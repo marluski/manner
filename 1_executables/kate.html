@@ -1,0 +1,263 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:28 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>KATE</title>
+
+</head>
+<body>
+
+<h1 align="center">KATE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">kate - Advanced
+text editor by KDE</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>kate</b> [<b>-s, --start</b>
+<i>name</i>] [<b>--startanon</b>] [<b>-n, --new</b>] [<b>-b,
+--block</b>] [<b>-p, --pid</b> <i>pid</i>] [<b>-e,
+--encoding</b> <i>name</i>] [<b>-l, --line</b> <i>line</i>]
+[<b>-c, --column</b> <i>column</i>] [<b>-i, --stdin</b>]
+[<b>--tempfile</b>] [<i>file</i>]</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kate is the KDE
+Advanced Text Editor.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Kate also
+provides the editor part for various applications, under the
+name KWrite.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some of Kate's
+many features include configurable syntax highlighting for
+languages ranging from C and C++ to HTML to bash scripts,
+the ability to create and maintain projects, a multiple
+document interface (MDI), and a self-contained terminal
+emulator.</p>
+
+<p style="margin-left:9%; margin-top: 1em">But Kate is more
+than a programmer's editor. Its ability to open several
+files at once makes it ideal for editing UNIX&reg;'s many
+configuration files. This document was written in Kate.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>,
+<b>--start</b> <i>name</i></p>
+
+<p style="margin-left:14%;">Start Kate with a given
+session.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--startanon</b></p>
+
+<p style="margin-left:14%;">Start Kate with a new anonymous
+session, implies <b>-n</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n</b>,
+<b>--new</b></p>
+
+<p style="margin-left:14%;">Force start of a new Kate
+instance (is ignored if <b>start</b> is used and another
+Kate instance already has the given session opened), forced
+if no parameters and no URLs are given at all.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>,
+<b>--block</b></p>
+
+<p style="margin-left:14%;">If using an already running
+Kate instance, block until it exits, if URLs given to
+open.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p, --pid</b>
+<i>pid</i></p>
+
+<p style="margin-left:14%;">Only try to reuse kate instance
+with this <i>pid</i> (is ignored if <b>start</b> is used and
+another Kate instance already has the given session
+opened).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e,
+--encoding</b> <i>name</i></p>
+
+<p style="margin-left:14%;">Set encoding for the file to
+open.</p>
+
+<p style="margin-left:14%; margin-top: 1em">You can use
+this to force a file opened in utf-8 format, for instance.
+(The command <b>iconv -l</b> provides a list of encodings,
+which may be helpful to you.)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l,
+--line</b> <i>line</i></p>
+
+<p style="margin-left:14%;">Navigate to this line.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--column</b> <i>column</i></p>
+
+<p style="margin-left:14%;">Navigate to this column.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i,
+--stdin</b></p>
+
+<p style="margin-left:14%;">Read the contents of stdin.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--tempfile</b></p>
+
+<p style="margin-left:14%;">The files/URLs opened by the
+application will be deleted after use.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>file</i></p>
+
+<p style="margin-left:14%;">File to open.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:14%; margin-top: 1em">More detailed
+user documentation is available from
+<b><font color="#0000FF">help:/kate</font></b>
+<font color="#000000">(either enter this URL into Konqueror,
+or run <b>khelpcenter</b> <i>help:/kate</i>). <br>
+kf6options(7) <br>
+qt6options(7) <br>
+There is also further information available at the</font>
+<b><font color="#0000FF">Kate website</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">.</font></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">To
+open a file named source.cpp at column 15, line 25, in an
+existing Kate window, you could use:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>kate
+-c 15 -l 25 source.cpp</b></font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">If
+you have an active internet connection, you can take
+advantage of KDE's network transparency to open a file from
+an FTP site. If you do not have write permission on the
+remote server, the file will be opened read only and you
+will be prompted for a local filename to save to if you make
+changes. If you do have write permission, changes will be
+saved transparently over the network.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>kate</b></font>
+<b><font color="#0000FF">ftp://ftp.kde.org/pub/kde/</font></b><i><font color="#000000">README</font></i></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+maintainer of Kate is Christoph Cullmann
+&lt;cullmann@kde.org&gt;. A comprehensive list of authors
+and contributors is available in the complete user manual
+mentioned above.</font></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Lauri
+Watts</b> &lt;lauri@kde.org&gt;</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Author.</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><font color="#000000">Kate
+website</font></p> </td>
+<td width="71%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://kate-editor.org/</font></p>
+<hr>
+</body>
+</html>

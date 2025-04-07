@@ -1,0 +1,158 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>byobu-ugraph</title>
+
+</head>
+<body>
+
+<h1 align="center">byobu-ugraph</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#USAGE">USAGE</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu-ugraph</b>
+- helper script for notification history graphs</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu-ugraph</b>
+is a helper script that can be used to create history
+graphs</p>
+
+<h2>USAGE
+<a name="USAGE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu-ugraph</b>
+[options] [command [args...]]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-f &lt;file&gt;
+: File to read data points from. (only required if no
+command specified). <br>
+-h : Show this help. <br>
+-m &lt;num&gt; : Minimum value (default=$min_default). <br>
+-n : Supress output of newline character. <br>
+-p &lt;points&gt; : Specify number of data points in graph
+(default=$points_default). <br>
+-r : Do not rotate file &lt;file&gt; (default is to rotate).
+Option implies file &lt;file&gt; should not be written to so
+a command cannot follow script options in this case. <br>
+-t &lt;theme&gt; : &rsquo;byobu-ulevel&rsquo; theme to use
+(default=$theme_default). <br>
+-x &lt;num&gt; : Maximum value (default=$max_default).</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Using
+byobu-ugraph to run a command, rotate log and display
+graph.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Here we specify
+a command to display available memory. Trailing echo adds a
+required newline Note no filename specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em">byobu-ugraph
+&quot;(/usr/lib/byobu/mem_used | sed -e &rsquo;s/%
+//g&rsquo;;echo)&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using
+byobu-ugraph just to rotate log and display the graph</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">file=/tmp/load.dat
+<br>
+awk &rsquo;{ print $1}&rsquo; /proc/loadavg &gt;&gt; $file
+<br>
+# Note: we need to specify what we consider to be a
+&quot;reasonable&quot; maximum load <br>
+byobu-ugraph -m 3.0 -f $file</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you specify
+&rsquo;command&rsquo;, care must be taken with shell quoting
+to avoid expansion prior to this script running the
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+&rsquo;-r&rsquo; is not specified, the file &lt;file&gt;
+will be rotated such that at most &lt;points&gt; lines are
+retained on each invocation of this script.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu</b>(1)
+<i><br>
+http://byobu.org</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This utility was
+written by James Hunt &lt;james.hunt@canonical.com&gt;, and
+this manpage was written by Dustin Kirkland
+&lt;kirkland@byobu.org&gt; for Ubuntu systems (but may be
+used by others). Permission is granted to copy, distribute
+and/or modify this document and the utility under the terms
+of the GNU General Public License, Version 3 published by
+the Free Software Foundation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The complete
+text of the GNU General Public License can be found in
+<i>/usr/share/common-licenses/GPL</i> on Debian/Ubuntu
+systems, or in <i>/usr/share/doc/fedora-release-*/GPL</i> on
+Fedora systems, or on the web at
+<i>http://www.gnu.org/licenses/gpl.txt</i>.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,443 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-CACHE</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-CACHE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#npm cache">npm cache</a><br>
+<a href="#npm cache npx">npm cache npx</a><br>
+<a href="#Details">Details</a><br>
+<a href="#A note about the cache&rsquo;s design">A note about the cache&rsquo;s design</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#cache">cache</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-cache</b>
+- Manipulates packages cache</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm cache add
+&lt;package-spec&gt; <br>
+npm cache clean [&lt;key&gt;] <br>
+npm cache ls [&lt;name&gt;@&lt;version&gt;] <br>
+npm cache verify <br>
+npm cache npx ls <br>
+npm cache npx rm [&lt;key&gt;...] <br>
+npm cache npx info &lt;key&gt;...</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+command is unaware of workspaces.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Used to add,
+list, or clean the <b>npm cache</b> folder. Also used to
+view info about entries in the <b>npm exec</b> (aka
+<b>npx</b>) cache folder.</p>
+
+<h3>npm cache
+<a name="npm cache"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">add: Add the specified packages
+to the local cache. This command is primarily intended to be
+used internally by npm, but it can provide a way to add data
+to the local installation cache explicitly.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>clean: Delete a single entry or all entries out of the
+cache folder. Note that this is typically unnecessary, as
+npm&rsquo;s cache is self-healing and resistant to data
+corruption issues.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>ls: List given entries or all entries in the local
+cache.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>verify: Verify the contents of the cache folder, garbage
+collecting any unneeded data, and verifying the integrity of
+the cache index and all cached data.</p></td></tr>
+</table>
+
+<h3>npm cache npx
+<a name="npm cache npx"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">ls: List all entries in the npx
+cache.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>rm: Remove given entries or all entries from the npx
+cache.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>info: Get detailed information about given entries in
+the npx cache.</p></td></tr>
+</table>
+
+<h3>Details
+<a name="Details"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">npm stores cache
+data in an opaque directory within the configured
+<b>cache</b>, named <b>_cacache</b>. This directory is a
+<b>cacache</b> <i>&lang; http://npm.im/cacache&rang;</i>
+-based content-addressable cache that stores all http
+request data as well as other package-related data. This
+directory is primarily accessed through <b>pacote</b>, the
+library responsible for all package fetching as of
+npm@5.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All data that
+passes through the cache is fully verified for integrity on
+both insertion and extraction. Cache corruption will either
+trigger an error, or signal to <b>pacote</b> that the data
+must be refetched, which it will do automatically. For this
+reason, it should never be necessary to clear the cache for
+any reason other than reclaiming disk space, thus why
+<b>clean</b> now requires <b>--force</b> to run.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There is
+currently no method exposed through npm to inspect or
+directly manage the contents of this cache. In order to
+access it, <b>cacache</b> must be used directly.</p>
+
+<p style="margin-left:9%; margin-top: 1em">npm will not
+remove data by itself: the cache will grow as new packages
+are installed.</p>
+
+<h3>A note about the cache&rsquo;s design
+<a name="A note about the cache&rsquo;s design"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The npm cache is
+strictly a cache: it should not be relied upon as a
+persistent and reliable data store for package data. npm
+makes no guarantee that a previously-cached piece of data
+will be available later, and will automatically delete
+corrupted contents. The primary guarantee that the cache
+makes is that, if it does return data, that data will be
+exactly the data that was inserted.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To run an
+offline verification of existing cache contents, use <b>npm
+cache verify</b>.</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>cache
+<a name="cache"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em">Default: Windows:
+<b>%LocalAppData%\npm-cache</b>, Posix:
+<b>&#732;/.npm</b></p> </td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>Type: Path</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The location of
+npm&rsquo;s cache directory.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p style="margin-top: 1em">npm help &quot;package
+spec&quot;</p> </td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>npm help folders</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>npm help config</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>npm help npmrc</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>npm help install</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>npm help publish</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>npm help pack</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>npm help exec</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>https://npm.im/cacache</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>https://npm.im/pacote</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>https://npm.im/@npmcli/arborist</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="41%">
+
+
+<p>https://npm.im/make-fetch-happen</p></td>
+<td width="45%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

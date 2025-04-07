@@ -1,0 +1,331 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:14 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE COMMIT</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE COMMIT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-commit -
+Commit a new revision</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em"><b>ostree commit</b>
+[OPTIONS...] --branch= {BRANCH} [PATH]</p></td>
+<td width="24%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This allows you
+to commit changes to a branch. The specification of the
+branch is required. The command will print the checksum of a
+successful commit.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--subject</b>,
+<b>-s</b>=&quot;SUBJECT&quot;</p>
+
+<p style="margin-left:14%;">One line subject.
+(optional)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--body</b>,
+<b>-m</b>=&quot;BODY&quot;</p>
+
+<p style="margin-left:14%;">Full description.
+(optional)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--body-file</b>,
+<b>-F</b>=&quot;FILE&quot;</p>
+
+<p style="margin-left:14%;">Full commit description from a
+file. (optional)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--editor</b>,
+<b>-e</b></p>
+
+<p style="margin-left:14%;">Open a text editor for the
+commit description. It will use OSTREE_EDITOR, VISUAL,
+EDITOR, or vi, in descending order of preference. The commit
+will be aborted if the message is left empty.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--branch</b>,
+<b>-b</b>=&quot;BRANCH&quot;</p>
+
+<p style="margin-left:14%;">Branch. Required, unless
+--orphan is given.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--parent</b>=&quot;COMMIT&quot;</p>
+
+<p style="margin-left:14%;">Parent checksum or
+&quot;none&quot; to explicitly use no parent. If not
+specified, BRANCH is used as parent (no parent in case
+BRANCH does not exist).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--tree</b>=&quot;dir=PATH&quot;
+or &quot;tar=TARFILE&quot; or &quot;ref=COMMIT&quot;</p>
+
+<p style="margin-left:14%;">Overlay the given argument as a
+tree. When committing an archive, the TARFILE can be
+specified as - to read the archive from standard input.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--base</b>=&quot;REV&quot;</p>
+
+<p style="margin-left:14%;">Start from the content in a
+commit. This differs from --tree=ref=REV in that no commit
+modifiers are applied. This is usually what you want when
+creating a derived commit. This is also used for
+--selinux-policy-from-base.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--add-metadata-string</b>=&quot;KEY=VALUE&quot;</p>
+
+<p style="margin-left:14%;">Add a key/value pair to
+metadata. Can be specified multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--add-metadata</b>=&quot;KEY=VALUE&quot;</p>
+
+<p style="margin-left:14%;">Add a key/value pair to
+metadata, where the KEY is a string, and VALUE is
+g_variant_parse() formatted. Can be specified multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keep-metadata</b>=&quot;KEY&quot;</p>
+
+<p style="margin-left:14%;">Keep metadata KEY and its
+associated VALUE from parent. Can be specified multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--add-detached-metadata-string</b>=&quot;KEY=VALUE&quot;</p>
+
+<p style="margin-left:14%;">Add a key/value pair to
+detached metadata.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--owner-uid</b>=&quot;UID&quot;</p>
+
+<p style="margin-left:14%;">Set file ownership user id.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--owner-gid</b>=&quot;GID&quot;</p>
+
+<p style="margin-left:14%;">Set file ownership group
+id.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-xattrs</b></p>
+
+<p style="margin-left:14%;">Do not import extended
+attributes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--selinux-labeling-epoch</b>0
+| 1</p>
+
+<p style="margin-left:14%;">When SELinux labeling is
+enabled, epoch 1 ensures that /usr/etc is labeled as if it
+was /etc.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--bootable</b></p>
+
+<p style="margin-left:14%;">Inject standard metadata for a
+bootable Linux filesystem tree.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--link-checkout-speedup</b></p>
+
+<p style="margin-left:14%;">Optimize for commits of trees
+composed of hardlinks into the repository.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--tar-autocreate-parents</b></p>
+
+<p style="margin-left:14%;">When loading tar archives,
+automatically create parent directories as needed.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--skip-if-unchanged</b></p>
+
+<p style="margin-left:14%;">If the contents are unchanged
+from previous commit, do nothing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--consume</b></p>
+
+<p style="margin-left:14%;">When committing from a local
+directory (i.e. not an archive or --tree=ref), assume
+ownership of the content. This may simply involve deleting
+it, but if possible, the content may simply be rename()ed
+into the repository rather than creating a new copy.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--statoverride</b>=&quot;PATH&quot;</p>
+
+<p style="margin-left:14%;">File containing list of
+modifications to make permissions (file mode in decimal,
+followed by space, followed by file path). The specified
+mode is ORed with the file's original mode unless preceded
+by &quot;=&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--skip-list</b>=&quot;PATH&quot;</p>
+
+<p style="margin-left:14%;">File containing list of file
+paths to skip (one path per line).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--table-output</b></p>
+
+<p style="margin-left:14%;">Output more information in a
+KEY: VALUE format.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--generate-sizes</b></p>
+
+<p style="margin-left:14%;">Generate size information along
+with commit metadata.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-sign</b>=&quot;KEY-ID&quot;</p>
+
+<p style="margin-left:14%;">GPG Key ID with which to sign
+the commit (if have GPGME - GNU Privacy Guard Made
+Easy).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-homedir</b>=&quot;HOMEDIR&quot;</p>
+
+<p style="margin-left:14%;">GPG home directory to use when
+looking for keyrings (if have GPGME - GNU Privacy Guard Made
+Easy).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--timestamp</b>=&quot;TIMESTAMP&quot;</p>
+
+<p style="margin-left:14%;">Override the timestamp of the
+commit to TIMESTAMP.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--orphan</b></p>
+
+<p style="margin-left:14%;">Create a commit without writing
+to a ref (branch)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fsync</b>=&quot;POLICY&quot;</p>
+
+<p style="margin-left:14%;">POLICY is a boolean which
+specifies whether fsync should be used or not. Default to
+true.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--sign-type</b></p>
+
+<p style="margin-left:14%;">Use particular signature
+engine. Currently available ed25519, spki, and dummy
+signature types. The default is ed25519.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign-from-file</b>=&quot;PATH&quot;</p>
+
+<p style="margin-left:14%;">This will read a key
+(corresponding to the provided --sign-type from the provided
+path. The encoding of the key depends on signature engine.
+For ed25519 the key should be base64 encoded, for spki it
+should be in PEM format, and for dummy it should be an
+ASCII-string.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign</b>=&quot;KEY-ID&quot;</p>
+
+<p style="margin-left:14%;">In new code, avoid using this
+because passing private keys via command line arguments are
+prone to leakage in logs and process listings.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The KEY-ID
+is:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for ed25519
+and spki:</b></p>
+
+<p style="margin-left:19%;">base64-encoded secret key for
+commit signing.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+dummy:</b></p>
+
+<p style="margin-left:19%;">ASCII-string used as secret
+key.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+commit --branch=my-branch --subject=&quot;Initial
+commit&quot;</b></p>
+
+
+<p style="margin-left:14%; margin-top: 1em">67e382b11d213a402a5313e61cbc69dfd5ab93cb07fbb8b71c2e84f79fa5d7dc</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,340 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>libnbd-release-notes-1.18</title>
+
+</head>
+<body>
+
+<h1 align="center">libnbd-release-notes-1.18</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Security">Security</a><br>
+<a href="#New APIs">New APIs</a><br>
+<a href="#Enhancements to existing APIs">Enhancements to existing APIs</a><br>
+<a href="#Protocol">Protocol</a><br>
+<a href="#Tools">Tools</a><br>
+<a href="#Language bindings">Language bindings</a><br>
+<a href="#Tests">Tests</a><br>
+<a href="#Other improvements and bug fixes">Other improvements and bug fixes</a><br>
+<a href="#Documentation">Documentation</a><br>
+<a href="#Build">Build</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">libnbd-release-notes-1.18
+- release notes for libnbd 1.18</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+release notes for libnbd stable release 1.18. This describes
+the major changes since 1.16.</p>
+
+<p style="margin-left:9%; margin-top: 1em">libnbd 1.18.0
+was released on <b>27 September 2023</b>.</p>
+
+<h3>Security
+<a name="Security"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Eric Blake found
+a case where a server could cause libnbd to crash, although
+not in the normal libnbd configuration. For more information
+see the announcement here:
+https://listman.redhat.com/archives/libguestfs/2023-July/032035.html</p>
+
+<p style="margin-left:9%; margin-top: 1em">Eric Blake found
+an issue with <b>nbd_get_size</b>(3) where a server that
+returns a size &gt; (uint64_t)INT64_MAX and &lt;
+(uint64_t)-1 would cause nbd_get_size to return a negative
+number (which is not -1 and so callers may or may not treat
+it as an error). While no client code in libnbd itself is
+affected by this, it could affect external clients. libnbd
+&ge; 1.16.5 now returns an error (-1) and sets nbd_get_errno
+to &quot;EOVERFLOW&quot; in this case. This was assigned
+CVE-2023-5215 (low severity). See the announcement here:
+https://listman.redhat.com/archives/libguestfs/2023-September/032711.html</p>
+
+<p style="margin-left:9%; margin-top: 1em">During routine
+fuzzing we found several security problems which had been
+introduced during this development cycle and have
+subsequently been fixed. Stable (even numbered) releases of
+libnbd should not be vulnerable; do not use the development
+(odd numbered) releases in production.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you find a
+security issue, please read <i>SECURITY</i> in the source
+(online here:
+https://gitlab.com/nbdkit/libnbd/blob/master/SECURITY). To
+find out about previous security issues in libnbd, see
+<b>libnbd-security</b>(3).</p>
+
+<h3>New APIs
+<a name="New APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_block_status_64</b>(3)
+<b><br>
+nbd_aio_block_status_64</b>(3)</p>
+
+<p style="margin-left:14%;">Make a 64 bit block status
+request, see &quot;Protocol&quot; below (Eric Blake).</p>
+
+
+<p style="margin-left:9%;"><b>nbd_block_status_filter</b>(3)
+<b><br>
+nbd_aio_block_status_filter</b>(3)</p>
+
+<p style="margin-left:14%;">Send filtered block status
+command, see &quot;Protocol&quot; below (Eric Blake).</p>
+
+
+<p style="margin-left:9%;"><b>nbd_can_block_status_payload</b>(3)</p>
+
+<p style="margin-left:14%;">Find out if the server supports
+filtered block status command (Eric Blake).</p>
+
+
+<p style="margin-left:9%;"><b>nbd_set_request_extended_headers</b>(3)
+<b><br>
+nbd_get_request_extended_headers</b>(3) <b><br>
+nbd_get_extended_headers_negotiated</b>(3) <b><br>
+nbd_opt_extended_headers</b>(3) <b><br>
+nbd_aio_opt_extended_headers</b>(3)</p>
+
+<p style="margin-left:14%;">Set/get whether we request
+extended headers from the server, and find out if we
+negotiated extended headers, see &quot;Protocol&quot; below
+(Eric Blake).</p>
+
+<h3>Enhancements to existing APIs
+<a name="Enhancements to existing APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&quot;qemu:&quot;
+meta-context constants (eg. &quot;qemu:dirty-bitmap&quot; as
+&quot;LIBNBD_CONTEXT_QEMU_DIRTY_BITMAP&quot;) are now
+available through the C, Golang, OCaml and Python language
+bindings (Eric Blake).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_shutdown</b>(3)
+now works correctly when in opt mode (Eric Blake).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_set_strict_mode</b>(3)
+adds &quot;LIBNBD_STRICT_AUTO_FLAG&quot; which allows the
+client to test how servers behave when the payload length
+flag is adjusted (Eric Blake).</p>
+
+<h3>Protocol
+<a name="Protocol"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">libnbd now
+supports NBD 64 bit &quot;extended headers&quot; and extent
+sizes. In practice this allows certain requests such as
+zeroing very large sections of the disk to be implemented
+much more efficiently, with servers that support this (Eric
+Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">libnbd now
+supports filtered block status requests (Eric Blake).</p>
+
+<h3>Tools
+<a name="Tools"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdcopy</b>(1),
+<b>nbdinfo</b>(1) and <b>nbddump</b>(1) have been expanded
+to use and report NBD 64 bit / extended header support when
+the server supports it (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">nbdinfo
+<i>--has</i> can be used as an alias for <i>--can</i>, eg.
+&quot;nbdinfo&nbsp;--has&nbsp;structured-reply&nbsp;URI&quot;
+(Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">nbdinfo makes
+the export size output optional, for servers which send an
+oversized one (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">nbdcopy now
+supports &quot;human sizes&quot; for some parameters, eg.
+&quot;nbdcopy&nbsp;--request-size=1M&nbsp;...&quot;.</p>
+
+<h3>Language bindings
+<a name="Language bindings"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">New Rust
+bindings. There is a basic API for ordinary use, and an
+asynch API implemented using Tokio. Rust&nbsp;&ge;&nbsp;1.69
+is required. (Tage Johansson, supported by sponsorship from
+Google Summer of Code 2023, additional review and fixes by
+Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">OCaml 5 is now
+supported.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Golang 1.21 is
+now supported. The minimum version is now 1.17 (Eric
+Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use
+&quot;gofmt&quot; to format Golang bindings (Eric
+Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use
+&quot;unsafe.Slice&quot; when converting C arrays to Golang
+slices (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">All language
+bindings support NBD 64 bit / extended headers, and examples
+of how to use this feature are available (Eric Blake).</p>
+
+<h3>Tests
+<a name="Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Fix a couple of
+race conditions in tests where we did not fully consume
+stdin in <b>nbdkit-sh-plugin</b>(3) pwrite method (Eric
+Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fuzzing now
+disables client-side strictness checks, enabling a wider
+range of inputs to be fuzzed (Eric Blake).</p>
+
+<h3>Other improvements and bug fixes
+<a name="Other improvements and bug fixes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Consistently
+wrap source code at 80 columns (Laszlo Ersek).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Debug messages
+no longer print the very verbose state transitions inside
+the state machine as these are not usually useful. You can
+reenable this by defining
+&quot;-DLIBNBD_STATE_VERBOSE=1&quot; at compile time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Completion
+&quot;.callback&quot; methods are now always called exactly
+once, and documentation is clearer on when this happens
+(Eric Blake).</p>
+
+<h3>Documentation
+<a name="Documentation"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&quot;podwrapper&quot;
+has a new <i>--replace</i> parameter which makes it easier
+to use &quot;AC_SUBST&quot;-substitutions in
+documentation.</p>
+
+<h3>Build
+<a name="Build"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">Automake&rsquo;s
+&quot;subdir-objects&quot; option is now used (Eric
+Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Multiple,
+ongoing fixes to the CI tests (Eric Blake).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Eric Blake <br>
+Laszlo Ersek <br>
+Richard W.M. Jones <br>
+Tage Johansson</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

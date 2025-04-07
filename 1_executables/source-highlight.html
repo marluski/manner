@@ -1,0 +1,435 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:21 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SOURCE-HIGHLIGHT</title>
+
+</head>
+<body>
+
+<h1 align="center">SOURCE-HIGHLIGHT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Lines:">Lines:</a><br>
+<a href="#reference generation:">reference generation:</a><br>
+<a href="#testing:">testing:</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">Source-highlight
+- convert source code to syntax highlighted document</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>source-highlight</b>
+[<i>OPTIONS</i>]... <i>&lt; INPUT_FILE &gt;
+OUTPUT_FILE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GNU GNU
+source-highlight 3.1.9</p>
+
+<p style="margin-left:9%; margin-top: 1em">Highlight the
+syntax of a source file (e.g. Java) into a specific format
+(e.g. HTML)</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">source-highlight
+[OPTIONS]... <b>-i</b> INPUT_FILE <b>-o</b> OUTPUT_FILE
+source-highlight [OPTIONS]... [FILES]...</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Print help and exit</p>
+
+<p style="margin-left:9%;"><b>--detailed-help</b></p>
+
+<p style="margin-left:18%;">Print help, including all
+details and hidden options, and exit</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Print version and exit</p>
+
+<p style="margin-left:9%;"><b>-i</b>,
+<b>--input</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Input file (default=stdin)</p>
+
+<p style="margin-left:9%;"><b>-o</b>,
+<b>--output</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Output file (default=stdout,
+when the third invocation form is used). If
+&rsquo;STDOUT&rsquo; is specified, the output is directed to
+standard output</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can simply
+specify some files at the command line and also use regular
+expressions (for instance *.java). In this case the name for
+the output files will be formed using the name of the source
+file with a .EXT appended, where EXT is the extension chosen
+according to the output format specified (for instance
+.html). <b><br>
+-s</b>, <b>--src-lang</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">source language (use
+<b>--lang-list</b> to get the complete list). If not
+specified, the source language will be guessed from the file
+extension.</p>
+
+<p style="margin-left:9%;"><b>--lang-list</b></p>
+
+<p style="margin-left:18%;">list all the supported language
+and associated language definition file</p>
+
+<p style="margin-left:9%;"><b>--outlang-list</b></p>
+
+<p style="margin-left:18%;">list all the supported output
+language and associated language definition file</p>
+
+<p style="margin-left:9%;"><b>-f</b>,
+<b>--out-format</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">output format (use
+<b>--outlang-list</b> to get the complete list)
+(default=&lsquo;html&rsquo;)</p>
+
+<p style="margin-left:9%;"><b>-d</b>, <b>--doc</b></p>
+
+<p style="margin-left:18%;">create an output file that can
+be used as a stand alone document (e.g., not to be included
+in another one)</p>
+
+<p style="margin-left:9%;"><b>--no-doc</b></p>
+
+<p style="margin-left:18%;">cancel the <b>--doc</b> option
+even if it is implied (e.g., when css is given)</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--css</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">the external style sheet
+filename. Implies <b>--doc</b></p>
+
+<p style="margin-left:9%;"><b>-T</b>,
+<b>--title</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">give a title to the output
+document. Implies <b>--doc</b></p>
+
+<p style="margin-left:9%;"><b>-t</b>,
+<b>--tab</b>=<i>INT</i></p>
+
+<p style="margin-left:18%;">specify tab length.
+(default=&lsquo;8&rsquo;)</p>
+
+<p style="margin-left:9%;"><b>-H</b>,
+<b>--header</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">file to insert as header</p>
+
+<p style="margin-left:9%;"><b>-F</b>,
+<b>--footer</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">file to insert as footer</p>
+
+
+<p style="margin-left:9%;"><b>--style-file</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">specify the file containing
+format options (default=&lsquo;default.style&rsquo;)</p>
+
+
+<p style="margin-left:9%;"><b>--style-css-file</b>=<i>FILENAME</i>
+specify the file containing format options <br>
+(in</p>
+
+<p style="margin-left:18%;">css syntax)</p>
+
+
+<p style="margin-left:9%;"><b>--style-defaults</b>=<i>FILENAME</i>
+specify the file containing defaults for <br>
+format</p>
+
+<p style="margin-left:18%;">options
+(default=&lsquo;style.defaults&rsquo;)</p>
+
+
+<p style="margin-left:9%;"><b>--outlang-def</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">output language definition
+file</p>
+
+
+<p style="margin-left:9%;"><b>--outlang-map</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">output language map file
+(default=&lsquo;outlang.map&rsquo;)</p>
+
+
+<p style="margin-left:9%;"><b>--data-dir</b>=<i>PATH</i></p>
+
+<p style="margin-left:18%;">directory where language
+definition files and language maps are searched for. If not
+specified these files are searched for in the current
+directory and in the data dir installation directory</p>
+
+
+<p style="margin-left:9%;"><b>--output-dir</b>=<i>PATH</i></p>
+
+<p style="margin-left:18%;">output directory</p>
+
+
+<p style="margin-left:9%;"><b>--lang-def</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">language definition file</p>
+
+
+<p style="margin-left:9%;"><b>--lang-map</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">language map file
+(default=&lsquo;lang.map&rsquo;)</p>
+
+
+<p style="margin-left:9%;"><b>--show-lang-elements</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">prints the language elements
+that are defined</p>
+
+<p style="margin-left:18%; margin-top: 1em">in the language
+definition file</p>
+
+<p style="margin-left:9%;"><b>--infer-lang</b></p>
+
+<p style="margin-left:18%;">force to infer source script
+language (overriding given language specification)</p>
+
+<h3>Lines:
+<a name="Lines:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n</b>,
+<b>--line-number</b>[=<i>PADDING</i>]</p>
+
+<p style="margin-left:18%;">number all output lines, using
+the specified padding character
+(default=&lsquo;0&rsquo;)</p>
+
+
+<p style="margin-left:9%;"><b>--line-number-ref</b>[=<i>PREFIX</i>]</p>
+
+<p style="margin-left:18%;">number all output lines and
+generate an anchor,</p>
+
+<p style="margin-left:9%;">made of the specified prefix +
+the line</p>
+
+<p style="margin-left:18%;">number
+(default=&lsquo;line&rsquo;)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Filtering
+output:</p>
+
+<p style="margin-left:18%; margin-top: 1em">Mode:
+linerange</p>
+
+<p style="margin-left:18%; margin-top: 1em">specifying line
+ranges</p>
+
+
+<p style="margin-left:9%;"><b>--line-range</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">generate only the lines in the
+specified range(s)</p>
+
+
+<p style="margin-left:9%;"><b>--range-separator</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">the optional separator to be
+printed among ranges (e.g., &quot;...&quot;)</p>
+
+
+<p style="margin-left:9%;"><b>--range-context</b>=<i>INT</i></p>
+
+<p style="margin-left:18%;">number of (context) lines
+generated even if not in range</p>
+
+<p style="margin-left:18%; margin-top: 1em">Mode:
+regexrange</p>
+
+<p style="margin-left:18%; margin-top: 1em">specifying
+regular expression delimited ranges</p>
+
+
+<p style="margin-left:9%;"><b>--regex-range</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">generate only the lines within
+the specified regular expressions</p>
+
+<h3>reference generation:
+<a name="reference generation:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gen-references</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">generate references (possible
+values=&quot;inline&quot;, &quot;postline&quot;,
+&quot;postdoc&quot; default=&lsquo;inline&rsquo;)</p>
+
+
+<p style="margin-left:9%;"><b>--ctags-file</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">specify the file generated by
+ctags that will be used to generate references
+(default=&lsquo;tags&rsquo;)</p>
+
+<p style="margin-left:9%;"><b>--ctags</b>=<i>CMD</i></p>
+
+<p style="margin-left:18%;">how to run the ctags command.
+If this option is not specified, ctags will be executed with
+the default value. If it is specified with an empty string,
+ctags will not be executed at all (default=&lsquo;ctags
+<b>--excmd</b>=<i>n</i>
+<b>--tag-relative</b>=<i>yes</i>&rsquo;)</p>
+
+<h3>testing:
+<a name="testing:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:18%;">verbose mode on</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--quiet</b></p>
+
+<p style="margin-left:18%;">print no progress
+information</p>
+
+<p style="margin-left:9%;"><b>--binary-output</b></p>
+
+<p style="margin-left:18%;">write output files in binary
+mode</p>
+
+<p style="margin-left:9%;"><b>--statistics</b></p>
+
+<p style="margin-left:18%;">print some statistics (i.e.,
+elapsed time)</p>
+
+<p style="margin-left:9%;"><b>--gen-version</b></p>
+
+<p style="margin-left:18%;">put source-highlight version in
+the generated file (default=on)</p>
+
+
+<p style="margin-left:9%;"><b>--check-lang</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">only check the correctness of a
+language definition file</p>
+
+
+<p style="margin-left:9%;"><b>--check-outlang</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">only check the correctness of
+an output language definition file</p>
+
+<p style="margin-left:9%;"><b>--failsafe</b></p>
+
+<p style="margin-left:18%;">if no language definition is
+found for the input, it is simply copied to the output</p>
+
+<p style="margin-left:9%;"><b>-g</b>,
+<b>--debug-langdef</b>[=<i>TYPE</i>]</p>
+
+<p style="margin-left:18%;">debug a language definition. In
+dump mode just dumps all the steps; in interactive, at each
+step, waits for some input (press ENTER to step) (possible
+values=&quot;interactive&quot;, &quot;dump&quot;
+default=&lsquo;dump&rsquo;)</p>
+
+
+<p style="margin-left:9%;"><b>--show-regex</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">show the regular expression
+automaton corresponding to a language definition file</p>
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Lorenzo Bettini &lt;http://www.lorenzobettini.it&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+&lt;bug-source-highlight at gnu.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+1999-2008 Lorenzo Bettini
+&lt;http://www.lorenzobettini.it&gt; This program comes with
+ABSOLUTELY NO WARRANTY. <br>
+This is free software; you may redistribute copies of the
+program under the terms of the GNU General Public License.
+For more information about these matters, see the file named
+COPYING.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <b>Source-highlight</b> is maintained as a
+Texinfo manual. If the <b>info</b> and
+<b>Source-highlight</b> programs are properly installed at
+your site, the command</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>info
+Source-highlight</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+<hr>
+</body>
+</html>

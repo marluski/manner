@@ -1,0 +1,257 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VDEQ</title>
+
+</head>
+<body>
+
+<h1 align="center">VDEQ</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OLD SYNOPSIS">OLD SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTE">NOTE</a><br>
+<a href="#NOTICE">NOTICE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">vdeq - Virtual
+Distributed Ethernet wrapper for QEMU/KVM virtual
+machines</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vdeq qemu</b>
+[ <b>--mod</b> <i>octalmode</i> ] <i>QEMU_OPTIONS</i>
+<b>-net vde[,vlan=n][,sock=socketpath][,port=n]</b>
+<i>QEMU_OPTIONS</i> <b><br>
+vdeq kvm</b> [ <b>--mod</b> <i>octalmode</i> ]
+<i>KVM_OPTIONS</i> <b>-net
+vde[,vlan=n][,sock=socketpath][,port=n]</b>
+<i>KVM_OPTIONS</i> <b><br>
+vde</b>{<i>qemu_name</i>} [ <b>--mod</b> <i>octalmode</i> ]
+<i>QEMU_OPTIONS</i> <b>-net
+vde[,vlan=n][,sock=socketpath][,port=n]</b>
+<i>QEMU_OPTIONS</i></p>
+
+<h2>OLD SYNOPSIS
+<a name="OLD SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>vdeq
+qemu</b></i> [ <b>--mod</b> <i>octalmode</i> ] [
+<b>-sock</b> <i>socketpath</i> [ <i>,socketpath</i> [
+<i>,...</i> ] ] ] [ qemu_args ] <b><br>
+vde</b>{<i>qemu_name</i>} [ <b>-sock</b> <i>socketpath</i> [
+<i>,socketpath</i> [ <i>,...</i> ] ] ] [ qemu_args ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vdeq</b> is a
+wrapper to start a QEMU/KVM virtual machine connected to a
+VDE network. It uses the qemu/kvm <b>-tun-fd</b> parameter
+to set up the connection with a vde_switch.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command</p>
+
+<p style="margin-left:18%;"><b>vdeq qemu -b c
+-hda=sampledisk</b></p>
+
+<p style="margin-left:9%;">starts a qemu machine which
+boots from the sampledisk image and has a ne2000 ethernet
+interface connected to the standard vde_switch. The
+command</p>
+
+<p style="margin-left:18%;"><b>vdeq kvm -b c
+-hda=sampledisk</b></p>
+
+<p style="margin-left:9%;">starts a kvm machine which boots
+from the sampledisk image and has a ne2000 ethernet
+interface connected to the standard vde_switch.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is also
+possible to create symbolic links to the vdeq executable to
+have a simpler command. If the link has a name that begins
+with vde the remaining part of the name is taken as the qemu
+command. For example if vdeq is linked to vdeqemu:</p>
+
+<p style="margin-left:18%;"><b>vdeqemu -b c
+-hda=sampledisk</b></p>
+
+<p style="margin-left:9%;">starts qemu as above. If vdeq is
+linked to vdekvm:</p>
+
+<p style="margin-left:18%;"><b>vdekvm -b c
+-hda=sampledisk</b></p>
+
+<p style="margin-left:9%;">starts kvm with the same
+parameters.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The new syntax
+is consistent with the new Qemu 0.8.0 network parameters.
+Using vdeq is possible to specify a vde interface in the
+same way as user,tap or socket interfaces. The <b>sock=</b>
+parameter can be used to use a specific socket. Please note
+that what qemu names as vlan is not related to the 802.1q
+VLAN managed by the vde_switch. <b>port=</b> can be used to
+specify the port of the switch, otherwise the first
+allocatable port is assigned. The following command run a
+qemu VM with two ethernet interface connected to the
+standard switch and to the switch with local socket
+&quot;/tmp/my.ctl&quot;, port 10, respectively</p>
+
+<p style="margin-left:18%;"><b>vde qemu -net nic,vlan=0
+-net nic,vlan=1 -net vde,vlan=0 -net
+vde,vlan=1,sock=/tmp/my.ctl,port=10 <br>
+vdeqemu -net nic,vlan=0 -net nic,vlan=1 -net vde,vlan=0 -net
+vde,vlan=1,sock=/tmp/my.ctl,port=10</b></p>
+
+<p style="margin-left:9%;">The following command run a kvm
+VM with two ethernet interface connected to the standard
+switch and to the switch with local socket
+&quot;/tmp/my.ctl&quot;, port 10, respectively</p>
+
+<p style="margin-left:18%;"><b>vde kvm -net nic,vlan=0 -net
+nic,vlan=1 -net vde,vlan=0 -net
+vde,vlan=1,sock=/tmp/my.ctl,port=10 <br>
+vdekvm -net nic,vlan=0 -net nic,vlan=1 -net vde,vlan=0 -net
+vde,vlan=1,sock=/tmp/my.ctl,port=10</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The old syntax
+can be used with Qemu 0.8.0 but all the vde interfaces are
+assigned to vlan 0.</p>
+
+<p style="margin-left:18%;"><b>vdeq qemu -sock
+/tmp/vde.ctl,/tmp/my.ctl -b c -hda=sampledisk <br>
+vdeqemu -sock /tmp/vde.ctl,/tmp/my.ctl -b c
+-hda=sampledisk</b></p>
+
+<p style="margin-left:9%;">both start qemu with <b>one</b>
+ethernet interface connected both to the standard switch and
+to the switch with local socket &quot;/tmp/my.ctl&quot;.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>--mod</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><i>octalmode,</i> specify the
+mode for comm socket.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sock</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p><i>socketpath,</i> specify the UNIX socket to be used by
+local programs for joining the VDE. The default value is
+&quot;/tmp/vde.ctl&quot; It is also possible to indicate
+several socketpath (comma separated, no blanks): in this
+case several interfaces are defined. The first socketpath is
+connected to the first ne2k interface and so on.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-h, -help, --help</b></p>
+
+<p style="margin-left:18%;">print a Usage help.</p>
+
+<h2>NOTE
+<a name="NOTE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Qemu has changed
+its syntax for networking (cvs Nov.15 2005). As a temporary
+solution use vdeoq and vdeoqemu instead of vdeq and vdeqemu
+if you are running a qemu with the old syntax. <br>
+By default qemu uses the same MAC address for every virtual
+machine, so if you plan to use several instances of qemu be
+sure to explicitly set a different MAC address for each
+virtual machine. While generating your address beware to not
+use broadcast/multicast reserved MACs, ethernet rules say:
+the multicast bit is the low-order bit of the first byte,
+which is &quot;the first bit on the wire&quot;. For example
+<i>34:12:de:ad:be:ef</i> is an unicast address,
+<i>35:12:de:ad:be:ef</i> is a multicast address (see
+ETHERNET MULTICAST ADDRESSES section in
+http://www.iana.org/assignments/ethernet-numbers for more
+informations).</p>
+
+<h2>NOTICE
+<a name="NOTICE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtual
+Distributed Ethernet is not related in any way with
+www.vde.com (&quot;Verband der Elektrotechnik, Elektronik
+und Informationstechnik&quot; i.e. the German
+&quot;Association for Electrical, Electronic &amp;
+Information Technologies&quot;).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_switch</b>(1),
+<b>vde_plug</b>(1), <b>vde_plug2tap</b>(1),
+<b>dpipe</b>(1).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">VDE is a project
+by Renzo Davoli &lt;renzo@cs.unibo.it&gt;</p>
+<hr>
+</body>
+</html>

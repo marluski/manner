@@ -1,0 +1,479 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:37 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GPROFNG-ARCHIVE</title>
+
+</head>
+<body>
+
+<h1 align="center">GPROFNG-ARCHIVE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gprofng-archive
+- Archive gprofng experiment data</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gprofng
+archive</b> [<i>option(s)</i>] <i>experiment</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Archive the
+associated application binaries and source files in a
+gprofng experiment to make it self contained and
+portable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, the
+binaries are archived as part of the data collection, but
+the application source files are not archived. Use this tool
+to change this and afterwards archive additional
+components.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This tool has to
+be executed on the same system where the profiling data was
+recorded.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print the version number and
+exit.</p>
+
+<p style="margin-left:9%;"><b>--help</b></p>
+
+<p style="margin-left:14%;">Print usage information and
+exit.</p>
+
+<p style="margin-left:9%;"><b>-a {off | on | ldobjects |
+src | usedldobjects | used[src]}</b></p>
+
+<p style="margin-left:14%;">Specify archiving of binaries
+and other files. In addition to disable this feature
+(<b>off</b>), or enable archiving of all loadobjects and
+sources (<b>on</b>), the other choices support a more
+refined selection.</p>
+
+<p style="margin-left:14%; margin-top: 1em">All of these
+choices enable archiving, but the keyword controls what
+exactly is selected: all load objects (<b>ldobjects</b>),
+all source files (<b>src</b>), the loadobjects associated
+with a program counter (<b>usedldobjects</b>), or the source
+files associated with a program counter (<b>used[src]</b>).
+The default is <b>-a ldobjects</b>.</p>
+
+<p style="margin-left:9%;"><b>-d</b> <i>path</i></p>
+
+<p style="margin-left:14%;">The <i>path</i> is the absolute
+path to a common archive, which is a directory that contains
+archived files. If the directory does not exist, then it
+will be created. Files are saved in the common archive
+directory, and a symbolic link is created in the experiment
+archive.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-F</b></p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>Force writing, or rewriting of .archive files. All
+archived files will be removed and recreated, except if the
+<b>-n</b> or <b>-m</b> option is used, or if the experiment
+is a subexperiment.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-m</b> <i>regex</i></p>
+
+<p style="margin-left:14%;">Archive only those source,
+object, and debug info files whose full path name matches
+the given POSIX compliant <i>regex</i> regular
+expression.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>Archive the named experiment only, not any of its
+descendants.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-q</b></p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>Do not write any warnings to <i>stderr</i>. Warnings are
+incorporated into the .archive file in the experiment
+directory. They are shown in the output of the <b>gprofng
+display text</b> command.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-r</b> <i>path</i></p>
+
+<p style="margin-left:14%;">This option specifies the
+location of a common archive. The value is the relative path
+to a common archive, which is a directory that contains
+archived files. If the directory does not exist, then it
+will be created. Files are saved in the common archive
+directory, and a symbolic link is created in the experiment
+archive.</p>
+
+<p style="margin-left:9%;"><b>-s</b> <i>selection</i></p>
+
+<p style="margin-left:14%;">Specify archiving of source
+files. The allowed values for <i>selection</i> are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>no</b></p></td>
+<td width="1%"></td>
+<td width="69%">
+
+
+<p>Do not archive any source files.</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>all</b></p></td>
+<td width="1%"></td>
+<td width="69%">
+
+
+<p>Archive all source and object files that can be
+found.</p> </td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>used[src]</b></p>
+
+<p style="margin-left:19%;">Archive source and object files
+for functions against which data was recorded in the
+experiment, and that can be found.</p>
+
+<p style="margin-left:14%; margin-top: 1em">By default,
+application source files are not archived into the
+experiment. If the <b>-s all</b>, or <b>-s used</b> option
+is used, sources and object files are archived. These
+options also ensure that source files are available in the
+experiment, even if the original source files have been
+modified, or are inaccessible afterwards.</p>
+
+<p style="margin-left:14%; margin-top: 1em">In case archive
+files cannot be found, use the <b>addpath</b>, or
+<b>pathmap</b> command, or both, in an <i>.er.rc</i> file to
+specify the location of the missing file(s).</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">-</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Archiving of application
+binaries - By default, binaries are archived automatically
+when an experiment is created. However, archiving does not
+occur in one or more of the following circumstances:</p></td></tr>
+</table>
+
+<p style="margin-left:14%;">&bull;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%"></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p style="margin-top: 1em">If the profiled application is
+terminated before it exits normally.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>If a running process is profiled.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>If archiving is explicitly disabled when profiling. For
+example by using the <b>-a off</b> option on <b>gprofng
+collect app</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">In these cases,
+<b>gprofng archive</b> must be run manually and on the same
+machine where the profiling data was recorded.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Archiving of
+experiment data during the data collection process can be
+quite expensive. Especially if the experiment has many
+descendant processes. In such cases, a more efficient
+strategy is to use the <b>-a off</b> option when collecting
+the data. Once the collection has completed, the data can be
+archived using the <b>-s all</b> option. This saves all
+executables and source files in the experiment.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If during the
+archiving there is an error message that an executable, or
+source file cannot be found, the <b>addpath</b> command to
+add the path to the missing file(s) can be included in the
+<i>.er.rc</i> file. After this command has been added,
+archive the experiment again. The archiving archiving can be
+repeated as many times as necessary to archive all
+files.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Archiving
+should be done on the same system as was used to collect the
+experiment. If some files cannot be accessed from this
+system (e.g. sources or object files), then additional
+archiving can be done using another system that can access
+them. For example, the system where the application was
+built.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Some Java
+applications store shared objects in jar files. By default,
+such shared objects are not automatically archived. To
+archive shared objects contained in jar files, make sure to
+include the <b>addpath</b> command in an <i>.er.rc</i> file.
+The <b>addpath</b> command should give the path to the jar
+file, including the jar file itself. The <i>.er.rc</i> file
+should be saved in the user home directory, or experiment
+parent directory.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">-</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Archiving of application sources
+- By default, application source files are not archived in
+the experiment. Execute the <b>gprofng archive</b> command
+with the <b>-s all</b>, or <b>-s used</b> option on each
+experiment to store source files in the experiment.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>-</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Automatic archiving of application sources - Environment
+variable <b>GPROFNG_ARCHIVE</b> may be set to automatically
+archive sources when the experiment has completed. This
+environment variable can contain <b>-s</b> and <b>-m</b>
+arguments, as pairs of argument and options, separated by
+one or more blanks.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">If more than
+one <b>-s</b> argument appears on the command line, the last
+one prevails. If <b>-s</b> is both passed on the command
+line, and set by the environment variable, the option from
+the environment variable prevails.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that in
+case automatic source archiving during data collection has
+been enabled using either the <b>GPROFNG_ARCHIVE</b>
+variable, or the <b>-a src</b>, or <b>-a usedsrc</b> option,
+it is recommended to confirm that source files have been
+correctly resolved by executing the <b>gprofng archive -s
+all</b>, or <b>gprofng archive -s used</b> command.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">-</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">The <b>-d</b> and <b>-r</b>
+options are mutually exclusive.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>-</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>When using the <b>-d</b> or <b>-r</b> option,
+environment variable <b>GPROFNG_ARCHIVE_COMMON_DIR</b> can
+be used to specify the location of the common archive. This
+can be very convenient when using a script to profile
+applications.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>-</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>If more than one <b>-s</b> option is given on the
+command line, or specified in the environment variable, the
+specified option for all must be the same. If not,
+<b>gprofng archive</b> exits with an error.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>-</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>This tool does not work on experiments recorded with
+earlier versions of the tools. If invoked on such
+experiments, a warning is printed. Use the version of
+<b>gprofng archive</b> from the same release with which the
+experiment was recorded.</p></td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gprofng</b>(1),
+<b>gprofng-collect-app</b>(1),
+<b>gprofng-display-html</b>(1),
+<b>gprofng-display-src</b>(1),
+<b>gprofng-display-text</b>(1)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The user guide
+for gprofng is maintained as a Texinfo manual. If the
+<b>info</b> and <b>gprofng</b> programs are correctly
+installed, the command <b>info gprofng</b> should give
+access to this document.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (c)
+2022-2025 Free Software Foundation, Inc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free
+Software Foundation; with no Invariant Sections, with no
+Front-Cover Texts, and with no Back-Cover Texts. A copy of
+the license is included in the section entitled &quot;GNU
+Free Documentation License&quot;.</p>
+<hr>
+</body>
+</html>

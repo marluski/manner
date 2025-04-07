@@ -1,0 +1,141 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#PARAMETERS">PARAMETERS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cert2spc -
+Transform multiple X.509 certificates to a Software
+Publisher Certificate</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cert2spc
+certificate|crl [certificate|crl ...] outputfile.spc</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Combine a list
+of X.509 certificates or X.509 CRL (Certificate Revocation
+List) into a Software Publisher Certificate (PKCS#7 file).
+The SPC file is required for signing a PE file (like an
+assembly) using signcode.</p>
+
+<h2>PARAMETERS
+<a name="PARAMETERS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>certificate</i></p>
+
+<p style="margin-left:18%;">One (or more) X.509 certificate
+to add (space separated).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>crl</i></p></td>
+<td width="5%"></td>
+<td width="63%">
+
+
+<p>One (or more) X.509 CRL to add (space separated).</p></td>
+<td width="19%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>output.spc</i></p>
+
+<p style="margin-left:18%;">Software Publisher Certificate
+to output. If the specified file exists it will be
+overwritten.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Sebastien Pouliot</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2002, 2003 Motus Technologies. Released under BSD
+license.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>makecert(1),</b>signcode(1)</p>
+<hr>
+</body>
+</html>

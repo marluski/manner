@@ -1,0 +1,1048 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:27 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SYSTEMD-CRYPTENROLL</title>
+
+</head>
+<body>
+
+<h1 align="center">SYSTEMD-CRYPTENROLL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#TPM2 PCRs and policies">TPM2 PCRs and policies</a><br>
+<a href="#LIMITATIONS">LIMITATIONS</a><br>
+<a href="#COMPATIBILITY">COMPATIBILITY</a><br>
+<a href="#UNLOCKING">UNLOCKING</a><br>
+<a href="#SIMPLE ENROLLMENT">SIMPLE ENROLLMENT</a><br>
+<a href="#PKCS#11 ENROLLMENT">PKCS#11 ENROLLMENT</a><br>
+<a href="#FIDO2 ENROLLMENT">FIDO2 ENROLLMENT</a><br>
+<a href="#TPM2 ENROLLMENT">TPM2 ENROLLMENT</a><br>
+<a href="#OTHER OPTIONS">OTHER OPTIONS</a><br>
+<a href="#CREDENTIALS">CREDENTIALS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">systemd-cryptenroll
+- Enroll PKCS#11, FIDO2, TPM2 token/devices to LUKS2
+encrypted volumes</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="53%">
+
+
+<p style="margin-top: 1em"><b>systemd-cryptenroll</b>
+[OPTIONS...] [DEVICE]</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>systemd-cryptenroll</b>
+is a tool for enrolling hardware security tokens and devices
+into a LUKS2 encrypted volume, which may then be used to
+unlock the volume during boot. Specifically, it supports
+tokens and credentials of the following kind to be
+enrolled:</p>
+
+<p style="margin-left:14%; margin-top: 1em">1. PKCS#11
+security tokens and smartcards that may carry an RSA or EC
+key pair (e.g. various YubiKeys)</p>
+
+<p style="margin-left:14%; margin-top: 1em">2. FIDO2
+security tokens that implement the &quot;hmac-secret&quot;
+extension (most FIDO2 keys, including YubiKeys)</p>
+
+<p style="margin-left:14%; margin-top: 1em">3. TPM2
+security devices</p>
+
+<p style="margin-left:14%; margin-top: 1em">4. Regular
+passphrases</p>
+
+<p style="margin-left:14%; margin-top: 1em">5. Recovery
+keys. These are similar to regular passphrases, however are
+randomly generated on the computer and thus generally have
+higher entropy than user-chosen passphrases. Their character
+set has been designed to ensure they are easy to type in,
+while having high entropy. They may also be scanned off
+screen using QR codes. Recovery keys may be used for
+unlocking LUKS2 volumes wherever passphrases are accepted.
+They are intended to be used in combination with an enrolled
+hardware security token, as a recovery option when the token
+is lost.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In addition, the
+tool may be used to enumerate currently enrolled security
+tokens and wipe a subset of them. The latter may be combined
+with the enrollment operation of a new security token, in
+order to update or replace enrollments.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The tool
+supports only LUKS2 volumes, as it stores token
+meta-information in the LUKS2 JSON token area, which is not
+available in other encryption formats.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>systemd-cryptsetup</b>
+operates on the device backing /var/ if no device is
+specified explicitly, and no wipe operation is requested.
+(Note that in the typical case where /var/ is on the same
+file system as the root file system, this hence enrolls a
+key into the backing device of the root file system.)</p>
+
+<h3>TPM2 PCRs and policies
+<a name="TPM2 PCRs and policies"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">PCRs allow
+binding of the encryption of secrets to specific software
+versions and system state, so that the enrolled key is only
+accessible (may be &quot;unsealed&quot;) if specific trusted
+software and/or configuration is used. Such bindings may be
+created with the option <b>--tpm2-pcrs=</b> described
+below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Secrets may also
+be bound indirectly: a signed policy for a state of some
+combination of PCR values is provided, and the secret is
+bound to the public part of the key used to sign this
+policy. This means that the owner of a key can generate a
+sequence of signed policies, for specific software versions
+and system states, and the secret can be decrypted as long
+as the machine state matches one of those policies. For
+example, a vendor may provide such a policy for each
+kernel+initrd update, allowing users to encrypt secrets so
+that they can be decrypted when running any kernel+initrd
+signed by the vendor. Such bindings may be created with the
+options <b>--tpm2-public-key=</b>,
+<b>--tpm2-public-key-pcrs=</b>, <b>--tpm2-signature=</b>
+described below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b><font color="#0000FF">Linux TPM PCR Registry</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">for an authoritative list of PCRs and
+how they are updated. The table below contains a quick
+reference, describing in particular the PCRs modified by
+systemd.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Table&nbsp;1.&nbsp;Well-known
+PCR Definitions</b> <br>
+In general, encrypted volumes would be bound to some
+combination of PCRs 7, 11, and 14 (if shim/MOK is used). In
+order to allow firmware and OS version updates, it is
+typically not advisable to use PCRs such as 0 and 2, since
+the program code they cover should already be covered
+indirectly through the certificates measured into PCR 7.
+Validation through certificates hashes is typically
+preferable over validation through direct measurements as it
+is less brittle in context of OS/firmware updates: the
+measurements will change on every update, but signatures
+should remain unchanged. See the</font>
+<b><font color="#0000FF">Linux TPM PCR Registry</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">for more discussion.</font></p>
+
+<h2>LIMITATIONS
+<a name="LIMITATIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Note
+that currently when enrolling a new key of one of the five
+supported types listed above, it is required to first
+provide a passphrase, a recovery key, a FIDO2 token, or a
+TPM2 key. It's currently not supported to unlock a device
+with a PKCS#11 key in order to enroll a new PKCS#11 key.
+Thus, if in future key roll-over is desired it's generally
+recommended to ensure a passphrase, a recovery key, a FIDO2
+token, or a TPM2 key is always enrolled.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Also
+note that support for enrolling multiple FIDO2 tokens is
+currently limited. When multiple FIDO2 tokens are enrolled,
+<b>systemd-cryptsetup</b> will perform pre-flight requests
+to attempt to identify which of the enrolled tokens are
+currently plugged in. However, this is not possible for
+FIDO2 tokens with user verification (UV, usually via
+biometrics), in which case it will fall back to attempting
+each enrolled token one by one. This will result in multiple
+prompts for PIN and user verification. This limitation does
+not apply to PKCS#11 tokens.</font></p>
+
+<h2>COMPATIBILITY
+<a name="COMPATIBILITY"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Security
+technology both in systemd and in the general industry
+constantly evolves. In order to provide best security
+guarantees, the way TPM2, FIDO2, PKCS#11 devices are
+enrolled is regularly updated in newer versions of systemd.
+Whenever this happens the following compatibility guarantees
+are given:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+Old enrollments continue to be supported and may be unlocked
+with newer versions of
+<b>systemd-cryptsetup@.service</b>(8).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+The opposite is not guaranteed however: it might not be
+possible to unlock volumes with enrollments done with a
+newer version of <b>systemd-cryptenroll</b> with an older
+version of <b>systemd-cryptsetup</b>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">That
+said, it is generally recommended to use matching versions
+of <b>systemd-cryptenroll</b> and <b>systemd-cryptsetup</b>,
+since this is best tested and supported.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">It
+might be advisable to re-enroll existing enrollments to take
+benefit of newer security features, as they are added to
+systemd.</font></p>
+
+<h2>UNLOCKING
+<a name="UNLOCKING"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following options are understood that may be used to unlock
+the device in preparation of the enrollment
+operations:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--unlock-key-file=</b><i>PATH</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Use a
+file instead of a password/passphrase read from stdin to
+unlock the volume. Expects the PATH to the file containing
+your key to unlock the volume. Currently there is nothing
+like <b>--key-file-offset=</b> or <b>--key-file-size=</b> so
+this file has to only contain the full key.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 252.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--unlock-fido2-device=</b><i>PATH</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Use a
+FIDO2 device instead of a password/passphrase read from
+stdin to unlock the volume. Expects a hidraw device
+referring to the FIDO2 device (e.g. /dev/hidraw1).
+Alternatively the special value &quot;auto&quot; may be
+specified, in order to automatically determine the device
+node of a currently plugged in security token (of which
+there must be exactly one). This automatic discovery is
+unsupported if <b>--fido2-device=</b> option is also
+specified. Note that currently FIDO2 devices enrolled
+without an accompanying LUKS2 token (i.e.
+<b>--fido2-parameters-in-header=no</b>) cannot be used for
+unlocking.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 253.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--unlock-tpm2-device=</b><i>PATH</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Use a
+TPM2 device instead of a password/passphrase read from stdin
+to unlock the volume. Expects a device node path referring
+to the TPM2 chip (e.g. /dev/tpmrm0). Alternatively the
+special value &quot;auto&quot; may be specified, in order to
+automatically determine the device node of a currently
+discovered TPM2 device (of which there must be exactly
+one).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+<h2>SIMPLE ENROLLMENT
+<a name="SIMPLE ENROLLMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following options are understood that may be used to enroll
+simple user input based unlocking:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--password</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Enroll a
+regular password/passphrase. This command is mostly
+equivalent to <b>cryptsetup luksAddKey</b>, however may be
+combined with <b>--wipe-slot=</b> in one call, see
+below.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 248.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--recovery-key</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Enroll a
+recovery key. Recovery keys are mostly identical to
+passphrases, but are computer-generated instead of being
+chosen by a human, and thus have a guaranteed high entropy.
+The key uses a character set that is easy to type in, and
+may be scanned off screen via a QR code.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 248.</font></p>
+
+<h2>PKCS#11 ENROLLMENT
+<a name="PKCS#11 ENROLLMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following option is understood that may be used to enroll
+PKCS#11 tokens:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--pkcs11-token-uri=</b><i>URI</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Enroll a
+PKCS#11 security token or smartcard (e.g. a YubiKey).
+Expects a PKCS#11 URI that allows finding an X.509
+certificate or a public key on the token. The URI must also
+be suitable to find a related private key after changing the
+type of object in it. Alternatively the special value
+&quot;auto&quot; may be specified, in order to automatically
+determine the suitable URI if a single security token
+containing a single key pair is plugged in. The special
+value &quot;list&quot; may be used to enumerate all suitable
+PKCS#11 tokens currently plugged in.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+PKCS#11 token must contain an RSA or EC key pair which will
+be used to unlock a LUKS2 volume. For RSA, a randomly
+generated volume key is encrypted with a public key in the
+token, and stored in the LUKS2 JSON token header area. To
+unlock a volume, the stored encrypted volume key will be
+decrypted with a private key in the token. For ECC, ECDH
+algorithm is used: we generate a pair of EC keys in the same
+EC group, then derive a shared secret using the generated
+private key and the public key in the token. The derived
+shared secret is used as a volume key. The generated public
+key is stored in the LUKS2 JSON token header area. The
+generated private key is erased. To unlock a volume, we
+derive the shared secret with the stored public key and a
+private key in the token.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">In
+order to unlock a LUKS2 volume with an enrolled PKCS#11
+security token, specify the <b>pkcs11-uri=</b> option in the
+respective /etc/crypttab line:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">myvolume
+/dev/sda1 - pkcs11-uri=auto</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">See
+<b>crypttab</b>(5) for a more comprehensive example of a
+<b>systemd-cryptenroll</b> invocation and its matching
+/etc/crypttab line.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 248.</font></p>
+
+<h2>FIDO2 ENROLLMENT
+<a name="FIDO2 ENROLLMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following options are understood that may be used to enroll
+FIDO2 tokens:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--fido2-device=</b><i>PATH</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Enroll a
+FIDO2 security token that implements the
+&quot;hmac-secret&quot; extension (e.g. a YubiKey). Expects
+a hidraw device referring to the FIDO2 device (e.g.
+/dev/hidraw1). Alternatively the special value
+&quot;auto&quot; may be specified, in order to automatically
+determine the device node of a currently plugged in security
+token (of which there must be exactly one). This automatic
+discovery is unsupported if <b>--unlock-fido2-device=</b>
+option is also specified. The special value &quot;list&quot;
+may be used to enumerate all suitable FIDO2 tokens currently
+plugged in. Note that many hardware security tokens that
+implement FIDO2 also implement the older PKCS#11 standard.
+Typically FIDO2 is preferable, given it's simpler to use and
+more modern.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">In
+order to unlock a LUKS2 volume with an enrolled FIDO2
+security token, specify the <b>fido2-device=</b> option in
+the respective /etc/crypttab line:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">myvolume
+/dev/sda1 - fido2-device=auto</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">See
+<b>crypttab</b>(5) for a more comprehensive example of a
+<b>systemd-cryptenroll</b> invocation and its matching
+/etc/crypttab line.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 248.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--fido2-credential-algorithm=</b><i>STRING</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Specify
+COSE algorithm used in credential generation. The default
+value is &quot;es256&quot;. Supported values are
+&quot;es256&quot;, &quot;rs256&quot; and
+&quot;eddsa&quot;.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&quot;es256&quot;
+denotes ECDSA over NIST P-256 with SHA-256.
+&quot;rs256&quot; denotes 2048-bit RSA with PKCS#1.5 padding
+and SHA-256. &quot;eddsa&quot; denotes EDDSA over Curve25519
+with SHA-512.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that your authenticator may choose not to support some
+algorithms.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 251.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--fido2-salt-file=</b><i>PATH</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When
+enrolling a FIDO2 security token, specifies the path to a
+file or an <b>AF_UNIX</b> socket from which we should read
+the salt value to be used in the HMAC operation performed by
+the FIDO2 security token. If this option is not specified,
+the salt will be randomly generated.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--fido2-parameters-in-header=</b><i>BOOL</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When
+enrolling a FIDO2 security token, controls whether to store
+FIDO2 parameters in a token in the LUKS2 superblock.
+Defaults to &quot;yes&quot;. If set to &quot;no&quot;, the
+<b>fido2-cid=</b> option has to be specified manually in the
+respective /etc/crypttab line along with a key file. See
+<b>crypttab</b>(5) for details.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--fido2-with-client-pin=</b><i>BOOL</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When
+enrolling a FIDO2 security token, controls whether to
+require the user to enter a PIN when unlocking the volume
+(the FIDO2 &quot;clientPin&quot; feature). Defaults to
+&quot;yes&quot;. (Note: this setting is without effect if
+the security token does not support the
+&quot;clientPin&quot; feature at all, or does not allow
+enabling or disabling it.)</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 249.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--fido2-with-user-presence=</b><i>BOOL</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When
+enrolling a FIDO2 security token, controls whether to
+require the user to verify presence (tap the token, the
+FIDO2 &quot;up&quot; feature) when unlocking the volume.
+Defaults to &quot;yes&quot;. (Note: this setting is without
+effect if the security token does not support the
+&quot;up&quot; feature at all, or does not allow enabling or
+disabling it.)</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 249.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--fido2-with-user-verification=</b><i>BOOL</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When
+enrolling a FIDO2 security token, controls whether to
+require user verification when unlocking the volume (the
+FIDO2 &quot;uv&quot; feature). Defaults to &quot;no&quot;.
+(Note: this setting is without effect if the security token
+does not support the &quot;uv&quot; feature at all, or does
+not allow enabling or disabling it.)</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 249.</font></p>
+
+<h2>TPM2 ENROLLMENT
+<a name="TPM2 ENROLLMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following options are understood that may be used to enroll
+TPM2 devices:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--tpm2-device=</b><i>PATH</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Enroll a
+TPM2 security chip. Expects a device node path referring to
+the TPM2 chip (e.g. /dev/tpmrm0). Alternatively the special
+value &quot;auto&quot; may be specified, in order to
+automatically determine the device node of a currently
+discovered TPM2 device (of which there must be exactly one).
+The special value &quot;list&quot; may be used to enumerate
+all suitable TPM2 devices currently discovered.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">In
+order to unlock a LUKS2 volume with an enrolled TPM2
+security chip, specify the <b>tpm2-device=</b> option in the
+respective /etc/crypttab line:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">myvolume
+/dev/sda1 - tpm2-device=auto</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">See
+<b>crypttab</b>(5) for a more comprehensive example of a
+<b>systemd-cryptenroll</b> invocation and its matching
+/etc/crypttab line.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Use
+<b>--tpm2-pcrs=</b> (see below) to configure which TPM2 PCR
+indexes to bind the enrollment to.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 248.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--tpm2-device-key=</b><i>PATH</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Enroll a
+TPM2 security chip using its public key. Expects a path
+referring to the TPM2 public key in TPM2B_PUBLIC format.
+This cannot be used with <b>--tpm2-device=</b>, as it
+performs the same operation, but without connecting to the
+TPM2 security chip; instead the enrollment is calculated
+using the provided TPM2 key. This is useful in situations
+where the TPM2 security chip is not available at the time of
+enrollment.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+key, in most cases, should be the Storage Root Key (SRK)
+from a local TPM2 security chip. If a key from a different
+handle (not the SRK) is used, you must specify its handle
+index using <b>--tpm2-seal-key-handle=</b>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+<b>systemd-tpm2-setup.service</b>(8) service writes the SRK
+to /run/systemd/tpm2-srk-public-key.tpm2b_public
+automatically during boot, in the correct format.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Alternatively,
+you may use <b>systemd-analyze srk</b> to retrieve the SRK
+from the TPM2 security chip explicitly. See
+<b>systemd-analyze</b>(1) for details. Example:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">systemd-analyze
+srk &gt; srk.tpm2b_public</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--tpm2-seal-key-handle=</b><i>HANDLE</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Configures
+which parent key to use for sealing, using the TPM handle
+(index) of the key. This is used to &quot;seal&quot;
+(encrypt) a secret and must be used later to
+&quot;unseal&quot; (decrypt) the secret. Expects a
+hexadecimal 32bit integer, optionally prefixed with
+&quot;0x&quot;. Allowable values are any handle index in the
+persistent (&quot;0x81000000&quot;-&quot;0x81ffffff&quot;)
+or transient (&quot;0x80000000&quot;-&quot;0x80ffffff&quot;)
+ranges. Since transient handles are lost after a TPM reset,
+and may be flushed during TPM context switching, they should
+not be used except for very specific use cases, e.g.
+testing.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+default is the Storage Root Key (SRK) handle index
+&quot;0x81000001&quot;. A value of 0 will use the default.
+For the SRK handle, a new key will be created and stored in
+the TPM if one does not already exist; for any other handle,
+the key must already exist in the TPM at the specified
+handle index.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+should not be changed unless you know what you are
+doing.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--tpm2-pcrs=</b><i>PCR[+PCR...]</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Configures
+the TPM2 PCRs (Platform Configuration Registers) to bind to
+when enrollment is requested via <b>--tpm2-device=</b>.
+Takes a list of PCR entries, where each entry starts with a
+name or numeric index in the range 0...23, optionally
+followed by &quot;:&quot; and a hash algorithm name
+(specifying the PCR bank), optionally followed by
+&quot;=&quot; and a hash digest value. Multiple PCR entries
+are separated by &quot;+&quot;. If not specified, the
+default is to use PCR 7 only. If an empty string is
+specified, binds the enrollment to no PCRs at all. See the
+table above for a list of available PCRs.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Example:
+<b>--tpm2-pcrs=boot-loader-code+platform-config+boot-loader-config</b>
+specifies that PCR registers 4, 1, and 5 should be
+used.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Example:
+<b>--tpm2-pcrs=7:sha256</b> specifies that PCR register 7
+from the SHA256 bank should be used.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Example:
+<b>--tpm2-pcrs=4:sha1=3a3f780f11a4b49969fcaa80cd6e3957c33b2275</b>
+specifies that PCR register 4 from the SHA1 bank should be
+used, and a hash digest value of
+3a3f780f11a4b49969fcaa80cd6e3957c33b2275 will be used
+instead of reading the current PCR value.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 248.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--tpm2-with-pin=</b><i>BOOL</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When
+enrolling a TPM2 device, controls whether to require the
+user to enter a PIN when unlocking the volume in addition to
+PCR binding, based on TPM2 policy authentication. Defaults
+to &quot;no&quot;. Despite being called PIN, any character
+can be used, not just numbers.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that incorrect PIN entry when unlocking increments the TPM
+dictionary attack lockout mechanism, and may lock out users
+for a prolonged time, depending on its configuration. The
+lockout mechanism is a global property of the TPM,
+<b>systemd-cryptenroll</b> does not control or configure the
+lockout mechanism. You may use tpm2-tss tools to inspect or
+configure the dictionary attack lockout, with
+<b>tpm2_getcap</b>(1) and <b>tpm2_dictionarylockout</b>(1)
+commands, respectively.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 251.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--tpm2-public-key=</b><i>PATH</i>,
+<b>--tpm2-public-key-pcrs=</b><i>PCR[+PCR...]</i>,
+<b>--tpm2-signature=</b><i>PATH</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Configures
+a TPM2 signed PCR policy to bind encryption to. The
+<b>--tpm2-public-key=</b> option accepts a path to a PEM
+encoded RSA public key, to bind the encryption to. If this
+is not specified explicitly, but a file
+tpm2-pcr-public-key.pem exists in one of the directories
+/etc/systemd/, /run/systemd/, /usr/lib/systemd/ (searched in
+this order), it is automatically used. The
+<b>--tpm2-public-key-pcrs=</b> option takes a list of TPM2
+PCR indexes to bind to (same syntax as <b>--tpm2-pcrs=</b>
+described above). If not specified defaults to 11 (i.e. this
+binds the policy to any unified kernel image for which a PCR
+signature can be provided).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+the difference between <b>--tpm2-pcrs=</b> and
+<b>--tpm2-public-key-pcrs=</b>: the former binds decryption
+to the current, specific PCR values; the latter binds
+decryption to any set of PCR values for which a signature by
+the specified public key can be provided. The latter is
+hence more useful in scenarios where software updates shall
+be possible without losing access to all previously
+encrypted LUKS2 volumes. Like with <b>--tpm2-pcrs=</b>,
+names defined in the table above can also be used to specify
+the registers, for instance
+<b>--tpm2-public-key-pcrs=boot-loader-code+system-identity</b>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+<b>--tpm2-signature=</b> option takes a path to a TPM2 PCR
+signature file as generated by the <b>systemd-measure</b>(1)
+tool. If this is not specified explicitly, a suitable
+signature file tpm2-pcr-signature.json is searched for in
+/etc/systemd/, /run/systemd/, /usr/lib/systemd/ (in this
+order) and used. If a signature file is specified or found
+it is used to verify if the volume can be unlocked with it
+given the current PCR state, before the new slot is written
+to disk. This is intended as safety net to ensure that
+access to a volume is not lost if a public key is enrolled
+for which no valid signature for the current PCR state is
+available. If the supplied signature does not unlock the
+current PCR state and public key combination, no slot is
+enrolled and the operation will fail. If no signature file
+is specified or found no such safety verification is
+done.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 252.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--tpm2-pcrlock=</b><i>PATH</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Configures
+a TPM2 pcrlock policy to bind encryption to. Expects a path
+to a pcrlock policy file as generated by the
+<b>systemd-pcrlock</b>(8) tool. If a TPM2 device is enrolled
+and this option is not used but a file pcrlock.json is found
+in /run/systemd/ or /var/lib/systemd/ it is automatically
+used. Assign an empty string to turn this behaviour
+off.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+<h2>OTHER OPTIONS
+<a name="OTHER OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following additional options are understood:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--wipe-slot=</b><i>SLOT[,SLOT...]</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Wipes one
+or more LUKS2 key slots. Takes a comma separated list of
+numeric slot indexes, or the special strings &quot;all&quot;
+(for wiping all key slots), &quot;empty&quot; (for wiping
+all key slots that are unlocked by an empty passphrase),
+&quot;password&quot; (for wiping all key slots that are
+unlocked by a traditional passphrase), &quot;recovery&quot;
+(for wiping all key slots that are unlocked by a recovery
+key), &quot;pkcs11&quot; (for wiping all key slots that are
+unlocked by a PKCS#11 token), &quot;fido2&quot; (for wiping
+all key slots that are unlocked by a FIDO2 token),
+&quot;tpm2&quot; (for wiping all key slots that are unlocked
+by a TPM2 chip), or any combination of these strings or
+numeric indexes, in which case all slots matching either are
+wiped. As safety precaution an operation that wipes all
+slots without exception (so that the volume cannot be
+unlocked at all anymore, unless the volume key is known) is
+refused.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+switch may be used alone, in which case only the requested
+wipe operation is executed. It may also be used in
+combination with any of the enrollment options listed above,
+in which case the enrollment is completed first, and only
+when successful the wipe operation executed &mdash; and the
+newly added slot is always excluded from the wiping.
+Combining enrollment and slot wiping may thus be used to
+update existing enrollments:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">systemd-cryptenroll
+/dev/sda1 --wipe-slot=tpm2 --tpm2-device=auto</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+above command will enroll the TPM2 chip, and then wipe all
+previously created TPM2 enrollments on the LUKS2 volume,
+leaving only the newly created one. Combining wiping and
+enrollment may also be used to replace enrollments of
+different types, for example for changing from a PKCS#11
+enrollment to a FIDO2 one:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">systemd-cryptenroll
+/dev/sda1 --wipe-slot=pkcs11 --fido2-device=auto</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Or
+for replacing an enrolled empty password by TPM2:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">systemd-cryptenroll
+/dev/sda1 --wipe-slot=empty --tpm2-device=auto</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 248.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--list-devices</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Show a
+list of candidate block devices this command may operate on.
+Specifically, this enumerates block devices currently
+present that contain a LUKS superblock, and shows their
+device node paths along with any of their symlinks. The
+devices must implement the <b>hmac-secret</b> extension to
+be useable.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-h</b>,
+<b>--help</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print a
+short help text and exit.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--version</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print a
+short version string and exit.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--no-pager</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Do not
+pipe output into a pager.</font></p>
+
+<h2>CREDENTIALS
+<a name="CREDENTIALS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>systemd-cryptenroll</b>
+supports the service credentials logic as implemented by
+<i>ImportCredential=</i>/<i>LoadCredential=</i>/<i>SetCredential=</i>
+(see <b>systemd.exec</b>(5) for details). The following
+credentials are used when passed in:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>cryptenroll.passphrase</i>,
+<i>cryptenroll.new-passphrase</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">May
+contain the passphrase to unlock the volume with/to newly
+enroll.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>cryptenroll.tpm2-pin</i>,
+<i>cryptenroll.new-tpm2-pin</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">May
+contain the TPM2 PIN to unlock the volume with/to newly
+enroll.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>cryptenroll.fido2-pin</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">If a
+FIDO2 token is enrolled this may contain the PIN of the
+token.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>cryptenroll.pkcs11-pin</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">If a
+PKCS#11 token is enrolled this may contain the PIN of the
+token.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">On
+success, 0 is returned, a non-zero failure code
+otherwise.</font></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>crypttab</b>(5)
+and <b>systemd-measure</b>(1) contain various examples
+employing <b>systemd-cryptenroll</b>.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>systemd</b>(1),
+<b>systemd-cryptsetup@.service</b>(8), <b>crypttab</b>(5),
+<b>cryptsetup</b>(8), <b>systemd-measure</b>(1)</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><font color="#000000">Linux TPM
+PCR Registry</font></p></td>
+<td width="58%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://uapi-group.org/specifications/specs/linux_tpm_pcr_registry/</font></p>
+<hr>
+</body>
+</html>

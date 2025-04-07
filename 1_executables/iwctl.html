@@ -1,0 +1,163 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:24 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>IWCTL</title>
+
+</head>
+<body>
+
+<h1 align="center">IWCTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Interactive mode">Interactive mode</a><br>
+<a href="#Command line mode">Command line mode</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">iwctl - Internet
+wireless control utility</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>iwctl</b>
+[<i>options</i> ...] [<i>commands</i> ...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Tool for
+configuring <b>iwd</b> daemon via D-Bus interface. It
+supports both an interactive mode and command line mode.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--username</b>,
+<b>-u</b></p>
+
+<p style="margin-left:18%;">Provide username.</p>
+
+<p style="margin-left:9%;"><b>--password</b>, <b>-p</b></p>
+
+<p style="margin-left:18%;">Provide password.</p>
+
+<p style="margin-left:9%;"><b>--passphrase</b>,
+<b>-P</b></p>
+
+<p style="margin-left:18%;">Provide passphrase.</p>
+
+<p style="margin-left:9%;"><b>--dont-ask</b>, <b>-v</b></p>
+
+<p style="margin-left:18%;">Don't ask for missing
+credentials.</p>
+
+<p style="margin-left:9%;"><b>--help</b>, <b>-h</b></p>
+
+<p style="margin-left:18%;">Show help message and exit.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h3>Interactive mode
+<a name="Interactive mode"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To start an
+interactive mode and list all available commands do: ..
+code-block:</p>
+
+<p style="margin-left:13%; margin-top: 1em">$ iwctl <br>
+[iwd]# help</p>
+
+<p style="margin-left:9%; margin-top: 1em">To connect to a
+network: .. code-block:</p>
+
+<p style="margin-left:13%; margin-top: 1em">[iwd]# device
+list <br>
+[iwd]# station DEVICE scan <br>
+[iwd]# station DEVICE get-networks <br>
+[iwd]# station DEVICE connect SSID</p>
+
+<h3>Command line mode
+<a name="Command line mode"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To list all
+available commands in command line mode and exit do: ..
+code-block:</p>
+
+<p style="margin-left:13%; margin-top: 1em">$ iwctl
+--help</p>
+
+<p style="margin-left:9%; margin-top: 1em">To connect to a
+network: .. code-block:</p>
+
+<p style="margin-left:13%; margin-top: 1em">$ iwctl device
+list <br>
+$ iwctl station DEVICE scan <br>
+$ iwctl station DEVICE get-networks <br>
+$ iwctl --passphrase=PASSPHRASE station DEVICE connect
+SSID</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">iwd(8)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Marcel Holtmann
+&lt;marcel@holtmann.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2013-2019 Intel
+Corporation</p>
+<hr>
+</body>
+</html>

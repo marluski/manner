@@ -1,0 +1,151 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:46 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GETCIFSACL</title>
+
+</head>
+<body>
+
+<h1 align="center">GETCIFSACL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">getcifsacl -
+Userspace helper to display an ACL in a security descriptor
+for Common Internet File System (CIFS)</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">getcifsacl
+[-v|-r] {file system object}</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This tool is
+part of the cifs-utils suite.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>getcifsacl</b>
+is a userspace helper program for the Linux CIFS client file
+system. It is intended to display a security descriptor,
+including DACL and SACL for a file system object.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program
+uses a plugin to handle the mapping of SIDs to user and
+group names. <i>/etc/cifs-utils/idmap-plugin</i> should be a
+symlink that points to the correct plugin to use.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fields of an ACE
+such as SID, type, flags, and mask are displayed separated
+by /. Numeric values of type, flags, and mask are displayed
+in hexadecimal format.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Print version number and
+exit.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-r</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Display a security descriptor in raw mode. Values such
+as type and flags are displayed in hexadecimal format, a SID
+is not mapped to a name.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-R</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>List the ACLs of all files and directories
+recursively.</p> </td></tr>
+</table>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kernel support
+for getcifsacl/setcifsacl utilities was initially introduced
+in the 2.6.37 kernel.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mount.cifs(8),
+setcifsacl(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Shirish
+Pargaonkar wrote the getcifsacl program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Linux CIFS
+Mailing list is the preferred place to ask questions
+regarding these programs.</p>
+<hr>
+</body>
+</html>

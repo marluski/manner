@@ -1,0 +1,499 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:18 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>DJPEG</title>
+
+</head>
+<body>
+
+<h1 align="center">DJPEG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">djpeg -
+decompress a JPEG file to an image file</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>djpeg</b> [
+<i>options</i> ] [ <i>filename</i> ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>djpeg</b>
+decompresses the named JPEG file, or the standard input if
+no file is named, and produces an image file on the standard
+output. PBMPLUS (PPM/PGM), BMP, GIF, or Targa output format
+can be selected.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">All switch names
+may be abbreviated; for example, <b>-grayscale</b> may be
+written <b>-gray</b> or <b>-gr</b>. Most of the
+&quot;basic&quot; switches can be abbreviated to as little
+as one letter. Upper and lower case are equivalent (thus
+<b>-BMP</b> is the same as <b>-bmp</b>). British spellings
+are also accepted (e.g. <b>-greyscale</b>), though for
+brevity these are not mentioned below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The basic
+switches are: <b><br>
+-colors</b> <i>N</i></p>
+
+<p style="margin-left:18%;">Reduce image to at most N
+colors [legacy feature]. This reduces the number of colors
+used in the output image so that it can be stored in a
+colormapped file format. This feature cannot be used when
+decompressing lossless JPEG images.</p>
+
+<p style="margin-left:9%;"><b>-quantize</b> <i>N</i></p>
+
+<p style="margin-left:18%;">Same as <b>-colors</b>.
+<b>-colors</b> is the recommended name. <b>-quantize</b> is
+provided only for backward compatibility.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-fast</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Select recommended processing options for low-quality
+output [legacy feature]. (The default options are chosen for
+highest-quality output.) Currently, this is equivalent to
+<b>-dct fast -nosmooth -onepass -dither ordered</b>. On
+modern CPUs, these settings have little or no performance
+benefit and are retained solely for backward
+compatibility.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-grayscale</b></p>
+
+<p style="margin-left:18%;">Force grayscale output even if
+JPEG file is full-color. This feature cannot be used when
+decompressing full-color lossless JPEG images.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-rgb</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Force RGB output even if JPEG file is grayscale. This
+feature cannot be used when decompressing grayscale lossless
+JPEG images.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-scale</b> <i>M/N</i></p>
+
+<p style="margin-left:18%;">Scale the output image by a
+factor M/N. Currently the scale factor must be M/8, where M
+is an integer between 1 and 16 inclusive, or any reduced
+fraction thereof (such as 1/2, 3/4, etc.) Scaling is handy
+if the image is larger than your screen. This feature cannot
+be used when decompressing lossless JPEG images.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-bmp</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Select BMP output format (Windows flavor). 8-bit
+colormapped format is emitted if <b>-colors</b> or
+<b>-grayscale</b> is specified, or if the JPEG file is
+grayscale; otherwise, 24-bit full-color format is emitted.
+This format can only be used when decompressing
+8-bit-per-sample JPEG images.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-gif</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Select GIF output format (LZW-compressed) [legacy
+feature]. Since GIF does not support more than 256 colors,
+<b>-colors 256</b> is assumed (unless you specify a smaller
+number of colors). If you specify <b>-fast,</b> the default
+number of colors is 216. This format can only be used when
+decompressing 8-bit-per-sample or 12-bit-per-sample lossy
+JPEG images.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-gif0</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Select GIF output format (uncompressed) [legacy
+feature]. Since GIF does not support more than 256 colors,
+<b>-colors 256</b> is assumed (unless you specify a smaller
+number of colors). If you specify <b>-fast,</b> the default
+number of colors is 216. This format can only be used when
+decompressing 8-bit-per-sample or 12-bit-per-sample lossy
+JPEG images.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-os2</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Select BMP output format (OS/2 1.x flavor) [legacy
+feature]. 8-bit colormapped format is emitted if
+<b>-colors</b> or <b>-grayscale</b> is specified, or if the
+JPEG file is grayscale; otherwise, 24-bit full-color format
+is emitted. This format can only be used when decompressing
+8-bit-per-sample JPEG images.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-pnm</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Select PBMPLUS (PPM/PGM) output format (this is the
+default format). PGM is emitted if the JPEG file is
+grayscale or if <b>-grayscale</b> is specified; otherwise
+PPM is emitted.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-targa</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Select Targa output format [legacy feature]. Grayscale
+format is emitted if the JPEG file is grayscale or if
+<b>-grayscale</b> is specified; otherwise, colormapped
+format is emitted if <b>-colors</b> is specified; otherwise,
+24-bit full-color format is emitted. This format can only be
+used when decompressing 8-bit-per-sample JPEG images.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Switches for
+advanced users: <b><br>
+-dct int</b></p>
+
+<p style="margin-left:18%;">Use accurate integer DCT method
+(default).</p>
+
+<p style="margin-left:9%;"><b>-dct fast</b></p>
+
+<p style="margin-left:18%;">Use less accurate integer DCT
+method [legacy feature]. When the Independent JPEG
+Group&rsquo;s software was first released in 1991, the
+decompression time for a 1-megapixel JPEG image on a
+mainstream PC was measured in minutes. Thus, the <b>fast</b>
+integer DCT algorithm provided noticeable performance
+benefits. On modern CPUs running libjpeg-turbo, however, the
+decompression time for a 1-megapixel JPEG image is measured
+in milliseconds, and thus the performance benefits of the
+<b>fast</b> algorithm are much less noticeable. On modern
+x86/x86-64 CPUs that support AVX2 instructions, the
+<b>fast</b> and <b>int</b> methods have similar performance.
+On other types of CPUs, the <b>fast</b> method is generally
+about 5-15% faster than the <b>int</b> method.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the JPEG
+image was compressed using a quality level of 85 or below,
+then there should be little or no perceptible quality
+difference between the two algorithms. When decompressing
+images that were compressed using quality levels above 85,
+however, the difference between the <b>fast</b> and
+<b>int</b> methods becomes more pronounced. With images
+compressed using quality=97, for instance, the <b>fast</b>
+method incurs generally about a 4-6 dB loss in PSNR relative
+to the <b>int</b> method, but this can be larger for some
+images. If you can avoid it, do not use the <b>fast</b>
+method when decompressing images that were compressed using
+quality levels above 97. The algorithm often degenerates for
+such images and can actually produce a more lossy output
+image than if the JPEG image had been compressed using lower
+quality levels.</p>
+
+<p style="margin-left:9%;"><b>-dct float</b></p>
+
+<p style="margin-left:18%;">Use floating-point DCT method
+[legacy feature]. The <b>float</b> method does not produce
+significantly more accurate results than the <b>int</b>
+method, and it is much slower. The <b>float</b> method may
+also give different results on different machines due to
+varying roundoff behavior, whereas the integer methods
+should give the same results on all machines.</p>
+
+<p style="margin-left:9%;"><b>-dither fs</b></p>
+
+<p style="margin-left:18%;">Use Floyd-Steinberg dithering
+when quantizing colors [legacy feature].</p>
+
+<p style="margin-left:9%;"><b>-dither ordered</b></p>
+
+<p style="margin-left:18%;">Use ordered dithering when
+quantizing colors [legacy feature].</p>
+
+<p style="margin-left:9%;"><b>-dither none</b></p>
+
+<p style="margin-left:18%;">Do not use dithering when
+quantizing colors [legacy feature]. By default,
+Floyd-Steinberg dithering is applied when quantizing colors.
+This is slower but usually produces the best results.
+Ordered dithering is a compromise between speed and quality.
+No dithering is faster but usually looks awful. Note that
+these switches have no effect unless color quantization is
+being done. Ordered dithering is only available in
+<b>-onepass</b> mode.</p>
+
+<p style="margin-left:9%;"><b>-icc</b> <i>file</i></p>
+
+<p style="margin-left:18%;">Extract ICC color management
+profile to the specified file.</p>
+
+<p style="margin-left:9%;"><b>-map</b> <i>file</i></p>
+
+<p style="margin-left:18%;">Quantize to the colors used in
+the specified image file [legacy feature]. This is useful
+for producing multiple files with identical color maps, or
+for forcing a predefined set of colors to be used. The
+<i>file</i> must be a GIF or PPM file. This option overrides
+<b>-colors</b> and <b>-onepass</b>.</p>
+
+<p style="margin-left:9%;"><b>-nosmooth</b></p>
+
+<p style="margin-left:18%;">Use a faster, lower-quality
+upsampling routine.</p>
+
+<p style="margin-left:9%;"><b>-onepass</b></p>
+
+<p style="margin-left:18%;">Use one-pass instead of
+two-pass color quantization [legacy feature]. The one-pass
+method needs less memory, but it produces a lower-quality
+image. <b>-onepass</b> is ignored unless you also specify
+<b>-colors</b> <i>N</i>. Also, the one-pass method is always
+used for grayscale output. (The two-pass method has no
+improvement in that case.)</p>
+
+<p style="margin-left:9%;"><b>-maxmemory</b> <i>N</i></p>
+
+<p style="margin-left:18%;">Set limit for amount of memory
+to use in processing large images. Value is in thousands of
+bytes, or millions of bytes if &quot;M&quot; is attached to
+the number. For example, <b>-max 4m</b> selects 4000000
+bytes. If more space is needed, an error will occur.</p>
+
+<p style="margin-left:9%;"><b>-maxscans</b> <i>N</i></p>
+
+<p style="margin-left:18%;">Abort if the JPEG image
+contains more than <i>N</i> scans. This feature demonstrates
+a method by which applications can guard against
+denial-of-service attacks instigated by specially-crafted
+malformed JPEG images containing numerous scans with missing
+image data or image data consisting only of &quot;EOB
+runs&quot; (a feature of progressive JPEG images that allows
+potentially hundreds of thousands of adjoining zero-value
+pixels to be represented using only a few bytes.) Attempting
+to decompress such malformed JPEG images can cause excessive
+CPU activity, since the decompressor must fully process each
+scan (even if the scan is corrupt) before it can proceed to
+the next scan.</p>
+
+<p style="margin-left:9%;"><b>-outfile</b> <i>name</i></p>
+
+<p style="margin-left:18%;">Send output image to the named
+file, not to standard output.</p>
+
+<p style="margin-left:9%;"><b>-memsrc</b></p>
+
+<p style="margin-left:18%;">Load input file into memory
+before decompressing. This feature was implemented mainly as
+a way of testing the in-memory source manager
+(jpeg_mem_src().)</p>
+
+<p style="margin-left:9%;"><b>-report</b></p>
+
+<p style="margin-left:18%;">Report decompression
+progress.</p>
+
+<p style="margin-left:9%;"><b>-skip</b> <i>Y0,Y1</i></p>
+
+<p style="margin-left:18%;">Decompress all rows of the JPEG
+image except those between Y0 and Y1 (inclusive.) Note that
+if decompression scaling is being used, then Y0 and Y1 are
+relative to the scaled image dimensions.</p>
+
+<p style="margin-left:9%;"><b>-crop</b> <i>WxH+X+Y</i></p>
+
+<p style="margin-left:18%;">Decompress only a rectangular
+subregion of the image, starting at point X,Y with width W
+and height H. If necessary, X will be shifted left to the
+nearest iMCU boundary, and the width will be increased
+accordingly. Note that if decompression scaling is being
+used, then X, Y, W, and H are relative to the scaled image
+dimensions. Currently this option only works with the
+PBMPLUS (PPM/PGM), GIF, and Targa output formats.</p>
+
+<p style="margin-left:9%;"><b>-strict</b></p>
+
+<p style="margin-left:18%;">Treat all warnings as fatal.
+This feature also demonstrates a method by which
+applications can guard against attacks instigated by
+specially-crafted malformed JPEG images. Enabling this
+option will cause the decompressor to abort if the JPEG
+image contains incomplete or corrupt image data.</p>
+
+<p style="margin-left:9%;"><b>-verbose</b></p>
+
+<p style="margin-left:18%;">Enable debug printout. More
+<b>-v</b>&rsquo;s give more output. Also, version
+information is printed at startup.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-debug</b></p></td>
+<td width="1%"></td>
+<td width="22%">
+
+
+<p>Same as <b>-verbose</b>.</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-version</b></p>
+
+<p style="margin-left:18%;">Print version information and
+exit.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This example
+decompresses the JPEG file foo.jpg and saves the output in
+8-bit BMP format in foo.bmp:</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>djpeg
+-bmp</b> <i>foo.jpg</i> <b>&gt;</b> <i>foo.bmp</i></p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>JPEGMEM</b></i></p>
+
+<p style="margin-left:18%;">If this environment variable is
+set, its value is the default memory limit. The value is
+specified as described for the <b>-maxmemory</b> switch.
+<b>JPEGMEM</b> overrides the default value specified when
+the program was compiled, and itself is overridden by an
+explicit <b>-maxmemory</b>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cjpeg</b>(1),
+<b>jpegtran</b>(1), <b>rdjpgcom</b>(1), <b>wrjpgcom</b>(1)
+<b><br>
+ppm</b>(5), <b>pgm</b>(5) <br>
+Wallace, Gregory K. &quot;The JPEG Still Picture Compression
+Standard&quot;, Communications of the ACM, April 1991 (vol.
+34, no. 4), pp. 30-44.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Independent JPEG
+Group</p>
+
+<p style="margin-left:9%; margin-top: 1em">This file was
+modified by The libjpeg-turbo Project to include only
+information relevant to libjpeg-turbo, to wordsmith certain
+sections, and to describe features not present in
+libjpeg.</p>
+<hr>
+</body>
+</html>

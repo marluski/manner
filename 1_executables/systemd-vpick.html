@@ -1,0 +1,281 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SYSTEMD-VPICK</title>
+
+</head>
+<body>
+
+<h1 align="center">SYSTEMD-VPICK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">systemd-vpick -
+Resolve paths to &quot;.v/&quot; versioned directories</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="46%">
+
+
+<p style="margin-top: 1em"><b>systemd-vpick [OPTIONS...]
+[PATH...]</b></p> </td>
+<td width="45%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>systemd-vpick</b>
+resolves a file system path referencing a &quot;.v/&quot;
+versioned directory to a path to the newest (by version)
+file contained therein. This tool provides a command line
+interface for the <b>systemd.v</b>(7) logic.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The tool expects
+a path to a &quot;.v/&quot; directory as argument (either
+directly, or with a triple underscore pattern as final
+component). It then determines the newest file contained in
+that directory, and writes its path to standard output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unless the
+triple underscore pattern is passed as last component of the
+path, it is typically necessary to at least specify the
+<b>--suffix=</b> switch to configure the file suffix to look
+for.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the specified
+path does not reference a &quot;.v/&quot; path (i.e. neither
+the final component ends in &quot;.v&quot;, nor the
+penultimate does or the final one does contain a triple
+underscore) its specified path is written unmodified to
+standard output.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--basename=</b>,
+<b>-B</b></p>
+
+<p style="margin-left:14%;">Overrides the
+&quot;basename&quot; of the files to look for, i.e. the part
+to the left of the variable part of the filenames. Normally
+this is derived automatically from the filename of the
+&quot;.v&quot; component of the specified path, or from the
+triple underscore pattern in the last component of the
+specified path.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b></p>
+
+<p style="margin-left:14%;">Explicitly configures the
+version to select. If specified, a filename with the
+specified version string will be looked for, instead of the
+newest version available.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-A</b></p>
+
+<p style="margin-left:14%;">Explicitly configures the
+architecture to select. If specified, a filename with the
+specified architecture identifier will be looked for. If not
+specified only filenames with a locally supported
+architecture are considered, or those without any
+architecture identifier.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--suffix=</b>,
+<b>-S</b></p>
+
+<p style="margin-left:14%;">Configures the suffix of the
+filenames to consider. For the &quot;.v/&quot; logic it is
+necessary to specify the suffix to look for, and the
+&quot;.v/&quot; component must also carry the suffix
+immediately before &quot;.v&quot; in its name.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--type=</b>,
+<b>-t</b></p>
+
+<p style="margin-left:14%;">Configures the inode type to
+look for in the &quot;.v/&quot; directory. Takes one of
+&quot;reg&quot;, &quot;dir&quot;, &quot;sock&quot;,
+&quot;fifo&quot;, &quot;blk&quot;, &quot;chr&quot;,
+&quot;lnk&quot; as argument, each identifying an inode type.
+See <b>inode</b>(7) for details about inode types. If this
+option is used inodes not matching the specified type are
+filtered and not taken into consideration.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--print=</b>,
+<b>-p</b></p>
+
+<p style="margin-left:14%;">Configures what precisely to
+write to standard output. If not specified prints the full,
+resolved path of the newest matching file in the
+&quot;.v/&quot; directory. This switch can be set to one of
+the following:</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull; If set
+to &quot;filename&quot;, will print only the filename
+instead of the full path of the resolved file.</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull; If set
+to &quot;version&quot;, will print only the version of the
+resolved file.</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull; If set
+to &quot;type&quot;, will print only the inode type of the
+resolved file (i.e. a string such as &quot;reg&quot; for
+regular files, or &quot;dir&quot; for directories).</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull; If set
+to &quot;arch&quot;, will print only the architecture of the
+resolved file.</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull; If set
+to &quot;tries&quot;, will print only the tries left/tries
+done of the resolved file.</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull; If set
+to &quot;all&quot;, will print all of the above in a simple
+tabular output.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--resolve=</b></p>
+
+<p style="margin-left:14%;">Takes a boolean argument. If
+true the path to the versioned file is fully canonicalized
+(i.e. symlinks resolved, and redundant path components
+removed) before it is shown. If false (the default) this is
+not done, and the path is shown without
+canonicalization.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Print a short help text and
+exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print a short version string
+and exit.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Use a command
+like the following to automatically pick the newest raw disk
+image from a &quot;.v/&quot; directory:</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ systemd-vpick
+--suffix=.raw --type=reg /var/lib/machines/quux.raw.v/</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will
+enumerate all regular files matching
+/var/lib/machines/quux.raw.v/quux*.raw, filter and sort them
+according to the rules described in <b>systemd.v</b>(7), and
+then write the path to the newest (by version) file to
+standard output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use a command
+like the following to automatically pick the newest OS
+directory tree from a &quot;.v/&quot; directory:</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ systemd-vpick
+--type=dir /var/lib/machines/waldo.v/</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will
+enumerate all directory inodes matching
+/var/lib/machines/waldo.v/waldo*, filter and sort them
+according to the rules described in <b>systemd.v</b>(7), and
+then write the path to the newest (by version) directory to
+standard output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For further
+examples see <b>systemd.v</b>(7).</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On success, 0 is
+returned, a non-zero failure code otherwise.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>systemd</b>(1),
+<b>systemd.v</b>(7)</p>
+<hr>
+</body>
+</html>

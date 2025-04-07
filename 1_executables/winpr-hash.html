@@ -1,0 +1,156 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>winpr-hash</title>
+
+</head>
+<body>
+
+<h1 align="center">winpr-hash</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">winpr-hash -
+NTLM hashing tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>winpr-hash
+-u</b> username <b>-p</b> password [<b>-d</b> domain]
+[<b>-f</b> { <i>default</i> | sam }] [<b>-v</b> { <i>1</i> |
+2 }]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>winpr-hash</b>
+is a small utility that can be used to create a NTLM hash
+from a username and password pair. The created hash can be
+outputed as plain hash or in SAM format.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-u username</p>
+
+<p style="margin-left:18%;">The username to use.</p>
+
+<p style="margin-left:9%;">-p password</p>
+
+<p style="margin-left:18%;">Password to use.</p>
+
+<p style="margin-left:9%;">-d domain</p>
+
+<p style="margin-left:18%;">A optional parameter to specify
+the domain of the user.</p>
+
+<p style="margin-left:9%;">-f format</p>
+
+<p style="margin-left:18%;">Specify the output format. The
+<i>default</i> outputs only the plain NTLM hash. The second
+output format available is <i>sam</i> which outputs the
+created hash in a format that it can be used in SAM
+file:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">user:domain::hash:::</p>
+
+<p style="margin-left:9%;">-v version</p>
+
+<p style="margin-left:18%;">Version allows it to specify
+the NTLM version to use. The default is to use version 1. In
+case version 2 is used a domain needs to be specified.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">winpr-hash -u
+<i>user</i> -p <i>password</i> -d <i>domain</i> -f
+<i>sam</i> -v <i>2</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Create a version
+<i>2</i> NTLM hash for <i>user</i> with <i>domain</i> and
+<i>password</i> and output it in <i>sam</i> format.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>0</b></p></td>
+<td width="8%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em">Successful program
+execution.</p> </td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>1</b></p></td>
+<td width="8%"></td>
+<td width="37%">
+
+
+<p>Missing or invalid arguments.</p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">FreeRDP
+&lt;team@freerdp.com&gt;</p>
+<hr>
+</body>
+</html>

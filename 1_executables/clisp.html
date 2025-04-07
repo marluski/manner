@@ -1,0 +1,2980 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:04 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CLISP</title>
+
+</head>
+<body>
+
+<h1 align="center">CLISP</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Interactive Mode">Interactive Mode</a><br>
+<a href="#Non-Interactive (Batch) Mode">Non-Interactive (Batch) Mode</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#LANGUAGE REFERENCE">LANGUAGE REFERENCE</a><br>
+<a href="#COMMAND LINE USER ENVIRONMENT">COMMAND LINE USER ENVIRONMENT</a><br>
+<a href="#USING AND EXTENDING CLISP">USING AND EXTENDING CLISP</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#INPUT AND OUTUT">INPUT AND OUTUT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#PROJECTS">PROJECTS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">clisp -
+<b><font color="#0000FF">ANSI</font></b>
+<small><font color="#000000">[38]</font></small>
+<b><font color="#0000FF">Common Lisp</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">compiler, interpreter and
+debugger.</font></p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="87%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>clisp</b>
+[[<b>-h</b>] | [<b>--help</b>]] [<b>--version</b>]
+[<b>--license</b>] [<b>-help-image</b>]
+[<b>-B&nbsp;</b><i>lisp-lib-dir</i>] [<b>-b</b>]
+[<b>-K&nbsp;</b><i>linking-set</i>]
+[<b>-M&nbsp;</b><i>mem-file</i>]
+[<b>-m&nbsp;</b><i>memory-size</i>]
+[<b>-L&nbsp;</b><i>language</i>]
+[<b>-N&nbsp;</b><i>locale-dir</i>]
+[<b>-E</b><i>domain&nbsp;encoding</i>] [[<b>-q</b>] |
+[<b>--quiet</b>] | [<b>--silent</b>] | [<b>-v</b>] |
+[<b>--verbose</b>]] [<b>-on-error&nbsp;</b><i>action</i>]
+[<b>-repl</b>] [<b>-w</b>] [<b>-I</b>]
+[<b>-disable-readline</b>] [[<b>-ansi</b>] |
+[<b>-traditional</b>]] [<b>-modern</b>]
+[<b>-p&nbsp;</b><i>package</i>] [<b>-C</b>] [<b>-norc</b>]
+[<b>-lp&nbsp;</b><i>directory</i>...]
+[<b>-i&nbsp;</b><i>init-file</i>...]
+[<b>-c&nbsp;</b>[<b>-l</b>]&nbsp;<i>lisp-file&nbsp;</i>[<b>-o&nbsp;</b><i>output-file</i>]...]
+[<b>-x&nbsp;</b><i>expressions</i>...]
+[<i>lisp-file&nbsp;</i>[<i>argument</i>...]]</font></p> </td>
+<td width="4%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Invokes
+the</font> <b><font color="#0000FF">Common Lisp</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">interpreter and compiler.</font></p>
+
+<h3>Interactive Mode
+<a name="Interactive Mode"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">When
+called without batch arguments, executes the</font>
+<b><font color="#0000FF">read-eval-print loop</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">, in which expressions are in
+turn</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;</font>
+<b><font color="#0000FF">READ</font></b>
+<small><font color="#000000">[3]</font></small>
+<font color="#000000">from the standard input,</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;</font>
+<b><font color="#0000FF">EVAL</font></b>
+<small><font color="#000000">[4]</font></small>
+<font color="#000000">uated by the lisp
+interpreter,</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+and their results are</font>
+<b><font color="#0000FF">PRINT</font></b>
+<small><font color="#000000">[5]</font></small>
+<font color="#000000">ed to the standard output.</font></p>
+
+<h3>Non-Interactive (Batch) Mode
+<a name="Non-Interactive (Batch) Mode"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Invoked
+with <b>-c</b>, compiles the specified lisp files to a
+platform-independent bytecode which can be executed more
+efficiently.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Invoked
+with <b>-x</b>, executes the specified lisp
+expressions.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Invoked
+with <i>lisp-file</i>, runs the specified lisp
+file.</font></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-h
+<br>
+--help</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Displays
+a help message on how to invoke</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--version</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Displays
+the</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">version number, as given by the
+function</font>
+<b><font color="#0000FF">LISP-IMPLEMENTATION-VERSION</font></b>
+<small><font color="#000000">[7]</font></small>
+<font color="#000000">, the value of the variable
+<i>*FEATURES*</i>, as well some other
+information.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--license</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Displays
+a summary of the licensing information, the</font>
+<b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<b><font color="#0000FF">GPL</font></b>
+<small><font color="#000000">[9]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-help-image</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Displays
+information about the memory image being invoked: whether is
+it suitable for scripting as well as the
+<b>:DOCUMENTATION</b> supplied to
+<b>EXT:SAVEINITMEM</b>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-B</b>
+<i>lisp-lib-dir</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+the installation directory. This is the directory containing
+the linking sets and other data files. This option is
+normally not necessary, because the installation directory
+is already built-in into the <b>clisp</b> executable.
+Directory <i>lisp-lib-dir</i> can be changed dynamically
+using the</font>
+<b><font color="#0000FF">SYMBOL-MACRO</font></b>
+<small><font color="#000000">[10]</font></small>
+<font color="#000000"><i>CUSTOM:*LIB-DIRECTORY*</i>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-b</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print the
+installation directory and exit immediately. The namestring
+of <i>CUSTOM:*LIB-DIRECTORY*</i> is printed without any
+quotes. This is mostly useful in module Makefiles, see,
+e.g., modules/syscalls/Makefile.in (file in the CLISP
+sources).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-K</b>
+<i>linking-set</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+the linking set to be run. This is a directory (relative to
+the <i>lisp-lib-dir</i>) containing at least a main
+executable (runtime) and an initial memory image. Possible
+values are</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>base</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">the
+core</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>full</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">core plus
+all the modules with which this installation was built, see
+Section&nbsp;32.2, &ldquo;External
+Modules&rdquo;.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+default is <b>base</b>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-M</b>
+<i>mem-file</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+the initial memory image. This must be a memory dump
+produced by the <b>EXT:SAVEINITMEM</b> function by this
+<b>clisp</b> runtime. It may have been compressed
+using</font> <b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<b><font color="#0000FF">gzip</font></b>
+<small><font color="#000000">[11]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-m</b>
+<i>memory-size</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Sets the
+amount of memory</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">tries to grab on startup. The amount
+may be given as</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><i>n
+<br>
+n</i><b>B</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">measured
+in bytes</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><i>n
+<br>
+n</i><b>W</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">measured
+in machine words (4&times;<i>n</i> on 32-bit platforms,
+8&times;<i>n</i> on 64-bit platforms)</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><i>n</i><b>K</b>
+<i><br>
+n</i><b>KB</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">measured
+in kilobytes</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><i>n</i><b>KW</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">measured
+in kilowords</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><i>n</i><b>M</b>
+<i><br>
+n</i><b>MB</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">measured
+in megabytes</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><i>n</i><b>MW</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">measured
+in megawords</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+default is 3 megabytes. The argument is constrained above
+100 KB.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+version of</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">eventually uses the entire
+<i>memory-size</i>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-L</b>
+<i>language</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+the language</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">uses to communicate with the user.
+This may be one of <b>english</b>, <b>german</b>,
+<b>french</b>, <b>spanish</b>, <b>dutch</b>, <b>russian</b>,
+<b>danish</b>. Other languages may be specified through
+the</font> <b><font color="#0000FF">environment
+variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000"><b>LANG</b>, provided the
+corresponding message catalog is installed. The language may
+be changed dynamically using the</font>
+<b><font color="#0000FF">SYMBOL-MACRO</font></b>
+<small><font color="#000000">[10]</font></small>
+<font color="#000000"><i>CUSTOM:*CURRENT-LANGUAGE*</i>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-N</b>
+<i>locale-dir</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+the base directory of locale files.</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">will search its message catalogs in
+<i>locale-dir</i>/<i>language</i>/LC_MESSAGES/clisp.mo. This
+directory may be changed dynamically using the</font>
+<b><font color="#0000FF">SYMBOL-MACRO</font></b>
+<small><font color="#000000">[10]</font></small>
+<font color="#000000"><i>CUSTOM:*CURRENT-LANGUAGE*</i>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-E</b><i>domain
+encoding</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+the encoding used for the given domain, overriding the
+default which depends on the</font>
+<b><font color="#0000FF">environment variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000">s <b>LC_ALL</b>, <b>LC_CTYPE</b>,
+<b>LANG</b>. <i>domain</i> can be</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>file</b></font></p>
+
+
+<p style="margin-left:19%;"><font color="#000000">affecting
+<i>CUSTOM:*DEFAULT-FILE-ENCODING*</i></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>pathname</b></font></p>
+
+
+<p style="margin-left:19%;"><font color="#000000">affecting
+<i>CUSTOM:*PATHNAME-ENCODING*</i></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>terminal</b></font></p>
+
+
+<p style="margin-left:19%;"><font color="#000000">affecting
+<i>CUSTOM:*TERMINAL-ENCODING*</i></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>foreign</b></font></p>
+
+
+<p style="margin-left:19%;"><font color="#000000">affecting
+<i>CUSTOM:*FOREIGN-ENCODING*</i></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>misc</b></font></p>
+
+
+<p style="margin-left:19%;"><font color="#000000">affecting
+<i>CUSTOM:*MISC-ENCODING*</i></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><i>blank</i></font></p>
+
+
+<p style="margin-left:19%;"><font color="#000000">affecting
+all of the above.</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000"><b><big>Warning</big></b>
+<br>
+Note that the values of these</font>
+<b><font color="#0000FF">SYMBOL-MACRO</font></b>
+<small><font color="#000000">[10]</font></small>
+<font color="#000000">s that have been saved in a memory
+image are ignored: these</font>
+<b><font color="#0000FF">SYMBOL-MACRO</font></b>
+<small><font color="#000000">[10]</font></small>
+<font color="#000000">s are reset based on the OS
+environment <b>after</b> the memory image is loaded. You
+have to use the RC file, <i>CUSTOM:*INIT-HOOKS*</i> or init
+function to set them on startup, but it is best to set the
+aforementioned</font> <b><font color="#0000FF">environment
+variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000">s appropriately for consistency with
+other programs. See Section&nbsp;31.1, &ldquo;Customizing
+CLISP Process Initialization and
+Termination&rdquo;.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-q
+<br>
+--quiet <br>
+--silent <br>
+-v <br>
+--verbose</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Change
+verbosity level: by default,</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">displays a banner at startup and a
+good-bye message when quitting, and initializes</font>
+<i><font color="#0000FF">*LOAD-VERBOSE*</font></i>
+<small><font color="#000000">[13]</font></small>
+<font color="#000000">and</font>
+<i><font color="#0000FF">*COMPILE-VERBOSE*</font></i>
+<small><font color="#000000">[14]</font></small>
+<font color="#000000">to</font>
+<b><font color="#0000FF">T</font></b>
+<small><font color="#000000">[15]</font></small>
+<font color="#000000">, and</font>
+<i><font color="#0000FF">*LOAD-PRINT*</font></i>
+<small><font color="#000000">[13]</font></small>
+<font color="#000000">and</font>
+<i><font color="#0000FF">*COMPILE-PRINT*</font></i>
+<small><font color="#000000">[14]</font></small>
+<font color="#000000">to</font>
+<b><font color="#0000FF">NIL</font></b>
+<small><font color="#000000">[16]</font></small>
+<font color="#000000">, as per [ANSI CL standard]. The first
+<b>-q</b> removes the banner and the good-bye message, the
+second sets variables</font>
+<i><font color="#0000FF">*LOAD-VERBOSE*</font></i>
+<small><font color="#000000">[13]</font></small>
+<font color="#000000">,</font>
+<i><font color="#0000FF">*COMPILE-VERBOSE*</font></i>
+<small><font color="#000000">[14]</font></small>
+<font color="#000000">and
+<i>CUSTOM:*SAVEINITMEM-VERBOSE*</i> to</font>
+<b><font color="#0000FF">NIL</font></b>
+<small><font color="#000000">[16]</font></small>
+<font color="#000000">. The first <b>-v</b> sets variables
+<i>CUSTOM:*REPORT-ERROR-PRINT-BACKTRACE*</i>,</font>
+<i><font color="#0000FF">*LOAD-PRINT*</font></i>
+<small><font color="#000000">[13]</font></small>
+<font color="#000000">and</font>
+<i><font color="#0000FF">*COMPILE-PRINT*</font></i>
+<small><font color="#000000">[14]</font></small>
+<font color="#000000">to</font>
+<b><font color="#0000FF">T</font></b>
+<small><font color="#000000">[15]</font></small>
+<font color="#000000">, the second sets
+<i>CUSTOM:*LOAD-ECHO*</i> to</font>
+<b><font color="#0000FF">T</font></b>
+<small><font color="#000000">[15]</font></small>
+<font color="#000000">. These settings affect the output
+produced by <b>-i</b> and <b>-c</b> options. Note that these
+settings persist into the</font>
+<b><font color="#0000FF">read-eval-print loop</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">. Repeated <b>-q</b> and <b>-v</b>
+cancel each other, e.g., <b>-q -q -v -v -v</b> is equivalent
+to <b>-v</b>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-on-error</b>
+<i>action</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Establish
+global error handlers, depending on <i>action</i>:.PP
+appease</font></p>
+
+
+<p style="margin-left:19%;"><b><font color="#0000FF">continuable</font></b>
+<small><font color="#000000">[17]</font></small>
+<b><font color="#0000FF">ERROR</font></b>
+<small><font color="#000000">[18]</font></small>
+<font color="#000000">s are turned into</font>
+<b><font color="#0000FF">WARNING</font></b>
+<small><font color="#000000">[19]</font></small>
+<font color="#000000">s (with <b>EXT:APPEASE-CERRORS</b>)
+other</font> <b><font color="#0000FF">ERROR</font></b>
+<small><font color="#000000">[18]</font></small>
+<font color="#000000">s are handled in the default
+way</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">debug</font></p>
+
+
+<p style="margin-left:19%;"><b><font color="#0000FF">ERROR</font></b>
+<small><font color="#000000">[18]</font></small>
+<font color="#000000">s</font>
+<b><font color="#0000FF">INVOKE-DEBUGGER</font></b>
+<small><font color="#000000">[20]</font></small>
+<font color="#000000">(the normal</font>
+<b><font color="#0000FF">read-eval-print loop</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">behavior), disables batch mode imposed
+by <b>-c</b>, <b>-x</b>, and <i>lisp-file</i>,</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">abort</font></p>
+
+
+<p style="margin-left:19%;"><b><font color="#0000FF">continuable</font></b>
+<small><font color="#000000">[17]</font></small>
+<b><font color="#0000FF">ERROR</font></b>
+<small><font color="#000000">[18]</font></small>
+<font color="#000000">s are appeased, other</font>
+<b><font color="#0000FF">ERROR</font></b>
+<small><font color="#000000">[18]</font></small>
+<font color="#000000">s are</font>
+<b><font color="#0000FF">ABORT</font></b>
+<small><font color="#000000">[21]</font></small>
+<font color="#000000">ed with
+<b>EXT:ABORT-ON-ERROR</b></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">exit</font></p>
+
+
+<p style="margin-left:19%;"><b><font color="#0000FF">continuable</font></b>
+<small><font color="#000000">[17]</font></small>
+<b><font color="#0000FF">ERROR</font></b>
+<small><font color="#000000">[18]</font></small>
+<font color="#000000">s are appeased, other</font>
+<b><font color="#0000FF">ERROR</font></b>
+<small><font color="#000000">[18]</font></small>
+<font color="#000000">s terminate</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">with <b>EXT:EXIT-ON-ERROR</b> (the
+normal batch mode behavior).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">See
+also <b>EXT:SET-GLOBAL-HANDLER</b>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-repl</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Start an
+interactive</font> <b><font color="#0000FF">read-eval-print
+loop</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">after processing the <b>-c</b>,
+<b>-x</b>, and <i>lisp-file</i> options and on any</font>
+<b><font color="#0000FF">ERROR</font></b>
+<small><font color="#000000">[18]</font></small>
+<b><font color="#0000FF">SIGNAL</font></b>
+<small><font color="#000000">[22]</font></small>
+<font color="#000000">ed during that processing.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Disables
+batch mode.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-w</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Wait for
+a keypress after program termination.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-I</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Interact
+better with</font> <b><font color="#0000FF">Emacs</font></b>
+<small><font color="#000000">[23]</font></small>
+<font color="#000000">(useful when running</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">under</font>
+<b><font color="#0000FF">Emacs</font></b>
+<small><font color="#000000">[23]</font></small>
+<font color="#000000">using</font>
+<b><font color="#0000FF">SLIME</font></b>
+<small><font color="#000000">[24]</font></small>
+<font color="#000000">,</font>
+<b><font color="#0000FF">ILISP</font></b>
+<small><font color="#000000">[25]</font></small>
+<font color="#000000">et al). With this option,</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">interacts in a way that</font>
+<b><font color="#0000FF">Emacs</font></b>
+<small><font color="#000000">[23]</font></small>
+<font color="#000000">can deal with:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">&bull;
+unnecessary prompts are not suppressed.</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">&bull;
+The</font> <b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<b><font color="#0000FF">readline</font></b>
+<small><font color="#000000">[26]</font></small>
+<font color="#000000">library treats TAB (see TAB key) as a
+normal self-inserting character (see
+Q:&nbsp;A.4.6).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-disable-readline</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Do not
+use</font> <b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<b><font color="#0000FF">readline</font></b>
+<small><font color="#000000">[26]</font></small>
+<font color="#000000">even when it has been linked against.
+This can be used if one wants to paste
+non-</font><i><font color="#0000FF">ASCII</font></i>
+<small><font color="#000000">[27]</font></small>
+<font color="#000000">characters, or when</font>
+<b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<b><font color="#0000FF">readline</font></b>
+<small><font color="#000000">[26]</font></small>
+<font color="#000000">misbehaves due to installation
+(different versions on the build and install machines) or
+setup (bad <b>TERM</b></font>
+<b><font color="#0000FF">environment variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000">value) issues.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-ansi</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Comply
+with the [ANSI CL standard] specification even where</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">has been traditionally different by
+setting the</font>
+<b><font color="#0000FF">SYMBOL-MACRO</font></b>
+<small><font color="#000000">[10]</font></small>
+<font color="#000000"><i>CUSTOM:*ANSI*</i> to</font>
+<b><font color="#0000FF">T</font></b>
+<small><font color="#000000">[15]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-traditional</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Traditional:
+reverses the residual effects of <b>-ansi</b> in the saved
+memory image.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-modern</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Provides
+a modern view of symbols: at startup the</font>
+<i><font color="#0000FF">*PACKAGE*</font></i>
+<small><font color="#000000">[28]</font></small>
+<font color="#000000">variable will be set to the
+&ldquo;CS-COMMON-LISP-USER&rdquo; package, and the</font>
+<i><font color="#0000FF">*PRINT-CASE*</font></i>
+<small><font color="#000000">[29]</font></small>
+<font color="#000000">will be set to <b>:DOWNCASE</b>. This
+has the effect that symbol lookup is case-sensitive (except
+for keywords and old-style packages) and that keywords and
+uninterned symbols are printed with lower-case preferrence.
+See Section&nbsp;11.5, &ldquo;Package
+Case-Sensitivity&rdquo;.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-p</b>
+<i>package</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">At
+startup the value of the variable</font>
+<i><font color="#0000FF">*PACKAGE*</font></i>
+<small><font color="#000000">[28]</font></small>
+<font color="#000000">will be set to the package named
+<i>package</i>. The default is the value of</font>
+<i><font color="#0000FF">*PACKAGE*</font></i>
+<small><font color="#000000">[28]</font></small>
+<font color="#000000">when the image was saved,
+normally</font>
+<b><font color="#0000FF">&ldquo;COMMON-LISP-USER&rdquo;</font></b>
+<small><font color="#000000">[30]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-C</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Compile
+when loading: at startup the value of the variable
+<i>CUSTOM:*LOAD-COMPILING*</i> will be set to</font>
+<b><font color="#0000FF">T</font></b>
+<small><font color="#000000">[15]</font></small>
+<font color="#000000">. Code being</font>
+<b><font color="#0000FF">LOAD</font></b>
+<small><font color="#000000">[31]</font></small>
+<font color="#000000">ed will then be</font>
+<b><font color="#0000FF">COMPILE</font></b>
+<small><font color="#000000">[32]</font></small>
+<font color="#000000">d on the fly. This results in slower
+loading, but faster execution.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-norc</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Normally</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">loads the user</font>
+<b><font color="#0000FF">&ldquo;run control&rdquo;
+(RC)</font></b>
+<small><font color="#000000">[33]</font></small>
+<font color="#000000">file on startup (this happens
+<b>after</b> the <b>-C</b> option is processed). The file
+loaded is .clisprc.lisp or .clisprc.fas in the home
+directory</font>
+<b><font color="#0000FF">USER-HOMEDIR-PATHNAME</font></b>
+<small><font color="#000000">[34]</font></small>
+<font color="#000000">, whichever is newer. This option,
+<b>-norc</b>, prevents loading of the RC file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-lp</b>
+<i>directory</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+directories to be added to <i>CUSTOM:*LOAD-PATHS*</i> at
+startup. This is done <b>after</b> loading the RC file (so
+that it does not override the command-line option) but
+<b>before</b> loading the init-files specified by the
+<b>-i</b> options (so that the init-files will be searched
+for in the specified directories). Several <b>-lp</b>
+options can be given; all the specified directories will be
+added.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-i</b>
+<i>init-file</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+initialization files to be</font>
+<b><font color="#0000FF">LOAD</font></b>
+<small><font color="#000000">[31]</font></small>
+<font color="#000000">ed at startup. These should be lisp
+files (source or compiled). Several <b>-i</b> options can be
+given; all the specified files will be loaded in
+order.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-c</b>
+<i>lisp-file</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Compiles
+the specified <i>lisp-file</i>s to bytecode (*.fas). The
+compiled files can then be</font>
+<b><font color="#0000FF">LOAD</font></b>
+<small><font color="#000000">[31]</font></small>
+<font color="#000000">ed instead of the sources to gain
+efficiency.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Imposes
+batch mode.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-o</b>
+<i>outputfile</i></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+the output file or directory for the compilation of the last
+specified <i>lisp-file</i>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-l</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Produce a
+bytecode</font>
+<b><font color="#0000FF">DISASSEMBLE</font></b>
+<small><font color="#000000">[35]</font></small>
+<font color="#000000">listing (*.lis) of the files being
+compiled. Useful only for debugging. See Section&nbsp;24.1,
+&ldquo;Function COMPILE-FILE&rdquo; for details.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-x</b>
+<i>expressions</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Executes
+a series of arbitrary expressions instead of a</font>
+<b><font color="#0000FF">read-eval-print loop</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">. The values of the expressions will
+be output to</font>
+<i><font color="#0000FF">*STANDARD-OUTPUT*</font></i>
+<small><font color="#000000">[36]</font></small>
+<font color="#000000">. Due to the argument processing done
+by the shell, the <i>expressions</i> must be enclosed in
+double quotes, and double quotes and backslashes must be
+escaped with backslashes.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Imposes
+batch mode.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>lisp-file</i>
+[ <i>argument</i> ... ]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Loads and
+executes a <i>lisp-file</i>, as described in
+Section&nbsp;32.6.2, &ldquo;Scripting with CLISP&rdquo;.
+There will be no</font>
+<b><font color="#0000FF">read-eval-print loop</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">. Before <i>lisp-file</i> is loaded,
+the variable <i>EXT:*ARGS*</i> will be bound to a list of
+strings, representing the <i>argument</i>s. The first line
+of <i>lisp-file</i> may start with <b>#!</b>, thus
+permitting</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">to be used as a script interpreter. If
+<i>lisp-file</i> is <b>-</b>, the</font>
+<i><font color="#0000FF">*STANDARD-INPUT*</font></i>
+<small><font color="#000000">[36]</font></small>
+<font color="#000000">is used instead of a file.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+option is <i>disabled</i> if the memory image was created by
+<b>EXT:SAVEINITMEM</b> with</font>
+<b><font color="#0000FF">NIL</font></b>
+<small><font color="#000000">[16]</font></small>
+<font color="#000000"><b>:SCRIPT</b> argument. In that case
+the</font> <b><font color="#0000FF">LIST</font></b>
+<small><font color="#000000">[37]</font></small>
+<font color="#000000"><i>EXT:*ARGS*</i> starts with
+<i>lisp-file</i>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+option must be the last one.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">No
+RC file will be executed.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Imposes
+batch mode.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">As
+usual, <b>--</b> stops option processing and places all
+remaining command line arguments into
+<i>EXT:*ARGS*</i>.</font></p>
+
+<h2>LANGUAGE REFERENCE
+<a name="LANGUAGE REFERENCE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+language implemented is</font> <b><font color="#0000FF">ANSI
+<small>[39]</small></font></b><small><font color="#000000">[38]</font></small>
+<b><font color="#0000FF">Common Lisp</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">. The implementation mostly conforms
+to the ANSI Common Lisp standard, see Section&nbsp;31.10,
+&ldquo;Maximum ANSI CL compliance&rdquo;. [ANSI CL] ANSI CL
+standard1994.</font> <font color="#0000FF">ANSI</font>
+<small><font color="#000000">[40]</font></small>
+<font color="#000000">INCITS 226-1994 (R1999) <br>
+Information Technology - Programming Language - Common Lisp
+<br>
+[formerly ANSI X3.226-1994 (R1999)].</font></p>
+
+<h2>COMMAND LINE USER ENVIRONMENT
+<a name="COMMAND LINE USER ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>help</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">get
+context-sensitive on-line help, see Chapter&nbsp;25,
+Environment chap-25.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">(<b>APROPOS</b>
+<i>name</i>)</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">list
+the</font> <b><font color="#0000FF">SYMBOL</font></b>
+<small><font color="#000000">[41]</font></small>
+<font color="#000000">s matching <i>name</i>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">(<b>DESCRIBE</b>
+<i>symbol</i>)</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">describe
+the <i>symbol</i>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">(exit)
+<br>
+(quit) <br>
+(bye)</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">quit</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">EOF
+(Control+D on</font>
+<b><font color="#0000FF">UNIX</font></b>
+<small><font color="#000000">[42]</font></small>
+<font color="#000000">)</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">leave the
+current level of the</font>
+<b><font color="#0000FF">read-eval-print loop</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">(see also Section&nbsp;1.1,
+&ldquo;Special Symbols sec_1-4-1-3&rdquo;).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">arrow
+keys</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">for
+editing and viewing the input history, using the</font>
+<b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<b><font color="#0000FF">readline</font></b>
+<small><font color="#000000">[26]</font></small>
+<font color="#000000">library.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">TAB
+key</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Context
+sensitive:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">&bull;
+If you are in the &ldquo;function position&rdquo; (in the
+first symbol after an opening paren or in the first symbol
+after a</font> <b><font color="#0000FF">#'</font></b>
+<small><font color="#000000">[44]</font></small>
+<font color="#000000">), the completion is limited to the
+symbols that name functions.</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">&bull;
+If you are in the &quot;filename position&quot; (inside a
+string after</font> <b><font color="#0000FF">#P</font></b>
+<small><font color="#000000">[45]</font></small>
+<font color="#000000">), the completion is done across file
+names,</font> <b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<b><font color="#0000FF">bash</font></b>
+<small><font color="#000000">[46]</font></small>
+<font color="#000000">-style.</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">&bull;
+If you have not typed anything yet, you will get a help
+message, as if by the <b>help</b> command.</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">&bull;
+If you have not started typing the next symbol (i.e., you
+are at a whitespace), the current function or macro is
+<b>DESCRIBE</b>d.</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">&bull;
+Otherwise, the symbol you are currently typing is
+completed.</font></p>
+
+<h2>USING AND EXTENDING CLISP
+<a name="USING AND EXTENDING CLISP"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><font color="#0000FF">Common
+Lisp</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">is a <i>programmable</i> programming
+language. &mdash;</font><b><font color="#0000FF">John
+Foderaro</font></b>
+<small><font color="#000000">[47]</font></small>
+<font color="#000000">.PP When</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">is invoked, the runtime loads the
+initial memory image and outputs the prompt; at which one
+can start typing</font>
+<b><font color="#0000FF">DEFVAR</font></b>
+<small><font color="#000000">[48]</font></small>
+<font color="#000000">s,</font>
+<b><font color="#0000FF">DEFUN</font></b>
+<small><font color="#000000">[49]</font></small>
+<font color="#000000">s and</font>
+<b><font color="#0000FF">DEFMACRO</font></b>
+<small><font color="#000000">[50]</font></small>
+<font color="#000000">s.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">To
+avoid having to re-enter the same definitions by hand in
+every session, one can create a lisp file with all the
+variables, functions, macros, etc.; (optionally) compile it
+with</font> <b><font color="#0000FF">COMPILE-FILE</font></b>
+<small><font color="#000000">[51]</font></small>
+<font color="#000000">; and</font>
+<b><font color="#0000FF">LOAD</font></b>
+<small><font color="#000000">[31]</font></small>
+<font color="#000000">it either by hand or from the RC file;
+or save a memory image to avoid the</font>
+<b><font color="#0000FF">LOAD</font></b>
+<small><font color="#000000">[31]</font></small>
+<font color="#000000">overhead.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">However,
+sometimes one needs to use some functionality implemented in
+another language, e.g., call a</font>
+<b><font color="#0000FF">C</font></b>
+<small><font color="#000000">[52]</font></small>
+<font color="#000000">library function. For that one uses
+the Foreign Function Interface and/or the External Modules
+facility. Finally, the truly adventurous ones might delve
+into Extending the Core.</font></p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>clisp
+<br>
+clisp.exe</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">startup
+driver (an executable or, rarely, a shell script) which
+remembers the location of the runtime and starts it with the
+appropriate arguments</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lisp.run
+<br>
+lisp.exe</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">main
+executable (runtime) - the part of</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">implemented in</font>
+<b><font color="#0000FF">C</font></b>
+<small><font color="#000000">[52]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lispinit.mem</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">initial
+memory image (the part of</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">implemented in lisp)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">config.lisp</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">site-dependent
+configuration (should have been customized before</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">was built); see Section&nbsp;31.12,
+&ldquo;Customizing CLISP behavior&rdquo;</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">*.lisp</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">lisp
+source</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">*.fas</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">lisp
+code, compiled by</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">*.lib</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">lisp
+source library information, generated by
+<b>COMPILE-FILE</b>, see Section&nbsp;24.3, &ldquo;Function
+REQUIRE&rdquo;.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">*.c</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">C code,
+compiled from lisp source by</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">(see Section&nbsp;32.3, &ldquo;The
+Foreign Function Call Facility&rdquo;)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">For
+the</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">source files, see Chapter&nbsp;34, The
+source files of CLISP.</font></p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">All</font>
+<b><font color="#0000FF">environment variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000">s that</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">uses are read at most once.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>CLISP_LANGUAGE</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">specifies
+the language</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">uses to communicate with the user. The
+legal values are identical to those of the <b>-L</b> option
+which can be used to override this</font>
+<b><font color="#0000FF">environment variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>LC_CTYPE</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">specifies
+the locale which determines the character set in use. The
+value can be of the form <i>language</i> or
+<i>language</i><b>_</b><i>country</i> or
+<i>language</i><b>_</b><i>country</i><b>.</b><i>charset</i>,
+where <i>language</i> is a two-letter ISO 639 language code
+(lower case), <i>country</i> is a two-letter ISO 3166
+country code (upper case). <i>charset</i> is an optional
+character set specification, and needs normally not be given
+because the character set can be inferred from the language
+and country. This</font>
+<b><font color="#0000FF">environment variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000">can be overridden with the <b>-Edomain
+encoding</b> option.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>LANG</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">specifies
+the language</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">uses to communicate with the user,
+unless it is already specified through the</font>
+<b><font color="#0000FF">environment variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000"><b>CLISP_LANGUAGE</b> or the <b>-L</b>
+option. It also specifies the locale determining the
+character set in use, unless already specified through
+the</font> <b><font color="#0000FF">environment
+variable</font></b>
+<small><font color="#000000">[12]</font></small>
+<font color="#000000"><b>LC_CTYPE</b>. The value may begin
+with a two-letter ISO 639 language code, for example
+<b>en</b>, <b>de</b>, <b>fr</b>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>HOME
+<br>
+USER</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">used for
+determining the value of the function</font>
+<b><font color="#0000FF">USER-HOMEDIR-PATHNAME</font></b>
+<small><font color="#000000">[34]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>SHELL
+<br>
+COMSPEC</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">is used
+to find the interactive command interpreter called by
+<b>EXT:SHELL</b>.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>TERM</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">determines
+the screen size recognized by the pretty printer.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>ORGANIZATION</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">for</font>
+<b><font color="#0000FF">SHORT-SITE-NAME</font></b>
+<small><font color="#000000">[53]</font></small>
+<font color="#000000">and</font>
+<b><font color="#0000FF">LONG-SITE-NAME</font></b>
+<small><font color="#000000">[53]</font></small>
+<font color="#000000">in config.lisp.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>CLHSROOT</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">for
+<b>CUSTOM:CLHS-ROOT</b> in config.lisp.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>IMPNOTES</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">for
+<b>CUSTOM:IMPNOTES-ROOT</b> in config.lisp.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>EDITOR</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">for
+<b>editor-name</b> in config.lisp.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>LOGICAL_HOST_</b><i>host</i><b>_FROM
+<br>
+LOGICAL_HOST_</b><i>host</i><b>_TO <br>
+LOGICAL_HOST_</b><i>host</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">for
+<i>CUSTOM:*LOAD-LOGICAL-PATHNAME-TRANSLATIONS-DATABASE*</i></font></p>
+
+<h2>INPUT AND OUTUT
+<a name="INPUT AND OUTUT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">See
+Section&nbsp;21.1.1, &ldquo;Initialization of Standard
+Streams&rdquo;.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">CLISP
+impnotes <br>
+clisp-link(1)</font> <b><font color="#0000FF"><br>
+CMU CL</font></b>
+<small><font color="#000000">[54]</font></small>
+<font color="#000000">- <b>cmucl</b>(1)</font>
+<b><font color="#0000FF"><br>
+SBCL</font></b>
+<small><font color="#000000">[55]</font></small>
+<font color="#000000">- <b>sbcl</b>(1)</font>
+<b><font color="#0000FF"><br>
+Emacs</font></b>
+<small><font color="#000000">[23]</font></small>
+<font color="#000000">- <b>emacs</b>(1)</font></p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">When
+you encounter a bug in</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">or in its documentation (this manual
+page or CLISP impnotes), please report it to the</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<b><font color="#0000FF">SourceForge bug tracker</font></b>
+<small><font color="#000000">[56]</font></small>
+<font color="#000000">. Visit this bug tracker with a
+browser other than Firefox (because as of May 2017, the
+&quot;Create Ticket&quot; button is not visible in Firefox).
+Then login, either to your</font>
+<b><font color="#0000FF">SourceForge</font></b>
+<small><font color="#000000">[57]</font></small>
+<font color="#000000">account, or to your</font>
+<b><font color="#0000FF">OpenID</font></b>
+<small><font color="#000000">[58]</font></small>
+<font color="#000000">account. Then press the &quot;Create
+Ticket&quot; button on the left-hand side.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>Before</i>
+submitting a bug report, please take the following basic
+steps to make the report more useful:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">1.
+Unless your bug is locale-specific, please set your locale
+to en. You <i>cannot</i> assume that</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">maintainers understand a language
+other than</font>
+<b><font color="#0000FF">English</font></b>
+<small><font color="#000000">[59]</font></small>
+<font color="#000000">, even though, historically,
+few</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">maintainers spoke English
+natively.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">2.
+Do a clean build (remove your build directory and
+build</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">with <b>./configure --cbc build</b> or
+at least do a <b>make distclean</b> before
+<b>make</b>).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">3.
+If you are reporting a &ldquo;hard crash&rdquo;
+(segmentation fault, bus error, core dump etc), please do
+<b>./configure --with-debug --cbc build-g ; cd build-g; gdb
+lisp.run</b>, then load the appropriate linking set by
+either <b>base</b> or <b>full</b></font>
+<b><font color="#0000FF">gdb</font></b>
+<small><font color="#000000">[60]</font></small>
+<font color="#000000">command, and report the backtrace (see
+also Q:&nbsp;A.1.1.10).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">4.
+If you are using pre-built binaries and experience a hard
+crash, the problem is likely to be in the incompatibilities
+between the platform on which the binary was built and
+yours; please try compiling the sources and report the
+problem if it persists.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">When
+submitting a bug report, please specify the following
+information:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">1.
+What is your platform (<b>uname -a</b> on a</font>
+<b><font color="#0000FF">UNIX</font></b>
+<small><font color="#000000">[42]</font></small>
+<font color="#000000">system)? Compiler version?</font>
+<b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<b><font color="#0000FF">libc</font></b>
+<small><font color="#000000">[61]</font></small>
+<font color="#000000">version (on</font>
+<b><font color="#0000FF">GNU</font></b>
+<small><font color="#000000">[8]</font></small>
+<font color="#000000">/</font><i><font color="#0000FF">Linux</font></i>
+<small><font color="#000000">[62]</font></small>
+<font color="#000000">)?</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">2.
+Where did you get the sources or binaries? When? (Absolute
+dates, e.g., &ldquo;2006-01-17&rdquo;, are preferred over
+the relative ones, e.g., &ldquo;2 days ago&rdquo;. If you
+are using</font>
+<b><font color="#0000FF">Mercurial</font></b>
+<small><font color="#000000">[63]</font></small>
+<font color="#000000">, please supply the output of <b>hg
+id</b>).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">3.
+How did you build</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">? (What command, options
+&amp;c.)</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">4.
+What is the output of <b>clisp --version</b>?</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">5.
+Please supply the full output (copy and paste) of all the
+error messages, as well as detailed instructions on how to
+reproduce them.</font></p>
+
+<h2>PROJECTS
+<a name="PROJECTS"></a>
+</h2>
+
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+Enhance the compiler so that it can inline local
+functions.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+Embed</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[6]</font></small>
+<font color="#000000">in</font>
+<b><font color="#0000FF">VIM</font></b>
+<small><font color="#000000">[64]</font></small>
+<font color="#000000">.</font></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Bruno
+Haible</b>
+&lt;</font><b><font color="#0000FF">http://www.haible.de/bruno/</font></b><font color="#000000">&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+original author and long-time maintainer.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Michael
+Stoll</b>
+&lt;</font><b><font color="#0000FF">http://www.mathe2.uni-bayreuth.de/stoll/</font></b><font color="#000000">&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+original author.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Sam
+Steingold</b>
+&lt;</font><b><font color="#0000FF">http://sds.podval.org/</font></b><font color="#000000">&gt;</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Co-maintainer
+since 1998.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Others</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">See
+<i>COPYRIGHT (file in the CLISP sources)</i> for the list of
+other contributors and the license.</font></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+&copy; 1992-2010 Bruno Haible <br>
+Copyright &copy; 1998-2010 Sam Steingold</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>Common
+Lisp</b></font></p> </td>
+<td width="72%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://common-lisp.net</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">2.</font></p> </td>
+<td width="1%"></td>
+<td width="26%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">read-eval-print
+loop</font></p> </td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><font color="#000000">[set
+$man.base.url.for.relative.links]/sec_25-1-1</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">3.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>READ</b></font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_readcm_re_g-whitespace.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">4.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>EVAL</b></font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_eval.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">5.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>PRINT</b></font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_writecm_p_rintcm_princ.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">6.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>CLISP</b></font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://clisp.org</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">7.</font></p> </td>
+<td width="1%"></td>
+<td width="35%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>LISP-IMPLEMENTATION-VERSION</b></font></p> </td>
+<td width="51%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_lisp-impl_tion-version.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">8.</font></p> </td>
+<td width="1%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">GNU</font></p> </td>
+<td width="82%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://www.gnu.org</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">9.</font></p> </td>
+<td width="1%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">GPL</font></p> </td>
+<td width="82%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.gnu.org/copyleft/gpl.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">10.</font></p> </td>
+<td width="1%"></td>
+<td width="15%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">SYMBOL-MACRO</font></p> </td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><font color="#000000">[set
+$man.base.url.for.relative.links]/mac_define-symbol-macro</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">11.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>gzip</b></font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.gzip.org/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">12.</font></p> </td>
+<td width="1%"></td>
+<td width="26%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">environment
+variable</font></p> </td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><font color="#000000">[set
+$man.base.url.for.relative.links]/basedefs/xbd_chap08.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">13.</font></p> </td>
+<td width="1%"></td>
+<td width="18%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><i>*LOAD-VERBOSE*</i></font></p> </td>
+<td width="68%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/var_stload-pr_ad-verbosest.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">14.</font></p> </td>
+<td width="1%"></td>
+<td width="22%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><i>*COMPILE-VERBOSE*</i></font></p> </td>
+<td width="64%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/var_stcompile_le-verbosest.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">15.</font></p> </td>
+<td width="1%"></td>
+<td width="1%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>T</b></font></p> </td>
+<td width="85%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/convar_t.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">16.</font></p> </td>
+<td width="1%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>NIL</b></font></p> </td>
+<td width="82%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/convar_nil.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">17.</font></p> </td>
+<td width="1%"></td>
+<td width="14%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">continuable</font></p> </td>
+<td width="72%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><font color="#000000">[set
+$man.base.url.for.relative.links]/clhs/glo</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">18.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">ERROR</font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/contyp_error.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">19.</font></p> </td>
+<td width="1%"></td>
+<td width="9%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">WARNING</font></p> </td>
+<td width="77%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/contyp_warning.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">20.</font></p> </td>
+<td width="1%"></td>
+<td width="19%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>INVOKE-DEBUGGER</b></font></p> </td>
+<td width="67%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_invoke-debugger.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">21.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>ABORT</b></font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_abortcm_c_cm_use-value.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">22.</font></p> </td>
+<td width="1%"></td>
+<td width="8%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>SIGNAL</b></font></p> </td>
+<td width="78%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_signal.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">23.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">Emacs</font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.gnu.org/software/emacs/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">24.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">SLIME</font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://common-lisp.net/project/slime/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">25.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">ILISP</font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://sourceforge.net/projects/ilisp/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">26.</font></p> </td>
+<td width="1%"></td>
+<td width="10%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">readline</font></p> </td>
+<td width="76%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://tiswww.case.edu/php/chet/readline/readline.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">27.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><i>ASCII</i></font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://en.wikipedia.org/wiki/ASCII</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">28.</font></p> </td>
+<td width="1%"></td>
+<td width="12%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><i>*PACKAGE*</i></font></p> </td>
+<td width="74%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/var_stpackagest.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">29.</font></p> </td>
+<td width="1%"></td>
+<td width="15%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><i>*PRINT-CASE*</i></font></p> </td>
+<td width="71%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/var_stprint-casest.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">30.</font></p> </td>
+<td width="1%"></td>
+<td width="23%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">&ldquo;COMMON-LISP-USER&rdquo;</font></p> </td>
+<td width="63%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><font color="#000000">[set
+$man.base.url.for.relative.links]/sec_11-1-2-2</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">31.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>LOAD</b></font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_load.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">32.</font></p> </td>
+<td width="1%"></td>
+<td width="9%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>COMPILE</b></font></p> </td>
+<td width="77%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_compile.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">33.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">&ldquo;run</font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">control&rdquo;
+(RC) <br>
+http://www.faqs.org/docs/artu/ch10s03.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">34.</font></p> </td>
+<td width="1%"></td>
+<td width="27%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>USER-HOMEDIR-PATHNAME</b></font></p> </td>
+<td width="59%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_user-homedir-pathname.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">35.</font></p> </td>
+<td width="1%"></td>
+<td width="14%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>DISASSEMBLE</b></font></p> </td>
+<td width="72%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_disassemble.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">36.</font></p> </td>
+<td width="1%"></td>
+<td width="22%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><i>*STANDARD-OUTPUT*</i></font></p> </td>
+<td width="64%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/var_stdebug-i_ace-outputst.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">37.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">LIST</font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/syscla_list.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">38.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">ANSI</font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ansi.org/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">39.</font></p> </td>
+<td width="1%"></td>
+<td width="53%">
+
+
+<p style="margin-top: 1em"><font color="#000000">The
+American National Standards Institute</font></p></td>
+<td width="33%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><font color="#000000">40.</font></p></td>
+<td width="1%"></td>
+<td width="53%">
+
+
+<p><font color="#000000">ANSI</font></p></td>
+<td width="33%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://webstore.ansi.org</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">41.</font></p> </td>
+<td width="1%"></td>
+<td width="8%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">SYMBOL</font></p> </td>
+<td width="78%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/syscla_symbol.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">42.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>UNIX</b></font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.unix.org/online.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">43.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><i>Win32</i></font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://winehq.org/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">44.</font></p> </td>
+<td width="1%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">#&rsquo;</font></p> </td>
+<td width="83%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><font color="#000000">[set
+$man.base.url.for.relative.links]/sec_2-4-8-2</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">45.</font></p> </td>
+<td width="1%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">#P</font></p> </td>
+<td width="83%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><font color="#000000">[set
+$man.base.url.for.relative.links]/sec_2-4-8-14</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">46.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">bash</font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.gnu.org/software/bash/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">47.</font></p> </td>
+<td width="1%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><font color="#000000">John
+Foderaro</font></p> </td>
+<td width="69%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.franz.com/&#732;jkf/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">48.</font></p> </td>
+<td width="1%"></td>
+<td width="8%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>DEFVAR</b></font></p> </td>
+<td width="78%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/mac_defparametercm_defvar.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">49.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>DEFUN</b></font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/mac_defun.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">50.</font></p> </td>
+<td width="1%"></td>
+<td width="10%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>DEFMACRO</b></font></p> </td>
+<td width="76%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/mac_defmacro.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">51.</font></p> </td>
+<td width="1%"></td>
+<td width="15%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>COMPILE-FILE</b></font></p> </td>
+<td width="71%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_compile-file.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">52.</font></p> </td>
+<td width="1%"></td>
+<td width="1%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>C</b></font></p> </td>
+<td width="85%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://c-faq.com/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">53.</font></p> </td>
+<td width="1%"></td>
+<td width="19%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>SHORT-SITE-NAME</b></font></p> </td>
+<td width="67%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_short-sit_ng-site-name.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">54.</font></p> </td>
+<td width="1%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>CMU
+CL</b></font></p> </td>
+<td width="78%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.cons.org/cmucl/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">55.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>SBCL</b></font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://sbcl.sourceforge.net/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">56.</font></p> </td>
+<td width="1%"></td>
+<td width="30%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">SourceForge
+bug tracker</font></p></td>
+<td width="56%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://sourceforge.net/p/clisp/bugs/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">57.</font></p> </td>
+<td width="1%"></td>
+<td width="14%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">SourceForge</font></p> </td>
+<td width="72%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://sourceforge.net</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">58.</font></p> </td>
+<td width="1%"></td>
+<td width="8%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">OpenID</font></p> </td>
+<td width="78%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://openid.net/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">59.</font></p> </td>
+<td width="1%"></td>
+<td width="9%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">English</font></p> </td>
+<td width="77%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.catb.org/esr/faqs/hacker-howto.html#skills4</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">60.</font></p> </td>
+<td width="1%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>gdb</b></font></p> </td>
+<td width="82%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://sources.redhat.com/gdb/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">61.</font></p> </td>
+<td width="1%"></td>
+<td width="5%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">libc</font></p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.gnu.org/software/libc/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">62.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><i>Linux</i></font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://www.kernel.org/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">63.</font></p> </td>
+<td width="1%"></td>
+<td width="12%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">Mercurial</font></p> </td>
+<td width="74%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://www.mercurial-scm.org/</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">64.</font></p> </td>
+<td width="1%"></td>
+<td width="4%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">VIM</font></p> </td>
+<td width="82%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.vim.org</font></p>
+<hr>
+</body>
+</html>

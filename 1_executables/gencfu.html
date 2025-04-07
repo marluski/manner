@@ -1,0 +1,150 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:44 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GENCFU</title>
+
+</head>
+<body>
+
+<h1 align="center">GENCFU</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#VERSION">VERSION</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gencfu</b> -
+Generates Unicode Confusable data files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gencfu</b> [
+<b>-h</b>, <b>-?</b>, <b>--help</b> ] [ <b>-V</b>,
+<b>--version</b> ] [ <b>-c</b>, <b>--copyright</b> ] [
+<b>-v</b>, <b>--verbose</b> ] [ <b>-d</b>, <b>--destdir</b>
+<i>destination</i> ] [ <b>-i</b>, <b>--icudatadir</b>
+<i>directory</i> ] <b>-r</b>, <b>--rules</b>
+<i>rule-file</i> <b>-w</b>, <b>--wsrules</b>
+<i>whole-script-rule-file</i> <b>-o</b>, <b>--out</b>
+<i>output-file</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>gencfu</b></i>
+reads confusable character definitions in the input file,
+which are plain text files containing confusable character
+definitions in the input format defined by Unicode UAX39 for
+the files <i>confusables.txt</i> and
+<i>confusablesWholeScript.txt.</i> This source (.txt) format
+is also accepted by ICU spoof detectors. The files must be
+encoded in utf-8 format, with or without a BOM. Normally the
+output data file has the <b>.cfu</b> extension.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>-?</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Print help about usage and
+exit.</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Print the version of
+<b>gencfu</b> and exit.</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--copyright</b></p>
+
+<p style="margin-left:18%;">Embeds the standard ICU
+copyright into the <i>output-file</i>.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Display extra informative
+messages during execution.</p>
+
+<p style="margin-left:9%;"><b>-d</b>, <b>--destdir</b>
+<i>destination</i></p>
+
+<p style="margin-left:18%;">Set the destination directory
+of the <i>output-file</i> to <i>destination</i>.</p>
+
+<p style="margin-left:9%;"><b>-i</b>, <b>--icudatadir</b>
+<i>directory</i></p>
+
+<p style="margin-left:18%;">Look for any necessary ICU data
+files in <i>directory</i>. For example, the file
+<b>pnames.icu</b> must be located when ICU&rsquo;s data is
+not built as a shared library. The default ICU data
+directory is specified by the environment variable
+<b>ICU_DATA</b>. Most configurations of ICU do not require
+this argument.</p>
+
+<p style="margin-left:9%;"><b>-r</b>, <b>--rules</b>
+<i>rule-file</i></p>
+
+<p style="margin-left:18%;">The source file to read.</p>
+
+<p style="margin-left:9%;"><b>-w</b>, <b>--wsrules</b>
+<i>whole-script-rule-file</i></p>
+
+<p style="margin-left:18%;">The whole script source file to
+read.</p>
+
+<p style="margin-left:9%;"><b>-o</b>, <b>--out</b>
+<i>output-file</i></p>
+
+<p style="margin-left:18%;">The output data file to
+write.</p>
+
+<h2>VERSION
+<a name="VERSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">1.0</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2009 International Business Machines Corporation and
+others</p>
+<hr>
+</body>
+</html>

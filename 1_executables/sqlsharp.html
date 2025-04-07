@@ -1,0 +1,1553 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>sqlsharp</title>
+
+</head>
+<body>
+
+<h1 align="center">sqlsharp</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#HOW TO USE">HOW TO USE</a><br>
+<a href="#CONNECTION AND PROVIDER COMMANDS">CONNECTION AND PROVIDER COMMANDS</a><br>
+<a href="#SQL EXECUTION COMMANDS">SQL EXECUTION COMMANDS</a><br>
+<a href="#FILE COMMANDS">FILE COMMANDS</a><br>
+<a href="#GENERAL PURPOSE COMMANDS">GENERAL PURPOSE COMMANDS</a><br>
+<a href="#PROVIDER SUPPORT OPTIONS">PROVIDER SUPPORT OPTIONS</a><br>
+<a href="#PROVIDERS">PROVIDERS</a><br>
+<a href="#CONNECTION STRING SAMPLES">CONNECTION STRING SAMPLES</a><br>
+<a href="#TRACING SUPPORT">TRACING SUPPORT</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sqlsharp - Mono
+SQL Query command-line tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sqlsharp</b>
+[-f filename] [-o filename] [-s]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sqlsharp is a
+Mono SQL tool used for entering SQL queries to a database
+using Mono data providers.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are supported: <i><br>
+-f filename</i></p>
+
+<p style="margin-left:18%;">Output file to load SQL
+commands from.</p>
+
+<p style="margin-left:9%;"><i>-o filename</i></p>
+
+<p style="margin-left:18%;">Output file to send
+results.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>-s</i></p></td>
+<td width="6%"></td>
+<td width="15%">
+
+
+<p>Silent mode.</p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+<h2>HOW TO USE
+<a name="HOW TO USE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The SQL tool
+accepts commands via its command line interface. Commands
+begin with a backslash followed by the command name.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example: <br>
+\open</p>
+
+<p style="margin-left:9%; margin-top: 1em">Basically, there
+are five commands a user should know: \provider,
+\connectionstring, \open, \quit, and \help</p>
+
+<p style="margin-left:9%; margin-top: 1em">To connect to a
+database, you need to do the following:</p>
+
+<p style="margin-left:9%; margin-top: 1em">1. set your data
+provider via \provider</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>SQL# \provider mysql</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">2. set your
+connection string via \connectionstring</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>SQL# \connectionstring Database=test</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">3. open a
+connection to the database via \open</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>SQL# \open</p></td></tr>
+</table>
+
+<h2>CONNECTION AND PROVIDER COMMANDS
+<a name="CONNECTION AND PROVIDER COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These commands
+are used to setup the provider, connection string, and
+open/close the database connnection <i><br>
+ConnectionString</i></p>
+
+<p style="margin-left:18%;">Sets the Connection String</p>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \ConnectionString Database=testdb</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>or</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \cs Database=testdb</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">For more
+examples, see section CONNECTION STRING EXAMPLES.</p>
+
+<p style="margin-left:9%;"><i>Provider</i></p>
+
+<p style="margin-left:18%;">Sets the Provider of the Data
+Source. For list of Providers, see section PROVIDERS. <br>
+Example: to set the provider for MySQL:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \provider mysql</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">or</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \p mysql</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">Note: if you need to load an
+external provider in SQL#, <br>
+see the SQL# command \loadextprovider</p>
+
+<p style="margin-left:9%;"><i>ListProviders</i></p>
+
+<p style="margin-left:18%;">List ADO.NET 2.0 Providers
+available</p>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \ListProviders</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>or</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \listp</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>BCS</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Prompts you for building each connection parameter and
+builds the connection string and also allows you to enter a
+password wich does not echo.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>SQL# \bcs</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Data Source [] SQL# blazer</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Persist Security Info [False]
+SQL#</p> </td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Integrated Security [False]
+SQL#</p> </td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: User ID [] SQL# scott</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>Password: *****</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Enlist [False] SQL#</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Pooling [True] SQL#</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Min Pool Size [0] SQL#</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Max Pool Size [100] SQL#</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Unicode [False] SQL#</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Load Balance Timeout [0]
+SQL#</p> </td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString Option: Omit Oracle Connection Name
+[False] SQL#</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>ConnectionString is set.</p></td>
+<td width="25%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>LoadExtProvider</i></p>
+
+<p style="margin-left:18%;">ASSEMBLY CLASS to load an
+external provider. Use the complete name of its assembly and
+its Connection class.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Example: to
+load the MySQL provider Mono.Data.MySql</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \loadextprovider Mono.Data.MySql
+Mono.Data.MySql.MySqlConnection</p> </td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><i>Open</i></p></td>
+<td width="4%"></td>
+<td width="44%">
+
+
+<p>Opens a connection to the database</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \open</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><i>Close</i></p></td>
+<td width="3%"></td>
+<td width="47%">
+
+
+<p style="margin-top: 1em">Closes the connection to the
+database</p> </td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \close</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>Default</i></p>
+
+<p style="margin-left:18%;">show default variables, such
+as, Provider and ConnectionString.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \defaults</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>Q</i></p></td>
+<td width="8%"></td>
+<td width="5%">
+
+
+<p>Quit</p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \q</p></td></tr>
+</table>
+
+<h2>SQL EXECUTION COMMANDS
+<a name="SQL EXECUTION COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Commands to
+execute SQL statements</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>e</i> execute
+SQL query (SELECT)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example: to
+execute a query</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# SELECT * FROM EMPLOYEE</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \e</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note: to get \e
+to automatically work after entering a query, put a <br>
+semicolon ; at the end of the query. <br>
+Example: to enter and exectue query at the same time</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# SELECT * FROM EMPLOYEE;</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>exenonquery</i></p>
+
+<p style="margin-left:18%;">execute a SQL non query (not a
+SELECT)</p>
+
+<p style="margin-left:18%; margin-top: 1em">Example: to
+insert a row into a table:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# INSERT INTO SOMETABLE (COL1, COL2)
+VALUES(&rsquo;ABC&rsquo;,&rsquo;DEF&rsquo;)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \exenonquery</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">Note: this can be used for
+those providers that are new and do not have <br>
+the ability to execute queries yet.</p>
+
+<p style="margin-left:9%;"><i>exescalar</i></p>
+
+<p style="margin-left:18%;">execute SQL to get a single row
+and single column.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Example: to
+execute a Maxium aggregate</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="19%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="19%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>SQL# SELECT MAX(grade) FROM class</p></td>
+<td width="19%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="19%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="19%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>SQL# \exescalar</p></td>
+<td width="19%"></td>
+<td width="7%"></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>exexml</i></p></td>
+<td width="1%"></td>
+<td width="65%">
+
+
+<p>FILENAME to execute SQL and save output to XML file</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# SELECT fname, lname, hire_date FROM employee</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \exexml employee.xml</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">Note: this depends on
+DataAdapter, DataTable, and DataSet <br>
+to be working properly</p>
+
+<h2>FILE COMMANDS
+<a name="FILE COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:18%;">Commands for importing commands
+from file to SQL# and vice versa</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>f</i></p></td>
+<td width="8%"></td>
+<td width="65%">
+
+
+<p>FILENAME to read a batch of SQL# commands from file</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \f batch.sql#</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">Note: the SQL# commands are
+interpreted as they are read. If there is <br>
+any SQL statements, the are executed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><i>o</i></p></td>
+<td width="8%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em">FILENAME to write result of
+commands executed to file.</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \o result.txt</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><i>load</i></p></td>
+<td width="4%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em">FILENAME to load from file SQL
+commands into SQL buffer.</p></td>
+<td width="10%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \load commands.sql</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><i>save</i></p></td>
+<td width="4%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em">FILENAME to save SQL commands
+from SQL buffer to file.</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \save commands.sql</p></td></tr>
+</table>
+
+<h2>GENERAL PURPOSE COMMANDS
+<a name="GENERAL PURPOSE COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">General commands
+to use.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><i>h</i></p></td>
+<td width="8%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em">show help (all commands).</p></td>
+<td width="50%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \h</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><i>s</i></p></td>
+<td width="8%"></td>
+<td width="40%">
+
+
+<p style="margin-top: 1em">TRUE, FALSE to silent
+messages.</p> </td>
+<td width="42%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example 1:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \s true</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">Example 2:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \s false</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><i>r</i></p></td>
+<td width="8%"></td>
+<td width="41%">
+
+
+<p style="margin-top: 1em">reset or clear the query
+buffer.</p> </td>
+<td width="41%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \r</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><i>print</i></p></td>
+<td width="3%"></td>
+<td width="44%">
+
+
+<p style="margin-top: 1em">show what&rsquo;s in the SQL
+buffer now.</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \print</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">SH VARIABLES
+WHICH CAN BE USED AS PARAMETERS Commands to set variables
+which can be used as Parameters in an SQL statement. If the
+SQL contains any parameters, the parameter does not have a
+variable set, the user will be prompted for the value for
+each missing parameter.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><i>set</i></p></td>
+<td width="5%"></td>
+<td width="50%">
+
+
+<p style="margin-top: 1em">NAME VALUE to set an internal
+variable.</p> </td>
+<td width="32%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \set sFirstName John</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><i>unset</i></p></td>
+<td width="3%"></td>
+<td width="46%">
+
+
+<p style="margin-top: 1em">NAME to remove an internal
+variable.</p> </td>
+<td width="36%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>SQL# \unset sFirstName</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>variable</i></p>
+
+<p style="margin-left:18%;">NAME to display the value of an
+internal variable.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \variable sFirstName</p></td></tr>
+</table>
+
+<h2>PROVIDER SUPPORT OPTIONS
+<a name="PROVIDER SUPPORT OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Enable or Disble
+support for a particular provider option <i><br>
+UseParameters</i></p>
+
+<p style="margin-left:18%;">TRUE,FALSE to use parameters
+when executing SQL which use the variables that were
+set.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If this option
+is true, the SQL contains parameters, and for each parameter
+which does not have a SQL# variable set, the user will be
+prompted to enter the value For that parameter.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \useparameter true</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Default: false
+<i><br>
+UseSimpleReader</i></p>
+
+<p style="margin-left:18%;">TRUE,FALSE to use simple reader
+when displaying results.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>SQL# \usesimplereader true</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Default: false.
+Mostly, this is dependent on the provider. If the provider
+does not have enough of IDataReader implemented to have the
+normal reader working, then the simple reader can be used.
+Providers like SqlClient, MySQL, and PostgreSQL have this
+ption defaulting to true.</p>
+
+<h2>PROVIDERS
+<a name="PROVIDERS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">PROVIDER NAME
+NAMESPACE ASSEMBLY</p>
+
+<p style="margin-left:9%; margin-top: 1em">oracle Oracle
+8i-11g System.Data.OracleClient System.Data.OracleClient
+<br>
+postgresql NetPostgreSQL Npgsql Npgsql <br>
+bytefx ByteFX MySQL ByteFX.Data.MySqlClient ByteFX.Data <br>
+sqlclient MS SQL 7-2008 System.Data.SqlClient System.Data
+<br>
+odbc ODBC System.Data.Odbc System.Data <br>
+sqlite SQL Lite Mono.Data.SqliteClient
+Mono.Data.SqliteClient <br>
+sybase Sybase Mono.Data.SybaseClient Mono.Data.SybaseClient
+<br>
+firebird Firebird SQL FirebirdSql.Data.FirebirdSql
+FirebirdSql.Data.Firebird <br>
+mysql MySQL AB MySql.Data.MySqlClient MySql.Data</p>
+
+<p style="margin-left:9%; margin-top: 1em">NOTES:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Ngsql is the
+.Net Data Provider for PosgreSQL. The <br>
+latest version can be downloaded from <br>
+http://npgsql.projects.postgresql.org/</p>
+
+<p style="margin-left:9%; margin-top: 1em">MySql.Data is
+the MySQL Connector/Net for connecting to MySql databases.
+<br>
+For MySQL, it is strongly recommend to use MySql.Data
+instead of the old <br>
+ByteFX.Data provider. Unfortunately, MySql.Data is not
+included with Mono. <br>
+You can download the latest MySQL Connector/Net from MySQL
+AB at <br>
+http://dev.mysql.com/downloads/</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">FirebirdSql.Data.Firebird
+can be downloaded from here: <br>
+
+http://www.firebirdsql.org/index.php?op=files&amp;id=netprovider</p>
+
+<h2>CONNECTION STRING SAMPLES
+<a name="CONNECTION STRING SAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Example
+connection strings for various providers to be used via the
+command \ConnectionString</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example of
+usage:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>\connectionstring Database=testdb</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Connection
+String examples:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Microsoft SQL
+Server via System.Data.SqlClient</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Server=DANPC;Database=pubs;User ID=saPassword=;</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>For Integrated Security, bear in mind that Mono is
+not</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>integrated with Windows, SQL Server client nor server,
+nor</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Windows Server. Therefore, you must provide the Windows
+Domain</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>name and domain user name and password for this
+user.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Server=DANPC;Database=pubs;User
+ID=DOMAINser;Password=pass;Integrated Security=SSPI</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>For a server locally, you can use localhost.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">ODBC via System.Data.Odbc
+provider using</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>a DSN named &quot;MSSQLDSN&quot;</p></td>
+<td width="26%"></td>
+<td width="6%"></td>
+<td width="62%">
+
+
+<p>I set up</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">in the Windows control
+panel&rsquo;s ODBC Data Sources <br>
+which connects to Microsoft SQL Server 2000:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>DSN=MSSQLDSN;UID=danmorg;PWD=freetds</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">To use ODBC ON
+Unix, consider unixODBC from http://www.unixodbc.org/ <br>
+or use iODBC from http://www.iodbc.org/</p>
+
+<p style="margin-left:9%; margin-top: 1em">SQL Lite via
+Mono.Data.SqliteClient <br>
+provider which connects to the <br>
+database file SqliteTest.db; if not found, <br>
+the file is created:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>URI=file:SqliteTest.db</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Oracle via
+System.Data.OracleClient</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Data Source=testdb;User ID=scott;Password=tiger</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If you prefer to
+not use a tnsnames.ora file, you can</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>use a connection string which allows a</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>TNS network description that is parentheses
+delimited</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>like the following which has the host, port, and</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>service name. For host, you can specify an IP
+address</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;">instead of a hostname.</p>
+
+<p style="margin-left:9%; margin-top: 1em">User ID=SCOTT;
+<br>
+Password=TIGER; <br>
+Data
+Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=192.168.1.101)(PORT=1521))(CONNECT_DATA=(SERVER=DEDICATED)(SERVICE_NAME=TESTDB)))</p>
+
+<p style="margin-left:9%; margin-top: 1em">Npgsql (.NET
+PostgreSQL) from <br>
+
+http://gborg.postgresql.org/project/npgsql/projdisplay.php</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Server=localhost;Database=test;User
+ID=postgres;Password=fun2db</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">ByteFX (ByteFX
+MySQL) from</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Please use MySql.Data instead.</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Server=localhost;Database=test;User
+ID=mysql;Password=</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">FirebirdSql via
+FirebirdSql.Data.Firebird (download latest form
+FirebirdSql.org)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+
+<p>Database=C:\FIREBIRD\EXAMPLES\EMPLOYEE.FDB;User=SYSDBA;Password=masterkey;Dialect=3;Server=localhost</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">MySQL via
+(MySql.Data) MySQL Connector/Net from
+http://www.mysql.com/</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Server=localhost;Database=test;User
+ID=mysql;Password=mypass;Pooling=false</p> </td></tr>
+</table>
+
+<h2>TRACING SUPPORT
+<a name="TRACING SUPPORT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">No support for
+tracing right now.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono SQL
+Query Tool was written <br>
+by Daniel Morgan &lt;monodanmorg@yahoo.com&gt;</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono SQL
+Query Tool is released under the terms of the GNU GPL.
+Please read the accompanying &lsquo;COPYING&rsquo; file for
+details. Alternative licenses are available from Novell or
+Daniel Morgan.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To report bugs
+in the compiler, you can file bug reports in our bug
+tracking system: <br>
+https://github.com/mono/mono/issues</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For details,
+visit: <br>
+
+http://lists.ximian.com/mailman/listinfo/mono-devel-list</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For details,
+visit: <br>
+http://www.mono-project.com</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+ 
+<p style="margin-left:9%; margin-top: 1em">mono(1)</p>
+<hr>
+</body>
+</html>

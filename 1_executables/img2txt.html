@@ -1,0 +1,209 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:20 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>img2txt</title>
+
+</head>
+<body>
+
+<h1 align="center">img2txt</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">img2txt -
+convert images to various text-based coloured files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>img2txt</b> [
+<b>-W</b> <i>width</i> ] [ <b>-H</b> <i>height</i> ] [
+<b>-x</b> <i>font-width</i> ] [ <b>-y</b> <i>font-height</i>
+]</p>
+
+<p style="margin-left:18%;">[ <b>-b</b> <i>brightness</i> ]
+[ <b>-c</b> <i>contrast</i> ] [ <b>-g</b> <i>gamma</i> ]
+<br>
+[ <b>-d</b> <i>dither</i> ] [ <b>-f</b> <i>format</i> ]
+<i>FILE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>img2txt</b></i>
+converts images to colour ASCII characters and outputs them
+to text-based coloured files.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>img2txt</b>
+can load the most widespread image formats: PNG, JPEG, GIF,
+PNG, BMP etc (see <b>NOTES</b> for details). By default the
+output text is 60 columns wide, and the line count is
+computed accordingly to respect aspect ratio of original
+file. The default output format is standard ANSI coloured
+text.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-W,
+--width=&lt;width&gt;</b></p>
+
+<p style="margin-left:18%;">Change output column count. If
+not given, the default is set to 60.</p>
+
+<p style="margin-left:9%;"><b>-H,
+--height=&lt;height&gt;</b></p>
+
+<p style="margin-left:18%;">Change output line count. If
+not given, the height is computed to match correct aspect
+ratio.</p>
+
+<p style="margin-left:9%;"><b>-x,
+--font-width=&lt;width&gt;</b></p>
+
+<p style="margin-left:18%;">Change output font width. If
+not given, the default is set to 6. This value will be used
+for computing aspect ratio.</p>
+
+<p style="margin-left:9%;"><b>-y,
+--font-height=&lt;height&gt;</b></p>
+
+<p style="margin-left:18%;">Change output font height. If
+not given, the default is set to 10. This value will be used
+for computing aspect ratio.</p>
+
+<p style="margin-left:9%;"><b>-b,
+--brightness=&lt;brightness&gt;</b></p>
+
+<p style="margin-left:18%;">Change image brightness.
+Default to 1.0.</p>
+
+<p style="margin-left:9%;"><b>-c,
+--contrast=&lt;contrast&gt;</b></p>
+
+<p style="margin-left:18%;">Change image contrast. Default
+to 1.0.</p>
+
+<p style="margin-left:9%;"><b>-g,
+--gamma=&lt;gamma&gt;</b></p>
+
+<p style="margin-left:18%;">Change image gamma. Default to
+1.0.</p>
+
+<p style="margin-left:9%;"><b>-d,
+--dither=&lt;dither&gt;</b></p>
+
+<p style="margin-left:18%;">Change dithering algorithm.
+This can be one of the following (default to fstein) : <br>
+none : Nearest color <br>
+ordered2 : Ordered 2x2 <br>
+ordered4 : Ordered 4x4 <br>
+ordered8 : Ordered 8x8 <br>
+random : Random <br>
+fstein : Floyd Steinberg</p>
+
+<p style="margin-left:9%;"><b>-f,
+--format=&lt;format&gt;</b></p>
+
+<p style="margin-left:18%;">Change output format. This can
+be one of the following (default to ansi) : <br>
+ansi : coloured ANSI <br>
+caca : internal libcaca format <br>
+utf8 : UTF8 with CR <br>
+utf8cr : UTF8 with CRLF (MS Windows) <br>
+html : HTML with CSS and DIV support <br>
+html3 : Pure HTML3 with tables <br>
+irc : IRC with ctrl-k codes <br>
+bbfr : BBCode (French) <br>
+ps : Postscript <br>
+svg : Scalable Vector Graphics <br>
+tga : Targa Image</p>
+
+<p style="margin-left:9%;"><b>-h, --help</b></p>
+
+<p style="margin-left:18%;">Display help message and
+exit.</p>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:18%;">Display version of the program
+and exit.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">img2txt
+hello.jpg &gt; hello.ans</p>
+
+<p style="margin-left:9%; margin-top: 1em">img2txt
+--width=40 --format=svg hello.jpg &gt; tinyhello.svg</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Setting both
+column and line count (using --width and --height) will let
+you choose the exact output size without taking aspect ratio
+in account.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You must compile
+libcaca package with support of <i>Imlib2</i> to be able to
+load a wide variety of image formats. Otherwise you will
+only be able to load regular BMP files.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cacaview(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written by Sam Hocevar &lt;sam@hocevar.net&gt; and
+Jean-Yves Lamoureux &lt;jylam@lnxscene.org&gt;.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FAAD</title>
+
+</head>
+<body>
+
+<h1 align="center">FAAD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">faad &mdash;
+Process an Advanced Audio Codec stream</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>faad</b>
+[options] [-w | -o &lt;output_filename&gt; | -a
+&lt;output_filename&gt;] input_filename</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This utility
+provides a command line interface to libfaad2. This program
+reads in MPEG-4 AAC files, processes, and outputs them in
+either Microsoft WAV, MPEG-4 AAC ADTS, or standard PCM
+formats.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a</b>
+<i>&lt;filename&gt;</i><b>, --adtsout</b>
+<i>&lt;filename&gt;</i></p>
+
+<p style="margin-left:18%;">Sets the processing to output
+to the specified file in MPEG-4 AAC ADTS format</p>
+
+<p style="margin-left:9%;"><b>-b</b>
+<i>&lt;number&gt;</i><b>, --bits</b>
+<i>&lt;number&gt;</i></p>
+
+<p style="margin-left:18%;">Set the output (individual)
+sample format. The number takes one of the following
+values:</p>
+
+<p style="margin-left:27%;">1: 16-bit PCM data (default).
+<br>
+2: 24-bit PCM data. <br>
+3: 32-bit PCM data. <br>
+4: 32-bit floating-point data. <br>
+5: 64-bit floating-point data.</p>
+
+<p style="margin-left:9%;"><b>-d , --downmix</b></p>
+
+<p style="margin-left:18%;">Set the processing to
+downsample from 5.1 (surround sound and bass) channels to 2
+channels (stereo).</p>
+
+<p style="margin-left:9%;"><b>-f</b>
+<i>&lt;number&gt;</i><b>, --format</b>
+<i>&lt;number&gt;</i></p>
+
+<p style="margin-left:18%;">Set the output file format. The
+number takes one of the following values:</p>
+
+<p style="margin-left:27%;">1: Microsoft WAV format
+(default). <br>
+2: Raw PCM data.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-g</b></p></td>
+<td width="6%"></td>
+<td width="65%">
+
+
+<p>Set the processing to not perform gapless decoding.</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-h , --help</b></p>
+
+<p style="margin-left:18%;">Shows a usage summary.</p>
+
+<p style="margin-left:9%;"><b>-i , --info</b></p>
+
+<p style="margin-left:18%;">Shows information about the
+about the input file.</p>
+
+<p style="margin-left:9%;"><b>-l</b>
+<i>&lt;number&gt;</i><b>, --objecttype</b>
+<i>&lt;number&gt;</i></p>
+
+<p style="margin-left:18%;">Sets the MPEG rofile and object
+type for the processing to use. The number takes one of the
+following values:</p>
+
+<p style="margin-left:27%;">1: Main object type. <br>
+2: Low Complexity (LC) object type (default). <br>
+4: Long Term Prediction (LTP) object type. <br>
+23: Low Delay (LD) object type.</p>
+
+<p style="margin-left:9%;"><b>-o</b>
+<i>&lt;filename&gt;</i><b>, --outfile</b>
+<i>&lt;number&gt;</i></p>
+
+<p style="margin-left:18%;">Sets the filename for
+processing output.</p>
+
+<p style="margin-left:9%;"><b>-q , --quiet</b></p>
+
+<p style="margin-left:18%;">Quiet - Suppresses status
+messages during processing.</p>
+
+<p style="margin-left:9%;"><b>-t , --oldformat</b></p>
+
+<p style="margin-left:18%;">Sets the processing to use the
+old MPEG-4 AAC ADTS format when outputting in said
+format.</p>
+
+<p style="margin-left:9%;"><b>-w , --stdio</b></p>
+
+<p style="margin-left:18%;">Sets the processing output to
+be sent to the standard out.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Matthew W. S.
+Bell &lt;matthew (at) bells23.org.uk&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>faac</b>(1)</p>
+<hr>
+</body>
+</html>

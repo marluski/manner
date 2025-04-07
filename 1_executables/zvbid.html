@@ -1,0 +1,192 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:46 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>zvbid</title>
+
+</head>
+<body>
+
+<h1 align="center">zvbid</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">zvbid - VBI
+proxy daemon</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>zvbid [
+options ]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>zvbid</b> is
+a proxy for VBI devices, i.e. it forwards one or more VBI
+data streams to one or more connected clients and manages
+channel change requests.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-dev</b>
+path</p>
+
+<p style="margin-left:18%;">Path of a device from which to
+read data. This argument can be given several times with
+different devices.</p>
+
+<p style="margin-left:9%;"><b>-buffers</b> count</p>
+
+<p style="margin-left:18%;">Number of buffers to allocate
+for capturing VBI raw data from devices which support
+streaming (currently only video4linux, rev. 2) A higher
+number of buffers can prevent data loss in case of high
+latency. The downside is higher memory consumption
+(typically 65kB per buffer.) Default count is 8, maximum is
+32.</p>
+
+<p style="margin-left:9%;"><b>-nodetach</b></p>
+
+<p style="margin-left:18%;">Daemon process remains
+connected to the terminal from which it was started (e.g. so
+that you can stop it by pressing Control-C keys). Intended
+for trouble shooting only.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-kill</b></p></td>
+<td width="3%"></td>
+<td width="70%">
+
+
+<p>Terminates a proxy daemon running for the given
+device.</p> </td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-debug</b> level</p>
+
+<p style="margin-left:18%;">Enables debug output: 0=
+off(default); 1= general messages; In addition 2, 4, 8, ...
+can be added to enable debug output for various
+categories.</p>
+
+<p style="margin-left:9%;"><b>-syslog</b> level</p>
+
+<p style="margin-left:18%;">Enables syslog output.</p>
+
+<p style="margin-left:9%;"><b>-loglevel</b> level</p>
+
+<p style="margin-left:18%;">Log file level</p>
+
+<p style="margin-left:9%;"><b>-logfile</b> path</p>
+
+<p style="margin-left:18%;">Path to the log file.</p>
+
+<p style="margin-left:9%;"><b>-maxclients</b> count</p>
+
+<p style="margin-left:18%;">Max. number of clients which
+are allowed to connect simultaneously.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-help</b></p></td>
+<td width="3%"></td>
+<td width="69%">
+
+
+<p>Print a short description of all command line
+options.</p> </td>
+<td width="13%">
+</td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">zvbi-chains(1),
+v4l-conf(8) <br>
+http://zapping.sourceforge.net/ (homepage)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Tom Zoerner
+(tomzo AT users.sourceforge.net)</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2003,2004 Tom Zoerner</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU General Public License along with
+this program; if not, write to the Free Software Foundation,
+Inc., 675 Mass Ave, Cambridge, MA 02139, USA.</p>
+<hr>
+</body>
+</html>

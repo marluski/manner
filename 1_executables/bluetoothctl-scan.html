@@ -1,0 +1,420 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BLUETOOTHCTL-SCAN</title>
+
+</head>
+<body>
+
+<h1 align="center">BLUETOOTHCTL-SCAN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#SCAN COMMANDS">SCAN COMMANDS</a><br>
+<a href="#uuids">uuids</a><br>
+<a href="#rssi">rssi</a><br>
+<a href="#pathloss">pathloss</a><br>
+<a href="#transport">transport</a><br>
+<a href="#duplicate-data">duplicate-data</a><br>
+<a href="#discoverable">discoverable</a><br>
+<a href="#pattern">pattern</a><br>
+<a href="#clear">clear</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">bluetoothctl-scan
+- Scan Submenu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl</b>
+[--options] [scan.commands]</p>
+
+<h2>SCAN COMMANDS
+<a name="SCAN COMMANDS"></a>
+</h2>
+
+
+<h3>uuids
+<a name="uuids"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set/Get UUIDs
+filter.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="37%">
+
+
+<p><b>&gt; uuids [all/uuid1 uuid2 ...]</b></p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<h3>rssi
+<a name="rssi"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set/Get RSSI
+filter, and clears pathloss.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This sets the
+minimum rssi value for reporting device advertisements.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The value is in
+dBm.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If one or more
+discovery filters have been set, the RSSI delta-threshold
+imposed by starting discovery by default will not be
+applied.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; rssi [rssi]</b></p></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example</b></p>
+
+<p style="margin-left:18%;"><b>&gt; rssi -60</b></p>
+
+<h3>pathloss
+<a name="pathloss"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set/Get Pathloss
+filter, and clears RSSI.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This sets the
+maximum pathloss value for reporting device
+advertisements.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The value is in
+dB.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If one or more
+discovery filters have been set, the RSSI delta-threshold
+imposed by starting discovery by default will not be
+applied.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="27%">
+
+
+<p><b>&gt; pathloss [pathloss]</b></p></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example</b></p>
+
+<p style="margin-left:18%;"><b>&gt; pathloss 4</b></p>
+
+<h3>transport
+<a name="transport"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set/Get
+transport filter.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Transport
+parameter determines the type of scan.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default is
+auto.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Possible
+values:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="30%">
+
+
+<p>&quot;auto&quot;: interleaved scan</p></td>
+<td width="58%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="30%">
+
+
+<p>&quot;bredr&quot;: BR/EDR inquiry</p></td>
+<td width="58%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="30%">
+
+
+<p>&quot;le&quot;: LE scan only</p></td>
+<td width="58%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If
+&quot;le&quot; or &quot;bredr&quot; Transport is requested
+and the controller doesn't support it, an
+org.bluez.Error.Failed error will be returned.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+&quot;auto&quot; transport is requested, the scan will use
+LE, BREDR, or both, depending on what's currently enabled on
+the controller.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em"><b>&gt; transport
+[auto/bredr/le]</b></p> </td>
+<td width="47%">
+</td></tr>
+</table>
+
+<h3>duplicate-data
+<a name="duplicate-data"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set/Get
+duplicate data filter.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Disables
+duplicate detection of advertisement data.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When enabled,
+PropertiesChanged signals will be generated for
+ManufacturerData and ServiceData every time they are
+discovered.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>&gt; duplicate-data
+[on/off]</b></p> </td>
+<td width="50%">
+</td></tr>
+</table>
+
+<h3>discoverable
+<a name="discoverable"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set/Get
+discoverable filter.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Makes the
+adapter discoverable while discovering.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the adapter
+is already discoverable, setting this filter won't have any
+effect.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><b>&gt; discoverable
+[on/off]</b></p> </td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h3>pattern
+<a name="pattern"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set/Get pattern
+filter.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Discover devices
+where the pattern matches either the prefix of the address
+or the device name, which is a convenient way to limit the
+number of device objects created during a discovery.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When set, it
+disregards device discoverable flags.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Note</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">The pattern matching is ignored
+if there are other clients that don't set any pattern, as it
+works as a logical OR. Also, setting an empty string
+&quot;&quot; pattern will match any device found.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p><b>&gt; pattern [value]</b></p></td></tr>
+</table>
+
+<h3>clear
+<a name="clear"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Clears discovery
+filter.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><b>&gt; clear
+[uuids/rssi/pathloss/transport/duplicate-data/discoverable/pattern]</b></p> </td></tr>
+</table>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

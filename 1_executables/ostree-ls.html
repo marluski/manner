@@ -1,0 +1,126 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE LS</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE LS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-ls - List
+file paths</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="54%">
+
+
+<p style="margin-top: 1em"><b>ostree ls</b> [OPTIONS...]
+{COMMIT} [PATHS...]</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Prints a list of
+file paths within the given commit, and within the given
+path(s) if specified. The first letter of the file line
+output specifies the type: &quot;-&quot; for regular file,
+&quot;d&quot; for directory, &quot;l&quot; for symbolic
+link. See EXAMPLE section for more detail on the specific
+output.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dironly</b>,<b>-d</b></p>
+
+<p style="margin-left:14%;">Do not recurse into directory
+arguments.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--recursive</b>,<b>-R</b></p>
+
+<p style="margin-left:14%;">Print directories
+recursively.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--checksum</b>,<b>-C</b></p>
+
+<p style="margin-left:14%;">Print checksum.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--xattrs</b>,<b>-X</b></p>
+
+<p style="margin-left:14%;">Print extended attributes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nul-filenames-only</b></p>
+
+<p style="margin-left:14%;">Print only filenames, NUL
+separated.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree ls
+my-branch</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">d00644 0 0 0 /
+<br>
+-00644 0 0 2 /helloworld.txt <br>
+d00755 0 0 0 /testdirectory</p>
+
+<p style="margin-left:9%; margin-top: 1em">Here, the first
+column is the file-type symbol (as explained in the
+DESCRIPTION section) followed by the S_IFMT file type. The
+next two columns (here: 0 0) are respectively the user ID
+and group ID for the file. After the break, the next number
+represents that file's standard size. The final column is
+the file path.</p>
+<hr>
+</body>
+</html>

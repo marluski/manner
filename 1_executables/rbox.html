@@ -1,0 +1,483 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:01 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>rbox</title>
+
+</head>
+<body>
+
+<h1 align="center">rbox</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rbox - generate
+point distributions for qhull</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Command
+&quot;rbox&quot; (w/o arguments) lists the options.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rbox generates
+random or regular points according to the options given, and
+outputs the points to stdout. The points are generated in a
+cube, unless &rsquo;s&rsquo; or &rsquo;k&rsquo; option is
+given. The format of the output is the following: first line
+contains the dimension and a comment, second line contains
+the number of points, and the following lines contain the
+points, one point per line. Points are represented by their
+coordinate values.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rbox 10</p>
+
+<p style="margin-left:18%;">10 random points in the unit
+cube centered at the origin.</p>
+
+<p style="margin-left:9%;">rbox 10 s D2</p>
+
+<p style="margin-left:18%;">10 random points on a 2-d
+circle.</p>
+
+<p style="margin-left:9%;">rbox 100 W0</p>
+
+<p style="margin-left:18%;">100 random points on the
+surface of a cube.</p>
+
+<p style="margin-left:9%;">rbox 1000 s D4</p>
+
+<p style="margin-left:18%;">1000 random points on a 4-d
+sphere.</p>
+
+<p style="margin-left:9%;">rbox c D5 O0.5</p>
+
+<p style="margin-left:18%;">a 5-d hypercube with one corner
+at the origin.</p>
+
+<p style="margin-left:9%;">rbox d D10</p>
+
+<p style="margin-left:18%;">a 10-d diamond.</p>
+
+<p style="margin-left:9%;">rbox x 1000 r W0</p>
+
+<p style="margin-left:18%;">100 random points on the
+surface of a fixed simplex</p>
+
+<p style="margin-left:9%;">rbox y D12</p>
+
+<p style="margin-left:18%;">a 12-d simplex.</p>
+
+<p style="margin-left:9%;">rbox l 10</p>
+
+<p style="margin-left:18%;">10 random points along a
+spiral</p>
+
+<p style="margin-left:9%;">rbox l 10 r</p>
+
+<p style="margin-left:18%;">10 regular points along a
+spiral plus two end points</p>
+
+<p style="margin-left:9%;">rbox 1000 L10000 D4 s</p>
+
+<p style="margin-left:18%;">1000 random points on the
+surface of a narrow lens.</p>
+
+<p style="margin-left:9%;">rbox c G2 d G3</p>
+
+<p style="margin-left:18%;">a cube with coordinates +2/-2
+and a diamond with coordinates +3/-3.</p>
+
+<p style="margin-left:9%;">rbox 64 M3,4 z</p>
+
+<p style="margin-left:18%;">a rotated, {0,1,2,3} x
+{0,1,2,3} x {0,1,2,3} lattice (Mesh) of integer points.
+&rsquo;rbox 64 M1,0&rsquo; is orthogonal.</p>
+
+<p style="margin-left:9%;">rbox P0 P0 P0 P0 P0</p>
+
+<p style="margin-left:18%;">5 copies of the origin in 3-d.
+Try &rsquo;rbox P0 P0 P0 P0 P0 | qhull QJ&rsquo;.</p>
+
+<p style="margin-left:9%;">r 100 s Z1 G0.1</p>
+
+<p style="margin-left:18%;">two cospherical 100-gons plus
+another cospherical point.</p>
+
+<p style="margin-left:9%;">100 s Z1</p>
+
+<p style="margin-left:18%;">a cone of points.</p>
+
+<p style="margin-left:9%;">100 s Z1e-7</p>
+
+<p style="margin-left:18%;">a narrow cone of points with
+many precision errors.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em">n</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">number of points</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>Dn</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>dimension n-d (default 3-d)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>Bn</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>bounding box coordinates (default 0.5)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>l</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>spiral distribution, available only in 3-d</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>Ln</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>lens distribution of radius n. May be used with
+&rsquo;s&rsquo;, &rsquo;r&rsquo;, &rsquo;G&rsquo;, and
+&rsquo;W&rsquo;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>Mn,m,r</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>lattice (Mesh) rotated by {[n,-m,0], [m,n,0], [0,0,r],
+...}. Use &rsquo;Mm,n&rsquo; for a rigid rotation with r =
+sqrt(n&#710;2+m&#710;2). &rsquo;M1,0&rsquo; is an orthogonal
+lattice. For example, &rsquo;27 M1,0&rsquo; is {0,1,2} x
+{0,1,2} x {0,1,2}. &rsquo;27 M3,4 z&rsquo; is a rotated
+integer lattice.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>s</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>cospherical points randomly generated in a cube and
+projected to the unit sphere</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>x</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>simplicial distribution. It is fixed for option
+&rsquo;r&rsquo;. May be used with &rsquo;W&rsquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>y</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>simplicial distribution plus a simplex. Both
+&rsquo;x&rsquo; and &rsquo;y&rsquo; generate the same
+points.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>Wn</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>restrict points to distance n of the surface of a sphere
+or a cube</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>c</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>add a unit cube to the output</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>c Gm</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>add a cube with all combinations of +m and -m to the
+output</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>d</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>add a unit diamond to the output.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>d Gm</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>add a diamond made of 0, +m and -m to the output</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>Cn,r,m</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>add n nearly coincident points within radius r of m
+points</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>Pn,m,r</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>add point [n,m,r] to the output first. Pad coordinates
+with 0.0.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>n</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Remove the command line from the first line of
+output.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>On</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>offset the data by adding n to each coordinate.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>t</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>use time in seconds as the random number seed (default
+is command line).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>tn</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>set the random number seed to n.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>z</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>generate integer coordinates. Use &rsquo;Bn&rsquo; to
+change the range. The default is &rsquo;B1e6&rsquo; for
+six-digit coordinates. In R&#710;4, seven-digit coordinates
+will overflow hyperplane normalization.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>Zn s</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>restrict points to a disk about the z+ axis and the
+sphere (default Z1.0). Includes the opposite pole.
+&rsquo;Z1e-6&rsquo; generates degenerate points under single
+precision.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;">Zn Gm s</p>
+
+<p style="margin-left:18%;">same as Zn with an empty center
+(default G0.5).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>r s D2</p></td>
+<td width="1%"></td>
+<td width="33%">
+
+
+<p>generate a regular polygon</p></td>
+<td width="49%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">r s Z1 G0.1</p>
+
+<p style="margin-left:18%;">generate a regular cone</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Some
+combinations of arguments generate odd results.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+qhull_bug@qhull.org, other correspondence to
+qhull@qhull.org</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">qhull(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">C. Bradford
+Barber <br>
+ bradb@shore.net</p>
+<hr>
+</body>
+</html>

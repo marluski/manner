@@ -1,0 +1,171 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>yuvinactive</title>
+
+</head>
+<body>
+
+<h1 align="center">yuvinactive</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">yuvinactive -
+Set a part of the video to a defined state</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvinactive</b>
+[<i>options</i>] <i>&lt;/dev/stdin &gt;/dev/stdout</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>yuvinactive</b></i>
+operates with a area (rectangle) you define. By default is
+sets it to really black. But you can tell tell yuvinactive
+to darken the area, or fill it with a certain color. It can
+also make the content of the area unreadable, like extreme
+softening of the area. Or copy the surrounding area into the
+the specified area. You usually have to use the -i option
+which sets the area in which yuvinactive will work. If no
+additional option is given yuvinactive stet the area to
+black. But you can use the <b>-d -s -a -c options</b> to
+tell yuvinactive that it shall do something different with
+that area. You can only use one additional option.
+yuvinactive was built to remove unwanted things like a logo,
+from the movie.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lav2yuv</b>
+accepts the following options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="3%"></td>
+<td width="21%">
+
+
+<p>Some help output</p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-i</b><i>XxY+XOFF+YOFF</i></p>
+
+<p style="margin-left:15%;">Specifies the area yuvinactive
+shall work with. With this option the area is set to black.
+There are no restrictions because of interlacing.</p>
+
+<p style="margin-left:9%;"><b>-d</b> <i>num</i></p>
+
+<p style="margin-left:15%;">How much darker the area should
+be compared to the original color. This is done by setting a
+lower value for the luma. The value is in percent from the
+original luma.</p>
+
+<p style="margin-left:9%;"><b>-s</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Here you specify a certain
+color in the yuv format.</p>
+
+<p style="margin-left:9%;"><b>-a</b> <i>num</i></p>
+
+<p style="margin-left:15%;">With this option the program
+uses on pixel and averages the surrounding pixels with the
+same color to make the original less readable. The number
+tells the the program how much pixels around the original
+pixel should be overwritten with the same color. You have to
+use a even number here</p>
+
+<p style="margin-left:9%;"><b>-c</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Sets the number of surrounding
+pixels yuvinactive should use to copy them into the given
+area. You have to use a even number here. yuvinactive uses
+the lines above and below the specified area for copying
+them into the area.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Right, there are
+bugs hidden. The thing is not well tested, and not every
+option might work. yuvinactive is in the first state of
+becoming a useful program.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was originally written by Bernhard Praschinger. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>lav2yuv</b>(1), <b>mpeg2enc</b>(1), <b>yuvscaler</b>(1),
+<b>yuv2lav</b>(1), <b>yuvdenoise</b>(1), <b>yuvplay</b>(1),
+<b>yuvmedianfilter</b>(1)</p>
+<hr>
+</body>
+</html>

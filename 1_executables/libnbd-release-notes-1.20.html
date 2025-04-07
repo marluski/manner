@@ -1,0 +1,265 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>libnbd-release-notes-1.20</title>
+
+</head>
+<body>
+
+<h1 align="center">libnbd-release-notes-1.20</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Security">Security</a><br>
+<a href="#Enhancements to existing APIs">Enhancements to existing APIs</a><br>
+<a href="#Protocol">Protocol</a><br>
+<a href="#Tools">Tools</a><br>
+<a href="#Language bindings">Language bindings</a><br>
+<a href="#Tests">Tests</a><br>
+<a href="#Other improvements and bug fixes">Other improvements and bug fixes</a><br>
+<a href="#Documentation">Documentation</a><br>
+<a href="#Build">Build</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">libnbd-release-notes-1.20
+- release notes for libnbd 1.20</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+release notes for libnbd stable release 1.20. This describes
+the major changes since 1.18.</p>
+
+<p style="margin-left:9%; margin-top: 1em">libnbd 1.20.0
+was released on <b>5 April 2024</b>.</p>
+
+<h3>Security
+<a name="Security"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Fuzzing found
+and Eric Blake fixed an assertion which could be triggered
+by connecting to a malicious server. This was assigned
+CVE-2023-5871 (low severity). See the announcement here:
+https://lists.libguestfs.org/archives/list/guestfs@lists.libguestfs.org/thread/5CRC7LRTN35WPZZ4BT6NAMH4JGMF47IK/</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you find a
+security issue, please read <i>SECURITY</i> in the source
+(online here:
+https://gitlab.com/nbdkit/libnbd/blob/master/SECURITY). To
+find out about previous security issues in libnbd, see
+<b>libnbd-security</b>(3).</p>
+
+<h3>Enhancements to existing APIs
+<a name="Enhancements to existing APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_connect_uri</b>(3)
+now correctly supports case insensitive URIs.</p>
+
+<h3>Protocol
+<a name="Protocol"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Improve interop
+with <b>nbd-server</b>(1) which supports structured replies
+but not meta context (Eric Blake).</p>
+
+<h3>Tools
+<a name="Tools"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+adds support for <i>--isnt</i>, <i>--cannot</i>,
+<i>--hasnt</i>, which lets you check if features of an NBD
+server are <i>not</i> supported.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+adds support for <i>--uri</i> which just prints the
+canonical URI of the server.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+now prints human sizes for block size constraints (Eric
+Blake).</p>
+
+<h3>Language bindings
+<a name="Language bindings"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">New
+<b>libnbd-rust</b>(3) manual page added, providing an
+overview for writing Rust programs using libnbd.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Rust
+documentation has been improved by using a custom translator
+from our own documentation format (Perl POD) to rustdoc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some Rust
+compiler warnings were fixed (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">OCaml bindings
+now support zero-copy in AIO pread and pwrite functions.
+This change is backwards compatible with existing code.
+(Thanks Nicolas Ojeda Bar, Anil Madhavapeddy, Simon
+Cruanes).</p>
+
+<p style="margin-left:9%; margin-top: 1em">OCaml bindings
+now use &quot;Gc.finalize&quot; (OCaml-level finalizers
+instead of C-level finalizers) which improves compatibility
+in OCaml 5.1.1 and above (Guillaume Munch-Maccagnoni).</p>
+
+<p style="margin-left:9%; margin-top: 1em">OCaml &ge; 4.05
+is formally required and checked in <i>./configure</i>.
+Previously we did not specify a minimum version of OCaml,
+but in practice versions older than 4.05 probably
+didn&rsquo;t work.</p>
+
+<h3>Tests
+<a name="Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Fuzzing approach
+was changed to use asynchronous commands. This improves
+speed of fuzzing greatly and should find more issues.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Multiple CI
+fixes (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Respect the
+user&rsquo;s choice of qemu-nbd, nbdkit and other binaries
+from (eg) &quot;./configure&nbsp;NBDKIT=/some/nbdkit&quot;.
+Previously we would often test against binaries found on the
+path even if the user had specified other binaries to
+use.</p>
+
+<h3>Other improvements and bug fixes
+<a name="Other improvements and bug fixes"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+now gracefully disconnects from the server in error cases,
+improving output (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">&quot;struct
+nbd_handle&quot; now contains a magic value which is checked
+on entry to libnbd, which should identify mistakes where
+programs calling libnbd pass in an incorrect pointer.</p>
+
+<h3>Documentation
+<a name="Documentation"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">An example was
+added of how to use userfaultfd to mmap an NBD-backed drive.
+See <i>examples/userfault-map.c</i> in the libnbd
+sources.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Documentation of
+acceptable handle states in the man pages has been
+improved.</p>
+
+<h3>Build
+<a name="Build"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>contrib/libnbd.m4</i>
+is a contributed configure test for libnbd (Bruno
+Haible).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&quot;./configure
+--with-bash-completions&quot; will now fail if the required
+bash-completions package is not installed.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Eric Blake <br>
+Richard W.M. Jones <br>
+Thomas Wei&szlig;schuh</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

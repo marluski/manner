@@ -1,0 +1,639 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VARLINKCTL</title>
+
+</head>
+<body>
+
+<h1 align="center">VARLINKCTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">varlinkctl -
+Introspect with and invoke Varlink services</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em"><b>varlinkctl</b> [OPTIONS...]
+info <i>ADDRESS</i></p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em"><b>varlinkctl</b> [OPTIONS...]
+list-interfaces <i>ADDRESS</i></p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em"><b>varlinkctl</b> [OPTIONS...]
+list-methods <i>ADDRESS</i> [<i>INTERFACE</i>...]</p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em"><b>varlinkctl</b> [OPTIONS...]
+introspect <i>ADDRESS</i> [<i>INTERFACE</i>...]</p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em"><b>varlinkctl</b> [OPTIONS...]
+call <i>ADDRESS METHOD</i> [<i>ARGUMENTS</i>]</p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em"><b>varlinkctl</b> [OPTIONS...]
+validate-idl [<i>FILE</i>]</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>varlinkctl</b>
+may be used to introspect and invoke
+<b><font color="#0000FF">Varlink</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">services.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Services
+are referenced by one of the following:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+A Varlink service reference starting with the
+&quot;unix:&quot; string, followed by an absolute
+<b>AF_UNIX</b> socket path, or by &quot;@&quot; and an
+arbitrary string (the latter for referencing sockets in the
+abstract namespace). In this case a stream socket connection
+is made to the specified socket.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+A Varlink service reference starting with the
+&quot;exec:&quot; string, followed by an absolute path of a
+binary to execute. In this case the specified process is
+forked off locally, with a connected stream socket passed
+in.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+A Varlink service reference starting with the
+&quot;ssh-unix:&quot; string, followed by an SSH host
+specification, followed by &quot;:&quot;, followed by an
+absolute <b>AF_UNIX</b> socket path. (This requires OpenSSH
+9.4 or newer on the server side, abstract namespace sockets
+are not supported.)</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+A Varlink service reference starting with the
+&quot;ssh-exec:&quot; string, followed by an SSH host
+specification, followed by &quot;:&quot;, followed by a
+command line. In this case the command is invoked and the
+Varlink protocol is spoken on the standard input and output
+of the invoked command.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">For
+convenience these two simpler (redundant) service address
+syntaxes are also supported:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+A file system path to an <b>AF_UNIX</b> socket, either
+absolute (i.e. begins with &quot;/&quot;) or relative (in
+which case it must begin with &quot;./&quot;).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+A file system path to an executable, either absolute or
+relative (as above, must begin with &quot;/&quot;, resp.
+&quot;./&quot;).</font></p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following commands are understood:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>info</b>
+<i>ADDRESS</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Show
+brief information about the specified service, including
+vendor name and list of implemented interfaces. Expects a
+service address in one of the formats described
+above.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>list-interfaces</b>
+<i>ADDRESS</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Show list
+of interfaces implemented by the specified service. Expects
+a service address in one of the formats described
+above.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>list-methods</b>
+<i>ADDRESS</i> [<i>INTERFACE...</i>]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Show list
+of methods implemented by the specified service. Expects a
+service address in one of the formats described above as
+well as one or more interface names. If no interface name is
+specified, lists all methods of all interfaces implemented
+by the service, otherwise just the methods in the specified
+interfaces.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>introspect</b>
+<i>ADDRESS</i> [<i>INTERFACE...</i>]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Show the
+interface definitions of the specified interfaces provided
+by the specified service. Expects a service address in one
+of the formats described above and optionally one or more
+Varlink interface names. If no interface names are
+specified, shows all provided interfaces by the
+service.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>call</b>
+<i>ADDRESS METHOD</i> [<i>ARGUMENTS</i>]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Call the
+specified method of the specified service. Expects a service
+address in the format described above, a fully qualified
+Varlink method name, and a JSON arguments object. If the
+arguments object is not specified, it is read from STDIN
+instead. To pass an empty list of parameters, specify the
+empty object &quot;{}&quot;.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+reply parameters are written as JSON object to
+STDOUT.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>validate-idl</b>
+[<i>FILE</i>]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Reads a
+Varlink interface definition file, parses and validates it,
+then outputs it with syntax highlighting. This checks for
+syntax and internal consistency of the interface. Expects a
+file name to read the interface definition from. If omitted
+reads the interface definition from STDIN.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>help</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Show
+command syntax help.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following options are understood:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--more</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When used
+with <b>call</b>: expect multiple method replies. If this
+flag is set the method call is sent with the <b>more</b>
+flag set, which tells the service to generate multiple
+replies, if needed. The command remains running until the
+service sends a reply message that indicates it is the last
+in the series (or if the configured timeout is reached, see
+below). This flag should be set only for method calls that
+support this mechanism.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">If
+this mode is enabled output is automatically switched to
+JSON-SEQ mode, so that individual reply objects can be
+easily discerned.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+switch has no effect on the method call timeout applied by
+default: regardless if <b>--more</b> is specified or not,
+the default timeout will be 45s. Use <b>--timeout=</b> (see
+below) to change or disable the timeout. When invoking a
+method call that continuously returns updates it is
+typically desirable to disable the timeout with
+<b>--timeout=infinity</b>. On the other hand, when invoking
+a <b>--more</b> method call for the purpose of enumerating
+objects (which likely will complete quickly) it is typically
+beneficial to leave the timeout logic enabled, for
+robustness reasons.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-E</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">A
+shortcut for <b>--more --timeout=infinity</b>. This switch
+is useful for method calls that implement subscription to a
+continuous stream of updates.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--collect</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">This is
+similar to <b>--more</b> but collects all responses in a
+JSON array, and prints it, rather than in JSON_SEQ
+mode.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--oneway</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When used
+with <b>call</b>: do not expect a method reply. If this flag
+is set the method call is sent with the <b>oneway</b> flag
+set (the command exits immediately after), which tells the
+service not to generate a reply.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--json=</b><i>MODE</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Selects
+the JSON output formatting, one of &quot;pretty&quot; (for
+nicely indented, colorized output) or &quot;short&quot; (for
+terse output with minimal whitespace and no newlines),
+defaults to &quot;short&quot;.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-j</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Equivalent
+to <b>--json=pretty</b> when invoked interactively from a
+terminal. Otherwise equivalent to <b>--json=short</b>, in
+particular when the output is piped to some other
+program.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 255.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--quiet</b>,
+<b>-q</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Suppress
+output of method call replies.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--graceful=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Takes a
+qualified Varlink error name (i.e. an interface name,
+suffixed by an error name, separated by a dot; e.g.
+&quot;org.varlink.service.InvalidParameter&quot;). Ensures
+that if a method call fails with the specified error this
+will be treated as success, i.e. will cause the
+<b>varlinkctl</b> invocation to exit with a zero exit
+status. This option may be used more than once in order to
+treat multiple different errors as successes.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--timeout=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Expects a
+timeout in seconds as parameter. By default a timeout of 45s
+is enforced. To turn off the timeout specify
+&quot;infinity&quot; or an empty string.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--no-pager</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Do not
+pipe output into a pager.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-h</b>,
+<b>--help</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print a
+short help text and exit.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--version</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print a
+short version string and exit.</font></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Example&nbsp;1.&nbsp;Investigating
+a Service</b></font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following three commands inspect the
+&quot;io.systemd.Resolve&quot; service implemented by
+<b>systemd-resolved.service</b>(8), listing general service
+information and implemented interfaces, and then displaying
+the interface definition of its primary
+interface:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">$
+varlinkctl info /run/systemd/resolve/io.systemd.Resolve <br>
+Vendor: The systemd Project <br>
+Product: systemd (systemd-resolved) <br>
+Version: 254 (254-1522-g4790521&#710;) <br>
+URL: https://systemd.io/ <br>
+Interfaces: io.systemd <br>
+io.systemd.Resolve <br>
+org.varlink.service <br>
+$ varlinkctl list-interfaces
+/run/systemd/resolve/io.systemd.Resolve <br>
+io.systemd <br>
+io.systemd.Resolve <br>
+org.varlink.service <br>
+$ varlinkctl introspect
+/run/systemd/resolve/io.systemd.Resolve io.systemd.Resolve
+<br>
+interface io.systemd.Resolve <br>
+type ResolvedAddress( <br>
+ifindex: ?int, <br>
+...</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">(Interface
+definition has been truncated in the example above, in the
+interest of brevity.)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Example&nbsp;2.&nbsp;Invoking
+a Method</b></font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following command resolves a hostname via
+<b>systemd-resolved.service</b>(8)'s <b>ResolveHostname</b>
+method call.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">$
+varlinkctl call /run/systemd/resolve/io.systemd.Resolve
+io.systemd.Resolve.ResolveHostname
+'{&quot;name&quot;:&quot;systemd.io&quot;,&quot;family&quot;:2}'
+-j <br>
+{ <br>
+&quot;addresses&quot; : [ <br>
+{ <br>
+&quot;ifindex&quot; : 2, <br>
+&quot;family&quot; : 2, <br>
+&quot;address&quot; : [ <br>
+185, <br>
+199, <br>
+111, <br>
+153 <br>
+] <br>
+} <br>
+], <br>
+&quot;name&quot; : &quot;systemd.io&quot;, <br>
+&quot;flags&quot; : 1048577 <br>
+}</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Example&nbsp;3.&nbsp;Investigating
+a Service Executable</b></font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following command inspects the
+/usr/lib/systemd/systemd-pcrextend executable and the IPC
+APIs it provides. It then invokes a method on it:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+varlinkctl info /usr/lib/systemd/systemd-pcrextend <br>
+Vendor: The systemd Project <br>
+Product: systemd (systemd-pcrextend) <br>
+Version: 254 (254-1536-g97734fb) <br>
+URL: https://systemd.io/ <br>
+Interfaces: io.systemd <br>
+io.systemd.PCRExtend <br>
+org.varlink.service <br>
+# varlinkctl introspect /usr/lib/systemd/systemd-pcrextend
+io.systemd.PCRExtend <br>
+interface io.systemd.PCRExtend</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">method
+Extend( <br>
+pcr: int, <br>
+text: ?string, <br>
+data: ?string <br>
+) -&gt; () <br>
+# varlinkctl call /usr/lib/systemd/systemd-pcrextend
+io.systemd.PCRExtend.Extend
+'{&quot;pcr&quot;:15,&quot;text&quot;:&quot;foobar&quot;}'
+<br>
+{}</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Example&nbsp;4.&nbsp;Invoking
+a method remotely via SSH</b></font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following command acquires a report about the identity of a
+remote host &quot;somehost&quot; from
+<b>systemd-hostnamed.service</b>(8) by connecting via SSH to
+the <b>AF_UNIX</b> socket the service listens on:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+varlinkctl call
+ssh-unix:somehost:/run/systemd/io.systemd.Hostname
+io.systemd.Hostname.Describe '{}'</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">To
+invoke a Varlink service binary directly on the remote host,
+rather than talking to a service via <b>AF_UNIX</b> can be
+done like this:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+varlinkctl call ssh-exec:somehost:/usr/bin/systemd-creds
+org.varlink.service.GetInfo '{}'</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>busctl</b>(1),</font>
+<b><font color="#0000FF">Varlink</font></b>
+<small><font color="#000000">[1]</font></small></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="9%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">Varlink</font></p> </td>
+<td width="77%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://varlink.org/</font></p>
+<hr>
+</body>
+</html>

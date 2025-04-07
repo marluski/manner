@@ -1,0 +1,367 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BLUETOOTHCTL-TRANSPORT</title>
+
+</head>
+<body>
+
+<h1 align="center">BLUETOOTHCTL-TRANSPORT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#MEDIA TRANSPORT COMMANDS">MEDIA TRANSPORT COMMANDS</a><br>
+<a href="#list">list</a><br>
+<a href="#show">show</a><br>
+<a href="#acquire">acquire</a><br>
+<a href="#select">select</a><br>
+<a href="#unselect">unselect</a><br>
+<a href="#release">release</a><br>
+<a href="#send">send</a><br>
+<a href="#receive">receive</a><br>
+<a href="#volume">volume</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">bluetoothctl-transport
+- Media Transport Submenu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl</b>
+[--options] [transport.commands]</p>
+
+<h2>MEDIA TRANSPORT COMMANDS
+<a name="MEDIA TRANSPORT COMMANDS"></a>
+</h2>
+
+
+<h3>list
+<a name="list"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List available
+transports.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="8%">
+
+
+<p><b>&gt; list</b></p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<h3>show
+<a name="show"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show transport
+information.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="23%">
+
+
+<p style="margin-top: 1em"><b>&gt; show [transport]</b></p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h3>acquire
+<a name="acquire"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Acquire
+transport.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="47%">
+
+
+<p style="margin-top: 1em"><b>&gt; acquire
+&lt;transport&gt; [transport1...]</b></p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note:</p>
+
+<p style="margin-left:9%; margin-top: 1em">If running the
+setup with an audio server that has LE Audio support (such
+as PipeWire) it will automatically acquire transports
+according to the configured roles.</p>
+
+<h3>select
+<a name="select"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Select
+transport. For transports created on a Broadcast Sink device
+only. This moves the transport to the
+&quot;broadcasting&quot; state, pending acquire.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="46%">
+
+
+<p style="margin-top: 1em"><b>&gt; select &lt;transport&gt;
+[transport1...]</b></p> </td>
+<td width="36%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note:</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the select
+command receives a list of transports, they will first be
+linked using the &quot;Links&quot; MediaTransport property.
+They will then be selected one by one, by calling the
+&quot;Select&quot; MediaTransport method. After the first
+transport is acquired, the Broadcast Sink will create fds
+for the associated stream and all its links. Each link can
+then be acquired one by one, setting the fd for the
+transport and starting to receive audio.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The select
+command does not require a local endpoint to be registered
+beforehand. This is because if the setup runs with an audio
+server that has LE Audio support (such as PipeWire), the
+audio server is the one to register endpoints and the
+transports are created as a result. Once a transport is
+selected, the audio server will automatically acquire.</p>
+
+<h3>unselect
+<a name="unselect"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unselect
+transport. For transports created on a Broadcast Sink device
+only. This moves the transport to the &quot;idle&quot;
+state, pending release by the audio server. If the transport
+was acquired by bluetoothctl it can be released straight
+away, without having to be unselected.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em"><b>&gt; unselect
+&lt;transport&gt; [transport1...]</b></p></td>
+<td width="33%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note: If running
+the setup with an audio server that has LE Audio support
+(such as PipeWire), it will prompt it to automatically
+release the transport.</p>
+
+<h3>release
+<a name="release"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Release
+transport.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="47%">
+
+
+<p style="margin-top: 1em"><b>&gt; release
+&lt;transport&gt; [transport1...]</b></p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Transports
+acquired by an audio server, can only be released by said
+audio server.</p>
+
+<h3>send
+<a name="send"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Send contents of
+a file.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em"><b>&gt; send &lt;transport&gt;
+&lt;filename&gt;</b></p> </td>
+<td width="45%">
+</td></tr>
+</table>
+
+<h3>receive
+<a name="receive"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get/Set file to
+receive.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="41%">
+
+
+<p style="margin-top: 1em"><b>&gt; receive
+&lt;transport&gt; [filename]</b></p></td>
+<td width="41%">
+</td></tr>
+</table>
+
+<h3>volume
+<a name="volume"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get/Set
+transport volume.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="36%">
+
+
+<p style="margin-top: 1em"><b>&gt; volume &lt;transport&gt;
+[value]</b></p> </td>
+<td width="46%">
+</td></tr>
+</table>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

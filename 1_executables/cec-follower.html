@@ -1,0 +1,258 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:59 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CEC-FOLLOWER</title>
+
+</head>
+<body>
+
+<h1 align="center">CEC-FOLLOWER</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cec-follower -
+An application to emulate CEC followers</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cec-follower</b>
+[<i>-h</i>] [<i>-d &lt;dev&gt;</i>] [other options]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>cec-follower</b> tool is used to emulate CEC followers.
+Based on the configured logical address(es) of the CEC
+device it will emulate the CEC behavior accordingly.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Configuring the
+CEC device is done using <b>cec-ctl</b>. Certain CEC
+functionalities are only emulated if the corresponding
+Device Features flag is set (these are set when configuring
+with <b>cec-ctl</b>). These are:</p>
+
+<p style="margin-left:9%; margin-top: 1em">- Audio Return
+Channel (RX and TX) <br>
+- Audio Rate Control <br>
+- Deck Control <br>
+- Record TV screen</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cec-follower</b>
+is basically a message loop, waiting for messages to arrive
+and taking the appropriate action for each message (incoming
+messages can be shown with the <i>--show-msgs</i> option).
+The follower maintains an internal state with appropriate
+parameters such as volume, current active source, power
+state and so on (state changes can be shown with the
+<i>--show-state</i> option).</p>
+
+<p style="margin-left:9%; margin-top: 1em">It also aims to
+be a reference implementation on how a follower should
+behave.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cec-follower</b>
+will keep track of incoming messages and look for violations
+of the CEC specification with regards to timings. For
+example, it will warn if it receives the same message again
+within 200ms after it replied &lt;Feature Abort&gt;
+[&quot;Unrecognized Opcode&quot;] to that message, and it
+will check that press and hold behavior is done
+properly.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cec-follower</b>
+will periodically send out polling messages to discover when
+a remote device is removed or a new one has appeared. When a
+device is removed, the recorded information about it is
+cleared. Each logical address is polled about once every 15
+seconds. In between polls, removing a remote device or
+replacing it with a new one is not detected.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When running
+compliance tests with <b>cec-compliance</b>,
+<b>cec-follower</b> should be run on the same device to act
+on incoming messages that are not replies to messages sent
+by the compliance tool. Before each test-run
+<b>cec-follower</b> should be restarted if it is running, to
+initialize the emulated device with a clean and known
+initial state.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--device</b> <i>&lt;dev&gt;</i></p>
+
+<p style="margin-left:18%;">Use device &lt;dev&gt; as the
+CEC device. If &lt;dev&gt; is a number, then
+/dev/cec&lt;dev&gt; is used.</p>
+
+<p style="margin-left:9%;"><b>-D</b>, <b>--driver</b>
+<i>&lt;drv&gt;</i></p>
+
+<p style="margin-left:18%;">Use a cec device that has
+driver name <i>&lt;drv&gt;</i>, as returned by the
+CEC_ADAP_G_CAPS ioctl. This option can be combined with
+<b>-a</b> to uniquely identify a CEC device without having
+to rely on the device node number.</p>
+
+<p style="margin-left:9%;"><b>-a</b>, <b>--adapter</b>
+<i>&lt;adap-name&gt;</i></p>
+
+<p style="margin-left:18%;">Use a cec device that has
+adapter name <i>&lt;adap-name&gt;</i>, as returned by the
+CEC_ADAP_G_CAPS ioctl. This option can be combined with
+<b>-D</b> to uniquely identify a CEC device without having
+to rely on the device node number.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Turn on verbose reporting.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Show version information.</p>
+
+<p style="margin-left:9%;"><b>-w</b>,
+<b>--wall-clock</b></p>
+
+<p style="margin-left:18%;">Show timestamps as wall-clock
+time. This also turns on verbose reporting.</p>
+
+<p style="margin-left:9%;"><b>-T</b>, <b>--trace</b></p>
+
+<p style="margin-left:18%;">Trace all called ioctls. Useful
+for debugging.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Prints the help message.</p>
+
+<p style="margin-left:9%;"><b>-n</b>,
+<b>--no-warnings</b></p>
+
+<p style="margin-left:18%;">Turn off warning messages.</p>
+
+<p style="margin-left:9%;"><b>-e</b>,
+<b>--exclusive</b></p>
+
+<p style="margin-left:18%;">If specified, then the follower
+uses exclusive mode (CEC_MODE_EXCL_FOLLOWER).</p>
+
+<p style="margin-left:9%;"><b>-m</b>,
+<b>--show-msgs</b></p>
+
+<p style="margin-left:18%;">Show received messages.</p>
+
+<p style="margin-left:9%;"><b>-s</b>,
+<b>--show-state</b></p>
+
+<p style="margin-left:18%;">Show state changes from the
+emulated device.</p>
+
+<p style="margin-left:9%;"><b>--service-by-dig-id</b></p>
+
+<p style="margin-left:18%;">Report digital services by
+digital ID instead of by channel.</p>
+
+<p style="margin-left:9%;"><b>--standby</b></p>
+
+<p style="margin-left:18%;">Start the follower in the
+Standby status.</p>
+
+<p style="margin-left:9%;"><b>--toggle-power-status</b>
+<i>&lt;secs&gt;</i></p>
+
+<p style="margin-left:18%;">Toggle the power status every
+&lt;secs&gt; seconds. Only supported if the follower is
+emulating a TV.</p>
+
+<p style="margin-left:9%;"><b>-i</b>, <b>--ignore</b>
+<i>&lt;la&gt;,&lt;opcode&gt;</i></p>
+
+<p style="margin-left:18%;">Ignore messages from logical
+address <i>&lt;la&gt;</i> and opcode <i>&lt;opcode&gt;</i>.
+&rsquo;all&rsquo; can be used for <i>&lt;la&gt;</i> or
+<i>&lt;opcode&gt;</i> to match all logical addresses or
+opcodes.</p>
+
+<p style="margin-left:9%;"><b>--ignore-standby</b>
+<i>&lt;n&gt;</i></p>
+
+<p style="margin-left:18%;">Ignore every &lt;n&gt;th
+received Standby message.</p>
+
+<p style="margin-left:9%;"><b>--ignore-view-on</b>
+<i>&lt;n&gt;</i></p>
+
+<p style="margin-left:18%;">Ignore every &lt;n&gt;th
+received Image/Text View On message.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On success, it
+returns 0. Otherwise, it will return the error code.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+is a work in progress.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Bug reports or
+questions about this utility should be sent to the
+linux-media@vger.kernel.org mailinglist.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cec-compliance</b>(1),
+<b>cec-ctl</b>(1)</p>
+<hr>
+</body>
+</html>

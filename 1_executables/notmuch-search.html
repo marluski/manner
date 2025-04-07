@@ -1,0 +1,363 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:54 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-SEARCH</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-SEARCH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-search -
+search for messages matching the given search terms</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+search</b> [<i>option</i> ...] &lt;<i>search-term</i>&gt;
+...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Search for
+messages matching the given search terms, and display as
+results the threads containing the matched messages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The output
+consists of one line per thread, giving a thread ID, the
+date of the newest (or oldest, depending on the sort option)
+matched message in the thread, the number of matched
+messages and total messages in the thread, the names of all
+participants in the thread, and the subject of the newest
+(or oldest) message.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<i>notmuch-search-terms</i> for details of the supported
+syntax for &lt;search-terms&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>search</b> include <b><br>
+--format=(json|sexp|text|text0)</b></p>
+
+<p style="margin-left:18%;">Presents the results in either
+JSON, S-Expressions, newline character separated plain-text
+(default), or null character separated plain-text
+(compatible with <i>xargs(1) -0 option where
+available).</i></p>
+
+<p style="margin-left:9%;"><b>--format-version=N</b></p>
+
+<p style="margin-left:18%;">Use the specified structured
+output format version. This is intended for programs that
+invoke <i>notmuch</i> internally. If omitted, the latest
+supported version will be used.</p>
+
+
+<p style="margin-left:9%;"><b>--output=(summary|threads|messages|files|tags)</b></p>
+
+<p style="margin-left:18%;"><b>summary (default)</b></p>
+
+<p style="margin-left:27%;">Output a summary of each thread
+with any message matching the search terms. The summary
+includes the thread ID, date, the number of messages in the
+thread (both the number matched and the total number), the
+authors of the thread and the subject. In the case where a
+thread contains multiple files for some messages, the total
+number of files is printed in parentheses (see below for an
+example).</p>
+
+<p style="margin-left:18%;"><b>threads</b></p>
+
+<p style="margin-left:27%;">Output the thread IDs of all
+threads with any message matching the search terms, either
+one per line (<b>--format=text</b>), separated by null
+characters (<b>--format=text0</b>), as a JSON array
+(<b>--format=json</b>), or an S-Expression list
+(<b>--format=sexp</b>).</p>
+
+<p style="margin-left:18%;"><b>messages</b></p>
+
+<p style="margin-left:27%;">Output the message IDs of all
+messages matching the search terms, either one per line
+(<b>--format=text</b>), separated by null characters
+(<b>--format=text0</b>), as a JSON array
+(<b>--format=json</b>), or as an S-Expression list
+(<b>--format=sexp</b>).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>files</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Output the filenames of all messages matching the search
+terms, either one per line (<b>--format=text</b>), separated
+by null characters (<b>--format=text0</b>), as a JSON array
+(<b>--format=json</b>), or as an S-Expression list
+(<b>--format=sexp</b>).</p> </td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">Note that each
+message may have multiple filenames associated with it. All
+of them are included in the output (unless limited with the
+<b>--duplicate=N</b> option). This may be particularly
+confusing for <b>folder:</b> or <b>path:</b> searches in a
+specified directory, as the messages may have duplicates in
+other directories that are included in the output, although
+these files alone would not match the search.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>tags</b></p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em">Output all tags that appear on
+any message matching the search terms, either one per line
+(<b>--format=text</b>), separated by null characters
+(<b>--format=text0</b>), as a JSON array
+(<b>--format=json</b>), or as an S-Expression list
+(<b>--format=sexp</b>).</p> </td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--sort=(newest-first|oldest-first)</b></p>
+
+<p style="margin-left:18%;">This option can be used to
+present results in either chronological order
+(<b>oldest-first</b>) or reverse chronological order
+(<b>newest-first</b>).</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note: The
+thread order will be distinct between these two options
+(beyond being simply reversed). When sorting by
+<b>oldest-first</b> the threads will be sorted by the oldest
+message in each thread, but when sorting by
+<b>newest-first</b> the threads will be sorted by the newest
+message in each thread.</p>
+
+<p style="margin-left:18%; margin-top: 1em">By default,
+results will be displayed in reverse chronological order,
+(that is, the newest results will be displayed first).</p>
+
+<p style="margin-left:9%;"><b>--offset=[-]N</b></p>
+
+<p style="margin-left:18%;">Skip displaying the first N
+results. With the leading '-', start at the Nth result from
+the end.</p>
+
+<p style="margin-left:9%;"><b>--limit=N</b></p>
+
+<p style="margin-left:18%;">Limit the number of displayed
+results to N.</p>
+
+
+<p style="margin-left:9%;"><b>--exclude=(true|false|all|flag)</b></p>
+
+<p style="margin-left:18%;">A message is called
+&quot;excluded&quot; if it matches at least one tag in
+search.exclude_tags that does not appear explicitly in the
+search terms. This option specifies whether to omit excluded
+messages in the search process. <b><br>
+true (default)</b></p>
+
+<p style="margin-left:27%;">Prevent excluded messages from
+matching the search terms.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>all</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Additionally prevent excluded messages from appearing in
+displayed results, in effect behaving as though the excluded
+messages do not exist.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>false</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Allow excluded messages to match search terms and appear
+in displayed results. Excluded messages are still marked in
+the relevant outputs.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>flag</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Only has an effect when <b>--output=summary</b>. The
+output is almost identical to <b>false</b>, but the
+&quot;match count&quot; is the number of matching
+non-excluded messages in the thread, rather than the number
+of matching messages.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--duplicate=N</b></p>
+
+<p style="margin-left:18%;">For <b>--output=files</b>,
+output the Nth filename associated with each message
+matching the query (N is 1-based). If N is greater than the
+number of files associated with the message, don't print
+anything.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For
+<b>--output=messages</b>, only output message IDs of
+messages matching the search terms that have at least N
+filenames associated with them.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note that this
+option is orthogonal with the <b>folder:</b> search prefix.
+The prefix matches messages based on filenames. This option
+filters filenames of the matching messages.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+shows an example of the summary output format, with one
+message having multiple filenames.</p>
+
+<p style="margin-left:13%; margin-top: 1em">% notmuch
+search date:today.. and tag:bad-news <br>
+thread:0000000000063c10 Today [1/1] Some Persun; To the bone
+(bad-news inbox unread) <br>
+thread:0000000000063c25 Today [1/1(2)] Ann Other; Bears
+(bad-news inbox unread) <br>
+thread:0000000000063c00 Today [1/1] A Thurd; Bites, stings,
+sad feelings (bad-news unread)</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+supports the following special exit status codes</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>20</b></p></td>
+<td width="6%"></td>
+<td width="51%">
+
+
+<p>The requested format version is too old.</p></td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>21</b></p></td>
+<td width="6%"></td>
+<td width="51%">
+
+
+<p>The requested format version is too new.</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-address notmuch-config</i>, <i>notmuch-count</i>,
+<i>notmuch-dump</i>, <i>notmuch-hooks</i>,
+<i>notmuch-insert</i>, <i>notmuch-new</i>,
+<i>notmuch-reply</i>, <i>notmuch-restore</i>,
+<i>notmuch-search-terms</i>, <i>notmuch-show</i>,
+<i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,161 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:56 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>caca-config</title>
+
+</head>
+<body>
+
+<h1 align="center">caca-config</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">caca-config -
+script to get information about the installed version of
+libcaca</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>caca-config</b>
+[ --prefix= <i>DIR</i>] [ --exec-prefix= <i>DIR</i>] [
+--version ] [ --libs ] [ --cflags ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>caca-config</b>
+is a tool that is used to configure and determine the
+compiler and linker flags that should be used to compile and
+link progams, libraries, and plugins that use libcaca.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The use of
+<b>caca-config</b> is deprecated. The more generic tool
+<b>pkg-config</b> should be used instead.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--cflags</b></p>
+
+<p style="margin-left:18%;">Print the compiler flags that
+are necessary to compile a program or library that uses
+libcaca.</p>
+
+
+<p style="margin-left:9%;"><b>--exec-prefix=</b><i>DIR</i></p>
+
+<p style="margin-left:18%;">If specified, use <i>DIR</i>
+instead of the installation exec prefix that libcaca was
+build with when computing the output for the --cflags and
+--libs options. This option must be specified before any of
+the --cflags and --libs options.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--libs</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Print the linker flags that are necessary to link a
+program or library that uses libcaca.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--prefix=</b><i>DIR</i></p>
+
+<p style="margin-left:18%;">If specified, use PREFIX
+instead of the installation prefix that libcaca was built
+with when computing the output for the --cflags and --libs
+options. This option is also used for the exec prefix if
+--exec-prefix was not specified. This option must be
+specified before any of the --cflags and --libs options.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Prints the currently installed
+version of libcaca on standard output.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gcc -o main.o
+$(caca-config --cflags) -c main.c</p>
+
+<p style="margin-left:18%;">is how you might use
+<b>caca-config</b> to compile a C source file for an
+executable program.</p>
+
+<p style="margin-left:9%;">gcc -o my_app $(caca-config
+--libs) main.o util.o</p>
+
+<p style="margin-left:18%;">is how you might use
+<b>caca-config</b> to link compiled objects into an
+executable program.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">pkg-config(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The libcaca
+library was written by Sam Hocevar
+&lt;sam@hocevar.net&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written for sdl-config by Branden Robinson, originally
+for Progeny Linux Systems, Inc., and the Debian Project. It
+was adapted to libcaca by Sam Hocevar.</p>
+<hr>
+</body>
+</html>

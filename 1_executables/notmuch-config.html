@@ -1,0 +1,652 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-CONFIG</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-CONFIG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#DATABASE LOCATION">DATABASE LOCATION</a><br>
+<a href="#HOOKS">HOOKS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-config -
+access notmuch configuration file</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+config get</b>
+&lt;<i>section</i>&gt;.&lt;<i>item</i>&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+config set</b> [--database]
+&lt;<i>section</i>&gt;.&lt;<i>item</i>&gt; [<i>value</i>
+...]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+config list</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>config</b> command can be used to get or set settings in
+the notmuch configuration file and corresponding
+database.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>get</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>The value of the specified configuration item is printed
+to stdout. If the item has multiple values (it is a list),
+each value is separated by a newline character.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>set</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>The specified configuration item is set to the given
+value. To specify a multiple-value item (a list), provide
+each value as a separate command-line argument.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">If no values
+are provided, the specified configuration item will be
+removed from the configuration file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">With the
+<i>--database</i> option, updates configuration metadata
+stored in the database, rather than the default (text)
+configuration file.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>list</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Every configuration item is
+printed to stdout, each on a separate line of the form:</p></td></tr>
+</table>
+
+
+<p style="margin-left:22%; margin-top: 1em">section.item=value</p>
+
+<p style="margin-left:18%; margin-top: 1em">No additional
+whitespace surrounds the dot or equals sign characters. In a
+multiple-value item (a list), the values are separated by
+semicolon characters.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The available
+configuration items are described below. Non-absolute paths
+are presumed relative to <i>$HOME</i> for items in section
+<b>database</b>. <b><br>
+built_with.&lt;name&gt;</b></p>
+
+<p style="margin-left:18%;">Compile time feature
+&lt;name&gt;. Current possibilities include
+&quot;retry_lock&quot; (configure option, included by
+default). (since notmuch 0.30, &quot;compact&quot; and
+&quot;field_processor&quot; are always included.)</p>
+
+<p style="margin-left:9%;"><b>database.autocommit</b></p>
+
+<p style="margin-left:18%;">How often to commit
+transactions to disk. <i>0</i> means wait until command
+completes, otherwise an integer <i>n</i> specifies to commit
+to disk after every <i>n</i> completed transactions.</p>
+
+<p style="margin-left:18%; margin-top: 1em">History: this
+configuration value was introduced in notmuch 0.33.</p>
+
+<p style="margin-left:9%;"><b>database.backup_dir</b></p>
+
+<p style="margin-left:18%;">Directory to store tag dumps
+when upgrading database.</p>
+
+<p style="margin-left:18%; margin-top: 1em">History: this
+configuration value was introduced in notmuch 0.32.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: A
+sibling directory of the Xapian database called
+<i>backups</i>.</p>
+
+<p style="margin-left:9%;"><b>database.hook_dir</b></p>
+
+<p style="margin-left:18%;">Directory containing hooks run
+by notmuch commands. See <i>notmuch-hooks</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">History: this
+configuration value was introduced in notmuch 0.32.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: See
+HOOKS, below.</p>
+
+<p style="margin-left:9%;"><b>database.mail_root</b></p>
+
+<p style="margin-left:18%;">The top-level directory where
+your mail currently exists and to where mail will be
+delivered in the future. Files should be individual email
+messages.</p>
+
+<p style="margin-left:18%; margin-top: 1em">History: this
+configuration value was introduced in notmuch 0.32.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: For
+compatibility with older configurations, the value of
+database.path is used if <i>database.mail_root</i> is
+unset.</p>
+
+<p style="margin-left:9%;"><b>database.path</b></p>
+
+<p style="margin-left:18%;">Notmuch will store its database
+here, (in sub-directory named <b>.notmuch</b> if
+<i>database.mail_root</i> is unset).</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: see
+<i>DATABASE LOCATION</i></p>
+
+<p style="margin-left:9%;"><b>git.path</b></p>
+
+<p style="margin-left:18%;">Default location for git
+repository for <i>notmuch-git</i>.</p>
+
+<p style="margin-left:9%;"><b>git.safe_fraction</b></p>
+
+<p style="margin-left:18%;">Some <i>notmuch-git</i>
+operations check that the fraction of messages changed (in
+the database or in git, as appropriate) is not too large.
+This item controls what fraction of total messages is
+considered &quot;not too large&quot;.</p>
+
+<p style="margin-left:9%;"><b>git.tag_prefix</b></p>
+
+<p style="margin-left:18%;">Default tag prefix (filter) for
+<i>notmuch-git</i>.</p>
+
+<p style="margin-left:9%;"><b>index.as_text</b></p>
+
+<p style="margin-left:18%;">List of regular expressions
+(without delimiters) for MIME types to be indexed as text.
+Currently this applies only to attachments. By default the
+regex matches anywhere in the content type; if the user
+wants an anchored match, they should include anchors in
+their regexes.</p>
+
+<p style="margin-left:18%; margin-top: 1em">History: This
+configuration value was introduced in notmuch 0.38.</p>
+
+<p style="margin-left:9%;"><b>index.decrypt</b></p>
+
+<p style="margin-left:18%;">Policy for decrypting encrypted
+messages during indexing. Must be one of: <b>false</b>,
+<b>auto</b>, <b>nostash</b>, or <b>true</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When indexing
+an encrypted e-mail message, if this variable is set to
+<b>true</b>, notmuch will try to decrypt the message and
+index the cleartext, stashing a copy of any discovered
+session keys for the message. If <b>auto</b>, it will try to
+index the cleartext if a stashed session key is already
+known for the message (e.g. from a previous copy), but will
+not try to access your secret keys. Use <b>false</b> to
+avoid decrypting even when a stashed session key is already
+present.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>nostash</b>
+is the same as <b>true</b> except that it will not stash
+newly-discovered session keys in the database.</p>
+
+<p style="margin-left:18%; margin-top: 1em">From the
+command line (i.e. during <i>notmuch-new</i>,
+<i>notmuch-insert</i>, or <i>notmuch-reindex</i>), the user
+can override the database's stored decryption policy with
+the <b>--decrypt=</b> option.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Here is a table
+that summarizes the functionality of each of these policies:
+<br>
+Stashed session keys are kept in the database as properties
+associated with the message. See <b>session-key</b> in
+<i>notmuch-properties</i> for more details about how they
+can be useful.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Be aware that
+the notmuch index is likely sufficient (and a stashed
+session key is certainly sufficient) to reconstruct the
+cleartext of the message itself, so please ensure that the
+notmuch message index is adequately protected. DO NOT USE
+<b>index.decrypt=true</b> or <b>index.decrypt=nostash</b>
+without considering the security of your index.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default:
+<b>auto</b>.</p>
+
+
+<p style="margin-left:9%;"><b>index.header.&lt;prefix&gt;</b></p>
+
+<p style="margin-left:18%;">Define the query prefix
+&lt;prefix&gt;, based on a mail header. For example
+<b>index.header.List=List-Id</b> will add a probabilistic
+prefix <b>List:</b> that searches the <b>List-Id</b> field.
+User defined prefixes must not start with 'a'...'z'; in
+particular adding a prefix with same name as a predefined
+prefix is not supported. See <i>notmuch-search-terms</i> for
+a list of existing prefixes, and an explanation of
+probabilistic prefixes.</p>
+
+
+<p style="margin-left:9%;"><b>maildir.synchronize_flags</b></p>
+
+<p style="margin-left:18%;">If true, then the following
+maildir flags (in message filenames) will be synchronized
+with the corresponding notmuch tags: <br>
+The <i>notmuch-new</i> command will notice flag changes in
+filenames and update tags, while the <i>notmuch-tag</i> and
+<i>notmuch-restore</i> commands will notice tag changes and
+update flags in filenames.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If there have
+been any changes in the maildir (new messages added, old
+ones removed or renamed, maildir flags changed, etc.), it is
+advisable to run <i>notmuch-new</i> before
+<i>notmuch-tag</i> or <i>notmuch-restore</i> commands to
+ensure the tag changes are properly synchronized to the
+maildir flags, as the commands expect the database and
+maildir to be in sync.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default:
+<b>true</b>.</p>
+
+<p style="margin-left:9%;"><b>new.ignore</b></p>
+
+<p style="margin-left:18%;">A list to specify files and
+directories that will not be searched for messages by
+<i>notmuch-new</i>. Each entry in the list is either:</p>
+
+<p style="margin-left:18%; margin-top: 1em">A file or a
+directory name, without path, that will be ignored,
+regardless of the location in the mail store directory
+hierarchy.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Or:</p>
+
+<p style="margin-left:18%; margin-top: 1em">A regular
+expression delimited with // that will be matched against
+the path of the file or directory relative to the database
+path. Matching files and directories will be ignored. The
+beginning and end of string must be explicitly anchored. For
+example, /.*/foo$/ would match &quot;bar/foo&quot; and
+&quot;bar/baz/foo&quot;, but not &quot;foo&quot; or
+&quot;bar/foobar&quot;.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: empty
+list.</p>
+
+<p style="margin-left:9%;"><b>new.tags</b></p>
+
+<p style="margin-left:18%;">A list of tags that will be
+added to all messages incorporated by <b>notmuch
+new</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default:
+<b>unread;inbox</b>.</p>
+
+<p style="margin-left:9%;"><b>query.&lt;name&gt;</b></p>
+
+<p style="margin-left:18%;">Expansion for named query
+called &lt;name&gt;. See <i>notmuch-search-terms</i> for
+more information about named queries.</p>
+
+<p style="margin-left:9%;"><b>search.exclude_tags</b></p>
+
+<p style="margin-left:18%;">A list of tags that will be
+excluded from search results by default. Using an excluded
+tag in a query will override that exclusion.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: empty
+list. Note that <i>notmuch</i> puts <b>deleted;spam</b> here
+when creating new configuration file.</p>
+
+
+<p style="margin-left:9%;"><b>search.authors_separator</b></p>
+
+<p style="margin-left:18%;">The string to separate authors
+when showing a thread.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: ,</p>
+
+
+<p style="margin-left:9%;"><b>search.authors_matched_separator</b></p>
+
+<p style="margin-left:18%;">The string to separate matched
+from non-matched authors when showing a thread.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: |</p>
+
+<p style="margin-left:9%;"><b>show.extra_headers</b></p>
+
+<p style="margin-left:18%;">By default <i>notmuch-show</i>
+includes the following headers in structured output if they
+are present in the message: <i>Subject</i>, <i>From</i>,
+<i>To</i>, <i>Cc</i>, <i>Bcc</i>, <i>Reply-To</i>,
+<i>Date</i>. This option allows the specification of a list
+of further headers to output.</p>
+
+<p style="margin-left:18%; margin-top: 1em">History: This
+configuration value was introduced in notmuch 0.35.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: empty
+list.</p>
+
+<p style="margin-left:9%;"><b>squery.&lt;name&gt;</b></p>
+
+<p style="margin-left:18%;">Expansion for named query
+called &lt;name&gt;, using s-expression syntax. See
+<i>notmuch-sexp-queries</i> for more information about
+s-expression queries.</p>
+
+<p style="margin-left:9%;"><b>user.name</b></p>
+
+<p style="margin-left:18%;">Your full name.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default:
+<b>$NAME</b> variable if set, otherwise read from
+<b>/etc/passwd</b>.</p>
+
+<p style="margin-left:9%;"><b>user.other_email</b></p>
+
+<p style="margin-left:18%;">A list of other email addresses
+at which you receive email (see also,
+<i>user.primary_email</i>)</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default: not
+set.</p>
+
+<p style="margin-left:9%;"><b>user.primary_email</b></p>
+
+<p style="margin-left:18%;">Your primary email address.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default:
+<b>$EMAIL</b> variable if set, otherwise constructed from
+the username and hostname of the current machine.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<h3>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Notmuch
+configuration file search order:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>File specified by <i>notmuch --config</i> global option;
+see <i>notmuch</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>File specified by <i>NOTMUCH_CONFIG</i> environment
+variable.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p><b>$XDG_CONFIG_HOME/notmuch/&lt;profile&gt;/config</b>
+where <b>&lt;profile&gt;</b> is defined by
+<i>NOTMUCH_PROFILE</i> environment variable if set,
+<b>$XDG_CONFIG_HOME/notmuch/default/config</b>
+otherwise.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>4.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p><b>$HOME/.notmuch-config.&lt;profile&gt;</b> where
+<b>&lt;profile&gt;</b> is defined by <i>NOTMUCH_PROFILE</i>
+environment variable if set, <b>$HOME/.notmuch-config</b>
+otherwise.</p> </td></tr>
+</table>
+
+<h3>DATABASE LOCATION
+<a name="DATABASE LOCATION"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Notmuch database
+search order:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">1.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p style="margin-top: 1em">Directory specified by
+<i>NOTMUCH_DATABASE</i> environment variable.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>Directory specified by config key
+<b>database.path</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p><b>$XDG_DATA_HOME/notmuch/&lt;profile&gt;</b> where
+<b>&lt;profile&gt;</b> is defined by <i>NOTMUCH_PROFILE</i>
+environment variable if set,
+<b>$XDG_DATA_HOME/notmuch/default</b> otherwise.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>4.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>Directory specified by <b>MAILDIR</b> environment
+variable.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>5.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p><b>$HOME/mail</b></p></td></tr>
+</table>
+
+<h3>HOOKS
+<a name="HOOKS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Notmuch hook
+directory search order:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">1.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p style="margin-top: 1em">Directory specified by
+<b>database.hook_dir</b> configuration option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p><b>$XDG_CONFIG_HOME/notmuch/&lt;profile&gt;/hooks</b>
+where <b>&lt;profile&gt;</b> is defined by
+<i>NOTMUCH_PROFILE</i> environment variable if set,
+<b>$XDG_CONFIG_HOME/notmuch/default/hooks</b> otherwise.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p><b>&lt;database.path&gt;/.notmuch/hooks</b></p></td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>notmuch</i></b>,
+<i>notmuch-count</i>, <i>notmuch-dump</i>,
+<i>notmuch-hooks</i>, <i>notmuch-insert</i>,
+<i>notmuch-new</i>, <i>notmuch-properties</i>,
+<i>notmuch-reply</i>, <i>notmuch-restore</i>,
+<i>notmuch-search</i>, <i>notmuch-search-terms</i>,
+<i>notmuch-show</i>, <i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

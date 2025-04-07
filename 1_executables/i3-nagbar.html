@@ -1,0 +1,149 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:14 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>I3-NAGBAR</title>
+
+</head>
+<body>
+
+<h1 align="center">I3-NAGBAR</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-nagbar -
+displays an error bar on top of your screen</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-nagbar [-m
+&lt;message&gt;] [-b &lt;button&gt; &lt;action&gt;] [-B
+&lt;button&gt; &lt;action&gt;] [-t warning|error] [-f
+&lt;font&gt;] [-v] [-p]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Display version number and
+exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Display a short help-message
+and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t,
+--type</b> <i>type</i></p>
+
+<p style="margin-left:14%;">Display either a warning or
+error message. This only changes the color scheme for the
+i3-nagbar. Default: error.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m,
+--message</b> <i>message</i></p>
+
+<p style="margin-left:14%;">Display <i>message</i> as text
+on the left of the i3-nagbar.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--font</b> <i>font</i></p>
+
+<p style="margin-left:14%;">Select font that is being
+used.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b,
+--button</b> <i>button action</i></p>
+
+<p style="margin-left:14%;">Create a button with text
+<i>button</i>. The <i>action</i> are the shell commands that
+will be executed by this button. Multiple buttons can be
+defined. Will launch the shell commands inside a terminal
+emulator, using i3-sensible-terminal.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-B,
+--button-no-terminal</b> <i>button action</i></p>
+
+<p style="margin-left:14%;">Same as above, but will execute
+the shell commands directly, without launching a terminal
+emulator.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p,
+--primary</b></p>
+
+<p style="margin-left:14%;">Always opens the i3-nagbar on
+the primary monitor. By default it opens on the focused
+monitor.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-nagbar is
+used by i3 to tell you about errors in your configuration
+file (for example). While these errors are logged to the
+logfile (if any), the past has proven that users are either
+not aware of their logfile or do not check it after
+modifying the configuration file.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:14%; margin-top: 1em">i3-nagbar -m
+'You have an error in your i3 config file!' \ <br>
+-b 'edit config' 'i3-sensible-editor
+&#732;/.config/i3/config'</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Michael
+Stapelberg and contributors</p>
+<hr>
+</body>
+</html>

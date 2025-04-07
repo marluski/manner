@@ -1,0 +1,215 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:03 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">resgen, resgen2
+- Mono/CLI Resource Generator</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>resgen
+source.ext [dest.ext]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>resgen
+/compile source.ext[,dest.resources] [...]</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>resgen2</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert a
+resource file from one format to another.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The currently
+supported formats are text, resources, resx and po. <i><br>
+.txt, .text</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Used to process
+text files, the format of the text file is of the form:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>key=value</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The value
+argument can contain special characters as long as they are
+escaped. The escape sequences currently supported are \n,
+\r, \t, \\ (to get the escape sequence itself) and with
+resgen2 unicode escape sequences are supported with the
+\uXXXX escape sequence, where XXXX is a four digit
+number.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Lines that
+start with the # or ; character are considered comments and
+ignored.</p>
+
+
+<p style="margin-left:9%;"><i>&rsquo;.resources&rsquo;</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">This is the
+binary file format implemented by the
+<i>System.Resources.ResourceReader</i> class, part of
+mscorlib.dll</p>
+
+<p style="margin-left:9%;"><i>&rsquo;.resx&rsquo;</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">This is the
+binary file format implemented by the
+<i>System.Resources.ResXResourceReader</i> class. This class
+is not part of mscorlib.dll, this class is part of
+System.Windows.Forms.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>&rsquo;.po&rsquo;.</i></p></td>
+<td width="83%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">PO files are
+the source files used by the Unix gettext infrastructure
+that is typically used to internationalize applications.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Lines starting
+with the &rsquo;#&rsquo; character are comment lines.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The file
+contains many instance of strings like this:</p>
+
+<p style="margin-left:18%; margin-top: 1em">msgid KEY <br>
+msgstr VALUE</p>
+
+<p style="margin-left:18%; margin-top: 1em">The KEY is
+typically the string to translate and the VALUE is the
+translation. On PO files instead of using codes as the KEY
+(as it is customary with resource files) the KEY is
+typically a complete english message that applications embed
+in their source code and will be used as a fallback if no
+translation resources are used.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Since resources
+are key value pairs, the extended features in PO files are
+not supported (plurals and support for N-cases).</p>
+
+<p style="margin-left:18%; margin-top: 1em">To learn more
+about the po file format, use your info browser and point it
+to the &quot;(gettext)PO Files&quot; node.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the
+destination file is not specified, source.resources will be
+used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The /compile
+option takes a list of .resX or .txt files to convert to the
+output file name.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-compile</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">This switch
+instructs <i>resgen</i> to compile multiple files. It must
+appear before any resources are specified on the command
+line.</p>
+
+<p style="margin-left:9%;"><i>-usesourcepath</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">This option is
+only available for <i>resgen2</i>, and it instructs resgen
+to resolve relative paths using the directory of the resx
+file as current directory.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program
+will load referenced assemblies from the Mono assembly
+cache.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://www.mono-project.com for details</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mcs(1),</b>mono(1),<b>mono-config(5).</b></p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pw-jack</title>
+
+</head>
+<body>
+
+<h1 align="center">pw-jack</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pw-jack - Use
+PipeWire instead of JACK</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-jack</b>
+[<i>options</i>] <i>COMMAND</i> [<i>ARGUMENTS...</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-jack</b>
+modifies the LD_LIBRARY_PATH environment variable so that
+applications will load PipeWire&rsquo;s reimplementation of
+the JACK client libraries instead of JACK&rsquo;s own
+libraries. This results in JACK clients being redirected to
+PipeWire.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+PipeWire&rsquo;s reimplementation of the JACK client
+libraries has been installed as a system-wide replacement
+for JACK&rsquo;s own libraries, then the whole system
+already behaves in that way, in which case <b>pw-jack</b>
+has no practical effect.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:14%;">Show help.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r
+NAME</b></p>
+
+<p style="margin-left:14%;">The name of the remote instance
+to connect to. If left unspecified, a connection is made to
+the default PipeWire instance.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:14%;">Verbose operation.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-jack
+sndfile-jackplay
+/usr/share/sounds/freedesktop/stereo/bell.oga</b></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire(1)</b>,
+<b>jackd(1)</b>,</p>
+<hr>
+</body>
+</html>

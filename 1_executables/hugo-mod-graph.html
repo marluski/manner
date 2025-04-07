@@ -1,0 +1,301 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>HUGO-MOD-GRAPH</title>
+
+</head>
+<body>
+
+<h1 align="center">HUGO-MOD-GRAPH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OPTIONS INHERITED FROM PARENT COMMANDS">OPTIONS INHERITED FROM PARENT COMMANDS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hugo-mod-graph -
+Print a module dependency graph</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hugo mod
+graph [flags] [args]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print a module
+dependency graph with information about module status
+(disabled, vendored). Note that for vendored modules, that
+is the version listed and not the one from go.mod.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-b</b>, <b>--baseURL</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>hostname (and path) to the root, e.g.
+https://spf13.com/</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--cacheDir</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>filesystem path to cache directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--clean</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>delete module cache for dependencies that fail
+verification</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-c</b>, <b>--contentDir</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>filesystem path to content directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-h</b>, <b>--help</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>help for graph</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--renderSegments</b>=[]</p></td>
+<td width="87%">
+
+
+<p>named segments to render (configured in the segments
+config)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-t</b>, <b>--theme</b>=[]</p></td>
+<td width="87%">
+
+
+<p>themes to use (located in /themes/THEMENAME/)</p></td></tr>
+</table>
+
+<h2>OPTIONS INHERITED FROM PARENT COMMANDS
+<a name="OPTIONS INHERITED FROM PARENT COMMANDS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--clock</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>set the clock used by Hugo, e.g. --clock
+2021-11-06T22:30:00.00+09:00</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--config</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>config file (default is hugo.yaml|json|toml)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--configDir</b>=&quot;config&quot;</p></td>
+<td width="87%">
+
+
+<p>config dir</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-d</b>, <b>--destination</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>filesystem path to write files to</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-e</b>, <b>--environment</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>build environment</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--ignoreVendorPaths</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>ignores any _vendor for module paths matching the given
+Glob pattern</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--logLevel</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>log level (debug|info|warn|error)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--noBuildLock</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>don&rsquo;t create .hugo_build.lock file</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--quiet</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>build in quiet mode</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-M</b>, <b>--renderToMemory</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>render to memory (mostly useful when running the
+server)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-s</b>, <b>--source</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>filesystem path to read files relative from</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--themesDir</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>filesystem path to themes directory</p></td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hugo-mod(1)</b></p>
+<hr>
+</body>
+</html>

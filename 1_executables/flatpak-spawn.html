@@ -1,0 +1,202 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK SPAWN</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK SPAWN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-spawn -
+Run commands in a sandbox</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="60%">
+
+
+<p style="margin-top: 1em"><b>flatpak-spawn</b> [OPTION...]
+COMMAND [ARGUMENT...]</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unlike other
+flatpak commands, <b>flatpak-spawn</b> is available to
+applications inside the sandbox. It runs COMMAND outside the
+sandbox: either in another sandbox, or on the host.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When called
+without <b>--host</b>, <b>flatpak-spawn</b> uses the Flatpak
+portal to create a copy of the sandbox it was called from,
+optionally using tighter permissions and optionally the
+latest version of the app and runtime (see
+<b>--latest-version</b>).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--forward-fd=FD</b></p>
+
+<p style="margin-left:14%;">Forward a file descriptor</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--clear-env</b></p>
+
+<p style="margin-left:14%;">Run with a clean
+environment</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--watch-bus</b></p>
+
+<p style="margin-left:14%;">Make the spawned command exit
+if the caller disappears from the session bus</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--env=VAR=VALUE</b></p>
+
+<p style="margin-left:14%;">Set an environment variable</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--latest-version</b></p>
+
+<p style="margin-left:14%;">Use the latest version of the
+refs that are used to set up the sandbox</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-network</b></p>
+
+<p style="margin-left:14%;">Run without network access</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sandbox</b></p>
+
+<p style="margin-left:14%;">Run fully sandboxed. See the
+documentation for the <b>--sandbox</b> option in
+<b>flatpak-run</b>(1)</p>
+
+<p style="margin-left:14%; margin-top: 1em">See the
+<b>--sandbox-expose</b> and <b>--sandbox-expose-ro</b>
+options for selective file access.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sandbox-expose=NAME</b></p>
+
+<p style="margin-left:14%;">Expose read-write access to a
+file in the sandbox.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+absolute paths or subdirectories are not allowed. The files
+must be in the sandbox subdirectory of the instance
+directory (i.e. &#732;/.var/app/$APP_ID/sandbox).</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option is
+useful in combination with <b>--sandbox</b> (otherwise the
+instance directory is accessible anyway).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sandbox-expose-ro=NAME</b></p>
+
+<p style="margin-left:14%;">Expose readonly access to a
+file in the sandbox.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+absolute paths or subdirectories are not allowed. The files
+must be in the sandbox subdirectory of the instance
+directory (i.e. &#732;/.var/app/$APP_ID/sandbox).</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option is
+useful in combination with <b>--sandbox</b> (otherwise the
+instance directory is accessible anyway).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--host</b></p>
+
+<p style="margin-left:14%;">Run the command unsandboxed on
+the host. This requires access to the
+org.freedesktop.Flatpak D-Bus interface.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--directory=DIR</b></p>
+
+<p style="margin-left:14%;">The working directory in which
+to run the command.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that the
+given directory must exist in the sandbox or, when used in
+conjunction with <b>--host</b>, on the host.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$
+flatpak-spawn ls /var/run</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flatpak</b>(1)</p>
+<hr>
+</body>
+</html>

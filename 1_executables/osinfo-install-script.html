@@ -1,0 +1,260 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:10 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>osinfo-install-script</title>
+
+</head>
+<body>
+
+<h1 align="center">osinfo-install-script</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#CONFIGURATION KEYS">CONFIGURATION KEYS</a><br>
+<a href="#CONFIGURATION FILE FORMAT">CONFIGURATION FILE FORMAT</a><br>
+<a href="#EXAMPLE USAGE">EXAMPLE USAGE</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">osinfo-install-script
+- generate a script for automated installation</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">osinfo-install-script
+[OPTIONS...] MEDIA-FILE|OS-ID</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Generate a
+script suitable for performing an automated installation of
+&quot;MEDIA_FILE&quot; or &quot;OS-ID&quot;.
+&quot;MEDIA_FILE&quot; should be a path to an installer or
+live media (typically an ISO file). &quot;OS-ID&quot; should
+be a URI identifying the operating system, or its short
+ID.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default a
+script will be generated for a &quot;JEOS&quot; style
+install.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--profile=NAME</b></p>
+
+<p style="margin-left:19%;">Choose the installation script
+profile. Defaults to &quot;jeos&quot;, but can also be
+&quot;desktop&quot;, or a site specific profile name</p>
+
+
+<p style="margin-left:9%;"><b>--installation-source=NAME</b></p>
+
+<p style="margin-left:19%;">Set the installation source to
+be used with the installation script. Defaults to
+&quot;media&quot;, but can also be &quot;network&quot;.</p>
+
+<p style="margin-left:9%;"><b>--config=key=value</b></p>
+
+<p style="margin-left:19%;">Set the configuration parameter
+&quot;key&quot; to &quot;value&quot;.</p>
+
+
+<p style="margin-left:9%;"><b>--config-file=config-file</b></p>
+
+<p style="margin-left:19%;">Set the configurations
+parameters according to the config-file passed.</p>
+
+<p style="margin-left:19%; margin-top: 1em">Note that use
+of <b>--config-file</b> is strongly recommended if the user
+or admin passwords need to be set. Providing passwords
+directly using <b>--config=</b> is insecure as the password
+is visible to all processes and users on the same host.</p>
+
+<h2>CONFIGURATION KEYS
+<a name="CONFIGURATION KEYS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+configuration keys are available <br>
+&quot;hardware-arch&quot;</p>
+
+<p style="margin-left:19%;">The hardware architecture</p>
+
+<p style="margin-left:9%;">&quot;l10n-timezone&quot;</p>
+
+<p style="margin-left:19%;">The local timezone</p>
+
+<p style="margin-left:9%;">&quot;l10n-keyboard&quot;</p>
+
+<p style="margin-left:19%;">The local keyboard layout</p>
+
+<p style="margin-left:9%;">&quot;l10n-language&quot;</p>
+
+<p style="margin-left:19%;">The local language</p>
+
+<p style="margin-left:9%;">&quot;admin-password&quot;</p>
+
+<p style="margin-left:19%;">The administrator password This
+option has been deprecated, use <b>--config-file</b> for
+setting the admin password.</p>
+
+<p style="margin-left:9%;">&quot;user-password&quot;</p>
+
+<p style="margin-left:19%;">The user password This option
+has been deprecated, use <b>--config-file</b> for setting
+the user password.</p>
+
+<p style="margin-left:9%;">&quot;user-login&quot;</p>
+
+<p style="margin-left:19%;">The user login name</p>
+
+<p style="margin-left:9%;">&quot;user-realname&quot;</p>
+
+<p style="margin-left:19%;">The user real name</p>
+
+<p style="margin-left:9%;">&quot;user-autologin&quot;</p>
+
+<p style="margin-left:19%;">Whether to automatically login
+the user</p>
+
+<p style="margin-left:9%;">&quot;user-admin&quot;</p>
+
+<p style="margin-left:19%;">Whether to give the user
+administrative privileges</p>
+
+<p style="margin-left:9%;">&quot;reg-product-key&quot;</p>
+
+<p style="margin-left:19%;">The software registration
+key</p>
+
+<p style="margin-left:9%;">&quot;reg-login&quot;</p>
+
+<p style="margin-left:19%;">The software registration user
+login</p>
+
+<p style="margin-left:9%;">&quot;reg-password&quot;</p>
+
+<p style="margin-left:19%;">The software registration user
+password</p>
+
+<h2>CONFIGURATION FILE FORMAT
+<a name="CONFIGURATION FILE FORMAT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+configuration file must consist in a file which contains a
+&quot;install-script&quot; group and, under this group,
+&quot;key&quot;=&quot;value&quot; pairs, as shown below:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[install-script]
+<br>
+l10n-timezone=GMT <br>
+l10n-keyboard=uk <br>
+l10n-language=en_GB <br>
+admin-password=123456 <br>
+user-login=berrange <br>
+user-password=123456 <br>
+user-realname=&quot;Daniel P Berrange&quot;</p>
+
+<h2>EXAMPLE USAGE
+<a name="EXAMPLE USAGE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+usages generate a Fedora 30 kickstart script:</p>
+
+<p style="margin-left:9%; margin-top: 1em">#
+osinfo-install-script \ <br>
+--profile jeos \ <br>
+--config-file /path/to/config/file \ <br>
+fedora30 <br>
+# osinfo-install-script \ <br>
+--profile jeos \ <br>
+--config l10n-timezone=GMT \ <br>
+--config l10n-keyboard=uk \ <br>
+--config l10n-language=en_GB \ <br>
+--config admin-password=123456 \ <br>
+--config user-login=berrange \ <br>
+--config user-password=123456 \ <br>
+--config user-realname=&quot;Daniel P Berrange&quot; \ <br>
+fedora30</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The exit status
+will be 0 if an install script is generated, or 1 on
+error</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Daniel P.
+Berrange &lt;berrange@redhat.com&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2012 Red Hat, Inc.</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&quot;osinfo-install-script&quot;
+is distributed under the termsof the GNU LGPL v2 license.
+This is free software; see the source for copying
+conditions. There is NO warranty; not even for
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,312 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE REMOTE</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE REMOTE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#ADD OPTIONS">ADD OPTIONS</a><br>
+<a href="#LIST OPTIONS">LIST OPTIONS</a><br>
+<a href="#REFS OPTIONS">REFS OPTIONS</a><br>
+<a href="#GPG-IMPORT OPTIONS">GPG-IMPORT OPTIONS</a><br>
+<a href="#SUMMARY OPTIONS">SUMMARY OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-remote -
+Control remote repository configuration</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote add</b>
+[OPTIONS...] {NAME} {URL} [BRANCH...]</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote delete</b>
+{NAME}</p> </td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote show-url</b>
+{NAME}</p> </td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote list</b>
+[OPTIONS...] {NAME}</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote gpg-import</b>
+[OPTIONS...] {NAME} [KEY-ID...]</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote
+gpg-list-keys</b> {NAME}</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote refs</b>
+{NAME}</p> </td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote summary</b>
+[OPTIONS...] {NAME}</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote add-cookie</b>
+{NAME} {DOMAIN} {PATH} {COOKIE_NAME} {VALUE}</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote
+delete-cookie</b> {NAME} {DOMAIN} {PATH} {COOKIE_NAME}
+{VALUE}</p> </td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ostree remote
+list-cookies</b> {NAME}</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Changes remote
+repository configurations. The NAME refers to the name of
+the remote.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The BRANCH
+arguments to the <b>add</b> subcommand specifies the
+configured branches for the remote. See the branches section
+in <b>ostree.repo-config</b>(5) for more information.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>gpg-import</b> subcommand can associate GPG keys to a
+specific remote repository for use when pulling signed
+commits from that repository (if GPG verification is
+enabled). The <b>gpg-list-keys</b> subcommand can be used to
+see the GPG keys currently associated with a remote
+repository.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The GPG keys to
+import may be in binary OpenPGP format or ASCII armored. The
+optional [KEY-ID] list can restrict which keys are imported
+from a keyring file or input stream. All keys are imported
+if this list is omitted. If neither <b>--keyring</b> nor
+<b>--stdin</b> options are given, then keys are imported
+from the user's personal GPG keyring.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The various
+cookie related command allow management of a remote specific
+cookie jar.</p>
+
+<h2>ADD OPTIONS
+<a name="ADD OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--set</b>=&quot;KEY=VALUE&quot;</p>
+
+<p style="margin-left:14%;">Set config option KEY=VALUE for
+remote.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--if-not-exists</b></p>
+
+<p style="margin-left:14%;">Do nothing if the provided
+remote exists.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force</b></p>
+
+<p style="margin-left:14%;">Replace the provided remote if
+it exists.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-gpg-verify</b></p>
+
+<p style="margin-left:14%;">Disable GPG verification.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-import</b>=FILE</p>
+
+<p style="margin-left:14%;">Import one or more GPG keys
+from a file.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Equivalent to
+<b>ostree remote gpg-import --keyring=FILE</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--collection-id</b>=COLLECTION-ID</p>
+
+<p style="margin-left:14%;">Set the collection ID for the
+remote to a value provided by the repository owner, which
+allows refs from this remote to be shared peer to peer.</p>
+
+<h2>LIST OPTIONS
+<a name="LIST OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u,
+--show-urls</b></p>
+
+<p style="margin-left:14%;">Show remote URLs in list</p>
+
+<h2>REFS OPTIONS
+<a name="REFS OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--revision</b>,
+<b>-r</b></p>
+
+<p style="margin-left:14%;">Also print the revisions for
+each ref. The revisions will be separated by a tab
+character.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--cache-dir</b>=DIR</p>
+
+<p style="margin-left:14%;">Use an alternate cache
+directory in DIR.</p>
+
+<h2>GPG-IMPORT OPTIONS
+<a name="GPG-IMPORT OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-k,
+--keyring</b>=FILE</p>
+
+<p style="margin-left:14%;">Import one or more keys from a
+file.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option may
+be repeated to import from multiple files, but may not be
+used in combination with <b>--stdin</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--stdin</b></p>
+
+<p style="margin-left:14%;">Import one or more keys from
+standard input.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option may
+not be used in combination with <b>--keyring</b>.</p>
+
+<h2>SUMMARY OPTIONS
+<a name="SUMMARY OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--cache-dir</b>=DIR</p>
+
+<p style="margin-left:14%;">Use an alternate cache
+directory in DIR.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--raw</b></p>
+
+<p style="margin-left:14%;">Show raw variant data</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+remote show-url local</b></p>
+
+
+<p style="margin-left:14%; margin-top: 1em">http://192.168.122.1/repo</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VIRT-QEMU-RUN</title>
+
+</head>
+<body>
+
+<h1 align="center">VIRT-QEMU-RUN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">virt-qemu-run -
+Run a standalone QEMU guest</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>virt-qemu-run</b>
+[<i>OPTION</i>]... <i>GUEST-XML-FILE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This tool
+provides a way to run a standalone QEMU guest such that it
+is completely independent of libvirtd. It makes use of the
+embedded QEMU driver support to run the VM placing files
+under an isolated directory tree. When the guest is run with
+this tool it is invisible to libvirtd and thus also
+invisible to other libvirt tools such as virsh.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>virt-qemu-run</b> program will run the QEMU virtual
+machine, and then block until the guest OS shuts down, at
+which point it will exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the
+<b>virt-qemu-run</b> program is interrupted (eg Ctrl-C) it
+will immediately terminate the virtual machine without
+giving the guest OS any opportunity to gracefully
+shutdown.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: this
+tool is currently considered experimental.</b> Its usage and
+behaviour is still subject to change in future libvirt
+releases. For further information on its usage consult the
+QEMU driver documentation
+&lt;https://libvirt.org/drvqemu.html#embedded-driver&gt;
+.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>GUEST-XML-FILE</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The full path to
+the XML file describing the guest virtual machine to be
+booted.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b>
+<i>DIR</i>, <b>--root</b>=<i>DIR</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify the root
+directory to use for storing state associated with the
+virtual machine. The caller is responsible for deleting this
+directory when it is no longer required.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If this
+parameter is omitted, then a random temporary directory will
+be created, and its contents be automatically deleted at VM
+shutdown.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>
+<i>SECRET-XML-FILE</i>,<i>SECRET-VALUE-FILE</i>,
+<b>--secret</b>=<i>SECRET-XML-FILE</i>,<i>SECRET-VALUE-FILE</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify a secret
+to be loaded into the secret driver. <i>SECRET-XML-FILE</i>
+is a path to the XML description of the secret, whose UUID
+should match a secret referenced in the guest domain XML.
+<i>SECRET-VALUE-FILE</i> is a path containing the raw value
+of the secret.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Display verbose
+information about startup.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Display the
+command line help.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Upon successful
+shutdown, an exit status of 0 will be set. Upon failure a
+non-zero status will be set.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Daniel P.
+Berrang&eacute;</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+all bugs you discover. This should be done via either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="1%"></td>
+<td width="20%">
+
+
+<p>the mailing list</p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:13%; margin-top: 1em">&lt;https://libvirt.org/contact.html&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">2.</p></td>
+<td width="1%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em">the bug tracker</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:13%; margin-top: 1em">&lt;https://libvirt.org/bugs.html&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Alternatively,
+you may report bugs to your software distributor /
+vendor.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2019 by Red Hat, Inc.</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>virt-run-qemu</b>
+is distributed under the terms of the GNU LGPL v2+. This is
+free software; see the source for copying conditions. There
+is NO warranty; not even for MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">virsh(1),
+&lt;https://libvirt.org/&gt;</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:42 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>aprofutil</title>
+
+</head>
+<body>
+
+<h1 align="center">aprofutil</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">aprofutil -
+Mono&rsquo;s AOT profile tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>aprofutil</b>
+[<i>options</i>]
+&lt;<i>your-aot-profile.aotprofile</i>&gt;</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">AOT profile tool
+is a tool to inspect AOT profiler files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It can be used
+to show, filter and write the profiler file content in
+readable text form.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:18%; margin-top: 1em">-h, --help, -?
+Show this message and exit <br>
+-a, --all Show modules, types and methods in the profile
+<br>
+-d, --modules Show modules in the profile <br>
+--filter-method=VALUE Filter by method with regex VALUE <br>
+--filter-module=VALUE Filter by module with regex VALUE <br>
+--filter-type=VALUE Filter by type with regex VALUE <br>
+-m, --methods Show methods in the profile <br>
+-o, --output=VALUE Write profile to OUTPUT file <br>
+-s, --summary Show summary of the profile <br>
+-t, --types Show types in the profile <br>
+-v, --verbose Output information about progress during the
+run <br>
+of the tool</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Display modules
+and summary of XA startup profile</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+aprofutil.exe -sd startup.aotprofile</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output:</p>
+
+<p style="margin-left:18%; margin-top: 1em">Modules:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>41C38B0A-2032-45CE-8638-0299CED65330 mscorlib</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>0326DF03-2158-4F7A-9A2B-B7A9419F021D Mono.Android</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>8FB63BB4-1195-4173-A9ED-0EC341B07C32 System</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>74C06E06-C1C7-4A4C-B64E-EAC7DBB08BBC Java.Interop</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>11E2319F-6A26-461C-9C46-C972248BEE4B System.Core</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>7999CC4B-D566-4ECA-8A72-469344172CA3
+Xamarin.Forms.Platform.Android</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>C5089213-328B-451D-BA87-D6585C120780
+Xamarin.Forms.Performance.Integration.Droid</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>D754F8AE-503C-41C8-B16F-647FC662507A
+Xamarin.Android.Support.v7.AppCompat</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>929ECB6D-1171-4C66-8470-DD32AC608969
+Xamarin.Android.Support.Fragment</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>F841E23B-59A8-4AE2-9A84-D2FC1D891B4A
+Xamarin.Forms.Core</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>945CCBF8-C2DB-468B-B3BD-D7ACA37B69AD
+Xamarin.Forms.Performance.Integration</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>AF20FA19-F07E-4BD4-B5ED-104706EA660E
+Xamarin.Forms.Xaml</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>629C84F8-0988-42EF-8BC5-872173A0A71F FormsViewGroup</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>60398815-8E62-487E-A553-781F56A0849D
+Xamarin.Android.Support.Design</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>F0C550D7-665A-40B5-A307-8E9B49976D87
+Xamarin.Android.Support.Core.UI</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>23A34485-DE75-440E-BA9D-E235F664E990
+Xamarin.Android.Support.Compat</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;">Summary:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Modules: 16</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Types: 907</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Methods: 4,230</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Filter
+Java.Interop.Runtime type in XA startup profile</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+aprofutil.exe --filter-type Java.Interop.Runtime -sa
+startup.aotprofile</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output:</p>
+
+<p style="margin-left:18%; margin-top: 1em">Modules:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>0326DF03-2158-4F7A-9A2B-B7A9419F021D Mono.Android</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">Types:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Java.Interop.Runtime</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">Methods:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>bool Java.Interop.Runtime:IsGCUserPeer
+(Android.Runtime.IJavaObject)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>bool Java.Interop.Runtime:IsGCUserPeer (intptr)</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">Summary:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Modules: 1 (of 16)</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Types: 1 (of 907)</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Methods: 2 (of 4230)</p></td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono-profilers</b>(1)</p>
+<hr>
+</body>
+</html>

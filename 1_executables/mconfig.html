@@ -1,0 +1,217 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mconfig, -
+Utility for modifying .NET configuration files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mconfig
+[options] command [command_parameters]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mconfig can be
+used to edit .NET configuration files, by adding
+&quot;features&quot; (that is sets of xml statements)
+defined in one of the config files read by mconfig. The
+config file can also define layouts of default configuration
+files, which may be useful for bootstrapping your .NET
+projects.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To see the list
+of recognized commands, default configuration files and
+features, run mconfig without passing any parameters.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c
+&lt;config_file&gt;, --config=&lt;config_file&gt;</b></p>
+
+<p style="margin-left:18%;">Read the specified config file
+after reading the other, preconfigured, config files for the
+utility. Settings in the specified file override those found
+in the other configuration locations.</p>
+
+<p style="margin-left:9%;"><b>-t {any | web | application},
+--target={any | web | application}</b></p>
+
+<p style="margin-left:18%;">Features and default
+configuration files defined in the mconfig config file(s)
+can be assigned to one of the three targets - <i>web</i>
+(for ASP.NET features/config files), <i>application</i> -
+for .NET applications, <i>any</i> - applicable in both of
+the previous targets. Defaults to <i>any</i>.</p>
+
+<p style="margin-left:9%;"><b>-?, -h, --help</b></p>
+
+<p style="margin-left:18%;">Show a summary usage
+screen.</p>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:18%;">Show the mconfig version</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>{addfeature,
+af} &lt;feature_name&gt; [config_file_path]</b></p>
+
+<p style="margin-left:18%;">Adds the feature named
+<i>&lt;feature_name&gt;</i> to the specified config file. If
+<i>[config_file_path]</i> is omitted, the name of the output
+configuration file will be chosen based on the selected
+target (see the <i>-t</i> option). The <i>web</i> target
+outputs configuration to file named <i>Web.config</i>, and
+the <i>application</i> target outputs to file named
+<i>application.exe.config</i>. The <i>any</i> target does
+not have a default output file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the
+specified config file exists, the feature will be injected
+into it at the locations specified by mconfig configuration.
+If the target config file does not exist, it will be created
+and will contain only the specified feature and all its
+dependencies.</p>
+
+<p style="margin-left:9%;"><b>{defaultconfig, dc}
+[config_name [target_directory]]</b></p>
+
+<p style="margin-left:18%;">Generates a default config file
+using the configuration entry named <i>[config_name]</i> and
+outputs the resulting configuration file to the directory
+given by the <i>[target_directory]</i> option. If
+<i>[config_name]</i> is omitted, it defaults to
+<i>Web.config</i> for the <i>web</i> target and
+<i>application</i> target. The <i>any</i> target does not
+specify any default output configuration name. If the
+<i>[target_directory]</i> parameter is omitted, it defaults
+to the current directory.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Name of the
+output config file created in <i>[target_directory]</i> is
+given in the config file layout definition.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Config files are
+read in the order given below. Each subsequent file may
+override settings found in the files read before it. <b><br>
+$prefix/etc/mono/mconfig/config.xml</b></p>
+
+<p style="margin-left:18%;">The default configuration file,
+distributed with mconfig. <i>$prefix</i> is the mconfig
+installation prefix specified on the compilation time.</p>
+
+
+<p style="margin-left:9%;"><b>$config_dir/mconfig/config.xml</b></p>
+
+<p style="margin-left:18%;">$config_dir is the directory
+specified in the <i>XDG_CONFIG_HOME</i> environment variable
+or, <br>
+if it is empty, in the <i>.config</i> directory located in
+the user&rsquo;s home directory. This file is not
+distributed with Mono.</p>
+
+<p style="margin-left:9%;"><b>./mconfig.xml</b></p>
+
+<p style="margin-left:18%;">Local configuration file which
+can contain per-application settings.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mconfig.config
+(5)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by Marek
+Habersack</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2007 Novell, Inc (http://www.novell.com)</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

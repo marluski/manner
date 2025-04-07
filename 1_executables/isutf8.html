@@ -1,0 +1,121 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:24 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>isutf8</title>
+
+</head>
+<body>
+
+<h1 align="center">isutf8</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">isutf8 - check
+whether files are valid UTF-8</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>isutf8</b>
+[<b>-hqliv</b>] [<b>--help</b>] [<b>--quiet</b>]
+[<b>--list</b>] [<b>--invert</b>] [<b>--verbose</b>]
+[<i>file</i>...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>isutf8</b>
+checks whether files are syntactically valid UTF-8. Input is
+either files named on the command line, or the standard
+input. Notices about files with invalid UTF-8 are printed to
+standard output.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Print out a help summary.</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--quiet</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t print messages
+telling which files are invalid UTF-8, merely indicate it
+with the exit status.</p>
+
+<p style="margin-left:9%;"><b>-l</b>, <b>--list</b></p>
+
+<p style="margin-left:18%;">Print only the names of files
+containing invalid UTF-8.</p>
+
+<p style="margin-left:9%;"><b>-i</b>, <b>--invert</b></p>
+
+<p style="margin-left:18%;">Invert the selection: list
+UTF-8 compatible files.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Also print an hexdump-like view
+of the error and some context.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If the file is
+valid UTF-8, the exit status is zero. If the file is not
+valid UTF-8, or there is some error, the exit status is
+non-zero.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Lars Wirzenius,
+Julien Palard</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>utf8</b>(7)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,452 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>lavplay</title>
+
+</head>
+<body>
+
+<h1 align="center">lavplay</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#SEARCHING AND EDITING">SEARCHING AND EDITING</a><br>
+<a href="#STDIN COMMANDS">STDIN COMMANDS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lavplay -
+Playback and edit MJPEG video</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lavplay</b>
+[<i>options</i>] <i>lavfile1 [lavfile2 ... lavfileN]</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>lavplay</b></i>
+can be used to playback video in MJPEG format (either
+quicktime or AVI) on a zoran video-capture device, such as
+the Miro/Pinnacle DC10(+), the Iomega Buz or Linux Media
+Labs&rsquo; LML33, or in software mode (using SDL).</p>
+
+<p style="margin-left:9%; margin-top: 1em">It also provides
+mechanisms for non-destructive editting video using an
+interactive front-end such as <b>glav</b>(1). See
+<b>SEARCHING AND EDITING</b> below for details.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lavplay</b>
+accepts the following options: <b><br>
+-p/--playback</b> [<b>S</b>|<b>C</b>|<b>H</b>]</p>
+
+<p style="margin-left:19%;">The playback mode to be used.
+&rsquo;S&rsquo; means software-playback using SDL. <br>
+&rsquo;H&rsquo; means hardware-playback on the monitor
+(on-screen). &rsquo;C&rsquo; means hardware-playback to the
+video-out of the zoran video-capture device. Obviously,
+&rsquo;C&rsquo; and &rsquo;H&rsquo; only work on computers
+with zoran video-capture devices.</p>
+
+<p style="margin-left:9%;"><b>-Z/--full-screen</b></p>
+
+<p style="margin-left:19%;">Full-screen playback. This
+works if SDL- or onscreen-playback is chosen.</p>
+
+<p style="margin-left:9%;"><b>--size</b> <i>NxN</i></p>
+
+<p style="margin-left:19%;">Size of the video window
+(default: size of the input video) when using software (SDL)
+or hardware onscreen playback</p>
+
+<p style="margin-left:9%;"><b>-a/--audio</b> <i>num</i></p>
+
+<p style="margin-left:19%;">When play audio, 0 means never,
+or sum of <br>
+1: while playing forward, <br>
+2: while playing reverse, <br>
+4: even fast playing, <br>
+8: while pausing <br>
+(default: 7: forward/reverse/fast). If 8(pausing) was
+contained, lavplay will be very noisy, but useful when you
+want to edit by sound.</p>
+
+<p style="margin-left:9%;"><b>-z/--zoom</b></p>
+
+<p style="margin-left:19%;">Zooms the video to fit the
+screen as good as possible.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-x</b></p></td>
+<td width="7%"></td>
+<td width="81%">
+
+
+<p>Exchange fields of an interlaced video. Try this if the
+video looks weird. It shouldn&rsquo;t be necessary with
+stuff captured using lavrec(1) but could be needed for other
+sources.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-s/--skip</b> <i>num</i></p>
+
+<p style="margin-left:19%;">Skip &lt;num&gt; seconds of
+video at the beginning.</p>
+
+<p style="margin-left:9%;"><b>-x/--exchange-fields</b></p>
+
+<p style="margin-left:19%;">Invert field order (for videos
+which are recorded with wrong field order interlacing
+settings)</p>
+
+<p style="margin-left:9%;"><b>-F/--flicker</b></p>
+
+<p style="margin-left:19%;">Disable stills flicker
+reduction. This is useful if you want to see stills exactly
+as they were recorded rather than flicker-free!</p>
+
+<p style="margin-left:9%;"><b>-c/--synchronization</b>
+[<b>0</b>|<b>1</b>]</p>
+
+<p style="margin-left:19%;">Enables (1) or disables (0) the
+use of sync corrections. Basically, you almost certainly
+want this. Disabling is really there for diagnostic purposes
+and not much else.</p>
+
+<p style="margin-left:9%;"><b>-H/--H-offset</b> <i>num,</i>
+<b>-V/--V-offset</b> <i>num</i></p>
+
+<p style="margin-left:19%;">Horizontal (-H) and vertical
+(-V) offset when using hardware-playback. Offset plus width
+or height should be smaller than or equal to the playback
+device&rsquo;s maximum allowed size (DC10+: 640x480 or
+768x576, LML33/Marvel/Buz: 720x480/576).</p>
+
+<p style="margin-left:9%;"><b>--s-x-offset</b> <i>num,</i>
+<b>--s-y-offset</b> <i>num</i></p>
+
+<p style="margin-left:19%;">Offset for the video window
+(from top left screen corner) when using hardware onscreen
+playback in non-fullscreen mode.</p>
+
+<p style="margin-left:9%;"><b>--display</b> <i>:x.x</i></p>
+
+<p style="margin-left:19%;">When using hardware fullsreen
+video playback (-pH), this setting can be used to specify
+the video display (default: :0.0) to use for video
+display.</p>
+
+<p style="margin-left:9%;"><b>-q/--no-quit</b></p>
+
+<p style="margin-left:19%;">Makes lavplay stay alive at the
+end of the video (lavplay won&rsquo;t quit). Use
+&rsquo;q&lt;enter&gt;&rsquo; on the command line to quit
+(see below, <b>SEARCHING AND EDITING</b>).</p>
+
+<p style="margin-left:9%;"><b>-g/--gui-mode</b></p>
+
+<p style="margin-left:19%;">Enables GUI-mode. This is used
+by glav and Linux Video Studio. It will output the current
+position in the video each frame, so that the glav or LVS
+can keep track of where we are in the video which is being
+played back.</p>
+
+
+<p style="margin-left:9%;"><b>-P/--preserve-pathnames</b></p>
+
+<p style="margin-left:19%;">This is used by glav and Linux
+Video Studio. When editlists are created the original
+pathnames for files are used and not the canonicalised
+pathnames from the root directory. Useful if you&rsquo;ve
+got things like automounters active that make directories
+with the same non-canonical name have different canonical
+names on different machines.</p>
+
+<p style="margin-left:9%;"><b>-U/--use-write</b></p>
+
+<p style="margin-left:19%;">Use the write() system call
+rather than the mmap() system call for audio writing to the
+sound device. This may fix some audio playback problems.</p>
+
+<p style="margin-left:9%;"><b>-n/--mjpeg-buffers</b>
+<i>num</i></p>
+
+<p style="margin-left:19%;">Number of MJPEG-buffers.
+Default is 32. Try changing this number if you have many
+lost frames.</p>
+
+<p style="margin-left:9%;"><b>-v/--verbose</b>
+<i>num</i></p>
+
+<p style="margin-left:19%;">Verbosity level (0, 1 or 2)</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+environment variables can be recognized by lavrec: <b><br>
+LAV_VIDEO_DEV</b></p>
+
+<p style="margin-left:19%;">The video device. Default is
+/dev/video</p>
+
+<p style="margin-left:9%;"><b>LAV_AUDIO_DEV</b></p>
+
+<p style="margin-left:19%;">The audio device. Default is
+/dev/dsp</p>
+
+<h2>SEARCHING AND EDITING
+<a name="SEARCHING AND EDITING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lavplay</b>
+can do more than simple plain playback. It is also intended
+to be controlled using commands sent via stdin from a
+front-end like <b>glav(1)</b> or similar, more sophisticated
+tools. The most significant aspect of this functionality is
+the ability to create <i>edit list</i> files giving the
+playback sequence of an editted version of the input video.
+The edit list file can be read by any of the mjpegtools(1)
+(including lavplay!) wherever an actual video file would be
+acceptable. Such edit lists record only the original source
+file and start and stop frames of the components of the
+editted video editting rather than the video itself. As such
+editting leaves the original files unchanged and requires
+only tiny amounts of data-movement. The drawback is that for
+the edit list to work the original files must remain
+unchanged, and that interactive play may be jumpy due to the
+playback sequence &quot;skipping about&quot; between
+different parts of the original video sequence.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a stand-alone
+consolidated versions of editted video is required it can be
+produced by running the lavtrans(1) utility on the edit
+list.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Edit list files
+are plain text with a very simple syntax to allow easy
+manual editting using a text-editor or writing of scripted
+editting tools.</p>
+
+<h2>STDIN COMMANDS
+<a name="STDIN COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The commands
+accepted on standard input sre as follows (and can of course
+be entered directly by command-line junkies):</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>+, -</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Goes to next/previous frame. Only makes sense when the
+video is paused.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>pN</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Sets playback speed to N (N=..., -1, 0, 1, ...)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>a[01]</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Enables/disables audio playback</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>sN</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>if N is a number, this means to go to frame N. if N is
+prefixed by a + or -, this means to go N frames back- or
+forward.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>om editlist [N1 N2 [N3
+N4]]</b></p>
+
+<p style="margin-left:19%;">Opens a movie or editlist. A
+second and third argument can specify to only open a
+specific range of frames from this video (N1=-1 means whole
+video). N3 and N4 can specify to show only a specific range
+of frames from the frames which were just opened (useful for
+trimming).</p>
+
+<p style="margin-left:9%;"><b>w[as] file</b></p>
+
+<p style="margin-left:19%;">Save the current editlist (a)
+or the current selection (s) to a file.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>q</b></p></td>
+<td width="9%"></td>
+<td width="17%">
+
+
+<p>Quit lavplay.</p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>e[ou] N1 N2</b></p>
+
+<p style="margin-left:19%;">Cuts (u) or copies (o) frames
+N1-N2 from the current editlist into an internal
+selection.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>ep</b></p></td>
+<td width="7%"></td>
+<td width="81%">
+
+
+<p>Pastes the contents of the selection into the current
+position in the editlist.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>em N1 N2 N3</b></p>
+
+<p style="margin-left:19%;">Moves frames N1-N2 to position
+N3 in the video.</p>
+
+<p style="margin-left:9%;"><b>ed N1 N2</b></p>
+
+<p style="margin-left:19%;">Deletes frames N1-N2 from the
+editlist.</p>
+
+<p style="margin-left:9%;"><b>ea video N1 N2 N3</b></p>
+
+<p style="margin-left:19%;">Adds frames N1-N2 of the video
+into position N3 within the editlist. N1=-1 means to add the
+whole video.</p>
+
+<p style="margin-left:9%;"><b>es N1 N2</b></p>
+
+<p style="margin-left:19%;">Sets the current viewable
+frames within the whole video to N1-N2. This is useful for
+trimming.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Editlists record
+absolute pathnames. This more or less forces manual editting
+of the pathnames in them if it is desired to move editlists
+and source video files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">lavplay really
+ought to make a decent job of detecting what playback
+options are feasible (on-screen hardware, video-out port
+hardware, software) and set the default playback mode
+appropriately. Alas, it does not.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Ronald Bultje. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at <i><br>
+http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>lavrec</b>(1), <b>glav</b>(1)</p>
+<hr>
+</body>
+</html>

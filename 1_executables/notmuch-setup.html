@@ -1,0 +1,358 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:54 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-SETUP</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-SETUP</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#NOTE">NOTE</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#SETUP">SETUP</a><br>
+<a href="#OTHER COMMANDS">OTHER COMMANDS</a><br>
+<a href="#EXTERNAL COMMANDS">EXTERNAL COMMANDS</a><br>
+<a href="#OPTION SYNTAX">OPTION SYNTAX</a><br>
+<a href="#DUPLICATE MESSAGE FILES">DUPLICATE MESSAGE FILES</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#CONTACT">CONTACT</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-setup -
+getting started with notmuch</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch</b>
+[option ...] <b>command</b> [arg ...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Notmuch is a
+command-line based program for indexing, searching, reading,
+and tagging large collections of email messages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This page
+describes how to get started using notmuch from the command
+line, and gives a brief overview of the commands available.
+For more information on e.g. <b>notmuch show</b> consult the
+<i>notmuch-show</i> man page, also accessible via <b>notmuch
+help show</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The quickest way
+to get started with Notmuch is to simply invoke the
+<b>notmuch</b> command with no arguments, which will
+interactively guide you through the process of indexing your
+mail.</p>
+
+<h2>NOTE
+<a name="NOTE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">While the
+command-line program <b>notmuch</b> provides powerful
+functionality, it does not provide the most convenient
+interface for that functionality. More sophisticated
+interfaces are expected to be built on top of either the
+command-line interface, or more likely, on top of the
+notmuch library interface. See
+<i>https://notmuchmail.org</i> for more about alternate
+interfaces to notmuch. The emacs-based interface to notmuch
+(available under <b>emacs/</b> in the Notmuch source
+distribution) is probably the most widely used at this
+time.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Supported global
+options for <b>notmuch</b> include <b><br>
+--help [command-name]</b></p>
+
+<p style="margin-left:18%;">Print a synopsis of available
+commands and exit. With an optional command name, show the
+man page for that subcommand.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Print the installed version of
+notmuch, and exit.</p>
+
+<p style="margin-left:9%;"><b>--config=FILE</b></p>
+
+<p style="margin-left:18%;">Specify the configuration file
+to use. This overrides any configuration file specified by
+<i>NOTMUCH_CONFIG</i>. The empty string is a permitted and
+sometimes useful value of <i>FILE</i>, which tells
+<b>notmuch</b> to use only configuration metadata from the
+database.</p>
+
+<p style="margin-left:9%;"><b>--uuid=HEX</b></p>
+
+<p style="margin-left:18%;">Enforce that the database UUID
+(a unique identifier which persists until e.g. the database
+is compacted) is HEX; exit with an error if it is not. This
+is useful to detect rollover in modification counts on
+messages. You can find this UUID using e.g. <b>notmuch count
+--lastmod</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">All global
+options except <b>--config</b> can also be specified after
+the command. For example, <b>notmuch subcommand
+--uuid=HEX</b> is equivalent to <b>notmuch --uuid=HEX
+subcommand</b>.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>SETUP
+<a name="SETUP"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>notmuch
+setup</b> command is used to configure Notmuch for first
+use, (or to reconfigure it later).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The setup
+command will prompt for your full name, your primary email
+address, any alternate email addresses you use, and the
+directory containing your email archives. Your answers will
+be written to a configuration file in <i>NOTMUCH_CONFIG</i>
+(if set) or ${HOME}/.notmuch-config . This configuration
+file will be created with descriptive comments, making it
+easy to edit by hand later to change the configuration. Or
+you can run <b>notmuch setup</b> again to change the
+configuration.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The mail
+directory you specify can contain any number of
+sub-directories and should primarily contain only files with
+individual email messages (eg. maildir or mh archives are
+perfect). If there are other, non-email files (such as
+indexes maintained by other email programs) then notmuch
+will do its best to detect those and ignore them.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Mail storage
+that uses mbox format, (where one mbox file contains many
+messages), will not work with notmuch. If that's how your
+mail is currently stored, it is recommended you first
+convert it to maildir format with a utility such as
+<i>mb2md(1) before running</i> <b>notmuch
+setup</b><i>.</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Invoking</i>
+<b>notmuch</b> <i>with no command argument will run</i>
+<b>setup</b> <i>if the setup command has not previously been
+completed.</i></p>
+
+<h3>OTHER COMMANDS
+<a name="OTHER COMMANDS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Several of the
+notmuch commands accept search terms with a common syntax.
+See <i>notmuch-search-terms</i> for more details on the
+supported syntax.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>notmuch-search</i>, <i>notmuch-show</i>,
+<i>notmuch-address</i> and <i>notmuch-count</i> commands are
+used to query the email database.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>notmuch-reply</i> command is useful for preparing a
+template for an email reply.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>notmuch-tag</i> command is the only command available for
+manipulating database contents.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>notmuch-dump</i> and <i>notmuch-restore</i> commands can
+be used to create a textual dump of email tags for backup
+purposes, and to restore from that dump.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>notmuch-config</i> command can be used to get or set
+settings in the notmuch configuration file.</p>
+
+<h3>EXTERNAL COMMANDS
+<a name="EXTERNAL COMMANDS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If the given
+command is not known to notmuch, notmuch tries to execute
+the external <b>notmuch-&lt;subcommand&gt;</b> in
+<b>PATH</b> instead. This allows users to have their own
+notmuch related tools to be run via the notmuch command. By
+design, this does not allow notmuch's own commands to be
+overridden using external commands. The environment variable
+<i>NOTMUCH_CONFIG</i> will be set according to
+<i>--config</i>, if the latter is present.</p>
+
+<h3>OPTION SYNTAX
+<a name="OPTION SYNTAX"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">All options
+accepting an argument can be used with '=' or ':' as a
+separator. Except for boolean options (which would be
+ambiguous), a space can also be used as a separator. The
+following are all equivalent:</p>
+
+<p style="margin-left:13%; margin-top: 1em">notmuch
+--config=alt-config config get user.name <br>
+notmuch --config:alt-config config get user.name <br>
+notmuch --config alt-config config get user.name</p>
+
+<h2>DUPLICATE MESSAGE FILES
+<a name="DUPLICATE MESSAGE FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Notmuch
+considers the <i>Message-ID</i> to be the primary identifier
+of message. Per <i>RFC 5322</i> the <i>Message-ID</i> is
+supposed to be globally unique, but this fails in two
+distinct ways. When you receive copies of a message via a
+mechanism like <i>Cc</i> or via a mailing list, the copies
+are typically interchangeable. In the case of some broken
+mail sending software, the same <i>Message-ID</i> is used
+for completely unrelated messages. The options <i>search
+--duplicate</i> and <i>show --duplicate</i> options provide
+the user with control over which message file is displayed.
+Front ends will need to provide their own interface, see
+e.g. the Emacs front-end <i>Dealing with duplicates</i>.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+environment variables can be used to control the behavior of
+notmuch. <b><br>
+NOTMUCH_CONFIG</b></p>
+
+<p style="margin-left:18%;">Specifies the location of the
+notmuch configuration file. See <i>notmuch-config</i> for
+details.</p>
+
+<p style="margin-left:9%;"><b>NOTMUCH_DATABASE</b></p>
+
+<p style="margin-left:18%;">Specifies the location of the
+notmuch database. See <i>notmuch-config</i> for details.</p>
+
+<p style="margin-left:9%;"><b>NOTMUCH_PROFILE</b></p>
+
+<p style="margin-left:18%;">Selects among notmuch
+configurations. See <i>notmuch-config</i> for details.</p>
+
+
+<p style="margin-left:9%;"><b>NOTMUCH_TALLOC_REPORT</b></p>
+
+<p style="margin-left:18%;">Location to write a talloc
+memory usage report. See
+<b>talloc_enable_leak_report_full</b> in <i>talloc(3) for
+more information.</i></p>
+
+<p style="margin-left:9%;"><b>NOTMUCH_DEBUG_QUERY</b></p>
+
+<p style="margin-left:18%;">If set to a non-empty value,
+the notmuch library will print (to stderr) Xapian queries it
+constructs.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch-address</i>,
+<i>notmuch-compact</i>, <i>notmuch-config</i>,
+<i>notmuch-count</i>, <i>notmuch-dump</i>,
+<i>notmuch-hooks</i>, <i>notmuch-insert</i>,
+<i>notmuch-new</i>, <i>notmuch-properties</i>,
+<i>notmuch-reindex</i>, <i>notmuch-reply</i>,
+<i>notmuch-restore</i>, <i>notmuch-search</i>,
+<i>notmuch-search-terms</i>, <i>notmuch-show</i>,
+<i>notmuch-tag</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The notmuch
+website: <b>https://notmuchmail.org</b></p>
+
+<h2>CONTACT
+<a name="CONTACT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Feel free to
+send questions, comments, or kudos to the notmuch mailing
+list &lt;<i>notmuch@notmuchmail.org</i>&gt; . Subscription
+is not required before posting, but is available from the
+notmuchmail.org website.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Real-time
+interaction with the Notmuch community is available via IRC
+(server: irc.libera.chat, channel: #notmuch).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,205 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:54 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-TAG</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-TAG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#TAG FILE FORMAT">TAG FILE FORMAT</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-tag -
+add/remove tags for all messages matching the search
+terms</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+tag</b> [options ...]
++&lt;<i>tag</i>&gt;|-&lt;<i>tag</i>&gt; [--]
+&lt;<i>search-term</i>&gt; ...</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch tag
+--batch</b> [--input=&lt;<i>filename</i>&gt;]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add/remove tags
+for all messages matching the search terms.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<i>notmuch-search-terms</i> for details of the supported
+syntax for &lt;<i>search-term</i>&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Tags prefixed by
+'+' are added while those prefixed by '-' are removed. For
+each message, tag changes are applied in the order they
+appear on the command line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The beginning of
+the search terms is recognized by the first argument that
+begins with neither '+' nor '-'. Support for an initial
+search term beginning with '+' or '-' is provided by
+allowing the user to specify a &quot;--&quot; argument to
+separate the tags from the search terms.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+tag</b> updates the maildir flags according to tag changes
+if the <b>maildir.synchronize_flags</b> configuration option
+is enabled. See <i>notmuch-config</i> for details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>tag</b> include <b><br>
+--remove-all</b></p>
+
+<p style="margin-left:18%;">Remove all tags from each
+message matching the search terms before applying the tag
+changes appearing on the command line. This means setting
+the tags of each message to the tags to be added. If there
+are no tags to be added, the messages will have no tags.</p>
+
+<p style="margin-left:9%;"><b>--batch</b></p>
+
+<p style="margin-left:18%;">Read batch tagging operations
+from a file (stdin by default). This is more efficient than
+repeated <b>notmuch tag</b> invocations. See <i>TAG FILE
+FORMAT</i> below for the input format. This option is not
+compatible with specifying tagging on the command line.</p>
+
+
+<p style="margin-left:9%;"><b>--input=&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Read input from given file,
+instead of from stdin. Implies <b>--batch</b>.</p>
+
+<h2>TAG FILE FORMAT
+<a name="TAG FILE FORMAT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The input must
+consist of lines of the format:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">+&lt;<i>tag</i>&gt;|-&lt;<i>tag</i>&gt;
+[...] [--] &lt;<i>query</i>&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each line is
+interpreted similarly to <b>notmuch tag</b> command line
+arguments. The delimiter is one or more spaces ' '. Any
+characters in &lt;<i>tag</i>&gt; <b>may</b> be hex-encoded
+with %NN where NN is the hexadecimal value of the character.
+To hex-encode a character with a multi-byte UTF-8 encoding,
+hex-encode each byte. Any spaces in &lt;tag&gt; <b>must</b>
+be hex-encoded as %20. Any characters that are not part of
+&lt;<i>tag</i>&gt; <b>must not</b> be hex-encoded.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In the future
+tag:&quot;tag with spaces&quot; style quoting may be
+supported for &lt;<i>tag</i>&gt; as well; for this reason
+all double quote characters in &lt;<i>tag</i>&gt;
+<b>should</b> be hex-encoded.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&lt;<i>query</i>&gt; should be quoted using Xapian boolean
+term quoting rules: if a term contains whitespace or a close
+paren or starts with a double quote, it must be enclosed in
+double quotes (not including any prefix) and double quotes
+inside the term must be doubled (see below for
+examples).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Leading and
+trailing space ' ' is ignored. Empty lines and lines
+beginning with '#' are ignored.</p>
+
+<h3>EXAMPLE
+<a name="EXAMPLE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+shows a valid input to batch tagging. Note that only the
+isolated '*' acts as a wildcard. Also note the two different
+quotings of the tag <b>space in tags</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">+winner * <br>
++foo::bar%25 -- (One and Two) or (One and tag:winner) <br>
++found::it -- tag:foo::bar% <br>
+# ignore this line and the next</p>
+
+
+<p style="margin-left:13%; margin-top: 1em">+space%20in%20tags
+-- Two <br>
+# add tag '(tags)', among other stunts. <br>
++crazy{ +(tags) +&amp;are +#possible\ -- tag:&quot;space in
+tags&quot; <br>
++match*crazy -- tag:crazy{ <br>
++some_tag -- id:&quot;this is
+&quot;&quot;nauty)&quot;&quot;&quot;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-config</i>, <i>notmuch-count</i>,
+<i>notmuch-dump</i>, <i>notmuch-hooks</i>,
+<i>notmuch-insert</i>, <i>notmuch-new</i>,
+<i>notmuch-reply</i>, <i>notmuch-restore</i>,
+<i>notmuch-search</i>, <i>notmuch-search-terms</i>,
+<i>notmuch-show</i>,</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

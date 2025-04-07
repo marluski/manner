@@ -1,0 +1,183 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>libinput-analyze-per-slot-delta</title>
+
+</head>
+<body>
+
+<h1 align="center">libinput-analyze-per-slot-delta</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OUTPUT">OUTPUT</a><br>
+<a href="#LIBINPUT">LIBINPUT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">libinput-analyze-per-slot-delta
+- analyze the per-event delta movement for touch slots</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libinput
+analyze per-slot-delta [--help] [options]</b>
+<i>recording.yml</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>libinput
+analyze per-slot-delta</b> tool analyzes a recording made
+with <b>libinput record</b> and prints the delta movement
+per touch slot.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+debugging tool only, its output may change at any time. Do
+not rely on the output.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="2%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em">Print help</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--ignore-below=&lt;units or
+mm&gt;</b></p>
+
+<p style="margin-left:19%;">Ignore any movement below the
+given threshold. The threshold is in mm if <b>--use-mm</b>
+is selected or in device units otherwise.</p>
+
+<p style="margin-left:9%;"><b>--show-distance</b></p>
+
+<p style="margin-left:19%;">Also show the distance relative
+to the initial position of the current touch. The distance
+is mm if <b>--use-mm</b> is selected or in device units
+otherwise.</p>
+
+<p style="margin-left:9%;"><b>--threshold=&lt;units or
+mm&gt;</b></p>
+
+<p style="margin-left:19%;">Color any movement above this
+threshold in red. The threshold is in mm if <b>--use-mm</b>
+is selected or in device units otherwise.</p>
+
+<p style="margin-left:9%;"><b>--use-mm</b></p>
+
+<p style="margin-left:19%;">Print data in mm instead of
+device units</p>
+
+<p style="margin-left:9%;"><b>--use-st</b></p>
+
+<p style="margin-left:19%;">Use the single-touch
+ABS_X/ABS_Y instead of the multitouch axes</p>
+
+<p style="margin-left:9%;"><b>--use-absolute</b></p>
+
+<p style="margin-left:19%;">Print absolute coordinates, not
+deltas</p>
+
+<h2>OUTPUT
+<a name="OUTPUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">An example
+output for a single finger touch on a touchpad supporting
+two slots is below. This output is with the use of the
+<b>--use-mm</b> flag.</p>
+
+<p style="margin-left:9%; margin-top: 1em">0.000000 +0ms
+TOU: ++++++ | ************* | <br>
+0.021900 +21ms TOU: &rarr;&#8600; +1.10/+0.14 |
+************* | <br>
+0.033468 +11ms TOU: &rarr;&#8600; +1.15/+0.19 |
+************* | <br>
+0.043856 +10ms TOU: &rarr;&#8600; +1.76/+0.22 |
+************* | <br>
+0.053237 +9ms TOU: &rarr;&#8600; +2.20/+0.19 | *************
+|</p>
+
+<p style="margin-left:9%; margin-top: 1em">The entry
+<b>++++++</b> indicates a finger has been put down,
+<b>------</b> indicates the finger has lifted. The left-most
+column is the absolute timestamp in seconds.microseconds
+followed by the relative time of the event to the previous
+event.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The word
+<b>TOU</b> in this example represents BTN_TOUCH, similar
+abbreviations exist for BTN_TOOL_DOUBLETAP,
+BTN_TOOL_TRIPLETAP, BTN_TOOL_QUADTAP, and
+BTN_TOOL_QUINTTAP.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The arrows
+indicate the approximate direction on a 16-point compass, in
+this example EastSouthEast.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each multitouch
+slot supported by the hardware has one column, where the
+column shows asterisk <b>********</b> no finger is down for
+that slot. Where the column shows spaces only, a finger is
+down but no data is currently available.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In the above
+example, the third events occurs &#732;33ms into the
+recording, is 11ms after the previous event and has an east
+south-east direction. The movement for this event was x:
+1.15 and y: 0.19 mm. A second finger is not currently
+down.</p>
+
+<h2>LIBINPUT
+<a name="LIBINPUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Part of the
+<b>libinput(1)</b> suite</p>
+<hr>
+</body>
+</html>

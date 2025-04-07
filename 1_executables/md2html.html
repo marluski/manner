@@ -1,0 +1,193 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>MD2HTML</title>
+
+</head>
+<body>
+
+<h1 align="center">MD2HTML</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#General options:">General options:</a><br>
+<a href="#Markdown dialect options:">Markdown dialect options:</a><br>
+<a href="#Markdown extension options:">Markdown extension options:</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">md2html -
+convert Markdown to HTML</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>md2html</b>
+[<i>OPTION</i>]... [<i>FILE</i>]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>General options:
+<a name="General options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--output=</b><i>OUTFILE</i></p>
+
+<p style="margin-left:18%;">Write output to <i>OUTFILE</i>
+instead of <b>stdout</b>(3)</p>
+
+<p style="margin-left:9%;"><b>-f</b>,
+<b>--full-html</b></p>
+
+<p style="margin-left:18%;">Generate full HTML document,
+including header</p>
+
+<p style="margin-left:9%;"><b>-s</b>, <b>--stat</b></p>
+
+<p style="margin-left:18%;">Measure time of input
+parsing</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Display help and exit</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Display version and exit</p>
+
+<h3>Markdown dialect options:
+<a name="Markdown dialect options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--commonmark</b></p>
+
+<p style="margin-left:18%;">CommonMark (the default)</p>
+
+<p style="margin-left:9%;"><b>--github</b></p>
+
+<p style="margin-left:18%;">Github Flavored Markdown</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: dialect
+options are equivalent to some combination of flags
+below.</p>
+
+<h3>Markdown extension options:
+<a name="Markdown extension options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fcollapse-whitespace</b></p>
+
+<p style="margin-left:18%;">Collapse non-trivial
+whitespace</p>
+
+<p style="margin-left:9%;"><b>--fverbatim-entities</b></p>
+
+<p style="margin-left:18%;">Do not translate entities</p>
+
+
+<p style="margin-left:9%;"><b>--fpermissive-atx-headers</b></p>
+
+<p style="margin-left:18%;">Allow ATX headers without
+delimiting space</p>
+
+
+<p style="margin-left:9%;"><b>--fpermissive-url-autolinks</b></p>
+
+<p style="margin-left:18%;">Allow URL autolinks without
+&quot;&lt;&quot; and &quot;&gt;&quot; delimiters</p>
+
+
+<p style="margin-left:9%;"><b>--fpermissive-www-autolinks</b></p>
+
+<p style="margin-left:18%;">Allow WWW autolinks without any
+scheme (e.g. &quot;www.example.com&quot;)</p>
+
+
+<p style="margin-left:9%;"><b>--fpermissive-email-autolinks</b></p>
+
+<p style="margin-left:18%;">Allow e-mail autolinks without
+&quot;&lt;&quot;, &quot;&gt;&quot; and
+&quot;mailto:&quot;</p>
+
+
+<p style="margin-left:9%;"><b>--fpermissive-autolinks</b></p>
+
+<p style="margin-left:18%;">Enable all 3 of the above
+permissive autolinks options</p>
+
+<p style="margin-left:9%;"><b>--fhard-soft-breaks</b></p>
+
+<p style="margin-left:18%;">Force all soft breaks to act as
+hard breaks</p>
+
+<p style="margin-left:9%;"><b>--fno-indented-code</b></p>
+
+<p style="margin-left:18%;">Disable indented code
+blocks</p>
+
+<p style="margin-left:9%;"><b>--fno-html-blocks</b></p>
+
+<p style="margin-left:18%;">Disable raw HTML blocks</p>
+
+<p style="margin-left:9%;"><b>--fno-html-spans</b></p>
+
+<p style="margin-left:18%;">Disable raw HTML spans</p>
+
+<p style="margin-left:9%;"><b>--fno-html</b></p>
+
+<p style="margin-left:18%;">Same as <b>--fno-html-blocks
+--fno-html-spans</b></p>
+
+<p style="margin-left:9%;"><b>--ftables</b></p>
+
+<p style="margin-left:18%;">Enable tables</p>
+
+<p style="margin-left:9%;"><b>--fstrikethrough</b></p>
+
+<p style="margin-left:18%;">Enable strikethrough spans</p>
+
+<p style="margin-left:9%;"><b>--ftasklists</b></p>
+
+<p style="margin-left:18%;">Enable task lists</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://github.com/mity/md4c</p>
+<hr>
+</body>
+</html>

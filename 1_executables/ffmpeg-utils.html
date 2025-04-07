@@ -1,0 +1,2911 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:24:25 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FFMPEG-UTILS</title>
+
+</head>
+<body>
+
+<h1 align="center">FFMPEG-UTILS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SYNTAX">SYNTAX</a><br>
+<a href="#Quoting and escaping">Quoting and escaping</a><br>
+<a href="#Date">Date</a><br>
+<a href="#Time duration">Time duration</a><br>
+<a href="#Video size">Video size</a><br>
+<a href="#Video rate">Video rate</a><br>
+<a href="#Ratio">Ratio</a><br>
+<a href="#Color">Color</a><br>
+<a href="#Channel Layout">Channel Layout</a><br>
+<a href="#EXPRESSION EVALUATION">EXPRESSION EVALUATION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg-utils -
+FFmpeg utilities</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This document
+describes some generic features and utilities provided by
+the libavutil library.</p>
+
+<h2>SYNTAX
+<a name="SYNTAX"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This section
+documents the syntax and formats employed by the FFmpeg
+libraries and tools.</p>
+
+<h3>Quoting and escaping
+<a name="Quoting and escaping"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">FFmpeg adopts
+the following quoting and escaping mechanism, unless
+explicitly specified. The following rules are applied:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>&rsquo;</b> and <b>\</b> are special characters
+(respectively used for quoting and escaping). In addition to
+them, there might be other special characters depending on
+the specific syntax where the escaping and quoting are
+employed.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>A special character is escaped by prefixing it with a
+<b>\</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>All characters enclosed between <b>&rsquo;&rsquo;</b>
+are included literally in the parsed string. The quote
+character <b>&rsquo;</b> itself cannot be quoted, so you may
+need to close the quote and escape it.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Leading and trailing whitespaces, unless escaped or
+quoted, are removed from the parsed string.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note that you
+may need to add a second level of escaping when using the
+command line or a script, which depends on the syntax of the
+adopted shell language.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The function
+&quot;av_get_token&quot; defined in
+<i>libavutil/avstring.h</i> can be used to parse a token
+quoted or escaped according to the rules defined above.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The tool
+<i>tools/ffescape</i> in the FFmpeg source tree can be used
+to automatically quote or escape a string in a script.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Examples</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Escape the string &quot;Crime
+d'Amour&quot; containing the &quot;'&quot; special
+character:</p> </td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Crime
+d\'Amour</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">The string above contains a
+quote, so the &quot;'&quot; needs to be escaped when quoting
+it:</p> </td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">'Crime
+d'\''Amour'</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em">Include leading or trailing
+whitespaces using quoting:</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">' this string
+starts and ends with whitespaces '</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="55%">
+
+
+<p style="margin-top: 1em">Escaping and quoting can be
+mixed together:</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">' The string
+'\'string\'' is a string '</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="80%">
+
+
+<p style="margin-top: 1em">To include a literal <b>\</b>
+you can use either escaping or quoting:</p></td>
+<td width="6%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">'c:\foo' can be
+written as c:\\foo</p>
+
+<h3>Date
+<a name="Date"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+syntax is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[(YYYY-MM-DD|YYYYMMDD)[T|t|
+]]((HH:MM:SS[.m...]]])|(HHMMSS[.m...]]]))[Z] <br>
+now</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the value is
+&quot;now&quot; it takes the current time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Time is local
+time unless Z is appended, in which case it is interpreted
+as UTC. If the year-month-day part is not specified it takes
+the current year-month-day.</p>
+
+<h3>Time duration
+<a name="Time duration"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">There are two
+accepted syntaxes for expressing time duration.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[-][&lt;HH&gt;:]&lt;MM&gt;:&lt;SS&gt;[.&lt;m&gt;...]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>HH</i>
+expresses the number of hours, <i>MM</i> the number of
+minutes for a maximum of 2 digits, and <i>SS</i> the number
+of seconds for a maximum of 2 digits. The <i>m</i> at the
+end expresses decimal value for <i>SS</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>or</i></p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[-]&lt;S&gt;+[.&lt;m&gt;...][s|ms|us]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>S</i>
+expresses the number of seconds, with the optional decimal
+part <i>m</i>. The optional literal suffixes <b>s</b>,
+<b>ms</b> or <b>us</b> indicate to interpret the value as
+seconds, milliseconds or microseconds, respectively.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In both
+expressions, the optional <b>-</b> indicates negative
+duration.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Examples</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+examples are all valid time duration:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>55</b></p></td>
+<td width="1%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em">55 seconds</p></td>
+<td width="72%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>0.2</b></p></td>
+<td width="1%"></td>
+<td width="14%">
+
+
+<p>0.2 seconds</p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>200ms</b></p>
+
+<p style="margin-left:14%;">200 milliseconds, that&rsquo;s
+0.2s</p>
+
+<p style="margin-left:9%;"><b>200000us</b></p>
+
+<p style="margin-left:14%;">200000 microseconds,
+that&rsquo;s 0.2s</p>
+
+<p style="margin-left:9%;"><b>12:03:45</b></p>
+
+<p style="margin-left:14%;">12 hours, 03 minutes and 45
+seconds</p>
+
+<p style="margin-left:9%;"><b>23.189</b></p>
+
+<p style="margin-left:14%;">23.189 seconds</p>
+
+<h3>Video size
+<a name="Video size"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specify the size
+of the sourced video, it may be a string of the form
+<i>width</i>x<i>height</i>, or the name of a size
+abbreviation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+abbreviations are recognized: <b><br>
+ntsc</b></p>
+
+<p style="margin-left:14%;">720x480</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>pal</b></p></td>
+<td width="1%"></td>
+<td width="9%">
+
+
+<p>720x576</p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>qntsc</b></p>
+
+<p style="margin-left:14%;">352x240</p>
+
+<p style="margin-left:9%;"><b>qpal</b></p>
+
+<p style="margin-left:14%;">352x288</p>
+
+<p style="margin-left:9%;"><b>sntsc</b></p>
+
+<p style="margin-left:14%;">640x480</p>
+
+<p style="margin-left:9%;"><b>spal</b></p>
+
+<p style="margin-left:14%;">768x576</p>
+
+<p style="margin-left:9%;"><b>film</b></p>
+
+<p style="margin-left:14%;">352x240</p>
+
+<p style="margin-left:9%;"><b>ntsc-film</b></p>
+
+<p style="margin-left:14%;">352x240</p>
+
+<p style="margin-left:9%;"><b>sqcif</b></p>
+
+<p style="margin-left:14%;">128x96</p>
+
+<p style="margin-left:9%;"><b>qcif</b></p>
+
+<p style="margin-left:14%;">176x144</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>cif</b></p></td>
+<td width="1%"></td>
+<td width="9%">
+
+
+<p>352x288</p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>4cif</b></p>
+
+<p style="margin-left:14%;">704x576</p>
+
+<p style="margin-left:9%;"><b>16cif</b></p>
+
+<p style="margin-left:14%;">1408x1152</p>
+
+<p style="margin-left:9%;"><b>qqvga</b></p>
+
+<p style="margin-left:14%;">160x120</p>
+
+<p style="margin-left:9%;"><b>qvga</b></p>
+
+<p style="margin-left:14%;">320x240</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>vga</b></p></td>
+<td width="1%"></td>
+<td width="9%">
+
+
+<p>640x480</p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>svga</b></p>
+
+<p style="margin-left:14%;">800x600</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>xga</b></p></td>
+<td width="1%"></td>
+<td width="10%">
+
+
+<p>1024x768</p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>uxga</b></p>
+
+<p style="margin-left:14%;">1600x1200</p>
+
+<p style="margin-left:9%;"><b>qxga</b></p>
+
+<p style="margin-left:14%;">2048x1536</p>
+
+<p style="margin-left:9%;"><b>sxga</b></p>
+
+<p style="margin-left:14%;">1280x1024</p>
+
+<p style="margin-left:9%;"><b>qsxga</b></p>
+
+<p style="margin-left:14%;">2560x2048</p>
+
+<p style="margin-left:9%;"><b>hsxga</b></p>
+
+<p style="margin-left:14%;">5120x4096</p>
+
+<p style="margin-left:9%;"><b>wvga</b></p>
+
+<p style="margin-left:14%;">852x480</p>
+
+<p style="margin-left:9%;"><b>wxga</b></p>
+
+<p style="margin-left:14%;">1366x768</p>
+
+<p style="margin-left:9%;"><b>wsxga</b></p>
+
+<p style="margin-left:14%;">1600x1024</p>
+
+<p style="margin-left:9%;"><b>wuxga</b></p>
+
+<p style="margin-left:14%;">1920x1200</p>
+
+<p style="margin-left:9%;"><b>woxga</b></p>
+
+<p style="margin-left:14%;">2560x1600</p>
+
+<p style="margin-left:9%;"><b>wqsxga</b></p>
+
+<p style="margin-left:14%;">3200x2048</p>
+
+<p style="margin-left:9%;"><b>wquxga</b></p>
+
+<p style="margin-left:14%;">3840x2400</p>
+
+<p style="margin-left:9%;"><b>whsxga</b></p>
+
+<p style="margin-left:14%;">6400x4096</p>
+
+<p style="margin-left:9%;"><b>whuxga</b></p>
+
+<p style="margin-left:14%;">7680x4800</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>cga</b></p></td>
+<td width="1%"></td>
+<td width="9%">
+
+
+<p>320x200</p></td>
+<td width="77%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>ega</b></p></td>
+<td width="1%"></td>
+<td width="9%">
+
+
+<p>640x350</p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>hd480</b></p>
+
+<p style="margin-left:14%;">852x480</p>
+
+<p style="margin-left:9%;"><b>hd720</b></p>
+
+<p style="margin-left:14%;">1280x720</p>
+
+<p style="margin-left:9%;"><b>hd1080</b></p>
+
+<p style="margin-left:14%;">1920x1080</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>2k</b></p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p>2048x1080</p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>2kflat</b></p>
+
+<p style="margin-left:14%;">1998x1080</p>
+
+<p style="margin-left:9%;"><b>2kscope</b></p>
+
+<p style="margin-left:14%;">2048x858</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>4k</b></p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p>4096x2160</p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>4kflat</b></p>
+
+<p style="margin-left:14%;">3996x2160</p>
+
+<p style="margin-left:9%;"><b>4kscope</b></p>
+
+<p style="margin-left:14%;">4096x1716</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>nhd</b></p></td>
+<td width="1%"></td>
+<td width="9%">
+
+
+<p>640x360</p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>hqvga</b></p>
+
+<p style="margin-left:14%;">240x160</p>
+
+<p style="margin-left:9%;"><b>wqvga</b></p>
+
+<p style="margin-left:14%;">400x240</p>
+
+<p style="margin-left:9%;"><b>fwqvga</b></p>
+
+<p style="margin-left:14%;">432x240</p>
+
+<p style="margin-left:9%;"><b>hvga</b></p>
+
+<p style="margin-left:14%;">480x320</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>qhd</b></p></td>
+<td width="1%"></td>
+<td width="9%">
+
+
+<p>960x540</p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>2kdci</b></p>
+
+<p style="margin-left:14%;">2048x1080</p>
+
+<p style="margin-left:9%;"><b>4kdci</b></p>
+
+<p style="margin-left:14%;">4096x2160</p>
+
+<p style="margin-left:9%;"><b>uhd2160</b></p>
+
+<p style="margin-left:14%;">3840x2160</p>
+
+<p style="margin-left:9%;"><b>uhd4320</b></p>
+
+<p style="margin-left:14%;">7680x4320</p>
+
+<h3>Video rate
+<a name="Video rate"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specify the
+frame rate of a video, expressed as the number of frames
+generated per second. It has to be a string in the format
+<i>frame_rate_num</i>/<i>frame_rate_den</i>, an integer
+number, a float number or a valid video frame rate
+abbreviation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+abbreviations are recognized: <b><br>
+ntsc</b></p>
+
+<p style="margin-left:14%;">30000/1001</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>pal</b></p></td>
+<td width="1%"></td>
+<td width="5%">
+
+
+<p>25/1</p></td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>qntsc</b></p>
+
+<p style="margin-left:14%;">30000/1001</p>
+
+<p style="margin-left:9%;"><b>qpal</b></p>
+
+<p style="margin-left:14%;">25/1</p>
+
+<p style="margin-left:9%;"><b>sntsc</b></p>
+
+<p style="margin-left:14%;">30000/1001</p>
+
+<p style="margin-left:9%;"><b>spal</b></p>
+
+<p style="margin-left:14%;">25/1</p>
+
+<p style="margin-left:9%;"><b>film</b></p>
+
+<p style="margin-left:14%;">24/1</p>
+
+<p style="margin-left:9%;"><b>ntsc-film</b></p>
+
+<p style="margin-left:14%;">24000/1001</p>
+
+<h3>Ratio
+<a name="Ratio"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">A ratio can be
+expressed as an expression, or in the form
+<i>numerator</i>:<i>denominator</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that a
+ratio with infinite (1/0) or negative value is considered
+valid, so you should check on the returned value if you want
+to exclude those values.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The undefined
+value can be expressed using the &quot;0:0&quot; string.</p>
+
+<h3>Color
+<a name="Color"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">It can be the
+name of a color as defined below (case insensitive match) or
+a &quot;[0x|#]RRGGBB[AA]&quot; sequence, possibly followed
+by @ and a string representing the alpha component.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The alpha
+component may be a string composed by &quot;0x&quot;
+followed by an hexadecimal number or a decimal number
+between 0.0 and 1.0, which represents the opacity value
+(<b>0x00</b> or <b>0.0</b> means completely transparent,
+<b>0xff</b> or <b>1.0</b> completely opaque). If the alpha
+component is not specified then <b>0xff</b> is assumed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The string
+<b>random</b> will result in a random color.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+names of colors are recognized: <b><br>
+AliceBlue</b></p>
+
+<p style="margin-left:14%;">0xF0F8FF</p>
+
+<p style="margin-left:9%;"><b>AntiqueWhite</b></p>
+
+<p style="margin-left:14%;">0xFAEBD7</p>
+
+<p style="margin-left:9%;"><b>Aqua</b></p>
+
+<p style="margin-left:14%;">0x00FFFF</p>
+
+<p style="margin-left:9%;"><b>Aquamarine</b></p>
+
+<p style="margin-left:14%;">0x7FFFD4</p>
+
+<p style="margin-left:9%;"><b>Azure</b></p>
+
+<p style="margin-left:14%;">0xF0FFFF</p>
+
+<p style="margin-left:9%;"><b>Beige</b></p>
+
+<p style="margin-left:14%;">0xF5F5DC</p>
+
+<p style="margin-left:9%;"><b>Bisque</b></p>
+
+<p style="margin-left:14%;">0xFFE4C4</p>
+
+<p style="margin-left:9%;"><b>Black</b></p>
+
+<p style="margin-left:14%;">0x000000</p>
+
+<p style="margin-left:9%;"><b>BlanchedAlmond</b></p>
+
+<p style="margin-left:14%;">0xFFEBCD</p>
+
+<p style="margin-left:9%;"><b>Blue</b></p>
+
+<p style="margin-left:14%;">0x0000FF</p>
+
+<p style="margin-left:9%;"><b>BlueViolet</b></p>
+
+<p style="margin-left:14%;">0x8A2BE2</p>
+
+<p style="margin-left:9%;"><b>Brown</b></p>
+
+<p style="margin-left:14%;">0xA52A2A</p>
+
+<p style="margin-left:9%;"><b>BurlyWood</b></p>
+
+<p style="margin-left:14%;">0xDEB887</p>
+
+<p style="margin-left:9%;"><b>CadetBlue</b></p>
+
+<p style="margin-left:14%;">0x5F9EA0</p>
+
+<p style="margin-left:9%;"><b>Chartreuse</b></p>
+
+<p style="margin-left:14%;">0x7FFF00</p>
+
+<p style="margin-left:9%;"><b>Chocolate</b></p>
+
+<p style="margin-left:14%;">0xD2691E</p>
+
+<p style="margin-left:9%;"><b>Coral</b></p>
+
+<p style="margin-left:14%;">0xFF7F50</p>
+
+<p style="margin-left:9%;"><b>CornflowerBlue</b></p>
+
+<p style="margin-left:14%;">0x6495ED</p>
+
+<p style="margin-left:9%;"><b>Cornsilk</b></p>
+
+<p style="margin-left:14%;">0xFFF8DC</p>
+
+<p style="margin-left:9%;"><b>Crimson</b></p>
+
+<p style="margin-left:14%;">0xDC143C</p>
+
+<p style="margin-left:9%;"><b>Cyan</b></p>
+
+<p style="margin-left:14%;">0x00FFFF</p>
+
+<p style="margin-left:9%;"><b>DarkBlue</b></p>
+
+<p style="margin-left:14%;">0x00008B</p>
+
+<p style="margin-left:9%;"><b>DarkCyan</b></p>
+
+<p style="margin-left:14%;">0x008B8B</p>
+
+<p style="margin-left:9%;"><b>DarkGoldenRod</b></p>
+
+<p style="margin-left:14%;">0xB8860B</p>
+
+<p style="margin-left:9%;"><b>DarkGray</b></p>
+
+<p style="margin-left:14%;">0xA9A9A9</p>
+
+<p style="margin-left:9%;"><b>DarkGreen</b></p>
+
+<p style="margin-left:14%;">0x006400</p>
+
+<p style="margin-left:9%;"><b>DarkKhaki</b></p>
+
+<p style="margin-left:14%;">0xBDB76B</p>
+
+<p style="margin-left:9%;"><b>DarkMagenta</b></p>
+
+<p style="margin-left:14%;">0x8B008B</p>
+
+<p style="margin-left:9%;"><b>DarkOliveGreen</b></p>
+
+<p style="margin-left:14%;">0x556B2F</p>
+
+<p style="margin-left:9%;"><b>Darkorange</b></p>
+
+<p style="margin-left:14%;">0xFF8C00</p>
+
+<p style="margin-left:9%;"><b>DarkOrchid</b></p>
+
+<p style="margin-left:14%;">0x9932CC</p>
+
+<p style="margin-left:9%;"><b>DarkRed</b></p>
+
+<p style="margin-left:14%;">0x8B0000</p>
+
+<p style="margin-left:9%;"><b>DarkSalmon</b></p>
+
+<p style="margin-left:14%;">0xE9967A</p>
+
+<p style="margin-left:9%;"><b>DarkSeaGreen</b></p>
+
+<p style="margin-left:14%;">0x8FBC8F</p>
+
+<p style="margin-left:9%;"><b>DarkSlateBlue</b></p>
+
+<p style="margin-left:14%;">0x483D8B</p>
+
+<p style="margin-left:9%;"><b>DarkSlateGray</b></p>
+
+<p style="margin-left:14%;">0x2F4F4F</p>
+
+<p style="margin-left:9%;"><b>DarkTurquoise</b></p>
+
+<p style="margin-left:14%;">0x00CED1</p>
+
+<p style="margin-left:9%;"><b>DarkViolet</b></p>
+
+<p style="margin-left:14%;">0x9400D3</p>
+
+<p style="margin-left:9%;"><b>DeepPink</b></p>
+
+<p style="margin-left:14%;">0xFF1493</p>
+
+<p style="margin-left:9%;"><b>DeepSkyBlue</b></p>
+
+<p style="margin-left:14%;">0x00BFFF</p>
+
+<p style="margin-left:9%;"><b>DimGray</b></p>
+
+<p style="margin-left:14%;">0x696969</p>
+
+<p style="margin-left:9%;"><b>DodgerBlue</b></p>
+
+<p style="margin-left:14%;">0x1E90FF</p>
+
+<p style="margin-left:9%;"><b>FireBrick</b></p>
+
+<p style="margin-left:14%;">0xB22222</p>
+
+<p style="margin-left:9%;"><b>FloralWhite</b></p>
+
+<p style="margin-left:14%;">0xFFFAF0</p>
+
+<p style="margin-left:9%;"><b>ForestGreen</b></p>
+
+<p style="margin-left:14%;">0x228B22</p>
+
+<p style="margin-left:9%;"><b>Fuchsia</b></p>
+
+<p style="margin-left:14%;">0xFF00FF</p>
+
+<p style="margin-left:9%;"><b>Gainsboro</b></p>
+
+<p style="margin-left:14%;">0xDCDCDC</p>
+
+<p style="margin-left:9%;"><b>GhostWhite</b></p>
+
+<p style="margin-left:14%;">0xF8F8FF</p>
+
+<p style="margin-left:9%;"><b>Gold</b></p>
+
+<p style="margin-left:14%;">0xFFD700</p>
+
+<p style="margin-left:9%;"><b>GoldenRod</b></p>
+
+<p style="margin-left:14%;">0xDAA520</p>
+
+<p style="margin-left:9%;"><b>Gray</b></p>
+
+<p style="margin-left:14%;">0x808080</p>
+
+<p style="margin-left:9%;"><b>Green</b></p>
+
+<p style="margin-left:14%;">0x008000</p>
+
+<p style="margin-left:9%;"><b>GreenYellow</b></p>
+
+<p style="margin-left:14%;">0xADFF2F</p>
+
+<p style="margin-left:9%;"><b>HoneyDew</b></p>
+
+<p style="margin-left:14%;">0xF0FFF0</p>
+
+<p style="margin-left:9%;"><b>HotPink</b></p>
+
+<p style="margin-left:14%;">0xFF69B4</p>
+
+<p style="margin-left:9%;"><b>IndianRed</b></p>
+
+<p style="margin-left:14%;">0xCD5C5C</p>
+
+<p style="margin-left:9%;"><b>Indigo</b></p>
+
+<p style="margin-left:14%;">0x4B0082</p>
+
+<p style="margin-left:9%;"><b>Ivory</b></p>
+
+<p style="margin-left:14%;">0xFFFFF0</p>
+
+<p style="margin-left:9%;"><b>Khaki</b></p>
+
+<p style="margin-left:14%;">0xF0E68C</p>
+
+<p style="margin-left:9%;"><b>Lavender</b></p>
+
+<p style="margin-left:14%;">0xE6E6FA</p>
+
+<p style="margin-left:9%;"><b>LavenderBlush</b></p>
+
+<p style="margin-left:14%;">0xFFF0F5</p>
+
+<p style="margin-left:9%;"><b>LawnGreen</b></p>
+
+<p style="margin-left:14%;">0x7CFC00</p>
+
+<p style="margin-left:9%;"><b>LemonChiffon</b></p>
+
+<p style="margin-left:14%;">0xFFFACD</p>
+
+<p style="margin-left:9%;"><b>LightBlue</b></p>
+
+<p style="margin-left:14%;">0xADD8E6</p>
+
+<p style="margin-left:9%;"><b>LightCoral</b></p>
+
+<p style="margin-left:14%;">0xF08080</p>
+
+<p style="margin-left:9%;"><b>LightCyan</b></p>
+
+<p style="margin-left:14%;">0xE0FFFF</p>
+
+<p style="margin-left:9%;"><b>LightGoldenRodYellow</b></p>
+
+<p style="margin-left:14%;">0xFAFAD2</p>
+
+<p style="margin-left:9%;"><b>LightGreen</b></p>
+
+<p style="margin-left:14%;">0x90EE90</p>
+
+<p style="margin-left:9%;"><b>LightGrey</b></p>
+
+<p style="margin-left:14%;">0xD3D3D3</p>
+
+<p style="margin-left:9%;"><b>LightPink</b></p>
+
+<p style="margin-left:14%;">0xFFB6C1</p>
+
+<p style="margin-left:9%;"><b>LightSalmon</b></p>
+
+<p style="margin-left:14%;">0xFFA07A</p>
+
+<p style="margin-left:9%;"><b>LightSeaGreen</b></p>
+
+<p style="margin-left:14%;">0x20B2AA</p>
+
+<p style="margin-left:9%;"><b>LightSkyBlue</b></p>
+
+<p style="margin-left:14%;">0x87CEFA</p>
+
+<p style="margin-left:9%;"><b>LightSlateGray</b></p>
+
+<p style="margin-left:14%;">0x778899</p>
+
+<p style="margin-left:9%;"><b>LightSteelBlue</b></p>
+
+<p style="margin-left:14%;">0xB0C4DE</p>
+
+<p style="margin-left:9%;"><b>LightYellow</b></p>
+
+<p style="margin-left:14%;">0xFFFFE0</p>
+
+<p style="margin-left:9%;"><b>Lime</b></p>
+
+<p style="margin-left:14%;">0x00FF00</p>
+
+<p style="margin-left:9%;"><b>LimeGreen</b></p>
+
+<p style="margin-left:14%;">0x32CD32</p>
+
+<p style="margin-left:9%;"><b>Linen</b></p>
+
+<p style="margin-left:14%;">0xFAF0E6</p>
+
+<p style="margin-left:9%;"><b>Magenta</b></p>
+
+<p style="margin-left:14%;">0xFF00FF</p>
+
+<p style="margin-left:9%;"><b>Maroon</b></p>
+
+<p style="margin-left:14%;">0x800000</p>
+
+<p style="margin-left:9%;"><b>MediumAquaMarine</b></p>
+
+<p style="margin-left:14%;">0x66CDAA</p>
+
+<p style="margin-left:9%;"><b>MediumBlue</b></p>
+
+<p style="margin-left:14%;">0x0000CD</p>
+
+<p style="margin-left:9%;"><b>MediumOrchid</b></p>
+
+<p style="margin-left:14%;">0xBA55D3</p>
+
+<p style="margin-left:9%;"><b>MediumPurple</b></p>
+
+<p style="margin-left:14%;">0x9370D8</p>
+
+<p style="margin-left:9%;"><b>MediumSeaGreen</b></p>
+
+<p style="margin-left:14%;">0x3CB371</p>
+
+<p style="margin-left:9%;"><b>MediumSlateBlue</b></p>
+
+<p style="margin-left:14%;">0x7B68EE</p>
+
+<p style="margin-left:9%;"><b>MediumSpringGreen</b></p>
+
+<p style="margin-left:14%;">0x00FA9A</p>
+
+<p style="margin-left:9%;"><b>MediumTurquoise</b></p>
+
+<p style="margin-left:14%;">0x48D1CC</p>
+
+<p style="margin-left:9%;"><b>MediumVioletRed</b></p>
+
+<p style="margin-left:14%;">0xC71585</p>
+
+<p style="margin-left:9%;"><b>MidnightBlue</b></p>
+
+<p style="margin-left:14%;">0x191970</p>
+
+<p style="margin-left:9%;"><b>MintCream</b></p>
+
+<p style="margin-left:14%;">0xF5FFFA</p>
+
+<p style="margin-left:9%;"><b>MistyRose</b></p>
+
+<p style="margin-left:14%;">0xFFE4E1</p>
+
+<p style="margin-left:9%;"><b>Moccasin</b></p>
+
+<p style="margin-left:14%;">0xFFE4B5</p>
+
+<p style="margin-left:9%;"><b>NavajoWhite</b></p>
+
+<p style="margin-left:14%;">0xFFDEAD</p>
+
+<p style="margin-left:9%;"><b>Navy</b></p>
+
+<p style="margin-left:14%;">0x000080</p>
+
+<p style="margin-left:9%;"><b>OldLace</b></p>
+
+<p style="margin-left:14%;">0xFDF5E6</p>
+
+<p style="margin-left:9%;"><b>Olive</b></p>
+
+<p style="margin-left:14%;">0x808000</p>
+
+<p style="margin-left:9%;"><b>OliveDrab</b></p>
+
+<p style="margin-left:14%;">0x6B8E23</p>
+
+<p style="margin-left:9%;"><b>Orange</b></p>
+
+<p style="margin-left:14%;">0xFFA500</p>
+
+<p style="margin-left:9%;"><b>OrangeRed</b></p>
+
+<p style="margin-left:14%;">0xFF4500</p>
+
+<p style="margin-left:9%;"><b>Orchid</b></p>
+
+<p style="margin-left:14%;">0xDA70D6</p>
+
+<p style="margin-left:9%;"><b>PaleGoldenRod</b></p>
+
+<p style="margin-left:14%;">0xEEE8AA</p>
+
+<p style="margin-left:9%;"><b>PaleGreen</b></p>
+
+<p style="margin-left:14%;">0x98FB98</p>
+
+<p style="margin-left:9%;"><b>PaleTurquoise</b></p>
+
+<p style="margin-left:14%;">0xAFEEEE</p>
+
+<p style="margin-left:9%;"><b>PaleVioletRed</b></p>
+
+<p style="margin-left:14%;">0xD87093</p>
+
+<p style="margin-left:9%;"><b>PapayaWhip</b></p>
+
+<p style="margin-left:14%;">0xFFEFD5</p>
+
+<p style="margin-left:9%;"><b>PeachPuff</b></p>
+
+<p style="margin-left:14%;">0xFFDAB9</p>
+
+<p style="margin-left:9%;"><b>Peru</b></p>
+
+<p style="margin-left:14%;">0xCD853F</p>
+
+<p style="margin-left:9%;"><b>Pink</b></p>
+
+<p style="margin-left:14%;">0xFFC0CB</p>
+
+<p style="margin-left:9%;"><b>Plum</b></p>
+
+<p style="margin-left:14%;">0xDDA0DD</p>
+
+<p style="margin-left:9%;"><b>PowderBlue</b></p>
+
+<p style="margin-left:14%;">0xB0E0E6</p>
+
+<p style="margin-left:9%;"><b>Purple</b></p>
+
+<p style="margin-left:14%;">0x800080</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>Red</b></p></td>
+<td width="1%"></td>
+<td width="10%">
+
+
+<p>0xFF0000</p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>RosyBrown</b></p>
+
+<p style="margin-left:14%;">0xBC8F8F</p>
+
+<p style="margin-left:9%;"><b>RoyalBlue</b></p>
+
+<p style="margin-left:14%;">0x4169E1</p>
+
+<p style="margin-left:9%;"><b>SaddleBrown</b></p>
+
+<p style="margin-left:14%;">0x8B4513</p>
+
+<p style="margin-left:9%;"><b>Salmon</b></p>
+
+<p style="margin-left:14%;">0xFA8072</p>
+
+<p style="margin-left:9%;"><b>SandyBrown</b></p>
+
+<p style="margin-left:14%;">0xF4A460</p>
+
+<p style="margin-left:9%;"><b>SeaGreen</b></p>
+
+<p style="margin-left:14%;">0x2E8B57</p>
+
+<p style="margin-left:9%;"><b>SeaShell</b></p>
+
+<p style="margin-left:14%;">0xFFF5EE</p>
+
+<p style="margin-left:9%;"><b>Sienna</b></p>
+
+<p style="margin-left:14%;">0xA0522D</p>
+
+<p style="margin-left:9%;"><b>Silver</b></p>
+
+<p style="margin-left:14%;">0xC0C0C0</p>
+
+<p style="margin-left:9%;"><b>SkyBlue</b></p>
+
+<p style="margin-left:14%;">0x87CEEB</p>
+
+<p style="margin-left:9%;"><b>SlateBlue</b></p>
+
+<p style="margin-left:14%;">0x6A5ACD</p>
+
+<p style="margin-left:9%;"><b>SlateGray</b></p>
+
+<p style="margin-left:14%;">0x708090</p>
+
+<p style="margin-left:9%;"><b>Snow</b></p>
+
+<p style="margin-left:14%;">0xFFFAFA</p>
+
+<p style="margin-left:9%;"><b>SpringGreen</b></p>
+
+<p style="margin-left:14%;">0x00FF7F</p>
+
+<p style="margin-left:9%;"><b>SteelBlue</b></p>
+
+<p style="margin-left:14%;">0x4682B4</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>Tan</b></p></td>
+<td width="1%"></td>
+<td width="10%">
+
+
+<p>0xD2B48C</p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Teal</b></p>
+
+<p style="margin-left:14%;">0x008080</p>
+
+<p style="margin-left:9%;"><b>Thistle</b></p>
+
+<p style="margin-left:14%;">0xD8BFD8</p>
+
+<p style="margin-left:9%;"><b>Tomato</b></p>
+
+<p style="margin-left:14%;">0xFF6347</p>
+
+<p style="margin-left:9%;"><b>Turquoise</b></p>
+
+<p style="margin-left:14%;">0x40E0D0</p>
+
+<p style="margin-left:9%;"><b>Violet</b></p>
+
+<p style="margin-left:14%;">0xEE82EE</p>
+
+<p style="margin-left:9%;"><b>Wheat</b></p>
+
+<p style="margin-left:14%;">0xF5DEB3</p>
+
+<p style="margin-left:9%;"><b>White</b></p>
+
+<p style="margin-left:14%;">0xFFFFFF</p>
+
+<p style="margin-left:9%;"><b>WhiteSmoke</b></p>
+
+<p style="margin-left:14%;">0xF5F5F5</p>
+
+<p style="margin-left:9%;"><b>Yellow</b></p>
+
+<p style="margin-left:14%;">0xFFFF00</p>
+
+<p style="margin-left:9%;"><b>YellowGreen</b></p>
+
+<p style="margin-left:14%;">0x9ACD32</p>
+
+<h3>Channel Layout
+<a name="Channel Layout"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">A channel layout
+specifies the spatial disposition of the channels in a
+multi-channel audio stream. To specify a channel layout,
+FFmpeg makes use of a special syntax.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Individual
+channels are identified by an id, as given by the table
+below:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>FL</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>front left</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>FR</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>front right</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>FC</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>front center</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>LFE</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>low frequency</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>BL</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>back left</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>BR</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>back right</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>FLC</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>front left-of-center</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>FRC</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>front right-of-center</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>BC</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>back center</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>SL</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>side left</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>SR</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>side right</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>TC</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>top center</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>TFL</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>top front left</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>TFC</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>top front center</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>TFR</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>top front right</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>TBL</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>top back left</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>TBC</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>top back center</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>TBR</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>top back right</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>DL</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>downmix left</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>DR</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>downmix right</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>WL</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>wide left</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>WR</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>wide right</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>SDL</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>surround direct left</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>SDR</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>surround direct right</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>LFE2</b></p>
+
+<p style="margin-left:14%;">low frequency 2</p>
+
+<p style="margin-left:9%; margin-top: 1em">Standard channel
+layout compositions can be specified by using the following
+identifiers: <b><br>
+mono</b></p>
+
+<p style="margin-left:14%;">FC</p>
+
+<p style="margin-left:9%;"><b>stereo</b></p>
+
+<p style="margin-left:14%;">FL+FR</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>2.1</b></p></td>
+<td width="1%"></td>
+<td width="12%">
+
+
+<p>FL+FR+LFE</p></td>
+<td width="74%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>3.0</b></p></td>
+<td width="1%"></td>
+<td width="12%">
+
+
+<p>FL+FR+FC</p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>3.0(back)</b></p>
+
+<p style="margin-left:14%;">FL+FR+BC</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>4.0</b></p></td>
+<td width="1%"></td>
+<td width="14%">
+
+
+<p>FL+FR+FC+BC</p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>quad</b></p>
+
+<p style="margin-left:14%;">FL+FR+BL+BR</p>
+
+<p style="margin-left:9%;"><b>quad(side)</b></p>
+
+<p style="margin-left:14%;">FL+FR+SL+SR</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>3.1</b></p></td>
+<td width="1%"></td>
+<td width="18%">
+
+
+<p>FL+FR+FC+LFE</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>5.0</b></p></td>
+<td width="1%"></td>
+<td width="18%">
+
+
+<p>FL+FR+FC+BL+BR</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>5.0(side)</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+SL+SR</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>4.1</b></p></td>
+<td width="1%"></td>
+<td width="23%">
+
+
+<p>FL+FR+FC+LFE+BC</p></td>
+<td width="63%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>5.1</b></p></td>
+<td width="1%"></td>
+<td width="23%">
+
+
+<p>FL+FR+FC+LFE+BL+BR</p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>5.1(side)</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+SL+SR</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>6.0</b></p></td>
+<td width="1%"></td>
+<td width="22%">
+
+
+<p>FL+FR+FC+BC+SL+SR</p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>6.0(front)</b></p>
+
+<p style="margin-left:14%;">FL+FR+FLC+FRC+SL+SR</p>
+
+<p style="margin-left:9%;"><b>3.1.2</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+TFL+TFR</p>
+
+<p style="margin-left:9%;"><b>hexagonal</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+BL+BR+BC</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>6.1</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>FL+FR+FC+LFE+BC+SL+SR</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>6.1</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>FL+FR+FC+LFE+BL+BR+BC</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>6.1(front)</b></p>
+
+<p style="margin-left:14%;">FL+FR+LFE+FLC+FRC+SL+SR</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>7.0</b></p></td>
+<td width="1%"></td>
+<td width="26%">
+
+
+<p>FL+FR+FC+BL+BR+SL+SR</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>7.0(front)</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+FLC+FRC+SL+SR</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>7.1</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p>FL+FR+FC+LFE+BL+BR+SL+SR</p></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>7.1(wide)</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+BL+BR+FLC+FRC</p>
+
+<p style="margin-left:9%;"><b>7.1(wide-side)</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+FLC+FRC+SL+SR</p>
+
+<p style="margin-left:9%;"><b>5.1.2</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+BL+BR+TFL+TFR</p>
+
+<p style="margin-left:9%;"><b>octagonal</b></p>
+
+<p style="margin-left:14%;">FL+FR+FC+BL+BR+BC+SL+SR</p>
+
+<p style="margin-left:9%;"><b>cube</b></p>
+
+
+<p style="margin-left:14%;">FL+FR+BL+BR+TFL+TFR+TBL+TBR</p>
+
+<p style="margin-left:9%;"><b>5.1.4</b></p>
+
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+BL+BR+TFL+TFR+TBL+TBR</p>
+
+<p style="margin-left:9%;"><b>7.1.2</b></p>
+
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+BL+BR+SL+SR+TFL+TFR</p>
+
+<p style="margin-left:9%;"><b>7.1.4</b></p>
+
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+BL+BR+SL+SR+TFL+TFR+TBL+TBR</p>
+
+<p style="margin-left:9%;"><b>7.2.3</b></p>
+
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+BL+BR+SL+SR+TFL+TFR+TBC+LFE2</p>
+
+<p style="margin-left:9%;"><b>9.1.4</b></p>
+
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+BL+BR+FLC+FRC+SL+SR+TFL+TFR+TBL+TBR</p>
+
+<p style="margin-left:9%;"><b>hexadecagonal</b></p>
+
+
+<p style="margin-left:14%;">FL+FR+FC+BL+BR+BC+SL+SR+WL+WR+TBL+TBR+TBC+TFC+TFL+TFR</p>
+
+<p style="margin-left:9%;"><b>downmix</b></p>
+
+<p style="margin-left:14%;">DL+DR</p>
+
+<p style="margin-left:9%;"><b>22.2</b></p>
+
+
+<p style="margin-left:14%;">FL+FR+FC+LFE+BL+BR+FLC+FRC+BC+SL+SR+TC+TFL+TFC+TFR+TBL+TBC+TBR+LFE2+TSL+TSR+BFC+BFL+BFR</p>
+
+<p style="margin-left:9%; margin-top: 1em">A custom channel
+layout can be specified as a sequence of terms, separated by
+&rsquo;+&rsquo;. Each term can be:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>the name of a single channel (e.g. <b>FL</b>, <b>FR</b>,
+<b>FC</b>, <b>LFE</b>, etc.), each optionally containing a
+custom name after a &rsquo;@&rsquo;, (e.g. <b>FL@Left</b>,
+<b>FR@Right</b>, <b>FC@Center</b>, <b>LFE@Low_Frequency</b>,
+etc.)</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">A standard
+channel layout can be specified by the following:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">the name of a single channel
+(e.g. <b>FL</b>, <b>FR</b>, <b>FC</b>, <b>LFE</b>, etc.)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>the name of a standard channel layout (e.g. <b>mono</b>,
+<b>stereo</b>, <b>4.0</b>, <b>quad</b>, <b>5.0</b>,
+etc.)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>a number of channels, in decimal, followed by
+&rsquo;c&rsquo;, yielding the default channel layout for
+that number of channels (see the function
+&quot;av_channel_layout_default&quot;). Note that not all
+channel counts have a default layout.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>a number of channels, in decimal, followed by
+&rsquo;C&rsquo;, yielding an unknown channel layout with the
+specified number of channels. Note that not all channel
+layout specification strings support unknown channel
+layouts.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>a channel layout mask, in hexadecimal starting with
+&quot;0x&quot; (see the &quot;AV_CH_*&quot; macros in
+<i>libavutil/channel_layout.h</i>.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Before libavutil
+version 53 the trailing character &quot;c&quot; to specify a
+number of channels was optional, but now it is required,
+while a channel layout mask can also be specified as a
+decimal number (if and only if not followed by &quot;c&quot;
+or &quot;C&quot;).</p>
+
+<p style="margin-left:9%; margin-top: 1em">See also the
+function &quot;av_channel_layout_from_string&quot; defined
+in <i>libavutil/channel_layout.h</i>.</p>
+
+<h2>EXPRESSION EVALUATION
+<a name="EXPRESSION EVALUATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When evaluating
+an arithmetic expression, FFmpeg uses an internal formula
+evaluator, implemented through the <i>libavutil/eval.h</i>
+interface.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An expression
+may contain unary, binary operators, constants, and
+functions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Two expressions
+<i>expr1</i> and <i>expr2</i> can be combined to form
+another expression &quot;<i>expr1</i>;<i>expr2</i>&quot;.
+<i>expr1</i> and <i>expr2</i> are evaluated in turn, and the
+new expression evaluates to the value of <i>expr2</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+binary operators are available: &quot;+&quot;,
+&quot;-&quot;, &quot;*&quot;, &quot;/&quot;,
+&quot;&#710;&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+unary operators are available: &quot;+&quot;,
+&quot;-&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some internal
+variables can be used to store and load intermediary
+results. They can be accessed using the &quot;ld&quot; and
+&quot;st&quot; functions with an index argument varying from
+0 to 9 to specify which internal variable to access.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+functions are available: <b><br>
+abs(x)</b></p>
+
+<p style="margin-left:14%;">Compute absolute value of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>acos(x)</b></p>
+
+<p style="margin-left:14%;">Compute arccosine of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>asin(x)</b></p>
+
+<p style="margin-left:14%;">Compute arcsine of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>atan(x)</b></p>
+
+<p style="margin-left:14%;">Compute arctangent of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>atan2(y, x)</b></p>
+
+<p style="margin-left:14%;">Compute principal value of the
+arc tangent of <i>y</i>/<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>between(x, min, max)</b></p>
+
+<p style="margin-left:14%;">Return 1 if <i>x</i> is greater
+than or equal to <i>min</i> and lesser than or equal to
+<i>max</i>, 0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>bitand(x, y) <br>
+bitor(x, y)</b></p>
+
+<p style="margin-left:14%;">Compute bitwise and/or
+operation on <i>x</i> and <i>y</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The results of
+the evaluation of <i>x</i> and <i>y</i> are converted to
+integers before executing the bitwise operation.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that both
+the conversion to integer and the conversion back to
+floating point can lose precision. Beware of unexpected
+results for large numbers (usually 2&#710;53 and
+larger).</p>
+
+<p style="margin-left:9%;"><b>ceil(expr)</b></p>
+
+<p style="margin-left:14%;">Round the value of expression
+<i>expr</i> upwards to the nearest integer. For example,
+&quot;ceil(1.5)&quot; is &quot;2.0&quot;.</p>
+
+<p style="margin-left:9%;"><b>clip(x, min, max)</b></p>
+
+<p style="margin-left:14%;">Return the value of <i>x</i>
+clipped between <i>min</i> and <i>max</i>.</p>
+
+<p style="margin-left:9%;"><b>cos(x)</b></p>
+
+<p style="margin-left:14%;">Compute cosine of <i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>cosh(x)</b></p>
+
+<p style="margin-left:14%;">Compute hyperbolic cosine of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>eq(x, y)</b></p>
+
+<p style="margin-left:14%;">Return 1 if <i>x</i> and
+<i>y</i> are equivalent, 0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>exp(x)</b></p>
+
+<p style="margin-left:14%;">Compute exponential of <i>x</i>
+(with base &quot;e&quot;, the Euler&rsquo;s number).</p>
+
+<p style="margin-left:9%;"><b>floor(expr)</b></p>
+
+<p style="margin-left:14%;">Round the value of expression
+<i>expr</i> downwards to the nearest integer. For example,
+&quot;floor(-1.5)&quot; is &quot;-2.0&quot;.</p>
+
+<p style="margin-left:9%;"><b>gauss(x)</b></p>
+
+<p style="margin-left:14%;">Compute Gauss function of
+<i>x</i>, corresponding to &quot;exp(-x*x/2) /
+sqrt(2*PI)&quot;.</p>
+
+<p style="margin-left:9%;"><b>gcd(x, y)</b></p>
+
+<p style="margin-left:14%;">Return the greatest common
+divisor of <i>x</i> and <i>y</i>. If both <i>x</i> and
+<i>y</i> are 0 or either or both are less than zero then
+behavior is undefined.</p>
+
+<p style="margin-left:9%;"><b>gt(x, y)</b></p>
+
+<p style="margin-left:14%;">Return 1 if <i>x</i> is greater
+than <i>y</i>, 0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>gte(x, y)</b></p>
+
+<p style="margin-left:14%;">Return 1 if <i>x</i> is greater
+than or equal to <i>y</i>, 0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>hypot(x, y)</b></p>
+
+<p style="margin-left:14%;">This function is similar to the
+C function with the same name; it returns
+&quot;sqrt(<i>x</i>*<i>x</i> + <i>y</i>*<i>y</i>)&quot;, the
+length of the hypotenuse of a right triangle with sides of
+length <i>x</i> and <i>y</i>, or the distance of the point
+(<i>x</i>, <i>y</i>) from the origin.</p>
+
+<p style="margin-left:9%;"><b>if(x, y)</b></p>
+
+<p style="margin-left:14%;">Evaluate <i>x</i>, and if the
+result is non-zero return the result of the evaluation of
+<i>y</i>, return 0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>if(x, y, z)</b></p>
+
+<p style="margin-left:14%;">Evaluate <i>x</i>, and if the
+result is non-zero return the evaluation result of <i>y</i>,
+otherwise the evaluation result of <i>z</i>.</p>
+
+<p style="margin-left:9%;"><b>ifnot(x, y)</b></p>
+
+<p style="margin-left:14%;">Evaluate <i>x</i>, and if the
+result is zero return the result of the evaluation of
+<i>y</i>, return 0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>ifnot(x, y, z)</b></p>
+
+<p style="margin-left:14%;">Evaluate <i>x</i>, and if the
+result is zero return the evaluation result of <i>y</i>,
+otherwise the evaluation result of <i>z</i>.</p>
+
+<p style="margin-left:9%;"><b>isinf(x)</b></p>
+
+<p style="margin-left:14%;">Return 1.0 if <i>x</i> is
++/-INFINITY, 0.0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>isnan(x)</b></p>
+
+<p style="margin-left:14%;">Return 1.0 if <i>x</i> is NAN,
+0.0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>ld(idx)</b></p>
+
+<p style="margin-left:14%;">Load the value of the internal
+variable with index <i>idx</i>, which was previously stored
+with st(<i>idx</i>, <i>expr</i>). The function returns the
+loaded value.</p>
+
+<p style="margin-left:9%;"><b>lerp(x, y, z)</b></p>
+
+<p style="margin-left:14%;">Return linear interpolation
+between <i>x</i> and <i>y</i> by amount of <i>z</i>.</p>
+
+<p style="margin-left:9%;"><b>log(x)</b></p>
+
+<p style="margin-left:14%;">Compute natural logarithm of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>lt(x, y)</b></p>
+
+<p style="margin-left:14%;">Return 1 if <i>x</i> is lesser
+than <i>y</i>, 0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>lte(x, y)</b></p>
+
+<p style="margin-left:14%;">Return 1 if <i>x</i> is lesser
+than or equal to <i>y</i>, 0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>max(x, y)</b></p>
+
+<p style="margin-left:14%;">Return the maximum between
+<i>x</i> and <i>y</i>.</p>
+
+<p style="margin-left:9%;"><b>min(x, y)</b></p>
+
+<p style="margin-left:14%;">Return the minimum between
+<i>x</i> and <i>y</i>.</p>
+
+<p style="margin-left:9%;"><b>mod(x, y)</b></p>
+
+<p style="margin-left:14%;">Compute the remainder of
+division of <i>x</i> by <i>y</i>.</p>
+
+<p style="margin-left:9%;"><b>not(expr)</b></p>
+
+<p style="margin-left:14%;">Return 1.0 if <i>expr</i> is
+zero, 0.0 otherwise.</p>
+
+<p style="margin-left:9%;"><b>pow(x, y)</b></p>
+
+<p style="margin-left:14%;">Compute the power of <i>x</i>
+elevated <i>y</i>, it is equivalent to
+&quot;(<i>x</i>)&#710;(<i>y</i>)&quot;.</p>
+
+<p style="margin-left:9%;"><b>print(t) <br>
+print(t, l)</b></p>
+
+<p style="margin-left:14%;">Print the value of expression
+<i>t</i> with loglevel <i>l</i>. If <i>l</i> is not
+specified then a default log level is used. Return the value
+of the expression printed.</p>
+
+<p style="margin-left:9%;"><b>random(idx)</b></p>
+
+<p style="margin-left:14%;">Return a pseudo random value
+between 0.0 and 1.0. <i>idx</i> is the index of the internal
+variable used to save the seed/state, which can be
+previously stored with st(idx).</p>
+
+<p style="margin-left:14%; margin-top: 1em">To initialize
+the seed, you need to store the seed value as a 64-bit
+unsigned integer in the internal variable with index
+<i>idx</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">For example, to
+store the seed with value 42 in the internal variable with
+index 0 and print a few random values:</p>
+
+<p style="margin-left:14%; margin-top: 1em">st(0,42);
+print(random(0)); print(random(0)); print(random(0))</p>
+
+<p style="margin-left:9%;"><b>randomi(idx, min,
+max)</b></p>
+
+<p style="margin-left:14%;">Return a pseudo random value in
+the interval between <i>min</i> and <i>max</i>. <i>idx</i>
+is the index of the internal variable which will be used to
+save the seed/state, which can be previously stored with
+st(idx).</p>
+
+<p style="margin-left:14%; margin-top: 1em">To initialize
+the seed, you need to store the seed value as a 64-bit
+unsigned integer in the internal variable with index
+<i>idx</i>.</p>
+
+<p style="margin-left:9%;"><b>root(expr, max)</b></p>
+
+<p style="margin-left:14%;">Find an input value for which
+the function represented by <i>expr</i> with argument
+<b><i>ld</i></b><i>(0)</i> is 0 in the interval
+0..<i>max</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The expression
+in <i>expr</i> must denote a continuous function or the
+result is undefined.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b><i>ld</i></b><i>(0)</i>
+is used to represent the function input value, which means
+that the given expression will be evaluated multiple times
+with various input values that the expression can access
+through ld(0). When the expression evaluates to 0 then the
+corresponding input value will be returned.</p>
+
+<p style="margin-left:9%;"><b>round(expr)</b></p>
+
+<p style="margin-left:14%;">Round the value of expression
+<i>expr</i> to the nearest integer. For example,
+&quot;round(1.5)&quot; is &quot;2.0&quot;.</p>
+
+<p style="margin-left:9%;"><b>sgn(x)</b></p>
+
+<p style="margin-left:14%;">Compute sign of <i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>sin(x)</b></p>
+
+<p style="margin-left:14%;">Compute sine of <i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>sinh(x)</b></p>
+
+<p style="margin-left:14%;">Compute hyperbolic sine of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>sqrt(expr)</b></p>
+
+<p style="margin-left:14%;">Compute the square root of
+<i>expr</i>. This is equivalent to
+&quot;(<i>expr</i>)&#710;.5&quot;.</p>
+
+<p style="margin-left:9%;"><b>squish(x)</b></p>
+
+<p style="margin-left:14%;">Compute expression &quot;1/(1 +
+exp(4*x))&quot;.</p>
+
+<p style="margin-left:9%;"><b>st(idx, expr)</b></p>
+
+<p style="margin-left:14%;">Store the value of the
+expression <i>expr</i> in an internal variable. <i>idx</i>
+specifies the index of the variable where to store the
+value, and it is a value ranging from 0 to 9. The function
+returns the value stored in the internal variable.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The stored
+value can be retrieved with ld(var).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note: variables
+are currently not shared between expressions.</p>
+
+<p style="margin-left:9%;"><b>tan(x)</b></p>
+
+<p style="margin-left:14%;">Compute tangent of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>tanh(x)</b></p>
+
+<p style="margin-left:14%;">Compute hyperbolic tangent of
+<i>x</i>.</p>
+
+<p style="margin-left:9%;"><b>taylor(expr, x) <br>
+taylor(expr, x, idx)</b></p>
+
+<p style="margin-left:14%;">Evaluate a Taylor series at
+<i>x</i>, given an expression representing the ld(idx)-th
+derivative of a function at 0.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When the series
+does not converge the result is undefined.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>ld(idx)</i>
+is used to represent the derivative order in <i>expr</i>,
+which means that the given expression will be evaluated
+multiple times with various input values that the expression
+can access through ld(idx). If <i>idx</i> is not specified
+then 0 is assumed.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note, when you
+have the derivatives at y instead of 0, &quot;taylor(expr,
+x-y)&quot; can be used.</p>
+
+<p style="margin-left:9%;"><b>time(0)</b></p>
+
+<p style="margin-left:14%;">Return the current (wallclock)
+time in seconds.</p>
+
+<p style="margin-left:9%;"><b>trunc(expr)</b></p>
+
+<p style="margin-left:14%;">Round the value of expression
+<i>expr</i> towards zero to the nearest integer. For
+example, &quot;trunc(-1.5)&quot; is &quot;-1.0&quot;.</p>
+
+<p style="margin-left:9%;"><b>while(cond, expr)</b></p>
+
+<p style="margin-left:14%;">Evaluate expression <i>expr</i>
+while the expression <i>cond</i> is non-zero, and returns
+the value of the last <i>expr</i> evaluation, or NAN if
+<i>cond</i> was always false.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+constants are available:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>PI</b></p></td>
+<td width="1%"></td>
+<td width="60%">
+
+
+<p>area of the unit disc, approximately 3.14</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>E</b></p></td>
+<td width="1%"></td>
+<td width="60%">
+
+
+<p><b>exp</b>(1) (Euler&rsquo;s number), approximately
+2.718</p> </td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>PHI</b></p></td>
+<td width="1%"></td>
+<td width="60%">
+
+
+<p>golden ratio (1+<b>sqrt</b>(5))/2, approximately
+1.618</p> </td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Assuming that an
+expression is considered &quot;true&quot; if it has a
+non-zero value, note that:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&quot;*&quot;
+works like AND</p>
+
+<p style="margin-left:9%; margin-top: 1em">&quot;+&quot;
+works like OR</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example the
+construct:</p>
+
+<p style="margin-left:9%; margin-top: 1em">if (A AND B)
+then C</p>
+
+<p style="margin-left:9%; margin-top: 1em">is equivalent
+to:</p>
+
+<p style="margin-left:9%; margin-top: 1em">if(A*B, C)</p>
+
+<p style="margin-left:9%; margin-top: 1em">In your C code,
+you can extend the list of unary and binary functions, and
+define recognized constants, so that they are available for
+your expressions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The evaluator
+also recognizes the International System unit prefixes. If
+&rsquo;i&rsquo; is appended after the prefix, binary
+prefixes are used, which are based on powers of 1024 instead
+of powers of 1000. The &rsquo;B&rsquo; postfix multiplies
+the value by 8, and can be appended after a unit prefix or
+used alone. This allows using for example &rsquo;KB&rsquo;,
+&rsquo;MiB&rsquo;, &rsquo;G&rsquo; and &rsquo;B&rsquo; as
+number postfix.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The list of
+available International System prefixes follows, with
+indication of the corresponding powers of 10 and of 2.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>y</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">10&#710;-24 / 2&#710;-80</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>z</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-21 / 2&#710;-70</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>a</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-18 / 2&#710;-60</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>f</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-15 / 2&#710;-50</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>p</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-12 / 2&#710;-40</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>n</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-9 / 2&#710;-30</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>u</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-6 / 2&#710;-20</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>m</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-3 / 2&#710;-10</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>c</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-2</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>d</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;-1</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>h</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;2</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>k</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;3 / 2&#710;10</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>K</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;3 / 2&#710;10</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>M</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;6 / 2&#710;20</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>G</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;9 / 2&#710;30</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>T</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;12 / 2&#710;40</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>P</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;15 / 2&#710;50</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>E</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;18 / 2&#710;60</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>Z</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;21 / 2&#710;70</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>Y</b></p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>10&#710;24 / 2&#710;80</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ffmpeg</b>(1),
+<b>ffplay</b>(1), <b>ffprobe</b>(1), <b>libavutil</b>(3)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The FFmpeg
+developers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For details
+about the authorship, see the Git history of the project
+(https://git.ffmpeg.org/ffmpeg), e.g. by typing the command
+<b>git log</b> in the FFmpeg source directory, or browsing
+the online repository at
+&lt;<b>https://git.ffmpeg.org/ffmpeg</b>&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Maintainers for
+the specific components are listed in the file
+<i>MAINTAINERS</i> in the source code tree.</p>
+<hr>
+</body>
+</html>

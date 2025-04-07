@@ -1,0 +1,405 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mdoc-update</title>
+
+</head>
+<body>
+
+<h1 align="center">mdoc-update</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mdoc update -
+<b>mdoc</b>(5) documentation format support</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdoc
+update</b> [OPTIONS]* ASSEMBLIES</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdoc
+update</b> is responsible for the following:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>*</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Creating documentation stubs based on <i>ASSEMBLIES</i>.
+The stub-creation process will create new <b>mdoc</b>(5) XML
+files for each type within <i>ASSEMBLIES</i>, and provide
+documentation stubs for each member of those types.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>*</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Update documentation stubs based on <i>ASSEMBLIES</i>.
+Existing <b>mdoc</b>(5) documentation can be updated to
+reflect changes within <i>ASSEMBLIES</i>, such as added
+types and members, while preserving existing
+documentation.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">In some limited
+circumstances, renames will be tracked, minimizing the
+documentation burden when e.g. a parameter is renamed.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdoc
+update</b> does not rely on documentation found within
+source code, though it can import XML Documentation Comments
+via the <b>-i</b> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>mdoc</b>(1) and <b>mdoc</b>(5) for more information.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--delete</b></p>
+
+<p style="margin-left:18%;">Allow <b>mdoc update</b> to
+delete members from documentation files. The only members
+deleted are members which are no longer present within
+<i>ASSEMBLIES</i> and are not present in any other assembly
+versions.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If a type is no
+longer present, the documentation file is <i>not</i>
+deleted, but is instead <i>renamed</i> to have a
+<b>.remove</b> extension.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Version
+detection is done with the <i>//AssemblyVersion</i>
+elements; if there are no <i>//AssemblyVersion</i> elements
+for a given <i>&lt;Type&gt;</i> or <i>&lt;Member/&gt;</i>,
+then the <i>&lt;Type&gt;</i> will be renamed and/or the
+<i>&lt;Member/&gt;</i> will be removed.</p>
+
+
+<p style="margin-left:9%;"><b>--exceptions</b>[=<i>SOURCES</i>]</p>
+
+<p style="margin-left:18%;">EXPERIMENTAL. This is not 100%
+reliable, but is intended to serve as an aid for
+documentation writers.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Inspect member
+bodies to determine what exceptions can be generated from
+the member.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>SOURCES</i>
+is an optional comma-separated list of the following sources
+that should be searched for exceptions:</p>
+
+<p style="margin-left:18%; margin-top: 1em">added Only
+generate &lt;exception/&gt; elements for members <br>
+added during the current program execution. <br>
+This keeps mdoc-update from re-generating <br>
+&lt;exception/&gt; elements for all members (and thus <br>
+prevents re-insertion for members that had the <br>
+&lt;exception/&gt; elements removed). <br>
+all Find exceptions created in the member itself, <br>
+references to members in the same assembly, <br>
+and references to members in dependent <br>
+assemblies. <br>
+asm Find exceptions created in the member itself and <br>
+references to members within the same assembly <br>
+as the member. <br>
+depasm Find exceptions created in the member itself and <br>
+references to members within dependent <br>
+assemblies.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If
+<i>SOURCES</i> isn&rsquo;t provided (the default), then only
+exceptions created within the member itself will be
+documented.</p>
+
+<p style="margin-left:18%; margin-top: 1em">LIMITATIONS:
+Exception searching is currently implemented by looking for
+the exception types that are explicitly created based on the
+known compile-time types. This has the following
+limitations:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>*</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p>This will not find exceptions which are implicit to the
+IL, such as NullReferenceException and
+IndexOutOfRangeException.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>*</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p>This will find exceptions which are <i>not</i> thrown,
+e.g.</p> </td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">public void
+CreateAnException () <br>
+{ <br>
+Exception e = new Exception (); <br>
+}</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>*</b></p></td>
+<td width="8%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em">This will not &quot;follow&quot;
+delegate and interface calls:</p></td>
+<td width="6%">
+</td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">public void
+UsesDelegates () <br>
+{ <br>
+Func&lt;int, int&gt; a = x =&gt; {throw new Exception ();};
+<br>
+a (4); <br>
+}</p>
+
+<p style="margin-left:27%; margin-top: 1em">The function
+<i>UsesDelegates()</i> won&rsquo;t have any exceptions
+documented.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>*</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em">This will find exceptions which
+&quot;cannot happen&quot;, such as ArgumentNullExceptions
+for arguments which are &quot;known&quot; to be
+non-null:</p> </td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">public void A
+() <br>
+{ <br>
+B (&quot;this parameter isn&rsquo;t null&quot;); <br>
+}</p>
+
+<p style="margin-left:27%; margin-top: 1em">public void B
+(string s) <br>
+{ <br>
+if (s == null) <br>
+throw new ArgumentNullException (&quot;s&quot;); <br>
+}</p>
+
+<p style="margin-left:27%; margin-top: 1em">For the above,
+if <b>--exceptions=asm</b> is provided then <i>A()</i> will
+be documented as throwing an ArgumentNullException, which
+cannot happen.</p>
+
+<p style="margin-left:9%;"><b>-f</b>=<i>FLAG</i></p>
+
+<p style="margin-left:18%;">Specify a flag to alter
+behavior. Valid flags include: <b><br>
+no-assembly-versions</b></p>
+
+<p style="margin-left:27%;">See the
+<b>-fno-assembly-versions</b> documentation, below.</p>
+
+
+<p style="margin-left:9%;"><b>-fno-assembly-versions</b></p>
+
+<p style="margin-left:18%;">Do not generate
+<i>/Type/AssemblyInfo/AssemblyVersion</i> and
+<i>/Type/Members/Member/AssemblyInfo</i> elements.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This is useful
+to prevent &quot;churn&quot; during updates. Normally, if a
+type or member hasn&rsquo;t changed but the assembly version
+has changed, then all types and members will be updated to
+include a new <i>//AssemblyVersion</i> element, thus
+increasing the amount of changes that need review before
+committing (assuming all changes are actually reviewed
+before commit).</p>
+
+<p style="margin-left:18%; margin-top: 1em">WARNING: This
+<i>will</i> interact badly with the <b>--delete</b> option,
+as <b>--delete</b> uses the <i>//AssemblyVersion</i>
+elements to track version changes. Thus, if you have a
+member which is present in an early assembly version and is
+removed in a subsequent assembly version, such as
+<i>System.Text.UTF8Encoding.GetBytes(string)</i> (which is
+present in .NET 1.0 but not in .NET 2.0), then the member
+will be removed when the <b>--delete
+-fno-assembly-versions</b> options are specified, the member
+was present in an earlier version of the assembly, and the
+current version of the assembly does not contain the
+member.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Consequently,
+this option should <i>only</i> be specified if types and
+members will <i>never</i> be removed from an assembly.</p>
+
+<p style="margin-left:9%;"><b>-i</b>,
+<b>--import</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Import documentation found
+within <i>FILE</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>FILE</i> may
+contain either <i>csc /doc</i> XML or <i>ECMA-335</i>
+XML.</p>
+
+<p style="margin-left:9%;"><b>-L</b>,
+<b>--lib</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Add <i>DIRECTORY</i> to the
+assembly search path, so that dependencies of
+<i>ASSEMBLIES</i> can be found without documenting those
+assemblies.</p>
+
+<p style="margin-left:9%;"><b>-o</b>,
+<b>--out</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Place the generated stubs into
+<i>DIRECTORY</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When updating
+documentation, <i>DIRECTORY</i> is also the source
+directory.</p>
+
+<p style="margin-left:9%;"><b>-r</b>=<i>ASSEMBLY</i></p>
+
+<p style="margin-left:18%;"><i>ASSEMBLY</i> is a dependency
+for one of <i>ASSEMBLIES</i> which should <i>not</i> be
+documented but is required to process one of
+<i>ASSEMBLIES</i>. Add the directory containing
+<i>ASSEMBLY</i> to the assembly search path.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option is
+equivalent to specifying <b>-L</b> &lsquo;<i>dirname</i>
+ASSEMBLY&lsquo;.</p>
+
+
+<p style="margin-left:9%;"><b>--since</b>=<i>VERSION</i></p>
+
+<p style="margin-left:18%;">When <i>updating</i>
+documentation for an assembly, if a type or member is
+encountered which didn&rsquo;t exist in the previous version
+of the assembly a <b>&lt;since
+version=&quot;</b><i>VERSION</i><b>&quot;/&gt;</b> element
+will be inserted.</p>
+
+<p style="margin-left:9%;"><b>--type</b>=<i>TYPE</i></p>
+
+<p style="margin-left:18%;">Only update documentation for
+the type <i>TYPE</i>.</p>
+
+<p style="margin-left:9%;"><b>-h, -?, --help</b></p>
+
+<p style="margin-left:18%;">Display a help message and
+exit.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mdoc(1),
+mdoc(5), mdoc-assemble(1), mdoc-export-html(1),
+mdoc-validate(1),</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-docs-list for
+<br>
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

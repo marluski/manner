@@ -1,0 +1,280 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:14 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>I3-MSG</title>
+
+</head>
+<body>
+
+<h1 align="center">I3-MSG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#IPC MESSAGE TYPES">IPC MESSAGE TYPES</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Exit status:">Exit status:</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#I3SOCK">I3SOCK</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-msg - send
+messages to i3 window manager</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-msg [-q] [-v]
+[-h] [-s socket] [-t type] [-r] [message]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q,
+--quiet</b></p>
+
+<p style="margin-left:14%;">Only send ipc message and
+suppress the output of the response.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Display version number and
+exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Display a short help-message
+and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--socket</b> <i>sock_path</i></p>
+
+<p style="margin-left:14%;">i3-msg will use the environment
+variable I3SOCK or the socket path given here. If both fail,
+it will try to get the socket information from the root
+window and then try /tmp/i3-ipc.sock before exiting with an
+error.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t</b>
+<i>type</i></p>
+
+<p style="margin-left:14%;">Send ipc message, see below.
+This option defaults to &quot;command&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m</b>,
+<b>--monitor</b></p>
+
+<p style="margin-left:14%;">Instead of exiting right after
+receiving the first subscribed event, wait indefinitely for
+all of them. Can only be used with &quot;-t subscribe&quot;.
+See the &quot;subscribe&quot; IPC message type below for
+details.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r,
+--raw</b></p>
+
+<p style="margin-left:14%;">Display the raw JSON reply
+instead of pretty-printing errors (for commands) or
+displaying the top-level config file contents (for
+GET_CONFIG).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>message</b></p>
+
+<p style="margin-left:14%;">Send ipc message, see
+below.</p>
+
+<h2>IPC MESSAGE TYPES
+<a name="IPC MESSAGE TYPES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">command</p>
+
+<p style="margin-left:14%;">The payload of the message is a
+command for i3 (like the commands you can bind to keys in
+the configuration file) and will be executed directly after
+receiving it.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">get_workspaces</p>
+
+<p style="margin-left:14%;">Gets the current workspaces.
+The reply will be a JSON-encoded list of workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">get_outputs</p>
+
+<p style="margin-left:14%;">Gets the current outputs. The
+reply will be a JSON-encoded list of outputs (see the reply
+section of docs/ipc, e.g. at
+<b><font color="#0000FF">https://i3wm.org/docs/ipc.html#_receiving_replies_from_i3</font></b><font color="#000000">).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">get_tree</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Gets the
+layout tree. i3 uses a tree as data structure which includes
+every container. The reply will be the JSON-encoded
+tree.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">get_marks</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Gets a
+list of marks (identifiers for containers to easily jump to
+them later). The reply will be a JSON-encoded list of window
+marks.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">get_bar_config</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Gets the
+configuration (as JSON map) of the workspace bar with the
+given ID. If no ID is provided, an array with all configured
+bar IDs is returned instead.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">get_binding_modes</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Gets a
+list of configured binding modes.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">get_version</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Gets the
+version of i3. The reply will be a JSON-encoded dictionary
+with the major, minor, patch and human-readable
+version.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">get_config</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Gets the
+currently loaded i3 configuration.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">send_tick</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Sends a
+tick to all IPC connections which subscribe to tick
+events.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">subscribe</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+payload of the message describes the events to subscribe to.
+Upon reception, each event will be dumped as a JSON-encoded
+object. See the -m option for continuous
+monitoring.</font></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">i3-msg
+is a sample implementation for a client using the unix
+socket IPC interface to i3.</font></p>
+
+<h3>Exit status:
+<a name="Exit status:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">0:
+if OK, 1: if invalid syntax or unable to connect to
+ipc-socket 2: if i3 returned an error processing your
+command(s)</font></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+Use 1-px border for current client <br>
+i3-msg &quot;border 1pixel&quot;</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+You can leave out the quotes <br>
+i3-msg border normal</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+Dump the layout tree <br>
+i3-msg -t get_tree</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+Monitor window changes <br>
+i3-msg -t subscribe -m '[ &quot;window&quot; ]'</font></p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<h3>I3SOCK
+<a name="I3SOCK"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">If
+no ipc-socket is specified on the commandline, this variable
+is used to determine the path, at which the unix domain
+socket is expected, on which to connect to i3.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">i3(1)</font></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Michael
+Stapelberg and contributors</font></p>
+<hr>
+</body>
+</html>

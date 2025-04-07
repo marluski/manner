@@ -1,0 +1,259 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:32 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FASTFETCH</title>
+
+</head>
+<body>
+
+<h1 align="center">FASTFETCH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Informative Options">Informative Options</a><br>
+<a href="#Display Options">Display Options</a><br>
+<a href="#Config Options">Config Options</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#Fetch Structure">Fetch Structure</a><br>
+<a href="#Config Files">Config Files</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">fastfetch - a
+neofetch-like tool for fetching system information and
+displaying them in a pretty way</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>fastfetch</b>
+<i>[options...]</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Fastfetch is a
+neofetch-like tool for fetching system information and
+displaying them in a pretty way. It is written mainly in C,
+with performance and customizability in mind. Currently,
+Linux, Android, FreeBSD, MacOS and Windows 7+ are
+supported.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On successful
+execution, fastfetch returns zero. If any error happened,
+the exit code will be non-zero.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Informative Options
+<a name="Informative Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b> <i>[command]</i></p>
+
+<p style="margin-left:18%;">Show help output, displaying
+all available options or help for given command</p>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:18%;">Show version of fastfetch</p>
+
+<p style="margin-left:9%;"><b>--list-config-paths</b></p>
+
+<p style="margin-left:18%;">List search paths of config
+files</p>
+
+<p style="margin-left:9%;"><b>--list-data-paths</b></p>
+
+<p style="margin-left:18%;">List search paths of presets
+and logos</p>
+
+<p style="margin-left:9%;"><b>--list-logos</b></p>
+
+<p style="margin-left:18%;">List available logos, they can
+be loaded with <i>--logo</i></p>
+
+<p style="margin-left:9%;"><b>--list-modules</b></p>
+
+<p style="margin-left:18%;">List available modules</p>
+
+<p style="margin-left:9%;"><b>--list-presets</b></p>
+
+<p style="margin-left:18%;">List available presets, they
+can be loaded with <i>--config</i></p>
+
+<p style="margin-left:9%;"><b>--list-features</b></p>
+
+<p style="margin-left:18%;">List the supported features
+fastfetch was compiled with</p>
+
+<p style="margin-left:9%;"><b>--print-logos</b></p>
+
+<p style="margin-left:18%;">Print available logos</p>
+
+<p style="margin-left:9%;"><b>--print-structure</b></p>
+
+<p style="margin-left:18%;">Print the default structure</p>
+
+<p style="margin-left:9%;"><b>--format</b>
+<i>&lt;type&gt;</i></p>
+
+<p style="margin-left:18%;">Set the output format. Besides
+the <i>default</i> format, only <i>json</i> is supported
+currently.</p>
+
+<h3>Display Options
+<a name="Display Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l,
+--logo</b> <i>&lt;logo&gt;</i></p>
+
+<p style="margin-left:18%;">Set the logo to display</p>
+
+<p style="margin-left:9%;"><b>-s, --structure</b>
+<i>&lt;structure&gt;</i></p>
+
+<p style="margin-left:18%;">Set the structure of the fetch.
+For details about the structure, see the CONFIGURATION
+section.</p>
+
+<h3>Config Options
+<a name="Config Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--config</b> <i>&lt;config&gt;</i></p>
+
+<p style="margin-left:18%;">Use the specified config file
+or preset. If <i>none</i> is specified, disable further
+config loading. For details about config files, see the
+CONFIGURATION section</p>
+
+<p style="margin-left:9%;"><b>--gen-config</b>
+<i>[file]</i></p>
+
+<p style="margin-left:18%;">Generate a config file with
+options specified on the command line. If <i>file</i> is
+specified, the configuration will be written to the file,
+otherwise it will be written to stdout.</p>
+
+<p style="margin-left:9%;"><b>--gen-config-force</b>
+<i>[file]</i></p>
+
+<p style="margin-left:18%;">Same as <b>--gen-config</b>,
+but overwrites existing config</p>
+
+<p style="margin-left:9%;">To list all options, use
+<b>--help</b>. It will also print all available <br>
+module options.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<h3>Fetch Structure
+<a name="Fetch Structure"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The structure of
+a fetch describes the modules that should be included in the
+output. It consists of a string of modules, separated by a
+colon (:). To list all available modules, use
+<b>--list-modules</b></p>
+
+<h3>Config Files
+<a name="Config Files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Fastfetch uses
+JSONC based format for configuration. Fastfetch
+doesn&rsquo;t generate config file automatically; it should
+be generated manually by <b>--gen-config</b>. The config
+file will be saved in
+<b>&#732;/.config/fastfetch/config.jsonc</b> by default.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A JSONC config
+file is a JSON file that also supports comments with (// and
+/* */). Those files must have the extension
+&rsquo;.jsonc&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The specified
+configuration/preset files are searched in the following
+order:</p>
+
+<p style="margin-left:9%; margin-top: 1em">1. relative to
+the current working directory</p>
+
+<p style="margin-left:9%; margin-top: 1em">2. relative to
+&#732;/.local/share/fastfetch/presets/</p>
+
+<p style="margin-left:9%; margin-top: 1em">3. relative to
+/usr/share/fastfetch/presets/</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fastfetch
+provides some default presets. List them with
+<b>--list-presets</b>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>neofetch</b>(1)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+bugs to:
+<i>https://github.com/fastfetch-cli/fastfetch/issues</i></p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,778 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:33 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>MPC</title>
+
+</head>
+<body>
+
+<h1 align="center">MPC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#Player Commands">Player Commands</a><br>
+<a href="#Queue Commands">Queue Commands</a><br>
+<a href="#Playlist Commands">Playlist Commands</a><br>
+<a href="#Database Commands">Database Commands</a><br>
+<a href="#File Commands">File Commands</a><br>
+<a href="#Mount Commands">Mount Commands</a><br>
+<a href="#Sticker Commands">Sticker Commands</a><br>
+<a href="#Output Commands">Output Commands</a><br>
+<a href="#Partition Commands">Partition Commands</a><br>
+<a href="#Client-to-client Commands">Client-to-client Commands</a><br>
+<a href="#Other Commands">Other Commands</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mpc - mpc
+Documentation</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mpc is a
+command-line client for the <i>Music Player Daemon</i>
+(MPD). It connects to a MPD and controls it according to
+commands and arguments passed to it. If no command is given,
+the current status is printed (same as &quot;<b>mpc
+status</b>&quot;).</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">mpc [options]
+&lt;command&gt; [--] [&lt;arguments&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">After <b>--</b>,
+all parameters are considered to be arguments, not options,
+even if they start with a dash.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--format</b></p>
+
+<p style="margin-left:18%;">Configure the format used to
+display songs.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The metadata
+delimiters are: <br>
+The <b>[]</b> operator is used to group output such that if
+no metadata delimiters are found or matched between <b>[</b>
+and <b>]</b>, then none of the characters between <b>[</b>
+and <b>]</b> are output. <b>&amp;</b> and <b>|</b> are
+logical operators for and and or. <b>#</b> is used to escape
+characters. Some useful examples for format are:
+&quot;<b>%file%</b>&quot; and &quot;<b>[[%artist% -
+]%title%]|[%file%]</b>&quot;. This command also takes the
+following defined escape sequences: <br>
+If not given, the value of the environment variable
+<i>MPC_FORMAT</i> is used.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--wait</b></p></td>
+<td width="1%"></td>
+<td width="67%">
+
+
+<p>Wait for operation to finish (e.g. database update).</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--range=[START]:[END]</b></p>
+
+<p style="margin-left:18%;">Operate on a range (e.g. when
+loading a playlist). START is the first index of the range,
+END is the first index after the range (i.e. excluding).
+START and END may be omitted, making the range open to that
+end. Indexes start with zero.</p>
+
+<p style="margin-left:9%;"><b>--with-prio</b></p>
+
+<p style="margin-left:18%;">Show only songs that have a
+non-zero priority.</p>
+
+<p style="margin-left:9%;"><b>-q, --quiet,
+--no-status</b></p>
+
+<p style="margin-left:18%;">Prevents the current song
+status from being printed on completion of some of the
+commands.</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">Verbose output.</p>
+
+<p style="margin-left:9%;"><b>--host=HOST</b></p>
+
+<p style="margin-left:18%;">The MPD server to connect to.
+This can be a hostname, IPv4/IPv6 address, an absolute path
+(i.e. local socket) or a name starting with <b>@</b> (i.e.
+an abstract socket, Linux only).</p>
+
+<p style="margin-left:18%; margin-top: 1em">To use a
+password, provide a value of the form
+&quot;<b>password@host</b>&quot;.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If not given,
+the value of the environment variable <i>MPD_HOST</i> is
+used.</p>
+
+<p style="margin-left:9%;"><b>--port=PORT, -p PORT</b></p>
+
+<p style="margin-left:18%;">The TCP port of the MPD server
+to connect to.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If not given,
+the value of the environment variable <i>MPD_PORT</i> is
+used.</p>
+
+<p style="margin-left:9%;"><b>--partition=PARTITION, -a
+PARTITION</b></p>
+
+<p style="margin-left:18%;">The partition of the MPD server
+to operate on.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If not given,
+the default partition is used.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Commands can be
+used from the least unambiguous prefix (e.g insert or
+ins).</p>
+
+<h3>Player Commands
+<a name="Player Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>consume
+&lt;on|off&gt;</b> - Toggle consume mode if state
+(<b>on</b></p>
+
+<p style="margin-left:18%;">or <b>off</b>) is not
+specified.</p>
+
+<p style="margin-left:9%;"><b>crossfade
+[&lt;seconds&gt;]</b> - Gets and sets the current amount
+of</p>
+
+<p style="margin-left:18%;">crossfading between songs
+(<b>0</b> disables crossfading).</p>
+
+<p style="margin-left:9%;"><b>current [--wait]</b> - Show
+the currently playing song. With</p>
+
+<p style="margin-left:18%;"><i>--wait</i>, mpc waits until
+the song changes (or until playback is started/stopped)
+before it queries the current song from the server.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>queued</b> -
+Show the currently queued (next) song. <b><br>
+mixrampdb [&lt;db&gt;]</b> - Gets and sets the volume level
+at which</p>
+
+<p style="margin-left:18%;">songs with MixRamp tags will be
+overlapped. This disables the fading of the crossfade
+command and simply mixes the songs. <b>-50.0</b> will
+effectively remove any gaps, <b>0.0</b> will mash tracks
+together. The amount of overlap is limited by the
+audio_buffer_size MPD configuration parameter.</p>
+
+<p style="margin-left:9%;"><b>mixrampdelay
+[&lt;seconds&gt;]</b> - Gets and sets the current amount</p>
+
+<p style="margin-left:18%;">of extra delay added to the
+value computed from the MixRamp tags. (A negative value
+disables overlapping with MixRamp tags and restores the
+previous value of crossfade).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>next</b> -
+Starts playing next song on queue.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pause</b> -
+Pauses playing. <b><br>
+play &lt;position&gt;</b> - Starts playing the
+song-number</p>
+
+<p style="margin-left:18%;">specified. If none is
+specified, plays number 1.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>prev</b> -
+Starts playing previous song. <b><br>
+random &lt;on|off&gt;</b> - Toggle random mode if state
+(<b>on</b></p>
+
+<p style="margin-left:18%;">or <b>off</b>) is not
+specified.</p>
+
+<p style="margin-left:9%;"><b>repeat &lt;on|off&gt;</b> -
+Toggle repeat mode if state (<b>on</b></p>
+
+<p style="margin-left:18%;">or <b>off</b>) is not
+specified.</p>
+
+<p style="margin-left:9%;"><b>replaygain
+[&lt;off|track|album&gt;]</b> - Sets the replay gain
+mode.</p>
+
+<p style="margin-left:18%;">Without arguments, it prints
+the replay gain mode.</p>
+
+<p style="margin-left:9%;"><b>single
+&lt;on|once|off&gt;</b> - Toggle single mode if state
+(<b>on</b>,</p>
+
+<p style="margin-left:18%;"><b>once</b>, or <b>off</b>) is
+not specified. <b>once</b> toggles to <b>off</b>.</p>
+
+<p style="margin-left:9%;"><b>seek [+-][&lt;HH:MM:SS&gt;]
+or &lt;[+-]&lt;0-100&gt;%&gt;</b> - Seeks by hour,</p>
+
+<p style="margin-left:18%;">minute or seconds, hours or
+minutes can be omitted. If seeking by percentage, seeks
+within the current song in the specified manner. If a
+<b>+</b> or <b>-</b> is used, the seek is done relative to
+the current song position. Absolute seeking by default.</p>
+
+<p style="margin-left:9%;"><b>seekthrough
+[+-][&lt;HH:MM:SS&gt;]</b> - Seeks by hour,</p>
+
+<p style="margin-left:18%;">minute or seconds, hours or
+minutes can be omitted, relatively to the current position.
+If the duration exceeds the limit of the current song, the
+seek command proceeds to seek through the playlist until the
+duration is reached. If a <b>+</b> is used, the seek is
+forward. If a <b>-</b> is used, the seek is backward.
+Forward seeking by default.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>stop</b> -
+Stops playing. <b><br>
+toggle</b> - Toggles between play and pause. If stopped
+starts</p>
+
+<p style="margin-left:18%;">playing. Does not support start
+playing at song number (use play).</p>
+
+<h3>Queue Commands
+<a name="Queue Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>add
+&lt;file&gt;</b> - Adds a song from the music database to
+the</p>
+
+<p style="margin-left:18%;">queue. Can also read input from
+pipes. Use &quot;<b>mpc add /</b>&quot; to add all files to
+the queue.</p>
+
+<p style="margin-left:9%;"><b>insert &lt;file&gt;</b> - The
+insert command works similarly to</p>
+
+<p style="margin-left:18%;"><b>add</b> except it adds
+song(s) after the currently playing one, rather than at the
+end. When random mode is enabled, the new song is queued
+after the current song.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>clear</b> -
+Empties the queue. <b><br>
+crop</b> - Remove all songs except for the currently
+playing</p>
+
+<p style="margin-left:18%;">song.</p>
+
+<p style="margin-left:9%;"><b>del &lt;songpos&gt;</b> -
+Removes a queue number from the queue. Can</p>
+
+<p style="margin-left:18%;">also read input from pipes
+(<b>0</b> deletes the current playing song).</p>
+
+<p style="margin-left:9%;"><b>mv, move &lt;from&gt;
+&lt;to&gt;</b> - Moves song at position &lt;from&gt; to
+the</p>
+
+<p style="margin-left:18%;">position &lt;to&gt; in the
+queue.</p>
+
+<p style="margin-left:9%;"><b>searchplay &lt;type&gt;
+&lt;query&gt; [&lt;type&gt; &lt;query&gt;]...</b> - Search
+the</p>
+
+<p style="margin-left:18%;">queue for a matching song and
+play it.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>shuffle</b> -
+Shuffles all songs on the queue.</p>
+
+<h3>Playlist Commands
+<a name="Playlist Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>load
+&lt;file&gt;</b> - Loads &lt;file&gt; as queue. The
+option</p>
+
+<p style="margin-left:18%;"><i>--range</i> may be used to
+load only a portion of the file</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lsplaylists</b>:
+- Lists available playlists. <b><br>
+playlist [&lt;playlist&gt;]</b> - Lists all songs in
+&lt;playlist&gt;. If</p>
+
+<p style="margin-left:18%;">no &lt;playlist&gt; is
+specified, lists all songs in the current queue.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>rm
+&lt;file&gt;</b> - Deletes a specific playlist.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>save
+&lt;file&gt;</b> - Saves playlist as &lt;file&gt;. <b><br>
+addplaylist &lt;playlist&gt; &lt;file&gt;</b> - Adds a song
+from the music database to <br>
+the</p>
+
+<p style="margin-left:18%;">playlist. The playlist will be
+created if it does not exist. Can also read input from
+pipes.</p>
+
+<p style="margin-left:9%;"><b>delplaylist &lt;playlist&gt;
+&lt;songpos&gt;</b> - Removes the song at given position
+<br>
+from the playlist. Can</p>
+
+<p style="margin-left:18%;">also read input from pipes.</p>
+
+<p style="margin-left:9%;"><b>moveplaylist &lt;playlist&gt;
+&lt;from&gt; &lt;to&gt;</b> - Moves the song at given
+&lt;from&gt; <br>
+position</p>
+
+<p style="margin-left:18%;">to the &lt;to&gt; position in
+the playlist.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>renplaylist
+&lt;playlist&gt; &lt;new playlist&gt;</b> - Rename a
+playlist.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clearplaylist
+&lt;playlist&gt;</b> - Clear the playlist name (i.e.
+truncate playlist.m3u).</p>
+
+<h3>Database Commands
+<a name="Database Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>listall
+[&lt;file&gt;]</b> - Lists &lt;file&gt; from database. If
+no</p>
+
+<p style="margin-left:18%;"><b>file</b> is specified, lists
+all songs in the database.</p>
+
+<p style="margin-left:9%;"><b>ls [&lt;directory&gt;]</b> -
+Lists all files/folders in</p>
+
+<p style="margin-left:18%;"><b>directory</b>. If no
+<b>directory</b> is specified, lists all files in music
+directory.</p>
+
+<p style="margin-left:9%;"><b>lsdirs
+[&lt;directory&gt;]</b> - List subdirectories of</p>
+
+<p style="margin-left:18%;"><b>directory</b>. If no
+<b>directory</b> is specified, lists subdirectories in music
+directory.</p>
+
+<p style="margin-left:9%;"><b>search &lt;type&gt;
+&lt;query&gt; [&lt;type&gt; &lt;query&gt;]...</b> - Searches
+for</p>
+
+<p style="margin-left:18%;">substrings in song tags. Any
+number of tag type and query combinations can be specified.
+Possible tag types are: artist, album, title, track, name,
+genre, date, composer, performer, comment, disc, filename,
+or any (to match any tag).</p>
+
+<p style="margin-left:9%;"><b>search &lt;expression&gt;</b>
+- Searches with a filter expression,</p>
+
+<p style="margin-left:22%;">e.g.:</p>
+
+<pre style="margin-left:27%; margin-top: 1em">mpc search '((artist == &quot;Kraftwerk&quot;) AND (title == &quot;Metall auf
+Metall&quot;))'</pre>
+
+
+<p style="margin-left:18%; margin-top: 1em">Check the
+<i>MPD protocol documentation</i> for details. This syntax
+can be used with <b>find</b> and <b>findadd</b> as well.
+(Requires libmpdclient 2.16 and MPD 0.21)</p>
+
+<p style="margin-left:9%;"><b>find &lt;type&gt;
+&lt;query&gt; [&lt;type&gt; &lt;query&gt;]...</b> - Same
+as</p>
+
+<p style="margin-left:18%;"><b>search</b>, but tag values
+must match <b>query</b> exactly instead of doing a substring
+match.</p>
+
+<p style="margin-left:9%;"><b>findadd &lt;type&gt;
+&lt;query&gt; [&lt;type&gt; &lt;query&gt;]...</b> - Same
+as</p>
+
+<p style="margin-left:18%;"><b>find</b>, but add the result
+to the current queue instead of printing them.</p>
+
+<p style="margin-left:9%;"><b>list &lt;type&gt;
+[&lt;type&gt; &lt;query&gt;]... [group &lt;type&gt;]...</b>
+- Return</p>
+
+<p style="margin-left:18%;">a list of all tags of given tag
+<b>type</b>. Optional search <b>type</b>/<b>query</b> limit
+results in a way similar to search. Results can be grouped
+by one or more tags. Example:</p>
+
+<pre style="margin-left:22%; margin-top: 1em">mpc list album group artist</pre>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>stats</b> -
+Displays statistics about MPD. <b><br>
+update [--wait] [&lt;path&gt;]</b> - Scans for updated files
+in the</p>
+
+<p style="margin-left:18%;">music directory. The optional
+parameter <b>path</b> (relative to the music directory) may
+limit the scope of the update.</p>
+
+<p style="margin-left:18%; margin-top: 1em">With
+<i>--wait</i>, mpc waits until MPD has finished the
+update.</p>
+
+<p style="margin-left:9%;"><b>rescan [--wait]
+[&lt;path&gt;]</b> - Like update, but also rescans</p>
+
+<p style="margin-left:18%;">unmodified files.</p>
+
+<h3>File Commands
+<a name="File Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>albumart
+&lt;file&gt;</b> - Download album art for the given song
+and</p>
+
+<p style="margin-left:18%;">write it to stdout.</p>
+
+<p style="margin-left:9%;"><b>readpicture &lt;file&gt;</b>
+- Download a picture embedded in the</p>
+
+<p style="margin-left:18%;">given song and write it to
+stdout.</p>
+
+<h3>Mount Commands
+<a name="Mount Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mount</b> -
+Lists all mounts. <b><br>
+mount &lt;mount-path&gt; &lt;storage-uri&gt;</b> - Create a
+new mount:</p>
+
+<p style="margin-left:18%;">mounts a storage on the given
+path. Example:</p>
+
+<pre style="margin-left:22%; margin-top: 1em">mpc mount server nfs://10.0.0.5/mp3
+mpc mount stick udisks://by-id-ata-FOO-part2</pre>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>unmount
+&lt;mount-path&gt;</b> - Remove a mount. <b><br>
+listneighbors</b> - Print a list of &quot;neighors&quot;</p>
+
+<p style="margin-left:18%;">(i.e. automatically detected
+storages which can be mounted). This requires <i>enabling at
+least one neighbor plugin</i> in <b>mpd.conf</b>.
+Example:</p>
+
+<pre style="margin-left:22%; margin-top: 1em">$ mpc listneighbors
+upnp://uuid:01234567-89ab-cdef-0123-456789abcdef/urn:schemas-upnp-org:service:ContentDirectory:1
+udisks://by-id-dm-name-_dev_sdb3
+udisks://by-id-ata-FOO-part2</pre>
+
+
+<h3>Sticker Commands
+<a name="Sticker Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>sticker</b> command allows you to get and set song
+stickers. <b><br>
+sticker &lt;file&gt; set &lt;key&gt; &lt;value&gt;</b> - Set
+the value of a song</p>
+
+<p style="margin-left:18%;">sticker.</p>
+
+<p style="margin-left:9%;"><b>sticker &lt;file&gt; get
+&lt;key&gt;</b> - Print the value of a song</p>
+
+<p style="margin-left:18%;">sticker.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sticker
+&lt;file&gt; list</b> - List all stickers of a song.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sticker
+&lt;file&gt; delete &lt;key&gt;</b> - Delete a song sticker.
+<b><br>
+sticker &lt;dir&gt; find &lt;key&gt;</b> - Search for
+stickers with the</p>
+
+<p style="margin-left:18%;">specified name, below the
+specified directory.</p>
+
+<h3>Output Commands
+<a name="Output Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>volume
+[+-]&lt;num&gt;</b> - Sets the volume to &lt;num&gt;
+(0-100). If</p>
+
+<p style="margin-left:18%;"><b>+</b> or <b>-</b> is used,
+then it adjusts the volume relative to the current
+volume.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>outputs</b> -
+Lists all available outputs <b><br>
+disable [only] &lt;output # or name&gt; [...]</b> - Disables
+the</p>
+
+<p style="margin-left:18%;">output(s); a list of one or
+more names or numbers is required. If <b>only</b> is the
+first argument, all other outputs are enabled.</p>
+
+<p style="margin-left:9%;"><b>enable [only] &lt;output # or
+name&gt; [...]</b> - Enables the</p>
+
+<p style="margin-left:18%;">output(s); a list of one or
+more names or numbers is required. If <b>only</b> is the
+first argument, all other outputs are disabled.</p>
+
+<p style="margin-left:9%;"><b>toggleoutput &lt;output # or
+name&gt; [...]</b> - Changes the</p>
+
+<p style="margin-left:18%;">status for the given output(s);
+a list of one or more names or numbers is required.</p>
+
+<p style="margin-left:9%;"><b>moveoutput &lt;output # or
+name&gt;</b> - Moves the given output</p>
+
+<p style="margin-left:18%;">to the current partition (see
+--partition).</p>
+
+<h3>Partition Commands
+<a name="Partition Commands"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>partitions</b>
+- Lists all available partitions</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>makepart
+&lt;name&gt; [...]</b> - Creates new partitions</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>delpart
+&lt;name&gt; [...]</b> - Deletes partitions</p>
+
+<h3>Client-to-client Commands
+<a name="Client-to-client Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>channels</b>
+- List the channels that other clients have</p>
+
+<p style="margin-left:18%;">subscribed to.</p>
+
+<p style="margin-left:9%;"><b>sendmessage &lt;channel&gt;
+&lt;message&gt;</b> - Send a message to the</p>
+
+<p style="margin-left:18%;">specified channel.</p>
+
+<p style="margin-left:9%;"><b>waitmessage
+&lt;channel&gt;</b> - Wait for at least one message on</p>
+
+<p style="margin-left:18%;">the specified channel.</p>
+
+<p style="margin-left:9%;"><b>subscribe &lt;channel&gt;</b>
+- Subscribe to the specified channel</p>
+
+<p style="margin-left:18%;">and continuously receive
+messages.</p>
+
+<h3>Other Commands
+<a name="Other Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>idle
+[events]</b> - Waits until an event occurs. Prints a
+list</p>
+
+<p style="margin-left:18%;">of event names, one per line.
+See the MPD protocol documentation for further
+information.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If you specify
+a list of events, only these events are considered.</p>
+
+<p style="margin-left:9%;"><b>idleloop [events]</b> -
+Similar to <b>idle</b>, but</p>
+
+<p style="margin-left:18%;">re-enters &quot;idle&quot;
+state after events have been printed.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If you specify
+a list of events, only these events are considered.</p>
+
+<p style="margin-left:9%;"><b>status [format]</b> - Without
+an argument print a three line status</p>
+
+<p style="margin-left:18%;">output equivalent to
+&quot;mpc&quot; with no arguments. If a format string is
+given then the delimiters are processed exactly as how they
+are for metadata. See the '-f' option in <i>Options</i></p>
+
+<p style="margin-left:9%;"><b>version</b> - Reports the
+version of the protocol spoken, not the real</p>
+
+<p style="margin-left:18%;">version of the daemon.</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">All environment
+variables are overridden by any values specified via command
+line switches. <b><br>
+MPC_FORMAT</b></p>
+
+<p style="margin-left:18%;">Configure the format used to
+display songs. See option <i>--format</i>.</p>
+
+<p style="margin-left:9%;"><b>MPD_HOST</b></p>
+
+<p style="margin-left:18%;">The MPD server to connect to.
+See option <i>--host</i>.</p>
+
+<p style="margin-left:9%;"><b>MPD_PORT</b></p>
+
+<p style="margin-left:18%;">The TCP port of the MPD server
+to connect to. See option <i>--port</i>.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs on
+<i>https://github.com/MusicPlayerDaemon/mpc/issues</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Since MPD uses
+UTF-8, mpc needs to convert characters to the charset used
+by the local system. If you get character conversion errors
+when you're running mpc you probably need to set up your
+locale. This is done by setting any of the LC_CTYPE, LANG or
+LC_ALL environment variables (LC_CTYPE only affects
+character handling).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mpd(1)</b></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<i>https://raw.githubusercontent.com/MusicPlayerDaemon/mpc/master/AUTHORS</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Max
+Kellermann</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright
+2003-2021 The Music Player Daemon Project</p>
+<hr>
+</body>
+</html>

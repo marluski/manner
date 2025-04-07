@@ -1,0 +1,134 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:02 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-FOR-EACH-REPO</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-FOR-EACH-REPO</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SUBPROCESS BEHAVIOR">SUBPROCESS BEHAVIOR</a><br>
+<a href="#GIT">GIT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">git-for-each-repo
+- Run a Git command on a list of repositories</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>git
+for-each-repo</i> --config=&lt;config&gt; [--]
+&lt;arguments&gt;</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Run a Git
+command on a list of repositories. The arguments after the
+known options or <b>--</b> indicator are used as the
+arguments for the Git subprocess.</p>
+
+<p style="margin-left:9%; margin-top: 1em">THIS COMMAND IS
+EXPERIMENTAL. THE BEHAVIOR MAY CHANGE.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, we
+could run maintenance on each of a list of repositories
+stored in a <b>maintenance.repo</b> config variable
+using</p>
+
+<p style="margin-left:14%; margin-top: 1em">git
+for-each-repo --config=maintenance.repo maintenance run</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will run
+<b>git -C</b> <i>&lt;repo&gt;</i> <b>maintenance run</b> for
+each value <i>&lt;repo&gt;</i> in the multi-valued config
+variable <b>maintenance.repo</b>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">--config=&lt;config&gt;</p>
+
+<p style="margin-left:14%;">Use the given config variable
+as a multi-valued list storing absolute path names. Iterate
+on that list of paths to run the given arguments.</p>
+
+<p style="margin-left:14%; margin-top: 1em">These config
+values are loaded from system, global, and local Git config,
+as available. If <b>git for-each-repo</b> is run in a
+directory that is not a Git repository, then only the system
+and global config is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--keep-going</p>
+
+<p style="margin-left:14%;">Continue with the remaining
+repositories if the command failed on a repository. The exit
+code will still indicate that the overall operation was not
+successful.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that the
+exact exit code of the failing command is not passed through
+as the exit code of the <b>for-each-repo</b> command: If the
+command failed in any of the specified repositories, the
+overall exit code will be 1.</p>
+
+<h2>SUBPROCESS BEHAVIOR
+<a name="SUBPROCESS BEHAVIOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If any <b>git
+-C</b> <i>&lt;repo&gt; &lt;arguments&gt;</i> subprocess
+returns a non-zero exit code, then the <b>git
+for-each-repo</b> process returns that exit code without
+running more subprocesses.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each <b>git
+-C</b> <i>&lt;repo&gt; &lt;arguments&gt;</i> subprocess
+inherits the standard file descriptors <b>stdin</b>,
+<b>stdout</b>, and <b>stderr</b>.</p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Part of the
+<b>git</b>(1) suite</p>
+<hr>
+</body>
+</html>

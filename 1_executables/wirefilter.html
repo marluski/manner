@@ -1,0 +1,385 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>WIREFILTER</title>
+
+</head>
+<body>
+
+<h1 align="center">WIREFILTER</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Markov mode">Markov mode</a><br>
+<a href="#NOTICE">NOTICE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wirefilter -
+Wire packet filter for Virtual Distributed Ethernet</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wirefilter</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">[<b>-f</b>
+<i>rcfile</i>] [<b>-l</b> <i>loss</i>] [<b>-l</b>
+<i>lostburst</i>] [<b>-d</b> <i>delay</i>] [<b>-D</b>
+<i>dup</i>] [<b>-b</b> <i>bandwidth</i>] [<b>-s</b>
+<i>interface_speed</i>] [<b>-c</b> <i>channel_bufsize</i>]
+[<b>-n</b> <i>noise_factor</i>] [<b>-m</b> <i>mtu_size</i>]
+[<b>-M</b> <i>mgmt socket</i>] [<b>-v</b>
+<i>vde_plug1:vde_plug2</i>] [<b>--daemon</b><i>]
+[</i><b>--pidfile</b> <i>pidfile_path] [</i><b>--blink</b>
+<i>blink] [</i><b>--blinkid</b> <i>blink_identifier]
+[</i><b>-N</b>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A
+<b>wirefilter</b> is able to emulate delays and packet loss
+on virtual wires. e.g.:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>dpipe
+vde_plug /tmp/s1 = wirefilter -l 10 = vde_plug
+/tmp/s2</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">creates a wire
+between two vde_switches (with sockets /tmp/s1 and /tmp/s2
+respectively). This cable looses 10% of the packets in each
+direction.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The same cable
+can be created using:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>wirefilter -v
+/tmp/s1:/tmp/s2 -l 10</b></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f</b>
+<i>rcfile</i></p>
+
+<p style="margin-left:18%;">use a startup configuration
+file. It is useful for complex defitions such as those for
+the Markov mode (see below). The startup configuration file
+has the same syntax of the management interface, in other
+word it is a script of management commands executed before
+the first packet is forwarded.</p>
+
+<p style="margin-left:9%;"><b>-l</b> <i>loss</i></p>
+
+<p style="margin-left:18%;">percentage of loss as a
+floating point number. It is possible to specify different
+loss percentage for the two channels: LR20.5 means 20.5% of
+packet flowing left to right are lost, RL10 means 10% from
+right to left.</p>
+
+<p style="margin-left:9%;"><b>-L</b> <i>lostburst</i></p>
+
+<p style="margin-left:18%;">when this is not zero,
+wirefilter uses the Gilbert model for bursty errors. This is
+the mean length of lost packet bursts. (it is a two state
+Markov chain: the probability to exit from the faulty state
+is <i>1/lostburst</i>, the probability to enter the faulty
+state is <i>loss/(lostburst-(1-loss))</i>. The loss rate
+converges to the value <i>loss</i>.</p>
+
+<p style="margin-left:9%;"><b>-d</b> <i>delay</i></p>
+
+<p style="margin-left:18%;">Extra delay (in milliseconds).
+This delay is added to the real communication delay. Packets
+are temporarily stored and resent after the delay. It is
+possible to specify different values for LR and RL like in
+the previous option. When the delay is specified as two
+numbers with a + in between, the first is the standard delay
+and the second is a random variation. 1000+500 means that
+the delay can be randomly chosen between half second and 1.5
+seconds. It is possible to add &rsquo;U&rsquo; or
+&rsquo;N&rsquo; at the end. 1000+500U means that the dealys
+are uniformly distributed, 1000+500N means that the delays
+follow a Gaussian normal distribution (more than 98% of the
+values are inside the limits).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-D</b> <i>dup</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>percentage of dup packet. It has the same syntax of -l.
+Do not use dup factor 100% because it means that each packet
+is sent infinite times.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-b</b> <i>bandwidth</i></p>
+
+<p style="margin-left:18%;">Channel bandwidth in Bytes/sec.
+It has the same syntax of -d. It is also possible to use
+suffixes K,M,G to abbreviate 2&#710;10, 2&#710;20,
+2&#710;30. 128K means 128KBytes/sec. 128+64K means 64i to
+196KBytes/sec. Sender is not prevented from sending packets,
+delivery is delayed to limit the bandwidth to the desired
+value. (Like a bottleneck along the path) U and N after the
+values (e.g. 128+64KN) set the statistic distribution to use
+(uniform or normal).</p>
+
+<p style="margin-left:9%;"><b>-s</b> <i>speed</i></p>
+
+<p style="margin-left:18%;">Interface speed in Bytes/sec.
+It has the same syntax of -b. Input is blocked for the
+tramission time of the packet, thus the sender is prevented
+from sending too fast.</p>
+
+<p style="margin-left:9%;"><b>-c</b>
+<i>channel_bufsize</i></p>
+
+<p style="margin-left:18%;">Channel buffer size (in Bytes):
+maximum size of the packet queue. Exceeding packets are
+discarded.</p>
+
+<p style="margin-left:9%;"><b>-n</b> <i>noise
+factor</i></p>
+
+<p style="margin-left:18%;">Number of bits damaged/one
+megabyte.</p>
+
+<p style="margin-left:9%;"><b>-m</b> <i>mtu size</i></p>
+
+<p style="margin-left:18%;">Packets longer than mtu_size
+are discarded.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-N</b></p></td>
+<td width="6%"></td>
+<td width="53%">
+
+
+<p>nofifo. with -N packets can be reordered.</p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-M</b> <i>mgmt socket</i></p>
+
+<p style="margin-left:18%;">the unix socket where the
+parameters (loss percentage, delay etc) can be checked and
+changed runtime. unixterm(1) can be used as a remote
+terminal for wirefilter.</p>
+
+<p style="margin-left:9%;"><b>-v</b>
+<i>vde_plug1:vde_plug2</i></p>
+
+<p style="margin-left:18%;">If this option is used, the two
+local vde_plugs (vde_plug1 and vde_plug2) will be connected
+each other instead of stdin/stdout, using the libvdeplug
+libraries. This option activates an interactive management
+session on console (stdin/stdout).</p>
+
+<p style="margin-left:9%;"><b>--mgmtmode</b>
+<i>mode</i></p>
+
+<p style="margin-left:18%;">this option sets the access
+mode of the mgmt socket. The command syntax is quite simple.
+<b>help</b> provides the list of commands. It is possible to
+load a script file using the <b>load</b> management
+command.</p>
+
+<p style="margin-left:9%;"><b>--daemon</b></p>
+
+<p style="margin-left:18%;">wirefilter becomes a daemon</p>
+
+<p style="margin-left:9%;"><b>--pidfile</b>
+<i>pathnamefP</i></p>
+
+<p style="margin-left:18%;">wirefilter saves its pid into
+the file.</p>
+
+<p style="margin-left:9%;"><b>--blinkid</b> <i>name</i></p>
+
+<p style="margin-left:18%;">This option defines the id sent
+for each packet to the blink server (see the --blink option
+below). The stardard identifier for a wirefilter is the
+process pid.</p>
+
+<p style="margin-left:9%;"><b>--blink</b> <i>socket</i></p>
+
+<p style="margin-left:18%;">wirefilter sends a log message
+to the specified PF_UNIX/DATAGRAM socket for each packet
+sent. Each packet has the format: id direction length.
+e.g:</p>
+
+<p style="margin-left:23%; margin-top: 1em">6768 LR 44 <br>
+6768 LR 44 <br>
+6768 RL 100 <br>
+6768 LR 100 <br>
+6768 LR 44</p>
+
+<h2>Markov mode
+<a name="Markov mode"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wirefilter
+provides also a more complex set of parameters using a
+Markov chain to emulate different states of the link and the
+tranistions between states. Each state is represented by a
+node. Markov chain parameters can be set with management
+commands or rc files only. In fact, due to the large number
+of parameters the command line would have been unreadable.
+<b><br>
+markov-numnodes</b> <i>n</i></p>
+
+<p style="margin-left:18%;">defines the number of different
+states. All the parameters of the connection can be defined
+node by node. Nodes are numbered starting from zero (to
+n-1). e.g.:</p>
+
+<p style="margin-left:69%; margin-top: 1em">delay
+100+10N[4] <br>
+loss 10[2]</p>
+
+<p style="margin-left:18%; margin-top: 1em">these command
+define a delay of 90-110 ms (normal distribution) for the
+node number 4 and a 10 loss for the node 2. It is possible
+to resize the Markov chain at run-time. New nodes are
+unreachable and do not have any edge to other states (i.e.
+each new node has a loopback edge to the node itself with
+100% probability). When reducing the number of nodes, the
+weight of the edges towards deleted nodes is added to the
+loopback edge. When the current node of the emulation is
+deleted, node 0 becomes the current node. (The emulation
+always starts from node 0).</p>
+
+<p style="margin-left:9%;"><b>markov-time</b> <i>ms</i></p>
+
+<p style="margin-left:18%;">time period (ms) for the markov
+chain computation. Each <i>ms</i> microseconds a random
+number generator decides which is the next state (default
+value=100ms).</p>
+
+<p style="margin-left:9%;"><b>markov-name</b>
+<i>n,name</i></p>
+
+<p style="margin-left:18%;">assign a name to a node of the
+markov chain.</p>
+
+<p style="margin-left:9%;"><b>markov-setnode</b>
+<i>n</i></p>
+
+<p style="margin-left:18%;">manually set the current node
+to the node <i>n</i>.</p>
+
+<p style="margin-left:9%;"><b>setedge</b>
+<i>n1,n2,w</i></p>
+
+<p style="margin-left:18%;">define an edge between
+<i>n1</i> and <i>n2</i>; <i>w</i> is the weight (probability
+percentage) of the edge. The loopback edge (from a node to
+itself) is always computed as 100% minus the sum of the
+weights of outgoing edges.</p>
+
+<p style="margin-left:9%;"><b>showedges [</b> <i>n</i>
+<b>]</b></p>
+
+<p style="margin-left:18%;">list the edges from node
+<i>n</i> (or from the current node when the command has no
+parameters). Null weight edges are omitted.</p>
+
+<p style="margin-left:9%;"><b>showcurrent</b></p>
+
+<p style="margin-left:18%;">show the current Markov
+state.</p>
+
+<p style="margin-left:9%;"><b>showinfo [</b> <i>n</i>
+<b>]</b></p>
+
+<p style="margin-left:18%;">show status and information on
+state (node) <i>n</i>. If the parameter is omitted it shows
+the status and information on the current state.</p>
+
+<p style="margin-left:9%;"><b>markov-debug [</b> <i>n</i>
+<b>]</b></p>
+
+<p style="margin-left:18%;">set the debug level for the
+current management connection. In the actual implementation
+when n is greater than zero each change of markov node
+causes the output of a debug trace. Debug tracing get
+disabled when <i>n</i> is zero or the parameter is
+missing.</p>
+
+<h2>NOTICE
+<a name="NOTICE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtual
+Distributed Ethernet is not related in any way with
+www.vde.com (&quot;Verband der Elektrotechnik, Elektronik
+und Informationstechnik&quot; i.e. the German
+&quot;Association for Electrical, Electronic &amp;
+Information Technologies&quot;).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_switch</b>(1),
+<b>vdeq</b>(1). <b>dpipe</b>(1). <b>unixterm</b>(1).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">VDE is a project
+by Renzo Davoli &lt;renzo@cs.unibo.it&gt;</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:38 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GPROFNG-DISPLAY-TEXT</title>
+
+</head>
+<body>
+
+<h1 align="center">GPROFNG-DISPLAY-TEXT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">gprofng-display-text
+- Display the performance data in plain text format</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gprofng
+display text</b> [<i>option(s)</i>] [<i>commands</i>]
+[-script <i>script-file</i>] <i>experiment(s)</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print a plain
+text version of the various displays supported by
+gprofng.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The input
+consists of one or more experiment directories. Through
+commands, the user controls the output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There is a rich
+set of commands to control the display of the data. The
+<b>NOTES</b> section lists the most common ones. The gprofng
+user guide lists all the commands supported.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Commands
+specified on the command line need to be prepended with the
+dash (&rsquo;-&rsquo;) symbol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In this example,
+a function overview will be shown, followed by the source
+code listing of function <b>my-func</b>, annotated with the
+performance metrics that have been recorded during the data
+collection and stored in experiment directory
+<b>my-exp.er</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ gprofng
+display text -functions -source my-func my-exp.er</p>
+
+<p style="margin-left:9%; margin-top: 1em">Instead of, or
+in addition to, specifying these commands on the command
+line, commands may also be included in a file called the
+<i>script-file</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+commands are processed and interpreted from left to right,
+<i>so the order matters</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If this tool is
+invoked without options, commands, or a script file, it
+starts in interpreter mode. The user can then issue the
+commands interactively. The session is terminated with the
+<b>exit</b> command in the interpreter.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print the version number and
+exit.</p>
+
+<p style="margin-left:9%;"><b>--help</b></p>
+
+<p style="margin-left:14%;">Print usage information and
+exit.</p>
+
+<p style="margin-left:9%;"><b>-script</b>
+<i>script-file</i></p>
+
+<p style="margin-left:14%;">Execute the commands stored in
+the script file. This feature may be combined with commands
+specified at the command line.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Many commands
+are supported. Below, the more common ones are listed in
+mostly alphabetical order, because sometimes it is more
+logical to swap the order of two entries.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There are many
+more commands. These are documented in the user guide. <br>
+&quot;callers-callees&quot;</p>
+
+<p style="margin-left:14%;">In a callers-callees panel, it
+is shown which function(s) call the target function (the
+<i>callers</i>) and what functions it is calling (the
+<i>callees</i>). This command prints the callers-callees
+panel for each of the functions, in the order specified by
+the function sort metric.</p>
+
+<p style="margin-left:9%;">&quot;calltree&quot;</p>
+
+<p style="margin-left:14%;">Display the dynamic call graph
+from the experiment, showing the hierarchical metrics at
+each level.</p>
+
+<p style="margin-left:9%;">&quot;compare {on | off | delta
+| ratio}&quot;</p>
+
+<p style="margin-left:14%;">By default, the results for
+multiple experiments are aggregated. This command changes
+this to enable the comparison of experiments for certain
+views (e.g. the function view). The first experiment
+specified is defined to be the reference. The following
+options are supported: <br>
+&quot;on&quot;</p>
+
+<p style="margin-left:19%;">For each experiment specified
+on the command line, print the values for the metrics that
+have been activated for the experiment.</p>
+
+<p style="margin-left:14%;">&quot;off&quot;</p>
+
+<p style="margin-left:19%;">Disable the comparison of
+experiments. This is the default.</p>
+
+<p style="margin-left:14%;">&quot;delta&quot;</p>
+
+<p style="margin-left:19%;">Print the values for the
+reference experiment. The results for the other experiments
+are shown as a delta relative to the reference
+(current-reference).</p>
+
+<p style="margin-left:14%;">&quot;ratio&quot;</p>
+
+<p style="margin-left:19%;">Print the values for the
+reference experiment. The results for the other experiments
+are shown as a ratio relative to the reference
+(current/reference).</p>
+
+<p style="margin-left:9%;">&quot;disasm
+<i>function-name</i>&quot;</p>
+
+<p style="margin-left:14%;">List the source code and
+instructions for the function specified. The instructions
+are annotated with the metrics used.</p>
+
+<p style="margin-left:9%;">&quot;fsingle
+<i>function-name</i> [<b>n</b>]&quot;</p>
+
+<p style="margin-left:14%;">Write a summary panel for the
+specified function. The optional parameter <i>n</i> is
+needed for those cases where several functions have the same
+name.</p>
+
+<p style="margin-left:9%;">&quot;fsummary&quot;</p>
+
+<p style="margin-left:14%;">Write a summary panel for each
+function in the function list.</p>
+
+<p style="margin-left:9%;">&quot;functions&quot;</p>
+
+<p style="margin-left:14%;">Display a list of all functions
+executed. For each function the used metrics (e.g. the CPU
+time) are shown.</p>
+
+<p style="margin-left:9%;">&quot;header&quot;</p>
+
+<p style="margin-left:14%;">Shows several operational
+characteristics of the experiment(s) specified on the
+command line.</p>
+
+<p style="margin-left:9%;">&quot;limit <i>n</i>&quot;</p>
+
+<p style="margin-left:14%;">Limit the output to <i>n</i>
+lines.</p>
+
+<p style="margin-left:9%;">&quot;lines&quot;</p>
+
+<p style="margin-left:14%;">Write a list of source lines
+and their metrics, ordered by the current sort metric.</p>
+
+<p style="margin-left:9%;">&quot;metric_list&quot;</p>
+
+<p style="margin-left:14%;">Display the currently selected
+metrics in the function view and a list of all the metrics
+available for the target experiment(s).</p>
+
+<p style="margin-left:9%;">&quot;metrics
+<i>metric-spec</i>&quot;</p>
+
+<p style="margin-left:14%;">Define the metrics to be
+displayed in the function and callers-callees overviews.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The
+<i>metric-spec</i> can either be the keyword <b>default</b>
+to restore the default metrics selection, or a colon
+separated list with metrics.</p>
+
+<p style="margin-left:14%; margin-top: 1em">A special
+metric is &quot;hwc&quot;. It automatically expands to the
+active set of hardware event counters used in the
+experiment(s).</p>
+
+<p style="margin-left:14%; margin-top: 1em">If both
+instructions and clock cycles have been measured, the
+&quot;CPI&quot; and &quot;IPC&quot; metrics can be used to
+see the Clockcycles Per Instruction and Instructions Per
+Clockcyle values, respectively.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The gprofng
+user guide has more details how to define metrics.</p>
+
+<p style="margin-left:9%;">&quot;name {short | long |
+mangled}[:{soname | nosoname}]&quot;</p>
+
+<p style="margin-left:14%;">Specify whether to use the
+short, long, or mangled form of function names. Optionally,
+the load object that the function is part of can be included
+in the output by adding the <i>soname</i> keyword. It can
+also be ommitted (<i>nosoname</i>), which is the
+default.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Whether there
+is an actual difference between these types of names depends
+on the language.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that there
+should be no (white)space to the left and right of the colon
+(<b>:</b>).</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option
+should not be confused with the keyword <b>name</b> in a
+metric definition, which is used to specify that the names
+of functions should be shown in the function overview.</p>
+
+<p style="margin-left:9%;">&quot;overview&quot;</p>
+
+<p style="margin-left:14%;">Shows a summary of the recorded
+performance data for the experiment(s) specified on the
+command line.</p>
+
+<p style="margin-left:9%;">&quot;pcs&quot;</p>
+
+<p style="margin-left:14%;">Write a list of program
+counters (PCs) and their metrics, ordered by the current
+sort metric.</p>
+
+<p style="margin-left:9%;">&quot;sort
+<i>metric-spec</i>&quot;</p>
+
+<p style="margin-left:14%;">Sort the function list on the
+<i>metric-spec</i> given.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">@IndexSubentry{Sort,
+Reverse order} The data can be sorted in reverse order by
+prepending the metric definition with a minus (<b>-</b>)
+sign.</p>
+
+<p style="margin-left:14%; margin-top: 1em">For example
+<b>sort -e.totalcpu</b>.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">@IndexSubentry{Sort,
+Reset to default} A default metric for the sort operation
+has been defined and since this is a persistent command,
+this default can be restored with &quot;default&quot; as the
+key (<b>sort default</b>).</p>
+
+<p style="margin-left:9%;">&quot;source
+<i>function-name</i>&quot;</p>
+
+<p style="margin-left:14%;">List the source code for the
+function specified, annotated with the metrics used.</p>
+
+<p style="margin-left:9%;">&quot;viewmode {user | expert |
+machine}&quot;</p>
+
+<p style="margin-left:14%;">This command is only relevant
+for Java programs. For all other languages supported, the
+viewmode setting has no effect.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The following
+options are supported: <br>
+&quot;user&quot;</p>
+
+<p style="margin-left:19%;">Show the Java call stacks for
+Java threads, but do not show housekeeping threads. The
+function view includes a function called
+<b>&lt;JVM-System&gt;</b>. This represents the aggregated
+time from non-Java threads. In case the JVM software does
+not report a Java call stack, time is reported against the
+function <b>&lt;no Java callstack recorded&gt;</b>.</p>
+
+<p style="margin-left:14%;">&quot;expert&quot;</p>
+
+<p style="margin-left:19%;">Show the Java call stacks for
+Java threads when the user Java code is executed, and
+machine call stacks when JVM code is executed, or when the
+JVM software does not report a Java call stack. Show the
+machine call stacks for housekeeping threads.</p>
+
+<p style="margin-left:14%;">&quot;machine&quot;</p>
+
+<p style="margin-left:19%;">Show the actual native call
+stacks for all threads. This is the view mode for C, C++,
+and Fortran.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gprofng</b>(1),
+<b>gprofng-archive</b>(1), <b>gprofng-collect-app</b>(1),
+<b>gprofng-display-html</b>(1),
+<b>gprofng-display-src</b>(1)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The user guide
+for gprofng is maintained as a Texinfo manual. If the
+<b>info</b> and <b>gprofng</b> programs are correctly
+installed, the command <b>info gprofng</b> should give
+access to this document.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (c)
+2022-2025 Free Software Foundation, Inc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free
+Software Foundation; with no Invariant Sections, with no
+Front-Cover Texts, and with no Back-Cover Texts. A copy of
+the license is included in the section entitled &quot;GNU
+Free Documentation License&quot;.</p>
+<hr>
+</body>
+</html>

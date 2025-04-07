@@ -1,0 +1,170 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:21 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>XPSTOJPEG</title>
+
+</head>
+<body>
+
+<h1 align="center">XPSTOJPEG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xpstojpeg - XPS
+to JPEG converter</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>xpstojpeg</b>
+[<i>OPTION</i>...] FILE [<i>OUTPUT&nbsp;FILE</i>]</p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xpstojpeg</b>
+converts XPS documents to JPEG format. <b>xpstojpeg</b>
+reads the XPS file, <i>FILE</i>, and writes a JPEG file per
+page with the page number and file type appended to
+<i>OUTPUT FILE</i>. If <i>OUTPUT FILE</i> is not specified
+&quot;page&quot; will be used.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-?</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>
+<i>DOCUMENT</i>, <b>--document</b>=<i>DOCUMENT</i></p>
+
+<p style="margin-left:14%;">The document inside the XPS
+file to convert. By default, the first document of the XPS
+file is used.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f</b>
+<i>PAGE</i>, <b>--first</b>=<i>PAGE</i></p>
+
+<p style="margin-left:14%;">The first page to convert.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l</b>
+<i>PAGE</i>, <b>--last</b>=<i>PAGE</i></p>
+
+<p style="margin-left:14%;">The last page to convert.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--odd</b></p>
+
+<p style="margin-left:14%;">Convert only odd pages.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e</b>,
+<b>--even</b></p>
+
+<p style="margin-left:14%;">Convert only even pages.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b>
+<i>RESOLUTION</i>, <b>--resolution</b>=<i>RESOLUTION</i></p>
+
+<p style="margin-left:14%;">Horizontal and vertical
+resolution in PPI (Pixels Per Inch). The default is 150
+PPI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--rx</b>=<i>RESOLUTION</i></p>
+
+<p style="margin-left:14%;">Horizontal resolution in PPI
+(Pixels Per Inch). The default is 150 PPI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ry</b>=<i>RESOLUTION</i></p>
+
+<p style="margin-left:14%;">Vertical resolution in PPI
+(Pixels Per Inch). The default is 150 PPI.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-x</b>
+<i>X</i>, <b>--crop-x</b>=<i>X</i></p>
+
+<p style="margin-left:14%;">The x-coordinate of the crop
+area top left corner.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-y</b>
+<i>Y</i>, <b>--crop-y</b>=<i>Y</i></p>
+
+<p style="margin-left:14%;">The y-coordinate of the crop
+area top left corner.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w</b>
+<i>WIDTH</i>, <b>--crop-width</b>=<i>WIDTH</i></p>
+
+<p style="margin-left:14%;">The width of crop area.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>
+<i>HEIGHT</i>, <b>--crop-height</b>=<i>HEIGHT</i></p>
+
+<p style="margin-left:14%;">The height of crop area.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to
+<b><font color="#0000FF">https://bugzilla.gnome.org/enter_bug.cgi?product=libgxps</font></b><font color="#000000">.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>xpstopng</b>(1)
+<b>xpstopdf</b>(1) <b>xpstops</b>(1)
+<b>xpstosvg</b>(1)</font></p>
+<hr>
+</body>
+</html>

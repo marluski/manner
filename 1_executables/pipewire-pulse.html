@@ -1,0 +1,138 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:33 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pipewire-pulse</title>
+
+</head>
+<body>
+
+<h1 align="center">pipewire-pulse</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pipewire-pulse -
+The PipeWire PulseAudio replacement</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire-pulse</b>
+[<i>options</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire-pulse</b>
+starts a PulseAudio-compatible daemon that integrates with
+the PipeWire media server, by running a pipewire process
+through a systemd service. This daemon is a drop-in
+replacement for the PulseAudio daemon.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h |
+--help</b></p>
+
+<p style="margin-left:14%;">Show help.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v |
+--verbose</b></p>
+
+<p style="margin-left:14%;">Increase the verbosity by one
+level. This option may be specified multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Show version information.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c |
+--config=FILE</b></p>
+
+<p style="margin-left:14%;">Load the given config file
+(Default: pipewire-pulse.conf).</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The generic
+<b>pipewire(1) environment variables</b> are supported.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In addition:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>PULSE_RUNTIME_PATH</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>XDG_RUNTIME_DIR</b></p>
+
+<p style="margin-left:14%;">Directory where to create the
+native protocol pulseaudio socket.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>PULSE_LATENCY_MSEC</b></p>
+
+<p style="margin-left:14%;">Extra buffering latency in
+milliseconds. This controls buffering logic in libpulse and
+may be set for PulseAudio client applications to adjust
+their buffering. (Setting it on the pipewire-pulse server
+has no effect.)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire-pulse.conf(5)</b>,
+<b>pipewire(1)</b>, <b>pipewire-pulse-modules(7)</b></p>
+<hr>
+</body>
+</html>

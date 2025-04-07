@@ -1,0 +1,220 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:40 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-@-set-window-title</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-@-set-window-title</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Global options">Global options</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-@-set-window-title
+- Set the window title</p>
+
+<h2>Usage
+<a name="Usage"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em"><b>kitten @ set-window-title
+[TITLE ...]</b></p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set the title
+for the specified windows. If you use the <b>--match option
+the title will be set for all matched windows. By default,
+only the window in which the command is run is affected. If
+you do not specify a title, the last title set by the child
+process running in the window will be used.</b></p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--temporary</b></p>
+
+<p style="margin-left:18%;">By default, the title will be
+permanently changed and programs running in the window will
+not be able to change it again. If you want to allow other
+programs to change it afterwards, use this option.</p>
+
+<p style="margin-left:9%;"><b>--match, -m</b></p>
+
+<p style="margin-left:18%;">The window to match. Match
+specifications are of the form: field:query. Where field can
+be one of: id, title, pid, cwd, cmdline, num, env, var,
+state, neighbor, and recent. query is the expression to
+match. Expressions can be either a number or a regular
+expression, and can be combined using Boolean operators.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The special
+value all matches all windows.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For numeric
+fields: id, pid, num and recent, the expression is
+interpreted as a number, not a regular expression. Negative
+values for id match from the highest id number down, in
+particular, -1 is the most recently created window.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The field num
+refers to the window position in the current tab, starting
+from zero and counting clockwise (this is the same as the
+order in which the windows are reported by the kitten @ ls
+command).</p>
+
+<p style="margin-left:18%; margin-top: 1em">The window id
+of the current window is available as the <b>KITTY_WINDOW_ID
+environment variable.</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">The field
+recent refers to recently active windows in the currently
+active tab, with zero being the currently active window, one
+being the previously active window and so on.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The field
+neighbor refers to a neighbor of the active window in the
+specified direction, which can be: left, right, top or
+bottom.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When using the
+env field to match on environment variables, you can specify
+only the environment variable name or a name and value, for
+example, env:MY_ENV_VAR=2.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Similarly, the
+var field matches on user variables set on the window. You
+can specify name or name and value as with the env
+field.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The field state
+matches on the state of the window. Supported states are:
+active, focused, needs_attention, parent_active,
+parent_focused, self, overlay_parent. Active windows are the
+windows that are active in their parent tab. There is only
+one focused window and it is the window to which keyboard
+events are delivered. If no window is focused, the last
+focused window is matched. The value self matches the window
+in which the remote control command is run. The value
+overlay_parent matches the window that is under the self
+window, when the self window is an overlay.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note that you
+can use the kitten @ ls command to get a list of
+windows.</p>
+
+<p style="margin-left:9%;"><b>--help, -h</b></p>
+
+<p style="margin-left:18%;">Show help for this command</p>
+
+<h2>Global options
+<a name="Global options"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>--to</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">An address for the kitty
+instance to control. Corresponds to the address given to the
+kitty instance via the <b>--listen-on option or the
+listen_on setting in</b> <i>kitty.conf. If not specified,
+the environment variable</i> <b>KITTY_LISTEN_ON is checked.
+If that is also not found, messages are sent to the
+controlling terminal for this process, i.e. they will only
+work if this process is run within a kitty window.</b></p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--password</b></p>
+
+<p style="margin-left:18%;">A password to use when
+contacting kitty. This will cause kitty to ask the user for
+permission to perform the specified action, unless the
+password has been accepted before or is pre-configured in
+<i>kitty.conf. To use a blank password specify</i>
+<b>--use-password as always.</b></p>
+
+<p style="margin-left:9%;"><b>--password-file</b>
+<i>[=rc-pass]</i></p>
+
+<p style="margin-left:18%;">A file from which to read the
+password. Trailing whitespace is ignored. Relative paths are
+resolved from the kitty configuration directory. Use - to
+read from STDIN. Use fd:num to read from the file descriptor
+num. Used if no <b>--password is supplied. Defaults to
+checking for the</b> <i>rc-pass file in the kitty
+configuration directory.</i></p>
+
+<p style="margin-left:9%;"><b>--password-env</b>
+<i>[=KITTY_RC_PASSWORD]</i></p>
+
+<p style="margin-left:18%;">The name of an environment
+variable to read the password from. Used if no
+<b>--password-file is supplied. Defaults to checking the
+environment variable KITTY_RC_PASSWORD.</b></p>
+
+<p style="margin-left:9%;"><b>--use-password</b>
+<i>[=if-available]</i></p>
+
+<p style="margin-left:18%;">If no password is available,
+kitty will usually just send the remote control command
+without a password. This option can be used to force it to
+always or never use the supplied password. If set to always
+and no password is provided, the blank password is used.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Choices:
+if-available, always, never</p>
+<hr>
+</body>
+</html>

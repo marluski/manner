@@ -1,0 +1,2064 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BLUETOOTHCTL-MGMT</title>
+
+</head>
+<body>
+
+<h1 align="center">BLUETOOTHCTL-MGMT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#MGMT COMMANDS">MGMT COMMANDS</a><br>
+<a href="#select">select</a><br>
+<a href="#revision">revision</a><br>
+<a href="#commands">commands</a><br>
+<a href="#config">config</a><br>
+<a href="#info">info</a><br>
+<a href="#extinfo">extinfo</a><br>
+<a href="#auto-power">auto-power</a><br>
+<a href="#power">power</a><br>
+<a href="#discov">discov</a><br>
+<a href="#connectable">connectable</a><br>
+<a href="#fast-conn">fast-conn</a><br>
+<a href="#bondable">bondable</a><br>
+<a href="#pairable">pairable</a><br>
+<a href="#linksec">linksec</a><br>
+<a href="#ssp">ssp</a><br>
+<a href="#sc">sc</a><br>
+<a href="#hs">hs</a><br>
+<a href="#le">le</a><br>
+<a href="#advertising">advertising</a><br>
+<a href="#bredr">bredr</a><br>
+<a href="#privacy">privacy</a><br>
+<a href="#class">class</a><br>
+<a href="#disconnect">disconnect</a><br>
+<a href="#con">con</a><br>
+<a href="#find">find</a><br>
+<a href="#find-service">find-service</a><br>
+<a href="#stop-find">stop-find</a><br>
+<a href="#name">name</a><br>
+<a href="#pair">pair</a><br>
+<a href="#cancelpair">cancelpair</a><br>
+<a href="#unpair">unpair</a><br>
+<a href="#keys">keys</a><br>
+<a href="#ltks">ltks</a><br>
+<a href="#irks">irks</a><br>
+<a href="#block">block</a><br>
+<a href="#unblock">unblock</a><br>
+<a href="#add-uuid">add-uuid</a><br>
+<a href="#rm-uuid">rm-uuid</a><br>
+<a href="#clr-uuids">clr-uuids</a><br>
+<a href="#local-oob">local-oob</a><br>
+<a href="#remote-oob">remote-oob</a><br>
+<a href="#did">did</a><br>
+<a href="#static-addr">static-addr</a><br>
+<a href="#public-addr">public-addr</a><br>
+<a href="#ext-config">ext-config</a><br>
+<a href="#debug-keys">debug-keys</a><br>
+<a href="#conn-info">conn-info</a><br>
+<a href="#io-cap">io-cap</a><br>
+<a href="#scan-params">scan-params</a><br>
+<a href="#get-clock">get-clock</a><br>
+<a href="#add-device">add-device</a><br>
+<a href="#del-device">del-device</a><br>
+<a href="#clr-devices">clr-devices</a><br>
+<a href="#bredr-oob">bredr-oob</a><br>
+<a href="#le-oob">le-oob</a><br>
+<a href="#advinfo">advinfo</a><br>
+<a href="#advsize">advsize</a><br>
+<a href="#add-adv">add-adv</a><br>
+<a href="#rm-adv">rm-adv</a><br>
+<a href="#clr-adv">clr-adv</a><br>
+<a href="#add-ext-adv-params">add-ext-adv-params</a><br>
+<a href="#add-ext-adv-data">add-ext-adv-data</a><br>
+<a href="#appearance">appearance</a><br>
+<a href="#phy">phy</a><br>
+<a href="#wbs">wbs</a><br>
+<a href="#secinfo">secinfo</a><br>
+<a href="#expinfo">expinfo</a><br>
+<a href="#exp-debug">exp-debug</a><br>
+<a href="#exp-privacy">exp-privacy</a><br>
+<a href="#exp-quality">exp-quality</a><br>
+<a href="#exp-offload">exp-offload</a><br>
+<a href="#read-sysconfig">read-sysconfig</a><br>
+<a href="#set-sysconfig">set-sysconfig</a><br>
+<a href="#get-flags">get-flags</a><br>
+<a href="#set-flags">set-flags</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">bluetoothctl-mgmt
+- Management Submenu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl</b>
+[--options] [mgmt.commands]</p>
+
+<h2>MGMT COMMANDS
+<a name="MGMT COMMANDS"></a>
+</h2>
+
+
+<h3>select
+<a name="select"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Select a
+different index</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="20%">
+
+
+<p><b>&gt; select &lt;index&gt;</b></p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h3>revision
+<a name="revision"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get the MGMT
+Revision</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em"><b>&gt; revision</b></p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<h3>commands
+<a name="commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List supported
+commands</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em"><b>&gt; commands</b></p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<h3>config
+<a name="config"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show
+configuration info</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><b>&gt; config</b></p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<h3>info
+<a name="info"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show controller
+info</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>&gt; info</b></p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<h3>extinfo
+<a name="extinfo"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show extended
+controller info</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><b>&gt; extinfo</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<h3>auto-power
+<a name="auto-power"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Power all
+available features</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>&gt; auto-power</b></p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+<h3>power
+<a name="power"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle powered
+state</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><b>&gt; power
+&lt;on/off&gt;</b></p> </td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h3>discov
+<a name="discov"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle
+discoverable state</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em"><b>&gt; discov
+&lt;yes/no/limited&gt; [timeout]</b></p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h3>connectable
+<a name="connectable"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle
+connectable state</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><b>&gt; connectable
+&lt;on/off&gt;</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h3>fast-conn
+<a name="fast-conn"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle fast
+connectable state</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><b>&gt; fast-conn
+&lt;on/off&gt;</b></p> </td>
+<td width="56%">
+</td></tr>
+</table>
+
+<h3>bondable
+<a name="bondable"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle bondable
+state</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em"><b>&gt; bondable
+&lt;on/off&gt;</b></p> </td>
+<td width="58%">
+</td></tr>
+</table>
+
+<h3>pairable
+<a name="pairable"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle bondable
+state</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em"><b>&gt; pairable
+&lt;on/off&gt;</b></p> </td>
+<td width="58%">
+</td></tr>
+</table>
+
+<h3>linksec
+<a name="linksec"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle link
+level security</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="23%">
+
+
+<p style="margin-top: 1em"><b>&gt; linksec
+&lt;on/off&gt;</b></p> </td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h3>ssp
+<a name="ssp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle SSP
+mode</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em"><b>&gt; spp
+&lt;on/off&gt;</b></p> </td>
+<td width="64%">
+</td></tr>
+</table>
+
+<h3>sc
+<a name="sc"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle SC
+support</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="23%">
+
+
+<p style="margin-top: 1em"><b>&gt; sc
+&lt;on/off/only&gt;</b></p> </td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h3>hs
+<a name="hs"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle HS
+support</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; hs
+&lt;on/off&gt;</b></p> </td>
+<td width="65%">
+</td></tr>
+</table>
+
+<h3>le
+<a name="le"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle LE
+support</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; le
+&lt;on/off&gt;</b></p> </td>
+<td width="65%">
+</td></tr>
+</table>
+
+<h3>advertising
+<a name="advertising"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle LE
+advertising</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><b>&gt; advertise
+&lt;on/off&gt;</b></p> </td>
+<td width="56%">
+</td></tr>
+</table>
+
+<h3>bredr
+<a name="bredr"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle BR/EDR
+support</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><b>&gt; bredr
+&lt;on/off&gt;</b></p> </td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h3>privacy
+<a name="privacy"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle privacy
+support</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="31%">
+
+
+<p style="margin-top: 1em"><b>&gt; privacy &lt;on/off&gt;
+[irk]</b></p> </td>
+<td width="51%">
+</td></tr>
+</table>
+
+<h3>class
+<a name="class"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set device
+major/minor class</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><b>&gt; class &lt;major&gt;
+&lt;minor&gt;</b></p> </td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h3>disconnect
+<a name="disconnect"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Disconnect
+device</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="50%">
+
+
+<p style="margin-top: 1em"><b>&gt; disconnect [-t type]
+&lt;remote address&gt;</b></p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<h3>con
+<a name="con"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List
+connections</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>&gt; con</b></p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<h3>find
+<a name="find"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Discover nearby
+devices</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em"><b>&gt; find [-l|-b]
+[-L]</b></p> </td>
+<td width="58%">
+</td></tr>
+</table>
+
+<h3>find-service
+<a name="find-service"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Discover nearby
+service</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em"><b>&gt; find-service [-u UUID]
+[-r RSSI_Threshold] [-l|-b]</b></p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<h3>stop-find
+<a name="stop-find"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Stop
+discovery</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em"><b>&gt; stop-find
+[-l|-b]</b></p> </td>
+<td width="58%">
+</td></tr>
+</table>
+
+<h3>name
+<a name="name"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set local
+name</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>&gt; name &lt;name&gt;
+[shortname]</b></p> </td>
+<td width="50%">
+</td></tr>
+</table>
+
+<h3>pair
+<a name="pair"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Pair with a
+remote device</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="54%">
+
+
+<p style="margin-top: 1em"><b>&gt; pair [-c cap] [-t type]
+&lt;remote address&gt;</b></p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<h3>cancelpair
+<a name="cancelpair"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Cancel
+pairing</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="50%">
+
+
+<p style="margin-top: 1em"><b>&gt; cancelpair [-t type]
+&lt;remote address&gt;</b></p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<h3>unpair
+<a name="unpair"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unpair
+device</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em"><b>&gt; unpair [-t type]
+&lt;remote address&gt;</b></p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h3>keys
+<a name="keys"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Load Link
+Keys</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>keys</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<h3>ltks
+<a name="ltks"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Load Long Term
+Keys</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>&gt; ltks</b></p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<h3>irks
+<a name="irks"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Load Identity
+Resolving Keys</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="53%">
+
+
+<p style="margin-top: 1em"><b>&gt; irks [--local index]
+[--file file path]</b></p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+<h3>block
+<a name="block"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Block Device</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="44%">
+
+
+<p style="margin-top: 1em"><b>&gt; block [-t type]
+&lt;remote address&gt;</b></p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<h3>unblock
+<a name="unblock"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unblock
+Device</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="46%">
+
+
+<p style="margin-top: 1em"><b>&gt; unblock [-t type]
+&lt;remote address&gt;</b></p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<h3>add-uuid
+<a name="add-uuid"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add UUID</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em"><b>&gt; add-uuid &lt;UUID&gt;
+&lt;service class hint&gt;</b></p></td>
+<td width="33%">
+</td></tr>
+</table>
+
+<h3>rm-uuid
+<a name="rm-uuid"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove UUID</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><b>&gt; rm-uuid
+&lt;UUID&gt;</b></p> </td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h3>clr-uuids
+<a name="clr-uuids"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Clear UUIDs</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; clear-uuids</b></p></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<h3>local-oob
+<a name="local-oob"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Local OOB
+data</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><b>&gt; local-oob</b></p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<h3>remote-oob
+<a name="remote-oob"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remote OOB
+data</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><b>&gt; remote-oob [-t
+&lt;addr_type&gt;] [-r &lt;rand192&gt;] [-h &lt;hash192&gt;]
+[-R &lt;rand256&gt;] [-H &lt;hash256&gt;]
+&lt;addr&gt;</b></p> </td></tr>
+</table>
+
+<h3>did
+<a name="did"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set Device
+ID</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="55%">
+
+
+<p style="margin-top: 1em"><b>&gt; did
+&lt;source&gt;:&lt;vendor&gt;:&lt;product&gt;:&lt;version&gt;</b></p> </td>
+<td width="27%">
+</td></tr>
+</table>
+
+<h3>static-addr
+<a name="static-addr"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set static
+address</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><b>&gt; static-addr
+&lt;address&gt;</b></p> </td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h3>public-addr
+<a name="public-addr"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set public
+address</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><b>&gt; public-addr
+&lt;address&gt;</b></p> </td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h3>ext-config
+<a name="ext-config"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">External
+configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em"><b>&gt; ext-config
+&lt;on/off&gt;</b></p> </td>
+<td width="55%">
+</td></tr>
+</table>
+
+<h3>debug-keys
+<a name="debug-keys"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle debug
+keys</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em"><b>&gt; debug-keys
+&lt;on/off&gt;</b></p> </td>
+<td width="55%">
+</td></tr>
+</table>
+
+<h3>conn-info
+<a name="conn-info"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get connection
+information</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em"><b>&gt; conn-info [-t type]
+&lt;remote address&gt;</b></p></td>
+<td width="33%">
+</td></tr>
+</table>
+
+<h3>io-cap
+<a name="io-cap"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set IO
+Capability</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em"><b>&gt; io-cap
+&lt;cap&gt;</b></p> </td>
+<td width="64%">
+</td></tr>
+</table>
+
+<h3>scan-params
+<a name="scan-params"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set Scan
+Parameters</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em"><b>&gt; scan-params
+&lt;interval&gt; &lt;window&gt;</b></p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h3>get-clock
+<a name="get-clock"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get Clock
+Information</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em"><b>&gt; get-clock
+[address]</b></p> </td>
+<td width="55%">
+</td></tr>
+</table>
+
+<h3>add-device
+<a name="add-device"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add Device</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="56%">
+
+
+<p style="margin-top: 1em"><b>&gt; add-device [-a action]
+[-t type] &lt;address&gt;</b></p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<h3>del-device
+<a name="del-device"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove
+Device</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="41%">
+
+
+<p style="margin-top: 1em"><b>&gt; del-device [-t type]
+&lt;address&gt;</b></p> </td>
+<td width="41%">
+</td></tr>
+</table>
+
+<h3>clr-devices
+<a name="clr-devices"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Clear
+Devices</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; clr-devices</b></p></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<h3>bredr-oob
+<a name="bredr-oob"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Local OOB data
+(BR/EDR)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><b>&gt; bredr-oob</b></p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<h3>le-oob
+<a name="le-oob"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Local OOB data
+(LE)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><b>&gt; le-oob</b></p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<h3>advinfo
+<a name="advinfo"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show advertising
+features</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><b>&gt; advinfo</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<h3>advsize
+<a name="advsize"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show advertising
+size info</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em"><b>&gt; advsize [options]
+&lt;instance_id&gt;</b></p> </td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h3>add-adv
+<a name="add-adv"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add advertising
+instance</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em"><b>&gt; add-adv [options]
+&lt;instance_id&gt;</b></p> </td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h3>rm-adv
+<a name="rm-adv"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove
+advertising instance</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><b>&gt; rm-adv
+&lt;instance_id&gt;</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h3>clr-adv
+<a name="clr-adv"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Clear
+advertising instances</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><b>&gt; clr-adv</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<h3>add-ext-adv-params
+<a name="add-ext-adv-params"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add extended
+advertising params</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="55%">
+
+
+<p style="margin-top: 1em"><b>&gt; add-ext-adv-parms
+[options] &lt;instance_id&gt;</b></p></td>
+<td width="27%">
+</td></tr>
+</table>
+
+<h3>add-ext-adv-data
+<a name="add-ext-adv-data"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add extended
+advertising data</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="54%">
+
+
+<p style="margin-top: 1em"><b>&gt; add-ext-adv-data
+[options] &lt;instance_id&gt;</b></p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<h3>appearance
+<a name="appearance"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set
+appearance</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>&gt; appearance
+&lt;appearance&gt;</b></p> </td>
+<td width="50%">
+</td></tr>
+</table>
+
+<h3>phy
+<a name="phy"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get/Set PHY
+Configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><b>&gt; phy [LE1MTX] [LE1MRX]
+[LE2MTX] [LE2MRX] [LECODEDTX] [LECODEDRX] [BR1M1SLOT]
+[BR1M3SLOT] [BR1M5SLOT][EDR2M1SLOT] [EDR2M3SLOT]
+[EDR2M5SLOT][EDR3M1SLOT] [EDR3M3SLOT] [EDR3M5SLOT]</b></p></td></tr>
+</table>
+
+<h3>wbs
+<a name="wbs"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle
+Wideband-Speech support</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em"><b>&gt; wbs
+&lt;on/off&gt;</b></p> </td>
+<td width="64%">
+</td></tr>
+</table>
+
+<h3>secinfo
+<a name="secinfo"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show security
+information</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><b>&gt; secinfo</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<h3>expinfo
+<a name="expinfo"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show
+experimental features</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><b>&gt; expinfo</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<h3>exp-debug
+<a name="exp-debug"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set debug
+feature</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><b>&gt; exp-debug
+&lt;on/off&gt;</b></p> </td>
+<td width="56%">
+</td></tr>
+</table>
+
+<h3>exp-privacy
+<a name="exp-privacy"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set LL privacy
+feature</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><b>&gt; exp-privacy
+&lt;on/off&gt;</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h3>exp-quality
+<a name="exp-quality"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set bluetooth
+quality report feature</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><b>&gt; exp-quality
+&lt;on/off&gt;</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h3>exp-offload
+<a name="exp-offload"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Toggle codec
+support</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><b>&gt; exp-offload
+&lt;on/off&gt;</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h3>read-sysconfig
+<a name="read-sysconfig"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Read System
+Configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><b>&gt; read-sysconfig</b></p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h3>set-sysconfig
+<a name="set-sysconfig"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set System
+Configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="46%">
+
+
+<p style="margin-top: 1em"><b>&gt; set-sysconfig
+&lt;-v|-h&gt; [options...]</b></p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<h3>get-flags
+<a name="get-flags"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get device
+flags</p>
+
+<h3>set-flags
+<a name="set-flags"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set device
+flags</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="54%">
+
+
+<p style="margin-top: 1em"><b>&gt; set-flags [-f flags] [-t
+type] &lt;address&gt;</b></p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,244 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>yuv2lav</title>
+
+</head>
+<body>
+
+<h1 align="center">yuv2lav</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">yuv2lav -
+encodes lavtool&rsquo;s raw YUV frame streams into MJPEG
+files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuv2lav</b>
+[<b>-f&nbsp;a</b>|<b>A</b>|<b>q</b>|<b>m</b>] [<b>-q</b>
+<i>num</i>] [<b>-b</b> <i>num</i>] [<b>-I</b> <i>num</i>]
+[<b>-m</b> <i>num</i>] [<b>-v</b> <i>num</i>] [<b>-w</b>
+<i>file</i>] <b>-o</b> <i>output-file</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">yuv2lav is a
+simple MJPEG encoder for raw YUV frame streams as they are
+emitted by <b>lav2yuv</b>(1) or <b>lavpipe</b>(1), for
+example. It reads its input from stdin and is capable of
+writing AVI and Quicktime.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The command line
+options allow to specify the output file name, JPEG encoding
+quality and the amount of memory that will be allocated for
+JPEG compressed data. <b><br>
+-o&nbsp;</b><i>output-file</i></p>
+
+<p style="margin-left:18%;">This (compulsorary) option sets
+the name of the file that yuv2lav will write its output to.
+If the output file contains a % (e.g. file%02d.avi), the
+output will be written to multiple files in case this is
+necessary (file00.avi, file01.avi and so on).</p>
+
+
+<p style="margin-left:9%;"><b>-f&nbsp;a</b>|<b>A</b>|<b>q</b></p>
+
+<p style="margin-left:18%;">This sets the output file
+format, which has to be one of &nbsp; <b><br>
+a</b> - for AVI file output, &nbsp; <b><br>
+A</b> - for AVI with reversed fields, &nbsp; <b><br>
+q</b> - for Quicktime output or <br>
+AVI with reversed field of course only makes sense if
+yuv2lav&rsquo;s feed is an interlaced video source and
+should only be needed if you experience frame reversal
+problems in your output. If you don&rsquo;t use that option
+yuv2lav will set the output format to AVI if the last 3 char
+are avi, or to Quicktime if you use mov. If you use the -f
+option it overrides the setting in the filename</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-q&nbsp;</b><i>num</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>This option specifies the JPEG encoding quality as
+passed through to libjpeg. The default value is 80,
+<i>num</i> must lie within 24...100 inclusive (think of it
+as percentage values, although with a lossy compression
+algorithm like JPEG, keeping 100% of the original quality is
+of course not really possible).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-b&nbsp;</b><i>num</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>This option specifies the size of the buffer (in kBytes)
+that yuv2lav allocates in order to store the compressed JPEG
+data in it. The default value (256k) is perfectly enough for
+100% quality full sized PAL/NTSC, but if you want to
+compress Super-Mega-HDTV or if you are low on memory, you
+can use this option to suit your needs.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-m&nbsp;</b><i>num</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>This is the maximum size (in MB) per file. Normally this
+depends on the output file type.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-I&nbsp;</b><i>num</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Force a specific interlacing type. 0 means no
+interlacing, 1 means top-field-first, 2 means
+bottom-field-first.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-w&nbsp;</b><i>file</i></p>
+
+<p style="margin-left:18%;">This is the WAV file containing
+audio data to be combined with the video stream into the
+output file.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-v&nbsp;</b><i>num</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Verbosity level. 0 means only print error messages, 2
+prints full debug output.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-?</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Display a synopsis of the command syntax.</p></td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lav2yuv
+movie.avi | yuv2lav -fq -q 30 lowbitrate.qt</p>
+
+<p style="margin-left:18%;">would recompress movie.avi as a
+low bit rate Quicktime file.</p>
+
+<p style="margin-left:9%;">lavpipe input.pli | yuv2lav -q80
+output.avi</p>
+
+<p style="margin-left:18%;">would save the movie assembled
+by lavpipe as a single AVI file.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you
+experience any problems with this tool, please feel free to
+contact the developers (see below).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by pHilipp Zabel. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at <i><br>
+http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>lav2yuv</b></i>(1),
+<b>lavpipe</b>(1), <b>lavplay</b>(1), <b>lavrec</b>(1),
+<b>mpeg2enc</b>(1), <b>yuvscaler</b>(1)</p>
+<hr>
+</body>
+</html>

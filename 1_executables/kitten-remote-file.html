@@ -1,0 +1,123 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:36 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-remote-file</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-remote-file</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Overview">Overview</a><br>
+<a href="#Author">Author</a><br>
+<a href="#Copyright">Copyright</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-remote-file
+- kitten Documentation</p>
+
+<h2>Overview
+<a name="Overview"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>kitty</i> has
+the ability to easily <i>Edit</i>, <i>Open</i> or
+<i>Download</i> files from a computer into which you are
+SSHed. In your SSH session run:</p>
+
+<p style="margin-left:13%; margin-top: 1em">ls
+--hyperlink=auto</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then hold down
+<b>Ctrl</b>+<b>Shift</b> and click the name of the file.</p>
+
+<p style="margin-left:12%;">Remote file actions (images not
+supported)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>kitty</i>
+will ask you what you want to do with the remote file. You
+can choose to <i>Edit</i> it in which case kitty will
+download it and open it locally in your <i>EDITOR</i>. As
+you make changes to the file, they are automatically
+transferred to the remote computer. Note that this happens
+without needing to install <i>any</i> special software on
+the server, beyond <b>ls</b> that supports hyperlinks.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>SEE
+ALSO:</b></p>
+
+<p style="margin-left:13%;">See the <i>edit-in-kitty</i>
+command</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>SEE
+ALSO:</b></p>
+
+<p style="margin-left:13%;">See the <i>Transfer files</i>
+kitten</p>
+
+<p style="margin-left:9%; margin-top: 1em">Added in version
+0.19.0.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">For best results, use this
+kitten with the <i>ssh kitten</i>. Otherwise, nested SSH
+sessions are not supported. The kitten will always try to
+copy remote files from the first SSH host. This is because,
+without the ssh kitten, there is no way for <i>kitty</i> to
+detect and follow a nested SSH session robustly. Use the
+<i>Transfer files</i> kitten for such situations.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">If you have not setup automatic
+password-less SSH access, and are not using the ssh kitten,
+then, when editing starts you will be asked to enter your
+password just once, thereafter the SSH connection will be
+re-used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Similarly, you
+can choose to save the file to the local computer or
+download and open it in its default file handler.</p>
+
+<h2>Author
+<a name="Author"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kovid Goyal</p>
+
+<h2>Copyright
+<a name="Copyright"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2025, Kovid
+Goyal</p>
+<hr>
+</body>
+</html>

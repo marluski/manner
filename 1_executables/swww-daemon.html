@@ -1,0 +1,114 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>swww-daemon</title>
+
+</head>
+<body>
+
+<h1 align="center">swww-daemon</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">swww-daemon</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">swww-daemon
+[-q|--quiet] [-f|--format &lt;xrgb|xbgr|rgb|bgr&gt;]
+[--no-cache]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f</b>,<b>--format</b>
+&lt;xrgb|xbgr|rgb|bgr&gt;</p>
+
+<p style="margin-left:14%;">Force the daemon to use a
+specific wl_shm format.</p>
+
+<p style="margin-left:14%; margin-top: 1em">IMPORTANT: make
+sure this is a value your compositor actually supports!
+&rsquo;swww-daemon&rsquo; will automatically select the best
+format for itself during initialization; this is only here
+for fallback, debug, and workaround purposes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-cache</b></p>
+
+<p style="margin-left:14%;">Don&rsquo;t search the cache
+for the last wallpaper for each output. Useful if you always
+want to select which image &rsquo;swww&rsquo; loads manually
+using &rsquo;swww img&rsquo;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>,<b>--quiet</b></p>
+
+<p style="margin-left:14%;">Makes the daemon only log
+errors.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Print help (see a summary with
+&rsquo;-h&rsquo;)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b>,
+<b>--version</b></p>
+
+<p style="margin-left:14%;">Print version</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>swww-daemon</b> will run continuously, waiting for
+commands in
+<i>${XDG_RUNTIME_DIR}/swww-${WAYLAND_DISPLAY}.socket</i> (or
+<i>/tmp/swww/swww-${WAYLAND_DISPLAY}.socket</i>, if
+$XDG_RUNTIME_DIR is not set). The daemon will take care of
+both creating and deleting that file when it is initialized
+or killed.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>swww-init</b>(1)</p>
+<hr>
+</body>
+</html>

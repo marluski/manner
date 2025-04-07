@@ -1,0 +1,268 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:35 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>locate</title>
+
+</head>
+<body>
+
+<h1 align="center">locate</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">plocate - find
+files by name, quickly</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>plocate</b>
+<i>[OPTION]... PATTERN...</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>plocate</b></i>
+finds all files on the system matching the given pattern (or
+all of the patterns if multiple are given). It does this by
+means of an index made by <b>updatedb</b>(8) or (less
+commonly) converted from another index by
+<b>plocate-build</b>(8).</p>
+
+<p style="margin-left:9%; margin-top: 1em">plocate is
+largely argument-compatible with <b>mlocate</b>(1), but is
+significantly faster. In particular, it rarely needs to scan
+through its entire database, unless the pattern is very
+short (less than three bytes) or you want to search for a
+regular expression. It does not try to maintain
+compatibility with BSD locate, or non-UTF-8 filenames and
+locales. Most I/O is done asynchronously, but the results
+are synchronized so that output comes in the same order
+every time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When multiple
+patterns are given, <b>plocate</b> will search for files
+that match <i>all</i> of them. This is the main
+incompatibility with <b>mlocate</b>(1), which searches for
+files that match one or more patterns, unless the -A option
+is given.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default,
+patterns are taken to be substrings to search for. If at
+least one non-escaped globbing metacharacter (*, ? or []) is
+given, that pattern is instead taken to be a glob pattern
+(which means it needs to start and end in * for a substring
+match). If <b>--regexp</b> is given, patterns are instead
+taken to be (non-anchored) POSIX basic regular expressions,
+and if <b>--regex</b> is given, patterns are taken to be
+POSIX extended regular expressions. All of this matches
+<b>mlocate</b>(1) behavior.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Like
+<b>mlocate</b>(1), <b>plocate</b> shows all files visible to
+the calling user (by virtue of having read and execute
+permissions on all parent directories), and none that are
+not, by means of running with the setgid bit set to access
+the index (which is built as root), but by testing
+visibility as the calling user.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>plocate</b>
+exits with 0 to indicate that a match was found or that
+<b>--help</b> or <b>--version</b> were passed. Otherwise,
+<b>plocate</b> exits with status code 1, indicating that an
+error occurred or that no matches were found.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-A</b>,
+<b>--all</b></p>
+
+<p style="margin-left:18%;">Ignored for compatibility with
+<b>mlocate</b>(1).</p>
+
+<p style="margin-left:9%;"><b>-b</b>, <b>--basename</b></p>
+
+<p style="margin-left:18%;">Match only against the file
+name portion of the path name, ie., the directory names will
+be excluded from the match (but still printed). This does
+not speed up the search, but can suppress uninteresting
+matches.</p>
+
+<p style="margin-left:9%;"><b>-c</b>, <b>--count</b></p>
+
+<p style="margin-left:18%;">Do not print each match.
+Instead, count them, and print out a total number at the
+end.</p>
+
+<p style="margin-left:9%;"><b>-d</b>, <b>--database</b>
+<i>DBPATH</i></p>
+
+<p style="margin-left:18%;">Find matches in the given
+database, instead of <b>/var/lib/plocate/plocate.db</b>.
+This argument can be given multiple times, to search
+multiple databases. It is also possible to give multiple
+databases in one argument, separated by <b>:</b>. (Any
+character, including : and \, can be escaped by prepending a
+\.)</p>
+
+<p style="margin-left:9%;"><b>-e</b>, <b>--existing</b></p>
+
+<p style="margin-left:18%;">Print only entries that refer
+to files existing at the time <b>locate</b> is run. Note
+that unlike <b>mlocate</b>(1), symlinks are not followed by
+default (and indeed, there is no option to change this).</p>
+
+<p style="margin-left:9%;"><b>-i</b>,
+<b>--ignore-case</b></p>
+
+<p style="margin-left:18%;">Do a case-insensitive match as
+given by the current locale (default is case-sensitive,
+byte-by-byte match). Note that <b>plocate</b> does not
+support the full range of Unicode case folding rules; in
+particular, searching for <i>&szlig;</i> will not give you
+matches on <i>ss</i> even in a German locale. Also note that
+this option will be somewhat slower than a case-sensitive
+match, since it needs to generate more candidates for
+searching the index.</p>
+
+<p style="margin-left:9%;"><b>-l</b>, <b>--limit</b>
+<i>LIMIT</i></p>
+
+<p style="margin-left:18%;">Stop searching after
+<i>LIMIT</i> matches have been found. If <b>--count</b> is
+given, the number printed out will be at most
+<i>LIMIT</i>.</p>
+
+<p style="margin-left:9%;"><b>-N</b>, <b>--literal</b></p>
+
+<p style="margin-left:18%;">Print entry names without
+quoting. Normally, <b>plocate</b> will escape special
+characters in filenames, so that they are safe for
+consumption by typical shells (similar to the GNU coreutils
+<i>shell-escape-always</i> quoting style), unless printing
+to a pipe, but this options will turn off such quoting.</p>
+
+<p style="margin-left:9%;"><b>-0</b>, <b>--null</b></p>
+
+<p style="margin-left:18%;">Instead of writing a newline
+after every match, write a NUL (ASCII 0). This is useful for
+creating unambiguous output when it is to be processed by
+other tools (like <b>xargs</b>(1)), as filenames are allowed
+to contain embedded newlines.</p>
+
+<p style="margin-left:9%;"><b>-r</b>, <b>--regexp</b></p>
+
+<p style="margin-left:18%;">Patterns are taken to be POSIX
+basic regular expressions. See <b>regex</b>(7) for more
+information. Note that this forces a linear scan through the
+entire database, which is slow.</p>
+
+<p style="margin-left:9%;"><b>--regex</b></p>
+
+<p style="margin-left:18%;">Like <b>--regexp</b>, but
+patterns are instead taken to be POSIX <i>extended</i>
+regular expressions.</p>
+
+<p style="margin-left:9%;"><b>-w</b>,
+<b>--wholename</b></p>
+
+<p style="margin-left:18%;">Match against the entire path
+name. This is the default, so unless <b>-b</b> is given
+first (see above), it will not do anything. This option thus
+exists only as compatibility with <b>mlocate</b>(1).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="67%">
+
+
+<p>Print out usage information, then exit successfully.</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Print out version information,
+then exit successfully.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>LOCATE_PATH</b></p>
+
+<p style="margin-left:18%;">If given, appended after the
+list of <b>--database</b> paths (whether an explicit is
+given or the default is used). Colon-delimiting and
+character escaping follows the same rules as for
+<b>--database</b>.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Steinar H.
+Gunderson &lt;steinar+plocate@gunderson.no&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>plocate-build</b>(8),
+<b>mlocate</b>(1), <b>updatedb</b>(8)</p>
+<hr>
+</body>
+</html>

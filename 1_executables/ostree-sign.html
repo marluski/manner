@@ -1,0 +1,155 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE SIGN</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE SIGN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-sign -
+Sign a commit</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="58%">
+
+
+<p style="margin-top: 1em"><b>ostree sign</b> [OPTIONS...]
+{COMMIT} {KEY-ID...}</p></td>
+<td width="33%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add a new
+signature to a commit. Note that currently, this will append
+a new signature even if the commit is already signed with a
+given key.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For
+&lsquo;ed25519&lsquo; and &lsquo;spki&lsquo;, there are
+several &quot;well-known&quot; system places for trusted and
+revoked public keys as listed below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Files:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+/etc/ostree/trusted.<i>SIGN-TYPE</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+/etc/ostree/revoked.<i>SIGN-TYPE</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+/usr/share/ostree/trusted.<i>SIGN-TYPE</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+/usr/share/ostree/revoked.<i>SIGN-TYPE</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Directories
+containing files with keys:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+/etc/ostree/trusted.<i>SIGN-TYPE</i>.d</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+/etc/ostree/revoked.<i>SIGN-TYPE</i>.d</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+/usr/share/ostree/trusted.<i>SIGN-TYPE</i>.d</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+/usr/share/ostree/revoked.<i>SIGN-TYPE</i>.d</p>
+
+<p style="margin-left:9%; margin-top: 1em">The format of
+those files depends on the signature mechanism; for
+&lsquo;ed25519&lsquo;, keys are stored in the base64
+encoding per line, while for &lsquo;spki&lsquo; they are
+stored in the PEM &quot;PUBLIC KEY&quot; encoding.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>KEY-ID</b></p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for ed25519
+and spki:</b></p>
+
+<p style="margin-left:19%;">base64-encoded secret (for
+signing) or public key (for verifying).</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+dummy:</b></p>
+
+<p style="margin-left:19%;">ASCII-string used as secret key
+and public key.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--verify</b></p>
+
+<p style="margin-left:14%;">Verify signatures</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--sign-type</b></p>
+
+<p style="margin-left:14%;">Use particular signature
+mechanism. Currently available ed25519, spki, and dummy
+signature types. The default is ed25519.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keys-file</b></p>
+
+<p style="margin-left:14%;">Read key(s) from file filename.
+Valid for ed25519 and spki signature types. This file must
+contain base64-encoded secret key(s) (for signing) or public
+key(s) (for verifying) per line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keys-dir</b></p>
+
+<p style="margin-left:14%;">Redefine the system path, where
+to search files and subdirectories with well-known and
+revoked keys.</p>
+<hr>
+</body>
+</html>

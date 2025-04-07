@@ -1,0 +1,399 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:34 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mprof-report</title>
+
+</head>
+<body>
+
+<h1 align="center">mprof-report</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#REPORTS">REPORTS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mprof-report -
+report generator for Mono&rsquo;s log profiler</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mprof-report</b>
+[<i>option</i>]... <i>file.mlpd</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mprof-report</b></i>
+is the report generator for Mono&rsquo;s <b>log</b>
+profiler. It reads the MLPD log files produced by the log
+profiler and generates a report based on the options passed
+to it. The output is based on individual reports which can
+be turned on or off. By default, all reports are generated
+in summary form (i.e., non-verbose output).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mprof-report</b>
+can read both normal and <b>gzip</b>(1)-compressed log files
+transparently.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For information
+about how to use the log profiler with a program, see the
+<b>mono-profilers</b>(1) page, under the <b>LOG PROFILER</b>
+section.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are available:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="36%">
+
+
+<p>Displays usage instructions.</p></td>
+<td width="46%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--out</b>=<i>file</i></p>
+
+<p style="margin-left:18%;">Write the report output to
+<i>file</i> instead of standard output.</p>
+
+<p style="margin-left:9%;"><b>--traces</b></p>
+
+<p style="margin-left:18%;">Show backtraces in reports when
+available.</p>
+
+
+<p style="margin-left:9%;"><b>--maxframes</b>=<i>num</i></p>
+
+<p style="margin-left:18%;">Limit backtraces to <i>num</i>
+frames.</p>
+
+
+<p style="margin-left:9%;"><b>--reports</b>=<i>reports</i></p>
+
+<p style="margin-left:18%;">Generate only the specified
+reports. <i>reports</i> is a comma-separated list of
+reports. See the <b>REPORTS</b> section.</p>
+
+
+<p style="margin-left:9%;"><b>--method-sort</b>=<i>mode</i></p>
+
+<p style="margin-left:18%;">Sort methods according to
+<i>mode</i>, which can be one of: <b><br>
+total</b> (default)</p>
+
+<p style="margin-left:27%;">Sort by the total amount of
+time spent in a method and its callees.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>self</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Sort by the amount of time spent only within a method
+itself.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>calls</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Sort by the total amount of calls made to a method.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--alloc-sort</b>=<i>mode</i></p>
+
+<p style="margin-left:18%;">Sort allocations according to
+<i>mode</i>, which can be one of: <b><br>
+bytes</b> (default)</p>
+
+<p style="margin-left:27%;">Sort by the amount of heap
+bytes occupied by all allocated objects of a type.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>count</b></p></td>
+<td width="3%"></td>
+<td width="64%">
+
+
+<p>Sort by the total amount of allocations of a type.</p></td>
+<td width="9%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--counters-sort</b>=<i>mode</i></p>
+
+<p style="margin-left:18%;">Sort counters according to
+<i>mode</i>. This alters how the <b>counters</b> report is
+presented. It can be one of: <b><br>
+time</b> (default)</p>
+
+<p style="margin-left:27%;">Present a list of samples, each
+containing a list of counter name-value pairs.</p>
+
+<p style="margin-left:18%;"><b>category</b></p>
+
+<p style="margin-left:27%;">Present a list of counter
+names, each containing a list of sampled values.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option has
+no effect unless <b>--verbose</b> is passed.</p>
+
+
+<p style="margin-left:9%;"><b>--track</b>=<i>objects</i></p>
+
+<p style="margin-left:18%;">Track what happens to the
+specified objects. <i>objects</i> is a comma-separated list
+of object addresses.</p>
+
+<p style="margin-left:9%;"><b>--find</b>=<i>spec</i></p>
+
+<p style="margin-left:18%;">Find and track what happens to
+objects matching <i>spec</i>, which can have one of these
+forms: <b><br>
+S</b>:<i>minimum_size</i></p>
+
+<p style="margin-left:27%;">Look for objects that are at
+least <i>minimum_size</i> bytes in size.</p>
+
+
+<p style="margin-left:18%;"><b>T</b>:<i>name_fragment</i></p>
+
+<p style="margin-left:27%;">Look for objects whose type
+name contain <i>name_fragment</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Both an
+<b>S</b> and <b>T</b> spec can be given by passing the
+option twice.</p>
+
+<p style="margin-left:9%;"><b>--thread</b>=<i>tid</i></p>
+
+<p style="margin-left:18%;">Consider only events from the
+thread with ID <i>tid</i>.</p>
+
+<p style="margin-left:9%;"><b>--time</b>=<i>span</i></p>
+
+<p style="margin-left:18%;">Consider only events occurring
+in the specified time span. <i>span</i> must be of the form
+<i>from</i>-<i>to</i> where <i>from</i> and <i>to</i> are
+seconds since the program started.</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">Print verbose output.</p>
+
+<p style="margin-left:9%;"><b>--debug</b></p>
+
+<p style="margin-left:18%;">Print extremely detailed debug
+output. Most users should not use this option.</p>
+
+<h2>REPORTS
+<a name="REPORTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+reports are available:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>header</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Program startup and profiler version and operational
+information.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>jit</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>JIT compiler statistics.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>gc</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Garbage collection and handle statistics.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>sample</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Flat statistical sampling profile.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>alloc</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Per-class GC allocation statistics and backtraces.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>call</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Method call statistics and backtraces.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>metadata</b></p>
+
+<p style="margin-left:18%;">Loaded images and
+assemblies.</p>
+
+<p style="margin-left:9%;"><b>exception</b></p>
+
+<p style="margin-left:18%;">Exception statistics and
+backtraces.</p>
+
+<p style="margin-left:9%;"><b>monitor</b></p>
+
+<p style="margin-left:18%;">Monitor lock statistics and
+backtraces.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>thread</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p>Managed thread names.</p></td>
+<td width="47%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>domain</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p>Loaded application domains.</p></td>
+<td width="47%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>context</b></p>
+
+<p style="margin-left:18%;">Loaded remoting contexts.</p>
+
+<p style="margin-left:9%;"><b>heapshot</b></p>
+
+<p style="margin-left:18%;">Heap snapshot information.</p>
+
+<p style="margin-left:9%;"><b>counters</b></p>
+
+<p style="margin-left:18%;">Performance counter
+samples.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono</b>(1),
+<b>mono-profilers</b>(1)</p>
+<hr>
+</body>
+</html>

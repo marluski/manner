@@ -1,0 +1,1067 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:58 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-EXEC</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-EXEC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#npx vs npm exec">npx vs npm exec</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#package">package</a><br>
+<a href="#call">call</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#include-workspace-root">include-workspace-root</a><br>
+<a href="#Examples">Examples</a><br>
+<a href="#Workspaces support">Workspaces support</a><br>
+<a href="#Filtering workspaces">Filtering workspaces</a><br>
+<a href="#Compatibility with Older npx Versions">Compatibility with Older npx Versions</a><br>
+<a href="#A note on caching">A note on caching</a><br>
+<a href="#prefer-online">prefer-online</a><br>
+<a href="#prefer-offline">prefer-offline</a><br>
+<a href="#offline">offline</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-exec</b>
+- Run a command from a local or remote npm package</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm exec --
+&lt;pkg&gt;[@&lt;version&gt;] [args...] <br>
+npm exec --package=&lt;pkg&gt;[@&lt;version&gt;] --
+&lt;cmd&gt; [args...] <br>
+npm exec -c &rsquo;&lt;cmd&gt; [args...]&rsquo; <br>
+npm exec --package=foo -c &rsquo;&lt;cmd&gt;
+[args...]&rsquo;</p>
+
+<p style="margin-left:12%; margin-top: 1em">alias: x</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+allows you to run an arbitrary command from an npm package
+(either one installed locally, or fetched remotely), in a
+similar context as running it via <b>npm run</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run without
+positional arguments or <b>--call</b>, this allows you to
+interactively run commands in the same sort of shell
+environment that <b>package.json</b> scripts are run.
+Interactive mode is not supported in CI environments when
+standard input is a TTY, to prevent hangs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Whatever
+packages are specified by the <b>--package</b> option will
+be provided in the <b>PATH</b> of the executed command,
+along with any locally installed package executables. The
+<b>--package</b> option may be specified multiple times, to
+execute the supplied command in an environment where all
+specified packages are available.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If any requested
+packages are not present in the local project dependencies,
+then a prompt is printed, which can be suppressed by
+providing either <b>--yes</b> or <b>--no</b>. When standard
+input is not a TTY or a CI environment is detected,
+<b>--yes</b> is assumed. The requested packages are
+installed to a folder in the npm cache, which is added to
+the <b>PATH</b> environment variable in the executed
+process.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Package names
+provided without a specifier will be matched with whatever
+version exists in the local project. Package names with a
+specifier will only be considered a match if they have the
+exact same name and version as the local dependency.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no <b>-c</b>
+or <b>--call</b> option is provided, then the positional
+arguments are used to generate the command string. If no
+<b>--package</b> options are provided, then npm will attempt
+to determine the executable name from the package specifier
+provided as the first positional argument according to the
+following heuristic:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>If the package has a single entry in its <b>bin</b>
+field in <b>package.json</b>, or if all entries are aliases
+of the same command, then that command will be used.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>If the package has multiple <b>bin</b> entries, and one
+of them matches the unscoped portion of the <b>name</b>
+field, then that command will be used.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>If this does not result in exactly one option (either
+because there are no bin entries, or none of them match the
+<b>name</b> of the package), then <b>npm exec</b> exits with
+an error.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">To run a binary
+<i>other than</i> the named binary, specify one or more
+<b>--package</b> options, which will prevent npm from
+inferring the package from the first command argument.</p>
+
+<h3>npx vs npm exec
+<a name="npx vs npm exec"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">When run via the
+<b>npx</b> binary, all flags and options <i>must</i> be set
+prior to any positional arguments. When run via <b>npm
+exec</b>, a double-hyphen <b>--</b> flag can be used to
+suppress npm&rsquo;s parsing of switches and options that
+should be sent to the executed command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npx
+foo@latest bar --package=@npmcli/foo</p>
+
+<p style="margin-left:9%; margin-top: 1em">In this case,
+npm will resolve the <b>foo</b> package name, and run the
+following command:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ foo bar
+--package=@npmcli/foo</p>
+
+<p style="margin-left:9%; margin-top: 1em">Since the
+<b>--package</b> option comes <i>after</i> the positional
+arguments, it is treated as an argument to the executed
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In contrast, due
+to npm&rsquo;s argument parsing logic, running this command
+is different:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm exec
+foo@latest bar --package=@npmcli/foo</p>
+
+<p style="margin-left:9%; margin-top: 1em">In this case,
+npm will parse the <b>--package</b> option first, resolving
+the <b>@npmcli/foo</b> package. Then, it will execute the
+following command in that context:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ foo@latest
+bar</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+double-hyphen character is recommended to explicitly tell
+npm to stop parsing command line options and switches. The
+following command would thus be equivalent to the <b>npx</b>
+command above:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm exec --
+foo@latest bar --package=@npmcli/foo</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>package
+<a name="package"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The package or
+packages to install for npm help exec</p>
+
+<h3>call
+<a name="call"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em">Default: &quot;&quot;</p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p>Type: String</p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Optional
+companion option for <b>npm exec</b>, <b>npx</b> that allows
+for specifying a custom command to be run along with the
+installed packages.</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm exec
+--package yo --package generator-node --call &quot;yo
+node&quot;</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Set to true to
+run the command in the context of <b>all</b> configured
+workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+setting this to false will cause commands like
+<b>install</b> to ignore workspaces altogether. When not set
+explicitly:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Commands that operate on the
+<b>node_modules</b> tree (install, update, etc.) will link
+workspaces into the <b>node_modules</b> folder. - Commands
+that do other things (test, exec, publish, etc.) will
+operate on the root project, <i>unless</i> one or more
+workspaces are specified in the <b>workspace</b> config.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>include-workspace-root
+<a name="include-workspace-root"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Include the
+workspace root when workspaces are enabled for a
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When false,
+specifying individual workspaces via the <b>workspace</b>
+config, or all workspaces via the <b>workspaces</b> flag,
+will cause npm to operate only on the specified workspaces,
+and not on the root project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>Examples
+<a name="Examples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Run the version
+of <b>tap</b> in the local dependencies, with the provided
+arguments:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm exec --
+tap --bail test/foo.js <br>
+$ npx tap --bail test/foo.js</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run a command
+<i>other than</i> the command whose name matches the package
+name by specifying a <b>--package</b> option:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm exec
+--package=foo -- bar --bar-argument <br>
+# &#732; or &#732; <br>
+$ npx --package=foo bar --bar-argument</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run an arbitrary
+shell script, in the context of the current project:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm x -c
+&rsquo;eslint &amp;&amp; say &quot;hooray, lint
+passed&quot;&rsquo; <br>
+$ npx -c &rsquo;eslint &amp;&amp; say &quot;hooray, lint
+passed&quot;&rsquo;</p>
+
+<h3>Workspaces support
+<a name="Workspaces support"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You may use the
+<b>workspace</b> <i>&lang;
+/using-npm/config#workspace&rang;</i> or <b>workspaces</b>
+<i>&lang; /using-npm/config#workspaces&rang;</i> configs in
+order to run an arbitrary command from an npm package
+(either one installed locally, or fetched remotely) in the
+context of the specified workspaces. If no positional
+argument or <b>--call</b> option is provided, it will open
+an interactive subshell in the context of each of these
+configured workspaces one at a time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Given a project
+with configured workspaces, e.g:</p>
+
+<p style="margin-left:12%; margin-top: 1em">+--
+package.json <br>
+&lsquo;-- packages <br>
++-- a <br>
+| &lsquo;-- package.json <br>
++-- b <br>
+| &lsquo;-- package.json <br>
+&lsquo;-- c <br>
+&lsquo;-- package.json</p>
+
+<p style="margin-left:9%; margin-top: 1em">Assuming the
+workspace configuration is properly set up at the root level
+<b>package.json</b> file. e.g:</p>
+
+<p style="margin-left:12%; margin-top: 1em">{ <br>
+&quot;workspaces&quot;: [ &quot;./packages/*&quot; ] <br>
+}</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can execute
+an arbitrary command from a package in the context of each
+of the configured workspaces when using the
+<b>workspaces</b> config options <i>&lang;
+/using-npm/config#workspace&rang;</i> , in this example
+we&rsquo;re using <b>eslint</b> to lint any js file found
+within each workspace folder:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm exec --ws
+-- eslint ./*.js</p>
+
+<h3>Filtering workspaces
+<a name="Filtering workspaces"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">It&rsquo;s also
+possible to execute a command in a single workspace using
+the <b>workspace</b> config along with a name or directory
+path:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm exec
+--workspace=a -- eslint ./*.js</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>workspace</b> config can also be specified multiple times
+in order to run a specific script in the context of multiple
+workspaces. When defining values for the <b>workspace</b>
+config in the command line, it also possible to use
+<b>-w</b> as a shorthand, e.g:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm exec -w a
+-w b -- eslint ./*.js</p>
+
+<p style="margin-left:9%; margin-top: 1em">This last
+command will run the <b>eslint</b> command in both
+<b>./packages/a</b> and <b>./packages/b</b> folders.</p>
+
+<h3>Compatibility with Older npx Versions
+<a name="Compatibility with Older npx Versions"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>npx</b>
+binary was rewritten in npm v7.0.0, and the standalone
+<b>npx</b> package deprecated at that time. <b>npx</b> uses
+the <b>npm exec</b> command instead of a separate argument
+parser and install process, with some affordances to
+maintain backwards compatibility with the arguments it
+accepted in previous versions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This resulted in
+some shifts in its functionality:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Any <b>npm</b> config value may
+be provided.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>To prevent security and user-experience problems from
+mistyping package names, <b>npx</b> prompts before
+installing anything. Suppress this prompt with the <b>-y</b>
+or <b>--yes</b> option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <b>--no-install</b> option is deprecated, and will
+be converted to <b>--no</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Shell fallback functionality is removed, as it is not
+advisable.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <b>-p</b> argument is a shorthand for
+<b>--parseable</b> in npm, but shorthand for
+<b>--package</b> in npx. This is maintained, but only for
+the <b>npx</b> executable.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <b>--ignore-existing</b> option is removed. Locally
+installed bins are always present in the executed process
+<b>PATH</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <b>--npm</b> option is removed. <b>npx</b> will
+always use the <b>npm</b> it ships with.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <b>--node-arg</b> and <b>-n</b> options are
+removed.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <b>--always-spawn</b> option is redundant, and thus
+removed.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <b>--shell</b> option is replaced with
+<b>--script-shell</b>, but maintained in the <b>npx</b>
+executable for backwards compatibility.</p></td></tr>
+</table>
+
+<h3>A note on caching
+<a name="A note on caching"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The npm cli
+utilizes its internal package cache when using the package
+name specified. You can use the following to change how and
+when the cli uses this cache. See npm help cache for more on
+how the cache works.</p>
+
+<h3>prefer-online
+<a name="prefer-online"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Forces staleness
+checks for packages, making the cli look for updates
+immediately even if the package is already in the cache.</p>
+
+<h3>prefer-offline
+<a name="prefer-offline"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bypasses
+staleness checks for packages. Missing data will still be
+requested from the server. To force full offline mode, use
+<b>offline</b>.</p>
+
+<h3>offline
+<a name="offline"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Forces full
+offline mode. Any packages not locally cached will result in
+an error.</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result to
+selecting all of the nested workspaces)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Alias: <b>--ws</b></p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Default: <b>false</b></p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Run scripts in
+the context of all configured workspaces for the current
+project.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em">npm help run-script</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help scripts</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help test</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help start</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help restart</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help stop</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help config</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help workspaces</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help npx</p></td>
+<td width="62%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

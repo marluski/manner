@@ -1,0 +1,159 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:28 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SYSTEMD-KEYUTIL</title>
+
+</head>
+<body>
+
+<h1 align="center">SYSTEMD-KEYUTIL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">systemd-keyutil
+- Perform various operations on private keys and X.509
+certificates</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em"><b>systemd-keyutil</b>
+[OPTIONS...] {COMMAND}</p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>systemd-keyutil</b>
+can be used to perform various operations on private keys
+and X.509 certificates.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>validate</b></p>
+
+<p style="margin-left:14%;">Checks that we can load the
+private key and certificate specified with
+<b>--private-key=</b> and <b>--certificate=</b>
+respectively.</p>
+
+<p style="margin-left:14%; margin-top: 1em">As a side
+effect, if the private key is loaded from a PIN-protected
+hardware token, this command can be used to cache the PIN in
+the kernel keyring. The
+<i>$SYSTEMD_ASK_PASSWORD_KEYRING_TIMEOUT_SEC</i> and
+<i>$SYSTEMD_ASK_PASSWORD_KEYRING_TYPE</i> environment
+variables can be used to control how long and in which
+kernel keyring the PIN is cached.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 257.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>public</b></p>
+
+<p style="margin-left:14%;">This commands prints the public
+key in PEM format extracted from either the certificate
+given with <b>--certificate=</b> or the private key given
+with <b>--private-key=</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 257.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--private-key=</b><i>PATH/URI</i>,
+<b>--private-key-source=</b><i>TYPE</i><b>[:</b><i>NAME</i><b>]</b>,
+<b>--certificate=</b><i>PATH</i>,
+<b>--certificate-source=</b><i>TYPE</i><b>[:</b><i>NAME</i><b>]</b></p>
+
+<p style="margin-left:14%;">Set the private key and
+certificate to use. The <b>--certificate=</b> option takes a
+path to a PEM encoded X.509 certificate or a URI that's
+passed to the OpenSSL provider configured with
+<b>--certificate-source</b>. The <b>--certificate-source</b>
+takes one of &quot;file&quot; or &quot;provider&quot;, with
+the latter being followed by a specific provider identifier,
+separated with a colon, e.g. &quot;provider:pkcs11&quot;.
+The <b>--private-key=</b> option can take a path or a URI
+that will be passed to the OpenSSL engine or provider, as
+specified by <b>--private-key-source=</b> as a
+&quot;type:name&quot; tuple, such as
+&quot;engine:pkcs11&quot;.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 257.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Print a short help text and
+exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print a short version string
+and exit.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>systemd-sbsign</b>(1),
+<b>systemd-measure</b>(1)</p>
+<hr>
+</body>
+</html>

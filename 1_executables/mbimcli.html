@@ -1,0 +1,921 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:18 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>MBIMCLI</title>
+
+</head>
+<body>
+
+<h1 align="center">MBIMCLI</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Usage:">Usage:</a><br>
+<a href="#Help Options:">Help Options:</a><br>
+<a href="#Basic Connect options:">Basic Connect options:</a><br>
+<a href="#Phonebook options:">Phonebook options:</a><br>
+<a href="#Device Service Stream options:">Device Service Stream options:</a><br>
+<a href="#Microsoft Firmware ID options:">Microsoft Firmware ID options:</a><br>
+<a href="#Microsoft Host Shutdown options:">Microsoft Host Shutdown options:</a><br>
+<a href="#Microsoft SAR options:">Microsoft SAR options:</a><br>
+<a href="#AT&amp;T Device Service options:">AT&amp;T Device Service options:</a><br>
+<a href="#Intel Firmware Update Service options:">Intel Firmware Update Service options:</a><br>
+<a href="#Microsoft Basic Connect Extensions options:">Microsoft Basic Connect Extensions options:</a><br>
+<a href="#Quectel options:">Quectel options:</a><br>
+<a href="#Link management options:">Link management options:</a><br>
+<a href="#Intel Thermal RF Service options:">Intel Thermal RF Service options:</a><br>
+<a href="#Microsoft Voice Extensions Service options:">Microsoft Voice Extensions Service options:</a><br>
+<a href="#Microsoft UICC Low Level Access Service options:">Microsoft UICC Low Level Access Service options:</a><br>
+<a href="#Intel mutual authentication Service options:">Intel mutual authentication Service options:</a><br>
+<a href="#Google options:">Google options:</a><br>
+<a href="#Application Options:">Application Options:</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mbimcli -
+Control MBIM devices</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<h3>Usage:
+<a name="Usage:"></a>
+</h3>
+
+
+<p style="margin-left:18%; margin-top: 1em">mbimcli
+[OPTION?] - Control MBIM devices</p>
+
+<h3>Help Options:
+<a name="Help Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<p style="margin-left:9%;"><b>--help-all</b></p>
+
+<p style="margin-left:18%;">Show all help options</p>
+
+<p style="margin-left:9%;"><b>--help-basic-connect</b></p>
+
+<p style="margin-left:18%;">Show Basic Connect Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-phonebook</b></p>
+
+<p style="margin-left:18%;">Show Phonebook Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-dss</b></p>
+
+<p style="margin-left:18%;">Show Device Service Stream
+options</p>
+
+
+<p style="margin-left:9%;"><b>--help-ms-firmware-id</b></p>
+
+<p style="margin-left:18%;">Show Microsoft Firmware ID
+Service options</p>
+
+
+<p style="margin-left:9%;"><b>--help-ms-host-shutdown</b></p>
+
+<p style="margin-left:18%;">Show Microsoft Host Shutdown
+Service options</p>
+
+<p style="margin-left:9%;"><b>--help-ms-sar</b></p>
+
+<p style="margin-left:18%;">Show Microsoft SAR Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-atds</b></p>
+
+<p style="margin-left:18%;">Show AT&amp;T Device Service
+options</p>
+
+
+<p style="margin-left:9%;"><b>--help-intel-firmware-update</b></p>
+
+<p style="margin-left:18%;">Show Intel Firmware Update
+Service options</p>
+
+
+<p style="margin-left:9%;"><b>--help-ms-basic-connect-extensions</b></p>
+
+<p style="margin-left:18%;">Show Microsoft Basic Connect
+Extensions Service options</p>
+
+<p style="margin-left:9%;"><b>--help-quectel</b></p>
+
+<p style="margin-left:18%;">Show Quectel Service
+options</p>
+
+
+<p style="margin-left:9%;"><b>--help-link-management</b></p>
+
+<p style="margin-left:18%;">Show link management specific
+options</p>
+
+
+<p style="margin-left:9%;"><b>--help-intel-thermal-rf</b></p>
+
+<p style="margin-left:18%;">Show Intel Thermal RF Service
+options</p>
+
+
+<p style="margin-left:9%;"><b>--help-ms-voice-extensions</b></p>
+
+<p style="margin-left:18%;">Show Microsoft Voice Extensions
+Service options</p>
+
+
+<p style="margin-left:9%;"><b>--help-ms-uicc-low-level-access</b></p>
+
+<p style="margin-left:18%;">Show Microsoft UICC Low Level
+Access Service options</p>
+
+
+<p style="margin-left:9%;"><b>--help-intel-mutual-authentication</b></p>
+
+<p style="margin-left:18%;">Show Intel mutual
+authentication Service options</p>
+
+<p style="margin-left:9%;"><b>--help-intel-tools</b></p>
+
+<p style="margin-left:18%;">Show Intel 5G tools options</p>
+
+<p style="margin-left:9%;"><b>--help-google</b></p>
+
+<p style="margin-left:18%;">Show Google Service options</p>
+
+<h3>Basic Connect options:
+<a name="Basic Connect options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--query-device-caps</b></p>
+
+<p style="margin-left:18%;">Query device capabilities</p>
+
+
+<p style="margin-left:9%;"><b>--query-subscriber-ready-status</b></p>
+
+<p style="margin-left:18%;">Query subscriber ready
+status</p>
+
+<p style="margin-left:9%;"><b>--query-radio-state</b></p>
+
+<p style="margin-left:18%;">Query radio state</p>
+
+
+<p style="margin-left:9%;"><b>--set-radio-state</b>=<i>[</i>(on|off)]</p>
+
+<p style="margin-left:18%;">Set radio state</p>
+
+
+<p style="margin-left:9%;"><b>--query-device-services</b></p>
+
+<p style="margin-left:18%;">Query device services</p>
+
+<p style="margin-left:9%;"><b>--query-pin-state</b></p>
+
+<p style="margin-left:18%;">Query PIN state</p>
+
+<p style="margin-left:9%;"><b>--enter-pin</b>=<i>[</i>(PIN
+type),(current PIN)]</p>
+
+<p style="margin-left:18%;">Enter PIN (PIN type is
+optional, defaults to PIN1, allowed options:
+(pin1,network-pin,network-subset-pin,service-provider-pin,corporate-pin)</p>
+
+
+<p style="margin-left:9%;"><b>--change-pin</b>=<i>[</i>(current
+PIN),(new PIN)]</p>
+
+<p style="margin-left:18%;">Change PIN</p>
+
+
+<p style="margin-left:9%;"><b>--enable-pin</b>=<i>[</i>(current
+PIN)]</p>
+
+<p style="margin-left:18%;">Enable PIN</p>
+
+
+<p style="margin-left:9%;"><b>--disable-pin</b>=<i>[</i>(PIN
+type),(current PIN)]</p>
+
+<p style="margin-left:18%;">Disable PIN (PIN type is
+optional, see enter-pin for details)</p>
+
+<p style="margin-left:9%;"><b>--enter-puk</b>=<i>[</i>(PUK
+type),(PUK),(new PIN)]</p>
+
+<p style="margin-left:18%;">Enter PUK (PUK type is
+optional, defaults to PUK1, allowed options:
+(puk1,network-puk,network-subset-puk,service-provider-puk,corporate-puk)</p>
+
+<p style="margin-left:9%;"><b>--query-pin-list</b></p>
+
+<p style="margin-left:18%;">Query PIN list</p>
+
+
+<p style="margin-left:9%;"><b>--query-home-provider</b></p>
+
+<p style="margin-left:18%;">Query home provider</p>
+
+
+<p style="margin-left:9%;"><b>--query-preferred-providers</b></p>
+
+<p style="margin-left:18%;">Query preferred providers</p>
+
+
+<p style="margin-left:9%;"><b>--query-visible-providers</b></p>
+
+<p style="margin-left:18%;">Query visible providers</p>
+
+
+<p style="margin-left:9%;"><b>--query-registration-state</b></p>
+
+<p style="margin-left:18%;">Query registration state</p>
+
+<p style="margin-left:9%;"><b>--register-automatic</b></p>
+
+<p style="margin-left:18%;">Launch automatic
+registration</p>
+
+<p style="margin-left:9%;"><b>--query-signal-state</b></p>
+
+<p style="margin-left:18%;">Query signal state</p>
+
+
+<p style="margin-left:9%;"><b>--query-packet-service-state</b></p>
+
+<p style="margin-left:18%;">Query packet service state</p>
+
+
+<p style="margin-left:9%;"><b>--attach-packet-service</b></p>
+
+<p style="margin-left:18%;">Attach to the packet
+service</p>
+
+
+<p style="margin-left:9%;"><b>--detach-packet-service</b></p>
+
+<p style="margin-left:18%;">Detach from the packet
+service</p>
+
+
+<p style="margin-left:9%;"><b>--query-connection-state</b>=<i>[SessionID]</i></p>
+
+<p style="margin-left:18%;">Query connection state
+(SessionID is optional, defaults to 0)</p>
+
+
+<p style="margin-left:9%;"><b>--connect</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Connect (allowed keys:
+session-id, access-string, ip-type, auth, username,
+password, compression, context-type)</p>
+
+
+<p style="margin-left:9%;"><b>--query-ip-configuration</b>=<i>[SessionID]</i></p>
+
+<p style="margin-left:18%;">Query IP configuration
+(SessionID is optional, defaults to 0)</p>
+
+
+<p style="margin-left:9%;"><b>--disconnect</b>=<i>[SessionID]</i></p>
+
+<p style="margin-left:18%;">Disconnect (SessionID is
+optional, defaults to 0)</p>
+
+
+<p style="margin-left:9%;"><b>--query-packet-statistics</b></p>
+
+<p style="margin-left:18%;">Query packet statistics</p>
+
+
+<p style="margin-left:9%;"><b>--query-ip-packet-filters</b>=<i>[SessionID]</i></p>
+
+<p style="margin-left:18%;">Query IP packet filters
+(SessionID is optional, defaults to 0)</p>
+
+
+<p style="margin-left:9%;"><b>--set-ip-packet-filters</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set IP packet filters (allowed
+keys: session-id, packet-filter, packet-mask, filter-id)</p>
+
+
+<p style="margin-left:9%;"><b>--query-provisioned-contexts</b></p>
+
+<p style="margin-left:18%;">Query provisioned contexts</p>
+
+
+<p style="margin-left:9%;"><b>--set-provisioned-contexts</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set provisioned contexts
+(allowed keys: context-id, context-type, auth, compression,
+username, password, access-string, provider-id)</p>
+
+
+<p style="margin-left:9%;"><b>--set-signal-state</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set signal state (allowed keys:
+signal-strength-interval, rssi-threshold,
+error-rate-threshold)</p>
+
+
+<p style="margin-left:9%;"><b>--set-network-idle-hint</b>=<i>[</i>(enabled|disabled)]</p>
+
+<p style="margin-left:18%;">Set network idle hint</p>
+
+
+<p style="margin-left:9%;"><b>--query-network-idle-hint</b></p>
+
+<p style="margin-left:18%;">Query network idle hint</p>
+
+
+<p style="margin-left:9%;"><b>--set-emergency-mode</b>=<i>[</i>(on|off)]</p>
+
+<p style="margin-left:18%;">Set emergency mode</p>
+
+
+<p style="margin-left:9%;"><b>--query-emergency-mode</b></p>
+
+<p style="margin-left:18%;">Query emergency mode</p>
+
+
+<p style="margin-left:9%;"><b>--set-service-activation</b>=<i>[Data]</i></p>
+
+<p style="margin-left:18%;">Set service activation</p>
+
+<h3>Phonebook options:
+<a name="Phonebook options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--phonebook-query-configuration</b></p>
+
+<p style="margin-left:18%;">Query the phonebook
+configuration</p>
+
+
+<p style="margin-left:9%;"><b>--phonebook-read</b>=<i>[</i>(Phonebook
+index)]</p>
+
+<p style="margin-left:18%;">Read phonebook entry with given
+index</p>
+
+<p style="margin-left:9%;"><b>--phonebook-read-all</b></p>
+
+<p style="margin-left:18%;">Read all phonebook entries</p>
+
+
+<p style="margin-left:9%;"><b>--phonebook-write</b>=<i>[</i>(Name),(Number)[,(Index)]]</p>
+
+<p style="margin-left:18%;">Add new phonebook entry or
+update an existing one</p>
+
+
+<p style="margin-left:9%;"><b>--phonebook-delete</b>=<i>[</i>(Phonebook
+index)]</p>
+
+<p style="margin-left:18%;">Delete phonebook entry with
+given index</p>
+
+
+<p style="margin-left:9%;"><b>--phonebook-delete-all</b></p>
+
+<p style="margin-left:18%;">Delete all phonebook
+entries</p>
+
+<h3>Device Service Stream options:
+<a name="Device Service Stream options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dss-connect</b>=<i>[</i>(UUID),(Session
+ID)]</p>
+
+<p style="margin-left:18%;">Connect DSS session</p>
+
+
+<p style="margin-left:9%;"><b>--dss-disconnect</b>=<i>[</i>(UUID),(Session
+ID)]</p>
+
+<p style="margin-left:18%;">Disconnect DSS session</p>
+
+<h3>Microsoft Firmware ID options:
+<a name="Microsoft Firmware ID options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ms-query-firmware-id</b></p>
+
+<p style="margin-left:18%;">Query firmware ID</p>
+
+<h3>Microsoft Host Shutdown options:
+<a name="Microsoft Host Shutdown options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ms-notify-host-shutdown</b></p>
+
+<p style="margin-left:18%;">Notify that host is shutting
+down</p>
+
+<h3>Microsoft SAR options:
+<a name="Microsoft SAR options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ms-set-sar-config</b>=<i>[</i>(device|os),(enabled|disabled)[,[{antenna_index,backoff_index}...]]]</p>
+
+<p style="margin-left:18%;">Set SAR config</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-sar-config</b></p>
+
+<p style="margin-left:18%;">Query SAR config</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-transmission-status</b>=<i>[</i>(enabled|disabled),(timer)]</p>
+
+<p style="margin-left:18%;">Set transmission status and
+hysteresis timer (in seconds)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-transmission-status</b></p>
+
+<p style="margin-left:18%;">Query transmission status</p>
+
+<h3>AT&amp;T Device Service options:
+<a name="AT&amp;T Device Service options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--atds-query-signal</b></p>
+
+<p style="margin-left:18%;">Query signal info</p>
+
+
+<p style="margin-left:9%;"><b>--atds-query-location</b></p>
+
+<p style="margin-left:18%;">Query cell location</p>
+
+<h3>Intel Firmware Update Service options:
+<a name="Intel Firmware Update Service options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--intel-modem-reboot</b>=<i>[</i>(Boot
+Mode),(Timeout)]</p>
+
+<p style="margin-left:18%;">Reboot modem. Boot mode and
+timeout arguments only required if MBIMEx &gt;= 2.0.</p>
+
+<h3>Microsoft Basic Connect Extensions options:
+<a name="Microsoft Basic Connect Extensions options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ms-query-pco</b>=<i>[SessionID]</i></p>
+
+<p style="margin-left:18%;">Query PCO value (SessionID is
+optional, defaults to 0)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-lte-attach-configuration</b></p>
+
+<p style="margin-left:18%;">Query LTE attach
+configuration</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-lte-attach-info</b></p>
+
+<p style="margin-left:18%;">Query LTE attach status
+information</p>
+
+<p style="margin-left:9%;"><b>--ms-query-sys-caps</b></p>
+
+<p style="margin-left:18%;">Query system capabilities</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-device-caps</b></p>
+
+<p style="margin-left:18%;">Query device capabilities</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-slot-info-status</b>=<i>[SlotIndex]</i></p>
+
+<p style="margin-left:18%;">Query slot information
+status</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-device-slot-mappings</b>=<i>[</i>(SlotIndex)[,(SlotIndex)[,...]]]</p>
+
+<p style="margin-left:18%;">Set device slot mappings for
+each executor</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-device-slot-mappings</b></p>
+
+<p style="margin-left:18%;">Query device slot mappings</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-location-info-status</b></p>
+
+<p style="margin-left:18%;">Query location info status</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-provisioned-contexts</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set provisioned contexts
+(allowed keys: operation, context-type, ip-type, state,
+roaming-control, media-type, source, auth, compression,
+username, password, access-string)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-provisioned-contexts</b></p>
+
+<p style="margin-left:18%;">Query provisioned contexts</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-base-stations-info</b></p>
+
+<p style="margin-left:18%;">Query base stations info</p>
+
+<p style="margin-left:9%;"><b>--ms-device-reset</b></p>
+
+<p style="margin-left:18%;">Reset device</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-version</b>=<i>[</i>(MBIM
+version),(MBIM extended version)]</p>
+
+<p style="margin-left:18%;">Exchange supported version
+information. Since MBIMEx v2.0.</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-registration-parameters</b></p>
+
+<p style="margin-left:18%;">Query registration parameters.
+Since MBIMEx v3.0.</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-registration-parameters</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set registration parameters
+(required keys: mico-mode, drx-cycle, ladn-info,
+default-pdu-activation-hint, re-register-if-needed). Since
+MBIMEx v3.0.</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-modem-configuration</b></p>
+
+<p style="margin-left:18%;">Query modem configuration.
+Since MBIMEx v3.0.</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-wake-reason</b></p>
+
+<p style="margin-left:18%;">Query wake reason. Since MBIMEx
+v3.0.</p>
+
+<h3>Quectel options:
+<a name="Quectel options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--quectel-query-radio-state</b></p>
+
+<p style="margin-left:18%;">Query radio state</p>
+
+
+<p style="margin-left:9%;"><b>--quectel-set-radio-state</b>=<i>[</i>(on)]</p>
+
+<p style="margin-left:18%;">Set radio state</p>
+
+<h3>Link management options:
+<a name="Link management options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--link-list</b>=<i>[IFACE]</i></p>
+
+<p style="margin-left:18%;">List links created from a given
+interface</p>
+
+
+<p style="margin-left:9%;"><b>--link-add</b>=<i>[iface=IFACE</i>,prefix=PREFIX[,session-id=N]]</p>
+
+<p style="margin-left:18%;">Create new network interface
+link</p>
+
+
+<p style="margin-left:9%;"><b>--link-delete</b>=<i>IFACE</i></p>
+
+<p style="margin-left:18%;">Delete a given network
+interface link</p>
+
+
+<p style="margin-left:9%;"><b>--link-delete-all</b>=<i>[IFACE]</i></p>
+
+<p style="margin-left:18%;">Delete all network interface
+links from the given interface</p>
+
+<h3>Intel Thermal RF Service options:
+<a name="Intel Thermal RF Service options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--intel-query-rfim</b></p>
+
+<p style="margin-left:18%;">Query RFIM frequency
+information</p>
+
+
+<p style="margin-left:9%;"><b>--intel-set-rfim</b>=<i>[</i>(on|off)]</p>
+
+<p style="margin-left:18%;">Enable or disable RFIM
+(disabled by default)</p>
+
+<h3>Microsoft Voice Extensions Service options:
+<a name="Microsoft Voice Extensions Service options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ms-query-nitz</b></p>
+
+<p style="margin-left:18%;">Query network identity and time
+zone</p>
+
+<h3>Microsoft UICC Low Level Access Service options:
+<a name="Microsoft UICC Low Level Access Service options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ms-query-uicc-application-list</b></p>
+
+<p style="margin-left:18%;">Query UICC application list</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-uicc-file-status</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Query UICC file status (allowed
+keys: application-id, file-path)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-uicc-read-binary</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Read UICC binary file (allowed
+keys: application-id, file-path, read-offset, read-size,
+local-pin and data)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-uicc-read-record</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Read UICC record file (allowed
+keys: application-id, file-path, record-number, local-pin
+and data)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-uicc-open-channel</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set UICC open channel (allowed
+keys: application-id, selectp2arg, channel-group)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-uicc-close-channel</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set UICC close channel (allowed
+keys: channel, channel-group)</p>
+
+<p style="margin-left:9%;"><b>--ms-query-uicc-atr</b></p>
+
+<p style="margin-left:18%;">Query UICC atr</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-uicc-apdu</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set UICC apdu (allowed keys:
+channel, secure-message, classbyte-type, command)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-uicc-reset</b>=<i>[</i>(Pass
+Through Action)]</p>
+
+<p style="margin-left:18%;">Set UICC reset</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-uicc-reset</b></p>
+
+<p style="margin-left:18%;">Query UICC reset</p>
+
+
+<p style="margin-left:9%;"><b>--ms-set-uicc-terminal-capability</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set UICC terminal capability
+(allowed keys: terminal-capability)</p>
+
+
+<p style="margin-left:9%;"><b>--ms-query-uicc-terminal-capability</b></p>
+
+<p style="margin-left:18%;">Query UICC terminal
+capability</p>
+
+<h3>Intel mutual authentication Service options:
+<a name="Intel mutual authentication Service options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--intel-query-fcc-lock</b></p>
+
+<p style="margin-left:18%;">Query FCC lock information</p>
+
+
+<p style="margin-left:9%;"><b>--intel-set-fcc-lock</b>=<i>[</i>(ResponsePresent),(Response)]</p>
+
+<p style="margin-left:18%;">Set FCC lock information</p>
+
+<p style="margin-left:9%; margin-top: 1em">Intel 5G tools
+options <b><br>
+
+--intel-set-trace-config</b>=<i>[</i>(TraceCmd)|(TraceValue)]</p>
+
+<p style="margin-left:18%;">Set trace configuration</p>
+
+
+<p style="margin-left:9%;"><b>--intel-query-trace-config</b>=<i>[</i>(TraceCmd)]</p>
+
+<p style="margin-left:18%;">Query trace configuration</p>
+
+<h3>Google options:
+<a name="Google options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--google-set-carrier-lock</b>=<i>[</i>(Data)]</p>
+
+<p style="margin-left:18%;">Set Google Carrier Lock</p>
+
+
+<p style="margin-left:9%;"><b>--google-query-carrier-lock</b></p>
+
+<p style="margin-left:18%;">Query Google Carrier Lock</p>
+
+<h3>Application Options:
+<a name="Application Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--device</b>=<i>[PATH]</i></p>
+
+<p style="margin-left:18%;">Specify device path</p>
+
+<p style="margin-left:9%;"><b>-p</b>,
+<b>--device-open-proxy</b></p>
+
+<p style="margin-left:18%;">Request to use the
+&rsquo;mbim-proxy&rsquo; proxy</p>
+
+
+<p style="margin-left:9%;"><b>--device-open-ms-mbimex-v2</b></p>
+
+<p style="margin-left:18%;">Request to enable Microsoft
+MBIMEx v2.0 support</p>
+
+
+<p style="margin-left:9%;"><b>--device-open-ms-mbimex-v3</b></p>
+
+<p style="margin-left:18%;">Request to enable Microsoft
+MBIMEx v3.0 support</p>
+
+
+<p style="margin-left:9%;"><b>--no-open</b>=<i>[Transaction</i>
+ID]</p>
+
+<p style="margin-left:18%;">Do not explicitly open the MBIM
+device before running the command</p>
+
+<p style="margin-left:9%;"><b>--no-close</b></p>
+
+<p style="margin-left:18%;">Do not close the MBIM device
+after running the command</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--noop</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>Don&rsquo;t run any command</p></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Run action with verbose logs,
+including the debug ones</p>
+
+<p style="margin-left:9%;"><b>--verbose-full</b></p>
+
+<p style="margin-left:18%;">Run action with verbose logs,
+including the debug ones and personal info</p>
+
+<p style="margin-left:9%;"><b>--silent</b></p>
+
+<p style="margin-left:18%;">Run action with no logs; not
+even the error/warning ones</p>
+
+
+<p style="margin-left:9%;"><b>--printable</b>=<i>[</i>(Data)]</p>
+
+<p style="margin-left:18%;">Get the printable info of the
+given hex encoded MBIM message</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Print version</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2013-2023 Aleksander Morgado License GPLv2+: GNU GPL version
+2 or later &lt;http://gnu.org/licenses/gpl-2.0.html&gt; <br>
+This is free software: you are free to change and
+redistribute it. There is NO WARRANTY, to the extent
+permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <b>mbimcli</b> is maintained as a Texinfo
+manual. If the <b>info</b> and <b>mbimcli</b> programs are
+properly installed at your site, the command</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>info
+mbimcli</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+<hr>
+</body>
+</html>

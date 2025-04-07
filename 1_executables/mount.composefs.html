@@ -1,0 +1,183 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mount.composefs(1)</title>
+
+</head>
+<body>
+
+<h1 align="center">mount.composefs(1)</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mount.composefs
+- mount a composefs filesystem image</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mount.composefs</b>
+[-o OPTIONS] <i>IMAGE TARGETDIR</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The composefs
+project uses EROFS image file to store metadata, and one or
+more separate directories containing content-addressed
+backing data for regular files.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mount.composefs</b>
+mounts such an EROFS file in combination with a given set of
+basedir at the specified location. It can be called
+directly, or as a mount helper by running <b>mount -t
+composefs ...</b>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The provided
+<i>IMAGE</i> argument must be a valid composefs (EROFS)
+metadata image. The <i>TARGETDIR</i> will be used as a mount
+target.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mount.composefs</b>
+accepts the following colon-separated mount options when
+passed via the <b>-o OPTIONS</b> argument. <b><br>
+basedir</b>=<i>PATH</i></p>
+
+<p style="margin-left:18%;">This path will be used to
+resolve non-empty file references stored in the composefs
+metadata image. A primary use case is to have this be the
+same path provided to <b>mkcomposefs
+--digest-store=PATH</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Multiple paths
+can be specified, separated by <b>:</b>.</p>
+
+<p style="margin-left:9%;"><b>digest</b>=<i>DIGEST</i></p>
+
+<p style="margin-left:18%;">The image file is validated to
+have the specified fs-verity digest before being used. This
+allows a chain of trust the ensures only the expected data
+is ever visible in the mount.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+also implies <b>verity</b>.</p>
+
+<p style="margin-left:9%;"><b>idmap</b>=<i>PATH</i></p>
+
+<p style="margin-left:18%;">Specify a path to a user
+namespace whose ID mapping should be used. The typical
+format for this type of path is
+<b>/proc/&lt;pid&gt;/ns/user</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>verity</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>If this is specified, all files in the <i>IMAGE</i> must
+specify an fs-verity digest, and all the files in the base
+dirs must have a matching fs-verity digest.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Note: This
+needs support for the overlayfs &quot;verity&quot; option in
+the kernel, which was added in 6.6rc1.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>ro</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Mounts the filesystem read-only.
+This is mainly useful when using <b>upperdir</b> as
+unlayered composefs images are naturally readonly.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>rw</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Overrides a previous <b>ro</b> option</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>upperdir</b></p>
+
+<p style="margin-left:18%;">Specify an upper dir in the
+overlayfs mount that composefs uses. This allows a writable
+layer on top of the composefs image. See overlayfs docs for
+details.</p>
+
+<p style="margin-left:9%;"><b>workdir</b></p>
+
+<p style="margin-left:18%;">Specifies an overlayfs workdir
+to go with <b>upperdir</b>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>composefs-info(1)</b>,
+<b>mount.composefs(1)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">composefs
+upstream &lang;
+https://github.com/containers/composefs&rang;</p>
+<hr>
+</body>
+</html>

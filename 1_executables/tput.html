@@ -1,0 +1,1350 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:38 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>tput</title>
+
+</head>
+<body>
+
+<h1 align="center">tput</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Operands">Operands</a><br>
+<a href="#Aliases">Aliases</a><br>
+<a href="#Terminal Size">Terminal Size</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#PORTABILITY">PORTABILITY</a><br>
+<a href="#HISTORY">HISTORY</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput</b> -
+initialize a terminal, exercise its capabilities, or query
+<i>term- info</i> database</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput</b>
+[<b>-T</b> <i>terminal-type</i>] {<i>cap-code</i>
+[<i>parameter</i> ...]} ...</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput</b>
+[<b>-T</b> <i>terminal-type</i>] [<b>-x</b>]
+<b>clear</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput</b>
+[<b>-T</b> <i>terminal-type</i>] <b>init</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput</b>
+[<b>-T</b> <i>terminal-type</i>] <b>reset</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput</b>
+[<b>-T</b> <i>terminal-type</i>] <b>longname</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput
+-S</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput
+-V</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput</b> uses
+the <i>terminfo</i> library and database to make
+terminal-specific capabilities and information available to
+the shell, to initialize or reset the terminal, or to report
+a description of the current (or specified) terminal type.
+Terminal capabilities are accessed by <i>cap-code</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>terminfo</b>(5)
+discusses terminal capabilities at length and presents a
+complete list of <i>cap-codes</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When retrieving
+capability values, the result depends upon the
+capability&rsquo;s type.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p>Boolean</p></td>
+<td width="3%"></td>
+<td width="79%">
+
+
+<p><b>tput</b> sets its exit status to <b>0</b> if the
+terminal possesses <i>cap-code</i>, and <b>1</b> if it does
+not.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p>numeric</p></td>
+<td width="3%"></td>
+<td width="79%">
+
+
+<p><b>tput</b> writes <i>cap-code</i>&rsquo;s decimal value
+to the standard output stream if defined (<b>-1</b> if it is
+not) followed by a newline.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p>string</p></td>
+<td width="3%"></td>
+<td width="79%">
+
+
+<p><b>tput</b> writes <i>cap-code</i>&rsquo;s value to the
+standard output stream if defined, without a trailing
+newline.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Before using a
+value returned on the standard output, the application
+should test <b>tput</b>&rsquo;s exit status to be sure it is
+0; see section &ldquo;EXIT STATUS&rdquo; below.</p>
+
+<h3>Operands
+<a name="Operands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Generally, an
+operand is a <i>cap-code</i>, a capability code from the
+terminal database, or a parameter thereto. Three others are
+specially recognized by <b>tput</b>: <b>init</b>,
+<b>reset</b>, and <b>longname</b>. Although these resemble
+capability codes, they in fact receive special handling; we
+term them &ldquo;pseudo-capabilities&rdquo;.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><i>cap-code</i></p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p style="margin-top: 1em">indicates a capability from the
+terminal database.</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<p style="margin-left:23%; margin-top: 1em">If
+<i>cap-code</i> is of string type and takes parameters,
+<b>tput</b> interprets arguments following <i>cap-code</i>
+as the parameters, up to the (fixed) quantity the capability
+requires.</p>
+
+<p style="margin-left:23%; margin-top: 1em">Most parameters
+are numeric. Only a few terminal capabilities require string
+parameters; <b>tput</b> uses a table to decide which to pass
+as strings. Normally <b>tput</b> uses <b>tparm</b>(3X) to
+perform the substitution. If no parameters are given for the
+capability, <b>tput</b> writes the string without performing
+the substitution.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>init</b></p></td>
+<td width="9%"></td>
+<td width="77%">
+
+
+<p style="margin-top: 1em">initializes the terminal. If the
+terminal database is present and an entry for the
+user&rsquo;s terminal type exists, the following occur.</p></td></tr>
+</table>
+
+<p style="margin-left:23%;">(1)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="29%"></td>
+<td width="71%">
+
+
+<p style="margin-top: 1em"><b>tput</b> retrieves the
+terminal&rsquo;s mode settings. It successively tests the
+file descriptors corresponding to</p></td></tr>
+</table>
+
+<p style="margin-left:29%;">&bull;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="29%"></td>
+<td width="2%"></td>
+<td width="4%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em">the standard error stream,</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="29%"></td>
+<td width="2%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="38%">
+
+
+<p>the standard output stream,</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="29%"></td>
+<td width="2%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="38%">
+
+
+<p>the standard input stream, and</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="29%"></td>
+<td width="2%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="38%">
+
+
+<p><i>/dev/tty</i></p></td>
+<td width="27%">
+</td></tr>
+</table>
+
+<p style="margin-left:29%; margin-top: 1em">to obtain
+terminal settings. Having retrieved them, <b>tput</b>
+remembers which descriptor to use for further updates.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em">(2)</p></td>
+<td width="2%"></td>
+<td width="71%">
+
+
+<p style="margin-top: 1em">If the terminal dimensions
+cannot be obtained from the operating system, but the
+environment or terminal type database entry describes them,
+<b>tput</b> updates the operating system&rsquo;s notion of
+them.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="4%">
+
+
+<p>(3)</p></td>
+<td width="2%"></td>
+<td width="71%">
+
+
+<p><b>tput</b> updates the terminal modes.</p></td></tr>
+</table>
+
+<p style="margin-left:29%;">&bull;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%"></td>
+<td width="4%"></td>
+<td width="65%">
+
+
+<p style="margin-top: 1em">Any delays specified in the
+entry (for example, when a newline is sent) are set in the
+terminal driver.</p></td></tr>
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="65%">
+
+
+<p>Tab expansion is turned on or off per the specification
+in the entry, and</p></td></tr>
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="65%">
+
+
+<p>if tabs are not expanded, standard tabs (every 8 spaces)
+are set.</p></td></tr>
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%">
+
+
+<p>(4)</p></td>
+<td width="4%"></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<p style="margin-left:29%; margin-top: 1em">If
+initialization capabilities, detailed in subsection
+&ldquo;Tabs and Initialization&rdquo; of <b>terminfo</b>(5),
+are present, <b>tput</b> writes them to the standard output
+stream.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em">(5)</p></td>
+<td width="2%"></td>
+<td width="52%">
+
+
+<p style="margin-top: 1em"><b>tput</b> flushes the standard
+output stream.</p></td>
+<td width="19%">
+</td></tr>
+</table>
+
+<p style="margin-left:23%; margin-top: 1em">If an entry
+lacks the information needed for an activity above, that
+activity is silently skipped.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>reset</b></p></td>
+<td width="8%"></td>
+<td width="77%">
+
+
+<p style="margin-top: 1em">re-initializes the terminal. A
+reset differs from initialization in two ways.</p></td></tr>
+</table>
+
+<p style="margin-left:23%;">(1)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="29%"></td>
+<td width="66%">
+
+
+<p style="margin-top: 1em"><b>tput</b> sets the the
+terminal modes to a &ldquo;sane&rdquo; state,</p></td>
+<td width="5%">
+</td></tr>
+</table>
+
+<p style="margin-left:29%;">&bull;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%"></td>
+<td width="4%"></td>
+<td width="65%">
+
+
+<p style="margin-top: 1em">enabling cooked and echo
+modes,</p> </td></tr>
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="65%">
+
+
+<p>disabling cbreak and raw modes,</p></td></tr>
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="65%">
+
+
+<p>enabling newline translation, and</p></td></tr>
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="65%">
+
+
+<p>setting any unset special characters to their default
+values.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="23%"></td>
+<td width="8%">
+
+
+<p>(2)</p></td>
+<td width="4%"></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<p style="margin-left:29%; margin-top: 1em">If any reset
+capabilities are defined for the terminal type, <b>tput</b>
+writes them to the output stream. Otherwise, <b>tput</b>
+uses any defined initialization capabilities. Reset
+capabilities are detailed in subsection &ldquo;Tabs and
+Initialization&rdquo; of <b>terminfo</b>(5).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><b>longname</b></p></td>
+<td width="4%"></td>
+<td width="77%">
+
+
+<p style="margin-top: 1em">A <i>terminfo</i> entry begins
+with one or more names by which an application can refer to
+the entry, before the list of terminal capabilities. The
+names are separated by &ldquo;|&rdquo; characters. X/Open
+Curses terms the last name the &ldquo;long name&rdquo;, and
+indicates that it may include blanks.</p></td></tr>
+</table>
+
+<p style="margin-left:23%; margin-top: 1em"><b>tic</b>
+warns if the last name does not include blanks, to
+accommodate old <i>terminfo</i> entries that treated the
+long name as an optional feature. The long name is often
+referred to as the description field.</p>
+
+<p style="margin-left:23%; margin-top: 1em">If the terminal
+database is present and an entry for the user&rsquo;s
+terminal type exists, <b>tput</b> reports its description to
+the standard output stream, without a trailing newline. See
+<b>terminfo</b>(5).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Note:</i>
+Redirecting the output of &ldquo;<b>tput init</b>&rdquo; or
+&ldquo;<b>tput reset</b>&rdquo; to a file will capture only
+part of their actions. Changes to the terminal modes are not
+affected by file descriptor redirection, since the terminal
+modes are altered via <b>ioctl</b>(2).</p>
+
+<h3>Aliases
+<a name="Aliases"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If <b>tput</b>
+is invoked via link with any of the names <b>clear</b>,
+<b>init</b>, or <b>reset</b>, it operates as if run with the
+corresponding (pseudo-)capability operand. For example,
+executing a link named <b>reset</b> that points to
+<b>tput</b> has the same effect as &ldquo;<b>tput
+reset</b>&rdquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This feature was
+introduced by <i>ncurses</i> 5.2 in 2000. It is rarely
+used:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>clear</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">is a separate program, which is
+both smaller and more frequently executed.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>init</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>has the same name as another program in widespread
+use.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>reset</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>is provided by the <b>tset</b>(1) utility (also via a
+link named <b>reset</b>).</p></td></tr>
+</table>
+
+<h3>Terminal Size
+<a name="Terminal Size"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Besides the
+pseudo-capabilities (such as <b>init</b>), <b>tput</b>
+treats the <b>lines</b> and <b>cols</b> <i>cap-codes</i>
+specially: it may call <b>setupterm</b>(3X) to obtain the
+terminal size.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">First, <b>tput</b> attempts to
+obtain these capabilities from the terminal database. This
+generally fails for terminal emulators, which lack a fixed
+window size and thus omit the capabilities.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>It then asks the operating system for the
+terminal&rsquo;s size, which generally works, unless the
+connection is via a serial line that does not support
+&ldquo;NAWS&rdquo;: negotiations about window size.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Finally, it inspects the environment variables
+<i>LINES</i> and <i>COLUMNS</i>, which may override the
+terminal size.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If the <b>-T</b>
+option is given, <b>tput</b> ignores the environment
+variables by calling <b>use_tioctl(TRUE)</b>, relying upon
+the operating system (or, ultimately, the terminal
+database).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-S</b></p></td>
+<td width="9%"></td>
+<td width="79%">
+
+
+<p style="margin-top: 1em">retrieves more than one
+capability per invocation of <b>tput</b>. The capabilities
+must be passed to <b>tput</b> from the standard input stream
+instead of from the command line (see section
+&ldquo;EXAMPLES&rdquo; below). Only one <i>cap-code</i> is
+allowed per line. The <b>-S</b> option changes the meanings
+of the <b>0</b> and <b>1</b> exit statuses (see section
+&ldquo;EXIT STATUS&rdquo; below).</p></td></tr>
+</table>
+
+<p style="margin-left:21%; margin-top: 1em">Some
+capabilities use string parameters rather than numeric ones.
+<b>tput</b> employs a built-in table and the presence of
+parameters in its input to decide how to interpret them, and
+whether to use <b>tparm</b>(3X).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>-T&nbsp;</b><i>type</i></p></td>
+<td width="3%"></td>
+<td width="79%">
+
+
+<p style="margin-top: 1em">indicates the terminal&rsquo;s
+<i>type</i>. Normally this option is unnecessary, because a
+default is taken from the <i>TERM</i> environment variable.
+If specified, the environment variables <i>LINES</i> and
+<i>COLUMNS</i> are also ignored.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>-V</b></p></td>
+<td width="3%"></td>
+<td width="79%">
+
+
+<p>reports the version of <i>ncurses</i> associated with
+<b>tput</b>, and exits with a successful status.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>-x</b></p></td>
+<td width="3%"></td>
+<td width="79%">
+
+
+<p>prevents &ldquo;<b>tput clear</b>&rdquo; from attempting
+to clear the scrollback buffer.</p></td></tr>
+</table>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Normally, one
+should interpret <b>tput</b>&rsquo;s exit statuses as
+follows.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When the
+<b>-S</b> option is used, some statuses change meanings.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput</b>
+reads one environment variable.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><i>TERM</i></p></td>
+<td width="5%"></td>
+<td width="81%">
+
+
+<p style="margin-top: 1em">denotes the terminal type. Each
+terminal type is distinct, though many are similar. The
+<b>-T</b> option overrides its value.</p></td></tr>
+</table>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>/usr/share/tabset</i></p>
+
+<p style="margin-left:18%;">tab stop initialization
+database</p>
+
+<p style="margin-left:9%;"><i>/usr/share/terminfo</i></p>
+
+<p style="margin-left:18%;">compiled terminal description
+database</p>
+
+<h2>PORTABILITY
+<a name="PORTABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Over time
+<i>ncurses</i> <b>tput</b> has differed from that of
+System&nbsp;V in two important respects, one now mostly
+historical.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>&ldquo;<b>tput</b> <i>cap-code</i>&rdquo; writes to the
+standard output, which need not be a terminal device.
+However, the operands that manipulate terminal modes might
+not use the standard output.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">System&nbsp;V
+<b>tput</b>&rsquo;s <b>init</b> and <b>reset</b> operands
+use logic from 4.1cBSD <b>tset</b>, manipulating terminal
+modes. It checks the same file descriptors (and
+<i>/dev/tty</i>) for association with a terminal device as
+<i>ncurses</i> now does, and if none are, finally assumes a
+1200 baud terminal. When updating terminal modes, it ignores
+errors.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Until
+<i>ncurses</i> 6.1 (see section &ldquo;HISTORY&rdquo;
+below), <b>tput</b> did not modify terminal modes. It now
+employs a scheme similar to System&nbsp;V, using functions
+shared with <b>tset</b> (and ultimately based on 4.4BSD
+<b>tset</b>). If it is not able to open a terminal (for
+instance, when run by <i>cron</i>(1)), <b>tput</b> exits
+with an error status.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">System&nbsp;V <b>tput</b>
+assumes that the type of a <i>cap-code</i> operand is
+numeric if all the characters of its value are decimal
+numbers; if they are not, it treats <i>cap-code</i> as a
+string capability.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Most
+implementations that provide support for <i>cap-code</i>
+operands use the <b>tparm</b>(3X) function to expand its
+parameters. That function expects a mixture of numeric and
+string parameters, requiring <b>tput</b> to know which type
+to use.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>ncurses</i>
+<b>tput</b> uses a table to determine the parameter types
+for the standard <i>cap-code</i> operands, and an internal
+function to analyze nonstandard <i>cap-code</i>
+operands.</p>
+
+<p style="margin-left:14%; margin-top: 1em">While more
+reliable than System&nbsp;V&rsquo;s utility, a portability
+problem is introduced by this analysis. An OpenBSD developer
+adapted the internal library function from <i>ncurses</i> to
+port NetBSD&rsquo;s <i>termcap</i>-based <b>tput</b> to
+<i>terminfo</i>, and modified it to interpret multiple
+<i>cap-codes</i> (and parameters) on the command line.
+Portable applications should not rely upon this feature;
+<i>ncurses</i> offers it to support applications written
+specifically for OpenBSD.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This
+implementation, unlike others, accepts both <i>termcap</i>
+and <i>terminfo cap-codes</i> if <i>termcap</i> support is
+compiled in. In that case, however, the predefined
+<i>termcap</i> and <i>terminfo</i> codes have two
+ambiguities; <i>ncurses</i> assumes the <i>terminfo</i>
+code.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">The <i>cap-code</i> <b>dl</b>
+means <b>delete_line</b> to <i>termcap</i> but
+<b>parm_delete_line</b> to <i>terminfo</i>. <i>termcap</i>
+uses the code <b>DL</b> for <b>parm_delete_line</b>.
+<i>term- info</i> uses the code <b>dl1</b> for
+<b>delete_line</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <i>cap-code</i> <b>ed</b> means
+<b>exit_delete_mode</b> to <i>termcap</i> but <b>clr_eos</b>
+to <i>terminfo</i>. <i>termcap</i> uses the code <b>cd</b>
+for <b>clr_eos</b>. <i>terminfo</i> uses the code
+<b>rmdc</b> for <b>exit_delete_mode</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>longname</b> operand, <b>-S</b> option, and the
+parameter-substitution features used in the <b>cup</b>
+example below, were not supported in AT&amp;T/USL
+<i>curses</i> before SVr4 (1989). Later, 4.3BSD-Reno (1990)
+added support for <b>longname</b>, and in 1994, NetBSD added
+support for the parameter-substitution features.</p>
+
+<p style="margin-left:9%; margin-top: 1em">IEEE Std
+1003.1/The Open Group Base Specifications Issue 7
+(POSIX.1-2008) documents only the <b>clear</b>, <b>init</b>,
+and <b>reset</b> operands. A few observations of interest
+arise from that selection.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em"><i>ncurses</i> supports
+<b>clear</b> as it does any other standard <i>cap-code</i>.
+The others (<b>init</b> and <b>longname</b>) do not
+correspond to terminal capabilities.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The <b>tput</b> on SVr4-based systems such as Solaris,
+IRIX64, and HP-UX, as well as others such as AIX and Tru64,
+also support standard <i>cap-code</i> operands.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>A few platforms such as FreeBSD recognize <i>termcap</i>
+codes rather than <i>terminfo</i> capability codes in their
+respective <b>tput</b> commands. Since 2010, NetBSD&rsquo;s
+<b>tput</b> uses <i>terminfo</i> codes. Before that, it
+(like FreeBSD) recognized <i>termcap</i> codes.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Beginning in
+2021, FreeBSD uses <i>ncurses</i> <b>tput</b>, configured
+for both <i>terminfo</i> (tested first) and <i>termcap</i>
+(as a fallback).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Because
+(apparently) all <i>certified</i> Unix systems support the
+full set of capability codes, the reason for documenting
+only a few may not be apparent.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">X/Open Curses Issue 7 documents
+<b>tput</b> differently, with <i>cap-code</i> and the other
+features used in this implementation.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>That is, there are two standards for <b>tput</b>: POSIX
+(a subset) and X/Open Curses (the full implementation).
+POSIX documents a subset to avoid the complication of
+including X/Open Curses and the terminal capability
+database.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>While it is certainly possible to write a <b>tput</b>
+program without using <i>curses</i>, no system with a
+<i>curses</i> implementation provides a <b>tput</b> utility
+that does not also support standard <i>cap-codes</i>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">X/Open Curses
+Issue 7 (2009) is the first version to document utilities.
+However that part of X/Open Curses does not follow existing
+practice (that is, System&nbsp;V <i>curses</i>
+behavior).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">It assigns exit status 4 to
+&ldquo;invalid operand&rdquo;, which may have the same
+meaning as &ldquo;unknown capability&rdquo;. For instance,
+the source code for Solaris <i>xcurses</i> uses the term
+&ldquo;invalid&rdquo; in this case.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>It assigns exit status 255 to a numeric variable that is
+not specified in the <i>terminfo</i> database. That likely
+is a documentation error, mistaking the &ldquo;-1&rdquo;
+written to the standard output to indicate an absent or
+cancelled numeric capability for an (unsigned) exit
+status.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The various
+System&nbsp;V implementations (AIX, HP-UX, Solaris) use the
+same exit statuses as <i>ncurses</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">NetBSD
+<i>curses</i> documents exit statuses that correspond to
+neither <i>ncurses</i> nor X/Open Curses.</p>
+
+<h2>HISTORY
+<a name="HISTORY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bill Joy wrote a
+<b>tput</b> command during development of 4BSD in October
+1980. This initial version only cleared the screen, and did
+not ship with official distributions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">System&nbsp;V
+developed a different <b>tput</b> command.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">SVr2 (1984) provided a
+rudimentary <b>tput</b> that checked the parameter against
+each predefined capability and returned the corresponding
+value. This version of <b>tput</b> did not use
+<b>tparm</b>(3X) for parameterized capabilities.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>SVr3 (1987) replaced that with a more extensive program
+whose support for <b>init</b> and <b>reset</b> operands
+(more than half the program) incorporated the <b>reset</b>
+feature of BSD <b>tset</b> written by Eric Allman.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>SVr4 (1989) added color initialization by using the
+<b>orig_colors</b> (<b>oc</b>) and <b>orig_pair</b>
+(<b>op</b>) capabilities in its <b>init</b> logic.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Keith Bostic
+refactored BSD <b>tput</b> for shipment in 4.3BSD-Tahoe
+(1988), then replaced it the next year with a new
+implementation based on System&nbsp;V <b>tput</b>.
+Bostic&rsquo;s version similarly accepted some parameters
+named for <i>terminfo</i> (pseudo-)capabilities:
+<b>clear</b>, <b>init</b>, <b>longname</b>, and
+<b>reset</b>. However, because he had only <i>termcap</i>
+available, it accepted <i>termcap</i> codes for other
+capabilities. Also, Bostic&rsquo;s BSD <b>tput</b> did not
+modify the terminal modes as the earlier BSD <b>tset</b> had
+done.</p>
+
+<p style="margin-left:9%; margin-top: 1em">At the same
+time, Bostic added a shell script named &ldquo;clear&rdquo;
+that used <b>tput</b> to clear the screen. Both of these
+appeared in 4.4BSD, becoming the &ldquo;modern&rdquo; BSD
+implementation of <b>tput</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The origin of
+<i>ncurses</i> <b>tput</b> lies outside both System&nbsp;V
+and BSD, in Ross Ridge&rsquo;s <i>mytinfo</i> package,
+published on <i>comp.sources.unix</i> in December 1992.
+Ridge&rsquo;s program made more sophisticated use of the
+terminal capabilities than the BSD program. Eric Raymond
+used that <b>tput</b> program (and other parts of
+<i>mytinfo</i>) in <i>ncurses</i> in June 1995.
+Incorporating the portions dealing with terminal
+capabilities almost without change, Raymond made
+improvements to the way command-line parameters were
+handled.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Before
+<i>ncurses</i> 6.1 (2018), its <b>tset</b> and <b>tput</b>
+utilities differed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em"><b>tset</b> was more effective,
+resetting the terminal modes and special characters.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>On the other hand, <b>tset</b>&rsquo;s repertoire of
+terminal capabilities for resetting the terminal was more
+limited; it had only equivalents of <b>reset_1string</b>
+(<b>rs1</b>), <b>reset_2string</b> (<b>rs2</b>), and
+<b>reset_file</b> (<b>rf</b>), and not the tab stop and
+margin update features of <b>tput</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>reset</b>
+program is traditionally an alias for <b>tset</b> due to its
+ability to reset terminal modes and special characters.</p>
+
+<p style="margin-left:9%; margin-top: 1em">As of
+<i>ncurses</i> 6.1, the &ldquo;reset&rdquo; features of the
+two programs are (mostly) the same. Two minor differences
+remain.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">The <b>tset</b> program waits
+one second when resetting, in case the terminal happens to
+be a hardware device.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>The two programs write the terminal initialization
+strings to different streams; that is, standard error for
+<b>tset</b> and standard output for <b>tput</b>.</p></td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>tput
+init</b></p>
+
+<p style="margin-left:18%;">Initialize the terminal
+according to the type of terminal in the <i>TERM</i>
+environment variable. If the system does not reliably
+initialize the terminal upon login, this command can be
+included in <i>$HOME/.profile</i> after exporting the
+<i>TERM</i> environment variable.</p>
+
+<p style="margin-left:9%;"><b>tput -T5620 reset</b></p>
+
+<p style="margin-left:18%;">Reset an AT&amp;T 5620
+terminal, overriding the terminal type in the <i>TERM</i>
+environment variable.</p>
+
+<p style="margin-left:9%;"><b>tput cnorm</b></p>
+
+<p style="margin-left:18%;">Set cursor to normal
+visibility.</p>
+
+<p style="margin-left:9%;"><b>tput home</b></p>
+
+<p style="margin-left:18%;">Move the cursor to row 0,
+column 0: the upper left corner of the screen, usually known
+as the &ldquo;home&rdquo; cursor position.</p>
+
+<p style="margin-left:9%;"><b>tput clear</b></p>
+
+<p style="margin-left:18%;">Clear the screen: write the
+<b>clear_screen</b> capability&rsquo;s value to the standard
+output stream.</p>
+
+<p style="margin-left:9%;"><b>tput cols</b></p>
+
+<p style="margin-left:18%;">Report the number of columns
+used by the current terminal type.</p>
+
+<p style="margin-left:9%;"><b>tput -Tadm3a cols</b></p>
+
+<p style="margin-left:18%;">Report the number of columns
+used by an ADM-3A terminal.</p>
+
+<p style="margin-left:9%;"><b>strong=`tput smso`
+normal=`tput rmso`</b></p>
+
+<p style="margin-left:18%;">Set shell variables to
+capability values: <b>strong</b> and <b>normal</b>, to begin
+and end, respectively, stand-out mode for the terminal. One
+might use these to present a prompt.</p>
+
+<p style="margin-left:27%; margin-top: 1em">printf
+&quot;${strong}Username:${normal} &quot;</p>
+
+<p style="margin-left:9%;"><b>tput hc</b></p>
+
+<p style="margin-left:18%;">Indicate via exit status
+whether the terminal is a hard copy device.</p>
+
+<p style="margin-left:9%;"><b>tput cup 23 4</b></p>
+
+<p style="margin-left:18%;">Move the cursor to row 23,
+column 4.</p>
+
+<p style="margin-left:9%;"><b>tput cup</b></p>
+
+<p style="margin-left:18%;">Report the value of the
+<b>cursor_address</b> (<b>cup</b>) capability (used for
+cursor movement), with no parameters substituted.</p>
+
+<p style="margin-left:9%;"><b>tput longname</b></p>
+
+<p style="margin-left:18%;">Report the <i>terminfo</i>
+database&rsquo;s description of the terminal type specified
+in the <i>TERM</i> environment variable.</p>
+
+<p style="margin-left:9%;"><b>tput -S</b></p>
+
+<p style="margin-left:18%;">Process multiple capabilities.
+The <b>-S</b> option can be profitably used with a shell
+&ldquo;here document&rdquo;.</p>
+
+<p style="margin-left:18%; margin-top: 1em">$&nbsp;<b>tput
+-S &lt;&lt;!</b> <br>
+&gt;&nbsp;<b>clear</b> <br>
+&gt;&nbsp;<b>cup 10 10</b> <br>
+&gt;&nbsp;<b>bold</b> <br>
+&gt;&nbsp;<b>!</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">The foregoing
+clears the screen, moves the cursor to position (10, 10) and
+turns on bold (extra bright) mode.</p>
+
+<p style="margin-left:9%;"><b>tput clear cup 10 10
+bold</b></p>
+
+<p style="margin-left:18%;">Perform the same actions as the
+foregoing &ldquo;<b>tput -S</b>&rdquo; example.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clear</b>(1),
+<b>stty</b>(1), <b>tabs</b>(1), <b>tset</b>(1),
+<b>curs_termcap</b>(3X), <b>terminfo</b>(5)</p>
+<hr>
+</body>
+</html>

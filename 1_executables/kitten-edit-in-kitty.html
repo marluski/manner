@@ -1,0 +1,338 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:32 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-edit-in-kitty</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-edit-in-kitty</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-edit-in-kitty
+- Edit a file in a kitty overlay window</p>
+
+<h2>Usage
+<a name="Usage"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="55%">
+
+
+<p style="margin-top: 1em"><b>kitten edit-in-kitty
+[options] file-to-edit</b></p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Edit the
+specified file in a kitty overlay window. Works over SSH as
+well.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For usage
+instructions see:
+https://sw.kovidgoyal.net/kitty/shell-integration/#edit-file</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--title,
+--window-title</b></p>
+
+<p style="margin-left:18%;">The title to set for the new
+window. By default, title is controlled by the child
+process. The special value current will copy the title from
+the <b>--source-window.</b></p>
+
+<p style="margin-left:9%;"><b>--tab-title</b></p>
+
+<p style="margin-left:18%;">The title for the new tab if
+launching in a new tab. By default, the title of the active
+window in the tab is used as the tab title. The special
+value current will copy the title from the tab containing
+the <b>--source-window.</b></p>
+
+<p style="margin-left:9%;"><b>--type</b>
+<i>[=window]</i></p>
+
+<p style="margin-left:18%;">Where to launch the child
+process:</p>
+
+<p style="margin-left:18%; margin-top: 1em">window <br>
+A new kitty window in the current tab</p>
+
+<p style="margin-left:18%; margin-top: 1em">tab <br>
+A new tab in the current OS window. Not available when the
+launch &lt;launch&gt; command is used in startup
+sessions.</p>
+
+<p style="margin-left:18%; margin-top: 1em">os-window <br>
+A new operating system window. Not available when the launch
+&lt;launch&gt; command is used in startup sessions.</p>
+
+<p style="margin-left:18%; margin-top: 1em">overlay <br>
+An overlay window covering the current active kitty
+window</p>
+
+<p style="margin-left:18%; margin-top: 1em">overlay-main
+<br>
+An overlay window covering the current active kitty window.
+Unlike a plain overlay window, this window is considered as
+a main window which means it is used as the active window
+for getting the current working directory, the input text
+for kittens, launch commands, etc. Useful if this overlay is
+intended to run for a long time as a primary window.</p>
+
+<p style="margin-left:18%; margin-top: 1em">background <br>
+The process will be run in the background, without a kitty
+window. Note that if <b>--allow-remote-control is specified
+the KITTY_LISTEN_ON environment variable will be set to a
+dedicated socket pair file descriptor that the process can
+use for remote control.</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">clipboard,
+primary <br>
+These two are meant to work with <b>--stdin-source to copy
+data to the system clipboard or primary selection.</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Choices:
+window, background, clipboard, os-window, overlay,
+overlay-main, primary, tab</p>
+
+<p style="margin-left:9%;"><b>--dont-take-focus,
+--keep-focus</b></p>
+
+<p style="margin-left:18%;">Keep the focus on the currently
+active window instead of switching to the newly opened
+window.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--cwd</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>The working directory for the newly launched child. Use
+the special value current to use the working directory of
+the <b>--source-window The special value last_reported uses
+the last working directory reported by the shell (needs
+shell_integration to work). The special value oldest works
+like current but uses the working directory of the oldest
+foreground process associated with the currently active
+window rather than the newest foreground process. Finally,
+the special value root refers to the process that was
+originally started when the window was created.</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--env</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Environment variables to set in the child process. Can
+be specified multiple times to set different environment
+variables. Syntax: name=value. Using name= will set to empty
+string and just name will remove the environment
+variable.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--var</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>User variables to set in the created window. Can be
+specified multiple times to set different user variables.
+Syntax: name=value. Using name= will set to empty
+string.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--hold</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Keep the window open even after the command being
+executed exits, at a shell prompt.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--location</b>
+<i>[=default]</i></p>
+
+<p style="margin-left:18%;">Where to place the newly
+created window when it is added to a tab which already has
+existing windows in it. after and before place the new
+window before or after the active window. neighbor is a
+synonym for after. Also applies to creating a new tab, where
+the value of after will cause the new tab to be placed next
+to the current tab instead of at the end. The values of
+vsplit, hsplit and split are only used by the splits layout
+and control if the new window is placed in a vertical,
+horizontal or automatic split with the currently active
+window. The default is to place the window in a layout
+dependent manner, typically, after the currently active
+window. See <b>--next-to to use a window other than the
+currently active window.</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Choices:
+default, after, before, first, hsplit, last, neighbor,
+split, vsplit</p>
+
+<p style="margin-left:9%;"><b>--next-to</b></p>
+
+<p style="margin-left:18%;">A match expression to select
+the window next to which the new window is created. See
+search_syntax for the syntax for specifying windows. If not
+specified defaults to the active window. When used via
+remote control and a target tab is specified this option is
+ignored unless the matched window is in the specified tab.
+When using <b>--type of tab, the tab will be created in the
+OS Window containing the matched window.</b></p>
+
+<p style="margin-left:9%;"><b>--os-window-class</b></p>
+
+<p style="margin-left:18%;">Set the WM_CLASS property on
+X11 and the application id property on Wayland for the newly
+created OS window when using <b>--type. Defaults to whatever
+is used by the parent kitty process, which in turn defaults
+to kitty.</b></p>
+
+<p style="margin-left:9%;"><b>--os-window-name</b></p>
+
+<p style="margin-left:18%;">Set the WM_NAME property on X11
+for the newly created OS Window when using <b>--type.
+Defaults to --os-window-class.</b></p>
+
+<p style="margin-left:9%;"><b>--os-window-title</b></p>
+
+<p style="margin-left:18%;">Set the title for the newly
+created OS window. This title will override any titles set
+by programs running in kitty. The special value current will
+copy the title from the OS Window containing the
+<b>--source-window.</b></p>
+
+<p style="margin-left:9%;"><b>--os-window-state</b>
+<i>[=normal]</i></p>
+
+<p style="margin-left:18%;">The initial state for the newly
+created OS Window.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Choices:
+normal, fullscreen, maximized, minimized</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--logo</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Path to a PNG image to use as the logo for the newly
+created window. See <b>window_logo_path. Relative paths are
+resolved from the kitty configuration directory.</b></p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--logo-position</b></p>
+
+<p style="margin-left:18%;">The position for the window
+logo. Only takes effect if <b>--logo is specified. See
+window_logo_position.</b></p>
+
+<p style="margin-left:9%;"><b>--logo-alpha</b>
+<i>[=-1]</i></p>
+
+<p style="margin-left:18%;">The amount the window logo
+should be faded into the background. Only takes effect if
+<b>--logo is specified. See window_logo_alpha.</b></p>
+
+<p style="margin-left:9%;"><b>--color</b></p>
+
+<p style="margin-left:18%;">Change colors in the newly
+launched window. You can either specify a path to a <i>.conf
+file with the same syntax as kitty.conf to read the colors
+from, or specify them individually, for example::</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">--color
+background=white --color foreground=red</p>
+
+<p style="margin-left:9%;"><b>--spacing</b></p>
+
+<p style="margin-left:18%;">Set the margin and padding for
+the newly created window. For example: margin=20 or
+padding-left=10 or margin-h=30. The shorthand form sets all
+values, the *-h and *-v variants set horizontal and vertical
+values. Can be specified multiple times. Note that this is
+ignored for overlay windows as these use the settings from
+the base window.</p>
+
+<p style="margin-left:9%;"><b>--max-file-size</b>
+<i>[=8]</i></p>
+
+<p style="margin-left:18%;">The maximum allowed size (in
+MB) of files to edit. Since the file data has to be base64
+encoded and transmitted over the tty device, overly large
+files will not perform well.</p>
+
+<p style="margin-left:9%;"><b>--help, -h</b></p>
+
+<p style="margin-left:18%;">Show help for this command</p>
+<hr>
+</body>
+</html>

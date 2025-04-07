@@ -1,0 +1,220 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pw-config</title>
+
+</head>
+<body>
+
+<h1 align="center">pw-config</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMON OPTIONS">COMMON OPTIONS</a><br>
+<a href="#LISTING PATHS">LISTING PATHS</a><br>
+<a href="#LISTING CONFIG SECTIONS">LISTING CONFIG SECTIONS</a><br>
+<a href="#MERGING A CONFIG SECTION">MERGING A CONFIG SECTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pw-config -
+Debug PipeWire Config parsing</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config</b>
+[<i>options</i>] paths</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config</b>
+[<i>options</i>] list [<i>SECTION</i>]</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config</b>
+[<i>options</i>] merge <i>SECTION</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">List config
+paths and config sections and display the parsed output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This tool can be
+used to get an overview of the config file that will be
+parsed by the PipeWire server and clients.</p>
+
+<h2>COMMON OPTIONS
+<a name="COMMON OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h |
+--help</b></p>
+
+<p style="margin-left:14%;">Show help.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Show version information.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n |
+--name=NAME</b></p>
+
+<p style="margin-left:14%;">Config Name (default
+&rsquo;pipewire.conf&rsquo;)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p |
+--prefix=PREFIX</b></p>
+
+<p style="margin-left:14%;">Config Prefix (default
+&rsquo;&rsquo;)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-L |
+--no-newline</b></p>
+
+<p style="margin-left:14%;">Omit newlines after values</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r |
+--recurse</b></p>
+
+<p style="margin-left:14%;">Reformat config sections
+recursively</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-N |
+--no-colors</b></p>
+
+<p style="margin-left:14%;">Disable color output</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C |
+-color[=WHEN]</b></p>
+
+<p style="margin-left:14%;">whether to enable color
+support. WHEN is <i>never</i>, <i>always</i>, or
+<i>auto</i></p>
+
+<h2>LISTING PATHS
+<a name="LISTING PATHS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specify the
+paths command. It will display all the config files that
+will be parsed and in what order.</p>
+
+<h2>LISTING CONFIG SECTIONS
+<a name="LISTING CONFIG SECTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specify the list
+command with an optional <i>SECTION</i> to list the
+configuration fragments used for <i>SECTION</i>. Without a
+<i>SECTION</i>, all sections will be listed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use the -r
+options to reformat the sections.</p>
+
+<h2>MERGING A CONFIG SECTION
+<a name="MERGING A CONFIG SECTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">With the merge
+option and a <i>SECTION</i>, pw-config will merge all config
+files into a merged config section and dump the results.
+This will be the section used by the client or server.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use the -r
+options to reformat the sections.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config</b></p>
+
+<p style="margin-left:14%;">List all config files that will
+be used</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config -n
+pipewire-pulse.conf</b></p>
+
+<p style="margin-left:14%;">List all config files that will
+be used by the PipeWire pulseaudio server.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config -n
+pipewire-pulse.conf list</b></p>
+
+<p style="margin-left:14%;">List all config sections used
+by the PipeWire pulseaudio server</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config -n
+jack.conf list context.properties</b></p>
+
+<p style="margin-left:14%;">List the context.properties
+fragments used by the JACK clients</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config -n
+jack.conf merge context.properties</b></p>
+
+<p style="margin-left:14%;">List the merged
+context.properties used by the JACK clients</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-config -n
+pipewire.conf -r merge context.modules</b></p>
+
+<p style="margin-left:14%;">List the merged context.modules
+used by the PipeWire server and reformat</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire(1)</b>,
+<b>pw-dump(1)</b>,</p>
+<hr>
+</body>
+</html>

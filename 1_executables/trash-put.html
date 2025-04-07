@@ -1,0 +1,190 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:39 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>TRASH-PUT</title>
+
+</head>
+<body>
+
+<h1 align="center">TRASH-PUT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#ARGUMENTS">ARGUMENTS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#IF YOU WANT SAY THANKS">IF YOU WANT SAY THANKS</a><br>
+<a href="#CREDITS">CREDITS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">trash-put -
+Command line trash utility.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>trash</b>
+[<i>OPTION</i>] ... [<i>ARGUMENTS</i>] ... <b><br>
+trash-put</b> [<i>OPTION</i>] ... [<i>ARGUMENTS</i>] ...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Trash-cli
+package provides a command line interface trashcan utility
+compliant with the FreeDesktop.org Trash Specification. It
+remembers the name, original path, deletion date, and
+permissions of each trashed file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Files trashed
+from the home partition will be in either
+$XDG_DATA_HOME/Trash or &#732;/.local/share/Trash/ (if
+$XDG_DATA_HOME is not defined or empty).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Files trashed
+from other partitions will be in one of the two places:</p>
+
+<p style="margin-left:9%; margin-top: 1em">-
+$top_dir/.Trash/$uid <br>
+- $top_dir/.Trash-$uid</p>
+
+<p style="margin-left:9%; margin-top: 1em">Where: <br>
+- $top_dir is the mount point of the volume containing the
+file to be removed <br>
+- $uid is the numeric ID of the deleting user</p>
+
+<p style="margin-left:9%; margin-top: 1em">The first option
+$top_dir/.Trash/$uid works only when .Trash dir has the
+sticky bit set. The second option is used when the first is
+not viable.</p>
+
+<h2>ARGUMENTS
+<a name="ARGUMENTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Names of files
+or directories to move to the trash can.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">-f</p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Silently ignore
+any files or directories that do not exist. Do not print
+error messages, and do not return a nonzero status to the
+caller, because of any such nonexistent arguments.</p>
+
+<p style="margin-left:9%;">-h, --help</p>
+
+<p style="margin-left:18%;">Show help message and exit.</p>
+
+<p style="margin-left:9%;">--trash-dir=TRASHDIR</p>
+
+<p style="margin-left:18%;">Use TRASHDIR as the trash
+folder.</p>
+
+<p style="margin-left:9%;">-v, --verbose</p>
+
+<p style="margin-left:18%;">Explain what is being done.</p>
+
+<p style="margin-left:9%;">--version</p>
+
+<p style="margin-left:18%;">Show the program&rsquo;s
+version number and exit.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">$ trash-put foo
+# trashes foo</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please, report
+bugs to
+https://github.com/andreafrancia/trash-cli/issues</p>
+
+<h2>IF YOU WANT SAY THANKS
+<a name="IF YOU WANT SAY THANKS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Tweet (to
+@andreafrancia or #trash-cli) or donate 1, 2 or 5 euros
+using paypal:
+https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=93L6PYT4WBN5A</p>
+
+<h2>CREDITS
+<a name="CREDITS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Trash was
+written by Andrea Francia &lt;andrea@andreafrancia.it&gt;.
+The original version of trash-empty was contributed by Einar
+Orn Olason &lt;eoo@hi.is&gt;. The first version of manual
+pages was written by Steve Stalcup &lt;vorian@ubuntu.com&gt;
+and was modified by Massimo Cavalleri
+&lt;submax@tiscalinet.it&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">trash-list(1),
+trash-restore(1), trash-empty(1), trash-rm(1), and the
+FreeDesktop.org Trash Specification at
+https://specifications.freedesktop.org/trash-spec/trashspec-1.0.html.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Both are
+released under the <small>GNU</small> General Public
+License, version 2 or later.</p>
+<hr>
+</body>
+</html>

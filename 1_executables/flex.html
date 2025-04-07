@@ -1,0 +1,425 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLEX</title>
+
+</head>
+<body>
+
+<h1 align="center">FLEX</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Table Compression:">Table Compression:</a><br>
+<a href="#Debugging:">Debugging:</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#Scanner behavior:">Scanner behavior:</a><br>
+<a href="#Generated code:">Generated code:</a><br>
+<a href="#Miscellaneous:">Miscellaneous:</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">flex - the fast
+lexical analyser generator</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flex</b>
+[<i>OPTIONS</i>] [<i>FILE</i>]...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Generates
+programs that perform pattern-matching on text.</p>
+
+<h3>Table Compression:
+<a name="Table Compression:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-Ca</b>,
+<b>--align</b></p>
+
+<p style="margin-left:18%;">trade off larger tables for
+better memory alignment</p>
+
+<p style="margin-left:9%;"><b>-Ce</b>, <b>--ecs</b></p>
+
+<p style="margin-left:18%;">construct equivalence
+classes</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-Cf</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>do not compress tables; use <b>-f</b> representation</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-CF</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>do not compress tables; use <b>-F</b> representation</p></td>
+<td width="24%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-Cm</b>,
+<b>--meta-ecs</b></p>
+
+<p style="margin-left:18%;">construct meta-equivalence
+classes</p>
+
+<p style="margin-left:9%;"><b>-Cr</b>, <b>--read</b></p>
+
+<p style="margin-left:18%;">use read() instead of stdio for
+scanner input</p>
+
+<p style="margin-left:9%;"><b>-f</b>, <b>--full</b></p>
+
+<p style="margin-left:18%;">generate fast, large scanner.
+Same as <b>-Cfr</b></p>
+
+<p style="margin-left:9%;"><b>-F</b>, <b>--fast</b></p>
+
+<p style="margin-left:18%;">use alternate table
+representation. Same as <b>-CFr</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-Cem</b></p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p>default compression (same as <b>--ecs
+--meta-ecs</b>)</p> </td>
+<td width="23%">
+</td></tr>
+</table>
+
+<h3>Debugging:
+<a name="Debugging:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--debug</b></p>
+
+<p style="margin-left:18%;">enable debug mode in
+scanner</p>
+
+<p style="margin-left:9%;"><b>-b</b>, <b>--backup</b></p>
+
+<p style="margin-left:18%;">write backing-up information to
+lex.backup</p>
+
+<p style="margin-left:9%;"><b>-p</b>,
+<b>--perf-report</b></p>
+
+<p style="margin-left:18%;">write performance report to
+stderr</p>
+
+<p style="margin-left:9%;"><b>-s</b>,
+<b>--nodefault</b></p>
+
+<p style="margin-left:18%;">suppress default rule to ECHO
+unmatched text</p>
+
+<p style="margin-left:9%;"><b>-T</b>, <b>--trace</b></p>
+
+<p style="margin-left:18%;">flex should run in trace
+mode</p>
+
+<p style="margin-left:9%;"><b>-w</b>, <b>--nowarn</b></p>
+
+<p style="margin-left:18%;">do not generate warnings</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">write summary of scanner
+statistics to stdout</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--hex</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>use hexadecimal numbers instead of octal in debug
+outputs</p> </td>
+<td width="9%">
+</td></tr>
+</table>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--outfile</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">specify output filename</p>
+
+<p style="margin-left:9%;"><b>-S</b>,
+<b>--skel</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">specify skeleton file</p>
+
+<p style="margin-left:9%;"><b>-t</b>, <b>--stdout</b></p>
+
+<p style="margin-left:18%;">write scanner on stdout instead
+of lex.yy.c</p>
+
+
+<p style="margin-left:9%;"><b>--yyclass</b>=<i>NAME</i></p>
+
+<p style="margin-left:18%;">name of C++ class</p>
+
+
+<p style="margin-left:9%;"><b>--header-file</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">create a C header file in
+addition to the scanner</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="53%">
+
+
+
+<p style="margin-top: 1em"><b>--tables-file</b>[=<i>FILE</i>]
+write tables to FILE</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<h3>Scanner behavior:
+<a name="Scanner behavior:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-7</b>,
+<b>--7bit</b></p>
+
+<p style="margin-left:18%;">generate 7-bit scanner</p>
+
+<p style="margin-left:9%;"><b>-8</b>, <b>--8bit</b></p>
+
+<p style="margin-left:18%;">generate 8-bit scanner</p>
+
+<p style="margin-left:9%;"><b>-B</b>, <b>--batch</b></p>
+
+<p style="margin-left:18%;">generate batch scanner
+(opposite of <b>-I</b>)</p>
+
+<p style="margin-left:9%;"><b>-i</b>,
+<b>--case-insensitive</b></p>
+
+<p style="margin-left:18%;">ignore case in patterns</p>
+
+<p style="margin-left:9%;"><b>-l</b>,
+<b>--lex-compat</b></p>
+
+<p style="margin-left:18%;">maximal compatibility with
+original lex</p>
+
+<p style="margin-left:9%;"><b>-X</b>,
+<b>--posix-compat</b></p>
+
+<p style="margin-left:18%;">maximal compatibility with
+POSIX lex</p>
+
+<p style="margin-left:9%;"><b>-I</b>,
+<b>--interactive</b></p>
+
+<p style="margin-left:18%;">generate interactive scanner
+(opposite of <b>-B</b>)</p>
+
+<p style="margin-left:9%;"><b>--yylineno</b></p>
+
+<p style="margin-left:18%;">track line count in
+yylineno</p>
+
+<h3>Generated code:
+<a name="Generated code:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">-+,
+<b>--c</b>++</p>
+
+<p style="margin-left:18%;">generate C++ scanner class</p>
+
+
+<p style="margin-left:9%;"><b>-Dmacro</b>[=<i>defn</i>]</p>
+
+<p style="margin-left:18%;">#define macro defn (default
+defn is &rsquo;1&rsquo;)</p>
+
+<p style="margin-left:9%;"><b>-L</b>, <b>--noline</b></p>
+
+<p style="margin-left:18%;">suppress #line directives in
+scanner</p>
+
+<p style="margin-left:9%;"><b>-P</b>,
+<b>--prefix</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">use STRING as prefix instead of
+&quot;yy&quot;</p>
+
+<p style="margin-left:9%;"><b>-R</b>,
+<b>--reentrant</b></p>
+
+<p style="margin-left:18%;">generate a reentrant C
+scanner</p>
+
+<p style="margin-left:9%;"><b>--bison-bridge</b></p>
+
+<p style="margin-left:18%;">scanner for bison pure
+parser.</p>
+
+<p style="margin-left:9%;"><b>--bison-locations</b></p>
+
+<p style="margin-left:18%;">include yylloc support.</p>
+
+<p style="margin-left:9%;"><b>--stdinit</b></p>
+
+<p style="margin-left:18%;">initialize yyin/yyout to
+stdin/stdout</p>
+
+<p style="margin-left:9%;"><b>--nounistd</b></p>
+
+<p style="margin-left:18%;">do not include
+&lt;unistd.h&gt;</p>
+
+<p style="margin-left:9%;"><b>--noFUNCTION</b></p>
+
+<p style="margin-left:18%;">do not generate a particular
+FUNCTION</p>
+
+<h3>Miscellaneous:
+<a name="Miscellaneous:"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-c</b></p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em">do-nothing POSIX option</p></td>
+<td width="53%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p>do-nothing POSIX option</p></td>
+<td width="53%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">-?</p></td>
+<td width="6%"></td>
+<td width="29%"></td>
+<td width="53%">
+</td></tr>
+</table>
+
+<p><b>-h</b>, <b>--help</b></p></table>
+
+<p style="margin-left:18%;">produce this help message</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">report flex version</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <b>flex</b> is maintained as a Texinfo
+manual. If the <b>info</b> and <b>flex</b> programs are
+properly installed at your site, the command</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>info
+flex</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+<hr>
+</body>
+</html>

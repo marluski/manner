@@ -1,0 +1,137 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:09 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SDDM</title>
+
+</head>
+<body>
+
+<h1 align="center">SDDM</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sddm - the
+simple desktop display manager</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sddm
+[OPTIONS...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sddm is a
+display and login manager based on Qt technologies.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using QtQuick
+and QML, designers are given the ability to easily create
+pleasant, modern looking interfaces for sddm.</p>
+
+<p style="margin-left:9%; margin-top: 1em">sddm runs the
+greeter as a system user named <b>sddm</b> whose home
+directory needs to be set to <b>/var/lib/sddm</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If pam and
+systemd are available, the greeter will go through logind,
+which will give it access to drm devices.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Distributions
+without pam and systemd will need to put the <b>sddm</b>
+user into the <b>video</b> group, otherwise errors regarding
+GL and drm devices might be experienced.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For X11
+sessions, the cookie for X authorization is written into a
+temporary file <i>/tmp/xauth_XXXXXX</i>, owned and only
+accessible by the user.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--test-mode</b></p>
+
+<p style="margin-left:18%;">Start daemon in test mode.</p>
+
+<p style="margin-left:9%;"><b>--example-config</b></p>
+
+<p style="margin-left:18%;">Print the complete current
+configuration to stdout</p>
+
+<p style="margin-left:9%;"><b>--help</b>, <b>-h</b></p>
+
+<p style="margin-left:18%;">Show help message and exit.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>/usr/lib/sddm/sddm.conf.d</b></p>
+
+<p style="margin-left:18%;">System configuration
+directory</p>
+
+<p style="margin-left:9%;"><b>/etc/sddm.conf.d</b></p>
+
+<p style="margin-left:18%;">Local configuration
+directory</p>
+
+<p style="margin-left:9%;"><b>/etc/sddm.conf</b></p>
+
+<p style="margin-left:18%;">Local configuration file for
+compatibility</p>
+
+
+<p style="margin-left:9%;"><b>/usr/share/sddm/themes</b></p>
+
+<p style="margin-left:18%;">Where sddm looks for themes</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sddm.conf</b>(5)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for sddm is available at
+&lt;https://github.com/sddm/sddm&gt;</p>
+<hr>
+</body>
+</html>

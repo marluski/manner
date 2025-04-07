@@ -1,0 +1,195 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-EMACS-MUA</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-EMACS-MUA</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-emacs-mua
+- send mail with notmuch and emacs</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+emacs-mua</b> [options ...] [&lt;to-address&gt; ... |
+&lt;mailto-url&gt;]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Start composing
+an email in the Notmuch Emacs UI with the specified subject,
+recipients, and message body, or mailto: URL.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>emacs-mua</b> include <b><br>
+-h, --help</b></p>
+
+<p style="margin-left:18%;">Display help.</p>
+
+<p style="margin-left:9%;"><b>-s,
+--subject=&lt;subject&gt;</b></p>
+
+<p style="margin-left:18%;">Specify the subject of the
+message.</p>
+
+
+<p style="margin-left:9%;"><b>--to=&lt;to-address&gt;</b></p>
+
+<p style="margin-left:18%;">Specify a recipient (To).</p>
+
+<p style="margin-left:9%;"><b>-c,
+--cc=&lt;cc-address&gt;</b></p>
+
+<p style="margin-left:18%;">Specify a carbon-copy (Cc)
+recipient.</p>
+
+<p style="margin-left:9%;"><b>-b,
+--bcc=&lt;bcc-address&gt;</b></p>
+
+<p style="margin-left:18%;">Specify a blind-carbon-copy
+(Bcc) recipient.</p>
+
+<p style="margin-left:9%;"><b>-i,
+--body=&lt;file&gt;</b></p>
+
+<p style="margin-left:18%;">Specify a file to include into
+the body of the message.</p>
+
+<p style="margin-left:9%;"><b>--hello</b></p>
+
+<p style="margin-left:18%;">Go to the Notmuch hello screen
+instead of the message composition window if no message
+composition parameters are given.</p>
+
+<p style="margin-left:9%;"><b>--no-window-system</b></p>
+
+<p style="margin-left:18%;">Even if a window system is
+available, use the current terminal.</p>
+
+<p style="margin-left:9%;"><b>--client</b></p>
+
+<p style="margin-left:18%;">Use <i>emacsclient(1), rather
+than emacs(1). For emacsclient(1) to work, you need an
+already running Emacs with a server, or use</i>
+<b>--auto-daemon</b><i>.</i></p>
+
+<p style="margin-left:9%;"><b>--auto-daemon</b></p>
+
+<p style="margin-left:18%;">Automatically start Emacs in
+daemon mode, if the Emacs server is not running. Applicable
+with <b>--client</b>. Implies <b>--create-frame</b>.</p>
+
+<p style="margin-left:9%;"><b>--create-frame</b></p>
+
+<p style="margin-left:18%;">Create a new frame instead of
+trying to use the current Emacs frame. Applicable with
+<b>--client</b>. This will be required when Emacs is running
+(or automatically started with <b>--auto-daemon</b>) in
+daemon mode.</p>
+
+<p style="margin-left:9%;"><b>--print</b></p>
+
+<p style="margin-left:18%;">Output the resulting elisp to
+stdout instead of evaluating it.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The supported
+positional parameters and short options are a compatible
+subset of the <i>mutt(1) MUA command-line options. The
+options and positional parameters modifying the message
+can't be combined with the mailto: URL.</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Options may
+be specified multiple times.</i></p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><i><b>EMACS</b></i></p></td>
+<td width="3%"></td>
+<td width="68%">
+
+
+<p style="margin-top: 1em">Name of emacs command to invoke.
+Defaults to &quot;emacs&quot;.</p></td>
+<td width="14%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>EMACSCLIENT</b></p>
+
+<p style="margin-left:18%;">Name of emacsclient command to
+invoke. Defaults to &quot;emacsclient&quot;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>emacsclient(1), mutt(1)</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

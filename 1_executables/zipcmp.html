@@ -1,0 +1,127 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:33 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>ZIPCMP</i>(1) General Commands Manual
+<i>ZIPCMP</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">zipcmp &mdash; compare contents
+of zip archives</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:18%;"><b>zipcmp</b>
+[<b>-ChipqsTtVv</b>] <i>archive1 archive2</i></p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>zipcmp</b> compares the zip
+archives or directories <i>archive1</i> and <i>archive2</i>
+and checks if they contain the same files, comparing their
+names, uncompressed sizes, and CRCs. File order and
+compressed size differences are ignored.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options:</p>
+
+<p style="margin-top: 1em"><b>-C</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Check
+consistency of archives. Results in an error if archive is
+inconsistent or not valid according to the zip
+specification.</p>
+
+<p style="margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Display a short
+help message and exit.</p>
+
+<p style="margin-top: 1em"><b>-i</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Compare names
+ignoring case distinctions.</p>
+
+<p style="margin-top: 1em"><b>-p</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Enable paranoid
+checks. Compares extra fields, comments, and other meta
+data. (Automatically disabled if one of the archives is a
+directory.) These checks are skipped for files where the
+data differs.</p>
+
+<p style="margin-top: 1em"><b>-q</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Quiet mode.
+Compare <b>-v</b>.</p>
+
+<p style="margin-top: 1em"><b>-s</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Print a summary
+of how many files where added and removed.</p>
+
+<p style="margin-top: 1em"><b>-T</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Additionally
+compare the time stamps of the entries.</p>
+
+<p style="margin-top: 1em"><b>-t</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Test zip files
+by comparing the contents to their checksums.</p>
+
+<p style="margin-top: 1em"><b>-V</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Display version
+information and exit.</p>
+
+<p style="margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Verbose mode.
+Print details about differences to stdout. (This is the
+default.)</p>
+
+<p style="margin-top: 1em"><b>EXIT STATUS</b></p>
+
+<p style="margin-left:9%;"><b>zipcmp</b> exits 0 if the two
+archives contain the same files, 1 if they differ, and &gt;1
+if an error occurred.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>zipmerge</i>(1),
+<i>ziptool</i>(1), <i>libzip</i>(3)</p>
+
+<p style="margin-top: 1em"><b>HISTORY</b></p>
+
+<p style="margin-left:9%;"><b>zipcmp</b> was added in
+libzip 0.6.</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">Dieter Baron
+&lt;<i>dillo@nih.at</i>&gt; and Thomas Klausner
+&lt;<i>wiz@gatalith.at</i>&gt; GNU March 15, 2024
+<i>ZIPCMP</i>(1)</p>
+<hr>
+</body>
+</html>

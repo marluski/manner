@@ -1,0 +1,210 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>LESSECHO</title>
+
+</head>
+<body>
+
+<h1 align="center">LESSECHO</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lessecho -
+expand metacharacters</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lessecho</b>
+<i>[-ox] [-cx] [-pn] [-dn] [-mx] [-nn] [-ex] [-a] file
+...</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>lessecho</b></i>
+is a program that simply echos its arguments on standard
+output. But any metacharacter in the output is preceded by
+an &quot;escape&quot; character, which by default is a
+backslash. <b>lessecho</b> is invoked internally by
+<b>less</b>, and is not intended to be used directly by
+humans.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A summary of
+options is included below.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-e</b><i>x</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies &quot;<i>x</i>&quot;, rather than backslash,
+to be the escape char for metachars. If <i>x</i> is
+&quot;-&quot;, no escape char is used and arguments
+containing metachars are surrounded by quotes instead.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-o</b><i>x</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies &quot;<i>x</i>&quot;, rather than
+double-quote, to be the open quote character, which is used
+if the -e- option is specified.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-c</b><i>x</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies &quot;<i>x</i>&quot; to be the close quote
+character.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-p</b><i>n</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies &quot;<i>n</i>&quot; to be the open quote
+character, as an integer.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-d</b><i>n</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies &quot;<i>n</i>&quot; to be the close quote
+character, as an integer.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-m</b><i>x</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies &quot;<i>x</i>&quot; to be a metachar. By
+default, no characters are considered metachars.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-n</b><i>n</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies &quot;<i>n</i>&quot; to be a metachar, as an
+integer.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-f</b><i>n</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies &quot;<i>n</i>&quot; to be the escape char for
+metachars, as an integer.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-a</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Specifies that all arguments are to be quoted. The
+default is that only arguments containing metacharacters are
+quoted.</p> </td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>less</b>(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written by Thomas Schoepf &lt;schoepf@debian.org&gt;,
+for the Debian GNU/Linux system (but may be used by
+others).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs at
+https://github.com/gwsw/less/issues.</p>
+<hr>
+</body>
+</html>

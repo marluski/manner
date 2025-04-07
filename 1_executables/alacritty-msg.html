@@ -1,0 +1,223 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:41 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ALACRITTY-MSG</title>
+
+</head>
+<body>
+
+<h1 align="center">ALACRITTY-MSG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#MESSAGES">MESSAGES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#MAINTAINERS">MAINTAINERS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">alacritty-msg -
+Send messages to Alacritty.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+communicates with running Alacritty instances through a
+socket, making it possible to control Alacritty without
+directly accessing it.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--socket</b> <i>&lt;SOCKET&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Path for IPC
+socket communication.</p>
+
+<h2>MESSAGES
+<a name="MESSAGES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>create-window</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Create a new
+window in the same Alacritty process.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>FLAGS</b></p>
+
+<p style="margin-left:19%;"><b>--hold</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Remain open
+after child process exits.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>OPTIONS</b></p>
+
+<p style="margin-left:19%;"><b>--working-directory</b>
+<i>&lt;WORKING_DIRECTORY&gt;</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Start the shell
+in the specified working directory.</p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>-T,
+--title</b> <i>&lt;TITLE&gt;</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Defines the
+window title.</p>
+
+<p style="margin-left:24%; margin-top: 1em">Default:
+<i>Alacritty</i></p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>--class</b>
+<i>&lt;GENERAL&gt;</i> |
+<i>&lt;GENERAL&gt;</i>,<i>&lt;INSTANCE&gt;</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Defines window
+class/app_id on X11/Wayland.</p>
+
+<p style="margin-left:24%; margin-top: 1em">Default:
+<i>Alacritty,Alacritty</i></p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>-o,
+--option</b> <i>&lt;OPTION&gt;...</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Override
+configuration file options.</p>
+
+<p style="margin-left:24%; margin-top: 1em">Example:
+<i>alacritty msg create-window -o
+&rsquo;cursor.style=&quot;Beam&quot;&rsquo;</i></p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>-e,
+--command</b> <i>&lt;COMMAND&gt;...</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Command and
+args to execute (must be last argument).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>config</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Update the
+Alacritty configuration.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>ARGS</b></p>
+
+
+<p style="margin-left:19%;"><b>&lt;CONFIG_OPTIONS&gt;...</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Configuration
+file options.</p>
+
+<p style="margin-left:24%; margin-top: 1em">Example:
+<i>alacritty msg config
+&rsquo;cursor.style=&quot;Beam&quot;&rsquo;</i></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>FLAGS</b></p>
+
+<p style="margin-left:19%;"><b>-r, --reset</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Clear all
+runtime configuration changes.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>OPTIONS</b></p>
+
+<p style="margin-left:19%;"><b>-w, --window-id</b>
+<i>&lt;WINDOW_ID&gt;</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Window ID for
+the new config.</p>
+
+<p style="margin-left:24%; margin-top: 1em">Use <i>-1</i>
+to apply this change to all windows.</p>
+
+<p style="margin-left:24%; margin-top: 1em">Default:
+<i>$ALACRITTY_WINDOW_ID</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>alacritty</b></i>(1),
+<b>alacritty</b>(5), <b>alacritty-bindings</b>(5)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Found a bug?
+Please report it at
+<i>https://github.com/alacritty/alacritty/issues</i>.</p>
+
+<h2>MAINTAINERS
+<a name="MAINTAINERS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="57%">
+
+
+<p style="margin-top: 1em">Christian Duerr
+&lt;contact@christianduerr.com&gt;</p> </td>
+<td width="29%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="57%">
+
+
+<p>Kirill Chibisov &lt;contact@kchibisov.com&gt;</p></td>
+<td width="29%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

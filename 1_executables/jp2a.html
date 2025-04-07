@@ -1,0 +1,514 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:26 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>jp2a</title>
+
+</head>
+<body>
+
+<h1 align="center">jp2a</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#RETURN VALUES">RETURN VALUES</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#DOWNLOADING IMAGES FROM THE NET">DOWNLOADING IMAGES FROM THE NET</a><br>
+<a href="#GRAYSCALE CONVERSION">GRAYSCALE CONVERSION</a><br>
+<a href="#PROJECT HOMEPAGE">PROJECT HOMEPAGE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">jp2a - convert
+JPEG, PNG and WebP images to ASCII</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jp2a</b> [
+<i>options</i> ] [ <i>filename(s) | URL(s)</i> ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jp2a</b> will
+convert JPEG, PNG and WebP images to ASCII characters. You
+can specify a mixture of files and URLs.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>-</b></p></td>
+<td width="8%"></td>
+<td width="63%">
+
+
+<p style="margin-top: 1em">Read JPEG, PNG and WebP image
+from standard input</p></td>
+<td width="19%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--background=light
+--background=dark</b></p>
+
+<p style="margin-left:18%;">If you don&rsquo;t want to mess
+with --invert all the time, just use these instead. If you
+are using white characters on a black display, then use
+--background=dark, and vice versa.</p>
+
+<p style="margin-left:9%;"><b>-b --border</b></p>
+
+<p style="margin-left:18%;">Frame output image in a
+border</p>
+
+<p style="margin-left:9%;"><b>--chars=</b><i>...</i></p>
+
+<p style="margin-left:18%;">Use the given characters when
+producing the output ASCII image. Default is &quot;
+...&rsquo;,;:clodxkO0KXNWM&quot;.</p>
+
+<p style="margin-left:9%;"><b>--colors</b></p>
+
+<p style="margin-left:18%;">Use truecolor (or ANSI color if
+truecolor is not supported) for text output and CSS color
+for HTML output.</p>
+
+
+<p style="margin-left:9%;"><b>--color-depth=</b><i>...</i></p>
+
+<p style="margin-left:18%;">Use a specific color-depth for
+terminal output. Valid values are: 4 (for ANSI), 8 (for 256
+color palette) and 24 (for truecolor or 24-bit color).</p>
+
+<p style="margin-left:9%;"><b>-d --debug</b></p>
+
+<p style="margin-left:18%;">Print debugging information
+when using libcurl to download images from the net.</p>
+
+<p style="margin-left:9%;"><b>-f --term-fit</b></p>
+
+<p style="margin-left:18%;">Use the largest dimension that
+makes the image fit in your terminal display.</p>
+
+<p style="margin-left:9%;"><b>--term-height</b></p>
+
+<p style="margin-left:18%;">Use terminal display height and
+calculate width based on image aspect ratio.</p>
+
+<p style="margin-left:9%;"><b>--term-width</b></p>
+
+<p style="margin-left:18%;">Use terminal display width and
+calculate height based on image aspect ratio.</p>
+
+<p style="margin-left:9%;"><b>-z --term-zoom</b></p>
+
+<p style="margin-left:18%;">Use terminal display width and
+height.</p>
+
+<p style="margin-left:9%;"><b>-c --term-center</b></p>
+
+<p style="margin-left:18%;">Center image in terminal.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--fill</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>When used with --html and --color, then color each
+output character&rsquo;s background color. For instance, if
+you want to use fill-output on a light background, do</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">jp2a --color
+--html --html-fill --background=light somefile.jpg
+--output=dark.html</p>
+
+<p style="margin-left:18%; margin-top: 1em">To do the same
+on a light background:</p>
+
+<p style="margin-left:18%; margin-top: 1em">jp2a --color
+--html --html-fill --background=dark somefile.jpg
+--output=light.html</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+to have fill disabled.</p>
+
+<p style="margin-left:9%;"><b>-x --flipx</b></p>
+
+<p style="margin-left:18%;">Flip output image
+horizontally</p>
+
+<p style="margin-left:9%;"><b>-y --flipy</b></p>
+
+<p style="margin-left:18%;">Flip output image
+vertically</p>
+
+<p style="margin-left:9%;"><b>--height=</b><i>N</i></p>
+
+<p style="margin-left:18%;">Set output height. If only
+--height is specified, then output width will be calculated
+according to the source images aspect ratio.</p>
+
+<p style="margin-left:9%;"><b>-h --help</b></p>
+
+<p style="margin-left:18%;">Display a short help text</p>
+
+<p style="margin-left:9%;"><b>--grayscale</b></p>
+
+<p style="margin-left:18%;">Converts image to grayscale
+when using --html or --colors.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--html</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Make ASCII output in strict XHTML 1.0. (Will output in
+HTML for version 2.0.0 and above.)</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--htmlls</b></p>
+
+<p style="margin-left:18%;">Make ASCII output in HTML
+(Living Standard), suitable for viewing with web browsers.
+This is useful with big output dimensions, and if you want
+to check the result with a browser with small font.</p>
+
+<p style="margin-left:9%;"><b>--xhtml</b></p>
+
+<p style="margin-left:18%;">Make ASCII output in strict
+XHTML 1.0.</p>
+
+<p style="margin-left:9%;"><b>--html-fill</b></p>
+
+<p style="margin-left:18%;">Same as --fill. You should use
+that option instead.</p>
+
+<p style="margin-left:9%;"><b>--html-no-bold</b></p>
+
+<p style="margin-left:18%;">Do not use bold text for HTML
+output.</p>
+
+<p style="margin-left:9%;"><b>--html-raw</b></p>
+
+<p style="margin-left:18%;">Output only the image in HTML
+codes, leaving out the rest of the webpage, so you can
+construct your own. (Will use &lt;br&gt; for version 2.0.0
+and above instead of &lt;br/&gt;.)</p>
+
+
+<p style="margin-left:9%;"><b>--html-fontsize=</b><i>N</i></p>
+
+<p style="margin-left:18%;">Set fontsize when using --html
+output. Default is 4.</p>
+
+
+<p style="margin-left:9%;"><b>--html-title=</b><i>...</i></p>
+
+<p style="margin-left:18%;">Set HTML output title.</p>
+
+<p style="margin-left:9%;"><b>--output=...</b></p>
+
+<p style="margin-left:18%;">Write ASCII output to given
+filename. To explicitly specify standard output, use
+--output=-.</p>
+
+<p style="margin-left:9%;"><b>-i --invert</b></p>
+
+<p style="margin-left:18%;">Invert output image. If you
+view a picture with white background, but you are using a
+display with light characters on a dark background, you
+should invert the image.</p>
+
+<p style="margin-left:9%;"><b>--red=</b><i>...</i> <b><br>
+--green=</b><i>...</i> <b><br>
+--blue=</b><i>...</i></p>
+
+<p style="margin-left:18%;">When converting from RGB to
+grayscale, use the given weights to calculate luminance. The
+default is red=0.2989, green=0.5866 and blue=0.1145.</p>
+
+
+<p style="margin-left:9%;"><b>--size=</b><i>WIDTHxHEIGHT</i></p>
+
+<p style="margin-left:18%;">Set output dimension.</p>
+
+<p style="margin-left:9%;"><b>-v --verbose</b></p>
+
+<p style="margin-left:18%;">Print some verbose information
+to standard error when reading each JPEG image.</p>
+
+<p style="margin-left:9%;"><b>--width=</b><i>N</i></p>
+
+<p style="margin-left:18%;">Set output width. If you only
+specify the width, the height will be calculated
+automatically.</p>
+
+<p style="margin-left:9%;"><b>-V --version</b></p>
+
+<p style="margin-left:18%;">Print program version.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--zoom</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Sets output dimensions to your entire terminal window,
+disregarding source image aspect ratio.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--edge-threshold= ...</b></p>
+
+<p style="margin-left:18%;">Specifies an image gradient
+above which to shade lines and edges with directional glyphs
+(such as -/|\). The right value to pick up the edges nicely
+will depend on the image but might be around 0.5.</p>
+
+<p style="margin-left:9%;"><b>--edges-only</b></p>
+
+<p style="margin-left:18%;">Only draw edges, so that the
+resulting image is like a line drawing or edge detector.
+This option should be used in conjunction with
+--edge-threshold so that edges are drawn.</p>
+
+<h2>RETURN VALUES
+<a name="RETURN VALUES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">jp2a returns 1
+when errors are encountered, zero for no errors.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert and
+print imagefile.jpg using ASCII characters in 40 columns and
+20 rows:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>jp2a</b>
+--size=40x20 imagefile.jpg</p>
+
+<p style="margin-left:9%; margin-top: 1em">Download an
+image off the net, convert and print:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>jp2a</b>
+http://www.google.com/intl/en/logos/easter_logo.jpg</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output
+picture.jpg and picture2.jpg, each 80x25 characters, using
+the characters &quot; ...ooxx@@&quot; for output:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>jp2a</b>
+--size=80x25 --chars=&quot; ...ooxx@@&quot; picture.jpg
+picture2.jpg</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output image.jpg
+using 76 columns, height is automatically calculated from
+aspect ratio of image.jpg</p>
+
+<p style="margin-left:9%; margin-top: 1em">cat image.jpg |
+<b>jp2a</b> --width=76 -</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you use jp2a
+together with ImageMagick&rsquo;s convert(1) then you can
+make good use of pipes, and have ImageMagick do all sorts of
+image conversions and effects on the source image. For
+example:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>magick</b>
+somefile.gif jpg:- | <b>jp2a</b> - --width=80</p>
+
+<p style="margin-left:9%; margin-top: 1em">Check out
+convert(1) options to see what you can do. Convert can
+handle almost any image format, so with this combination you
+can convert images in e.g. PDF or AVI files to ASCII.</p>
+
+<p style="margin-left:9%; margin-top: 1em">jp2a uses a very
+basic scaling algorithm for every image format except WebP.
+To get better quality, convert an image to WebP to make use
+of the scaling built into the libwebp library:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cwebp</b>
+-quiet image.jpg -o - | <b>jp2a</b> -</p>
+
+<p style="margin-left:9%; margin-top: 1em">Although the
+default build of jp2a includes automatic downloading of
+files specified by URLs, you can explicitly download them by
+using curl(1) or wget(1), for example:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>curl</b> -s
+http://foo.bar/image.jpg | <b>magick</b> - jpg:- |
+<b>jp2a</b> -</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can pass the
+--edge-threshold option to highlight the edges of the image,
+or add the --edges-only option to draw only the edges, to
+produce a line drawing.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>jp2a</b>
+--edge-threshold=0.5 --edges-only imagefile.jpg</p>
+
+<h2>DOWNLOADING IMAGES FROM THE NET
+<a name="DOWNLOADING IMAGES FROM THE NET"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+compiled jp2a with libcurl(3), you can download images by
+specifying URLs:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>jp2a</b>
+https://user:pass@foo.com/bar.jpg</p>
+
+<p style="margin-left:9%; margin-top: 1em">The protocols
+recognized are ftp, ftps, file, http, https and tftp.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you need more
+control of the downloading, you should use curl(1) or
+wget(1) and jp2a read the image from standard input.</p>
+
+<p style="margin-left:9%; margin-top: 1em">jp2a uses pipe
+and fork to download images using libcurl (i.e., no exec or
+system calls) and therefore does not worry about
+malevolently formatted URLs.</p>
+
+<h2>GRAYSCALE CONVERSION
+<a name="GRAYSCALE CONVERSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can extract
+the red channel by doing this:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>jp2a</b>
+somefile.jpg --red=1.0 --green=0.0 --blue=0.0</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will
+calculate luminance based on Y = R*1.0 + G*0.0 + B*0.0. The
+default values is to use Y = R*0.2989 + G*0.5866 +
+B*0.1145.</p>
+
+<h2>PROJECT HOMEPAGE
+<a name="PROJECT HOMEPAGE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The latest
+version of jp2a and news is always available from
+https://github.com/Talinx/jp2a.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cjpeg(1),
+djpeg(1), jpegtran(1), convert(1), cwebp(1)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">jp2a does not
+interpolate when resizing (except for WebP images). If you
+want better quality, try using cwebp(1) to convert the image
+to WebP before using jp2a to get correct scaling.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Another issue is
+that jp2a skips some X-pixels along each scanline. This
+gives a less precise output image, and will probably be
+corrected in future versions.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Christian Stigen
+Larsen and Christoph Raitzig</p>
+
+<p style="margin-left:9%; margin-top: 1em">jp2a uses
+jpeglib to read JPEG files. jpeglib is made by The
+Independent JPEG Group (IJG), who have a page at
+http://www.ijg.org</p>
+
+<p style="margin-left:9%; margin-top: 1em">jp2a uses libpng
+to read PNG files. libpng&rsquo;s homepage:
+http://libpng.org/pub/png/libpng.html</p>
+
+<p style="margin-left:9%; margin-top: 1em">jp2a uses
+libwebp to read WebP files. libwebp&rsquo;s homepage:
+https://developers.google.com/speed/webp/</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">jp2a is
+distributed under the GNU General Public License v2.</p>
+<hr>
+</body>
+</html>

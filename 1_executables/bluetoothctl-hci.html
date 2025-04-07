@@ -1,0 +1,264 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BLUETOOTHCTL-HCI</title>
+
+</head>
+<body>
+
+<h1 align="center">BLUETOOTHCTL-HCI</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#open">open</a><br>
+<a href="#cmd">cmd</a><br>
+<a href="#send">send</a><br>
+<a href="#register">register</a><br>
+<a href="#unregister">unregister</a><br>
+<a href="#close">close</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">bluetoothctl-hci
+- HCI Submenu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl</b>
+[--options] [hci.commands]</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>open
+<a name="open"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Open HCI
+channel.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="38%">
+
+
+<p><b>&gt; open &lt;index&gt; &lt;chan=raw,user&gt;</b></p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example open user
+channel</b></p>
+
+<p style="margin-left:18%;">In order to open a user channel
+the controller needs to be power off <br>
+first: <br>
+&gt; power off <br>
+&gt; hci.open 0 user <br>
+HCI index 0 user channel opened</p>
+
+<h3>cmd
+<a name="cmd"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Send HCI
+command.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="38%">
+
+
+<p><b>&gt; cmd &lt;opcode&gt; [parameters...]</b></p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example send HCI Reset
+command</b></p>
+
+<p style="margin-left:18%;">&gt; hci.cmd 0x0c03 <br>
+HCI Command complete:</p>
+
+<p style="margin-left:21%;">00</p>
+
+<h3>send
+<a name="send"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Send HCI data
+packet.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="56%">
+
+
+<p><b>&gt; send &lt;type=acl,sco,iso&gt; &lt;handle&gt;
+[data...]</b></p> </td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example send ACL data packet
+to connection handle 0x0000</b></p>
+
+<p style="margin-left:18%;">&gt; hci.send acl 0x0000</p>
+
+<h3>register
+<a name="register"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Register HCI
+event handler.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="23%">
+
+
+<p><b>&gt; register &lt;event&gt;</b></p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h3>unregister
+<a name="unregister"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unregister HCI
+event handler.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><b>&gt; unregister
+&lt;event&gt;</b></p> </td>
+<td width="56%">
+</td></tr>
+</table>
+
+<h3>close
+<a name="close"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Close HCI
+channel.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>&gt; close
+&lt;index&gt;</b></p> </td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

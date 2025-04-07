@@ -1,0 +1,152 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>composefs-info(1)</title>
+
+</head>
+<body>
+
+<h1 align="center">composefs-info(1)</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">composefs-info -
+print information about a composefs image</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>composefs-info</b>
+[ls|objects|missing-objects|dump] <i>IMAGE</i> [<i>IMAGE2
+IMAGE3</i> ...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+composefs-info command lets you inspect a composefs image.
+It has several sub-commands:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>ls</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Prints a simple list of the files and directorie in the
+images as well as their backing file or symlink target.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>objects</b></p>
+
+<p style="margin-left:18%;">Prints a list of all the
+backing files referenced by the images, in sorted order.</p>
+
+<p style="margin-left:9%;"><b>missing-objects</b></p>
+
+<p style="margin-left:18%;">Prints a list of all the
+missing backing files referenced by the images, in sorted
+order, given a backing file store passed in using the
+--basedir option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>dump</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Prints a full dump of the images in a line based textual
+format. See <b>composefs-dump(5)</b> for more details. This
+format is also accepted as input to mkcomposefs if the
+--from-file option is used.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>measure-file</b></p>
+
+<p style="margin-left:18%;">Interpret the provided paths as
+generic files, and print their fsverity digest.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The provided
+<i>IMAGE</i> argument must be a composefs file. Multiple
+images can be specified.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>compoosefs-info</b>
+accepts the following options: <b><br>
+--basedir</b>=<i>PATH</i></p>
+
+<p style="margin-left:18%;">This should point to a
+directory of backing files, and will be used by the
+<b>missing-objects</b> command to know what files are
+available.</p>
+
+<p style="margin-left:9%;"><b>--filter</b>=<i>NAME</i></p>
+
+<p style="margin-left:18%;">Only print entries whose name
+matches one of these. Can be specified multiple times.
+Cannot be a full path (e.g. cannot contain <b>/</b>). This
+is intended to be used for tooling to efficiently lookup
+metadata files embedded in the image without loading and
+printing the entire image.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>composefs-info(1)</b>,
+<b>composefs-dump(5)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">composefs
+upstream &lang;
+https://github.com/containers/composefs&rang;</p>
+<hr>
+</body>
+</html>

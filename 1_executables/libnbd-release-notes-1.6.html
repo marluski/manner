@@ -1,0 +1,260 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>libnbd-release-notes-1.6</title>
+
+</head>
+<body>
+
+<h1 align="center">libnbd-release-notes-1.6</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Security">Security</a><br>
+<a href="#New APIs">New APIs</a><br>
+<a href="#Enhancements to existing APIs">Enhancements to existing APIs</a><br>
+<a href="#New features">New features</a><br>
+<a href="#Tools">Tools</a><br>
+<a href="#Other improvements and bug fixes">Other improvements and bug fixes</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">libnbd-release-notes-1.6
+- release notes for libnbd 1.6</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+release notes for libnbd stable release 1.6. This describes
+the major changes since 1.4.</p>
+
+<p style="margin-left:9%; margin-top: 1em">libnbd 1.6.0 was
+released on <b>7 January 2021</b>.</p>
+
+<h3>Security
+<a name="Security"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">There were no
+security issues found in this release.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you find a
+security issue, please read <i>SECURITY</i> in the source
+(online here:
+https://gitlab.com/nbdkit/libnbd/blob/master/SECURITY). To
+find out about previous security issues in libnbd, see
+<b>libnbd-security</b>(3).</p>
+
+<h3>New APIs
+<a name="New APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_set_strict_mode</b>(3)
+<b><br>
+nbd_get_strict_mode</b>(3)</p>
+
+<p style="margin-left:14%;">This API allows you to control
+how libnbd handles requests from the program that it thinks
+would trigger undefined behaviour in the server (such as
+sending unknown commands, zero-sized or out-of-bounds
+requests, etc). Normally libnbd is very strict and will
+prevent you from sending such requests, but you can use this
+API to relax these restrictions, leaving it up to the server
+to handle or reject them. Some servers may crash if you do
+this.</p>
+
+
+<p style="margin-left:9%;"><b>nbd_get_nr_meta_contexts</b>(3)
+<b><br>
+nbd_get_meta_context</b>(3) <b><br>
+nbd_clear_meta_contexts</b>(3)</p>
+
+<p style="margin-left:14%;">These APIs allow you to review
+or clear the requested metadata contexts.</p>
+
+
+<p style="margin-left:9%;"><b>nbd_opt_list_meta_context</b>(3)
+<b><br>
+nbd_aio_opt_list_meta_context</b>(3)</p>
+
+<p style="margin-left:14%;">Request that the server lists
+available metadata contexts. You can only use this in opt
+mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Thanks: Eric
+Blake for all of the new APIs.</p>
+
+<h3>Enhancements to existing APIs
+<a name="Enhancements to existing APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_shutdown</b>(3)
+new flag &quot;LIBNBD_SHUTDOWN_ABANDON_PENDING&quot; drops
+any commands in flight which have not been sent to the
+server yet (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">All APIs which
+have flag (bitmask) parameters now define a
+&quot;LIBNBD_*_MASK&quot; constant allowing you to tell
+which bits represent valid flags at compilation time (Eric
+Blake).</p>
+
+<h3>New features
+<a name="New features"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The performance
+of the <b>nbdcopy</b>(1) tool has been greatly improved.
+Also it supports numerous new features.</p>
+
+<p style="margin-left:9%; margin-top: 1em">New
+<b>nbdinfo</b>(1) <i>--map</i> option showing the allocated
+and sparse extents of an NBD server. This can also show
+other information such as dirty bitmaps.</p>
+
+<h3>Tools
+<a name="Tools"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdfuse</b>(1)
+can now mount the NBD export on top of any regular file, it
+does not have to mount over a directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdsh</b>(1)
+now produces a nice error message if the URI in the
+<i>-u</i> option or the command in the <i>-c</i> option is
+wrong (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">New
+<b>nbdsh</b>(1) <i>--opt-mode</i> option which requests opt
+mode on the handle before connecting.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+<i>--list</i> option now shows the supported metadata
+contexts of the server (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The output of
+<b>nbdinfo</b>(1) is now usually printed atomically, ie. it
+will either print the complete output or an error message,
+but not partial output followed by an error.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+can now decode &quot;qemu:allocation-depth&quot; metacontext
+(Eric Blake).</p>
+
+<h3>Other improvements and bug fixes
+<a name="Other improvements and bug fixes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Multiple
+improvements to handling of NBD protocol (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fix handling of
+booleans in Python bindings (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fix handling of
+flags parameters in OCaml bindings (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Python style
+fixes (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fix multiple
+memory leaks (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">OCaml bindings
+now include ocamldoc-generated documentation, if ocamldoc is
+installed at build time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&quot;vector&quot; library from nbdkit is now used by
+libnbd, simplifying places where we used to use
+<b>realloc</b>(3).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Eric Blake</p>
+
+<p style="margin-left:9%; margin-top: 1em">Richard W.M.
+Jones</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

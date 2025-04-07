@@ -1,0 +1,329 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SPICE-CLIENT</title>
+
+</head>
+<body>
+
+<h1 align="center">SPICE-CLIENT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#URI">URI</a><br>
+<a href="#URI query string">URI query string</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Spice-GTK - a
+client-side library to access remote SPICE displays</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Spice-GTK is a
+library allowing access to remote displays over the SPICE
+protocol. At the moment It&rsquo;s mainly used to access
+remote virtual machines.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Spice-GTK
+library provides a set of command line options which can be
+used to tweak some SPICE-specific option.</p>
+
+<h2>URI
+<a name="URI"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To initiate a
+plain SPICE connection (the connection will be unencrypted)
+to hostname.example.com and port 5900, use the following
+URI:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">spice://hostname.example.com:5900</p>
+
+<p style="margin-left:9%; margin-top: 1em">In order to
+start a TLS connection, one would use:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">spice+tls://hostname.example.com:5900</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note:
+&rsquo;spice+tls&rsquo; is available since v0.35, you have
+to use the spice:// query string with the
+&rsquo;tls-port&rsquo; parameter before that.</p>
+
+<h2>URI query string
+<a name="URI query string"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">spice URI
+accepts query string. Several parameters can be specified at
+once if they are separated by &amp; or ;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">spice://hostname.example.com?port=5900;tls-port=5901</p>
+
+<p style="margin-left:9%; margin-top: 1em">When using
+&rsquo;tls-port&rsquo;, it&rsquo;s recommended to not
+specify any non-TLS port. If you give both
+&rsquo;port&rsquo; and &rsquo;tls-port&rsquo;, make sure you
+use the --spice-secure-channels options to indicate which
+channels must be secure. Otherwise, Spice-GTK first attempts
+a connection to the non-TLS port, and then try to use the
+TLS port. This means a man-in-the-middle could force the
+whole SPICE session to go in clear text regardless of the
+TLS settings of the SPICE server.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Other valid URI
+parameters are &rsquo;username&rsquo; and
+&rsquo;password&rsquo;. Be careful that passing a password
+through a SPICE URI might cause the password to be visible
+by any local user through &rsquo;ps&rsquo;.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are accepted when running a SPICE client which makes
+use of the default Spice-GTK options: <br>
+
+--spice-secure-channels=&lt;main,display,inputs,...,all&gt;</p>
+
+<p style="margin-left:14%;">Force the specified channels to
+be secured</p>
+
+<p style="margin-left:14%; margin-top: 1em">This instructs
+the SPICE client that it must use a TLS connection for these
+channels. If the server only offers non-TLS connections for
+these channels, the client will not use these. If the
+special value &quot;all&quot; is used, this indicates that
+all SPICE channels must be encrypted.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The current
+SPICE channels are: main, display, inputs, cursor, playback,
+record, smartcard, usbredir.</p>
+
+
+<p style="margin-left:9%;">--spice-disable-effects=&lt;wallpaper,font-smooth,animation,all&gt;</p>
+
+<p style="margin-left:14%;">Disable guest display
+effects</p>
+
+<p style="margin-left:14%; margin-top: 1em">This tells the
+SPICE client that it should attempt to disable some guest
+features in order to lower bandwidth usage. This requires
+guest support, usually through a SPICE agent. This is
+currently only supported on Windows guests.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">&quot;wallpaper&quot;
+will disable the guest wallpaper, &quot;font-smooth&quot;
+will disable font antialiasing, &quot;animation&quot; will
+try to disable some of the desktop environment animations.
+&quot;all&quot; will attempt to disable everything which can
+be disabled.</p>
+
+
+<p style="margin-left:9%;">--spice-color-depth=&lt;16,32&gt;</p>
+
+<p style="margin-left:14%;">Guest display color depth -
+DEPRECATED</p>
+
+<p style="margin-left:14%; margin-top: 1em">This tells the
+SPICE client that it should attempt to force the guest OS
+color depth. A lower color depth should lower bandwith
+usage. This requires guest support, usually through a SPICE
+agent. This is currently only supported on Windows 7 and
+older guests.</p>
+
+
+<p style="margin-left:9%;">--spice-ca-file=&lt;file&gt;</p>
+
+<p style="margin-left:14%;">Truststore file for secure
+connections</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option is
+used to specify a .crt file containing the CA certificate
+with which the SPICE server TLS certificates are signed.
+This is useful when using self-signed TLS certificates
+rather than certificates signed by an official CA.</p>
+
+
+<p style="margin-left:9%;">--spice-host-subject=&lt;host-subject&gt;</p>
+
+<p style="margin-left:14%;">Subject of the host certificate
+(field=value pairs separated by commas)</p>
+
+<p style="margin-left:14%; margin-top: 1em">When using
+self-signed certificates, or when the guest is migrated
+between different hosts, the subject/altSubject of the TLS
+certificate the SPICE server will provide will not
+necessarily match the hostname we are connecting to. This
+option makes it possible to override the expected subject of
+the TLS certificate.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The subject
+must correspond to the &quot;Subject:&quot; line returned
+by: <br>
+openssl x509 -noout -text -in server-cert.pem</p>
+
+<p style="margin-left:9%;">--spice-debug</p>
+
+<p style="margin-left:14%;">Enable Spice-GTK debugging.
+This can also be toggled on with the SPICE_DEBUG environment
+variable, or using G_MESSAGES_DEBUG=all</p>
+
+<p style="margin-left:9%;">--spice-disable-audio</p>
+
+<p style="margin-left:14%;">Disable audio support</p>
+
+<p style="margin-left:9%;">--spice-disable-usbredir</p>
+
+<p style="margin-left:14%;">Disable USB redirection
+support</p>
+
+
+<p style="margin-left:9%;">--spice-usbredir-auto-redirect-filter=&lt;filter-string&gt;</p>
+
+<p style="margin-left:14%;">Filter selecting USB devices to
+be auto-redirected when plugged in</p>
+
+<p style="margin-left:14%; margin-top: 1em">This filter
+specifies which USB devices should be automatically
+redirected when they are plugged in during the lifetime of a
+SPICE session.</p>
+
+<p style="margin-left:14%; margin-top: 1em">A rule has the
+form of: &quot;class,vendor,product,version,allow&quot;</p>
+
+<p style="margin-left:14%; margin-top: 1em">-1 can be used
+instead of class, vendor, product or version in order to
+accept any value. Several rules can be concatenated with
+&rsquo;|&rsquo;: &quot;rule1|rule2|rule3&quot;</p>
+
+
+<p style="margin-left:9%;">--spice-usbredir-redirect-on-connect=&lt;filter-string&gt;</p>
+
+<p style="margin-left:14%;">Filter selecting USB devices to
+redirect on connect</p>
+
+<p style="margin-left:14%; margin-top: 1em">This filter
+specifies which USB devices should be automatically
+redirected when a SPICE connection to a remote display has
+been established.</p>
+
+<p style="margin-left:9%;">--spice-gtk-version</p>
+
+<p style="margin-left:14%;">Display Spice-GTK version
+information</p>
+
+<p style="margin-left:9%;">--spice-smartcard</p>
+
+<p style="margin-left:14%;">Enable smartcard support</p>
+
+
+<p style="margin-left:9%;">--spice-smartcard-db=&lt;certificate-db&gt;</p>
+
+<p style="margin-left:14%;">Path to the local certificate
+database to use for software smartcard certificates</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option is
+only useful for testing purpose. Instead of having a
+hardware smartcard reader, and a physical smartcard, you can
+specify a file containing 3 certificates which will be used
+to emulate a smartcard in software. See
+&quot;http://www.spice-space.org/page/SmartcardUsage#Using_a_software_smartcard&quot;
+for more details about how to generate these
+certificates.</p>
+
+
+<p style="margin-left:9%;">--spice-smartcard-certificates=&lt;certificates&gt;</p>
+
+<p style="margin-left:14%;">Certificates to use for
+software smartcards (field=values separated by commas)</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option is
+only useful for testing purpose. This allows to specify
+which certificates from the certificate database specified
+with --spice-smartcard-db should be used for smartcard
+emulation.</p>
+
+
+<p style="margin-left:9%;">--spice-cache-size=&lt;bytes&gt;</p>
+
+<p style="margin-left:14%;">Image cache size -
+DEPRECATED</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option
+should only be used for testing/debugging.</p>
+
+
+<p style="margin-left:9%;">--spice-glz-window-size=&lt;bytes&gt;</p>
+
+<p style="margin-left:14%;">Glz compression history size -
+DEPRECATED</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option
+should only be used for testing/debugging.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+the mailing list
+&quot;http://lists.freedesktop.org/mailman/listinfo/spice-devel&quot;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2011, 2014 Red Hat, Inc., and various contributors. This is
+free software. You may redistribute copies of it under the
+terms of the GNU Lesser General Public License
+&quot;https://www.gnu.org/licenses/old-licenses/lgpl-2.1.html&quot;.
+There is NO WARRANTY, to the extent permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&quot;virt-viewer(1)&quot;,
+the project website &quot;http://spice-space.org&quot;</p>
+<hr>
+</body>
+</html>

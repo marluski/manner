@@ -1,0 +1,541 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:09 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OPENMPT123</title>
+
+</head>
+<body>
+
+<h1 align="center">OPENMPT123</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">openmpt123 -
+command line module music player based on libopenmpt</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>openmpt123</b>
+[<i>options</i>] [<i>--</i>] <i>file1</i> [<i>file2</i>]
+...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">openmpt123
+v0.7.13, libopenmpt 0.7.13+r22826 (OpenMPT 1.31.14.00
+https://source.openmpt.org/svn/openmpt/tags/libopenmpt-0.7.13@22826
+(2025-01-06T13:49:43.586768Z) clean) Copyright &copy;
+2013-2025 OpenMPT Project Developers and Contributors
+&lt;https://lib.openmpt.org/&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">openmpt123 plays
+module music files.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show help</p>
+
+<p style="margin-left:9%;"><b>--help-keyboard</b></p>
+
+<p style="margin-left:18%;">Show keyboard hotkeys in ui
+mode</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--quiet</b></p>
+
+<p style="margin-left:18%;">Suppress non-error screen
+output</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Show more screen output</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Show version information and
+exit</p>
+
+<p style="margin-left:9%;"><b>--short-version</b></p>
+
+<p style="margin-left:18%;">Show version number and nothing
+else</p>
+
+<p style="margin-left:9%;"><b>--long-version</b></p>
+
+<p style="margin-left:18%;">Show long version information
+and exit</p>
+
+<p style="margin-left:9%;"><b>--credits</b></p>
+
+<p style="margin-left:18%;">Show elaborate contributors
+list</p>
+
+<p style="margin-left:9%;"><b>--license</b></p>
+
+<p style="margin-left:18%;">Show license</p>
+
+<p style="margin-left:9%;"><b>--probe</b></p>
+
+<p style="margin-left:18%;">Probe each file whether it is a
+supported file format</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--info</b></p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Display information about each file</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--ui</b></p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Interactively play each file</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--batch</b></p>
+
+<p style="margin-left:18%;">Play each file</p>
+
+<p style="margin-left:9%;"><b>--render</b></p>
+
+<p style="margin-left:18%;">Render each file to individual
+PCM data files</p>
+
+<p style="margin-left:9%;"><b>--banner</b> n</p>
+
+<p style="margin-left:18%;">openmpt123 banner style
+[0=hide,1=show,2=verbose] [default: 1]</p>
+
+<p style="margin-left:9%;"><b>--assume-terminal</b></p>
+
+<p style="margin-left:18%;">Skip checking whether
+stdin/stderr are a terminal, and always allow UI [default:
+0]</p>
+
+<p style="margin-left:9%;"><b>--terminal-width</b> n</p>
+
+<p style="margin-left:18%;">Assume terminal is n characters
+wide [default: 72]</p>
+
+<p style="margin-left:9%;"><b>--terminal-height</b> n</p>
+
+<p style="margin-left:18%;">Assume terminal is n characters
+high [default: 23]</p>
+
+<p style="margin-left:9%;"><b>--[no-]progress</b></p>
+
+<p style="margin-left:18%;">Show playback progress
+[default: 1]</p>
+
+<p style="margin-left:9%;"><b>--[no-]meters</b></p>
+
+<p style="margin-left:18%;">Show peak meters [default:
+1]</p>
+
+
+<p style="margin-left:9%;"><b>--[no-]channel-meters</b></p>
+
+<p style="margin-left:18%;">Show channel peak meters
+(EXPERIMENTAL) [default: 0]</p>
+
+<p style="margin-left:9%;"><b>--[no-]pattern</b></p>
+
+<p style="margin-left:18%;">Show pattern (EXPERIMENTAL)
+[default: 0]</p>
+
+<p style="margin-left:9%;"><b>--[no-]details</b></p>
+
+<p style="margin-left:18%;">Show song details [default:
+1]</p>
+
+<p style="margin-left:9%;"><b>--[no-]message</b></p>
+
+<p style="margin-left:18%;">Show song message [default:
+0]</p>
+
+<p style="margin-left:9%;"><b>--update</b> n</p>
+
+<p style="margin-left:18%;">Set output update interval to n
+ms [default: <b>-1]</b></p>
+
+<p style="margin-left:9%;"><b>--samplerate</b> n</p>
+
+<p style="margin-left:18%;">Set samplerate to n Hz
+[default: 48000]</p>
+
+<p style="margin-left:9%;"><b>--channels</b> n</p>
+
+<p style="margin-left:18%;">use n [1,2,4] output channels
+[default: 2]</p>
+
+<p style="margin-left:9%;"><b>--[no-]float</b></p>
+
+<p style="margin-left:18%;">Output 32bit floating point
+instead of 16bit integer [default: 1]</p>
+
+<p style="margin-left:9%;"><b>--gain</b> n</p>
+
+<p style="margin-left:18%;">Set output gain to n dB
+[default: 0]</p>
+
+<p style="margin-left:9%;"><b>--stereo</b> n</p>
+
+<p style="margin-left:18%;">Set stereo separation to n %
+[default: 100]</p>
+
+<p style="margin-left:9%;"><b>--filter</b> n</p>
+
+<p style="margin-left:18%;">Set interpolation filter taps
+to n [1,2,4,8] [default: 8]</p>
+
+<p style="margin-left:9%;"><b>--ramping</b> n</p>
+
+<p style="margin-left:18%;">Set volume ramping strength n
+[0..5] [default: <b>-1]</b></p>
+
+<p style="margin-left:9%;"><b>--tempo</b> f</p>
+
+<p style="margin-left:18%;">Set tempo factor f [default:
+1]</p>
+
+<p style="margin-left:9%;"><b>--pitch</b> f</p>
+
+<p style="margin-left:18%;">Set pitch factor f [default:
+1]</p>
+
+<p style="margin-left:9%;"><b>--dither</b> n</p>
+
+<p style="margin-left:18%;">Dither type to use (if
+applicable for selected output format):
+[0=off,1=auto,2=0.5bit,3=1bit] [default: 1]</p>
+
+<p style="margin-left:9%;"><b>--playlist</b> file</p>
+
+<p style="margin-left:18%;">Load playlist from file</p>
+
+<p style="margin-left:9%;"><b>--[no-]randomize</b></p>
+
+<p style="margin-left:18%;">Randomize playlist [default:
+0]</p>
+
+<p style="margin-left:9%;"><b>--[no-]shuffle</b></p>
+
+<p style="margin-left:18%;">Shuffle through playlist
+[default: 0]</p>
+
+<p style="margin-left:9%;"><b>--[no-]restart</b></p>
+
+<p style="margin-left:18%;">Restart playlist when finished
+[default: 0]</p>
+
+<p style="margin-left:9%;"><b>--subsong</b> n</p>
+
+<p style="margin-left:18%;">Select subsong n (<b>-1</b>
+means play all subsongs consecutively) [default:
+<b>-1]</b></p>
+
+<p style="margin-left:9%;"><b>--repeat</b> n</p>
+
+<p style="margin-left:18%;">Repeat song n times (<b>-1</b>
+means forever) [default: 0]</p>
+
+<p style="margin-left:9%;"><b>--seek</b> n</p>
+
+<p style="margin-left:18%;">Seek to n seconds on start
+[default: 0]</p>
+
+<p style="margin-left:9%;"><b>--end-time</b> n</p>
+
+<p style="margin-left:18%;">Play until position is n
+seconds (0 means until the end) [default: 0]</p>
+
+<p style="margin-left:9%;"><b>--ctl</b> c=v</p>
+
+<p style="margin-left:18%;">Set libopenmpt ctl c to value
+v</p>
+
+<p style="margin-left:9%;"><b>--driver</b> n</p>
+
+<p style="margin-left:18%;">Set output driver [default:
+default],</p>
+
+<p style="margin-left:9%;"><b>--device</b> n</p>
+
+<p style="margin-left:18%;">Set output device [default:
+default], use <b>--device</b> help to show available
+devices</p>
+
+<p style="margin-left:9%;"><b>--buffer</b> n</p>
+
+<p style="margin-left:18%;">Set output buffer size to n ms
+[default: <b>-1]</b></p>
+
+<p style="margin-left:9%;"><b>--period</b> n</p>
+
+<p style="margin-left:18%;">Set output period size to n ms
+[default: <b>-1]</b></p>
+
+<p style="margin-left:9%;"><b>--stdout</b></p>
+
+<p style="margin-left:18%;">Write raw audio data to stdout
+[default: 0]</p>
+
+<p style="margin-left:9%;"><b>--output-type</b> t</p>
+
+<p style="margin-left:18%;">Use output format t when
+writing to a individual PCM files (only applies to
+<b>--render</b> mode) [default: auto]</p>
+
+<p style="margin-left:9%;"><b>-o</b>, <b>--output</b> f</p>
+
+<p style="margin-left:18%;">Write PCM output to file f
+instead of streaming to audio device (only applies to
+<b>--ui</b> and <b>--batch</b> modes) [default: ]</p>
+
+<p style="margin-left:9%;"><b>--force</b></p>
+
+<p style="margin-left:18%;">Force overwriting of output
+file [default: 0]</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>--</b></p></td>
+<td width="6%"></td>
+<td width="51%">
+
+
+<p>Interpret further arguments as filenames</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Keyboard hotkeys
+(use &rsquo;openmpt123 <b>--ui</b>&rsquo;):</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em">[q]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p style="margin-top: 1em">quit</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[ ]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>pause / unpause</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[N]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>skip 10 files backward</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[n]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>prev file</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[m]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>next file</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[M]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>skip 10 files forward</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[h]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>seek 10 seconds backward</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[j]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>seek 1 seconds backward</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[k]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>seek 1 seconds forward</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>[l]</p></td>
+<td width="5%"></td>
+<td width="31%">
+
+
+<p>seek 10 seconds forward</p></td>
+<td width="51%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">[u]|[i]</p>
+
+<p style="margin-left:18%;">+/- tempo</p>
+
+<p style="margin-left:9%;">[o]|[p]</p>
+
+<p style="margin-left:18%;">+/- pitch</p>
+
+<p style="margin-left:9%;">[3]|[4]</p>
+
+<p style="margin-left:18%;">+/- gain</p>
+
+<p style="margin-left:9%;">[5]|[6]</p>
+
+<p style="margin-left:18%;">+/- stereo separation</p>
+
+<p style="margin-left:9%;">[7]|[8]</p>
+
+<p style="margin-left:18%;">+/- filter taps</p>
+
+<p style="margin-left:9%;">[9]|[0]</p>
+
+<p style="margin-left:18%;">+/- volume ramping</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2013-2025 OpenMPT Project Developers and Contributors
+&lt;https://lib.openmpt.org/&gt;</p>
+<hr>
+</body>
+</html>

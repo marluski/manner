@@ -1,0 +1,708 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:03 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-SBOM</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-SBOM</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Example CycloneDX SBOM">Example CycloneDX SBOM</a><br>
+<a href="#Example SPDX SBOM">Example SPDX SBOM</a><br>
+<a href="#Package lock only mode">Package lock only mode</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#omit">omit</a><br>
+<a href="#package-lock-only">package-lock-only</a><br>
+<a href="#sbom-format">sbom-format</a><br>
+<a href="#sbom-type">sbom-type</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-sbom</b>
+- Generate a Software Bill of Materials (SBOM)</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm sbom</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>npm
+sbom</b> command generates a Software Bill of Materials
+(SBOM) listing the dependencies for the current project.
+SBOMs can be generated in either <b>SPDX</b> <i>&lang;
+https://spdx.dev/&rang;</i> or <b>CycloneDX</b> <i>&lang;
+https://cyclonedx.org/&rang;</i> format.</p>
+
+<h3>Example CycloneDX SBOM
+<a name="Example CycloneDX SBOM"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">{ <br>
+&quot;$schema&quot;:
+&quot;http://cyclonedx.org/schema/bom-1.5.schema.json&quot;,
+<br>
+&quot;bomFormat&quot;: &quot;CycloneDX&quot;, <br>
+&quot;specVersion&quot;: &quot;1.5&quot;, <br>
+&quot;serialNumber&quot;:
+&quot;urn:uuid:09f55116-97e1-49cf-b3b8-44d0207e7730&quot;,
+<br>
+&quot;version&quot;: 1, <br>
+&quot;metadata&quot;: { <br>
+&quot;timestamp&quot;: &quot;2023-09-01T00:00:00.001Z&quot;,
+<br>
+&quot;lifecycles&quot;: [ <br>
+{ <br>
+&quot;phase&quot;: &quot;build&quot; <br>
+} <br>
+], <br>
+&quot;tools&quot;: [ <br>
+{ <br>
+&quot;vendor&quot;: &quot;npm&quot;, <br>
+&quot;name&quot;: &quot;cli&quot;, <br>
+&quot;version&quot;: &quot;10.1.0&quot; <br>
+} <br>
+], <br>
+&quot;component&quot;: { <br>
+&quot;bom-ref&quot;: &quot;simple@1.0.0&quot;, <br>
+&quot;type&quot;: &quot;library&quot;, <br>
+&quot;name&quot;: &quot;simple&quot;, <br>
+&quot;version&quot;: &quot;1.0.0&quot;, <br>
+&quot;scope&quot;: &quot;required&quot;, <br>
+&quot;author&quot;: &quot;John Doe&quot;, <br>
+&quot;description&quot;: &quot;simple react app&quot;, <br>
+&quot;purl&quot;: &quot;pkg:npm/simple@1.0.0&quot;, <br>
+&quot;properties&quot;: [ <br>
+{ <br>
+&quot;name&quot;: &quot;cdx:npm:package:path&quot;, <br>
+&quot;value&quot;: &quot;&quot; <br>
+} <br>
+], <br>
+&quot;externalReferences&quot;: [], <br>
+&quot;licenses&quot;: [ <br>
+{ <br>
+&quot;license&quot;: { <br>
+&quot;id&quot;: &quot;MIT&quot; <br>
+} <br>
+} <br>
+] <br>
+} <br>
+}, <br>
+&quot;components&quot;: [ <br>
+{ <br>
+&quot;bom-ref&quot;: &quot;lodash@4.17.21&quot;, <br>
+&quot;type&quot;: &quot;library&quot;, <br>
+&quot;name&quot;: &quot;lodash&quot;, <br>
+&quot;version&quot;: &quot;4.17.21&quot;, <br>
+&quot;scope&quot;: &quot;required&quot;, <br>
+&quot;author&quot;: &quot;John-David Dalton&quot;, <br>
+&quot;description&quot;: &quot;Lodash modular
+utilities.&quot;, <br>
+&quot;purl&quot;: &quot;pkg:npm/lodash@4.17.21&quot;, <br>
+&quot;properties&quot;: [ <br>
+{ <br>
+&quot;name&quot;: &quot;cdx:npm:package:path&quot;, <br>
+&quot;value&quot;: &quot;node_modules/lodash&quot; <br>
+} <br>
+], <br>
+&quot;externalReferences&quot;: [ <br>
+{ <br>
+&quot;type&quot;: &quot;distribution&quot;, <br>
+&quot;url&quot;:
+&quot;https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz&quot;
+<br>
+}, <br>
+{ <br>
+&quot;type&quot;: &quot;vcs&quot;, <br>
+&quot;url&quot;:
+&quot;git+https://github.com/lodash/lodash.git&quot; <br>
+}, <br>
+{ <br>
+&quot;type&quot;: &quot;website&quot;, <br>
+&quot;url&quot;: &quot;https://lodash.com/&quot; <br>
+}, <br>
+{ <br>
+&quot;type&quot;: &quot;issue-tracker&quot;, <br>
+&quot;url&quot;:
+&quot;https://github.com/lodash/lodash/issues&quot; <br>
+} <br>
+], <br>
+&quot;hashes&quot;: [ <br>
+{ <br>
+&quot;alg&quot;: &quot;SHA-512&quot;, <br>
+&quot;content&quot;:
+&quot;bf690311ee7b95e713ba568322e3533f2dd1cb880b189e99d4edef13592b81764daec43e2c54c61d5c558dc5cfb35ecb85b65519e74026ff17675b6f8f916f4a&quot;
+<br>
+} <br>
+], <br>
+&quot;licenses&quot;: [ <br>
+{ <br>
+&quot;license&quot;: { <br>
+&quot;id&quot;: &quot;MIT&quot; <br>
+} <br>
+} <br>
+] <br>
+} <br>
+], <br>
+&quot;dependencies&quot;: [ <br>
+{ <br>
+&quot;ref&quot;: &quot;simple@1.0.0&quot;, <br>
+&quot;dependsOn&quot;: [ <br>
+&quot;lodash@4.17.21&quot; <br>
+] <br>
+}, <br>
+{ <br>
+&quot;ref&quot;: &quot;lodash@4.17.21&quot;, <br>
+&quot;dependsOn&quot;: [] <br>
+} <br>
+] <br>
+}</p>
+
+<h3>Example SPDX SBOM
+<a name="Example SPDX SBOM"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">{ <br>
+&quot;spdxVersion&quot;: &quot;SPDX-2.3&quot;, <br>
+&quot;dataLicense&quot;: &quot;CC0-1.0&quot;, <br>
+&quot;SPDXID&quot;: &quot;SPDXRef-DOCUMENT&quot;, <br>
+&quot;name&quot;: &quot;simple@1.0.0&quot;, <br>
+&quot;documentNamespace&quot;:
+&quot;http://spdx.org/spdxdocs/simple-1.0.0-bf81090e-8bbc-459d-bec9-abeb794e096a&quot;,
+<br>
+&quot;creationInfo&quot;: { <br>
+&quot;created&quot;: &quot;2023-09-01T00:00:00.001Z&quot;,
+<br>
+&quot;creators&quot;: [ <br>
+&quot;Tool: npm/cli-10.1.0&quot; <br>
+] <br>
+}, <br>
+&quot;documentDescribes&quot;: [ <br>
+&quot;SPDXRef-Package-simple-1.0.0&quot; <br>
+], <br>
+&quot;packages&quot;: [ <br>
+{ <br>
+&quot;name&quot;: &quot;simple&quot;, <br>
+&quot;SPDXID&quot;:
+&quot;SPDXRef-Package-simple-1.0.0&quot;, <br>
+&quot;versionInfo&quot;: &quot;1.0.0&quot;, <br>
+&quot;packageFileName&quot;: &quot;&quot;, <br>
+&quot;description&quot;: &quot;simple react app&quot;, <br>
+&quot;primaryPackagePurpose&quot;: &quot;LIBRARY&quot;, <br>
+&quot;downloadLocation&quot;: &quot;NOASSERTION&quot;, <br>
+&quot;filesAnalyzed&quot;: false, <br>
+&quot;homepage&quot;: &quot;NOASSERTION&quot;, <br>
+&quot;licenseDeclared&quot;: &quot;MIT&quot;, <br>
+&quot;externalRefs&quot;: [ <br>
+{ <br>
+&quot;referenceCategory&quot;: &quot;PACKAGE-MANAGER&quot;,
+<br>
+&quot;referenceType&quot;: &quot;purl&quot;, <br>
+&quot;referenceLocator&quot;:
+&quot;pkg:npm/simple@1.0.0&quot; <br>
+} <br>
+] <br>
+}, <br>
+{ <br>
+&quot;name&quot;: &quot;lodash&quot;, <br>
+&quot;SPDXID&quot;:
+&quot;SPDXRef-Package-lodash-4.17.21&quot;, <br>
+&quot;versionInfo&quot;: &quot;4.17.21&quot;, <br>
+&quot;packageFileName&quot;:
+&quot;node_modules/lodash&quot;, <br>
+&quot;description&quot;: &quot;Lodash modular
+utilities.&quot;, <br>
+&quot;downloadLocation&quot;:
+&quot;https://registry.npmjs.org/lodash/-/lodash-4.17.21.tgz&quot;,
+<br>
+&quot;filesAnalyzed&quot;: false, <br>
+&quot;homepage&quot;: &quot;https://lodash.com/&quot;, <br>
+&quot;licenseDeclared&quot;: &quot;MIT&quot;, <br>
+&quot;externalRefs&quot;: [ <br>
+{ <br>
+&quot;referenceCategory&quot;: &quot;PACKAGE-MANAGER&quot;,
+<br>
+&quot;referenceType&quot;: &quot;purl&quot;, <br>
+&quot;referenceLocator&quot;:
+&quot;pkg:npm/lodash@4.17.21&quot; <br>
+} <br>
+], <br>
+&quot;checksums&quot;: [ <br>
+{ <br>
+&quot;algorithm&quot;: &quot;SHA512&quot;, <br>
+&quot;checksumValue&quot;:
+&quot;bf690311ee7b95e713ba568322e3533f2dd1cb880b189e99d4edef13592b81764daec43e2c54c61d5c558dc5cfb35ecb85b65519e74026ff17675b6f8f916f4a&quot;
+<br>
+} <br>
+] <br>
+} <br>
+], <br>
+&quot;relationships&quot;: [ <br>
+{ <br>
+&quot;spdxElementId&quot;: &quot;SPDXRef-DOCUMENT&quot;,
+<br>
+&quot;relatedSpdxElement&quot;:
+&quot;SPDXRef-Package-simple-1.0.0&quot;, <br>
+&quot;relationshipType&quot;: &quot;DESCRIBES&quot; <br>
+}, <br>
+{ <br>
+&quot;spdxElementId&quot;:
+&quot;SPDXRef-Package-simple-1.0.0&quot;, <br>
+&quot;relatedSpdxElement&quot;:
+&quot;SPDXRef-Package-lodash-4.17.21&quot;, <br>
+&quot;relationshipType&quot;: &quot;DEPENDS_ON&quot; <br>
+} <br>
+] <br>
+}</p>
+
+<h3>Package lock only mode
+<a name="Package lock only mode"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If
+package-lock-only is enabled, only the information in the
+package lock (or shrinkwrap) is loaded. This means that
+information from the package.json files of your dependencies
+will not be included in the result set (e.g. description,
+homepage, engines).</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>omit
+<a name="omit"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: &rsquo;dev&rsquo; if
+the <b>NODE_ENV</b> environment variable is set to
+&rsquo;production&rsquo;, otherwise empty.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: &quot;dev&quot;, &quot;optional&quot;, or
+&quot;peer&quot; (can be set multiple times)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Dependency types
+to omit from the installation tree on disk.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that these
+dependencies <i>are</i> still resolved and added to the
+<b>package-lock.json</b> or <b>npm-shrinkwrap.json</b> file.
+They are just not physically installed on disk.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a package
+type appears in both the <b>--include</b> and <b>--omit</b>
+lists, then it will be included.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the resulting
+omit list includes <b>&rsquo;dev&rsquo;</b>, then the
+<b>NODE_ENV</b> environment variable will be set to
+<b>&rsquo;production&rsquo;</b> for all lifecycle
+scripts.</p>
+
+<h3>package-lock-only
+<a name="package-lock-only"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If set to true,
+the current operation will only use the
+<b>package-lock.json</b>, ignoring <b>node_modules</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For
+<b>update</b> this means only the <b>package-lock.json</b>
+will be updated, instead of checking <b>node_modules</b> and
+downloading dependencies.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For <b>list</b>
+this means the output will be based on the tree described by
+the <b>package-lock.json</b>, rather than the contents of
+<b>node_modules</b>.</p>
+
+<h3>sbom-format
+<a name="sbom-format"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="35%">
+
+
+<p>Type: &quot;cyclonedx&quot; or &quot;spdx&quot;</p></td>
+<td width="51%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">SBOM format to
+use when generating SBOMs.</p>
+
+<h3>sbom-type
+<a name="sbom-type"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p style="margin-top: 1em">Default: &quot;library&quot;</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p>Type: &quot;library&quot;, &quot;application&quot;, or
+&quot;framework&quot;</p> </td>
+<td width="27%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The type of
+package described by the generated SBOM. For SPDX, this is
+the value for the <b>primaryPackagePurpose</b> field. For
+CycloneDX, this is the value for the <b>type</b> field.</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Set to true to
+run the command in the context of <b>all</b> configured
+workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+setting this to false will cause commands like
+<b>install</b> to ignore workspaces altogether. When not set
+explicitly:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Commands that operate on the
+<b>node_modules</b> tree (install, update, etc.) will link
+workspaces into the <b>node_modules</b> folder. - Commands
+that do other things (test, exec, publish, etc.) will
+operate on the root project, <i>unless</i> one or more
+workspaces are specified in the <b>workspace</b> config.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p style="margin-top: 1em">npm help &quot;package
+spec&quot;</p> </td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p>npm help &quot;dependency selectors&quot;</p></td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p><b>package.json</b> <i>&lang;
+/configuring-npm/package-json&rang;</i></p> </td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p>npm help workspaces</p></td>
+<td width="28%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

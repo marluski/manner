@@ -1,0 +1,795 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ddcutil</title>
+
+</head>
+<body>
+
+<h1 align="center">ddcutil</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#RESTRICTIONS">RESTRICTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#Primary Commands">Primary Commands</a><br>
+<a href="#Secondary Commands">Secondary Commands</a><br>
+<a href="#Diagnostic commands">Diagnostic commands</a><br>
+<a href="#COMMAND ARGUMENTS">COMMAND ARGUMENTS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NVIDIA PROPRIETARY DRIVER">NVIDIA PROPRIETARY DRIVER</a><br>
+<a href="#VIRTUAL MACHINES">VIRTUAL MACHINES</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ddcutil - Query
+and change monitor settings</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil</b>
+[<i>options</i>] command [<i>command-arguments</i>]
+[<i>options</i>]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options can be
+written either before or after the command and its
+arguments.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil</b>
+is used to query and change monitor settings. The settings
+that can be controlled by <b>ddcutil</b> are, generally
+speaking, those that can be changed using the buttons on a
+monitor and its on screen display. The specific settings
+vary from monitor to monitor.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil</b>
+communicates with monitors that implement the Monitor
+Control Command Set (MCCS) using the DDC/CI protocol on an
+I2C bus. Normally, the video driver for the monitor exposes
+the I2C bus as devices named /dev/i2c-n. Alternatively,
+<b>ddcutil</b> can communicate with monitors that use USB to
+communicate MMCS, provided the monitors meet the USB Monitor
+Control Class Specification.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Monitor
+Control Command Set describes a collection of Virtual
+Control Panel (VCP) features that a monitor can implement.
+Each feature is identified using a single byte. For example,
+feature x10 is the brightness control.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Common use cases
+include changing monitor brightness and color. Using
+scripts, the changes can be effected by keystrokes, or in
+response to the time of day. Another common use case is to
+switch the monitor input source.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A more complex
+use case for <b>ddcutil</b> is as part of color profile
+management. Monitor calibration is relative to the monitor
+color settings currently in effect, e.g. red gain.
+<b>ddcutil</b> allows color related settings to be saved at
+the time a monitor is calibrated, and then restored when the
+calibration is applied.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+describes <b>ddcutil</b> commands and options most important
+to the typical user. For complete documentation, use the
+<i>--help</i> option or see the web site
+<a href="http://www/ddcutil.com">http://www/ddcutil.com</a>.
+If option <i>--verbose</i> is specifeid in conjunction with
+<i>--help</i>, more extensive help on option arguments is
+shown.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Option
+<i>--hh</i> shows all options recognized by <b>ddcutil</b>.
+These include deprecated option names (which have been
+replaced by more descriptive names), experimental options,
+and options only of interest to developers.</p>
+
+<h2>RESTRICTIONS
+<a name="RESTRICTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil</b>
+does not support laptop monitors, which do not implement
+DDC/CI.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>Primary Commands
+<a name="Primary Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+most used <b>ddcutil</b> commands.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>detect</b></p></td>
+<td width="1%"></td>
+<td width="61%">
+
+
+<p>Find monitors that have a Virtual Control Panel.</p></td>
+<td width="21%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>vcpinfo</b> [
+<i>feature-code</i> | <i>feature-group</i> ]</p>
+
+<p style="margin-left:18%;">Describe VCP feature codes. as
+defined in the MCCS specification. Use option
+<i>--verbose</i> to see values for Non-Continuous
+features.</p>
+
+<p style="margin-left:9%;"><b>capabilities</b></p>
+
+<p style="margin-left:18%;">Query the monitor&rsquo;s
+capabilities string</p>
+
+<p style="margin-left:9%;"><b>getvcp</b> [
+<i>feature-code</i> | <i>feature-group</i> ] ...</p>
+
+<p style="margin-left:18%;">Report a VCP feature value, or
+a group of feature values. More than one feature code can be
+specified. However feature codes and groups cannot be
+combined.</p>
+
+<p style="margin-left:9%;"><b>setvcp</b>
+<i>feature-code</i> [+|-] <i>new-value</i> ...</p>
+
+<p style="margin-left:18%;">Set a VCP feature value. If +
+or - is specified, it must be surrounded by blanks, and
+indicates a relative value change of a continuous VCP
+feature. Multiple feature/value pairs (with or without
+[+|1]) can be specified.</p>
+
+<h3>Secondary Commands
+<a name="Secondary Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These commands
+address special situations. <b><br>
+dumpvcp</b> <i>filename</i></p>
+
+<p style="margin-left:18%;">Save color profile related VCP
+feature values in a file. If no file name is specified, one
+is generated and the file is saved in
+$HOME/.local/share/ddcutil,</p>
+
+<p style="margin-left:9%;"><b>loadvcp</b>
+<i>filename</i></p>
+
+<p style="margin-left:18%;">Set VCP feature values from a
+file. The monitor to which the values will be applied is
+determined by the monitor identification stored in the file.
+If the monitor is not attached, nothing happens.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>scs</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Issue DDC/CI Save Current Settings request. Most
+monitors do not implement this command. A few require it for
+values changed by <b>setvcp</b> to take effect.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>chkusbmon</b></p>
+
+<p style="margin-left:18%;">Tests if a hiddev device may be
+a USB connected monitor, for use in udev rules.</p>
+
+<p style="margin-left:9%;"><b>discard</b>
+<i>all|capabilities|dsa</i> <b>cache[s]</b></p>
+
+<p style="margin-left:18%;">Discard cached files used for
+performance improvement.</p>
+
+<p style="margin-left:9%;"><b>traceable-functions</b></p>
+
+<p style="margin-left:18%;">Lists functions that can be
+specifically traced using an option like <i>--trcfunc</i> or
+<i>--trcfrom</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>noop</b></p></td>
+<td width="4%"></td>
+<td width="61%">
+
+
+<p>Do not execute a command. Just process options.</p></td>
+<td width="21%">
+</td></tr>
+</table>
+
+<h3>Diagnostic commands
+<a name="Diagnostic commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These commands
+diagnose issues in the system configuration that affect
+<b>ddcutil</b> operation, and that gather information for
+remote problem diagnosis. <b><br>
+environment</b></p>
+
+<p style="margin-left:18%;">Probe the <b>ddcutil</b>
+installation environment.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>usbenv</b></p></td>
+<td width="1%"></td>
+<td width="74%">
+
+
+<p>Probe USB aspects of the <b>ddcutil</b> installation
+environment.</p> </td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>probe</b></p></td>
+<td width="1%"></td>
+<td width="74%">
+
+
+<p>Explore the capabilities and features of a single
+monitor.</p> </td>
+<td width="8%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>interrogate</b></p>
+
+<p style="margin-left:18%;">Collect maximum information for
+problem diagnosis. Includes the output of <b>ddcutil
+environment --verbose</b> for each detected monitor, the
+output of <b>ddcutil capabilities --verbose</b> and
+<b>ddcutil probe --verbose</b>.</p>
+
+<h2>COMMAND ARGUMENTS
+<a name="COMMAND ARGUMENTS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>feature-code</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">A feature-code
+is specified by its 2 character hex feature number, with or
+without a leading &quot;0x&quot;, e.g. 0x10, 10</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>feature-group</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+are the most useful feature groups. For a complete list, use
+the <b>--help</b> option. <b><br>
+ALL|KNOWN</b></p>
+
+<p style="margin-left:18%;">All feature codes understood by
+<b>ddcutil</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>COLOR</b></p></td>
+<td width="3%"></td>
+<td width="41%">
+
+
+<p>Scan color related feature codes</p></td>
+<td width="41%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>PROFILE</b></p>
+
+<p style="margin-left:18%;">Subset of color related feature
+codes that are saved and restored by <b>dumpvcp</b> and
+<b>loadvcp</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>SCAN</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Scan all possible feature codes 0x00..0xff, except those
+known the be write-only</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Feature group
+names can be abbreviated to the first 3 characters. Case is
+ignored. e.g. &quot;COL&quot;, &quot;pro&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>new-value</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Normally, this
+is a decimal number in the range 0..255, or a hexadecimal
+number in the range x00..xff. More generally, this is
+actually a two byte value, i.e. x00..xffff, and a few
+features on some monitors use this extended range.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Options that
+control the amount and form of output. <b><br>
+-t, --terse, --brief</b></p>
+
+<p style="margin-left:18%;">Show brief detail. For command
+<b>getvcp</b>, the output is in machine readable form.</p>
+
+<p style="margin-left:9%;"><b>-v, --verbose</b></p>
+
+<p style="margin-left:18%;">Show extended detail</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options for
+program information. <b><br>
+-V, --version</b></p>
+
+<p style="margin-left:18%;">Show program version.</p>
+
+<p style="margin-left:9%;"><b>--settings</b></p>
+
+<p style="margin-left:18%;">Report option settings in
+effect.</p>
+
+<p style="margin-left:9%;"><b>-h</b>,<b>--help</b></p>
+
+<p style="margin-left:18%;">Show program help.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>--hh</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Show program help including hidden options. Hidden
+options include alternative option names, experimental and
+deprecated options, and ones for debugging.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Options for
+monitor selection. If none are specified, the default is the
+first detected monitor. Options <b>--mfg</b>, <b>--model</b>
+and <b>--sn</b> can be specified together. <b><br>
+-d , --dis , --display</b> ,</p>
+
+<p style="margin-left:18%;"><i>display-number</i> logical
+display number (starting from 1)</p>
+
+<p style="margin-left:9%;"><b>-b,--bus</b></p>
+
+<p style="margin-left:18%;"><i>bus-number</i> I2C bus
+number</p>
+
+<p style="margin-left:9%;"><b>--hiddev</b></p>
+
+<p style="margin-left:18%;"><i>device number</i> hiddev
+device number</p>
+
+<p style="margin-left:9%;"><b>-u,--usb</b>
+<i>busnum.devicenum</i></p>
+
+<p style="margin-left:18%;">USB bus and device numbers</p>
+
+<p style="margin-left:9%;"><b>-g,--mfg</b></p>
+
+<p style="margin-left:18%;">3 letter manufacturer code</p>
+
+<p style="margin-left:9%;"><b>-l,--model</b></p>
+
+<p style="margin-left:18%;">model name</p>
+
+<p style="margin-left:9%;"><b>-n,--sn</b></p>
+
+<p style="margin-left:18%;">serial number. (This is the
+&quot;serial ascii&quot; field from the EDID, not the binary
+serial number.)</p>
+
+<p style="margin-left:9%;"><b>-e,--edid</b></p>
+
+<p style="margin-left:18%;">256 hex character
+representation of the 128 byte EDID. Needless to say, this
+is intended for program use.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Feature
+selection filters <b><br>
+-U, --show-unsupported</b></p>
+
+<p style="margin-left:18%;">Normally, <b>getvcp</b> does
+not report unsupported features when querying a
+feature-group. This option forces output.</p>
+
+<p style="margin-left:9%;"><b>--show-table |
+--no-table</b></p>
+
+<p style="margin-left:18%;">Normally, <b>getvcp</b> does
+not report Table type features when querying a
+feature-group. <b>--show-table</b> forces output.
+<b>--no-table</b> is the default.</p>
+
+<p style="margin-left:9%;"><b>--rw, --ro, --wo</b></p>
+
+<p style="margin-left:18%;">Limit <b>getvcp</b> or
+<b>vcpinfo</b> output to read-write, read-only, or (for
+<b>vcpinfo</b>) write-only features.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options for
+diagnostic output <b><br>
+--ddcdata</b></p>
+
+<p style="margin-left:18%;">Reports DDC protocol errors.
+These may reflect I2C bus errors, or deviations by monitors
+from the MCCS specification. Formerly named
+<b>--ddc</b>,</p>
+
+<p style="margin-left:9%;"><b>--stats</b>
+[<b>all</b>|<b>errors</b>|<b>tries</b>|<b>calls</b>|<b>elapsed</b>|<b>time</b>]</p>
+
+<p style="margin-left:18%;">Report execution statistics.
+I2C bus communication is inherently unreliable. It is the
+responsibility of the program using the bus, i.e.
+<b>ddcutil</b>, to manage retries in case of failure. This
+option reports retry counts and various performance
+statistics. If no argument is specified, or ALL is
+specified, then all statistics are output. ELAPSED is a
+synonym for TIME. CALLS implies TIME.</p>
+
+<p style="margin-left:9%;"><b>--vstats</b>
+[<b>all</b>|<b>errors</b>|<b>tries</b>|<b>calls</b>|<b>elapsed</b>|<b>time</b>]</p>
+
+<p style="margin-left:18%;">Like <b>--stats</b>, but
+includes per-display statistics.</p>
+
+<p style="margin-left:9%;"><b>--istats</b>
+[<b>all</b>|<b>errors</b>|<b>tries</b>|<b>calls</b>|<b>elapsed</b>|<b>time</b>]</p>
+
+<p style="margin-left:18%;">Like <b>--vstats</b>, but
+includes additional internal information.</p>
+
+<p style="margin-left:9%;"><b>--syslog</b>
+<i>[</i><b>debug</b><i>|</i><b>verbose</b><i>|</i><b>info</b><i>|</i><b>notice</b><i>|</i><b>warn</b><i>|</i><b>error</b><i>|</i><b>never</b>
+<i>]</i></p>
+
+<p style="margin-left:18%;">Write messages of the specified
+or more urgent severity level to the system log. The
+<b>ddcutil</b> default is <b>WARN</b>. The <b>libddcutilP
+default is NOTICE.</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Options that
+tune execution <b><br>
+--enable-capabilities-cache,
+--disable-capabilities-cache</b></p>
+
+<p style="margin-left:18%;">Enable or disable caching of
+capabilities strings, improving performance. The default is
+<b>--enable-capabilities-cache</b></p>
+
+<p style="margin-left:9%;"><b>--enable-dynamic-sleep,
+--disable-dynamic-sleep</b></p>
+
+<p style="margin-left:18%;">Dynamically adjust the
+sleep-multiplier over multiple <b>ddcutil</b> invocations,
+improving performance. The default is
+<b>--enable-dynamic-sleep</b></p>
+
+<p style="margin-left:9%;"><b>--min-dynamic-multiplier</b>
+<i>decimal number</i></p>
+
+<p style="margin-left:18%;">Modify the dynamic sleep
+algorithm to never adjust the sleep multiplier below this
+value. This option can help dampen swings in sleep
+multiplier values.</p>
+
+<p style="margin-left:9%;"><b>--sleep-multiplier</b>
+<i>decimal number</i></p>
+
+<p style="margin-left:18%;">Adjust the length of waits
+listed in the DDC/CI specification by this number to
+determine the actual wait time. Well behaved monitors work
+with sleep-multiplier values less than 1.0, while monitors
+with poor DDC implementations may require sleep-multiplier
+values greater than 1.0. In general, newer option
+<b>--enable-dynamic-sleep</b> will provide better
+performance.</p>
+
+<p style="margin-left:9%;"><b>--skip-ddc-checks</b></p>
+
+<p style="margin-left:18%;">Assume DDC communication works
+and monitors properly use the invalid feature flag in a
+DDC/CI Reply packet to indicate an unsupported feature,
+improving display detection performance.</p>
+
+<p style="margin-left:9%;"><b>--discard-cache
+[capabilities|dsa|all</b></p>
+
+<p style="margin-left:18%;">Discard cached display
+information and/or dynamic sleep data.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options that
+modify behavior <b><br>
+--maxtries</b> <i>(max-read-tries, max-write-read-tries,
+max-multi-part-tries)</i></p>
+
+<p style="margin-left:18%;">Adjust the number of retries. A
+value of &quot;.&quot; or &quot;0&quot; leaves the setting
+for a retry type unchanged.</p>
+
+<p style="margin-left:9%;"><b>--verify | --noverify</b></p>
+
+<p style="margin-left:18%;">Verify or do not verify values
+set by <b>setvcp</b> or <b>loadvcp</b>. <b>--noverify</b> is
+the default.</p>
+
+<p style="margin-left:9%;"><b>--mccs</b> <i>MCCS
+version</i></p>
+
+<p style="margin-left:18%;">Tailor command input and output
+to a particular MCCS version, e.g. 2.1</p>
+
+<p style="margin-left:9%;"><b>--enable-udf,
+--disable-udf</b></p>
+
+<p style="margin-left:18%;">Enable or disable support for
+user supplied feature definitions. The default is
+<b>--enable-udf</b></p>
+
+<p style="margin-left:9%;"><b>--enable-usb,
+--disable-usb</b></p>
+
+<p style="margin-left:18%;">Enable or disable support for
+monitors that implement USB communication with the Virtual
+Control Panel. (These options are available only if
+<b>ddcutil</b> was built with USB support.) The default is
+<b>--disable-usb</b></p>
+
+<p style="margin-left:9%;"><b>--ignore-usb-vid-pid</b>
+<i>vid:pid</i></p>
+
+<p style="margin-left:18%;">Force <b>ddcutil</b> to ignore
+a particular USB device, specified by its 4 hex digit vendor
+id and its 4 hex digit product id.</p>
+
+<p style="margin-left:9%;"><b>--ignore-hiddev</b>
+<i>hiddev-device-number</i></p>
+
+<p style="margin-left:18%;">Force <b>ddcutil</b> <i>to
+ignore a particular USB device, specified by /dev/usb/hiddev
+device number</i></p>
+
+<p style="margin-left:9%;"><b>--use-file-io |
+--use-ioctl-io</b></p>
+
+<p style="margin-left:18%;">Cause <b>ddcutil</b> to use the
+write()/read() interface or the ioctl interface of driver
+dev-i2c to send and receive I2C packets. By default,
+<b>ddcutil</b> uses the ioctl interface. Nvidia proprietary
+driver are built in a way such that the ioctl interface can
+fail, in which case <b>ddcutil</b> switches to using the
+file io interface.</p>
+
+
+<p style="margin-left:9%;"><b>--force-slave-address</b></p>
+
+<p style="margin-left:18%;">Take control of slave addresses
+on the I2C bus even they are in use. Has use only with
+file-io, not with ioctl-io.</p>
+
+
+<p style="margin-left:9%;"><b>--enable-cross-instance-locks
+| --disable-cross-instance-locks</b></p>
+
+<p style="margin-left:18%;">Coordinates /dev/i2c device
+access across multiple instance of <b>ddcutil</b> and
+<b>libddcutil</b>. The default is
+<b>--enable-cross-instance-locks</b></p>
+
+<p style="margin-left:9%;"><b>--edid-read-size</b>
+<i>128|256</i></p>
+
+<p style="margin-left:18%;">Force <b>ddcutil</b> to read
+the specified number of bytes when reading the EDID. This
+option is a work-around for certain driver bugs. The default
+is 256.</p>
+
+<p style="margin-left:9%;"><b>--i2c-source-addr</b>
+<i>hex-addr</i></p>
+
+<p style="margin-left:18%;">Use this as the source address
+in DDC packet, instead of the normal value. This option has
+been found to enable access some control functions when
+using some displays, particularly from LG.</p>
+
+
+<p style="margin-left:9%;"><b>--permit-unknown-feature</b></p>
+
+<p style="margin-left:18%;">Allow <b>setvcp</b> of unknown
+features.</p>
+
+<p style="margin-left:9%;"><b>--ignore-mmid</b>
+<i>monitor-model-id</i></p>
+
+<p style="margin-left:18%;">Ignore monitors with this
+monitor-model-id. The see the monitor-model-id for a
+display, use command <b>ddcutil --verbose</b>.</p>
+
+<p style="margin-left:9%;"><b>--noconfig</b></p>
+
+<p style="margin-left:18%;">Do not process the
+configuration file</p>
+
+<h2>NVIDIA PROPRIETARY DRIVER
+<a name="NVIDIA PROPRIETARY DRIVER"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Some Nvidia
+cards using the proprietary Nvidia driver require special
+settings to properly enable I2C support. See
+<a href="http://www.ddcutil.com/nvidia">http://www.ddcutil.com/nvidia</a>.</p>
+
+<h2>VIRTUAL MACHINES
+<a name="VIRTUAL MACHINES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtualized
+video drivers in VMWare and VirtualBox do not provide I2C
+emulation. Use of normal video drivers with PCI passthrough
+is possible.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil
+detect</b> <br>
+Identify all attached monitors.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil
+getvcp supported</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Show all
+settings that the default monitor supports and that
+<b>ddcutil</b> understands.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil
+getvcp 10 --display 2</b> <br>
+Query the luminosity value of the second monitor.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil
+setvcp 10 30 --bus 4</b> <br>
+Set the luminosity value for the monitor on bus
+/dev/i2c-4.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil
+vcpinfo --verbose</b> <br>
+Show detailed information about VCP features that
+<b>ddcutil</b> understands.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ddcutil
+interrogate &gt; &#732;/ddcutil.out</b> <br>
+Collect maximum information about monitor capabilities and
+the execution environment, and direct the output to a
+file.</p>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Returns 0 on
+success, 1 on failure.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Requesting help
+is regarded as success.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The project
+homepage:
+<a href="http://www.ddcutil.com">http://www.ddcutil.com</a></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Sanford
+Rockowitz (rockowitz at minsoft dot com) <br>
+Copyright 2015-2023 Sanford Rockowitz</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>NVIM</i>(1) General Commands Manual
+<i>NVIM</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">nvim &mdash; edit text</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:15%;"><b>nvim</b> [<i>options</i>]
+[<i>file&nbsp;...</i>] <b><br>
+nvim</b> [<i>options</i>] <b>- <br>
+nvim</b> [<i>options</i>] <b>-t</b> <i>tag</i> <b><br>
+nvim</b> [<i>options</i>] <b>-q</b> [<i>errorfile</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>nvim</b> is a text editor
+based on Vim. Start <b>nvim</b> followed by any number of
+options and/or files:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>nvim
+[options] [file ...]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Commands in
+<b>nvim</b> begin with colon (&lsquo;:&rsquo;). Type
+&quot;:help subject&quot; to get help on a specific subject.
+Use &lt;Tab&gt; and CTRL-D to complete subjects (&quot;:help
+cmdline-completion&quot;).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&quot;quickref&quot; help section is a condensed reference
+of editor features:</p>
+
+<p style="margin-left:17%;"><b>:help quickref</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If you are new
+to Vim/Nvim, start with the 30-minute tutorial:</p>
+
+<p style="margin-left:17%;"><b>:Tutor</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">After
+installing/updating Nvim, it&rsquo;s a good idea to run the
+self-check:</p>
+
+<p style="margin-left:17%;"><b>:checkhealth</b></p>
+
+<p style="margin-top: 1em"><i>file ...</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">File(s) to
+edit. Opens one buffer per file. To switch between buffers,
+use the <b>:next</b> and <b>:previous</b> commands.</p>
+
+<p style="margin-top: 1em"><b>-</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Reads text from
+standard input until EOF, then opens a buffer with that
+text. User input is read from standard error, which should
+be a terminal.</p>
+
+<p style="margin-top: 1em"><b>OPTIONS <br>
+-t</b> <i>tag</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Finds
+<i>tag</i> in the tags file, the associated file becomes the
+current file and the associated command is executed. Cursor
+is positioned at the tag location in the file. <b>:help
+tag-commands</b></p>
+
+<p style="margin-top: 1em"><b>-q</b> [<i>errorfile</i>]</p>
+
+<p style="margin-left:24%;">QuickFix mode. Display the
+first error in <i>errorfile</i>. If <i>errorfile</i> is
+omitted, the value of the &rsquo;errorfile&rsquo; option is
+used (defaults to <b>errors.err</b>). Further errors can be
+jumped to with the <b>:cnext</b> command. <b>:help
+quickfix</b></p>
+
+<p style="margin-top: 1em"><b>--</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">End of options.
+Remaining arguments are treated as literal file names,
+including filenames starting with hyphen
+(&lsquo;-&rsquo;).</p>
+
+<p style="margin-top: 1em"><b>-e</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Ex mode,
+reading stdin as Ex commands. <b>:help Ex-mode</b></p>
+
+<p style="margin-top: 1em"><b>-E</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Ex mode,
+reading stdin as text. <b>:help Ex-mode</b></p>
+
+<p style="margin-top: 1em"><b>-es</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Silent
+(non-interactive) Ex mode, reading stdin as Ex commands.
+Useful for scripting because it does NOT start a UI, unlike
+<b>-e</b>. <b>:help silent-mode</b></p>
+
+<p style="margin-top: 1em"><b>-Es</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Silent
+(non-interactive) Ex mode, reading stdin as text. Useful for
+scripting because it does NOT start a UI, unlike <b>-E</b>.
+<b>:help silent-mode</b></p>
+
+<p style="margin-top: 1em"><b>-d</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Diff mode. Show
+the difference between two to eight files, similar to
+<i>sdiff</i>(1). <b>:help diff</b></p>
+
+<p style="margin-top: 1em"><b>-R</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Read-only mode.
+Sets the &rsquo;readonly&rsquo; option. Implies <b>-n</b>.
+Buffers can still be edited, but cannot be written to disk
+if already associated with a file. To overwrite a file, add
+an exclamation mark to the relevant Ex command, such as
+<b>:w!</b>. <b>:help &rsquo;readonly&rsquo;</b></p>
+
+<p style="margin-top: 1em"><b>-m</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Resets the
+&rsquo;write&rsquo; option, to disable file modifications.
+Writing to a file is disabled, but buffers can still be
+modified.</p>
+
+<p style="margin-top: 1em"><b>-M</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Resets the
+&rsquo;write&rsquo; and &rsquo;modifiable&rsquo; options, to
+disable file and buffer modifications.</p>
+
+<p style="margin-top: 1em"><b>-b</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Binary mode.
+<b>:help edit-binary</b></p>
+
+<p style="margin-top: 1em"><b>-A</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Arabic mode.
+Sets the &rsquo;arabic&rsquo; option.</p>
+
+<p style="margin-top: 1em"><b>-H</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Hebrew mode.
+Sets the &rsquo;hkmap&rsquo; and &rsquo;rightleft&rsquo;
+options.</p>
+
+<p style="margin-top: 1em"><b>-V</b>[ <i><br>
+N</i>][<i>file</i>]</p>
+
+<p style="margin-left:24%;">Verbose mode. Prints debug
+messages. <i>N</i> is the &rsquo;verbose&rsquo; level,
+defaults to <b>10</b>. If <i>file</i> is specified, append
+messages to <i>file</i> instead of printing them. <b>:help
+&rsquo;verbose&rsquo;</b></p>
+
+<p style="margin-top: 1em"><b>-D</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Vimscript debug
+mode. Started when executing the first command from a
+script. :help debug-mode</p>
+
+<p style="margin-top: 1em"><b>-n</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Disable the use
+of swap files. Sets the &rsquo;updatecount&rsquo; option to
+<b>0</b>. Can be useful for editing files on a slow
+medium.</p>
+
+<p style="margin-top: 1em"><b>-r</b> [<i>file</i>]</p>
+
+<p style="margin-left:24%; margin-top: 1em">Recovery mode.
+If <i>file</i> is omitted then list swap files with recovery
+information. Otherwise the swap file <i>file</i> is used to
+recover a crashed session. The swap file has the same name
+as the file it&rsquo;s associated with, but with
+&lsquo;.swp&rsquo; appended. <b>:help recovery</b></p>
+
+<p style="margin-top: 1em"><b>-L</b> [<i>file</i>]</p>
+
+<p style="margin-left:24%; margin-top: 1em">Alias for
+<b>-r</b>.</p>
+
+<p style="margin-top: 1em"><b>-u</b> <i>vimrc</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Use
+<i>vimrc</i> instead of the default
+<i>&#732;/.config/nvim/init.vim</i>. If <i>vimrc</i> is
+<b>NORC</b>, do not load any initialization files (except
+plugins). If <i>vimrc</i> is <b>NONE</b>, loading plugins is
+also skipped. <b>:help initialization</b></p>
+
+<p style="margin-top: 1em"><b>-i</b> <i>shada</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Use
+<i>shada</i> instead of the default
+<i>&#732;/.local/state/nvim/shada/main.shada</i>. If
+<i>shada</i> is <b>NONE</b>, do not read or write a ShaDa
+file. <b>:help shada</b></p>
+
+<p style="margin-top: 1em"><b>--noplugin</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Skip loading
+plugins (by setting the &rsquo;noloadplugins&rsquo; option).
+Implied by <b>-u NONE</b>.</p>
+
+<p style="margin-top: 1em"><b>--clean</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Start Nvim with
+&quot;factory defaults&quot; (no user config and plugins, no
+shada). <b>:help --clean</b></p>
+
+<p style="margin-top: 1em"><b>-o</b>[<i>N</i>]</p>
+
+<p style="margin-left:24%; margin-top: 1em">Open <i>N</i>
+windows stacked horizontally. If <i>N</i> is omitted, open
+one window for each file. If <i>N</i> is less than the
+number of file arguments, allocate windows for the first
+<i>N</i> files and hide the rest.</p>
+
+<p style="margin-top: 1em"><b>-O</b>[<i>N</i>]</p>
+
+<p style="margin-left:24%; margin-top: 1em">Like <b>-o</b>,
+but tile windows vertically.</p>
+
+<p style="margin-top: 1em"><b>-p</b>[<i>N</i>]</p>
+
+<p style="margin-left:24%; margin-top: 1em">Like <b>-o</b>,
+but for tab pages.</p>
+
+<p style="margin-top: 1em"><b>+</b>[<i>linenum</i>]</p>
+
+<p style="margin-left:24%; margin-top: 1em">For the first
+file, position the cursor on line <i>linenum</i>. If
+<i>linenum</i> is omitted, position the cursor on the last
+line of the file. <b>+5</b> and <b>-c 5</b> on the
+command-line are equivalent to <b>:5</b> inside
+<b>nvim</b>.</p>
+
+<p style="margin-top: 1em"><b>+/</b>[<i>pattern</i>]</p>
+
+<p style="margin-left:24%;">For the first file, position
+the cursor on the first occurrence of <i>pattern</i>. If
+<i>pattern</i> is omitted, the most recent search pattern is
+used (if any). <b>+/foo</b> and <b>-c /foo</b> on the
+command-line are equivalent to <b>/foo</b> and <b>:/foo</b>
+inside <b>nvim</b>. <b>:help search-pattern</b></p>
+
+<p style="margin-top: 1em"><b>+</b><i>command</i>,
+<b>-c</b> <i>command</i></p>
+
+<p style="margin-left:24%;">Execute <i>command</i> after
+reading the first file. Up to 10 instances allowed.
+&quot;<b>+foo</b>&quot; and <b>-c &quot;foo&quot;</b> are
+equivalent.</p>
+
+<p style="margin-top: 1em"><b>--cmd</b> <i>command</i></p>
+
+<p style="margin-left:24%;">Like <b>-c</b>, but execute
+<i>command</i> before processing any vimrc. Up to 10
+instances of these can be used independently from instances
+of <b>-c</b>.</p>
+
+<p style="margin-top: 1em"><b>-l</b> <i>script</i>
+[<i>args</i>]</p>
+
+<p style="margin-left:24%;">Execute Lua <i>script</i> with
+optional [<i>args</i>] after processing any preceding Nvim
+startup arguments. All [<i>args</i>] are treated as script
+arguments and are passed literally to Lua, that is,
+<b>-l</b> stops processing of Nvim arguments. <b>:help
+-l</b></p>
+
+<p style="margin-top: 1em"><b>-S</b> [<i>session</i>]</p>
+
+<p style="margin-left:24%;">Execute <i>session</i> after
+the first file argument has been read. If <i>session</i>
+filename ends with <i>.lua</i> it is executed as Lua instead
+of Vimscript. Equivalent to <b>-c &quot;source
+session&quot;</b>. <i>session</i> cannot start with a hyphen
+(&lsquo;-&rsquo;). If <i>session</i> is omitted then
+<i>Session.vim</i> is used, if found. <b>:help
+session-file</b></p>
+
+<p style="margin-top: 1em"><b>-s</b> <i>scriptin</i></p>
+
+<p style="margin-left:24%;">Read normal mode commands from
+<i>scriptin</i>. The same can be done with the command
+<b>:source! scriptin</b>. If the end of the file is reached
+before <b>nvim</b> exits, further characters are read from
+the keyboard.</p>
+
+<p style="margin-top: 1em"><b>-w</b> <i>scriptout</i></p>
+
+<p style="margin-left:24%;">Append all typed characters to
+<i>scriptout</i>. Can be used for creating a script to be
+used with <b>-s</b> or <b>:source!</b>.</p>
+
+<p style="margin-top: 1em"><b>-W</b> <i>scriptout</i></p>
+
+<p style="margin-left:24%;">Like <b>-w</b>, but truncate
+<i>scriptout</i>.</p>
+
+<p style="margin-top: 1em"><b>--startuptime</b>
+<i>file</i></p>
+
+<p style="margin-left:24%;">During startup, append timing
+messages to <i>file</i>. Can be used to diagnose slow
+startup times.</p>
+
+<p style="margin-top: 1em"><b>--api-info</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Dump API
+metadata serialized to msgpack and exit.</p>
+
+<p style="margin-top: 1em"><b>--embed</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Use standard
+input and standard output as a msgpack-rpc channel. :help
+--embed</p>
+
+<p style="margin-top: 1em"><b>--headless</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Do not start a
+UI. When supplied with --embed this implies that the
+embedding application does not intend to (immediately) start
+a UI. Also useful for &quot;scraping&quot; messages in a
+pipe. :help --headless</p>
+
+<p style="margin-top: 1em"><b>--listen</b>
+<i>address</i></p>
+
+<p style="margin-left:24%;">Start RPC server on this pipe
+or TCP socket.</p>
+
+<p style="margin-top: 1em"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Print usage
+information and exit.</p>
+
+<p style="margin-top: 1em"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:24%;">Print version information and
+exit.</p>
+
+<p style="margin-top: 1em"><b>ENVIRONMENT</b> <br>
+NVIM_APPNAME</p>
+
+<p style="margin-left:24%;">The name of sub-directories
+used within each XDG user directory. Defaults to
+<b>nvim</b>. :help $NVIM_APPNAME</p>
+
+<p style="margin-top: 1em">NVIM_LOG_FILE</p>
+
+<p style="margin-left:24%;">Low-level log file, usually
+found at &#732;/.local/state/nvim/log. :help
+$NVIM_LOG_FILE</p>
+
+<p style="margin-top: 1em">VIM</p>
+
+<p style="margin-left:24%; margin-top: 1em">Used to locate
+user files, such as init.vim. System-dependent. :help
+$VIM</p>
+
+<p style="margin-top: 1em">VIMRUNTIME</p>
+
+<p style="margin-left:24%; margin-top: 1em">Used to locate
+runtime files (documentation, syntax highlighting,
+etc.).</p>
+
+<p style="margin-top: 1em">XDG_CONFIG_HOME</p>
+
+<p style="margin-left:24%;">Path to the user-local
+configuration directory, see &ldquo;FILES&rdquo;. Defaults
+to <i>&#732;/.config</i>. :help xdg</p>
+
+<p style="margin-top: 1em">XDG_STATE_HOME</p>
+
+<p style="margin-left:24%;">Like XDG_CONFIG_HOME, but used
+to store data not generally edited by the user, namely swap,
+backup, and ShaDa files. Defaults to
+<i>&#732;/.local/state</i>. :help xdg</p>
+
+<p style="margin-top: 1em">XDG_DATA_HOME</p>
+
+<p style="margin-left:24%;">Like XDG_CONFIG_HOME, but used
+to store data not generally edited by the user, things like
+runtime files. Defaults to <i>&#732;/.local/share</i>. :help
+xdg</p>
+
+<p style="margin-top: 1em">VIMINIT</p>
+
+<p style="margin-left:24%; margin-top: 1em">Ex commands to
+be executed at startup. <b>:help VIMINIT</b></p>
+
+<p style="margin-top: 1em">SHELL</p>
+
+<p style="margin-left:24%; margin-top: 1em">Used to
+initialize the &rsquo;shell&rsquo; option, which decides the
+default shell used by features like <b>:terminal</b>,
+<b>:!</b>, <b>and system()</b>.</p>
+
+<p style="margin-top: 1em"><b>FILES</b> <i><br>
+&#732;/.config/nvim/init.lua</i></p>
+
+<p style="margin-left:41%; margin-top: 1em">User-local
+<b>nvim</b> Lua configuration file.</p>
+
+<p style="margin-top: 1em"><i>&#732;/.config/nvim</i></p>
+
+<p style="margin-left:41%; margin-top: 1em">User-local
+<b>nvim</b> configuration directory. See also
+XDG_CONFIG_HOME.</p>
+
+<p style="margin-top: 1em"><i>$VIM/sysinit.vim</i></p>
+
+<p style="margin-left:41%; margin-top: 1em">System-global
+<b>nvim</b> configuration file.</p>
+
+<p style="margin-top: 1em"><i>$VIM</i></p>
+
+<p style="margin-left:41%; margin-top: 1em">System-global
+<b>nvim</b> runtime directory.</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">Nvim was started by Thiago de
+Arruda. Most of Vim was written by Bram Moolenaar. Vim is
+based on Stevie, worked on by Tim Thompson, Tony Andrews,
+and G.R. (Fred) Walter. <b>:help credits</b> GNU December
+17, 2017 <i>NVIM</i>(1)</p>
+<hr>
+</body>
+</html>

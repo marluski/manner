@@ -1,0 +1,168 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:37 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>POLYBAR-MSG</title>
+
+</head>
+<body>
+
+<h1 align="center">POLYBAR-MSG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">polybar-msg -
+Send IPC messages to polybar</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>polybar-msg</b>
+[<i>OPTIONS</i>] <b>action</b> <i>action-string</i> <b><br>
+polybar-msg</b> [<i>OPTIONS</i>] <b>action</b> <i>module
+action</i> [<i>data</i>] <b><br>
+polybar-msg</b> [<i>OPTIONS</i>] <b>cmd</b>
+<i>command</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Polybar allows
+external control through <i>actions</i> and <i>commands</i>.
+Actions control individual modules and commands control the
+bar itself.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The full IPC
+documentation is linked at the end of this document.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The available
+actions depend on the target module. For actions, the
+payload is either a single action string or the module name,
+the action name, and the optional data string specified
+separately.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In order for
+<b>polybar-msg</b> being able to send a message to a running
+<b>polybar</b> process, the bar must have IPC enabled and
+both <b>polybar-msg</b> and <b>polybar</b> must run under
+the same user.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">Display help text and exit</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-p PID</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Send message only to <b>polybar</b> process running
+under the given process ID. If not specified, the message is
+sent to all running <b>polybar</b> processes.</p></td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>polybar-msg
+cmd</b> <i>quit</i></p>
+
+<p style="margin-left:18%;">Terminate all running
+<b>polybar</b> instances.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>polybar-msg
+action</b> <i>mymodule module_hide</i> <b><br>
+polybar-msg action</b>
+&quot;<i>#mymodule.module_hide</i>&quot;</p>
+
+<p style="margin-left:18%;">Hide the module named
+<i>mymodule</i>. The first variant specifies the module and
+action names separately, the second uses an action
+string.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Polybar was
+created by Michael Carlberg and is currently maintained by
+Patrick Ziegler. <br>
+Contributors can be listed on GitHub.</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report issues on
+GitHub &lt;<i>https://github.com/polybar/polybar</i>&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>polybar</b>(1),
+<b>polybar</b>(5) <br>
+IPC documentation:
+&lt;<i>https://polybar.rtfd.org/en/stable/user/ipc.html</i>&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2016-2024,
+Michael Carlberg &amp; contributors</p>
+<hr>
+</body>
+</html>

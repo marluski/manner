@@ -1,0 +1,266 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:54 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>libnbd-release-notes-1.10</title>
+
+</head>
+<body>
+
+<h1 align="center">libnbd-release-notes-1.10</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Security">Security</a><br>
+<a href="#New APIs">New APIs</a><br>
+<a href="#Enhancements to existing APIs">Enhancements to existing APIs</a><br>
+<a href="#Tools">Tools</a><br>
+<a href="#Tests">Tests</a><br>
+<a href="#Other improvements and bug fixes">Other improvements and bug fixes</a><br>
+<a href="#Documentation">Documentation</a><br>
+<a href="#Build">Build</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">libnbd-release-notes-1.10
+- release notes for libnbd 1.10</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+release notes for libnbd stable release 1.10. This describes
+the major changes since 1.8.</p>
+
+<p style="margin-left:9%; margin-top: 1em">libnbd 1.10.0
+was released on <b>23 September 2021</b>.</p>
+
+<h3>Security
+<a name="Security"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">There were no
+security bugs found in libnbd during this release cycle.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you find a
+security issue, please read <i>SECURITY</i> in the source
+(online here:
+https://gitlab.com/nbdkit/libnbd/blob/master/SECURITY). To
+find out about previous security issues in libnbd, see
+<b>libnbd-security</b>(3).</p>
+
+<h3>New APIs
+<a name="New APIs"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">No new APIs were
+added in 1.10.</p>
+
+<h3>Enhancements to existing APIs
+<a name="Enhancements to existing APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_get_uri</b>(3)
+no longer returns service names (eg.
+&quot;nbd://localhost:nbd&quot;). Instead it always returns
+raw port numbers for portability.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_connect_uri</b>(3)
+now supports &quot;tls-certificates=<i>DIR</i>&quot; query
+parameter, making it much easier to connect to servers using
+TLS with X.509 certificates. Also error messages from this
+API have been improved in the case of some common URI user
+errors.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Python
+&quot;nbd.aio_connect&quot; implements support for
+&quot;AF_UNIX&quot; sockets.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fix invalid use
+of &quot;unsafe.Pointer&quot; in Go bindings.</p>
+
+<h3>Tools
+<a name="Tools"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdcopy</b>(1)
+now uses a default request size of 256K (instead of 32M).
+This default performs better in most cases.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+has a new <i>--map --totals</i> mode which displays a
+summary of the map. Also new <i>--can</i> and <i>--is</i>
+options let you test export properties (eg. <i>--is
+read-only</i>).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+<i>--map</i> option uses &quot;data&quot; instead of
+&quot;allocated&quot; because of ambiguity about what
+&quot;allocated&quot; means (Eric Blake, Nir Soffer).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+shows the export size in both bytes and human units (like
+&quot;1K&quot;). The machine-parsable JSON output has not
+changed.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdfuse</b>(1)
+now supports efficient zeroing. Note this requires Linux
+kernel &ge; 5.14.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdsh</b>(1)
+has new option <i>-n</i> which avoids creating the implicit
+handle &quot;h&quot;. Also new option <i>-v</i> which
+enables debugging. Also the initial help banner is now
+context sensitive giving more relevant information depending
+on how nbdsh was invoked.</p>
+
+<h3>Tests
+<a name="Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">CI tests were
+greatly enhanced and many platform-specific fixes were made.
+To view the latest CI tests and results see:
+https://gitlab.com/nbdkit/libnbd/-/pipelines (Martin
+Kletzander).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Tests now use
+the new &quot;GLIBC_TUNABLES&quot; feature, replacing
+&quot;MALLOC_CHECK_&quot; on glibc &ge; 2.34 (thanks Eric
+Blake, Siddhesh Poyarekar).</p>
+
+<h3>Other improvements and bug fixes
+<a name="Other improvements and bug fixes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>nbdcopy</b>(1) progress bar should be displayed more
+accurately in multithreaded mode.</p>
+
+<h3>Documentation
+<a name="Documentation"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&quot;nbd_connect*&quot;
+and &quot;nbd_aio_connect*&quot; documentation has been
+revised and improved.</p>
+
+<p style="margin-left:9%; margin-top: 1em">More consistent
+option styling is used throughout the documentation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>podwrapper.pl</i>
+has been unified (almost) with the copy in nbdkit.</p>
+
+<h3>Build
+<a name="Build"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>configure.ac</i>
+now uses spaces consistently, and has been modernized to
+support the latest autotools (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">We now warn
+about large stack frames, and a few places which used large
+stack frames have been fixed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Continue fuzzing
+using AFL++. Updated the fuzzing documentation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fix building
+from git with <i>--disable-ocaml</i>. As long as only
+&quot;ocamlc&quot; is installed, the generator should still
+be built and run (Martin Kletzander).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Anson Lo <br>
+Eric Blake <br>
+Martin Kletzander <br>
+Richard W.M. Jones</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

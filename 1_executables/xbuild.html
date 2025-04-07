@@ -1,0 +1,444 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>xbuild</title>
+
+</head>
+<body>
+
+<h1 align="center">xbuild</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xbuild -
+Mono&rsquo;s tool to build MSBuild project files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xbuild</b>
+[option] [project-file]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xbuild can be
+used to build MSBuild project files. Integrated Development
+Environments like MonoDevelop and &quot;Microsoft Visual
+Studio .NET&quot; use msbuild project file format.</p>
+
+<p style="margin-left:9%; margin-top: 1em">xbuild takes the
+path of the project or solution file to build, as the main
+argument. If no file is specified then it tries to build any
+solution file or project file in the current directory, that
+has a *proj extension.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>/target:T1[,TN]</b></p>
+
+<p style="margin-left:18%;">List of targets to build</p>
+
+<p style="margin-left:9%;"><b>/property:Name=Value</b></p>
+
+<p style="margin-left:18%;">Set or override project
+properties</p>
+
+
+<p style="margin-left:9%;"><b>/logger:&lt;logger&gt;</b></p>
+
+<p style="margin-left:18%;">Custom logger to log build
+events</p>
+
+<p style="margin-left:9%;"><b>/toolsversion:version ,
+/tv:version</b></p>
+
+<p style="margin-left:18%;">Specify the toolset version to
+use.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Eg. /tv:4.0
+<br>
+This would cause 4.0 version of the Microsoft.Common.targets
+(among others) to be used. This overrides <br>
+the value specified in a project file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Valid values:
+2.0, 3.0, 3.5 and 4.0</p>
+
+
+<p style="margin-left:9%;"><b>/verbosity:&lt;level&gt;</b></p>
+
+<p style="margin-left:18%;">Logger verbosity level : quiet,
+minimal, normal, detailed, diagnostic</p>
+
+<p style="margin-left:9%;"><b>/validate</b></p>
+
+<p style="margin-left:18%;">Validate the project file
+against the schema</p>
+
+
+<p style="margin-left:9%;"><b>/validate:&lt;schema&gt;</b></p>
+
+<p style="margin-left:18%;">Validate the project file
+against the specified schema</p>
+
+
+<p style="margin-left:9%;"><b>/consoleloggerparameters:&lt;params&gt;
+, /clp:&lt;params&gt;</b></p>
+
+<p style="margin-left:18%;">Parameters for the console
+logger : PerfomanceSummary, Summary, NoSummary,
+NoItemAndPropertyList, Verbosity</p>
+
+<p style="margin-left:9%;"><b>/filelogger[n] ,
+/fl[n]</b></p>
+
+<p style="margin-left:18%;">Logs the output to a file,
+named &rsquo;msbuild.log&rsquo; by default. If the optional
+number &rsquo;n&rsquo; is specified, then it logs to
+&rsquo;msbuild[n].log&rsquo; . Parameters for this logger,
+including the log file name can be specified via a
+corresponding /flp[n] option. Default verbosity for file
+loggers is &rsquo;detailed. &rsquo;n&rsquo; can be between
+1-9.</p>
+
+
+<p style="margin-left:9%;"><b>/fileloggerparameters[n]:&lt;params&gt;
+, /flp[n]:&lt;params&gt;</b></p>
+
+<p style="margin-left:18%;">Parameters for a file logger.
+This implies a corresponding /fl[n]. &rsquo;n&rsquo; can be
+between 1-9, and is used to add upto 10 file loggers.
+Parameters can be, besides the ones available for console
+logger: <i><br>
+LogFile=&lt;file&gt;</i></p>
+
+<p style="margin-left:27%;">File to which the build log
+will be written.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>Append</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>If this is used, then the log file is appended to, else
+a new one will be created.</p></td></tr>
+</table>
+
+
+<p style="margin-left:18%;"><i>Encoding=&lt;encoding&gt;</i></p>
+
+<p style="margin-left:27%;">Encoding to use for the log
+file, eg. UTF-8, ASCII.</p>
+
+<p style="margin-left:18%;">Eg: xbuild foo.csproj
+/flp:Verbosity=normal <br>
+
+&quot;/flp1:LogFile=build.log;Append;Encoding=ASCII&quot;</p>
+
+<p style="margin-left:9%;"><b>/nologo</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t show the initial
+xbuild banner</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>/help</b></p></td>
+<td width="3%"></td>
+<td width="22%">
+
+
+<p>Show xbuild usage</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>/version</b></p>
+
+<p style="margin-left:18%;">Display xbuild version</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>XBUILD_EMIT_SOLUTION</i></p>
+
+<p style="margin-left:18%;">If this variable is set, then
+the project file generated from a solution file is
+emitted.</p>
+
+
+<p style="margin-left:9%;"><i>XBUILD_LOG_REFERENCE_RESOLVER</i></p>
+
+<p style="margin-left:18%;">References are resolved by
+trying a list of assembly search paths
+($(AssemblySearchPaths)). If xbuild is unable to resolve a
+reference, then it logs details of why the various search
+paths failed. If this variable is set, then it logs the same
+even for references that were resolved successfully. These
+logs show up if the verbosity is set to detailed or
+higher.</p>
+
+
+<p style="margin-left:9%;"><i>MSBuildExtensionsPath</i></p>
+
+<p style="margin-left:18%;">MSBuild extensions are usually
+installed in $(MSBuildExtensionsPath), which xbuild resolves
+to $prefix/lib/mono/xbuild . When used in Import, like:</p>
+
+<p style="margin-left:18%; margin-top: 1em">&lt;Import
+Project=&quot;$(MSBuildExtensionsPath)\TestTargets.targets&quot;/&gt;</p>
+
+<p style="margin-left:18%; margin-top: 1em">xbuild tries
+various values for the msbuild property
+$(MSBuildExtensionsPath), in order:</p>
+
+<p style="margin-left:18%; margin-top: 1em">1. Paths
+specified in the environment variable
+$MSBuildExtensionsPath. <br>
+2. /Library/Frameworks/Mono.framework/External/xbuild on Mac
+OSX. <br>
+3. $XDG_CONFIG_HOME/xbuild/tasks (or
+Environment.SpecialFolder.ApplicationData) <br>
+4. $prefix/lib/mono/xbuild (default location)</p>
+
+<p style="margin-left:18%; margin-top: 1em">Anywhere else
+in the project files, $(MSBuildExtensionsPath) will always
+resolve to the default location. This is a xbuild-only
+feature. This is also applicable for the properties
+$(MSBuildExtensionsPath32) and $(MSBuildExtensionsPath64),
+and the environment variables have the corresponding names -
+MSBuildExtensionsPath32/64 .</p>
+
+
+<p style="margin-left:9%;"><i>XBUILD_FRAMEWORK_FOLDERS_PATH</i></p>
+
+<p style="margin-left:18%;">With ToolsVersion 4.0, projects
+can target arbitrary frameworks referenced by
+TargetFrameworkMoniker, which is of the format:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">Identifier,Version=&lt;version&gt;[,Profile=&lt;profile&gt;]</p>
+
+<p style="margin-left:18%; margin-top: 1em">Eg.
+&quot;.NETFramework,Version=v4.0&quot;</p>
+
+<p style="margin-left:18%; margin-top: 1em">The 3 parts of
+the moniker are given by the msbuild properties:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">$(TargetFrameworkIdentifier),
+$(TargetFrameworkVersion) and $(TargetFrameworkProfile)</p>
+
+<p style="margin-left:18%; margin-top: 1em">This moniker
+maps to a framework description file on disk:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">&lt;framework_root&gt;/Identifier/Version/[Profile]/RedistList/FrameworkList.xml</p>
+
+<p style="margin-left:18%; margin-top: 1em">This file is
+used to determine the path where to find the framework
+assemblies for this particular framework.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Framework root
+here is configurable and is resolved in the following
+order:</p>
+
+<p style="margin-left:18%; margin-top: 1em">1. Paths
+specified in the environment variable
+$XBUILD_FRAMEWORK_FOLDERS_PATH <br>
+2.
+/Library/Frameworks/Mono.framework/External/xbuild-frameworks
+on Mac OSX. <br>
+3. MSBuild property $(TargetFrameworkRoot) <br>
+4. $prefix/lib/mono/xbuild-frameworks (default location)</p>
+
+<p style="margin-left:18%; margin-top: 1em">XBuild tries
+the paths given above, in order, till it finds a
+FrameworkList.xml for the moniker. Running with /v:detailed
+or higher verbosity will show the various paths that it
+tries.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+FrameworkList.xml itself just has a root element like:</p>
+
+<p style="margin-left:18%; margin-top: 1em">&lt;FileList
+Name=&quot;.NET Framework 3.5&quot;
+TargetFrameworkDirectory=&quot;..\..\..\..\3.5&quot;
+IncludeFramework=&quot;v3.0&quot;&gt; <br>
+&lt;/FileList&gt;</p>
+
+<p style="margin-left:18%; margin-top: 1em">Here the
+TargetFrameworkDirectory attribute specifies the directory
+where the assemblies for this particular framework can be
+found. If this is not set, then the parent of the folder
+containing the xml file is taken as the framework
+directory.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">IncludeFramework
+attribute specifies the version of a framework (under the
+*same* $(TargetFrameworkIdentifier)) which should be
+included in the final list of Target framework
+directories.</p>
+
+<p style="margin-left:9%;"><i>XBUILD_COLORS</i></p>
+
+<p style="margin-left:18%;">If this variable is set, it
+contains a string of the form
+&quot;type=foreground,type=..&quot; that specifies which
+color to use to display errors/warnings etc on some
+terminals. Type here can be:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>errors, warnings, messages or events</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>events: These are project/target/task start and end
+event</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>messages.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The possible
+colors for foreground are: <b>black, red, brightred, green,
+brightgreen, yellow, brightyellow,</b> blue, brightblue,
+magenta, brightmagenta, cyan, brightcyan, grey, white and
+brightwhite.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For example,
+you could set this variable from your shell:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>export XBUILD_COLORS</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>XBUILD_COLORS=errors=brightred,warnings=blue</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">You can disable
+the built-in color scheme by setting this variable to
+&quot;disable&quot;.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On Mac OSX, for
+locating pkg-config (.pc) files, xbuild additionally looks
+in
+&quot;/Library/Frameworks/Mono.framework/External/pkgconfig&quot;
+.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono(1),</b>mcs(1)</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2011 Novell, Inc (http://www.novell.com)</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

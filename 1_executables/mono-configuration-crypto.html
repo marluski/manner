@@ -1,0 +1,219 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:29 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">mono-configuration-crypto,
+- Mono configuration utility to manage encryption keys and
+encrypt/decrypt config file sections</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono-configuration-crypto
+&lt;options&gt;</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">mono-configuration-crypto
+is a utility to manage mono encryption key container store
+and to encrypt/decrypt config file sections.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h, -?,
+--help</b></p>
+
+<p style="margin-left:18%;">Show usage information</p>
+
+<p style="margin-left:9%;"><b>-v, --verbose</b></p>
+
+<p style="margin-left:18%;">Show verbose information
+(including exception stacktraces)</p>
+
+<p style="margin-left:9%;"><b>-m, --machine,
+--global</b></p>
+
+<p style="margin-left:18%;">Use machine (global) store for
+all the key actions. Note that on Unix machines global store
+is located in <i>/usr/share/.mono</i> and modifying it
+requires root user permissions.</p>
+
+<p style="margin-left:9%;"><b>-u, --user, --local</b></p>
+
+<p style="margin-left:18%;">Use local (user) store for all
+the key actions. User key store is located in the
+<i>$HOME/.config/.mono</i> directory. This is the default
+location used by mono-configuration-crypto.</p>
+
+<p style="margin-left:9%;"><b>-l, --list</b></p>
+
+<p style="margin-left:18%;">List all the key container
+names in the store. Note that some container names might be
+just GUID strings.</p>
+
+<p style="margin-left:9%;"><b>-c, --create</b></p>
+
+<p style="margin-left:18%;">Creates an RSA public/private
+key pair. If the specified container (see the <i>-f</i>
+option) already exists, the operation will fail.</p>
+
+<p style="margin-left:9%;"><b>-i, --import</b></p>
+
+<p style="margin-left:18%;">Imports key to a container.
+Imports a key from file (specified by the <i>-f</i> option)
+and puts it as the first key in the specified container (see
+the <i>-n</i> option). If container exists, its first key is
+replaced. If container doesn&rsquo;t exist, it is created.
+No validation is performed on the key value - this is left
+to the protection provider or encryption code which uses the
+key.</p>
+
+<p style="margin-left:9%;"><b>-x, --export</b></p>
+
+<p style="margin-left:18%;">Exports key from a container.
+Exports a key from indicated container (see the <i>-n</i>
+option) and puts it in the specified file (see the <i>-f</i>
+option) as XML. The file can later be used to import the
+key.</p>
+
+<p style="margin-left:9%;"><b>-r, --remove</b></p>
+
+<p style="margin-left:18%;">Remove a container. Physically
+removes the container file from disk.</p>
+
+<p style="margin-left:9%;"><b>-f, --file=VALUE</b></p>
+
+<p style="margin-left:18%;">File name for import or export
+operations. All options which read or write anything to/from
+files require this option to be present on the command
+line.</p>
+
+<p style="margin-left:9%;"><b>-cf,
+--config-file=VALUE</b></p>
+
+<p style="margin-left:18%;">Config file name. Specifies
+base name of the config file, used in encrypt and decrypt
+operations. Files are sought for case-insensitively.
+Defaults to <i>Web.config</i></p>
+
+<p style="margin-left:9%;"><b>-n, --name=VALUE</b></p>
+
+<p style="margin-left:18%;">Container name. If this option
+is absent from the command line it defaults to
+<i>MonoFrameworkConfigurationKey</i> (the default key name
+used by System.Configuration section encryption/decryption
+code)</p>
+
+<p style="margin-left:9%;"><b>-s, --size=VALUE</b></p>
+
+<p style="margin-left:18%;">Key size. Specifies the key
+length for the create operation (see the <i>-c</i> option).
+Defaults to 1024.</p>
+
+<p style="margin-left:9%;"><b>-p, --path=VALUE</b></p>
+
+<p style="margin-left:18%;">Application physical path. Used
+when encrypting/decrypting configuration file sections to
+specify the directory in which the configuration file lives
+(see the <i>-cf</i> option). Defaults to current
+directory.</p>
+
+<p style="margin-left:9%;"><b>-d, --dec,
+--decrypt=VALUE</b></p>
+
+<p style="margin-left:18%;">Decrypt configuration section.
+Configuration section must follow the format used when
+calling ConfigurationManager.GetSection, i.e.:
+path/to/section. Only sections known to the configuration
+system will be processed.</p>
+
+<p style="margin-left:9%;"><b>-e, --enc,
+--encrypt=VALUE</b></p>
+
+<p style="margin-left:18%;">Encrypt configuration section.
+Configuration section must follow the format used when
+calling ConfigurationManager.GetSection, i.e.:
+path/to/section. Only sections known to the configuration
+system will be processed.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Marek
+Habersack</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2010 Novell, Inc (http://novell.com)</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://mono-project.com for details</p>
+<hr>
+</body>
+</html>

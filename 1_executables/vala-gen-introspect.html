@@ -1,0 +1,166 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VALA-GEN-INTROSPECT</title>
+
+</head>
+<body>
+
+<h1 align="center">VALA-GEN-INTROSPECT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Usage:">Usage:</a><br>
+<a href="#Help Options:">Help Options:</a><br>
+<a href="#Application Options:">Application Options:</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#HOMEPAGE OR CONTACT">HOMEPAGE OR CONTACT</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">vala-gen-introspect
+- generate a GI file for GObject and glib based packages</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vala-gen-introspect</b>
+<i>PKGNAME PKGBASE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>vala-gen-introspect</b></i>
+is a utility which generates GI files from GObject and glib
+based packages. It can be used in combination with
+vapigen(1) to generate an API for Vala, and allow its usage
+in Vala for compiling to native code. <i>PKGNAME</i> is the
+pkg-config name of the library and <i>PKGBASE</i> specifies
+the base directory for that package.</p>
+
+<h3>Usage:
+<a name="Usage:"></a>
+</h3>
+
+
+<p style="margin-left:18%; margin-top: 1em">gen-introspect
+[OPTION?]</p>
+
+<h3>Help Options:
+<a name="Help Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<h3>Application Options:
+<a name="Application Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:18%;">Be verbose</p>
+
+<p style="margin-left:9%;"><b>-o</b>,
+<b>--output</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">write output here instead of
+stdout</p>
+
+<p style="margin-left:9%;"><b>-n</b>,
+<b>--namespace</b>=<i>NAMESPACE</i></p>
+
+<p style="margin-left:18%;">Namespace of the module, like
+&rsquo;Gtk&rsquo;</p>
+
+
+<p style="margin-left:9%;"><b>--shared-library</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Shared library which contains
+the symbols</p>
+
+
+<p style="margin-left:9%;"><b>--include-idl</b>=<i>IDL</i></p>
+
+<p style="margin-left:18%;">Other gidls to include</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://gitlab.gnome.org/GNOME/vala/issues</p>
+
+<h2>HOMEPAGE OR CONTACT
+<a name="HOMEPAGE OR CONTACT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://vala.dev</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">J??rg Billeter,
+Raffaele Sandrini.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">After
+compilation, the following command generates a GI for pango:
+<b>vala-gen-introspect pango packages/pango</b> <br>
+This can then be converted to a Vala API as follows:</p>
+
+<p style="margin-left:18%;"><b>vapigen --pkg cairo
+--vapidir . --library pango packages/pango/pango.gi</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">vapigen (1)</p>
+<hr>
+</body>
+</html>

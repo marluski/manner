@@ -1,0 +1,287 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:36 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-panel</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-panel</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Overview">Overview</a><br>
+<a href="#Source code for panel">Source code for panel</a><br>
+<a href="#Command line interface">Command line interface</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Author">Author</a><br>
+<a href="#Copyright">Copyright</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-panel -
+Use a command line program to draw a GPU accelerated panel
+on your X11 desktop</p>
+
+<h2>Overview
+<a name="Overview"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can use this
+kitten to draw a GPU accelerated panel on the edge of your
+screen or as the desktop wallpaper, that shows the output
+from an arbitrary terminal program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is useful for
+showing status information or notifications on your desktop
+using terminal programs instead of GUI toolkits.</p>
+
+<p style="margin-left:12%;">Screenshot, showing a sample
+panel (images not supported)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The screenshot
+above shows a sample panel that displays the current desktop
+and window title as well as miscellaneous system information
+such as network activity, CPU load, date/time, etc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Added in version
+0.34.0: Support for Wayland</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">This kitten currently only
+works on X11 desktops and Wayland compositors that support
+the <i>wlr layer shell protocol</i> (which is almost all of
+them except the, as usual, crippled GNOME).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using this
+kitten is simple, for example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitty +kitten
+panel sh -c 'printf &quot;\n\n\nHello, world.&quot;; sleep
+5s'</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will show
+<b>Hello, world.</b> at the top edge of your screen for five
+seconds. Here, the terminal program we are running is
+<b>sh</b> with a script to print out <b>Hello, world!</b>.
+You can make the terminal program as complex as you like, as
+demonstrated in the screenshot above.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you are on
+Wayland, you can, for instance run:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitty +kitten
+panel --edge=background htop</p>
+
+<p style="margin-left:9%; margin-top: 1em">to display htop
+as your desktop background. Remember this works in
+everything but GNOME and also, in sway, you have to disable
+the background wallpaper as sway renders that over the panel
+kitten surface.</p>
+
+<h2>Source code for panel
+<a name="Source code for panel"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The source code
+for this kitten is <i>available on GitHub</i>.</p>
+
+<h2>Command line interface
+<a name="Command line interface"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">kitty +kitten
+panel [options] program-to-run</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use a command
+line program to draw a GPU accelerated panel on your X11
+desktop</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--lines
+&lt;LINES&gt;</b></p>
+
+<p style="margin-left:18%;">The number of lines shown in
+the panel. Ignored for background, centered, and vertical
+panels. Default: <b>1</b></p>
+
+<p style="margin-left:9%;"><b>--columns
+&lt;COLUMNS&gt;</b></p>
+
+<p style="margin-left:18%;">The number of columns shown in
+the panel. Ignored for background, centered, and horizontal
+panels. Default: <b>1</b></p>
+
+<p style="margin-left:9%;"><b>--margin-top
+&lt;MARGIN_TOP&gt;</b></p>
+
+<p style="margin-left:18%;">Request a given top margin to
+the compositor. Only works on a Wayland compositor that
+supports the wlr layer shell protocol. Default: <b>0</b></p>
+
+<p style="margin-left:9%;"><b>--margin-left
+&lt;MARGIN_LEFT&gt;</b></p>
+
+<p style="margin-left:18%;">Request a given left margin to
+the compositor. Only works on a Wayland compositor that
+supports the wlr layer shell protocol. Default: <b>0</b></p>
+
+<p style="margin-left:9%;"><b>--margin-bottom
+&lt;MARGIN_BOTTOM&gt;</b></p>
+
+<p style="margin-left:18%;">Request a given bottom margin
+to the compositor. Only works on a Wayland compositor that
+supports the wlr layer shell protocol. Default: <b>0</b></p>
+
+<p style="margin-left:9%;"><b>--margin-right
+&lt;MARGIN_RIGHT&gt;</b></p>
+
+<p style="margin-left:18%;">Request a given right margin to
+the compositor. Only works on a Wayland compositor that
+supports the wlr layer shell protocol. Default: <b>0</b></p>
+
+<p style="margin-left:9%;"><b>--edge &lt;EDGE&gt;</b></p>
+
+<p style="margin-left:18%;">Which edge of the screen to
+place the panel on. Note that some window managers (such as
+i3) do not support placing docked windows on the left and
+right edges. The value <b>background</b> means make the
+panel the &quot;desktop wallpaper&quot;. This is only
+supported on Wayland, not X11 and note that when using sway
+if you set a background in your sway config it will cover
+the background drawn using this kitten. Additionally, there
+are two Wayland only values: <b>center</b> and <b>none</b>.
+The value <b>center</b> anchors the panel to all sides and
+covers the entire display by default. The panel can be
+shrunk using the margin parameters. The value <b>none</b>
+anchors the panel to the top left corner and should be
+placed using the margin parameters. Default: <b>top</b>
+Choices: <b>background</b>, <b>bottom</b>, <b>center</b>,
+<b>left</b>, <b>none</b>, <b>right</b>, <b>top</b></p>
+
+<p style="margin-left:9%;"><b>--layer &lt;LAYER&gt;</b></p>
+
+<p style="margin-left:18%;">On a Wayland compositor that
+supports the wlr layer shell protocol, specifies the layer
+on which the panel should be drawn. This parameter is
+ignored and set to <b>background</b> if <i>--edge</i> is set
+to <b>background</b>. Default: <b>bottom</b> Choices:
+<b>background</b>, <b>bottom</b>, <b>overlay</b>,
+<b>top</b></p>
+
+<p style="margin-left:9%;"><b>--config &lt;CONFIG&gt;, -c
+&lt;CONFIG&gt;</b></p>
+
+<p style="margin-left:18%;">Path to config file to use for
+kitty when drawing the panel.</p>
+
+<p style="margin-left:9%;"><b>--override &lt;OVERRIDE&gt;,
+-o &lt;OVERRIDE&gt;</b></p>
+
+<p style="margin-left:18%;">Override individual kitty
+configuration options, can be specified multiple times.
+Syntax: name=value. For example: <i>kitty +kitten panel
+-o</i> font_size=20</p>
+
+<p style="margin-left:9%;"><b>--output-name
+&lt;OUTPUT_NAME&gt;</b></p>
+
+<p style="margin-left:18%;">On Wayland, the panel can only
+be displayed on a single monitor (output) at a time. This
+allows you to specify which output is used, by name. If not
+specified the compositor will choose an output
+automatically, typically the last output the user interacted
+with or the primary monitor.</p>
+
+<p style="margin-left:9%;"><b>--class &lt;CLS&gt;</b></p>
+
+<p style="margin-left:18%;">Set the class part of the
+WM_CLASS window property. On Wayland, it sets the app id.
+Default: <b>kitty-panel</b></p>
+
+<p style="margin-left:9%;"><b>--name &lt;NAME&gt;</b></p>
+
+<p style="margin-left:18%;">Set the name part of the
+WM_CLASS property (defaults to using the value from <i>kitty
+--class</i>)</p>
+
+<p style="margin-left:9%;"><b>--focus-policy
+&lt;FOCUS_POLICY&gt;</b></p>
+
+<p style="margin-left:18%;">On a Wayland compositor that
+supports the wlr layer shell protocol, specify the focus
+policy for keyboard interactivity with the panel. Please
+refer to the wlr layer shell protocol documentation for more
+details. Default: <b>not-allowed</b> Choices:
+<b>exclusive</b>, <b>not-allowed</b>, <b>on-demand</b></p>
+
+<p style="margin-left:9%;"><b>--exclusive-zone
+&lt;EXCLUSIVE_ZONE&gt;</b></p>
+
+<p style="margin-left:18%;">On a Wayland compositor that
+supports the wlr layer shell protocol, request a given
+exclusive zone for the panel. Please refer to the wlr layer
+shell documentation for more details on the meaning of
+exclusive and its value. If <i>--edge</i> is set to anything
+other than <b>center</b> or <b>none</b>, this flag will not
+have any effect unless the flag
+<i>--override-exclusive-zone</i> is also set. If
+<i>--edge</i> is set to <b>background</b>, this option has
+no effect. Default: <b>-1</b></p>
+
+
+<p style="margin-left:9%;"><b>--override-exclusive-zone</b></p>
+
+<p style="margin-left:18%;">On a Wayland compositor that
+supports the wlr layer shell protocol, override the default
+exclusive zone. This has effect only if <i>--edge</i> is set
+to <b>top</b>, <b>left</b>, <b>bottom</b> or
+<b>right</b>.</p>
+
+<p style="margin-left:9%;"><b>--debug-rendering</b></p>
+
+<p style="margin-left:18%;">For internal debugging use.</p>
+
+<h2>Author
+<a name="Author"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kovid Goyal</p>
+
+<h2>Copyright
+<a name="Copyright"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2025, Kovid
+Goyal</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,826 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mono-profilers</title>
+
+</head>
+<body>
+
+<h1 align="center">mono-profilers</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#LOG PROFILER">LOG PROFILER</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Command server">Command server</a><br>
+<a href="#Managed library">Managed library</a><br>
+<a href="#Example">Example</a><br>
+<a href="#COVERAGE PROFILER">COVERAGE PROFILER</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Filter files">Filter files</a><br>
+<a href="#Example">Example</a><br>
+<a href="#AOT PROFILER">AOT PROFILER</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Example">Example</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mono-profilers -
+Mono&rsquo;s bundled profiler modules</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono&nbsp;--profile=log</b>[:<i>option</i>,...]
+<i>program.exe</i> [<i>args</i>]...</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono&nbsp;--profile=coverage</b>[:<i>option</i>,...]
+<i>program.exe</i> [<i>args</i>]...</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono&nbsp;--profile=aot</b>[:<i>option</i>,...]
+<i>program.exe</i> [<i>args</i>]...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mono ships with
+a few profiler modules that enable most typical profiling
+scenarios. This page describes each of them in the sections
+below.</p>
+
+<h2>LOG PROFILER
+<a name="LOG PROFILER"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The log profiler
+is Mono&rsquo;s general-purpose performance profiler. It can
+collect a wide variety of data that can be analyzed by tools
+such as <b>mprof-report</b>(1) or the Xamarin Profiler.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, the
+log profiler writes its output to <i>output.mlpd</i>. Refer
+to the <i>mono/profiler/log.h</i> file in the Mono source
+tree for documentation on the log profiler&rsquo;s file
+format.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A default
+invocation of the log profiler gathers only basic data:
+Metadata load and unload events, thread start and stop
+events, performance counter samples, exception throws, etc.
+Most users will want to enable some of the heavier features
+such as GC allocation recording, statistical sampling, heap
+snapshotting (heapshots), or method entry and exit
+instrumentation. See the <b>Options</b> sub-section.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that, in
+most realistic scenarios, the log profiler will record a
+vast amount of data. This can lead to very large log files.
+(The <b>zip</b> and <b>report</b> options can help deal with
+this.)</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The log profiler
+supports the following options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>help</b></p></td>
+<td width="4%"></td>
+<td width="32%">
+
+
+<p>Print usage instructions.</p></td>
+<td width="50%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>output</b>=[<i>+</i>|<i>#</i>|<i>|</i>]<i>file</i></p>
+
+<p style="margin-left:18%;">Write log data to <i>file</i>.
+The optional modifiers are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>+</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p>The program PID is appended to the file name. For
+example, <b>output=+out.mlpd</b> outputs to
+<i>out.mlpd.1234</i> if the PID is <b>1234</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>#</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p><i>file</i> is parsed as a file descriptor number, which
+is opened with <b>fdopen</b>(3). This is mainly useful in
+embedding scenarios.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>|</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p><i>file</i> is treated as a program name. It will be
+started with <b>popen</b>(3) and the log data will be piped
+to its standard input.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>report</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Generate a
+report directly instead of writing the log data to a file.
+If this option is used together with the <b>output</b>
+option, the report will be written to the specified file
+instead of the log data.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>zip</b></p></td>
+<td width="5%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">Compress the output file with
+<b>gzip</b>(1).</p> </td>
+<td width="33%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>port</b>=<i>port</i></p>
+
+<p style="margin-left:18%;">Use <i>port</i> to listen for
+command server connections. See the <b>Command server</b>
+sub-section.</p>
+
+<p style="margin-left:9%;"><b>nodefaults</b></p>
+
+<p style="margin-left:18%;">Disables pre Mono 5.6
+compatibility. In particular, this disables exception events
+and performance counter sampling by default. It also makes
+it so that GC move events won&rsquo;t be enabled by default
+when heapshots are enabled. To use this option, it must be
+the first option given to the log profiler.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+will be the default in a future version of the log
+profiler.</p>
+
+<p style="margin-left:9%;">[<b>no</b>]<i>event</i></p>
+
+<p style="margin-left:18%;">Enable or disable gathering
+data for <i>event</i>, which can be one of: <b><br>
+exception</b></p>
+
+<p style="margin-left:27%;">Exception throw and clause
+(<b>catch</b>, <b>finally</b>, etc) evaluation events.
+Enabled by default unless <b>nodefaults</b> is used.</p>
+
+<p style="margin-left:18%;"><b>monitor</b></p>
+
+<p style="margin-left:27%;">Monitor lock contention,
+acquisition, and release events.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p><b>gc</b></p></td>
+<td width="6%"></td>
+<td width="56%">
+
+
+<p>GC start, progress, stop, and resize events.</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>gcalloc</b></p>
+
+<p style="margin-left:27%;">GC allocation events.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>gcmove</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>GC move events.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>gcroot</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>GC root report events. Generated on every collection if
+enabled, unless <b>nodefaults</b> is used, in which case,
+they&rsquo;re only generated on heapshots.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>gchandle</b></p>
+
+<p style="margin-left:27%;">GC handle creation and deletion
+events.</p>
+
+<p style="margin-left:18%;"><b>finalization</b></p>
+
+<p style="margin-left:27%;">Object finalization events.</p>
+
+<p style="margin-left:18%;"><b>counter</b></p>
+
+<p style="margin-left:27%;">Performance counter sample
+events. Enabled by default unless <b>nodefaults</b> is
+used.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>jit</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>JIT code buffer events.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>alloc</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Alias for <b>gc</b>, <b>gcalloc</b>, and
+<b>gcmove</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>legacy</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Alias for <b>exception</b>, <b>monitor</b>, <b>gc</b>,
+<b>gcmove</b>, <b>gcroot</b>, <b>gchandle</b>,
+<b>finalization</b>, and <b>counter</b>.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>sample</b>[<b>-real</b>][=<i>freq</i>]</p>
+
+<p style="margin-left:18%;">Enable statistical sampling.
+The default is to sample at a frequency of 100 Hz, but
+<i>freq</i> can be used to override this.</p>
+
+<p style="margin-left:18%; margin-top: 1em">By default,
+sampling uses process time (i.e., the more work a process
+does, the more samples are collected). The <b>-real</b>
+variant uses wall clock time instead. Wall clock time is
+better for programs that are I/O-bound.</p>
+
+
+<p style="margin-left:9%;"><b>maxsamples</b>=<i>num</i></p>
+
+<p style="margin-left:18%;">Limit the number of reusable
+sample events to <i>num</i> allocations. A value of zero
+means no limit. By default, the value of this setting is
+based on the number of CPU cores. Some tinkering with this
+setting may be necessary for programs with an unusually high
+amount of threads.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>calls</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Enable method entry and exit instrumentation. This is an
+alternative to statistical sampling when you need more
+precise information. Note that this mode is extremely heavy
+and can slow most programs to a crawl.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>callspec</b>=<i>spec</i></p>
+
+<p style="margin-left:18%;">Limit method entry and exit
+instrumentation to methods matching the specified call spec.
+This uses the same syntax as the <b>--trace</b> option for
+<b>mono</b>(1), so refer to that page for more
+information.</p>
+
+<p style="margin-left:9%;"><b>calldepth</b>=<i>num</i></p>
+
+<p style="margin-left:18%;">Limit method entry and exit
+event collection to a call depth of <i>num</i>.</p>
+
+<p style="margin-left:9%;"><b>maxframes</b>=<i>num</i></p>
+
+<p style="margin-left:18%;">Limit backtraces in various
+events (including statistical samples) to <i>num</i>
+frames.</p>
+
+
+<p style="margin-left:9%;"><b>heapshot</b>[=<i>mode</i>]</p>
+
+<p style="margin-left:18%;">Enable heap snapshots.
+<i>mode</i>, if given, can be one of: <b><br>
+ondemand</b></p>
+
+<p style="margin-left:27%;">Only perform a heapshot when
+receiving a command via the command server or when triggered
+through the managed library.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>num</i><b>gc</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Perform a heapshot on every <i>num</i> collections of
+the major generation.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>num</i><b>ms</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Perform a heapshot on a major generation collection if
+<i>num</i> milliseconds have passed since the last
+heapshot.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">If <i>mode</i>
+is not given, a heapshot will be performed on every
+collection of the major generation.</p>
+
+<p style="margin-left:9%;"><b>heapshot-on-shutdown</b></p>
+
+<p style="margin-left:18%;">In addition to any other
+heapshot settings, also perform a heapshot on runtime
+shutdown.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>debug</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Print detailed debugging information. Most users should
+not use this option.</p></td></tr>
+</table>
+
+<h3>Command server
+<a name="Command server"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The log profiler
+features a simple command server that currently is only used
+to trigger manual heapshots (typcally when using the
+on-demand mode, but also usable with the other modes). A
+random port will be used to listen for connections unless
+the <b>port</b> option is used. To trigger a heapshot, open
+a TCP connection to the command server and send the C string
+<b>&quot;heapshot\n&quot;</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command
+server supports multiple simultaneous connections.</p>
+
+<h3>Managed library
+<a name="Managed library"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The log profiler
+comes with a managed library called
+<b>Mono.Profiler.Log</b>. This library allows easily reading
+log files in managed code (e.g., C#) as well as interacting
+with the profiler at run-time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">With the ability
+to easily read log files, users can write all sorts of
+interesting analyses that might not be provided by the
+standard tools (e.g., <b>mprof-report</b>(1)).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>LogProfiler</b> class allows users to reconfigure
+profiler settings at run-time. For example, certain event
+types can be toggled on or off, the mode and frequency of
+heapshots and sampling can be changed, etc. Heapshots can
+also be triggered manually.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To use this
+library, simply pass <b>-r:Mono.Profiler.Log</b> when
+compiling your code.</p>
+
+<h3>Example
+<a name="Example"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Collect GC
+allocation and sampling data for a program, then generate a
+report:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--profile=log:alloc,sample program.exe <br>
+mprof-report output.mlpd</p>
+
+<p style="margin-left:9%; margin-top: 1em">Perform a
+heapshot on every 5th collection and generate a report
+directly:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--profile=log:heapshot=5gc,report program.exe</p>
+
+<h2>COVERAGE PROFILER
+<a name="COVERAGE PROFILER"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The code
+coverage profiler collects information about how often code
+paths are executed. This is done by instrumenting
+JIT-compiled code at all sequence points. On program exit,
+the coverage profiler collects all execution count
+information and outputs it to an XML file. The main use case
+for the coverage profiler is unit testing: By running unit
+test suites with the coverage profiler, it is possible to
+determine whether the unit tests actually cover all the code
+that they should.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, the
+coverage profiler writes its output to <i>coverage.xml</i>.
+Refer to the <i>mono/profiler/coverage.c</i> file in the
+Mono source tree for documentation on the schema.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Please note that
+the coverage profiler currently does not support
+instrumenting AOT-compiled code. When collecting coverage
+data, one may wish to run Mono with the <b>-O=-aot</b>
+option to disable loading AOT-compiled code.</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The coverage
+profiler supports the following options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>help</b></p></td>
+<td width="4%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em">Print usage instructions.</p></td>
+<td width="50%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>output</b>=[<i>+</i>|<i>#</i>|<i>|</i>]<i>file</i></p>
+
+<p style="margin-left:18%;">Write coverage data to
+<i>file</i>. The optional modifiers are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>+</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p>The program PID is appended to the file name. For
+example, <b>output=+cov.xml</b> outputs to
+<i>cov.xml.1234</i> if the PID is <b>1234</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>#</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p><i>file</i> is parsed as a file descriptor number, which
+is opened with <b>fdopen</b>(3). This is mainly useful in
+embedding scenarios.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>|</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p><i>file</i> is treated as a program name. It will be
+started with <b>popen</b>(3) and the coverage data will be
+piped to its standard input.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>covfilter-file</b>=<i>file</i></p>
+
+<p style="margin-left:18%;">Supply a coverage filter file.
+This option can be given multiple times. See the <b>Filter
+files</b> sub-section.</p>
+
+<h3>Filter files
+<a name="Filter files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Filter files can
+be used to pick and choose which types should be considered
+for coverage instrumentation. A filter file consists of a
+series of lines of the form:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>+</b>|<b>-[</b><i>image_name</i><b>]</b><i>type_name_prefix</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Here,
+<i>image_name</i> is something like <b>mscorlib</b>.
+<i>type_name_prefix</i> can be something like
+<b>System.Int32</b> for a specific type or <b>System.App</b>
+to pick all types starting with <b>App</b> in the
+<b>System</b> namespace.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Lines starting
+with <b>+</b> indicate that a type should be instrumented
+for coverage, whereas lines starting with <b>-</b> indicate
+the opposite. Lines starting with <b>+</b> always override
+lines starting with <b>-</b> regardless of the order they
+appear in.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Lines not
+starting with either character are ignored. This can be used
+to write comments. For example, this is a valid file:</p>
+
+<p style="margin-left:18%; margin-top: 1em"># Ignore
+coverage in network-related code, except HTTP client code.
+<br>
+-[MyProgram]MyProgram.Net <br>
++[MyProgram]MyProgram.Net.Http.HttpClient</p>
+
+<h3>Example
+<a name="Example"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Coverage data
+for a program can be collected like this:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono -O=-aot
+--profile=coverage:output=cov.xml program.exe</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>cov.xml</i>
+will now contain the coverage data.</p>
+
+<h2>AOT PROFILER
+<a name="AOT PROFILER"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The AOT profiler
+will record which generic instantiations a program makes use
+of and save the information to a specified file. This data
+can then be used by the AOT compiler to compile those
+generic instantiations ahead of time to reduce program
+startup time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, the
+AOT profiler writes its output to <i>output.aotprofile</i>.
+Refer to the <i>mono/profiler/aot.h</i> file in the Mono
+source tree for documentation on the AOT profiler&rsquo;s
+file format.</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The AOT profiler
+supports the following options: <b><br>
+duration</b>=<i>num</i></p>
+
+<p style="margin-left:18%;">Profile only NUM seconds of
+runtime and then write the data.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>help</b></p></td>
+<td width="4%"></td>
+<td width="32%">
+
+
+<p>Print usage instructions.</p></td>
+<td width="50%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>output</b>=[<i>+</i>|<i>#</i>|<i>|</i>]<i>file</i></p>
+
+<p style="margin-left:18%;">Write output data to
+<i>file</i>. The optional modifiers are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>+</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p>The program PID is appended to the file name. For
+example, <b>output=+out.aotprofile</b> outputs to
+<i>out.aotprofile.1234</i> if the PID is <b>1234</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>#</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p><i>file</i> is parsed as a file descriptor number, which
+is opened with <b>fdopen</b>(3). This is mainly useful in
+embedding scenarios.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>|</b></p></td>
+<td width="8%"></td>
+<td width="73%">
+
+
+<p><i>file</i> is treated as a program name. It will be
+started with <b>popen</b>(3) and the log data will be piped
+to its standard input.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>verbose</b></p>
+
+<p style="margin-left:18%;">Print detailed debugging
+information. Most users should not use this option.</p>
+
+<h3>Example
+<a name="Example"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">A profile can be
+collected and used like this:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--profile=aot:output=program.aotprofile program.exe <br>
+mono --aot=profile=program.aotprofile program.exe <br>
+mono program.exe</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono</b>(1),
+<b>mprof-report</b>(1)</p>
+<hr>
+</body>
+</html>

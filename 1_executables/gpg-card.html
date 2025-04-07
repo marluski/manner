@@ -1,0 +1,1218 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:33 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GPG-CARD</title>
+
+</head>
+<body>
+
+<h1 align="center">GPG-CARD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#NOTES (OPENPGP)">NOTES (OPENPGP)</a><br>
+<a href="#NOTES (PIV)">NOTES (PIV)</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gpg-card</b>
+- Administrate Smart Cards</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gpg-card</b>
+[<i>options</i>] <b><br>
+gpg-card</b> [<i>options</i>] <i>command</i> { <b>--</b>
+<i>command</i> }</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>gpg-card</b> is used to administrate smart cards and USB
+tokens. It provides a superset of features from <b>gpg
+--card-edit</b> an can be considered a frontend to
+<b>scdaemon</b> which is a daemon started by
+<b>gpg-agent</b> to handle smart cards.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<b>gpg-card</b> is invoked without commands an interactive
+mode is used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<b>gpg-card</b> is invoked with one or more commands the
+same commands as available in the interactive mode are run
+from the command line. These commands need to be delimited
+with a double-dash. If a double-dash or a shell specific
+character is required as part of a command the entire
+command needs to be put in quotes. If one of those commands
+returns an error the remaining commands are not anymore run
+unless the command was prefixed with a single dash.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A list of
+commands is available by using the command <b>help</b> and a
+brief description of each command is printed by using
+<b>help CMD</b>. See the section COMMANDS for a full
+description.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See the NOTES
+sections for instructions pertaining to specific cards or
+card applications.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gpg-card</b>
+understands the following commands, which have options of
+their own. The pseudo-option &lsquo;--&rsquo; can be used to
+separate command options from arguments; if this pseudo
+option is used on the command line the entire command with
+options and arguments must be quoted, so that it is not
+mixed up with the &lsquo;--&rsquo; as used on the command
+line to separate commands. Note that a short online help is
+available for all commands by prefixing them with
+&lsquo;&lsquo;help&rsquo;&rsquo;. Command completion in the
+interactive mode is also supported. <b><br>
+AUTHENTICATE [--setkey] [--raw] [&lt;</b>
+<i>file</i><b>]|</b><i>key</i><b>]</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>AUTH</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Authenticate to the card. Perform a mutual
+authentication either by reading the key from <i>file</i> or
+by taking it from the command line as <i>key</i>. Without
+the option <b>--raw</b> the key is expected to be hex
+encoded. To install a new administration key <b>--setkey</b>
+is used; this requires a prior authentication with the old
+key. This is used with PIV cards.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>CAFPR [--clear] N</b></p>
+
+<p style="margin-left:18%;">Change the CA fingerprint
+number N of an OpenPGP card. N must be in the range 1 to 3.
+The option <b>--clear</b> clears the specified CA
+fingerprint N or all of them if N is 0 or not given.</p>
+
+<p style="margin-left:9%;"><b>FACTORY-RESET</b></p>
+
+<p style="margin-left:18%;">Do a complete reset of some
+OpenPGP and PIV cards. This command deletes all data and
+keys and resets the PINs to their default. Don&rsquo;t
+worry, you need to confirm before the command proceeds.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>FETCH</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Retrieve a key using the URL data object of an OpenPGP
+card or if that is missing using the stored fingerprint.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>FORCESIG</b></p>
+
+<p style="margin-left:18%;">Toggle the forcesig flag of an
+OpenPGP card.</p>
+
+<p style="margin-left:9%;"><b>GENERATE [--force]
+[--algo=</b><i>algo</i><b>{+</b><i>algo2</i><b>}]</b>
+<i>keyref</i></p>
+
+<p style="margin-left:18%;">Create a new key on a card. Use
+<b>--force</b> to overwrite an existing key. Use
+&quot;help&quot; for <i>algo</i> to get a list of known
+algorithms. For OpenPGP cards several algos may be given.
+Note that the OpenPGP key generation is done interactively
+unless <b>--algo</b> or <i>keyref</i> are given.</p>
+
+<p style="margin-left:9%;"><b>KDF-SETUP</b></p>
+
+<p style="margin-left:18%;">Prepare the OpenPGP card KDF
+feature for this card.</p>
+
+<p style="margin-left:9%;"><b>LANG [--clear]</b></p>
+
+<p style="margin-left:18%;">Change the language info for
+the card. This info can be used by applications for a
+personalized greeting. Up to 4 two-digit language
+identifiers can be entered as a preference. The option
+<b>--clear</b> removes all identifiers. GnuPG does not use
+this info.</p>
+
+<p style="margin-left:9%;"><b>LIST [--cards] [--apps]
+[--info] [--no-key-lookup] [</b><i>n</i><b>]
+[</b><i>app</i><b>]</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>L</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>This command reads all information from the current card
+and display them in a human readable format. The first
+section shows generic information vaialable for all cards.
+The next section shows information pertaining to keys which
+depend on the actual card and application.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">With <i>n</i>
+given select and list the n-th card; with <i>app</i> also
+given select that application. To select an <i>app</i> on
+the current card use &quot;-&quot; for <i>n</i>. The serial
+number of the card may be used instead of <i>n</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The option
+<b>--cards</b> lists the serial numbers of available cards.
+The option <b>--apps</b> lists all card applications. The
+option <b>--info</b> selects a card and prints its serial
+number. The option <b>--no-key-lookup</b> suppresses the
+listing of matching OpenPGP or X.509 keys.</p>
+
+<p style="margin-left:9%;"><b>LOGIN [--clear] [&lt;</b>
+<i>file</i><b>]</b></p>
+
+<p style="margin-left:18%;">Set the login data object of
+OpenPGP cards. If <i>file</i> is given the data is is read
+from that file. This allows one to store binary data in the
+login field. The option <b>--clear</b> deletes the login
+data object.</p>
+
+<p style="margin-left:9%;"><b>NAME [--clear]</b></p>
+
+<p style="margin-left:18%;">Set the name field of an
+OpenPGP card. With option <b>--clear</b> the stored name is
+cleared off the card.</p>
+
+<p style="margin-left:9%;"><b>PASSWD [--reset|--nullpin]
+[</b><i>pinref</i><b>]</b></p>
+
+<p style="margin-left:18%;">Change or unblock the PINs.
+Note that in interactive mode and without a <i>pinref</i> a
+menu is presented for certain cards.&quot; In
+non-interactive mode and without a <i>pinref</i> a default
+value i used for these cards. The option <b>--reset</b> is
+used with TCOS cards to reset the PIN using the PUK or vice
+versa; the option <i>--nullpin</i> is used for these cards
+to set the initial PIN.</p>
+
+<p style="margin-left:9%;"><b>PRIVATEDO [--clear]</b>
+<i>n</i> <b>[&lt;</b> <i>file</i><b>]</b></p>
+
+<p style="margin-left:18%;">Change the private data object
+<i>n</i> of an OpenPGP card. <i>n</i> must be in the range 1
+to 4. If <i>file</i> is given the data is is read from that
+file. The option <b>--clear</b> clears the data.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>QUIT</b></p></td>
+<td width="4%"></td>
+<td width="50%">
+</td>
+<td width="32%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>Q</b></p></td>
+<td width="4%"></td>
+<td width="50%">
+
+
+<p>Stop processing and terminate <b>gpg-card</b>.</p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>READCERT [--openpgp]</b>
+<i>certref</i> <b>&gt;</b> <i>file</i></p>
+
+<p style="margin-left:18%;">Read the certificate for key
+<i>certref</i> and store it in <i>file</i>. With option
+<b>--openpgp</b> an OpenPGP keyblock wrapped in a dedicated
+CMS content type (OID=1.3.6.1.4.1.11591.2.3.1) is expected
+and extracted to <i>file</i>. Note that for current OpenPGP
+cards a certificate may only be available at the
+<i>certref</i> &quot;OPENPGP.3&quot;.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>RESET</b></p></td>
+<td width="3%"></td>
+<td width="41%">
+
+
+<p>Send a reset to the card daemon.</p></td>
+<td width="41%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>SALUTATION [--clear]</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>SALUT</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Change the salutation info for the card. This info can
+be used by applications for a personalized greeting. The
+option <b>--clear</b> removes this data object. GnuPG does
+not use this info.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>UIF</b> <i>N</i>
+<b>[on|off|permanent]</b></p>
+
+<p style="margin-left:18%;">Change the User Interaction
+Flag. That flags tells whether the confirmation button of a
+token shall be used. <i>n</i> must in the range 1 to 3.
+&quot;permanent&quot; is the same as &quot;on&quot; but the
+flag can&rsquo;t be changed anmore.</p>
+
+<p style="margin-left:9%;"><b>UNBLOCK</b></p>
+
+<p style="margin-left:18%;">Unblock a PIN using a PUK or
+Reset Code. Note that OpenPGP cards prior to version 2
+can&rsquo;t use this; instead the <b>PASSWD</b> can be used
+to set a new PIN.</p>
+
+<p style="margin-left:9%;"><b>URL [--clear]</b></p>
+
+<p style="margin-left:18%;">Set the URL data object of an
+OpenPGP card. That data object can be used by by
+<b>gpg</b>&rsquo;s <b>--fetch</b> command to retrieve the
+full public key. The option <b>--clear</b> deletes the
+content of that data object.</p>
+
+<p style="margin-left:9%;"><b>VERIFY
+[</b><i>chvid</i><b>]</b></p>
+
+<p style="margin-left:18%;">Verify the PIN identified by
+<i>chvid</i> or the default PIN.</p>
+
+<p style="margin-left:9%;"><b>WRITECERT</b> <i>certref</i>
+<b>&lt;</b> <i>file</i> <b><br>
+WRITECERT --openpgp</b> <i>certref</i> <b>[&lt;</b>
+<i>file</i><b>|</b><i>fpr</i><b>] <br>
+WRITECERT --clear</b> <i>certref</i></p>
+
+<p style="margin-left:18%;">Write a certificate to the card
+under the id <i>certref</i>. The option <b>--clear</b>
+removes the certificate from the card. The option
+<b>--openpgp</b> expects an OpenPGP keyblock and stores it
+encapsulated in a CMS container; the keyblock is taken from
+<i>file</i> or directly from the OpenPGP key identified by
+fingerprint <i>fpr</i>.</p>
+
+<p style="margin-left:9%;"><b>WRITEKEY [--force]</b>
+<i>keyref keygrip</i></p>
+
+<p style="margin-left:18%;">Write a private key object
+identified by <i>keygrip</i> to the card under the id
+<i>keyref</i>. Option <b>--force</b> allows overwriting an
+existing key.</p>
+
+<p style="margin-left:9%;"><b>CHECKKEYS [--ondisk]
+[--delete-clear-copy] [--delete-protected-copy]</b></p>
+
+<p style="margin-left:18%;">Print a list of keys noticed on
+all inserted cards. With <b>--ondisk</b> only smartcard keys
+with a copy on disk are listed. With
+<b>--delete-clear-copy</b> copies of smartcard keys stored
+on disk without any protection will be deleted. With
+<b>--delete-protected-copy</b> password protected copies of
+smartcard keys stored on disk will be deleted.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This command
+creates missing shadow keys. The delete options print the
+status of the keys before they are deleted.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The format of
+the output is: <b><br>
+Serial number</b></p>
+
+<p style="margin-left:27%;">A hex-string with the serial
+number of the card.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>Type</b></p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>This gives the type of the card&rsquo;s application. For
+example &quot;OpenPGP&quot; or &quot;PIV&quot;.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>Keygrip</b></p>
+
+<p style="margin-left:27%;">A hex-string identifying a
+key.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>Keyref</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>The application slot where the key is stored on the
+card. For example &quot;OpenPGP.1&quot;</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>Status</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>The status of the key. The most common value is
+&quot;shadowed&quot; for a key where only the public key
+along with the card&rsquo;s serial number is stored on the
+disk. The value &quot;clear&quot; indicates that a copy of
+the card&rsquo;s key is stored unprotected on disk. The
+value &quot;protected&quot; indicated that a copy of the
+car&rsquo;s key is stored on disk but is protected by a
+password. The value &quot;error&quot; may also be shown if
+there was a problem reading information from the card.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>YUBIKEY</b> <i>cmd
+args</i></p>
+
+<p style="margin-left:18%;">Various commands pertaining to
+Yubikey tokens with <i>cmd</i> being:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>LIST</b></p></td>
+<td width="4%"></td>
+<td width="61%">
+
+
+<p>List supported and enabled Yubikey applications.</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>ENABLE usb|nfc|all
+[otp|u2f|opgp|piv|oath|fido2|all] <br>
+DISABLE</b></p>
+
+<p style="margin-left:27%;">Enable or disable the specified
+or all applications on the given interface.</p>
+
+<h2>NOTES (OPENPGP)
+<a name="NOTES (OPENPGP)"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The support for
+OpenPGP cards in <b>gpg-card</b> is not yet complete. For
+missing features, please continue to use <b>gpg
+--card-edit</b>.</p>
+
+<h2>NOTES (PIV)
+<a name="NOTES (PIV)"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GnuPG has
+support for PIV cards (&lsquo;&lsquo;Personal Identity
+Verification&rsquo;&rsquo; as specified by NIST Special
+Publication 800-73-4). This section describes how to
+initialize (personalize) a fresh Yubikey token featuring the
+PIV application (requires Yubikey-5). We assume that the
+credentials have not yet been changed and thus are: <b><br>
+Authentication key</b></p>
+
+<p style="margin-left:18%;">This is a 24 byte key described
+by the hex string <b><br>
+010203040506070801020304050607080102030405060708</b>.</p>
+
+<p style="margin-left:9%;"><b>PIV Application PIN</b></p>
+
+<p style="margin-left:18%;">This is the string
+<b>123456</b>.</p>
+
+<p style="margin-left:9%;"><b>PIN Unblocking Key</b></p>
+
+<p style="margin-left:18%;">This is the string
+<b>12345678</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See the example
+section on how to change these defaults. For production use
+it is important to use secure values for them. Note that the
+Authentication Key is not queried via the usual Pinentry
+dialog but needs to be entered manually or read from a file.
+The use of a dedicated machine to personalize tokens is
+strongly suggested.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To see what is
+on the card, the command <b>list</b> can be given. We will
+use the interactive mode in the following (the string
+<i>gpg/card&gt;</i> is the prompt). An example output for a
+fresh card is:</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+list <br>
+Reader ...........: 1050:0407:X:0 <br>
+Card type ........: yubikey <br>
+Card firmware ....: 5.1.2 <br>
+Serial number ....: D2760001240102010006090746250000 <br>
+Application type .: OpenPGP <br>
+Version ..........: 2.1 <br>
+[...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">It can be seen
+by the &lsquo;&lsquo;Application type&rsquo;&rsquo; line
+that GnuPG selected the OpenPGP application of the Yubikey.
+This is because GnuPG assigns the highest priority to the
+OpenPGP application. To use the PIV application of the
+Yubikey several methods can be used:</p>
+
+<p style="margin-left:9%; margin-top: 1em">With a Yubikey 5
+or later the OpenPGP application on the Yubikey can be
+disabled:</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+yubikey disable all opgp <br>
+gpg/card&gt; yubikey list <br>
+Application USB NFC <br>
+----------------------- <br>
+OTP yes yes <br>
+U2F yes yes <br>
+OPGP no no <br>
+PIV yes no <br>
+OATH yes yes <br>
+FIDO2 yes yes <br>
+gpg/card&gt; reset</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>reset</b>
+is required so that the GnuPG system rereads the card. Note
+that disabled applications keep all their data and can at
+any time be re-enabled (use &lsquo;help yubikey&rsquo;).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Another option,
+which works for all Yubikey versions, is to disable the
+support for OpenPGP cards in scdaemon. This is done by
+adding the line</p>
+
+
+<p style="margin-left:12%; margin-top: 1em">disable-application
+openpgp</p>
+
+<p style="margin-left:9%; margin-top: 1em">to
+&lsquo;<i>&#732;/.gnupg/scdaemon.conf</i>&rsquo; and by
+restarting scdaemon, either by killing the process or by
+using &lsquo;gpgconf --kill scdaemon&rsquo;. Finally the
+default order in which card applications are tried by
+scdaemon can be changed. For example to prefer PIV over
+OpenPGP it is sufficient to add</p>
+
+
+<p style="margin-left:12%; margin-top: 1em">application-priority
+piv</p>
+
+<p style="margin-left:9%; margin-top: 1em">to
+&lsquo;<i>&#732;/.gnupg/scdaemon.conf</i>&rsquo; and to
+restart <b>scdaemon</b>. This has an effect only on tokens
+which support both, PIV and OpenPGP, but does not hamper the
+use of OpenPGP only tokens.</p>
+
+<p style="margin-left:9%; margin-top: 1em">With one of
+these methods employed the <b>list</b> command of
+<b>gpg-card</b> shows this:</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+list <br>
+Reader ...........: 1050:0407:X:0 <br>
+Card type ........: yubikey <br>
+Card firmware ....: 5.1.2 <br>
+Serial number ....: FF020001008A77C1 <br>
+Application type .: PIV <br>
+Version ..........: 1.0 <br>
+Displayed s/n ....: yk-9074625 <br>
+PIN usage policy .: app-pin <br>
+PIN retry counter : - 3 - <br>
+PIV authentication: [none] <br>
+keyref .....: PIV.9A <br>
+Card authenticat. : [none] <br>
+keyref .....: PIV.9E <br>
+Digital signature : [none] <br>
+keyref .....: PIV.9C <br>
+Key management ...: [none] <br>
+keyref .....: PIV.9D</p>
+
+<p style="margin-left:9%; margin-top: 1em">In case several
+tokens are plugged into the computer, gpg-card will show
+only one. To show another token the number of the token (0,
+1, 2, ...) can be given as an argument to the <b>list</b>
+command. The command &lsquo;list --cards&rsquo; prints a
+list of all inserted tokens.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+&lsquo;&lsquo;Displayed s/n&rsquo;&rsquo; is printed on the
+token and also shown in Pinentry prompts asking for the PIN.
+The four standard key slots are always shown, if other key
+slots are initialized they are shown as well. The <i>PIV
+authentication</i> key (internal reference <i>PIV.9A</i>) is
+used to authenticate the card and the card holder. The use
+of the associated private key is protected by the
+Application PIN which needs to be provided once and the key
+can the be used until the card is reset or removed from the
+reader or USB port. GnuPG uses this key with its <i>Secure
+Shell</i> support. The <i>Card authentication</i> key
+(<i>PIV.9E</i>) is also known as the CAK and used to support
+physical access applications. The private key is not
+protected by a PIN and can thus immediately be used. The
+<i>Digital signature</i> key (<i>PIV.9C</i>) is used to
+digitally sign documents. The use of the associated private
+key is protected by the Application PIN which needs to be
+provided for each signing operation. The <i>Key
+management</i> key (<i>PIV.9D</i>) is used for encryption.
+The use of the associated private key is protected by the
+Application PIN which needs to be provided only once so that
+decryption operations can then be done until the card is
+reset or removed from the reader or USB port.</p>
+
+<p style="margin-left:9%; margin-top: 1em">We now generate
+three of the four keys. Note that GnuPG does currently not
+use the the <i>Card authentication</i> key; however, that
+key is mandatory by the PIV standard and thus we create it
+too. Key generation requires that we authenticate to the
+card. This can be done either on the command line (which
+would reveal the key):</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+auth 010203040506070801020304050607080102030405060708</p>
+
+<p style="margin-left:9%; margin-top: 1em">or by reading
+the key from a file. That file needs to consist of one LF
+terminated line with the hex encoded key (as above):</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+auth &lt; myauth.key</p>
+
+<p style="margin-left:9%; margin-top: 1em">As usual
+&lsquo;help auth&rsquo; gives help for this command. An
+error message is printed if a non-matching key is used. The
+authentication is valid until a reset of the card or until
+the card is removed from the reader or the USB port. Note
+that that in non-interactive mode the &lsquo;&lt;&rsquo;
+needs to be quoted so that the shell does not interpret it
+as a its own redirection symbol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Here are the
+actual commands to generate the keys:</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+generate --algo=nistp384 PIV.9A <br>
+PIV card no. yk-9074625 detected <br>
+gpg/card&gt; generate --algo=nistp256 PIV.9E <br>
+PIV card no. yk-9074625 detected <br>
+gpg/card&gt; generate --algo=rsa2048 PIV.9C <br>
+PIV card no. yk-9074625 detected</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a key has
+already been created for one of the slots an error will be
+printed; to create a new key anyway the option
+&lsquo;--force&rsquo; can be used. Note that only the
+private and public keys have been created but no
+certificates are stored in the key slots. In fact, GnuPG
+uses its own non-standard method to store just the public
+key in place of the the certificate. Other application will
+not be able to make use these keys until <b>gpgsm</b> or
+another tool has been used to create and store the
+respective certificates. Let us see what the list command
+now shows:</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+list <br>
+Reader ...........: 1050:0407:X:0 <br>
+Card type ........: yubikey <br>
+Card firmware ....: 5.1.2 <br>
+Serial number ....: FF020001008A77C1 <br>
+Application type .: PIV <br>
+Version ..........: 1.0 <br>
+Displayed s/n ....: yk-9074625 <br>
+PIN usage policy .: app-pin <br>
+PIN retry counter : - 3 - <br>
+PIV authentication: 213D1825FDE0F8240CB4E4229F01AF90AC658C2E
+<br>
+keyref .....: PIV.9A (auth) <br>
+algorithm ..: nistp384 <br>
+Card authenticat. : 7A53E6CFFE7220A0E646B4632EE29E5A7104499C
+<br>
+keyref .....: PIV.9E (auth) <br>
+algorithm ..: nistp256 <br>
+Digital signature : 32A6C6FAFCB8421878608AAB452D5470DD3223ED
+<br>
+keyref .....: PIV.9C (sign,cert) <br>
+algorithm ..: rsa2048 <br>
+Key management ...: [none] <br>
+keyref .....: PIV.9D</p>
+
+<p style="margin-left:9%; margin-top: 1em">The primary
+information for each key is the <i>keygrip</i>, a 40 byte
+hex-string identifying the key. This keygrip is a unique
+identifier for the specific parameters of a key. It is used
+by <b>gpg-agent</b> and other parts of GnuPG to associate a
+private key to its protocol specific certificate format
+(X.509, OpenPGP, or SecureShell). Below the keygrip the key
+reference along with the key usage capabilities are show.
+Finally the algorithm is printed in the format used by
+{gpg}. At that point no other information is shown because
+for these new keys gpg won&rsquo;t be able to find matching
+certificates.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Although we
+could have created the <i>Key management</i> key also with
+the generate command, we will create that key off-card so
+that a backup exists. To accomplish this a key needs to be
+created with either <b>gpg</b> or <b>gpgsm</b> or imported
+in one of these tools. In our example we create a
+self-signed X.509 certificate (exit the gpg-card tool,
+first):</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ gpgsm
+--gen-key -o encr.crt <br>
+(1) RSA <br>
+(2) Existing key <br>
+(3) Existing key from card <br>
+Your selection? 1 <br>
+What keysize do you want? (3072) 2048 <br>
+Requested keysize is 2048 bits <br>
+Possible actions for a RSA key: <br>
+(1) sign, encrypt <br>
+(2) sign <br>
+(3) encrypt <br>
+Your selection? 3 <br>
+Enter the X.509 subject name: CN=Encryption key for
+yk-9074625,O=example,C=DE <br>
+Enter email addresses (end with an empty line): <br>
+&gt; otto@example.net <br>
+&gt; <br>
+Enter DNS names (optional; end with an empty line): <br>
+&gt; <br>
+Enter URIs (optional; end with an empty line): <br>
+&gt; <br>
+Create self-signed certificate? (y/N) y <br>
+These parameters are used: <br>
+Key-Type: RSA <br>
+Key-Length: 2048 <br>
+Key-Usage: encrypt <br>
+Serial: random <br>
+Name-DN: CN=Encryption key for yk-9074625,O=example,C=DE
+<br>
+Name-Email: otto@example.net</p>
+
+<p style="margin-left:12%; margin-top: 1em">Proceed with
+creation? (y/N) <br>
+Now creating self-signed certificate. This may take a while
+... <br>
+gpgsm: about to sign the certificate for key:
+&amp;34798AAFE0A7565088101CC4AE31C5C8C74461CB <br>
+gpgsm: certificate created <br>
+Ready. <br>
+$ gpgsm --import encr.crt <br>
+gpgsm: certificate imported <br>
+gpgsm: total number processed: 1 <br>
+gpgsm: imported: 1</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note the last
+step which imported the created certificate. If you you
+instead created a certificate signing request (CSR) instead
+of a self-signed certificate and sent this off to a CA you
+would do the same import step with the certificate received
+from the CA. Take note of the keygrip (prefixed with an
+ampersand) as shown during the certificate creation or
+listed it again using &lsquo;gpgsm --with-keygrip -k
+otto@example.net&rsquo;. Now to move the key and certificate
+to the card start <b>gpg-card</b> again and enter:</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+writekey PIV.9D 34798AAFE0A7565088101CC4AE31C5C8C74461CB
+<br>
+gpg/card&gt; writecert PIV.9D &lt; encr.crt</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you entered a
+passphrase to protect the private key, you will be asked for
+it via the Pinentry prompt. On success the key and the
+certificate has been written to the card and a <b>list</b>
+command shows:</p>
+
+<p style="margin-left:12%; margin-top: 1em">[...] <br>
+Key management ...: 34798AAFE0A7565088101CC4AE31C5C8C74461CB
+<br>
+keyref .....: PIV.9D (encr) <br>
+algorithm ..: rsa2048 <br>
+used for ...: X.509 <br>
+user id ..: CN=Encryption key for yk-9074625,O=example,C=DE
+<br>
+user id ..: &lt;otto@example.net&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">In case the same
+key (identified by the keygrip) has been used for several
+certificates you will see several &lsquo;&lsquo;used
+for&rsquo;&rsquo; parts. With this the encryption key is now
+fully functional and can be used to decrypt messages
+encrypted to this certificate. <b>Take care:</b> the
+original key is still stored on-disk and should be moved to
+a backup medium. This can simply be done by copying the file
+&lsquo;<i>34798AAFE0A7565088101CC4AE31C5C8C74461CB.key</i>&rsquo;
+from the directory
+&lsquo;<i>&#732;/.gnupg/private-keys-v1.d/</i>&rsquo; to the
+backup medium and deleting the file at its original
+place.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The final
+example is to create a self-signed certificate for digital
+signatures. Leave <b>gpg-card</b> using <b>quit</b> or by
+pressing Control-D and use gpgsm:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ gpgsm --learn
+<br>
+$ gpgsm --gen-key -o sign.crt <br>
+Please select what kind of key you want: <br>
+(1) RSA <br>
+(2) Existing key <br>
+(3) Existing key from card <br>
+Your selection? 3 <br>
+Serial number of the card: FF020001008A77C1 <br>
+Available keys: <br>
+(1) 213D1825FDE0F8240CB4E4229F01AF90AC658C2E PIV.9A nistp384
+<br>
+(2) 7A53E6CFFE7220A0E646B4632EE29E5A7104499C PIV.9E nistp256
+<br>
+(3) 32A6C6FAFCB8421878608AAB452D5470DD3223ED PIV.9C rsa2048
+<br>
+(4) 34798AAFE0A7565088101CC4AE31C5C8C74461CB PIV.9D rsa2048
+<br>
+Your selection? 3 <br>
+Possible actions for a RSA key: <br>
+(1) sign, encrypt <br>
+(2) sign <br>
+(3) encrypt <br>
+Your selection? 2 <br>
+Enter the X.509 subject name: CN=Signing key for
+yk-9074625,O=example,C=DE <br>
+Enter email addresses (end with an empty line): <br>
+&gt; otto@example.net <br>
+&gt; <br>
+Enter DNS names (optional; end with an empty line): <br>
+&gt; <br>
+Enter URIs (optional; end with an empty line): <br>
+&gt; <br>
+Create self-signed certificate? (y/N) <br>
+These parameters are used: <br>
+Key-Type: card:PIV.9C <br>
+Key-Length: 1024 <br>
+Key-Usage: sign <br>
+Serial: random <br>
+Name-DN: CN=Signing key for yk-9074625,O=example,C=DE <br>
+Name-Email: otto@example.net</p>
+
+<p style="margin-left:12%; margin-top: 1em">Proceed with
+creation? (y/N) y <br>
+Now creating self-signed certificate. This may take a while
+... <br>
+gpgsm: about to sign the certificate for key:
+&amp;32A6C6FAFCB8421878608AAB452D5470DD3223ED <br>
+gpgsm: certificate created <br>
+Ready. <br>
+$ gpgsm --import sign.crt <br>
+gpgsm: certificate imported <br>
+gpgsm: total number processed: 1 <br>
+gpgsm: imported: 1</p>
+
+<p style="margin-left:9%; margin-top: 1em">The use of
+&lsquo;gpgsm --learn&rsquo; is currently necessary so that
+gpg-agent knows what keys are available on the card. The
+need for this command will eventually be removed. The
+remaining commands are similar to the creation of an on-disk
+key. However, here we select the &lsquo;Digital
+signature&rsquo; key. During the creation process you will
+be asked for the Application PIN of the card. The final step
+is to write the certificate to the card using
+<b>gpg-card</b>:</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg/card&gt;
+writecert PIV.9C &lt; sign.crt</p>
+
+<p style="margin-left:9%; margin-top: 1em">By running list
+again we will see the fully initialized card:</p>
+
+<p style="margin-left:12%; margin-top: 1em">Reader
+...........: 1050:0407:X:0 <br>
+Card type ........: yubikey <br>
+Card firmware ....: 5.1.2 <br>
+Serial number ....: FF020001008A77C1 <br>
+Application type .: PIV <br>
+Version ..........: 1.0 <br>
+Displayed s/n ....: yk-9074625 <br>
+PIN usage policy .: app-pin <br>
+PIN retry counter : - [verified] - <br>
+PIV authentication: 213D1825FDE0F8240CB4E4229F01AF90AC658C2E
+<br>
+keyref .....: PIV.9A (auth) <br>
+algorithm ..: nistp384 <br>
+Card authenticat. : 7A53E6CFFE7220A0E646B4632EE29E5A7104499C
+<br>
+keyref .....: PIV.9E (auth) <br>
+algorithm ..: nistp256 <br>
+Digital signature : 32A6C6FAFCB8421878608AAB452D5470DD3223ED
+<br>
+keyref .....: PIV.9C (sign,cert) <br>
+algorithm ..: rsa2048 <br>
+used for ...: X.509 <br>
+user id ..: CN=Signing key for yk-9074625,O=example,C=DE
+<br>
+user id ..: &lt;otto@example.net&gt; <br>
+Key management ...: 34798AAFE0A7565088101CC4AE31C5C8C74461CB
+<br>
+keyref .....: PIV.9D (encr) <br>
+algorithm ..: rsa2048 <br>
+used for ...: X.509 <br>
+user id ..: CN=Encryption key for yk-9074625,O=example,C=DE
+<br>
+user id ..: &lt;otto@example.net&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is now
+possible to sign and to encrypt with this card using gpgsm
+and to use the &lsquo;PIV authentication&rsquo; key with
+ssh:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ ssh-add -l
+<br>
+384 SHA256:0qnJ0Y0ehWxKcx2frLfEljf6GCdlO55OZed5HqGHsaU
+cardno:yk-9074625 (ECDSA)</p>
+
+<p style="margin-left:9%; margin-top: 1em">As usual use
+ssh-add with the uppercase &lsquo;-L&rsquo; to list the
+public ssh key. To use the certificates with Thunderbird or
+Mozilla, please consult the Scute manual for details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+use the same PIV keys also for OpenPGP (for example on a
+Yubikey to avoid switching between OpenPGP and PIV), this is
+also possible:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ gpgsm --learn
+<br>
+$ gpg --full-gen-key <br>
+Please select what kind of key you want: <br>
+(1) RSA and RSA (default) <br>
+(2) DSA and Elgamal <br>
+(3) DSA (sign only) <br>
+(4) RSA (sign only) <br>
+(14) Existing key from card <br>
+Your selection? 14 <br>
+Serial number of the card: FF020001008A77C1 <br>
+Available keys: <br>
+(1) 213D1825FDE0F8240CB4E4229F01AF90AC658C2E PIV.9A nistp384
+(auth) <br>
+(2) 7A53E6CFFE7220A0E646B4632EE29E5A7104499C PIV.9E nistp256
+(auth) <br>
+(3) 32A6C6FAFCB8421878608AAB452D5470DD3223ED PIV.9C rsa2048
+(cert,sign) <br>
+(4) 34798AAFE0A7565088101CC4AE31C5C8C74461CB PIV.9D rsa2048
+(encr) <br>
+Your selection? 3 <br>
+Please specify how long the key should be valid. <br>
+0 = key does not expire <br>
+&lt;n&gt; = key expires in n days <br>
+&lt;n&gt;w = key expires in n weeks <br>
+&lt;n&gt;m = key expires in n months <br>
+&lt;n&gt;y = key expires in n years <br>
+Key is valid for? (0) <br>
+Key does not expire at all <br>
+Is this correct? (y/N) y</p>
+
+<p style="margin-left:12%; margin-top: 1em">GnuPG needs to
+construct a user ID to identify your key.</p>
+
+<p style="margin-left:12%; margin-top: 1em">Real name: <br>
+Email address: otto@example.net <br>
+Comment: <br>
+You selected this USER-ID: <br>
+&quot;otto@example.net&quot;</p>
+
+<p style="margin-left:12%; margin-top: 1em">Change (N)ame,
+(C)omment, (E)mail or (O)kay/(Q)uit? o <br>
+gpg: key C3AFA9ED971BB365 marked as ultimately trusted <br>
+gpg: revocation certificate stored as
+&rsquo;[...]D971BB365.rev&rsquo; <br>
+public and secret key created and signed.</p>
+
+<p style="margin-left:12%; margin-top: 1em">Note that this
+key cannot be used for encryption. You may want to use <br>
+the command &quot;--edit-key&quot; to generate a subkey for
+this purpose. <br>
+pub rsa2048 2019-04-04 [SC] <br>
+7F899AE2FB73159DD68A1B20C3AFA9ED971BB365 <br>
+uid otto@example.net</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that you
+will be asked two times to enter the PIN of your PIV card.
+If you run <b>gpg</b> in <b>--expert</b> mode you will also
+ge given the option to change the usage flags of the key.
+The next typescript shows how to add the encryption
+subkey:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ gpg
+--edit-key 7F899AE2FB73159DD68A1B20C3AFA9ED971BB365 <br>
+Secret key is available.</p>
+
+<p style="margin-left:12%; margin-top: 1em">sec
+rsa2048/C3AFA9ED971BB365 <br>
+created: 2019-04-04 expires: never usage: SC <br>
+card-no: FF020001008A77C1 <br>
+trust: ultimate validity: ultimate <br>
+[ultimate] (1). otto@example.net <br>
+gpg&gt; addkey <br>
+Secret parts of primary key are stored on-card. <br>
+Please select what kind of key you want: <br>
+(3) DSA (sign only) <br>
+(4) RSA (sign only) <br>
+(5) Elgamal (encrypt only) <br>
+(6) RSA (encrypt only) <br>
+(14) Existing key from card <br>
+Your selection? 14 <br>
+Serial number of the card: FF020001008A77C1 <br>
+Available keys: <br>
+(1) 213D1825FDE0F8240CB4E4229F01AF90AC658C2E PIV.9A nistp384
+(auth) <br>
+(2) 7A53E6CFFE7220A0E646B4632EE29E5A7104499C PIV.9E nistp256
+(auth) <br>
+(3) 32A6C6FAFCB8421878608AAB452D5470DD3223ED PIV.9C rsa2048
+(cert,sign) <br>
+(4) 34798AAFE0A7565088101CC4AE31C5C8C74461CB PIV.9D rsa2048
+(encr) <br>
+Your selection? 4 <br>
+Please specify how long the key should be valid. <br>
+0 = key does not expire <br>
+&lt;n&gt; = key expires in n days <br>
+&lt;n&gt;w = key expires in n weeks <br>
+&lt;n&gt;m = key expires in n months <br>
+&lt;n&gt;y = key expires in n years <br>
+Key is valid for? (0) <br>
+Key does not expire at all <br>
+Is this correct? (y/N) y <br>
+Really create? (y/N) y</p>
+
+<p style="margin-left:12%; margin-top: 1em">sec
+rsa2048/C3AFA9ED971BB365 <br>
+created: 2019-04-04 expires: never usage: SC <br>
+card-no: FF020001008A77C1 <br>
+trust: ultimate validity: ultimate <br>
+ssb rsa2048/7067860A98FCE6E1 <br>
+created: 2019-04-04 expires: never usage: E <br>
+card-no: FF020001008A77C1 <br>
+[ultimate] (1). otto@example.net</p>
+
+<p style="margin-left:12%; margin-top: 1em">gpg&gt;
+save</p>
+
+<p style="margin-left:9%; margin-top: 1em">Now you can use
+your PIV card also with <b>gpg</b>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gpg-card</b>
+understands these options: <b><br>
+--with-colons</b></p>
+
+<p style="margin-left:18%;">This option has currently no
+effect.</p>
+
+<p style="margin-left:9%;"><b>--status-fd</b> <i>n</i></p>
+
+<p style="margin-left:18%;">Write special status strings to
+the file descriptor <i>n</i>. This program returns only the
+status messages SUCCESS or FAILURE which are helpful when
+the caller uses a double fork approach and can&rsquo;t
+easily get the return code of the process.</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">Enable extra informational
+output.</p>
+
+<p style="margin-left:9%;"><b>--quiet</b></p>
+
+<p style="margin-left:18%;">Disable almost all
+informational output.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Print version of the program
+and exit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Display a brief help page and exit.</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--no-autostart</b></p>
+
+<p style="margin-left:18%;">Do not start the gpg-agent if
+it has not yet been started and its service is required.
+This option is mostly useful on machines where the
+connection to gpg-agent has been redirected to another
+machines.</p>
+
+<p style="margin-left:9%;"><b>--no-history</b></p>
+
+<p style="margin-left:18%;">In interactive mode the command
+line history is usually saved and restored to and from a
+file below the GnuPG home directory. This option inhibits
+the use of that file.</p>
+
+<p style="margin-left:9%;"><b>--agent-program</b>
+<i>file</i></p>
+
+<p style="margin-left:18%;">Specify the agent program to be
+started if none is running. The default value is determined
+by running <b>gpgconf</b> with the option
+<b>--list-dirs</b>.</p>
+
+<p style="margin-left:9%;"><b>--gpg-program</b>
+<i>file</i></p>
+
+<p style="margin-left:18%;">Specify a non-default gpg
+binary to be used by certain commands.</p>
+
+<p style="margin-left:9%;"><b>--gpgsm-program</b>
+<i>file</i></p>
+
+<p style="margin-left:18%;">Specify a non-default gpgsm
+binary to be used by certain commands.</p>
+
+<p style="margin-left:9%;"><b>--chuid</b> <i>uid</i></p>
+
+<p style="margin-left:18%;">Change the current user to
+<i>uid</i> which may either be a number or a name. This can
+be used from the root account to run gpg-card for another
+user. If <i>uid</i> is not the current UID a standard PATH
+is set and the envvar GNUPGHOME is unset. To override the
+latter the option <b>--homedir</b> can be used. This option
+has only an effect when used on the command line. This
+option has currently no effect at all on Windows.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>scdaemon</b>(1)</p>
+<hr>
+</body>
+</html>

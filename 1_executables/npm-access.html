@@ -1,0 +1,459 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-ACCESS</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-ACCESS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Details">Details</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#json">json</a><br>
+<a href="#otp">otp</a><br>
+<a href="#registry">registry</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-access</b>
+- Set access level on published packages</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm access list
+packages [&lt;user&gt;|&lt;scope&gt;|&lt;scope:team&gt;]
+[&lt;package&gt;] <br>
+npm access list collaborators [&lt;package&gt;
+[&lt;user&gt;]] <br>
+npm access get status [&lt;package&gt;] <br>
+npm access set status=public|private [&lt;package&gt;] <br>
+npm access set mfa=none|publish|automation [&lt;package&gt;]
+<br>
+npm access grant &lt;read-only|read-write&gt;
+&lt;scope:team&gt; [&lt;package&gt;] <br>
+npm access revoke &lt;scope:team&gt; [&lt;package&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+command is unaware of workspaces.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Used to set
+access controls on private packages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For all of the
+subcommands, <b>npm access</b> will perform actions on the
+packages in the current working directory if no package name
+is passed to the subcommand.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>public / restricted (deprecated): Set a package to be
+either publicly accessible or restricted.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>grant / revoke (deprecated): Add or remove the ability
+of users and teams to have read-only or read-write access to
+a package.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>2fa-required / 2fa-not-required (deprecated): Configure
+whether a package requires that anyone publishing it have
+two-factor authentication enabled on their account.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>ls-packages (deprecated): Show all of the packages a
+user or a team is able to access, along with the access
+level, except for read-only public packages (it won&rsquo;t
+print the whole registry listing)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>ls-collaborators (deprecated): Show all of the access
+privileges for a package. Will only show permissions for
+packages to which you have at least read access. If
+<b>&lt;user&gt;</b> is passed in, the list is filtered only
+to teams <i>that</i> user happens to belong to.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>edit (not implemented)</p></td></tr>
+</table>
+
+<h3>Details
+<a name="Details"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm
+access</b> always operates directly on the current registry,
+configurable from the command line using
+<b>--registry=&lt;registry url&gt;</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unscoped
+packages are <i>always public</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Scoped packages
+<i>default to restricted</i>, but you can either publish
+them as public using <b>npm publish --access=public</b>, or
+set their access as public using <b>npm access public</b>
+after the initial publish.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You must have
+privileges to set the access of a package:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">You are an owner of an unscoped
+or scoped package.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>You are a member of the team that owns a scope.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>You have been given read-write privileges for a package,
+either as a member of a team or directly as an owner.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+two-factor authentication enabled then you&rsquo;ll be
+prompted to provide a second factor, or may use the
+<b>--otp=...</b> option to specify it on the command
+line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If your account
+is not paid, then attempts to publish scoped packages will
+fail with an HTTP 402 status code (logically enough), unless
+you use <b>--access=public</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Management of
+teams and team memberships is done with the <b>npm team</b>
+command.</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>json
+<a name="json"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Whether or not
+to output JSON data, rather than the normal output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">In <b>npm pkg set</b> it enables
+parsing set values with JSON.parse() before saving them to
+your <b>package.json</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Not supported by
+all npm commands.</p>
+
+<h3>otp
+<a name="otp"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p>Type: null or String</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+one-time password from a two-factor authenticator.
+It&rsquo;s needed when publishing or changing package
+permissions with <b>npm access</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If not set, and
+a registry response fails with a challenge for a one-time
+password, npm will prompt on the command line for one.</p>
+
+<h3>registry
+<a name="registry"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">Default:
+&quot;https://registry.npmjs.org/&quot;</p> </td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p>Type: URL</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The base URL of
+the npm registry.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="55%">
+
+
+<p style="margin-top: 1em"><b>libnpmaccess</b> <i>&lang;
+https://npm.im/libnpmaccess&rang;</i></p> </td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="55%">
+
+
+<p>npm help team</p></td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="55%">
+
+
+<p>npm help publish</p></td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="55%">
+
+
+<p>npm help config</p></td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="55%">
+
+
+<p>npm help registry</p></td>
+<td width="31%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VALAC</title>
+
+</head>
+<body>
+
+<h1 align="center">VALAC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Usage:">Usage:</a><br>
+<a href="#Help Options:">Help Options:</a><br>
+<a href="#Application Options:">Application Options:</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#HOMEPAGE OR CONTACT">HOMEPAGE OR CONTACT</a><br>
+<a href="#FEATURES">FEATURES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">valac - compiler
+that translates Vala source code into C source and header
+files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>valac</b>
+[<i>OPTION</i>]... [<i>FILE</i>]...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Vala is a
+programming language that aims to bring modern programming
+language features to GNOME developers without imposing any
+additional runtime requirements and without using a
+different ABI compared to applications and libraries written
+in C. <br>
+valac, the Vala compiler, is a self-hosting compiler that
+translates</p>
+
+<p style="margin-left:18%;">Vala source code into C source
+and header files. It uses the GObject type system to create
+classes and interfaces declared in the Vala source code.</p>
+
+<h3>Usage:
+<a name="Usage:"></a>
+</h3>
+
+
+<p style="margin-left:18%; margin-top: 1em">valac [OPTION?]
+FILE... - Vala Compiler</p>
+
+<h3>Help Options:
+<a name="Help Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">-?,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<h3>Application Options:
+<a name="Application Options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--vapidir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for package bindings in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--girdir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for .gir files in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--metadatadir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for GIR .metadata files in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--pkg</b>=<i>PACKAGE</i>...</p>
+
+<p style="margin-left:18%;">Include binding for PACKAGE</p>
+
+<p style="margin-left:9%;"><b>--vapi</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Output VAPI file name</p>
+
+
+<p style="margin-left:9%;"><b>--library</b>=<i>NAME</i></p>
+
+<p style="margin-left:18%;">Library name</p>
+
+
+<p style="margin-left:9%;"><b>--shared-library</b>=<i>NAME</i></p>
+
+<p style="margin-left:18%;">Shared library name used in
+generated gir</p>
+
+
+<p style="margin-left:9%;"><b>--gir</b>=<i>NAME-VERSION</i>.gir</p>
+
+<p style="margin-left:18%;">GObject-Introspection
+repository file name</p>
+
+<p style="margin-left:9%;"><b>-b</b>,
+<b>--basedir</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Base source directory</p>
+
+<p style="margin-left:9%;"><b>-d</b>,
+<b>--directory</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Change output directory from
+current working directory</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Display version number</p>
+
+<p style="margin-left:9%;"><b>--api-version</b></p>
+
+<p style="margin-left:18%;">Display API version number</p>
+
+<p style="margin-left:9%;"><b>-C</b>, <b>--ccode</b></p>
+
+<p style="margin-left:18%;">Output C code</p>
+
+<p style="margin-left:9%;"><b>-H</b>,
+<b>--header</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Output C header file</p>
+
+<p style="margin-left:9%;"><b>--use-header</b></p>
+
+<p style="margin-left:18%;">Use C header file (DEPRECATED
+AND IGNORED)</p>
+
+
+<p style="margin-left:9%;"><b>--includedir</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Directory used to include the C
+header file</p>
+
+<p style="margin-left:9%;"><b>-h</b>,
+<b>--internal-header</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Output internal C header
+file</p>
+
+
+<p style="margin-left:9%;"><b>--internal-vapi</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Output vapi with internal
+api</p>
+
+<p style="margin-left:9%;"><b>--fast-vapi</b></p>
+
+<p style="margin-left:18%;">Output vapi without performing
+symbol resolution</p>
+
+<p style="margin-left:9%;"><b>--use-fast-vapi</b></p>
+
+<p style="margin-left:18%;">Use <b>--fast-vapi</b> output
+during this compile</p>
+
+<p style="margin-left:9%;"><b>--vapi-comments</b></p>
+
+<p style="margin-left:18%;">Include comments in generated
+vapi</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--deps</b></p></td>
+<td width="1%"></td>
+<td width="67%">
+
+
+<p>Write make-style dependency information to this file</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--depfile</b></p>
+
+<p style="margin-left:18%;">Write make-style external
+dependency information for build systems to this file</p>
+
+<p style="margin-left:9%;"><b>--list-sources</b></p>
+
+<p style="margin-left:18%;">Output a list of all source and
+binding files which are used</p>
+
+
+<p style="margin-left:9%;"><b>--symbols</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Output symbols file</p>
+
+<p style="margin-left:9%;"><b>-c</b>, <b>--compile</b></p>
+
+<p style="margin-left:18%;">Compile but do not link</p>
+
+<p style="margin-left:9%;"><b>-o</b>,
+<b>--output</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Place output in file FILE</p>
+
+<p style="margin-left:9%;"><b>-g</b>, <b>--debug</b></p>
+
+<p style="margin-left:18%;">Produce debug information</p>
+
+<p style="margin-left:9%;"><b>--thread</b></p>
+
+<p style="margin-left:18%;">Enable multithreading support
+(DEPRECATED AND IGNORED)</p>
+
+
+<p style="margin-left:9%;"><b>--enable-mem-profiler</b></p>
+
+<p style="margin-left:18%;">Enable GLib memory profiler</p>
+
+<p style="margin-left:9%;"><b>-D</b>,
+<b>--define</b>=<i>SYMBOL</i>...</p>
+
+<p style="margin-left:18%;">Define SYMBOL</p>
+
+
+<p style="margin-left:9%;"><b>--main</b>=<i>SYMBOL</i>...</p>
+
+<p style="margin-left:18%;">Use SYMBOL as entry point</p>
+
+<p style="margin-left:9%;"><b>--nostdpkg</b></p>
+
+<p style="margin-left:18%;">Do not include standard
+packages</p>
+
+<p style="margin-left:9%;"><b>--disable-assert</b></p>
+
+<p style="margin-left:18%;">Disable assertions</p>
+
+<p style="margin-left:9%;"><b>--enable-checking</b></p>
+
+<p style="margin-left:18%;">Enable additional run-time
+checks</p>
+
+<p style="margin-left:9%;"><b>--enable-deprecated</b></p>
+
+<p style="margin-left:18%;">Enable deprecated features</p>
+
+<p style="margin-left:9%;"><b>--hide-internal</b></p>
+
+<p style="margin-left:18%;">Hide symbols marked as
+internal</p>
+
+
+<p style="margin-left:9%;"><b>--enable-experimental</b></p>
+
+<p style="margin-left:18%;">Enable experimental
+features</p>
+
+<p style="margin-left:9%;"><b>--disable-warnings</b></p>
+
+<p style="margin-left:18%;">Disable warnings</p>
+
+<p style="margin-left:9%;"><b>--fatal-warnings</b></p>
+
+<p style="margin-left:18%;">Treat warnings as fatal</p>
+
+
+<p style="margin-left:9%;"><b>--disable-since-check</b></p>
+
+<p style="margin-left:18%;">Do not check whether used
+symbols exist in local packages</p>
+
+<p style="margin-left:9%;"><b>-k</b>,
+<b>--keep-going</b></p>
+
+<p style="margin-left:18%;">Continue as much as possible
+after an error</p>
+
+
+<p style="margin-left:9%;"><b>--enable-experimental-non-null</b></p>
+
+<p style="margin-left:18%;">Enable experimental
+enhancements for non-null types</p>
+
+
+<p style="margin-left:9%;"><b>--enable-gobject-tracing</b></p>
+
+<p style="margin-left:18%;">Enable GObject creation
+tracing</p>
+
+<p style="margin-left:9%;"><b>--cc</b>=<i>COMMAND</i></p>
+
+<p style="margin-left:18%;">Use COMMAND as C compiler
+command</p>
+
+<p style="margin-left:9%;"><b>-X</b>,
+<b>--Xcc</b>=<i>OPTION</i>...</p>
+
+<p style="margin-left:18%;">Pass OPTION to the C
+compiler</p>
+
+
+<p style="margin-left:9%;"><b>--pkg-config</b>=<i>COMMAND</i></p>
+
+<p style="margin-left:18%;">Use COMMAND as pkg-config
+command</p>
+
+
+<p style="margin-left:9%;"><b>--dump-tree</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Write code tree to FILE</p>
+
+<p style="margin-left:9%;"><b>--save-temps</b></p>
+
+<p style="margin-left:18%;">Keep temporary files</p>
+
+
+<p style="margin-left:9%;"><b>--profile</b>=<i>PROFILE</i></p>
+
+<p style="margin-left:18%;">Minimum runtime dependency:
+&rsquo;gobject&rsquo; (default) or &rsquo;posix&rsquo;
+(minimal libc) <i><br>
+gobject</i> enables GLib&rsquo;s GType runtime type system.
+The runtime environment will usually require libgobject and
+its small number of dependencies. <i>posix</i> removes the
+dependency on GLib and disables the runtime type system. The
+profile either generates alternative code or errors at
+compile time if a Vala language feature is used that
+requires the runtime type system. This is useful for writing
+code, for example, that targets microcontrollers or for
+extremely small system utilities or container images. The
+runtime environment will usually require a small subset of
+the ISO C standard library.</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--quiet</b></p>
+
+<p style="margin-left:18%;">Do not print messages to the
+console</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Print additional messages to
+the console</p>
+
+<p style="margin-left:9%;"><b>--no-color</b></p>
+
+<p style="margin-left:18%;">Disable colored output, alias
+for <b>--color</b>=<i>never</i></p>
+
+<p style="margin-left:9%;"><b>--color</b>=<i>WHEN</i></p>
+
+<p style="margin-left:18%;">Enable color output, options
+are &rsquo;always&rsquo;, &rsquo;never&rsquo;, or
+&rsquo;auto&rsquo; <br>
+When no value is given <i>always</i> is implied. When
+neither <b>--color</b> or <b>--no-color</b> are declared
+then <b>--color</b>=<i>auto</i> is used where output is
+colored when stderr is a terminal.</p>
+
+
+<p style="margin-left:9%;"><b>--target-glib=</b>&rsquo;MAJOR.MINOR&rsquo;,
+or &rsquo;auto&rsquo;</p>
+
+<p style="margin-left:18%;">Target version of glib for code
+generation</p>
+
+
+<p style="margin-left:9%;"><b>--gresources</b>=<i>FILE</i>...</p>
+
+<p style="margin-left:18%;">XML of gresources</p>
+
+
+<p style="margin-left:9%;"><b>--gresourcesdir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for resources in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--enable-version-header</b></p>
+
+<p style="margin-left:18%;">Write vala build version in
+generated files</p>
+
+
+<p style="margin-left:9%;"><b>--disable-version-header</b></p>
+
+<p style="margin-left:18%;">Do not write vala build version
+in generated files</p>
+
+<p style="margin-left:9%;"><b>--run-args</b></p>
+
+<p style="margin-left:18%;">Arguments passed to directly
+compiled executable</p>
+
+<p style="margin-left:9%;"><b>--abi-stability</b></p>
+
+<p style="margin-left:18%;">Enable support for ABI
+stability <br>
+This changes the current behaviour to output public members
+of classes and interfaces the same order as they appear in
+Vala source. For libraries is recommended to use
+<b>--abi-stability</b> to ensure the maintainability of the
+resulting Application Binary Interface (ABI). This option is
+disabled by default for backward compatibility because it
+can break ABI of existing projects.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://gitlab.gnome.org/GNOME/vala/issues</p>
+
+<h2>HOMEPAGE OR CONTACT
+<a name="HOMEPAGE OR CONTACT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://vala.dev</p>
+
+<h2>FEATURES
+<a name="FEATURES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Interfaces,
+properties, signals, foreach, lambda expressions, type
+inference for local variables, generics, non-null types,
+assisted memory management, exception handling</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">J??rg Billeter,
+Raffaele Sandrini, Rico Tzschichholz.</p>
+<hr>
+</body>
+</html>

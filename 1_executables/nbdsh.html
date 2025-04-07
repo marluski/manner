@@ -1,0 +1,340 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:39 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>nbdsh</title>
+
+</head>
+<body>
+
+<h1 align="center">nbdsh</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Print the size of an NBD export">Print the size of an NBD export</a><br>
+<a href="#Hexdump the boot sector of an NBD export">Hexdump the boot sector of an NBD export</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#nbdsh examples">nbdsh examples</a><br>
+<a href="#Using libnbd directly from Python">Using libnbd directly from Python</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">nbdsh - network
+block device (NBD) shell</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">$ nbdsh <br>
+Welcome to nbdsh, the shell for interacting with <br>
+Network Block Device (NBD) servers. <br>
+The &lsquo;nbd&rsquo; module has already been imported and
+there <br>
+is an open NBD handle called &lsquo;h&rsquo;. <br>
+nbd&gt; h.connect_command([&quot;nbdkit&quot;,
+&quot;-s&quot;, &quot;memory&quot;, &quot;1G&quot;]) <br>
+nbd&gt; h.get_size() <br>
+1073741824 <br>
+nbd&gt; buf = b&quot;hello, world&quot; <br>
+nbd&gt; h.pwrite(buf, 0) <br>
+nbd&gt; exit()</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">nbdsh is a
+Python-based client shell for accessing Network Block Device
+(NBD) servers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For
+documentation about the libnbd API please open the shell and
+type:</p>
+
+<p style="margin-left:9%; margin-top: 1em">help(nbd)</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h3>Print the size of an NBD export
+<a name="Print the size of an NBD export"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <i>-u</i>
+option connects to an NBD URI. The <i>-c</i> option lets you
+execute single Python statements from the command line.
+Combining these two options lets you print the size in bytes
+of an NBD export:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ nbdsh -u
+nbd://localhost -c 'print(h.get_size())' <br>
+1073741824</p>
+
+<h3>Hexdump the boot sector of an NBD export
+<a name="Hexdump the boot sector of an NBD export"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Using <i>-c
+-</i> you can feed a whole Python program to the standard
+input of nbdsh:</p>
+
+<p style="margin-left:9%; margin-top: 1em">nbdsh -c -
+&lt;&lt;'EOF' <br>
+from subprocess import * <br>
+h.connect_uri(&quot;nbd://localhost&quot;) <br>
+bootsect = h.pread(512, 0) <br>
+p = Popen(&quot;hexdump -C&quot;, shell=True, stdin=PIPE)
+<br>
+p.stdin.write(bootsect) <br>
+EOF</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-h</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:14%;">Display brief command line help
+and exit.</p>
+
+<p style="margin-left:9%;"><b>--base-allocation</b></p>
+
+<p style="margin-left:14%;">Request the use of the
+&quot;base:allocation&quot; meta context, which is the most
+common context used with <b>nbd_block_status_64</b>(3). This
+is equivalent to calling
+&quot;h.set_meta_context(nbd.CONTEXT_BASE_ALLOCATION)&quot;
+in the shell prior to connecting, and works even when
+combined with &quot;--uri&quot; (while attempting the same
+with &quot;-c&quot; would be too late).</p>
+
+<p style="margin-left:9%;"><b>-c</b> &rsquo;COMMAND
+...&rsquo; <b><br>
+--command</b> &rsquo;COMMAND ...&rsquo;</p>
+
+<p style="margin-left:14%;">Instead of starting an
+interactive shell, run a command. This option can be
+specified multiple times in order to run multiple
+commands.</p>
+
+<p style="margin-left:9%;"><b>-c - <br>
+--command -</b></p>
+
+<p style="margin-left:14%;">Read standard input and execute
+it as a command.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="2%"></td>
+<td width="49%">
+
+
+<p>Do not create the implicit handle &quot;h&quot;.</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--opt-mode</b></p>
+
+<p style="margin-left:14%;">Request that option mode be
+enabled, which gives fine-grained control over option
+negotiation after initially contacting the server but prior
+to actually using the export. This is equivalent to calling
+&quot;h.set_opt_mode(True)&quot; in the shell prior to
+connecting, and works even when combined with
+&quot;--uri&quot; (while attempting the same with
+&quot;-c&quot; would be too late).</p>
+
+<p style="margin-left:9%;"><b>-u</b> URI <b><br>
+--uri</b> URI</p>
+
+<p style="margin-left:14%;">Connect to the given NBD URI.
+This is equivalent to the &quot;h.connect_uri(URI)&quot;
+command in the shell.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that the
+connection is created prior to processing any &quot;-c&quot;
+commands, which prevents the use of configuration commands
+such as &quot;h.add_meta_context(&quot;NAME&quot;)&quot;
+from the command line when mixed with this option. The
+options &quot;--opt-mode&quot; and
+&quot;--base-allocation&quot; can be used to make this
+situation easier to manage.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--verbose</b></p>
+
+<p style="margin-left:14%;">Enable verbose libnbd messages.
+This has the same effect as setting the environment variable
+&quot;LIBNBD_DEBUG=1&quot;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Display the package name and
+version and exit.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<h3>nbdsh examples
+<a name="nbdsh examples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">There are some
+example nbdsh scripts in the libnbd source repository under
+<i>sh/examples</i> or see
+https://gitlab.com/nbdkit/libnbd/tree/master/sh/examples.</p>
+
+<h3>Using libnbd directly from Python
+<a name="Using libnbd directly from Python"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">nbdsh is
+convenient for command line scripting, but you do not have
+to use it. Instead you can write an ordinary Python program
+or module which imports the &quot;nbd&quot; module:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">#!/usr/bin/python3
+<br>
+import nbd <br>
+h = nbd.NBD() <br>
+h.connect_uri(&quot;nbd://localhost&quot;)</p>
+
+<p style="margin-left:9%; margin-top: 1em">There are some
+example Python scripts in the libnbd source repository under
+<i>python/examples</i> or see
+https://gitlab.com/nbdkit/libnbd/tree/master/python/examples.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3),
+<b>libnbd-security</b>(3), <b>nbdcopy</b>(1),
+<b>nbddump</b>(1), <b>nbdfuse</b>(1), <b>nbdublk</b>(1),
+<b>nbdinfo</b>(1), <b>qemu-img</b>(1).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Richard W.M.
+Jones</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

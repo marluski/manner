@@ -1,0 +1,387 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>HWLOC-PS</title>
+
+</head>
+<body>
+
+<h1 align="center">HWLOC-PS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Example with lstopo integration">Example with lstopo integration</a><br>
+<a href="#Examples with MPI processes">Examples with MPI processes</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hwloc-ps - List
+currently-running processes or threads that are bound</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hwloc-ps</b>
+[<i>options</i>]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-a</b></p></td>
+<td width="10%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em">List all processes, even those
+that are not bound to any specific part of the machine.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--pid &lt;pid&gt;</b></p>
+
+<p style="margin-left:22%;">Only show process of PID
+<i>&lt;pid&gt;</i>, even if it is not bound to any specific
+part of the machine.</p>
+
+<p style="margin-left:9%;"><b>--children-of-pid
+&lt;pid&gt;</b></p>
+
+<p style="margin-left:22%;">Only show process of PID
+<i>&lt;pid&gt;</i> and its hierarchy of children, even if
+they are not bound to any specific part of the machine.</p>
+
+<p style="margin-left:9%;"><b>--name &lt;name&gt;</b></p>
+
+<p style="margin-left:22%;">Only show processes whose name
+contains <i>&lt;name&gt;</i>, even if they are not bound to
+any specific part of the machine. This is not supported on
+all operating systems.</p>
+
+<p style="margin-left:9%;"><b>--uid &lt;uid&gt;</b></p>
+
+<p style="margin-left:22%;">Only show processes of the user
+whose UID is <i>&lt;uid&gt;</i>, or processes of all users
+if <i>all</i> is given. By default, only processes of the
+current user are displayed. This is currently only supported
+on Linux.</p>
+
+<p style="margin-left:9%;"><b>-p --physical</b></p>
+
+<p style="margin-left:22%;">Report OS/physical indexes
+instead of logical indexes</p>
+
+<p style="margin-left:9%;"><b>-l --logical</b></p>
+
+<p style="margin-left:22%;">Report logical indexes instead
+of physical/OS indexes (default)</p>
+
+<p style="margin-left:9%;"><b>-c --cpuset</b></p>
+
+<p style="margin-left:22%;">Show process bindings as
+cpusets instead of objects.</p>
+
+<p style="margin-left:9%;"><b>-t --threads</b></p>
+
+<p style="margin-left:22%;">Show threads inside processes.
+If <b>-a</b> is given as well, list all threads within each
+process. Otherwise, show all threads inside each process
+where at least one thread is bound. This is currently only
+supported on Linux.</p>
+
+<p style="margin-left:9%;"><b>--single-ancestor</b></p>
+
+<p style="margin-left:22%;">When the object is bound to
+different objects, report their common ancestor (even if it
+may be larger than the actual binding).</p>
+
+<p style="margin-left:9%;"><b>-e
+--get-last-cpu-location</b></p>
+
+<p style="margin-left:22%;">Report the last processors
+where the process/thread ran. Note that the result may
+already be outdated when reported since the operating system
+may move the tasks to other processors at any time according
+to the binding.</p>
+
+<p style="margin-left:9%;"><b>--disallowed</b></p>
+
+<p style="margin-left:22%;">Include objects disallowed by
+administrative limitations.</p>
+
+<p style="margin-left:9%;"><b>--pid-cmd &lt;cmd&gt;</b></p>
+
+<p style="margin-left:22%;">Append the output of the given
+command to each PID line. For each displayed process ID,
+execute the command <i>&lt;cmd&gt; &lt;pid&gt;</i> and
+append <b>the first line</b> of its output to the regular
+hwloc-ps line.</p>
+
+<p style="margin-left:9%;"><b>--pid-cmd
+env=&lt;name&gt;</b></p>
+
+<p style="margin-left:22%;">On Linux, try to read the value
+of environment variable <i>name</i> in each process and
+display it at the end of the line.</p>
+
+<p style="margin-left:9%;"><b>--pid-cmd mpirank</b></p>
+
+<p style="margin-left:22%;">On Linux, try to find the
+process MPI rank (by querying some widespread environment
+variables) and display it at the end of the line.</p>
+
+<p style="margin-left:9%;"><b>--lstopo-misc</b>
+&lt;file&gt;</p>
+
+<p style="margin-left:22%;">Output a file that may be given
+to <b>lstopo --misc-from</b> for displaying
+processes/threads as Misc objects. See EXAMPLES below.</p>
+
+<p style="margin-left:9%;"><b>--json-server</b></p>
+
+<p style="margin-left:22%;">Run the tool as a JSON server
+that waits for other process&rsquo; requests on a port and
+sends back binding information. See contrib/hwloc-ps.www/
+for details.</p>
+
+<p style="margin-left:9%;"><b>--json-port
+&lt;port&gt;</b></p>
+
+<p style="margin-left:22%;">Use the given port number
+instead of the default 8888.</p>
+
+<p style="margin-left:9%;"><b>-v --verbose</b></p>
+
+<p style="margin-left:22%;">Increase verbosity of the JSON
+server.</p>
+
+<p style="margin-left:9%;"><b>--short-name</b></p>
+
+<p style="margin-left:22%;">Show only the process short
+name instead of the path.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>--version</b></p></td>
+<td width="1%"></td>
+<td width="38%">
+
+
+<p>Report version and exit.</p></td>
+<td width="40%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>-h --help</b></p></td>
+<td width="1%"></td>
+<td width="38%">
+
+
+<p>Display help message and exit.</p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">By default,
+hwloc-ps lists only those currently-running processes that
+are bound. If <b>-t</b> is given, processes that are not
+bound but contain at least one bound thread are also
+displayed, as well as all their threads.</p>
+
+<p style="margin-left:9%; margin-top: 1em">hwloc-ps
+displays process identifier, command-line and binding. The
+binding may be reported as objects or cpusets.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default,
+process bindings are restricted to the currently available
+topology. If some processes are bound to processors that are
+not available to the current process, they are ignored
+unless <b>--disallowed</b> is given.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The output is a
+plain list. If you wish to annotate the hierarchical
+topology with processes so as to see how they are actual
+distributed on the machine, you might want to use lstopo
+--ps instead (which also only shows processes that are
+bound).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <i>-a</i>
+switch can be used to show <i>all</i> processes, if
+desired.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If a process is
+bound, it appears in the default output:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps <br>
+4759 Core:0 myprogram</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a process is
+bound on two cores of a larger package, the output will show
+these cores. Option --single-ancestor will rather return the
+package even if it is actually larger than the binding here
+(the process is not bound to Core:0 of Package:0):</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps <br>
+4863 Core:1 Core:2 myprogram <br>
+$ hwloc-ps --single-ancestor <br>
+4863 Package:0 myprogram</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a process is
+not bound but 3 of his 4 threads are bound, it only appears
+in the thread-aware output (or if explicitly selected):</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps -t
+<br>
+4759 Machine:0 myprogram <br>
+4759 Machine:0 <br>
+4761 PU:0 <br>
+4762 PU:2 <br>
+4765 PU:1</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps --pid
+4759 <br>
+4759 Machine:0 myprogram</p>
+
+<h2>Example with lstopo integration
+<a name="Example with lstopo integration"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The output may
+be a file that lstopo uses for adding Misc objects (more
+flexible version of lstopo --top):</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps
+--misc-from foo <br>
+$ cat foo <br>
+name=12444 myprogram <br>
+cpuset=0x000000f0 <br>
+subtype=Process</p>
+
+<p style="margin-left:9%; margin-top: 1em">name=12444
+mythread1 <br>
+cpuset=0x00000050 <br>
+subtype=Thread</p>
+
+<p style="margin-left:9%; margin-top: 1em">name=12444
+mythread2 <br>
+cpuset=0x000000a0 <br>
+subtype=Thread</p>
+
+<p style="margin-left:9%; margin-top: 1em">This may be
+directly given to lstopo:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps
+--misc-from - | lstopo --misc-from -</p>
+
+<h2>Examples with MPI processes
+<a name="Examples with MPI processes"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On Linux,
+hwloc-ps may also display some process specific environment
+variable at the end of the line. This is for instance useful
+for identify MPI ranks among processes:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps
+--pid-cmd env=OMPI_COMM_WORLD_RANK <br>
+29093 PU:0 myprogram OMPI_COMM_WORLD_RANK=0 <br>
+29094 PU:2 myprogram OMPI_COMM_WORLD_RANK=1 <br>
+29095 PU:1 myprogram OMPI_COMM_WORLD_RANK=2 <br>
+29096 PU:3 myprogram OMPI_COMM_WORLD_RANK=3</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some widespread
+MPI specific environment variables (OMPI_COMM_WORLD_RANK,
+PMIX_RANK, PMI_RANK and SLURM_PROCID) are actually directly
+recognized by hwloc-ps when requesting the <i>mpirank</i>
+command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps
+--pid-cmd mpirank <br>
+29093 PU:0 myprogram PMIX_RANK=0 <br>
+29094 PU:2 myprogram PMIX_RANK=1 <br>
+29095 PU:1 myprogram PMIX_RANK=2 <br>
+29096 PU:3 myprogram PMIX_RANK=3</p>
+
+<p style="margin-left:9%; margin-top: 1em">Beside reading
+environment variables, hwloc-ps may also append the output
+of a custom program. Again, for reading the Open MPI process
+rank:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-ps
+--pid-cmd myscript <br>
+29093 PU:0 myprogram OMPI_COMM_WORLD_RANK=0 <br>
+29094 PU:2 myprogram OMPI_COMM_WORLD_RANK=1 <br>
+29095 PU:1 myprogram OMPI_COMM_WORLD_RANK=2 <br>
+29096 PU:3 myprogram OMPI_COMM_WORLD_RANK=3</p>
+
+<p style="margin-left:9%; margin-top: 1em">where
+<b>myscript</b> is a shell script doing:</p>
+
+<p style="margin-left:9%; margin-top: 1em">#!/bin/sh <br>
+cat /proc/$1/environ 2&gt;/dev/null | xargs --null
+--max-args=1 echo | grep OMPI_COMM_WORLD_RANK</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hwloc(7),
+lstopo(1), hwloc-calc(1), hwloc-distrib(1), and
+hwloc-ps.www/README</p>
+<hr>
+</body>
+</html>

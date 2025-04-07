@@ -1,0 +1,168 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:47 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GI-COMPILE-REPOSITORY</title>
+
+</head>
+<body>
+
+<h1 align="center">GI-COMPILE-REPOSITORY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#HOMEPAGE AND CONTACT">HOMEPAGE AND CONTACT</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">gi-compile-repository
+- Typelib compiler</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gi-compile-repository</b>
+[<i>OPTION</i>&#8230;] <i>GIRFILE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">gi-compile-repository
+converts one or more GIR files into one or more typelibs.
+The output will be written to standard output unless the
+<b>--output</b> is specified.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="23%">
+
+
+<p style="margin-top: 1em">Show help options.</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--output</b>
+<i>FILENAME</i><b>, -o</b> <i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Save the resulting output in
+<i>FILENAME</i>.</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">Show verbose messages.</p>
+
+<p style="margin-left:9%;"><b>--debug</b></p>
+
+<p style="margin-left:18%;">Show debug messages.</p>
+
+<p style="margin-left:9%;"><b>--includedir</b>
+<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Add <i>DIRECTORY</i> to the
+search path for GIR XML. This option can be used more than
+once. The first <i>DIRECTORY</i> on the command-line will be
+searched first (highest precedence).</p>
+
+<p style="margin-left:9%;"><b>--shared-library</b>
+<i>FILENAME</i><b>, -l</b> <i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Specifies the shared library
+where the symbols in the typelib can be found. The name of
+the library should not contain the ending shared library
+suffix. This option can be used more than once, for typelibs
+that describe more than one shared library.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Show program&rsquo;s version
+number and exit.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>::</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">$ gi-compile-repository -o
+Gio-2.0.typelib /usr/share/gir-1.0/Gio-2.0.gir</p></td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs at
+&lt;https://gitlab.gnome.org/GNOME/glib/-/issues&gt;</p>
+
+<h2>HOMEPAGE AND CONTACT
+<a name="HOMEPAGE AND CONTACT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;https://gi.readthedocs.io/&gt;</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Matthias
+Clasen</p>
+<hr>
+</body>
+</html>

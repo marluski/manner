@@ -1,0 +1,208 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:14 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>DBUS-BROKER-LAUNCH</title>
+
+</head>
+<body>
+
+<h1 align="center">DBUS-BROKER-LAUNCH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#LOGGING">LOGGING</a><br>
+<a href="#SCOPE">SCOPE</a><br>
+<a href="#SOCKETS">SOCKETS</a><br>
+<a href="#PRIVILEGES">PRIVILEGES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">dbus-broker-launch
+- Launcher for D-Bus Message Brokers</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dbus-broker-launch</b>
+[ OPTIONS ] <b><br>
+dbus-broker-launch --version <br>
+dbus-broker-launch --help</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dbus-broker-launch</b>
+is a launcher for <b>dbus-broker</b>, spawning and managing
+a D-Bus Message Bus. The launcher aims to be fully
+compatible to the D-Bus reference implementation
+<b>dbus-daemon</b>(1), supporting the same configuration
+syntax and runtime environment.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each instance of
+<b>dbus-broker-launch</b> manages exactly one message bus.
+Each message bus is independent. The configuration file can
+either be specified via the command-line, or the default is
+picked from <i>/usr/share/dbus-1/</i>. Nearly all of the
+configuration attributes are supported. See
+<b>dbus-daemon</b>(1) for details on the configuration
+syntax.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+command-line options are supported. If an option is passed,
+which is not listed here, the launcher will deny startup and
+exit with an error. <b><br>
+-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">print usage information and
+exit immediately</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">print build-version and exit
+immediately</p>
+
+<p style="margin-left:9%;"><b>--audit</b></p>
+
+<p style="margin-left:18%;">enable logging to the linux
+audit subsystem (no-op if audit support was not compiled in;
+<b>Default</b>: off)</p>
+
+
+<p style="margin-left:9%;"><b>--config-file=</b><i>PATH</i></p>
+
+<p style="margin-left:18%;">config file to use
+(<b>Default</b>:
+<i>/usr/share/dbus-1/{system,session}.conf</i>)</p>
+
+<p style="margin-left:9%;"><b>--scope=</b><i>SCOPE</i></p>
+
+<p style="margin-left:18%;">select scope to run in (one of:
+<i>system</i>, <i>user</i>; <b>Default</b>:
+<i>system</i>)</p>
+
+<h2>LOGGING
+<a name="LOGGING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">By default,
+<b>dbus-broker-launch</b> logs messages to the system
+journal. The messages are augmented with lots of metadata,
+so be sure to check the additional journal-fields. The
+human-readable log-message is intentionally kept short.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On startup and
+shutdown, the launcher logs initial messages that contain
+information on the parsed configuration files and service
+definitions. No other log-messages are generated, except
+those originating in <b>dbus-broker</b>(1).</p>
+
+<h2>SCOPE
+<a name="SCOPE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unlike
+<b>dbus-daemon</b>(1), <b>dbus-broker-launch</b> activates
+all services as systemd units. Services that already come
+with a systemd-unit are activated as usual, but services
+that lack a systemd unit are activated as transient unit,
+with an ad-hoc unit-file generated at runtime. This
+guarantees that all services run in a well-defined
+environment.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>--scope</b> parameter defines which systemd instance the
+launcher shall use to activate services. In case of
+<i>system</i>, the launcher will use the system instance of
+systemd. In case of <i>user</i>, the user instance is used
+instead.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Furthermore, the
+selected scope also defines which configuration file is used
+if none is specified on the command-line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The selected
+scope does not have any further effect. It is only needed to
+define the activation environment for loaded service
+definitions. If no activatable services are declared, the
+scope will have no effect at all.</p>
+
+<h2>SOCKETS
+<a name="SOCKETS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The socket to
+listen on for client connections must be created and passed
+to <b>dbus-broker-launch</b> by its parent process. The
+protocol must follow the socket-activation as defined by
+<b>systemd.socket</b>(1). Only a single socket is supported
+right now.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Additional
+<i>&lt;listen&gt;%path%&lt;/listen&gt;</i> attributes in the
+configuration are ignored.</p>
+
+<h2>PRIVILEGES
+<a name="PRIVILEGES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The launcher
+needs read-access to its configuration file. Other than
+that, no privileges are needed. If the
+<i>&lt;user&gt;%user%&lt;/user&gt;</i> configuration
+attribute is used, the launcher will drop privileges when
+executing <b>dbus-broker</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If activatable
+services are declared, the launcher will need access to the
+corresponding systemd instance. The launcher must be allowed
+to spawn transient units, as well as manage units declared
+in the service definitions.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dbus-daemon</b>(1)
+<b>dbus-broker</b>(1)</p>
+<hr>
+</body>
+</html>

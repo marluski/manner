@@ -1,0 +1,3228 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:29 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#PORTABILITY">PORTABILITY</a><br>
+<a href="#METHOD DESCRIPTIONS">METHOD DESCRIPTIONS</a><br>
+<a href="#RUNTIME OPTIONS">RUNTIME OPTIONS</a><br>
+<a href="#DEVELOPMENT OPTIONS">DEVELOPMENT OPTIONS</a><br>
+<a href="#JIT MAINTAINER OPTIONS">JIT MAINTAINER OPTIONS</a><br>
+<a href="#ATTACH SUPPORT">ATTACH SUPPORT</a><br>
+<a href="#PROFILING">PROFILING</a><br>
+<a href="#Log profiler">Log profiler</a><br>
+<a href="#Coverage profiler">Coverage profiler</a><br>
+<a href="#AOT profiler">AOT profiler</a><br>
+<a href="#Custom profilers">Custom profilers</a><br>
+<a href="#DEBUGGING AIDS">DEBUGGING AIDS</a><br>
+<a href="#DEBUGGING WITH LLDB">DEBUGGING WITH LLDB</a><br>
+<a href="#SERIALIZATION">SERIALIZATION</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#ENVIRONMENT VARIABLES FOR DEBUGGING">ENVIRONMENT VARIABLES FOR DEBUGGING</a><br>
+<a href="#VALGRIND">VALGRIND</a><br>
+<a href="#DTRACE">DTRACE</a><br>
+<a href="#PERMISSIONS">PERMISSIONS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mono -
+Mono&rsquo;s ECMA-CLI native code generator (Just-in-Time
+and Ahead-of-Time)</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono
+[options] file [arguments...]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono-sgen
+[options] file [arguments...]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>mono</i></b>
+is a runtime implementation of the ECMA Common Language
+Infrastructure. This can be used to run ECMA and .NET
+applications.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The runtime
+loads the specified <i>file</i> and optionally passes the
+<i>arguments</i> to it. The <i>file</i> is an ECMA assembly.
+They typically have a .exe or .dll extension.</p>
+
+<p style="margin-left:9%; margin-top: 1em">These
+executables can reference additional functionality in the
+form of assembly references. By default those assembly
+references are resolved as follows: the <b>mscorlib.dll</b>
+is resolved from the system profile that is configured by
+Mono, and other assemblies are loaded from the Global
+Assembly Cache (GAC).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The runtime
+contains a native code generator that transforms the Common
+Intermediate Language into native code.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The code
+generator can operate in two modes: Just-in-time compilation
+(JIT) or Ahead-of-time compilation (AOT). Since code can be
+dynamically loaded, the runtime environment and the JIT are
+always present, even if code is compiled ahead of time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The runtime
+provides a number of configuration options for running
+applications, for developing and debugging, and for testing
+and debugging the runtime itself.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <i>mono</i>
+command uses the moving and generational SGen garbage
+collector while the <i>mono-boehm</i> command uses the
+conservative Boehm garbage collector.</p>
+
+<h2>PORTABILITY
+<a name="PORTABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On Unix-based
+systems, Mono provides a mechanism to emulate the
+Windows-style file access, this includes providing a case
+insensitive view of the file system, directory separator
+mapping (from \ to /) and stripping the drive letters.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This
+functionality is enabled by setting the <b>MONO_IOMAP</b>
+environment variable to one of <b>all, drive</b> and
+<b>case.</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">See the
+description for <b>MONO_IOMAP</b> in the environment
+variables section for more details.</p>
+
+<h2>METHOD DESCRIPTIONS
+<a name="METHOD DESCRIPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A number of
+diagnostic command line options take as argument a method
+description. A method description is a textual
+representation that can be used to uniquely identify a
+method. The syntax is as follows: <br>
+[namespace]classname:methodname[(arguments)]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The values in
+brackets are optional, like the namespace and the arguments.
+The arguments themselves are either empty, or a
+comma-separated list of arguments. Both the <b>classname</b>
+and <b>methodname</b> can be set to the special value
+&rsquo;*&rsquo; to match any values (Unix shell users should
+escape the argument to avoid the shell interpreting
+this).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The arguments,
+if present should be a comma separated list of types either
+a full typename, or for built-in types it should use the
+low-level ILAsm type names for the built-in types, like
+&rsquo;void&rsquo;, &rsquo;char&rsquo;, &rsquo;bool&rsquo;,
+&rsquo;byte&rsquo;, &rsquo;sbyte&rsquo;,
+&rsquo;uint16&rsquo;, &rsquo;int16&rsquo;,
+&rsquo;uint&rsquo;,</p>
+
+<p style="margin-left:9%; margin-top: 1em">Pointer types
+should be the name of the type, followed by a
+&rsquo;*&rsquo;, arrays should be the typename followed by
+&rsquo;[&rsquo; one or more commas (to indicate the rank of
+the array), and &rsquo;]&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Generic values
+should use &rsquo;&lt;&rsquo;, one or more type names,
+separated by both a comma and a space and
+&rsquo;&gt;&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By-reference
+arguments should include a &quot;&amp;&quot; after the
+typename.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Examples: <br>
+*:ctor(int) // All constructors that take an int as an
+argument</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>*:Main</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="68%">
+
+
+<p>// Methods named Main in any class</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>*:Main(string[])</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+
+
+<p>// Methods named Main that take a string array in any
+class</p> </td></tr>
+</table>
+
+<h2>RUNTIME OPTIONS
+<a name="RUNTIME OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are available: <b><br>
+--aot</b>, <b>--aot[=options]</b></p>
+
+<p style="margin-left:18%;">This option is used to
+precompile the CIL code in the specified assembly to native
+code. The generated code is stored in a file with the
+extension .so. This file will be automatically picked up by
+the runtime when the assembly is executed. Ahead-of-Time
+compilation is most useful if you use it in combination with
+the -O=all,-shared flag which enables all of the
+optimizations in the code generator to be performed. Some of
+those optimizations are not practical for Just-in-Time
+compilation since they might be very time consuming. Unlike
+the .NET Framework, Ahead-of-Time compilation will not
+generate domain independent code: it generates the same code
+that the Just-in-Time compiler would produce. Since most
+applications use a single domain, this is fine. If you want
+to optimize the generated code for use in multi-domain
+applications, consider using the -O=shared flag. This
+pre-compiles the methods, but the original assembly is still
+required to execute as this one contains the metadata and
+exception information which is not available on the
+generated file. When precompiling code, you might want to
+compile with all optimizations (-O=all). Pre-compiled code
+is position independent code. Precompilation is just a
+mechanism to reduce startup time, increase code sharing
+across multiple mono processes and avoid just-in-time
+compilation program startup costs. The original assembly
+must still be present, as the metadata is contained there.
+AOT code typically can not be moved from one computer to
+another (CPU-specific optimizations that are detected at
+runtime) so you should not try to move the pre-generated
+assemblies or package the pre-generated assemblies for
+deployment. A few options are available as a parameter to
+the <b>--aot</b> command line option. The options are
+separated by commas, and more than one can be specified:
+<i><br>
+asmonly</i></p>
+
+<p style="margin-left:27%;">Instructs the AOT compiler to
+output assembly code instead of an object file.</p>
+
+
+<p style="margin-left:18%;"><i>bind-to-runtime-version</i></p>
+
+<p style="margin-left:27%;">If specified, forces the
+generated AOT files to be bound to the runtime version of
+the compiling Mono. This will prevent the AOT files from
+being consumed by a different Mono runtime.</p>
+
+
+<p style="margin-left:18%;"><i>data-outfile=FILE.dll.aotdata</i></p>
+
+<p style="margin-left:27%;">This instructs the AOT code
+generator to output certain data constructs into a separate
+file. This can reduce the executable images some five to
+twenty percent. Developers need to then ship the resulting
+aotdata as a resource and register a hook to load the data
+on demand by using the
+<i>mono_install_load_aot_data_hook</i> method.</p>
+
+<p style="margin-left:18%;"><i>direct-icalls</i></p>
+
+<p style="margin-left:27%;">When this option is specified,
+icalls (internal calls made from the standard library into
+the mono runtime code) are invoked directly instead of going
+through the operating system symbol lookup operation. This
+requires use of the <i>static</i> option.</p>
+
+<p style="margin-left:18%;"><i>direct-pinvoke</i></p>
+
+<p style="margin-left:27%;">When this option is specified,
+P/Invoke methods are invoked directly instead of going
+through the operating system symbol lookup operation. This
+requires use of the <i>static</i> option.</p>
+
+<p style="margin-left:18%;"><i>dwarfdebug</i></p>
+
+<p style="margin-left:27%;">Instructs the AOT compiler to
+emit DWARF debugging information. When used together with
+the nodebug option, only DWARF debugging information is
+emitted, but not the information that can be used at
+runtime.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>full</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>This creates binaries which can be used with the
+--full-aot option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>hybrid</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>This creates binaries which can be used with the
+--hybrid-aot option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>llvm</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>AOT will be performed with the LLVM backend instead of
+the Mono backend where possible. This will be slower to
+compile but most likely result in a performance
+improvement.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><i>llvmonly</i></p>
+
+<p style="margin-left:27%;">AOT will be performed with the
+LLVM backend exclusively and the Mono backend will not be
+used. The only output in this mode will be the bitcode file
+normally specified with the <i>llvm-outfile</i> option. Use
+of <i>llvmonly</i> automatically enables the <i>full</i> and
+<i>llvm</i> options. This feature is experimental.</p>
+
+<p style="margin-left:18%;"><i>llvmopts=[options]</i></p>
+
+<p style="margin-left:27%;">Use this option to add more
+flags to the built-in set of flags passed to the LLVM
+optimizer. When you invoke the <i>mono</i> command with the
+<i>--aot=llvm</i> it displays the current list of flags that
+are being passed to the <i>opt</i> command. <i>The list of
+possible flags that can be passed can be</i> obtained by
+calling the bundled <i>opt</i> program that comes with Mono,
+and calling it like this:</p>
+
+<p style="margin-left:27%; margin-top: 1em">opt --help</p>
+
+<p style="margin-left:18%;"><i>llvmllc=[options]</i></p>
+
+<p style="margin-left:27%;">Use this option to add more
+flags to the built-in set of flags passed to the LLVM static
+compiler (llc). The list of possible flags that can be
+passed can be obtained by calling the bundled <i>llc</i>
+program that comes with Mono, and calling it like this:</p>
+
+<p style="margin-left:27%; margin-top: 1em">llc --help</p>
+
+<p style="margin-left:18%;"><i>mcpu=[native o
+generic]</i></p>
+
+<p style="margin-left:27%;">cpu=native allows AOT mode to
+use all instructions current CPU supports, e.g. AVX2, SSE42,
+etc. Default value is &rsquo;generic&rsquo;. <i>mattr=[cpu
+feature]</i> Allows AOT code generator to use specified CPU
+features where possible including
+&lsquo;System.Runtime.Intrinsics.*&rsquo;. E.g.
+&lsquo;mattr=+avx2,mattr=-lzcnt&rsquo; unlocks sse1-4.2,
+avx1-2 and disables lzcnt. It&rsquo;s useful for
+cross-compilation or when it&rsquo;s not possible to use
+&lsquo;-mcpu=native&rsquo; (which enables all cpu feature
+current cpu has). <i>llvm-outfile=[filename]</i> Gives the
+path for the temporary LLVM bitcode file created during AOT.
+<i>dedup</i> Each AOT module will typically contain the code
+for inflated methods and wrappers that are called by code in
+that module. In dedup mode, we identify and skip compiling
+all of those methods. When using this mode with fullaot,
+dedup-include is required or these methods will remain
+missing.</p>
+
+
+<p style="margin-left:18%;"><i>dedup-include=[filename]</i></p>
+
+<p style="margin-left:27%;">In dedup-include mode, we are
+in the pass of compilation where we compile the methods that
+we had previously skipped. All of them are emitted into the
+assembly that is passed as this option. We consolidate the
+many duplicate skipped copies of the same method into
+one.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>info</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Print the architecture the AOT in this copy of Mono
+targets and quit.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>interp</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Generates all required wrappers, so that it is possible
+to run --interpreter without any code generation at runtime.
+This option only makes sense with <b>mscorlib.dll</b>.
+Embedders can set</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><i>depfile=[filename]</i></p>
+
+<p style="margin-left:27%;">Outputs a gcc -M style
+dependency file.</p>
+
+
+<p style="margin-left:27%; margin-top: 1em">mono_jit_set_aot_mode
+(MONO_AOT_MODE_INTERP);</p>
+
+<p style="margin-left:18%;"><i>ld-flags</i></p>
+
+<p style="margin-left:27%;">Additional flags to pass to the
+C linker (if the current AOT mode calls for invoking
+it).</p>
+
+
+<p style="margin-left:18%;"><i>llvm-path=&lt;PREFIX&gt;</i></p>
+
+<p style="margin-left:27%;">Same for the llvm tools
+&rsquo;opt&rsquo; and &rsquo;llc&rsquo;.</p>
+
+
+<p style="margin-left:18%;"><i>msym-dir=&lt;PATH&gt;</i></p>
+
+<p style="margin-left:27%;">Instructs the AOT compiler to
+generate offline sequence points .msym files. The generated
+.msym files will be stored into a subfolder of &lt;PATH&gt;
+named as the compilation AOTID.</p>
+
+
+<p style="margin-left:18%;"><i>mtriple=&lt;TRIPLE&gt;</i></p>
+
+<p style="margin-left:27%;">Use the GNU style target triple
+&lt;TRIPLE&gt; to determine some code generation options,
+i.e. --mtriple=armv7-linux-gnueabi will generate code that
+targets ARMv7. This is currently only supported by the ARM
+backend. In LLVM mode, this triple is passed on to the LLVM
+llc compiler.</p>
+
+
+<p style="margin-left:18%;"><i>nimt-trampolines=[number]</i></p>
+
+<p style="margin-left:27%;">When compiling in full aot
+mode, the IMT trampolines must be precreated in the AOT
+image. You can add additional method trampolines with this
+argument. Defaults to 512.</p>
+
+
+<p style="margin-left:18%;"><i>ngsharedvt-trampolines=[number]</i></p>
+
+<p style="margin-left:27%;">When compiling in full aot
+mode, the value type generic sharing trampolines must be
+precreated in the AOT image. You can add additional method
+trampolines with this argument. Defaults to 512.</p>
+
+<p style="margin-left:18%;"><i>nodebug</i></p>
+
+<p style="margin-left:27%;">Instructs the AOT compiler to
+not output any debugging information.</p>
+
+<p style="margin-left:18%;"><i>no-direct-calls</i></p>
+
+<p style="margin-left:27%;">This prevents the AOT compiler
+from generating a direct calls to a method. The AOT compiler
+usually generates direct calls for certain methods that do
+not require going through the PLT (for example, methods that
+are known to not require a hook like a static constructor)
+or call into simple internal calls.</p>
+
+
+<p style="margin-left:18%;"><i>nrgctx-trampolines=[number]</i></p>
+
+<p style="margin-left:27%;">When compiling in full aot
+mode, the generic sharing trampolines must be precreated in
+the AOT image. You can add additional method trampolines
+with this argument. Defaults to 4096.</p>
+
+
+<p style="margin-left:18%;"><i>nrgctx-fetch-trampolines=[number]</i></p>
+
+<p style="margin-left:27%;">When compiling in full aot
+mode, the generic sharing fetch trampolines must be
+precreated in the AOT image. You can add additional method
+trampolines with this argument. Defaults to 128.</p>
+
+
+<p style="margin-left:18%;"><i>ntrampolines=[number]</i></p>
+
+<p style="margin-left:27%;">When compiling in full aot
+mode, the method trampolines must be precreated in the AOT
+image. You can add additional method trampolines with this
+argument. Defaults to 4096.</p>
+
+<p style="margin-left:18%;"><i>outfile=[filename]</i></p>
+
+<p style="margin-left:27%;">Instructs the AOT compiler to
+save the output to the specified file.</p>
+
+
+<p style="margin-left:18%;"><i>print-skipped-methods</i></p>
+
+<p style="margin-left:27%;">If the AOT compiler cannot
+compile a method for any reason, enabling this flag will
+output the skipped methods to the console.</p>
+
+<p style="margin-left:18%;"><i>profile=[file]</i></p>
+
+<p style="margin-left:27%;">Specify a file to use for
+profile-guided optimization. See the <b>AOT profiler</b>
+sub-section. To specify multiple files, include the
+<i>profile</i> option multiple times.</p>
+
+<p style="margin-left:18%;"><i>profile-only</i></p>
+
+<p style="margin-left:27%;">AOT *only* the methods
+described in the files specified with the <i>profile</i>
+option. See the <b>AOT profiler</b> sub-section.</p>
+
+
+<p style="margin-left:18%;"><i>readonly-value=namespace.typename.fieldname=type/value</i></p>
+
+<p style="margin-left:27%;">Override the value of a static
+readonly field. Usually, during JIT compilation, the static
+constructor is ran eagerly, so the value of a static
+readonly field is known at compilation time and the compiler
+can do a number of optimizations based on it. During AOT,
+instead, the static constructor can&rsquo;t be ran, so this
+option can be used to set the value of such a field and
+enable the same set of optimizations. Type can be any of i1,
+i2, i4 for integers of the respective sizes (in bytes). Note
+that signed/unsigned numbers do not matter here, just the
+storage size. This option can be specified multiple times
+and it doesn&rsquo;t prevent the static constructor for the
+type defining the field to execute with the usual rules at
+runtime (hence possibly computing a different value for the
+field).</p>
+
+
+<p style="margin-left:18%;"><i>save-temps,keep-temps</i></p>
+
+<p style="margin-left:27%;">Instructs the AOT compiler to
+keep temporary files.</p>
+
+<p style="margin-left:18%;"><i>soft-debug</i></p>
+
+<p style="margin-left:27%;">This instructs the compiler to
+generate sequence point checks that allow Mono&rsquo;s soft
+debugger to debug applications even on systems where it is
+not possible to set breakpoints or to single step (certain
+hardware configurations like the cell phones and video
+gaming consoles).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>static</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Create an ELF object file (.o) or .s file which can be
+statically linked into an executable when embedding the mono
+runtime. When this option is used, the object file needs to
+be registered with the embedded runtime using the
+mono_aot_register_module function which takes as its
+argument the mono_aot_module_&lt;ASSEMBLY NAME&gt;_info
+global symbol from the object file:</p></td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">extern void
+*mono_aot_module_hello_info;</p>
+
+
+<p style="margin-left:27%; margin-top: 1em">mono_aot_register_module
+(mono_aot_module_hello_info);</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><i>stats</i></p></td>
+<td width="3%"></td>
+<td width="68%">
+
+
+<p style="margin-top: 1em">Print various stats collected
+during AOT compilation.</p></td>
+<td width="5%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><i>temp-path=[path]</i></p>
+
+<p style="margin-left:27%;">Explicitly specify path to
+store temporary files created during AOT compilation.</p>
+
+<p style="margin-left:18%;"><i>threads=[number]</i></p>
+
+<p style="margin-left:27%;">This is an experimental option
+for the AOT compiler to use multiple threads when compiling
+the methods.</p>
+
+
+<p style="margin-left:18%;"><i>tool-prefix=&lt;PREFIX&gt;</i></p>
+
+<p style="margin-left:27%;">Prepends &lt;PREFIX&gt; to the
+name of tools ran by the AOT compiler, i.e.
+&rsquo;as&rsquo;/&rsquo;ld&rsquo;. For example,
+--tool=prefix=arm-linux-gnueabi- will make the AOT compiler
+run</p>
+
+<p style="margin-left:18%;"><i>ld-name=NAME</i></p>
+
+<p style="margin-left:27%;">One of the tools used for AOT
+builds is the linker. Its name differs between various
+systems and it may happen that the assumed default name of
+the binary is not present. If the toolchain used does not
+have a linker with the default name (e.g. Android NDK r22
+does not have the default &rsquo;ld&rsquo; linker prefixed
+with &rsquo;tool-prefix&rsquo; above, instead it has
+prefixed &rsquo;ld.gold&rsquo; and &rsquo;ld.bfd&rsquo;
+linkers) this option can be used to set the linker binary
+name. It will be prefixed with &rsquo;tool-prefix&rsquo; to
+form the full linker executable name.</p>
+
+<p style="margin-left:18%;"><i>verbose</i></p>
+
+<p style="margin-left:27%;">Prints additional information
+about type loading failures.</p>
+
+
+<p style="margin-left:18%;"><i>write-symbols,no-write-symbols</i></p>
+
+<p style="margin-left:27%;">Instructs the AOT compiler to
+emit (or not emit) debug symbol information.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>no-opt</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Instructs the AOT compiler tot no call opt when
+compiling with LLVM.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">For more
+information about AOT, see:
+http://www.mono-project.com/docs/advanced/aot/</p>
+
+<p style="margin-left:9%;"><b>--aot-path=PATH</b></p>
+
+<p style="margin-left:18%;">List of additional directories
+to search for AOT images.</p>
+
+
+<p style="margin-left:9%;"><b>--apply-bindings=FILE</b></p>
+
+<p style="margin-left:18%;">Apply the assembly bindings
+from the specified configuration file when running the AOT
+compiler. This is useful when compiling an auxiliary
+assembly that is referenced by a main assembly that provides
+a configuration file. For example, if app.exe uses lib.dll
+then in order to make the assembly bindings from
+app.exe.config available when compiling lib.dll ahead of
+time, use: <br>
+mono --apply-bindings=app.exe.config --aot lib.dll</p>
+
+
+<p style="margin-left:9%;"><b>--assembly-loader=MODE</b></p>
+
+<p style="margin-left:18%;">If mode is <b>strict</b>, Mono
+will check that the public key token, culture and version of
+a candidate assembly matches the requested strong name. If
+mode is <b>legacy</b>, as long as the name matches, the
+candidate will be allowed. <b>strict</b> is the behavior
+consistent with .NET Framework but may break some existing
+mono-based applications. The default is <b>legacy</b>.</p>
+
+<p style="margin-left:9%;"><b>--attach=[options]</b></p>
+
+<p style="margin-left:18%;">Currently the only option
+supported by this command line argument is <b>disable</b>
+which disables the attach functionality.</p>
+
+<p style="margin-left:9%;"><b>--config filename</b></p>
+
+<p style="margin-left:18%;">Load the specified
+configuration file instead of the default one(s). The
+default files are /etc/mono/config and &#732;/.mono/config
+or the file specified in the MONO_CONFIG environment
+variable, if set. See the mono-config(5) man page for
+details on the format of this file.</p>
+
+
+<p style="margin-left:9%;"><b>--debugger-agent=[options]</b></p>
+
+<p style="margin-left:18%;">This instructs the Mono runtime
+to start a debugging agent inside the Mono runtime and
+connect it to a client user interface will control the Mono
+process. This option is typically used by IDEs, like the
+MonoDevelop or Visual Studio IDEs. <br>
+The configuration is specified using one of more of the
+following options:</p>
+
+<p style="margin-left:27%;"><i>address=host:port</i></p>
+
+<p style="margin-left:36%;">Use this option to specify the
+IP address where your debugger client is listening to.</p>
+
+<p style="margin-left:27%;"><i>loglevel=LEVEL</i></p>
+
+<p style="margin-left:36%;">Specifies the diagnostics log
+level for</p>
+
+<p style="margin-left:27%;"><i>logfile=filename</i></p>
+
+<p style="margin-left:36%;">Used to specify the file where
+the log will be stored, it defaults to standard output.</p>
+
+<p style="margin-left:27%;"><i>server=[y/n]</i></p>
+
+<p style="margin-left:36%;">Defaults to no, with the
+default option Mono will actively connect to the host/port
+configured with the <b>address</b> option. If you set it to
+&rsquo;y&rsquo;, it instructs the Mono runtime to start
+debugging in server mode, where Mono actively waits for the
+debugger front end to connect to the Mono process. Mono will
+print out to stdout the IP address and port where it is
+listening.</p>
+
+<p style="margin-left:27%;"><i>setpgid=[y/n]</i></p>
+
+<p style="margin-left:36%;">If set to yes, Mono will call
+<b>setpgid(0, 0)</b> on startup, if that function is
+available on the system. This is useful for ensuring that
+signals delivered to a process that is executing the
+debuggee are not propagated to the debuggee, e.g. when
+Ctrl-C sends <b>SIGINT</b> to the <b>sdb</b> tool.</p>
+
+<p style="margin-left:27%;"><i>suspend=[y/n]</i></p>
+
+<p style="margin-left:36%;">Defaults to yes, with the
+default option Mono will suspend the vm on startup until it
+connects successfully to a debugger front end. If you set it
+to &rsquo;n&rsquo;, in conjunction with <b>server=y</b>, it
+instructs the Mono runtime to run as normal, while caching
+metadata to send to the debugger front end on
+connection..</p>
+
+
+<p style="margin-left:27%;"><i>transport=transport_name</i></p>
+
+<p style="margin-left:36%;">This is used to specify the
+transport that the debugger will use to communicate. It must
+be specified and currently requires this to be
+&rsquo;dt_socket&rsquo;.</p>
+
+<p style="margin-left:18%;"><b>--desktop</b></p>
+
+<p style="margin-left:27%;">Configures the virtual machine
+to be better suited for desktop applications. Currently this
+sets the GC system to avoid expanding the heap as much as
+possible at the expense of slowing down garbage collection a
+bit.</p>
+
+<p style="margin-left:18%;"><b>--full-aot</b></p>
+
+<p style="margin-left:27%;">This flag instructs the Mono
+runtime to not generate any code at runtime and depend
+exclusively on the code generated from using mono --aot=full
+previously. This is useful for platforms that do not permit
+dynamic code generation, or if you need to run assemblies
+that have been stripped of IL (for example using
+mono-cil-strip). Notice that this feature will abort
+execution at runtime if a codepath in your program, or
+Mono&rsquo;s class libraries attempts to generate code
+dynamically. You should test your software upfront and make
+sure that you do not use any dynamic features.</p>
+
+<p style="margin-left:18%;"><b>--full-aot-interp</b></p>
+
+<p style="margin-left:27%;">Same as --full-aot with
+fallback to the interpreter.</p>
+
+<p style="margin-left:18%;"><b>--gc=boehm</b>,
+<b>--gc=sgen</b></p>
+
+<p style="margin-left:27%;">Selects the Garbage Collector
+engine for Mono to use, Boehm or SGen. Currently this merely
+ensures that you are running either the <i>mono</i> or
+<i>mono-sgen</i> commands. This flag can be set in the
+<b>MONO_ENV_OPTIONS</b> environment variable to force all of
+your child processes to use one particular kind of GC with
+the Mono runtime.</p>
+
+
+<p style="margin-left:18%;"><b>--gc-debug=[options]</b></p>
+
+<p style="margin-left:27%;">Command line equivalent of the
+<b>MONO_GC_DEBUG</b> environment variable.</p>
+
+
+<p style="margin-left:18%;"><b>--gc-params=[options]</b></p>
+
+<p style="margin-left:27%;">Command line equivalent of the
+<b>MONO_GC_PARAMS</b> environment variable.</p>
+
+<p style="margin-left:18%;"><b>--arch=32</b>,
+<b>--arch=64</b></p>
+
+<p style="margin-left:27%;">(Mac OS X only): Selects the
+bitness of the Mono binary used, if available. If the binary
+used is already for the selected bitness, nothing changes.
+If not, the execution switches to a binary with the selected
+bitness suffix installed side by side (for example,
+&rsquo;/bin/mono --arch=64&rsquo; will switch to
+&rsquo;/bin/mono64&rsquo; iff &rsquo;/bin/mono&rsquo; is a
+32-bit build).</p>
+
+<p style="margin-left:18%;"><b>--help</b>, <b>-h</b></p>
+
+<p style="margin-left:27%;">Displays usage
+instructions.</p>
+
+<p style="margin-left:18%;"><b>--interpreter</b></p>
+
+<p style="margin-left:27%;">The Mono runtime will use its
+interpreter to execute a given assembly. The interpreter is
+usually slower than the JIT, but it can be useful on
+platforms where code generation at runtime is not
+allowed.</p>
+
+<p style="margin-left:18%;"><b>--hybrid-aot</b></p>
+
+<p style="margin-left:27%;">This flag allows the Mono
+runtime to run assemblies that have been stripped of IL, for
+example using mono-cil-strip. For this to work, the assembly
+must have been AOT compiled with --aot=hybrid.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This flag is
+similar to --full-aot, but it does not disable the JIT. This
+means you can use dynamic features such as
+System.Reflection.Emit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>--llvm</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>If the Mono runtime has been compiled with LLVM support
+(not available in all configurations), Mono will use the
+LLVM optimization and code generation engine to JIT or AOT
+compile. For more information, consult:
+http://www.mono-project.com/docs/advanced/mono-llvm/</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>--ffast-math</b></p>
+
+<p style="margin-left:27%;">This flag allows Mono and LLVM
+to apply aggressive floating point optimizations. Can break
+IEEE754 compliance.</p>
+
+<p style="margin-left:18%;"><b>--nollvm</b></p>
+
+<p style="margin-left:27%;">When using a Mono that has been
+compiled with LLVM support, it forces Mono to fallback to
+its JIT engine and not use the LLVM backend.</p>
+
+<p style="margin-left:18%;"><b>--optimize=MODE</b>,
+<b>-O=MODE</b></p>
+
+<p style="margin-left:27%;">MODE is a comma separated list
+of optimizations. They also allow optimizations to be turned
+off by prefixing the optimization name with a minus sign. In
+general, Mono has been tuned to use the default set of
+flags, before using these flags for a deployment setting,
+you might want to actually measure the benefits of using
+them. The following optimization flags are implemented in
+the core engine: <br>
+abcrem Array bound checks removal <br>
+all Turn on all optimizations <br>
+aot Usage of Ahead Of Time compiled code <br>
+branch Branch optimizations <br>
+cfold Constant folding <br>
+cmov Conditional moves [arch-dependency] <br>
+deadce Dead code elimination <br>
+consprop Constant propagation <br>
+copyprop Copy propagation <br>
+fcmov Fast x86 FP compares [arch-dependency]</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+
+
+<p>float32 Perform 32-bit float arithmetic using 32-bit
+operations</p> </table>
+
+<p style="margin-left:27%;">gshared Enable generic code
+sharing. <br>
+inline Inline method calls <br>
+intrins Intrinsic method implementations <br>
+linears Linear scan global reg allocation <br>
+leaf Leaf procedures optimizations <br>
+loop Loop related optimizations <br>
+peephole Peephole postpass <br>
+precomp Precompile all methods before executing Main <br>
+sched Instruction scheduling <br>
+shared Emit per-domain code <br>
+sse2 SSE2 instructions on x86 [arch-dependency] <br>
+tailc Tail recursion and tail calls <br>
+For example, to enable all the optimization but dead code
+elimination and inlining, you can use:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>-O=all,-deadce,-inline</p></td></tr>
+</table>
+
+<p style="margin-left:27%;">The flags that are flagged with
+[arch-dependency] indicate that the given option if used in
+combination with Ahead of Time compilation (--aot flag)
+would produce pre-compiled code that will depend on the
+current CPU and might not be safely moved to another
+computer.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The following
+optimizations are supported <i><br>
+float32</i></p>
+
+<p style="margin-left:36%;">Requests that the runtime
+performn 32-bit floating point operations using only
+32-bits. By default the Mono runtime tries to use the
+highest precision available for floating point operations,
+but while this might render better results, the code might
+run slower. This options also affects the code generated by
+the LLVM backend.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="8%">
+
+
+<p><i>inline</i></p></td>
+<td width="1%"></td>
+<td width="64%">
+
+
+<p>Controls whether the runtime should attempt to inline
+(the default), or not inline methods invocations</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>--response=FILE</b> Provides
+a response file, this instructs the Mono command to read
+other command line options from the specified file, as if
+the options had been specified on the command line. Useful
+when you have very long command lines. <b><br>
+--runtime=VERSION</b></p>
+
+<p style="margin-left:27%;">Mono supports different runtime
+versions. The version used depends on the program that is
+being run or on its configuration file (named
+program.exe.config). This option can be used to override
+such autodetection, by forcing a different runtime version
+to be used. Note that this should only be used to select a
+later compatible runtime version than the one the program
+was compiled against. A typical usage is for running a 1.1
+program on a 2.0 version: <br>
+mono --runtime=v2.0.50727 program.exe</p>
+
+<p style="margin-left:18%;"><b>--server</b></p>
+
+<p style="margin-left:27%;">Configures the virtual machine
+to be better suited for server operations (currently, allows
+a heavier threadpool initialization).</p>
+
+<p style="margin-left:18%;"><b>--use-map-jit</b></p>
+
+<p style="margin-left:27%;">Instructs Mono to generate code
+using MAP_JIT on MacOS. Necessary for bundled
+applications.</p>
+
+<p style="margin-left:18%;"><b>--verify-all</b></p>
+
+<p style="margin-left:27%;">Verifies mscorlib and
+assemblies in the global assembly cache for valid IL, and
+all user code for IL verifiability.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This is
+different from <b>--security</b>&rsquo;s verifiable or
+validil in that these options only check user code and skip
+mscorlib and assemblies located on the global assembly
+cache.</p>
+
+<p style="margin-left:18%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:27%;">Prints JIT version information
+(system configuration, release number and branch names if
+available).</p>
+
+<p style="margin-left:18%;"><b>--version=number</b></p>
+
+<p style="margin-left:27%;">Print version number only.</p>
+
+<h2>DEVELOPMENT OPTIONS
+<a name="DEVELOPMENT OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are used to help when developing a JITed
+application. <b><br>
+--debug</b>, <b>--debug=OPTIONS</b></p>
+
+<p style="margin-left:18%;">Turns on the debugging mode in
+the runtime. If an assembly was compiled with debugging
+information, it will produce line number information for
+stack traces.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The optional
+OPTIONS argument is a comma separated list of debugging
+options. These options are turned off by default since they
+generate much larger and slower code at runtime. <br>
+The following options are supported:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>casts</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Produces a detailed error when throwing a
+InvalidCastException. This option needs to be enabled as
+this generates more verbose code at execution time.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><i>mdb-optimizations</i></p>
+
+<p style="margin-left:27%;">Disable some JIT optimizations
+which are usually only disabled when running inside the
+debugger. This can be helpful if you want to attach to the
+running process with mdb.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><i>gdb</i></p></td>
+<td width="5%"></td>
+<td width="73%">
+
+
+<p>Generate and register debugging information with gdb.
+This is only supported on some platforms, and only when
+using gdb 7.0 or later.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--profile</b>[=<i>profiler</i>[:<i>profiler_args</i>]]</p>
+
+<p style="margin-left:18%;">Loads a profiler module with
+the given arguments. For more information, see the
+<b>PROFILING</b> section. This option can be used multiple
+times; each time will load an additional profiler
+module.</p>
+
+<p style="margin-left:9%;"><b>--trace[=expression]</b></p>
+
+<p style="margin-left:18%;">Shows method names as they are
+invoked. By default all methods are traced. The trace can be
+customized to include or exclude methods, classes or
+assemblies. A trace expression is a comma separated list of
+targets, each target can be prefixed with a minus sign to
+turn off a particular target. The words
+&lsquo;program&rsquo;, &lsquo;all&rsquo; and
+&lsquo;disabled&rsquo; have special meaning.
+&lsquo;program&rsquo; refers to the main program being
+executed, and &lsquo;all&rsquo; means all the method calls.
+The &lsquo;disabled&rsquo; option is used to start up with
+tracing disabled. It can be enabled at a later point in time
+in the program by sending the SIGUSR2 signal to the runtime.
+Assemblies are specified by their name, for example, to
+trace all calls in the System assembly, use:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--trace=System app.exe</p>
+
+<p style="margin-left:18%; margin-top: 1em">Classes are
+specified with the T: prefix. For example, to trace all
+calls to the System.String class, use:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--trace=T:System.String app.exe</p>
+
+<p style="margin-left:18%; margin-top: 1em">And individual
+methods are referenced with the M: prefix, and the standard
+method notation:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--trace=M:System.Console:WriteLine app.exe</p>
+
+<p style="margin-left:18%; margin-top: 1em">Exceptions can
+also be traced, it will cause a stack trace to be printed
+every time an exception of the specified type is thrown. The
+exception type can be specified with or without the
+namespace, and to trace all exceptions, specify
+&rsquo;all&rsquo; as the type name.</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--trace=E:System.Exception app.exe</p>
+
+<p style="margin-left:18%; margin-top: 1em">As previously
+noted, various rules can be specified at once:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--trace=T:System.String,T:System.Random app.exe</p>
+
+<p style="margin-left:18%; margin-top: 1em">You can exclude
+pieces, the next example traces calls to System.String
+except for the System.String:Concat method.</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--trace=T:System.String,-M:System.String:Concat</p>
+
+<p style="margin-left:18%; margin-top: 1em">You can trace
+managed to unmanaged transitions using the wrapper
+qualifier:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--trace=wrapper app.exe</p>
+
+<p style="margin-left:18%; margin-top: 1em">Finally,
+namespaces can be specified using the N: prefix:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--trace=N:System.Xml</p>
+
+<p style="margin-left:9%;"><b>--no-x86-stack-align</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t align stack frames
+on the x86 architecture. By default, Mono aligns stack
+frames to 16 bytes on x86, so that local floating point and
+SIMD variables can be properly aligned. This option turns
+off the alignment, which usually saves one instruction per
+call, but might result in significantly lower floating point
+and SIMD performance.</p>
+
+<p style="margin-left:9%;"><b>--jitmap</b></p>
+
+<p style="margin-left:18%;">Generate a JIT method map in a
+/tmp/perf-PID.map file. This file is then used, for example,
+by the perf tool included in recent Linux kernels. Each line
+in the file has:</p>
+
+<p style="margin-left:18%; margin-top: 1em">HEXADDR HEXSIZE
+methodname</p>
+
+<p style="margin-left:18%; margin-top: 1em">Currently this
+option is only supported on Linux.</p>
+
+<h2>JIT MAINTAINER OPTIONS
+<a name="JIT MAINTAINER OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The maintainer
+options are only used by those developing the runtime
+itself, and not typically of interest to runtime users or
+developers. <b><br>
+--bisect=optimization:filename</b></p>
+
+<p style="margin-left:18%;">This flag is used by the
+automatic optimization bug bisector. It takes an
+optimization flag and a filename of a file containing a list
+of full method names, one per line. When it compiles one of
+the methods in the file it will use the optimization given,
+in addition to the optimizations that are otherwise enabled.
+Note that if the optimization is enabled by default, you
+should disable it with &lsquo;-O&lsquo;, otherwise it will
+just apply to every method, whether it&rsquo;s in the file
+or not.</p>
+
+<p style="margin-left:9%;"><b>--break method</b></p>
+
+<p style="margin-left:18%;">Inserts a breakpoint before the
+method whose name is &lsquo;method&rsquo;
+(namespace.class:methodname). Use &lsquo;Main&rsquo; as
+method name to insert a breakpoint on the
+application&rsquo;s main method. You can use it also with
+generics, for example
+&quot;System.Collections.Generic.Queue&lsquo;1:Peek&quot;</p>
+
+<p style="margin-left:9%;"><b>--breakonex</b></p>
+
+<p style="margin-left:18%;">Inserts a breakpoint on
+exceptions. This allows you to debug your application with a
+native debugger when an exception is thrown.</p>
+
+<p style="margin-left:9%;"><b>--compile name</b></p>
+
+<p style="margin-left:18%;">This compiles a method
+(namespace.name:methodname), this is used for testing the
+compiler performance or to examine the output of the code
+generator.</p>
+
+<p style="margin-left:9%;"><b>--compile-all</b></p>
+
+<p style="margin-left:18%;">Compiles all the methods in an
+assembly. This is used to test the compiler performance or
+to examine the output of the code generator</p>
+
+<p style="margin-left:9%;"><b>--graph=TYPE METHOD</b></p>
+
+<p style="margin-left:18%;">This generates a postscript
+file with a graph with the details about the specified
+method (namespace.name:methodname). This requires
+&lsquo;dot&rsquo; and ghostview to be installed (it expects
+Ghostview to be called &quot;gv&quot;). The following graphs
+are available: <br>
+cfg Control Flow Graph (CFG) <br>
+dtree Dominator Tree <br>
+code CFG showing code <br>
+ssa CFG showing code after SSA translation <br>
+optcode CFG showing code after IR optimizations <br>
+Some graphs will only be available if certain optimizations
+are turned on.</p>
+
+<p style="margin-left:9%;"><b>--ncompile</b></p>
+
+<p style="margin-left:18%;">Instruct the runtime on the
+number of times that the method specified by --compile (or
+all the methods if --compile-all is used) to be compiled.
+This is used for testing the code generator performance.</p>
+
+<p style="margin-left:9%;"><b>--stats=[method]</b></p>
+
+<p style="margin-left:18%;">Displays information about the
+work done by the runtime during the execution of an
+application. If a method (namespace.name:methodname) is
+specified, it will display that information when the method
+is first run in addition to the end of program
+execution.</p>
+
+<p style="margin-left:9%;"><b>--wapi=hps|semdel</b></p>
+
+<p style="margin-left:18%;">Perform maintenance of the
+process shared data. semdel will delete the global
+semaphore. hps will list the currently used handles.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Increases the verbosity level,
+each time it is listed, increases the verbosity level to
+include more information (including, for example, a
+disassembly of the native code produced, code selector info
+etc.).</p>
+
+<h2>ATTACH SUPPORT
+<a name="ATTACH SUPPORT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono runtime
+allows external processes to attach to a running process and
+load assemblies into the running program. To attach to the
+process, a special protocol is implemented in the
+Mono.Management assembly.</p>
+
+<p style="margin-left:9%; margin-top: 1em">With this
+support it is possible to load assemblies that have an entry
+point (they are created with -target:exe or -target:winexe)
+to be loaded and executed in the Mono process.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The code is
+loaded into the root domain, and it starts execution on the
+special runtime attach thread. The attached program should
+create its own threads and return after invocation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This support
+allows for example debugging applications by having the
+csharp shell attach to running processes.</p>
+
+<h2>PROFILING
+<a name="PROFILING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono runtime
+includes a profiler API that dynamically loaded profiler
+modules and embedders can use to collect performance-related
+data about an application. Profiler modules are loaded by
+passing the <b>--profile</b> command line argument to the
+Mono runtime.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Mono ships with
+a few profiler modules, of which the <b>log</b> profiler is
+the most feature-rich. It is also the default profiler if
+the <i>profiler</i> argument is not given, or if
+<b>default</b> is given. It is possible to write your own
+profiler modules; see the <b>Custom profilers</b>
+sub-section.</p>
+
+<h3>Log profiler
+<a name="Log profiler"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The log profiler
+can be used to collect a lot of information about a program
+running in the Mono runtime. This data can be used (both
+while the process is running and later) to do analyses of
+the program behavior, determine resource usage, performance
+issues or even look for particular execution patterns.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is
+accomplished by logging the events provided by the Mono
+runtime through the profiler API and periodically writing
+them to a file which can later be inspected with the
+<b>mprof-report</b>(1) tool.</p>
+
+<p style="margin-left:9%; margin-top: 1em">More information
+about how to use the log profiler is available on the
+<b>mono-profilers</b>(1) page, under the <b>LOG PROFILER</b>
+section, as well as the <b>mprof-report</b>(1) page.</p>
+
+<h3>Coverage profiler
+<a name="Coverage profiler"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The code
+coverage profiler can instrument a program to help determine
+which classes, methods, code paths, etc are actually
+executed. This is most useful when running a test suite to
+determine whether the tests actually cover the code
+they&rsquo;re expected to.</p>
+
+<p style="margin-left:9%; margin-top: 1em">More information
+about how to use the coverage profiler is available on the
+<b>mono-profilers</b>(1) page, under the <b>COVERAGE
+PROFILER</b> section.</p>
+
+<h3>AOT profiler
+<a name="AOT profiler"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The AOT profiler
+can help improve startup performance by logging which
+generic instantiations are used by a program, which the AOT
+compiler can then use to compile those instantiations ahead
+of time so that they won&rsquo;t have to be JIT compiled at
+startup.</p>
+
+<p style="margin-left:9%; margin-top: 1em">More information
+about how to use the AOT profiler is available on the
+<b>mono-profilers</b>(1) page, under the <b>AOT PROFILER</b>
+section.</p>
+
+<h3>Custom profilers
+<a name="Custom profilers"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Custom profiler
+modules can be loaded in exactly the same way as the
+standard modules that ship with Mono. They can also access
+the same profiler API to gather all kinds of information
+about the code being executed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+use a third-party profiler called <b>custom</b>, you would
+load it like this:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--profile=custom program.exe</p>
+
+<p style="margin-left:9%; margin-top: 1em">You could also
+pass arguments to it:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mono
+--profile=custom:arg1,arg2=arg3 program.exe</p>
+
+<p style="margin-left:9%; margin-top: 1em">In the above
+example, Mono will load the profiler from the shared library
+called <i>libmono-profiler-custom.so</i> (name varies based
+on platform, e.g., <i>libmono-profiler-custom.dylib</i> on
+OS X). This profiler module must be on your dynamic linker
+library path (<b>LD_LIBRARY_PATH</b> on most systems,
+<b>DYLD_LIBRARY_PATH</b> on OS X).</p>
+
+<p style="margin-left:9%; margin-top: 1em">For a sample of
+how to write your own custom profiler, look at the
+<i>samples/profiler/sample.c</i> file in the Mono source
+tree.</p>
+
+<h2>DEBUGGING AIDS
+<a name="DEBUGGING AIDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To debug managed
+applications, you can use the <b>mdb</b> command, a command
+line debugger.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to obtain a stack trace of all the active threads in Mono by
+sending the QUIT signal to Mono, you can do this from the
+command line, like this:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>kill -QUIT pid</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Where pid is the
+Process ID of the Mono process you want to examine. The
+process will continue running afterwards, but its state is
+not guaranteed.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Important:</b>
+this is a last-resort mechanism for debugging applications
+and should not be used to monitor or probe a production
+application. The integrity of the runtime after sending this
+signal is not guaranteed and the application might crash or
+terminate at any given point afterwards.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>--debug=casts</b> option can be used to get more detailed
+information for Invalid Cast operations, it will provide
+information about the types involved.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can use the
+MONO_LOG_LEVEL and MONO_LOG_MASK environment variables to
+get verbose debugging output about the execution of your
+application within Mono.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>MONO_LOG_LEVEL</i> environment variable if set, the
+logging level is changed to the set value. Possible values
+are &quot;error&quot;, &quot;critical&quot;,
+&quot;warning&quot;, &quot;message&quot;, &quot;info&quot;,
+&quot;debug&quot;. The default value is &quot;error&quot;.
+Messages with a logging level greater then or equal to the
+log level will be printed to stdout/stderr.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use
+&quot;info&quot; to track the dynamic loading of
+assemblies.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use the
+<i>MONO_LOG_MASK</i> environment variable to limit the
+extent of the messages you get: If set, the log mask is
+changed to the set value. Possible values are
+&quot;asm&quot; (assembly loader), &quot;type&quot;,
+&quot;dll&quot; (native library loader), &quot;gc&quot;
+(garbage collector), &quot;cfg&quot; (config file loader),
+&quot;aot&quot; (precompiler), &quot;security&quot; (e.g.
+Moonlight CoreCLR support), &quot;threadpool&quot; (thread
+pool generic), &quot;io-selector&quot; (async socket
+operations), &quot;io-layer&quot; (I/O layer - processes,
+files, sockets, events, semaphores, mutexes and handles),
+&quot;io-layer-process&quot;, &quot;io-layer-file&quot;,
+&quot;io-layer-socket&quot;, &quot;io-layer-event&quot;,
+&quot;io-layer-semaphore&quot;, &quot;io-layer-mutex&quot;,
+&quot;io-layer-handle&quot; and &quot;all&quot;. The default
+value is &quot;all&quot;. Changing the mask value allows you
+to display only messages for a certain component. You can
+use multiple masks by comma separating them. For example to
+see config file messages and assembly loader messages set
+you mask to &quot;asm,cfg&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following is
+a common use to track down problems with P/Invoke:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>$ MONO_LOG_LEVEL=&quot;debug&quot;
+MONO_LOG_MASK=&quot;dll&quot; mono glue.exe</p></td></tr>
+</table>
+
+<h2>DEBUGGING WITH LLDB
+<a name="DEBUGGING WITH LLDB"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you are using
+LLDB, you can use the <b>mono.py</b> script to print some
+internal data structures with it. To use this, add this to
+your <b>$HOME/.lldbinit</b> file: <br>
+command script import $PREFIX/lib/mono/lldb/mono.py</p>
+
+<p style="margin-left:9%; margin-top: 1em">Where $PREFIX is
+the prefix value that you used when you configured Mono
+(typically /usr).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Once this is
+done, then you can inspect some Mono Runtime data
+structures, for example: <br>
+(lldb) p method</p>
+
+<p style="margin-left:9%; margin-top: 1em">(MonoMethod *)
+$0 = 0x05026ac0
+[mscorlib]System.OutOfMemoryException:.ctor()</p>
+
+<h2>SERIALIZATION
+<a name="SERIALIZATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mono&rsquo;s XML
+serialization engine by default will use a reflection-based
+approach to serialize which might be slow for continuous
+processing (web service applications). The serialization
+engine will determine when a class must use a hand-tuned
+serializer based on a few parameters and if needed it will
+produce a customized C# serializer for your types at
+runtime. This customized serializer then gets dynamically
+loaded into your application.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can control
+this with the MONO_XMLSERIALIZER_THS environment
+variable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The possible
+values are <b>&lsquo;no&rsquo;</b> to disable the use of a
+C# customized serializer, or an integer that is the minimum
+number of uses before the runtime will produce a custom
+serializer (0 will produce a custom serializer on the first
+access, 50 will produce a serializer on the 50th use). Mono
+will fallback to an interpreted serializer if the serializer
+generation somehow fails. This behavior can be disabled by
+setting the option <b>&lsquo;nofallback&rsquo;</b> (for
+example: MONO_XMLSERIALIZER_THS=0,nofallback).</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>GC_DONT_GC</b></p>
+
+<p style="margin-left:18%;">Turns off the garbage
+collection in Mono. This should be only used for debugging
+purposes</p>
+
+<p style="margin-left:9%;"><b>HTTP_PROXY</b></p>
+
+<p style="margin-left:18%;">(Also <b>http_proxy</b>) If
+set, web requests using the Mono Class Library will be
+automatically proxied through the given URL. Not supported
+on Windows, Mac OS, iOS or Android. See also
+<b>NO_PROXY</b>.</p>
+
+<p style="margin-left:9%;"><b>LLVM_COUNT</b></p>
+
+<p style="margin-left:18%;">When Mono is compiled with LLVM
+support, this instructs the runtime to stop using LLVM after
+the specified number of methods are JITed. This is a tool
+used in diagnostics to help isolate problems in the code
+generation backend. For example <b>LLVM_COUNT=10</b> would
+only compile 10 methods with LLVM and then switch to the
+Mono JIT engine. <b>LLVM_COUNT=0</b> would disable the LLVM
+engine altogether.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_ASPNET_INHIBIT_SETTINGSMAP</b></p>
+
+<p style="margin-left:18%;">Mono contains a feature which
+allows modifying settings in the .config files shipped with
+Mono by using config section mappers. The mappers and the
+mapping rules are defined in the
+$prefix/etc/mono/2.0/settings.map file and, optionally, in
+the settings.map file found in the top-level directory of
+your ASP.NET application. Both files are read by System.Web
+on application startup, if they are found at the above
+locations. If you don&rsquo;t want the mapping to be
+performed you can set this variable in your environment
+before starting the application and no action will be
+taken.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_ASPNET_WEBCONFIG_CACHESIZE</b></p>
+
+<p style="margin-left:18%;">Mono has a cache of
+ConfigSection objects for speeding up
+WebConfigurationManager queries. Its default size is 100
+items, and when more items are needed, cache evictions start
+happening. If evictions are too frequent this could impose
+unnecessary overhead, which could be avoided by using this
+environment variable to set up a higher cache size (or to
+lower memory requirements by decreasing it).</p>
+
+
+<p style="margin-left:9%;"><b>MONO_CAIRO_DEBUG_DISPOSE</b></p>
+
+<p style="margin-left:18%;">If set, causes Mono.Cairo to
+collect stack traces when objects are allocated, so that the
+finalization/Dispose warnings include information about the
+instance&rsquo;s origin.</p>
+
+<p style="margin-left:9%;"><b>MONO_CFG_DIR</b></p>
+
+<p style="margin-left:18%;">If set, this variable overrides
+the default system configuration directory ($PREFIX/etc).
+It&rsquo;s used to locate machine.config file.</p>
+
+<p style="margin-left:9%;"><b>MONO_COM</b></p>
+
+<p style="margin-left:18%;">Sets the style of COM interop.
+If the value of this variable is &quot;MS&quot; Mono will
+use string marhsalling routines from the liboleaut32 for the
+BSTR type library, any other values will use the
+mono-builtin BSTR string marshalling.</p>
+
+<p style="margin-left:9%;"><b>MONO_CONFIG</b></p>
+
+<p style="margin-left:18%;">If set, this variable overrides
+the default runtime configuration file
+($PREFIX/etc/mono/config). The --config command line options
+overrides the environment variable.</p>
+
+<p style="margin-left:9%;"><b>MONO_CPU_ARCH</b></p>
+
+<p style="margin-left:18%;">Override the automatic cpu
+detection mechanism. Currently used only on arm. The format
+of the value is as follows:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&quot;armvV [thumb[2]]&quot;</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">where V is the
+architecture number 4, 5, 6, 7 and the options can be
+currently be &quot;thumb&quot; or &quot;thumb2&quot;.
+Example:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>MONO_CPU_ARCH=&quot;armv4 thumb&quot; mono ...</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>MONO_ARM_FORCE_SOFT_FLOAT</b></p>
+
+<p style="margin-left:18%;">When Mono is built with a soft
+float fallback on ARM and this variable is set to
+&quot;1&quot;, Mono will always emit soft float code, even
+if a VFP unit is detected.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_DARWIN_USE_KQUEUE_FSW</b></p>
+
+<p style="margin-left:18%;">Fall back on the kqueue
+FileSystemWatcher implementation in Darwin. The default is
+the FSEvent implementation.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_DARWIN_WATCHER_MAXFDS</b></p>
+
+<p style="margin-left:18%;">This is a debugging aid used to
+force limits on the kqueue FileSystemWatcher implementation
+in Darwin. There is no limit by default.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_DISABLE_MANAGED_COLLATION</b></p>
+
+<p style="margin-left:18%;">If this environment variable is
+&lsquo;yes&rsquo;, the runtime uses unmanaged collation
+(which actually means no culture-sensitive collation). It
+internally disables managed collation functionality invoked
+via the members of System.Globalization.CompareInfo class.
+Collation is enabled by default.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_DISABLE_SHARED_AREA</b></p>
+
+<p style="margin-left:18%;">Unix only: If set, disable
+usage of shared memory for exposing performance counters.
+This means it will not be possible to both externally read
+performance counters from this processes or read those of
+external processes.</p>
+
+<p style="margin-left:9%;"><b>MONO_DNS</b></p>
+
+<p style="margin-left:18%;">When set, enables the use of a
+fully managed DNS resolver instead of the regular libc
+functions. This resolver performs much better when multiple
+queries are run in parallel.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note that
+/etc/nsswitch.conf will be ignored.</p>
+
+<p style="margin-left:9%;"><b>MONO_EGD_SOCKET</b></p>
+
+<p style="margin-left:18%;">For platforms that do not
+otherwise have a way of obtaining random bytes this can be
+set to the name of a file system socket on which an egd or
+prngd daemon is listening.</p>
+
+<p style="margin-left:9%;"><b>MONO_ENABLE_AIO</b></p>
+
+<p style="margin-left:18%;">If set, tells mono to attempt
+using native asynchronous I/O services. If not set, a
+default select/poll implementation is used. Currently epoll
+and kqueue are supported.</p>
+
+<p style="margin-left:9%;"><b>MONO_THREADS_SUSPEND</b>
+Selects a mechanism that Mono will use to suspend</p>
+
+<p style="margin-left:18%;">threads. May be set to
+&quot;preemptive&quot;, &quot;coop&quot;, or
+&quot;hybrid&quot;. Threads may need to be suspended by the
+debugger, or using some .NET threading APIs, and most
+commonly when the SGen garbage collector needs to stop all
+threads during a critical phase of garbage collection.
+Preemptive mode is the mode that Mono has used historically,
+going back to the Boehm days, where the garbage collector
+would run at any point and suspend execution of all threads
+as required to perform a garbage collection. The cooperative
+mode on the other hand requires the cooperation of all
+threads to stop at a safe point. This makes for an easier to
+debug garbage collector and it improves the stability of the
+runtime because threads are not suspended when accessing
+critical resources. In scenarios where Mono is embedded in
+another application, cooperative suspend requires the
+embedder code to follow coding guidelines in order to
+cooperate with the garbage collector. Cooperative suspend in
+embedded Mono is currently experimental. Hybrid mode is a
+combination of the two that retains better compatability
+with scenarios where Mono is embedded in another
+application: threads that are running managed code or code
+that comprises the Mono runtime will be cooperatively
+suspended, while threads running embedder code will be
+preemptively suspended. Hybrid suspend is the default on
+some desktop platforms.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Alternatively,
+coop and hybrid mode can be enabled at compile time by using
+the --enable-cooperative-suspend or --enable-hybrid-suspend
+flags, respectively, when calling configure. The
+<b>MONO_THREADS_SUSPEND</b> environment variable takes
+priority over the compiled default.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_ENABLE_COOP_SUSPEND</b></p>
+
+<p style="margin-left:18%;">This environment variable is
+obsolete, but retained for backward compatibility. Use
+<b>MONO_THREADS_SUSPEND</b> set to &quot;coop&quot; instead.
+Note that if configure flags were provided to enable
+cooperative or hybrid suspend, this variable is ignored.</p>
+
+<p style="margin-left:9%;"><b>MONO_ENV_OPTIONS</b></p>
+
+<p style="margin-left:18%;">This environment variable
+allows you to pass command line arguments to a Mono process
+through the environment. This is useful for example to force
+all of your Mono processes to use LLVM or SGEN without
+having to modify any launch scripts.</p>
+
+<p style="margin-left:9%;"><b>MONO_SDB_ENV_OPTIONS</b></p>
+
+<p style="margin-left:18%;">Used to pass extra options to
+the debugger agent in the runtime, as they were passed using
+--debugger-agent=.</p>
+
+<p style="margin-left:9%;"><b>MONO_EVENTLOG_TYPE</b></p>
+
+<p style="margin-left:18%;">Sets the type of event log
+provider to use (for System.Diagnostics.EventLog). Possible
+values are: <i><br>
+local[:path]</i></p>
+
+<p style="margin-left:27%;">Persists event logs and entries
+to the local file system. The directory in which to persist
+the event logs, event sources and entries can be specified
+as part of the value. If the path is not explicitly set, it
+defaults to &quot;/var/lib/mono/eventlog&quot; on unix and
+&quot;%APPDATA%no\ventlog&quot; on Windows.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>win32</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p><b>Uses the native win32 API to write events and
+registers event logs and</b> event sources in the registry.
+This is only available on Windows. On Unix, the directory
+permission for individual event log and event source
+directories is set to 777 (with +t bit) allowing everyone to
+read and write event log entries while only allowing entries
+to be deleted by the user(s) that created them.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>null</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Silently discards any events.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+&quot;null&quot; on Unix (and versions of Windows before
+NT), and &quot;win32&quot; on Windows NT (and higher).</p>
+
+
+<p style="margin-left:9%;"><b>MONO_EXTERNAL_ENCODINGS</b></p>
+
+<p style="margin-left:18%;">If set, contains a
+colon-separated list of text encodings to try when turning
+externally-generated text (e.g. command-line arguments or
+filenames) into Unicode. The encoding names come from the
+list provided by iconv, and the special case
+&quot;default_locale&quot; which refers to the current
+locale&rsquo;s default encoding.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When reading
+externally-generated text strings UTF-8 is tried first, and
+then this list is tried in order with the first successful
+conversion ending the search. When writing external text
+(e.g. new filenames or arguments to new processes) the first
+item in this list is used, or UTF-8 if the environment
+variable is not set.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The problem
+with using MONO_EXTERNAL_ENCODINGS to process your files is
+that it results in a problem: although its possible to get
+the right file name it is not necessarily possible to open
+the file. In general if you have problems with encodings in
+your filenames you should use the &quot;convmv&quot;
+program.</p>
+
+<p style="margin-left:9%;"><b>MONO_GC_PARAMS</b></p>
+
+<p style="margin-left:18%;">When using Mono with the SGen
+garbage collector this variable controls several parameters
+of the collector. The variable&rsquo;s value is a comma
+separated list of words. <b><br>
+max-heap-size=</b><i>size</i></p>
+
+<p style="margin-left:27%;">Sets the maximum size of the
+heap. The size is specified in bytes and must be a power of
+two. The suffixes &lsquo;k&rsquo;, &lsquo;m&rsquo; and
+&lsquo;g&rsquo; can be used to specify kilo-, mega- and
+gigabytes, respectively. The limit is the sum of the
+nursery, major heap and large object heap. Once the limit is
+reached the application will receive OutOfMemoryExceptions
+when trying to allocate. Not the full extent of memory set
+in max-heap-size could be available to satisfy a single
+allocation due to internal fragmentation. By default heap
+limits is disabled and the GC will try to use all available
+memory.</p>
+
+
+<p style="margin-left:18%;"><b>nursery-size=</b><i>size</i></p>
+
+<p style="margin-left:27%;">Sets the size of the nursery.
+The size is specified in bytes and must be a power of two.
+The suffixes &lsquo;k&rsquo;, &lsquo;m&rsquo; and
+&lsquo;g&rsquo; can be used to specify kilo-, mega- and
+gigabytes, respectively. The nursery is the first generation
+(of two). A larger nursery will usually speed up the program
+but will obviously use more memory. The default nursery size
+4 MB.</p>
+
+
+<p style="margin-left:18%;"><b>major=</b><i>collector</i></p>
+
+<p style="margin-left:27%;">Specifies which major collector
+to use. Options are &lsquo;marksweep&rsquo; for the
+Mark&amp;Sweep collector, &lsquo;marksweep-conc&rsquo; for
+concurrent Mark&amp;Sweep and
+&lsquo;marksweep-conc-par&rsquo; for parallel and concurrent
+Mark&amp;Sweep. The concurrent Mark&amp;Sweep collector is
+the default.</p>
+
+
+<p style="margin-left:18%;"><b>mode=balanced|throughput|pause</b>[:<i>max-pause</i>]</p>
+
+<p style="margin-left:27%;">Specifies what should be the
+garbage collector&rsquo;s target. The
+&lsquo;throughput&rsquo; mode aims to reduce time spent in
+the garbage collector and improve application speed, the
+&lsquo;pause&rsquo; mode aims to keep pause times to a
+minimum and it receives the argument <i>max-pause</i> which
+specifies the maximum pause time in milliseconds that is
+acceptable and the &lsquo;balanced&rsquo; mode which is a
+general purpose optimal mode.</p>
+
+
+<p style="margin-left:18%;"><b>soft-heap-limit=</b><i>size</i></p>
+
+<p style="margin-left:27%;">Once the heap size gets larger
+than this size, ignore what the default major collection
+trigger metric says and only allow four nursery size&rsquo;s
+of major heap growth between major collections.</p>
+
+
+<p style="margin-left:18%;"><b>evacuation-threshold=</b><i>threshold</i></p>
+
+<p style="margin-left:27%;">Sets the evacuation threshold
+in percent. This option is only available on the
+Mark&amp;Sweep major collectors. The value must be an
+integer in the range 0 to 100. The default is 66. If the
+sweep phase of the collection finds that the occupancy of a
+specific heap block type is less than this percentage, it
+will do a copying collection for that block type in the next
+major collection, thereby restoring occupancy to close to
+100 percent. A value of 0 turns evacuation off.</p>
+
+<p style="margin-left:18%;"><b>(no-)lazy-sweep</b></p>
+
+<p style="margin-left:27%;">Enables or disables lazy sweep
+for the Mark&amp;Sweep collector. If enabled, the sweeping
+of individual major heap blocks is done piecemeal whenever
+the need arises, typically during nursery collections. Lazy
+sweeping is enabled by default.</p>
+
+
+<p style="margin-left:18%;"><b>(no-)concurrent-sweep</b></p>
+
+<p style="margin-left:27%;">Enables or disables concurrent
+sweep for the Mark&amp;Sweep collector. If enabled, the
+iteration of all major blocks to determine which ones can be
+freed and which ones have to be kept and swept, is done
+concurrently with the running program. Concurrent sweeping
+is enabled by default.</p>
+
+
+<p style="margin-left:18%;"><b>stack-mark=</b><i>mark-mode</i></p>
+
+<p style="margin-left:27%;">Specifies how application
+threads should be scanned. Options are &lsquo;precise&lsquo;
+and &lsquo;conservative&lsquo;. Precise marking allow the
+collector to know what values on stack are references and
+what are not. Conservative marking threats all values as
+potentially references and leave them untouched. Precise
+marking reduces floating garbage and can speed up nursery
+collection and allocation rate, it has the downside of
+requiring a significant extra memory per compiled method.
+The right option, unfortunately, requires
+experimentation.</p>
+
+
+<p style="margin-left:18%;"><b>save-target-ratio=</b><i>ratio</i></p>
+
+<p style="margin-left:27%;">Specifies the target save ratio
+for the major collector. The collector lets a given amount
+of memory to be promoted from the nursery due to minor
+collections before it triggers a major collection. This
+amount is based on how much memory it expects to free. It is
+represented as a ratio of the size of the heap after a major
+collection. Valid values are between 0.1 and 2.0. The
+default is 0.5. Smaller values will keep the major heap size
+smaller but will trigger more major collections. Likewise,
+bigger values will use more memory and result in less
+frequent major collections. This option is EXPERIMENTAL, so
+it might disappear in later versions of mono.</p>
+
+
+<p style="margin-left:18%;"><b>default-allowance-ratio=</b><i>ratio</i></p>
+
+<p style="margin-left:27%;">Specifies the default
+allocation allowance when the calculated size is too small.
+The allocation allowance is how much memory the collector
+let be promoted before triggered a major collection. It is a
+ratio of the nursery size. Valid values are between 1.0 and
+10.0. The default is 4.0. Smaller values lead to smaller
+heaps and more frequent major collections. Likewise, bigger
+values will allow the heap to grow faster but use more
+memory when it reaches a stable size. This option is
+EXPERIMENTAL, so it might disappear in later versions of
+mono.</p>
+
+
+<p style="margin-left:18%;"><b>minor=</b><i>minor-collector</i></p>
+
+<p style="margin-left:27%;">Specifies which minor collector
+to use. Options are &lsquo;simple&rsquo; which promotes all
+objects from the nursery directly to the old generation,
+&lsquo;simple-par&rsquo; which has same promotion behavior
+as &lsquo;simple&rsquo; but using multiple workers and
+&lsquo;split&rsquo; which lets objects stay longer on the
+nursery before promoting.</p>
+
+
+<p style="margin-left:18%;"><b>alloc-ratio=</b><i>ratio</i></p>
+
+<p style="margin-left:27%;">Specifies the ratio of memory
+from the nursery to be use by the alloc space. This only can
+only be used with the split minor collector. Valid values
+are integers between 1 and 100. Default is 60.</p>
+
+
+<p style="margin-left:18%;"><b>promotion-age=</b><i>age</i></p>
+
+<p style="margin-left:27%;">Specifies the required age of
+an object must reach inside the nursery before been promoted
+to the old generation. This only can only be used with the
+split minor collector. Valid values are integers between 1
+and 14. Default is 2.</p>
+
+<p style="margin-left:18%;"><b>(no-)cementing</b></p>
+
+<p style="margin-left:27%;">Enables or disables cementing.
+This can dramatically shorten nursery collection times on
+some benchmarks where pinned objects are referred to from
+the major heap.</p>
+
+
+<p style="margin-left:18%;"><b>allow-synchronous-major</b></p>
+
+<p style="margin-left:27%;">This forbids the major
+collector from performing synchronous major collections. The
+major collector might want to do a synchronous collection
+due to excessive fragmentation. Disabling this might trigger
+OutOfMemory error in situations that would otherwise not
+happen.</p>
+
+<p style="margin-left:9%;"><b>MONO_GC_DEBUG</b></p>
+
+<p style="margin-left:18%;">When using Mono with the SGen
+garbage collector this environment variable can be used to
+turn on various debugging features of the collector. The
+value of this variable is a comma separated list of words.
+Do not use these options in production.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><i>number</i></p></td>
+<td width="1%"></td>
+<td width="58%">
+
+
+<p>Sets the debug level to the specified number.</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>print-allowance</b></p>
+
+<p style="margin-left:27%;">After each major collection
+prints memory consumption for before and after the
+collection and the allowance for the minor collector, i.e.
+how much the heap is allowed to grow from minor collections
+before the next major collection is triggered.</p>
+
+<p style="margin-left:18%;"><b>print-pinning</b></p>
+
+<p style="margin-left:27%;">Gathers statistics on the
+classes whose objects are pinned in the nursery and for
+which global remset entries are added. Prints those
+statistics when shutting down.</p>
+
+<p style="margin-left:18%;"><b>collect-before-allocs <br>
+check-remset-consistency</b></p>
+
+<p style="margin-left:27%;">This performs a remset
+consistency check at various opportunities, and also clears
+the nursery at collection time, instead of the default, when
+buffers are allocated (clear-at-gc). The consistency check
+ensures that there are no major to minor references that are
+not on the remembered sets.</p>
+
+
+<p style="margin-left:18%;"><b>mod-union-consistency-check</b></p>
+
+<p style="margin-left:27%;">Checks that the mod-union
+cardtable is consistent before each finishing major
+collection pause. This check is only applicable to
+concurrent major collectors.</p>
+
+<p style="margin-left:18%;"><b>check-mark-bits</b></p>
+
+<p style="margin-left:27%;">Checks that mark bits in the
+major heap are consistent at the end of each major
+collection. Consistent mark bits mean that if an object is
+marked, all objects that it had references to must also be
+marked.</p>
+
+<p style="margin-left:18%;"><b>check-nursery-untag</b></p>
+
+<p style="margin-left:27%;">After garbage collections,
+check whether all vtable pointers are no longer tagged.</p>
+
+<p style="margin-left:18%;"><b>xdomain-checks</b></p>
+
+<p style="margin-left:27%;">Performs a check to make sure
+that no references are left to an unloaded AppDomain.</p>
+
+
+<p style="margin-left:18%;"><b>clear-at-tlab-creation</b></p>
+
+<p style="margin-left:27%;">Clears the nursery
+incrementally when the thread local allocation buffers
+(TLAB) are created. The default setting clears the whole
+nursery at GC time.</p>
+
+
+<p style="margin-left:18%;"><b>debug-clear-at-tlab-creation</b></p>
+
+<p style="margin-left:27%;">Clears the nursery
+incrementally when the thread local allocation buffers
+(TLAB) are created, but at GC time fills it with the byte
+&lsquo;0xff&lsquo;, which should result in a crash more
+quickly if &lsquo;clear-at-tlab-creation&lsquo;
+doesn&rsquo;t work properly.</p>
+
+<p style="margin-left:18%;"><b>clear-at-gc</b></p>
+
+<p style="margin-left:27%;">This clears the nursery at GC
+time instead of doing it when the thread local allocation
+buffer (TLAB) is created. The default is to clear the
+nursery at TLAB creation time.</p>
+
+<p style="margin-left:18%;"><b>disable-minor</b></p>
+
+<p style="margin-left:27%;">Don&rsquo;t do minor
+collections. If the nursery is full, a major collection is
+triggered instead, unless it, too, is disabled.</p>
+
+<p style="margin-left:18%;"><b>disable-major</b></p>
+
+<p style="margin-left:27%;">Don&rsquo;t do major
+collections.</p>
+
+
+<p style="margin-left:18%;"><b>conservative-stack-mark</b></p>
+
+<p style="margin-left:27%;">Forces the GC to scan the stack
+conservatively, even if precise scanning is available.</p>
+
+
+<p style="margin-left:18%;"><b>no-managed-allocator</b></p>
+
+<p style="margin-left:27%;">Disables the managed
+allocator.</p>
+
+<p style="margin-left:18%;"><b>managed-allocator</b></p>
+
+<p style="margin-left:27%;">Enables the managed
+allocator.</p>
+
+<p style="margin-left:18%;"><b>check-scan-starts</b></p>
+
+<p style="margin-left:27%;">If set, does a plausibility
+check on the scan_starts before and after each
+collection</p>
+
+
+<p style="margin-left:18%;"><b>verify-nursery-at-minor-gc</b></p>
+
+<p style="margin-left:27%;">If set, does a complete object
+walk of the nursery at the start of each minor
+collection.</p>
+
+
+<p style="margin-left:18%;"><b>dump-nursery-at-minor-gc</b></p>
+
+<p style="margin-left:27%;">If set, dumps the contents of
+the nursery at the start of each minor collection. Requires
+verify-nursery-at-minor-gc to be set.</p>
+
+
+<p style="margin-left:18%;"><b>heap-dump=</b><i>file</i></p>
+
+<p style="margin-left:27%;">Dumps the heap contents to the
+specified file. To visualize the information, use the
+mono-heapviz tool.</p>
+
+
+<p style="margin-left:18%;"><b>binary-protocol=</b><i>file</i></p>
+
+<p style="margin-left:27%;">Outputs the debugging output to
+the specified file. For this to work, Mono needs to be
+compiled with the BINARY_PROTOCOL define on sgen-gc.c. You
+can then use this command to explore the output <br>
+sgen-grep-binprot 0x1234 0x5678 &lt; file</p>
+
+<p style="margin-left:18%;"><b>nursery-canaries</b></p>
+
+<p style="margin-left:27%;">If set, objects allocated in
+the nursery are suffixed with a canary (guard) word, which
+is checked on each minor collection. Can be used to
+detect/debug heap corruption issues. This disables the usage
+of the managed allocator, because allocation from full aot
+code is inconsistent with this option. If the application is
+guaranteed not to use aot code, the managed allocator can be
+enabled back with managed-allocator option.</p>
+
+
+<p style="margin-left:18%;"><b>do-not-finalize(=</b><i>classes</i><b>)</b></p>
+
+<p style="margin-left:27%;">If enabled, finalizers will not
+be run. Everything else will be unaffected: finalizable
+objects will still be put into the finalization queue where
+they survive until they&rsquo;re scheduled to finalize. Once
+they&rsquo;re not in the queue anymore they will be
+collected regularly. If a list of comma-separated class
+names is given, only objects from those classes will not be
+finalized.</p>
+
+<p style="margin-left:18%;"><b>log-finalizers</b></p>
+
+<p style="margin-left:27%;">Log verbosely around the
+finalization process to aid debugging.</p>
+
+<p style="margin-left:9%;"><b>MONO_GAC_PREFIX</b></p>
+
+<p style="margin-left:18%;">Provides a prefix the runtime
+uses to look for Global Assembly Caches. Directories are
+separated by the platform path separator (colons on unix).
+MONO_GAC_PREFIX should point to the top directory of a
+prefixed install. Or to the directory provided in the
+gacutil /gacdir command. Example:
+<b>/home/username/.mono:/usr/local/mono/</b></p>
+
+<p style="margin-left:9%;"><b>MONO_IOMAP</b></p>
+
+<p style="margin-left:18%;">(deprecated) Enabled some
+filename rewriting support to assist badly-written
+applications that hard-code Windows paths. It no longer
+works as of Mono 6.0.</p>
+
+<p style="margin-left:9%;"><b>MONO_LLVM</b></p>
+
+<p style="margin-left:18%;">When Mono is using the LLVM
+code generation backend you can use this environment
+variable to pass code generation options to the LLVM
+compiler.</p>
+
+<p style="margin-left:9%;"><b>MONO_MANAGED_WATCHER</b></p>
+
+<p style="margin-left:18%;">If set to &quot;disabled&quot;,
+System.IO.FileSystemWatcher will use a file watcher
+implementation which silently ignores all the watching
+requests. If set to any other value,
+System.IO.FileSystemWatcher will use the default managed
+implementation (slow). If unset, mono will try to use
+inotify, FAM, Gamin, kevent under Unix systems and native
+API calls on Windows, falling back to the managed
+implementation on error.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_MESSAGING_PROVIDER</b></p>
+
+<p style="margin-left:18%;">Mono supports a plugin model
+for its implementation of System.Messaging making it
+possible to support a variety of messaging implementations
+(e.g. AMQP, ActiveMQ). To specify which messaging
+implementation is to be used the evironement variable needs
+to be set to the full class name for the provider. E.g. to
+use the RabbitMQ based AMQP implementation the variable
+should be set to:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">Mono.Messaging.RabbitMQ.RabbitMQMessagingProvider,Mono.Messaging.RabbitMQ</p>
+
+<p style="margin-left:9%;"><b>MONO_NO_SMP</b></p>
+
+<p style="margin-left:18%;">If set causes the mono process
+to be bound to a single processor. This may be <br>
+useful when debugging or working around race conditions.</p>
+
+<p style="margin-left:9%;"><b>MONO_NO_TLS</b></p>
+
+<p style="margin-left:18%;">Disable inlining of thread
+local accesses. Try setting this if you get a segfault <br>
+early on in the execution of mono.</p>
+
+<p style="margin-left:9%;"><b>MONO_PATH</b></p>
+
+<p style="margin-left:18%;">Provides a search path to the
+runtime where to look for library <br>
+files. This is a tool convenient for debugging applications,
+but <br>
+should not be used by deployed applications as it breaks the
+assembly <br>
+loader in subtle ways. <br>
+Directories are separated by the platform path separator
+(colons on unix). Example: <b><br>
+/home/username/lib:/usr/local/mono/lib</b> <br>
+Relative paths are resolved based on the launch-time current
+directory. <br>
+Alternative solutions to MONO_PATH include: installing
+libraries into <br>
+the Global Assembly Cache (see gacutil(1)) or having the
+dependent <br>
+libraries side-by-side with the main executable. <br>
+For a complete description of recommended practices for
+application <br>
+deployment, see <br>
+
+http://www.mono-project.com/docs/getting-started/application-deployment/</p>
+
+<p style="margin-left:9%;"><b>MONO_SHARED_DIR</b></p>
+
+<p style="margin-left:18%;">If set its the directory where
+the &quot;.wapi&quot; handle state is stored. <br>
+This is the directory where the Windows I/O Emulation layer
+stores its <br>
+shared state data (files, events, mutexes, pipes). By
+default Mono <br>
+will store the &quot;.wapi&quot; directory in the
+users&rsquo;s home directory.</p>
+
+<p style="margin-left:9%;"><b>MONO_SHARED_HOSTNAME</b></p>
+
+<p style="margin-left:18%;">Uses the string value of this
+variable as a replacement for the host name when <br>
+creating file names in the &quot;.wapi&quot; directory. This
+helps if the host name of <br>
+your machine is likely to be changed when a mono application
+is running or if <br>
+you have a .wapi directory shared among several different
+computers. <br>
+Mono typically uses the hostname to create the files that
+are used to <br>
+share state across multiple Mono processes. This is done to
+support <br>
+home directories that might be shared over the network.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_STRICT_IO_EMULATION</b></p>
+
+<p style="margin-left:18%;">If set, extra checks are made
+during IO operations. Currently, this <br>
+includes only advisory locks around file writes.</p>
+
+<p style="margin-left:9%;"><b>MONO_TLS_PROVIDER</b></p>
+
+<p style="margin-left:18%;">This environment variable
+controls which TLS/SSL provider Mono will <br>
+use. The options are usually determined by the operating
+system where <br>
+Mono was compiled and the configuration options that were
+used for <br>
+it. <i><br>
+default</i></p>
+
+<p style="margin-left:27%;">Uses the default TLS stack that
+the Mono runtime was configured with. <br>
+Usually this is configured to use Apple&rsquo;s SSL stack on
+Apple <br>
+platforms, and Boring SSL on other platforms.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>apple</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Forces the use of the Apple SSL stack, only works on
+Apple platforms.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>btls</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Forces the use of the BoringSSL stack. See</p></td></tr>
+</table>
+
+
+<p style="margin-left:27%;">https://opensource.google.com/projects/boringssl
+for more information <br>
+about this stack.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><i>legacy</i></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em">This is the old Mono stack,
+which only supports SSL and TLS up to</p></td></tr>
+</table>
+
+<p style="margin-left:27%;">version 1.0. It is deprecated
+and will be removed in the future.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_TLS_SESSION_CACHE_TIMEOUT</b></p>
+
+<p style="margin-left:18%;">The time, in seconds, that the
+SSL/TLS session cache will keep it&rsquo;s entry to <br>
+avoid a new negotiation between the client and a server.
+Negotiation are very <br>
+CPU intensive so an application-specific custom value may
+prove useful for <br>
+small embedded systems. <br>
+The default is 180 seconds.</p>
+
+<p style="margin-left:9%;"><b>MONO_THREADS_PER_CPU</b></p>
+
+<p style="margin-left:18%;">The minimum number of threads
+in the general threadpool will be <br>
+MONO_THREADS_PER_CPU * number of CPUs. The default value for
+this <br>
+variable is 1.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_XMLSERIALIZER_THS</b></p>
+
+<p style="margin-left:18%;">Controls the threshold for the
+XmlSerializer to produce a custom <br>
+serializer for a given class instead of using the
+Reflection-based <br>
+interpreter. The possible values are &lsquo;no&rsquo; to
+disable the use of a <br>
+custom serializer or a number to indicate when the
+XmlSerializer <br>
+should start serializing. The default value is 50, which
+means that <br>
+the a custom serializer will be produced on the 50th
+use.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_X509_REVOCATION_MODE</b></p>
+
+<p style="margin-left:18%;">Sets the revocation mode used
+when validating a X509 certificate chain (https, <br>
+ftps, smtps...). The default is &rsquo;nocheck&rsquo;, which
+performs no revocation check <br>
+at all. The other possible values are &rsquo;offline&rsquo;,
+which performs CRL check (not <br>
+implemented yet) and &rsquo;online&rsquo; which uses OCSP
+and CRL to verify the revocation <br>
+status (not implemented yet).</p>
+
+<p style="margin-left:9%;"><b>NO_PROXY</b></p>
+
+<p style="margin-left:18%;">(Also <b>no_proxy</b>) If both
+<b>HTTP_PROXY</b> and <b>NO_PROXY</b> are <br>
+set, <b>NO_PROXY</b> will be treated as a comma-separated
+list of &quot;bypass&quot; domains <br>
+which will not be sent through the proxy. Domains in
+<b>NO_PROXY</b> may contain <br>
+wildcards, as in &quot;*.mono-project.com&quot; or
+&quot;build????.local&quot;. Not supported on <br>
+Windows, Mac OS, iOS or Android.</p>
+
+<h2>ENVIRONMENT VARIABLES FOR DEBUGGING
+<a name="ENVIRONMENT VARIABLES FOR DEBUGGING"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>MONO_ASPNET_NODELETE</b></p>
+
+<p style="margin-left:18%;">If set to any value, temporary
+source files generated by ASP.NET support classes will not
+be removed. They will be kept in the user&rsquo;s temporary
+directory.</p>
+
+<p style="margin-left:9%;"><b>MONO_DEBUG</b></p>
+
+<p style="margin-left:18%;">If set, enables some features
+of the runtime useful for debugging. This variable should
+contain a comma separated list of debugging options.
+Currently, the following options are supported: <b><br>
+align-small-structs</b></p>
+
+<p style="margin-left:27%;">Enables small structs alignment
+to 4/8 bytes.</p>
+
+
+<p style="margin-left:18%;"><b>arm-use-fallback-tls</b></p>
+
+<p style="margin-left:27%;">When this option is set on ARM,
+a fallback thread local store will be used instead of the
+default fast thread local storage primitives.</p>
+
+<p style="margin-left:18%;"><b>break-on-unverified</b></p>
+
+<p style="margin-left:27%;">If this variable is set, when
+the Mono VM runs into a verification problem, instead of
+throwing an exception it will break into the debugger. This
+is useful when debugging verifier problems</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>casts</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>This option can be used to get more detailed information
+from InvalidCast exceptions, it will provide information
+about the types involved.</p></td></tr>
+</table>
+
+
+<p style="margin-left:18%;"><b>check-pinvoke-callconv</b></p>
+
+<p style="margin-left:27%;">This option causes the runtime
+to check for calling convention mismatches when using
+pinvoke, i.e. mixing cdecl/stdcall. It only works on
+windows. If a mismatch is detected, an
+ExecutionEngineException is thrown.</p>
+
+
+<p style="margin-left:18%;"><b>collect-pagefault-stats</b></p>
+
+<p style="margin-left:27%;">Collects information about
+pagefaults. This is used internally to track the number of
+page faults produced to load metadata. To display this
+information you must use this option with
+&quot;--stats&quot; command line option.</p>
+
+<p style="margin-left:18%;"><b>debug-domain-unload</b></p>
+
+<p style="margin-left:27%;">When this option is set, the
+runtime will invalidate the domain memory pool instead of
+destroying it.</p>
+
+<p style="margin-left:18%;"><b>disable_omit_fp</b></p>
+
+<p style="margin-left:27%;">Disables a compiler
+optimization where the frame pointer is omitted from the
+stack. This optimization can interact badly with
+debuggers.</p>
+
+<p style="margin-left:18%;"><b>dont-free-domains</b></p>
+
+<p style="margin-left:27%;">This is an Optimization for
+multi-AppDomain applications (most commonly ASP.NET
+applications). Due to internal limitations Mono, Mono by
+default does not use typed allocations on multi-appDomain
+applications as they could leak memory when a domain is
+unloaded. Although this is a fine default, for applications
+that use more than on AppDomain heavily (for example,
+ASP.NET applications) it is worth trading off the small
+leaks for the increased performance (additionally, since
+ASP.NET applications are not likely going to unload the
+application domains on production systems, it is worth using
+this feature).</p>
+
+<p style="margin-left:18%;"><b>dyn-runtime-invoke</b></p>
+
+<p style="margin-left:27%;">Instructs the runtime to try to
+use a generic runtime-invoke wrapper instead of creating one
+invoke wrapper.</p>
+
+
+<p style="margin-left:18%;"><b>explicit-null-checks</b></p>
+
+<p style="margin-left:27%;">Makes the JIT generate an
+explicit NULL check on variable dereferences instead of
+depending on the operating system to raise a SIGSEGV or
+another form of trap event when an invalid memory location
+is accessed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>gdb</b></p></td>
+<td width="5%"></td>
+<td width="73%">
+
+
+<p>Equivalent to setting the <b>MONO_XDEBUG</b> variable,
+this emits symbols into a shared library as the code is
+JITed that can be loaded into GDB to inspect symbols.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>gen-seq-points</b></p>
+
+<p style="margin-left:27%;">Automatically generates
+sequence points where the IL stack is empty. These are
+places where the debugger can set a breakpoint.</p>
+
+
+<p style="margin-left:18%;"><b>llvm-disable-implicit-null-checks</b></p>
+
+<p style="margin-left:27%;">Makes the LLVM backend use
+explicit NULL checks on variable dereferences instead of
+depending on operating system support for signals or traps
+when an invalid memory location is accessed. Unconditionally
+enabled by explicit-null-checks.</p>
+
+
+<p style="margin-left:18%;"><b>no-compact-seq-points</b></p>
+
+<p style="margin-left:27%;">Unless the option is used, the
+runtime generates sequence points data that maps native
+offsets to IL offsets. Sequence point data is used to
+display IL offset in stacktraces. Stacktraces with IL
+offsets can be symbolicated using mono-symbolicate tool.</p>
+
+<p style="margin-left:18%;"><b>handle-sigint</b></p>
+
+<p style="margin-left:27%;">Captures the interrupt signal
+(Control-C) and displays a stack trace when pressed. Useful
+to find out where the program is executing at a given point.
+This only displays the stack trace of a single thread.</p>
+
+<p style="margin-left:18%;"><b>init-stacks</b></p>
+
+<p style="margin-left:27%;">Instructs the runtime to
+initialize the stack with some known values (0x2a on x86-64)
+at the start of a method to assist in debuggin the JIT
+engine.</p>
+
+<p style="margin-left:18%;"><b>keep-delegates</b></p>
+
+<p style="margin-left:27%;">This option will leak delegate
+trampolines that are no longer referenced as to present the
+user with more information about a delegate misuse.
+Basically a delegate instance might be created, passed to
+unmanaged code, and no references kept in managed code,
+which will garbage collect the code. With this option it is
+possible to track down the source of the problems.</p>
+
+<p style="margin-left:18%;"><b>no-gdb-backtrace</b></p>
+
+<p style="margin-left:27%;">This option will disable the
+GDB backtrace emitted by the runtime after a SIGSEGV or
+SIGABRT in unmanaged code.</p>
+
+<p style="margin-left:18%;"><b>partial-sharing</b></p>
+
+<p style="margin-left:27%;">When this option is set, the
+runtime can share generated code between generic types
+effectively reducing the amount of code generated.</p>
+
+
+<p style="margin-left:18%;"><b>reverse-pinvoke-exceptions</b></p>
+
+<p style="margin-left:27%;">This option will cause mono to
+abort with a descriptive message when during stack unwinding
+after an exception it reaches a native stack frame. This
+happens when a managed delegate is passed to native code,
+and the managed delegate throws an exception. Mono will
+normally try to unwind the stack to the first (managed)
+exception handler, and it will skip any native stack frames
+in the process. This leads to undefined behaviour (since
+mono doesn&rsquo;t know how to process native frames),
+leaks, and possibly crashes too.</p>
+
+<p style="margin-left:18%;"><b>single-imm-size</b></p>
+
+<p style="margin-left:27%;">This guarantees that each time
+managed code is compiled the same instructions and registers
+are used, regardless of the size of used values.</p>
+
+<p style="margin-left:18%;"><b>soft-breakpoints</b></p>
+
+<p style="margin-left:27%;">This option allows using
+single-steps and breakpoints in hardware where we cannot do
+it with signals.</p>
+
+
+<p style="margin-left:18%;"><b>suspend-on-native-crash</b></p>
+
+<p style="margin-left:27%;">This option will suspend the
+program when a native crash occurs (SIGSEGV, SIGILL, ...).
+This is useful for debugging crashes which do not happen
+under gdb, since a live process contains more information
+than a core file.</p>
+
+<p style="margin-left:18%;"><b>suspend-on-sigsegv</b></p>
+
+<p style="margin-left:27%;">Same as
+<b>suspend-on-native-crash</b>.</p>
+
+
+<p style="margin-left:18%;"><b>suspend-on-exception</b></p>
+
+<p style="margin-left:27%;">This option will suspend the
+program when an exception occurs.</p>
+
+
+<p style="margin-left:18%;"><b>suspend-on-unhandled</b></p>
+
+<p style="margin-left:27%;">This option will suspend the
+program when an unhandled exception occurs.</p>
+
+<p style="margin-left:18%;"><b>thread-dump-dir=DIR</b></p>
+
+<p style="margin-left:27%;">Use DIR for storage thread
+dumps created by SIGQUIT.</p>
+
+<p style="margin-left:18%;"><b>weak-memory-model</b></p>
+
+<p style="margin-left:27%;">Don&rsquo;t enforce the CLR
+memory model on platforms with weak memory models. This can
+introduce random crashes in some rare cases, for
+multithreaded environments. This can be used for a
+performance boost on applications that are single
+threaded.</p>
+
+<p style="margin-left:18%;"><b>verbose-gdb</b></p>
+
+<p style="margin-left:27%;">Make gdb output on native
+crashes more verbose.</p>
+
+<p style="margin-left:9%;"><b>MONO_LOG_LEVEL</b></p>
+
+<p style="margin-left:18%;">The logging level, possible
+values are &lsquo;error&rsquo;, &lsquo;critical&rsquo;,
+&lsquo;warning&rsquo;, &lsquo;message&rsquo;,
+&lsquo;info&rsquo; and &lsquo;debug&rsquo;. See the
+DEBUGGING section for more details.</p>
+
+<p style="margin-left:9%;"><b>MONO_LOG_MASK</b></p>
+
+<p style="margin-left:18%;">Controls the domain of the Mono
+runtime that logging will apply to. If set, the log mask is
+changed to the set value. Possible values are
+&quot;asm&quot; (assembly loader), &quot;type&quot;,
+&quot;dll&quot; (native library loader), &quot;gc&quot;
+(garbage collector), &quot;cfg&quot; (config file loader),
+&quot;aot&quot; (precompiler), &quot;security&quot; (e.g.
+Moonlight CoreCLR support) and &quot;all&quot;. The default
+value is &quot;all&quot;. Changing the mask value allows you
+to display only messages for a certain component. You can
+use multiple masks by comma separating them. For example to
+see config file messages and assembly loader messages set
+you mask to &quot;asm,cfg&quot;.</p>
+
+<p style="margin-left:9%;"><b>MONO_LOG_DEST</b></p>
+
+<p style="margin-left:18%;">Controls where trace log
+messages are written. If not set then the messages go to
+stdout. If set, the string either specifies a path to a file
+that will have messages appended to it, or the string
+&quot;syslog&quot; in which case the messages will be
+written to the system log. Under Windows, this is simulated
+by writing to a file called &quot;mono.log&quot;.
+<b>MONO_LOG_HEADER</b> Controls whether trace log messages
+not directed to syslog have the id, timestamp, and pid as
+the prefix to the log message. To enable a header this
+environment variable need just be non-null.</p>
+
+<p style="margin-left:9%;"><b>MONO_TRACE</b></p>
+
+<p style="margin-left:18%;">Used for runtime tracing of
+method calls. The format of the comma separated trace
+options is:</p>
+
+<p style="margin-left:18%; margin-top: 1em">[-]M:method
+name</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>[-]N:namespace</p></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>[-]T:class name</p></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>[-]all</p></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>[-]program</p></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%"></td>
+<td width="7%">
+
+
+<p>disabled</p></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+
+
+<p>Trace output off upon start.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">You can toggle
+trace output on/off sending a SIGUSR2 signal to the
+program.</p>
+
+<p style="margin-left:9%;"><b>MONO_TRACE_LISTENER</b></p>
+
+<p style="margin-left:18%;">If set, enables the
+System.Diagnostics.DefaultTraceListener, which will print
+the output of the System.Diagnostics Trace and Debug
+classes. It can be set to a filename, and to Console.Out or
+Console.Error to display output to standard output or
+standard error, respectively. If it&rsquo;s set to
+Console.Out or Console.Error you can append an optional
+prefix that will be used when writing messages like this:
+Console.Error:MyProgramName. See the
+System.Diagnostics.DefaultTraceListener documentation for
+more information.</p>
+
+<p style="margin-left:9%;"><b>MONO_WCF_TRACE</b></p>
+
+<p style="margin-left:18%;">This eases WCF diagnostics
+functionality by simply outputs all log messages from WCF
+engine to &quot;stdout&quot;, &quot;stderr&quot; or any file
+passed to this environment variable. The log format is the
+same as usual diagnostic output.</p>
+
+<p style="margin-left:9%;"><b>MONO_XEXCEPTIONS</b></p>
+
+<p style="margin-left:18%;">This throws an exception when a
+X11 error is encountered; by default a message is displayed
+but execution continues</p>
+
+
+<p style="margin-left:9%;"><b>MONO_XMLSERIALIZER_DEBUG</b></p>
+
+<p style="margin-left:18%;">Set this value to 1 to prevent
+the serializer from removing the temporary files that are
+created for fast serialization; This might be useful when
+debugging.</p>
+
+<p style="margin-left:9%;"><b>MONO_XSYNC</b></p>
+
+<p style="margin-left:18%;">This is used in the
+System.Windows.Forms implementation when running with the
+X11 backend. This is used to debug problems in Windows.Forms
+as it forces all of the commands send to X11 server to be
+done synchronously. The default mode of operation is
+asynchronous which makes it hard to isolate the root of
+certain problems.</p>
+
+<p style="margin-left:9%;"><b>MONO_XDEBUG</b></p>
+
+<p style="margin-left:18%;">When the the MONO_XDEBUG env
+var is set, debugging info for JITted code is emitted into a
+shared library, loadable into gdb. This enables, for
+example, to see managed frame names on gdb backtraces.</p>
+
+<p style="margin-left:9%;"><b>MONO_VERBOSE_METHOD</b></p>
+
+<p style="margin-left:18%;">Enables the maximum JIT
+verbosity for the specified method. This is very helpfull to
+diagnose a miscompilation problems of a specific method.
+This can be a semicolon-separated list of method names to
+match. If the name is simple, this applies to any method
+with that name, otherwise you can use a mono method
+description (see the section METHOD DESCRIPTIONS).</p>
+
+<p style="margin-left:9%;"><b>MONO_JIT_DUMP_METHOD</b></p>
+
+<p style="margin-left:18%;">Enables sending of the JITs
+intermediate representation for a specified method to the
+IdealGraphVisualizer tool.</p>
+
+<p style="margin-left:9%;"><b>MONO_VERBOSE_HWCAP</b></p>
+
+<p style="margin-left:18%;">If set, makes the JIT output
+information about detected CPU features (such as SSE, CMOV,
+FCMOV, etc) to stdout.</p>
+
+
+<p style="margin-left:9%;"><b>MONO_CONSERVATIVE_HWCAP</b></p>
+
+<p style="margin-left:18%;">If set, the JIT will not
+perform any hardware capability detection. This may be
+useful to pinpoint the cause of JIT issues. This is the
+default when Mono is built as an AOT cross compiler, so that
+the generated code will run on most hardware.</p>
+
+<h2>VALGRIND
+<a name="VALGRIND"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+use Valgrind, you will find the file &lsquo;mono.supp&rsquo;
+useful, it contains the suppressions for the GC which
+trigger incorrect warnings. Use it like this: <br>
+valgrind --suppressions=mono.supp mono ...</p>
+
+<h2>DTRACE
+<a name="DTRACE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On some
+platforms, Mono can expose a set of DTrace probes (also
+known as user-land statically defined, USDT Probes). <br>
+They are defined in the file &lsquo;mono.d&rsquo;. <b><br>
+ves-init-begin, ves-init-end</b></p>
+
+<p style="margin-left:18%;">Begin and end of runtime
+initialization.</p>
+
+<p style="margin-left:9%;"><b>method-compile-begin,
+method-compile-end</b></p>
+
+<p style="margin-left:18%;">Begin and end of method
+compilation. The probe arguments are class name, method name
+and signature, and in case of method-compile-end success or
+failure of compilation.</p>
+
+<p style="margin-left:9%;"><b>gc-begin, gc-end</b></p>
+
+<p style="margin-left:18%;">Begin and end of Garbage
+Collection.</p>
+
+<p style="margin-left:9%;">To verify the availability of
+the probes, run:</p>
+
+<p style="margin-left:18%;">dtrace -P
+mono&rsquo;$target&rsquo; -l -c mono</p>
+
+<h2>PERMISSIONS
+<a name="PERMISSIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mono&rsquo;s
+Ping implementation for detecting network reachability can
+create the ICMP packets itself without requiring the system
+ping command to do the work. If you want to enable this on
+Linux for non-root users, you need to give the Mono binary
+special permissions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">As root, run
+this command: <br>
+# setcap cap_net_raw=+ep /usr/bin/mono</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On Unix
+assemblies are loaded from the installation lib directory.
+If you set &lsquo;prefix&rsquo; to /usr, the assemblies will
+be located in /usr/lib. On Windows, the assemblies are
+loaded from the directory where mono and mint live. <b><br>
+&#732;/.mono/aot-cache</b></p>
+
+<p style="margin-left:18%;">The directory for the
+ahead-of-time compiler demand creation assemblies are
+located.</p>
+
+<p style="margin-left:9%;"><b>/etc/mono/config,
+&#732;/.mono/config</b></p>
+
+<p style="margin-left:18%;">Mono runtime configuration
+file. See the mono-config(5) manual page for more
+information.</p>
+
+<p style="margin-left:9%;"><b>&#732;/.config/.mono/certs,
+/usr/share/.mono/certs</b></p>
+
+<p style="margin-left:18%;">Contains Mono certificate
+stores for users / machine. See the certmgr(1) manual page
+for more information on managing certificate stores and the
+mozroots(1) page for information on how to import the
+Mozilla root certificates into the Mono certificate
+store.</p>
+
+
+<p style="margin-left:9%;"><b>&#732;/.mono/assemblies/ASSEMBLY/ASSEMBLY.config</b></p>
+
+<p style="margin-left:18%;">Files in this directory allow a
+user to customize the configuration for a given system
+assembly, the format is the one described in the
+mono-config(5) page.</p>
+
+
+<p style="margin-left:9%;"><b>&#732;/.config/.mono/keypairs,
+/usr/share/.mono/keypairs</b></p>
+
+<p style="margin-left:18%;">Contains Mono cryptographic
+keypairs for users / machine. They can be accessed by using
+a CspParameters object with DSACryptoServiceProvider and
+RSACryptoServiceProvider classes.</p>
+
+
+<p style="margin-left:9%;"><b>&#732;/.config/.isolatedstorage,
+&#732;/.local/share/.isolatedstorage, <br>
+/usr/share/.isolatedstorage</b></p>
+
+<p style="margin-left:18%;">Contains Mono isolated storage
+for non-roaming users, roaming users and local machine.
+Isolated storage can be accessed using the classes from the
+System.IO.IsolatedStorage namespace.</p>
+
+
+<p style="margin-left:9%;"><b>&lt;assembly&gt;.config</b></p>
+
+<p style="margin-left:18%;">Configuration information for
+individual assemblies is loaded by the runtime from
+side-by-side files with the .config files, see the
+http://www.mono-project.com/Config for more information.</p>
+
+<p style="margin-left:9%;"><b>Web.config,
+web.config</b></p>
+
+<p style="margin-left:18%;">ASP.NET applications are
+configured through these files, the configuration is done on
+a per-directory basis. For more information on this subject
+see the http://www.mono-project.com/Config_system.web
+page.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mailing lists
+are listed at the
+http://www.mono-project.com/community/help/mailing-lists/</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">http://www.mono-project.com</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>certmgr</b>(1),
+<b>cert-sync</b>(1), <b>csharp</b>(1), <b>gacutil</b>(1),
+<b>mcs</b>(1), <b>monodis</b>(1), <b>mono-config</b>(5),
+<b>mono-profilers</b>(1), <b>mprof-report</b>(1),
+<b>pdb2mdb</b>(1), <b>xsp</b>(1), <b>mod_mono</b>(8)</p>
+
+<p style="margin-left:9%; margin-top: 1em">For more
+information on AOT:
+http://www.mono-project.com/docs/advanced/aot/</p>
+
+<p style="margin-left:9%; margin-top: 1em">For
+ASP.NET-related documentation, see the xsp(1) manual
+page</p>
+<hr>
+</body>
+</html>

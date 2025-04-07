@@ -1,0 +1,270 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:36 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-notify</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-notify</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Overview">Overview</a><br>
+<a href="#Source code for notify">Source code for notify</a><br>
+<a href="#Command line interface">Command line interface</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Author">Author</a><br>
+<a href="#Copyright">Copyright</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-notify -
+Send notifications to the user</p>
+
+<h2>Overview
+<a name="Overview"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show pop-up
+system notifications.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Added in version
+0.36.0: The notify kitten</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>notify</b> kitten can be used to show pop-up system
+notifications from the shell. It even works over SSH. Using
+it is as simple as:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitten notify
+&quot;Good morning&quot; Hello world, it is a nice day!</p>
+
+<p style="margin-left:9%; margin-top: 1em">To add an icon,
+use:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitten notify
+--icon-path /path/to/some/image.png &quot;Good morning&quot;
+Hello world, it is a nice day! <br>
+kitten notify --icon firefox &quot;Good morning&quot; Hello
+world, it is a nice day!</p>
+
+<p style="margin-left:9%; margin-top: 1em">To be informed
+when the notification is activated:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitten notify
+--wait-for-completion &quot;Good morning&quot; Hello world,
+it is a nice day!</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then, the kitten
+will wait till the notification is either closed or
+activated. If activated, a <b>0</b> is printed to
+<b>STDOUT</b>. You can press the <b>Esc</b> or
+<b>Ctrl</b>+<b>c</b> keys to abort, closing the
+notification.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To add buttons
+to the notification:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitten notify
+--wait-for-completion --button One --button Two &quot;Good
+morning&quot; Hello world, it is a nice day!</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>TIP:</b></p>
+
+<p style="margin-left:13%;">Learn about the underlying
+<i>Desktop notifications</i> escape code protocol.</p>
+
+<h2>Source code for notify
+<a name="Source code for notify"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The source code
+for this kitten is <i>available on GitHub</i>.</p>
+
+<h2>Command line interface
+<a name="Command line interface"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">kitten notify
+[options] TITLE [BODY ...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Send
+notifications to the user that are displayed to them via the
+desktop environment's notifications service. Works over SSH
+as well.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To update an
+existing notification, specify the identifier of the
+notification with the --identifier option. The value should
+be the same as the identifier specified for the notification
+you wish to update.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no title is
+specified and an identifier is specified using the
+--identifier option, then instead of creating a new
+notification, an existing notification with the specified
+identifier is closed.</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--icon
+&lt;ICON&gt;, -n &lt;ICON&gt;</b></p>
+
+<p style="margin-left:18%;">The name of the icon to use for
+the notification. An icon with this name will be searched
+for on the computer running the terminal emulator. Can be
+specified multiple times, the first name that is found will
+be used. Standard names: error, file-manager, help, info,
+question, system-monitor, text-editor, warn, warning</p>
+
+<p style="margin-left:9%;"><b>--icon-path
+&lt;ICON_PATH&gt;, -p &lt;ICON_PATH&gt;</b></p>
+
+<p style="margin-left:18%;">Path to an image file in
+PNG/JPEG/GIF formats to use as the icon. If both name and
+path are specified then first the name will be looked for
+and if not found then the path will be used.</p>
+
+<p style="margin-left:9%;"><b>--app-name &lt;APP_NAME&gt;,
+-a &lt;APP_NAME&gt;</b></p>
+
+<p style="margin-left:18%;">The application name for the
+notification. Default: <b>kitten-notify</b></p>
+
+<p style="margin-left:9%;"><b>--button &lt;BUTTON&gt;, -b
+&lt;BUTTON&gt;</b></p>
+
+<p style="margin-left:18%;">Add a button with the specified
+text to the notification. Can be specified multiple times
+for multiple buttons. If --wait-till-closed is used then the
+kitten will print the button number to STDOUT if the user
+clicks a button. 1 for the first button, 2 for the second
+button and so on.</p>
+
+<p style="margin-left:9%;"><b>--urgency &lt;URGENCY&gt;, -u
+&lt;URGENCY&gt;</b></p>
+
+<p style="margin-left:18%;">The urgency of the
+notification. Default: <b>normal</b> Choices:
+<b>critical</b>, <b>low</b>, <b>normal</b></p>
+
+<p style="margin-left:9%;"><b>--expire-after
+&lt;EXPIRE_AFTER&gt;, -e &lt;EXPIRE_AFTER&gt;</b></p>
+
+<p style="margin-left:18%;">The duration, for the
+notification to appear on screen. The default is to use the
+policy of the OS notification service. A value of
+<b>never</b> means the notification should never expire,
+however, this may or may not work depending on the policies
+of the OS notification service. Time is specified in the
+form NUMBER[SUFFIX] where SUFFIX can be <b>s</b> for
+seconds, <b>m</b> for minutes, <b>h</b> for hours or
+<b>d</b> for days. Non-integer numbers are allowed. If not
+specified, seconds is assumed. The notification is
+guaranteed to be closed automatically after the specified
+time has elapsed. The notification could be closed before by
+user action or OS policy.</p>
+
+<p style="margin-left:9%;"><b>--sound-name
+&lt;SOUND_NAME&gt;, -s &lt;SOUND_NAME&gt;</b></p>
+
+<p style="margin-left:18%;">The name of the sound to play
+with the notification. <b>system</b> means let the
+notification system use whatever sound it wants.
+<b>silent</b> means prevent any sound from being played. Any
+other value is passed to the desktop's notification system
+which may or may not honor it. Default: <b>system</b></p>
+
+<p style="margin-left:9%;"><b>--type &lt;TYPE&gt;, -t
+&lt;TYPE&gt;</b></p>
+
+<p style="margin-left:18%;">The notification type. Can be
+any string, it is used by users to create filter rules for
+notifications, so choose something descriptive of the
+notification's purpose.</p>
+
+<p style="margin-left:9%;"><b>--identifier
+&lt;IDENTIFIER&gt;, -i &lt;IDENTIFIER&gt;</b></p>
+
+<p style="margin-left:18%;">The identifier of this
+notification. If a notification with the same identifier is
+already displayed, it is replaced/updated.</p>
+
+<p style="margin-left:9%;"><b>--print-identifier,
+-P</b></p>
+
+<p style="margin-left:18%;">Print the identifier for the
+notification to STDOUT. Useful when not specifying your own
+identifier via the --identifier option.</p>
+
+<p style="margin-left:9%;"><b>--wait-for-completion,
+--wait-till-closed, -w</b></p>
+
+<p style="margin-left:18%;">Wait until the notification is
+closed. If the user activates the notification,
+&quot;0&quot; is printed to STDOUT before quitting. If a
+button on the notification is pressed the number
+corresponding to the button is printed to STDOUT. Press the
+Esc or Ctrl+C keys to close the notification manually.</p>
+
+
+<p style="margin-left:9%;"><b>--only-print-escape-code</b></p>
+
+<p style="margin-left:18%;">Only print the escape code to
+STDOUT. Useful if using this kitten as part of a larger
+application. If this is specified, the --wait-till-closed
+option will be used for escape code generation, but no
+actual waiting will be done.</p>
+
+<p style="margin-left:9%;"><b>--icon-cache-id
+&lt;ICON_CACHE_ID&gt;, -g &lt;ICON_CACHE_ID&gt;</b></p>
+
+<p style="margin-left:18%;">Identifier to use when caching
+icons in the terminal emulator. Using an identifier means
+that icon data needs to be transmitted only once using
+--icon-path. Subsequent invocations will use the cached icon
+data, at least until the terminal instance is restarted.
+This is useful if this kitten is being used inside a larger
+application, with --only-print-escape-code.</p>
+
+<h2>Author
+<a name="Author"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kovid Goyal</p>
+
+<h2>Copyright
+<a name="Copyright"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2025, Kovid
+Goyal</p>
+<hr>
+</body>
+</html>

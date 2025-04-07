@@ -1,0 +1,454 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:04 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CLISP-LINK</title>
+
+</head>
+<body>
+
+<h1 align="center">CLISP-LINK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">clisp-link -
+link a new external module to
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">.</font></p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="65%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>clisp-link</b>
+[<b>create</b>] [<i>module</i>] [<i>file</i>...]</font></p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="65%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>clisp-link</b>
+[<b>add</b>] [<i>source</i>] [<i>destination</i>]
+[<i>module</i>...]</font></p> </td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="65%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>clisp-link</b>
+[<b>run</b>] [<i>source</i>] [<i>module</i>...]</font></p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="65%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>clisp-link</b>
+[<b>install</b>] [<i>module</i>...]</font></p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+shell script operates on</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">module sets and linking
+sets:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+<b>create</b>s new module sets out of source
+files</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+<b>add</b>s module sets to a linking set to produce a new
+linking set</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+<b>run</b>s</font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">with module sets added</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+<i>Only in</i></font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000"><i>built</i> <b>without</b>
+<i>configure flag</i>
+<b>--without-dynamic-modules</b><i>.</i></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>install</b>s
+new module sets for general use</font></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>create</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+command</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">$
+<b>clisp-link create</b> <i>module file</i> ...</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">creates
+a module set in <i>module</i> directory which refers (via
+symbolic links) to files <i>file</i>... The files are
+expected to be modules of their own.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>add</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+command</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">$
+<b>clisp-link add</b> <i>source destination module</i>
+...</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">combines
+the linking set in directory <i>source</i> and the modules
+in directories <i>module</i>... to a new linking set, in the
+directory <i>destination</i> which is newly
+created.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>run</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+command</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">$
+<b>clisp-link run</b> <i>source module</i> ...</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">runs
+the linking set in directory <i>source</i>, with the modules
+in directories <i>module</i>... Unless</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">has been built with the configuration
+option <b>--without-dynamic-modules</b>, the loading will be
+performed using <b>SYS::DYNLOAD-MODULES</b>. Otherwise -
+this is much slower - a temporary linking set will be
+created and deleted afterwards.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>install</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000"><i>Only
+in</i></font> <b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000"><i>built</i> <b>without</b>
+<i>configure flag</i>
+<b>--without-dynamic-modules</b><i>.</i></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+command</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">$
+<b>clisp-link install</b> <i>module</i> ...</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">installs
+the modules in directories <i>module</i>... into
+<i>CUSTOM:*LIB-DIRECTORY*</i> or, if it is not writable to
+the user (e.g., if a system-wide</font>
+<b><font color="#0000FF">CLISP</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">installation is used and the user does
+not have administrative privileges), into
+<i>CUSTOM:*USER-LIB-DIRECTORY*</i>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Variable
+<i>CUSTOM:*USER-LIB-DIRECTORY*</i> is initially set to
+(</font><b><font color="#0000FF">MERGE-PATHNAMES</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">&quot;.clisp/&quot;
+(</font><b><font color="#0000FF">USER-HOMEDIR-PATHNAME</font></b>
+<small><font color="#000000">[3]</font></small>
+<font color="#000000">)) if that directory exists, and can
+be reset in the RC file.</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000"><b><big>Note</big></b>
+<br>
+Do <b>not</b> add <i>CUSTOM:*USER-LIB-DIRECTORY*</i> to
+<i>CUSTOM:*LOAD-PATHS*</i> or under any element thereof. Use
+<b>REQUIRE</b> instead of <b>LOAD</b> to load dynamic
+modules.</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">For this
+command to work, each <i>module</i> directory must contain a
+Makefile with a <b>clisp-module-distrib</b> target which
+uses <b>LN</b> to distribute the files necessary to run the
+module into <b>destdir</b>. This is in addition to the
+general requirement that <b>link.sh</b> is
+present.</font></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">See
+Section&nbsp;32.2.6, &ldquo;Example&rdquo;.</font></p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>clisp-link</b>
+needs a &ldquo;link kit&rdquo; directory
+containing:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+&quot;modules.c&quot;</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+&quot;clisp.h&quot;</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>clisp-link</b>
+expects to find these files in a subdirectory linkkit/ of
+the installation directory (i.e.,
+<i>CUSTOM:*LIB-DIRECTORY*</i>) which it acquires by
+running</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">$
+&lsquo;dirname $0&lsquo;/clisp <b>-b</b></font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+can be overridden by the</font>
+<b><font color="#0000FF">environment variable</font></b>
+<small><font color="#000000">[4]</font></small>
+<font color="#000000"><b>CLISP_LINKKIT</b>.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">CLISP
+impnotes <br>
+clisp(1)</font></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Bruno
+Haible</b>
+&lt;</font><b><font color="#0000FF">http://www.haible.de/bruno/</font></b><font color="#000000">&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+original author and long-time maintainer.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Michael
+Stoll</b>
+&lt;</font><b><font color="#0000FF">http://www.mathe2.uni-bayreuth.de/stoll/</font></b><font color="#000000">&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+original author.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Sam
+Steingold</b>
+&lt;</font><b><font color="#0000FF">http://sds.podval.org/</font></b><font color="#000000">&gt;</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Co-maintainer
+since 1998.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Others</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">See
+<i>COPYRIGHT (file in the CLISP sources)</i> for the list of
+other contributors and the license.</font></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+&copy; 1992-2010 Bruno Haible <br>
+Copyright &copy; 1998-2010 Sam Steingold</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="7%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>CLISP</b></font></p> </td>
+<td width="79%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://clisp.org</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">2.</font></p> </td>
+<td width="1%"></td>
+<td width="19%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>MERGE-PATHNAMES</b></font></p> </td>
+<td width="67%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_merge-pathnames.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">3.</font></p> </td>
+<td width="1%"></td>
+<td width="27%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000"><b>USER-HOMEDIR-PATHNAME</b></font></p> </td>
+<td width="59%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.ai.mit.edu/projects/iiip/doc/CommonLISP/HyperSpec/Body/fun_user-homedir-pathname.html</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">4.</font></p> </td>
+<td width="1%"></td>
+<td width="26%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">environment
+variable</font></p> </td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><font color="#000000">[set
+$man.base.url.for.relative.links]/basedefs/xbd_chap08.html</font></p>
+<hr>
+</body>
+</html>

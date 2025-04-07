@@ -1,0 +1,180 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>y4munsharp</title>
+
+</head>
+<body>
+
+<h1 align="center">y4munsharp</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">y4munsharp -
+Unsharp filter for YUV4MPEG2 streams</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4munsharp</b>
+[<i>options</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4munsharp</b>
+is an implementation of the GIMP unsharp filter for
+YUV4MPEG2 streams. The usual 3 parameters for unshap mask
+processing (radius, amount and threshold) are specified on
+the command line. By default only the Y&rsquo; (luma)
+component is processed although processing of the CbCr
+(chroma) may be requested by a commandline option. Output
+must be either to a pipe or a file, leaving stdout as a
+terminal will elicit an error and the program will exit.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4munsharp</b>
+accepts the following options: <b><br>
+-v</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Set verbosity level (0 = quiet,
+1 = normal, 2 = debug) (default: 1)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="3%"></td>
+<td width="39%">
+
+
+<p>Print a suage summary and exit</p></td>
+<td width="46%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-L</b>
+<i>radius,amount,threshold</i></p>
+
+<p style="margin-left:15%;">Y&rsquo; (luma) unsharp
+parameters. The <i>radius</i> and <i>amount&quot; arguments
+are floating point numbers. The threshold argument is an
+integer. (default: 3.0,0.3,4)</i> <b>-C</b>
+<i>radius,amount,threshold</i> CbCr (chroma) unsharp
+parameters. The chroma is not processed unless this option
+is given. Arguments are the same type as for the -L option
+above. (default: none)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-N</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>Filtering can produce output outside the 16 to 240 range
+for Y&rsquo; and 16 to 235 for CbCr. By default values
+outside the legal range are clipped/cored (values over 240
+for Y&rsquo; are set to 240 for example). Using <b>-N</b>
+the limits 0 and 255 are used instead.</p></td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A mild setting:
+<br>
+y4munsharp -L 2.0,0.3,0</p>
+
+<p style="margin-left:9%; margin-top: 1em">An aggressive
+setting: <br>
+y4munsharp -L 5.0,0.5,0</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The radius,
+amount, threshold parameters have the same meaning as the
+GIMP&rsquo;s unsharp plugin. This means you can use the GIMP
+on selected frame still images to determine suitable
+settings for <b>y4munsharp</b>. The key thing to remember is
+to be subtle - you just barely want to notice the sharpening
+effect. If the effect is obvious (&quot;jumps out at
+you&quot;) then the parameters are set too aggressively.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The chroma is
+not processed for a several reasons: 1) The eye is much more
+sensitive to changes in brightness, 2) the chroma is usually
+subsampled and doesn&rsquo;t contribute much to the
+perceived sharpness of an image - so not processing the
+chroma provides a boost in speed of processing the image,
+and 3) possible artifacting - changes in Y&rsquo; just make
+an image brighter/darker but changes in Cb or Cr can change
+colors and possibly lead to shifts in hue. Use the <b>-C</b>
+option to enable processing of the chroma planes.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Only the 3 plane
+YUV4MPEG2 formats are supported.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Only
+progressive, top field first or bottom field first
+interlaced streams are handled. The mixed interlaced stream
+format is not supported.</p>
+<hr>
+</body>
+</html>

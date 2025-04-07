@@ -1,0 +1,132 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-MAILSPLIT</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-MAILSPLIT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#GIT">GIT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">git-mailsplit -
+Simple UNIX mbox splitter program</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>git
+mailsplit</i> [-b] [-f&lt;nn&gt;] [-d&lt;prec&gt;]
+[--keep-cr] [--mboxrd] <br>
+-o&lt;directory&gt; [--]
+[(&lt;mbox&gt;|&lt;Maildir&gt;)...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Splits a mbox
+file or a Maildir into a list of files: &quot;0001&quot;
+&quot;0002&quot; .. in the specified directory so you can
+process them further from there.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b><big>Important</big></b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Maildir
+splitting relies upon filenames being sorted to output
+patches in the correct order.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;mbox&gt;</p>
+
+<p style="margin-left:14%;">Mbox file to split. If not
+given, the mbox is read from the standard input.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;Maildir&gt;</p>
+
+<p style="margin-left:14%;">Root of the Maildir to split.
+This directory should contain the cur, tmp and new
+subdirectories.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">-o&lt;directory&gt;</p>
+
+<p style="margin-left:14%;">Directory in which to place the
+individual messages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-b</p>
+
+<p style="margin-left:14%;">If any file doesn&rsquo;t begin
+with a From line, assume it is a single mail message instead
+of signaling an error.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">-d&lt;prec&gt;</p>
+
+<p style="margin-left:14%;">Instead of the default 4 digits
+with leading zeros, different precision can be specified for
+the generated filenames.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">-f&lt;nn&gt;</p>
+
+<p style="margin-left:14%;">Skip the first &lt;nn&gt;
+numbers, for example if -f3 is specified, start the
+numbering with 0004.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--keep-cr</p>
+
+<p style="margin-left:14%;">Do not remove \r from lines
+ending with \r\n.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--mboxrd</p>
+
+<p style="margin-left:14%;">Input is of the
+&quot;mboxrd&quot; format and &quot;&#710;&gt;+From &quot;
+line escaping is reversed.</p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Part of the
+<b>git</b>(1) suite</p>
+<hr>
+</body>
+</html>

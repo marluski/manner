@@ -1,0 +1,179 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>WVTAG</i>(1) General Commands Manual
+<i>WVTAG</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">wvtag &mdash; manipulate wavpack
+metadata</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:17%;"><b>wvtag</b> [<b>-options</b>]
+<i>file&nbsp;...</i></p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>wvtag</b> applies the
+specified metadata operations to each of the specified
+WavPack source files in this order: clean, import, delete,
+write, extract, list. Note that WavPack metadata is stored
+in APEv2 tags, and <b>wvtag</b> will automatically import
+from an ID3v1 tag if it is the only tag present in the
+source file, and that ID3v1 tag will be deleted and replaced
+with an APEv2 tag if an edit is requested.</p>
+
+
+<p style="margin-left:4%; margin-top: 1em"><b>OPTIONS</b></p>
+
+<p><b>--allow-huge-tags</b></p>
+
+<p style="margin-left:19%;">allow tag data up to 16 MB.
+Embedding &gt; 1 MB is not recommended for portable devices
+and may not work with some programs, including older
+versions of WavPack.</p>
+
+<p style="margin-top: 1em"><b>-c</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">extract
+cuesheet only to <i>stdout</i> (equivalent to <b>-x</b>
+&ldquo;cuesheet&rdquo;)</p>
+
+<p style="margin-top: 1em"><b>-cc</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">extract
+cuesheet to <i>source-name.cue</i> file in same directory as
+source file (equivalent to <b>-xx</b>
+&ldquo;cuesheet=%a.cue&rdquo;)</p>
+
+<p style="margin-top: 1em"><b>--clean</b>,
+<b>--clear</b></p>
+
+<p style="margin-left:19%;">clean all items from tag (done
+first)</p>
+
+<p style="margin-top: 1em"><b>-d</b> &ldquo; <i><br>
+Field</i>&rdquo;</p>
+
+<p style="margin-left:19%;">delete specified metadata item
+(text or binary)</p>
+
+<p style="margin-top: 1em"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:19%;">display this help</p>
+
+<p style="margin-top: 1em"><b>--import-id3</b></p>
+
+<p style="margin-left:19%;">import applicable tag items
+from ID3v2.3 tag present in DSF and possibly other files
+into the APEv2 tag. If there are &gt; 1 MB cover images
+present, add <b>--allow-huge-tags</b> to include them.</p>
+
+<p style="margin-top: 1em"><b>-l</b>, <b>--list</b></p>
+
+<p style="margin-left:19%;">list all tag items (done
+last)</p>
+
+<p style="margin-top: 1em"><b>--no-utf8-convert</b></p>
+
+<p style="margin-left:19%;">don&rsquo;t recode passed tags
+from local encoding to UTF-8, assume they are in UTF-8
+already</p>
+
+<p style="margin-top: 1em"><b>-q</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Be quiet: keep
+console output to a minimum.</p>
+
+<p style="margin-top: 1em"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:19%;">Write program version to
+<i>stdout</i></p>
+
+<p style="margin-top: 1em"><b>-w</b> &ldquo; <i><br>
+Field</i>=&rdquo;</p>
+
+<p style="margin-left:19%;">delete specified metadata item
+(text or binary)</p>
+
+<p style="margin-top: 1em"><b>-w</b> &ldquo; <i><br>
+Field</i>=<i>Value</i>&rdquo;</p>
+
+<p style="margin-left:19%;">write specified text metadata
+to APEv2 tag</p>
+
+<p style="margin-top: 1em"><b>-w</b> &ldquo; <i><br>
+Field</i>=@<i>file.ext</i>&rdquo;</p>
+
+<p style="margin-left:19%;">write specified text metadata
+from file to APEv2 tag, normally used for embedded cuesheets
+and logs (field names &ldquo;Cuesheet&rdquo; and
+&ldquo;Log&rdquo;)</p>
+
+<p style="margin-top: 1em"><b>--write-binary-tag</b>
+&ldquo; <i><br>
+Field</i>=@<i>file.ext</i>&rdquo;</p>
+
+<p style="margin-left:19%;">write the specified binary
+metadata file to APEv2 tag, normally used for cover art with
+the specified field name &ldquo;Cover Art (Front)&rdquo;</p>
+
+<p style="margin-top: 1em"><b>-x</b> &ldquo; <i><br>
+Field</i>&rdquo;</p>
+
+<p style="margin-left:19%;">extract the specified tag field
+only to <i>stdout</i></p>
+
+<p style="margin-top: 1em"><b>-xx</b> &ldquo; <i><br>
+Field</i>[=<i>filename</i>]&rdquo;</p>
+
+<p style="margin-left:19%;">extract the specified tag field
+into a named file in same directory as source file. An
+optional <i>filename</i> specification may contain
+&lsquo;%a&rsquo; which gets replaced with the audio file
+base name; &lsquo;%t&rsquo; which gets replaced with the tag
+field name (note that for binary tags, this comes from the
+data); and &lsquo;%e&rsquo; which gets replaced with the
+extension of the binary tag source file (or
+&ldquo;txt&rdquo; for a text tag).</p>
+
+<p style="margin-top: 1em"><b>-y</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">yes to all
+warnings; <b>use with caution!</b></p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>wavpack</i>(1),
+<i>wvgain</i>(1), <i>wvunpack</i>(1), www.wavpack.com</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">David Bryant
+&lt;<i>david@wavpack.com</i>&gt; <br>
+Jan Star&yacute; &lt;<i>hans@stare.cz</i>&gt; GNU February
+9, 2024 <i>WVTAG</i>(1)</p>
+<hr>
+</body>
+</html>

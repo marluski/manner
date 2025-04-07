@@ -1,0 +1,851 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>eza</title>
+
+</head>
+<body>
+
+<h1 align="center">eza</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#META OPTIONS">META OPTIONS</a><br>
+<a href="#DISPLAY OPTIONS">DISPLAY OPTIONS</a><br>
+<a href="#FILTERING AND SORTING OPTIONS">FILTERING AND SORTING OPTIONS</a><br>
+<a href="#LONG VIEW OPTIONS">LONG VIEW OPTIONS</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#COLUMNS">COLUMNS</a><br>
+<a href="#EZA_STRICT">EZA_STRICT</a><br>
+<a href="#EZA_GRID_ROWS">EZA_GRID_ROWS</a><br>
+<a href="#EZA_ICON_SPACING">EZA_ICON_SPACING</a><br>
+<a href="#NO_COLOR">NO_COLOR</a><br>
+<a href="#LS_COLORS, EZA_COLORS">LS_COLORS, EZA_COLORS</a><br>
+<a href="#EZA_OVERRIDE_GIT">EZA_OVERRIDE_GIT</a><br>
+<a href="#EZA_MIN_LUMINANCE">EZA_MIN_LUMINANCE</a><br>
+<a href="#EZA_ICONS_AUTO">EZA_ICONS_AUTO</a><br>
+<a href="#EZA_STDIN_SEPARATOR">EZA_STDIN_SEPARATOR</a><br>
+<a href="#EZA_CONFIG_DIR">EZA_CONFIG_DIR</a><br>
+<a href="#EXIT STATUSES">EXIT STATUSES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">eza &mdash; a
+modern replacement for ls</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">eza [options]
+[files...]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>eza</b> is a
+modern replacement for ls. It uses colours for information
+by default, helping you distinguish between many types of
+files, such as whether you are the owner, or in the owning
+group.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It also has
+extra features not present in the original ls, such as
+viewing the Git status for a directory, or recursing into
+directories with a tree view.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em">eza</p></td>
+<td width="5%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em">Lists the contents of the
+current directory in a grid.</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">eza --oneline --reverse
+--sort=size</p>
+
+<p style="margin-left:18%;">Displays a list of files with
+the largest at the top.</p>
+
+<p style="margin-left:9%;">eza --long --header --inode
+--git</p>
+
+<p style="margin-left:18%;">Displays a table of files with
+a header, showing each file&rsquo;s metadata, inode, and Git
+status.</p>
+
+<p style="margin-left:9%;">eza --long --tree --level=3</p>
+
+<p style="margin-left:18%;">Displays a tree of files, three
+levels deep, as well as each file&rsquo;s metadata.</p>
+
+<h2>META OPTIONS
+<a name="META OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em">--help</p></td>
+<td width="1%"></td>
+<td width="44%">
+
+
+<p style="margin-top: 1em">Show list of command-line
+options.</p> </td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">-v, --version</p>
+
+<p style="margin-left:18%;">Show version of eza.</p>
+
+<h2>DISPLAY OPTIONS
+<a name="DISPLAY OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-1,
+--oneline</p>
+
+<p style="margin-left:18%;">Display one entry per line.</p>
+
+<p style="margin-left:9%;">-F, --classify=WHEN</p>
+
+<p style="margin-left:18%;">Display file kind indicators
+next to file names.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid settings
+are &lsquo;always&rsquo;, &lsquo;automatic&rsquo; (or
+&lsquo;auto&rsquo; for short), and &lsquo;never&rsquo;. The
+default value is &lsquo;automatic&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default
+behavior (automatic or auto) will display file kind
+indicators only when the standard output is connected to a
+real terminal. If eza is ran while in a tty, or the output
+of eza is either redirected to a file or piped into another
+program, file kind indicators will not be used. Setting this
+option to &lsquo;always&rsquo; causes eza to always display
+file kind indicators, while &lsquo;never&rsquo; disables the
+use of file kind indicators. <br>
+-G, --grid</p>
+
+<p style="margin-left:18%;">Display entries as a grid
+(default).</p>
+
+<p style="margin-left:9%;">-l, --long</p>
+
+<p style="margin-left:18%;">Display extended file metadata
+as a table.</p>
+
+<p style="margin-left:9%;">-R, --recurse</p>
+
+<p style="margin-left:18%;">Recurse into directories.</p>
+
+<p style="margin-left:9%;">-T, --tree</p>
+
+<p style="margin-left:18%;">Recurse into directories as a
+tree.</p>
+
+<p style="margin-left:9%;">--follow-symlinks</p>
+
+<p style="margin-left:18%;">Drill down into symbolic links
+that point to directories.</p>
+
+<p style="margin-left:9%;">-X, --dereference</p>
+
+<p style="margin-left:18%;">Dereference symbolic links when
+displaying information.</p>
+
+<p style="margin-left:9%;">-x, --across</p>
+
+<p style="margin-left:18%;">Sort the grid across, rather
+than downwards.</p>
+
+<p style="margin-left:9%;">--color=WHEN, --colour=WHEN</p>
+
+<p style="margin-left:18%;">When to use terminal colours
+(using ANSI escape code to colorize the output).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid settings
+are &lsquo;always&rsquo;, &lsquo;automatic&rsquo; (or
+&lsquo;auto&rsquo; for short), and &lsquo;never&rsquo;. The
+default value is &lsquo;automatic&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default
+behavior (&lsquo;automatic&rsquo; or &lsquo;auto&rsquo;) is
+to colorize the output only when the standard output is
+connected to a real terminal. If the output of eza is
+redirected to a file or piped into another program, terminal
+colors will not be used. Setting this option to
+&lsquo;always&rsquo; causes eza to always output terminal
+color, while &lsquo;never&rsquo; disables the use of
+terminal color.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Manually setting
+this option overrides NO_COLOR environment. <br>
+--color-scale, --colour-scale</p>
+
+<p style="margin-left:18%;">highlight levels of field
+distinctly. Use comma(,) separated list of all, age,
+size</p>
+
+<p style="margin-left:9%;">--color-scale-mode,
+--colour-scale-mode</p>
+
+<p style="margin-left:18%;">Use gradient or fixed colors in
+--color-scale.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid options
+are fixed or gradient. The default value is gradient. <br>
+--icons=WHEN</p>
+
+<p style="margin-left:18%;">Display icons next to file
+names.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid settings
+are &lsquo;always&rsquo;, &lsquo;automatic&rsquo;
+(&lsquo;auto&rsquo; for short), and &lsquo;never&rsquo;. The
+default value is &lsquo;automatic&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">automatic or
+auto will display icons only when the standard output is
+connected to a real terminal. If eza is ran while in a tty,
+or the output of eza is either redirected to a file or piped
+into another program, icons will not be used. Setting this
+option to &lsquo;always&rsquo; causes eza to always display
+icons, while &lsquo;never&rsquo; disables the use of icons.
+<br>
+--no-quotes</p>
+
+<p style="margin-left:18%;">Don&rsquo;t quote file names
+with spaces.</p>
+
+<p style="margin-left:9%;">--hyperlink</p>
+
+<p style="margin-left:18%;">Display entries as
+hyperlinks</p>
+
+<p style="margin-left:9%;">-w, --width=COLS</p>
+
+<p style="margin-left:18%;">Set screen width in
+columns.</p>
+
+<h2>FILTERING AND SORTING OPTIONS
+<a name="FILTERING AND SORTING OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-a, --all</p>
+
+<p style="margin-left:18%;">Show hidden and
+&ldquo;dot&rdquo; files. Use this twice to also show the
+&lsquo;.&rsquo; and &lsquo;..&rsquo; directories.</p>
+
+<p style="margin-left:9%;">-A, --almost-all</p>
+
+<p style="margin-left:18%;">Equivalent to &ndash;all;
+included for compatibility with ls -A.</p>
+
+<p style="margin-left:9%;">-d, --list-dirs</p>
+
+<p style="margin-left:18%;">List directories as regular
+files, rather than recursing and listing their contents.</p>
+
+<p style="margin-left:9%;">-L, --level=DEPTH</p>
+
+<p style="margin-left:18%;">Limit the depth of
+recursion.</p>
+
+<p style="margin-left:9%;">-r, --reverse</p>
+
+<p style="margin-left:18%;">Reverse the sort order.</p>
+
+<p style="margin-left:9%;">-s, --sort=SORT_FIELD</p>
+
+<p style="margin-left:18%;">Which field to sort by.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid sort
+fields are &lsquo;name&rsquo;, &lsquo;Name&rsquo;,
+&lsquo;extension&rsquo;, &lsquo;Extension&rsquo;,
+&lsquo;size&rsquo;, &lsquo;modified&rsquo;,
+&lsquo;changed&rsquo;, &lsquo;accessed&rsquo;,
+&lsquo;created&rsquo;, &lsquo;inode&rsquo;,
+&lsquo;type&rsquo;, and &lsquo;none&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The modified
+sort field has the aliases &lsquo;date&rsquo;,
+&lsquo;time&rsquo;, and &lsquo;newest&rsquo;, and its
+reverse order has the aliases &lsquo;age&rsquo; and
+&lsquo;oldest&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Sort fields
+starting with a capital letter will sort uppercase before
+lowercase: &lsquo;A&rsquo; then &lsquo;B&rsquo; then
+&lsquo;a&rsquo; then &lsquo;b&rsquo;. Fields starting with a
+lowercase letter will mix them: &lsquo;A&rsquo; then
+&lsquo;a&rsquo; then &lsquo;B&rsquo; then &lsquo;b&rsquo;.
+<br>
+-I, --ignore-glob=GLOBS</p>
+
+<p style="margin-left:18%;">Glob patterns, pipe-separated,
+of files to ignore.</p>
+
+<p style="margin-left:9%;">--git-ignore [if eza was built
+with git support]</p>
+
+<p style="margin-left:18%;">Do not list files that are
+ignored by Git.</p>
+
+<p style="margin-left:9%;">--group-directories-first</p>
+
+<p style="margin-left:18%;">List directories before other
+files.</p>
+
+<p style="margin-left:9%;">--group-directories-last</p>
+
+<p style="margin-left:18%;">List directories after other
+files.</p>
+
+<p style="margin-left:9%;">-D, --only-dirs</p>
+
+<p style="margin-left:18%;">List only directories, not
+files.</p>
+
+<p style="margin-left:9%;">-f, --only-files</p>
+
+<p style="margin-left:18%;">List only files, not
+directories.</p>
+
+<p style="margin-left:9%;">--show-symlinks</p>
+
+<p style="margin-left:18%;">Explicitly show symbolic links
+(when used with --only-files | --only-dirs)</p>
+
+<p style="margin-left:9%;">--no-symlinks</p>
+
+<p style="margin-left:18%;">Do not show symbolic links</p>
+
+<h2>LONG VIEW OPTIONS
+<a name="LONG VIEW OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+are available when running with --long (-l): <br>
+-b, --binary</p>
+
+<p style="margin-left:18%;">List file sizes with binary
+prefixes.</p>
+
+<p style="margin-left:9%;">-B, --bytes</p>
+
+<p style="margin-left:18%;">List file sizes in bytes,
+without any prefixes.</p>
+
+<p style="margin-left:9%;">--changed</p>
+
+<p style="margin-left:18%;">Use the changed timestamp
+field.</p>
+
+<p style="margin-left:9%;">-g, --group</p>
+
+<p style="margin-left:18%;">List each file&rsquo;s
+group.</p>
+
+<p style="margin-left:9%;">--smart-group</p>
+
+<p style="margin-left:18%;">Only show group if it has a
+different name from owner</p>
+
+<p style="margin-left:9%;">-h, --header</p>
+
+<p style="margin-left:18%;">Add a header row to each
+column.</p>
+
+<p style="margin-left:9%;">-H, --links</p>
+
+<p style="margin-left:18%;">List each file&rsquo;s number
+of hard links.</p>
+
+<p style="margin-left:9%;">-i, --inode</p>
+
+<p style="margin-left:18%;">List each file&rsquo;s inode
+number.</p>
+
+<p style="margin-left:9%;">-m, --modified</p>
+
+<p style="margin-left:18%;">Use the modified timestamp
+field.</p>
+
+<p style="margin-left:9%;">-M, --mounts</p>
+
+<p style="margin-left:18%;">Show mount details (Linux and
+Mac only)</p>
+
+<p style="margin-left:9%;">-n, --numeric</p>
+
+<p style="margin-left:18%;">List numeric user and group
+IDs.</p>
+
+<p style="margin-left:9%;">-O, --flags</p>
+
+<p style="margin-left:18%;">List file flags on Mac and BSD
+systems and file attributes on Windows systems. By default,
+Windows attributes are displayed in a long form. To display
+in attributes as single character set the environment
+variable EZA_WINDOWS_ATTRIBUTES=short. On BSD systems see
+chflags(1) for a list of file flags and their meanings.</p>
+
+<p style="margin-left:9%;">-S, --blocksize</p>
+
+<p style="margin-left:18%;">List each file&rsquo;s size of
+allocated file system blocks.</p>
+
+<p style="margin-left:9%;">-t, --time=WORD</p>
+
+<p style="margin-left:18%;">Which timestamp field to list.
+Valid timestamp fields are &lsquo;modified&rsquo;,
+&lsquo;changed&rsquo;, &lsquo;accessed&rsquo;, and
+&lsquo;created&rsquo;.</p>
+
+<p style="margin-left:9%;">--time-style=STYLE</p>
+
+<p style="margin-left:18%;">How to format timestamps. Valid
+timestamp styles are &lsquo;default&rsquo;,
+&lsquo;iso&rsquo;, &lsquo;long-iso&rsquo;,
+&lsquo;full-iso&rsquo;, &lsquo;relative&rsquo;, or a custom
+style &lsquo;+&lt;FORMAT&gt;&rsquo; (e.g., &lsquo;+%Y-%m-%d
+%H:%M&rsquo; =&gt; &lsquo;2023-09-30 13:00&rsquo;).</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;FORMAT&gt;
+should be a chrono format string. For details on the chrono
+format syntax, please read:
+https://docs.rs/chrono/latest/chrono/format/strftime/index.html
+.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Alternatively,
+&lt;FORMAT&gt; can be a two line string, the first line will
+be used for non-recent files and the second for recent
+files. E.g., if &lt;FORMAT&gt; is &ldquo;%Y-%m-%d
+%H&lt;newline&gt;--%m-%d %H:%M&rdquo;, non-recent files
+=&gt; &ldquo;2022-12-30 13&rdquo;, recent files =&gt;
+&ldquo;--09-30 13:34&rdquo;. <br>
+--total-size</p>
+
+<p style="margin-left:18%;">Show recursive directory size
+(unix only).</p>
+
+<p style="margin-left:9%;">-u, --accessed</p>
+
+<p style="margin-left:18%;">Use the accessed timestamp
+field.</p>
+
+<p style="margin-left:9%;">-U, --created</p>
+
+<p style="margin-left:18%;">Use the created timestamp
+field.</p>
+
+<p style="margin-left:9%;">--no-permissions</p>
+
+<p style="margin-left:18%;">Suppress the permissions
+field.</p>
+
+<p style="margin-left:9%;">-o, --octal-permissions</p>
+
+<p style="margin-left:18%;">List each file&rsquo;s
+permissions in octal format.</p>
+
+<p style="margin-left:9%;">--no-filesize</p>
+
+<p style="margin-left:18%;">Suppress the file size
+field.</p>
+
+<p style="margin-left:9%;">--no-user</p>
+
+<p style="margin-left:18%;">Suppress the user field.</p>
+
+<p style="margin-left:9%;">--no-time</p>
+
+<p style="margin-left:18%;">Suppress the time field.</p>
+
+<p style="margin-left:9%;">--stdin</p>
+
+<p style="margin-left:18%;">When you wish to pipe
+directories to eza/read from stdin. Separate one per line or
+define custom separation char in EZA_STDIN_SEPARATOR env
+variable.</p>
+
+<p style="margin-left:9%;">-@, --extended</p>
+
+<p style="margin-left:18%;">List each file&rsquo;s extended
+attributes and sizes.</p>
+
+<p style="margin-left:9%;">-Z, --context</p>
+
+<p style="margin-left:18%;">List each file&rsquo;s security
+context.</p>
+
+<p style="margin-left:9%;">--git [if eza was built with git
+support]</p>
+
+<p style="margin-left:18%;">List each file&rsquo;s Git
+status, if tracked. This adds a two-character column
+indicating the staged and unstaged statuses respectively.
+The status character can be &lsquo;-&rsquo; for not
+modified, &lsquo;M&rsquo; for a modified file,
+&lsquo;N&rsquo; for a new file, &lsquo;D&rsquo; for deleted,
+&lsquo;R&rsquo; for renamed, &lsquo;T&rsquo; for
+type-change, &lsquo;I&rsquo; for ignored, and
+&lsquo;U&rsquo; for conflicted. Directories will be shown to
+have the status of their contents, which is how
+&lsquo;deleted&rsquo; is possible if a directory contains a
+file that has a certain status, it will be shown to have
+that status.</p>
+
+<p style="margin-left:9%;">--git-repos [if eza was built
+with git support]</p>
+
+<p style="margin-left:18%;">List each directory&rsquo;s Git
+status, if tracked. Symbols shown are |= clean, += dirty,
+and ~= for unknown.</p>
+
+<p style="margin-left:9%;">--git-repos-no-status [if eza
+was built with git support]</p>
+
+<p style="margin-left:18%;">List if a directory is a Git
+repository, but not its status. All Git repository
+directories will be shown as (themed) - without status
+indicated.</p>
+
+<p style="margin-left:9%;">--no-git</p>
+
+<p style="margin-left:18%;">Don&rsquo;t show Git status
+(always overrides --git, --git-repos,
+--git-repos-no-status)</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If an
+environment variable prefixed with EZA_ is not set, for
+backward compatibility, it will default to its counterpart
+starting with EXA_.</p>
+
+<p style="margin-left:9%; margin-top: 1em">eza responds to
+the following environment variables:</p>
+
+<h3>COLUMNS
+<a name="COLUMNS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Overrides the
+width of the terminal, in characters, however, -w takes
+precedence.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example,
+&lsquo;COLUMNS=80 eza&rsquo; will show a grid view with a
+maximum width of 80 characters.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This option
+won&rsquo;t do anything when eza&rsquo;s output
+doesn&rsquo;t wrap, such as when using the --long view.</p>
+
+<h3>EZA_STRICT
+<a name="EZA_STRICT"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Enables
+<i>strict mode</i>, which will make eza error when two
+command-line options are incompatible.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Usually, options
+can override each other going right-to-left on the command
+line, so that eza can be given aliases: creating an alias
+&lsquo;eza=eza --sort=ext&rsquo; then running &lsquo;eza
+--sort=size&rsquo; with that alias will run &lsquo;eza
+--sort=ext --sort=size&rsquo;, and the sorting specified by
+the user will override the sorting specified by the
+alias.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In strict mode,
+the two options will not co-operate, and eza will error.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This option is
+intended for use with automated scripts and other situations
+where you want to be certain you&rsquo;re typing in the
+right command.</p>
+
+<h3>EZA_GRID_ROWS
+<a name="EZA_GRID_ROWS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Limits the
+grid-details view (&lsquo;eza --grid --long&rsquo;) so
+it&rsquo;s only activated when at least the given number of
+rows of output would be generated.</p>
+
+<p style="margin-left:9%; margin-top: 1em">With widescreen
+displays, it&rsquo;s possible for the grid to look very wide
+and sparse, on just one or two lines with none of the
+columns lining up. By specifying a minimum number of rows,
+you can only use the view if it&rsquo;s going to be worth
+using.</p>
+
+<h3>EZA_ICON_SPACING
+<a name="EZA_ICON_SPACING"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+number of spaces to print between an icon (see the
+&lsquo;--icons&rsquo; option) and its file name.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Different
+terminals display icons differently, as they usually take up
+more than one character width on screen, so there&rsquo;s no
+&ldquo;standard&rdquo; number of spaces that eza can use to
+separate an icon from text. One space may place the icon too
+close to the text, and two spaces may place it too far away.
+So the choice is left up to the user to configure depending
+on their terminal emulator.</p>
+
+<h3>NO_COLOR
+<a name="NO_COLOR"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Disables colours
+in the output (regardless of its value). Can be overridden
+by --color option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+https://no-color.org/ for details.</p>
+
+<h3>LS_COLORS, EZA_COLORS
+<a name="LS_COLORS, EZA_COLORS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+colour scheme used to highlight files based on their name
+and kind, as well as highlighting metadata and parts of the
+UI.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For more
+information on the format of these environment variables,
+see the eza_colors.5.md manual page.</p>
+
+<h3>EZA_OVERRIDE_GIT
+<a name="EZA_OVERRIDE_GIT"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Overrides any
+--git or --git-repos argument</p>
+
+<h3>EZA_MIN_LUMINANCE
+<a name="EZA_MIN_LUMINANCE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+minimum luminance to use when color-scale is active.
+It&rsquo;s value can be between -100 to 100.</p>
+
+<h3>EZA_ICONS_AUTO
+<a name="EZA_ICONS_AUTO"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If set,
+automates the same behavior as using --icons or
+--icons=auto. Useful for if you always want to have icons
+enabled.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Any explicit use
+of the --icons=WHEN flag overrides this behavior.</p>
+
+<h3>EZA_STDIN_SEPARATOR
+<a name="EZA_STDIN_SEPARATOR"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+separator to use when file names are piped from stdin.
+Defaults to newline.</p>
+
+<h3>EZA_CONFIG_DIR
+<a name="EZA_CONFIG_DIR"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+directory where eza will look for its configuration and
+theme files. Defaults to $XDG_CONFIG_HOME/eza or
+$HOME/.config/eza if XDG_CONFIG_HOME is not set.</p>
+
+<h2>EXIT STATUSES
+<a name="EXIT STATUSES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">0</p></td>
+<td width="6%"></td>
+<td width="70%">
+
+
+<p style="margin-top: 1em">If everything goes OK.</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1</p></td>
+<td width="6%"></td>
+<td width="70%">
+
+
+<p>If there was an I/O error during operation.</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3</p></td>
+<td width="6%"></td>
+<td width="70%">
+
+
+<p>If there was a problem with the command-line
+arguments.</p> </td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>13</p></td>
+<td width="6%"></td>
+<td width="70%">
+
+
+<p>If permission is denied to access a path.</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">eza is
+maintained by Christina S&oslash;rensen and many other
+contributors.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Source
+code:</b> https://github.com/eza-community/eza <b><br>
+Contributors:</b>
+https://github.com/eza-community/eza/graphs/contributors</p>
+
+<p style="margin-left:9%; margin-top: 1em">Our infinite
+thanks to Benjamin &lsquo;ogham&rsquo; Sago and all the
+other contributors of exa, from which eza was forked.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>eza_colors</b>(5)</p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p><b>eza_colors-explanation</b>(5)</p></td>
+<td width="56%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:02 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>READPST</title>
+
+</head>
+<body>
+
+<h1 align="center">READPST</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#FROM QUOTING">FROM QUOTING</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#VERSION">VERSION</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">readpst -
+convert PST (MS Outlook Personal Folders) files to mbox and
+other formats</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="91%">
+
+
+<p style="margin-top: 1em"><b>readpst</b>
+[<b>-C&nbsp;</b><i>default-charset</i>] [<b>-D</b>]
+[<b>-M</b>] [<b>-S</b>] [<b>-V</b>]
+[<b>-a&nbsp;</b><i>attachment-extension-list</i>]
+[<b>-b</b>] [<b>-c&nbsp;</b><i>format</i>]
+[<b>-d&nbsp;</b><i>debug-file</i>] [<b>-e</b>] [<b>-h</b>]
+[<b>-j&nbsp;</b><i>jobs</i>] [<b>-k</b>] [<b>-m</b>]
+[<b>-o&nbsp;</b><i>output-directory</i>] [<b>-q</b>]
+[<b>-r</b>] [<b>-t&nbsp;</b><i>output-type-codes</i>]
+[<b>-u</b>] [<b>-w</b>] [<b>-8</b>] pstfile</p></td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>readpst</b>
+is a program that can read an Outlook PST (Personal Folders)
+file and convert it into an mbox file, a format suitable for
+KMail, a recursive mbox structure, or separate emails.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-C
+<i>default-charset</i></p>
+
+<p style="margin-left:14%;">Set the character set to be
+used for items with an unspecified character set.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-D</p>
+
+<p style="margin-left:14%;">Include deleted items in the
+output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-M</p>
+
+<p style="margin-left:14%;">Output messages in MH (rfc822)
+format as separate files. This will create folders as named
+in the PST file, and will put each email together with any
+attachments into its own file. These files will be numbered
+from 1 to n with no leading zeros. This format has no from
+quoting.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-S</p>
+
+<p style="margin-left:14%;">Output messages into separate
+files. This will create folders as named in the PST file,
+and will put each email in its own file. These files will be
+numbered from 1 to n with no leading zeros. Attachments will
+also be saved in the same folder as the email message. The
+attachments for message $m are saved as $m-$name where $name
+is (the original name of the attachment, or 'attach$n' if
+the attachment had no name), where $n is another sequential
+index with no leading zeros. This format has no from
+quoting.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-V</p>
+
+<p style="margin-left:14%;">Show program version and
+exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-a
+<i>attachment-extension-list</i></p>
+
+<p style="margin-left:14%;">Set the list of acceptable
+attachment extensions. Any attachment that does not have an
+extension on this list will be discarded. All attachments
+are acceptable if the list is empty, or this option is not
+specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-b</p>
+
+<p style="margin-left:14%;">Do not save the attachments for
+the RTF format of the email body.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-c
+<i>format</i></p>
+
+<p style="margin-left:14%;">Set the Contact output mode.
+Use -cv for vcard format or -cl for an email list.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-d
+<i>debug-file</i></p>
+
+<p style="margin-left:14%;">Specify name of debug log file.
+The log file is now an ascii file, instead of the binary
+file used in previous versions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-e</p>
+
+<p style="margin-left:14%;">Same as the M option, but each
+output file will include an extension from (.eml, .ics,
+.vcf). This format has no from quoting.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-h</p>
+
+<p style="margin-left:14%;">Show summary of options and
+exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-j
+<i>jobs</i></p>
+
+<p style="margin-left:14%;">Specifies the maximum number of
+parallel jobs. Specify 0 to suppress running parallel jobs.
+Folders may be processed in parallel. Output formats that
+place each mail message in a separate file (-M, -S, -e) may
+process the contents of individual folders in parallel.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-k</p>
+
+<p style="margin-left:14%;">Changes the output format to
+KMail. This format uses mboxrd from quoting.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-m</p>
+
+<p style="margin-left:14%;">Same as the e option, but write
+.msg files also</p>
+
+<p style="margin-left:9%; margin-top: 1em">-o
+<i>output-directory</i></p>
+
+<p style="margin-left:14%;">Specifies the output directory.
+The directory must already exist, and is entered after the
+PST file is opened, but before any processing of files
+commences.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-q</p>
+
+<p style="margin-left:14%;">Changes to silent mode. No
+feedback is printed to the screen, except for error
+messages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-r</p>
+
+<p style="margin-left:14%;">Changes the output format to
+Recursive. This will create folders as named in the PST
+file, and will put all emails in a file called
+&quot;mbox&quot; inside each folder. Appointments go into a
+file called &quot;calendar&quot;, address book entries go
+into a file called &quot;contacts&quot;, and journal entries
+go into a file called &quot;journal&quot;. These files are
+then compatible with all mbox-compatible email clients. This
+format uses mboxrd from quoting.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-t
+<i>output-type-codes</i></p>
+
+<p style="margin-left:14%;">Specifies the item types that
+are processed. The argument is a sequence of single letters
+from (e,a,j,c) for (email, appointment, journal, contact)
+types. The default is to process all item types.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-u</p>
+
+<p style="margin-left:14%;">Sets Thunderbird mode, a
+submode of recursive mode. This causes two extra .type and
+.size meta files to be created. This format uses mboxrd from
+quoting.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-w</p>
+
+<p style="margin-left:14%;">Overwrite any previous output
+files. Beware: When used with the -S switch, this will
+remove all files from the target folder before writing. This
+is to keep the count of emails and attachments correct.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-8</p>
+
+<p style="margin-left:14%;">Output bodies in UTF-8, rather
+than original encoding, if a UTF-8 version is available.</p>
+
+<h2>FROM QUOTING
+<a name="FROM QUOTING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Output formats
+that place each mail message in a separate file (-M, -S, -e,
+-m) don't do any from quoting. Output formats that place
+multiple email messages in a single file (-k, -r, -u) now
+use mboxrd from quoting rules. If none of those switches are
+specified, the default output format uses mboxrd from
+quoting rules, since it produces multiple email messages in
+a single file. Earlier versions used mboxo from quoting
+rules for all output formats.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was originally written by Dave Smith
+&lt;dave.s@earthcorp.com&gt;, and updated by Joe Nahmias
+&lt;joe@nahmias.net&gt; for the Debian GNU/Linux system (but
+may be used by others). It was subsequently updated by Brad
+Hards &lt;bradh@frogmouth.net&gt;, and converted to xml
+format by Carl Byington &lt;carl@five-ten-sg.com&gt;.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2002 by David Smith &lt;dave.s@earthcorp.com&gt;. XML
+version Copyright (C) 2008 by 510 Software Group
+&lt;carl@five-ten-sg.com&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2,
+or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU General Public License along with
+this program; see the file COPYING. If not, please write to
+the Free Software Foundation, 675 Mass Ave, Cambridge, MA
+02139, USA.</p>
+
+<h2>VERSION
+<a name="VERSION"></a>
+</h2>
+
+ 
+<p style="margin-left:9%; margin-top: 1em">0.6.76</p>
+<hr>
+</body>
+</html>

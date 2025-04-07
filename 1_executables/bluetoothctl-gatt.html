@@ -1,0 +1,642 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BLUETOOTHCTL-GATT</title>
+
+</head>
+<body>
+
+<h1 align="center">BLUETOOTHCTL-GATT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#GENERIC ATTRIBUTE COMMANDS">GENERIC ATTRIBUTE COMMANDS</a><br>
+<a href="#list-attributes">list-attributes</a><br>
+<a href="#select-attribute">select-attribute</a><br>
+<a href="#attribute-info">attribute-info</a><br>
+<a href="#read">read</a><br>
+<a href="#write">write</a><br>
+<a href="#acquire-write">acquire-write</a><br>
+<a href="#release-write">release-write</a><br>
+<a href="#acquire-notify">acquire-notify</a><br>
+<a href="#release-notify">release-notify</a><br>
+<a href="#notify">notify</a><br>
+<a href="#clone">clone</a><br>
+<a href="#register-application">register-application</a><br>
+<a href="#unregister-application">unregister-application</a><br>
+<a href="#register-service">register-service</a><br>
+<a href="#unregister-service">unregister-service</a><br>
+<a href="#register-includes">register-includes</a><br>
+<a href="#unregister-includes">unregister-includes</a><br>
+<a href="#register-characteristic">register-characteristic</a><br>
+<a href="#unregister-characteristic">unregister-characteristic</a><br>
+<a href="#register-descriptor">register-descriptor</a><br>
+<a href="#unregister-descriptor">unregister-descriptor</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">bluetoothctl-gatt
+- Generic Attribute Submenu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl</b>
+[--options] [gatt.commands]</p>
+
+<h2>GENERIC ATTRIBUTE COMMANDS
+<a name="GENERIC ATTRIBUTE COMMANDS"></a>
+</h2>
+
+
+<h3>list-attributes
+<a name="list-attributes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List
+attributes.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="44%">
+
+
+<p><b>&gt; list-attributes &lt;attribute/UUID&gt;</b></p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<h3>select-attribute
+<a name="select-attribute"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Select
+attribute.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em"><b>&gt; select-attribute
+&lt;attribute/UUID&gt;</b></p> </td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h3>attribute-info
+<a name="attribute-info"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Select
+attribute.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em"><b>&gt; attribute-info
+[attribute/UUID]</b></p> </td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h3>read
+<a name="read"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Read attribute
+value.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>&gt; read [offset]</b></p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h3>write
+<a name="write"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Write attribute
+value.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>&gt; write &lt;data=xx xx
+...&gt; [offset] [type]</b></p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<h3>acquire-write
+<a name="acquire-write"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Acquire Write
+file descriptor.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>&gt; acquire-write</b></p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h3>release-write
+<a name="release-write"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Release Write
+file descriptor.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>&gt; release-write</b></p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h3>acquire-notify
+<a name="acquire-notify"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Acquire Notify
+file descriptor.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><b>&gt; acquire-notify</b></p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h3>release-notify
+<a name="release-notify"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Release Notify
+file descriptor.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><b>&gt; release-notify</b></p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h3>notify
+<a name="notify"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Notify attribute
+value.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="22%">
+
+
+<p style="margin-top: 1em"><b>&gt; notify
+&lt;on/off&gt;</b></p> </td>
+<td width="60%">
+</td></tr>
+</table>
+
+<h3>clone
+<a name="clone"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Clone a device
+or attribute.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="36%">
+
+
+<p style="margin-top: 1em"><b>&gt; clone
+[dev/attribute/UUID]</b></p> </td>
+<td width="46%">
+</td></tr>
+</table>
+
+<h3>register-application
+<a name="register-application"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Register
+application.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em"><b>&gt; register-application
+[UUID ...]</b></p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h3>unregister-application
+<a name="unregister-application"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unregister
+application</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="31%">
+
+
+<p style="margin-top: 1em"><b>&gt;
+unregister-application</b></p> </td>
+<td width="51%">
+</td></tr>
+</table>
+
+<h3>register-service
+<a name="register-service"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Register
+application service.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="44%">
+
+
+<p style="margin-top: 1em"><b>&gt; register-service
+&lt;UUID&gt; [handle]</b></p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<h3>unregister-service
+<a name="unregister-service"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unregister
+application service</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="44%">
+
+
+<p style="margin-top: 1em"><b>&gt; unregister-service
+&lt;UUID/object&gt;</b></p> </td>
+<td width="38%">
+</td></tr>
+</table>
+
+<h3>register-includes
+<a name="register-includes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Register as
+Included service.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em"><b>&gt;r egister-includes
+&lt;UUID&gt; [handle]</b></p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h3>unregister-includes
+<a name="unregister-includes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unregister
+Included service.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="59%">
+
+
+<p style="margin-top: 1em"><b>&gt; unregister-includes
+&lt;Service-UUID&gt;&lt;Inc-UUID&gt;</b></p> </td>
+<td width="23%">
+</td></tr>
+</table>
+
+<h3>register-characteristic
+<a name="register-characteristic"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Register service
+characteristic.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><b>&gt; register-characteristic
+&lt;UUID&gt; &lt;Flags=read,write,notify...&gt;
+[handle]</b></p> </td></tr>
+</table>
+
+<h3>unregister-characteristic
+<a name="unregister-characteristic"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unregister
+service characteristic.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="53%">
+
+
+<p style="margin-top: 1em"><b>&gt;
+unregister-characteristic &lt;UUID/object&gt;</b></p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+<h3>register-descriptor
+<a name="register-descriptor"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Register
+characteristic descriptor.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em"><b>&gt; register-descriptor
+&lt;UUID&gt; &lt;Flags=read,write...&gt; [handle]</b></p></td>
+<td width="6%">
+</td></tr>
+</table>
+
+<h3>unregister-descriptor
+<a name="unregister-descriptor"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unregister
+characteristic descriptor.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="47%">
+
+
+<p style="margin-top: 1em"><b>&gt; unregister-descriptor
+&lt;UUID/object&gt;</b></p> </td>
+<td width="35%">
+</td></tr>
+</table>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

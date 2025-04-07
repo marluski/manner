@@ -1,0 +1,1447 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-AUDIT</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-AUDIT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Package lock">Package lock</a><br>
+<a href="#Audit Signatures">Audit Signatures</a><br>
+<a href="#Audit Endpoints">Audit Endpoints</a><br>
+<a href="#Bulk Advisory Endpoint">Bulk Advisory Endpoint</a><br>
+<a href="#Quick Audit Endpoint">Quick Audit Endpoint</a><br>
+<a href="#Scrubbing">Scrubbing</a><br>
+<a href="#Calculating Meta-Vulnerabilities and Remediations">Calculating Meta-Vulnerabilities and Remediations</a><br>
+<a href="#Exit Code">Exit Code</a><br>
+<a href="#Examples">Examples</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#audit-level">audit-level</a><br>
+<a href="#dry-run">dry-run</a><br>
+<a href="#force">force</a><br>
+<a href="#json">json</a><br>
+<a href="#package-lock-only">package-lock-only</a><br>
+<a href="#package-lock">package-lock</a><br>
+<a href="#omit">omit</a><br>
+<a href="#include">include</a><br>
+<a href="#foreground-scripts">foreground-scripts</a><br>
+<a href="#ignore-scripts">ignore-scripts</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#include-workspace-root">include-workspace-root</a><br>
+<a href="#install-links">install-links</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-audit</b>
+- Run a security audit</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm audit
+[fix|signatures]</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The audit
+command submits a description of the dependencies configured
+in your project to your default registry and asks for a
+report of known vulnerabilities. If any vulnerabilities are
+found, then the impact and appropriate remediation will be
+calculated. If the <b>fix</b> argument is provided, then
+remediations will be applied to the package tree.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command will
+exit with a 0 exit code if no vulnerabilities were
+found.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that some
+vulnerabilities cannot be fixed automatically and will
+require manual intervention or review. Also note that since
+<b>npm audit fix</b> runs a full-fledged <b>npm install</b>
+under the hood, all configs that apply to the installer will
+also apply to <b>npm install</b> -- so things like <b>npm
+audit fix --package-lock-only</b> will work as expected.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, the
+audit command will exit with a non-zero code if any
+vulnerability is found. It may be useful in CI environments
+to include the <b>--audit-level</b> parameter to specify the
+minimum vulnerability level that will cause the command to
+fail. This option does not filter the report output, it
+simply changes the command&rsquo;s failure threshold.</p>
+
+<h3>Package lock
+<a name="Package lock"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">By default npm
+requires a package-lock or shrinkwrap in order to run the
+audit. You can bypass the package lock with
+<b>--no-package-lock</b> but be aware the results may be
+different with every run, since npm will re-build the
+dependency tree each time.</p>
+
+<h3>Audit Signatures
+<a name="Audit Signatures"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To ensure the
+integrity of packages you download from the public npm
+registry, or any registry that supports signatures, you can
+verify the registry signatures of downloaded packages using
+the npm CLI.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Registry
+signatures can be verified using the following <b>audit</b>
+command:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit
+signatures</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>audit
+signatures</b> command will also verify the provenance
+attestations of downloaded packages. Because provenance
+attestations are such a new feature, security features may
+be added to (or changed in) the attestation format over
+time. To ensure that you&rsquo;re always able to verify
+attestation signatures check that you&rsquo;re running the
+latest version of the npm CLI. Please note this often means
+updating npm beyond the version that ships with Node.js.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The npm CLI
+supports registry signatures and signing keys provided by
+any registry if the following conventions are followed:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>Signatures are provided in the package&rsquo;s
+<b>packument</b> in each published version within the
+<b>dist</b> object:</p></td></tr>
+</table>
+
+
+<p style="margin-left:12%; margin-top: 1em">&quot;dist&quot;:{
+<br>
+&quot;..omitted..&quot;: &quot;..omitted..&quot;, <br>
+&quot;signatures&quot;: [{ <br>
+&quot;keyid&quot;: &quot;SHA256:{{SHA256_PUBLIC_KEY}}&quot;,
+<br>
+&quot;sig&quot;:
+&quot;a312b9c3cb4a1b693e8ebac5ee1ca9cc01f2661c14391917dcb111517f72370809...&quot;
+<br>
+}] <br>
+}</p>
+
+<p style="margin-left:9%; margin-top: 1em">See this
+<b>example</b> <i>&lang;
+https://registry.npmjs.org/light-cycle/1.4.3&rang;</i> of a
+signed package from the public npm registry.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>sig</b>
+is generated using the following template:
+<b>${package.name}@${package.version}:${package.dist.integrity}</b>
+and the <b>keyid</b> has to match one of the public signing
+keys below.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">2.</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Public signing keys are provided
+at <b>registry-host.tld/-/npm/v1/keys</b> in the following
+format:</p> </td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">{ <br>
+&quot;keys&quot;: [{ <br>
+&quot;expires&quot;: null, <br>
+&quot;keyid&quot;: &quot;SHA256:{{SHA256_PUBLIC_KEY}}&quot;,
+<br>
+&quot;keytype&quot;: &quot;ecdsa-sha2-nistp256&quot;, <br>
+&quot;scheme&quot;: &quot;ecdsa-sha2-nistp256&quot;, <br>
+&quot;key&quot;: &quot;{{B64_PUBLIC_KEY}}&quot; <br>
+}] <br>
+}</p>
+
+<p style="margin-left:9%; margin-top: 1em">Keys
+response:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em"><b>expires</b>: null or a
+simplified extended <b>ISO 8601 format</b> <i>&lang;
+https://en.wikipedia.org/wiki/ISO_8601&rang;</i> :
+<b>YYYY-MM-DDTHH:mm:ss.sssZ</b></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>keydid</b>: sha256 fingerprint of the public key</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>keytype</b>: only <b>ecdsa-sha2-nistp256</b> is
+currently supported by the npm CLI</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>scheme</b>: only <b>ecdsa-sha2-nistp256</b> is
+currently supported by the npm CLI</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>key</b>: base64 encoded public key</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">See this
+<b>example key&rsquo;s response from the public npm
+registry</b> <i>&lang;
+https://registry.npmjs.org/-/npm/v1/keys&rang;</i> .</p>
+
+<h3>Audit Endpoints
+<a name="Audit Endpoints"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">There are two
+audit endpoints that npm may use to fetch vulnerability
+information: the <b>Bulk Advisory</b> endpoint and the
+<b>Quick Audit</b> endpoint.</p>
+
+<h3>Bulk Advisory Endpoint
+<a name="Bulk Advisory Endpoint"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">As of version 7,
+npm uses the much faster <b>Bulk Advisory</b> endpoint to
+optimize the speed of calculating audit results.</p>
+
+<p style="margin-left:9%; margin-top: 1em">npm will
+generate a JSON payload with the name and list of versions
+of each package in the tree, and POST it to the default
+configured registry at the path
+<b>/-/npm/v1/security/advisories/bulk</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Any packages in
+the tree that do not have a <b>version</b> field in their
+package.json file will be ignored. If any <b>--omit</b>
+options are specified (either via the <b>--omit</b> config
+<i>&lang; /using-npm/config#omit&rang;</i> , or one of the
+shorthands such as <b>--production</b>, <b>--only=dev</b>,
+and so on), then packages will be omitted from the submitted
+payload as appropriate.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the registry
+responds with an error, or with an invalid response, then
+npm will attempt to load advisory data from the <b>Quick
+Audit</b> endpoint.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The expected
+result will contain a set of advisory objects for each
+dependency that matches the advisory range. Each advisory
+object contains a <b>name</b>, <b>url</b>, <b>id</b>,
+<b>severity</b>, <b>vulnerable_versions</b>, and
+<b>title</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">npm then uses
+these advisory objects to calculate vulnerabilities and
+meta-vulnerabilities of the dependencies within the
+tree.</p>
+
+<h3>Quick Audit Endpoint
+<a name="Quick Audit Endpoint"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If the <b>Bulk
+Advisory</b> endpoint returns an error, or invalid data, npm
+will attempt to load advisory data from the <b>Quick
+Audit</b> endpoint, which is considerably slower in most
+cases.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The full package
+tree as found in <b>package-lock.json</b> is submitted,
+along with the following pieces of additional metadata:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>npm_version</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p><b>node_version</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p><b>platform</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p><b>arch</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p><b>node_env</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">All packages in
+the tree are submitted to the Quick Audit endpoint. Omitted
+dependency types are skipped when generating the report.</p>
+
+<h3>Scrubbing
+<a name="Scrubbing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Out of an
+abundance of caution, npm versions 5 and 6 would
+&quot;scrub&quot; any packages from the submitted report if
+their name contained a <b>/</b> character, so as to avoid
+leaking the names of potentially private packages or git
+URLs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">However, in
+practice, this resulted in audits often failing to properly
+detect meta-vulnerabilities, because the tree would appear
+to be invalid due to missing dependencies, and prevented the
+detection of vulnerabilities in package trees that used git
+dependencies or private modules.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This scrubbing
+has been removed from npm as of version 7.</p>
+
+<h3>Calculating Meta-Vulnerabilities and Remediations
+<a name="Calculating Meta-Vulnerabilities and Remediations"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">npm uses the
+<b>@npmcli/metavuln-calculator</b> <i>&lang;
+http://npm.im/@npmcli/metavuln-calculator&rang;</i> module
+to turn a set of security advisories into a set of
+&quot;vulnerability&quot; objects. A
+&quot;meta-vulnerability&quot; is a dependency that is
+vulnerable by virtue of dependence on vulnerable versions of
+a vulnerable package.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, if
+the package <b>foo</b> is vulnerable in the range
+<b>&gt;=1.0.2 &lt;2.0.0</b>, and the package <b>bar</b>
+depends on <b>foo@&#710;1.1.0</b>, then that version of
+<b>bar</b> can only be installed by installing a vulnerable
+version of <b>foo</b>. In this case, <b>bar</b> is a
+&quot;metavulnerability&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Once
+metavulnerabilities for a given package are calculated, they
+are cached in the <b>&#732;/.npm</b> folder and only
+re-evaluated if the advisory range changes, or a new version
+of the package is published (in which case, the new version
+is checked for metavulnerable status as well).</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the chain of
+metavulnerabilities extends all the way to the root project,
+and it cannot be updated without changing its dependency
+ranges, then <b>npm audit fix</b> will require the
+<b>--force</b> option to apply the remediation. If
+remediations do not require changes to the dependency
+ranges, then all vulnerable packages will be updated to a
+version that does not have an advisory or metavulnerability
+posted against it.</p>
+
+<h3>Exit Code
+<a name="Exit Code"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>npm
+audit</b> command will exit with a 0 exit code if no
+vulnerabilities were found. The <b>npm audit fix</b> command
+will exit with 0 exit code if no vulnerabilities are found
+<i>or</i> if the remediation is able to successfully fix all
+vulnerabilities.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+vulnerabilities were found the exit code will depend on the
+<b>audit-level</b> config <i>&lang;
+/using-npm/config#audit-level&rang;</i> .</p>
+
+<h3>Examples
+<a name="Examples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Scan your
+project for vulnerabilities and automatically install any
+compatible updates to vulnerable dependencies:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit
+fix</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run <b>audit
+fix</b> without modifying <b>node_modules</b>, but still
+updating the pkglock:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit fix
+--package-lock-only</p>
+
+<p style="margin-left:9%; margin-top: 1em">Skip updating
+<b>devDependencies</b>:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit fix
+--only=prod</p>
+
+<p style="margin-left:9%; margin-top: 1em">Have <b>audit
+fix</b> install SemVer-major updates to toplevel
+dependencies, not just SemVer-compatible ones:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit fix
+--force</p>
+
+<p style="margin-left:9%; margin-top: 1em">Do a dry run to
+get an idea of what <b>audit fix</b> will do, and
+<i>also</i> output install information in JSON format:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit fix
+--dry-run --json</p>
+
+<p style="margin-left:9%; margin-top: 1em">Scan your
+project for vulnerabilities and just show the details,
+without fixing anything:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit</p>
+
+<p style="margin-left:9%; margin-top: 1em">Get the detailed
+audit report in JSON format:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit
+--json</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fail an audit
+only if the results include a vulnerability with a level of
+moderate or higher:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm audit
+--audit-level=moderate</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>audit-level
+<a name="audit-level"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: null</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: null, &quot;info&quot;, &quot;low&quot;,
+&quot;moderate&quot;, &quot;high&quot;,
+&quot;critical&quot;, or &quot;none&quot;</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The minimum
+level of vulnerability for <b>npm audit</b> to exit with a
+non-zero exit code.</p>
+
+<h3>dry-run
+<a name="dry-run"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Indicates that
+you don&rsquo;t want npm to make any changes and that it
+should only report what it would have done. This can be
+passed into any of the commands that modify your local
+installation, eg, <b>install</b>, <b>update</b>,
+<b>dedupe</b>, <b>uninstall</b>, as well as <b>pack</b> and
+<b>publish</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This is
+NOT honored by other network related commands, eg
+<b>dist-tags</b>, <b>owner</b>, etc.</p>
+
+<h3>force
+<a name="force"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Removes various
+protections against unfortunate side effects, common
+mistakes, unnecessary performance degradation, and malicious
+input.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Allow clobbering non-npm files
+in global installs.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow the <b>npm version</b> command to work on an
+unclean git repository.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow deleting the cache folder with <b>npm cache
+clean</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow installing packages that have an <b>engines</b>
+declaration requiring a different version of npm.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow installing packages that have an <b>engines</b>
+declaration requiring a different version of <b>node</b>,
+even if <b>--engine-strict</b> is enabled.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow <b>npm audit fix</b> to install modules outside
+your stated dependency range (including SemVer-major
+changes).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow unpublishing all versions of a published
+package.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow conflicting peerDependencies to be installed in
+the root project.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Implicitly set <b>--yes</b> during <b>npm init</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow clobbering existing values in <b>npm pkg</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow unpublishing of entire packages (not just a single
+version).</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If you
+don&rsquo;t have a clear idea of what you want to do, it is
+strongly recommended that you do not use this option!</p>
+
+<h3>json
+<a name="json"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Whether or not
+to output JSON data, rather than the normal output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">In <b>npm pkg set</b> it enables
+parsing set values with JSON.parse() before saving them to
+your <b>package.json</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Not supported by
+all npm commands.</p>
+
+<h3>package-lock-only
+<a name="package-lock-only"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If set to true,
+the current operation will only use the
+<b>package-lock.json</b>, ignoring <b>node_modules</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For
+<b>update</b> this means only the <b>package-lock.json</b>
+will be updated, instead of checking <b>node_modules</b> and
+downloading dependencies.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For <b>list</b>
+this means the output will be based on the tree described by
+the <b>package-lock.json</b>, rather than the contents of
+<b>node_modules</b>.</p>
+
+<h3>package-lock
+<a name="package-lock"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em">Default: true</p></td>
+<td width="69%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p>Type: Boolean</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If set to false,
+then ignore <b>package-lock.json</b> files when installing.
+This will also prevent <i>writing</i>
+<b>package-lock.json</b> if <b>save</b> is true.</p>
+
+<h3>omit
+<a name="omit"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: &rsquo;dev&rsquo; if
+the <b>NODE_ENV</b> environment variable is set to
+&rsquo;production&rsquo;, otherwise empty.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: &quot;dev&quot;, &quot;optional&quot;, or
+&quot;peer&quot; (can be set multiple times)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Dependency types
+to omit from the installation tree on disk.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that these
+dependencies <i>are</i> still resolved and added to the
+<b>package-lock.json</b> or <b>npm-shrinkwrap.json</b> file.
+They are just not physically installed on disk.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a package
+type appears in both the <b>--include</b> and <b>--omit</b>
+lists, then it will be included.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the resulting
+omit list includes <b>&rsquo;dev&rsquo;</b>, then the
+<b>NODE_ENV</b> environment variable will be set to
+<b>&rsquo;production&rsquo;</b> for all lifecycle
+scripts.</p>
+
+<h3>include
+<a name="include"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default:</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: &quot;prod&quot;, &quot;dev&quot;,
+&quot;optional&quot;, or &quot;peer&quot; (can be set
+multiple times)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Option that
+allows for defining which types of dependencies to
+install.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is the
+inverse of <b>--omit=&lt;type&gt;</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Dependency types
+specified in <b>--include</b> will not be omitted,
+regardless of the order in which omit/include are specified
+on the command-line.</p>
+
+<h3>foreground-scripts
+<a name="foreground-scripts"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: <b>false</b> unless
+when using <b>npm pack</b> or <b>npm publish</b> where it
+defaults to <b>true</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: Boolean</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Run all build
+scripts (ie, <b>preinstall</b>, <b>install</b>, and
+<b>postinstall</b>) scripts for installed packages in the
+foreground process, sharing standard input, output, and
+error with the main npm process.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that this
+will generally make installs run slower, and be much
+noisier, but can be useful for debugging.</p>
+
+<h3>ignore-scripts
+<a name="ignore-scripts"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If true, npm
+does not run scripts specified in package.json files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+commands explicitly intended to run a particular script,
+such as <b>npm start</b>, <b>npm stop</b>, <b>npm
+restart</b>, <b>npm test</b>, and <b>npm run-script</b> will
+still run their intended script if <b>ignore-scripts</b> is
+set, but they will <i>not</i> run any pre- or
+post-scripts.</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Set to true to
+run the command in the context of <b>all</b> configured
+workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+setting this to false will cause commands like
+<b>install</b> to ignore workspaces altogether. When not set
+explicitly:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Commands that operate on the
+<b>node_modules</b> tree (install, update, etc.) will link
+workspaces into the <b>node_modules</b> folder. - Commands
+that do other things (test, exec, publish, etc.) will
+operate on the root project, <i>unless</i> one or more
+workspaces are specified in the <b>workspace</b> config.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>include-workspace-root
+<a name="include-workspace-root"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Include the
+workspace root when workspaces are enabled for a
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When false,
+specifying individual workspaces via the <b>workspace</b>
+config, or all workspaces via the <b>workspaces</b> flag,
+will cause npm to operate only on the specified workspaces,
+and not on the root project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>install-links
+<a name="install-links"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set file:
+protocol dependencies will be packed and installed as
+regular dependencies instead of creating a symlink. This
+option has no effect on workspaces.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="21%">
+
+
+<p style="margin-top: 1em">npm help install</p></td>
+<td width="65%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="21%">
+
+
+<p>npm help config</p></td>
+<td width="65%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

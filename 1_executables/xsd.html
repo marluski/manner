@@ -1,0 +1,177 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>xsd</title>
+
+</head>
+<body>
+
+<h1 align="center">xsd</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xsd -
+Mono&rsquo;s utility for generating schema or class
+files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xsd</b>
+&lt;schema.xsd&gt; /classes [options]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>xsd</b>
+&lt;schema.xsd&gt; /dataset [options]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>xsd</b>
+&lt;assembly&gt;.dll|&lt;assembly&gt;.exe [options]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>xsd</b>
+&lt;instance.xml&gt; [&lt;instance.xml&gt; ...]
+[options]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>xsd</i> is a
+tool for intended to complement the XML serialization
+support of Mono. It can do the following tasks: <br>
+Generate serializable classes</p>
+
+<p style="margin-left:18%;">From a given XML schema,
+generate a class that can be used to read and write xml
+documents that conform that schema (/classes option).</p>
+
+<p style="margin-left:9%;">Generate typed datasets</p>
+
+<p style="margin-left:18%;">From a given XML schema,
+generate a typed DataSet class that can be used to read and
+write xml documents that conform that schema (/dataset
+option).</p>
+
+<p style="margin-left:9%;">Generate XML schemas</p>
+
+<p style="margin-left:18%;">From a given assembly and an
+optional type name, generate an XML schema that can be used
+to validate the xml documents that can be obtained by
+serializing objects of that type. If no type is provided,
+xsd generates a schema for all types in the assembly. When
+specifying the assembly name do not include the file
+extension (.dll or .exe). xsd will look for the assembly
+using the standard assembly loading rules.</p>
+
+<p style="margin-left:9%;">Infer XML schemas</p>
+
+<p style="margin-left:18%;">From a given set of XML
+documents, infer the XML schema that can be used to validate
+those documents.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are available: <i><br>
+/element:name /e:name</i></p>
+
+<p style="margin-left:18%;">Specifies the name of the XML
+schema element for which a class or a dataset has to be
+generated.</p>
+
+<p style="margin-left:9%;"><i>/namespace:name
+/n:name</i></p>
+
+<p style="margin-left:18%;">Specifies the namespace of the
+XML schema element for which a class or a dataset has to be
+generated.</p>
+
+<p style="margin-left:9%;"><i>/language:name
+/l:name</i></p>
+
+<p style="margin-left:18%;">Specifies the programming
+language to use for the generated code. The only supported
+languages are CS (C#) and VB (Visual Basic.NET).</p>
+
+<p style="margin-left:9%;"><i>/generator:type,assembly
+/g:type,assembly</i></p>
+
+<p style="margin-left:18%;">Indicates xsd.exe to use custom
+CodeDomProvider to generate code. The type name must be full
+name. Assembly name is a local file name that is going to be
+loaded. The specified Type must have the default
+constructor.</p>
+
+<p style="margin-left:9%;"><i>/outputdir:path
+/o:path</i></p>
+
+<p style="margin-left:18%;">Specifies the directory where
+to generate the code or schemas.</p>
+
+<p style="margin-left:9%;"><i>/type:name /t:name</i></p>
+
+<p style="margin-left:18%;">Specifies the full name of the
+type (including namespace) for which to generate the XML
+schema.</p>
+
+<p style="margin-left:9%;"><i>/help /h</i></p>
+
+<p style="margin-left:18%;">Show usage help.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Lluis Sanchez
+Gual (lluis@ximian.com) <br>
+Atsushi Enomoto (atsushi@ximian.com)</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xsd is released
+under the terms of the GNU GPL.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">disco(1),
+soapsuds(1), mono(1), mcs(1), wsdl(1)</p>
+<hr>
+</body>
+</html>

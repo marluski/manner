@@ -1,0 +1,256 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>BSDUNZIP</i>(1) General Commands Manual
+<i>BSDUNZIP</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">bsdunzip &mdash; extract files
+from a ZIP archive</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:21%;"><b>bsdunzip</b>
+[<b>-aCcfjLlnopqtuvy</b>]
+[{&nbsp;<b>-O&nbsp;</b>|&nbsp;<b>-I&nbsp;</b>}&nbsp;<i>encoding</i>]
+[<b>-d&nbsp;</b><i>dir</i>] [<b>-x&nbsp;</b><i>pattern</i>]
+[<b>-P&nbsp;</b><i>password</i>] <i>zipfile</i>
+[<i>member&nbsp;...</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;">The following options are
+available:</p>
+
+<p style="margin-top: 1em"><b>-a</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">When extracting
+a text file, convert DOS-style line endings to Unix-style
+line endings.</p>
+
+<p style="margin-top: 1em"><b>-C</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Match file
+names case-insensitively.</p>
+
+<p style="margin-top: 1em"><b>-c</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Extract to
+stdout/screen. When extracting files from the zipfile, they
+are written to stdout. This is similar to <b>-p</b>, but
+does not suppress normal output.</p>
+
+<p style="margin-top: 1em"><b>-d</b> <i>dir</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Extract files
+into the specified directory rather than the current
+directory.</p>
+
+<p style="margin-top: 1em"><b>-f</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Update
+existing. Extract only files from the zipfile if a file with
+the same name already exists on disk and is older than the
+former. Otherwise, the file is silently skipped.</p>
+
+<p style="margin-top: 1em"><b>-I</b> <i>encoding</i></p>
+
+<p style="margin-top: 1em"><b>-O</b> <i>encoding</i></p>
+
+<p style="margin-left:24%;">Convert filenames from the
+specified encoding.</p>
+
+<p style="margin-top: 1em"><b>-j</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Ignore
+directories stored in the zipfile; instead, extract all
+files directly into the extraction directory.</p>
+
+<p style="margin-top: 1em"><b>-L</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Convert the
+names of the extracted files and directories to
+lowercase.</p>
+
+<p style="margin-top: 1em"><b>-l</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">List, rather
+than extract, the contents of the zipfile.</p>
+
+<p style="margin-top: 1em"><b>-n</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">No overwrite.
+When extracting a file from the zipfile, if a file with the
+same name already exists on disk, the file is silently
+skipped.</p>
+
+<p style="margin-top: 1em"><b>-o</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Overwrite. When
+extracting a file from the zipfile, if a file with the same
+name already exists on disk, the existing file is replaced
+with the file from the zipfile.</p>
+
+<p style="margin-top: 1em"><b>-p</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Extract to
+stdout. When extracting files from the zipfile, they are
+written to stdout. The normal output is suppressed as if
+<b>-q</b> was specified.</p>
+
+<p style="margin-top: 1em"><b>-P</b> <i>password</i></p>
+
+<p style="margin-left:24%;">Extract encrypted files using a
+password. Putting a password on the command line using this
+option can be insecure.</p>
+
+<p style="margin-top: 1em"><b>-q</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Quiet: print
+less information while extracting.</p>
+
+<p style="margin-top: 1em"><b>-t</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Test: do not
+extract anything, but verify the checksum of every file in
+the archive.</p>
+
+<p style="margin-top: 1em"><b>-u</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Update. When
+extracting a file from the zipfile, if a file with the same
+name already exists on disk, the existing file is replaced
+with the file from the zipfile if and only if the latter is
+newer than the former. Otherwise, the file is silently
+skipped.</p>
+
+<p style="margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">List verbosely,
+rather than extract, the contents of the zipfile. This
+differs from <b>-l</b> by using the long listing. Note that
+most of the data is currently fake and does not reflect the
+content of the archive.</p>
+
+<p style="margin-top: 1em"><b>-x</b> <i>pattern</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Exclude files
+matching the pattern <i>pattern</i>.</p>
+
+<p style="margin-top: 1em"><b>-y</b></p>
+
+<p style="margin-left:24%; margin-top: 1em">Print four
+digit years in listings instead of two.</p>
+
+<p style="margin-top: 1em"><b>-Z</b> <i>mode</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Emulate
+<i>zipinfo</i>(1L) mode. Enabling <i>zipinfo</i>(1L) mode
+changes the way in which additional arguments are parsed.
+Currently only <i>zipinfo</i>(1L) mode 1 is supported, which
+lists the file names one per line.</p>
+
+<p style="margin-top: 1em"><i>[member ...]</i></p>
+
+<p style="margin-left:24%;">Optional list of members to
+extract from the zipfile. Can include patterns, e.g.,
+<i>&rsquo;memberdir/*&rsquo;</i> will extract all files and
+dirs below memberdir.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that only
+one of <b>-n</b>, <b>-o</b>, and <b>-u</b> may be specified.
+If specified filename is &quot;-&quot;, then data is read
+from <i>stdin</i>.</p>
+
+<p style="margin-top: 1em"><b>ENVIRONMENT</b></p>
+
+<p style="margin-left:9%;">If the UNZIP_DEBUG environment
+variable is defined, the <b>-q</b> command-line option has
+no effect, and additional debugging information will be
+printed to <i>stderr</i>.</p>
+
+<p style="margin-top: 1em"><b>COMPATIBILITY</b></p>
+
+<p style="margin-left:9%;">The <b>bsdunzip</b> utility aims
+to be sufficiently compatible with other implementations to
+serve as a drop-in replacement in the context of the
+<i>ports</i>(7) system. No attempt has been made to
+replicate functionality which is not required for that
+purpose.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For
+compatibility reasons, command-line options will be
+recognized if they are listed not only before but also after
+the name of the zipfile.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Normally, the
+<b>-a</b> option should only affect files which are marked
+as text files in the zipfile&rsquo;s central directory.
+Since the <i>archive</i>(3) library does not provide access
+to that information, it is not available to the
+<b>bsdunzip</b> utility. Instead, the <b>bsdunzip</b>
+utility will assume that a file is a text file if no
+non-ASCII characters are present within the first block of
+data decompressed for that file. If non-ASCII characters
+appear in subsequent blocks of data, a warning will be
+issued.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>bsdunzip</b> utility is only able to process ZIP archives
+handled by <i>libarchive</i>(3). Depending on the installed
+version of <i>libarchive</i>(3), this may or may not include
+self-extracting or ZIPX archives.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>libarchive</i>(3)</p>
+
+<p style="margin-top: 1em"><b>HISTORY</b></p>
+
+<p style="margin-left:9%;">The <b>bsdunzip</b> utility
+appeared in FreeBSD&nbsp;8.0.</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">The <b>bsdunzip</b> utility and
+this manual page were written by Dag-Erling Sm&oslash;rgrav
+&lt;<i>des@FreeBSD.org</i>&gt;. It uses the
+<i>archive</i>(3) library developed by <br>
+Tim Kientzle &lt;<i>kientzle@FreeBSD.org</i>&gt;.</p>
+
+<p style="margin-top: 1em"><b>CAVEATS</b></p>
+
+<p style="margin-left:9%;">The <b>bsdunzip</b> utility
+performs two scans of the command-line for arguments before
+and after the archive name, so as to maintain compatibility
+with Info-ZIP unzip. As a result, the POSIX &lsquo;--&rsquo;
+double-dash string used to separate options from arguments
+will need to be repeated. For example, to extract a
+&quot;-a.jpg&quot; from &quot;-b.zip&quot; with overwrite,
+one would need to invoke</p>
+
+<p style="margin-left:17%;"><b>bsdunzip -o -- -a.jpg --
+-b.zip</b> GNU June 27, 2023 <i>BSDUNZIP</i>(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>idevicebackup2</title>
+
+</head>
+<body>
+
+<h1 align="center">idevicebackup2</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#SECURITY CONSIDERATIONS">SECURITY CONSIDERATIONS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#ON THE WEB">ON THE WEB</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">idevicebackup2 -
+Create or restore backups for devices running iOS 4 or
+later.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>idevicebackup2</b>
+[OPTIONS] CMD [CMDOPTIONS] DIRECTORY</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Create or
+restore backup in/from the specified directory.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u, --udid
+UDID</b></p>
+
+<p style="margin-left:18%;">target specific device by
+UDID.</p>
+
+<p style="margin-left:9%;"><b>-s, --source UDID</b></p>
+
+<p style="margin-left:18%;">use backup data from device
+specified by UDID.</p>
+
+<p style="margin-left:9%;"><b>-i, --interactive</b></p>
+
+<p style="margin-left:18%;">request passwords interactively
+on the command line.</p>
+
+<p style="margin-left:9%;"><b>-n, --network</b></p>
+
+<p style="margin-left:18%;">connect to network device.</p>
+
+<p style="margin-left:9%;"><b>-d, --debug</b></p>
+
+<p style="margin-left:18%;">enable communication
+debugging.</p>
+
+<p style="margin-left:9%;"><b>-h, --help</b></p>
+
+<p style="margin-left:18%;">prints usage information.</p>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:18%;">prints version information.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>backup</b></p></td>
+<td width="1%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em">create backup for the
+device.</p> </td>
+<td width="45%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--full</b></p>
+
+<p style="margin-left:18%;">force full backup from
+device.</p>
+
+<p style="margin-left:9%;"><b>restore</b></p>
+
+<p style="margin-left:18%;">restore last backup to the
+device.</p>
+
+<p style="margin-left:9%;"><b>--system</b></p>
+
+<p style="margin-left:18%;">restore system files, too.</p>
+
+<p style="margin-left:9%;"><b>--no-reboot</b></p>
+
+<p style="margin-left:18%;">reboot the system when
+done.</p>
+
+<p style="margin-left:9%;"><b>--copy</b></p>
+
+<p style="margin-left:18%;">create a copy of backup folder
+before restoring.</p>
+
+<p style="margin-left:9%;"><b>--settings</b></p>
+
+<p style="margin-left:18%;">restore device settings from
+the backup.</p>
+
+<p style="margin-left:9%;"><b>--remove</b></p>
+
+<p style="margin-left:18%;">remove items which are not
+being restored.</p>
+
+<p style="margin-left:9%;"><b>--skip-apps</b></p>
+
+<p style="margin-left:18%;">do not trigger re-installation
+of apps after restore.</p>
+
+<p style="margin-left:9%;"><b>--password PWD</b></p>
+
+<p style="margin-left:18%;">supply the password for the
+encrypted source backup. If omitted, the password will be
+requested in interactive mode (<b>-i</b>), or it can be
+passed using the environment variable
+<b>BACKUP_PASSWORD</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>info</b></p></td>
+<td width="1%"></td>
+<td width="65%">
+
+
+<p>show details about last completed backup of device.</p></td>
+<td width="17%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>list</b></p></td>
+<td width="1%"></td>
+<td width="65%">
+
+
+<p>list files of last completed backup in CSV format.</p></td>
+<td width="17%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>unback</b></p></td>
+<td width="1%"></td>
+<td width="65%">
+
+
+<p>unpack a completed backup in DIRECTORY/_unback_/</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>encryption on|off
+[PWD]</b></p>
+
+<p style="margin-left:18%;">enable or disable backup
+encryption. The password will be requested in interactive
+mode (<b>-i</b>) if omitted, or it can be passed using the
+environment variable <b>BACKUP_PASSWORD</b>.</p>
+
+<p style="margin-left:9%;"><b>changepw [OLD NEW]</b></p>
+
+<p style="margin-left:18%;">change backup password on
+target device. The passwords will be requested in
+interactive mode (<b>-i</b>) if omitted, or they can be
+passed using the environment variables
+<b>BACKUP_PASSWORD</b> (old password) and
+<b>BACKUP_PASSWORD_NEW</b> (new password) respectively.</p>
+
+<p style="margin-left:9%;"><b>cloud on|off</b></p>
+
+<p style="margin-left:18%;">enable or disable cloud use
+(requires iCloud account).</p>
+
+<h2>SECURITY CONSIDERATIONS
+<a name="SECURITY CONSIDERATIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Passing
+passwords on the command line is not advised, since it might
+reveal the backup password to other users via process list
+or command line history. Use interactive mode (<b>-i</b>) or
+pass them via environment variable(s) as mentioned in the
+description of the respective commands above.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Martin
+Szulecki</p>
+
+<p style="margin-left:9%; margin-top: 1em">Nikias
+Bassen</p>
+
+<h2>ON THE WEB
+<a name="ON THE WEB"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://libimobiledevice.org</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">https://github.com/libimobiledevice/libimobiledevice</p>
+<hr>
+</body>
+</html>

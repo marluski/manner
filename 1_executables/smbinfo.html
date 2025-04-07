@@ -1,0 +1,238 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SMBINFO</title>
+
+</head>
+<body>
+
+<h1 align="center">SMBINFO</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMAND">COMMAND</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">smbinfo -
+Userspace helper to display SMB-specific file information
+for the Linux SMB client file system (CIFS)</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">smbinfo [-v]
+[-h] [-V] {command} {file system object}</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This tool is
+part of the cifs-utils suite.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>smbinfo</i>
+is a userspace helper program for the Linux SMB client file
+system (CIFS). It is intended to display SMB-specific file
+informations such as Security Descriptors and Quota.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This tool works
+by making an CIFS_QUERY_INFO IOCTL call to the Linux SMB
+client which in turn issues a SMB Query Info request and
+returns the result. This differs from <i>getcifsacl</i>
+which uses extended file attributes.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="6%"></td>
+<td width="60%">
+
+
+<p style="margin-top: 1em">Print version number and
+exit.</p> </td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="6%"></td>
+<td width="60%">
+
+
+<p>Verbose output.</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="6%"></td>
+<td width="60%">
+
+
+<p>Print help explaining the command line options.</p></td>
+<td width="22%">
+</td></tr>
+</table>
+
+<h2>COMMAND
+<a name="COMMAND"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>fileaccessinfo</i>:
+Prints the FileAccessInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>filealigninfo</i>:
+Prints the FileAlignmentInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>fileallinfo</i>:
+Prints the FileAllInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>filebasicinfo</i>:
+Prints the FileBasicInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>fileeainfo</i>:
+Prints the FileEaInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>filefsfullsizeinfo</i>:
+Prints the FileFsFullSizeInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>fileinternalinfo</i>:
+Prints the FileInternalInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>filemodeinfo</i>:
+Prints the FileModeInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>filepositioninfo</i>:
+Prints the FilePositionInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>filestandardinfo</i>:
+Prints the FileStandardInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>filestreaminfo</i>:
+Prints the FileStreamInformation class</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>fsctl-getobjid</i>:
+Prints the ObjectID</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>getcompression</i>:
+Prints the compression setting for the file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>setcompression
+-c &lt;no|default|lznt1&gt;</i>: Sets the compression
+setting for the file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>list-snapshots</i>:
+Lists the previous versions of the volume that backs this
+file</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>quota</i>:
+Print the quota for the volume in the form - SID Length -
+Change Time - Quota Used - Quota Threshold - Quota Limit -
+SID</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>secdesc</i>:
+Print the security descriptor in the form - Revision -
+Control - Owner SID - Group SID - ACL - File types - File
+flags</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>keys</i>:
+Dump session id, encryption keys and decryption keys so that
+the SMB3 traffic of this mount can be decryped e.g. via
+wireshark (requires root).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>gettconinfo</i>:
+Prints both the TCON Id and Session Id for a cifs file.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kernel support
+for smbinfo utilities requires the CIFS_QUERY_INFO IOCTL
+which was initially introduced in the 4.20 kernel and is
+only implemented for mount points using SMB2 or above (see
+mount.cifs(8) <i>vers</i> option).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mount.cifs(8),
+getcifsacl(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Ronnie Sahlberg
+wrote the smbinfo program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Linux CIFS
+Mailing list is the preferred place to ask questions
+regarding these programs.</p>
+<hr>
+</body>
+</html>

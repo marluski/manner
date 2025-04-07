@@ -1,0 +1,157 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK MASK</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK MASK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-mask -
+Mask out updates and automatic installation</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em"><b>flatpak mask</b> [OPTION...]
+PATTERN...</p> </td>
+<td width="46%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Flatpak
+maintains a list of patterns that define which refs are
+masked. A masked ref will never be updated or automatically
+installed (for example a masked extension marked
+auto-download will not be downloaded). You can still
+manually install such refs, but once they are installed the
+version will be pinned.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The patterns are
+just a partial ref, with the * character matching anything
+within that part of the ref. Here are some example
+patterns:</p>
+
+<p style="margin-left:14%; margin-top: 1em">org.some.App
+<br>
+org.some.App//unstable <br>
+app/org.domain.* <br>
+org.some.App/arm</p>
+
+<p style="margin-left:9%; margin-top: 1em">To list the
+current set of masks, run this command without any
+patterns.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--remove</b></p>
+
+<p style="margin-left:14%;">Instead of adding the patterns,
+remove matching patterns.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>,
+<b>--user</b></p>
+
+<p style="margin-left:14%;">Mask refs in a per-user
+installation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system</b></p>
+
+<p style="margin-left:14%;">Mask refs in the default
+system-wide installation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--installation=NAME</b></p>
+
+<p style="margin-left:14%;">Mask refs in a system-wide
+installation specified by NAME among those defined in
+/etc/flatpak/installations.d/. Using
+<b>--installation=default</b> is equivalent to using
+<b>--system</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+mask</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+mask org.broken.App</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+mask --remove org.broken.App</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flatpak</b>(1),
+<b>flatpak-update</b>(1),</p>
+<hr>
+</body>
+</html>

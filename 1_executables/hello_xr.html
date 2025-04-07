@@ -1,0 +1,154 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:58 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>HELLO_XR</i>(1) General Commands Manual
+<i>HELLO_XR</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">hello_xr &mdash; A sample OpenXR
+application.</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:21%;"><b>hello_xr</b>
+[<b>-h&nbsp;</b>|&nbsp;<b>--help</b>] <b><br>
+hello_xr -g</b> | <b>--graphics</b> <i>graphics_api</i>
+[<b>-ff&nbsp;</b>|&nbsp;<b>--formfactor&nbsp;</b><i>form_factor</i>]
+[<b>-vc&nbsp;</b>|&nbsp;<b>--viewconfig&nbsp;</b><i>view_config</i>]
+[<b>-bm&nbsp;</b>|&nbsp;<b>--blendmode&nbsp;</b><i>blend_mode</i>]
+[<b>-s&nbsp;</b>|&nbsp;<b>--space&nbsp;</b><i>space</i>]
+[<b>-v&nbsp;</b>|&nbsp;<b>--verbose</b>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>hello_xr</b> is a sample
+application written using the OpenXR API.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The arguments
+are as follows:</p>
+
+<p style="margin-top: 1em"><b>-h</b> | <b>--help</b></p>
+
+<p style="margin-left:21%;">Show brief usage
+instructions.</p>
+
+<p style="margin-top: 1em">g | <b>--graphics</b>
+<i>graphics_api</i></p>
+
+<p style="margin-left:21%;"><i>Required:</i> specify the
+graphics API to use. (Note that not that not all graphics
+APIs are necessarily available on all systems.) The
+parameter <i>graphics_api</i> must be one of the following
+(case-insensitive):</p>
+
+<p style="margin-top: 1em">&lsquo;D3D11&rsquo;</p>
+
+<p style="margin-left:31%;">Direct3D 11 (Windows-only)</p>
+
+<p style="margin-top: 1em">&lsquo;D3D12&rsquo;</p>
+
+<p style="margin-left:31%;">Direct3D 12 (Windows-only)</p>
+
+<p style="margin-top: 1em">&lsquo;OpenGLES&rsquo;</p>
+
+<p style="margin-top: 1em">&lsquo;OpenGL&rsquo;</p>
+
+<p style="margin-top: 1em">&lsquo;Vulkan&rsquo;</p>
+
+<p style="margin-top: 1em"><b>-ff</b> | <b>--formfactor</b>
+<i>form_factor</i></p>
+
+<p style="margin-left:21%;">Specify the form factor to use.
+(Note that you need a suitable XR system and a runtime
+supporting a given form factor for it to work.) The
+parameter <i>form_factor</i> must be one of the following
+(case-insensitive):</p>
+
+<p style="margin-top: 1em">&lsquo;Hmd&rsquo;</p>
+
+<p style="margin-left:31%; margin-top: 1em">Head-mounted
+display (default)</p>
+
+<p style="margin-top: 1em">&lsquo;Handheld&rsquo;</p>
+
+<p style="margin-top: 1em"><b>-vc</b> | <b>--viewconfig</b>
+<i>view_config</i></p>
+
+<p style="margin-left:21%;">Specify the view configuration
+to use. (Note that you need a suitable XR system and a
+runtime supporting a given view configuration for it to
+work.) The parameter <i>view_config</i> must be one of the
+following (case-insensitive):</p>
+
+<p style="margin-top: 1em">&lsquo;Mono&rsquo; <br>
+&lsquo;Stereo&rsquo;</p>
+
+<p style="margin-left:31%;">(default)</p>
+
+<p style="margin-top: 1em"><b>-bm</b> | <b>--blendmode</b>
+<i>blend_mode</i></p>
+
+<p style="margin-left:21%;">Specify the environment blend
+mode to use. (Note that you need a suitable XR system and a
+runtime supporting a given environment blend mode for it to
+work.) The parameter <i>blend_mode</i> must be one of the
+following (case-insensitive):</p>
+
+<p style="margin-top: 1em">&lsquo;Opaque&rsquo;</p>
+
+<p style="margin-top: 1em">&lsquo;Additive&rsquo;</p>
+
+<p style="margin-top: 1em">&lsquo;AlphaBlend&rsquo;</p>
+
+<p style="margin-top: 1em"><b>-s</b> | <b>--space</b>
+<i>space</i></p>
+
+<p style="margin-left:21%;">Specify the space to use. The
+parameter <i>space</i> must be one of the following
+(case-insensitive):</p>
+
+<p style="margin-top: 1em">&lsquo;View&rsquo; <br>
+&lsquo;Local&rsquo;</p>
+
+<p style="margin-top: 1em">&lsquo;Stage&rsquo;</p>
+
+<p style="margin-top: 1em"><b>-v</b> | <b>--verbose</b></p>
+
+<p style="margin-left:21%;">Enable verbose logging output
+from the <b>hello_xr</b> application itself.</p>
+
+<p style="margin-top: 1em"><b>EXIT STATUS</b></p>
+
+<p style="margin-left:9%;">The <b>hello_xr</b> utility
+exits&nbsp;0 on success, and&nbsp;&gt;0 if an error
+occurs.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>openxr_runtime_list</i>(1),
+https://registry.khronos.org/OpenXR/ ,
+https://github.com/KhronosGroup/OpenXR-SDK-Source/tree/main/src/tests/hello_xr
+GNU March 06, 2020 <i>HELLO_XR</i>(1)</p>
+<hr>
+</body>
+</html>

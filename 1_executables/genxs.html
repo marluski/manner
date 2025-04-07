@@ -1,0 +1,1792 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>genxs</title>
+
+</head>
+<body>
+
+<h1 align="center">genxs</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONFIGURATION FILE FORMAT">CONFIGURATION FILE FORMAT</a><br>
+<a href="#SPECIFYING HOOKS">SPECIFYING HOOKS</a><br>
+<a href="#HOOK EXAMPLES">HOOK EXAMPLES</a><br>
+<a href="#CONFIGURATION FILE EXAMPLE">CONFIGURATION FILE EXAMPLE</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">genxs -
+Mono&rsquo;s Xml Serializer Generator</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>genxs</b>
+configurationFile [destinationFolder]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>genxs</i> is
+a tool for generating custom XML serialization writers and
+readers for classes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>configurationFile</i>
+is configuration file which specifies several information,
+such as the class for which to generate the reader and
+writer, the name and namespace of the classes to generate,
+and a collection of hooks to apply. By using hooks it is
+possible to customize the behavior of the serializer without
+needing to modify the generated file, so you can safely
+regenerate it if the source class is modified.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>destinationFolder</i>
+specifies the folder where the files will be generated.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b>
+This tool only runs in the Mono runtime, since it uses some
+internal classes not available in other runtimes.</p>
+
+<h2>CONFIGURATION FILE FORMAT
+<a name="CONFIGURATION FILE FORMAT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+configuration file is an xml document based on the following
+grammar (&quot;?&quot; means optional, &quot;*&quot; 0 or
+more):</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;configuration&gt;</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;serializer class=&quot;name&quot;
+assembly=&quot;name&quot;&gt; *</p></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;reader&gt;name&lt;/reader&gt; ?</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;writer&gt;name&lt;/writer&gt; ?</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;namespace&gt;name&lt;/namespace&gt; ?</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;outFileName&gt;name&lt;/outFileName&gt; ?</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;readerHooks&gt; ?</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="68%">
+
+
+<p>&lt;hook ...&gt; *</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/readerHooks&gt;</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;writerHooks&gt; ?</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="68%">
+
+
+<p>&lt;hook ...&gt; *</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/writerHooks&gt;</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;/serializer&gt;</p></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/configuration&gt;</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">A configuration
+file can have multiple &quot;serializer&quot; elements, each
+of which specifies the class for which to generate a
+serializer together with several generation options. The
+source class is specified in the following attributes:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="76%">
+
+
+<p><i>class</i> : name of the class (including
+namespace).</p> </td>
+<td width="9%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="76%">
+
+
+<p><i>assembly</i> : assembly name. It can include the
+complete path.</p></td>
+<td width="9%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Generation
+options are specified in child elements:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><i>reader</i> : name of the
+reader class.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>noReader</i> : if &quot;true&quot;, it does not
+generate reader class.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>writer</i> : name of the writer class.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>baseSerializer</i> : name of the base xml serializer
+class. This item is 2.0 only.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>implementation</i> : name of the serializer
+implementation class. This item is 2.0 only.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>noWriter</i> : if &quot;true&quot;, it does not
+generate writer class.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>namespace</i> : namespace of the reader and writer
+classes.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>generateAsInternal</i> : if &quot;true&quot;, it
+generates classes as internal.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>outFileName</i> : name of the generated file.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>readerHooks</i> : a list of hooks to apply to the
+reader.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>writerHooks</i> : a list of hooks to apply to the
+writer.</p> </td></tr>
+</table>
+
+<h2>SPECIFYING HOOKS
+<a name="SPECIFYING HOOKS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Using hooks you
+can customize the behavior of readers and writers. A hook
+specification follows this grammar:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;hook
+type=&quot;name&quot;&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;select&gt; ?</p></td>
+<td width="74%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="74%">
+
+
+<p>&lt;typeName&gt;name&lt;/typeName&gt; ?</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="74%">
+
+
+<p>&lt;typeAttribute&gt;name&lt;/typeAttribute&gt; *</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="74%">
+
+
+<p>&lt;typeMember&gt;name&lt;/typeMember&gt; ?</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="74%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;replace&gt;source code&lt;/replace&gt; ?</p></td>
+<td width="74%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;insertBefore&gt;source code&lt;/insertBefore&gt;
+?</p> </td>
+<td width="74%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;insertAfter&gt;source code&lt;/insertAfter&gt; ?</p></td>
+<td width="74%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/hook&gt;</p></td>
+<td width="7%"></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&quot;type&quot; attribute specifies the context in which
+the hook is applied. It can be one of the following:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><i>attributes</i> : hook is
+applied where attributes are serialized/deserialized.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>elements</i> : hook is applied where elements are
+serialized/deserialized.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>unknownAttribute</i> : hook is applied where unknown
+attributes are processed.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>unknownElement</i> : hook is applied where unknown
+elements are processed.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>member</i> : hook is applied where a member is
+serialized/deserialized.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>type</i> : hook is applied for the whole type.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&quot;select&quot; element specifies the classes and members
+to which the hook has to be added. It can contain the
+following elements:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><i>typeName</i> : the class with
+that name will be selected (must include namespace)</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>typeAttribute</i> : all classes which have that
+attribute applied will be selected (specify the full
+attribute class name, including namespace). Several
+attribute names can be specified.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>typeMember</i> : name of the class member for which
+the hook must be added.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The hook source
+code can be specified using any of the following
+elements:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><i>replace</i> : the provided
+source code will replace all serialization/deserialization
+operations in the hook context.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>insertBefore</i> : the source code will be added
+before the hook context.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>insertAfter</i> : the source code will be added after
+the hook context.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When writing the
+code for a hook you can use some special variables that are
+defined during the code generation process. The variables
+are the following:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><i>$TYPE:</i> name of the class
+being generated, without namespace.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>$FULLTYPE:</i> full name of the class being
+generated, including namespace.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>$OBJECT:</i> the object being serialized or
+deserialized. When using a replace reader hook of type
+&quot;type&quot;, the hook code must assign the deserialized
+object to this variable.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p>-I $ELEMENT: name of the element of the object being
+serialized/deserialized.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>$NAMESPACE:</i> namespace of the element of the
+object being serialized/deserialized.</p></td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>*</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p><i>$MEMBER:</i> name of the member being
+serialized/deserialized. Only valid in the
+&quot;member&quot; context.</p></td></tr>
+</table>
+
+<h2>HOOK EXAMPLES
+<a name="HOOK EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+example adds a call to a Validate method after the
+deserialization of any object:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;hook
+type=&quot;type&quot;&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;insertAfter&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>System.Xml.Schema.XmlSchema.Validate$TYPE ($OBJECT);</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/insertAfter&gt;</p></td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">&lt;/hook&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">This example
+specifies the code to be used to deserialize the XmlSchema
+class:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;hook
+type=&quot;type&quot;&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+
+<p>&lt;typeName&gt;System.Xml.Schema.XmlSchema&lt;/typeName&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;replace&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>$OBJECT = System.Xml.Schema.XmlSchema.Read (Reader,
+null);</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/replace&gt;</p></td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">&lt;/hook&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">That one
+specifies the code to be used to read XmlSchema
+instances:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;hook
+type=&quot;type&quot;&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+
+<p>&lt;typeName&gt;System.Xml.Schema.XmlSchema&lt;/typeName&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;replace&gt;$OBJECT.Write
+(Writer);&lt;/replace&gt;</p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">&lt;/hook&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">With this two
+hooks the serializer will print some information when
+serializing the class &quot;MyClass&quot;:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;hook
+type=&quot;type&quot;&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+
+<p>&lt;typeName&gt;MyNamespace.MyClass&lt;/typeName&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;insertBefore&gt;Console.WriteLine (&quot;Serializing
+MyClass&quot;);&lt;/replace&gt;</p> </td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;insertAfter&gt;Console.WriteLine (&quot;MyClass
+serialized&quot;);&lt;/insertAfter&gt;</p> </td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">&lt;/hook&gt; <br>
+&lt;hook type=&quot;member&quot;&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+
+<p>&lt;typeName&gt;MyNamespace.MyClass&lt;/typeName&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;insertAfter&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>Console.WriteLine (&quot;Serialized member
+$MEMBER&quot;);</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/insertAfter&gt;</p></td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">&lt;/hook&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">This hook writes
+an additional element for all types that have the custom
+attribute &quot;MyAttribute&quot;:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;hook
+type=&quot;elements&quot;&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+
+<p>&lt;typeAttribute&gt;MyNamespace.MyAttribute&lt;/typeAttribute&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;insertAfter&gt;</p></td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>Writer.WriteStartElement (&quot;privateData&quot;);</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>Writer.WriteString ($OBJECT.PrivateData);</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>Writer.WriteEndElement ();</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/insertAfter&gt;</p></td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">&lt;/hook&gt;</p>
+
+<h2>CONFIGURATION FILE EXAMPLE
+<a name="CONFIGURATION FILE EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This is the
+configuration file used to generate the serializer for
+ServiceDescription:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;configuration&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;serializer
+class=&quot;System.Web.Services.Description.ServiceDescription&quot;
+assembly=&quot;System.Web.Services&quot;&gt;</p> </td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+
+<p>&lt;reader&gt;ServiceDescriptionReaderBase&lt;/reader&gt;</p> </td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+
+<p>&lt;writer&gt;ServiceDescriptionWriterBase&lt;/writer&gt;</p> </td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+
+<p>&lt;namespace&gt;System.Web.Services.Description&lt;/namespace&gt;</p> </td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+
+<p>&lt;outFileName&gt;ServiceDescriptionSerializerBase.cs&lt;/outFileName&gt;</p> </td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;readerHooks&gt;</p></td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;hook type=&quot;unknownElement&quot;&gt;</p></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+</td>
+<td width="62%">
+
+
+
+<p>&lt;typeAttribute&gt;System.Web.Services.Configuration.XmlFormatExtensionPointAttribute&lt;/typeAttribute&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;replace&gt;ServiceDescription.ReadExtension (Reader,
+$OBJECT);&lt;/replace&gt;</p> </td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/hook&gt;</p></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;hook type=&quot;type&quot;&gt;</p></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+</td>
+<td width="62%">
+
+
+
+<p>&lt;typeName&gt;System.Xml.Schema.XmlSchema&lt;/typeName&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;replace&gt;$OBJECT =
+System.Xml.Schema.XmlSchema.Read (Reader,
+null);&lt;/replace&gt;</p> </td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/hook&gt;</p></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;/readerHooks&gt;</p></td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;writerHooks&gt;</p></td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;hook type=&quot;elements&quot;&gt;</p></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+</td>
+<td width="62%">
+
+
+
+<p>&lt;typeAttribute&gt;System.Web.Services.Configuration.XmlFormatExtensionPointAttribute&lt;/typeAttribute&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;insertBefore&gt;ServiceDescription.WriteExtensions
+(Writer, $OBJECT);&lt;/insertBefore&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/hook&gt;</p></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;hook type=&quot;type&quot;&gt;</p></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;select&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+</td>
+<td width="62%">
+
+
+
+<p>&lt;typeName&gt;System.Xml.Schema.XmlSchema&lt;/typeName&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/select&gt;</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p>&lt;replace&gt;$OBJECT.Write
+(Writer);&lt;/replace&gt;</p> </td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>&lt;/hook&gt;</p></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p>&lt;/writerHooks&gt;</p></td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>&lt;/serializer&gt;</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="6%"></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">&lt;/configuration&gt;</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Lluis Sanchez
+Gual (lluis@ximian.com)</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GenXS is
+released under the terms of the GNU GPL.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mono(1), mcs(1),
+sgen(1)</p>
+<hr>
+</body>
+</html>

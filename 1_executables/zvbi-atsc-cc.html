@@ -1,0 +1,418 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:46 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>zvbi-atsc-cc</title>
+
+</head>
+<body>
+
+<h1 align="center">zvbi-atsc-cc</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Device options">Device options</a><br>
+<a href="#Tuning options">Tuning options</a><br>
+<a href="#Caption options">Caption options</a><br>
+<a href="#XDS options">XDS options</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">zvbi-atsc-cc -
+ATSC Closed Caption decoder</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>zvbi-atsc-cc
+[ options ] [-n] station name</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>zvbi-atsc-cc</b>
+captures ATSC TV transmissions using a Linux DVB device and
+decodes the enclosed Closed Caption data. It can record both
+NTSC caption (EIA 608-B) and DTVCC caption (CEA 708-C).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-? -h --help
+--usage</b></p>
+
+<p style="margin-left:18%;">Print a short usage
+message.</p>
+
+<p style="margin-left:9%;"><b>-q --quiet</b></p>
+
+<p style="margin-left:18%;">Suppress all progress and error
+messages.</p>
+
+<p style="margin-left:9%;"><b>-v --verbose</b></p>
+
+<p style="margin-left:18%;">Increase verbosity.</p>
+
+<h3>Device options
+<a name="Device options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a</b> number
+<b><br>
+--adapter-num</b> number</p>
+
+<p style="margin-left:18%;">Select a different DVB device
+to capture the signal (/dev/dvb/adapterN). The default is
+adapter 0.</p>
+
+<p style="margin-left:9%;"><b>-i</b> number <b><br>
+--frontend-id</b> number</p>
+
+<p style="margin-left:18%;">Select a different frontend on
+the DVB device (/dev/dvb/adapterN/frontendM). Most devices
+have only one frontend. The default is frontend 0.</p>
+
+<p style="margin-left:9%;"><b>-d</b> number <b><br>
+--demux-id</b> number</p>
+
+<p style="margin-left:18%;">Select a different
+demultiplexer on the DVB device (/dev/dvb/adapterN/demuxM).
+Most devices have only one demultiplexer. The default is
+demultiplexer 0.</p>
+
+<p style="margin-left:9%;"><b>-r</b> number <b><br>
+--dvr-id</b> number</p>
+
+<p style="margin-left:18%;">Select a different DVR
+interface on the DVB device (/dev/dvb/adapterN/dvrM). Most
+devices have only one DVR interface. The default is DVR
+interface 0.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-T</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>--ts</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Decode an MPEG-2 Transport Stream on standard input
+instead of opening a DVB device. This option is mainly
+intended for debugging.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Since Transport
+Streams can contain multiple programs you must still specify
+one or more station names, which <b>zvbi-atsc-cc</b> will
+look up in a channel configuration file to determine the
+Program ID of the video elementary stream or streams it
+should extract. You should also add the <b>--atsc</b> option
+to clarify that this is an ATSC TS and the program should
+expect an <b>azap</b> channel configuration file, which is
+otherwise inferred from the DVB device capabilities.</p>
+
+<h3>Tuning options
+<a name="Tuning options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e</b> file
+name <b><br>
+--channel-conf</b> file name</p>
+
+<p style="margin-left:18%;">To tune in a TV station
+<b>zvbi-atsc-cc</b> needs a channel configuration file. We
+use the config file of the <b>azap</b> tuning tool from the
+linuxtv-dvb-apps package. You can create it with the
+<b>scan</b> tool from the same package.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The azap
+channel configuration file is a text file which lists one
+station per line. Each line contains six fields separated by
+a colon: The station name, the transponder frequency in Hz,
+the modulation used (8VSB, 16VSB, QAM_64, QAM_256), the
+video stream PID, the audio stream PID, and the service ID.
+Empty lines and lines starting with a number sign will be
+ignored.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+selects a different channel configuration file. The default
+is <i><br>
+$HOME/.azap/channels.conf</i></p>
+
+<p style="margin-left:9%;"><b>-L --list</b></p>
+
+<p style="margin-left:18%;">List all stations in the
+channel configuration file and their transponder
+frequency.</p>
+
+<p style="margin-left:9%;"><b>-n</b> station name <b><br>
+--station</b> station name</p>
+
+<p style="margin-left:18%;">The station to tune in. Usually
+the <b>-n</b> can be omitted.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>zvbi-atsc-cc</b>
+can record caption from multiple stations at once if they
+share a transponder frequency. Just specify multiple station
+names on the command line to enable this.</p>
+
+<h3>Caption options
+<a name="Caption options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">With the caption
+and XDS options you specify which data <b>zvbi-atsc-cc</b>
+should extract. If multiple station names are given these
+options apply to the succeeding station name. You must
+specify at least one of these options for each station.
+<b><br>
+-c --cc</b></p>
+
+<p style="margin-left:18%;">Print any received caption on
+standard output.</p>
+
+<p style="margin-left:9%;"><b>-C</b> file name <b><br>
+--cc-file</b> file name</p>
+
+<p style="margin-left:18%;">Append any received caption to
+the specified file.</p>
+
+<p style="margin-left:9%;"><b>-l</b> number <b><br>
+--channel</b> number</p>
+
+<p style="margin-left:18%;">Print NTSC Closed Caption
+channel 1, 2, 3 or 4 on standard output.</p>
+
+<p style="margin-left:9%;"><b>-1</b> ... <b>-4</b> file
+name <b><br>
+--cc1-file</b> ... <b>--cc4-file</b> file name</p>
+
+<p style="margin-left:18%;">Filter out NTSC Closed Caption
+channel CC1 ... CC4 and append the text to the specified
+file. CC1 is the primary, CC3 the secondary caption service.
+If both services are transmitted CC1 usually carries
+English, CC3 Spanish caption.</p>
+
+<p style="margin-left:9%;"><b>-5</b> ... <b>-8</b> file
+name <b><br>
+--t1-file</b> ... <b>--t4-file</b> file name</p>
+
+<p style="margin-left:18%;">Filter out NTSC Text service T1
+... T4 and append the text to the specified file.</p>
+
+<p style="margin-left:9%;"><b>-9</b> ... <b>-0</b> file
+name <b><br>
+--s1-file</b> ... <b>--s2-file</b> file name</p>
+
+<p style="margin-left:18%;">Filter out DTVCC service 1 or 2
+and append the text to the specified file. Service 1 is the
+primary, service 2 the secondary caption service. If both
+services are transmitted service 1 usually carries English,
+service 2 Spanish caption.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Digital TV
+stations are supposed to transmit language codes and other
+information about the available caption services but these
+are not presently evaluated. <b>zvbi-atsc-cc</b> filters out
+text which does not appear to be caption, such as tickers or
+vertically printed text.</p>
+
+<p style="margin-left:9%;"><b>-b --no-webtv</b></p>
+
+<p style="margin-left:18%;">Do not print WebTV links.</p>
+
+<p style="margin-left:9%;"><b>-m --timestamps</b></p>
+
+<p style="margin-left:18%;">Prepend timestamps
+YYYYMMDDHHMMSS to caption lines. This is the system time in
+the UTC timezone when the text was captured, specifically
+the Carriage Return or Pop-On code responsible for printing
+the line.</p>
+
+<p style="margin-left:9%;"><b>-S --stream-time <br>
+-S</b>date <b>--stream-time</b>=date</p>
+
+<p style="margin-left:18%;">Prepend timestamps
+YYYYMMDDHHMMSS to caption lines generated from the
+timestamps transmitted in the video stream. If date is
+given, also in the format YYYYMMDDHHMMSS, it will be added
+to the timestamps, otherwise the counter starts at
+0001-01-01 00:00:00.</p>
+
+<p style="margin-left:9%;"><b>-s --sentences</b></p>
+
+<p style="margin-left:18%;">Print caption one sentence at a
+time.</p>
+
+<p style="margin-left:9%;"><b>-j</b> type <b><br>
+--format</b> type</p>
+
+<p style="margin-left:18%;">When type is &quot;plain&quot;
+<b>zvbi-atsc-cc</b> prints caption and XDS text without any
+markup. When type is &quot;vt100&quot; it faithfully
+reproduces the caption foreground and background color,
+italic and underline attributes by inserting VT.100 terminal
+control codes. With type &quot;ntsc-cc&quot; it mimics the
+output of the <b>ntsc-cc</b> and <b>zvbi-ntsc-cc</b> tool.
+The default is &quot;ntsc-cc&quot;.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>zvbi-atsc-cc
+supports all Closed Caption character sets and</b> converts
+to the encoding of the current locale, usually UTF-8.</p>
+
+<p style="margin-left:9%;"><b>-p --plain</b></p>
+
+<p style="margin-left:18%;">Same as
+<b>-j&nbsp;plain</b></p>
+
+<h3>XDS options
+<a name="XDS options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-x
+--xds</b></p>
+
+<p style="margin-left:18%;">Print all received XDS data on
+standard output.</p>
+
+<p style="margin-left:9%;"><b>-X</b> file name <b><br>
+--xds-file</b> file name</p>
+
+<p style="margin-left:18%;">Filter out eXtended Data
+Service data (station name, program name, program rating
+etc.) and append it as text to the specified file.</p>
+
+<p style="margin-left:9%;"><b>-f</b> type[,type]* <b><br>
+--filter</b> type[,type]*</p>
+
+<p style="margin-left:18%;">Filter out specific XDS
+information: all, call (station call sign), desc (program
+synopsis), length, network, rating, time, timecode,
+timezone, title. Multiple <b>-f</b> options accumulate. The
+default is &quot;all&quot;.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">zvbi-atsc-cc -c
+NJN-HD</p>
+
+<p style="margin-left:9%; margin-top: 1em">zvbi-atsc-cc
+--cc1-file wnyw.txt WNYW-DT --cc1-file wwor.txt WWOR-DT</p>
+
+<p style="margin-left:9%; margin-top: 1em">(NJN-HD, WNYW-DT
+and WWOR-DT are TV stations in New York. WNYW-DT <br>
+and WWOR-DT can be captured simultaneously because they
+share a <br>
+transponder frequency.)</p>
+
+<p style="margin-left:9%; margin-top: 1em">zvbi-atsc-cc
+--atsc --ts -c CNN &lt; recorded-from-cnn.ts</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$HOME/.azap/channels.conf</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">zvbi-ntsc-cc,
+azap</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">http://zapping.sourceforge.net</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Michael H.
+Schimek (mschimek AT users.sourceforge.net) <br>
+timecop@japan.co.jp <br>
+Mike Baker <br>
+Mark K. Kim</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU General Public License along with
+this program; if not, write to the Free Software Foundation,
+Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+02110-1301, USA.</p>
+<hr>
+</body>
+</html>

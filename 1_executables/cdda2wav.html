@@ -1,0 +1,2473 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:58 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CDDA2WAV</title>
+
+</head>
+<body>
+
+<h1 align="center">CDDA2WAV</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Default settings">Default settings</a><br>
+<a href="#Device naming">Device naming</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Informative options">Informative options</a><br>
+<a href="#Audio options">Audio options</a><br>
+<a href="#SCSI options">SCSI options</a><br>
+<a href="#OS Interface options">OS Interface options</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#DISCUSSION">DISCUSSION</a><br>
+<a href="#HINTS ON OPTIONS">HINTS ON OPTIONS</a><br>
+<a href="#Select Device">Select Device</a><br>
+<a href="#Select Auxiliary device">Select Auxiliary device</a><br>
+<a href="#Select Interface">Select Interface</a><br>
+<a href="#Enable echo to soundcard">Enable echo to soundcard</a><br>
+<a href="#Change pitch of echoed audio">Change pitch of echoed audio</a><br>
+<a href="#Select mono or stereo recording">Select mono or stereo recording</a><br>
+<a href="#Select maximum quality">Select maximum quality</a><br>
+<a href="#Select sample quality">Select sample quality</a><br>
+<a href="#Select sample rate">Select sample rate</a><br>
+<a href="#Select sample rate divider">Select sample rate divider</a><br>
+<a href="#List a table of all sampling rates">List a table of all sampling rates</a><br>
+<a href="#Select start track and optionally end track">Select start track and optionally end track</a><br>
+<a href="#Select start index">Select start index</a><br>
+<a href="#Set recording duration">Set recording duration</a><br>
+<a href="#Record all tracks of a complete audio CD in separate files">Record all tracks of a complete audio CD in separate files</a><br>
+<a href="#Set start sector offset">Set start sector offset</a><br>
+<a href="#Wait for signal option">Wait for signal option</a><br>
+<a href="#Find extreme samples">Find extreme samples</a><br>
+<a href="#Find if input samples are in mono">Find if input samples are in mono</a><br>
+<a href="#Undo the pre-emphasis in the input samples">Undo the pre-emphasis in the input samples</a><br>
+<a href="#Set audio format">Set audio format</a><br>
+<a href="#Select cdrom drive reading speed">Select cdrom drive reading speed</a><br>
+<a href="#Enable MD5 checksums">Enable MD5 checksums</a><br>
+<a href="#Use Monty&rsquo;s libparanoia for reading of sectors">Use Monty&rsquo;s libparanoia for reading of sectors</a><br>
+<a href="#Do linear or overlapping reading of sectors">Do linear or overlapping reading of sectors</a><br>
+<a href="#Set the transfer size">Set the transfer size</a><br>
+<a href="#Set number of ring buffer elements">Set number of ring buffer elements</a><br>
+<a href="#Set endianess of input samples">Set endianess of input samples</a><br>
+<a href="#Set endianess of output samples">Set endianess of output samples</a><br>
+<a href="#Verbose option">Verbose option</a><br>
+<a href="#The table of contents">The table of contents</a><br>
+<a href="#No file output">No file output</a><br>
+<a href="#No infofile generation">No infofile generation</a><br>
+<a href="#Generation of simple output for gui frontends">Generation of simple output for gui frontends</a><br>
+<a href="#Verbose SCSI logging">Verbose SCSI logging</a><br>
+<a href="#Quiet option">Quiet option</a><br>
+<a href="#Just show information option">Just show information option</a><br>
+<a href="#CDDBP support">CDDBP support</a><br>
+<a href="#Lookup album and track titles option">Lookup album and track titles option</a><br>
+<a href="#Set server for title lookups">Set server for title lookups</a><br>
+<a href="#Set portnumber for title lookups">Set portnumber for title lookups</a><br>
+<a href="#HINTS ON USAGE">HINTS ON USAGE</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#Audio files:">Audio files:</a><br>
+<a href="#Cddb and Cdindex files:">Cddb and Cdindex files:</a><br>
+<a href="#Inf files:">Inf files:</a><br>
+<a href="#WARNING">WARNING</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#ACKNOWLEDGEMENTS">ACKNOWLEDGEMENTS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#DATE">DATE</a><br>
+<a href="#INTERFACE STABILITY">INTERFACE STABILITY</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cdda2wav - dumps
+CD audio data into sound files with extra data
+verification</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav</b>
+[ <i>options</i> ][ <b>dev=</b><i>device</i> ]
+[<i>file(s)</i> or <i>directories</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav</b>
+can retrieve audio tracks from CDROM drives which are
+capable of reading audio data digitally via SCSI
+(<b>CDDA</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">As
+<b>cdda2wav</b> implements strategies to work around typical
+defects on audio CDs it reads many disks that cannot be read
+by other software. As <b>cdda2wav</b> can use
+<b>libparanoia</b> (see <b>-paranoia</b> option below) to
+verify the data that has been read from the medium, it
+delivers superior quality even if the medium is dusty,
+scratched or if other problems occur.</p>
+
+<p style="margin-left:9%; margin-top: 1em">As
+<b>cdda2wav</b> may be directed to write the audio data to
+stdout, it writes all its informational output to stderr by
+default. See <b>out-fd=</b><i>descriptor</i> option
+below.</p>
+
+<h3>Default settings
+<a name="Default settings"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Cdda2wav</b>
+defaults to read the first audio track from the medium and
+the default verbose level is set to
+<b>-vtoc,summary,sectors,titles</b> and <b>cdda2wav</b> by
+default writes <b>*.inf</b> files. To extract all audio
+tracks with quality verification, it is recommended to
+call:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav
+-vall cddb=0 speed=4 -paranoia paraopts=proof -B</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">For hints on how
+to specify better parameters manually, see the
+<b>paraopts=</b> description below.</p>
+
+<h3>Device naming
+<a name="Device naming"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Most users do
+not need to care about device naming. If no <b>dev=</b>
+option was specified, <b>cdda2wav</b> implements <b>auto
+target</b> support and automagically finds the drive when
+exactly one CD-ROM type drive is available in the system.
+When more than one CD-ROM type drive exists, a list of
+possible device name parameters may be retrieved with
+<b>cdda2wav -scanbus</b> or from the target example from the
+output of <b>cdda2wav dev=help</b>, then the <b>dev=</b>
+parameter may be set based on the device listing.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>device</i> parameter to the <b>dev=</b> option explained
+below refers to the <b>SCSI&nbsp;CAM</b> standard notation
+for <i>scsibus</i>/<i>target</i>/<i>lun</i> of the
+CD/DVD/BluRay-Recorder. If a file /etc/default/cdrecord
+exists, the parameter to the <b>dev=</b> option may also be
+a drive name label in said file (see FILES section).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Informative options
+<a name="Informative options"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>-h</b></p></td>
+<td width="3%"></td>
+<td width="77%">
+</td>
+<td width="5%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-help</b></p></td>
+<td width="3%"></td>
+<td width="77%">
+
+
+<p>display version information for cdda2wav on standard
+output.</p> </td>
+<td width="5%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-version</b></p>
+
+<p style="margin-left:18%;">display version and Copyright
+information.</p>
+
+<h3>Audio options
+<a name="Audio options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a</b>
+<i>divider</i> <b><br>
+-divider</b> <i>divider</i></p>
+
+<p style="margin-left:18%;">sets rate to 44100Hz /
+<i>divider</i>. Possible values are listed with the
+<b>-R</b> option.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default
+divider value is 1.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-B</b></p></td>
+<td width="85%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-bulk</b></p></td>
+<td width="85%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-alltracks</b></p>
+
+<p style="margin-left:18%;">copies each track into a
+separate file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+not to extract all tracks.</p>
+
+<p style="margin-left:9%;"><b>-b</b> <i>bits</i> <b><br>
+-bits-per-sample</b> <i>bits</i></p>
+
+<p style="margin-left:18%;">sets <i>bits</i> per sample per
+channel: <b>8</b>, <b>12</b> or <b>16</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+16 bits per sample.</p>
+
+<p style="margin-left:9%;"><b>-c</b> <i>channels</i>
+<b><br>
+-channels</b> <i>channels</i></p>
+
+<p style="margin-left:18%;">use:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>1</b></p></td>
+<td width="8%"></td>
+<td width="60%">
+
+
+<p>for mono recording</p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>2</b></p></td>
+<td width="8%"></td>
+<td width="60%">
+
+
+<p>for stereo recording</p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p><b>s</b></p></td>
+<td width="8%"></td>
+<td width="60%">
+
+
+<p>for stereo recording with both channels swapped</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+stereo recording.</p>
+
+<p style="margin-left:9%;"><b>-C</b> <i>endianess</i>
+<b><br>
+-cdrom-endianess</b> <i>endianess</i></p>
+
+<p style="margin-left:18%;">sets endianess of the input
+samples to &rsquo;little&rsquo;, &rsquo;big&rsquo;,
+&rsquo;machine&rsquo; or &rsquo;guess&rsquo; to override
+defaults. The value &rsquo;machine&rsquo; or
+&rsquo;host&rsquo; is evaluated as the actual byte order of
+the host CPU in the current OS.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+to detect cdrom endianess automatically.</p>
+
+<p style="margin-left:9%;"><b>-cuefile</b></p>
+
+<p style="margin-left:18%;">Create a CDRWIN compatible CUE
+file. A CUE file that completely follows the CDRWIN
+documentation can only be used to create 1:1 copies if there
+is a single file with audio data for the whole disk. The
+*.inf file format implements more audio CD features than the
+CDRWIN CUE format and it allows to create 1:1 copies if
+there is one audio data file per track. Use the CUE file
+format for meta data only if you really need this
+format.</p>
+
+<p style="margin-left:18%; margin-top: 1em">To allow
+<b>cdda2wav</b> to create CUE files, you must also specify
+<b>-t all</b> to switch <b>cdda2wav</b> into a mode that
+creates a single audio data file for the whole CD.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-T</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-deemphasize</b></p>
+
+<p style="margin-left:18%;">undo the effect of pre-emphasis
+in the input samples.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+to keep the audio data in the same state as on the medium
+and to mark the pre-emphasis state in the <b>*.inf</b>
+files.</p>
+
+<p style="margin-left:9%;"><b>-L</b> <i>cddb mode</i>
+<b><br>
+-cddb</b> <i>cddb mode</i></p>
+
+<p style="margin-left:18%;">does a cddbp album- and track
+title lookup based on the cddb id. The parameter cddb mode
+defines how multiple entries shall be handled.</p>
+
+
+<p style="margin-left:9%;"><b>cddbp-server=</b><i>servername</i></p>
+
+<p style="margin-left:18%;">sets the server to be contacted
+for title lookups.</p>
+
+
+<p style="margin-left:9%;"><b>cddbp-port=</b><i>portnumber</i></p>
+
+<p style="margin-left:18%;">sets the port number to be used
+for title lookups.</p>
+
+<p style="margin-left:9%;"><b>-d</b> <i>duration</i>
+<b><br>
+-duration</b> <i>duration</i></p>
+
+<p style="margin-left:18%;">sets recording time in seconds
+or frames (sectors). Frames are indicated by a
+&rsquo;f&rsquo; suffix (e.g. 75f for 75 sectors). <b>0</b>
+sets the time for whole track.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+to extract the whole track.</p>
+
+<p style="margin-left:9%;"><b>-E</b> <i>endianess</i>
+<b><br>
+-output-endianess</b> <i>endianess</i></p>
+
+<p style="margin-left:18%;">sets endianess of the output
+samples to &rsquo;little&rsquo;, &rsquo;big&rsquo; or
+&rsquo;machine&rsquo; to override the default which is
+&rsquo;network byte order&rsquo; (big endian). The value
+&rsquo;machine&rsquo; or &rsquo;host&rsquo; is evaluated as
+the actual byte order of the host CPU in the current OS.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-F</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-find-extremes</b></p>
+
+<p style="margin-left:18%;">finds extreme amplitudes in
+samples.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-G</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-find-mono</b></p>
+
+<p style="margin-left:18%;">finds if input samples are in
+mono.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-g</b></p></td>
+<td width="4%"></td>
+<td width="64%">
+</td>
+<td width="18%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-gui</b></p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>reformats the output for parsing by gui frontends.</p></td>
+<td width="18%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-H</b></p></td>
+<td width="4%"></td>
+<td width="64%"></td>
+<td width="18%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-no-infofile</b></p>
+
+<p style="margin-left:18%;">does not write info file, cddb
+file or cdtext file.</p>
+
+<p style="margin-left:9%;"><b>-i</b> <i>index</i> <b><br>
+-index</b> <i>index</i></p>
+
+<p style="margin-left:18%;">selects the start index.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-J</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-info-only</b></p>
+
+<p style="margin-left:18%;">does not write to a file, it
+just gives information about the disc.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-M</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-md5</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>enables calculation of MD-5 checksum for all audio bytes
+from the beginning of a track. The audio header is skipped
+when calculating the MD-5 checksum to allow comparison of
+MD-5 sums for files with different header types.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-m</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-mono</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>sets to mono recording.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-no-hidden-track</b></p>
+
+<p style="margin-left:18%;">Ignore hidden tracks on the CD.
+By default, <b>cdda2wav</b> checks whether there might be a
+hidden track before track 1. This check may take a few
+seconds and thus can be disabled with
+<b>-no-hidden-track</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-N</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-no-write</b></p>
+
+<p style="margin-left:18%;">does not write to a file, it
+just reads (e.g. for debugging purposes). If this option is
+used together with the <b>-e</b> option, the CD is read and
+the audio content is played back to the sound device without
+creating output files with audio data.</p>
+
+<p style="margin-left:9%;"><b>-no-textdefaults</b></p>
+
+<p style="margin-left:18%;">By default, <b>cdda2wav</b>
+replaces empty CD-Text fields from tracks with the related
+CD-Text field (when defined) for the whole CD. If the option
+<b>-no-textdefaults</b> is used, <b>cdda2wav</b> leaves the
+track related CD-Text fields empty in such a case.</p>
+
+<p style="margin-left:9%;"><b>-no-textfile</b></p>
+
+<p style="margin-left:18%;">If <b>cdda2wav</b> encounters
+useful CD-Text information on the CD, it writes a .cdtext
+file. The option <b>-no-textfile</b> allows to suppress the
+creation of the .cdtext file.</p>
+
+<p style="margin-left:9%;"><b>-o</b> <i>offset</i> <b><br>
+-offset</b> <i>offset</i></p>
+
+<p style="margin-left:18%;">starts <i>offset</i> sectors
+behind start track (one sector equivalents 1/75
+seconds).</p>
+
+<p style="margin-left:9%;"><b>-O</b> <i>audiotype</i>
+<b><br>
+-output-format</b> <i>audiotype</i></p>
+
+<p style="margin-left:18%;">can be <i>wav</i> (for wav
+files) or <i>aiff</i> (for apple/sgi aiff files) or
+<i>aifc</i> (for apple/sgi aifc files) or <i>au</i> or
+<i>sun</i> (for sun .au PCM files) or <i>cdr</i> or
+<i>raw</i> (for headerless files to be used for cd
+writers).</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default
+output format is now <b>wav</b> for all platforms as it has
+become the most common format. Note that former versions of
+<b>cdda2wav</b> made an exception and by default created
+<b>au</b> type files on Solaris.</p>
+
+<p style="margin-left:9%;"><b>-p</b> <i>percentage</i>
+<b><br>
+-playback-realtime</b> <i>percentage</i></p>
+
+<p style="margin-left:18%;">changes pitch of audio data
+copied to sound device.</p>
+
+<p style="margin-left:9%;"><b>-P</b> <i>sectors</i> <b><br>
+-set-overlap</b> <i>sectors</i></p>
+
+<p style="margin-left:18%;">sets the initial number of
+overlap <i>sectors</i> for jitter correction in non-paranoia
+mode. Note that overlapped reads are handled differently in
+paranoia mode.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default
+overlap in non-paranoia mode is 1.</p>
+
+<p style="margin-left:9%;"><b>-paranoia</b></p>
+
+<p style="margin-left:18%;">use the paranoia library as a
+filter on top of cdda2wav&rsquo;s routines for reading. In
+<b>paranoia</b> mode, the latency time for the
+<b>-interactive</b> mode and with a read ahead buffer size
+of 150..300 sectors, is increased to typically 5..10
+seconds. This is due to the <b>paranoia</b> code reading
+everything at least twice and having to empty the cache RAM
+of the CD-ROM drive.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The size of the
+read ahead area must be larger than the size of the RAM of
+the drive in order to allow <b>libparanoia</b> to empty the
+cache RAM in the drive. As the size of the read ahead area
+in former times was a constant compiled into the
+<b>libparanoia</b> code, the extract quality with using
+libparanoia was no longer sufficient with drives built after
+year 2000. See <b>readahead=</b> parameter to the
+<b>paraopts=</b> option below.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the
+<b>paranoia</b> mode is used, <b>cdda2wav</b> displays some
+quality statistics for each extracted track. The following
+items appear in the list: <br>
+The quality indicators in detail:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>rderr</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>The number of failed low level read requests. Each read
+appears for <b>sectors-per-request</b> sectors. The
+<b>sectors-per-request</b> size is typically less than the
+read ahead size.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>skip</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>The number of sectors that have been skipped because the
+read error retry count was exhausted and no successful read
+was possible.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>atom</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>The number of jitters that have been detected inside
+sectors. This should never happen, but whenever a
+non-correctable C2 error occurs, the drive could lose
+streaming. Increasing the read ahead buffer size may reduce
+the results from atom errors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>edge</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>The number of jitters that have been detected at the
+edges of sectors. This could be caused by sector positioning
+errors. Increasing the read ahead buffer size may reduce the
+results from edge errors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>drop</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>The number of dropped samples. This could be caused by
+sector positioning errors. Increasing the read ahead buffer
+size may reduce the results from edge errors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>dup</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Duplicated samples could be caused by sector positioning
+errors like dripped samples. Increasing the read ahead
+buffer size may reduce the results from edge errors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>drift</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>This is the amount of drifts detected when checking the
+overlap area.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>c2</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>The number of sectors with C2 errors seen when reading
+the last track. As the paranoia code tends to read bad parts
+of the disk many times, this number usually is above the
+number that would appear when the disk is just read once in
+a linear way. Use <b>paraopts=disable,c2check</b> to see a
+number that represents the state of the medium.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>reads</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>The number of read ahead blocks read for the last track
+by the upper layer and the percentage of the amount of data
+read compared to the size of the track. This percentage is
+typically 200% because the paranoia code reads all data at
+least twice. If there is a lot of overlap and a lof of read
+problems, this percentage raises.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>overlap</b></p>
+
+<p style="margin-left:27%;">The number the overlap size has
+been raised. This happens when the overlap size is below the
+maximum overlap size and errors in the overlap area are
+detected.</p>
+
+
+<p style="margin-left:9%;"><b>-paraopts=</b><i>list</i></p>
+
+<p style="margin-left:18%;"><i>List</i> is a comma
+separated list of suboptions passed to the paranoia library.
+<br>
+The <b>paraopts=</b> parameters in detail: <b><br>
+disable</b></p>
+
+<p style="margin-left:27%;">The paranoia corrections are
+disabled, but the data is still directed through the code
+from <b>libparanoia</b>. This allows to switch on C2 error
+detection and to check the C2 error statistics for a CD.</p>
+
+<p style="margin-left:18%;"><b>no-verify</b></p>
+
+<p style="margin-left:27%;">This switches off the
+verification of the data integrity in the overlap area and
+turns off dynamic overlap control in favor of a static
+overlap value.</p>
+
+
+<p style="margin-left:18%;"><b>retries=</b><i>amount</i></p>
+
+<p style="margin-left:27%;">Set the maximum number of read
+retries per sector in case of hard read errors. The default
+value for this parameter is <b>20</b>. This is the same
+value as used by the old <b>cdparanoia</b>(1) command.</p>
+
+
+<p style="margin-left:18%;"><b>readahead=</b><i>amount</i></p>
+
+<p style="margin-left:27%;">Set the number of sectors to
+use for the read ahead buffer. Except when at the end of the
+medium, <b>libparanoia</b> never requests less than this
+amount of data from the low level I/O code. The size of the
+read ahead buffer is usually bigger than the maximum size
+for a single DMA in the system. For this reason,
+<b>libparanoia</b> calls several read operations in order to
+fill the read ahead buffer. The default value used by
+<b>cdda2wav</b> is 400, which is more than the 150 sectors
+that <b>cdparanoia</b>(1) uses but still a compromise for
+not requiring too much memory.</p>
+
+<p style="margin-left:27%; margin-top: 1em">It is
+recommended to use a read ahead buffer size that is not less
+than the RAM size in the CD-ROM drive. If the drive has more
+than 1MB of RAM, use 425 sectors per MB of RAM in the
+drive.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Note that as
+long as the <b>readahead=</b> value is too small, the
+extract quality varies a lot with the value in use. The
+value used by <b>cdparanoia</b>(1) may cause an extract
+quality below what <b>cdda2wav</b> delivers without
+<b>libparanoia</b>.</p>
+
+
+<p style="margin-left:18%;"><b>overlap=</b><i>amount</i></p>
+
+<p style="margin-left:27%;">Set the number of sectors used
+for static overlap. This switches dynamic overlap off. It is
+recommended not to use static overlapping. To get a larger
+overlapping, better use a higher <b>minoverlap=</b>
+value.</p>
+
+
+<p style="margin-left:18%;"><b>minoverlap=</b><i>amount</i></p>
+
+<p style="margin-left:27%;">Set the minimum number of
+sectors for dynamic overlap. The default value used by
+<b>cdda2wav</b> is <b>0.5</b>, this is more than the default
+used by <b>cdparanoia</b>(1) which is 0.1.</p>
+
+<p style="margin-left:27%; margin-top: 1em">For old drives
+that do not support accurate streaming, it is not
+recommended to specify a <b>minoverlap=</b> value greater or
+equal to the maximal DMA size.</p>
+
+<p style="margin-left:27%; margin-top: 1em">For best
+results on other drives, it is recommended to use a
+<b>minoverlap=</b> value that is not less than half of the
+readahead size.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The extract
+quality varies a lot with the <b>minoverlap=</b> value, but
+increasing the value also increases the extract time.</p>
+
+
+<p style="margin-left:18%;"><b>maxoverlap=</b><i>amount</i></p>
+
+<p style="margin-left:27%;">Set the maximum number of
+sectors for dynamic overlap. If <b>maxoverlap=</b> was not
+specified and a large <b>minoverlap=</b> value was
+specified, this results in a quasi static overlapping. The
+default value used by <b>cda2wav</b> is <b>32</b>.</p>
+
+<p style="margin-left:18%;"><b>c2check</b></p>
+
+<p style="margin-left:27%;">Turn on C2 error checking. For
+now, this just results in printing C2 error statistics.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Warning: some
+drives have been reported to fail reading hidden tracks when
+the <b>c2check</b> mode is in effect. If you encounter a
+drive where <b>cdda2wav</b> is not able to auto-detect
+whether <b>c2check</b> is usable, please report.</p>
+
+<p style="margin-left:27%; margin-top: 1em">When you plan
+to use <b>c2check</b> while extracting hidden tracks, first
+verify that your drive will report hidden tracks the same
+with and without the <b>c2check</b> option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>proof</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>This option is a macro for better extract parameters
+than used by default. The macro <b>proof</b> expands to:</p></td></tr>
+</table>
+
+
+<p style="margin-left:27%; margin-top: 1em"><b>paraopts=minoverlap=</b><i>sectors-per-request</i><b>-1,\
+<br>
+retries=200,readahead=600</b></p>
+
+<p style="margin-left:27%; margin-top: 1em">If
+<i>sectors-per-request1</i> is more than 20, 20 is used as
+minimal overlap value.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameters
+used by <b>proof</b> are still not the best and there is no
+best parameter set for all cases. A larger value for the
+read ahead buffer size may e.g be too large for the
+available RAM in the system and the best value for the
+minimal overlap depends on whether the drive supports exact
+streaming. It is recommended to run experiments with larger
+values for the parameters <b>minoverlap=</b> and
+<b>readahead=</b> to get the best results for a specific
+platform.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Note that
+previous versions did include <b>c2check</b> with the
+<b>proof</b> macro, but this has been reported to fail on
+some drives and thus <b>c2check</b> was disabled by default.
+Current versions of <b>cdda2wav</b> auto-detect whether the
+actual drive supports the <b>c2check</b> feature and use it
+if possible.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>-q</b></p></td>
+<td width="1%"></td>
+<td width="44%">
+</td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-quiet</b></p></td>
+<td width="1%"></td>
+<td width="44%">
+
+
+<p>quiet operation, no screen output.</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-r</b> <i>rate</i> <b><br>
+-rate</b> <i>rate</i></p>
+
+<p style="margin-left:18%;">sets <i>rate</i> in samples per
+second. Possible values are listed with the <b>-R</b>
+option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-R</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-dump-rates</b></p>
+
+<p style="margin-left:18%;">shows a list of all sample
+rates and their dividers.</p>
+
+<p style="margin-left:9%;"><b>-S</b> <i>speed</i> <b><br>
+-speed</b> <i>speed</i></p>
+
+<p style="margin-left:18%;">sets the cdrom device to one of
+the selectable speeds for reading. For maximum extraction
+quality, it is recommended to use speed values of 8 or
+below.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+to extract at maximum speed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-s</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-stereo</b></p>
+
+<p style="margin-left:18%;">sets to stereo recording.</p>
+
+<p style="margin-left:9%;"><b>-start-sector</b>
+<i>sector</i></p>
+
+<p style="margin-left:18%;">set an absolute start sector.
+This option is mutually exclusive to <b>-track</b> and
+<b>-offset</b>.</p>
+
+<p style="margin-left:9%;"><b>-t</b>
+<i>track[+endtrack]</i> <b><br>
+-track</b> <i>track[+endtrack]</i> <b><br>
+-track</b> <i>track</i><b>+max <br>
+-track&nbsp;all</b></p>
+
+<p style="margin-left:18%;">selects the start track and
+optionally the end track. If <b>-t&nbsp;all</b> is used, all
+audio tracks are selected. If <b>-t&nbsp;2+max</b> is used,
+all audio tracks starting with track 2 are selected.</p>
+
+<p style="margin-left:9%;"><b>-v</b> <i>itemlist</i>
+<b><br>
+-verbose-level</b> <i>itemlist</i></p>
+
+<p style="margin-left:18%;">Retrieves and prints verbose
+information about the CD. <b>Level</b> is a list of comma
+separated suboptions. Each suboption controls the type of
+information to be reported.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default
+verbose-level is <b>toc,summary,sectors,titles</b> .</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-w</b></p></td>
+<td width="3%"></td>
+<td width="50%">
+</td>
+<td width="32%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-wait</b></p></td>
+<td width="3%"></td>
+<td width="50%">
+
+
+<p>waits for signal, then start recording.</p></td>
+<td width="32%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-x</b></p></td>
+<td width="3%"></td>
+<td width="50%">
+</td>
+<td width="32%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-max</b></p></td>
+<td width="3%"></td>
+<td width="50%">
+
+
+<p>sets maximum (CD) quality.</p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<h3>SCSI options
+<a name="SCSI options"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dev=</b><i>device</i>
+<b><br>
+-D</b> <i>device</i> <b><br>
+-device</b> <i>device</i></p>
+
+<p style="margin-left:18%;">uses <i>device</i> as the
+source for CDDA reading. For example /dev/cdrom for the
+<b>cooked_ioctl</b> interface and Bus,ID,Lun for the
+<b>generic_scsi</b> interface. The <i>device</i> has to
+correspond with the interface setting if given (see
+<b>-I</b> and <b>-interface</b> option below).</p>
+
+<p style="margin-left:18%; margin-top: 1em">If no <b>-I</b>
+or <b>-interface</b> option has been specified, the
+interface setting is derived from the device name syntax. A
+device name that is in the form Bus,ID,Lun or contains a
+colon (&rsquo;:&rsquo;) defaults to the <b>generic_scsi</b>
+interface.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Using the
+<b>cooked_ioctl</b> is not recommended as this makes
+<b>cdda2wav</b> mainly depend on the audio extraction
+quality of the operating system which is usually extremely
+bad. For this reason, avoid using parameters like
+<b>dev=</b>/dev/cdrom for the device.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The setting of
+the environment variable <b>CDDA_DEVICE</b> is overridden by
+this option.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If no
+<b>dev=</b> option is present, or if the <b>dev=</b> option
+only contains a transport specifier but no address,
+<b>cdda2wav</b> tries to scan the SCSI address space for
+CD-ROM drives. If exactly one is found, this is used by
+default.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For more
+information, see the description of the <b>dev=</b> option
+from <b>cdrecord</b>(1).</p>
+
+<p style="margin-left:9%;"><b>debug=</b><i>#</i> <b><br>
+debug-scsi=</b><i>#</i></p>
+
+<p style="margin-left:18%;">Set the debug level for the
+<b>libscg</b> SCSI OS abstraction layer.</p>
+
+<p style="margin-left:9%;"><b>kdebug=</b><i>#</i> <b><br>
+kdebug-scsi=</b><i>#</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>kd=</b><i>#</i></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Set the kernel debug level for the kernel driver called
+by the <b>libscg</b> SCSI OS abstraction layer. This option
+is not supported on all platforms.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-scanbus</b></p>
+
+<p style="margin-left:18%;">Scan all SCSI devices on all
+SCSI buses and print the inquiry strings. This option may be
+used to find SCSI address of the CD/DVD-Recorder on a
+system. The numbers printed out as labels are computed by:
+<b>bus * 100 + target</b></p>
+
+<p style="margin-left:9%;"><b>scgopts=</b><i>list</i></p>
+
+<p style="margin-left:18%;">A comma separated list of SCSI
+options that are handled by libscg. The implemented options
+may be uptated indepentendly from applications. Currently,
+one option: <b>ignore-resid</b> is supported to work around
+a Linux kernel bug.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>ts=</b><i>#</i></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Set the maximum transfer size for a single SCSI command
+to #. The syntax for the <b>ts=</b> option is the same as
+for cdrecord fs=# or sdd bs=#.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">If no
+<b>ts=</b> option has been specified, <b>cdda2wav</b>
+defaults to a transfer size of 3&nbsp;MB. If libscg gets
+lower values from the operating system, the value is reduced
+to the maximum value that is possible with the current
+operating system. Sometimes, it may help to further reduce
+the transfer size or to enhance it, but note that it may
+take a long time to find a better value by experimenting
+with the <b>ts=</b> option.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Some operating
+systems return wrong values for the maximum transfer size.
+If the transfer totally hangs or resets occur, it may be
+appropriate to reduce the transfer size to less than 64 kB
+or even less than 32 kB.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-V</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-verbose-scsi</b></p>
+
+<p style="margin-left:18%;">enable SCSI command logging to
+the console. This is mainly used for debugging.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-Q</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-silent-scsi</b></p>
+
+<p style="margin-left:18%;">suppress SCSI command error
+reports to the console. This is mainly used for guis.</p>
+
+<h3>OS Interface options
+<a name="OS Interface options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-A</b>
+<i>auxdevice</i> <b><br>
+-auxdevice</b> <i>auxdevice</i></p>
+
+<p style="margin-left:18%;">uses <i>auxdevice</i> as CDROM
+drive to allow to send the CDROMMULTISESSION ioctl on Linux
+although the <b>generic_scsi</b> interface is in use.</p>
+
+<p style="margin-left:9%;"><b>-I</b> <i>interface</i>
+<b><br>
+-interface</b> <i>interface</i></p>
+
+<p style="margin-left:18%;">specifies the <i>interface</i>
+to use for accessing the CDROM: <b><br>
+generic_scsi</b></p>
+
+<p style="margin-left:27%;">for sending SCSI commands
+directly to the drive.</p>
+
+<p style="margin-left:18%;"><b>cooked_ioctl</b></p>
+
+<p style="margin-left:27%;">for using the programming
+interface supplied by the OS kernel.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The latter is
+not recommended as it gives lower quality and only works on
+a limited number of platforms.</p>
+
+<p style="margin-left:9%;"><b>-interactive</b></p>
+
+<p style="margin-left:18%;">Go into interactive mode that
+reads commands from <b>stdin</b> and writes the textual
+replies to <b>stderr</b>, or the file descriptor specified
+by the <b>out-fd</b> option. This mode has been introduced
+mainly to allow cdrecord to be called by gstreamer
+plugins.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If
+<b>cdda2wav</b> was called with the option
+<b>-interactive</b>, it reads the TOC from the medium and
+then waits for command input as if it has been issued a
+<b>stop</b> command. If the next command is a <b>cont</b>
+command, then <b>cdda2wav</b> extracts the whole audio part
+of the medium. If the next command is a <b>read</b> command,
+then <b>cdda2wav</b> starts extracting from the position
+that was indicated by the <b>read</b> command parameter.</p>
+
+
+<p style="margin-left:9%;"><b>out-fd=</b><i>descriptor</i></p>
+
+<p style="margin-left:18%;">Redirect informational output
+to the file descriptor named by <b>descriptor</b>. The
+parameter <b>descriptor</b> specifies a UNIX file descriptor
+number. By default, <b>cdda2wav</b> sends informational
+output to <b>stderr</b>. Redirecting the informational
+output to a different file descriptor helps guis and other
+programs that call <b>cdda2wav</b> via pipes.</p>
+
+
+<p style="margin-left:9%;"><b>audio-fd=</b><i>descriptor</i></p>
+
+<p style="margin-left:18%;">In case that the file name for
+the audio data file is &quot;-&quot;, redirect audio output
+to the file descriptor named by <b>descriptor</b>. The
+parameter <b>descriptor</b> specifies a UNIX file descriptor
+number. By default, <b>cdda2wav</b> sends audio data to
+<b>stdout</b> if the output is not directed into a file.
+Redirecting the audio output to a different file descriptor
+helps guis and other programs that call <b>cdda2wav</b> via
+pipes.</p>
+
+<p style="margin-left:9%;"><b>-no-fork</b></p>
+
+<p style="margin-left:18%;">Do not fork for extended
+buffering. If <b>-no-fork</b> is used and <b>cdda2wav</b> is
+used to play back audio CDs in <b>paranoia</b> mode, the
+playback may be interrupted due to lack of buffering. On the
+other hand, allowing <b>cdda2wav</b> to fork will increase
+the latency time for the <b>-interactive</b> mode.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-e</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-echo</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>copies audio data to the operating system&rsquo;s sound
+device e.g. <b>/dev/dsp</b>.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>sound-device=</b><i>sounddevice</i></p>
+
+<p style="margin-left:18%;">set an alternate sound device
+to use for <b>-e</b>.</p>
+
+<p style="margin-left:9%;"><b>-n</b> <i>sectors</i> <b><br>
+-sectors-per-request</b> <i>sectors</i></p>
+
+<p style="margin-left:18%;">reads <i>sectors</i> per
+request.</p>
+
+<p style="margin-left:9%;"><b>-l</b> <i>buffers</i> <b><br>
+-buffers-in-ring</b> <i>buffers</i></p>
+
+<p style="margin-left:18%;">uses a ring buffer with
+<i>buffers</i> total.</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Some defaults
+for <b>cdda2wav</b> are compiled in and depend on the
+<b>Makefile</b> others on the <b>environment variable</b>
+settings. <b><br>
+CDDA_DEVICE</b></p>
+
+<p style="margin-left:18%;">is used to set the device name.
+The device naming is compatible with <b>cdrecord</b>(1).</p>
+
+<p style="margin-left:9%;"><b>CDDBP_SERVER</b></p>
+
+<p style="margin-left:18%;">is used for cddbp title lookups
+when supplied.</p>
+
+<p style="margin-left:9%;"><b>CDDBP_PORT</b></p>
+
+<p style="margin-left:18%;">is used for cddbp title lookups
+when supplied.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>RSH</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>If the <b>RSH</b> environment variable is present, the
+remote connection will not be created via <b>rcmd</b>(3) but
+by calling the program pointed to by <b>RSH</b>. Use e.g.
+<b>RSH=</b>/usr/bin/ssh to create a secure shell
+connection.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Note that this
+forces <b>cdda2wav</b> to create a pipe to the <b>rsh(1)</b>
+program and disallows <b>cdda2wav</b> to directly access the
+network socket to the remote server. This makes it
+impossible to set up performance parameters and slows down
+the connection compared to a <b>root</b> initiated
+<b>rcmd(3)</b> connection.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>RSCSI</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">If the <b>RSCSI</b> environment
+variable is present, the remote SCSI server will not be the
+program <b>/opt/schily/sbin/rscsi</b> but the program
+pointed to by <b>RSCSI</b>. Note that the remote SCSI server
+program name will be ignored if you log in using an account
+that has been created with a remote SCSI server program as
+login shell.</p></td></tr>
+</table>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav</b>
+uses the following exit codes to indicate various degrees of
+success:</p>
+
+<h2>DISCUSSION
+<a name="DISCUSSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav</b>
+is able to read parts of an <b>audio</b> CD or
+<b>multimedia</b> CDROM (containing audio parts) directly
+digitally. These parts can be written to a file, a pipe, or
+to a sound device.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav</b>
+stands for <b>CDDA</b> to <b>WAV</b> (where <b>CDDA</b>
+stands for compact disc digital audio and <b>WAV</b> is a
+sound sample format introduced by MS Windows). It allows
+copying <b>CDDA</b> audio data from the CDROM drive into a
+file in <b>WAV</b> or other formats.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some versions of
+<b>cdda2wav</b> may try to get higher real-time scheduling
+priorities to ensure smooth (uninterrupted) operation. These
+priorities are available for super users and are higher than
+those of &rsquo;normal&rsquo; processes. Thus delays are
+minimized.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you only have
+one CDROM and it is loaded with an audio CD, you may simply
+invoke <b>cdda2wav</b> and it will create the sound file
+<b>audio.wav</b> recording the whole track beginning with
+track 1 in stereo at 16 bit at 44100 Hz sample rate, if your
+file system has enough space free. Otherwise recording time
+will be limited. For details see files <b>README</b> and
+<b>README.INSTALL</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have more
+then one CD-ROM type drive in the system, you need to
+specify the <b>dev=</b> option.</p>
+
+<h2>HINTS ON OPTIONS
+<a name="HINTS ON OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Most of the
+options are used to control the format of the WAV file. In
+the following text most of them are discussed in a more
+verbose way.</p>
+
+<h3>Select Device
+<a name="Select Device"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dev=</b><i>device</i>
+selects the CDROM drive device to be used. The specifier
+given should correspond to the selected interface (see
+below). For the <b>cooked_ioctl</b> interface this is the
+cdrom device descriptor. <b>The SCSI devices used with the
+generic SCSI interface however are addressed with their
+SCSI-Bus, SCSI-Id, and SCSI-Lun instead of the generic SCSI
+device descriptor.</b> One example for a SCSI CDROM drive on
+bus 0 with SCSI ID 3 and lun 0 is <b>dev=0,3,0</b>.</p>
+
+<h3>Select Auxiliary device
+<a name="Select Auxiliary device"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-A</b>
+<i>auxdevice</i> may be needed in some rare cases for
+CD-Extra handling. <b>Cdda2wav</b> usually has no problem to
+get the multi-session information for CD-Extra using raw
+SCSI commands. For Non-SCSI-CDROM drives this is the same
+device as given by <b>dev=</b> (see above). For SCSI-CDROM
+drives it is the CDROM drive (SCSI) device (i.e.
+<b>/dev/sr0</b> ) corresponding to the SCSI device (i.e.
+<b>0,3,0</b> ). It has to match the device used for
+sampling.</p>
+
+<h3>Select Interface
+<a name="Select Interface"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-I</b>
+<i>interface</i> selects the CDROM drive communication
+method. This interface method is typically automatically
+selected from the device name. For SCSI drives
+<b>generic_scsi</b> is used (cooked_ioctl may not be
+available for all devices). Valid names are
+<b>generic_scsi</b> and <b>cooked_ioctl</b>. The first uses
+the generic SCSI interface, the latter uses the ioctl of the
+CDROM driver. The latter variant works only when the kernel
+driver supports <b>CDDA</b> reading. This entry has to match
+the selected CDROM device (see above).</p>
+
+<h3>Enable echo to soundcard
+<a name="Enable echo to soundcard"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e</b> copies
+audio data to the sound card while recording, so you hear it
+nearly simultaneously. The soundcard gets the same data that
+is recorded. This is time critical, so it works best with
+the <b>-q</b> option. To use <b>cdda2wav</b> as a pseudo CD
+player without recording in a file you could use</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav -q
+-e -t2 -d0 -N</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">to play the
+whole second track or</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav -q
+-e -B -N</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">to play the
+whole disk. This feature reduces the recording speed to at
+most onefold speed.</p>
+
+<h3>Change pitch of echoed audio
+<a name="Change pitch of echoed audio"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p
+percentage</b> changes the pitch of all audio echoed to a
+sound card. Only the copy to the soundcard is affected, the
+recorded audio samples in a file remain the same. Normal
+pitch, which is the default, is given by 100. Lower
+percentages correspond to lower pitches, i.e. -p 50
+transposes the audio output one octave lower. See also the
+script <b>pitchplay</b> as an example. This option was
+contributed by Raul Sobon.</p>
+
+<h3>Select mono or stereo recording
+<a name="Select mono or stereo recording"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m</b> or
+<b>-c 1</b> selects mono recording (both stereo channels are
+mixed), <b>-s</b> or <b>-c 2</b> or <b>-c s</b> selects
+stereo recording. Parameter s will swap both sound
+channels.</p>
+
+<h3>Select maximum quality
+<a name="Select maximum quality"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-x</b> will
+set stereo, 16 bits per sample at 44.1 kHz (full CD
+quality). Note that other format options given later can
+change this setting.</p>
+
+<h3>Select sample quality
+<a name="Select sample quality"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b 8</b>
+specifies 8 bit (1 Byte) for each sample in each channel;
+<b>-b 12</b> specifies 12 bit (2 Byte) for each sample in
+each channel; <b>-b 16</b> specifies 16 bit (2 Byte) for
+each sample in each channel (Ensure that your sample player
+or sound card is capable of playing 12-bit or 16-bit
+samples). Selecting 12 or 16 bits doubles file size. 12-bit
+samples are aligned to 16-bit samples, so they waste some
+disk space.</p>
+
+<h3>Select sample rate
+<a name="Select sample rate"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b>
+<i>samplerate</i> selects a sample rate. <i>samplerate</i>
+can be in a range between 900 and 44100. Option <b>-R</b>
+lists all available rates.</p>
+
+<h3>Select sample rate divider
+<a name="Select sample rate divider"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a</b>
+<i>divider</i> selects a sample rate divider. <i>divider</i>
+can be from 1 to 50.5 in steps of 0.5. Option <b>-R</b>
+lists all available rates.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To make the
+sound smoother at lower sampling rates, <b>cdda2wav</b> sums
+over <i>n</i> samples (where <i>n</i> is the specific
+dividend). So for 22050 Hertz output we have to sum over 2
+samples, for 900 Hertz we have to sum over 49 samples. This
+cancels higher frequencies. Standard sector size of an audio
+CD (ignoring additional information) is 2352 Bytes. In order
+to finish summing for an output sample at sector boundaries
+the rates above have to be chosen. Arbitrary sampling rates
+in high quality would require some interpolation scheme,
+which needs much more sophisticated programming.</p>
+
+<h3>List a table of all sampling rates
+<a name="List a table of all sampling rates"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-R</b> shows
+a list of all sample rates and their dividers. Dividers can
+range from 1 to 50.5 in steps of 0.5.</p>
+
+<h3>Select start track and optionally end track
+<a name="Select start track and optionally end track"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t</b>
+<i>n+m</i> selects <b>n</b> as the start track and
+optionally <b>m</b> as the last track of a range to be
+recorded. These tracks must be from the table of contents.
+This sets the track where recording begins. Recording can
+advance through the following tracks as well (limited by the
+optional end track or otherwise depending on recording
+time). Whether one file or different files are then created
+depends on the <b>-B</b> option (see below).</p>
+
+<h3>Select start index
+<a name="Select start index"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i</b>
+<i>n</i> selects the index to start recording with. Indices
+other than 1 will invoke the index scanner, which will take
+some time to find the correct start position. An offset may
+be given additionally (see below).</p>
+
+<h3>Set recording duration
+<a name="Set recording duration"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d n</b> sets
+recording time to <i>n</i> seconds or set recording time for
+whole track if <i>n</i> is zero. In order to specify the
+duration in frames (sectors) also, the argument can have an
+appended &rsquo;f&rsquo;. Then the numerical argument is to
+be taken as frames (sectors) rather than seconds. Please
+note that if track ranges are being used they define the
+recording time as well thus overriding any <b>-d</b> option
+specified times.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Recording time
+is defined as the time the generated sample will play (at
+the defined sample rate). Since it&rsquo;s related to the
+amount of generated samples, it&rsquo;s not the time of the
+sampling process itself (which can be less or more).
+It&rsquo;s neither strictly coupled with the time
+information on the audio CD (shown by your hifi CD player).
+Differences can occur by the usage of the <b>-o</b> option
+(see below). Notice that recording time will be shortened,
+unless enough disk space exists. Recording can be aborted at
+anytime by pressing the break character (signal
+SIGQUIT).</p>
+
+<h3>Record all tracks of a complete audio CD in separate files
+<a name="Record all tracks of a complete audio CD in separate files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-B</b> copies
+each track into a separate file. A base name can be given.
+File names have an appended track number and an extension
+corresponding to the audio format. To record all audio
+tracks of a CD, use a sufficient high duration (i.e.
+-d99999).</p>
+
+<h3>Set start sector offset
+<a name="Set start sector offset"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>
+<i>sectors</i> increments start sector of the track by
+<i>sectors</i>. By this option you are able to skip a
+certain amount at the beginning of a track so you can pick
+exactly the part you want. Each sector runs for 1/75
+seconds, so you have very fine control. If your offset is so
+high that it would not fit into the current track, a warning
+message is issued and the offset is ignored. Recording time
+is not reduced. (To skip introductory quiet passages
+automagically, use the <b>-w</b> option see below.)</p>
+
+<h3>Wait for signal option
+<a name="Wait for signal option"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w</b>
+Turning on this option will suppress all silent output at
+startup, reducing possibly file size. <b>cdda2wav</b> will
+watch for any signal in the output signal and switches on
+writing to file.</p>
+
+<h3>Find extreme samples
+<a name="Find extreme samples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-F</b>
+Turning on this option will display the most negative and
+the most positive sample value found during recording for
+both channels. This can be useful for readjusting the
+volume. The values shown are not reset at track boundaries,
+they cover the complete sampling process. They are taken
+from the original samples and have the same format (i.e.
+they are independent of the selected output format).</p>
+
+<h3>Find if input samples are in mono
+<a name="Find if input samples are in mono"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-G</b> If
+this option is given, input samples for both channels will
+be compared. At the end of the program the result is
+printed. Differences in the channels indicate stereo,
+otherwise when both channels are equal it will indicate
+mono.</p>
+
+<h3>Undo the pre-emphasis in the input samples
+<a name="Undo the pre-emphasis in the input samples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-T</b> Some
+older audio CDs are recorded with a modified frequency
+response called pre-emphasis. This is found mostly in
+classical recordings. The correction can be seen in the
+flags of the Table Of Contents often. But there are
+recordings, that show this setting only in the subchannels.
+If this option is given, the index scanner will be started,
+which reads the q-subchannel of each track. If pre-emphasis
+is indicated in the q-subchannel of a track, but not in the
+TOC, pre-emphasis will be assumed to be present, and
+subsequently a reverse filtering is done for this track
+before the samples are written into the audio file.</p>
+
+<h3>Set audio format
+<a name="Set audio format"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-O
+audiotype</b> can be <i>wav</i> (for wav files) or <i>au</i>
+or <i>sun</i> (for sun PCM files) or <i>cdr</i> or
+<i>raw</i> (for headerless files to be used for cd writers).
+All file samples are coded in linear pulse code modulation
+(as done in the audio compact disc format). This holds for
+all audio formats. Wav files are compatible to Wind*ws sound
+files, they have lsb,msb byte order which is the opposite
+byte order to the one used on the audio cd. The default
+filename extension is &rsquo;.wav&rsquo;. Sun type files are
+not like the older common logarithmically coded .au files,
+but instead as mentioned above linear PCM is used. The byte
+order is msb,lsb to be compatible. The default filename
+extension is &rsquo;.au&rsquo;. The AIFF and the newer
+variant AIFC from the Apple/SGI world store their samples in
+bigendian format (msb,lsb). In AIFC no compression is used.
+Finally the easiest &rsquo;format&rsquo;, the cdr aka raw
+format. It is done per default in msb,lsb byte order to
+satisfy the order wanted by most cd writers. Since there is
+no header information in this format, the sample parameters
+can only be identified by playing the samples on a soundcard
+or similar. The default filename extension is
+&rsquo;.cdr&rsquo; or &rsquo;.raw&rsquo;.</p>
+
+<h3>Select cdrom drive reading speed
+<a name="Select cdrom drive reading speed"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-S speed</b>
+allows to switch the cdrom drive to a certain speed in order
+to reduce read errors. The argument is transferred verbatim
+to the drive. Details depend very much on the cdrom drives.
+An argument of 0 for example is often the default speed of
+the drive, a value of 1 often selects single speed.</p>
+
+<h3>Enable MD5 checksums
+<a name="Enable MD5 checksums"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-M count</b>
+enables calculation of MD-5 checksum for &rsquo;count&rsquo;
+bytes from the beginning of a track. This was introduced for
+quick comparisons of tracks.</p>
+
+<h3>Use Monty&rsquo;s libparanoia for reading of sectors
+<a name="Use Monty&rsquo;s libparanoia for reading of sectors"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-paranoia</b>
+selects an alternate way of extracting audio sectors.
+Monty&rsquo;s library is used with the following default
+options:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">PARANOIA_MODE_FULL,
+but without PARANOIA_MODE_NEVERSKIP</p>
+
+<p style="margin-left:9%; margin-top: 1em">for details see
+Monty&rsquo;s libparanoia documentation. In this case the
+option <b>-P</b> has no effect.</p>
+
+<h3>Do linear or overlapping reading of sectors
+<a name="Do linear or overlapping reading of sectors"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">(This applies
+unless option <b>-paranoia</b> is used.) <b>-P sectors</b>
+sets the given number of sectors for initial overlap
+sampling for jitter correction. Two cases are to be
+distinguished. For nonzero values, some sectors are read
+twice to enable cdda2wav&rsquo;s jitter correction. If an
+argument of zero is given, no overlap sampling will be used.
+For nonzero overlap sectors cdda2wav dynamically adjusts the
+setting during sampling (like cdparanoia does). If no match
+can be found, cdda2wav retries the read with an increased
+overlap. If the amount of jitter is lower than the current
+overlapped samples, cdda2wav reduces the overlap setting,
+resulting in a higher reading speed. The argument given has
+to be lower than the total number of sectors per request
+(see option <i>-n</i> below). Cdda2wav will check this
+setting and issues a error message otherwise. The case of
+zero sectors is nice on low load situations or errorfree
+(perfect) cdrom drives and perfect (unscratched) audio
+cds.</p>
+
+<h3>Set the transfer size
+<a name="Set the transfer size"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n
+sectors</b> will set the transfer size to the specified
+sectors per request.</p>
+
+<h3>Set number of ring buffer elements
+<a name="Set number of ring buffer elements"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l
+buffers</b> will allocate the specified number of ring
+buffer elements.</p>
+
+<h3>Set endianess of input samples
+<a name="Set endianess of input samples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C
+endianess</b> will override the default settings of the
+input format. Endianess can be set explicitly to
+&quot;little&quot;, &quot;big&quot; or &quot;machine&quot;
+or to the automatic endianess detection based on voting with
+&quot;guess&quot;.</p>
+
+<h3>Set endianess of output samples
+<a name="Set endianess of output samples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-E
+endianess</b> (endianess can be &quot;little&quot;,
+&quot;big&quot; or &quot;machine&quot;) will override the
+default settings of the output format.</p>
+
+<h3>Verbose option
+<a name="Verbose option"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v
+itemlist</b> prints more information. A list allows
+selection of different information items.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>help</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em">Print a summary of possible
+members of the diffopts list.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>!</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>Invert the meaning of the following string. No comma is
+needed after the exclamation mark.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>not</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>Invert the meaning of all members in the diffopts list
+i.e. exclude all present options from an initially complete
+set compare list. When using <b>csh</b>(1) you might have
+problems with <b>!</b> due to its strange parser. This is
+why the <b>not</b> alias exists.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>disable</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>disables verbosity</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>all</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>all information is given</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>toc</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>displays the table of contents</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>summary</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>displays a summary of recording parameters</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>indices</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>invokes the index scanner and displays start positions
+of indices</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>catalog</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>retrieves and displays a media catalog number</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>trackid</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>retrieves and displays international standard recording
+codes</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>sectors</b></p></td>
+<td width="4%"></td>
+<td width="78%">
+
+
+<p>displays track start positions in absolute sector
+notation</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">To combine
+several requests just list the suboptions separated with
+commas.</p>
+
+<h3>The table of contents
+<a name="The table of contents"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The display will
+show the table of contents with number of tracks and total
+time (displayed in <i>mm</i>:<i>ss</i>.<i>hh</i> format,
+<i>mm</i>=minutes, <i>ss</i>=seconds, <i>hh</i>=rounded
+1/100 seconds). The following list displays track number and
+track time for each entry. The summary gives a line per
+track describing the type of the track.</p>
+
+<p align="center" style="margin-top: 1em"><b>track
+preemphasis copypermitted tracktype chans</b></p>
+
+<p style="margin-top: 1em">The <b>track</b> column holds
+the track number. <b>preemphasis</b> shows if that track has
+been given a non linear frequency response. NOTE: You can
+undo this effect with the <b>-T</b> option.
+<b>copy-permitted</b> indicates if this track is allowed to
+copy. <b>tracktype</b> can be data or audio. On multimedia
+CDs (except hidden track CDs) both of them should be
+present. <b>channels</b> is defined for audio tracks only.
+There can be two or four channels.</p>
+
+<h3>No file output
+<a name="No file output"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-N</b> this
+debugging option switches off writing to a file.</p>
+
+<h3>No infofile generation
+<a name="No infofile generation"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-H</b> this
+option switches off creation of an info file and a cddb
+file.</p>
+
+<h3>Generation of simple output for gui frontends
+<a name="Generation of simple output for gui frontends"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-g</b> this
+option switches on simple line formatting, which is needed
+to support gui frontends (like xcd-roast).</p>
+
+<h3>Verbose SCSI logging
+<a name="Verbose SCSI logging"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b> this
+option switches on logging of SCSI commands. This will
+produce a lot of output (when SCSI devices are being used).
+This is needed for debugging purposes. The format is the
+same as being used with the cdrecord program, see
+<b>cdrecord</b>(1) for more information.</p>
+
+<h3>Quiet option
+<a name="Quiet option"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>
+suppresses all screen output except error messages. That
+reduces cpu time resources.</p>
+
+<h3>Just show information option
+<a name="Just show information option"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-J</b> does
+not write a file, it only prints information about the disc
+(depending on the <b>-v</b> option). This is just for
+information purposes.</p>
+
+<h2>CDDBP support
+<a name="CDDBP support"></a>
+</h2>
+
+
+<h3>Lookup album and track titles option
+<a name="Lookup album and track titles option"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-L cddbp
+mode</b> Cdda2wav tries to retrieve performer, album-, and
+track titles from a cddbp server. The default server right
+now is &rsquo;freedb.freedb.org&rsquo;. It is planned to
+have more control over the server handling later. The
+parameter defines how multiple entries are handled:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>0</b></p></td>
+<td width="8%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em">interactive mode, the user
+chooses one of the entries.</p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>1</b></p></td>
+<td width="8%"></td>
+<td width="69%">
+
+
+<p>take the first entry without asking.</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<h3>Set server for title lookups
+<a name="Set server for title lookups"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cddbp-server
+servername</b> When using -L or -cddb, the server being
+contacted can be set with this option.</p>
+
+<h3>Set portnumber for title lookups
+<a name="Set portnumber for title lookups"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cddbp-port
+portnumber</b> When using -L or -cddb, the server port being
+contacted can be set with this option.</p>
+
+<h2>HINTS ON USAGE
+<a name="HINTS ON USAGE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Don&rsquo;t
+create samples you cannot read. First check your sample
+player software and sound card hardware. I experienced
+problems with very low sample rates (stereo &lt;= 1575 Hz,
+mono &lt;= 3675 Hz) when trying to play them with standard
+WAV players for sound blaster (maybe they are not legal in
+<b>WAV</b> format). Most CD-Writers insist on audio samples
+in a bigendian format. Now cdda2wav supports the <b>-E
+endianess</b> option to control the endianess of the written
+samples.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If your hardware
+is fast enough to run cdda2wav uninterrupted and your CD
+drive is one of the &rsquo;perfect&rsquo; ones, you will
+gain speed when switching all overlap sampling off with the
+<b>-P 0</b> option. Further fine tuning can be done with the
+<b>-n sectors</b> option. You can specify how much sectors
+should be requested in one go.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Cdda2wav
+supports <b>pipes</b>. Use a filename of <b>-</b> to let
+cdda2wav output its samples to standard output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Conversion to
+other sound formats is possible using the <b>sox</b> program
+package (it should no longer be necessary to use <b>sox
+-x</b> to change the byte order of samples; see option
+<b>-E</b> to change the output byteorder).</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+sample more than one track into different files in one run,
+this is currently possible with the <b>-B</b> option. When
+recording time exceeds the track limit a new file will be
+opened for the next track.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Cdda2wav can
+generate a lot of files for various purposes.</p>
+
+<h3>Audio files:
+<a name="Audio files:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">There are audio
+files containing samples with default extensions .wav, .au,
+.aifc, .aiff, and .cdr according to the selected sound
+format. These files are not generated when option
+(<b>-N</b>) is given. Multiple files may be written when the
+bulk copy option (<b>-B</b>) is used. Individual file names
+can be given as arguments. If the number of file names given
+is sufficient to cover all included audio tracks, the file
+names will be used verbatim. Otherwise, if there are less
+file names than files needed to write the included tracks,
+the part of the file name before the extension is extended
+with &rsquo;_dd&rsquo; where dd represents the current track
+number.</p>
+
+<h3>Cddb and Cdindex files:
+<a name="Cddb and Cdindex files:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If cdda2wav
+detects cd-extra or cd-text (album/track) title information,
+then .cddb, .cdindex and .cdtext files are generated unless
+suppressed by the option <b>-H</b>. They contain suitable
+formatted entries for submission to audio cd track title
+databases in the Internet. The CDINDEX and CDDB(tm) systems
+are currently supported. For more information please visit
+www.musicbrainz.org and www.freedb.com.</p>
+
+<h3>Inf files:
+<a name="Inf files:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The inf files
+describe the sample files and the part of the audio cd it
+was taken from. They are a means to transfer information to
+a cd burning program like cdrecord. For example, if the
+original audio cd had pre-emphasis enabled, and cdda2wav
+<b>-T</b> did remove the pre-emphasis, then the inf file has
+pre-emphasis not set (since the audio file does not have it
+anymore), while the .cddb and the .cdindex have pre-emphasis
+set as the original does.</p>
+
+<h2>WARNING
+<a name="WARNING"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>IMPORTANT:</b>
+it is prohibited to sell copies of copyrighted material by
+noncopyright holders. This program may not be used to
+circumvent copyrights. The user acknowledges this constraint
+when using the software.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The index
+scanner may give timeouts.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The resampling
+(rate conversion code) uses polynomial interpolation, which
+is not optimal.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Cdda2wav should
+use threads.</p>
+
+<h2>ACKNOWLEDGEMENTS
+<a name="ACKNOWLEDGEMENTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Thanks go to
+Project MODE (http://www.mode.net/) and Fraunhofer Institut
+fuer integrierte Schaltungen (FhG-IIS)
+(http://www.iis.fhg.de/) for financial support. Plextor
+Europe and Ricoh Japan provided cdrom disk drives and cd
+burners which helped a lot to develop this software. Rammi
+has helped a lot with the debugging and showed a lot of
+stamina when hearing 100 times the first 16 seconds of the
+first track of the Krupps CD. Libparanoia contributed by
+Monty (Christopher Montgomery) xiphmont@mit.edu.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Heiko Eissfeldt
+heiko@colossus.escape.de (1993-2004,2015)</p>
+
+<p style="margin-left:9%; margin-top: 1em">2004-today:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Joerg Schilling
+<br>
+Seestr. 110 <br>
+D-13353 Berlin <br>
+Germany</p>
+
+<h2>DATE
+<a name="DATE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2017/03/29</p>
+
+<h2>INTERFACE STABILITY
+<a name="INTERFACE STABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The interfaces
+provided by <b>cdda2wav</b> are designed for long term
+stability. As <b>cdda2wav</b> depends on interfaces provided
+by the underlying operating system, the stability of the
+interfaces offered by <b>cdda2wav</b> depends on the
+interface stability of the OS interfaces. Modified
+interfaces in the OS may enforce modified interfaces in
+<b>cdda2wav</b>.</p>
+<hr>
+</body>
+</html>

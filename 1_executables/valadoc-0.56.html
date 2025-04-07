@@ -1,0 +1,285 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VALADOC</title>
+
+</head>
+<body>
+
+<h1 align="center">VALADOC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Usage:">Usage:</a><br>
+<a href="#Help Options:">Help Options:</a><br>
+<a href="#Application Options:">Application Options:</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#HOMEPAGE OR CONTACT">HOMEPAGE OR CONTACT</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">valadoc - Vala
+Documentation Tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>valadoc</b>
+[<i>OPTION</i>]... <i>FILE</i>...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Valadoc is a
+documentation generator for generating API documentation
+from Vala source code based on libvala.</p>
+
+<h3>Usage:
+<a name="Usage:"></a>
+</h3>
+
+
+<p style="margin-left:18%; margin-top: 1em">valadoc
+[OPTION?] FILE... - Vala Documentation Tool</p>
+
+<h3>Help Options:
+<a name="Help Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<h3>Application Options:
+<a name="Application Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--directory</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Output directory</p>
+
+<p style="margin-left:9%;"><b>-b</b>,
+<b>--basedir</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Base source directory</p>
+
+<p style="margin-left:9%;"><b>-D</b>,
+<b>--define</b>=<i>SYMBOL</i>...</p>
+
+<p style="margin-left:18%;">Define SYMBOL</p>
+
+
+<p style="margin-left:9%;"><b>--profile</b>=<i>PROFILE</i></p>
+
+<p style="margin-left:18%;">Minimum runtime dependency:
+&rsquo;gobject&rsquo; (default) or &rsquo;posix&rsquo;
+(minimal libc)</p>
+
+
+<p style="margin-left:9%;"><b>--enable-experimental</b></p>
+
+<p style="margin-left:18%;">Enable experimental
+features</p>
+
+
+<p style="margin-left:9%;"><b>--enable-experimental-non-null</b></p>
+
+<p style="margin-left:18%;">Enable experimental
+enhancements for non-null types</p>
+
+
+<p style="margin-left:9%;"><b>--metadatadir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for GIR .metadata files in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--girdir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for .gir files in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--vapidir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for package bindings in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--pkg</b>=<i>PACKAGE</i>...</p>
+
+<p style="margin-left:18%;">Include binding for PACKAGE</p>
+
+<p style="margin-left:9%;"><b>--driver</b></p>
+
+<p style="margin-left:18%;">Name of an driver or path to a
+custom driver (DEPRECATED AND IGNORED)</p>
+
+
+<p style="margin-left:9%;"><b>--importdir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for external documentation
+in DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--import</b>=<i>PACKAGE</i>...</p>
+
+<p style="margin-left:18%;">Include binding for PACKAGE</p>
+
+
+<p style="margin-left:9%;"><b>--alternative-resource-dir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Alternative resource
+directories</p>
+
+
+<p style="margin-left:9%;"><b>--wiki</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Wiki directory</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--deps</b></p></td>
+<td width="1%"></td>
+<td width="44%">
+
+
+<p>Adds packages to the documentation</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--doclet</b>=<i>PLUGIN</i></p>
+
+<p style="margin-left:18%;">Name of an included doclet or
+path to custom doclet</p>
+
+<p style="margin-left:9%;"><b>-X</b>,
+<b>--doclet-arg</b>=<i>ARG</i></p>
+
+<p style="margin-left:18%;">Pass arguments to the
+doclet</p>
+
+<p style="margin-left:9%;"><b>--no-protected</b></p>
+
+<p style="margin-left:18%;">Removes protected elements from
+documentation</p>
+
+<p style="margin-left:9%;"><b>--internal</b></p>
+
+<p style="margin-left:18%;">Adds internal elements to
+documentation</p>
+
+<p style="margin-left:9%;"><b>--private</b></p>
+
+<p style="margin-left:18%;">Adds private elements to
+documentation</p>
+
+<p style="margin-left:9%;"><b>--use-svg-images</b></p>
+
+<p style="margin-left:18%;">Generate SVG image charts
+instead of PNG</p>
+
+
+<p style="margin-left:9%;"><b>--package-name</b>=<i>NAME</i></p>
+
+<p style="margin-left:18%;">package name</p>
+
+
+<p style="margin-left:9%;"><b>--package-version</b>=<i>VERSION</i></p>
+
+<p style="margin-left:18%;">package version</p>
+
+
+<p style="margin-left:9%;"><b>--gir</b>=<i>NAME-VERSION</i>.gir</p>
+
+<p style="margin-left:18%;">GObject-Introspection
+repository file name</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Display version number</p>
+
+<p style="margin-left:9%;"><b>--force</b></p>
+
+<p style="margin-left:18%;">force</p>
+
+<p style="margin-left:9%;"><b>--fatal-warnings</b></p>
+
+<p style="margin-left:18%;">Treat warnings as fatal</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">Show all warnings</p>
+
+<p style="margin-left:9%;"><b>--no-color</b></p>
+
+<p style="margin-left:18%;">Disable colored output</p>
+
+
+<p style="margin-left:9%;"><b>--target-glib=</b>&rsquo;MAJOR.MINOR&rsquo;,
+or &rsquo;auto&rsquo;</p>
+
+<p style="margin-left:18%;">Target version of glib for code
+generation</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://gitlab.gnome.org/GNOME/vala/issues</p>
+
+<h2>HOMEPAGE OR CONTACT
+<a name="HOMEPAGE OR CONTACT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://docs.vala.dev</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Florian
+Brosch</p>
+<hr>
+</body>
+</html>

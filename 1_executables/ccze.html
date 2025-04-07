@@ -1,0 +1,471 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:57 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CCZE</title>
+
+</head>
+<body>
+
+<h1 align="center">CCZE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#PLUGINS">PLUGINS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ccze - A robust
+log colorizer</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ccze</b>
+[<i>options</i>] &lt;<i>logfile</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+documents briefly the <b>ccze</b> utility, which is a
+drop-in replacement for <b>colorize</b>, but written in C,
+to be faster and less resource-hungry. The goal was to be
+fully backwards compatible, yet superior with respect to
+speed and features.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These programs
+follow the usual GNU command line syntax, with long options
+starting with two dashes (&lsquo;-&rsquo;). A summary of
+options is included below. <b><br>
+-a, --argument</b> <i>PLUGIN=ARGUMENTS</i></p>
+
+<p style="margin-left:18%;">Use this option to pass
+<i>ARGUMENTS</i> to the specified <i>PLUGIN</i>. The
+argument list is whitespace separated.</p>
+
+<p style="margin-left:9%;"><b>-A, --raw-ansi</b></p>
+
+<p style="margin-left:18%;">If one wants to enable raw ANSI
+color sequences instead of using curses, this option does
+just that.</p>
+
+<p style="margin-left:9%;"><b>-c, --color</b>
+<i>KEY=COLOR</i></p>
+
+<p style="margin-left:18%;">Set the color of the keyword
+<i>KEY</i> to <i>COLOR</i>, like one would do in one of the
+configuration files.</p>
+
+<p style="margin-left:9%;"><b>-C, --convert-date</b></p>
+
+<p style="margin-left:18%;">Convert unix timestamp to
+readable date format (in oops and squid logs, for
+example).</p>
+
+<p style="margin-left:9%;"><b>-F, --rcfile</b>
+<i>rcfile</i></p>
+
+<p style="margin-left:18%;">Read <i>rcfile</i> as a
+configuration file upon startup, instead of the default
+ones.</p>
+
+<p style="margin-left:9%;"><b>-h, --html</b></p>
+
+<p style="margin-left:18%;">Instead of colorising the input
+onto the console, output it in HTML format instead.</p>
+
+<p style="margin-left:9%;"><b>-l, --list-plugins</b></p>
+
+<p style="margin-left:18%;">List all available (loaded)
+plugins, along with their type and a short description.</p>
+
+<p style="margin-left:9%;"><b>-m, --mode</b>
+<i>mode</i></p>
+
+<p style="margin-left:18%;">Change the output mode.
+Available modes are <i>curses</i>, <i>ansi</i> and
+<i>html</i>.</p>
+
+<p style="margin-left:9%;"><b>-o, --options</b>
+<i>OPTIONS...</i></p>
+
+<p style="margin-left:18%;"><b>CCZE</b> is able to toggle
+some of its features with this option. You can toggle the
+<i>scroll</i>, <i>wordcolor</i>, <i>lookups</i>, and
+<i>transparent</i> features, or you can fiddle with
+<i>cssfile</i>. All of these are enabled by default, except
+<i>cssfile</i>. One can turn them off by prefixing the
+option with a &quot;no&quot;.</p>
+
+<p style="margin-left:18%; margin-top: 1em">With
+<i>scroll</i>, one can enable or disable scrolling. If the
+output is not redirected, it is wise to leave it
+enabled.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>wordcolor</i> option makes <b>ccze</b> search for
+different keywords in unparsed input, and color those too.
+Since it is quite fast, and makes the output look better, it
+is recommended to leave this enabled.</p>
+
+<p style="margin-left:18%; margin-top: 1em">However,
+<i>lookups</i> is an option that might be better to disable.
+When on, <b>ccze</b> will try to look up usernames, service
+names, and lots of other stuff, which will slow down
+coloring a great deal. If one is piping a long log through
+<b>ccze</b>, this option might be turned off to speed up the
+process.</p>
+
+<p style="margin-left:18%; margin-top: 1em">With the
+<i>transparent</i> option, one can make CCZE treat black
+background colors as transparent - that means, a black
+background will appear transparent in a similar X terminal.
+If turned off, it will appear as black.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If
+<i>cssfile</i> is set, then CCZE will not inline the
+Cascading Style Sheet information into the outputted HTML,
+but include a link to the external stylesheet given in this
+paramater.</p>
+
+<p style="margin-left:9%;"><b>-p, --plugin</b>
+<i>PLUGIN</i></p>
+
+<p style="margin-left:18%;">While the default action is to
+load all plugins (see the <b>Plugins</b> section below),
+when this option is present, only the specified plugins will
+be loaded. If one knows what kind of log will be piped
+through <b>ccze</b>, using this option may result in a
+slight speedup.</p>
+
+<p style="margin-left:9%;"><b>-r, --remove-facilty</b></p>
+
+<p style="margin-left:18%;">Syslog-ng puts the facility
+level before log messages. With this switch, these can be
+cut off.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="42%">
+
+
+<p>Show summary of options and exit.</p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-V, --version</b></p>
+
+<p style="margin-left:18%;">Show version of program.</p>
+
+<h2>PLUGINS
+<a name="PLUGINS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Different
+programs have different kind of logs, and every kind of log
+<b>ccze</b> supports is implemented via a plug-in. They are
+by default located under <i>/usr/lib/ccze</i> and
+<i>$HOME/.ccze</i> (so they can be overridden by the user
+easily).</p>
+
+<p style="margin-left:9%; margin-top: 1em">At the moment,
+the following modules are bundled with the official
+release:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>apm</i></p></td>
+<td width="1%"></td>
+<td width="58%">
+
+
+<p>For coloring apmd&rsquo;s logs.</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>distcc</i></p></td>
+<td width="1%"></td>
+<td width="58%">
+
+
+<p>For coloring distccd&rsquo;s logs. (See
+<i>distccd</i>(1))</p> </td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>exim</i></p></td>
+<td width="1%"></td>
+<td width="58%">
+
+
+<p>For coloring exim&rsquo;s <i>main.log</i>. (See
+<i>exim</i>(8))</p> </td>
+<td width="24%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>fetchmail</i></p>
+
+<p style="margin-left:18%;">For coloring fetchmail&rsquo;s
+log files. (See <i>fetchmail</i>(1))</p>
+
+<p style="margin-left:9%;"><i>ftpstats</i></p>
+
+<p style="margin-left:18%;">For coloring ftpStats
+compatible log files, such as Pure-FTPD&rsquo;s <i>Stats</i>
+log format.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>httpd</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>For coloring apache-style <i>access.log</i> and
+<i>error.log</i> files. (See <i>apache</i>(8))</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">As a
+side-effect, all compatible formats, like
+<i>pure-ftpd</i>(8)&rsquo;s common-log format is also
+supported by this plugin.</p>
+
+<p style="margin-left:9%;"><i>icecast</i></p>
+
+<p style="margin-left:18%;">For coloring
+<i>icecast/icecast.log</i> and <i>icecast/usage.log</i>
+files. (See <i>icecast</i>(8))</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><i>oops</i></p></td>
+<td width="4%"></td>
+<td width="42%">
+
+
+<p>For coloring <i>oops/oops.log</i> files.</p></td>
+<td width="40%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><i>php</i></p></td>
+<td width="4%"></td>
+<td width="42%">
+
+
+<p>For coloring <i>php.log</i> files.</p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>postfix</i></p>
+
+<p style="margin-left:18%;">For coloring postfix logs. (See
+<i>postfix</i>(1))</p>
+
+<p style="margin-left:9%;"><i>procmail</i></p>
+
+<p style="margin-left:18%;">For coloring procmail&rsquo;s
+log file. (See <i>procmail</i>(1))</p>
+
+<p style="margin-left:9%;"><i>proftpd</i></p>
+
+<p style="margin-left:18%;">For coloring proftpd&rsquo;s
+<i>access.log</i> and <i>auth.log</i> files. (See
+<i>proftpd</i>(8))</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>squid</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>For coloring squid&rsquo;s <i>access.log</i>,
+<i>store.log</i> and <i>cache.log</i> files. (See
+<i>squid</i>(8))</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>sulog</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>For coloring <i>sulog</i> files. (See <i>su</i>(1))</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>super</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>For coloring <i>super.log</i> files. (See
+<i>super</i>(1))</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>syslog</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>For coloring generic syslog messages. (See
+<i>syslogd</i>(8))</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>ulogd</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>For coloring ulogd logs.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>vsftpd</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>For coloring <i>vsftpd.log</i> files. (See
+<i>vsftpd</i>(8))</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>xferlog</i></p>
+
+<p style="margin-left:18%;">For coloring <i>xferlog</i>
+files. (See <i>xferlog</i>(5))</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>/usr/etc/colorizerc</i>,
+<i>$HOME/.colorizerc</i></p>
+
+<p style="margin-left:18%;">These files are the default
+configuration files for <b>colorize</b>, and are parsed by
+<b>ccze</b> for the sake of full compatibility.</p>
+
+<p style="margin-left:9%;"><i>/usr/etc/cczerc</i>,
+<i>$HOME/.cczerc</i></p>
+
+<p style="margin-left:18%;">This two are the main
+configuration files, in which one can change the colors used
+by the program to his liking. See the comments in the
+beginning of <i>/usr/etc/cczerc</i> for a description on the
+files&rsquo; structure.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If neither of
+these files exist on your system, consider using the
+<b>ccze-dump</b> utility in the source tree, which dumps the
+default color set to standard output.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>colorize</b>(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ccze was written
+by Gergely Nagy &lt;algernon@bonehunter.rulez.org&gt;, based
+on colorize by Istvan Karaszi
+&lt;colorize@spam.raszi.hu&gt;.</p>
+<hr>
+</body>
+</html>

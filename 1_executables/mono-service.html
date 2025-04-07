@@ -1,0 +1,214 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONTROL">CONTROL</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#DEBUGGING">DEBUGGING</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mono-service,
+mono-service2 - Mono ServiceProcess host</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono-service
+[options] program.exe</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>mono-service</i> is a host to run services built with the
+ServiceProcess assembly.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use
+<i>mono-service</i> to run services that use the 1.0
+assemblies and use <i>mono-service2</i> to run services that
+use the 2.0 assemblies.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Services can be
+paused by sending the SIGUSR1 signal to the process, and
+execution can be resumed by sending the SIGUSR2 signal. The
+service can be cleanly shutdown by sending the SIGTERM
+signal to the process.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options can be used to control the service: <i><br>
+-d:DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Use this option to specify the
+working directory for the service. The default is the
+current directory.</p>
+
+<p style="margin-left:9%;"><i>-l:LOCKFILE</i></p>
+
+<p style="margin-left:18%;">Specifies the file to use for
+locking, the default is a filename constructed in /tmp based
+on the name of the program that hosts the service.</p>
+
+<p style="margin-left:9%;"><i>-m:MESSAGE</i></p>
+
+<p style="margin-left:18%;">Name to show in the syslog.</p>
+
+<p style="margin-left:9%;"><i>-n:NAME</i></p>
+
+<p style="margin-left:18%;">Use this to specify the service
+to be launched (if the program contains more than one
+service). The default is to run the first defined
+service.</p>
+
+<p style="margin-left:9%;"><i>--debug</i></p>
+
+<p style="margin-left:18%;">Use this option to prevent
+mono-service from redirecting stdin and stdout and prevent
+the program to be sent to the background. Equivalent to
+--no-daemon</p>
+
+<p style="margin-left:9%;"><i>--no-daemon</i></p>
+
+<p style="margin-left:18%;">Use this option to prevent
+mono-service from redirecting stdin and stdout and prevent
+the program to be sent to the background. Equivalent to
+--debug.</p>
+
+<h2>CONTROL
+<a name="CONTROL"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can control
+the service by sending signals to the process, you can use
+the following commands: <br>
+Pausing service:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>kill -USR1 &lsquo;cat &lt;lock file&gt;&lsquo;</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">Resuming service:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>kill -USR2 &lsquo;cat &lt;lock file&gt;&lsquo;</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">Stopping the service:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>kill &lsquo;cat &lt;lock file&gt;&lsquo;</p></td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Start the
+MyService.exe assembly, with a lock in
+/root/service-lock:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>mono-service -l:/root/service-lock MyService.exe</p></td></tr>
+</table>
+
+<h2>DEBUGGING
+<a name="DEBUGGING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Messages
+produced by the service are logged on syslog.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://www.mono-project.com for details</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono(1)</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>N:System.ServiceProcess</b></p>
+<hr>
+</body>
+</html>

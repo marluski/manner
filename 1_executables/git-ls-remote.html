@@ -1,0 +1,258 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-LS-REMOTE</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-LS-REMOTE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OUTPUT">OUTPUT</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#GIT">GIT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">git-ls-remote -
+List references in a remote repository</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>git
+ls-remote</i> [--branches] [--tags] [--refs]
+[--upload-pack=&lt;exec&gt;] <br>
+[-q | --quiet] [--exit-code] [--get-url]
+[--sort=&lt;key&gt;] <br>
+[--symref] [&lt;repository&gt; [&lt;patterns&gt;...]]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Displays
+references available in a remote repository along with the
+associated commit IDs.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-b, --branches,
+-t, --tags</p>
+
+<p style="margin-left:14%;">Limit to only local branches
+and local tags, respectively. These options are <i>not</i>
+mutually exclusive; when given both, references stored in
+refs/heads and refs/tags are displayed. Note that
+<b>--heads</b> and <b>-h</b> are deprecated synonyms for
+<b>--branches</b> and <b>-b</b> and may be removed in the
+future. Also note that <b>git ls-remote -h</b> used without
+anything else on the command line gives help, consistent
+with other git subcommands.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--refs</p>
+
+<p style="margin-left:14%;">Do not show peeled tags or
+pseudorefs like <b>HEAD</b> in the output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-q, --quiet</p>
+
+<p style="margin-left:14%;">Do not print remote URL to
+stderr.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--upload-pack=&lt;exec&gt;</p>
+
+<p style="margin-left:14%;">Specify the full path of
+<i>git-upload-pack</i> on the remote host. This allows
+listing references from repositories accessed via SSH and
+where the SSH daemon does not use the PATH configured by the
+user.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--exit-code</p>
+
+<p style="margin-left:14%;">Exit with status &quot;2&quot;
+when no matching refs are found in the remote repository.
+Usually the command exits with status &quot;0&quot; to
+indicate it successfully talked with the remote repository,
+whether it found any matching refs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--get-url</p>
+
+<p style="margin-left:14%;">Expand the URL of the given
+remote repository taking into account any
+&quot;url.&lt;base&gt;.insteadOf&quot; config setting (See
+<b>git-config</b>(1)) and exit without talking to the
+remote.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--symref</p>
+
+<p style="margin-left:14%;">In addition to the object
+pointed by it, show the underlying ref pointed by it when
+showing a symbolic ref. Currently, upload-pack only shows
+the symref HEAD, so it will be the only one shown by
+ls-remote.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--sort=&lt;key&gt;</p>
+
+<p style="margin-left:14%;">Sort based on the key given.
+Prefix <b>-</b> to sort in descending order of the value.
+Supports &quot;version:refname&quot; or
+&quot;v:refname&quot; (tag names are treated as versions).
+The &quot;version:refname&quot; sort order can also be
+affected by the &quot;versionsort.suffix&quot; configuration
+variable. See <b>git-for-each-ref</b>(1) for more sort
+options, but be aware keys like <b>committerdate</b> that
+require access to the objects themselves will not work for
+refs whose objects have not yet been fetched from the
+remote, and will give a <b>missing object</b> error.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-o
+&lt;option&gt;, --server-option=&lt;option&gt;</p>
+
+<p style="margin-left:14%;">Transmit the given string to
+the server when communicating using protocol version 2. The
+given string must not contain a NUL or LF character. When
+multiple <b>--server-option=</b><i>&lt;option&gt;</i> are
+given, they are all sent to the other side in the order
+listed on the command line. When no
+<b>--server-option=</b><i>&lt;option&gt;</i> is given from
+the command line, the values of configuration variable
+<b>remote.</b><i>&lt;name&gt;</i><b>.serverOption</b> are
+used instead.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;repository&gt;</p>
+
+<p style="margin-left:14%;">The &quot;remote&quot;
+repository to query. This parameter can be either a URL or
+the name of a remote (see the GIT URLS and REMOTES sections
+of <b>git-fetch</b>(1)).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;patterns&gt;...</p>
+
+<p style="margin-left:14%;">When unspecified, all
+references, after filtering done with --heads and --tags,
+are shown. When &lt;patterns&gt;... are specified, only
+references matching one or more of the given patterns are
+displayed. Each pattern is interpreted as a glob (see
+<b>glob</b> in <b>gitglossary</b>(7)) which is matched
+against the &quot;tail&quot; of a ref, starting either from
+the start of the ref (so a full name like
+<b>refs/heads/foo</b> matches) or from a slash separator (so
+<b>bar</b> matches <b>refs/heads/bar</b> but not
+<b>refs/heads/foobar</b>).</p>
+
+<h2>OUTPUT
+<a name="OUTPUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The output is in
+the format:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&lt;oid&gt; TAB
+&lt;ref&gt; LF</p>
+
+<p style="margin-left:9%; margin-top: 1em">When showing an
+annotated tag, unless <b>--refs</b> is given, two such lines
+are shown: one with the refname for the tag itself as
+<i>&lt;ref&gt;</i>, and another with <i>&lt;ref&gt;</i>
+followed by <b>&#710;</b>{}. The <i>&lt;oid&gt;</i> on the
+latter line shows the name of the object the tag points
+at.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:14%; margin-top: 1em">&bull; List all
+references (including symbolics and pseudorefs), peeling
+tags:</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git ls-remote
+<br>
+27d43aaaf50ef0ae014b88bba294f93658016a2e HEAD <br>
+950264636c68591989456e3ba0a5442f93152c1a refs/heads/main
+<br>
+d9ab777d41f92a8c1684c91cfb02053d7dd1046b refs/heads/next
+<br>
+d4ca2e3147b409459955613c152220f4db848ee1 refs/tags/v2.40.0
+<br>
+73876f4861cd3d187a4682290ab75c9dccadbc56
+refs/tags/v2.40.0&#710;{}</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; List all
+references matching given patterns:</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git ls-remote
+http://www.kernel.org/pub/scm/git/git.git master seen rc
+<br>
+5fe978a5381f1fbad26a80e682ddd2a401966740 refs/heads/master
+<br>
+c781a84b5204fb294c9ccc79f8b3baceeb32c061 refs/heads/seen</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; List
+only tags matching a given wildcard pattern:</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git ls-remote
+--tags http://www.kernel.org/pub/scm/git/git.git v\* <br>
+485a869c64a68cc5795dd99689797c5900f4716d refs/tags/v2.39.2
+<br>
+cbf04937d5b9fcf0a76c28f69e6294e9e3ecd7e6
+refs/tags/v2.39.2&#710;{} <br>
+d4ca2e3147b409459955613c152220f4db848ee1 refs/tags/v2.40.0
+<br>
+73876f4861cd3d187a4682290ab75c9dccadbc56
+refs/tags/v2.40.0&#710;{}</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>git-check-ref-format</b>(1).</p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Part of the
+<b>git</b>(1) suite</p>
+<hr>
+</body>
+</html>

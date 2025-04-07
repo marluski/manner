@@ -1,0 +1,1038 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>RSVG-CONVERT</title>
+
+</head>
+<body>
+
+<h1 align="center">RSVG-CONVERT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SPECIFYING THE RENDERED SIZE">SPECIFYING THE RENDERED SIZE</a><br>
+<a href="#SPECIFYING A PAGE SIZE">SPECIFYING A PAGE SIZE</a><br>
+<a href="#SPECIFYING A SCALE FACTOR INSTEAD OF A RENDERED SIZE">SPECIFYING A SCALE FACTOR INSTEAD OF A RENDERED SIZE</a><br>
+<a href="#CREATING A MULTI-PAGE DOCUMENT">CREATING A MULTI-PAGE DOCUMENT</a><br>
+<a href="#CONVERSION OF PIXELS BASED ON THE DOTS-PER-INCH">CONVERSION OF PIXELS BASED ON THE DOTS-PER-INCH</a><br>
+<a href="#DEFAULT OUTPUT SIZE">DEFAULT OUTPUT SIZE</a><br>
+<a href="#BACKGROUND COLOR">BACKGROUND COLOR</a><br>
+<a href="#SELECTING A LANGUAGE FOR MULTI-LANGUAGE SVG">SELECTING A LANGUAGE FOR MULTI-LANGUAGE SVG</a><br>
+<a href="#USER STYLESHEET">USER STYLESHEET</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#GENERAL OPTIONS">GENERAL OPTIONS</a><br>
+<a href="#SIZE AND POSITION">SIZE AND POSITION</a><br>
+<a href="#CONTROLLING THE RENDERED APPEARANCE">CONTROLLING THE RENDERED APPEARANCE</a><br>
+<a href="#OPTIONS SPECIFIC TO PDF/PS/EPS OUTPUT">OPTIONS SPECIFIC TO PDF/PS/EPS OUTPUT</a><br>
+<a href="#MISCELLANEOUS">MISCELLANEOUS</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#PDF VERSIONS">PDF VERSIONS</a><br>
+<a href="#MORE INFORMATION">MORE INFORMATION</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rsvg-convert -
+Render SVG documents to PNG images, or convert them to PDF
+or PS.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert an SVG
+to PNG at its &quot;natural size&quot; and write it to
+standard output:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert</b>
+<i>input.svg</i> <b>&gt;</b> <i>output.png</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify an
+output filename; the input filename must be the last
+argument:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--output=</b><i>output.png input.svg</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Configure
+dots-per-inch (DPI) for SVGs that have physical units, as in
+<b>&lt;svg width=&quot;5cm&quot;
+height=&quot;3cm&quot;&gt;</b> - the default is 96 DPI:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--dpi-x=</b><i>300</i> <b>--dpi-y=</b><i>300 input.svg</i>
+<b>&gt;</b> <i>output.png</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Render an SVG at
+a specific pixel size, scaled proportionally:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--width=</b><i>1024</i> <b>--height=</b><i>768</i>
+<b>--keep-aspect-ratio</b> <i>input.svg</i> <b>&gt;</b>
+<i>output.png</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>rsvg-convert</b></i>
+renders SVG documents into PNG raster images, or converts
+them to PDF or PS as vector objects. By default
+<b>rsvg-convert</b> will render an SVG document to a raster
+PNG image and write it to standard output:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert</b>
+<i>input.svg</i> <b>&gt;</b> <i>output.png</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">To select
+another format, use the <b>--format</b> option:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--format=pdf</b> <i>input.svg</i> <b>&gt;</b>
+<i>output.pdf</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">You can use
+<b>rsvg-convert</b> as part of a pipeline; without an
+argument for the input filename it will read the document
+from standard input:</p>
+
+<p style="margin-left:13%;"><b>cat</b> <i>input.svg</i>
+<b>| rsvg-convert &gt;</b> <i>output.png</i></p>
+
+<h3>SPECIFYING THE RENDERED SIZE
+<a name="SPECIFYING THE RENDERED SIZE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can use the
+<b>--width</b> and <b>--height</b> options to specify the
+size of the output image. Most of the time you should
+specify <b>--keep-aspect-ratio</b> to scale the image
+proportionally; for compatibility with old versions this is
+not the default.</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--width=</b><i>100</i> <b>--height=</b><i>200</i>
+<b>--keep-aspect-ratio</b> <i>input.svg</i> <b>&gt;</b>
+<i>output.png</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">You can also
+specify dimensions as CSS lengths, for example <b>10px</b>
+or <b>8.5in</b>. The unit specifiers supported are as
+follows:</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+will create a 600*900 pixel PNG, or 2*3 inches at 300
+dots-per-inch:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--width=</b><i>2in</i> <b>--height=</b><i>3in</i>
+<b>--keep-aspect-ratio --dpi-x=</b><i>300</i>
+<b>--dpi-y=</b><i>300 input.svg</i> <b>&gt;</b>
+<i>output.png</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">This will scale
+an SVG document to fit in an A4 page and convert it to
+PDF:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--format=</b><i>pdf</i> <b>--width=</b><i>210mm</i>
+<b>--height=</b><i>297mm</i> <b>--keep-aspect-ratio</b>
+<i>input.svg</i> <b>&gt;</b> <i>output.pdf</i></p>
+
+<h3>SPECIFYING A PAGE SIZE
+<a name="SPECIFYING A PAGE SIZE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">By default the
+size of the output comes from the rendered size, which can
+be specified with the <b>--width</b> and <b>--height</b>
+options, but you can specify a page size independently of
+the rendered size with <b>--page-width</b> and
+<b>--page-height</b>, together with <b>--top</b> and
+<b>--left</b> to control the position of the rendered image
+within the page. In short:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p><b>--page-width</b> and <b>--page-height</b> together -
+set the page size.</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p><b>--top</b> and <b>--left</b> - set the margins.</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p><b>--width</b> and <b>--height</b> - set the rendered
+size.</p> </td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This will create
+a PDF with a landscape A4 page, by scaling an SVG document
+to 10*10 cm, and placing it with its top-left corner 5 cm
+away from the top and 8 cm from the left of the page:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--format=</b><i>pdf</i> <b>--page-width=</b><i>297mm</i>
+<b>--page-height=</b><i>210mm</i> <b>--width=</b><i>10cm</i>
+<b>--height=</b><i>10cm</i> <b>--keep-aspect-ratio
+--top=</b><i>5cm</i> <b>--left=</b><i>8cm input.svg</i>
+<b>&gt;</b> <i>output.pdf</i></p>
+
+<h3>SPECIFYING A SCALE FACTOR INSTEAD OF A RENDERED SIZE
+<a name="SPECIFYING A SCALE FACTOR INSTEAD OF A RENDERED SIZE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>--zoom</b> option lets you scale the natural size of an
+SVG document. For example, if <i>input.svg</i> is a document
+with a declared size of 100*200 pixels, then the following
+command will render it at 250*500 pixels (zoom 2.5):</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert --zoom=2.5</b>
+<i>input.svg</i> <b>&gt;</b> <i>output.png</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">You can limit
+the maximum scaled size by specifying the <b>--width</b> and
+<b>--height</b> options together with <b>--zoom</b>. Here,
+the image will be scaled 10x, but limited to 1000*1000
+pixels at the most:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert --zoom=10
+--width=1000 --height=1000</b> <i>input.svg</i> <b>&gt;</b>
+<i>output.png</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">If you need
+different scale factors for the horizontal and vertical
+dimensions, use the <b>--x-zoom</b> and <b>--y-zoom</b>
+options instead of <b>--zoom</b>.</p>
+
+<h3>CREATING A MULTI-PAGE DOCUMENT
+<a name="CREATING A MULTI-PAGE DOCUMENT"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+&quot;pdf&quot;, &quot;ps&quot;, and &quot;eps&quot; output
+formats support multiple pages. These can be created by
+combining multiple input SVG files. For example, this PDF
+file will have three pages:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--format=</b><i>pdf page1.svg page2.svg page3.svg</i>
+<b>&gt;</b> <i>out.pdf</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The size of each
+page will be computed, separately, as described in the
+<b>DEFAULT OUTPUT SIZE</b> section. This may result in a PDF
+being produced with differently-sized pages. If you need to
+produce a PDF with all pages set to exactly the same size,
+use the <b>--page-width</b> and <b>--page-height</b>
+options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, the
+following command creates a three-page PDF out of three SVG
+documents. All the pages are portrait US Letter, and each
+SVG is scaled to fit so that there is a 1in margin around
+each page (hence the width of 6.5in and height of 9in for
+the rendered size).</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--format=</b><i>pdf</i> <b>--page-width=</b><i>8.5in</i>
+<b>--page-height=</b><i>11in</i> <b>--width=</b><i>6.5in</i>
+<b>--height=</b><i>9in</i> <b>--keep-aspect-ratio
+--top=</b><i>1in</i> <b>--left=</b><i>1in pg1.svg pg2.svg
+pg3.svg</i> <b>&gt;</b> <i>out.pdf</i></p>
+
+<h3>CONVERSION OF PIXELS BASED ON THE DOTS-PER-INCH
+<a name="CONVERSION OF PIXELS BASED ON THE DOTS-PER-INCH"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>rsvg-convert</b></i>
+uses the <b>--dpi-x</b> and <b>--dpi-y</b> options to
+configure the dots-per-inch (DPI) by which pixels will be
+converted to/from physical units like inches or centimeters.
+The default for both options is 96 DPI.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Consider this
+example SVG, which is nominally declared to be 2*3 inches in
+size:</p>
+
+<p style="margin-left:13%; margin-top: 1em">&lt;svg
+xmlns=&quot;http://www.w3.org/2000/svg&quot;
+width=&quot;2in&quot; height=&quot;3in&quot;&gt; <br>
+&lt;!-- graphical objects here --&gt; <br>
+&lt;/svg&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+commands create PNGs of different sizes for the example SVG
+above:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert</b>
+<i>two-by-three.svg</i> <b>&gt;</b> <i>output.png</i> ####
+creates a 192*288 pixel PNG</p>
+
+
+<p style="margin-left:13%; margin-top: 1em"><b>rsvg-convert
+--dpi-x=</b><i>300</i> <b>--dpi-y=</b><i>300
+two-by-three.svg</i> <b>&gt;</b> <i>output.png</i> ####
+creates a 600*900 pixel PNG</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+final pixel dimensions are rounded up to the nearest pixel,
+to avoid clipping off the right/bottom edges. In the
+following example, <b>rsvg-convert</b> will generate a PNG
+300x300 pixels in size:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--width=</b><i>299.5</i> <b>--height=</b><i>299.4
+input.svg</i> <b>&gt;</b> <i>output.png</i> #### outputs
+300x300 pixel PNG with a fractionally-scaled image</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you specify
+dimensions in physical units, they will be multiplied by the
+dots-per-inch (DPI) value to obtain dimensions in pixels.
+For example, this will generate a 96x96 pixel PNG, since it
+is 1x1 inch at the default 96 DPI:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--width=</b><i>1in</i> <b>--height=</b><i>1in input.svg</i>
+<b>&gt;</b> <i>output.png</i> #### outputs 96x96 pixel
+PNG</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">Correspondingly,
+this will generate a 300x300 pixel PNG, since it is 1x1 inch
+at 300 DPI:</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--width=</b><i>1in</i> <b>--height=</b><i>1in</i>
+<b>--dpi-x=</b><i>300</i> <b>--dpi-y=</b><i>300
+input.svg</i> <b>&gt;</b> <i>output.png</i> #### outputs
+300x300 pixel PNG</p>
+
+<h3>DEFAULT OUTPUT SIZE
+<a name="DEFAULT OUTPUT SIZE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you do not
+specify <b>--width</b> or <b>--height</b> options for the
+output size, <b>rsvg-convert</b> will figure out a
+&quot;natural size&quot; for the SVG as follows:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>SVG with width and height in
+pixel units (px): &lt;svg width=&quot;96px&quot;
+height=&quot;192px&quot;&gt;</b> For PNG output, those same
+dimensions in pixels are used. For PDF/PS/EPS, that pixel
+size is converted to physical units based on the DPI value
+(see the <b>--dpi-x</b> and <b>--dpi-y</b> options),</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>SVG with width and height in physical units: &lt;svg
+width=&quot;1in&quot; height=&quot;2in&quot;&gt;</b> For PNG
+output, the <b>width</b> and <b>height</b> attributes get
+converted to pixels, based on the DPI value (see the
+<b>--dpi-x</b> and <b>--dpi-y</b> options). For PDF/PS/EPS
+output, the width/height in physical units define the size
+of the PDF unless you specify options for the page size; see
+<b>SPECIFYING A PAGE SIZE</b> above.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>SVG with viewBox only: &lt;svg viewBox=&quot;0 0 20
+30&quot;&gt;</b> The size of the <b>viewBox</b> attribute
+gets used for the pixel size of the image as in the first
+case above.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>SVG with width and height in percentages: &lt;svg
+width=&quot;100%&quot; height=&quot;100%&quot;
+viewBox=&quot;0 0 20 30&quot;&gt;</b> Percentages are
+meaningless unless you specify a viewport size with the
+<b>--width</b> and <b>--height</b> options. In their
+absence, <b>rsvg-convert</b> will just use the size of the
+<b>viewBox</b> for the pixel size, as described above.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>SVG with no width, height, or viewBox:
+rsvg-convert</b> will measure the extents of all graphical
+objects in the SVG document and render them at 1:1 scale (1
+pixel for each CSS px unit). It is strongly recommended that
+you give SVG documents an explicit size with the
+<b>width</b>, <b>height</b>, or <b>viewBox</b>
+attributes.</p> </td></tr>
+</table>
+
+<h3>BACKGROUND COLOR
+<a name="BACKGROUND COLOR"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can use the
+<b>--background-color</b> option (<b>-b</b> for short) to
+specify the background color that will appear in parts of
+the image that would otherwise be transparent. This option
+accepts the same syntax as the CSS <b>color</b> property, so
+you can use <b>#rrggbb</b> syntax, or CSS named colors like
+<b>white</b>, or <b>rgba()</b>.</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--background-color=</b><i>white input.svg</i> <b>&gt;</b>
+<i>output.png</i> #### opaque white <b><br>
+rsvg-convert -b</b> <i>'#ff000080' input.svg</i> <b>&gt;</b>
+<i>output.png</i> #### translucent red - use shell quotes so
+the # is not interpreted as a comment</p>
+
+<h3>SELECTING A LANGUAGE FOR MULTI-LANGUAGE SVG
+<a name="SELECTING A LANGUAGE FOR MULTI-LANGUAGE SVG"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">An SVG document
+can use the <b>&lt;switch&gt;</b> element and children with
+the <b>systemLanguage</b> attribute to provide different
+content depending on the user's language. For example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">&lt;svg
+xmlns=&quot;http://www.w3.org/2000/svg&quot;
+width=&quot;200&quot; height=&quot;100&quot;&gt; <br>
+&lt;rect width=&quot;200&quot; height=&quot;100&quot;
+fill=&quot;white&quot;/&gt; <br>
+&lt;g transform=&quot;translate(30, 30)&quot;
+font-size=&quot;20&quot;&gt; <br>
+&lt;switch allowReorder=&quot;yes&quot;&gt; <br>
+&lt;text
+systemLanguage=&quot;es&quot;&gt;Espa&ntilde;ol&lt;/text&gt;
+<br>
+&lt;text
+systemLanguage=&quot;de&quot;&gt;Deutsch&lt;/text&gt; <br>
+&lt;text
+systemLanguage=&quot;fr&quot;&gt;Fran&ccedil;ais&lt;/text&gt;
+<br>
+&lt;text&gt;English fallback&lt;/text&gt; <br>
+&lt;/switch&gt; <br>
+&lt;/g&gt; <br>
+&lt;/svg&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can use the
+<b>--accept-language</b> option to select which language to
+use when rendering. This option accepts strings formatted
+like an HTTP Accept-Language header, which is a
+comma-separated list of BCP47 language tags:
+&lt;https://www.rfc-editor.org/info/bcp47&gt;</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--accept-language=</b><i>es-MX input.svg</i> <b>&gt;</b>
+<i>output.png</i> #### selects Mexican Spanish; renders
+&quot;Espa&ntilde;ol&quot;.</p>
+
+<h3>USER STYLESHEET
+<a name="USER STYLESHEET"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can include
+an extra CSS stylesheet to be used when rendering an SVG
+document with the <b>--stylesheet</b> option. The stylesheet
+will have the CSS <b>user origin</b>, while styles declared
+in the SVG document will have the CSS <b>author
+origin</b>.</p>
+
+<p style="margin-left:13%;"><b>rsvg-convert
+--stylesheet=</b><i>extra-styles.css input.svg</i>
+<b>&gt;</b> <i>output.png</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Please note that
+per the cascading rules of CSS, a user stylesheet does not
+necessarily override the styles defined in an SVG document.
+To override them reliably, you need to set your extra styles
+to <b>!important</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">According to the
+CSS Cascading specification
+(<i>https://www.w3.org/TR/css-cascade-4/#cascade-sort</i>),
+style declarations have the following precedence.
+Declarations from origins later in the list win over
+declarations from earlier origins:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p style="margin-top: 1em">Normal user agent declarations
+(librsvg's own stylesheets).</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p>Normal user declarations (from your user
+stylesheet).</p> </td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p>Normal author declarations (from the SVG document).</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p><b>!important</b> author declarations (from the SVG
+document).</p> </td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p><b>!important</b> user declarations (from your user
+stylesheet).</p> </td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p><b>!important</b> user agent declarations (librsvg's own
+stylesheets).</p> </td>
+<td width="8%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">After that, the
+CSS specificity and order of appearance of declarations get
+taken into account.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Consider the
+following <i>input.svg</i>; notice how the rectangle has
+<b>fill=&quot;red&quot;</b> as a presentation attribute, and
+a <b>recolorable</b> class:</p>
+
+<p style="margin-left:13%; margin-top: 1em">&lt;svg
+xmlns=&quot;http://www.w3.org/2000/svg&quot;
+width=&quot;100&quot; height=&quot;100&quot;&gt; <br>
+&lt;rect width=&quot;200&quot; height=&quot;100&quot;
+fill=&quot;white&quot;/&gt;</p>
+
+<p style="margin-left:13%; margin-top: 1em">&lt;rect
+class=&quot;recolorable&quot; x=&quot;10&quot;
+y=&quot;10&quot; width=&quot;50&quot; height=&quot;50&quot;
+fill=&quot;red&quot;/&gt;</p>
+
+<p style="margin-left:13%; margin-top: 1em">&lt;text
+x=&quot;10&quot; y=&quot;80&quot; font-size=&quot;20&quot;
+fill=&quot;red&quot;&gt;Hello&lt;/text&gt; <br>
+&lt;/svg&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">And this is
+<i>extra-styles.css</i>:</p>
+
+<p style="margin-left:13%; margin-top: 1em">.recolorable {
+fill: blue !important; }</p>
+
+<p style="margin-left:13%; margin-top: 1em">text { fill:
+green !important; }</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then the PNG
+created by the command above will have these elements:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">A blue square instead of a red
+one, because of the selector for the the <b>recolorable</b>
+class. The <b>fill: blue !important;</b> declaration takes
+precendence over the <b>fill=&quot;red&quot;</b>
+presentation attribute.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Text in green, since its <b>fill=&quot;red&quot;</b>
+gets overriden with <i>fill: green !important</i>.</p></td></tr>
+</table>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>GENERAL OPTIONS
+<a name="GENERAL OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f</b>
+<i>format</i><b>, --format=[png, pdf, pdf1.4, pdf1.5,
+pdf1.6. pdf1.7, ps, eps, <br>
+svg]</b></p>
+
+<p style="margin-left:18%;">Output format for the rendered
+document. Default is <b>png</b>. See the section &quot;PDF
+VERSIONS&quot; for more detail on what each one allows.</p>
+
+<p style="margin-left:9%;"><b>-o</b> <i>filename</i><b>,
+--output</b> <i>filename</i></p>
+
+<p style="margin-left:18%;">Specify the output filename. If
+unspecified, outputs to standard output.</p>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:18%;">Display what version of
+rsvg-convert you are running.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="50%">
+
+
+<p>Display a summary of usage and options.</p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<h3>SIZE AND POSITION
+<a name="SIZE AND POSITION"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In the
+following, <i>&lt;length&gt;</i> values must be specified
+with CSS &lt;length&gt; syntax:
+&lt;https://developer.mozilla.org/en-US/docs/Web/CSS/length&gt;
+. For example, <b>640px</b> or <b>25cm</b>. <b><br>
+--page-width</b> <i>&lt;length&gt;</i> <b>--page-height</b>
+<i>&lt;length&gt;</i></p>
+
+<p style="margin-left:18%;">Page size of the output
+document; both options must be used together. The default is
+to use the image's width and height as modified by the
+options below.</p>
+
+<p style="margin-left:9%;"><b>--top</b>
+<i>&lt;length&gt;</i></p>
+
+<p style="margin-left:18%;">Distance between top edge of
+the page and the rendered image. Default is 0.</p>
+
+<p style="margin-left:9%;"><b>--left</b>
+<i>&lt;length&gt;</i></p>
+
+<p style="margin-left:18%;">Distance between left edge of
+the page and the rendered image. Default is 0.</p>
+
+<p style="margin-left:9%;"><b>-w</b>
+<i>&lt;length&gt;</i><b>, --width</b>
+<i>&lt;length&gt;</i></p>
+
+<p style="margin-left:18%;">Width of the rendered image. If
+unspecified, the natural width of the image is used as the
+default. See the section &quot;SPECIFYING DIMENSIONS&quot;
+above for details.</p>
+
+<p style="margin-left:9%;"><b>-h</b>
+<i>&lt;length&gt;</i><b>, --height</b>
+<i>&lt;length&gt;</i></p>
+
+<p style="margin-left:18%;">Height of the rendered image.
+If unspecified, the natural height of the image is used as
+the default. See the section &quot;SPECIFYING
+DIMENSIONS&quot; above for details.</p>
+
+<p style="margin-left:9%;"><b>-a,
+--keep-aspect-ratio</b></p>
+
+<p style="margin-left:18%;">Specify that the aspect ratio
+is to be preserved, i.e. the image is scaled proportionally
+to fit in the <b>--width</b> and <b>--height</b>. If not
+specified, aspect ratio will not be preserved.</p>
+
+<p style="margin-left:9%;"><b>-d</b> <i>number</i><b>,
+--dpi-x</b> <i>number</i></p>
+
+<p style="margin-left:18%;">Set the X resolution of the
+image in pixels per inch. Default is 96 DPI.</p>
+
+<p style="margin-left:9%;"><b>-p</b> <i>number</i><b>,
+--dpi-y</b> <i>number</i></p>
+
+<p style="margin-left:18%;">Set the Y resolution of the
+image in pixels per inch. Default is 96 DPI.</p>
+
+<p style="margin-left:9%;"><b>-x</b> <i>number</i><b>,
+--x-zoom</b> <i>number</i></p>
+
+<p style="margin-left:18%;">Horizontal scaling factor.
+Default is 1.0.</p>
+
+<p style="margin-left:9%;"><b>-y</b> <i>number</i><b>,
+--y-zoom</b> <i>number</i></p>
+
+<p style="margin-left:18%;">Vertical factor factor. Default
+is 1.0.</p>
+
+<p style="margin-left:9%;"><b>-z</b> <i>number</i><b>,
+--zoom</b> <i>number</i></p>
+
+<p style="margin-left:18%;">Horizontal and vertical scaling
+factor. Default is 1.0.</p>
+
+<h3>CONTROLLING THE RENDERED APPEARANCE
+<a name="CONTROLLING THE RENDERED APPEARANCE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>
+<i>&lt;color&gt;</i><b>, --background-color</b> <i>[black,
+white, #abccee, #aaa...]</i></p>
+
+<p style="margin-left:18%;">Specify the background color.
+If unspecified, <b>none</b> is used as the default; this
+will create transparent PNGs, or PDF/PS/EPS without a
+special background. The <i>&lt;color&gt;</i> must be
+specified in CSS &lt;color&gt; syntax:
+&lt;https://developer.mozilla.org/en-US/docs/Web/CSS/color_value&gt;
+. For example, <b>black</b>, <b>#ff0000</b>, <b>rgba(0.0,
+1.0, 0.0, 1.0)</b>.</p>
+
+<p style="margin-left:9%;"><b>-s</b>
+<i>filename.css</i><b>, --stylesheet</b>
+<i>filename.css</i></p>
+
+<p style="margin-left:18%;">Filename of a custom CSS
+stylesheet.</p>
+
+<p style="margin-left:9%;"><b>-l</b>
+<i>language-tag</i><b>, --accept-language</b>
+<i>[es-MX,fr,en]</i></p>
+
+<p style="margin-left:18%;">Specify which languages will be
+used for SVG documents with multiple languages. The string
+is formatted like an HTTP Accept-Language header, which is a
+comma-separated list of BCP47 language tags: <br>
+&lt;https://www.rfc-editor.org/info/bcp47&gt; . The default
+is to use the language specified by environment variables;
+see the section &quot;ENVIRONMENT VARIABLES&quot; below.</p>
+
+<h3>OPTIONS SPECIFIC TO PDF/PS/EPS OUTPUT
+<a name="OPTIONS SPECIFIC TO PDF/PS/EPS OUTPUT"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keep-image-data</b></p>
+
+<p style="margin-left:18%;">For SVG documents that
+reference PNG or JPEG images, include the original,
+compressed images in the final output, rather than
+uncompressed RGB data. This is the default behavior for PDF
+and (E)PS output.</p>
+
+<p style="margin-left:9%;"><b>--no-keep-image-data</b></p>
+
+<p style="margin-left:18%;">Do not include the original,
+compressed images but instead embed uncompressed RGB date in
+PDF or (E)PS output. This will most likely result in larger
+documents that are slower to read.</p>
+
+<h3>MISCELLANEOUS
+<a name="MISCELLANEOUS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i</b>
+<i>object-id</i><b>, --export-id</b> <i>object-id</i></p>
+
+<p style="margin-left:18%;">Allows to specify an SVG object
+that should be exported based on its XML <b>id</b>
+attribute. If not specified, all objects will be
+exported.</p>
+
+<p style="margin-left:9%;"><b>-u, --unlimited</b></p>
+
+<p style="margin-left:18%;">The XML parser has some guards
+designed to mitigate large CPU or memory consumption in the
+face of malicious documents. It may also refuse to resolve
+<b>data:</b> URIs used to embed image data in SVG documents.
+If you are running into such issues when converting a SVG,
+this option allows to turn off these guards.</p>
+
+<p style="margin-left:9%;"><b>--testing</b></p>
+
+<p style="margin-left:18%;">For developers only: render
+images for librsvg's test suite.</p>
+
+<p style="margin-left:9%;"><b>--completion</b>
+<i>shell-name</i></p>
+
+<p style="margin-left:18%;">Generate a script for a shell's
+Tab completion. You can use <b>bash</b>, <b>elvish</b>,
+<b>fish</b>, <b>powershell</b>, and <b>zsh</b> for the
+shell's name. Rsvg-convert will then write a suitable script
+to standard output.</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>SOURCE_DATE_EPOCH</b></p>
+
+<p style="margin-left:18%;">If the selected output format
+is PDF, this variable can be used to control the
+CreationDate in the PDF file. This is useful for
+reproducible output. The environment variable must be set to
+a decimal number corresponding to a UNIX timestamp, defined
+as the number of seconds, excluding leap seconds, since 01
+Jan 1970 00:00:00 UTC. The specification for this can be
+found at <br>
+
+&lt;https://reproducible-builds.org/specs/source-date-epoch/&gt;</p>
+
+<p style="margin-left:9%;"><b>System language</b></p>
+
+<p style="margin-left:18%;">Unless the
+<b>--accept-language</b> option is specified, the default is
+to use the system's environment to detect the user's
+preferred language. This consults the environment variables
+<b>LANGUAGE</b>, <b>LC_ALL</b>, <b>LC_MESSAGES</b>, and
+<b>LANG</b>.</p>
+
+<h2>PDF VERSIONS
+<a name="PDF VERSIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>--format=pdf</b> option makes rsvg-convert output the
+latest version of PDF that it supports. Normally this is the
+right thing to do, except when you have tools that consume
+the resulting PDFs but only support certain versions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example,
+LaTeX tools like pdflatex may issue a warning if you try to
+include a PDF image that uses a newer version than the
+surrounding document, similar to</p>
+
+<p style="margin-left:13%;"><i>PDF inclusion: found PDF
+version &lt;1.7&gt; but at most version &lt;1.5&gt;
+allowed</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">In this case,
+you may need to restrict the PDF version that rsvg-convert
+produces. Instead of <b>--format=pdf</b>, you can use the
+following: <b><br>
+--format=pdf1.4</b></p>
+
+<p style="margin-left:18%;">Does not use PDF object
+streams; files may be bigger as they allow for less
+compression.</p>
+
+<p style="margin-left:9%;"><b>--format=pdf1.5</b></p>
+
+<p style="margin-left:18%;">Allows creating PDFs where text
+can be selected and searched.</p>
+
+<p style="margin-left:9%;"><b>--format=pdf1.6</b></p>
+
+<p style="margin-left:18%;">No special behavior.</p>
+
+<p style="margin-left:9%;"><b>--format=pdf1.7</b></p>
+
+<p style="margin-left:18%;">Allows including UTF-8
+filenames in link objects reliably.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you are using
+LaTeX tooling, you may want to research options like
+<b>\pdfminorversion=6</b>.</p>
+
+<h2>MORE INFORMATION
+<a name="MORE INFORMATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Librsvg source
+repository and bug tracker:
+&lt;https://gitlab.gnome.org/GNOME/librsvg&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Wiki project
+page: &lt;https://wiki.gnome.org/Projects/LibRsvg&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">SVG1.1
+specification: &lt;http://www.w3.org/TR/SVG11/&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">SVG2
+specification: &lt;http://www.w3.org/TR/SVG2&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">GNOME project
+page: &lt;http://www.gnome.org/&gt;</p>
+<hr>
+</body>
+</html>

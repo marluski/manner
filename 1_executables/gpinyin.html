@@ -1,0 +1,275 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:36 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>gpinyin</title>
+
+</head>
+<body>
+
+<h1 align="center">gpinyin</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Pinyin sections">Pinyin sections</a><br>
+<a href="#Syllables">Syllables</a><br>
+<a href="#Tones">Tones</a><br>
+<a href="#Authors">Authors</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gpinyin - use
+Hanyu Pinyin Chinese in <i>groff</i> documents</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>gpinyin</b></p></td>
+<td width="1%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em">[<i>file&nbsp;</i>...]</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>gpinyin</b></p></td>
+<td width="1%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em"><b>-h</b></p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>gpinyin</b></p></td>
+<td width="1%"></td>
+<td width="13%">
+
+
+<p><b>--help</b></p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>gpinyin</b></p></td>
+<td width="1%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>gpinyin</b></p></td>
+<td width="1%"></td>
+<td width="13%">
+
+
+<p><b>--version</b></p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>gpinyin</i></b>
+is a preprocessor for
+<a href="man:groff(1)"><i>groff</i>(1)</a> that facilitates
+use of Hanyu Pinyin in
+<a href="man:groff(7)"><i>groff</i>(7)</a> files. Pinyin is
+a method for writing the Mandarin Chinese language with the
+Latin alphabet. Mandarin consists of more than four hundred
+base syllables, each spoken with one of five different
+tones. Changing the tone applied to the syllable generally
+alters the meaning of the word it forms. In Pinyin, a
+syllable is written in the Latin alphabet and a numeric tone
+indicator can be appended to each syllable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each
+<i>input-file</i> is a file name or the character
+&ldquo;<b>-</b>&rdquo; to indicate that the standard input
+stream should be read. As usual, the argument
+&ldquo;<b>--</b>&rdquo; can be used in order to force
+interpretation of all remaining arguments as file names,
+even if an <i>input-file</i> argument begins with a
+&ldquo;<b>-</b>&rdquo;. <b>-h</b> and <b>--help</b> display
+a usage message, while <b>-v</b> and <b>--version</b> show
+version information; all exit afterward.</p>
+
+<h3>Pinyin sections
+<a name="Pinyin sections"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Pinyin sections
+in <i>groff</i> files are enclosed by two <b>.pinyin</b>
+requests with different arguments. The starting request
+is</p>
+
+<p style="margin-left:18%;">.pinyin start</p>
+
+<p style="margin-left:9%;">or</p>
+
+<p style="margin-left:18%;">.pinyin begin</p>
+
+<p style="margin-left:9%;">and the ending request is</p>
+
+<p style="margin-left:18%;">.pinyin stop</p>
+
+<p style="margin-left:9%;">or</p>
+
+<p style="margin-left:18%;">.pinyin end</p>
+
+<p style="margin-left:9%;">.</p>
+
+<h3>Syllables
+<a name="Syllables"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In Pinyin, each
+syllable is represented by one to six letters drawn from the
+fifty-two upper- and lowercase letters of the Unicode basic
+Latin character set, plus the letter &ldquo;U&rdquo; with
+dieresis (umlaut) in both cases&mdash;in other words, the
+members of the set
+&ldquo;[a&ndash;zA&ndash;Z&uuml;&Uuml;]&rdquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In <i>groff</i>
+input, all basic Latin letters are written as themselves.
+The &ldquo;u with dieresis&rdquo; can be written as
+&ldquo;\[:u]&rdquo; in lowercase or &ldquo;\[:U]&rdquo; in
+uppercase. Within <b>.pinyin</b> sections, <i>gpinyin</i>
+supports the form &ldquo;ue&rdquo; for lowercase and the
+forms &ldquo;Ue&rdquo; and &ldquo;UE&rdquo; for
+uppercase.</p>
+
+<h3>Tones
+<a name="Tones"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Each syllable
+has exactly one of five <i>tones</i>. The fifth tone is not
+explicitly written at all, but each of the first through
+fourth tones is indicated with a diacritic above a specific
+vowel within the syllable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In a
+<i>gpinyin</i> source file, these tones are written by
+adding a numeral in the range 0 to 5 after the syllable. The
+tone numbers 1 to 4 are transformed into accents above
+vowels in the output. The tone numbers 0 and 5 are
+synonymous.</p>
+
+<p style="margin-left:9%; margin-top: 1em">[The tone mark
+table is omitted from this rendering of the man page because
+the selected output device &ldquo;html&rdquo; lacks the
+character repertoire to display it. Try another output
+device.]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The neutral tone
+number can be omitted from a word-final syllable, but not
+otherwise.</p>
+
+<h2>Authors
+<a name="Authors"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>gpinyin</i>
+was written by
+<a href="mailto:groff-bernd.warken-72@web.de">Bernd
+Warken</a>.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Useful documents
+on the World Wide Web related to Pinyin include</p>
+
+
+<p style="margin-left:14%;"><a href="http://www.foolsworkshop.com/ptou/index.html"><i>Pinyin
+to Unicode</i></a>, <br>
+<a href="http://www.mandarintools.com/"><i>On-line Chinese
+Tools</i></a>, <br>
+<a href="http://www.pinyin.info/index.html"><i>Pinyin.info:
+a guide to the writing of Mandarin Chinese in roman-
+ization</i></a>, <br>
+
+<a href="http://www.pinyin.info/rules/where.html">&ldquo;Where
+do the tone marks go?&rdquo;</a>, <br>
+
+<a href="http://git.savannah.gnu.org/gitweb/?p=cjk.git;a=blob_plain;f=doc/pinyin.txt;hb=HEAD"><i>pinyin.txt</i>
+from the CJK macro package for TeX</a>,</p>
+
+<p style="margin-left:9%;">and</p>
+
+
+<p style="margin-left:14%;"><a href="http://git.savannah.gnu.org/gitweb/?p=cjk.git;a=blob_plain;f=texinput/pinyin.sty;hb=HEAD"><i>pinyin.sty</i>
+from the CJK macro package for TeX</a>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff(1)"><i>groff</i>(1)</a>
+and <a href="man:grog(1)"><i>grog</i>(1)</a> explain how to
+view <i>roff</i> documents.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff(7)"><i>groff</i>(7)</a>
+and <a href="man:groff_char(7)"><i>groff_char</i>(7)</a> are
+comprehensive references covering the language elements of
+GNU <i>troff</i> and the available glyph repertoire,
+respectively.</p>
+<hr>
+</body>
+</html>

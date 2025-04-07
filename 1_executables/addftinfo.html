@@ -1,0 +1,216 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:40 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>addftinfo</title>
+
+</head>
+<body>
+
+<h1 align="center">addftinfo</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">addftinfo - add
+font metrics to <i>troff</i> fonts for use with
+<i>groff</i></p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><i><b>addftinfo</b></i></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+
+<p style="margin-top: 1em">[<b>-asc-height&nbsp;</b><i>n</i>]
+[<b>-body-depth&nbsp;</b><i>n</i>]
+[<b>-body-height&nbsp;</b><i>n</i>]
+[<b>-cap-height&nbsp;</b><i>n</i>]
+[<b>-comma-depth&nbsp;</b><i>n</i>]
+[<b>-desc-depth&nbsp;</b><i>n</i>]
+[<b>-fig-height&nbsp;</b><i>n</i>]
+[<b>-x-height&nbsp;</b><i>n</i>] <i>resolution unit-width
+font</i></p> </td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>addftinfo</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>addftinfo</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>addftinfo</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p><b>--version</b></p></td>
+<td width="6%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>addftinfo</i></b>
+reads an AT&amp;T&nbsp;<i>troff</i> font description file
+<i>font</i>, adds additional font metric information
+required by GNU&nbsp;<i>troff</i>(1), and writes the
+combined result to the standard output. The information
+added is derived from the font&rsquo;s existing parameters
+and assumptions about traditional <i>troff</i> names for
+characters. Among the font metrics added are the heights and
+depths of characters (how far each extends vertically above
+and below the baseline). The <i>resolution</i> and
+<i>unit-width</i> arguments should be the same as the
+corresponding parameters in the <i>DESC</i> file.
+<i>font</i> is the name of the file describing the font; if
+<i>font</i> ends with &ldquo;<b>I</b>&rdquo;, the font is
+assumed to be oblique (or italic).</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All other
+options change parameters that are used to derive the
+heights and depths. Like the existing quantities in the font
+description file, each value&nbsp;<i>n</i> is in <i>scaled
+points,</i> inches/<i>resolution</i> for a font whose type
+size is <i>unit-width</i>; see
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>.
+<b><br>
+-asc-height&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">height of characters with
+ascenders, such as &ldquo;b&rdquo;, &ldquo;d&rdquo;, or
+&ldquo;l&rdquo;</p>
+
+
+<p style="margin-left:9%;"><b>-body-depth&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">depth of characters such as
+parentheses</p>
+
+
+<p style="margin-left:9%;"><b>-body-height&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">height of characters such as
+parentheses</p>
+
+
+<p style="margin-left:9%;"><b>-cap-height&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">height of uppercase letters
+such as &ldquo;A&rdquo;</p>
+
+
+<p style="margin-left:9%;"><b>-comma-depth&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">depth of a comma</p>
+
+
+<p style="margin-left:9%;"><b>-desc-depth&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">depth of characters with
+descenders, such as &ldquo;p&rdquo;, &ldquo;q&rdquo;, or
+&ldquo;y&rdquo;</p>
+
+<p style="margin-left:9%;"><b>-fig-height</b></p>
+
+<p style="margin-left:18%;">height of figures
+(numerals)</p>
+
+
+<p style="margin-left:9%;"><b>-x-height&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">height of lowercase letters
+without ascenders such as &ldquo;x&rdquo;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>addftinfo</i>
+makes no attempt to use the specified parameters to infer
+unspecified parameters. If a parameter is not specified, the
+default will be used. The defaults are chosen to produce
+reasonable values for a Times font.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff_font(5)"><i>groff_font</i>(5)</a>,
+<a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:groff_char(7)"><i>groff_char</i>(7)</a></p>
+<hr>
+</body>
+</html>

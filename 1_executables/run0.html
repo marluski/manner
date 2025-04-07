@@ -1,0 +1,504 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>RUN0</title>
+
+</head>
+<body>
+
+<h1 align="center">RUN0</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">run0 - Elevate
+privileges</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em"><b>run0</b> [OPTIONS...]
+[COMMAND...]</p> </td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>run0</b> may
+be used to temporarily and interactively acquire elevated or
+different privileges. It serves a similar purpose as
+<b>sudo</b>(8), but operates differently in a couple of key
+areas:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; No
+execution or security context credentials are inherited from
+the caller into the invoked commands, as they are invoked
+from a fresh, isolated service forked off by the service
+manager.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+Authentication takes place via
+<b><font color="#0000FF">polkit</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">, thus isolating the authentication
+prompt from the terminal (if possible).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+An independent pseudo-tty is allocated for the invoked
+command, detaching its lifecycle and isolating it for
+security.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">&bull;
+No SetUID/SetGID file access bit functionality is used for
+the implementation.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Altogether
+this should provide a safer and more robust alternative to
+the <b>sudo</b> mechanism, in particular in OS environments
+where SetUID/SetGID support is not available (for example by
+setting the <i>NoNewPrivileges=</i> variable in
+<b>systemd-system.conf</b>(5)).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Any
+session invoked via <b>run0</b> will run through the
+&quot;systemd-run0&quot; PAM stack.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Note
+that <b>run0</b> is implemented as an alternative multi-call
+invocation of <b>systemd-run</b>(1). That is, <b>run0</b> is
+a symbolic link to <b>systemd-run</b> executable file, and
+it behaves as <b>run0</b> if it is invoked through the
+symbolic link, otherwise behaves as
+<b>systemd-run</b>.</font></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following options are understood:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--unit=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Use this
+unit name instead of an automatically generated
+one.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--property=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Sets a
+property of the service unit that is created. This option
+takes an assignment in the same format as
+<b>systemctl</b>(1)'s <b>set-property</b>
+command.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--description=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Provide a
+description for the service unit that is invoked. If not
+specified, the command itself will be used as a description.
+See <i>Description=</i> in
+<b>systemd.unit</b>(5).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--slice=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Make the
+new .service unit part of the specified slice, instead of
+user.slice.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--slice-inherit</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Make the
+new .service unit part of the slice the <b>run0</b> itself
+has been invoked in. This option may be combined with
+<b>--slice=</b>, in which case the slice specified via
+<b>--slice=</b> is placed within the slice the <b>run0</b>
+command is invoked in.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Example:
+consider <b>run0</b> being invoked in the slice foo.slice,
+and the <b>--slice=</b> argument is bar. The unit will then
+be placed under foo-bar.slice.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--user=</b>,
+<b>-u</b>, <b>--group=</b>, <b>-g</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Switches
+to the specified user/group instead of root.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--nice=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Runs the
+invoked session with the specified nice level.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--chdir=</b>,
+<b>-D</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Runs the
+invoked session with the specified working directory. If not
+specified defaults to the client's current working directory
+if switching to the root user, or the target user's home
+directory otherwise.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--setenv=</b><i>NAME</i><b>[=</b><i>VALUE</i><b>]</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Runs the
+invoked session with the specified environment variable set.
+This parameter may be used more than once to set multiple
+variables. When &quot;=&quot; and <i>VALUE</i> are omitted,
+the value of the variable with the same name in the invoking
+environment will be used.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--background=</b><i>COLOR</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Change
+the terminal background color to the specified ANSI color as
+long as the session lasts. If not specified, the background
+will be tinted in a reddish tone when operating as root, and
+in a yellowish tone when operating under another UID, as
+reminder of the changed privileges. The color specified
+should be an ANSI X3.64 SGR background color, i.e. strings
+such as &quot;40&quot;, &quot;41&quot;, ..., &quot;47&quot;,
+&quot;48;2;...&quot;, &quot;48;5;...&quot;. See</font>
+<b><font color="#0000FF">ANSI Escape Code
+(Wikipedia)</font></b>
+<small><font color="#000000">[2]</font></small>
+<font color="#000000">for details. Set to an empty string to
+disable.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Example:
+&quot;--background=44&quot; for a blue
+background.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--pty</b>,
+<b>--pipe</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Request
+allocation of a pseudo TTY for the <b>run0</b> session (in
+case of <b>--pty</b>), or request passing the caller's STDIO
+file descriptors directly through (in case of
+<b>--pipe</b>). If neither switch is specified, or if both
+switches are specified, the mode will be picked
+automatically: if standard input, standard output and
+standard error output are all connected to a TTY then a
+pseudo TTY is allocated, otherwise the relevant file
+descriptors are passed through directly.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--shell-prompt-prefix=</b><i>STRING</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set a
+shell prompt prefix string. This ultimately controls the
+<i>$SHELL_PROMPT_PREFIX</i> environment variable for the
+invoked program, which is typically imported into the shell
+prompt. By default &ndash; if emojis are supported &ndash; a
+superhero emoji is shown (&#129464; ). This default may also
+be changed (or turned off) by passing the
+<i>$SYSTEMD_RUN_SHELL_PROMPT_PREFIX</i> environment variable
+to <i>run0</i>, see below. Set to an empty string to disable
+shell prompt prefixing.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--machine=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Execute
+operation in a local container. Specify a container name to
+connect to.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--no-ask-password</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Do not
+query the user for authentication for privileged
+operations.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-h</b>,
+<b>--help</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print a
+short help text and exit.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--version</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print a
+short version string and exit.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">All
+command line arguments after the first non-option argument
+become part of the command line of the launched process. If
+no command line is specified an interactive shell is
+invoked. The shell to invoke may be controlled via
+<b>--setenv=SHELL=...</b> and currently defaults to the
+<i>originating user's</i> shell (i.e. not the target
+user's!) if operating locally, or /bin/sh when operating
+with <b>--machine=</b>.</font></p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">On
+success, 0 is returned. If <b>run0</b> failed to start the
+session or the specified command fails, a non-zero return
+value will be returned.</font></p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">As
+with <b>systemd-run</b>, the session will inherit the system
+environment from the service manager. In addition, the
+following environment variables will be set:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$TERM</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Copied
+from the <i>$TERM</i> of the caller. Can be overridden with
+<b>--setenv=</b></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SUDO_USER</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set to
+the username of the originating user.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SUDO_UID</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set to
+the numeric UNIX user id of the originating user.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SUDO_GID</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set to
+the primary numeric UNIX group id of the originating
+session.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SHELL_PROMPT_PREFIX</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">By
+default set to the superhero emoji (if supported), but may
+be overridden with the
+<i>$SYSTEMD_RUN_SHELL_PROMPT_PREFIX</i> environment variable
+(see below), or the <b>--shell-prompt-prefix=</b> switch
+(see above).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following variables may be passed to <b>run0</b>:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_RUN_SHELL_PROMPT_PREFIX</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">If set,
+overrides the default shell prompt prefix that <b>run0</b>
+sets for the invoked shell (the superhero emoji). Set to an
+empty string to disable shell prompt prefixing.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 257.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>systemd</b>(1),
+<b>systemd-run</b>(1), <b>sudo</b>(8),
+<b>machinectl</b>(1)</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="8%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">polkit</font></p> </td>
+<td width="78%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://www.freedesktop.org/wiki/Software/polkit</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">2.</font></p> </td>
+<td width="1%"></td>
+<td width="36%">
+
+
+<p style="margin-top: 1em"><font color="#000000">ANSI
+Escape Code (Wikipedia)</font></p></td>
+<td width="50%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://en.wikipedia.org/wiki/ANSI_escape_code#SGR_(Select_Graphic_Rendition)_parameters</font></p>
+<hr>
+</body>
+</html>

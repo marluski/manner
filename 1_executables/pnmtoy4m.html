@@ -1,0 +1,278 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:36 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pnmtoy4m</title>
+
+</head>
+<body>
+
+<h1 align="center">pnmtoy4m</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pnmtoy4m -
+Convert PNM/PAM images to YUV4MPEG2 stream</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pnmtoy4m</b>
+[<i>options</i>] <i>[ filename ]</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>pnmtoy4m</b></i>
+converts one or more raw PPM, PGM, PBM, or PAM images into a
+YUV4MPEG2 stream ready for further processing by other video
+tools. These three (or four) image formats are collectively
+referred to as &quot;PNM images&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output is to
+stdout to facilitate piping to other MJPEG tools. The size
+of the output frame(s) is determined from the (first) input
+image.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Input is a
+&rsquo;raw&rsquo; format PNM image, read from stdin or from
+the optional filename. The input may contain multiple PNM
+images concatenated together; <b>pnmtoy4m</b> will read and
+process them sequentially. All images must have identical
+size and format. Input images can be interpreted as whole
+progressive frames, pairs of interleaved fields, or as
+sequential fields (read in pairs of images) to be output as
+either interlaced or progressive frames. PPM and PGM images
+must have 8 bits per channel (i.e. &rsquo;maxval&rsquo; must
+be 255).</p>
+
+<p style="margin-left:9%; margin-top: 1em">PPM input images
+should be in the usual R&rsquo;G&rsquo;B&rsquo; colorspace.
+They are converted to the Y&rsquo;CbCr colorspace (ITU-R
+BT.601) before being output to a &quot;4:4:4&quot;
+(non-subsampled) YUV4MPEG2 stream. If chroma subsampling is
+required (e.g. to 4:2:0 for MPEG), the output should be
+further piped through a program such as
+<b>y4mscaler</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">PGM images
+should be in the standard full-range ([0,255]) grayscale
+colorspace. PGM and PBM images will be converted to BT.601
+luma and output as &quot;MONO&quot; (luma-only) YUV4MPEG2
+streams.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The PAM format
+is a newer superset of the PNM formats; the precise contents
+of a PAM image is defined by the TUPLTYPE header tag.
+<b>pnmtoy4m</b> handles TUPLTYPE &quot;GRAYSCALE&quot; as
+PGM, &quot;RGB&quot; as PPM, and &quot;RGB_ALPHA&quot; as
+PPM with an 8-bit alpha channel. (The alpha channel is
+converted to BT.601 luma as is appropriate for YUV4MPEG2
+streams.)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pnmtoy4m</b>
+and <b>y4mtopnm</b> are inverses of each other; you can pipe
+the output of one into the other, and vice-versa. Note that
+the colorspace operations are lossy in both directions. And,
+when converting to PNM, information on interlacing and
+sample aspect ratio is lost (but can be reconstructed by
+supplying command-line arguments to <b>pnmtoy4m</b>).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pnmtoy4m</b>
+accepts the following options: <b><br>
+-o</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Frame offset: skip output of
+the first &rsquo;num&rsquo; frames. (default: 0)</p>
+
+<p style="margin-left:9%;"><b>-n</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Output a total of
+&rsquo;num&rsquo; output frames. Use &rsquo;0&rsquo; to
+specify all frames. (default: 0)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-B</b></p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p>Interpret data as being BGR rather than RGB.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-r</b></p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p>Repeat last input frame until output is complete. If
+&rsquo;-n 0&rsquo; is also specified, last input frame will
+be repeated forever.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-D</b> <i>x</i></p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p>Treat each PNM image as a single (de-interleaved) field
+instead of a full frame. The argument specifies the
+interpretation:</p> </td></tr>
+</table>
+
+<p style="margin-left:15%;">t - the first image is a
+top-field <br>
+b - the first image is a bottom-field</p>
+
+<p style="margin-left:15%; margin-top: 1em">With this
+option, two input images will be required per output frame.
+Be careful: mismatched &quot;-I&quot; and &quot;-D&quot;
+options can invert the temporal or spatial order of the
+fields (or both).</p>
+
+<p style="margin-left:9%;"><b>-F</b> <i>n:d</i></p>
+
+<p style="margin-left:15%;">Set framerate encoded in output
+stream, as an exact integer ratio. (default: 30000:1001)
+Common rates are: <br>
+24000:1001 - NTSC 3:2 pulldown converted film <br>
+24:1 - native film <br>
+25:1 - PAL/SECAM <br>
+30000:1001 - NTSC video <br>
+50:1 - PAL field rate <br>
+60000:1001 - NTSC field rate</p>
+
+<p style="margin-left:9%;"><b>-A</b> <i>n:d</i></p>
+
+<p style="margin-left:15%;">Set pixel aspect ratio encoded
+in output stream, as an exact integer ratio. (default: 1:1)
+Common ratios are: <br>
+1:1 - square pixels (computer graphics) <br>
+10:11 - CCIR-601 NTSC <br>
+59:54 - CCIR-601 PAL</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-I</b> <i>x</i></p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p>Set the output interlacing mode, encoded in the output
+stream. (Default is to match &quot;-D&quot; if given, or
+&rsquo;p&rsquo; if not.)</p></td></tr>
+</table>
+
+<p style="margin-left:15%;">p - progressive, non-interlaced
+<br>
+t - top/upper-field-first interlaced <br>
+b - bottom/lower-field-first interlaced</p>
+
+<p style="margin-left:9%;"><b>-v</b> <i>[0,1,2]</i></p>
+
+<p style="margin-left:15%;">Set verbosity level. <br>
+0 = warnings and errors only. <br>
+1 = add informative messages, too. <br>
+2 = add chatty debugging message, too.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To convert a
+file containing a single PPM file into a stream of 15
+(identical) frames:</p>
+
+<p style="margin-left:15%; margin-top: 1em">pnmtoy4m -n 15
+-r some-image.ppm</p>
+
+<p style="margin-left:9%; margin-top: 1em">To convert a
+series of Targa format images (in the current directory) to
+a YUV4MPEG2 stream displayed by yuvplay:</p>
+
+<p style="margin-left:15%; margin-top: 1em">ls *.tga |
+xargs -n1 tgatoppm | pnmtoy4m | yuvplay</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written by Matt Marjanovic. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>pam</b></i>(5),
+<b>pbm</b>(5), <b>pgm</b>(5), <b>pnm</b>(5), <b>ppm</b>(5),
+<b>y4mtopnm</b>(1), <b>mjpegtools</b>(1),
+<b>mpeg2enc</b>(1), <b>y4mscaler</b>(1), <b>yuv2lav</b>(1),
+<b>yuvplay</b>(1)</p>
+<hr>
+</body>
+</html>

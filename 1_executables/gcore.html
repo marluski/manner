@@ -1,0 +1,158 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:41 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GCORE</title>
+
+</head>
+<body>
+
+<h1 align="center">GCORE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gcore - Generate
+a core file of a running program</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gcore [-a] [-o
+<i>prefix</i>] [-d <i>directory</i>] <i>pid1</i>
+[<i>pid2</i>...<i>pidN</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Generate core
+dumps of one or more running programs with process IDs
+<i>pid1</i>, <i>pid2</i>, etc. A core file produced by
+<b>gcore</b> is equivalent to one produced by the kernel
+when the process crashes (and when &quot;ulimit -c&quot; was
+used to set up an appropriate core dump limit). However,
+unlike after a crash, after <b>gcore</b> finishes its job
+the program remains running without any change.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-a</b></p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Dump all memory mappings. The
+actual effect of this option depends on the Operating
+System. On GNU/Linux, it will disable
+&quot;use-coredump-filter&quot; and enable
+&quot;dump-excluded-mappings&quot;.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-o</b> <i>prefix</i></p>
+
+<p style="margin-left:14%;">The optional argument
+<i>prefix</i> specifies the prefix to be used when composing
+the file names of the core dumps. The file name is composed
+as <i>prefix.pid</i>, where <i>pid</i> is the process
+<small>ID</small> of the running program being analyzed by
+<b>gcore</b>. If not specified, <i>prefix</i> defaults to
+<i>gcore</i>.</p>
+
+<p style="margin-left:9%;"><b>-d</b> <i>directory</i></p>
+
+<p style="margin-left:14%;">Use <i>directory</i> as the
+data directory when invoking <small>GDB</small> for running
+the gcore command. This argument is optional.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <small>GDB</small> is maintained as a
+Texinfo manual. If the &quot;info&quot; and &quot;gdb&quot;
+programs and <small>GDB</small> &rsquo;s Texinfo
+documentation are properly installed at your site, the
+command</p>
+
+<p style="margin-left:9%; margin-top: 1em">info gdb</p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Using
+<small>GDB: A</small> Guide to the <small>GNU</small>
+Source-Level Debugger</i>, Richard M. Stallman and Roland H.
+Pesch, July 1991.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (c)
+1988-2024 Free Software Foundation, Inc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this document
+under the terms of the <small>GNU</small> Free Documentation
+License, Version 1.3 or any later version published by the
+Free Software Foundation; with the Invariant Sections being
+&quot;Free Software&quot; and &quot;Free Software Needs Free
+Documentation&quot;, with the Front-Cover Texts being
+&quot;A <small>GNU</small> Manual,&quot; and with the
+Back-Cover Texts as in (a) below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">(a) The
+<small>FSF</small> &rsquo;s Back-Cover Text is: &quot;You
+are free to copy and modify this <small>GNU</small> Manual.
+Buying copies from <small>GNU</small> Press supports the
+<small>FSF</small> in developing <small>GNU</small> and
+promoting software freedom.&quot;</p>
+<hr>
+</body>
+</html>

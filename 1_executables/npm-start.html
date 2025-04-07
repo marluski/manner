@@ -1,0 +1,264 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:04 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-START</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-START</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Example">Example</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#ignore-scripts">ignore-scripts</a><br>
+<a href="#script-shell">script-shell</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-start</b>
+- Start a package</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm start [--
+&lt;args&gt;]</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This runs a
+predefined command specified in the <b>&quot;start&quot;</b>
+property of a package&rsquo;s <b>&quot;scripts&quot;</b>
+object.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the
+<b>&quot;scripts&quot;</b> object does not define a
+<b>&quot;start&quot;</b> property, npm will run <b>node
+server.js</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that this
+is different from the default node behavior of running the
+file specified in a package&rsquo;s <b>&quot;main&quot;</b>
+attribute when evoking with <b>node .</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">As of
+<b>npm@2.0.0</b> <i>&lang;
+https://blog.npmjs.org/post/98131109725/npm-2-0-0&rang;</i>
+, you can use custom arguments when executing scripts. Refer
+to npm help run-script for more details.</p>
+
+<h3>Example
+<a name="Example"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">{ <br>
+&quot;scripts&quot;: { <br>
+&quot;start&quot;: &quot;node foo.js&quot; <br>
+} <br>
+}</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm start</p>
+
+<p style="margin-left:12%; margin-top: 1em">&gt; npm@x.x.x
+start <br>
+&gt; node foo.js</p>
+
+<p style="margin-left:12%; margin-top: 1em">(foo.js output
+would be here)</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>ignore-scripts
+<a name="ignore-scripts"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If true, npm
+does not run scripts specified in package.json files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+commands explicitly intended to run a particular script,
+such as <b>npm start</b>, <b>npm stop</b>, <b>npm
+restart</b>, <b>npm test</b>, and <b>npm run-script</b> will
+still run their intended script if <b>ignore-scripts</b> is
+set, but they will <i>not</i> run any pre- or
+post-scripts.</p>
+
+<h3>script-shell
+<a name="script-shell"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em">Default: &rsquo;/bin/sh&rsquo;
+on POSIX systems, &rsquo;cmd.exe&rsquo; on Windows</p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>Type: null or String</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The shell to use
+for scripts run with the <b>npm exec</b>, <b>npm run</b> and
+<b>npm init &lt;package-spec&gt;</b> commands.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em">npm help run-script</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help scripts</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help test</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help restart</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help stop</p></td>
+<td width="62%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

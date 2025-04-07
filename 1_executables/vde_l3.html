@@ -1,0 +1,159 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VDE_L3</title>
+
+</head>
+<body>
+
+<h1 align="center">VDE_L3</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTICE">NOTICE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">vde_l3 - Virtual
+Distributed Ethernet &rsquo;Layer 3&rsquo; Switch.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_l3 -v</b>
+<i>vde_plug:ipaddress/netmask</i> [<b>-v</b><i>...]
+[</i><b>-r</b> <i>target_network/netmask:gateway</i>]
+[<b>-G</b> <i>default_gw</i>] [<b>-M</b>
+<i>mgmt_socket</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A <b>vde_l3</b>
+connects to one or more vde_switches, performing ip
+forwarding among its virtual interfaces. A new interface is
+created at startup for each <b>-v</b> option given at
+command line. Static routes to target networks can be
+defined using the <b>-r</b> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_l3 -v
+/var/run/s1.ctl:192.168.0.1/24</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">connects to the
+vde sock at /var/run/s1.ctl with its virtual interface ve0,
+having the address 192.168.0.1 and netmask
+255.255.255.0.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_l3
+\</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v
+/var/run/s1.ctl:192.168.0.1/24 \</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v
+/var/run/s2.ctl:10.0.0.254/255.255.0.0</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">connects to the
+two vde socks, with its virtual interfaces ve0 and ve1,
+having addressess 192.168.1.0 and 10.0.0.254 respectively.
+Hosts in each network can specify the <b>vde_l3</b> as their
+gateway to reach the other one.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>
+<i>vde_plug:ipaddress/netmask</i></p>
+
+<p style="margin-left:18%;">Creates a virtual network
+interfaces on the <b>vde_l3</b> box, with address
+<i>ipaddress</i> and netmask <i>netmask</i>. Please note
+that the netmask can be specified either in the
+&rsquo;classic&rsquo; A.B.C.D mode, or just by giving the
+number of leading bits (f.e., /17 for 255.255.128.0). One
+can define as many interfaces as she wants.</p>
+
+<p style="margin-left:9%;"><b>-r</b>
+<i>target_network/netmask:gateway</i></p>
+
+<p style="margin-left:18%;">Specify a static route through
+<i>gateway</i> to reach hosts in <i>target_network</i> with
+netmask <i>netmask</i>. One can define as many routes as she
+wants.</p>
+
+<p style="margin-left:9%;"><b>-G</b> <i>default_gw</i></p>
+
+<p style="margin-left:18%;">Specify a default gateway, to
+be used whenever no static route is defined for a target
+host.</p>
+
+<p style="margin-left:9%;"><b>-M</b> <i>mgmt_socket</i></p>
+
+<p style="margin-left:18%;">the unix socket where the
+parameters (interfaces addresses, routes, etc.) can be
+checked and changed runtime. <b>unixterm</b>(1) can be used
+as a remote terminal for wirefilter.</p>
+
+<h2>NOTICE
+<a name="NOTICE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtual
+Distributed Ethernet is not related in any way with
+www.vde.com (&quot;Verband der Elektrotechnik, Elektronik
+und Informationstechnik&quot; i.e. the German
+&quot;Association for Electrical, Electronic &amp;
+Information Technologies&quot;).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_switch</b>(1),
+<b>vdeq</b>(1), <b>unixterm</b>(1), <b>vde_cryptcab</b>(1),
+<b>wirefilter</b>(1).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">VDE_L3 is a tool
+by Daniele Lacamera &lt;root@danielinux.net&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">VDE is a project
+by Renzo Davoli &lt;renzo@cs.unibo.it&gt;</p>
+<hr>
+</body>
+</html>

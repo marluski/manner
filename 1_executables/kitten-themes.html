@@ -1,0 +1,269 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:41 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-themes</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-themes</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Overview">Overview</a><br>
+<a href="#How it works">How it works</a><br>
+<a href="#Change color themes automatically when the os switches between light and dark">Change color themes automatically when the os switches between light and dark</a><br>
+<a href="#Using your own themes">Using your own themes</a><br>
+<a href="#Contributing new themes">Contributing new themes</a><br>
+<a href="#Changing the theme non-interactively">Changing the theme non-interactively</a><br>
+<a href="#Source code for themes">Source code for themes</a><br>
+<a href="#Command line interface">Command line interface</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Author">Author</a><br>
+<a href="#Copyright">Copyright</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-themes -
+Manage kitty color schemes easily</p>
+
+<h2>Overview
+<a name="Overview"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The themes
+kitten allows you to easily change color themes, from a
+collection of over three hundred pre-built themes available
+at - <i>kitty-themes</i>. To use it, simply run:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitten
+themes</p>
+
+<p style="margin-left:9%; margin-top: 1em">The kitten
+allows you to pick a theme, with live previews of the
+colors. You can choose between light and dark themes and
+search by theme name by just typing a few characters from
+the name.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The kitten
+maintains a list of recently used themes to allow quick
+switching.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+restore the colors to default, you can do so by choosing the
+<b>Default</b> theme.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Added in version
+0.23.0: The themes kitten</p>
+
+<h2>How it works
+<a name="How it works"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A theme in kitty
+is just a <b>.conf</b> file containing kitty settings. When
+you select a theme, the kitten simply copies the
+<b>.conf</b> file to
+<b>&#732;/.config/kitty/current-theme.conf</b> and adds an
+include for <b>current-theme.conf</b> to <b>kitty.conf</b>.
+It also comments out any existing color settings in
+<b>kitty.conf</b> so they do not interfere.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Once that's
+done, the kitten sends kitty a signal to make it reload its
+config.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">If you want to have some color
+settings in your <b>kitty.conf</b> that the theme kitten
+does not override, move them into a separate conf file and
+<b>include</b> it into kitty.conf. The include should be
+placed after the inclusion of <b>current-theme.conf</b> so
+that the settings in it override conflicting settings from
+<b>current-theme.conf</b>.</p>
+
+<h2>Change color themes automatically when the os switches between light and dark
+<a name="Change color themes automatically when the os switches between light and dark"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Added in version
+0.38.0.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can have
+kitty automatically change its color theme when the OS
+switches between dark, light and no-preference modes. In
+order to do this, run the theme kitten as normal and at the
+final screen select the option to save your chosen theme as
+either light, dark, or no-preference. Repeat until you have
+chosen a theme for each of the three modes. Then, once you
+restart kitty, it will automatically use your chosen themes
+depending on the OS color scheme.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This works by
+creating three files: <b>dark-theme.auto.conf</b>,
+<b>light-theme.auto.conf</b> and
+<b>no-preference-theme.auto.conf</b> in the kitty config
+directory. When these files exist, kitty queries the OS for
+its color scheme and uses the appropriate file. Note that
+the colors in these files override all other colors, even
+those specified using the <i>kitty --override</i> command
+line flag. kitty will also automatically change colors when
+the OS color scheme changes, for example, during night/day
+transitions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When using these
+colors, you can still dynamically change colors, but the
+next time the OS changes its color mode, any dynamic changes
+will be overridden.</p>
+
+<h2>Using your own themes
+<a name="Using your own themes"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can also
+create your own themes as <b>.conf</b> files. Put them in
+the <b>themes</b> sub-directory of the <i>kitty config
+directory</i>, usually, <b>&#732;/.config/kitty/themes</b>.
+The kitten will automatically add them to the list of
+themes. You can use this to modify the builtin themes, by
+giving the conf file the name <b>Some theme name.conf</b> to
+override the builtin theme of that name. Here, <b>Some theme
+name</b> is the actual builtin theme name, not its file
+name. Note that after doing so you have to run the kitten
+and choose that theme once for your changes to be
+applied.</p>
+
+<h2>Contributing new themes
+<a name="Contributing new themes"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you wish to
+contribute a new theme to the kitty theme repository, start
+by going to the <i>kitty-themes</i> repository. <i>Fork
+it</i>, and use the file <b>template.conf</b> as a template
+when creating your theme. Once you are satisfied with how it
+looks, <i>submit a pull request</i> to have your theme
+merged into the <i>kitty-themes</i> repository, which will
+make it available in this kitten automatically.</p>
+
+<h2>Changing the theme non-interactively
+<a name="Changing the theme non-interactively"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can specify
+the theme name as an argument when invoking the kitten to
+have it change to that theme instantly. For example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitten themes
+--reload-in=all Dimmed Monokai</p>
+
+<p style="margin-left:9%; margin-top: 1em">Will change the
+theme to <b>Dimmed Monokai</b> in all running kitty
+instances. See below for more details on non-interactive
+operation.</p>
+
+<h2>Source code for themes
+<a name="Source code for themes"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The source code
+for this kitten is <i>available on GitHub</i>.</p>
+
+<h2>Command line interface
+<a name="Command line interface"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">kitten themes
+[options] [theme name to switch to]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Change the kitty
+theme. If no theme name is supplied, run interactively,
+otherwise change the current theme to the specified theme
+name.</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--cache-age
+&lt;CACHE_AGE&gt;</b></p>
+
+<p style="margin-left:18%;">Check for new themes only after
+the specified number of days. A value of zero will always
+check for new themes. A negative value will never check for
+new themes, instead raising an error if a local copy of the
+themes is not available. Default: <b>1</b></p>
+
+<p style="margin-left:9%;"><b>--reload-in
+&lt;RELOAD_IN&gt;</b></p>
+
+<p style="margin-left:18%;">By default, this kitten will
+signal only the parent kitty instance it is running in to
+reload its config, after making changes. Use this option to
+instead either not reload the config at all or in all
+running kitty instances. Default: <b>parent</b> Choices:
+<b>all</b>, <b>none</b>, <b>parent</b></p>
+
+<p style="margin-left:9%;"><b>--dump-theme</b></p>
+
+<p style="margin-left:18%;">When running non-interactively,
+dump the specified theme to STDOUT instead of changing
+kitty.conf. Default: <b>false</b></p>
+
+<p style="margin-left:9%;"><b>--config-file-name
+&lt;CONFIG_FILE_NAME&gt;</b></p>
+
+<p style="margin-left:18%;">The name or path to the config
+file to edit. Relative paths are interpreted with respect to
+the kitty config directory. By default the kitty config
+file, kitty.conf is edited. This is most useful if you add
+<b>include themes.conf</b> to your kitty.conf and then have
+the kitten operate only on <b>themes.conf</b>, allowing
+<b>kitty.conf</b> to remain unchanged. Default:
+<b>kitty.conf</b></p>
+
+<h2>Author
+<a name="Author"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kovid Goyal</p>
+
+<h2>Copyright
+<a name="Copyright"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2025, Kovid
+Goyal</p>
+<hr>
+</body>
+</html>

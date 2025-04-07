@@ -1,0 +1,113 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:05 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ROFILES-FUSE</title>
+
+</head>
+<body>
+
+<h1 align="center">ROFILES-FUSE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLE: UPDATE AN OSTREE COMMIT">EXAMPLE: UPDATE AN OSTREE COMMIT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rofiles-fuse -
+Use FUSE to create a view where directories are writable,
+files are immutable</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="36%">
+
+
+<p style="margin-top: 1em"><b>rofiles-fuse SRCDIR
+MNTPOINT</b></p> </td>
+<td width="55%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Creating a
+checkout from an OSTree repository by default uses hard
+links, which means an in-place mutation to any file corrupts
+the repository and all checkouts. This can be problematic if
+one wishes to run arbitrary programs against such a
+checkout. For example, RPM %post scripts or equivalent.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In the case
+where one wants to create a tree commit derived from other
+content, using <b>rofiles-fuse</b> in concert with <b>ostree
+commit --link-checkout-speedup</b> (or the underlying API)
+can ensure that only new files are checksummed.</p>
+
+<h2>EXAMPLE: UPDATE AN OSTREE COMMIT
+<a name="EXAMPLE: UPDATE AN OSTREE COMMIT"></a>
+</h2>
+
+
+<p style="margin-left:14%; margin-top: 1em"># Initialize a
+checkout and mount <br>
+$ ostree --repo=repo checkout somebranch branch-checkout
+<br>
+$ mkdir mnt <br>
+$ rofiles-fuse branch-checkout mnt</p>
+
+<p style="margin-left:14%; margin-top: 1em"># Now,
+arbitrary changes to mnt/ are reflected in branch-checkout
+<br>
+$ echo somenewcontent &gt; mnt/anewfile <br>
+$ mkdir mnt/anewdir <br>
+$ rm mnt/someoriginalcontent -rf</p>
+
+<p style="margin-left:14%; margin-top: 1em"># Commit and
+cleanup <br>
+$ fusermount3 -u mnt <br>
+$ ostree --repo=repo commit --link-checkout-speedup -b
+somebranch -s 'Commit new content'
+--tree=dir=branch-checkout <br>
+$ rm mnt branch-checkout -rf</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree</b>(1)</p>
+<hr>
+</body>
+</html>

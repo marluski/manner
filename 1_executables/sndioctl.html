@@ -1,0 +1,158 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:18 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>SNDIOCTL</i>(1) General Commands Manual
+<i>SNDIOCTL</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">sndioctl &mdash; manipulate
+audio device controls</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:21%;"><b>sndioctl</b>
+[<b>-dimnqv</b>] [<b>-f&nbsp;</b><i>device</i>]
+[<i>command&nbsp;...</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;">The <b>sndioctl</b> utility can
+display or manipulate controls of <i>sndio</i>(7) audio
+devices, like the output level. The options are as
+follows:</p>
+
+<p style="margin-top: 1em"><b>-d</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Dump the raw
+list of available controls and exit. Useful as a debugging
+tool.</p>
+
+<p style="margin-top: 1em"><b>-f</b> <i>device</i></p>
+
+<p style="margin-left:19%;">Use this <i>sndio</i>(7) audio
+device.</p>
+
+<p style="margin-top: 1em"><b>-i</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Display
+characteristics of requested controls instead of their
+values.</p>
+
+<p style="margin-top: 1em"><b>-m</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Monitor and
+display audio controls changes.</p>
+
+<p style="margin-top: 1em"><b>-n</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Suppress
+printing of the variable name.</p>
+
+<p style="margin-top: 1em"><b>-q</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Suppress all
+printing when setting a variable.</p>
+
+<p style="margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Enable verbose
+mode, a.k.a. multi-channel mode. By default controls
+affecting different channels of the same stream are
+disguised as a single mono control to hide details that are
+not essential.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no commands
+are specified, all valid controls are displayed on
+<i>stdout</i>. Unless <b>-d</b>, <b>-m</b>, <b>-n</b>, or
+<b>-i</b> are used, displayed lines are valid commands. The
+set of available controls depends on the audio device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Commands use the
+following two formats to display and change controls
+respectively:</p>
+
+
+<p style="margin-left:17%; margin-top: 1em"><b>[group/]stream[channel].function
+<br>
+[group/]stream[channel].function=value</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">On the left-hand
+side are specified the control group (if any), the affected
+stream name, and the optional channel number. Examples of
+left-hand side terms:</p>
+
+
+<p style="margin-left:17%; margin-top: 1em"><b>output.level
+<br>
+output[0].level</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If the channel
+number (including the brackets) is omitted, the command is
+applied to all channels.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Values are
+numbers between 0 and 1. Two-state controls (switches) take
+either 0 or 1 as value, typically corresponding to the
+<i>off</i> and <i>on</i> states respectively.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a decimal is
+prefixed by the plus (minus) sign then the given value is
+added to (subtracted from) the current value of the control.
+If &quot;!&quot; is used instead of a number, then the
+switch is toggled.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">Increase the <b>level</b>
+control affecting all <b>output</b> channels by 10% of the
+maximum:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$ sndioctl
+output.level=+0.1</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Mute all
+<b>output</b> channels:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$ sndioctl
+output.mute=1</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Toggle the above
+<b>mute</b> control:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$ sndioctl
+output.mute=!</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Allow audio
+recording and set all <b>input</b> channels to 50%:</p>
+
+<p style="margin-left:17%; margin-top: 1em"># sysctl
+kern.audio.record=1 <br>
+$ sndioctl input.mute=0 input.level=0.5</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>sioctl_open</i>(3) GNU
+$Mdocdate$ <i>SNDIOCTL</i>(1)</p>
+<hr>
+</body>
+</html>

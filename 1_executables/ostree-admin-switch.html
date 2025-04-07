@@ -1,0 +1,103 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE ADMIN SWITCH</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE ADMIN SWITCH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-admin-switch
+- Construct new tree from current origin and deploy it, if
+it changed</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>ostree admin switch</b>
+{REF}</p> </td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Choose a
+different REF from the current remote to track. This is the
+ref that will be &quot;tracked&quot; and upgraded with
+<b>ostree admin upgrade</b>. Like an upgrade, the operating
+system state will be preserved.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--reboot</b>,<b>-r</b></p>
+
+<p style="margin-left:14%;">Reboot after a successful
+switch.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--kexec</b>,<b>-k</b></p>
+
+<p style="margin-left:14%;">Load new deployment into kexec
+after a successful switch.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--os</b>=&quot;STATEROOT&quot;</p>
+
+<p style="margin-left:14%;">Use a different operating
+system root than the current one.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin switch fedostree/20/workstation/gnome/core</b></p>
+<hr>
+</body>
+</html>

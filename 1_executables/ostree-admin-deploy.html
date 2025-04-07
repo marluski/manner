@@ -1,0 +1,185 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE ADMIN DEPLOY</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE ADMIN DEPLOY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-admin-deploy
+- Checkout a revision as the new default deployment</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="54%">
+
+
+<p style="margin-top: 1em"><b>ostree admin deploy</b>
+[OPTIONS...] {REFSPEC}</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Takes a commit
+or revision REFSPEC, and queues the new deployment as
+default upon reboot.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--stateroot</b>=&quot;STATEROOT&quot;</p>
+
+<p style="margin-left:14%;">Use a different operating
+system stateroot than the current one.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--os</b>=&quot;STATEROOT&quot;</p>
+
+<p style="margin-left:14%;">Alias for --stateroot.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--origin-file</b>=&quot;FILENAME&quot;</p>
+
+<p style="margin-left:14%;">Use FILENAME as the origin,
+which is where OSTree will look for updated versions of the
+tree.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--retain</b></p>
+
+<p style="margin-left:14%;">Do not delete previous
+deployment.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--retain-pending</b></p>
+
+<p style="margin-left:14%;">Do not delete pending
+deployments.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--retain-rollback</b></p>
+
+<p style="margin-left:14%;">Do not delete rollback
+deployments.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--not-as-default</b></p>
+
+<p style="margin-left:14%;">Append rather than prepend new
+deployment.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--lock-finalization</b></p>
+
+<p style="margin-left:14%;">The deployment will not be
+&quot;finalized&quot; by default on shutdown; to later queue
+it, use ostree admin lock-finalization --unlock.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--karg-proc-cmdline</b></p>
+
+<p style="margin-left:14%;">Import current
+/proc/cmdline.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--karg</b>=&quot;NAME=VALUE&quot;</p>
+
+<p style="margin-left:14%;">Set kernel argument, like
+root=/dev/sda1; this overrides any earlier argument with the
+same name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--karg-append</b>=&quot;NAME=VALUE&quot;</p>
+
+<p style="margin-left:14%;">Append kernel argument; useful
+with e.g. console= that can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--karg-delete</b>=&quot;NAME=VALUE&quot;</p>
+
+<p style="margin-left:14%;">Delete kernel argument if
+exists, can be used multiple times.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin status</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">* gnome-ostree
+67e382b11d213a402a5313e61cbc69dfd5ab93cb07.0 <br>
+origin refspec: gnome-ostree/buildmain/x86_64-runtime <br>
+gnome-ostree ce19c41036cc45e49b0cecf6b157523c2105c4de1ce3.0
+<br>
+origin refspec: gnome-ostree/buildmain/x86_64-runtime</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin deploy gnome-ostree/buildmain/x86_64-runtime</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">ostadmin:
+Creating deployment
+/ostree/deploy/gnome-ostree/deploy/7e382b11d213a402a5313e61cbc69dfd5ab93cb07.1
+<br>
+ostadmin: Processing /etc: 3 modified, 0 removed, 29 added
+<br>
+Transaction complete: bootconfig swap: no deployment count
+change: 0)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin status</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">gnome-ostree
+67e382b11d213a402a5313e61cbc69dfd5ab93cb07.1 <br>
+origin refspec: gnome-ostree/buildmain/x86_64-runtime <br>
+* gnome-ostree 67e382b11d213a402a5313e61cbc69dfd5ab93cb07.0
+<br>
+origin refspec: gnome-ostree/buildmain/x86_64-runtime</p>
+<hr>
+</body>
+</html>

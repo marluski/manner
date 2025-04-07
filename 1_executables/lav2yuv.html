@@ -1,0 +1,210 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>lav2yuv</title>
+
+</head>
+<body>
+
+<h1 align="center">lav2yuv</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lav2yuv -
+Convert a MJPEG file to raw yuv</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lav2yuv</b>
+[<i>options</i>] <i>lavfile1</i> [<i>lavfile2</i> ...
+<i>lavfileN</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lav2yuv</b>
+converts an MJPEG video sequence described by a sequence of
+MJPEG video files and/or edit lists pointing to such files
+into the simple uncompressed planar 4:2:0 Y&rsquo;CbCr
+format, as used by <b>mpeg2enc</b>(1) MPEG encoder and image
+processing filters like <b>yuvscaler</b>(1) or
+<b>yuv2dfilter</b>(1) or <b>yuvdenoise</b>(1).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output is to
+stdout so that by piping the output of lav2yuv into a
+suitable pipeline it is possible to process and then encode
+or play back video recorded in any of the mjpegtools MJPEG
+container formats: AVI, quicktime or edit lists describing
+editted versions of video held in such files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Mixing different
+files with different video formats is currently not
+possible.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>-S -T
+-D</b> options are used for scene detection which is used by
+linux video studio.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lav2yuv</b>
+accepts the following options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-m</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>Force mono-chrome</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-c</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>Conceal frames containing corrupt MJPEG data by
+repeating the preceeding good frame.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-S</b> <i>list.el</i></p>
+
+<p style="margin-left:15%;">Output a scene list with scene
+detection</p>
+
+<p style="margin-left:9%;"><b>-T</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Set scene detection threshold
+to num (default: 4)</p>
+
+<p style="margin-left:9%;"><b>-D</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Width decimation to use for
+scene detection (default: 2)</p>
+
+<p style="margin-left:9%;"><b>-o</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Frame offset - skip <i>num</i>
+frames at the beginning. if <i>num</i> is negative all but
+the last <i>num</i> frames are skipped</p>
+
+<p style="margin-left:9%;"><b>-f</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Only <i>num</i> frames are
+written to stdout. 0 means that all frames are
+processed.</p>
+
+
+<p style="margin-left:9%;"><b>-A&nbsp;</b><i>width:height</i></p>
+
+<p style="margin-left:15%;">Set/override the sample aspect
+ratio (SAR) emitted in the output stream header. Currently,
+the SAR is only auto-detected for DV files, and guessed
+otherwise.</p>
+
+
+<p style="margin-left:9%;"><b>-P&nbsp;</b><i>width:height</i></p>
+
+<p style="margin-left:15%;">Set the intended/approximate
+display aspect ratio (DAR) for the stream. This value is
+only used to guess the SAR when it cannot be detected from
+the input stream. The default DAR is &rsquo;4:3&rsquo;
+(corresponding to a standard TV screen); another useful
+value is &rsquo;16:9&rsquo; (corresponding to widescreen
+TV).</p>
+
+
+<p style="margin-left:9%;"><b>-C&nbsp;</b><i>chroma</i></p>
+
+<p style="margin-left:15%;">Set output chroma (default:
+&rsquo;420jpeg&rsquo;). Currently, &rsquo;420jpeg&rsquo;,
+&rsquo;420mpeg2&rsquo;, &rsquo;420paldv&rsquo;,
+&rsquo;422&rsquo; are available.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-x</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>Exchange fields. Useful if the field order was reversed
+during editing.</p></td></tr>
+</table>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was originally written by Bernhard Praschinger. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>mpeg2enc</b>(1), <b>yuvscaler</b>(1), <b>yuv2lav</b>(1),
+<b>yuvdenoise</b>(1), <b>yuvplay</b>(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>y4mtopnm</title>
+
+</head>
+<body>
+
+<h1 align="center">y4mtopnm</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">y4mtopnm -
+Convert a YUV4MPEG2 stream to PNM images</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4mtopnm</b>
+[<i>options</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4mtopnm</b>
+converts a YUV4MPEG2 stream into a sequence of raw PPM, PGM,
+or PAM images. (Technically, &quot;pnm&quot; comprises the
+PPM, PGM and PBM formats. PAM is a fourth format, which can
+effectively contain any of the other three, and more.)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output is to
+stdout (but feel free to have the shell redirect to a
+file).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Input is read
+from stdin, like all other YUV4MPEG2 filters and tools.
+YUV4MPEG2 streams contain frames using the Y&rsquo;CbCr
+colorspace (ITU-R BT.601). For 4:4:4 (color) streams,
+<b>y4mtopnm</b> will convert each pixel to the usual
+R&rsquo;G&rsquo;B&rsquo; colorspace used for computer
+graphics, and produce PPM images. &quot;MONO&quot;
+(luma-only) streams will be converted to full-range [0,255]
+grayscale and output as PGM images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">YUV4MPEG2
+streams may (often!) have subsampled chroma planes, but
+<b>y4mtopnm</b> will not process them (except in the special
+&rsquo;flatten&rsquo; mode; see below). Subsampled streams
+will need to be converted to 4:4:4 using a tool such as
+<b>y4mscaler</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<b>y4mtopnm</b> is given a &quot;444ALPHA&quot; stream
+(4:4:4 video with an 8-bit alpha channel), the results
+depend on whether or not the &quot;-P&quot; option is
+specified. With &quot;-P&quot;, it will produce PAM images
+with a TUPLTYPE of RGB_ALPHA, containing both color and
+alpha channel data. Without &quot;-P&quot;, it will produce
+pairs of PPM and PGM images: a PPM for the color pixels
+followed by a PGM for the alpha channel data. (Such a
+sequence of interspersed PPM and PGM images cannot be later
+re-processed by <b>pnmtoy4m</b>. This feature is mostly for
+quick and easy stream debugging.)</p>
+
+<p style="margin-left:9%; margin-top: 1em">If multiple
+output images are generated, they are simply output one
+after another. If you want to turn such a
+&quot;multi-image&quot; stream/file into individual files,
+use <b>pnmsplit</b>. (Some PNM filters can process
+multi-image files/streams; however, many written before June
+2000 will only process the first image.)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4mtopnm</b>
+and <b>pnmtoy4m</b> are inverses of each other; you can
+typically pipe the output of one into the other, and
+vice-versa (except for the &quot;444ALPHA&quot; case noted
+above and the &quot;mixed-mode&quot; case noted below). Note
+that the colorspace operations can be lossy in both
+directions (due to range-compression and/or quantization).
+And, when converting to PNM, information on interlacing and
+sample aspect ratio of a stream is lost (but can be
+reconstructed by supplying command-line arguments to
+<b>pnmtoy4m</b>).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4mtopnm</b>
+accepts the following options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-P</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>Produce PAM format output, instead of PPM and/or PGM.
+PAM can encode a superset of PNM, but is not yet understood
+by as many graphics programs. (Indeed, surprisingly few of
+the NetPBM tools seem to understand it.)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-D</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>Produce a separate output image for each field of each
+frame. (Otherwise, a single image per frame, containing two
+interleaved fields, is created.)</p></td></tr>
+</table>
+
+<p style="margin-left:15%; margin-top: 1em">If the input
+stream is interlaced, the field-images are output in
+temporal order, i.e. the first image of a bottom-field-first
+stream will be the bottom-field. If the stream is
+progressive or has &quot;mixed-mode&quot; interlacing, then
+the temporal order is ambiguous, and the top-field will
+always be output first.</p>
+
+<p style="margin-left:15%; margin-top: 1em">Note that it
+will <i>not</i> be possible to later use <b>pnmtoy4m</b> to
+reconstruct a &quot;mixed-mode&quot; stream from a sequence
+of PNM/PAM images.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-f</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em">Produce a special
+&rsquo;flattened&rsquo; output, most useful for analyzing
+and debugging streams. All the planes of a frame/field are
+tiled together into an enlarged PGM (or grayscale PAM)
+output image as follows:</p></td></tr>
+</table>
+
+<p style="margin-left:15%;">+-----+ +-----+ <br>
+4:4:4 | Y | 4:4:4 w/alpha | Y | <br>
++-----+ +-----+ <br>
+| Cb | | Cb | <br>
++-----+ +-----+ <br>
+| Cr | | Cr | <br>
++-----+ +-----+ <br>
+| A | <br>
++-----+ +-----+ <br>
+4:2:2, | Y | <br>
+4:2:0 +--+--+ +-----+--+--+ <br>
+|Cb|Cr| 4:1:1 | Y |Cb|Cr| <br>
++--+--+ +-----+--+--+ <br>
++-----+ <br>
+MONO | Y | <br>
++-----+ <br>
+In this mode, any YUV4MPEG2 chroma format is accepted, but
+no upsampling or colorspace conversion is performed. This is
+essentially just a reformatting/permutation of the original
+data from the input stream into a PGM image container. All
+the other command-line flags continue to have the same
+effect on output.</p>
+
+<p style="margin-left:9%;"><b>-v</b> <i>[0,1,2]</i></p>
+
+<p style="margin-left:15%;">Set verbosity level. <br>
+0 = warnings and errors only. <br>
+1 = add informative messages, too. <br>
+2 = add chatty debugging message, too.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To turn the
+first 15 frames of an (MJPEG or DV) AVI file into individual
+PPM files:</p>
+
+<p style="margin-left:15%; margin-top: 1em">lav2yuv -f 15
+your-video.avi | y4mscaler -O chromass=444 | y4mtopnm |
+pnmsplit - &quot;your-video-%d.ppm&quot;</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written by Matt Marjanovic. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>pam</b></i>(5),
+<b>pgm</b>(5), <b>pnm</b>(5), <b>ppm</b>(5),
+<b>pnmtoy4m</b>(1), <b>mjpegtools</b>(1),
+<b>mpeg2enc</b>(1), <b>lav2yuv</b>(1), <b>pnmsplit</b>(1),
+<b>y4mscaler</b>(1)</p>
+<hr>
+</body>
+</html>

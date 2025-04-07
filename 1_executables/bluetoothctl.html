@@ -1,0 +1,1110 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BLUETOOTHCTL</title>
+
+</head>
+<body>
+
+<h1 align="center">BLUETOOTHCTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#list">list</a><br>
+<a href="#show">show</a><br>
+<a href="#select">select</a><br>
+<a href="#devices">devices</a><br>
+<a href="#system-alias">system-alias</a><br>
+<a href="#reset-alias">reset-alias</a><br>
+<a href="#power">power</a><br>
+<a href="#advertise">advertise</a><br>
+<a href="#set-alias">set-alias</a><br>
+<a href="#scan">scan</a><br>
+<a href="#pair">pair</a><br>
+<a href="#pairable">pairable</a><br>
+<a href="#discoverable">discoverable</a><br>
+<a href="#discoverable-timeout">discoverable-timeout</a><br>
+<a href="#agent">agent</a><br>
+<a href="#default-agent">default-agent</a><br>
+<a href="#trust">trust</a><br>
+<a href="#untrust">untrust</a><br>
+<a href="#block">block</a><br>
+<a href="#unblock">unblock</a><br>
+<a href="#remove">remove</a><br>
+<a href="#connect">connect</a><br>
+<a href="#disconnect">disconnect</a><br>
+<a href="#info">info</a><br>
+<a href="#bearer">bearer</a><br>
+<a href="#ADVERTISE SUBMENU">ADVERTISE SUBMENU</a><br>
+<a href="#MONITOR SUBMENU">MONITOR SUBMENU</a><br>
+<a href="#SCAN SUBMENU">SCAN SUBMENU</a><br>
+<a href="#GATT SUBMENU">GATT SUBMENU</a><br>
+<a href="#ADMIN SUBMENU">ADMIN SUBMENU</a><br>
+<a href="#PLAYER SUBMENU">PLAYER SUBMENU</a><br>
+<a href="#ENDPOINT SUBMENU">ENDPOINT SUBMENU</a><br>
+<a href="#TRANSPORT SUBMENU">TRANSPORT SUBMENU</a><br>
+<a href="#MANAGEMENT SUBMENU">MANAGEMENT SUBMENU</a><br>
+<a href="#ASSISTANT SUBMENU">ASSISTANT SUBMENU</a><br>
+<a href="#AUTOMATION">AUTOMATION</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">bluetoothctl -
+Bluetooth Control Command Line Tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl</b>
+[<b>-a</b> <i>capability</i>] [<b>-e</b>] [<b>-m</b>]
+[<b>-t</b> <i>seconds</i>] [<b>-v</b>] [<b>-h</b>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl(1)</b>
+interactive bluetooth control tool. The tool works with
+Bluetooth Classic (BR/EDR) and Bluetooth Low Energy (LE)
+controllers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The tool is menu
+driven but can be automated from the command line. Examples
+are given in the automation section.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a&nbsp;</b><i>capability</i>,&nbsp;<b>--agent&nbsp;</b><i>capability</i></p>
+
+<p style="margin-left:18%;">Register agent handler:
+&lt;capability&gt;</p>
+
+<p style="margin-left:9%;"><b>-e</b>,
+<b>--endpoints</b></p>
+
+<p style="margin-left:18%;">Register Media endpoints</p>
+
+<p style="margin-left:9%;"><b>-m</b>, <b>--monitor</b></p>
+
+<p style="margin-left:18%;">Enable monitor output</p>
+
+
+<p style="margin-left:9%;"><b>-t&nbsp;</b><i>seconds</i>,&nbsp;<b>--timeout&nbsp;</b><i>seconds</i></p>
+
+<p style="margin-left:18%;">Timeout in seconds for
+non-interactive mode</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Display version</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Display help</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>list
+<a name="list"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List available
+controllers.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="8%">
+
+
+<p><b>&gt; list</b></p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<h3>show
+<a name="show"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Controller
+information.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; show [ctrl]</b></p></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<h3>select
+<a name="select"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Select default
+controller.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>&gt; select
+&lt;ctrl&gt;</b></p> </td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h3>devices
+<a name="devices"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List available
+devices, with an optional property as the filter.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="55%">
+
+
+<p style="margin-top: 1em"><b>&gt; devices
+[Paired/Bonded/Trusted/Connected]</b></p> </td>
+<td width="27%">
+</td></tr>
+</table>
+
+<h3>system-alias
+<a name="system-alias"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set controller
+alias.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em"><b>&gt; system-alias
+&lt;name&gt;</b></p> </td>
+<td width="55%">
+</td></tr>
+</table>
+
+<h3>reset-alias
+<a name="reset-alias"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Reset controller
+alias.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; reset-alias</b></p></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<h3>power
+<a name="power"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set controller
+power.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When the
+controller is powered off, the USB port the controller is
+attached to is put into a suspend state.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><b>&gt; power
+&lt;on/off&gt;</b></p> </td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h3>advertise
+<a name="advertise"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Enable/disable
+advertising with given type.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you exit the
+program advertising will be disabled.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When advertising
+the controller should advertise with random address but may
+use its public address if it does not support the feature
+(address of the device).</p>
+
+<p style="margin-left:9%; margin-top: 1em">A device can
+advertise if it initiated the connection to another
+advertising device.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em"><b>&gt; advertise
+&lt;on/off/type&gt;</b></p> </td>
+<td width="50%">
+</td></tr>
+</table>
+
+<h3>set-alias
+<a name="set-alias"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set device
+alias.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em"><b>&gt; set-alias
+&lt;alias&gt;</b></p> </td>
+<td width="58%">
+</td></tr>
+</table>
+
+<h3>scan
+<a name="scan"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Scan for
+devices.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For LE, scanning
+is an important requirement before connecting or
+pairing.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The purpose of
+scanning is to find devices that are advertising with their
+discoverable flag set (either limited or general). Once you
+have found the address then you can connect or pair.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note the
+following when scanning:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em">When scanning the controller
+will use a random address that is not resolvable so the
+public address is not leaked. A new random address is
+created every time scan on is used.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>&bull;</p></td>
+<td width="85%">
+
+
+<p>When turning on scanning the device will start receiving
+advertising reports of what devices are advertising.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>&bull;</p></td>
+<td width="85%">
+
+
+<p>The filtering of duplicate advertising reports may be
+enabled depending on the filtering settings.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>&bull;</p></td>
+<td width="85%">
+
+
+<p>Device objects found during a scan session will only be
+persisted if they are connected/paired otherwise they are
+removed after some time.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="85%">
+
+
+<p><b>&gt; scan &lt;on/off/bredr/le&gt;</b></p></td></tr>
+</table>
+
+<h3>pair
+<a name="pair"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Pair with
+device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will pair
+with a device and then trust and connect to it. If the
+device is already paired this will first remove the
+pairing.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command can
+either be used while the controller is in the connected or
+not connected state.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the
+controller is already connected then the pair command can be
+used without an arguments. If the controller is not
+connected, the pair command can be given the address of a
+device with an active scan report and it will initiate the
+connection before pairing.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Before pairing
+the agent must be selected to choose the authentication
+mechanism.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>&gt; pair &lt;dev&gt;</b></p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+<h3>pairable
+<a name="pairable"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set controller
+pairable mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This
+enables/disables pairing. If pairing is disabled then the
+controller will not accept any pairing requests.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em"><b>&gt; pairable
+&lt;on/off&gt;</b></p> </td>
+<td width="58%">
+</td></tr>
+</table>
+
+<h3>discoverable
+<a name="discoverable"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set discoverable
+mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This
+enables/disables discoverable mode. If discoverable is
+disabled then the controller will not respond to any scan
+requests.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In LE if
+discoverable if off the controller will just passively scan
+and not make scan requests to advertising devices. If on it
+will make the advertising requests.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It will use a
+random address if supported by the controller. The length of
+time &quot;discoverable on&quot; is valid is determined by
+discoverable-timeout command.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><b>&gt; discoverable
+&lt;on/off&gt;</b></p> </td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h3>discoverable-timeout
+<a name="discoverable-timeout"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set discoverable
+timeout.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The time in
+seconds that &quot;discoverable on&quot; is valid.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em"><b>&gt; discoverable-timeout
+[value]</b></p> </td>
+<td width="44%">
+</td></tr>
+</table>
+
+<h3>agent
+<a name="agent"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Enable/disable
+agent with given capability.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This chooses the
+local authentication mechanism of the controller. It is
+needed for pairing and allows you to choose the IO
+capabilities of the controller.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The valid agent
+capabilities are: DisplayOnly, DisplayYesNo,
+KeyboardDisplay, KeyboardOnly, NoInputNoOutput.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em"><b>&gt; agent
+&lt;on/off/capability&gt;</b></p> </td>
+<td width="47%">
+</td></tr>
+</table>
+
+<h3>default-agent
+<a name="default-agent"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set current
+agent as the default one.</p>
+
+<p style="margin-left:9%; margin-top: 1em">After selecting
+the agent this will make it the default agent.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>&gt; default-agent</b></p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h3>trust
+<a name="trust"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Trust
+device.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; trust
+&lt;dev&gt;</b></p> </td>
+<td width="65%">
+</td></tr>
+</table>
+
+<h3>untrust
+<a name="untrust"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Untrust
+device.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>&gt; untrust
+&lt;dev&gt;</b></p> </td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h3>block
+<a name="block"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Block
+device.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>&gt; block
+&lt;dev&gt;</b></p> </td>
+<td width="65%">
+</td></tr>
+</table>
+
+<h3>unblock
+<a name="unblock"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unblock
+device</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>&gt; unblock
+&lt;dev&gt;</b></p> </td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h3>remove
+<a name="remove"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove
+device.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em"><b>&gt; remove
+&lt;dev&gt;</b></p> </td>
+<td width="64%">
+</td></tr>
+</table>
+
+<h3>connect
+<a name="connect"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Connect
+device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will
+initiate a connection to a device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default this
+commands tries to connect all the profiles the remote device
+supports and have been flagged as auto-connectable. In case
+when the UUID of the remote service is given only that
+service will be connected. The UUID can be either a short
+form (16-bit UUID) or a long form (128-bit UUID). There are
+also some special values for well-known profiles like
+&quot;a2dp-sink&quot;, &quot;a2dp-source&quot;,
+&quot;hfp-hf&quot;, &quot;hfp-ag&quot;, &quot;ftp&quot; or
+&quot;spp&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To connect with
+an LE device the controller must have an active scan report
+of the device it wants to connect to.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no
+advertising report is received before the timeout a
+le-connection-abort-by-local error will be issued. In that
+case either try again to connect assuming the device is
+advertising.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><b>&gt; connect &lt;dev&gt;
+[uuid]</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example</b></p>
+
+<p style="margin-left:18%;"><b>&gt; connect
+1C:48:F9:9D:81:5C</b></p>
+
+<p style="margin-left:9%;"><b>Example</b></p>
+
+<p style="margin-left:18%;"><b>&gt; connect
+1C:48:F9:9D:81:5C hsp-hs</b></p>
+
+<p style="margin-left:9%;"><b>Example</b></p>
+
+<p style="margin-left:18%;"><b>&gt; connect
+1C:48:F9:9D:81:5C
+00001108-0000-1000-8000-00805f9b34fb</b></p>
+
+<p style="margin-left:9%;"><b>Example</b></p>
+
+<p style="margin-left:18%;"><b>&gt; connect
+1C:48:F9:9D:81:5C 0x1108</b></p>
+
+<h3>disconnect
+<a name="disconnect"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Disconnect
+device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default this
+commands disconnects all profiles and then terminates the
+connection. In case when the UUID of the remote service is
+given only that service will be disconnected.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For LE when
+disconnecting from an active connection the device address
+is not needed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="32%">
+
+
+<p><b>&gt; disconnect &lt;dev&gt; [uuid]</b></p></td>
+<td width="50%">
+</td></tr>
+</table>
+
+<h3>info
+<a name="info"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Device
+information.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>&gt; info &lt;dev&gt;</b></p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+<h3>bearer
+<a name="bearer"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get/Set
+preferred bearer.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em"><b>&gt; bearer &lt;dev&gt;
+[last-seen/bredr/le]</b></p> </td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example get preferred
+bearer</b></p>
+
+<p style="margin-left:18%;">&gt; bearer &lt;addr&gt;</p>
+
+<p style="margin-left:21%;">PreferredBearer: last-seen</p>
+
+<p style="margin-left:9%;"><b>Example set preferred bearer
+to LE</b></p>
+
+<p style="margin-left:18%;">&gt; bearer &lt;addr&gt; le
+<br>
+[CHG] Device &lt;addr&gt; PreferredBearer: le <br>
+Changing le succeeded</p>
+
+<p style="margin-left:9%;"><b>Example set preferred bearer
+to BREDR</b></p>
+
+<p style="margin-left:18%;">&gt; bearer &lt;addr&gt; bredr
+<br>
+[CHG] Device &lt;addr&gt; PreferredBearer: bredr <br>
+Changing bredr succeeded</p>
+
+<h2>ADVERTISE SUBMENU
+<a name="ADVERTISE SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-advertise(1)</b>.</p>
+
+<h2>MONITOR SUBMENU
+<a name="MONITOR SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-monitor(1)</b></p>
+
+<h2>SCAN SUBMENU
+<a name="SCAN SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-scan(1)</b></p>
+
+<h2>GATT SUBMENU
+<a name="GATT SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-gatt(1)</b></p>
+
+<h2>ADMIN SUBMENU
+<a name="ADMIN SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-admin(1)</b></p>
+
+<h2>PLAYER SUBMENU
+<a name="PLAYER SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-player(1)</b></p>
+
+<h2>ENDPOINT SUBMENU
+<a name="ENDPOINT SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-endpoint(1)</b></p>
+
+<h2>TRANSPORT SUBMENU
+<a name="TRANSPORT SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-transport(1)</b></p>
+
+<h2>MANAGEMENT SUBMENU
+<a name="MANAGEMENT SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-mgmt(1)</b></p>
+
+<h2>ASSISTANT SUBMENU
+<a name="ASSISTANT SUBMENU"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>bluetoothctl-assistant(1)</b></p>
+
+<h2>AUTOMATION
+<a name="AUTOMATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Two common ways
+to automate the tool are to use Here Docs or the program
+expect. Using Here Docs to show information about the
+Bluetooth controller.</p>
+
+<p style="margin-left:13%; margin-top: 1em">bluetoothctl
+&lt;&lt;EOF <br>
+list <br>
+show <br>
+EOF</p>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

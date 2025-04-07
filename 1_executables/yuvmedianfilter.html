@@ -1,0 +1,209 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>yuvmedianfilter</title>
+
+</head>
+<body>
+
+<h1 align="center">yuvmedianfilter</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">yuvmedianfilter
+- A filter for yuv images produced by the mjpeg tools</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvmedianfilter</b>
+[<b>-r</b> <i>num</i>] [<b>-R</b> <i>num</i>] [<b>-t</b>
+<i>num</i>] [<b>-T</b> <i>num</i>] [<b>-I</b> <i>num</i>]
+[<b>-f</b>] [<b>-w</b> <i>num</i>] [<b>-s</b> <i>num</i>]
+[<b>-v</b> <i>num</i>] [<b>-h</b>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvmedianfilter</b>
+is designed to enhance/filter images. It takes the input
+from STDIN and writes output to STDOUT. <br>
+This filter looks around the current point for a radius and
+averages the values that fall inside a threshold. So the
+image is softened and the edges become more sharp. If the
+input material is noisy (it is always noisy but you do not
+always see it) the output images are improved and the
+encoder spends less bandwidth encoding noise. The more
+sophisticated version of image filtering is yuvdenoise. But
+you can use both programs in the encoding procces. It cannot
+process a recorded file and write the improved version to
+another file.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvmedianfilter</b>
+accepts the following options: <b><br>
+-r</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Radius for luma median
+(default: 2 pixels)</p>
+
+<p style="margin-left:9%;"><b>-R</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Radius for chroma median
+(default: 2 pixels)</p>
+
+<p style="margin-left:9%;"><b>-t</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Trigger threshold for luma
+(default: 2 [0=disable])</p>
+
+<p style="margin-left:9%;"><b>-T</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Trigger threshold for chroma
+(default: 2 [0=disable])</p>
+
+<p style="margin-left:9%;"><b>-I</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Interlacing type (0=no, 1=yes,
+default: taken from yuv stream)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-f</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>Fast mode, i.e. the threshold is ignored, and a simple
+mean of the surrounding values is calculated.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-w</b> <i>num</i></p>
+
+<p style="margin-left:15%;">In fast mode, the weight given
+to the current value versus the surrounding values. Default
+is 8. <br>
+Note that certain combinations of radii and weights have
+been optimized to be even faster -- radius 1 and weight
+2.667, radius 1 and weight 8, and radius 2 and weight 8.</p>
+
+<p style="margin-left:9%;"><b>-c</b> <i>num</i></p>
+
+<p style="margin-left:15%;">In slow mode, more than this
+fraction of the pixels must be within the threshold;
+otherwise the pixel is simply the weighted mean of pixels
+within a radius of 1. Default is 0.33333.</p>
+
+<p style="margin-left:9%;"><b>-s</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Number of beginning frames to
+skip. The first num frames are written to stdout unfiltered.
+This is useful for resuming an interrupted job without
+having to duplicate work.</p>
+
+<p style="margin-left:9%;"><b>-v</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Verbosity level (0, 1 or 2)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="3%"></td>
+<td width="31%">
+
+
+<p>Print out a help message</p></td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">It is slow.
+Using a radius greater than the default of 2 is painfully
+slow.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Bernhard Praschinger. <br>
+The yuvmedianfilter program was written by Mike Bernson, and
+adapted to the yuv4mpeg2 stream header format by Steven M.
+Schultz.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+questions, remarks, problems or you just want to contact the
+developers, the main mailing list for the MJPEG-tools is:
+<i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>jpeg2yuv</b>(1), <b>lav2yuv</b>(1), <b>mpeg2enc</b>(1),
+<b>ppmtoy4m</b>(1), <b>yuv2lav</b>(1), <b>yuvdenoise</b>(1),
+<b>yuvscaler</b>(1)</p>
+<hr>
+</body>
+</html>

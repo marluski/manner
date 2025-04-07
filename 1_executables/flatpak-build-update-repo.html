@@ -1,0 +1,242 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK BUILD-UPDAT</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK BUILD-UPDAT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-build-update-repo
+- Create a repository from a build directory</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="59%">
+
+
+<p style="margin-top: 1em"><b>flatpak build-update-repo</b>
+[OPTION...] LOCATION</p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Updates
+repository metadata for the repository at LOCATION. This
+command generates an OSTree summary file that lists the
+contents of the repository. The summary is used by flatpak
+remote-ls and other commands to display the contents of
+remote repositories.</p>
+
+<p style="margin-left:9%; margin-top: 1em">After this
+command, LOCATION can be used as the repository location for
+flatpak remote-add, either by exporting it over http, or
+directly with a file: url.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--redirect-url=URL</b></p>
+
+<p style="margin-left:14%;">Redirect this repo to a new
+URL.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--title=TITLE</b></p>
+
+<p style="margin-left:14%;">A title for the repository,
+e.g. for display in a UI. The title is stored in the
+repository summary.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--comment=COMMENT</b></p>
+
+<p style="margin-left:14%;">A single-line comment for the
+remote, e.g. for display in a UI. The comment is stored in
+the repository summary.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--description=DESCRIPTION</b></p>
+
+<p style="margin-left:14%;">A full-paragraph description
+for the remote, e.g. for display in a UI. The description is
+stored in the repository summary.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--homepage=URL</b></p>
+
+<p style="margin-left:14%;">URL for a website for the
+remote, e.g. for display in a UI. The url is stored in the
+repository summary.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--icon=URL</b></p>
+
+<p style="margin-left:14%;">URL for an icon for the remote,
+e.g. for display in a UI. The url is stored in the
+repository summary.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--default-branch=BRANCH</b></p>
+
+<p style="margin-left:14%;">A default branch for the
+repository, mainly for use in a UI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-import=FILE</b></p>
+
+<p style="margin-left:14%;">Import a new default GPG public
+key from the given file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--collection-id=COLLECTION-ID</b></p>
+
+<p style="margin-left:14%;">The globally unique identifier
+of the remote repository, to allow mirrors to be grouped.
+This must be set to a globally unique reverse DNS string if
+the repository is to be made publicly available. If a
+collection ID is already set on an existing repository, this
+will update it. If not specified, the existing collection ID
+will be left unchanged.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--deploy-collection-id</b></p>
+
+<p style="margin-left:14%;">Deploy the collection ID (set
+using <b>--collection-id</b>) in the static remote
+configuration for all clients. This is irrevocable once
+published in a repository. Use it to decide when to roll out
+a collection ID to users of an existing repository. If
+constructing a new repository which has a collection ID, you
+should typically always pass this option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--deploy-sideload-collection-id</b></p>
+
+<p style="margin-left:14%;">This is similar to
+--deploy-collection-id, but it only applies the deploy to
+clients newer than flatpak 1.7 which supports the new form
+of sideloads.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-sign=KEYID</b></p>
+
+<p style="margin-left:14%;">Sign the commit with this GPG
+key. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-homedir=PATH</b></p>
+
+<p style="margin-left:14%;">GPG Homedir to use when looking
+for keyrings</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--generate-static-deltas</b></p>
+
+<p style="margin-left:14%;">Generate static deltas for all
+references. This generates from-empty and delta static files
+that allow for faster download.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--static-delta-jobs=NUM-JOBS</b></p>
+
+<p style="margin-left:14%;">Limit the number of parallel
+jobs creating static deltas. The default is the number of
+cpus.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--static-delta-ignore-ref=PATTERN</b></p>
+
+<p style="margin-left:14%;">Don't generate deltas for
+runtime or application id matching this pattern. For
+instance, --static-delta-ignore-ref=*.Sources means there
+will not be any deltas for source refs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--prune</b></p>
+
+<p style="margin-left:14%;">Remove unreferenced objects in
+repo.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--prune-depth</b></p>
+
+<p style="margin-left:14%;">Only keep at most this number
+of old versions for any particular ref. Default is -1 which
+means infinite.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree</b>(1),
+<b>flatpak</b>(1), <b>flatpak-remote-ls</b>(1),
+<b>flatpak-build-export</b>(1)</p>
+<hr>
+</body>
+</html>

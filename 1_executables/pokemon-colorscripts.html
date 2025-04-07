@@ -1,0 +1,207 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:37 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>POKEMON-COLORSCRIPTS</title>
+
+</head>
+<body>
+
+<h1 align="center">POKEMON-COLORSCRIPTS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#pokemon-colorscripts -r">pokemon-colorscripts -r</a><br>
+<a href="#pokemon-colorscripts -r 1">pokemon-colorscripts -r 1</a><br>
+<a href="#pokemon-colorscripts -r 1-3">pokemon-colorscripts -r 1-3</a><br>
+<a href="#pokemon-colorscripts -r 1,3,6">pokemon-colorscripts -r 1,3,6</a><br>
+<a href="#pokemon-colorscripts -l">pokemon-colorscripts -l</a><br>
+<a href="#pokemon-colorscripts -n chikorita">pokemon-colorscripts -n chikorita</a><br>
+<a href="#pokemon-colorscripts -n mudkip -s">pokemon-colorscripts -n mudkip -s</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">pokemon-colorscripts
+- display unicode sprites of pokemon in the terminal</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pokemon-colorscripts</b>
+[-h|--help] [-l|--list] [-r|--random <i>generation</i>]
+[-n|--name <i>name</i> [-s|--shiny]] [--no-title]]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">Pokemon-colorscripts
+is a CLI utility written in shell script that prints out
+unicode sprites of pokemon to the terminal. Almost all
+pokemon generations 1-8 are available (except different
+forms). You can select specific pokemon to be printed out by
+name or let the script choose a pokemon randomly. While
+choosing randomly you can also filter by generation.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">Print help.</p>
+
+<p style="margin-left:9%;"><b>-l, --list</b></p>
+
+<p style="margin-left:18%;">List all available pokemon.</p>
+
+<p style="margin-left:9%;"><b>-r, --random</b>
+<i>generation</i></p>
+
+<p style="margin-left:18%;">Select a pokemon at random and
+print it out. Can be followed by an optional generation
+number or range 1-8 to print out random pokemon from a
+specific generation or range of generations. If no
+generation is specified, selects from full list of available
+pokemon.</p>
+
+<p style="margin-left:9%;"><b>-n, --name</b>
+<i>name</i></p>
+
+<p style="margin-left:18%;">Select a specific pokemon to
+print out by name. Most pokemon are spelled as expected. A
+few pokemon with some special characters in their names
+might be spelled slightly differently. Examples
+nidoran-f,nidoran-m,farfetchd,mr-mime etc. You can check the
+output of the <b>list</b> option if in doubt.</p>
+
+<p style="margin-left:9%;"><b>-f, --form</b>
+<i>form</i></p>
+
+<p style="margin-left:18%;">Display an alternate form of
+the pokemon</p>
+
+<p style="margin-left:9%;"><b>-s, --shiny</b></p>
+
+<p style="margin-left:18%;">Show the shiny version of the
+pokemon instead</p>
+
+<p style="margin-left:9%;"><b>-b, --big</b></p>
+
+<p style="margin-left:18%;">Show a larger size sprite</p>
+
+<p style="margin-left:9%;"><b>--no-title</b></p>
+
+<p style="margin-left:18%;">Do not display pokemon name</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">All the files
+are present in the directory</p>
+
+
+<p style="margin-left:18%;">&quot;/usr/local/opt/pokemon-colorscripts&quot;</p>
+
+<p style="margin-left:9%;">with the executable script being
+symlinked to</p>
+
+
+<p style="margin-left:18%;">&quot;/usr/local/bin/pokemon-colorscripts&quot;</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h3>pokemon-colorscripts -r
+<a name="pokemon-colorscripts -r"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Prints out a
+random pokemon. Add this command to your shell config file
+(.bashrc, .zshrc, fish.config etc.) to print out a random
+pokemon every time you open the terminal.</p>
+
+<h3>pokemon-colorscripts -r 1
+<a name="pokemon-colorscripts -r 1"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print out a
+random pokemon from generation 1.</p>
+
+<h3>pokemon-colorscripts -r 1-3
+<a name="pokemon-colorscripts -r 1-3"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print out a
+random pokemon from generations 1-3.</p>
+
+<h3>pokemon-colorscripts -r 1,3,6
+<a name="pokemon-colorscripts -r 1,3,6"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print out a
+random pokemon from generations 1,3 or 6.</p>
+
+<h3>pokemon-colorscripts -l
+<a name="pokemon-colorscripts -l"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print out all
+available pokemon names.</p>
+
+<h3>pokemon-colorscripts -n chikorita
+<a name="pokemon-colorscripts -n chikorita"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print out the
+pokemon chikorita.</p>
+
+<h3>pokemon-colorscripts -n mudkip -s
+<a name="pokemon-colorscripts -n mudkip -s"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print out the
+shiny version of mudkip.</p>
+<hr>
+</body>
+</html>

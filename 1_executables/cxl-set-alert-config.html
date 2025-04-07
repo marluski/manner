@@ -1,0 +1,308 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CXL-SET-ALERT-CONFIG</title>
+
+</head>
+<body>
+
+<h1 align="center">CXL-SET-ALERT-CONFIG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">cxl-set-alert-config
+- set the warning alert threshold on a CXL memdev</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>cxl
+set-alert-config &lt;mem0&gt; [&lt;mem1&gt;..&lt;memN&gt;]
+[&lt;options&gt;]</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">CXL device
+raises an alert when its health status is changed. Critical
+alert shall automatically be configured by the device after
+a device reset. If supported, programmable warning
+thresholds also be initialized to vendor recommended
+defaults, then could be configured by the user.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use this command
+to configure warning alert thresholds of a device. Having
+issued this command, the newly requested warning thresholds
+would override the previously programmed warning
+thresholds.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To enable
+warning alert, set both <i>threshold=value</i> and
+<i>alert=on</i>. To disable warning alert, set only
+<i>alert=off</i>. Other cases would cause errors.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use &quot;cxl
+list -m &lt;memdev&gt; -A&quot; to examine the programming
+warning threshold capabilities of a device.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set warning
+threshold to 30 and enable alert for life used.</p>
+
+<p style="margin-left:14%; margin-top: 1em"># cxl
+set-alert-config mem0 --life-used-threshold=30
+--life-used-alert=on <br>
+{ &nbsp; <br>
+&quot;memdev&quot;:&quot;mem0&quot;, &nbsp; <br>
+&quot;ram_size&quot;:&quot;1024.00 MiB (1073.74 MB)&quot;,
+&nbsp; <br>
+&quot;alert_config&quot;:{ &nbsp; &nbsp; <br>
+&quot;life_used_prog_warn_threshold_valid&quot;:true, &nbsp;
+&nbsp; <br>
+
+&quot;dev_over_temperature_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+
+&quot;dev_under_temperature_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_volatile_mem_err_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_pmem_err_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+&quot;life_used_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+
+&quot;dev_over_temperature_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+
+&quot;dev_under_temperature_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_volatile_mem_err_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_pmem_err_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+&quot;life_used_crit_alert_threshold&quot;:75, &nbsp; &nbsp;
+<br>
+&quot;life_used_prog_warn_threshold&quot;:30, &nbsp; &nbsp;
+<br>
+&quot;dev_over_temperature_crit_alert_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+&quot;dev_under_temperature_crit_alert_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+&quot;dev_over_temperature_prog_warn_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+&quot;dev_under_temperature_prog_warn_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_volatile_mem_err_prog_warn_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+&quot;corrected_pmem_err_prog_warn_threshold&quot;:0 &nbsp;
+<br>
+}, &nbsp; <br>
+&quot;serial&quot;:&quot;0&quot;, &nbsp; <br>
+&quot;host&quot;:&quot;0000:0d:00.0&quot; <br>
+} <br>
+cxl memdev: cmd_set_alert_config: set alert configuration 1
+mem</p>
+
+<p style="margin-left:9%; margin-top: 1em">Disable warning
+alert for life_used.</p>
+
+<p style="margin-left:14%; margin-top: 1em"># cxl
+set-alert-config mem0 --life-used-alert=off <br>
+{ &nbsp; <br>
+&quot;memdev&quot;:&quot;mem0&quot;, &nbsp; <br>
+&quot;ram_size&quot;:&quot;1024.00 MiB (1073.74 MB)&quot;,
+&nbsp; <br>
+&quot;alert_config&quot;:{ &nbsp; &nbsp; <br>
+&quot;life_used_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+
+&quot;dev_over_temperature_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+
+&quot;dev_under_temperature_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_volatile_mem_err_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_pmem_err_prog_warn_threshold_valid&quot;:false,
+&nbsp; &nbsp; <br>
+&quot;life_used_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+
+&quot;dev_over_temperature_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+
+&quot;dev_under_temperature_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_volatile_mem_err_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_pmem_err_prog_warn_threshold_writable&quot;:true,
+&nbsp; &nbsp; <br>
+&quot;life_used_crit_alert_threshold&quot;:75, &nbsp; &nbsp;
+<br>
+&quot;life_used_prog_warn_threshold&quot;:30, &nbsp; &nbsp;
+<br>
+&quot;dev_over_temperature_crit_alert_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+&quot;dev_under_temperature_crit_alert_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+&quot;dev_over_temperature_prog_warn_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+&quot;dev_under_temperature_prog_warn_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+
+&quot;corrected_volatile_mem_err_prog_warn_threshold&quot;:0,
+&nbsp; &nbsp; <br>
+&quot;corrected_pmem_err_prog_warn_threshold&quot;:0 &nbsp;
+<br>
+}, &nbsp; <br>
+&quot;serial&quot;:&quot;0&quot;, &nbsp; <br>
+&quot;host&quot;:&quot;0000:0d:00.0&quot; <br>
+} <br>
+cxl memdev: cmd_set_alert_config: set alert configuration 1
+mem</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;memory
+device(s)&gt;</p>
+
+<p style="margin-left:14%;">A <i>memX</i> device name, or a
+memdev id number. Restrict the operation to the specified
+memdev(s). The keyword <i>all</i> can be specified to
+indicate the lack of any restriction.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-S, --serial</p>
+
+<p style="margin-left:14%;">Rather an a memdev id number,
+interpret the &lt;memdev&gt; argument(s) as a list of serial
+numbers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-L,
+--life-used-threshold=</p>
+
+<p style="margin-left:14%;">Set &lt;value&gt; for the life
+used warning alert threshold.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--life-used-alert=</p>
+
+<p style="margin-left:14%;">Enable or disable the life used
+warning alert. Options are <i>on</i> or <i>off</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-O,
+--over-temperature-threshold=</p>
+
+<p style="margin-left:14%;">Set &lt;value&gt; for the
+device over temperature warning alert threshold.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--over-temperature-alert=</p>
+
+<p style="margin-left:14%;">Enable or disable the device
+over temperature warning alert. Options are <i>on</i> or
+<i>off</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-U,
+--under-temperature-threshold=</p>
+
+<p style="margin-left:14%;">Set &lt;value&gt; for the
+device under temperature warning alert threshold.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--under-temperature-alert=</p>
+
+<p style="margin-left:14%;">Enable or disable the device
+under temperature warning alert. Options are <i>on</i> or
+<i>off</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-V,
+--volatile-mem-err-threshold=</p>
+
+<p style="margin-left:14%;">Set &lt;value&gt; for the
+corrected volatile memory error warning alert threshold.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--volatile-mem-err-alert=</p>
+
+<p style="margin-left:14%;">Enable or disable the corrected
+volatile memory error warning alert. Options are <i>on</i>
+or <i>off</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-P,
+--pmem-err-threshold=</p>
+
+<p style="margin-left:14%;">Set &lt;value&gt; for the
+corrected persistent memory error warning alert
+threshold.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--pmem-err-alert=</p>
+
+<p style="margin-left:14%;">Enable or disable the corrected
+persistent memory error warning alert. Options are <i>on</i>
+or <i>off</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-v,
+--verbose</p>
+
+<p style="margin-left:14%;">Turn on verbose debug messages
+in the library (if libcxl was built with logging and debug
+enabled).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">CXL-3.0
+8.2.9.8.3.3</p>
+<hr>
+</body>
+</html>

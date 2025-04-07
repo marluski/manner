@@ -1,0 +1,136 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:21 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>SORD_VALIDATE</i>(1) General Commands Manual
+<i>SORD_VALIDATE</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">sord_validate &mdash; validate
+RDF data</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:27%;"><b>sord_validate</b>
+[<b>-hlv</b>] <i>input ...</i></p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>sord_validate</b> is a simple
+validator which checks that all used properties are actually
+defined, and that the domain and range of properties is
+explicitly correct. Note that a validation &quot;error&quot;
+here doesn&rsquo;t necessarily mean that data is invalid,
+since it isn&rsquo;t, for example, required to explicitly
+list types in RDF. This validator implements a more strict
+and explicit set of rules, based on the realistic needs of
+simple real-world implementations. For example, missing
+explicit type information may be warned about, even though
+even a simple inference engine would be able to deduce
+it.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sord_validate</b>
+never retrieves data from the web or special places on the
+file system, it only processes the files passed directly on
+the command line. This means you must pass all used
+vocabularies to get a useful result.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If an
+appropriate schema is available, literals are checked
+against datatype definitions (both the explicit datatype of
+the literal itself, as well as any types implied by the
+corresponding property). Three XML Schema Datatypes (XSD)
+constraints are currently supported: regular expressions
+(xsd:pattern), and inclusive ranges (xsd:minimumInclusive
+and xsd:maximumInclusive). Given an appropriate schema, this
+is enough to validate against most of the standard XSD
+datatypes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The options are
+as follows:</p>
+
+<p style="margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Print the
+command line options.</p>
+
+<p style="margin-top: 1em"><b>-l</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Print errors on
+a single line.</p>
+
+<p style="margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:15%; margin-top: 1em">Display version
+information and exit.</p>
+
+<p style="margin-top: 1em"><b>EXIT STATUS</b></p>
+
+<p style="margin-left:9%;"><b>sord_validate</b> exits with
+a status of 0 if the input data is valid, or non-zero if
+there are issues with the data or if an error occurred.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>sordi</i>(1) <br>
+http://drobilla.net/software/sord/ <br>
+http://gitlab.com/drobilla/sord/</p>
+
+<p style="margin-top: 1em"><b>STANDARDS</b> <br>
+W3C</p>
+
+<p style="margin-left:9%;">,</p>
+
+<p><i>RDF 1.1 NQuads</i> , <br>
+February 2014 . https://www.w3.org/TR/n-quads/</p>
+
+<p style="margin-top: 1em">W3C</p>
+
+<p style="margin-left:9%;">,</p>
+
+<p><i>RDF 1.1 NTriples</i> , <br>
+February 2014 . https://www.w3.org/TR/n-triples/</p>
+
+<p style="margin-top: 1em">W3C</p>
+
+<p style="margin-left:9%;">,</p>
+
+<p><i>RDF 1.1 TriG</i> , <br>
+February 2014 . https://www.w3.org/TR/trig/</p>
+
+<p style="margin-top: 1em">W3C</p>
+
+<p style="margin-left:9%;">,</p>
+
+<p><i>RDF 1.1 Turtle</i> , <br>
+February 2014 . https://www.w3.org/TR/turtle/</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;"><b>sord_validate</b> is a part
+of sord, by David Robillard &lang;
+<i>d@drobilla.net</i>&rang; . Sord 0.30.17 Nov 29, 2022
+<i>SORD_VALIDATE</i>(1)</p>
+<hr>
+</body>
+</html>

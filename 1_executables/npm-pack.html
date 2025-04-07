@@ -1,0 +1,563 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:01 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-PACK</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-PACK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#dry-run">dry-run</a><br>
+<a href="#json">json</a><br>
+<a href="#pack-destination">pack-destination</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#include-workspace-root">include-workspace-root</a><br>
+<a href="#ignore-scripts">ignore-scripts</a><br>
+<a href="#Description">Description</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-pack</b>
+- Create a tarball from a package</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm pack
+&lt;package-spec&gt;</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>dry-run
+<a name="dry-run"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Indicates that
+you don&rsquo;t want npm to make any changes and that it
+should only report what it would have done. This can be
+passed into any of the commands that modify your local
+installation, eg, <b>install</b>, <b>update</b>,
+<b>dedupe</b>, <b>uninstall</b>, as well as <b>pack</b> and
+<b>publish</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This is
+NOT honored by other network related commands, eg
+<b>dist-tags</b>, <b>owner</b>, etc.</p>
+
+<h3>json
+<a name="json"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Whether or not
+to output JSON data, rather than the normal output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">In <b>npm pkg set</b> it enables
+parsing set values with JSON.parse() before saving them to
+your <b>package.json</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Not supported by
+all npm commands.</p>
+
+<h3>pack-destination
+<a name="pack-destination"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em">Default: &quot;.&quot;</p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p>Type: String</p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Directory in
+which <b>npm pack</b> will save tarballs.</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Set to true to
+run the command in the context of <b>all</b> configured
+workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+setting this to false will cause commands like
+<b>install</b> to ignore workspaces altogether. When not set
+explicitly:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Commands that operate on the
+<b>node_modules</b> tree (install, update, etc.) will link
+workspaces into the <b>node_modules</b> folder. - Commands
+that do other things (test, exec, publish, etc.) will
+operate on the root project, <i>unless</i> one or more
+workspaces are specified in the <b>workspace</b> config.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>include-workspace-root
+<a name="include-workspace-root"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Include the
+workspace root when workspaces are enabled for a
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When false,
+specifying individual workspaces via the <b>workspace</b>
+config, or all workspaces via the <b>workspaces</b> flag,
+will cause npm to operate only on the specified workspaces,
+and not on the root project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>ignore-scripts
+<a name="ignore-scripts"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If true, npm
+does not run scripts specified in package.json files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+commands explicitly intended to run a particular script,
+such as <b>npm start</b>, <b>npm stop</b>, <b>npm
+restart</b>, <b>npm test</b>, and <b>npm run-script</b> will
+still run their intended script if <b>ignore-scripts</b> is
+set, but they will <i>not</i> run any pre- or
+post-scripts.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">For anything
+that&rsquo;s installable (that is, a package folder,
+tarball, tarball url, git url, name@tag, name@version, name,
+or scoped name), this command will fetch it to the cache,
+copy the tarball to the current working directory as
+<b>&lt;name&gt;-&lt;version&gt;.tgz</b>, and then write the
+filenames out to stdout.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the same
+package is specified multiple times, then the file will be
+overwritten the second time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no arguments
+are supplied, then npm packs the current package folder.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p style="margin-top: 1em">npm help &quot;package
+spec&quot;</p> </td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p><b>npm-packlist package</b> <i>&lang;
+http://npm.im/npm-packlist&rang;</i></p> </td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help cache</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help publish</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help config</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help npmrc</p></td>
+<td width="22%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

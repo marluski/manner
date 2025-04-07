@@ -1,0 +1,226 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>yuvfps</title>
+
+</head>
+<body>
+
+<h1 align="center">yuvfps</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">yuvfps -
+Converts to a different frame rate</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvfps</b>
+[<b>-r</b> <i>Num:Den</i>] [<b>-s</b> <i>Num:Den</i>]
+[<b>-i</b> <i>Interlacing</i>] [<b>-I</b>
+<i>Interlacing</i>] [<b>-c</b>] [<b>-n</b>] [<b>-w</b>]
+[<b>-v&nbsp;0</b>-<b>2</b>] [<b>-h</b>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvfps</b> is
+a general (UP or DOWN) resampling utility that is provided
+to allow the generation of video streams with the frame
+rates required for each standard video format. <b>yuvfps</b>
+reads a YUV4MPEG stream from the standard input and outputs
+a YUV4MPEG stream to the standard output in which frames
+from the original ones are skipped (downsampling) or
+duplicated (upsampling). This allows for other mjpegtools
+that require a specific frame rate to process the
+stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvfps</b>
+uses by default Bresenham&rsquo;s algorithm to do the
+resampling so that the new video stream is similar to the
+original one. Note, however, that downscaling is a
+non-reversible operation because frames are dropped.
+Moreover, the resulting video stream may not have the exact
+same duration as the original one if the new frame rate is
+not a whole multiple of the original rate.</p>
+
+<p style="margin-left:9%; margin-top: 1em">As an
+alternative to simply dropping or duplicating frames each
+output frame/field can be produced as a weighted average of
+the two temporally closest input frames/fields. In this
+mode, <b>yuvfps</b> can also change the interlacing mode of
+the stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvfps</b>
+also can &quot;fix&quot; the framerate specified in the
+YUV4MPEG header. This allows for the generation of effects
+(fast-forwarding, slow motion) and also when the source
+stream has some framerate that is very close, but not
+exactly, the rate required for some standard video (for
+example, 24.9 vs 25).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r
+Num:Den</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Specifies the
+resulting stream frame rate.</p>
+
+<p style="margin-left:9%;"><b>-s Num:Den</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Ignores the
+frame rate in the input stream and assumes this frame rate
+for the input stream.</p>
+
+<p style="margin-left:9%;"><b>-i Interlacing</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Specifies the
+interlacing mode of the resulting stream. The interlacing
+mode can be changed only when using the weighted average
+resampling mode (the -w option).</p>
+
+<p style="margin-left:18%; margin-top: 1em">p - progressive
+(non-interlaced) <br>
+t - top-field first <br>
+b - bottom-field first</p>
+
+<p style="margin-left:9%;"><b>-I Interlacing</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Ignores the
+interlacing mode information in the input stream and assumes
+this interlacing mode for the input stream. The possible
+values are the same as for the -i option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-c</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Changes the
+stream header frame rate and interlacing mode in the output
+stream but copies frames from the original stream without
+changes. The -r and -i options specify the frame rate and
+interlacing mode for the output stream header.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-n</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">By default
+yuvfps tries to find a normalized framerate. Some programs
+create framerates like: 29969909:1000000 which is actually
+th typical NTSC framerate of 30000:1001. yuvfps prints out
+the normalizes values and the original when it starts. If
+you think the normalized value is not correct and want
+yuvfps to use the original given number you have to add that
+option. So yuvfps does not try to normalize the values.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-w</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Produce each
+output frame/field as a weighted average of the two
+temporally closest input frames/fields instead of simply
+dropping or duplicating frames. The blending of two adjacent
+frames/fields reduces visible stepping compared to the
+default drop/duplicate algorithm but as a drawback it makes
+fast moving objects appear blurred and is much slower.</p>
+
+<p style="margin-left:9%;"><b>-v [0,1,2]</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Set verbosity
+level. <br>
+0 = warnings and error messages only. <br>
+1 = add informative messages, like the framerate
+conversation information. <br>
+2 = add chatty debugging message, too.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Alfonso Garc&iacute;a-Pati&ntilde;o
+Barbolani. <br>
+Johannes Lehtinen added information about the weighted
+average resampling mode and the related options. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>yuvscaler</b></i>(1),
+<b>mjpegtools</b>(1), <b>lavpipe</b>(1), <b>lav2yuv</b>(1)
+<b>mpeg2enc</b>(1)</p>
+<hr>
+</body>
+</html>

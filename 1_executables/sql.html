@@ -1,0 +1,952 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SQL</title>
+
+</head>
+<body>
+
+<h1 align="center">SQL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#DBURL">DBURL</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Get an interactive prompt">Get an interactive prompt</a><br>
+<a href="#Run a query">Run a query</a><br>
+<a href="#Copy a PostgreSQL database">Copy a PostgreSQL database</a><br>
+<a href="#Empty all tables in a MySQL database">Empty all tables in a MySQL database</a><br>
+<a href="#Drop all tables in a PostgreSQL database">Drop all tables in a PostgreSQL database</a><br>
+<a href="#Run as a script">Run as a script</a><br>
+<a href="#Use --colsep to process multiple columns">Use --colsep to process multiple columns</a><br>
+<a href="#Retry if the connection fails">Retry if the connection fails</a><br>
+<a href="#Get info about the running database system">Get info about the running database system</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#Documentation license I">Documentation license I</a><br>
+<a href="#Documentation license II">Documentation license II</a><br>
+<a href="#DEPENDENCIES">DEPENDENCIES</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sql - execute a
+command on a database determined by a dburl</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql</b>
+[options] <i>dburl</i> [<i>commands</i>]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql</b>
+[options] <i>dburl</i> &lt; commandfile</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>#!/usr/bin/sql
+--shebang</b> [options] <i>dburl</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GNU <b>sql</b>
+aims to give a simple, unified interface for accessing
+databases through all the different databases&rsquo; command
+line clients. So far the focus has been on giving a common
+way to specify login information (protocol, username,
+password, hostname, and port number), size (database and
+table size), and running queries.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The database is
+addressed using a DBURL. If <i>commands</i> are left out you
+will get that database&rsquo;s interactive shell.</p>
+
+<p style="margin-left:9%; margin-top: 1em">GNU <b>sql</b>
+is often used in combination with GNU <b>parallel</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>dburl</i></p></td>
+<td width="6%"></td>
+<td width="79%">
+
+
+<p>A DBURL has the following syntax: [sql:]vendor://
+[[user][:password]@][host][:port]/[database][?sqlquery]</p> </td></tr>
+</table>
+
+<p style="margin-left:21%; margin-top: 1em">See the section
+DBURL below.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><i>commands</i></p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p style="margin-top: 1em">The SQL commands to run. Each
+argument will have a newline appended.</p></td></tr>
+</table>
+
+<p style="margin-left:21%; margin-top: 1em">Example:
+&quot;SELECT * FROM foo;&quot; &quot;SELECT * FROM
+bar;&quot;</p>
+
+<p style="margin-left:21%; margin-top: 1em">If the
+arguments contain &rsquo;\n&rsquo; or &rsquo;\x0a&rsquo;
+this will be replaced with a newline:</p>
+
+<p style="margin-left:21%; margin-top: 1em">Example:
+&quot;SELECT * FROM foo;\n SELECT * FROM bar;&quot;</p>
+
+<p style="margin-left:21%; margin-top: 1em">If no commands
+are given SQL is read from the keyboard or STDIN.</p>
+
+<p style="margin-left:21%; margin-top: 1em">Example: echo
+&rsquo;SELECT * FROM foo;&rsquo; | sql mysql:///</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>--csv</b></p></td>
+<td width="6%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em">CSV output.</p></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--db-size</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>--dbsize</b></p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p>Size of database. Show the size of the database on disk.
+For Oracle this requires access to read the table
+<i>dba_data_files</i> - the user <i>system</i> has that.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>--help</b></p></td>
+<td width="2%"></td>
+<td width="79%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>-h</b></p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p>Print a summary of the options to GNU <b>sql</b> and
+exit.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>--html</b></p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p>HTML output. Turn on HTML tabular output.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>--json</b></p></td>
+<td width="2%"></td>
+<td width="79%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>--pretty</b></p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p>Pretty JSON output.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--list-databases <br>
+--listdbs <br>
+--show-databases <br>
+--showdbs</b></p>
+
+<p style="margin-left:21%;">List the databases (table
+spaces) in the database.</p>
+
+<p style="margin-left:9%;"><b>--listproc <br>
+--proclist <br>
+--show-processlist</b></p>
+
+<p style="margin-left:21%;">Show the list of running
+queries.</p>
+
+<p style="margin-left:9%;"><b>--list-tables <br>
+--show-tables <br>
+--table-list</b></p>
+
+<p style="margin-left:21%;">List the tables in the
+database.</p>
+
+<p style="margin-left:9%;"><b>--noheaders <br>
+--no-headers</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="9%"></td>
+<td width="79%">
+
+
+<p>Remove headers and footers and print only tuples. Bug in
+Oracle: it still prints number of rows found.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-p</b>
+<i>pass-through</i></p>
+
+<p style="margin-left:21%;">The string following -p will be
+given to the database connection program as arguments.
+Multiple -p&rsquo;s will be joined with space. Example: pass
+&rsquo;-U&rsquo; and the user name to the program:</p>
+
+<p style="margin-left:21%; margin-top: 1em"><i>-p &quot;-U
+scott&quot;</i> can also be written <i>-p -U -p
+scott</i>.</p>
+
+<p style="margin-left:9%;"><b>--precision</b>
+&lt;<i>rfc3339|h|m|s|ms|u|ns</i>&gt;</p>
+
+<p style="margin-left:21%;">Precision of timestamps.</p>
+
+<p style="margin-left:21%; margin-top: 1em">Specifiy the
+format of the output timestamps: rfc3339, h, m, s, ms, u or
+ns.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-r</b></p></td>
+<td width="9%"></td>
+<td width="53%">
+
+
+<p>Try 3 times. Short version of <i>--retries 3</i>.</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--retries</b>
+<i>ntimes</i></p>
+
+<p style="margin-left:21%;">Try <i>ntimes</i> times. If the
+client program returns with an error, retry the command.
+Default is <i>--retries 1</i>.</p>
+
+<p style="margin-left:9%;"><b>--sep</b> <i>string</i>
+<b><br>
+-s</b> <i>string</i></p>
+
+<p style="margin-left:21%;">Field separator. Use
+<i>string</i> as separator between columns.</p>
+
+<p style="margin-left:9%;"><b>--skip-first-line</b></p>
+
+<p style="margin-left:21%;">Do not use the first line of
+input (used by GNU <b>sql</b> itself when called with
+<b>--shebang</b>).</p>
+
+<p style="margin-left:9%;"><b>--table-size <br>
+--tablesize</b></p>
+
+<p style="margin-left:21%;">Size of tables. Show the size
+of the tables in the database.</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="9%"></td>
+<td width="35%">
+
+
+<p>Print which command is sent.</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="9%"></td>
+<td width="44%">
+
+
+<p>Print the version GNU <b>sql</b> and exit.</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--shebang</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-Y</b></p></td>
+<td width="9%"></td>
+<td width="79%">
+
+
+<p>GNU <b>sql</b> can be called as a shebang (#!) command
+as the first line of a script. Like this:</p></td></tr>
+</table>
+
+<p style="margin-left:21%; margin-top: 1em">#!/usr/bin/sql
+-Y mysql:/// <br>
+SELECT * FROM foo;</p>
+
+<p style="margin-left:21%; margin-top: 1em">For this to
+work <b>--shebang</b> or <b>-Y</b> must be set as the first
+option.</p>
+
+<h2>DBURL
+<a name="DBURL"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A DBURL has the
+following syntax: [sql:]vendor://
+[[user][:password]@][host][:port]/[database][?sqlquery]</p>
+
+<p style="margin-left:9%; margin-top: 1em">To quote special
+characters use %-encoding specified in
+http://tools.ietf.org/html/rfc3986#section-2.1 (E.g. a
+password containing &rsquo;/&rsquo; would contain
+&rsquo;%2F&rsquo;).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">csv:///%2Ftmp%2Fparallel-bug-56096/mytable
+csv:////tmp/parallel-bug-56096/mytable mysql://me@/me/
+mysql:////</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">sqlite3:///%2Frun%2Fshm%2Fparallel.db
+sqlite3:///%2Frun%2Fshm%2Fparallel.db/table
+sqlite:///%2Ftmp%2Ffile.sqlite?SELECT
+csv:///%2Ftmp%2Fparallel-CSV/OK csv:///%2Fmust%2Ffail/fail
+sqlite3:///%2Frun%2Fshm%2Fparallel.db</p>
+
+<p style="margin-left:9%; margin-top: 1em">Examples:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">mysql://scott:tiger@my.example.com/mydb
+<br>
+influxdb://scott:tiger@influxdb.example.com/foo <br>
+sql:oracle://scott:tiger@ora.example.com/xe <br>
+postgresql://scott:tiger@pg.example.com/pgdb <br>
+pg:/// <br>
+postgresqlssl://scott@pg.example.com:3333/pgdb <br>
+sql:sqlite2:////tmp/db.sqlite?SELECT * FROM foo; <br>
+sqlite3:///../db.sqlite3?SELECT%20*%20FROM%20foo;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Currently
+supported vendors:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">MySQL (mysql) with SSL (mysqls,
+mysqlssl)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Oracle (oracle, ora)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>PostgreSQL (postgresql, pg, pgsql, postgres) with SSL
+(postgresqlssl, pgs, pgsqlssl, postgresssl, pgssl,
+postgresqls, pgsqls, postgress)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>SQLite2 (sqlite, sqlite2)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>SQLite3 (sqlite3)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>InfluxDB 1.x (influx, influxdb) with SSL (influxdbssl,
+influxdbs, influxs, influxssl)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Aliases must
+start with &rsquo;:&rsquo; and are read from
+/etc/sql/aliases and &#732;/.sql/aliases. The user&rsquo;s
+own &#732;/.sql/aliases should only be readable by the
+user.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example of
+aliases:</p>
+
+<p style="margin-left:9%; margin-top: 1em">:myalias1
+pg://scott:tiger@pg.example.com/pgdb <br>
+:myalias2 ora://scott:tiger@ora.example.com/xe <br>
+# Short form of
+mysql://`whoami`:nopassword@localhost:3306/`whoami` <br>
+:myalias3 mysql:/// <br>
+# Short form of
+mysql://`whoami`:nopassword@localhost:33333/mydb <br>
+:myalias4 mysql://:33333/mydb <br>
+# Alias for an alias <br>
+:m :myalias4 <br>
+# the sortest alias possible <br>
+: sqlite2:////tmp/db.sqlite <br>
+# Including an SQL query <br>
+:query sqlite:////tmp/db.sqlite?SELECT * FROM foo;</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h3>Get an interactive prompt
+<a name="Get an interactive prompt"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The most basic
+use of GNU <b>sql</b> is to get an interactive prompt:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql
+sql:oracle://scott:tiger@ora.example.com/xe</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+setup an alias you can do:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql
+:myora</b></p>
+
+<h3>Run a query
+<a name="Run a query"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To run a query
+directly from the command line:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql :myalias
+&quot;SELECT * FROM foo;&quot;</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Oracle requires
+newlines after each statement. This can be done like
+this:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql :myora
+&quot;SELECT * FROM foo;&quot; &quot;SELECT * FROM
+bar;&quot;</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Or this:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql :myora
+&quot;SELECT * FROM foo;\nSELECT * FROM bar;&quot;</b></p>
+
+<h3>Copy a PostgreSQL database
+<a name="Copy a PostgreSQL database"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To copy a
+PostgreSQL database use pg_dump to generate the dump and GNU
+<b>sql</b> to import it:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pg_dump
+pg_database | sql
+pg://scott:tiger@pg.example.com/pgdb</b></p>
+
+<h3>Empty all tables in a MySQL database
+<a name="Empty all tables in a MySQL database"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Using GNU
+<b>parallel</b> it is easy to empty all tables without
+dropping them:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql -n
+mysql:/// &rsquo;show tables&rsquo; | parallel sql mysql:///
+DELETE FROM {};</b></p>
+
+<h3>Drop all tables in a PostgreSQL database
+<a name="Drop all tables in a PostgreSQL database"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To drop all
+tables in a PostgreSQL database do:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql -n pg:///
+&rsquo;\dt&rsquo; | parallel --colsep &rsquo;\|&rsquo; -r
+sql pg:/// DROP TABLE {2};</b></p>
+
+<h3>Run as a script
+<a name="Run as a script"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Instead of
+doing:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql mysql:///
+&lt; sqlfile</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">you can combine
+the sqlfile with the DBURL to make a UNIX-script. Create a
+script called <i>demosql</i>:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>#!/usr/bin/sql
+-Y mysql:///</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>SELECT * FROM
+foo;</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Then do:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>chmod +x
+demosql; ./demosql</b></p>
+
+<h3>Use --colsep to process multiple columns
+<a name="Use --colsep to process multiple columns"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Use GNU
+<b>parallel</b>&rsquo;s <b>--colsep</b> to separate
+columns:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql -s
+&rsquo;\t&rsquo; :myalias &rsquo;SELECT * FROM foo;&rsquo; |
+parallel --colsep &rsquo;\t&rsquo; do_stuff {4} {1}</b></p>
+
+<h3>Retry if the connection fails
+<a name="Retry if the connection fails"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If the access to
+the database fails occasionally <b>--retries</b> can help
+make sure the query succeeds:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql --retries
+5 :myalias &rsquo;SELECT * FROM
+really_big_foo;&rsquo;</b></p>
+
+<h3>Get info about the running database system
+<a name="Get info about the running database system"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Show how big the
+database is:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql --db-size
+:myalias</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">List the
+tables:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql
+--list-tables :myalias</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">List the size of
+the tables:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql
+--table-size :myalias</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">List the running
+processes:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>sql
+--show-processlist :myalias</b></p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GNU <b>sql</b>
+is part of GNU <b>parallel</b>. Report bugs to
+&lt;bug-parallel@gnu.org&gt;.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When using GNU
+<b>sql</b> for a publication please cite:</p>
+
+<p style="margin-left:9%; margin-top: 1em">O. Tange (2011):
+GNU SQL - A Command Line Tool for Accessing Different
+Databases Using DBURLs, ;login: The USENIX Magazine, April
+2011:29-32.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2008-2010 Ole Tange http://ole.tange.dk</p>
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2010-2025 Ole Tange, http://ole.tange.dk and Free Software
+Foundation, Inc.</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 3
+of the License, or at your option any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU General Public License along with
+this program. If not, see
+&lt;http://www.gnu.org/licenses/&gt;.</p>
+
+<h3>Documentation license I
+<a name="Documentation license I"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this documentation
+under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free
+Software Foundation; with no Invariant Sections, with no
+Front-Cover Texts, and with no Back-Cover Texts. A copy of
+the license is included in the file
+LICENSES/GFDL-1.3-or-later.txt.</p>
+
+<h3>Documentation license II
+<a name="Documentation license II"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You are
+free:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><b>to Share</b></p></td>
+<td width="2%"></td>
+<td width="52%">
+
+
+<p style="margin-top: 1em">to copy, distribute and transmit
+the work</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>to Remix</b></p></td>
+<td width="2%"></td>
+<td width="52%">
+
+
+<p>to adapt the work</p></td>
+<td width="27%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Under the
+following conditions: <b><br>
+Attribution</b></p>
+
+<p style="margin-left:21%;">You must attribute the work in
+the manner specified by the author or licensor (but not in
+any way that suggests that they endorse you or your use of
+the work).</p>
+
+<p style="margin-left:9%;"><b>Share Alike</b></p>
+
+<p style="margin-left:21%;">If you alter, transform, or
+build upon this work, you may distribute the resulting work
+only under the same, similar or a compatible license.</p>
+
+<p style="margin-left:9%; margin-top: 1em">With the
+understanding that:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>Waiver</b></p></td>
+<td width="4%"></td>
+<td width="79%">
+
+
+<p>Any of the above conditions can be waived if you get
+permission from the copyright holder.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Public Domain</b></p>
+
+<p style="margin-left:21%;">Where the work or any of its
+elements is in the public domain under applicable law, that
+status is in no way affected by the license.</p>
+
+<p style="margin-left:9%;"><b>Other Rights</b></p>
+
+<p style="margin-left:21%;">In no way are any of the
+following rights affected by the license:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="10%"></td>
+<td width="68%">
+
+
+<p>Your fair dealing or fair use rights, or other
+applicable copyright exceptions and limitations;</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="10%"></td>
+<td width="68%">
+
+
+<p>The author&rsquo;s moral rights;</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="10%"></td>
+<td width="68%">
+
+
+<p>Rights other persons may have either in the work itself
+or in how the work is used, such as publicity or privacy
+rights.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p><b>Notice</b></p></td>
+<td width="10%"></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:21%; margin-top: 1em">For any reuse
+or distribution, you must make clear to others the license
+terms of this work.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A copy of the
+full license is included in the file as cc-by-sa.txt.</p>
+
+<h2>DEPENDENCIES
+<a name="DEPENDENCIES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GNU <b>sql</b>
+uses Perl. If <b>mysql</b> is installed, MySQL dburls will
+work. If <b>psql</b> is installed, PostgreSQL dburls will
+work. If <b>sqlite</b> is installed, SQLite2 dburls will
+work. If <b>sqlite3</b> is installed, SQLite3 dburls will
+work. If <b>sqlplus</b> is installed, Oracle dburls will
+work. If <b>rlwrap</b> is installed, GNU <b>sql</b> will
+have a command history for Oracle.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&#732;/.sql/aliases
+- user&rsquo;s own aliases with DBURLs</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">/etc/sql/aliases
+- common aliases with DBURLs</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mysql</b>(1),
+<b>psql</b>(1), <b>rlwrap</b>(1), <b>sqlite</b>(1),
+<b>sqlite3</b>(1), <b>sqlplus</b>(1), <b>influx</b>(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:38 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GPROFNG-DISPLAY-SRC</title>
+
+</head>
+<body>
+
+<h1 align="center">GPROFNG-DISPLAY-SRC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">gprofng-display-src
+- Display source code and optionally disassembly of the
+target object</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gprofng
+display src</b> [<i>option(s)</i>] <i>target-file</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Display the
+source code listing, or source code interleaved with
+disassembly code, as extracted from the target file (an
+executable, shared object, object file, or a Java .class
+file).</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example,
+this command displays the source code and disassembly
+listing for a function called <b>mxv_core</b> that is part
+of object file <b>mxv.o</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ gprofng
+display src -disasm mxv_core mxv.o</p>
+
+<p style="margin-left:9%; margin-top: 1em">To list the
+source code and disassembly for all the functions in this
+file, use the following command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ gprofng
+display src -disasm all -1 mxv.o</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>target-file</i> is the name of an executable, a shared
+object, an object file (.o), or a Java .class file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no options
+are given, the source code listing of the <i>target-file</i>
+is shown. This is equivalent to <b>-source all -1</b>. If
+this information is not available, a message to this extent
+is printed.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print the version number and
+exit.</p>
+
+<p style="margin-left:9%;"><b>--help</b></p>
+
+<p style="margin-left:14%;">Print usage information and
+exit.</p>
+
+<p style="margin-left:9%;"><b>-functions</b></p>
+
+<p style="margin-left:14%;">List all the functions from the
+given object.</p>
+
+<p style="margin-left:9%;"><b>-source</b> <i>item
+tag</i></p>
+
+<p style="margin-left:14%;">Show the source code for
+<i>item</i> in <i>target-file</i>. The <i>tag</i> is used to
+differentiate in case there are multiple occurences with the
+same name. See the <b>NOTES</b> section for the definition
+of <i>item</i> and <i>tag</i>.</p>
+
+<p style="margin-left:9%;"><b>-disasm</b> <i>item
+tag</i></p>
+
+<p style="margin-left:14%;">Include the disassembly in the
+source listing. The default listing does not include the
+disassembly. If the source code is not available, show a
+listing of the disassembly only. See the <b>NOTES</b>
+section for the definition of <i>item</i> and
+<i>tag</i>.</p>
+
+<p style="margin-left:9%;"><b>-outfile</b>
+<i>filename</i></p>
+
+<p style="margin-left:14%;">Write results to file
+<i>filename</i>. A dash (-) writes to stdout. This is also
+the default. Note that this option only affects those
+options included to the right of the option.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Use <i>item</i>
+to specify the name of a function, or of a source or object
+file that was used to build the executable, or shared
+object.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <i>tag</i>
+is an index used to determine which item is being referred
+to when multiple functions have the same name. It is
+required, but will be ignored if not necessary to resolve
+the function.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <i>item</i>
+may also be specified in the form
+<b>function&lsquo;file&lsquo;</b>, in which case the source
+or disassembly of the named function in the source context
+of the named file will be used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The special
+<i>item</i> and <i>tag</i> combination <b>all -1</b>, is
+used to indicate generating the source, or disassembly, for
+all functions in the <i>target-file</i>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gprofng</b>(1),
+<b>gprofng-archive</b>(1), <b>gprofng-collect-app</b>(1),
+<b>gprofng-display-html</b>(1),
+<b>gprofng-display-text</b>(1)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The user guide
+for gprofng is maintained as a Texinfo manual. If the
+<b>info</b> and <b>gprofng</b> programs are correctly
+installed, the command <b>info gprofng</b> should give
+access to this document.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (c)
+2022-2025 Free Software Foundation, Inc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free
+Software Foundation; with no Invariant Sections, with no
+Front-Cover Texts, and with no Back-Cover Texts. A copy of
+the license is included in the section entitled &quot;GNU
+Free Documentation License&quot;.</p>
+<hr>
+</body>
+</html>

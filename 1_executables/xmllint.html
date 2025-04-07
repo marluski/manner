@@ -1,0 +1,716 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:20 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>XMLLINT</title>
+
+</head>
+<body>
+
+<h1 align="center">XMLLINT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SHELL COMMANDS">SHELL COMMANDS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xmllint -
+command line XML tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="91%">
+
+
+<p style="margin-top: 1em"><b>xmllint</b> [<b>--version</b>
+| <b>--debug</b> | <b>--quiet</b> | <b>--shell</b> |
+<b>--xpath&nbsp;&quot;</b><i>XPath_expression</i><b>&quot;</b>
+| <b>--debugent</b> | <b>--copy</b> | <b>--recover</b> |
+<b>--nodict</b> | <b>--noent</b> | <b>--noout</b> |
+<b>--nonet</b> |
+<b>--path&nbsp;&quot;</b><i>PATH(S)</i><b>&quot;</b> |
+<b>--load-trace</b> | <b>--htmlout</b> | <b>--nowrap</b> |
+<b>--valid</b> | <b>--postvalid</b> |
+<b>--dtdvalid&nbsp;</b><i>URL</i> |
+<b>--dtdvalidfpi&nbsp;</b><i>FPI</i> | <b>--timing</b> |
+<b>--output&nbsp;</b><i>FILE</i> | <b>--repeat</b> |
+<b>--insert</b> | <b>--compress</b> | <b>--html</b> |
+<b>--xmlout</b> | <b>--push</b> | <b>--memory</b> |
+<b>--max-ampl&nbsp;</b><i>INTEGER</i> |
+<b>--maxmem&nbsp;</b><i>NBBYTES</i> | <b>--nowarning</b> |
+<b>--noblanks</b> | <b>--nocdata</b> | <b>--format</b> |
+<b>--encode&nbsp;</b><i>ENCODING</i> | <b>--dropdtd</b> |
+<b>--nsclean</b> | <b>--testIO</b> | <b>--catalogs</b> |
+<b>--nocatalogs</b> | <b>--auto</b> | <b>--xinclude</b> |
+<b>--noxincludenode</b> | <b>--loaddtd</b> |
+<b>--dtdattr</b> | <b>--stream</b> | <b>--walker</b> |
+<b>--pattern&nbsp;</b><i>PATTERNVALUE</i> |
+<b>--relaxng&nbsp;</b><i>SCHEMA</i> |
+<b>--schema&nbsp;</b><i>SCHEMA</i> | <b>--c14n</b> |
+<b>--pedantic</b>] {<i>XML-FILE(S)</i>... | -}</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="91%">
+
+
+<p style="margin-top: 1em"><b>xmllint --help</b></p></td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>xmllint</b> program parses one or more XML files,
+specified on the command line as <i>XML-FILE</i> (or the
+standard input if the filename provided is <b>-</b> ). It
+prints various types of output, depending upon the options
+selected. It is useful for detecting errors both in XML code
+and in the XML parser itself.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>xmllint</b>
+is included in <b>libxml</b>(3).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xmllint</b>
+accepts the following options (in alphabetical order):</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--auto</b></p>
+
+<p style="margin-left:14%;">Generate a small document for
+testing purposes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--catalogs</b></p>
+
+<p style="margin-left:14%;">Use the SGML catalog(s) from
+<b>SGML_CATALOG_FILES</b>. Otherwise XML catalogs starting
+from /etc/xml/catalog or, more specifically,
+${sysconfdir}/xml/catalog are used by default.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--compress</b></p>
+
+<p style="margin-left:14%;">Turn on <b>gzip</b>(1)
+compression of output.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--copy</b></p>
+
+<p style="margin-left:14%;">Test the internal copy
+implementation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--c14n</b></p>
+
+<p style="margin-left:14%;">Use the W3C XML
+Canonicalisation (C14N) to serialize the result of parsing
+to stdout. It keeps comments in the result.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dtdvalid</b>
+<i>URL</i></p>
+
+<p style="margin-left:14%;">Use the DTD specified by an
+<i>URL</i> for validation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dtdvalidfpi</b>
+<i>FPI</i></p>
+
+<p style="margin-left:14%;">Use the DTD specified by a
+Formal Public Identifier <i>FPI</i> for validation, note
+that this will require a catalog exporting that Formal
+Public Identifier to work.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--debug</b></p>
+
+<p style="margin-left:14%;">Parse a file and output an
+annotated tree of the in-memory version of the document.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--debugent</b></p>
+
+<p style="margin-left:14%;">Debug the entities defined in
+the document.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dropdtd</b></p>
+
+<p style="margin-left:14%;">Remove DTD from output.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dtdattr</b></p>
+
+<p style="margin-left:14%;">Fetch external DTD and populate
+the tree with inherited attributes.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--encode</b>
+<i>ENCODING</i></p>
+
+<p style="margin-left:14%;">Output in the given encoding.
+Note that this works for full document not fragments or
+result from XPath queries.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--format</b></p>
+
+<p style="margin-left:14%;">Reformat and reindent the
+output. The <b>XMLLINT_INDENT</b> environment variable
+controls the indentation. The default value is two spaces
+&quot; &quot;).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:14%;">Print out a short usage summary
+for <b>xmllint</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--html</b></p>
+
+<p style="margin-left:14%;">Use the HTML parser.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--htmlout</b></p>
+
+<p style="margin-left:14%;">Output results as an HTML file.
+This causes <b>xmllint</b> to output the necessary HTML tags
+surrounding the result tree output so the results can be
+displayed/viewed in a browser.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--insert</b></p>
+
+<p style="margin-left:14%;">Test for valid insertions.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--loaddtd</b></p>
+
+<p style="margin-left:14%;">Fetch an external DTD.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--load-trace</b></p>
+
+<p style="margin-left:14%;">Display all the documents
+loaded during the processing to stderr.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--max-ampl</b>
+<i>INTEGER</i></p>
+
+<p style="margin-left:14%;">Set the maximum amplification
+factor which protects against exponential entity expansion
+(&quot;billion laughs&quot;). The default value is 5.
+Documents making heavy use of entity expansion may require a
+higher value.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--maxmem</b>
+<i>NNBYTES</i></p>
+
+<p style="margin-left:14%;">Test the parser memory support.
+<i>NNBYTES</i> is the maximum number of bytes the library is
+allowed to allocate. This can also be used to make sure
+batch processing of XML files will not exhaust the virtual
+memory of the server running them.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--memory</b></p>
+
+<p style="margin-left:14%;">Parse from memory.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--noblanks</b></p>
+
+<p style="margin-left:14%;">Drop ignorable blank
+spaces.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nocatalogs</b></p>
+
+<p style="margin-left:14%;">Do not use any catalogs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nocdata</b></p>
+
+<p style="margin-left:14%;">Substitute CDATA section by
+equivalent text nodes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nodict</b></p>
+
+<p style="margin-left:14%;">Don't use dictionaries (parser
+option XML_PARSE_NODICT). Only for debugging.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--noent</b></p>
+
+<p style="margin-left:14%;">Substitute entity values for
+entity references. By default, <b>xmllint</b> leaves entity
+references in place.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nonet</b></p>
+
+<p style="margin-left:14%;">Do not use the Internet to
+fetch DTDs or entities.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--noout</b></p>
+
+<p style="margin-left:14%;">Suppress output. By default,
+<b>xmllint</b> outputs the result tree.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nowarning</b></p>
+
+<p style="margin-left:14%;">Do not emit warnings from the
+parser and/or validator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nowrap</b></p>
+
+<p style="margin-left:14%;">Do not output HTML doc
+wrapper.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--noxincludenode</b></p>
+
+<p style="margin-left:14%;">Do XInclude processing but do
+not generate XInclude start and end nodes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nsclean</b></p>
+
+<p style="margin-left:14%;">Remove redundant namespace
+declarations.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--output</b>
+<i>FILE</i></p>
+
+<p style="margin-left:14%;">Define a file path where
+<b>xmllint</b> will save the result of parsing. Usually the
+programs build a tree and save it on stdout, with this
+option the result XML instance will be saved onto a
+file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--path
+&quot;</b><i>PATH(S)</i><b>&quot;</b></p>
+
+<p style="margin-left:14%;">Use the (space- or
+colon-separated) list of filesystem paths specified by
+<i>PATHS</i> to load DTDs or entities. Enclose
+space-separated lists by quotation marks.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pattern</b>
+<i>PATTERNVALUE</i></p>
+
+<p style="margin-left:14%;">Used to exercise the pattern
+recognition engine, which can be used with the reader
+interface to the parser. It allows to select some nodes in
+the document based on an XPath (subset) expression. Used for
+debugging.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pedantic</b></p>
+
+<p style="margin-left:14%;">Enable additional warnings.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--postvalid</b></p>
+
+<p style="margin-left:14%;">Validate after parsing has
+completed.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--push</b></p>
+
+<p style="margin-left:14%;">Use the push mode of the
+parser.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--quiet</b></p>
+
+<p style="margin-left:14%;">Don't print informational
+messages to stderr.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--recover</b></p>
+
+<p style="margin-left:14%;">Output any parsable portions of
+an invalid document.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--relaxng</b>
+<i>SCHEMA</i></p>
+
+<p style="margin-left:14%;">Use RelaxNG file named
+<i>SCHEMA</i> for validation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--repeat</b></p>
+
+<p style="margin-left:14%;">Repeat 100 times, for timing or
+profiling.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--schema</b>
+<i>SCHEMA</i></p>
+
+<p style="margin-left:14%;">Use a W3C XML Schema file named
+<i>SCHEMA</i> for validation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--shell</b></p>
+
+<p style="margin-left:14%;">Run a navigating shell. Details
+on available commands in shell mode are below (see the
+section called &ldquo;SHELL COMMANDS&rdquo;).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--xpath
+&quot;</b><i>XPath_expression</i><b>&quot;</b></p>
+
+<p style="margin-left:14%;">Run an XPath expression given
+as argument and print the result. In case of a nodeset
+result, each node in the node set is serialized in full in
+the output. In case of an empty node set the &quot;XPath set
+is empty&quot; result will be shown and exit code 11 will be
+returned.. This feature is EXPERIMENTAL. Implementation
+details can change without futher notice.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--stream</b></p>
+
+<p style="margin-left:14%;">Use streaming API - useful when
+used in combination with <b>--relaxng</b> or <b>--valid</b>
+options for validation of files that are too large to be
+held in memory.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--testIO</b></p>
+
+<p style="margin-left:14%;">Test user input/output
+support.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--timing</b></p>
+
+<p style="margin-left:14%;">Output information about the
+time it takes <b>xmllint</b> to perform the various
+steps.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--valid</b></p>
+
+<p style="margin-left:14%;">Determine if the document is a
+valid instance of the included Document Type Definition
+(DTD). A DTD to be validated against also can be specified
+at the command line using the <b>--dtdvalid</b> option. By
+default, <b>xmllint</b> also checks to determine if the
+document is well-formed.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Display the version of
+<b>libxml</b>(3) used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--walker</b></p>
+
+<p style="margin-left:14%;">Test the walker module, which
+is a reader interface but for a document tree, instead of
+using the reader API on an unparsed document it works on an
+existing in-memory tree. Used for debugging.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--xinclude</b></p>
+
+<p style="margin-left:14%;">Do XInclude processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--xmlout</b></p>
+
+<p style="margin-left:14%;">Used in conjunction with
+<b>--html</b>. Usually when HTML is parsed the document is
+saved with the HTML serializer. But with this option the
+resulting document is saved with the XML serializer. This is
+primarily used to generate XHTML from HTML input.</p>
+
+<h2>SHELL COMMANDS
+<a name="SHELL COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xmllint</b>
+offers an interactive shell mode invoked with the
+<b>--shell</b> command. Available commands in shell mode
+include (in alphabetical order):</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>base</b></p>
+
+<p style="margin-left:14%;">Display XML base of the
+node.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>bye</b></p>
+
+<p style="margin-left:14%;">Leave the shell.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cat</b>
+<i>NODE</i></p>
+
+<p style="margin-left:14%;">Display the given node or the
+current one.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cd</b>
+<i>PATH</i></p>
+
+<p style="margin-left:14%;">Change the current node to the
+given path (if unique) or root if no argument is given.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>dir</b>
+<i>PATH</i></p>
+
+<p style="margin-left:14%;">Dumps information about the
+node (namespace, attributes, content).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>du</b>
+<i>PATH</i></p>
+
+<p style="margin-left:14%;">Show the structure of the
+subtree under the given path or the current node.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>exit</b></p>
+
+<p style="margin-left:14%;">Leave the shell.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>help</b></p>
+
+<p style="margin-left:14%;">Show this help.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>load</b>
+<i>FILENAME</i></p>
+
+<p style="margin-left:14%;">Load a new document with the
+given filename.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ls</b>
+<i>PATH</i></p>
+
+<p style="margin-left:14%;">List contents of the given path
+or the current directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pwd</b></p>
+
+<p style="margin-left:14%;">Display the path to the current
+node.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>quit</b></p>
+
+<p style="margin-left:14%;">Leave the shell.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>save</b>
+<i>FILENAME</i></p>
+
+<p style="margin-left:14%;">Save the current document to
+the given filename or to the original name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>validate</b></p>
+
+<p style="margin-left:14%;">Check the document for
+errors.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>write</b>
+<i>FILENAME</i></p>
+
+<p style="margin-left:14%;">Write the current node to the
+given filename.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>SGML_CATALOG_FILES</b></p>
+
+<p style="margin-left:14%;">SGML catalog behavior can be
+changed by redirecting queries to the user's own set of
+catalogs. This can be done by setting the
+<b>SGML_CATALOG_FILES</b> environment variable to a list of
+catalogs. An empty one should deactivate loading the default
+catalog.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>XML_CATALOG_FILES</b></p>
+
+<p style="margin-left:14%;">XML catalog behavior can be
+changed by redirecting queries to the user's own set of
+catalogs. This can be done by setting the
+<b>XML_CATALOG_FILES</b> environment variable to a
+space-separated list of catalogs. Use percent-encoding to
+escape spaces or other characters. An empty variable should
+deactivate loading the default catalog.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>XML_DEBUG_CATALOG</b></p>
+
+<p style="margin-left:14%;">Setting the environment
+variable <b>XML_DEBUG_CATALOG</b> to <i>non-zero</i> using
+the <b>export</b> command outputs debugging information
+related to catalog operations.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>XMLLINT_INDENT</b></p>
+
+<p style="margin-left:14%;">Setting the environment
+variable <b>XMLLINT_INDENT</b> controls the indentation. The
+default value is two spaces &quot; &quot;.</p>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xmllint</b>
+return codes provide information that can be used when
+calling it from scripts.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>0</b></p>
+
+<p style="margin-left:14%;">No error</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>1</b></p>
+
+<p style="margin-left:14%;">Unclassified</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>2</b></p>
+
+<p style="margin-left:14%;">Error in DTD</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>3</b></p>
+
+<p style="margin-left:14%;">Validation error</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>4</b></p>
+
+<p style="margin-left:14%;">Validation error</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>5</b></p>
+
+<p style="margin-left:14%;">Error in schema compilation</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>6</b></p>
+
+<p style="margin-left:14%;">Error writing output</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>7</b></p>
+
+<p style="margin-left:14%;">Error in pattern (generated
+when <b>--pattern</b> option is used)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>9</b></p>
+
+<p style="margin-left:14%;">Out of memory error</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>10</b></p>
+
+<p style="margin-left:14%;">XPath evaluation error</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>11</b></p>
+
+<p style="margin-left:14%;">XPath result is empty</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libxml</b>(3)</p>
+
+<p style="margin-left:9%; margin-top: 1em">More information
+can be found at</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+<b>libxml</b>(3) web page
+<b><font color="#0000FF">https://gitlab.gnome.org/GNOME/libxml2</font></b></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><font color="#000000">John
+Fleck</font></b>
+<font color="#000000">&lt;jfleck@inkstain.net&gt;</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Author.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Ziying
+Sherwin</b> &lt;sherwin@nlm.nih.gov&gt;</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Author.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Heiko
+Rupp</b> &lt;hwr@pilhuhn.de&gt;</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Author.</font></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+&copy; 2001, 2004</font></p>
+<hr>
+</body>
+</html>

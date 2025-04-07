@@ -1,0 +1,272 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SPECTACLE</title>
+
+</head>
+<body>
+
+<h1 align="center">SPECTACLE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SPECTACLE OPTIONS">SPECTACLE OPTIONS</a><br>
+<a href="#FEEDBACK">FEEDBACK</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">spectacle -
+screenshot capture Utility</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em"><b>spectacle</b>
+[<i>Spectacle&nbsp;options</i>]</p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>spectacle</b>
+is a simple application for capturing desktop screenshots.
+It can capture images of the entire desktop, a single
+monitor, the currently active window, the window currently
+under the mouse, or a rectangular region of the screen. The
+images can then be annotated, printed, sent to other
+applications for manipulation, or quickly be saved
+as-is.</p>
+
+<h2>SPECTACLE OPTIONS
+<a name="SPECTACLE OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Displays help on commandline
+options.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help-all</b></p>
+
+<p style="margin-left:14%;">Displays help including Qt
+specific options.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Displays version
+information.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--fullscreen</b></p>
+
+<p style="margin-left:14%;">Capture the entire desktop
+(default).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m,
+--current</b></p>
+
+<p style="margin-left:14%;">Capture the current
+monitor.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a,
+--activewindow</b></p>
+
+<p style="margin-left:14%;">Capture the active window.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u,
+--windowundercursor</b></p>
+
+<p style="margin-left:14%;">Capture the window currently
+under the cursor, including parents of pop-up menus.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t,
+--transientonly</b></p>
+
+<p style="margin-left:14%;">Capture the window currently
+under the cursor, excluding parents of pop-up menus.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r,
+--region</b></p>
+
+<p style="margin-left:14%;">Capture a rectangular region of
+the screen.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l,
+--launchonly</b></p>
+
+<p style="margin-left:14%;">Launch Spectacle without taking
+a screenshot.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-g,
+--gui</b></p>
+
+<p style="margin-left:14%;">Start in GUI mode
+(default).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b,
+--background</b></p>
+
+<p style="margin-left:14%;">Take a screenshot and exit
+without showing the GUI.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--dbus</b></p>
+
+<p style="margin-left:14%;">Start in DBus-Activation
+mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n,
+--nonotify</b></p>
+
+<p style="margin-left:14%;">In background mode, do not pop
+up a notification when the screenshot is taken.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o,
+--output</b> <i>fileName</i></p>
+
+<p style="margin-left:14%;">In background mode, save image
+to specified file <i>fileName</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--delay</b> <i>delayMsec</i></p>
+
+<p style="margin-left:14%;">In background mode, delay
+before taking the shot (in milliseconds).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--copy-image</b></p>
+
+<p style="margin-left:14%;">In background mode, copy
+screenshot only to clipboard, unless -o is also used.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C,
+--copy-path</b></p>
+
+<p style="margin-left:14%;">In background mode, copy
+screenshot file path to clipboard.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w,
+--onclick</b></p>
+
+<p style="margin-left:14%;">Wait for a click before taking
+screenshot. Invalidates delay..</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i,
+--new-instance</b></p>
+
+<p style="margin-left:14%;">Starts a new GUI instance of
+spectacle without registering to DBus.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p,
+--pointer</b></p>
+
+<p style="margin-left:14%;">In background mode, include
+pointer in the screenshot.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e,
+--no-decoration</b></p>
+
+<p style="margin-left:14%;">In background mode, do not
+include window decorations in the screenshot.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-E,
+--edit-existing</b> <i>existingFileName</i></p>
+
+<p style="margin-left:14%;">Open and edit existing
+screenshot file.</p>
+
+<h2>FEEDBACK
+<a name="FEEDBACK"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On IRC,
+irc.libera.chat #kde or via email,
+kde-graphics-devel@kde.org or on the web,
+&lt;<b><font color="#0000FF">https://apps.kde.org/spectacle</font></b><font color="#000000">&gt;</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">More
+detailed user documentation is available from</font>
+<b><font color="#0000FF">help:/spectacle</font></b>
+<font color="#000000">(either enter this URL into Konqueror,
+or run <b>khelpcenter</b> <i>help:/spectacle</i>). <br>
+kf6options(7) <br>
+qt6options(7) <br>
+There is also further information available at</font>
+<b><font color="#0000FF">https://apps.kde.org/spectacle</font></b></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+(c) 2015 Boudhayan Gupta</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">License:
+GNU General Public Version 2
+&lt;</font><b><font color="#0000FF">https://www.gnu.org/licenses/gpl-2.0.html</font></b><font color="#000000">&gt;</font></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Yuri
+Chornoivan</b> &lt;yurchor@ukr.net&gt;</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Spectacle
+man page.</font></p>
+<hr>
+</body>
+</html>

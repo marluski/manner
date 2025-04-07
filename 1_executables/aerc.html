@@ -1,0 +1,1752 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:40 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>AERC</title>
+
+</head>
+<body>
+
+<h1 align="center">AERC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#RUNTIME COMMANDS">RUNTIME COMMANDS</a><br>
+<a href="#GLOBAL COMMANDS">GLOBAL COMMANDS</a><br>
+<a href="#MESSAGE COMMANDS">MESSAGE COMMANDS</a><br>
+<a href="#MESSAGE LIST COMMANDS">MESSAGE LIST COMMANDS</a><br>
+<a href="#MESSAGE VIEW COMMANDS">MESSAGE VIEW COMMANDS</a><br>
+<a href="#MESSAGE COMPOSE COMMANDS">MESSAGE COMPOSE COMMANDS</a><br>
+<a href="#TERMINAL COMMANDS">TERMINAL COMMANDS</a><br>
+<a href="#LOGGING">LOGGING</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">aerc - a pretty
+good email client.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>aerc</b>
+[<b>-h</b>] [<b>-v</b>] [<b>-a</b> <i>&lt;name&gt;</i>]
+[<b>-C</b> <i>&lt;file&gt;</i>] [<b>-A</b>
+<i>&lt;file&gt;</i>] [<b>-B</b> <i>&lt;file&gt;</i>]
+[<b>-I</b>] [<b>mailto:</b><i>&lt;...&gt;</i> |
+<b>mbox:</b><i>&lt;file&gt;</i> |
+:<i>&lt;command...&gt;</i>]</p>
+
+<p style="margin-left:9%; margin-top: 1em">For a guided
+tutorial, use <b>:help tutorial</b> from aerc, or <b>man
+aerc-tutorial</b> from your terminal.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show aerc usage help and
+exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--version</b></p>
+
+<p style="margin-left:14%;">Print the installed version of
+aerc and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a</b>
+<i>&lt;name&gt;</i> <b><br>
+--account</b> <i>&lt;name&gt;</i></p>
+
+<p style="margin-left:14%;">Load only the named account, as
+opposed to all configured accounts. It can also be a comma
+separated list of names. This option may be specified
+multiple times. The account order will be preserved.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C</b>
+<i>&lt;/path/to/aerc.conf&gt;</i> <b><br>
+--aerc-conf</b> <i>&lt;/path/to/aerc.conf&gt;</i></p>
+
+<p style="margin-left:14%;">Instead of using
+<i>$XDG_CONFIG_HOME/aerc/aerc.conf</i> use the file at the
+specified path for configuring aerc.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-A</b>
+<i>&lt;/path/to/accounts.conf&gt;</i> <b><br>
+--accounts-conf</b>
+<i>&lt;/path/to/accounts.conf&gt;</i></p>
+
+<p style="margin-left:14%;">Instead of using
+<i>$XDG_CONFIG_HOME/aerc/accounts.conf</i> use the file at
+the specified path for configuring accounts.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-B</b>
+<i>&lt;/path/to/binds.conf&gt;</i> <b><br>
+--binds-conf</b> <i>&lt;/path/to/binds.conf&gt;</i></p>
+
+<p style="margin-left:14%;">Instead of using
+<i>$XDG_CONFIG_HOME/aerc/binds.conf</i> use the file at the
+specified path for configuring binds.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-I</b>,
+<b>--no-ipc</b></p>
+
+<p style="margin-left:14%;">Run commands
+(<b>mailto:</b><i>...</i>,
+<b>:</b><i>&lt;command...&gt;</i>,
+<b>mbox:</b><i>&lt;file&gt;</i>) directly in this instance
+rather than over IPC in an existing aerc instance. Also
+disable creation of an IPC server for subsequent aerc
+instances to communicate with this one.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mailto:</b><i>address[,address][?query[&amp;query]]</i></p>
+
+<p style="margin-left:14%;">Open the composer with the
+address(es) in the To field. These addresses must not be
+percent encoded.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If aerc is
+already running (and IPC is not disabled), the composer is
+started in that instance; otherwise a new instance is
+started with the composer.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The following
+(optional) query parameters are supported:</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+reserved characters in the queries must be percent
+encoded.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:</b><i>&lt;command...&gt;</i></p>
+
+<p style="margin-left:14%;">Run an aerc-internal command as
+you would in Ex-Mode. See <b>RUNTIME COMMANDS</b> below.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The command to
+be executed and its arguments can either be passed as
+separate arguments in the shell (e.g., <i>aerc :cmd arg1
+arg2</i>) or as a single argument in the shell (e.g.,
+<i>aerc &quot;:cmd arg1 arg2&quot;</i>). In the former case,
+aerc may add quotes to the command before it is parsed in an
+attempt to preserve arguments containing spaces and other
+special characters. In the latter case, aerc will parse the
+command verbatim, as if it had been typed directly on
+aerc&rsquo;s command line. This latter form can be helpful
+for commands that don&rsquo;t interpret quotes in their
+arguments.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If aerc is
+already running (and IPC is not disabled), the command is
+run in that instance; otherwise a new instance is started
+with the command.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mbox:</b><i>&lt;file&gt;</i></p>
+
+<p style="margin-left:14%;">Open the specified mbox file as
+a virtual temporary account.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If aerc is
+already running (and IPC is not disabled), the file is
+opened in that instance; otherwise a new instance is started
+with the file.</p>
+
+<h2>RUNTIME COMMANDS
+<a name="RUNTIME COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To execute a
+command, press <b>:</b> to bring up the command interface.
+Commands may also be bound to keys, see <b>aerc-binds</b>(5)
+for details. In some contexts, such as the terminal
+emulator, <b>&lt;c-x&gt;</b> is used to bring up the command
+interface.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Different
+commands work in different contexts, depending on the kind
+of tab you have selected.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Dynamic
+arguments are expanded following <b>aerc-templates</b>(7)
+depending on the context. For example, if you have a message
+selected, the following command:</p>
+
+<p style="margin-left:14%; margin-top: 1em">:filter -f
+&quot;{{index (.From | emails) 0}}&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Will filter all
+messages sent by the same sender.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Aerc stores a
+history of commands, which can be cycled through in command
+mode. Pressing the up key cycles backwards in history, while
+pressing down cycles forwards.</p>
+
+<h3>GLOBAL COMMANDS
+<a name="GLOBAL COMMANDS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These commands
+work in any context.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:help</b>
+<i>&lt;topic&gt;</i> <b><br>
+:man</b> <i>&lt;topic&gt;</i></p>
+
+<p style="margin-left:14%;">Display one of aerc&rsquo;s man
+pages in the embedded terminal.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:help keys
+<br>
+:man keys</b></p>
+
+<p style="margin-left:14%;">Display the active key bindings
+in the current context.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:new-account</b>
+[<b>-t</b>]</p>
+
+<p style="margin-left:14%;">Start the new account
+wizard.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>:
+Create a temporary account. Do not modify
+<i>accounts.conf</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:cd</b>
+<i>&lt;directory&gt;</i></p>
+
+<p style="margin-left:14%;">Changes aerc&rsquo;s current
+working directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:z</b>
+<i>&lt;directory or zoxide query&gt;</i></p>
+
+<p style="margin-left:14%;">Changes aerc&rsquo;s current
+working directory using zoxide. If zoxide is not on
+<b>$PATH</b>., the command will not be registered.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:change-tab</b>
+[<b>+</b>|<b>-</b>]<i>&lt;tab name or index&gt;</i> <b><br>
+:ct</b> [<b>+</b>|<b>-</b>]<i>&lt;tab name or
+index&gt;</i></p>
+
+<p style="margin-left:14%;">Changes the focus to the tab
+with the given name. If a number is given, it&rsquo;s
+treated as an index. If the number is prepended with
+<b>+</b> or <b>-</b>, the number is interpreted as a delta
+from the selected tab. If only a <b>-</b> is given, changes
+the focus to the previously selected tab.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:exec</b>
+<i>&lt;command&gt;</i></p>
+
+<p style="margin-left:14%;">Executes an arbitrary command
+in the background. Aerc will set the environment variables
+<b>$account</b> and <b>$folder</b> when the command is
+executed from an Account tab or an opened message.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note: commands
+executed in this way are not executed with the shell.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:echo</b>
+<i>&lt;string&gt;</i></p>
+
+<p style="margin-left:14%;">Resolve templates in
+<i>&lt;string&gt;</i> and print it.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:eml</b>
+[<i>&lt;path&gt;</i>] <b><br>
+:preview</b> [<i>&lt;path&gt;</i>]</p>
+
+<p style="margin-left:14%;">Opens an eml file and displays
+the message in the message viewer.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Can also be
+used in the message viewer to open an rfc822 attachment or
+in the composer to preview the message.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:pwd</b></p>
+
+<p style="margin-left:14%;">Displays aerc&rsquo;s current
+working directory in the status bar.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:send-keys</b>
+<i>&lt;keystrokes&gt;</i></p>
+
+<p style="margin-left:14%;">Send keystrokes to the
+currently visible terminal, if any. Can be used to control
+embedded editors to save drafts or quit in a safe
+manner.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Here&rsquo;s an
+example of quitting a Vim-like editor:</p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><b>:send-keys</b>
+<i>&lt;Esc&gt;:wq!&lt;Enter&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Note: when used
+in <i>binds.conf</i> (see <b>aerc-binds</b>(5)), angle
+brackets need to be escaped in order to make their way to
+the command:</p>
+
+<p style="margin-left:19%; margin-top: 1em">&lt;C-q&gt; =
+:send-keys \&lt;Esc\&gt;:wq!\&lt;Enter\&gt;&lt;Enter&gt;</p>
+
+<p style="margin-left:14%; margin-top: 1em">This way the
+<i>&lt;Esc&gt;</i> and the first <i>&lt;Enter&gt;</i>
+keystrokes are passed to <b>:send-keys</b>, while the last
+<i>&lt;Enter&gt;</i> keystroke is executed directly,
+committing the <b>:send-keys</b> command&rsquo;s
+execution.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:term</b>
+[<i>&lt;command&gt;...</i>] <b><br>
+:terminal</b> [<i>&lt;command&gt;...</i>]</p>
+
+<p style="margin-left:14%;">Opens a new terminal tab with a
+shell running in the current working directory, or the
+specified command.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:move-tab</b>
+[<i>+</i>|<i>-</i>]<i>&lt;index&gt;</i></p>
+
+<p style="margin-left:14%;">Moves the selected tab to the
+given index. If <i>+</i> or <i>-</i> is specified, the
+number is interpreted as a delta from the selected tab.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:prev-tab</b>
+[<i>&lt;n&gt;</i>] <b><br>
+:next-tab</b> [<i>&lt;n&gt;</i>]</p>
+
+<p style="margin-left:14%;">Cycles to the previous or next
+tab in the list, repeating <i>&lt;n&gt;</i> times (default:
+<i>1</i>).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:pin-tab</b></p>
+
+<p style="margin-left:14%;">Moves the current tab to the
+left of all non-pinned tabs and displays the
+<b>pinned-tab-marker</b> (default: <i>&lsquo;</i>) to the
+left of the tab title.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:unpin-tab</b></p>
+
+<p style="margin-left:14%;">Removes the
+<b>pinned-tab-marker</b> from the current tab and returns
+the tab to its previous location.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:prompt</b>
+<i>&lt;prompt&gt; &lt;command&gt;...</i></p>
+
+<p style="margin-left:14%;">Displays the prompt on the
+status bar, waits for user input, then appends that input as
+the last argument to the command and executes it. The input
+is passed as one argument to the command, unless it is
+empty, in which case no extra argument is added.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:menu</b>
+[<b>-c</b> <i>&quot;&lt;shell-cmd&gt;&quot;</i>] [<b>-e</b>]
+[<b>-b</b>] [<b>-a</b>] [<b>-d</b>] <i>&lt;aerc-cmd
+...&gt;</i></p>
+
+<p style="margin-left:14%;">Opens a popover dialog running
+<i>sh -c &quot;&lt;shell-cmd&gt;&quot;</i> (if not specified
+<b>[general].default-menu-cmd</b> will be used). When the
+command exits, all lines printed on its standard output will
+be appended to <i>&lt;aerc-cmd ...&gt;</i> and executed as a
+standard aerc command like <b>xargs</b>(1) would do when
+used in a shell. A colon (<b>:</b>) prefix is supported for
+<i>&lt;aerc-cmd ...&gt;</i> but is not required.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>:menu</b>
+can be used without an external program by setting
+<i>&lt;shell-cmd&gt;</i> to <i>-</i>. This also acts as a
+fallback in case where no <i>&lt;shell-cmd&gt;</i> was
+specified at all or the executable in the
+<i>&lt;shell-cmd&gt;</i> was not found.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-c</b>
+<i>&quot;&lt;shell-cmd&gt;&quot;</i></p>
+
+<p style="margin-left:19%;">Override
+<b>[general].default-menu-cmd</b>. See <b>aerc-config</b>(5)
+for more details.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>: Stop
+executing commands on the first error.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-b</b>: Do
+<b>NOT</b> spawn the popover dialog. Start the commands in
+the background (<b>NOT</b> in a virtual terminal). Use this
+if <i>&lt;shell-cmd&gt;</i> is a graphical application that
+does not need a terminal.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>&lt;shell-cmd&gt;</i>
+may be fed with input text using the following flags:</p>
+
+<p style="margin-left:19%;"><b>-a</b>: All account names,
+one per line. E.g.:</p>
+
+
+<p style="margin-left:24%; margin-top: 1em">&rsquo;&lt;account&gt;&rsquo;
+LF</p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>-d</b>: All
+current account directory names, one per line. E.g.:</p>
+
+
+<p style="margin-left:24%; margin-top: 1em">&rsquo;&lt;directory&gt;&rsquo;
+LF</p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>-ad</b>: All
+directories of all accounts, one per line. E.g.:</p>
+
+
+<p style="margin-left:24%; margin-top: 1em">&rsquo;&lt;account&gt;&rsquo;
+&rsquo;&lt;directory&gt;&rsquo; LF</p>
+
+<p style="margin-left:19%; margin-top: 1em">Quotes may be
+added by aerc when either tokens contain special characters.
+The quotes should be preserved for <i>&lt;aerc-cmd
+...&gt;</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Examples:</p>
+
+<p style="margin-left:19%; margin-top: 1em">:menu -adc fzf
+:cf -a <br>
+:menu -c &rsquo;fzf --multi&rsquo; :attach <br>
+:menu -dc &rsquo;fzf --multi&rsquo; :cp <br>
+:menu -bc &rsquo;dmenu -l 20&rsquo; :cf <br>
+:menu -c &rsquo;ranger --choosefiles=%f&rsquo; :attach</p>
+
+<p style="margin-left:14%; margin-top: 1em">This may also
+be used in key bindings (see <b>aerc-binds</b>(5)):</p>
+
+<p style="margin-left:19%; margin-top: 1em">&lt;C-p&gt; =
+:menu -adc fzf :cf -a&lt;Enter&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:choose
+-o</b> <i>&lt;key&gt; &lt;text&gt; &lt;command&gt;</i>
+[<b>-o</b> <i>&lt;key&gt; &lt;text&gt;
+&lt;command&gt;</i>]...</p>
+
+<p style="margin-left:14%;">Prompts the user to choose from
+various options.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:reload</b>
+[<b>-B</b>] [<b>-C</b>] [<b>-s</b>
+<i>&lt;styleset-name&gt;</i>]</p>
+
+<p style="margin-left:14%;">Hot-reloads the config files
+for the key binds and general <b>aerc</b> config. Reloading
+of the account config file is not supported.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If no flags are
+provided, <i>binds.conf</i>, <i>aerc.conf</i>, and the
+current styleset will all be reloaded.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-B</b>:
+Reload <i>binds.conf</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-C</b>:
+Reload <i>aerc.conf</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>
+<i>&lt;styleset-name&gt;</i></p>
+
+<p style="margin-left:19%;">Load the specified
+styleset.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:suspend</b></p>
+
+<p style="margin-left:14%;">Suspends the aerc process. Some
+ongoing connections may be terminated.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:quit</b>
+[<b>-f</b>] <b><br>
+:exit</b> [<b>-f</b>] <b><br>
+:q</b> [<b>-f</b>]</p>
+
+<p style="margin-left:14%;">Exits aerc. If a task is being
+performed that should not be interrupted (like sending a
+message), a normal quit call might fail. In this case,
+closing aerc can be forced with the <b>-f</b> option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:redraw</b></p>
+
+<p style="margin-left:14%;">Force a full redraw of the
+screen.</p>
+
+<h3>MESSAGE COMMANDS
+<a name="MESSAGE COMMANDS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These commands
+are valid in any context that has a selected message (e.g.
+the message list, the message in the message viewer,
+etc).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:archive</b>
+[<b>-m</b> <i>&lt;strategy&gt;</i>]
+<i>&lt;scheme&gt;</i></p>
+
+<p style="margin-left:14%;">Moves the selected message to
+the archive. The available schemes are:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>flat</i>: No
+special structure, all messages in the archive directory</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>year</i>:
+Messages are stored in folders per year</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>month</i>:
+Messages are stored in folders per year and subfolders per
+month</p>
+
+<p style="margin-left:14%; margin-top: 1em">The <b>-m</b>
+option sets the multi-file strategy. See
+<b>aerc-notmuch</b>(5) for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:accept</b>
+[<b>-e</b>|<b>-E</b>] [<b>-s</b>]</p>
+
+<p style="margin-left:14%;">Accepts an iCalendar meeting
+invitation. This opens a compose window with a specially
+crafted attachment. Sending the email will let the inviter
+know that you accepted and will likely update their calendar
+as well. This will NOT add the meeting to your own calendar,
+that must be done as a separate manual step (e.g. by piping
+the text/calendar part to an appropriate script).</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Skips the editor and goes directly to the review screen.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:accept-tentative</b>
+[<b>-e</b>|<b>-E</b>] [<b>-s</b>]</p>
+
+<p style="margin-left:14%;">Accepts an iCalendar meeting
+invitation tentatively.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Skips the editor and goes directly to the review screen.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:copy</b>
+[<b>-dp</b>] [<b>-a</b> <i>&lt;account&gt;</i>] [<b>-m</b>
+<i>&lt;strategy&gt;</i>] <i>&lt;folder&gt;</i> <b><br>
+:cp</b> [<b>-dp</b>] [<b>-a</b> <i>&lt;account&gt;</i>]
+[<b>-m</b> <i>&lt;strategy&gt;</i>]
+<i>&lt;folder&gt;</i></p>
+
+<p style="margin-left:14%;">Copies the selected message(s)
+to <i>&lt;folder&gt;</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-d</b>:
+Decrypt the message before copying.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-p</b>:
+Create <i>&lt;folder&gt;</i> if it does not exist.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>: Copy
+to <i>&lt;folder&gt;</i> of <i>&lt;account&gt;</i>. If
+<i>&lt;folder&gt;</i> does not exist, it will be created
+whether or not <b>-p</b> is used.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-m</b>: Set
+the multi-file strategy. See <b>aerc-notmuch</b>(5) for more
+details.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:decline</b>
+[<b>-e</b>|<b>-E</b>] [<b>-s</b>]</p>
+
+<p style="margin-left:14%;">Declines an iCalendar meeting
+invitation.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Skips the editor and goes directly to the review screen.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:delete</b>
+[<b>-m</b> <i>&lt;strategy&gt;</i>] <b><br>
+:delete-message</b> [<b>-m</b> <i>&lt;strategy&gt;</i>]</p>
+
+<p style="margin-left:14%;">Deletes the selected
+message.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-m</b>: Set
+the multi-file strategy. See <b>aerc-notmuch</b>(5) for more
+details.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:envelope</b>
+[<b>-h</b>] [<b>-s</b> <i>&lt;format-specifier&gt;</i>]</p>
+
+<p style="margin-left:14%;">Opens the message envelope in a
+dialog popup.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-h</b>: Show
+all header fields</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>
+<i>&lt;format-specifier&gt;</i></p>
+
+<p style="margin-left:19%;">User-defined format specifier
+requiring two <i>%s</i> for the key and value strings.
+Default format: <i>%-20.20s: %s</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:recall</b>
+[<b>-f</b>] [<b>-e</b>|<b>-E</b>] [<b>-s</b>]</p>
+
+<p style="margin-left:14%;">Opens the selected message for
+re-editing. Messages can only be recalled from the postpone
+directory.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-f</b>: Open
+the message for re-editing even if it is not in the postpone
+directory. Aerc remembers the folder, so the further
+<b>:postpone</b> call will save the message back there.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Skips the editor and goes directly to the review screen.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Original
+recalled messages are deleted if they are sent or postponed
+again. In both cases you have another copy of the message
+somewhere. Otherwise the recalled message is left intact.
+This happens if the recalled message is discarded after
+editing. It can be deleted with <b>:rm</b> if it is not
+needed.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:forward</b>
+[<b>-A</b>|<b>-F</b>] [<b>-T</b>
+<i>&lt;template-file&gt;</i>] [<b>-e</b>|<b>-E</b>]
+[<b>-s</b>] [<i>&lt;address&gt;</i>...]</p>
+
+<p style="margin-left:14%;">Opens the composer to forward
+the selected message to another recipient.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-A</b>:
+Forward the message and all attachments.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-F</b>:
+Forward the full message as an RFC 2822 attachment.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-T</b>
+<i>&lt;template-file&gt;</i></p>
+
+<p style="margin-left:19%;">Use the specified template file
+for creating the initial message body. Unless <b>-F</b> is
+specified, this defaults to what is set as <b>forwards</b>
+in the <b>[templates]</b> section of <i>aerc.conf</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Skips the editor and goes directly to the review screen.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:move</b>
+[<b>-p</b>] [<b>-a</b> <i>&lt;account&gt;</i>] [<b>-m</b>
+<i>&lt;strategy&gt;</i>] <i>&lt;folder&gt;</i> <b><br>
+:mv</b> [<b>-p</b>] [<b>-a</b> <i>&lt;account&gt;</i>]
+[<b>-m</b> <i>&lt;strategy&gt;</i>]
+<i>&lt;folder&gt;</i></p>
+
+<p style="margin-left:14%;">Moves the selected message(s)
+to <i>&lt;folder&gt;</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-p</b>:
+Create <i>&lt;folder&gt;</i> if it does not exist.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>: Move
+to <i>&lt;folder&gt;</i> of <i>&lt;account&gt;</i>. If
+<i>&lt;folder&gt;</i> does not exist, it will be created
+whether or not <b>-p</b> is used.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-m</b>: Set
+the multi-file strategy. See <b>aerc-notmuch</b>(5) for more
+details.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:patch</b>
+<i>&lt;args ...&gt;</i></p>
+
+<p style="margin-left:14%;">Patch management sub-commands.
+See <b>aerc-patch</b>(7) for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:pipe</b>
+[<b>-bdmps</b>] <i>&lt;cmd&gt;</i></p>
+
+<p style="margin-left:14%;">Downloads and pipes the
+selected message into the given shell command (executed with
+<i>sh -c &quot;&lt;cmd&gt;&quot;</i>), and opens a new
+terminal tab to show the result. By default, the selected
+message part is used in the message viewer and the full
+message is used in the message list.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Operates on
+multiple messages when they are marked. When piping multiple
+messages, aerc will write them with mbox format
+separators.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-b</b>: Run
+the command in the background instead of opening a terminal
+tab</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-d</b>: Pipe
+the (full) message but decrypt it first.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-m</b>: Pipe
+the full message</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-p</b>: Pipe
+just the selected message part, if applicable</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Silently close the terminal tab after the command is
+completed</p>
+
+<p style="margin-left:14%; margin-top: 1em">This can be
+used to apply patch series with git:</p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>:pipe -m</b>
+<i>git am -3</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">When at least
+one marked message subject matches a patch series (e.g.
+<i>[PATCH X/Y]</i>), all marked messages will be sorted by
+subject to ensure that the patches are applied in order.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:reply</b>
+[<b>-acfqs</b>] [<b>-T</b> <i>&lt;template-file&gt;</i>]
+[<b>-A</b> <i>&lt;account&gt;</i>] [<b>-e</b>|<b>-E</b>]</p>
+
+<p style="margin-left:14%;">Opens the composer to reply to
+the selected message.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>:
+Reply all</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-c</b>:
+Close the view tab when replying. If the reply is not sent,
+reopen the view tab.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-f:</b>
+Reply to all addresses in From and Reply-To headers.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-q</b>:
+Insert a quoted version of the selected message into the
+reply editor. This defaults to what is set as
+<b>quoted-reply</b> in the <b>[templates]</b> section of
+<i>aerc.conf</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>: Skip
+opening the text editor and go directly to the review
+screen.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-T</b>
+<i>&lt;template-file&gt;</i></p>
+
+<p style="margin-left:19%;">Use the specified template file
+for creating the initial message body.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-A</b>
+<i>&lt;account&gt;</i></p>
+
+<p style="margin-left:19%;">Reply with the specified
+account instead of the current one.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:read</b>
+[<b>-t</b>]</p>
+
+<p style="margin-left:14%;">Marks the marked or selected
+messages as read.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>:
+Toggle the messages between read and unread.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:unread</b>
+[<b>-t</b>]</p>
+
+<p style="margin-left:14%;">Marks the marked or selected
+messages as unread.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>:
+Toggle the messages between read and unread.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:flag</b>
+[<b>-t</b>] [<b>-a</b> | <b>-x</b> <i>&lt;flag&gt;</i>]</p>
+
+<p style="margin-left:14%;">Sets (enables) a certain flag
+on the marked or selected messages.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>:
+Toggle the flag instead of setting (enabling) it.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>: Mark
+message as answered/unanswered.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-x</b>
+<i>&lt;flag&gt;</i>: Mark message with specific flag.</p>
+
+<p style="margin-left:19%;">The available flags are
+(adapted from RFC 3501, section 2.3.2):</p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><i>Seen</i></p>
+
+<p style="margin-left:24%;">Message has been read</p>
+
+<p style="margin-left:19%;"><i>Answered</i></p>
+
+<p style="margin-left:24%;">Message has been answered</p>
+
+<p style="margin-left:19%;"><i>Forwarded</i></p>
+
+<p style="margin-left:24%;">Message has been forwarded</p>
+
+<p style="margin-left:19%;"><i>Flagged</i></p>
+
+<p style="margin-left:24%;">Message is flagged for
+urgent/special attention</p>
+
+<p style="margin-left:19%;"><i>Draft</i></p>
+
+<p style="margin-left:24%;">Message is a draft</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:unflag</b>
+[<b>-t</b>] <i>&lt;flag&gt;</i></p>
+
+<p style="margin-left:14%;">Operates exactly like
+<b>:flag</b>, defaulting to unsetting (disabling) flags.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:modify-labels</b>
+[<i>+</i>|<i>-</i>]<i>&lt;label&gt;</i>... <b><br>
+:tag</b> [<i>+</i>|<i>-</i>]<i>&lt;label&gt;</i>...</p>
+
+<p style="margin-left:14%;">Modify message labels (e.g.
+notmuch tags). Labels prefixed with a <b>+</b> are added,
+those prefixed with a <b>-</b> removed. As a convenience,
+labels without either operand add the specified label.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example: add
+<i>inbox</i> and <i>unread</i> labels, remove <i>spam</i>
+label.</p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><b>:modify-labels</b>
+<i>+inbox -spam unread</i></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:unsubscribe</b>
+[<b>-e</b>|<b>-E</b>] [<b>-s</b>]</p>
+
+<p style="margin-left:14%;">Attempt to automatically
+unsubscribe the user from the mailing list through use of
+the List-Unsubscribe header. If supported, aerc may open a
+compose window pre-filled with the unsubscribe information
+or open the unsubscribe URL in a web browser.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Skips the editor and goes directly to the review screen.</p>
+
+<h3>MESSAGE LIST COMMANDS
+<a name="MESSAGE LIST COMMANDS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:align</b>
+<i>top|center|bottom</i></p>
+
+<p style="margin-left:14%;">Aligns the selected message.
+The available positions are:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>top</i>: Top
+of the message list.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="7%"></td>
+<td width="83%">
+
+
+<p><i>center</i>: Center of the message list.</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="7%"></td>
+<td width="83%">
+
+
+<p><i>bottom</i>: Bottom of the message list.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:disconnect
+<br>
+:connect</b></p>
+
+<p style="margin-left:14%;">Disconnect or reconnect the
+current account. This only applies to certain email
+sources.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:clear</b>
+[<b>-s</b>]</p>
+
+<p style="margin-left:14%;">Clears the current search or
+filter criteria.</p>
+
+<p style="margin-left:14%; margin-top: 1em">By default, the
+selected message will be kept. To clear the selected message
+and move cursor to the top of the message list, use the
+<b>-s</b> flag.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Selects the message at the top of the message list after
+clearing.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:cf</b>
+[<b>-a</b> <i>&lt;account&gt;</i>] <i>&lt;folder&gt;</i></p>
+
+<p style="margin-left:14%;">Change the folder shown in the
+message list to <i>&lt;folder&gt;</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>
+<i>&lt;account&gt;</i></p>
+
+<p style="margin-left:19%;">Change to <i>&lt;folder&gt;</i>
+of <i>&lt;account&gt;</i> and focus its corresponding
+tab.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:check-mail</b></p>
+
+<p style="margin-left:14%;">Check for new mail on the
+selected account. Non-imap backends require check-mail-cmd
+to be set in order for aerc to initiate a check for new
+mail. Issuing a manual <b>:check-mail</b> command will reset
+the timer for automatic checking.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:compose</b>
+[<b>-H</b> <i>&quot;&lt;header&gt;: &lt;value&gt;&quot;</i>]
+[<b>-T</b> <i>&lt;template-file&gt;</i>]
+[<b>-e</b>|<b>-E</b>] [<b>-s</b>] [<i>&lt;body&gt;</i>]</p>
+
+<p style="margin-left:14%;">Open the compose window to send
+a new email. The new email will be sent with the current
+account&rsquo;s outgoing transport configuration. For
+details on configuring outgoing mail delivery consult
+<b>aerc-accounts</b>(5).</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-H</b>
+<i>&quot;&lt;header&gt;: &lt;value&gt;&quot;</i></p>
+
+<p style="margin-left:19%;">Add the specified header to the
+message, e.g:</p>
+
+<p style="margin-left:24%; margin-top: 1em"><b>:compose
+-H</b> <i>&quot;X-Custom: custom value&quot;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-T</b>
+<i>&lt;template-file&gt;</i></p>
+
+<p style="margin-left:19%;">Use the specified template file
+for creating the initial message body.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s</b>:
+Skips the editor and goes directly to the review screen.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>&lt;body&gt;</i>:
+The initial message body.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:bounce</b>
+[<b>-A</b> <i>&lt;account&gt;</i>] <i>&lt;address&gt;</i>
+[<i>&lt;address&gt;</i>...] <b><br>
+:resend</b> [<b>-A</b> <i>&lt;account&gt;</i>]
+<i>&lt;address&gt;</i> [<i>&lt;address&gt;</i>...]</p>
+
+<p style="margin-left:14%;">Bounce the selected message or
+all marked messages to the specified addresses, optionally
+using the specified account. This forwards the message while
+preserving all the existing headers. The new sender
+(<b>From</b>), date (<b>Date</b>), <b>Message-ID</b> and
+recipients (<b>To</b>) are prepended to the headers with the
+<b>Resent-</b> prefix. For more information please refer to
+section 3.6.6 of RFC 2822. Note that the bounced message is
+not copied over to the <b>sent</b> folder.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Also please
+note that some providers (notably for instance
+Microsoft&rsquo;s O365) do not allow sending messages with
+the <b>From</b> header not matching any of the
+account&rsquo;s identities (even if <b>Resent-From</b>
+matches some).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:recover</b>
+[<b>-f</b>] [<b>-e</b>|<b>-E</b>] <i>&lt;file&gt;</i></p>
+
+<p style="margin-left:14%;">Resume composing a message that
+was not sent nor postponed. The file may not contain header
+data unless <b>[compose].edit-headers</b> was enabled when
+originally composing the aborted message.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-f</b>:
+Delete the <i>&lt;file&gt;</i> after opening the
+composer.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:filter</b>
+[<i>&lt;options&gt;</i>] <i>&lt;terms&gt;</i>...</p>
+
+<p style="margin-left:14%;">Similar to <b>:search</b>, but
+filters the displayed messages to only the search results.
+The search syntax is dependent on the underlying backend.
+Refer to <b>aerc-search</b>(1) for details</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:mkdir</b>
+<i>&lt;name&gt;</i></p>
+
+<p style="margin-left:14%;">Creates a new folder for this
+account and changes to that folder.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:rmdir</b>
+[<b>-f</b>] [<i>&lt;folder&gt;</i>]</p>
+
+<p style="margin-left:14%;">Removes the folder
+<i>&lt;folder&gt;</i>, or the current folder if not
+specified.</p>
+
+<p style="margin-left:14%; margin-top: 1em">By default, it
+will fail if the directory is non-empty (see <b>-f</b>).</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-f</b></p>
+
+<p style="margin-left:19%;">Remove the directory even if it
+contains messages.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Some programs
+that sync maildirs may recover deleted directories (e.g.
+<b>offlineimap</b>). These can either be specially
+configured to properly handle directory deletion, or special
+commands need to be run to delete directories (e.g.
+<i>offlineimap --delete-folder</i>).</p>
+
+<p style="margin-left:14%; margin-top: 1em">It is possible,
+with a slow connection and the imap backend, that new
+messages arrive in the directory before they show up - using
+<b>:rmdir</b> at this moment would delete the directory and
+such new messages before the user sees them.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:next</b>
+<i>&lt;n&gt;</i>[<i>%</i>] <b><br>
+:next-message</b> <i>&lt;n&gt;</i>[<i>%</i>] <b><br>
+:prev</b> <i>&lt;n&gt;</i>[<i>%</i>] <b><br>
+:prev-message</b> <i>&lt;n&gt;</i>[<i>%</i>]</p>
+
+<p style="margin-left:14%;">Selects the next (or previous)
+message in the message list. If specified as a percentage,
+the percentage is applied to the number of messages shown on
+screen and the cursor advances that far.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:next-folder</b>
+<i>&lt;n&gt;</i> <b><br>
+:prev-folder</b> <i>&lt;n&gt;</i></p>
+
+<p style="margin-left:14%;">Cycles to the next (or
+previous) folder shown in the sidebar, repeated
+<i>&lt;n&gt;</i> times (default: <i>1</i>).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:expand-folder</b>
+[<i>&lt;folder&gt;</i>] <b><br>
+:collapse-folder</b> [<i>&lt;folder&gt;</i>]</p>
+
+<p style="margin-left:14%;">Expands or collapses a folder
+when the directory tree is enabled. If no
+<i>&lt;folder&gt;</i> argument is specified, the currently
+selected folder is acted upon.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:export-mbox</b>
+<i>&lt;file&gt;</i></p>
+
+<p style="margin-left:14%;">Exports messages in the current
+folder to an mbox file. If there are marked messages in the
+folder, only the marked ones are exported. Otherwise the
+whole folder is exported.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:import-mbox</b>
+<i>&lt;path&gt;</i></p>
+
+<p style="margin-left:14%;">Imports all messages from an
+(gzipped) mbox file to the current folder.
+<i>&lt;path&gt;</i> can either be a path to a file or an
+URL.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Examples:</p>
+
+<p style="margin-left:19%; margin-top: 1em">:import-mbox
+&#732;/messages.mbox <br>
+:import-mbox
+https://lists.sr.ht/&#732;rjarry/aerc-devel/patches/55634/mbox
+<br>
+:import-mbox
+https://lore.kernel.org/all/20190807155524.5112-1-steve.capper@arm.com/t.mbox.gz</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:next-result
+<br>
+:prev-result</b></p>
+
+<p style="margin-left:14%;">Selects the next or previous
+search result.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:query</b>
+[<b>-a</b> <i>&lt;account&gt;</i>] [<b>-n</b> <i>name</i>]
+[<b>-f</b>] <i>&lt;notmuch query&gt;</i></p>
+
+<p style="margin-left:14%;">Create a virtual folder using
+the specified top-level notmuch query. This command is
+exclusive to the notmuch backend.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>
+<i>&lt;account&gt;</i></p>
+
+<p style="margin-left:19%;">Change to <i>&lt;folder&gt;</i>
+of <i>&lt;account&gt;</i> and focus its corresponding
+tab.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-n</b>
+<i>&lt;name&gt;</i></p>
+
+<p style="margin-left:19%;">Specify the display name for
+the virtual folder. If not provided, <i>&lt;notmuch
+query&gt;</i> is used as the display name.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-f</b></p>
+
+<p style="margin-left:19%;">Load the query results into an
+already existing folder (messages in the original folder are
+not deleted).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:search</b>
+[<i>&lt;options&gt;</i>] <i>&lt;terms&gt;</i>...</p>
+
+<p style="margin-left:14%;">Searches the current folder for
+messages matching the given set of conditions. The search
+syntax is dependent on the underlying backend. Refer to
+<b>aerc-search</b>(1) for details.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:select</b>
+<i>&lt;n&gt;</i> <b><br>
+:select-message</b> <i>&lt;n&gt;</i></p>
+
+<p style="margin-left:14%;">Selects the <i>&lt;n&gt;</i>th
+message in the message list (and scrolls it into view if
+necessary).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:hsplit</b>
+[[<i>+</i>|<i>-</i>]<i>&lt;n&gt;</i>] <b>:split</b>
+[[<i>+</i>|<i>-</i>]<i>&lt;n&gt;</i>]</p>
+
+<p style="margin-left:14%;">Creates a horizontal split,
+showing <i>&lt;n&gt;</i> messages and a message view below
+the message list. If a <i>+</i> or <i>-</i> is prepended,
+the message list size will grow or shrink accordingly. The
+split can be cleared by calling <b>:[h]split</b> <i>0</i>,
+or just <b>:[h]split</b>. The split can be toggled by
+calling split with the same (absolute) size repeatedly. For
+example, <b>:[h]split</b> <i>10</i> will create a split.
+Calling <b>:[h]split</b> <i>10</i> again will remove the
+split. If not specified, <i>&lt;n&gt;</i> is set to an
+estimation based on the user&rsquo;s terminal. Also see
+<b>:vsplit</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:sort</b>
+[[<b>-r</b>] <i>&lt;criterion&gt;</i>]...</p>
+
+<p style="margin-left:14%;">Sorts the message list by the
+given criteria. <b>-r</b> sorts the immediately following
+criterion in reverse order.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Available
+criteria:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:toggle-threads</b></p>
+
+<p style="margin-left:14%;">Toggles between message
+threading and the normal message list.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:fold</b>
+[<b>-at</b>] <b><br>
+:unfold</b> [<b>-at</b>]</p>
+
+<p style="margin-left:14%;">Collapse or un-collapse the
+thread children of the selected message. If the toggle flag
+<b>-t</b> is set, the folded status is changed. If the
+<b>-a</b> flag is set, all threads in the current view are
+affected. Folded threads can be identified by
+<i>{{.Thread*}}</i> template attributes in
+<b>[ui].index-columns</b>. See <b>aerc-config</b>(5) and
+<b>aerc-templates</b>(7) for more details.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:toggle-thread-context</b></p>
+
+<p style="margin-left:14%;">Toggles between showing entire
+thread (when supported) and only showing messages which
+match the current query / mailbox.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:view</b>
+[<b>-pb</b>] <b><br>
+:view-message</b> [<b>-pb</b>]</p>
+
+<p style="margin-left:14%;">Opens the message viewer to
+display the selected message. If the peek flag <b>-p</b> is
+set, the message will not be marked as seen and ignores the
+<b>auto-mark-read</b> config. If the background flag
+<b>-b</b> is set, the message will be opened in a background
+tab.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:vsplit</b>
+[[<i>+</i>|<i>-</i>]<i>&lt;n&gt;</i>]</p>
+
+<p style="margin-left:14%;">Creates a vertical split of the
+message list. The message list will be <i>&lt;n&gt;</i>
+columns wide, and a vertical message view will be shown to
+the right of the message list. If a <i>+</i> or <i>-</i> is
+prepended, the message list size will grow or shrink
+accordingly. The split can be cleared by calling
+<b>:vsplit</b> <i>0</i>, or just <b>:vsplit</b>. The split
+can be toggled by calling split with the same (absolute)
+size repeatedly. For example, <b>:vsplit</b> <i>10</i> will
+create a split. Calling <b>:vsplit</b> <i>10</i> again will
+remove the split. If not specified, <i>&lt;n&gt;</i> is set
+to an estimation based on the user&rsquo;s terminal. Also
+see <b>:split</b>.</p>
+
+<h3>MESSAGE VIEW COMMANDS
+<a name="MESSAGE VIEW COMMANDS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:close</b></p>
+
+<p style="margin-left:14%;">Closes the message viewer.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:next</b>
+<i>&lt;n&gt;</i>[<i>%</i>] <b><br>
+:prev</b> <i>&lt;n&gt;</i>[<i>%</i>]</p>
+
+<p style="margin-left:14%;">Selects the next (or previous)
+message in the message list. If specified as a percentage,
+the percentage is applied to the number of messages shown on
+screen and the cursor advances that far.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:next-part
+<br>
+:prev-part</b></p>
+
+<p style="margin-left:14%;">Cycles between message parts
+being shown. The list of message parts is shown at the
+bottom of the message viewer.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:open</b>
+[<b>-d</b>] [<i>&lt;args...&gt;</i>]</p>
+
+<p style="margin-left:14%;">Saves the current message part
+to a temporary file, then opens it. If no arguments are
+provided, it will open the current MIME part with the
+matching command in the <b>[openers]</b> section of
+<i>aerc.conf</i>. When no match is found in
+<b>[openers]</b>, it falls back to the default system
+handler.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-d</b>:
+Delete the temporary file after the opener exits</p>
+
+<p style="margin-left:14%; margin-top: 1em">When arguments
+are provided:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>The first argument must be the program to open the
+message part with. Subsequent args are passed to that
+program.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p><i>{}</i> will be expanded as the temporary filename to
+be opened. If it is not encountered in the arguments, the
+temporary filename will be appended to the end of the
+command.</p> </td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:open-link</b>
+<i>&lt;url&gt;</i> [<i>&lt;args...&gt;</i>]</p>
+
+<p style="margin-left:14%;">Open the specified URL with an
+external program. The opening logic is the same than for
+<b>:open</b> but the opener program will be looked up
+according to the URL scheme MIME type:
+<i>x-scheme-handler/&lt;scheme&gt;</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:save</b>
+[<b>-fpaA</b>] <i>&lt;path&gt;</i></p>
+
+<p style="margin-left:14%;">Saves the current message part
+to the given path. If the path is not an absolute path,
+<b>[general].default-save-path</b> from <i>aerc.conf</i>
+will be prepended to the path given. If path ends in a
+trailing slash or if a folder exists on disc or if <b>-a</b>
+is specified, aerc assumes it to be a directory. When passed
+a directory <b>:save</b> infers the filename from the mail
+part if possible, or if that fails, uses
+<i>aerc_$DATE</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-f</b>:
+Overwrite the destination whether or not it exists</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-p</b>:
+Create any directories in the path that do not exist</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>: Save
+all attachments. Individual filenames cannot be
+specified.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-A</b>: Same
+as <b>-a</b> but saves all the named parts, not just
+attachments.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:mark</b>
+[<b>-atvT</b>]</p>
+
+<p style="margin-left:14%;">Marks messages. Commands will
+execute on all marked messages instead of the highlighted
+one if applicable. The flags below can be combined as
+needed.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>:
+Apply to all messages in the current folder</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>:
+toggle the mark state instead of marking a message</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-v</b>:
+Enter / leave visual mark mode</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-V</b>: Same
+as <b>-v</b> but does not clear existing selection</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-T</b>:
+Marks the displayed message thread of the selected
+message.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:unmark</b>
+[<b>-at</b>]</p>
+
+<p style="margin-left:14%;">Unmarks messages. The flags
+below can be combined as needed.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>:
+Apply to all messages in the current folder</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>:
+toggle the mark state instead of unmarking a message</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:remark</b></p>
+
+<p style="margin-left:14%;">Re-select the last set of
+marked messages. Can be used to chain commands after a
+selection has been acted upon</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:toggle-headers</b></p>
+
+<p style="margin-left:14%;">Toggles the visibility of the
+message headers.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:toggle-key-passthrough</b></p>
+
+<p style="margin-left:14%;">Enter or exit the
+<b>[view::passthrough]</b> key bindings context. See
+<b>aerc-binds</b>(5) for more details.</p>
+
+<h3>MESSAGE COMPOSE COMMANDS
+<a name="MESSAGE COMPOSE COMMANDS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:abort</b></p>
+
+<p style="margin-left:14%;">Close the composer without
+sending, discarding the message in progress.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If the text
+editor exits with an error (e.g. <b>:cq</b> in
+<b>vim</b>(1)), the message is immediately discarded.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:attach</b>
+<i>&lt;path&gt;</i> <b><br>
+:attach -m</b> [<i>&lt;arg&gt;</i>] <b><br>
+:attach -r</b> &lt;name&gt; &lt;cmd&gt;</p>
+
+<p style="margin-left:14%;">Attaches the file at the given
+path to the email. The path can contain globbing syntax
+described at https://godocs.io/path/filepath#Match.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-m</b>
+[<i>&lt;arg&gt;</i>]</p>
+
+<p style="margin-left:19%;">Runs the <b>file-picker-cmd</b>
+to select files to be attached. Requires an argument when
+<b>file-picker-cmd</b> contains the <i>%s</i> verb.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-r</b>
+&lt;name&gt; &lt;cmd&gt;</p>
+
+<p style="margin-left:19%;">Runs the &lt;cmd&gt;, reads its
+output and attaches it as &lt;name&gt;. The attachment MIME
+type is derived from the &lt;name&gt;&rsquo;s extension.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:attach-key</b></p>
+
+<p style="margin-left:14%;">Attaches the public key for the
+configured account to the email.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:detach</b>
+[<i>&lt;path&gt;</i>]</p>
+
+<p style="margin-left:14%;">Detaches the file with the
+given path from the composed email. If no path is specified,
+detaches the first attachment instead. The path can contain
+globbing syntax described at
+https://godocs.io/path/filepath#Match.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:cc</b>
+<i>&lt;addresses&gt;</i> <b><br>
+:bcc</b> <i>&lt;addresses&gt;</i></p>
+
+<p style="margin-left:14%;">Sets the Cc or Bcc header to
+the given addresses. If an editor for the header is not
+currently visible in the compose window, a new one will be
+added.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:edit</b>
+[<b>-e</b>|<b>-E</b>]</p>
+
+<p style="margin-left:14%;">(Re-)opens your text editor to
+edit the message in progress. This will also allow editing
+the message headers. Only available from the review
+screen.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Forces <b>[compose].edit-headers</b> = <i>true</i> for this
+message only.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-E</b>:
+Forces <b>[compose].edit-headers</b> = <i>false</i> for this
+message only.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:multipart</b>
+[<b>-d</b>] <i>&lt;mime/type&gt;</i></p>
+
+<p style="margin-left:14%;">Makes the message to
+multipart/alternative and add the specified
+<i>&lt;mime/type&gt;</i> part. Only the MIME types that are
+configured in the <b>[multipart-converters]</b> section of
+<i>aerc.conf</i> are supported and their related commands
+will be used to generate the alternate part.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-d</b>:</p>
+
+<p style="margin-left:19%;">Remove the specified
+alternative <i>&lt;mime/type&gt;</i> instead of adding it.
+If no alternative parts are left, make the message
+text/plain (i.e. not multipart/alternative).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:next-field
+<br>
+:prev-field</b></p>
+
+<p style="margin-left:14%;">Cycles between input fields in
+the compose window. Only available when the text editor is
+visible and <b>[compose].edit-headers</b> =
+<i>false</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:postpone</b>
+[<b>-t</b> <i>&lt;folder&gt;</i>]</p>
+
+<p style="margin-left:14%;">Saves the current state of the
+message to the <b>postpone</b> folder (from
+<i>accounts.conf</i>) for the current account by default.
+Only available from the review screen.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>:
+Overrides the target folder for saving the message</p>
+
+<p style="margin-left:14%; margin-top: 1em">If the message
+was force-recalled with <b>:recall -f</b> from a different
+folder, the <b>:postpone</b> command will save it back to
+that folder instead of the default <b>postpone</b> folder
+configured in settings. Use <b>-t</b> to override that or
+use <b>:mv</b> to move the saved message to a different
+folder.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:send</b>
+[<b>-a</b> <i>&lt;scheme&gt;</i>] [<b>-t</b>
+<i>&lt;folder&gt;</i>]</p>
+
+<p style="margin-left:14%;">Sends the message using this
+accounts default outgoing transport configuration. For
+details on configuring outgoing mail delivery consult
+<b>aerc-accounts</b>(5). Only available from the review
+screen.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>:
+Archive the message being replied to. See <b>:archive</b>
+for schemes.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>:
+Overrides the Copy-To folder for saving the message.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:switch-account</b>
+<i>&lt;account-name&gt;</i> <b><br>
+:switch-account -n <br>
+:switch-account -p</b></p>
+
+<p style="margin-left:14%;">Switches the account. Can be
+used to switch to a specific account from its name or to
+cycle through accounts using the <b>-p</b> and <b>-n</b>
+flags.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-p</b>:
+switch to previous account</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-n</b>:
+switch to next account</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:header</b>
+[<b>-f</b>] <i>&lt;name&gt;</i> [<i>&lt;value&gt;</i>]
+<b>:header</b> [<b>-d</b>] <i>&lt;name&gt;</i></p>
+
+<p style="margin-left:14%;">Add a new email header to the
+compose window. If the header is already set and is not
+empty, <b>-f</b> must be used to overwrite its value.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-f</b>:
+Overwrite any existing header.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-d</b>:
+Remove the header instead of adding it.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:encrypt</b></p>
+
+<p style="margin-left:14%;">Encrypt the message to all
+recipients. If a key for a recipient cannot be found the
+message will not be encrypted.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:sign</b></p>
+
+<p style="margin-left:14%;">Sign the message using the
+account&rsquo;s default key. If <b>pgp-key-id</b> is set in
+<i>accounts.conf</i> (see <b>aerc-accounts</b>(5)), it will
+be used in priority. Otherwise, the <b>From</b> header
+address will be used to look for a matching private key in
+the pgp keyring.</p>
+
+<h3>TERMINAL COMMANDS
+<a name="TERMINAL COMMANDS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>:close</b></p>
+
+<p style="margin-left:14%;">Closes the terminal.</p>
+
+<h2>LOGGING
+<a name="LOGGING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Aerc does not
+log by default, but collecting log output can be useful for
+troubleshooting and reporting issues. Redirecting stdout
+when invoking aerc will write log messages to that file:</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ aerc &gt;
+aerc.log</p>
+
+<p style="margin-left:9%; margin-top: 1em">Persistent
+logging can be configured via the <b>log-file</b> and
+<b>log-level</b> settings in <i>aerc.conf</i>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>aerc-config</b>(5)
+<b>aerc-imap</b>(5) <b>aerc-jmap</b>(5)
+<b>aerc-notmuch</b>(5) <b>aerc-smtp</b>(5)
+<b>aerc-maildir</b>(5) <b>aerc-sendmail</b>(5)
+<b>aerc-search</b>(1) <b>aerc-stylesets</b>(7)
+<b>aerc-templates</b>(7) <b>aerc-accounts</b>(5)
+<b>aerc-binds</b>(5) <b>aerc-tutorial</b>(7)
+<b>aerc-patch</b>(7)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Originally
+created by Drew DeVault and maintained by Robin Jarry who is
+assisted by other open source contributors. For more
+information about aerc development, see
+<i>https://sr.ht/&#732;rjarry/aerc/</i>.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,283 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mdoc-export-html</title>
+
+</head>
+<body>
+
+<h1 align="center">mdoc-export-html</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#TEMPLATE FORMAT">TEMPLATE FORMAT</a><br>
+<a href="#HTML LINKS">HTML LINKS</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mdoc export-html
+- Convert <b>mdoc</b>(5) XML to HTML.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdoc
+export-html</b> [OPTION]* DIRECTORIES</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdoc
+export-html</b> creates HTML files from the
+<b>mdoc</b>(5)-formatted documentation XML files within
+<i>DIRECTORIES</i>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--default-template</b></p>
+
+<p style="margin-left:18%;">Writes the default XSLT used to
+<i>stdout</i>.</p>
+
+
+<p style="margin-left:9%;"><b>--ext</b>=<i>EXTENSION</i></p>
+
+<p style="margin-left:18%;">The file extension to use for
+created files.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This defaults
+to <i>html</i>.</p>
+
+<p style="margin-left:9%;"><b>--force-update</b></p>
+
+<p style="margin-left:18%;">Always generate new files. If
+not specified, will only generate a new output file if the
+source documentation file is newer than the target output
+file.</p>
+
+<p style="margin-left:9%;"><b>-o</b>,
+<b>--out</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Write the created files within
+directory <i>DIRECTORY</i>.</p>
+
+
+<p style="margin-left:9%;"><b>--template</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">An XSLT file to use to generate
+the created files.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If not
+specified, uses the template produced by
+<i>--dump-template</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">See the
+<i>TEMPLATE FORMAT</i> section below for more
+information.</p>
+
+
+<p style="margin-left:9%;"><b>--with-profile</b>=<i>PROFILE</i></p>
+
+<p style="margin-left:18%;">Only process types and members
+within the .NET profile <i>PROFILE</i>. May be specified
+multiple times. If not specified, all types and members,
+regardless of version, are processed.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Valid profiles
+are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>monotouch</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>net_1_0</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>net_1_1</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>net_2_0</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>net_3_0</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>net_3_5</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>net_4_0</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>silverlight</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--with-version</b>=<i>VERSION</i></p>
+
+<p style="margin-left:18%;">Only process types and members
+within the assembly version <i>VERSION</i>. May be specified
+multiple times. If not specified, all types and members,
+regardless of version, are processed.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>VERSION</i>
+is an assembly version, e.g. 2.0.5.0.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>-?</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Display a help message and
+exit.</p>
+
+<h2>TEMPLATE FORMAT
+<a name="TEMPLATE FORMAT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The template
+file is an XSLT which needs to process the following input
+XML document:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;Page&gt;
+<br>
+&lt;CollectionTitle&gt;Collection
+Title&lt;/CollectionTitle&gt; <br>
+&lt;PageTitle&gt;Page Title&lt;/PageTitle&gt; <br>
+&lt;Summary&gt;Page Summary&lt;/Summary&gt; <br>
+&lt;Signature&gt;Type Declaration&lt;/Signature&gt; <br>
+&lt;Remarks&gt;Type Remarks&lt;/Remarks&gt; <br>
+&lt;Members&gt;Type Members&lt;/Members&gt; <br>
+&lt;Copyright&gt;Documentation Copyright&lt;/Copyright&gt;
+<br>
+&lt;/Page&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">The generated
+HTML also makes use of several CSS classes. You can either
+use the <i>create-default-style</i> named template found
+within the <i>--default-template</i> output to generate
+these classes, or explicitly define the following CSS
+classes:</p>
+
+<p style="margin-left:18%;"><i>.CollectionTitle <br>
+.PageTitle <br>
+.Summary <br>
+.Signature <br>
+.Remarks <br>
+.Members <br>
+.Copyright <br>
+.Section <br>
+.SectionBox <br>
+.NamespaceName <br>
+.NamespaceSummary <br>
+.MemberName <br>
+.MemberSignature <br>
+.MemberBox <br>
+.Subsection <br>
+.SubsectionBox <br>
+.SignatureTable <br>
+.EnumerationsTable <br>
+.CodeExampleTable <br>
+.MembersListing <br>
+.TypesListing <br>
+.InnerSignatureTable <br>
+.TypePermissionsTable</i></p>
+
+<h2>HTML LINKS
+<a name="HTML LINKS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">All members
+within the HTML file have an <i>id</i> attribute to permit
+linking to a specific member. The value of the <i>id</i>
+attribute is the String ID of the specified member.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See the <i>CREF
+FORMAT</i> section of <b>mdoc</b>(5) for more
+information.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-docs-list for
+<br>
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com/docs/tools+libraries/tools/mdoc/
+for details</p>
+<hr>
+</body>
+</html>

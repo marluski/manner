@@ -1,0 +1,1166 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:43 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GDBMTOOL</title>
+
+</head>
+<body>
+
+<h1 align="center">GDBMTOOL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SHELL COMMANDS">SHELL COMMANDS</a><br>
+<a href="#PIPES">PIPES</a><br>
+<a href="#DATA DEFINITIONS">DATA DEFINITIONS</a><br>
+<a href="#VARIABLES">VARIABLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gdbmtool -
+examine and modify a GDBM database</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gdbmtool</b>
+[<b>-lmNnqrs</b>] [<b>-b</b> <i>SIZE</i>] [<b>-c</b>
+<i>SIZE</i>] [<b>-f</b> <i>FILE</i>]
+[<b>--block-size</b>=<i>SIZE</i>]
+[<b>--cache-size</b>=<i>SIZE</i>] [<b>--file</b>
+<i>FILE</i>] [<b>--newdb</b>] [<b>--no-lock</b>]
+[<b>--no-mmap</b>] [<b>--norc</b>] [<b>--quiet</b>]
+[<b>--read-only</b>] [<b>--synchronize</b>] [<i>DBFILE</i>]
+[<i>COMMAND</i> [; <i>COMMAND</i>...]]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>gdbmtool</b>
+[<b>-Vh</b>] [<b>--help</b>] [<b>--usage</b>]
+[<b>--version</b>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>gdbmtool</b> utility allows you to view and modify an
+existing GDBM database or to create a new one.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>DBFILE</i> argument supplies the name of the database to
+open. If not supplied, the default name <b>junk.gdbm</b> is
+used instead. If the named database does not exist, it will
+be created. An existing database can be cleared (i.e. all
+records removed from it) using the <b>--newdb</b> option
+(see below).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unless the
+<b>-N</b> (<b>--norc</b>) option is given, after startup
+<b>gdbmtool</b> looks for file named <b>.gdbmtoolrc</b>
+first in the current working directory, and, if not found
+there, in the home directory of the user who started the
+program. If found, this file is read and interpreted as a
+list of <b>gdbmtool</b> commands.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then
+<b>gdbmtool</b> starts a loop, in which it reads commands
+from the standard input, executes them and prints the
+results on the standard output. If the standard input is
+attached to a console, the program runs in interactive
+mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The program
+terminates when the <b>quit</b> command is given, or
+end-of-file is detected on its standard input.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Commands can
+also be specified in the command line, after the
+<i>DBFILE</i> argument. In this case, they will be
+interpreted without attempting to read more commands from
+the standard input.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If several
+commands are supplied, they must be separated by semicolons
+(properly escaped or quoted, in order to prevent them from
+being interpreted by the shell).</p>
+
+<p style="margin-left:9%; margin-top: 1em">A
+<b>gdbmtool</b> command consists of a command verb,
+optionally followed by one or more arguments, separated by
+any amount of white space. A command verb can be entered
+either in full or in an abbreviated form, as long as that
+abbreviation does not match any other verb.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Any sequence of
+non-whitespace characters appearing after the command verb
+forms an argument. If the argument contains whitespace or
+unprintable characters it must be enclosed in double quotes.
+Within double quotes the usual escape sequences are
+understood, as shown in the table below:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p><i>Escape</i></p></td>
+<td width="74%">
+
+
+<p><i>Expansion</i></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>\a</p></td>
+<td width="74%">
+
+
+<p>Audible bell character (ASCII 7)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>\b</p></td>
+<td width="74%">
+
+
+<p>Backspace character (ASCII 8)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>\f</p></td>
+<td width="74%">
+
+
+<p>Form-feed character (ASCII 12)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>\n</p></td>
+<td width="74%">
+
+
+<p>Newline character (ASCII 10)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>\r</p></td>
+<td width="74%">
+
+
+<p>Carriage return character (ASCII 13)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>\t</p></td>
+<td width="74%">
+
+
+<p>Horizontal tabulation character (ASCII 9)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>\v</p></td>
+<td width="74%">
+
+
+<p>Vertical tabulation character (ASCII 11)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>\\</p></td>
+<td width="74%">
+
+
+<p>Single slash</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">In addition, a
+backslash immediately followed by the end-of-line character
+effectively removes that character, allowing to split long
+arguments over several input lines.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>,
+<b>--block-size</b>=<i>SIZE</i></p>
+
+<p style="margin-left:18%;">Set block size.</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--cache-size</b>=<i>SIZE</i></p>
+
+<p style="margin-left:18%;">Set cache size.</p>
+
+<p style="margin-left:9%;"><b>-f</b>,
+<b>--file</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Read commands from <i>FILE</i>,
+instead of from the standard input.</p>
+
+<p style="margin-left:9%;"><b>-l</b>, <b>--no-lock</b></p>
+
+<p style="margin-left:18%;">Disable file locking.</p>
+
+<p style="margin-left:9%;"><b>-m</b>, <b>--no-mmap</b></p>
+
+<p style="margin-left:18%;">Do not use <b>mmap</b>(2).</p>
+
+<p style="margin-left:9%;"><b>-n</b>, <b>--newdb</b></p>
+
+<p style="margin-left:18%;">Create the database, truncating
+it if it already exists.</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--quiet</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t print initial
+banner.</p>
+
+<p style="margin-left:9%;"><b>-r</b>,
+<b>--read-only</b></p>
+
+<p style="margin-left:18%;">Open database in read-only
+mode.</p>
+
+<p style="margin-left:9%;"><b>-s</b>,
+<b>--synchronize</b></p>
+
+<p style="margin-left:18%;">Synchronize to disk after each
+write.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Print a short usage
+summary.</p>
+
+<p style="margin-left:9%;"><b>--usage</b></p>
+
+<p style="margin-left:18%;">Print a list of available
+options.</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Print program version</p>
+
+<h2>SHELL COMMANDS
+<a name="SHELL COMMANDS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>avail</b></p></td>
+<td width="3%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Print the <b>avail list</b>.</p></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>bucket</b> <i>NUM</i></p>
+
+<p style="margin-left:18%;">Print the bucket number
+<i>NUM</i> and set is as the current one.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>cache</b></p></td>
+<td width="3%"></td>
+<td width="56%">
+
+
+<p>Print the bucket cache.</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>close</b></p></td>
+<td width="3%"></td>
+<td width="56%">
+
+
+<p>Close the currently open database.</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>count</b></p></td>
+<td width="3%"></td>
+<td width="56%">
+
+
+<p>Print the number of entries in the database.</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>current</b></p>
+
+<p style="margin-left:18%;">Print the current bucket.</p>
+
+<p style="margin-left:9%;"><b>delete</b> <i>KEY</i></p>
+
+<p style="margin-left:18%;">Delete record with the given
+<i>KEY</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>dir</b></p></td>
+<td width="5%"></td>
+<td width="27%">
+
+
+<p>Print hash directory.</p></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>downgrade</b></p>
+
+<p style="margin-left:18%;">Downgrade the database from the
+extended <i>numsync</i> format to the standard format.</p>
+
+<p style="margin-left:9%;"><b>export</b> <i>FILE-NAME</i>
+[<b>truncate</b>] [<b>binary</b>|<b>ascii</b>]</p>
+
+<p style="margin-left:18%;">Export the database to the flat
+file <i>FILE-NAME</i>. This is equivalent to
+<b>gdbm_dump</b>(1).</p>
+
+<p style="margin-left:18%; margin-top: 1em">This command
+will not overwrite an existing file, unless the
+<b>truncate</b> parameter is also given. Another optional
+parameter determines the type of the dump (*note Flat
+files::). By default, ASCII dump will be created.</p>
+
+<p style="margin-left:9%;"><b>fetch</b> <i>KEY</i></p>
+
+<p style="margin-left:18%;">Fetch and display the record
+with the given <i>KEY</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>first</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Fetch and display the first record in the database.
+Subsequent records can be fetched using the <b>next</b>
+command (see below).</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>hash</b> <i>KEY</i></p>
+
+<p style="margin-left:18%;">Compute and display the hash
+value for the given <i>KEY</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>header</b></p></td>
+<td width="1%"></td>
+<td width="23%">
+
+
+<p>Print file header.</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>help</b> or <b>?</b></p>
+
+<p style="margin-left:18%;">Print a concise command
+summary, showing each command letter and verb with its
+parameters and a short description of what it does. Optional
+arguments are enclosed in square brackets.</p>
+
+<p style="margin-left:9%;"><b>history</b></p>
+
+<p style="margin-left:18%;">Shows the command history list
+with line numbers. This command is available only if the
+program was compiled with GNU Readline.</p>
+
+<p style="margin-left:9%;"><b>history</b> <i>COUNT</i>.</p>
+
+<p style="margin-left:18%;">Shows <i>COUNT</i> latest
+commands from the command history.</p>
+
+<p style="margin-left:9%;"><b>history</b> <i>N
+COUNT</i>.</p>
+
+<p style="margin-left:18%;">Shows <i>COUNT</i> commands
+from the command history starting with <i>N</i>th
+command.</p>
+
+<p style="margin-left:9%;"><b>import</b> <i>FILE-NAME</i>
+[<b>replace</b>] [<b>nometa</b>]</p>
+
+<p style="margin-left:18%;">Import data from a flat dump
+file <i>FILE-NAME</i>. If the <b>replace</b> argument is
+given, any records with the same keys as the already
+existing ones will replace them. The <b>nometa</b> argument
+turns off restoring meta-information from the dump file.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>list</b></p></td>
+<td width="4%"></td>
+<td width="44%">
+
+
+<p>List the contents of the database.</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>next</b> [<i>KEY</i>]</p>
+
+<p style="margin-left:18%;">Sequential access: fetch and
+display the next record. If the <i>KEY</i> is given, the
+record following the one with this key will be fetched.</p>
+
+<p style="margin-left:9%;"><b>open</b> <i>FILE</i></p>
+
+<p style="margin-left:18%;">Open the database file
+<i>FILE</i>. If successful, any previously open database is
+closed. Otherwise, if the operation fails, the currently
+opened database remains unchanged.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This command
+takes additional information from the variables <b>open</b>,
+<b>lock</b>, <b>mmap</b>, and <b>sync</b>. See the section
+<b>VARIABLES</b>, for a detailed description of these.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>quit</b></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Close the database and quit the utility.</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>reorganize</b></p>
+
+<p style="margin-left:18%;">Reorganize the database.</p>
+
+<p style="margin-left:9%;"><b>set</b>
+[<i>VAR</i>=<i>VALUE</i>...]</p>
+
+<p style="margin-left:18%;">Without arguments, lists
+variables and their values. If arguments are specified, sets
+variables. Boolean variables can be set by specifying
+variable name, optionally prefixed with <b>no</b>, to set it
+to <b>false</b>.</p>
+
+<p style="margin-left:9%;"><b>snapshot</b> <i>FILE
+FILE</i></p>
+
+<p style="margin-left:18%;">Analyzes two database snapshots
+and selects the most recent of them. In case of error,
+prints a detailed diagnostics. Use this command to manually
+recover from a crash. For details, please refer to the
+chapter <b>Crash Tolerance</b> in the <b>GDBM
+manual</b>.</p>
+
+<p style="margin-left:9%;"><b>source</b> <i>FILE</i></p>
+
+<p style="margin-left:18%;">Read commands from the given
+<i>FILE</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>status</b></p></td>
+<td width="1%"></td>
+<td width="37%">
+
+
+<p>Print current program status.</p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>store</b> <i>KEY DATA</i></p>
+
+<p style="margin-left:18%;">Store the <i>DATA</i> with the
+given <i>KEY</i> in the database. If the <i>KEY</i> already
+exists, its data will be replaced.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>sync</b></p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Synchronize the database file with the disk storage.</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>upgrade</b></p>
+
+<p style="margin-left:18%;">Upgrade the database from the
+standard to the extended <i>numsync</i> format.</p>
+
+<p style="margin-left:9%;"><b>unset</b>
+<i>VARIABLE</i>...</p>
+
+<p style="margin-left:18%;">Unsets listed variables.</p>
+
+<p style="margin-left:9%;"><b>version</b></p>
+
+<p style="margin-left:18%;">Print the version of
+<b>gdbm</b>.</p>
+
+<h2>PIPES
+<a name="PIPES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A command can be
+followed by a pipe sign (<b>|</b>) and a shell command. The
+meaning is the same as in Bourne shell: the output of the
+<b>gdbmtool</b> command is connected to the input of a shell
+command specified on the right side of <b>|</b>. In this
+case pager is disabled.</p>
+
+<h2>DATA DEFINITIONS
+<a name="DATA DEFINITIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>define</b> statement provides a mechanism for defining
+key or content structures. It is similar to the <b>C
+struct</b> declaration:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>define
+key</b>|<b>content {</b> <i>defnlist</i> <b>}</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>defnlist</i> is a comma-separated list of member
+declarations. Within <i>defnlist</i> the newline character
+looses its special meaning as the command terminator, so
+each declaration can appear on a separate line and arbitrary
+number of comments can be inserted to document the
+definition.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each declaration
+has one of the following formats</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>type name
+<br>
+type name</i> <b>[</b><i>N</i><b>]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">where
+<i>type</i> is a data type and <i>name</i> is the member
+name. The second format defines the member <i>name</i> as an
+array of <i>N</i> elements of <i>type</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The supported
+types are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p><i>type</i></p></td>
+<td width="74%">
+
+
+<p><i>meaning</i></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>char</p></td>
+<td width="74%">
+
+
+<p>single byte (signed)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>short</p></td>
+<td width="74%">
+
+
+<p>signed short integer</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>ushort</p></td>
+<td width="74%">
+
+
+<p>unsigned short integer</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>int</p></td>
+<td width="74%">
+
+
+<p>signed integer</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>unsigned</p></td>
+<td width="74%">
+
+
+<p>unsigned integer</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>uint</p></td>
+<td width="74%">
+
+
+<p>ditto</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>long</p></td>
+<td width="74%">
+
+
+<p>signed long integer</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>ulong</p></td>
+<td width="74%">
+
+
+<p>unsigned long integer</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>llong</p></td>
+<td width="74%">
+
+
+<p>signed long long integer</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>ullong</p></td>
+<td width="74%">
+
+
+<p>unsigned long long integer</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>float</p></td>
+<td width="74%">
+
+
+<p>a floating point number</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>double</p></td>
+<td width="74%">
+
+
+<p>double-precision floating point number</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>string</p></td>
+<td width="74%">
+
+
+<p>array of characters (see the <b>NOTE</b> below)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+
+
+<p>stringz</p></td>
+<td width="74%">
+
+
+<p>null-terminated string of characters</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+alignment declarations can be used within <i>defnlist</i>:
+<b><br>
+offset</b> <i>N</i></p>
+
+<p style="margin-left:18%;">The next member begins at
+offset <i>N</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>pad</b> <i>N</i></p></td>
+<td width="3%"></td>
+<td width="59%">
+
+
+<p>Add <i>N</i> bytes of padding to the previous
+member.</p> </td>
+<td width="23%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">For example:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>define
+content {</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="90%">
+
+
+<p><b>int status,</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="90%">
+
+
+<p><b>pad 8,</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="90%">
+
+
+<p><b>char id[3],</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="90%">
+
+
+<p><b>stringz name</b></p></td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>}</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">To define data
+consisting of a single data member, the following simplified
+construct can be used:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>define
+key</b>|<b>content</b> <i>type</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">where
+<i>type</i> is one of the types discussed above.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE</b>: The
+<b>string</b> type can reasonably be used only if it is the
+last or the only member of the data structure. That&rsquo;s
+because it provides no information about the number of
+elements in the array, so it is interpreted to contain all
+bytes up to the end of the datum.</p>
+
+<h2>VARIABLES
+<a name="VARIABLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>confirm</b>,
+boolean</p>
+
+<p style="margin-left:18%;">Whether to ask for confirmation
+before certain destructive operations, such as truncating
+the existing database. Default is <b>true</b>.</p>
+
+<p style="margin-left:9%;"><b>ps1</b>, string</p>
+
+<p style="margin-left:18%;">Primary prompt string. Its
+value can contain <i>conversion specifiers</i>, consisting
+of the <b>%</b> character followed by another character.
+These specifiers are expanded in the resulting prompt as
+follows:</p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>Sequence
+Expansion</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+</td>
+<td width="74%">
+
+
+<p><b>%f</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%"></td>
+<td width="74%">
+
+
+<p>name of the db file</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+</td>
+<td width="74%">
+
+
+<p><b>%p</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%"></td>
+<td width="74%">
+
+
+<p>program name</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+</td>
+<td width="74%">
+
+
+<p><b>%P</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%"></td>
+<td width="74%">
+
+
+<p>package name (<b>gdbm</b>)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+</td>
+<td width="74%">
+
+
+<p><b>%_</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%"></td>
+<td width="74%">
+
+
+<p>horizontal space (<b>ASCII</b> 32)</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+</td>
+<td width="74%">
+
+
+<p><b>%v</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%"></td>
+<td width="74%">
+
+
+<p>program version</p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%">
+</td>
+<td width="74%">
+
+
+<p><b>%%</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="16%"></td>
+<td width="74%">
+
+
+<p><b>%</b></p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The default
+prompt is <b>%p&gt;%_</b>.</p>
+
+<p style="margin-left:9%;"><b>ps2</b>, string</p>
+
+<p style="margin-left:18%;">Secondary prompt. See
+<b>ps1</b> for a description of its value. This prompt is
+displayed before reading the second and subsequent lines of
+a multi-line command.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default
+value is <b>%_&gt;%_</b>.</p>
+
+<p style="margin-left:9%;"><b>delim1</b>, string</p>
+
+<p style="margin-left:18%;">A string used to delimit fields
+of a structured datum on output (see the section <b>DATA
+DEFINITIONS</b>).</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default is
+<b>,</b> (a comma). This variable cannot be unset.</p>
+
+<p style="margin-left:9%;"><b>delim2</b>, string</p>
+
+<p style="margin-left:18%;">A string used to delimit array
+items when printing a structured datum.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default is
+<b>,</b> (a comma). This variable cannot be unset.</p>
+
+<p style="margin-left:9%;"><b>pager</b>, string</p>
+
+<p style="margin-left:18%;">The name and command line of
+the pager program to pipe output to. This program is used in
+interactive mode when the estimated number of output lines
+is greater then the number of lines on your screen.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default
+value is inherited from the environment variable
+<b>PAGER</b>. Unsetting this variable disables paging.</p>
+
+<p style="margin-left:9%;"><b>quiet</b>, boolean</p>
+
+<p style="margin-left:18%;">Whether to display welcome
+banner at startup. This variable should be set in a startup
+script file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+variables control how the database is opened: <b><br>
+cachesize</b>, numeric</p>
+
+<p style="margin-left:18%;">Sets the cache size. By default
+this variable is not set.</p>
+
+<p style="margin-left:9%;"><b>blocksize</b>, numeric</p>
+
+<p style="margin-left:18%;">Sets the block size. Unset by
+default.</p>
+
+<p style="margin-left:9%;"><b>open</b>, string</p>
+
+<p style="margin-left:18%;">Open mode. The following values
+are allowed:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>newdb</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Truncate the database if it exists or create a new one.
+Open it in read-write mode.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>wrcreat</b> or <b>rw</b></p>
+
+<p style="margin-left:27%;">Open the database in read-write
+mode. Create it if it does not exist. This is the
+default.</p>
+
+<p style="margin-left:18%;"><b>reader</b> or
+<b>readonly</b></p>
+
+<p style="margin-left:27%;">Open the database in read-only
+mode. Signal an error if it does not exist.</p>
+
+<p style="margin-left:9%;"><b>filemode</b>, octal</p>
+
+<p style="margin-left:18%;">Sets the file mode for newly
+created database files. Default is 0644.</p>
+
+<p style="margin-left:9%;"><b>lock</b>, boolean</p>
+
+<p style="margin-left:18%;">Lock the database. This is the
+default.</p>
+
+<p style="margin-left:9%;"><b>mmap</b>, boolean</p>
+
+<p style="margin-left:18%;">Use memory mapping. This is the
+default.</p>
+
+<p style="margin-left:9%;"><b>coalesce</b>, boolean</p>
+
+<p style="margin-left:18%;">When set, this option causes
+adjacent free blocks to be merged which allows for more
+efficient memory management at the expense of a certain
+increase in CPU usage.</p>
+
+<p style="margin-left:9%;"><b>centfree</b>, boolean</p>
+
+<p style="margin-left:18%;">Enables central free block
+pool. This causes all free blocks of space to be placed in
+the global pool, thereby speeding up the allocation of data
+space.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gdbm_dump</b>(1),
+<b>gdbm_load</b>(1), <b>gdbm</b>(3).</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+&lt;bug-gdbm@gnu.org&gt;.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2013-2025 Free Software Foundation, Inc <br>
+License GPLv3+: GNU GPL version 3 or later
+&lt;http://gnu.org/licenses/gpl.html&gt; <br>
+This is free software: you are free to change and
+redistribute it. There is NO WARRANTY, to the extent
+permitted by law.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,376 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONFIGURATION OPTIONS">CONFIGURATION OPTIONS</a><br>
+<a href="#CSP RELATED OPTIONS">CSP RELATED OPTIONS</a><br>
+<a href="#CONVERSION OPTIONS">CONVERSION OPTIONS</a><br>
+<a href="#STRONGNAME SIGNING OPTIONS">STRONGNAME SIGNING OPTIONS</a><br>
+<a href="#HELP OPTIONS">HELP OPTIONS</a><br>
+<a href="#CONFIGURATION FILE">CONFIGURATION FILE</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sn - Digitally
+sign/verify/compare strongnames on CLR assemblies.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sn [-q |
+-quiet] [options] [parameters]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Digitally sign,
+verify or compare CLR assemblies using strongnames.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can use the
+sn command to create &quot;snk files&quot; using the -k
+option described below.</p>
+
+<h2>CONFIGURATION OPTIONS
+<a name="CONFIGURATION OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Configuration
+options are stored in the machine.config configuration file
+under /configuration/strongNames. <i><br>
+-c provider</i></p>
+
+<p style="margin-left:18%;">Change the default CSP (Crypto
+Service Provider). Currently not supported in Mono.</p>
+
+<p style="margin-left:9%;"><i>-m [y|n]</i></p>
+
+<p style="margin-left:18%;">Use a machine [y] key container
+or a user [n] key container. Currently not supported in
+Mono.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>-Vl</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>List the verification options. The list is kept under
+/configuration/ strongNames/verificationSettings in
+machine.config.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>-Vr assembly
+[userlist]</i></p>
+
+<p style="margin-left:18%;">Exempt the specified assembly
+from verification for the specified user list. Currently not
+supported by sn. You must edit machine.config manually if
+you require this.</p>
+
+<p style="margin-left:9%;"><i>-Vu assembly</i></p>
+
+<p style="margin-left:18%;">Remove the exemption entry for
+the specified assembly. Currently not supported by sn, you
+must edit machine.config manually if you require this.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>-Vx</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Remove all exemptions entries. Currently not supported
+by sn, you must edit machine.config manually if you require
+this.</p> </td></tr>
+</table>
+
+<h2>CSP RELATED OPTIONS
+<a name="CSP RELATED OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-d
+container</i></p>
+
+<p style="margin-left:18%;">Delete the keypair present in
+the specified key container.</p>
+
+<p style="margin-left:9%;"><i>-i keypair.snk
+container</i></p>
+
+<p style="margin-left:18%;">Import the specified strongname
+file into the specified container.</p>
+
+<p style="margin-left:9%;"><i>-pc container
+publickey</i></p>
+
+<p style="margin-left:18%;">Export the public key from the
+specified CSP container to the specified file.</p>
+
+<h2>CONVERSION OPTIONS
+<a name="CONVERSION OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-e assembly
+output.pub</i></p>
+
+<p style="margin-left:18%;">Export the assembly public key
+to the specified output file.</p>
+
+<p style="margin-left:9%;"><i>-p keypair.snk
+output.pub</i></p>
+
+<p style="margin-left:18%;">Export the public key from the
+specified strongname key file (SNK) or from a PKCS#12/PFX
+password protected file to the specified output file.</p>
+
+<p style="margin-left:9%;"><i>-o input output.txt</i></p>
+
+<p style="margin-left:18%;">Convert the input file to a CSV
+file (using decimal).</p>
+
+<p style="margin-left:9%;"><i>-oh input output.txt</i></p>
+
+<p style="margin-left:18%;">Convert the input file to a CSV
+file (using hexadecimal).</p>
+
+<h2>STRONGNAME SIGNING OPTIONS
+<a name="STRONGNAME SIGNING OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-D assembly1
+assembly2</i></p>
+
+<p style="margin-left:18%;">Compare if assembly1 and
+assembly2 are the same except for their signature. This is
+done by comparing the hash of the metadata of both
+assemblies.</p>
+
+<p style="margin-left:9%;"><i>-k [size] keypair.snk</i></p>
+
+<p style="margin-left:18%;">Create a new strongname keypair
+in the specified file. The default key length is 1024 bits
+and MUST ALWAYS be used when signing 1.x assemblies. Any
+value from 384 to 16384 bits (in increments of 8 bits) is a
+valid key length to sign 2.x assemblies. To ensure maximum
+compatibility you may want to continue using 1024 bits keys.
+Note that there&rsquo;s no good reason, even if it&rsquo;s
+possible, to use length lesser than 1024 bits.</p>
+
+<p style="margin-left:9%;"><i>-R assembly
+keypair.snk</i></p>
+
+<p style="margin-left:18%;">Re-sign the specified assembly
+using the specified strongname keypair file (SNK) or a
+PKCS#12/PFX password protected file. You can only sign an
+assembly with the private key that matches the public key
+inside the assembly (unless it&rsquo;s public key token has
+been remapped in machine.config).</p>
+
+<p style="margin-left:9%;"><i>-Rc assembly
+container</i></p>
+
+<p style="margin-left:18%;">Re-sign the specified assembly
+using the specified strongname container.</p>
+
+<p style="margin-left:9%;"><i>-t file</i></p>
+
+<p style="margin-left:18%;">Show the public key token from
+the specified file.</p>
+
+<p style="margin-left:9%;"><i>-tp file</i></p>
+
+<p style="margin-left:18%;">Show the public key and the
+public key token from the specified file.</p>
+
+<p style="margin-left:9%;"><i>-T assembly</i></p>
+
+<p style="margin-left:18%;">Show the public key token from
+the specified assembly.</p>
+
+<p style="margin-left:9%;"><i>-Tp assembly</i></p>
+
+<p style="margin-left:18%;">Show the public key and the
+public key token from the specified assembly.</p>
+
+<p style="margin-left:9%;"><i>-v assembly</i></p>
+
+<p style="margin-left:18%;">Verify the specified assembly
+signature.</p>
+
+<p style="margin-left:9%;"><i>-vf assembly</i></p>
+
+<p style="margin-left:18%;">Verify the specified assembly
+signature (even if disabled).</p>
+
+<h2>HELP OPTIONS
+<a name="HELP OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-h ,
+-?</i></p>
+
+<p style="margin-left:18%;">Display basic help about this
+tool.</p>
+
+<p style="margin-left:9%;"><i>-h config , -? config</i></p>
+
+<p style="margin-left:18%;">Display configuration related
+help about this tool.</p>
+
+<p style="margin-left:9%;"><i>-h csp , -? csp</i></p>
+
+<p style="margin-left:18%;">Display Cryptographic Service
+Provider related help about this tool.</p>
+
+<p style="margin-left:9%;"><i>-h convert , -?
+convert</i></p>
+
+<p style="margin-left:18%;">Display conversion related help
+about this tool.</p>
+
+<p style="margin-left:9%;"><i>-h sn , -? sn</i></p>
+
+<p style="margin-left:18%;">Display strongname related help
+about this tool.</p>
+
+<h2>CONFIGURATION FILE
+<a name="CONFIGURATION FILE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Strongnames
+configuration is kept in &quot;machine.config&quot; file.
+Currently <br>
+two</p>
+
+<p style="margin-left:18%;">features can be configured.</p>
+
+
+<p style="margin-left:9%;"><i>/configuration/strongNames/pubTokenMapping</i></p>
+
+<p style="margin-left:18%;">This mechanism lets Mono remap
+a public key token, like the ECMA token, to another public
+key for verification. This is useful in two scenarios.
+First, assemblies signed with the &quot;ECMA key&quot; need
+to be verified by the &quot;runtime&quot; key (as the ECMA
+key isn&rsquo;t a public key). Second, many assemblies are
+signed with private keys that Mono can&rsquo;t use (e.g.
+System.Security.dll assembly). A new key cannot be used
+because it should change the strongname (a new key pair
+would have a new public key which would produce a new
+token). Public key token remapping is the solution for both
+problems. Each token must be configured in a &quot;map&quot;
+entry similar to this one: &lt;map
+Token=&quot;b77a5c561934e089&quot;
+PublicKey=&quot;00...&quot; /&gt;</p>
+
+
+<p style="margin-left:9%;"><i>/configuration/strongNames/verificationSettings</i></p>
+
+<p style="margin-left:18%;">It is often useful during
+development to use delay signed assemblies. Normally* the
+runtime wouldn&rsquo;t allow delay-signed assemblies to be
+loaded. This feature allows some delay-signed assemblies
+(based on their public key token, optionally assembly name
+and user name) to be used like they were fully signed
+assemblies. [*] Note that Mono 1.0 &quot;runtime&quot;
+doesn&rsquo;t validate strongname signatures so this option
+shouldn&rsquo;t be required in most scenarios.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Sebastien Pouliot</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2003 Motus Technologies. Copyright (C) 2004 Novell. Released
+under BSD license.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>secutil(1)</b></p>
+<hr>
+</body>
+</html>

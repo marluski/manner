@@ -1,0 +1,383 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:02 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>WATCH</title>
+
+</head>
+<body>
+
+<h1 align="center">WATCH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#KEY CONTROL">KEY CONTROL</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">watch - execute
+a program periodically, showing output fullscreen</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>watch</b>
+[<i>option</i> ...] <i>command</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>watch</b></i>
+runs <i>command</i> repeatedly, displaying its output and
+errors (the first screenful). This allows you to watch the
+program output change over time. By default, <i>command</i>
+is run every 2 seconds and <b>watch</b> will run until
+interrupted. A header informs of the start and running time
+of <i>command</i> as well as its exit code.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>,
+<b>--beep</b></p>
+
+<p style="margin-left:18%;">Beep if <i>command</i> has a
+non-zero exit.</p>
+
+<p style="margin-left:9%;"><b>-c</b>, <b>--color</b></p>
+
+<p style="margin-left:18%;">Interpret ANSI color and style
+sequences.</p>
+
+<p style="margin-left:9%;"><b>-C</b>, <b>--no-color</b></p>
+
+<p style="margin-left:18%;">Do not interpret ANSI color and
+style sequences.</p>
+
+<p style="margin-left:9%;"><b>-d</b>,
+<b>--differences</b>[=<i>permanent</i>]</p>
+
+<p style="margin-left:18%;">Highlight the differences
+between successive updates. If the optional <i>permanent</i>
+argument is specified then <b>watch</b> will show all
+changes since the first iteration.</p>
+
+<p style="margin-left:9%;"><b>-e</b>, <b>--errexit</b></p>
+
+<p style="margin-left:18%;">Freeze updates on
+<i>command</i> error, and exit after a key press. The exit
+code of <b>watch</b> will be the code <i>command</i> exits
+with. If signal <b>n</b> is the cause of <i>command</i>
+termination, the exit code will be 128 + <b>n</b>.</p>
+
+<p style="margin-left:9%;"><b>-g</b>, <b>--chgexit</b></p>
+
+<p style="margin-left:18%;">Exit when the visible output of
+<i>command</i> changes. Changes that are off the screen due
+to small screen size or large output will not cause
+<b>watch</b> to exit.</p>
+
+<p style="margin-left:9%;"><b>-n</b>, <b>--interval</b>
+<i>seconds</i></p>
+
+<p style="margin-left:18%;">Specify update interval. Values
+smaller than 0.1 and larger than 2678400 (31 days) are
+converted into these respective bounds. Both &rsquo;.&rsquo;
+and &rsquo;,&rsquo; work for any locale. The
+<b>WATCH_INTERVAL</b> environment variable can be used to
+persistently set a non-default interval (following the same
+rules and formatting).</p>
+
+<p style="margin-left:9%;"><b>-p</b>, <b>--precise</b></p>
+
+<p style="margin-left:18%;">Execute <i>command</i>
+<b>--interval</b> seconds after its previous run started,
+instead of <b>--interval</b> seconds after its previous run
+finished. If it&rsquo;s taking longer than <b>--interval</b>
+seconds for <i>command</i> to complete, it is waited for in
+either case.</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--equexit</b>
+&lt;cycles&gt;</p>
+
+<p style="margin-left:18%;">Exit when output of
+<i>command</i> does not change for the given number of
+cycles.</p>
+
+<p style="margin-left:9%;"><b>-r</b>, <b>--no-rerun</b></p>
+
+<p style="margin-left:18%;">Do not run the program on
+terminal resize, the output of the program will re-appear at
+the next regular run time.</p>
+
+<p style="margin-left:9%;"><b>-s</b>, <b>--shotsdir</b></p>
+
+<p style="margin-left:18%;">Directory to save screenshots
+into.</p>
+
+<p style="margin-left:9%;"><b>-t</b>, <b>--no-title</b></p>
+
+<p style="margin-left:18%;">Turn off the header normally
+shown at the top of the screen.</p>
+
+<p style="margin-left:9%;"><b>-w</b>, <b>--no-wrap</b></p>
+
+<p style="margin-left:18%;">Turn off line wrapping. Long
+lines will be truncated instead of wrapped to the next
+line.</p>
+
+<p style="margin-left:9%;"><b>-x</b>, <b>--exec</b></p>
+
+<p style="margin-left:18%;">Pass <i>command</i> to an
+<b>exec</b>(3) call instead of <b>sh -c</b>. The program
+will start a bit quicker. Shell features (environment setup,
+variable and pathname expansion, etc.) will be
+unavailable.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Display help text and exit.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Display version information and
+exit.</p>
+
+<h2>KEY CONTROL
+<a name="KEY CONTROL"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>spacebar</b></p>
+
+<p style="margin-left:18%;">Issue <i>command</i>
+immediately. If it&rsquo;s running at the moment, it is not
+interrupted and its next round will start without delay.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>q</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Quit <b>watch</b>. It currently does not interrupt a
+running <i>command</i> (as opposed to terminating signals,
+such as the SIGKILL following Ctrl+C).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>s</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Take a screenshot. It will be saved in the working
+directory, unless specified otherwise by <b>--shotsdir</b>.
+If <i>command</i> is running at the moment, the screenshot
+will be taken as soon as it finishes.</p></td></tr>
+</table>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>0</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Success. Does not represent
+<i>command</i> exit code.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>1</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Errors unrelated to <i>command</i> operation.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>2</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Errors related to <i>command</i> execution and
+management (not its exit code).</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>any non-zero
+(--errexit)</b></p>
+
+<p style="margin-left:18%;">With <b>--errexit</b> the last
+exit code of <i>command</i> is returned.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The behavior of
+<b>watch</b> is affected by the following environment
+variables. <b><br>
+WATCH_INTERVAL</b></p>
+
+<p style="margin-left:18%;">Update interval, follows the
+same rules as the <b>--interval</b> command line option.</p>
+
+<p style="margin-left:9%;"><b>COLUMNS</b></p>
+
+<p style="margin-left:18%;">Terminal screen character
+width. Set to override autodetection.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>LINES</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Terminal screen character height. Set to override
+autodetection.</p> </td></tr>
+</table>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">POSIX option
+processing is used (i.e., option processing stops at the
+first non-option argument). This means that flags after
+<i>command</i> don&rsquo;t get interpreted by <b>watch</b>
+itself.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Non-printing
+characters are stripped from program output. Use <b>cat
+-v</b> as part of the command pipeline if you want to see
+them.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To watch the
+contents of a directory change, you could use</p>
+
+<p style="margin-left:18%; margin-top: 1em">watch -d ls
+-l</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have CPUs
+with a dynamic frequency and want to observe it change, try
+the following. The command is passed to the shell, which
+allows you to make the pipeline. The quotes are a feature of
+the shell too.</p>
+
+<p style="margin-left:18%; margin-top: 1em">watch -n1
+&rsquo;grep &quot;&#710;cpu MHz&quot; /proc/cpuinfo | sort
+-nrk4&rsquo;</p>
+
+<p style="margin-left:9%; margin-top: 1em">To monitor the
+up status of your servers, saving a copy of the output of
+each run to a file, you may use this. The <b>-p</b> makes
+the command execute every 10 seconds regardless of how long
+it took to complete the previous run.</p>
+
+<p style="margin-left:18%; margin-top: 1em">watch -n10 -p
+-d &rsquo;{ date; for i in 10.0.0.31 10.0.0.32 10.0.0.33; do
+R=OK; ping -c2 -W2 &quot;$i&quot; &amp;&gt;/dev/null ||
+R=FAIL; echo &quot;$i: $R&quot;; done } | tee -a
+&#732;/log&rsquo;</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can watch
+for your administrator to install the latest kernel with</p>
+
+<p style="margin-left:18%; margin-top: 1em">watch uname
+-r</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When the
+terminal dimensions change, its contents changes are not
+registered on the next <i>command</i> run. <b>--chgexit</b>
+will not trigger that turn and the counter of
+<b>--equexit</b> will not restart even if <i>command</i>
+output changes meanwhile. <b>--differences</b> highlighting
+is reset.</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to
+<a href="mailto:procps@freelists.org">procps@freelists.org</a>.</p>
+<hr>
+</body>
+</html>

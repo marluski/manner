@@ -1,0 +1,1901 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:24:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FFMPEG-BITSTREAM-FILTERS</title>
+
+</head>
+<body>
+
+<h1 align="center">FFMPEG-BITSTREAM-FILTERS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#BITSTREAM FILTERS">BITSTREAM FILTERS</a><br>
+<a href="#aac_adtstoasc">aac_adtstoasc</a><br>
+<a href="#av1_metadata">av1_metadata</a><br>
+<a href="#chomp">chomp</a><br>
+<a href="#dca_core">dca_core</a><br>
+<a href="#dovi_rpu">dovi_rpu</a><br>
+<a href="#dump_extra">dump_extra</a><br>
+<a href="#dv_error_marker">dv_error_marker</a><br>
+<a href="#eac3_core">eac3_core</a><br>
+<a href="#extract_extradata">extract_extradata</a><br>
+<a href="#filter_units">filter_units</a><br>
+<a href="#hapqa_extract">hapqa_extract</a><br>
+<a href="#h264_metadata">h264_metadata</a><br>
+<a href="#h264_mp4toannexb">h264_mp4toannexb</a><br>
+<a href="#h264_redundant_pps">h264_redundant_pps</a><br>
+<a href="#hevc_metadata">hevc_metadata</a><br>
+<a href="#hevc_mp4toannexb">hevc_mp4toannexb</a><br>
+<a href="#imxdump">imxdump</a><br>
+<a href="#mjpeg2jpeg">mjpeg2jpeg</a><br>
+<a href="#mjpegadump">mjpegadump</a><br>
+<a href="#mov2textsub">mov2textsub</a><br>
+<a href="#mpeg2_metadata">mpeg2_metadata</a><br>
+<a href="#mpeg4_unpack_bframes">mpeg4_unpack_bframes</a><br>
+<a href="#noise">noise</a><br>
+<a href="#null">null</a><br>
+<a href="#pcm_rechunk">pcm_rechunk</a><br>
+<a href="#pgs_frame_merge">pgs_frame_merge</a><br>
+<a href="#prores_metadata">prores_metadata</a><br>
+<a href="#remove_extra">remove_extra</a><br>
+<a href="#setts">setts</a><br>
+<a href="#showinfo">showinfo</a><br>
+<a href="#text2movsub">text2movsub</a><br>
+<a href="#trace_headers">trace_headers</a><br>
+<a href="#truehd_core">truehd_core</a><br>
+<a href="#vp9_metadata">vp9_metadata</a><br>
+<a href="#vp9_superframe">vp9_superframe</a><br>
+<a href="#vp9_superframe_split">vp9_superframe_split</a><br>
+<a href="#vp9_raw_reorder">vp9_raw_reorder</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg-bitstream-filters
+- FFmpeg bitstream filters</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This document
+describes the bitstream filters provided by the libavcodec
+library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A bitstream
+filter operates on the encoded stream data, and performs
+bitstream level modifications without performing
+decoding.</p>
+
+<h2>BITSTREAM FILTERS
+<a name="BITSTREAM FILTERS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When you
+configure your FFmpeg build, all the supported bitstream
+filters are enabled by default. You can list all available
+ones using the configure option &quot;--list-bsfs&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can disable
+all the bitstream filters using the configure option
+&quot;--disable-bsfs&quot;, and selectively enable any
+bitstream filter using the option
+&quot;--enable-bsf=BSF&quot;, or you can disable a
+particular bitstream filter using the option
+&quot;--disable-bsf=BSF&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The option
+&quot;-bsfs&quot; of the ff* tools will display the list of
+all the supported bitstream filters included in your
+build.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The ff* tools
+have a -bsf option applied per stream, taking a
+comma-separated list of filters, whose parameters follow the
+filter name after a &rsquo;=&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c:v copy -bsf:v filter1[=opt1=str1:opt2=str2][,filter2]
+OUTPUT</p>
+
+<p style="margin-left:9%; margin-top: 1em">Below is a
+description of the currently available bitstream filters,
+with their parameters, if any.</p>
+
+<h3>aac_adtstoasc
+<a name="aac_adtstoasc"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert MPEG-2/4
+AAC ADTS to an MPEG-4 Audio Specific Configuration
+bitstream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This filter
+creates an MPEG-4 AudioSpecificConfig from an MPEG-2/4 ADTS
+header and removes the ADTS header.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This filter is
+required for example when copying an AAC stream from a raw
+ADTS AAC or an MPEG-TS container to MP4A-LATM, to an FLV
+file, or to MOV/MP4 files and related formats such as 3GP or
+M4A. Please note that it is auto-inserted for MP4A-LATM and
+MOV/MP4 and related formats.</p>
+
+<h3>av1_metadata
+<a name="av1_metadata"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Modify metadata
+embedded in an AV1 stream.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>td</b></p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>Insert or remove temporal delimiter OBUs in all temporal
+units of the stream.</p></td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>insert</b></p>
+
+<p style="margin-left:19%;">Insert a TD at the beginning of
+every TU which does not already have one.</p>
+
+<p style="margin-left:14%;"><b>remove</b></p>
+
+<p style="margin-left:19%;">Remove the TD from the
+beginning of every TU which has one.</p>
+
+<p style="margin-left:9%;"><b>color_primaries <br>
+transfer_characteristics <br>
+matrix_coefficients</b></p>
+
+<p style="margin-left:14%;">Set the color description
+fields in the stream (see AV1 section 6.4.2).</p>
+
+<p style="margin-left:9%;"><b>color_range</b></p>
+
+<p style="margin-left:14%;">Set the color range in the
+stream (see AV1 section 6.4.2; note that this cannot be set
+for streams using BT.709 primaries, sRGB transfer
+characteristic and identity (RGB) matrix coefficients).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="3%">
+
+
+<p><b>tv</b></p></td>
+<td width="2%"></td>
+<td width="18%">
+
+
+<p>Limited range.</p></td>
+<td width="63%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="3%">
+
+
+<p><b>pc</b></p></td>
+<td width="2%"></td>
+<td width="18%">
+
+
+<p>Full range.</p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>chroma_sample_position</b></p>
+
+<p style="margin-left:14%;">Set the chroma sample location
+in the stream (see AV1 section 6.4.2). This can only be set
+for 4:2:0 streams. <b><br>
+vertical</b></p>
+
+<p style="margin-left:19%;">Left position (matching the
+default in MPEG-2 and H.264).</p>
+
+<p style="margin-left:14%;"><b>colocated</b></p>
+
+<p style="margin-left:19%;">Top-left position.</p>
+
+<p style="margin-left:9%;"><b>tick_rate</b></p>
+
+<p style="margin-left:14%;">Set the tick rate
+(<i>time_scale / num_units_in_display_tick</i>) in the
+timing info in the sequence header.</p>
+
+
+<p style="margin-left:9%;"><b>num_ticks_per_picture</b></p>
+
+<p style="margin-left:14%;">Set the number of ticks in each
+picture, to indicate that the stream has a fixed framerate.
+Ignored if <b>tick_rate</b> is not also set.</p>
+
+<p style="margin-left:9%;"><b>delete_padding</b></p>
+
+<p style="margin-left:14%;">Deletes Padding OBUs.</p>
+
+<h3>chomp
+<a name="chomp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove zero
+padding at the end of a packet.</p>
+
+<h3>dca_core
+<a name="dca_core"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Extract the core
+from a DCA/DTS stream, dropping extensions such as
+DTS-HD.</p>
+
+<h3>dovi_rpu
+<a name="dovi_rpu"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Manipulate Dolby
+Vision metadata in a HEVC/AV1 bitstream, optionally enabling
+metadata compression. <b><br>
+strip</b></p>
+
+<p style="margin-left:14%;">If enabled, strip all Dolby
+Vision metadata (configuration record + RPU data blocks)
+from the stream.</p>
+
+<p style="margin-left:9%;"><b>compression</b></p>
+
+<p style="margin-left:14%;">Which compression level to
+enable. <b><br>
+none</b></p>
+
+<p style="margin-left:19%;">No metadata compression.</p>
+
+<p style="margin-left:14%;"><b>limited</b></p>
+
+<p style="margin-left:19%;">Limited metadata compression
+scheme. Should be compatible with most devices. This is the
+default.</p>
+
+<p style="margin-left:14%;"><b>extended</b></p>
+
+<p style="margin-left:19%;">Extended metadata compression.
+Devices are not required to support this. Note that this
+level currently behaves the same as <b>limited</b> in
+libavcodec.</p>
+
+<h3>dump_extra
+<a name="dump_extra"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add extradata to
+the beginning of the filtered packets except when said
+packets already exactly begin with the extradata that is
+intended to be added. <b><br>
+freq</b></p>
+
+<p style="margin-left:14%;">The additional argument
+specifies which packets should be filtered. It accepts the
+values:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>k</b></p></td>
+<td width="85%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>keyframe</b></p>
+
+<p style="margin-left:19%;">add extradata to all key
+packets</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>e</b></p></td>
+<td width="1%"></td>
+<td width="36%">
+</td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>all</b></p></td>
+<td width="1%"></td>
+<td width="36%">
+
+
+<p>add extradata to all packets</p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If not specified
+it is assumed <b>k</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example the
+following <b>ffmpeg</b> command forces a global header (thus
+disabling individual packet headers) in the H.264 packets
+generated by the &quot;libx264&quot; encoder, but corrects
+them by adding the header stored in extradata to the key
+packets:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-map 0 -flags:v +global_header -c:v libx264 -bsf:v
+dump_extra out.ts</p>
+
+<h3>dv_error_marker
+<a name="dv_error_marker"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Blocks in DV
+which are marked as damaged are replaced by blocks of the
+specified color. <b><br>
+color</b></p>
+
+<p style="margin-left:14%;">The color to replace damaged
+blocks by</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>sta</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>A 16 bit mask which specifies which of the 16 possible
+error status values are to be replaced by colored blocks.
+0xFFFE is the default which replaces all non 0 error status
+values.</p> </td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>ok</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%"></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p style="margin-top: 1em">No error, no concealment</p></td>
+<td width="50%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>err</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p>Error, No concealment</p></td>
+<td width="50%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>res</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p>Reserved</p></td>
+<td width="50%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>notok</b></p>
+
+<p style="margin-left:19%;">Error or concealment</p>
+
+<p style="margin-left:14%;"><b>notres</b></p>
+
+<p style="margin-left:19%;">Not reserved</p>
+
+<p style="margin-left:14%;"><b>Aa, Ba, Ca, Ab, Bb, Cb, A,
+B, C, a, b, erri, erru</b></p>
+
+<p style="margin-left:19%;">The specific error status
+code</p>
+
+<p style="margin-left:14%; margin-top: 1em">see page 44-46
+or section 5.5 of
+&lt;<b>http://web.archive.org/web/20060927044735/http://www.smpte.org/smpte_store/standards/pdf/s314m.pdf</b>&gt;</p>
+
+<h3>eac3_core
+<a name="eac3_core"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Extract the core
+from a E-AC-3 stream, dropping extra channels.</p>
+
+<h3>extract_extradata
+<a name="extract_extradata"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Extract the
+in-band extradata.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Certain codecs
+allow the long-term headers (e.g. MPEG-2 sequence headers,
+or H.264/HEVC (VPS/)SPS/PPS) to be transmitted either
+&quot;in-band&quot; (i.e. as a part of the bitstream
+containing the coded frames) or &quot;out of band&quot;
+(e.g. on the container level). This latter form is called
+&quot;extradata&quot; in FFmpeg terminology.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This bitstream
+filter detects the in-band headers and makes them available
+as extradata. <b><br>
+remove</b></p>
+
+<p style="margin-left:14%;">When this option is enabled,
+the long-term headers are removed from the bitstream after
+extraction.</p>
+
+<h3>filter_units
+<a name="filter_units"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove units
+with types in or not in a given set from the stream. <b><br>
+pass_types</b></p>
+
+<p style="margin-left:14%;">List of unit types or ranges of
+unit types to pass through while removing all others. This
+is specified as a &rsquo;|&rsquo;-separated list of unit
+type values or ranges of values with &rsquo;-&rsquo;.</p>
+
+<p style="margin-left:9%;"><b>remove_types</b></p>
+
+<p style="margin-left:14%;">Identical to <b>pass_types</b>,
+except the units in the given set removed and all others
+passed through.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The types used
+by pass_types and remove_types correspond to NAL unit types
+(nal_unit_type) in H.264, HEVC and H.266 (see Table 7-1 in
+the H.264 and HEVC specifications or Table 5 in the H.266
+specification), to marker values for JPEG (without 0xFF
+prefix) and to start codes without start code prefix (i.e.
+the byte following the 0x000001) for MPEG-2. For VP8 and
+VP9, every unit has type zero.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Extradata is
+unchanged by this transformation, but note that if the
+stream contains inline parameter sets then the output may be
+unusable if they are removed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+remove all non-VCL NAL units from an H.264 stream:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c:v copy -bsf:v 'filter_units=pass_types=1-5' OUTPUT</p>
+
+<p style="margin-left:9%; margin-top: 1em">To remove all
+AUDs, SEI and filler from an H.265 stream:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c:v copy -bsf:v 'filter_units=remove_types=35|38-40'
+OUTPUT</p>
+
+<p style="margin-left:9%; margin-top: 1em">To remove all
+user data from a MPEG-2 stream, including Closed
+Captions:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c:v copy -bsf:v 'filter_units=remove_types=178' OUTPUT</p>
+
+<p style="margin-left:9%; margin-top: 1em">To remove all
+SEI from a H264 stream, including Closed Captions:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c:v copy -bsf:v 'filter_units=remove_types=6' OUTPUT</p>
+
+<p style="margin-left:9%; margin-top: 1em">To remove all
+prefix and suffix SEI from a HEVC stream, including Closed
+Captions and dynamic HDR:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c:v copy -bsf:v 'filter_units=remove_types=39|40'
+OUTPUT</p>
+
+<h3>hapqa_extract
+<a name="hapqa_extract"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Extract Rgb or
+Alpha part of an HAPQA file, without recompression, in order
+to create an HAPQ or an HAPAlphaOnly file. <b><br>
+texture</b></p>
+
+<p style="margin-left:14%;">Specifies the texture to keep.
+<b><br>
+color <br>
+alpha</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert HAPQA to
+HAPQ</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+hapqa_inputfile.mov -c copy -bsf:v
+hapqa_extract=texture=color -tag:v HapY -metadata:s:v:0
+encoder=&quot;HAPQ&quot; hapq_file.mov</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert HAPQA to
+HAPAlphaOnly</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+hapqa_inputfile.mov -c copy -bsf:v
+hapqa_extract=texture=alpha -tag:v HapA -metadata:s:v:0
+encoder=&quot;HAPAlpha Only&quot; hapalphaonly_file.mov</p>
+
+<h3>h264_metadata
+<a name="h264_metadata"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Modify metadata
+embedded in an H.264 stream.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>aud</b></p></td>
+<td width="1%"></td>
+<td width="83%">
+
+
+<p>Insert or remove AUD NAL units in all access units of
+the stream.</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>pass <br>
+insert <br>
+remove</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+pass.</p>
+
+<p style="margin-left:9%;"><b>sample_aspect_ratio</b></p>
+
+<p style="margin-left:14%;">Set the sample aspect ratio of
+the stream in the VUI parameters. See H.264 table E-1.</p>
+
+
+<p style="margin-left:9%;"><b>overscan_appropriate_flag</b></p>
+
+<p style="margin-left:14%;">Set whether the stream is
+suitable for display using overscan or not (see H.264
+section E.2.1).</p>
+
+<p style="margin-left:9%;"><b>video_format <br>
+video_full_range_flag</b></p>
+
+<p style="margin-left:14%;">Set the video format in the
+stream (see H.264 section E.2.1 and table E-2).</p>
+
+<p style="margin-left:9%;"><b>colour_primaries <br>
+transfer_characteristics <br>
+matrix_coefficients</b></p>
+
+<p style="margin-left:14%;">Set the colour description in
+the stream (see H.264 section E.2.1 and tables E-3, E-4 and
+E-5).</p>
+
+
+<p style="margin-left:9%;"><b>chroma_sample_loc_type</b></p>
+
+<p style="margin-left:14%;">Set the chroma sample location
+in the stream (see H.264 section E.2.1 and figure E-1).</p>
+
+<p style="margin-left:9%;"><b>tick_rate</b></p>
+
+<p style="margin-left:14%;">Set the tick rate (time_scale /
+num_units_in_tick) in the VUI parameters. This is the
+smallest time unit representable in the stream, and in many
+cases represents the field rate of the stream (double the
+frame rate).</p>
+
+
+<p style="margin-left:9%;"><b>fixed_frame_rate_flag</b></p>
+
+<p style="margin-left:14%;">Set whether the stream has
+fixed framerate - typically this indicates that the
+framerate is exactly half the tick rate, but the exact
+meaning is dependent on interlacing and the picture
+structure (see H.264 section E.2.1 and table E-6).</p>
+
+
+<p style="margin-left:9%;"><b>zero_new_constraint_set_flags</b></p>
+
+<p style="margin-left:14%;">Zero constraint_set4_flag and
+constraint_set5_flag in the SPS. These bits were reserved in
+a previous version of the H.264 spec, and thus some hardware
+decoders require these to be zero. The result of zeroing
+this is still a valid bitstream.</p>
+
+<p style="margin-left:9%;"><b>crop_left <br>
+crop_right <br>
+crop_top <br>
+crop_bottom</b></p>
+
+<p style="margin-left:14%;">Set the frame cropping offsets
+in the SPS. These values will replace the current ones if
+the stream is already cropped.</p>
+
+<p style="margin-left:14%; margin-top: 1em">These fields
+are set in pixels. Note that some sizes may not be
+representable if the chroma is subsampled or the stream is
+interlaced (see H.264 section 7.4.2.1.1).</p>
+
+<p style="margin-left:9%;"><b>sei_user_data</b></p>
+
+<p style="margin-left:14%;">Insert a string as SEI
+unregistered user data. The argument must be of the form
+<i>UUID+string</i>, where the UUID is as hex digits possibly
+separated by hyphens, and the string can be anything.</p>
+
+<p style="margin-left:14%; margin-top: 1em">For example,
+<b>086f3693-b7b3-4f2c-9653-21492feee5b8+hello</b> will
+insert the string &lsquo;&lsquo;hello&rsquo;&rsquo;
+associated with the given UUID.</p>
+
+<p style="margin-left:9%;"><b>delete_filler</b></p>
+
+<p style="margin-left:14%;">Deletes both filler NAL units
+and filler SEI messages.</p>
+
+<p style="margin-left:9%;"><b>display_orientation</b></p>
+
+<p style="margin-left:14%;">Insert, extract or remove
+Display orientation SEI messages. See H.264 section D.1.27
+and D.2.27 for syntax and semantics. <b><br>
+pass <br>
+insert <br>
+remove <br>
+extract</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+pass.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Insert mode
+works in conjunction with &quot;rotate&quot; and
+&quot;flip&quot; options. Any pre-existing Display
+orientation messages will be removed in insert or remove
+mode. Extract mode attaches the display matrix to the packet
+as side data.</p>
+
+<p style="margin-left:9%;"><b>rotate</b></p>
+
+<p style="margin-left:14%;">Set rotation in display
+orientation SEI (anticlockwise angle in degrees). Range is
+-360 to +360. Default is NaN.</p>
+
+<p style="margin-left:9%;"><b>flip</b></p>
+
+<p style="margin-left:14%;">Set flip in display orientation
+SEI. <b><br>
+horizontal <br>
+vertical</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+unset.</p>
+
+<p style="margin-left:9%;"><b>level</b></p>
+
+<p style="margin-left:14%;">Set the level in the SPS. Refer
+to H.264 section A.3 and tables A-1 to A-5.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The argument
+must be the name of a level (for example, <b>4.2</b>), a
+level_idc value (for example, <b>42</b>), or the special
+name <b>auto</b> indicating that the filter should attempt
+to guess the level from the input stream properties.</p>
+
+<h3>h264_mp4toannexb
+<a name="h264_mp4toannexb"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert an H.264
+bitstream from length prefixed mode to start code prefixed
+mode (as defined in the Annex B of the ITU-T H.264
+specification).</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is required
+by some streaming formats, typically the MPEG-2 transport
+stream format (muxer &quot;mpegts&quot;).</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+remux an MP4 file containing an H.264 stream to mpegts
+format with <b>ffmpeg</b>, you can use the command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+INPUT.mp4 -codec copy -bsf:v h264_mp4toannexb OUTPUT.ts</p>
+
+<p style="margin-left:9%; margin-top: 1em">Please note that
+this filter is auto-inserted for MPEG-TS (muxer
+&quot;mpegts&quot;) and raw H.264 (muxer &quot;h264&quot;)
+output formats.</p>
+
+<h3>h264_redundant_pps
+<a name="h264_redundant_pps"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This applies a
+specific fixup to some Blu-ray streams which contain
+redundant PPSs modifying irrelevant parameters of the stream
+which confuse other transformations which require correct
+extradata.</p>
+
+<h3>hevc_metadata
+<a name="hevc_metadata"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Modify metadata
+embedded in an HEVC stream.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>aud</b></p></td>
+<td width="1%"></td>
+<td width="83%">
+
+
+<p>Insert or remove AUD NAL units in all access units of
+the stream.</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>insert <br>
+remove</b></p>
+
+<p style="margin-left:9%;"><b>sample_aspect_ratio</b></p>
+
+<p style="margin-left:14%;">Set the sample aspect ratio in
+the stream in the VUI parameters.</p>
+
+<p style="margin-left:9%;"><b>video_format <br>
+video_full_range_flag</b></p>
+
+<p style="margin-left:14%;">Set the video format in the
+stream (see H.265 section E.3.1 and table E.2).</p>
+
+<p style="margin-left:9%;"><b>colour_primaries <br>
+transfer_characteristics <br>
+matrix_coefficients</b></p>
+
+<p style="margin-left:14%;">Set the colour description in
+the stream (see H.265 section E.3.1 and tables E.3, E.4 and
+E.5).</p>
+
+
+<p style="margin-left:9%;"><b>chroma_sample_loc_type</b></p>
+
+<p style="margin-left:14%;">Set the chroma sample location
+in the stream (see H.265 section E.3.1 and figure E.1).</p>
+
+<p style="margin-left:9%;"><b>tick_rate</b></p>
+
+<p style="margin-left:14%;">Set the tick rate in the VPS
+and VUI parameters (time_scale / num_units_in_tick).
+Combined with <b>num_ticks_poc_diff_one</b>, this can set a
+constant framerate in the stream. Note that it is likely to
+be overridden by container parameters when the stream is in
+a container.</p>
+
+
+<p style="margin-left:9%;"><b>num_ticks_poc_diff_one</b></p>
+
+<p style="margin-left:14%;">Set
+poc_proportional_to_timing_flag in VPS and VUI and use this
+value to set num_ticks_poc_diff_one_minus1 (see H.265
+sections 7.4.3.1 and E.3.1). Ignored if <b>tick_rate</b> is
+not also set.</p>
+
+<p style="margin-left:9%;"><b>crop_left <br>
+crop_right <br>
+crop_top <br>
+crop_bottom</b></p>
+
+<p style="margin-left:14%;">Set the conformance window
+cropping offsets in the SPS. These values will replace the
+current ones if the stream is already cropped.</p>
+
+<p style="margin-left:14%; margin-top: 1em">These fields
+are set in pixels. Note that some sizes may not be
+representable if the chroma is subsampled (H.265 section
+7.4.3.2.1).</p>
+
+<p style="margin-left:9%;"><b>width <br>
+height</b></p>
+
+<p style="margin-left:14%;">Set width and height after
+crop.</p>
+
+<p style="margin-left:9%;"><b>level</b></p>
+
+<p style="margin-left:14%;">Set the level in the VPS and
+SPS. See H.265 section A.4 and tables A.6 and A.7.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The argument
+must be the name of a level (for example, <b>5.1</b>), a
+<i>general_level_idc</i> value (for example, <b>153</b> for
+level 5.1), or the special name <b>auto</b> indicating that
+the filter should attempt to guess the level from the input
+stream properties.</p>
+
+<h3>hevc_mp4toannexb
+<a name="hevc_mp4toannexb"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert an
+HEVC/H.265 bitstream from length prefixed mode to start code
+prefixed mode (as defined in the Annex B of the ITU-T H.265
+specification).</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is required
+by some streaming formats, typically the MPEG-2 transport
+stream format (muxer &quot;mpegts&quot;).</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+remux an MP4 file containing an HEVC stream to mpegts format
+with <b>ffmpeg</b>, you can use the command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+INPUT.mp4 -codec copy -bsf:v hevc_mp4toannexb OUTPUT.ts</p>
+
+<p style="margin-left:9%; margin-top: 1em">Please note that
+this filter is auto-inserted for MPEG-TS (muxer
+&quot;mpegts&quot;) and raw HEVC/H.265 (muxer
+&quot;h265&quot; or &quot;hevc&quot;) output formats.</p>
+
+<h3>imxdump
+<a name="imxdump"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Modifies the
+bitstream to fit in MOV and to be usable by the Final Cut
+Pro decoder. This filter only applies to the mpeg2video
+codec, and is likely not needed for Final Cut Pro 7 and
+newer with the appropriate <b>-tag:v</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+remux 30 MB/sec NTSC IMX to MOV:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+input.mxf -c copy -bsf:v imxdump -tag:v mx3n output.mov</p>
+
+<h3>mjpeg2jpeg
+<a name="mjpeg2jpeg"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert
+MJPEG/AVI1 packets to full JPEG/JFIF packets.</p>
+
+<p style="margin-left:9%; margin-top: 1em">MJPEG is a video
+codec wherein each video frame is essentially a JPEG image.
+The individual frames can be extracted without loss, e.g.
+by</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+../some_mjpeg.avi -c:v copy frames_%d.jpg</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unfortunately,
+these chunks are incomplete JPEG images, because they lack
+the DHT segment required for decoding. Quoting from
+&lt;<b>http://www.digitalpreservation.gov/formats/fdd/fdd000063.shtml</b>&gt;:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Avery Lee,
+writing in the rec.video.desktop newsgroup in 2001,
+commented that &quot;MJPEG, or at least the MJPEG in AVIs
+having the MJPG fourcc, is restricted JPEG with a fixed --
+and *omitted* -- Huffman table. The JPEG must be YCbCr
+colorspace, it must be 4:2:2, and it must use basic Huffman
+encoding, not arithmetic or progressive. . . . You can
+indeed extract the MJPEG frames and decode them with a
+regular JPEG decoder, but you have to prepend the DHT
+segment to them, or else the decoder won&rsquo;t have any
+idea how to decompress the data. The exact table necessary
+is given in the OpenDML spec.&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">This bitstream
+filter patches the header of frames extracted from an MJPEG
+stream (carrying the AVI1 header ID and lacking a DHT
+segment) to produce fully qualified JPEG images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+mjpeg-movie.avi -c:v copy -bsf:v mjpeg2jpeg frame_%d.jpg
+<br>
+exiftran -i -9 frame*.jpg <br>
+ffmpeg -i frame_%d.jpg -c:v copy rotated.avi</p>
+
+<h3>mjpegadump
+<a name="mjpegadump"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add an MJPEG A
+header to the bitstream, to enable decoding by
+Quicktime.</p>
+
+<h3>mov2textsub
+<a name="mov2textsub"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Extract a
+representable text file from MOV subtitles, stripping the
+metadata header from each subtitle packet.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See also the
+<b>text2movsub</b> filter.</p>
+
+<h3>mpeg2_metadata
+<a name="mpeg2_metadata"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Modify metadata
+embedded in an MPEG-2 stream. <b><br>
+display_aspect_ratio</b></p>
+
+<p style="margin-left:14%;">Set the display aspect ratio in
+the stream.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The following
+fixed values are supported:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>4/3</b></p></td>
+<td width="82%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em"><b>16/9 <br>
+221/100</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Any other value
+will result in square pixels being signalled instead (see
+H.262 section 6.3.3 and table 6-3).</p>
+
+<p style="margin-left:9%;"><b>frame_rate</b></p>
+
+<p style="margin-left:14%;">Set the frame rate in the
+stream. This is constructed from a table of known values
+combined with a small multiplier and divisor - if the
+supplied value is not exactly representable, the nearest
+representable value will be used instead (see H.262 section
+6.3.3 and table 6-4).</p>
+
+<p style="margin-left:9%;"><b>video_format</b></p>
+
+<p style="margin-left:14%;">Set the video format in the
+stream (see H.262 section 6.3.6 and table 6-6).</p>
+
+<p style="margin-left:9%;"><b>colour_primaries <br>
+transfer_characteristics <br>
+matrix_coefficients</b></p>
+
+<p style="margin-left:14%;">Set the colour description in
+the stream (see H.262 section 6.3.6 and tables 6-7, 6-8 and
+6-9).</p>
+
+<h3>mpeg4_unpack_bframes
+<a name="mpeg4_unpack_bframes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unpack
+DivX-style packed B-frames.</p>
+
+<p style="margin-left:9%; margin-top: 1em">DivX-style
+packed B-frames are not valid MPEG-4 and were only a
+workaround for the broken Video for Windows subsystem. They
+use more space, can cause minor AV sync issues, require more
+CPU power to decode (unless the player has some decoded
+picture queue to compensate the 2,0,2,0 frame per packet
+style) and cause trouble if copied into a standard container
+like mp4 or mpeg-ps/ts, because MPEG-4 decoders may not be
+able to decode them, since they are not valid MPEG-4.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+fix an AVI file containing an MPEG-4 stream with DivX-style
+packed B-frames using <b>ffmpeg</b>, you can use the
+command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+INPUT.avi -codec copy -bsf:v mpeg4_unpack_bframes
+OUTPUT.avi</p>
+
+<h3>noise
+<a name="noise"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Damages the
+contents of packets or simply drops them without damaging
+the container. Can be used for fuzzing or testing error
+resilience/concealment.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Parameters:
+<b><br>
+amount</b></p>
+
+<p style="margin-left:14%;">Accepts an expression whose
+evaluation per-packet determines how often bytes in that
+packet will be modified. A value below 0 will result in a
+variable frequency. Default is 0 which results in no
+modification. However, if neither amount nor drop is
+specified, amount will be set to <i>-1</i>. See below for
+accepted variables.</p>
+
+<p style="margin-left:9%;"><b>drop</b></p>
+
+<p style="margin-left:14%;">Accepts an expression evaluated
+per-packet whose value determines whether that packet is
+dropped. Evaluation to a positive value results in the
+packet being dropped. Evaluation to a negative value results
+in a variable chance of it being dropped, roughly inverse in
+proportion to the magnitude of the value. Default is 0 which
+results in no drops. See below for accepted variables.</p>
+
+<p style="margin-left:9%;"><b>dropamount</b></p>
+
+<p style="margin-left:14%;">Accepts a non-negative integer,
+which assigns a variable chance of it being dropped, roughly
+inverse in proportion to the value. Default is 0 which
+results in no drops. This option is kept for backwards
+compatibility and is equivalent to setting drop to a
+negative value with the same magnitude i.e.
+&quot;dropamount=4&quot; is the same as &quot;drop=-4&quot;.
+Ignored if drop is also specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Both
+&quot;amount&quot; and &quot;drop&quot; accept expressions
+containing the following variables:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>n</b></p></td>
+<td width="1%"></td>
+<td width="57%">
+
+
+<p>The index of the packet, starting from zero.</p></td>
+<td width="29%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>tb</b></p></td>
+<td width="1%"></td>
+<td width="57%">
+
+
+<p>The timebase for packet timestamps.</p></td>
+<td width="29%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>pts</b></p></td>
+<td width="1%"></td>
+<td width="57%">
+
+
+<p>Packet presentation timestamp.</p></td>
+<td width="29%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>dts</b></p></td>
+<td width="1%"></td>
+<td width="57%">
+
+
+<p>Packet decoding timestamp.</p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>nopts</b></p>
+
+<p style="margin-left:14%;">Constant representing
+AV_NOPTS_VALUE.</p>
+
+<p style="margin-left:9%;"><b>startpts</b></p>
+
+<p style="margin-left:14%;">First non-AV_NOPTS_VALUE PTS
+seen in the stream.</p>
+
+<p style="margin-left:9%;"><b>startdts</b></p>
+
+<p style="margin-left:14%;">First non-AV_NOPTS_VALUE DTS
+seen in the stream.</p>
+
+<p style="margin-left:9%;"><b>duration</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>d</b></p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p>Packet duration, in timebase units.</p></td>
+<td width="9%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>pos</b></p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p>Packet position in input; may be -1 when unknown or not
+set.</p> </td>
+<td width="9%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>size</b></p>
+
+<p style="margin-left:14%;">Packet size, in bytes.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>key</b></p></td>
+<td width="1%"></td>
+<td width="50%">
+
+
+<p>Whether packet is marked as a keyframe.</p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>state</b></p>
+
+<p style="margin-left:14%;">A pseudo random integer,
+primarily derived from the content of packet payload.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Examples</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Apply
+modification to every byte but don&rsquo;t drop any
+packets.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c copy -bsf noise=1 output.mkv</p>
+
+<p style="margin-left:9%; margin-top: 1em">Drop every video
+packet not marked as a keyframe after timestamp 30s but do
+not modify any of the remaining packets.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c copy -bsf:v noise=drop='gt(t\,30)*not(key)'
+output.mkv</p>
+
+<p style="margin-left:9%; margin-top: 1em">Drop one second
+of audio every 10 seconds and add some random noise to the
+rest.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c copy -bsf:a
+noise=amount=-1:drop='between(mod(t\,10)\,9\,10)'
+output.mkv</p>
+
+<h3>null
+<a name="null"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This bitstream
+filter passes the packets through unchanged.</p>
+
+<h3>pcm_rechunk
+<a name="pcm_rechunk"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Repacketize PCM
+audio to a fixed number of samples per packet or a fixed
+packet rate per second. This is similar to the
+<b>asetnsamples audio filter</b> but works on audio packets
+instead of audio frames. <b><br>
+nb_out_samples, n</b></p>
+
+<p style="margin-left:14%;">Set the number of samples per
+each output audio packet. The number is intended as the
+number of samples <i>per each channel</i>. Default value is
+1024.</p>
+
+<p style="margin-left:9%;"><b>pad, p</b></p>
+
+<p style="margin-left:14%;">If set to 1, the filter will
+pad the last audio packet with silence, so that it will
+contain the same number of samples (or roughly the same
+number of samples, see <b>frame_rate</b>) as the previous
+ones. Default value is 1.</p>
+
+<p style="margin-left:9%;"><b>frame_rate, r</b></p>
+
+<p style="margin-left:14%;">This option makes the filter
+output a fixed number of packets per second instead of a
+fixed number of samples per packet. If the audio sample rate
+is not divisible by the frame rate then the number of
+samples will not be constant but will vary slightly so that
+each packet will start as close to the frame boundary as
+possible. Using this option has precedence over
+<b>nb_out_samples</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can generate
+the well known 1602-1601-1602-1601-1602 pattern of 48kHz
+audio for NTSC frame rate using the <b>frame_rate</b>
+option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -f lavfi
+-i sine=r=48000:d=1 -c pcm_s16le -bsf
+pcm_rechunk=r=30000/1001 -f framecrc -</p>
+
+<h3>pgs_frame_merge
+<a name="pgs_frame_merge"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Merge a sequence
+of PGS Subtitle segments ending with an &quot;end of display
+set&quot; segment into a single packet.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is required
+by some containers that support PGS subtitles (muxer
+&quot;matroska&quot;).</p>
+
+<h3>prores_metadata
+<a name="prores_metadata"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Modify color
+property metadata embedded in prores stream. <b><br>
+color_primaries</b></p>
+
+<p style="margin-left:14%;">Set the color primaries.
+Available values are: <b><br>
+auto</b></p>
+
+<p style="margin-left:19%;">Keep the same color primaries
+property (default).</p>
+
+<p style="margin-left:14%;"><b>unknown <br>
+bt709 <br>
+bt470bg</b></p>
+
+<p style="margin-left:19%;">BT601 625</p>
+
+<p style="margin-left:14%;"><b>smpte170m</b></p>
+
+<p style="margin-left:19%;">BT601 525</p>
+
+<p style="margin-left:14%;"><b>bt2020 <br>
+smpte431</b></p>
+
+<p style="margin-left:19%;">DCI P3</p>
+
+<p style="margin-left:14%;"><b>smpte432</b></p>
+
+<p style="margin-left:19%;">P3 D65</p>
+
+
+<p style="margin-left:9%;"><b>transfer_characteristics</b></p>
+
+<p style="margin-left:14%;">Set the color transfer.
+Available values are: <b><br>
+auto</b></p>
+
+<p style="margin-left:19%;">Keep the same transfer
+characteristics property (default).</p>
+
+<p style="margin-left:14%;"><b>unknown <br>
+bt709</b></p>
+
+<p style="margin-left:19%;">BT 601, BT 709, BT 2020</p>
+
+<p style="margin-left:14%;"><b>smpte2084</b></p>
+
+<p style="margin-left:19%;">SMPTE ST 2084</p>
+
+<p style="margin-left:14%;"><b>arib-std-b67</b></p>
+
+<p style="margin-left:19%;">ARIB STD-B67</p>
+
+<p style="margin-left:9%;"><b>matrix_coefficients</b></p>
+
+<p style="margin-left:14%;">Set the matrix coefficient.
+Available values are: <b><br>
+auto</b></p>
+
+<p style="margin-left:19%;">Keep the same colorspace
+property (default).</p>
+
+<p style="margin-left:14%;"><b>unknown <br>
+bt709 <br>
+smpte170m</b></p>
+
+<p style="margin-left:19%;">BT 601</p>
+
+<p style="margin-left:14%;"><b>bt2020nc</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Set Rec709
+colorspace for each frame of the file</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c copy -bsf:v
+prores_metadata=color_primaries=bt709:color_trc=bt709:colorspace=bt709
+output.mov</p>
+
+<p style="margin-left:9%; margin-top: 1em">Set Hybrid
+Log-Gamma parameters for each frame of the file</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c copy -bsf:v
+prores_metadata=color_primaries=bt2020:color_trc=arib-std-b67:colorspace=bt2020nc
+output.mov</p>
+
+<h3>remove_extra
+<a name="remove_extra"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove extradata
+from packets.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It accepts the
+following parameter: <b><br>
+freq</b></p>
+
+<p style="margin-left:14%;">Set which frame types to remove
+extradata from.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>k</b></p></td>
+<td width="4%"></td>
+<td width="53%">
+
+
+<p>Remove extradata from non-keyframes only.</p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>keyframe</b></p>
+
+<p style="margin-left:19%;">Remove extradata from keyframes
+only.</p>
+
+<p style="margin-left:14%;"><b>e, all</b></p>
+
+<p style="margin-left:19%;">Remove extradata from all
+frames.</p>
+
+<h3>setts
+<a name="setts"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set PTS and DTS
+in packets.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It accepts the
+following parameters:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>ts</b></p></td>
+<td width="1%"></td>
+<td width="48%">
+</td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>pts</b></p></td>
+<td width="1%"></td>
+<td width="48%">
+</td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>dts</b></p></td>
+<td width="1%"></td>
+<td width="48%">
+
+
+<p>Set expressions for PTS, DTS or both.</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>duration</b></p>
+
+<p style="margin-left:14%;">Set expression for
+duration.</p>
+
+<p style="margin-left:9%;"><b>time_base</b></p>
+
+<p style="margin-left:14%;">Set output time base.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The expressions
+are evaluated through the eval API and can contain the
+following constants:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>N</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>The count of the input packet. Starting from 0.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>TS</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>The demux timestamp in input in case of &quot;ts&quot;
+or &quot;dts&quot; option or presentation timestamp in case
+of &quot;pts&quot; option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>POS</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>The original position in the file of the packet, or
+undefined if undefined for the current packet</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>DTS</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>The demux timestamp in input.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>PTS</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>The presentation timestamp in input.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>DURATION</b></p>
+
+<p style="margin-left:14%;">The duration in input.</p>
+
+<p style="margin-left:9%;"><b>STARTDTS</b></p>
+
+<p style="margin-left:14%;">The DTS of the first
+packet.</p>
+
+<p style="margin-left:9%;"><b>STARTPTS</b></p>
+
+<p style="margin-left:14%;">The PTS of the first
+packet.</p>
+
+<p style="margin-left:9%;"><b>PREV_INDTS</b></p>
+
+<p style="margin-left:14%;">The previous input DTS.</p>
+
+<p style="margin-left:9%;"><b>PREV_INPTS</b></p>
+
+<p style="margin-left:14%;">The previous input PTS.</p>
+
+<p style="margin-left:9%;"><b>PREV_INDURATION</b></p>
+
+<p style="margin-left:14%;">The previous input
+duration.</p>
+
+<p style="margin-left:9%;"><b>PREV_OUTDTS</b></p>
+
+<p style="margin-left:14%;">The previous output DTS.</p>
+
+<p style="margin-left:9%;"><b>PREV_OUTPTS</b></p>
+
+<p style="margin-left:14%;">The previous output PTS.</p>
+
+<p style="margin-left:9%;"><b>PREV_OUTDURATION</b></p>
+
+<p style="margin-left:14%;">The previous output
+duration.</p>
+
+<p style="margin-left:9%;"><b>NEXT_DTS</b></p>
+
+<p style="margin-left:14%;">The next input DTS.</p>
+
+<p style="margin-left:9%;"><b>NEXT_PTS</b></p>
+
+<p style="margin-left:14%;">The next input PTS.</p>
+
+<p style="margin-left:9%;"><b>NEXT_DURATION</b></p>
+
+<p style="margin-left:14%;">The next input duration.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>TB</b></p></td>
+<td width="2%"></td>
+<td width="49%">
+
+
+<p>The timebase of stream packet belongs.</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>TB_OUT</b></p>
+
+<p style="margin-left:14%;">The output timebase.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>SR</b></p></td>
+<td width="2%"></td>
+<td width="53%">
+
+
+<p>The sample rate of stream packet belongs.</p></td>
+<td width="33%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>NOPTS</b></p>
+
+<p style="margin-left:14%;">The AV_NOPTS_VALUE
+constant.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+set PTS equal to DTS (not recommended if B-frames are
+involved):</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-c:a copy -bsf:a setts=pts=DTS out.mkv</p>
+
+<h3>showinfo
+<a name="showinfo"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Log basic packet
+information. Mainly useful for testing, debugging, and
+development.</p>
+
+<h3>text2movsub
+<a name="text2movsub"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert text
+subtitles to MOV subtitles (as used by the
+&quot;mov_text&quot; codec) with metadata headers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See also the
+<b>mov2textsub</b> filter.</p>
+
+<h3>trace_headers
+<a name="trace_headers"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Log trace output
+containing all syntax elements in the coded stream headers
+(everything above the level of individual coded blocks).
+This can be useful for debugging low-level stream
+issues.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supports AV1,
+H.264, H.265, (M)JPEG, MPEG-2 and VP9, but depending on the
+build only a subset of these may be available.</p>
+
+<h3>truehd_core
+<a name="truehd_core"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Extract the core
+from a TrueHD stream, dropping ATMOS data.</p>
+
+<h3>vp9_metadata
+<a name="vp9_metadata"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Modify metadata
+embedded in a VP9 stream. <b><br>
+color_space</b></p>
+
+<p style="margin-left:14%;">Set the color space value in
+the frame header. Note that any frame set to RGB will be
+implicitly set to PC range and that RGB is incompatible with
+profiles 0 and 2. <b><br>
+unknown <br>
+bt601 <br>
+bt709 <br>
+smpte170 <br>
+smpte240 <br>
+bt2020</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>rgb</b></p></td>
+<td width="82%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>color_range</b></p>
+
+<p style="margin-left:14%;">Set the color range value in
+the frame header. Note that any value imposed by the color
+space will take precedence over this value.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="3%">
+
+
+<p><b>tv</b></p></td>
+<td width="83%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="3%">
+
+
+<p><b>pc</b></p></td>
+<td width="83%">
+</td></tr>
+</table>
+
+<h3>vp9_superframe
+<a name="vp9_superframe"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Merge VP9
+invisible (alt-ref) frames back into VP9 superframes. This
+fixes merging of split/segmented VP9 streams where the
+alt-ref frame was split from its visible counterpart.</p>
+
+<h3>vp9_superframe_split
+<a name="vp9_superframe_split"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Split VP9
+superframes into single frames.</p>
+
+<h3>vp9_raw_reorder
+<a name="vp9_raw_reorder"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Given a VP9
+stream with correct timestamps but possibly out of order,
+insert additional show-existing-frame packets to correct the
+ordering.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ffmpeg</b>(1),
+<b>ffplay</b>(1), <b>ffprobe</b>(1),
+<b>libavcodec</b>(3)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The FFmpeg
+developers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For details
+about the authorship, see the Git history of the project
+(https://git.ffmpeg.org/ffmpeg), e.g. by typing the command
+<b>git log</b> in the FFmpeg source directory, or browsing
+the online repository at
+&lt;<b>https://git.ffmpeg.org/ffmpeg</b>&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Maintainers for
+the specific components are listed in the file
+<i>MAINTAINERS</i> in the source code tree.</p>
+<hr>
+</body>
+</html>

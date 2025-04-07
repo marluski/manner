@@ -1,0 +1,755 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:59 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CEC-CTL</title>
+
+</head>
+<body>
+
+<h1 align="center">CEC-CTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cec-ctl - An
+application to control cec devices</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cec-ctl</b>
+[<i>-h</i>] [<i>-d &lt;dev&gt;</i>] [many other options]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The cec-ctl tool
+is used to control cec devices. It is able to control almost
+any aspect of such devices covering the full CEC API.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The easiest way
+to quickly test a CEC adapter of an HDMI output is:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>cec-ctl -d/dev/cecX --playback -S</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is what you
+would use if the HDMI output of your device supports CEC:
+your device will play back video, so it is a CEC Playback
+device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">And for an HDMI
+input:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>cec-ctl -d/dev/cecX --tv -S</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is what you
+would use if your device has an HDMI input, i.e. it acts
+like a TV.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Both commands
+configure the CEC adapter and show the CEC topology. The
+&rsquo;--playback&rsquo; and &rsquo;--tv&rsquo; options
+configure <i>your</i> device, they are not about what device
+you will be talking to.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To put a display
+to standby use:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>cec-ctl -d/dev/cecX --to 0 --standby</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">To wake up the
+display:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>cec-ctl -d/dev/cecX --to 0 --image-view-on</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">To switch the TV
+to our HDMI output (replace the physical address with what
+cec-ctl -d/dev/cecX reported):</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>cec-ctl -d/dev/cecX --to 0 --active-source
+phys-addr=1.0.0.0</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Instead of
+&rsquo;-d/dev/cecX&rsquo; you can also write this as
+&rsquo;-dX&rsquo;. And instead of &rsquo;--to 0&rsquo; you
+can also write this as &rsquo;-t0&rsquo;.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--device</b> <i>&lt;dev&gt;</i></p>
+
+<p style="margin-left:18%;">Use device &lt;dev&gt; as the
+CEC device. If &lt;dev&gt; is a number, then
+/dev/cec&lt;dev&gt; is used.</p>
+
+<p style="margin-left:9%;"><b>-D</b>, <b>--driver</b>
+<i>&lt;drv&gt;</i></p>
+
+<p style="margin-left:18%;">Use a cec device that has
+driver name <i>&lt;drv&gt;</i>, as returned by the
+CEC_ADAP_G_CAPS ioctl. This option can be combined with
+<b>-a</b> to uniquely identify a CEC device without having
+to rely on the device node number.</p>
+
+<p style="margin-left:9%;"><b>-a</b>, <b>--adapter</b>
+<i>&lt;adap-name&gt;</i></p>
+
+<p style="margin-left:18%;">Use a cec device that has
+adapter name <i>&lt;adap-name&gt;</i>, as returned by the
+CEC_ADAP_G_CAPS ioctl. This option can be combined with
+<b>-D</b> to uniquely identify a CEC device without having
+to rely on the device node number.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Turn on verbose reporting.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Show version information.</p>
+
+<p style="margin-left:9%;"><b>-w</b>,
+<b>--wall-clock</b></p>
+
+<p style="margin-left:18%;">Show timestamps as wall-clock
+time. This also turns on verbose reporting.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Prints the help message.</p>
+
+<p style="margin-left:9%;"><b>-p</b>, <b>--phys-addr</b>
+<i>&lt;addr&gt;</i></p>
+
+<p style="margin-left:18%;">Use this physical address. The
+address can be a number (e.g. 0 or 0x11b1) or formatted as
+a.b.c.d where each component is a hex value from 0-f (e.g.
+0.0.0.0 or 1.1.b.1).</p>
+
+<p style="margin-left:9%;"><b>-e</b>,
+<b>--phys-addr-from-edid</b> <i>&lt;path&gt;</i></p>
+
+<p style="margin-left:18%;">Parse the given EDID file (in
+raw binary format) and extract the physical address. If the
+EDID file does not exist or does not contain a physical
+address, then invalidate the physical address.</p>
+
+<p style="margin-left:9%;"><b>-E</b>,
+<b>--phys-addr-from-edid-poll</b> <i>&lt;path&gt;</i></p>
+
+<p style="margin-left:18%;">Parse the given EDID file (in
+raw binary format) and extract the physical address. If the
+EDID file does not exist or does not contain a physical
+address, then invalidate the physical address. Poll for
+changes in this EDID file every 100 ms and, if changed,
+update the physical address.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This provides a
+way for Pulse-Eight (or similar) USB CEC dongles to become
+aware of HDMI disconnect and reconnect events.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Polling happens
+in the background while cec-ctl processes other requested
+actions (i.e. transmitting messages, waiting for replies,
+etc.) and when that is all done cec-ctl will keep polling
+until the user kills cec-ctl (Ctrl-C).</p>
+
+<p style="margin-left:9%;"><b>-o</b>, <b>--osd-name</b>
+<i>&lt;name&gt;</i></p>
+
+<p style="margin-left:18%;">Use this OSD name. The maximum
+length is 14 characters.</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--vendor-id</b>
+<i>&lt;id&gt;</i></p>
+
+<p style="margin-left:18%;">Use this vendor ID. The vendor
+ID is a number from 0x0 to 0xffffff.</p>
+
+<p style="margin-left:9%;"><b>-l</b>,
+<b>--logical-address</b></p>
+
+<p style="margin-left:18%;">Show first configured logical
+address or nothing if the device is unconfigured. Useful for
+scripts, e.g.: la=&lsquo;cec-ctl -s -l&lsquo;</p>
+
+<p style="margin-left:9%;"><b>-L</b>,
+<b>--logical-addresses</b></p>
+
+<p style="margin-left:18%;">Show all configured logical
+addresses or nothing if the device is unconfigured. Useful
+for scripts, e.g.: las=&lsquo;cec-ctl -s -L&lsquo;</p>
+
+<p style="margin-left:9%;"><b>-C</b>, <b>--clear</b></p>
+
+<p style="margin-left:18%;">Clear all logical addresses,
+leaving the CEC device unconfigured.</p>
+
+<p style="margin-left:9%;"><b>-n</b>, <b>--no-reply</b></p>
+
+<p style="margin-left:18%;">By default when sending a CEC
+message that expects a reply this utility will wait for that
+reply. With this option it will just send it without waiting
+for the reply. This option applies to the messages following
+this option. It acts as a toggle, so after you specify it a
+second time then the following messages will wait for a
+reply again.</p>
+
+<p style="margin-left:9%;"><b>-N</b>,
+<b>--non-blocking</b></p>
+
+<p style="margin-left:18%;">Transmit messages in
+non-blocking mode.</p>
+
+<p style="margin-left:9%;"><b>-t</b>, <b>--to</b>
+<i>&lt;la&gt;</i></p>
+
+<p style="margin-left:18%;">Send the message to the given
+logical address (0-15).</p>
+
+<p style="margin-left:9%;"><b>-f</b>, <b>--from</b>
+<i>&lt;la&gt;</i></p>
+
+<p style="margin-left:18%;">Send message from the given
+logical address. It is only necessary to use this option if
+multiple logical addresses are claimed. By default the first
+assigned logical address will be used.</p>
+
+<p style="margin-left:9%;"><b>-r</b>, <b>--show-raw</b></p>
+
+<p style="margin-left:18%;">Show the raw CEC message in
+hex.</p>
+
+<p style="margin-left:9%;"><b>-s</b>,
+<b>--skip-info</b></p>
+
+<p style="margin-left:18%;">Skip the Driver Info output
+section.</p>
+
+<p style="margin-left:9%;"><b>-S</b>,
+<b>--show-topology</b></p>
+
+<p style="margin-left:18%;">Show the CEC topology,
+detecting which other CEC devices are on the CEC bus.</p>
+
+<p style="margin-left:9%;"><b>-P</b>, <b>--poll</b></p>
+
+<p style="margin-left:18%;">Send a poll message.</p>
+
+<p style="margin-left:9%;"><b>-T</b>, <b>--trace</b></p>
+
+<p style="margin-left:18%;">Trace all called ioctls. Useful
+for debugging.</p>
+
+<p style="margin-left:9%;"><b>--cec-version-1.4</b></p>
+
+<p style="margin-left:18%;">Use CEC Version 1.4 instead of
+2.0 (the default).</p>
+
+
+<p style="margin-left:9%;"><b>--allow-unreg-fallback</b></p>
+
+<p style="margin-left:18%;">Allow fallback to Unregistered
+if all logical addresses are claimed. By default the adapter
+will remain unconfigured.</p>
+
+<p style="margin-left:9%;"><b>--no-rc-passthrough</b></p>
+
+<p style="margin-left:18%;">Disable the RC passthrough. By
+default remote control CEC messages are passed on as input
+keystrokes (the <b>CEC_LOG_ADDRS_FL_ALLOW_RC_PASSTHRU</b>
+flag is set when calling the <b>CEC_ADAP_S_LOG_ADDRS</b>
+ioctl), but this can be blocked by using this option.</p>
+
+<p style="margin-left:9%;"><b>--reply-to-followers</b></p>
+
+<p style="margin-left:18%;">The reply will be sent to
+followers as well. By default the reply will only go to the
+follower that initiated the CEC message. But if you have
+other followers running as well, then by giving this option
+they will also receive the reply.</p>
+
+<p style="margin-left:9%;"><b>--timeout</b>
+<i>&lt;ms&gt;</i></p>
+
+<p style="margin-left:18%;">Set the reply timeout in
+milliseconds (default is 1000 ms).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>--tv</b></p></td>
+<td width="4%"></td>
+<td width="44%">
+
+
+<p>Configure the CEC adapter as a TV.</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--record</b></p>
+
+<p style="margin-left:18%;">Configure the CEC adapter as a
+recording and playback device.</p>
+
+<p style="margin-left:9%;"><b>--tuner</b></p>
+
+<p style="margin-left:18%;">Configure the CEC adapter as a
+tuner device.</p>
+
+<p style="margin-left:9%;"><b>--playback</b></p>
+
+<p style="margin-left:18%;">Configure the CEC adapter as a
+playback device.</p>
+
+<p style="margin-left:9%;"><b>--audio</b></p>
+
+<p style="margin-left:18%;">Configure the CEC adapter as an
+audio system device.</p>
+
+<p style="margin-left:9%;"><b>--processor</b></p>
+
+<p style="margin-left:18%;">Configure the CEC adapter as a
+processor device.</p>
+
+<p style="margin-left:9%;"><b>--switch</b></p>
+
+<p style="margin-left:18%;">Configure the CEC adapter as a
+pure CEC switch.</p>
+
+<p style="margin-left:9%;"><b>--cdc-only</b></p>
+
+<p style="margin-left:18%;">Configure the CEC adapter as a
+CDC-only device.</p>
+
+<p style="margin-left:9%;"><b>--unregistered</b></p>
+
+<p style="margin-left:18%;">Configure the CEC adapter as an
+unregistered device.</p>
+
+
+<p style="margin-left:9%;"><b>--feat-record-tv-screen</b></p>
+
+<p style="margin-left:18%;">Signal the Record TV Screen
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--feat-set-osd-string</b></p>
+
+<p style="margin-left:18%;">Signal the Set OSD String
+feature.</p>
+
+<p style="margin-left:9%;"><b>--feat-deck-control</b></p>
+
+<p style="margin-left:18%;">Signal the Deck Control
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--feat-set-audio-rate</b></p>
+
+<p style="margin-left:18%;">Signal the Set Audio Rate
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--feat-sink-has-arc-tx</b></p>
+
+<p style="margin-left:18%;">Signal the sink ARC Tx
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--feat-source-has-arc-rx</b></p>
+
+<p style="margin-left:18%;">Signal the source ARC Rx
+feature.</p>
+
+<p style="margin-left:9%;"><b>--rc-tv-profile-1</b></p>
+
+<p style="margin-left:18%;">Signal RC TV Profile 1.</p>
+
+<p style="margin-left:9%;"><b>--rc-tv-profile-2</b></p>
+
+<p style="margin-left:18%;">Signal RC TV Profile 2.</p>
+
+<p style="margin-left:9%;"><b>--rc-tv-profile-3</b></p>
+
+<p style="margin-left:18%;">Signal RC TV Profile 3.</p>
+
+<p style="margin-left:9%;"><b>--rc-tv-profile-4</b></p>
+
+<p style="margin-left:18%;">Signal RC TV Profile 4.</p>
+
+<p style="margin-left:9%;"><b>--rc-src-dev-root</b></p>
+
+<p style="margin-left:18%;">Signal that the RC source has a
+Dev Root Menu.</p>
+
+<p style="margin-left:9%;"><b>--rc-src-dev-setup</b></p>
+
+<p style="margin-left:18%;">Signal that the RC source has a
+Dev Setup Menu.</p>
+
+<p style="margin-left:9%;"><b>--rc-src-contents</b></p>
+
+<p style="margin-left:18%;">Signal that the RC source has a
+Contents Menu.</p>
+
+<p style="margin-left:9%;"><b>--rc-src-media-top</b></p>
+
+<p style="margin-left:18%;">Signal that the RC source has a
+Media Top Menu.</p>
+
+
+<p style="margin-left:9%;"><b>--rc-src-media-context</b></p>
+
+<p style="margin-left:18%;">Signal that the RC source has a
+Media Context Menu.</p>
+
+<p style="margin-left:9%;"><b>-m</b>, <b>--monitor</b></p>
+
+<p style="margin-left:18%;">Start monitoring CEC traffic.
+This will monitor broadcast messages, messages directed to
+this CEC adapter and messages transmitted by this CEC
+adapter. Directed messages between other CEC devices are not
+monitored. This option requires root.</p>
+
+<p style="margin-left:9%;"><b>-M</b>,
+<b>--monitor-all</b></p>
+
+<p style="margin-left:18%;">Start monitoring all CEC
+traffic. This will monitor all CEC messages, including
+directed messages between other CEC devices. This option
+requires root. Not all CEC devices support this monitoring
+mode. It will fallback to regular monitoring mode if it is
+not supported.</p>
+
+<p style="margin-left:9%;"><b>--monitor-pin</b></p>
+
+<p style="margin-left:18%;">Start monitoring and analyzing
+the low-level CEC pin transitions. This is only possible if
+the device has the CEC_CAP_MONITOR_PIN capability. This
+option requires root. When in pin monitoring mode all
+0-&gt;1 and 1-&gt;0 CEC pin transitions are monitored and
+analysed. This is effectively a cheap CEC bus analyzer.</p>
+
+<p style="margin-left:9%;"><b>--monitor-time</b>
+<i>&lt;secs&gt;</i></p>
+
+<p style="margin-left:18%;">Monitor for the given number of
+seconds, then exit. The default (0) is to monitor
+forever.</p>
+
+<p style="margin-left:9%;"><b>--ignore</b>
+<i>&lt;la&gt;</i>,<i>&lt;opcode&gt;</i></p>
+
+<p style="margin-left:18%;">Ignore messages from logical
+address &lt;la&gt; and opcode &lt;opcode&gt; when
+monitoring. &quot;all&quot; can be used for &lt;la&gt; or
+&lt;opcode&gt; to match all logical addresses or opcodes. To
+ignore poll messages use &quot;poll&quot; as
+&lt;opcode&gt;.</p>
+
+<p style="margin-left:9%;"><b>--store-pin</b>
+<i>&lt;to&gt;</i></p>
+
+<p style="margin-left:18%;">Store the CEC pin events to the
+given file. This can be read and analyzed later via the
+<b>--analyze-pin</b> option. Use - to write to stdout
+instead of to a file.</p>
+
+<p style="margin-left:9%;"><b>--analyze-pin</b>
+<i>&lt;from&gt;</i></p>
+
+<p style="margin-left:18%;">Read and analyze the CEC pin
+events from the given file. Use - to read from stdin instead
+of from a file.</p>
+
+
+<p style="margin-left:9%;"><b>--test-standby-wakeup-cycle</b>
+<br>
+
+[<i>polls</i>=<i>&lt;n&gt;</i>][,<i>sleep</i>=<i>&lt;secs&gt;</i>][,<i>hpd-may-be-low</i>=<i>&lt;0/1&gt;</i>]</p>
+
+<p style="margin-left:18%;">This option tests the
+standby-wakeup cycle behavior of the display. It polls up to
+<i>&lt;n&gt;</i> times (default 15), waiting for a state
+change. If that fails then it waits <i>&lt;secs&gt;</i>
+seconds (default 10) before retrying this. If
+<i>&lt;hpd-may-be-low&gt;</i> is 1, then the HPD is allowed
+to be low when in standby.</p>
+
+
+<p style="margin-left:9%;"><b>--stress-test-standby-wakeup-cycle</b>
+<i><br>
+
+cnt</i>=<i>&lt;count&gt;</i>[,<i>polls</i>=<i>&lt;n&gt;</i>][,<i>max-sleep</i>=<i>&lt;maxsecs&gt;</i>][,<i>min-sleep</i>=<i>&lt;minsecs&gt;</i>][,<i>seed</i>=<i>&lt;seed&gt;</i>][,<i>repeats</i>=<i>&lt;reps&gt;</i>][,<i>sleep-before-on</i>=<i>&lt;secs1&gt;</i>][,<i>sleep-before-off</i>=<i>&lt;secs2&gt;</i>][,<i>hpd-may-be-low</i>=<i>&lt;0/1&gt;</i>]</p>
+
+<p style="margin-left:18%;">This option performs a stress
+test for a display: it cycles the display
+<i>&lt;count&gt;</i> times in and out of standby using the
+CEC Standby and Image View On commands. If
+<i>&lt;count&gt;</i> is 0, then never stop. It polls up to
+<i>&lt;n&gt;</i> times (default 30), waiting for a state
+change. If <i>&lt;maxsecs&gt;</i> is non-zero (0 is the
+default), then sleep for a random number of seconds between
+<i>&lt;minsecs&gt;</i> (0 is the default) and
+<i>&lt;maxsecs&gt;</i> before each &lt;Standby&gt; or
+&lt;Image View On&gt; message. If <i>&lt;seed&gt;</i> is
+specified, then set the randomizer seed to that value
+instead of using the current time as seed. If
+<i>&lt;reps&gt;</i> is specified, then repeat the &lt;Image
+View On&gt; and &lt;Standby&gt; up to <i>&lt;reps&gt;</i>
+times. Note that this test should work without any repeats.
+If a non-zero <i>&lt;reps&gt;</i> value is needed in order
+to pass this test, then that indicates a problem. If
+<i>&lt;secs1&gt;</i> is specified, then sleep for
+&lt;secs1&gt; seconds before transmitting &lt;Image View
+On&gt;. If <i>&lt;secs2&gt;</i> is specified, then sleep for
+&lt;secs2&gt; seconds before transmitting &lt;Standby&gt;.
+If <i>&lt;hpd-may-be-low&gt;</i> is 1, then the HPD is
+allowed to be low when in standby.</p>
+
+
+<p style="margin-left:9%;"><b>--stress-test-random-standby-wakeup-cycle</b>
+<i><br>
+
+cnt</i>=<i>&lt;count&gt;</i>[,<i>max-sleep</i>=<i>&lt;maxsecs&gt;</i>][,<i>min-sleep</i>=<i>&lt;minsecs&gt;</i>][,<i>seed</i>=<i>&lt;seed&gt;</i>][,<i>hpd-may-be-low</i>=<i>&lt;0/1&gt;</i>]</p>
+
+<p style="margin-left:18%;">This option performs a stress
+test for a display: it cycles the display
+<i>&lt;count&gt;</i> times in and out of standby using the
+CEC Standby and Image View On commands. After each command
+wait between <i>&lt;minsecs&gt;</i> (default is 0) and
+<i>&lt;maxsecs&gt;</i> (default is 10) seconds. This test
+does not check if the display reached the new state, this
+test is meant to check if the display can handle state
+change commands while still transitioning to a new state.
+After every 10 cycles it attempts to properly wake up the
+display and check if that works. If not, this test fails. If
+<i>&lt;count&gt;</i> is 0, then never stop. If
+<i>&lt;seed&gt;</i> is specified, then set the randomizer
+seed to that value instead of using the current time as
+seed. If <i>&lt;hpd-may-be-low&gt;</i> is 1, then the HPD is
+allowed to be low when in standby.</p>
+
+<p style="margin-left:9%;"><b>--help-all</b></p>
+
+<p style="margin-left:18%;">Prints the help message for all
+options.</p>
+
+
+<p style="margin-left:9%;"><b>--help-audio-rate-control</b></p>
+
+<p style="margin-left:18%;">Show help for the Audio Rate
+Control feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-audio-return-channel-control</b></p>
+
+<p style="margin-left:18%;">Show help for the Audio Return
+Channel Control feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-capability-discovery-and-control</b></p>
+
+<p style="margin-left:18%;">Show help for the Capability
+Discovery and Control feature.</p>
+
+<p style="margin-left:9%;"><b>--help-deck-control</b></p>
+
+<p style="margin-left:18%;">Show help for the Deck Control
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-device-menu-control</b></p>
+
+<p style="margin-left:18%;">Show help for the Device Menu
+Control feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-device-osd-transfer</b></p>
+
+<p style="margin-left:18%;">Show help for the Device OSD
+Transfer feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-dynamic-audio-lipsync</b></p>
+
+<p style="margin-left:18%;">Show help for the Dynamic Audio
+Lipsync feature.</p>
+
+<p style="margin-left:9%;"><b>--help-htng</b></p>
+
+<p style="margin-left:18%;">Show help for the Hospitality
+Profile Next Generation feature. This is an optional CEC
+extension for Hotel displays and is not generally available
+for regular displays. See http://www.htng.org for more
+information.</p>
+
+<p style="margin-left:9%;"><b>--help-osd-display</b></p>
+
+<p style="margin-left:18%;">Show help for the OSD Display
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-one-touch-play</b></p>
+
+<p style="margin-left:18%;">Show help for the One Touch
+Play feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-one-touch-record</b></p>
+
+<p style="margin-left:18%;">Show help for the One Touch
+Record feature.</p>
+
+<p style="margin-left:9%;"><b>--help-power-status</b></p>
+
+<p style="margin-left:18%;">Show help for the Power Status
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-remote-control-passthrough</b></p>
+
+<p style="margin-left:18%;">Show help for the Remote
+Control Passthrough feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-routing-control</b></p>
+
+<p style="margin-left:18%;">Show help for the Routing
+Control feature.</p>
+
+<p style="margin-left:9%;"><b>--help-standby</b></p>
+
+<p style="margin-left:18%;">Show help for the Standby
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-system-audio-control</b></p>
+
+<p style="margin-left:18%;">Show help for the System Audio
+Control feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-system-information</b></p>
+
+<p style="margin-left:18%;">Show help for the System
+Information feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-timer-programming</b></p>
+
+<p style="margin-left:18%;">Show help for the Timer
+Programming feature.</p>
+
+<p style="margin-left:9%;"><b>--help-tuner-control</b></p>
+
+<p style="margin-left:18%;">Show help for the Tuner Control
+feature.</p>
+
+
+<p style="margin-left:9%;"><b>--help-vendor-specific-commands</b></p>
+
+<p style="margin-left:18%;">Show help for the Vendor
+Specific Commands feature.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On success, it
+returns 0. Otherwise, it will return the error code.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+is a work in progress.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Bug reports or
+questions about this utility should be sent to the
+linux-media@vger.kernel.org mailinglist.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,569 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:01 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>QVIDCAP</title>
+
+</head>
+<body>
+
+<h1 align="center">QVIDCAP</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#HOTKEYS">HOTKEYS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">qvidcap - A v4l2
+video capture viewer</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>qvidcap</b>
+[<i>&lt;options&gt;</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The qvidcap tool
+is used to test video4linux capture devices, either using a
+video device, a file, or over network. This application can
+also serve as a generic video/TV viewer application.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It does not
+(yet) support compressed video streams other than MJPEG</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--device</b>=<i>&lt;dev&gt;</i></p>
+
+<p style="margin-left:18%;">Use device &lt;dev&gt; as the
+video device if &lt;dev&gt; is a number, then
+/dev/video&lt;dev&gt; is used</p>
+
+<p style="margin-left:9%;"><b>-f</b>,
+<b>--file</b>=<i>&lt;file&gt;</i></p>
+
+<p style="margin-left:18%;">Read from the file &lt;file&gt;
+for the raw frame data</p>
+
+<p style="margin-left:9%;"><b>-p</b>,
+<b>--port</b><i>[=&lt;port&gt;]</i></p>
+
+<p style="margin-left:18%;">Listen for a network connection
+on the given port. The default port is 8362</p>
+
+<p style="margin-left:9%;"><b>-T</b>, <b>--tpg</b></p>
+
+<p style="margin-left:18%;">Use the test pattern generator.
+If neither -d, -f nor -T is specified then use
+/dev/video0.</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--count</b>=<i>&lt;cnt&gt;</i></p>
+
+<p style="margin-left:18%;">Stop after &lt;cnt&gt; captured
+frames</p>
+
+<p style="margin-left:9%;"><b>-b</b>,
+<b>--buffers</b>=<i>&lt;bufs&gt;</i></p>
+
+<p style="margin-left:18%;">Request &lt;bufs&gt; buffers
+(default 4) when streaming from a video device.</p>
+
+<p style="margin-left:9%;"><b>-s</b>,
+<b>--single-step</b><i>[=&lt;frm&gt;]</i></p>
+
+<p style="margin-left:18%;">Starting with frame &lt;frm&gt;
+(default 1), pause after displaying each frame until Space
+is pressed.</p>
+
+<p style="margin-left:9%;"><b>-C</b>,
+<b>--colorspace</b>=<i>&lt;c&gt;</i></p>
+
+<p style="margin-left:18%;">Override colorspace. &lt;c&gt;
+can be one of the following colorspaces: smpte170m,
+smpte240m, rec709, 470m, 470bg, jpeg, srgb, oprgb, bt2020,
+dcip3</p>
+
+<p style="margin-left:9%;"><b>-X</b>,
+<b>--xfer-func</b>=<i>&lt;x&gt;</i></p>
+
+<p style="margin-left:18%;">Override transfer function.
+&lt;x&gt; can be one of the following transfer functions:
+default, 709, srgb, oprgb, smpte240m, smpte2084, dcip3,
+none</p>
+
+<p style="margin-left:9%;"><b>-Y</b>,
+<b>--ycbcr-enc</b>=<i>&lt;y&gt;</i></p>
+
+<p style="margin-left:18%;">Override Y&rsquo;CbCr encoding.
+&lt;y&gt; can be one of the following Y&rsquo;CbCr
+encodings: default, 601, 709, xv601, xv709, bt2020, bt2020c,
+smpte240m</p>
+
+<p style="margin-left:9%;"><b>-Q</b>,
+<b>--quant</b>=<i>&lt;q&gt;</i></p>
+
+<p style="margin-left:18%;">Override quantization.
+&lt;q&gt; can be one of the following quantization methods:
+default, full-range, lim-range</p>
+
+<p style="margin-left:9%;"><b>-P</b>,
+<b>--pixelformat</b>=<i>&lt;p&gt;</i></p>
+
+<p style="margin-left:18%;">For video devices: set the
+format to this pixel format. For reading from a file:
+interpret the data using this pixel format setting. Ignored
+for other modes. Use -l to see the list of supported pixel
+formats.</p>
+
+<p style="margin-left:9%;"><b>-l</b>,
+<b>--list-formats</b></p>
+
+<p style="margin-left:18%;">Display all supported
+formats</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Display this help message</p>
+
+<p style="margin-left:9%;"><b>-t</b>, <b>--timing</b>s</p>
+
+<p style="margin-left:18%;">Report frame render timings</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Be more verbose</p>
+
+<p style="margin-left:9%;"><b>-R</b>, <b>--raw</b></p>
+
+<p style="margin-left:18%;">Open device in raw mode</p>
+
+<p style="margin-left:9%;"><b>--opengl</b></p>
+
+<p style="margin-left:18%;">Force openGL to display the
+video</p>
+
+<p style="margin-left:9%;"><b>--opengles</b></p>
+
+<p style="margin-left:18%;">Force openGL ES to display the
+video</p>
+
+<p style="margin-left:9%;">The following options are
+ignored when capturing from a video device: <b><br>
+-W,--width</b>=<i>&lt;width&gt;</i></p>
+
+<p style="margin-left:18%;">Set width</p>
+
+
+<p style="margin-left:9%;"><b>-H,--height</b>=<i>&lt;height&gt;</i></p>
+
+<p style="margin-left:18%;">Set frame (not field!)
+height</p>
+
+
+<p style="margin-left:9%;"><b>-A,--padding</b>=<i>&lt;bytes&gt;</i></p>
+
+<p style="margin-left:18%;">set additional horizontal
+padding (after width)</p>
+
+
+<p style="margin-left:9%;"><b>--fps</b>=<i>&lt;fps&gt;</i></p>
+
+<p style="margin-left:18%;">Set frames-per-second (default
+is 30)</p>
+
+<p style="margin-left:9%;">The following option is only
+valid when reading from a file: <b><br>
+-F</b>, <b>--field</b>=<i>&lt;f&gt;</i></p>
+
+<p style="margin-left:18%;">Override field setting.
+&lt;f&gt; can be one of the following field layouts: any,
+none, top, bottom, interlaced, seq_tb, seq_bt, alternate,
+interlaced_tb, interlaced_bt</p>
+
+<p style="margin-left:9%;">The following options are
+specific to the test pattern generator: <b><br>
+--list-patterns</b></p>
+
+<p style="margin-left:18%;">List available patterns for use
+with --pattern</p>
+
+
+<p style="margin-left:9%;"><b>--pattern</b>=<i>&lt;pat&gt;</i></p>
+
+<p style="margin-left:18%;">Choose output test pattern, the
+default is 0</p>
+
+<p style="margin-left:9%;"><b>--square</b></p>
+
+<p style="margin-left:18%;">Show a square in the middle of
+the output test pattern</p>
+
+<p style="margin-left:9%;"><b>--border</b></p>
+
+<p style="margin-left:18%;">Show a border around the
+pillar/letterboxed video</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--sav</b></p></td>
+<td width="3%"></td>
+<td width="41%">
+
+
+<p>Insert an SAV code in every line</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--eav</b></p></td>
+<td width="3%"></td>
+<td width="41%">
+
+
+<p>Insert an EAV code in every line</p></td>
+<td width="41%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--pixel-aspect</b>=<i>&lt;aspect&gt;</i></p>
+
+<p style="margin-left:18%;">Select a pixel aspect ratio,
+the default is to autodetect. &lt;aspect&gt; can be one of:
+square, ntsc, pal</p>
+
+
+<p style="margin-left:9%;"><b>--video-aspect</b>=<i>&lt;aspect&gt;</i></p>
+
+<p style="margin-left:18%;">Select a video aspect ratio,
+the default is to use the frame ratio. &lt;aspect&gt; can be
+one of: 4 x3, 14x9, 16x9, anamorphic</p>
+
+
+<p style="margin-left:9%;"><b>--alpha</b>=<i>&lt;alpha-value&gt;</i></p>
+
+<p style="margin-left:18%;">Value to use for the alpha
+component, range 0-255, the default is 0</p>
+
+<p style="margin-left:9%;"><b>--alpha-red-only</b></p>
+
+<p style="margin-left:18%;">Only use the --alpha value for
+the red colors, for all others use 0</p>
+
+<p style="margin-left:9%;"><b>--rgb-lim-range</b></p>
+
+<p style="margin-left:18%;">Encode RGB values as limited
+[16-235] instead of full range</p>
+
+
+<p style="margin-left:9%;"><b>--hor-speed</b>=<i>&lt;speed&gt;</i></p>
+
+<p style="margin-left:18%;">Choose speed for horizontal
+movement, the default is 0 and the range is [-3...3]</p>
+
+
+<p style="margin-left:9%;"><b>--vert-speed</b>=<i>&lt;speed&gt;</i></p>
+
+<p style="margin-left:18%;">Choose speed for vertical
+movement, the default is 0 and the range is [-3...3]</p>
+
+
+<p style="margin-left:9%;"><b>--perc-fill</b>=<i>&lt;percentage&gt;</i></p>
+
+<p style="margin-left:18%;">Percentage of the frame to
+actually fill. the default is 100%</p>
+
+<p style="margin-left:9%;">These options use the test
+pattern generator to test the OpenGL <br>
+backend: <b><br>
+--test</b>=<i>&lt;count&gt;</i></p>
+
+<p style="margin-left:18%;">Test all formats, each test
+generates &lt;count&gt; frames.</p>
+
+
+<p style="margin-left:9%;"><b>--test-mask</b>=<i>&lt;mask&gt;</i></p>
+
+<p style="margin-left:18%;">Mask which tests are performed.
+&lt;mask&gt; is a bit mask with these values: <br>
+0x01: Mask iterating over pixel formats <br>
+0x02: Mask iterating over fields <br>
+0x04: Mask iterating over colorspaces <br>
+0x08: Mask iterating over transfer functions <br>
+0x10: Mask iterating over Y&rsquo;CbCr encodings <br>
+0x20: Mask iterating over quantization ranges</p>
+
+<h2>HOTKEYS
+<a name="HOTKEYS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><i>Q</i></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Quit application.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>P</i></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Cycle forwards through all the supported pixel formats.
+With Shift pressed: cycle backwards. With Ctrl pressed:
+restore the original pixel format. Only available with
+--file.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>I</i></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Cycle forwards through all the supported interlaced
+field settings. With Shift pressed: cycle backwards. With
+Ctrl pressed: restore the original interlaced field setting.
+Only available with --file.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>C</i></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Cycle forwards through all the supported colorspaces.
+With Shift pressed: cycle backwards. With Ctrl pressed:
+restore the original colorspace.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>X</i></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Cycle forwards through all the supported transfer
+functions. With Shift pressed: cycle backwards. With Ctrl
+pressed: restore the original transfer function.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>Y</i></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Cycle forwards through all the supported Y&rsquo;CbCr
+encodings. With Shift pressed: cycle backwards. With Ctrl
+pressed: restore the original Y&rsquo;CbCr encoding.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>H</i></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Cycle forwards through all the supported HSV encodings.
+With Shift pressed: cycle backwards. With Ctrl pressed:
+restore the original HSV encoding.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><i>R</i></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Cycle forwards through all the supported quantization
+ranges. With Shift pressed: cycle backwards. With Ctrl
+pressed: restore the original quantization range.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>Right-Click</i></p>
+
+<p style="margin-left:18%;">Open menu.</p>
+
+<p style="margin-left:9%;"><i>Double left-click</i></p>
+
+<p style="margin-left:18%;">Toggle fullscreen on and
+off.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>F</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Toggle fullscreen on and off.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>ESC</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Exit fullscreen.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>Space</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>When in test mode (<b>--test</b>) pressing Space will
+skip to the next test. When single-stepping, continue to the
+next frame.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>Up</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Reduce the resolution by two pixels in height. Only
+available when &quot;Override resolution&quot; is
+enabled.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>Down</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Increase the resolution by two pixels in height. Only
+available when &quot;Override resolution&quot; is
+enabled.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>Left</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Reduce the resolution by two pixels in width. Only
+available when &quot;Override resolution&quot; is
+enabled.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>Right</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Increase the resolution by two pixels in width. Only
+available when &quot;Override resolution&quot; is
+enabled.</p> </td></tr>
+</table>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On success, it
+returns 0. Otherwise, it will return the number of
+errors.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+Hans Verkuil &lt;hverkuil@xs4all.nl&gt;</p>
+<hr>
+</body>
+</html>

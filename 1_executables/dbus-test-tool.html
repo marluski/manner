@@ -1,0 +1,329 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>DBUS-TEST-TOOL</title>
+
+</head>
+<body>
+
+<h1 align="center">DBUS-TEST-TOOL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Common options">Common options</a><br>
+<a href="#black-hole mode">black-hole mode</a><br>
+<a href="#echo mode">echo mode</a><br>
+<a href="#spam mode">spam mode</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">dbus-test-tool -
+D-Bus traffic generator and test tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="87%">
+
+
+<p style="margin-top: 1em"><b>dbus-test-tool</b> black-hole
+[--session | --system] [--name=<i>NAME</i>] [--no-read]</p></td>
+<td width="4%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="87%">
+
+
+<p style="margin-top: 1em"><b>dbus-test-tool</b> echo
+[--session | --system] [--name=<i>NAME</i>]
+[--sleep-ms=<i>MS</i>]</p> </td>
+<td width="4%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="87%">
+
+
+<p style="margin-top: 1em"><b>dbus-test-tool</b> spam
+[--session | --system] [--dest=<i>NAME</i>]
+[--count=<i>N</i>] [--flood] [--ignore-errors]
+[--messages-per-conn=<i>N</i>] [--no-reply]
+[--queue=<i>N</i>] [--seed=<i>SEED</i>] [--string | --bytes
+| --empty] [--payload=<i>S</i> | --stdin | --message-stdin |
+--random-size]</p> </td>
+<td width="4%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dbus-test-tool</b>
+is a multi-purpose tool for debugging and profiling
+D-Bus.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dbus-test-tool
+black-hole</b> connects to D-Bus, optionally requests a
+name, then does not reply to messages. It normally reads and
+discards messages from its D-Bus socket, but can be
+configured to sleep forever without reading.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dbus-test-tool
+echo</b> connects to D-Bus, optionally requests a name, then
+sends back an empty reply to every method call, after an
+optional delay.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dbus-test-tool
+spam</b> connects to D-Bus and makes repeated method calls,
+normally named com.example.Spam.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Common options
+<a name="Common options"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--session</b></p>
+
+<p style="margin-left:14%;">Connect to the session bus.
+This is the default.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system</b></p>
+
+<p style="margin-left:14%;">Connect to the system bus.</p>
+
+<h3>black-hole mode
+<a name="black-hole mode"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--name=</b><i>NAME</i></p>
+
+<p style="margin-left:14%;">Before proceeding, request
+ownership of the well-known bus name <i>NAME</i>, for
+example com.example.NoReply. By default, no name is
+requested, and the tool can only be addressed by a unique
+bus name such as :1.23.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-read</b></p>
+
+<p style="margin-left:14%;">Do not read from the D-Bus
+socket.</p>
+
+<h3>echo mode
+<a name="echo mode"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--name=</b><i>NAME</i></p>
+
+<p style="margin-left:14%;">Before proceeding, request
+ownership of the well-known bus name <i>NAME</i>, for
+example com.example.Echo. By default, no name is requested,
+and the tool can only be addressed by a unique bus name such
+as :1.23.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sleep-ms=</b><i>MS</i></p>
+
+<p style="margin-left:14%;">Block for <i>MS</i>
+milliseconds before replying to a method call.</p>
+
+<h3>spam mode
+<a name="spam mode"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dest=</b><i>NAME</i></p>
+
+<p style="margin-left:14%;">Send method calls to the
+well-known or unique bus name <i>NAME</i>. The default is
+the dbus-daemon, org.freedesktop.DBus.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--count=</b><i>N</i></p>
+
+<p style="margin-left:14%;">Send <i>N</i> method calls in
+total. The default is 1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--queue=</b><i>N</i></p>
+
+<p style="margin-left:14%;">Send <i>N</i> method calls
+before waiting for any replies, then send one new call per
+reply received, keeping <i>N</i> method calls &quot;in
+flight&quot; at all times until the number of messages
+specified with the <b>--count</b> option have been sent. The
+default is 1, unless <b>--flood</b> is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--flood</b></p>
+
+<p style="margin-left:14%;">Send all messages without
+waiting for a reply, equivalent to <b>--queue</b> with an
+arbitrarily large <i>N</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-reply</b></p>
+
+<p style="margin-left:14%;">Set the &quot;no reply
+desired&quot; flag on the messages. This implies
+<b>--flood</b>, since it disables the replies that would be
+used for a finite <b>--queue</b> length.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--messages-per-conn=</b><i>N</i></p>
+
+<p style="margin-left:14%;">If given, send <i>N</i> method
+calls on the same connection, then disconnect and reconnect.
+The default is to use the same connection for all method
+calls.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--string</b></p>
+
+<p style="margin-left:14%;">The payload of each message is
+a UTF-8 string. This is the default. The actual string used
+is given by the <b>--payload</b> or <b>--stdin</b> option,
+defaulting to &quot;hello, world!&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--bytes</b></p>
+
+<p style="margin-left:14%;">The payload of each message is
+a byte-array. The actual bytes used are given by the
+<b>--payload</b> or <b>--stdin</b> option, defaulting to the
+ASCII encoding of &quot;hello, world!&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--empty</b></p>
+
+<p style="margin-left:14%;">The messages have no
+payload.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--payload=</b><i>S</i></p>
+
+<p style="margin-left:14%;">Use <i>S</i> as the
+<b>--string</b> or <b>--bytes</b> in the messages. The
+default is &quot;hello, world!&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--stdin</b></p>
+
+<p style="margin-left:14%;">Read from standard input until
+end-of-file is reached, and use that as the <b>--string</b>
+or <b>--bytes</b> in the messages.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--message-stdin</b></p>
+
+<p style="margin-left:14%;">Read a complete binary D-Bus
+method call message from standard input, and use that for
+each method call.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--random-size</b></p>
+
+<p style="margin-left:14%;">Read whitespace-separated ASCII
+decimal numbers from standard input, choose one at random
+for each message, and send a message whose payload is a
+string of that length.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--seed=</b><i>SEED</i></p>
+
+<p style="margin-left:14%;">Use <i>SEED</i> as the seed for
+the pseudorandom number generator, to have somewhat
+repeatable sequences of random messages.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to the D-Bus bug tracker or mailing list. See
+<b><font color="#0000FF">https://www.freedesktop.org/wiki/Software/dbus/</font></b><font color="#000000">.</font></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">See</font>
+<b><font color="#0000FF">https://dbus.freedesktop.org/doc/AUTHORS</font></b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><font color="#000000">dbus-send</font></b><font color="#000000">(1)</font></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+&copy; 2015 Collabora Ltd.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+man page is distributed under the same terms as
+dbus-test-tool (GPL-2+). There is NO WARRANTY, to the extent
+permitted by law.</font></p>
+<hr>
+</body>
+</html>

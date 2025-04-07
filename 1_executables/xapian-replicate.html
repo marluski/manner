@@ -1,0 +1,145 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:09 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>XAPIAN-REPLICATE</title>
+
+</head>
+<body>
+
+<h1 align="center">XAPIAN-REPLICATE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">xapian-replicate
+- Replicate a database from a master server to a local
+copy</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xapian-replicate</b>
+[<i>OPTIONS</i>] <i>DATABASE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">xapian-replicate
+- Replicate a database from a master server to a local
+copy</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--host</b>=<i>HOST</i></p>
+
+<p style="margin-left:18%;">host to connect to
+(required)</p>
+
+<p style="margin-left:9%;"><b>-p</b>,
+<b>--port</b>=<i>PORT</i></p>
+
+<p style="margin-left:18%;">port to connect to
+(required)</p>
+
+<p style="margin-left:9%;"><b>-m</b>,
+<b>--master</b>=<i>DB</i></p>
+
+<p style="margin-left:18%;">replicate database DB from the
+master (default: DATABASE)</p>
+
+<p style="margin-left:9%;"><b>-i</b>,
+<b>--interval</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">wait N seconds between each
+connection to the master (default: 60)</p>
+
+<p style="margin-left:9%;"><b>-r</b>,
+<b>--reader-time</b>=<i>N</i> wait N seconds to allow
+readers time to close <br>
+before</p>
+
+<p style="margin-left:18%;">applying repeated changesets
+(default: 30)</p>
+
+<p style="margin-left:9%;"><b>-t</b>,
+<b>--timeout</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">set socket timeouts (if
+supported) to N seconds; N=0 for no timeout (default: 0)</p>
+
+<p style="margin-left:9%;"><b>-f</b>,
+<b>--force-copy</b></p>
+
+<p style="margin-left:18%;">force a full copy of the
+database to be sent (and then replicate as normal)</p>
+
+<p style="margin-left:9%;"><b>-o</b>, <b>--one-shot</b></p>
+
+<p style="margin-left:18%;">replicate only once and then
+exit</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--quiet</b></p>
+
+<p style="margin-left:18%;">only report errors</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">be more verbose</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="33%">
+
+
+<p>display this help and exit</p></td>
+<td width="49%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">output version information and
+exit</p>
+<hr>
+</body>
+</html>

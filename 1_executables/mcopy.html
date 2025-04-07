@@ -1,0 +1,339 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mcopy</title>
+
+</head>
+<body>
+
+<h1 align="center">mcopy</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Note&nbsp;of&nbsp;warning">Note&nbsp;of&nbsp;warning</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Bugs">Bugs</a><br>
+<a href="#See&nbsp;Also">See&nbsp;Also</a><br>
+<a href="#Viewing&nbsp;the&nbsp;texi&nbsp;doc">Viewing&nbsp;the&nbsp;texi&nbsp;doc</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mcopy - copy
+MSDOS files to/from Unix</p>
+
+<h2>Note&nbsp;of&nbsp;warning
+<a name="Note&nbsp;of&nbsp;warning"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manpage has
+been automatically generated from mtools&rsquo;s texinfo
+documentation, and may not be entirely accurate or complete.
+See the end of this man page for details.</p>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The mcopy
+command is used to copy MS-DOS files to and from Unix. It
+uses the following syntax:</p>
+
+<p style="margin-left:13%; margin-top: 1em">mcopy
+[-bspanvmQT] [-D <i>clash_option</i>] <i>sourcefile
+targetfile</i> <br>
+mcopy [-bspanvmQT] [-D <i>clash_option</i>]
+<i>sourcefile</i> [ <i>sourcefiles</i>... ]
+<i>targetdirectory</i> <br>
+mcopy [-tnvm] <i>MSDOSsourcefile</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Mcopy copies the
+specified file to the named file, or copies multiple files
+to the named directory. The source and target can be either
+MS-DOS or Unix files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The use of a
+drive letter designation on the MS-DOS files,
+&rsquo;a:&rsquo; for example, determines the direction of
+the transfer. A missing drive designation implies a Unix
+file whose path starts in the current directory. If a source
+drive letter is specified with no attached file name (e.g.
+mcopy a: .), all files are copied from that drive.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If only a
+single, MS-DOS source parameter is provided (e.g.
+&quot;mcopy a:foo.exe&quot;), an implied destination of the
+current directory (&lsquo;.&rsquo;) is assumed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A filename of
+&lsquo;-&rsquo; means standard input or standard output,
+depending on its position on the command line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Mcopy accepts
+the following command line options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>t&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Text file transfer. Mcopy translates incoming carriage
+return/line feeds to line feeds when copying from MS-DOS to
+Unix, and vice-versa when copying from Unix to MS-DOS.
+Moreover copying stops at Control-Z characters when copying
+from MS-DOS to Unix, and Control-Z is added at end when
+copying from Unix to MS-DOS.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>b&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Batch mode. Optimized for huge recursive copies, but
+less secure if a crash happens during the copy.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>s&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Recursive copy. Also copies directories and their
+contents</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>p&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Preserves the attributes of the copied files</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Q&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>When mcopying multiple files, quits as soon as one copy
+fails (for example due to lacking storage space on the
+target disk)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>a&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Text (ASCII) file transfer. Same as t above.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>T&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Text (ASCII) file transfer with character set
+conversion. Differs from -a in the ASCII also translates
+incoming PC-8 characters to ISO-8859-1 equivalents as far as
+possible. When reading DOS files, untranslatable characters
+are replaced by &rsquo;#&rsquo;; when writing DOS files,
+untranslatable characters are replaced by
+&rsquo;.&rsquo;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>n&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>No confirmation when overwriting Unix files. ASCII
+doesn&rsquo;t warn the user when overwriting an existing
+Unix file. If the target file already exists, and the -n
+option is not in effect, mcopy asks whether to overwrite the
+file or to rename the new file (see &lsquo;name
+clashes&rsquo; for details). In order to switch off
+confirmation for DOS files, use -o.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>m&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Preserve the file modification time.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>v&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Verbose. Displays the name of each file as it is
+copied.</p> </td></tr>
+</table>
+
+<h2>Bugs
+<a name="Bugs"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unlike MS-DOS,
+the &rsquo;+&rsquo; operator (append) from MS-DOS is not
+supported. However, you may use mtype to produce the same
+effect:</p>
+
+<p style="margin-left:13%; margin-top: 1em"><b>mtype
+a:file1 a:file2 a:file3 &gt;unixfile <br>
+mtype a:file1 a:file2 a:file3 | mcopy - a:msdosfile</b></p>
+
+<h2>See&nbsp;Also
+<a name="See&nbsp;Also"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mtools&rsquo;
+texinfo doc</p>
+
+<h2>Viewing&nbsp;the&nbsp;texi&nbsp;doc
+<a name="Viewing&nbsp;the&nbsp;texi&nbsp;doc"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manpage has
+been automatically generated from mtools&rsquo;s texinfo
+documentation. However, this process is only approximative,
+and some items, such as crossreferences, footnotes and
+indices are lost in this translation process. Indeed, these
+items have no appropriate representation in the manpage
+format. Moreover, not all information has been translated
+into the manpage version. Thus I strongly advise you to use
+the original texinfo doc. See the end of this manpage for
+instructions how to view the texinfo doc.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em">* &nbsp;&nbsp;</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">To generate a printable copy
+from the texinfo doc, run the following commands:</p></td></tr>
+</table>
+
+
+<p style="margin-left:22%; margin-top: 1em"><b>./configure;
+make dvi; dvips mtools.dvi</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em">* &nbsp;&nbsp;</p></td>
+<td width="4%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em">To generate a html copy,
+run:</p> </td>
+<td width="44%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:22%; margin-top: 1em"><b>./configure;
+make html</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">A premade html
+can be found at
+&lsquo;http://www.gnu.org/software/mtools/manual/mtools.html&rsquo;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em">* &nbsp;&nbsp;</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">To generate an info copy
+(browsable using emacs&rsquo; info mode), run:</p></td></tr>
+</table>
+
+
+<p style="margin-left:22%; margin-top: 1em"><b>./configure;
+make info</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The texinfo doc
+looks most pretty when printed or as html. Indeed, in the
+info version certain examples are difficult to read due to
+the quoting conventions used in info.</p>
+<hr>
+</body>
+</html>

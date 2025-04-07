@@ -1,0 +1,235 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:43 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>UNTITLED</i>() LOCAL <i>UNTITLED</i>()</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">ttx &mdash; tool for
+manipulating TrueType and OpenType fonts</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:14%;"><b>ttx</b>
+[<i>option&nbsp;...</i>] <i>file&nbsp;...</i></p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>ttx</b> is a tool for
+manipulating TrueType and OpenType fonts. It can convert
+TrueType and OpenType fonts to and from an XML-based format
+called TTX. TTX files have a &lsquo;.ttx&rsquo;
+extension.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For each
+<i>file</i> argument it is given, <b>ttx</b> detects whether
+it is a &lsquo;.ttf&rsquo;, &lsquo;.otf&rsquo; or
+&lsquo;.ttx&rsquo; file and acts accordingly: if it is a
+&lsquo;.ttf&rsquo; or &lsquo;.otf&rsquo; file, it generates
+a &lsquo;.ttx&rsquo; file; if it is a &lsquo;.ttx&rsquo;
+file, it generates a &lsquo;.ttf&rsquo; or
+&lsquo;.otf&rsquo; file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default,
+every output file is created in the same directory as the
+corresponding input file and with the same name except for
+the extension, which is substituted appropriately.
+<b>ttx</b> never overwrites existing files; if necessary, it
+appends a suffix to the output file name before the
+extension, as in <i>Arial#1.ttf</i>.</p>
+
+<p style="margin-left:4%; margin-top: 1em"><b>General
+options</b></p>
+
+<p><b>-h</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">Display usage
+information.</p>
+
+<p style="margin-top: 1em"><b>-d</b> <i>dir</i></p>
+
+<p style="margin-left:22%; margin-top: 1em">Write the
+output files to directory <i>dir</i> instead of writing
+every output file to the same directory as the corresponding
+input file.</p>
+
+<p style="margin-top: 1em"><b>-o</b> <i>file</i></p>
+
+<p style="margin-left:22%; margin-top: 1em">Write the
+output to <i>file</i> instead of writing it to the same
+directory as the corresponding input file.</p>
+
+<p style="margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">Be verbose.
+Write more messages to the standard output describing what
+is being done.</p>
+
+<p style="margin-top: 1em"><b>-a</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">Allow virtual
+glyphs ID&rsquo;s on compile or decompile.</p>
+
+<p style="margin-left:4%; margin-top: 1em"><b>Dump
+options</b></p>
+
+<p style="margin-left:9%;">The following options control
+the process of dumping font files (TrueType or OpenType) to
+TTX files.</p>
+
+<p style="margin-top: 1em"><b>-l</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">List table
+information. Instead of dumping the font to a TTX file,
+display minimal information about each table.</p>
+
+<p style="margin-top: 1em"><b>-t</b> <i>table</i></p>
+
+<p style="margin-left:22%; margin-top: 1em">Dump table
+<i>table</i>. This option may be given multiple times to
+dump several tables at once. When not specified, all tables
+are dumped.</p>
+
+<p style="margin-top: 1em"><b>-x</b> <i>table</i></p>
+
+<p style="margin-left:22%; margin-top: 1em">Exclude table
+<i>table</i> from the list of tables to dump. This option
+may be given multiple times to exclude several tables from
+the dump. The <b>-t</b> and <b>-x</b> options are mutually
+exclusive.</p>
+
+<p style="margin-top: 1em"><b>-s</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">Split tables.
+Dump each table to a separate TTX file and write (under the
+name that would have been used for the output file if the
+<b>-s</b> option had not been given) one small TTX file
+containing references to the individual table dump files.
+This file can be used as input to <b>ttx</b> as long as the
+referenced files can be found in the same directory.</p>
+
+<p style="margin-top: 1em"><b>-i</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">Don&rsquo;t
+disassemble TrueType instructions. When this option is
+specified, all TrueType programs (glyph programs, the font
+program and the pre-program) are written to the TTX file as
+hexadecimal data instead of assembly. This saves some time
+and results in smaller TTX files.</p>
+
+<p style="margin-top: 1em"><b>-y</b> <i>n</i></p>
+
+<p style="margin-left:22%; margin-top: 1em">When
+decompiling a TrueType Collection (TTC) file, decompile font
+number <i>n</i>, starting from 0.</p>
+
+<p style="margin-left:4%; margin-top: 1em"><b>Compilation
+options</b></p>
+
+<p style="margin-left:9%;">The following options control
+the process of compiling TTX files into font files (TrueType
+or OpenType):</p>
+
+<p style="margin-top: 1em"><b>-m</b> <i>fontfile</i></p>
+
+<p style="margin-left:22%;">Merge the input TTX file
+<i>file</i> with <i>fontfile</i>. No more than one
+<i>file</i> argument can be specified when this option is
+used.</p>
+
+<p style="margin-top: 1em"><b>-b</b></p>
+
+<p style="margin-left:22%; margin-top: 1em">Don&rsquo;t
+recalculate glyph bounding boxes. Use the values in the TTX
+file as is.</p>
+
+<p style="margin-top: 1em"><b>THE TTX FILE FORMAT</b></p>
+
+<p style="margin-left:9%;">You can find some information
+about the TTX file format in <i>documentation.html</i>. In
+particular, you will find in that file the list of tables
+understood by <b>ttx</b> and the relations between TrueType
+GlyphIDs and the glyph names used in TTX files.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">In the following examples, all
+files are read from and written to the current directory.
+Additionally, the name given for the output file assumes in
+every case that it did not exist before <b>ttx</b> was
+invoked.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Dump the
+TrueType font contained in <i>FreeSans.ttf</i> to
+<i>FreeSans.ttx</i>:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>ttx
+FreeSans.ttf</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Compile
+<i>MyFont.ttx</i> into a TrueType or OpenType font file:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>ttx
+MyFont.ttx</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">List the tables
+in <i>FreeSans.ttf</i> along with some information:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>ttx -l
+FreeSans.ttf</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Dump the
+&lsquo;cmap&rsquo; table from <i>FreeSans.ttf</i> to
+<i>FreeSans.ttx</i>:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>ttx -t cmap
+FreeSans.ttf</b></p>
+
+<p style="margin-top: 1em"><b>NOTES</b></p>
+
+<p style="margin-left:9%;">On MS-Windows and MacOS,
+<b>ttx</b> is available as a graphical application to which
+files can be dropped.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>documentation.html</i></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>fontforge</i>(1),
+<i>ftinfo</i>(1), <i>gfontview</i>(1), <i>xmbdfed</i>(1),
+<i>Font::TTF</i>(3pm)</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;"><b>ttx</b> was written by Just
+van Rossum &lt;just@letterror.com&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written by Florent Rougon &lt;f.rougon@free.fr&gt; for
+the Debian GNU/Linux system based on the existing FontTools
+documentation. It may be freely used, modified and
+distributed without restrictions. May 18, 2004
+<i>TTX</i>(1)</p>
+<hr>
+</body>
+</html>

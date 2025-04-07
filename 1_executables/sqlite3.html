@@ -1,0 +1,196 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SQLITE3</title>
+
+</head>
+<body>
+
+<h1 align="center">SQLITE3</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#SUMMARY">SUMMARY</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SQLITE META-COMMANDS">SQLITE META-COMMANDS</a><br>
+<a href="#INIT FILE">INIT FILE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sqlite3</b> -
+A command line interface for SQLite version 3</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sqlite3</b>
+[<i>options</i>] [<i>databasefile</i>] [<i>SQL</i>]</p>
+
+<h2>SUMMARY
+<a name="SUMMARY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sqlite3</b>
+is a terminal-based front-end to the SQLite library that can
+evaluate queries interactively and display the results in
+multiple formats. <b>sqlite3</b> can also be used within
+shell scripts and other applications to provide batch
+processing features.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To start a
+<b>sqlite3</b> interactive session, invoke the
+<b>sqlite3</b> command and optionally provide the name of a
+database file. If the database file does not exist, it will
+be created. If the database file does exist, it will be
+opened.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+create a new database file named &quot;mydata.db&quot;,
+create a table named &quot;memos&quot; and insert a couple
+of records into that table:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ <b>sqlite3
+mydata.db</b> <br>
+SQLite version 3.43.0 2023-08-11 17:45:23 <br>
+Enter &quot;.help&quot; for usage hints. <br>
+sqlite&gt; <b>create table memos(text, priority
+INTEGER);</b> <br>
+sqlite&gt; <b>insert into memos values(&rsquo;deliver
+project description&rsquo;, 10);</b> <br>
+sqlite&gt; <b>insert into memos values(&rsquo;lunch with
+Christine&rsquo;, 100);</b> <br>
+sqlite&gt; <b>select * from memos;</b> <br>
+deliver project description|10 <br>
+lunch with Christine|100 <br>
+sqlite&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no database
+name is supplied, the ATTACH sql command can be used to
+attach to existing or create new database files. ATTACH can
+also be used to attach to multiple databases within the same
+interactive session. This is useful for migrating data
+between databases, possibly changing the schema along the
+way.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Optionally, a
+SQL statement or set of SQL statements can be supplied as a
+single argument. Multiple statements should be separated by
+semi-colons.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ <b>sqlite3
+-line mydata.db &rsquo;select * from memos where priority
+&gt; 20;&rsquo;</b> <br>
+text = lunch with Christine <br>
+priority = 100</p>
+
+<h3>SQLITE META-COMMANDS
+<a name="SQLITE META-COMMANDS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The interactive
+interpreter offers a set of meta-commands that can be used
+to control the output format, examine the currently attached
+database files, or perform administrative operations upon
+the attached databases (such as rebuilding indices).
+Meta-commands are always prefixed with a dot (.).</p>
+
+<p style="margin-left:9%; margin-top: 1em">A list of
+available meta-commands can be viewed at any time by issuing
+the &rsquo;.help&rsquo; command. For example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">sqlite&gt;
+<b>.help</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The available
+commands differ by version and build options, so they are
+not listed here. Please refer to your local copy for all
+available options.</p>
+
+<h2>INIT FILE
+<a name="INIT FILE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sqlite3</b>
+reads an initialization file to set the configuration of the
+interactive environment. Throughout initialization, any
+previously specified setting can be overridden. The sequence
+of initialization is as follows:</p>
+
+<p style="margin-left:9%; margin-top: 1em">o The default
+configuration is established as follows:</p>
+
+<p style="margin-left:9%; margin-top: 1em">mode = LIST <br>
+separator = &quot;|&quot; <br>
+main prompt = &quot;sqlite&gt; &quot; <br>
+continue prompt = &quot; ...&gt; &quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">o If the file
+<b>${XDG_CONFIG_HOME}/sqlite3/sqliterc</b> or
+<b>&#732;/.sqliterc</b> exists, the first of those to be
+found is processed during startup. It should generally only
+contain meta-commands.</p>
+
+<p style="margin-left:9%; margin-top: 1em">o If the -init
+option is present, the specified file is processed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">o All other
+command line options are processed.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://sqlite.org/cli.html
+<br>
+https://sqlite.org/fiddle (a WebAssembly build of the CLI
+app) <br>
+The sqlite3-doc package.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was originally written by Andreas Rottmann
+&lt;rotty@debian.org&gt;, for the Debian GNU/Linux system
+(but may be used by others). It was subsequently revised by
+Bill Bumgarner &lt;bbum@mac.com&gt;, Laszlo Boszormenyi
+&lt;gcs@debian.hu&gt;, and the sqlite3 developers.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,570 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:56 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-CONFIG</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-CONFIG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Sub-commands">Sub-commands</a><br>
+<a href="#set">set</a><br>
+<a href="#get">get</a><br>
+<a href="#list">list</a><br>
+<a href="#delete">delete</a><br>
+<a href="#edit">edit</a><br>
+<a href="#fix">fix</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#json">json</a><br>
+<a href="#global">global</a><br>
+<a href="#editor">editor</a><br>
+<a href="#location">location</a><br>
+<a href="#long">long</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-config</b>
+- Manage the npm configuration files</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm config set
+&lt;key&gt;=&lt;value&gt; [&lt;key&gt;=&lt;value&gt; ...]
+<br>
+npm config get [&lt;key&gt; [&lt;key&gt; ...]] <br>
+npm config delete &lt;key&gt; [&lt;key&gt; ...] <br>
+npm config list [--json] <br>
+npm config edit <br>
+npm config fix</p>
+
+<p style="margin-left:12%; margin-top: 1em">alias: c</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+command is unaware of workspaces.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">npm gets its
+config settings from the command line, environment
+variables, <b>npmrc</b> files, and in some cases, the
+<b>package.json</b> file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See npm help
+npmrc for more information about the npmrc files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See npm help
+config for a more thorough explanation of the mechanisms
+involved, and a full list of config options available.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>npm
+config</b> command can be used to update and edit the
+contents of the user and global npmrc files.</p>
+
+<h3>Sub-commands
+<a name="Sub-commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Config supports
+the following sub-commands:</p>
+
+<h3>set
+<a name="set"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm config set
+key=value [key=value...] <br>
+npm set key=value [key=value...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Sets each of the
+config keys to the value provided. Modifies the user
+configuration file unless <b>location</b> <i>&lang;
+/commands/npm-config#location&rang;</i> is passed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If value is
+omitted, the key will be removed from your config file
+entirely.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: for
+backwards compatibility, <b>npm config set key value</b> is
+supported as an alias for <b>npm config set
+key=value</b>.</p>
+
+<h3>get
+<a name="get"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm config get
+[key ...] <br>
+npm get [key ...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Echo the config
+value(s) to stdout.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If multiple keys
+are provided, then the values will be prefixed with the key
+names.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no keys are
+provided, then this command behaves the same as <b>npm
+config list</b>.</p>
+
+<h3>list
+<a name="list"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm config
+list</p>
+
+<p style="margin-left:9%; margin-top: 1em">Show all the
+config settings. Use <b>-l</b> to also show defaults. Use
+<b>--json</b> to show the settings in json format.</p>
+
+<h3>delete
+<a name="delete"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm config
+delete key [key ...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Deletes the
+specified keys from all configuration files.</p>
+
+<h3>edit
+<a name="edit"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm config
+edit</p>
+
+<p style="margin-left:9%; margin-top: 1em">Opens the config
+file in an editor. Use the <b>--global</b> flag to edit the
+global config.</p>
+
+<h3>fix
+<a name="fix"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm config
+fix</p>
+
+<p style="margin-left:9%; margin-top: 1em">Attempts to
+repair invalid configuration items. Usually this means
+attaching authentication config (i.e. <b>_auth</b>,
+<b>_authToken</b>) to the configured <b>registry</b>.</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>json
+<a name="json"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Whether or not
+to output JSON data, rather than the normal output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">In <b>npm pkg set</b> it enables
+parsing set values with JSON.parse() before saving them to
+your <b>package.json</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Not supported by
+all npm commands.</p>
+
+<h3>global
+<a name="global"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Operates in
+&quot;global&quot; mode, so that packages are installed into
+the <b>prefix</b> folder instead of the current working
+directory. See npm help folders for more on the differences
+in behavior.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">packages are installed into the
+<b>{prefix}/lib/node_modules</b> folder, instead of the
+current working directory.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>bin files are linked to <b>{prefix}/bin</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>man pages are linked to <b>{prefix}/share/man</b></p></td></tr>
+</table>
+
+<h3>editor
+<a name="editor"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: The EDITOR or VISUAL
+environment variables, or
+&rsquo;%SYSTEMROOT%\notepad.exe&rsquo; on Windows, or
+&rsquo;vi&rsquo; on Unix systems</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: String</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The command to
+run for <b>npm edit</b> and <b>npm config edit</b>.</p>
+
+<h3>location
+<a name="location"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: &quot;user&quot; unless
+<b>--global</b> is passed, which will also set this value to
+&quot;global&quot;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: &quot;global&quot;, &quot;user&quot;, or
+&quot;project&quot;</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When passed to
+<b>npm config</b> this refers to which config file to
+use.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When set to
+&quot;global&quot; mode, packages are installed into the
+<b>prefix</b> folder instead of the current working
+directory. See npm help folders for more on the differences
+in behavior.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">packages are installed into the
+<b>{prefix}/lib/node_modules</b> folder, instead of the
+current working directory.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>bin files are linked to <b>{prefix}/bin</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>man pages are linked to <b>{prefix}/share/man</b></p></td></tr>
+</table>
+
+<h3>long
+<a name="long"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Show extended
+information in <b>ls</b>, <b>search</b>, and
+<b>help-search</b>.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p style="margin-top: 1em">npm help folders</p></td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p>npm help config</p></td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p><b>package.json</b> <i>&lang;
+/configuring-npm/package-json&rang;</i></p> </td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p>npm help npmrc</p></td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="58%">
+
+
+<p>npm help npm</p></td>
+<td width="28%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE ADMIN UPGRADE</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE ADMIN UPGRADE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-admin-upgrade
+- Construct new tree from current origin and deploy it, if
+it changed</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em"><b>ostree admin upgrade</b>
+[OPTIONS...]</p> </td>
+<td width="49%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Downloads the
+latest version of the current ref from the build server and
+deploys it, if it changed. Reboot the machine for the
+changes to take effect. These phases can be split via
+<b>--pull-only</b> and <b>--deploy-only</b>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--os</b>=&quot;STATEROOT&quot;</p>
+
+<p style="margin-left:14%;">Use a different operating
+system root than the current one.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pull-only</b></p>
+
+<p style="margin-left:14%;">Only perform a pull into the
+repository; do not create a deployment. This option can
+hence safely be used in a background scheduled job with the
+assurance of not changing system state.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--deploy-only</b></p>
+
+<p style="margin-left:14%;">Create a new deployment from
+the latest commit in the tracked origin refspec. This option
+is intended to be used by a scheduled system that detected
+changes via <b>--pull-only</b>, and is ready to deploy
+them.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--stage</b></p>
+
+<p style="margin-left:14%;">Perform deployment finalization
+at shutdown time. Recommended, and will likely become the
+default in the future.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--reboot</b>,<b>-r</b></p>
+
+<p style="margin-left:14%;">Reboot after a successful
+upgrade.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--kexec</b>,<b>-k</b></p>
+
+<p style="margin-left:14%;">Load new deployment into kexec
+after a successful upgrade.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--allow-downgrade</b></p>
+
+<p style="margin-left:14%;">Permit deployment of
+chronologically older trees.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--override-commit</b>=&quot;CHECKSUM&quot;</p>
+
+<p style="margin-left:14%;">Deploy CHECKSUM instead of the
+latest tree.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin upgrade</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">No update
+available.</p>
+<hr>
+</body>
+</html>

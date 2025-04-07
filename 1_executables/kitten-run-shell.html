@@ -1,0 +1,129 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:38 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-run-shell</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-run-shell</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-run-shell
+- Run the user's shell with shell integration enabled</p>
+
+<h2>Usage
+<a name="Usage"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="91%">
+
+
+<p style="margin-top: 1em"><b>kitten run-shell [options]
+[optional cmd to run before running the shell ...]</b></p></td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Run the users's
+configured shell. If the shell supports shell integration,
+enable it based on the user's configured shell_integration
+setting.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--shell-integration</b></p>
+
+<p style="margin-left:18%;">Specify a value for the
+<b>shell_integration option, overriding the one from</b>
+<i>kitty.conf.</i></p>
+
+<p style="margin-left:9%;"><b>--shell</b> <i>[=.]</i></p>
+
+<p style="margin-left:18%;">Specify the shell command to
+run. The default value of . will use the parent shell if
+recognized, falling back to the value of the <b>shell option
+from</b> <i>kitty.conf.</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--env</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Specify an env var to set before running the shell. Of
+the form KEY=VAL. Can be specified multiple times. If no =
+is present KEY is unset.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--cwd</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>The working directory to use when executing the
+shell.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--inject-self-onto-path</b>
+<i>[=always]</i></p>
+
+<p style="margin-left:18%;">Add the directory containing
+this kitten binary to PATH. Directory is added only if not
+already present.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Choices:
+always, never, unless-root</p>
+
+<p style="margin-left:9%;"><b>--help, -h</b></p>
+
+<p style="margin-left:18%;">Show help for this command</p>
+<hr>
+</body>
+</html>

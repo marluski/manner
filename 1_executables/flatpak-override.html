@@ -1,0 +1,412 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK OVERRIDE</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK OVERRIDE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-override
+- Override application requirements</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="44%">
+
+
+<p style="margin-top: 1em"><b>flatpak override</b>
+[OPTION...] [APP]</p></td>
+<td width="47%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Overrides the
+application specified runtime requirements. This can be used
+to grant a sandboxed application more or less resources than
+it requested.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default the
+application gets access to the resources it requested when
+it is started. But the user can override it on a particular
+instance by specifying extra arguments to <b>flatpak
+run</b>, or every time by using <b>flatpak override</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The application
+overrides are saved in text files residing in
+$XDG_DATA_HOME/flatpak/overrides in user mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the
+application ID APP is not specified then the overrides
+affect all applications, but the per-application overrides
+can override the global overrides.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unless
+overridden with the <b>--user</b> or <b>--installation</b>
+options, this command changes the default system-wide
+installation.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>,
+<b>--user</b></p>
+
+<p style="margin-left:14%;">Update a per-user
+installation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system</b></p>
+
+<p style="margin-left:14%;">Update the default system-wide
+installation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--installation=NAME</b></p>
+
+<p style="margin-left:14%;">Updates a system-wide
+installation specified by NAME among those defined in
+/etc/flatpak/installations.d/. Using
+<b>--installation=default</b> is equivalent to using
+<b>--system</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--share=SUBSYSTEM</b></p>
+
+<p style="margin-left:14%;">Share a subsystem with the host
+session. This overrides the Context section from the
+application metadata. SUBSYSTEM must be one of: network,
+ipc. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--unshare=SUBSYSTEM</b></p>
+
+<p style="margin-left:14%;">Don't share a subsystem with
+the host session. This overrides the Context section from
+the application metadata. SUBSYSTEM must be one of: network,
+ipc. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--socket=SOCKET</b></p>
+
+<p style="margin-left:14%;">Expose a well-known socket to
+the application. This overrides to the Context section from
+the application metadata. SOCKET must be one of: x11,
+wayland, fallback-x11, pulseaudio, system-bus, session-bus,
+ssh-auth, pcsc, cups, gpg-agent, inherit-wayland-socket.
+This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nosocket=SOCKET</b></p>
+
+<p style="margin-left:14%;">Don't expose a well-known
+socket to the application. This overrides to the Context
+section from the application metadata. SOCKET must be one
+of: x11, wayland, fallback-x11, pulseaudio, system-bus,
+session-bus, ssh-auth, pcsc, cups, gpg-agent,
+inherit-wayland-socket. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--device=DEVICE</b></p>
+
+<p style="margin-left:14%;">Expose a device to the
+application. This overrides to the Context section from the
+application metadata. DEVICE must be one of: dri, input,
+usb, kvm, shm, all. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nodevice=DEVICE</b></p>
+
+<p style="margin-left:14%;">Don't expose a device to the
+application. This overrides to the Context section from the
+application metadata. DEVICE must be one of: dri, input,
+usb, kvm, shm, all. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--allow=FEATURE</b></p>
+
+<p style="margin-left:14%;">Allow access to a specific
+feature. This updates the [Context] group in the metadata.
+FEATURE must be one of: devel, multiarch, bluetooth, canbus,
+per-app-dev-shm. This option can be used multiple times.</p>
+
+<p style="margin-left:14%; margin-top: 1em">See
+<b>flatpak-build-finish</b>(1) for the meaning of the
+various features.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disallow=FEATURE</b></p>
+
+<p style="margin-left:14%;">Disallow access to a specific
+feature. This updates the [Context] group in the metadata.
+FEATURE must be one of: devel, multiarch, bluetooth, canbus,
+per-app-dev-shm. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--filesystem=FILESYSTEM</b></p>
+
+<p style="margin-left:14%;">Allow the application access to
+a subset of the filesystem. This overrides to the Context
+section from the application metadata. FILESYSTEM can be one
+of: home, host, host-os, host-etc, xdg-desktop,
+xdg-documents, xdg-download, xdg-music, xdg-pictures,
+xdg-public-share, xdg-templates, xdg-videos, xdg-run,
+xdg-config, xdg-cache, xdg-data, an absolute path, or a
+homedir-relative path like &#732;/dir or paths relative to
+the xdg dirs, like xdg-download/subdir. The optional :ro
+suffix indicates that the location will be read-only. The
+optional :create suffix indicates that the location will be
+read-write and created if it doesn't exist. This option can
+be used multiple times. See the &quot;[Context]
+filesystems&quot; list in <b>flatpak-metadata</b>(5) for
+details of the meanings of these filesystems.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nofilesystem=FILESYSTEM</b></p>
+
+<p style="margin-left:14%;">Undo the effect of a previous
+<b>--filesystem=</b>FILESYSTEM in the app's manifest or a
+lower-precedence layer of overrides, and/or remove a
+previous <b>--filesystem=</b>FILESYSTEM from this layer of
+overrides. This overrides the Context section of the
+application metadata. FILESYSTEM can take the same values as
+for <b>--filesystem</b>, but the :ro and :create suffixes
+are not used here. This option can be used multiple
+times.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option
+does not prevent access to a more narrowly-scoped
+<b>--filesystem</b>. For example, if an application has the
+equivalent of <b>--filesystem=xdg-config/MyApp</b> in its
+manifest or as a system-wide override, and flatpak override
+--user --nofilesystem=home as a per-user override, then it
+will be prevented from accessing most of the home directory,
+but it will still be allowed to access
+$XDG_CONFIG_HOME/MyApp.</p>
+
+<p style="margin-left:14%; margin-top: 1em">As a special
+case, <b>--nofilesystem=host:reset</b> will ignore all
+<b>--filesystem</b> permissions inherited from the app
+manifest or a lower-precedence layer of overrides, in
+addition to having the behaviour of
+<b>--nofilesystem=host</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--add-policy=SUBSYSTEM.KEY=VALUE</b></p>
+
+<p style="margin-left:14%;">Add generic policy option. For
+example, &quot;--add-policy=subsystem.key=v1
+--add-policy=subsystem.key=v2&quot; would map to this
+metadata:</p>
+
+<p style="margin-left:19%; margin-top: 1em">[Policy
+subsystem] <br>
+key=v1;v2;</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option can
+be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--remove-policy=SUBSYSTEM.KEY=VALUE</b></p>
+
+<p style="margin-left:14%;">Remove generic policy option.
+This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--env=VAR=VALUE</b></p>
+
+<p style="margin-left:14%;">Set an environment variable in
+the application. This overrides to the Context section from
+the application metadata. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--unset-env=VAR</b></p>
+
+<p style="margin-left:14%;">Unset an environment variable
+in the application. This overrides the unset-environment
+entry in the [Context] group of the metadata, and the
+[Environment] group. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--env-fd=</b><i>FD</i></p>
+
+<p style="margin-left:14%;">Read environment variables from
+the file descriptor <i>FD</i>, and set them as if via
+<b>--env</b>. This can be used to avoid environment
+variables and their values becoming visible to other
+users.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Each
+environment variable is in the form <i>VAR</i>=<i>VALUE</i>
+followed by a zero byte. This is the same format used by env
+-0 and /proc/*/environ.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--own-name=NAME</b></p>
+
+<p style="margin-left:14%;">Allow the application to own
+the well-known name NAME on the session bus. This overrides
+to the Context section from the application metadata. This
+option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--talk-name=NAME</b></p>
+
+<p style="margin-left:14%;">Allow the application to talk
+to the well-known name NAME on the session bus. This
+overrides to the Context section from the application
+metadata. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-talk-name=NAME</b></p>
+
+<p style="margin-left:14%;">Don't allow the application to
+talk to the well-known name NAME on the session bus. This
+overrides to the Context section from the application
+metadata. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system-own-name=NAME</b></p>
+
+<p style="margin-left:14%;">Allow the application to own
+the well known name NAME on the system bus. If NAME ends
+with .*, it allows the application to own all matching
+names. This overrides to the Context section from the
+application metadata. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system-talk-name=NAME</b></p>
+
+<p style="margin-left:14%;">Allow the application to talk
+to the well known name NAME on the system bus. If NAME ends
+with .*, it allows the application to talk to all matching
+names. This overrides to the Context section from the
+application metadata. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system-no-talk-name=NAME</b></p>
+
+<p style="margin-left:14%;">Don't allow the application to
+talk to the well known name NAME on the system bus. If NAME
+ends with .*, it allows the application to talk to all
+matching names. This overrides to the Context section from
+the application metadata. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--persist=FILENAME</b></p>
+
+<p style="margin-left:14%;">If the application doesn't have
+access to the real homedir, make the (homedir-relative) path
+FILENAME a bind mount to the corresponding path in the
+per-application directory, allowing that location to be used
+for persistent data. This overrides to the Context section
+from the application metadata. This option can be used
+multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--reset</b></p>
+
+<p style="margin-left:14%;">Remove overrides. If an APP is
+given, remove the overrides for that application, otherwise
+remove the global overrides.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--show</b></p>
+
+<p style="margin-left:14%;">Shows overrides. If an APP is
+given, shows the overrides for that application, otherwise
+shows the global overrides.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+override --nosocket=wayland org.gnome.gedit</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+override --filesystem=home org.mozilla.Firefox</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flatpak</b>(1),
+<b>flatpak-run</b>(1)</p>
+<hr>
+</body>
+</html>

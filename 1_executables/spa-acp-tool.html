@@ -1,0 +1,206 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:21 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>spa-acp-tool</title>
+
+</head>
+<body>
+
+<h1 align="center">spa-acp-tool</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">spa-acp-tool -
+The PipeWire ALSA profile debugging utility</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>spa-acp-tool</b>
+[<i>OPTIONS</i>] [<i>COMMAND</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Debug tool for
+exercising the ALSA card profile probing code, without
+running PipeWire.</p>
+
+<p style="margin-left:9%; margin-top: 1em">May be used to
+debug problems where PipeWire has incorrectly functioning
+ALSA card profiles.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h |
+--help</b></p>
+
+<p style="margin-left:14%;">Show help</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v |
+--verbose</b></p>
+
+<p style="margin-left:14%;">Increase verbosity by one
+level</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c NUMBER |
+--card NUMBER</b></p>
+
+<p style="margin-left:14%;">Select which card to probe</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p |
+--properties</b></p>
+
+<p style="margin-left:14%;">Additional properties to pass
+to ACP, e.g. key=value ....</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>help |
+h</b></p>
+
+<p style="margin-left:14%;">Show available commands</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>quit |
+q</b></p>
+
+<p style="margin-left:14%;">Quit</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>card ID | c
+ID</b></p>
+
+<p style="margin-left:14%;">Probe card</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>info |
+i</b></p>
+
+<p style="margin-left:14%;">List card info</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>list |
+l</b></p>
+
+<p style="margin-left:14%;">List all objects</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>list-verbose
+| lv</b></p>
+
+<p style="margin-left:14%;">List all data</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>list-profiles
+[ID] | lpr [ID]</b></p>
+
+<p style="margin-left:14%;">List profiles</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>set-profile
+ID | spr ID</b></p>
+
+<p style="margin-left:14%;">Activate a profile</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>list-ports
+[ID] | lp [ID]</b></p>
+
+<p style="margin-left:14%;">List ports</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>set-port ID |
+sp ID</b></p>
+
+<p style="margin-left:14%;">Activate a port</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>list-devices
+[ID] | ld [ID]</b></p>
+
+<p style="margin-left:14%;">List available devices</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>get-volume ID
+| gv ID</b></p>
+
+<p style="margin-left:14%;">Get volume from device</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>set-volume ID
+VOL | v ID VOL</b></p>
+
+<p style="margin-left:14%;">Set volume on device</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>inc-volume ID
+| v+ ID</b></p>
+
+<p style="margin-left:14%;">Increase volume on device</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>dec-volume ID
+| v- ID</b></p>
+
+<p style="margin-left:14%;">Decrease volume on device</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>get-mute ID |
+gm ID</b></p>
+
+<p style="margin-left:14%;">Get mute state from device</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>set-mute ID
+VAL | sm ID VAL</b></p>
+
+<p style="margin-left:14%;">Set mute on device</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>toggle-mute
+ID | m ID</b></p>
+
+<p style="margin-left:14%;">Toggle mute on device</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire(1)</b></p>
+<hr>
+</body>
+</html>

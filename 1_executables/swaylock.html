@@ -1,0 +1,611 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>swaylock</title>
+
+</head>
+<body>
+
+<h1 align="center">swaylock</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#APPEARANCE">APPEARANCE</a><br>
+<a href="#SIGNALS">SIGNALS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">swaylock-effects
+- Fancier screen locker for Wayland</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>swaylock</i>
+[options...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Locks your
+Wayland session.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C,
+--config</b> &lt;path&gt;</p>
+
+<p style="margin-left:14%;">The config file to use. By
+default, the following paths are checked:
+<i>$HOME/.swaylock/config</i>,
+<i>$XDG_CONFIG_HOME/swaylock/config</i>, and
+<i>SYSCONFDIR/swaylock/config</i>. All flags aside from this
+one are valid options in the configuration file using the
+format <i>long-option=value</i>. For options such as
+<i>ignore-empty-password</i>, just supply the
+<i>long-option</i>. All leading dashes should be omitted and
+the equals sign is required for flags that take an
+argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--debug</b></p>
+
+<p style="margin-left:14%;">Enable debugging output.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e,
+--ignore-empty-password</b></p>
+
+<p style="margin-left:14%;">When an empty password is
+provided, do not validate it.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-F,
+--show-failed-attempts</b></p>
+
+<p style="margin-left:14%;">Show current count of failed
+authentication attempts.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--daemonize</b></p>
+
+<p style="margin-left:14%;">Detach from the controlling
+terminal after locking.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note: this is
+the default behavior of i3lock.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fade-in</b>
+&lt;seconds&gt;</p>
+
+<p style="margin-left:14%;">Fade in the lock screen.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--submit-on-touch</b></p>
+
+<p style="margin-left:14%;">Submit password in response to
+a touch event.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--grace</b>
+&lt;seconds&gt;</p>
+
+<p style="margin-left:14%;">Only require a password after
+some grace period.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note: Together
+with <b>--indicator</b>, the indicator is always shown.
+Together with <b>--indicator-idle-visible</b>, the indicator
+is only shown after the grace period.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--grace-no-mouse</b></p>
+
+<p style="margin-left:14%;">With <b>--grace</b>,
+don&rsquo;t unlock in response to a mouse event.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--grace-no-touch</b></p>
+
+<p style="margin-left:14%;">With <b>--grace</b>,
+don&rsquo;t unlock in response to a touch event.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Show the version number and
+quit.</p>
+
+<h2>APPEARANCE
+<a name="APPEARANCE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u,
+--no-unlock-indicator</b></p>
+
+<p style="margin-left:14%;">Disable the unlock
+indicator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--indicator</b></p>
+
+<p style="margin-left:14%;">Always show the indicator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--clock</b></p>
+
+<p style="margin-left:14%;">Show a clock in the
+indicator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--timestr</b>
+&lt;format&gt;</p>
+
+<p style="margin-left:14%;">The time format for the
+indicator clock. Defaults to &rsquo;%T&rsquo;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--datestr</b>
+&lt;format&gt;</p>
+
+<p style="margin-left:14%;">The date format for the
+indicator clock. Defaults to &rsquo;%a, %x&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i,
+--image</b> [[&lt;output&gt;]:]&lt;path&gt;</p>
+
+<p style="margin-left:14%;">Display the given image,
+optionally only on the given output. Use -c to set a
+background color. If the path potentially contains a
+&rsquo;:&rsquo;, prefix it with another &rsquo;:&rsquo; to
+prevent interpreting part of it as &lt;output&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-S,
+--screenshots</b></p>
+
+<p style="margin-left:14%;">Display a screenshot.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-k,
+--show-keyboard-layout</b></p>
+
+<p style="margin-left:14%;">Display the current xkb layout
+while typing.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-K,
+--hide-keyboard-layout</b></p>
+
+<p style="margin-left:14%;">Force hiding the current xkb
+layout while typing, even if more than one layout is
+configured or the show-keyboard-layout option is set.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-L,
+--disable-caps-lock-text</b></p>
+
+<p style="margin-left:14%;">Disable the Caps Lock text.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l,
+--indicator-caps-lock</b></p>
+
+<p style="margin-left:14%;">Show the current Caps Lock
+state also on the indicator.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--scaling</b></p>
+
+<p style="margin-left:14%;">Image scaling mode:
+<i>stretch</i>, <i>fill</i>, <i>fit</i>, <i>center</i>,
+<i>tile</i>, <i>solid_color</i>. Use <i>solid_color</i> to
+display only the background color, even if a background
+image is specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-T,
+--tiling</b></p>
+
+<p style="margin-left:14%;">Same as --scaling=tile.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--color</b> &lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Turn the screen into the given
+color instead of white. If -i is used, this sets the
+background of the image to the given color. Defaults to
+white (FFFFFF).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--bs-hl-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of backspace
+highlight segments.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--caps-lock-bs-hl-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of backspace
+highlight segments when Caps Lock is active.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--caps-lock-key-hl-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the key press
+highlight segments when Caps Lock is active.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--font</b>
+&lt;font&gt;</p>
+
+<p style="margin-left:14%;">Sets the font of the text.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--font-size</b>
+&lt;size&gt;</p>
+
+<p style="margin-left:14%;">Sets a fixed font size for the
+indicator text.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--indicator-idle-visible</b></p>
+
+<p style="margin-left:14%;">Sets the indicator to show even
+if idle.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--indicator-radius</b>
+&lt;radius&gt;</p>
+
+<p style="margin-left:14%;">Sets the indicator radius. The
+default value is 50.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--indicator-thickness</b>
+&lt;thickness&gt;</p>
+
+<p style="margin-left:14%;">Sets the indicator thickness.
+The default value is 10.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--indicator-x-position</b>
+&lt;x&gt;</p>
+
+<p style="margin-left:14%;">Sets the horizontal position of
+the indicator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--indicator-y-position</b>
+&lt;y&gt;</p>
+
+<p style="margin-left:14%;">Sets the vertical position of
+the indicator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--indicator-image</b>
+&lt;path&gt;</p>
+
+<p style="margin-left:14%;">Display the given image inside
+of the indicator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inside-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the inside of
+the indicator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inside-clear-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the inside of
+the indicator when cleared.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inside-caps-lock-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the inside of
+the indicator when Caps Lock is active.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inside-ver-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the inside of
+the indicator when verifying.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inside-wrong-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the inside of
+the indicator when invalid.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--key-hl-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the key press
+highlight segments.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--layout-bg-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the background color of
+the box containing the layout text.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--layout-border-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the border of
+the box containing the layout text.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--layout-text-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the layout
+text.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the line
+between the inside and ring.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-clear-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the line
+between the inside and ring when cleared.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-caps-lock-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the line
+between the inside and ring when Caps Lock is active.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-ver-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the line
+between the inside and ring when verifying.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-wrong-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the line
+between the inside and ring when invalid.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n,
+--line-uses-inside</b></p>
+
+<p style="margin-left:14%;">Use the inside color for the
+line between the inside and ring.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r,
+--line-uses-ring</b></p>
+
+<p style="margin-left:14%;">Use the ring color for the line
+between the inside and ring.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ring-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the ring of
+the indicator when typing or idle.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ring-clear-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the ring of
+the indicator when cleared.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ring-caps-lock-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the ring of
+the indicator when Caps Lock is active.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ring-ver-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the ring of
+the indicator when verifying.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ring-wrong-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the ring of
+the indicator when invalid.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--separator-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the lines
+that separate highlight segments.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the text.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-clear</b>
+&lt;string&gt;</p>
+
+<p style="margin-left:14%;">Sets the string displayed when
+the password is cleared.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-clear-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the text when
+cleared.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-caps-lock</b>
+&lt;string&gt;</p>
+
+<p style="margin-left:14%;">Sets the string displayed when
+Caps Lock is active.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-caps-lock-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the text when
+Caps Lock is active.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-ver</b>
+&lt;string&gt;</p>
+
+<p style="margin-left:14%;">Sets the string displayed when
+the password is being verified.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-ver-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the text when
+verifying.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-wrong</b>
+&lt;string&gt;</p>
+
+<p style="margin-left:14%;">Sets the string displayed when
+the password is wrong.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text-wrong-color</b>
+&lt;rrggbb[aa]&gt;</p>
+
+<p style="margin-left:14%;">Sets the color of the text when
+invalid.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--effect-blur</b>
+&lt;radius&gt;x&lt;times&gt;</p>
+
+<p style="margin-left:14%;">Blur displayed images.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--effect-pixelate</b>
+&lt;factor&gt;</p>
+
+<p style="margin-left:14%;">Pixelate displayed images.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--effect-scale</b>
+&lt;scale&gt;</p>
+
+<p style="margin-left:14%;">Scale the image by a factor.
+This can be used to make other effects faster if you
+don&rsquo;t need the full resolution.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--effect-greyscale</b></p>
+
+<p style="margin-left:14%;">Make the displayed image
+greyscale.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--effect-vignette
+&lt;base&gt;:&lt;factor&gt;</b></p>
+
+<p style="margin-left:14%;">Apply a vignette effect to
+images. Base and factor should be numbers between 0 and
+1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--effect-compose
+&lt;position&gt;;&lt;size&gt;;&lt;gravity&gt;;&lt;path&gt;</b></p>
+
+<p style="margin-left:14%;">Overlay another image to your
+lock screen. The <i>position</i>, <i>size</i> and
+<i>gravity</i> part is optional.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--effect-custom
+&lt;path&gt;</b></p>
+
+<p style="margin-left:14%;">Load a custom effect from a
+shared object. The .so must export a <b><br>
+void swaylock_effect(uint32_t *data, int width, int height,
+int scale)</b> <br>
+or an <b>uint32_t swaylock_pixel(uint32_t pix, int x, int y,
+int width, int height)</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--time-effects</b></p>
+
+<p style="margin-left:14%;">Measure the time it takes to
+run each effect.</p>
+
+<h2>SIGNALS
+<a name="SIGNALS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>SIGUSR1</b></p>
+
+<p style="margin-left:14%;">Unlock the screen and exit.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Jakub Jirutka. This is a fork of the upstream Swaylock,
+which is maintained by Simon Ser, and it was originally
+forked by Martin D&oslash;rum. For more information about
+swaylock-effects development, see
+https://github.com/jirutka/swaylock-effects.</p>
+<hr>
+</body>
+</html>

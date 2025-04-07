@@ -1,0 +1,191 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>yuvdenoise</title>
+
+</head>
+<body>
+
+<h1 align="center">yuvdenoise</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#HOW IT WORKS">HOW IT WORKS</a><br>
+<a href="#TYPICAL USAGE AND TIPS">TYPICAL USAGE AND TIPS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#ADDITIONAL INFO">ADDITIONAL INFO</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">yuvdenoise -
+Motion-Compensating-YUV4MPEG2-frame-denoiser</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvdenoise</b>
+[<i>options</i>] &lt;/dev/stdin &gt;/dev/stdout</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvdenoise</b>
+is a spatio-temporal noise-filter for YUV4MPEG2 streams.
+This is useful to reduce the bitrate needed to encode your
+captured movies for VCD and SVCD creation.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvdenoise</b>
+accepts the following options: <b><br>
+-g</b> <i>y,u,v [0..255] Gaussian filter thresholds</i></p>
+
+<p style="margin-left:14%;">This sets the thresholds for
+the gaussian filter. A value of 0 disables filtering for a
+specific component and 0,0,0 completely disables/bypasses
+the filter. This filter is applied <b>before</b> the
+temporal (-t) filter. <br>
+(default=0,0,0)</p>
+
+<p style="margin-left:9%;"><b>-m</b> <i>y,u,v [0..255] Pre
+3D Median filter thresholds</i></p>
+
+<p style="margin-left:14%;">This sets the thresholds for
+the pre-processing 3D median filter. A value of 0 disables
+median filtering for a specific component and 0,0,0
+completely disables/bypasses the filter. This filter is
+applied <b>before</b> the temporal (-t) filter. <br>
+(default=0,0,0)</p>
+
+<p style="margin-left:9%;"><b>-r</b> <i>y,u,v [0..255]
+Renoising filter thresholds</i></p>
+
+<p style="margin-left:14%;">This sets the thresholds for
+adding random &quot;noise&quot; back into the video stream.
+Default is disabled (not adding random noise). This filter,
+if enabled, is run as the Blast filter (after the median and
+temporal filters). Reasonable value is 4,8,8 but if you are
+working with monochrome (black and white movie) then 4,0,0
+will speed things up by not processing the chroma planes.
+<br>
+(default=0,0,0)</p>
+
+<p style="margin-left:9%;"><b>-t</b> <i>y,u,v [0..255]
+Temporal noise-filter thresholds</i></p>
+
+<p style="margin-left:14%;">This sets the thresholds for
+the temporal noise-filter. Values above 12 may introduce
+ghosting. The default value for Y&rsquo; (y) is often a
+little high and reducing it to 4 or 5 may be necessary. If
+the chroma smears or ghosts try using values of 5 or 6
+instead of the default (12). A value of 0 disables temporal
+filtering for the specified component (0,0,0
+disables/bypasses all temporal filtering). Thus for black
+and white movies 4,0,0 will be faster by not denoising the
+chroma planes. <br>
+(default=4,8,8)</p>
+
+<p style="margin-left:9%;"><b>-M</b> <i>y,u,v [0..255] Post
+3D Median filter thresholds</i></p>
+
+<p style="margin-left:14%;">This sets the thresholds for
+the post-processing 3D median filter. A value of 0 disables
+median filtering for a specific component and 0,0,0
+completely disables/bypasses the filter. This filter is
+applied <b>after</b> the temporal (-t) filter. Reasonable
+value is 4,8,8 but if you are working with monochrome (black
+and white movie) then 4,0,0 will speed things up by not
+processing the chroma planes. <br>
+(default=0,0,0)</p>
+
+<h2>HOW IT WORKS
+<a name="HOW IT WORKS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To Be Written
+(maybe) in the future.</p>
+
+<h2>TYPICAL USAGE AND TIPS
+<a name="TYPICAL USAGE AND TIPS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">As it is
+self-adapting to the noise-situation found in the stream you
+normally just can go without any options set:</p>
+
+<p style="margin-left:9%; margin-top: 1em">lav2yuv
+my-video.avi | yuvdenoise | mpeg2enc -t 1 -o
+my-video.m1v</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Stefan Fendt &lt;stefan@lionfish.ping.de&gt;
+and revised by Steven Schultz.</p>
+
+<h2>ADDITIONAL INFO
+<a name="ADDITIONAL INFO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+questions, remarks, problems or you just want to contact the
+developers, the main mailing list for the MJPEG-tools
+is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>mjpeg-users@lists.sourceforge.net</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">For more info,
+see our website at</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>mpeg2enc</b>(1) <b>lavrec</b>(1) <b>lav2yuv</b>(1)</p>
+<hr>
+</body>
+</html>

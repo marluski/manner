@@ -1,0 +1,193 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:50 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pw-reserve</title>
+
+</head>
+<body>
+
+<h1 align="center">pw-reserve</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pw-reserve - The
+PipeWire device reservation utility</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-reserve</b>
+[<i>options</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Reserves a
+device using the DBus org.freedesktop.ReserveDevice1 device
+reservation scheme [1], waiting until terminated by SIGINT
+or another signal.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It can also
+request other applications to release a device. This can be
+used to make audio servers such as PipeWire, Pulseaudio,
+JACK, or other applications that respect the device
+reservation protocol, to ignore a device, or to release a
+sound device they are already using so that it can be used
+by other applications.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r |
+--release</b></p>
+
+<p style="margin-left:14%;">Request any client currently
+holding the device to release it, and try to reserve it
+after that. If this option is not given and the device is
+already in use, <b>pw-reserve</b> will exit with error
+status.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n NAME |
+--name=NAME</b></p>
+
+<p style="margin-left:14%;">Name of the device to reserve.
+By convention, this is</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="38%">
+
+
+<p>Audio<i>N</i>: for ALSA card number <i>N</i></p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>pw-reserve</b>
+can reserve any device name, however PipeWire does not
+currently support other values than listed above.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a NAME |
+--appname=NAME</b></p>
+
+<p style="margin-left:14%;">Application name to use when
+reserving the device.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p PRIO |
+--priority=PRIO</b></p>
+
+<p style="margin-left:14%;">Priority to use when reserving
+the device.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m |
+--monitor</b></p>
+
+<p style="margin-left:14%;">Monitor reservations of a given
+device, instead of reserving it.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h |
+--help</b></p>
+
+<p style="margin-left:14%;">Show help.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Show version information.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If the device
+reservation succeeds, <b>pw-reserve</b> does not exit until
+terminated with a signal. It exits with status 0 if
+terminated by SIGINT or SIGTERM in this case.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Otherwise, it
+exits with nonzero exit status.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-reserve</b>
+-n Audio0</p>
+
+<p style="margin-left:9%; margin-top: 1em">Reserve ALSA
+card 0, and exit with error if it is already reserved.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-reserve</b>
+-n Audio0 -r</p>
+
+<p style="margin-left:9%; margin-top: 1em">Reserve ALSA
+card 0, requesting any applications that have reserved the
+device to release it for us.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">[1]
+https://git.0pointer.net/reserve.git/tree/reserve.txt - A
+simple device reservation scheme with DBus</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,396 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK BUILD</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK BUILD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-build -
+Build in a directory</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em"><b>flatpak build</b> [OPTION...]
+DIRECTORY [COMMAND&nbsp;[ARG...]]</p></td>
+<td width="22%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Runs a build
+command in a directory. DIRECTORY must have been initialized
+with <b>flatpak build-init</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The sdk that is
+specified in the metadata file in the directory is mounted
+at /usr and the files and var subdirectories are mounted at
+/app and /var, respectively. They are writable, and their
+contents are preserved between build commands, to allow
+accumulating build artifacts there.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b>,
+<b>--runtime</b></p>
+
+<p style="margin-left:14%;">Use the non-devel runtime that
+is specified in the application metadata instead of the
+devel runtime.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>,
+<b>--die-with-parent</b></p>
+
+<p style="margin-left:14%;">Kill the build process and all
+children when the launching process dies.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--bind-mount=DEST=SOURCE</b></p>
+
+<p style="margin-left:14%;">Add a custom bind mount in the
+build namespace. Can be specified multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--build-dir=PATH</b></p>
+
+<p style="margin-left:14%;">Start the build in this
+directory (default is in the current directory).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--share=SUBSYSTEM</b></p>
+
+<p style="margin-left:14%;">Share a subsystem with the host
+session. This overrides the Context section from the
+application metadata. SUBSYSTEM must be one of: network,
+ipc. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--unshare=SUBSYSTEM</b></p>
+
+<p style="margin-left:14%;">Don't share a subsystem with
+the host session. This overrides the Context section from
+the application metadata. SUBSYSTEM must be one of: network,
+ipc. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--socket=SOCKET</b></p>
+
+<p style="margin-left:14%;">Expose a well-known socket to
+the application. This overrides to the Context section from
+the application metadata. SOCKET must be one of: x11,
+wayland, fallback-x11, pulseaudio, system-bus, session-bus,
+ssh-auth, pcsc, cups, gpg-agent, inherit-wayland-socket.
+This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nosocket=SOCKET</b></p>
+
+<p style="margin-left:14%;">Don't expose a well-known
+socket to the application. This overrides to the Context
+section from the application metadata. SOCKET must be one
+of: x11, wayland, fallback-x11, pulseaudio, system-bus,
+session-bus, ssh-auth, pcsc, cups, gpg-agent,
+inherit-wayland-socket. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--device=DEVICE</b></p>
+
+<p style="margin-left:14%;">Expose a device to the
+application. This overrides to the Context section from the
+application metadata. DEVICE must be one of: dri, input,
+usb, kvm, shm, all. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nodevice=DEVICE</b></p>
+
+<p style="margin-left:14%;">Don't expose a device to the
+application. This overrides to the Context section from the
+application metadata. DEVICE must be one of: dri, input,
+usb, kvm, shm, all. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--allow=FEATURE</b></p>
+
+<p style="margin-left:14%;">Allow access to a specific
+feature. This updates the [Context] group in the metadata.
+FEATURE must be one of: devel, multiarch, bluetooth, canbus,
+per-app-dev-shm. This option can be used multiple times.</p>
+
+<p style="margin-left:14%; margin-top: 1em">See
+<b>flatpak-build-finish</b>(1) for the meaning of the
+various features.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disallow=FEATURE</b></p>
+
+<p style="margin-left:14%;">Disallow access to a specific
+feature. This updates the [Context] group in the metadata.
+FEATURE must be one of: devel, multiarch, bluetooth, canbus,
+per-app-dev-shm. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--filesystem=FILESYSTEM[:ro|:create]</b></p>
+
+<p style="margin-left:14%;">Allow the application access to
+a subset of the filesystem. This overrides to the Context
+section from the application metadata. FILESYSTEM can be one
+of: home, host, host-os, host-etc, xdg-desktop,
+xdg-documents, xdg-download, xdg-music, xdg-pictures,
+xdg-public-share, xdg-templates, xdg-videos, xdg-run,
+xdg-config, xdg-cache, xdg-data, an absolute path, or a
+homedir-relative path like &#732;/dir or paths relative to
+the xdg dirs, like xdg-download/subdir. The optional :ro
+suffix indicates that the location will be read-only. The
+optional :create suffix indicates that the location will be
+read-write and created if it doesn't exist. This option can
+be used multiple times. See the &quot;[Context]
+filesystems&quot; list in <b>flatpak-metadata</b>(5) for
+details of the meanings of these filesystems.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nofilesystem=FILESYSTEM</b></p>
+
+<p style="margin-left:14%;">Remove access to the specified
+subset of the filesystem from the application. This
+overrides to the Context section from the application
+metadata. FILESYSTEM can be one of: home, host, host-os,
+host-etc, xdg-desktop, xdg-documents, xdg-download,
+xdg-music, xdg-pictures, xdg-public-share, xdg-templates,
+xdg-videos, an absolute path, or a homedir-relative path
+like &#732;/dir. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--with-appdir</b></p>
+
+<p style="margin-left:14%;">Expose and configure access to
+the per-app storage directory in $HOME/.var/app. This is not
+normally useful when building, but helps when testing built
+apps.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--add-policy=SUBSYSTEM.KEY=VALUE</b></p>
+
+<p style="margin-left:14%;">Add generic policy option. For
+example, &quot;--add-policy=subsystem.key=v1
+--add-policy=subsystem.key=v2&quot; would map to this
+metadata:</p>
+
+<p style="margin-left:19%; margin-top: 1em">[Policy
+subsystem] <br>
+key=v1;v2;</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option can
+be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--remove-policy=SUBSYSTEM.KEY=VALUE</b></p>
+
+<p style="margin-left:14%;">Remove generic policy option.
+This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--env=VAR=VALUE</b></p>
+
+<p style="margin-left:14%;">Set an environment variable in
+the application. This overrides to the Context section from
+the application metadata. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--unset-env=VAR</b></p>
+
+<p style="margin-left:14%;">Unset an environment variable
+in the application. This overrides the unset-environment
+entry in the [Context] group of the metadata, and the
+[Environment] group. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--env-fd=</b><i>FD</i></p>
+
+<p style="margin-left:14%;">Read environment variables from
+the file descriptor <i>FD</i>, and set them as if via
+<b>--env</b>. This can be used to avoid environment
+variables and their values becoming visible to other
+users.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Each
+environment variable is in the form <i>VAR</i>=<i>VALUE</i>
+followed by a zero byte. This is the same format used by env
+-0 and /proc/*/environ.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--own-name=NAME</b></p>
+
+<p style="margin-left:14%;">Allow the application to own
+the well-known name NAME on the session bus. This overrides
+to the Context section from the application metadata. This
+option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--talk-name=NAME</b></p>
+
+<p style="margin-left:14%;">Allow the application to talk
+to the well-known name NAME on the session bus. This
+overrides to the Context section from the application
+metadata. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system-own-name=NAME</b></p>
+
+<p style="margin-left:14%;">Allow the application to own
+the well-known name NAME on the system bus. This overrides
+to the Context section from the application metadata. This
+option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system-talk-name=NAME</b></p>
+
+<p style="margin-left:14%;">Allow the application to talk
+to the well-known name NAME on the system bus. This
+overrides to the Context section from the application
+metadata. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--persist=FILENAME</b></p>
+
+<p style="margin-left:14%;">If the application doesn't have
+access to the real homedir, make the (homedir-relative) path
+FILENAME a bind mount to the corresponding path in the
+per-application directory, allowing that location to be used
+for persistent data. This overrides to the Context section
+from the application metadata. This option can be used
+multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sdk-dir=DIR</b></p>
+
+<p style="margin-left:14%;">Normally if there is a usr
+directory in the build dir, this is used for the runtime
+files (this can be created by <b>--writable-sdk</b> or
+<b>--type=runtime</b> arguments to build-init). If you
+specify <b>--sdk-dir</b>, this directory will be used
+instead. Use this if you passed <b>--sdk-dir</b> to
+build-init.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--readonly</b></p>
+
+<p style="margin-left:14%;">Mount the normally writable
+destination directories read-only. This can be useful if you
+want to run something in the sandbox but guarantee that it
+doesn't affect the build results. For example tests.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--metadata=FILE</b></p>
+
+<p style="margin-left:14%;">Use the specified filename as
+metadata in the exported app instead of the default file
+(called metadata). This is useful if you build multiple
+things from a single build tree (such as both a platform and
+a sdk).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--log-session-bus</b></p>
+
+<p style="margin-left:14%;">Log session bus traffic. This
+can be useful to see what access you need to allow in your
+D-Bus policy.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--log-system-bus</b></p>
+
+<p style="margin-left:14%;">Log system bus traffic. This
+can be useful to see what access you need to allow in your
+D-Bus policy.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+build /build/my-app rpmbuild my-app.src.rpm</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flatpak</b>(1),
+<b>flatpak-build-init</b>(1),
+<b>flatpak-build-finish</b>(1),
+<b>flatpak-build-export</b>(1)</p>
+<hr>
+</body>
+</html>

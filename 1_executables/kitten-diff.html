@@ -1,0 +1,665 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:32 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-diff</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-diff</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Major features">Major features</a><br>
+<a href="#Installation">Installation</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Keyboard controls">Keyboard controls</a><br>
+<a href="#Integrating with git">Integrating with git</a><br>
+<a href="#Why does this work only in kitty?">Why does this work only in kitty?</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#Diffing">Diffing</a><br>
+<a href="#Colors">Colors</a><br>
+<a href="#Keyboard shortcuts">Keyboard shortcuts</a><br>
+<a href="#Source code for diff">Source code for diff</a><br>
+<a href="#Command line interface">Command line interface</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Sample diff.conf">Sample diff.conf</a><br>
+<a href="#Author">Author</a><br>
+<a href="#Copyright">Copyright</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-diff -
+Pretty, side-by-side diffing of files and images</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>A fast
+side-by-side diff tool with syntax highlighting and
+images</i></p>
+
+<h2>Major features
+<a name="Major features"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Displays diffs side-by-side in
+the kitty terminal</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Does syntax highlighting of the displayed diffs,
+asynchronously, for maximum speed</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Displays images as well as text diffs, even over SSH</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Does recursive directory diffing</p></td></tr>
+</table>
+
+<p style="margin-left:12%;">Screenshot, showing a sample
+diff (images not supported)</p>
+
+<h2>Installation
+<a name="Installation"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Simply
+<i>install kitty</i>.</p>
+
+<h2>Usage
+<a name="Usage"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">In the kitty
+terminal, run:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitten diff
+file1 file2</p>
+
+<p style="margin-left:9%; margin-top: 1em">to see the diff
+between <b>file1</b> and <b>file2</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Create an alias
+in your shell's startup file to shorten the command, for
+example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">alias
+d=&quot;kitten diff&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Now all you need
+to do to diff two files is:</p>
+
+<p style="margin-left:13%; margin-top: 1em">d file1
+file2</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can also
+pass directories instead of files to see the recursive diff
+of the directory contents.</p>
+
+<h2>Keyboard controls
+<a name="Keyboard controls"></a>
+</h2>
+
+
+<h2>Integrating with git
+<a name="Integrating with git"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Add the
+following to <b>&#732;/.gitconfig</b>:</p>
+
+<p style="margin-left:13%; margin-top: 1em">[diff] <br>
+tool = kitty <br>
+guitool = kitty.gui <br>
+[difftool] <br>
+prompt = false <br>
+trustExitCode = true <br>
+[difftool &quot;kitty&quot;] <br>
+cmd = kitten diff $LOCAL $REMOTE <br>
+[difftool &quot;kitty.gui&quot;] <br>
+cmd = kitten diff $LOCAL $REMOTE</p>
+
+<p style="margin-left:9%; margin-top: 1em">Now to use
+kitty-diff to view git diffs, you can simply do:</p>
+
+<p style="margin-left:13%; margin-top: 1em">git difftool
+--no-symlinks --dir-diff</p>
+
+<p style="margin-left:9%; margin-top: 1em">Once again,
+creating an alias for this command is useful.</p>
+
+<h2>Why does this work only in kitty?
+<a name="Why does this work only in kitty?"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The diff kitten
+makes use of various features that are <i>kitty only</i>,
+such as the <i>kitty graphics protocol</i>, the <i>extended
+keyboard protocol</i>, etc. It also leverages terminal
+program infrastructure I created for all of kitty's other
+kittens to reduce the amount of code needed (the entire
+implementation is under 3000 lines of code).</p>
+
+<p style="margin-left:9%; margin-top: 1em">And
+fundamentally, it's kitty only because I wrote it for
+myself, and I am highly unlikely to use any other terminals
+:)</p>
+
+<h2>Configuration
+<a name="Configuration"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can
+configure the colors used, keyboard shortcuts, the diff
+implementation, the default lines of context, etc. by
+creating a <b>diff.conf</b> file in your <i>kitty config
+folder</i>. See below for the supported configuration
+directives.</p>
+
+<h2>Diffing
+<a name="Diffing"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>syntax_aliases</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">syntax_aliases
+pyj:py pyi:py recipe:py</p>
+
+<p style="margin-left:9%; margin-top: 1em">File extension
+aliases for syntax highlight. For example, to syntax
+highlight <b>file.xyz</b> as <b>file.abc</b> use a setting
+of <b>xyz:abc</b>. Multiple aliases must be separated by
+spaces. <b><br>
+num_context_lines</b></p>
+
+
+<p style="margin-left:13%; margin-top: 1em">num_context_lines
+3</p>
+
+<p style="margin-left:9%; margin-top: 1em">The number of
+lines of context to show around each change. <b><br>
+diff_cmd</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">diff_cmd
+auto</p>
+
+<p style="margin-left:9%; margin-top: 1em">The diff command
+to use. Must contain the placeholder <b>_CONTEXT_</b> which
+will be replaced by the number of lines of context. A few
+special values are allowed: <b>auto</b> will automatically
+pick an available diff implementation. <b>builtin</b> will
+use the anchored diff algorithm from the Go standard
+library. <b>git</b> will use the git command to do the
+diffing. <b>diff</b> will use the diff command to do the
+diffing. <b><br>
+replace_tab_by</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">replace_tab_by
+\x20\x20\x20\x20</p>
+
+<p style="margin-left:9%; margin-top: 1em">The string to
+replace tabs with. Default is to use four spaces. <b><br>
+ignore_name</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">A glob pattern
+that is matched against only the filename of files and
+directories. Matching files and directories are ignored when
+scanning the filesystem to look for files to diff. Can be
+specified multiple times to use multiple patterns. For
+example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">ignore_name
+.git <br>
+ignore_name *&#732; <br>
+ignore_name *.pyc</p>
+
+<h2>Colors
+<a name="Colors"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>color_scheme</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">color_scheme
+auto</p>
+
+<p style="margin-left:9%; margin-top: 1em">Whether to use
+the light or dark colors. The default of <b>auto</b> means
+to follow the parent terminal color scheme. Note that the
+actual colors used for dark schemes are set by the
+<b>dark_*</b> settings below and the non-prefixed settings
+are used for light colors. <b><br>
+pygments_style</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">pygments_style
+default</p>
+
+<p style="margin-left:9%; margin-top: 1em">The pygments
+color scheme to use for syntax highlighting. See <i>pygments
+builtin styles</i> for a list of schemes. Note that this
+<b>does not</b> change the colors used for diffing, only the
+colors used for syntax highlighting. To change the general
+colors use the settings below. This sets the colors used for
+light color schemes, use <i>dark_pygments_style</i> to
+change the colors for dark color schemes. <b><br>
+dark_pygments_style</b></p>
+
+
+<p style="margin-left:13%; margin-top: 1em">dark_pygments_style
+github-dark</p>
+
+<p style="margin-left:9%; margin-top: 1em">The pygments
+color scheme to use for syntax highlighting with dark
+colors. See <i>pygments builtin styles</i> for a list of
+schemes. Note that this <b>does not</b> change the colors
+used for diffing, only the colors used for syntax
+highlighting. To change the general colors use the settings
+below. This sets the colors used for dark color schemes, use
+<i>pygments_style</i> to change the colors for light color
+schemes. <b><br>
+foreground, dark_foreground, background,
+dark_background</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">foreground
+black <br>
+dark_foreground #f8f8f2 <br>
+background white <br>
+dark_background #212830</p>
+
+<p style="margin-left:9%; margin-top: 1em">Basic colors
+<b><br>
+title_fg, dark_title_fg, title_bg, dark_title_bg</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">title_fg black
+<br>
+dark_title_fg white <br>
+title_bg white <br>
+dark_title_bg #212830</p>
+
+<p style="margin-left:9%; margin-top: 1em">Title colors
+<b><br>
+margin_bg, dark_margin_bg, margin_fg, dark_margin_fg</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">margin_bg
+#fafbfc <br>
+dark_margin_bg #212830 <br>
+margin_fg #aaaaaa <br>
+dark_margin_fg #aaaaaa</p>
+
+<p style="margin-left:9%; margin-top: 1em">Margin colors
+<b><br>
+removed_bg, dark_removed_bg, highlight_removed_bg, <br>
+dark_highlight_removed_bg, removed_margin_bg,
+dark_removed_margin_bg</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">removed_bg
+#ffeef0 <br>
+dark_removed_bg #352c33 <br>
+highlight_removed_bg #fdb8c0 <br>
+dark_highlight_removed_bg #5c3539 <br>
+removed_margin_bg #ffdce0 <br>
+dark_removed_margin_bg #5c3539</p>
+
+<p style="margin-left:9%; margin-top: 1em">Removed text
+backgrounds <b><br>
+added_bg, dark_added_bg, highlight_added_bg,
+dark_highlight_added_bg, <br>
+added_margin_bg, dark_added_margin_bg</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">added_bg
+#e6ffed <br>
+dark_added_bg #263834 <br>
+highlight_added_bg #acf2bd <br>
+dark_highlight_added_bg #31503d <br>
+added_margin_bg #cdffd8 <br>
+dark_added_margin_bg #31503d</p>
+
+<p style="margin-left:9%; margin-top: 1em">Added text
+backgrounds <b><br>
+filler_bg, dark_filler_bg</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">filler_bg
+#fafbfc <br>
+dark_filler_bg #262c36</p>
+
+<p style="margin-left:9%; margin-top: 1em">Filler (empty)
+line background <b><br>
+margin_filler_bg, dark_margin_filler_bg</b></p>
+
+
+<p style="margin-left:13%; margin-top: 1em">margin_filler_bg
+none <br>
+dark_margin_filler_bg none</p>
+
+<p style="margin-left:9%; margin-top: 1em">Filler (empty)
+line background in margins, defaults to the filler
+background <b><br>
+hunk_margin_bg, dark_hunk_margin_bg, hunk_bg,
+dark_hunk_bg</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">hunk_margin_bg
+#dbedff <br>
+dark_hunk_margin_bg #0c2d6b <br>
+hunk_bg #f1f8ff <br>
+dark_hunk_bg #253142</p>
+
+<p style="margin-left:9%; margin-top: 1em">Hunk header
+colors <b><br>
+search_bg, dark_search_bg, search_fg, dark_search_fg,
+select_bg, <br>
+dark_select_bg, select_fg, dark_select_fg</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">search_bg #444
+<br>
+dark_search_bg #2c599c <br>
+search_fg white <br>
+dark_search_fg white <br>
+select_bg #b4d5fe <br>
+dark_select_bg #2c599c <br>
+select_fg black <br>
+dark_select_fg white</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">Highlighting</p>
+
+<h2>Keyboard shortcuts
+<a name="Keyboard shortcuts"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>Quit</b></p></td>
+<td width="86%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">map q quit <br>
+map esc quit</p>
+
+<p style="margin-left:9%;"><b>Scroll down</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map j scroll_by
+1 <br>
+map down scroll_by 1</p>
+
+<p style="margin-left:9%;"><b>Scroll up</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map k scroll_by
+-1 <br>
+map up scroll_by -1</p>
+
+<p style="margin-left:9%;"><b>Scroll to top</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map home
+scroll_to start</p>
+
+<p style="margin-left:9%;"><b>Scroll to bottom</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map end
+scroll_to end</p>
+
+<p style="margin-left:9%;"><b>Scroll to next page</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map page_down
+scroll_to next-page <br>
+map space scroll_to next-page</p>
+
+<p style="margin-left:9%;"><b>Scroll to previous
+page</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map page_up
+scroll_to prev-page</p>
+
+<p style="margin-left:9%;"><b>Scroll to next change</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map n scroll_to
+next-change</p>
+
+<p style="margin-left:9%;"><b>Scroll to previous
+change</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map p scroll_to
+prev-change</p>
+
+<p style="margin-left:9%;"><b>Scroll to next file</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map shift+j
+scroll_to next-file</p>
+
+<p style="margin-left:9%;"><b>Scroll to previous
+file</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map shift+k
+scroll_to prev-file</p>
+
+<p style="margin-left:9%;"><b>Show all context</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map a
+change_context all</p>
+
+<p style="margin-left:9%;"><b>Show default context</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map =
+change_context default</p>
+
+<p style="margin-left:9%;"><b>Increase context</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map +
+change_context 5</p>
+
+<p style="margin-left:9%;"><b>Decrease context</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map -
+change_context -5</p>
+
+<p style="margin-left:9%;"><b>Search forward</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map /
+start_search regex forward</p>
+
+<p style="margin-left:9%;"><b>Search backward</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map ?
+start_search regex backward</p>
+
+<p style="margin-left:9%;"><b>Scroll to next search
+match</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map . scroll_to
+next-match <br>
+map &gt; scroll_to next-match</p>
+
+<p style="margin-left:9%;"><b>Scroll to previous search
+match</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map , scroll_to
+prev-match <br>
+map &lt; scroll_to prev-match</p>
+
+<p style="margin-left:9%;"><b>Search forward (no
+regex)</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map f
+start_search substring forward</p>
+
+<p style="margin-left:9%;"><b>Search backward (no
+regex)</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map b
+start_search substring backward</p>
+
+<p style="margin-left:9%;"><b>Copy selection to
+clipboard</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map y
+copy_to_clipboard</p>
+
+<p style="margin-left:9%;"><b>Copy selection to clipboard
+or exit if no selection is present</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">map ctrl+c
+copy_to_clipboard_or_exit</p>
+
+<h2>Source code for diff
+<a name="Source code for diff"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The source code
+for this kitten is <i>available on GitHub</i>.</p>
+
+<h2>Command line interface
+<a name="Command line interface"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">kitten diff
+[options] file_or_directory_left file_or_directory_right</p>
+
+<p style="margin-left:9%; margin-top: 1em">Show a
+side-by-side diff of the specified files/directories. You
+can also use ssh:hostname:remote-file-path to diff remote
+files.</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--context
+&lt;CONTEXT&gt;</b></p>
+
+<p style="margin-left:18%;">Number of lines of context to
+show between changes. Negative values use the number set in
+<b>diff.conf</b>. Default: <b>-1</b></p>
+
+<p style="margin-left:9%;"><b>--config
+&lt;CONFIG&gt;</b></p>
+
+<p style="margin-left:18%;">Specify a path to the
+configuration file(s) to use. All configuration files are
+merged onto the builtin <b>diff.conf</b>, overriding the
+builtin values. This option can be specified multiple times
+to read multiple configuration files in sequence, which are
+merged. Use the special value <b>NONE</b> to not load any
+config file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If this option
+is not specified, config files are searched for in the
+order: <b>$XDG_CONFIG_HOME/kitty/diff.conf</b>,
+<b>&#732;/.config/kitty/diff.conf</b>,
+<b>$XDG_CONFIG_DIRS/kitty/diff.conf</b>. The first one that
+exists is used as the config file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the
+environment variable <i>KITTY_CONFIG_DIRECTORY</i> is
+specified, that directory is always used and the above
+searching does not happen.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If
+<b>/etc/xdg/kitty/diff.conf</b> exists, it is merged before
+(i.e. with lower priority) than any user config files. It
+can be used to specify system-wide defaults for all users.
+You can use either <b>-</b> or <b>/dev/stdin</b> to read the
+config from STDIN.</p>
+
+<p style="margin-left:9%;"><b>--override &lt;OVERRIDE&gt;,
+-o &lt;OVERRIDE&gt;</b></p>
+
+<p style="margin-left:18%;">Override individual
+configuration options, can be specified multiple times.
+Syntax: name=value. For example: -o background=gray</p>
+
+<h2>Sample diff.conf
+<a name="Sample diff.conf"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can download
+a sample <b>diff.conf</b> file with all default settings and
+comments describing each setting by clicking: <b>sample
+diff.conf</b>.</p>
+
+<h2>Author
+<a name="Author"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kovid Goyal</p>
+
+<h2>Copyright
+<a name="Copyright"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2025, Kovid
+Goyal</p>
+<hr>
+</body>
+</html>

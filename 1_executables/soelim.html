@@ -1,0 +1,285 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:20 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>soelim</title>
+
+</head>
+<body>
+
+<h1 align="center">soelim</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">soelim -
+recursively interpolate source requests in <i>roff</i> or
+other text files</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>soelim</b></p></td>
+<td width="1%"></td>
+<td width="41%">
+
+
+<p style="margin-top: 1em">[<b>-Crt</b>] [<b>-I</b>
+<i>dir</i>] [<i>input-file&nbsp;</i>...]</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>soelim</b></p></td>
+<td width="1%"></td>
+<td width="41%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>soelim</b></p></td>
+<td width="1%"></td>
+<td width="41%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>soelim</b></p></td>
+<td width="1%"></td>
+<td width="41%">
+
+
+<p><b>--version</b></p></td>
+<td width="41%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GNU
+<i>soelim</i> is a preprocessor for the
+<a href="man:groff(7)"><i>groff</i>(7)</a> document
+formatting system. <i>soelim</i> works as a filter to
+eliminate source requests in
+<a href="man:roff(7)"><i>roff</i>(7)</a> input files; that
+is, it replaces lines of the form &ldquo;<b>.so</b>
+<i>included-file</i>&rdquo; within each text
+<i>input-file</i> with the contents of <i>included-file</i>,
+recursively. By default, it writes <b>lf</b> requests as
+well to record the name and line number of each
+<i>input-file</i> and <i>included-file</i>, so that any
+diagnostics produced by later processing can be accurately
+traced to the original input. Options allow this information
+to be suppressed (<b>-r</b>) or supplied in TeX comments
+instead (<b>-t</b>). In the absence of <i>input-file</i>
+arguments, <i>soelim</i> reads the standard input stream.
+Output is written to the standard output stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the name of a
+<i>macro-file</i> contains a backslash, use <b>\\</b> or
+<b>\e</b> to embed it. To embed a space, write
+&ldquo;<b>\&nbsp;</b>&rdquo; (backslash followed by a
+space). Any other escape sequence in <i>macro-file</i>,
+including &ldquo;<b>\[rs]</b>&rdquo;, prevents <i>soelim</i>
+from replacing the source request.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The dot must be
+at the beginning of a line and must be followed by
+&ldquo;<b>so</b>&rdquo; without intervening spaces or tabs
+for <i>soelim</i> to handle it. This convention allows
+source requests to be &ldquo;protected&rdquo; from
+processing by <i>soelim</i>, for instance as part of macro
+definitions or &ldquo;<b>if</b>&rdquo; requests.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There must also
+be at least one space between &ldquo;<b>so</b>&rdquo; and
+its <i>macro-file</i> argument. The <b>-C</b> option
+overrides this requirement.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The foregoing is
+the limit of <i>soelim</i>&rsquo;s understanding of the
+<i>roff</i> language; it does not, for example, replace the
+input line</p>
+
+<p style="margin-left:18%;">.if 1 .so otherfile</p>
+
+<p style="margin-left:9%;">with the contents of
+<i>otherfile</i>. With its <b>-r</b> option, therefore,
+<i>soelim</i> can be used to process text files in general,
+to flatten a tree of input documents.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>soelim</i>
+was designed to handle situations where the target of a
+<i>roff</i> source request requires a preprocessor such as
+<a href="man:eqn(1)"><i>eqn</i>(1)</a>,
+<a href="man:pic(1)"><i>pic</i>(1)</a>,
+<a href="man:refer(1)"><i>refer</i>(1)</a>, or
+<a href="man:tbl(1)"><i>tbl</i>(1)</a>. The usual processing
+sequence of <a href="man:groff(1)"><i>groff</i>(1)</a> is as
+follows.</p>
+
+<p style="margin-left:9%; margin-top: 1em">input sourced
+<br>
+file file <br>
+&#9130; &#9130; <br>
+&darr; &darr; <br>
+preprocessor &#9135;&rarr; troff &#9135;&rarr; postprocessor
+<br>
+&#9130; <br>
+&darr; <br>
+output <br>
+file</p>
+
+<p style="margin-left:9%; margin-top: 1em">That is, files
+sourced with &ldquo;<b>so</b>&rdquo; are normally read
+<i>only</i> by the formatter, <i>troff</i>. <i>soelim</i> is
+<i>not</i> required for <i>troff</i> to source files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a file to be
+sourced should also be preprocessed, it must already be read
+<i>before</i> the input file passes through the
+preprocessor. <i>soelim</i>, normally invoked via
+<i>groff</i>&rsquo;s <b>-s</b> option, handles this.</p>
+
+<p style="margin-left:9%; margin-top: 1em">input <br>
+file <br>
+&#9130; <br>
+&darr; <br>
+soelim &#9135;&rarr; preprocessor &#9135;&rarr; troff
+&#9135;&rarr; postprocessor <br>
+&uarr; &#9130; <br>
+&#9130; &darr; <br>
+sourced output <br>
+file file</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-C</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Recognize an input line starting with <b>.so</b> even if
+a character other than a space or newline follows.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-I&nbsp;</b><i>dir</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Search the directory <i>dir</i> path for <i>input-</i>
+and <i>included-files.</i> <b>-I</b> may be specified more
+than once; each <i>dir</i> is searched in the given order.
+To search the current working directory before others, add
+&ldquo;<b>-I .</b>&rdquo; at the desired place; it is
+otherwise searched last.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-r</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Write files &ldquo;raw&rdquo;; do not add <b>lf</b>
+requests.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-t</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Emit TeX comment lines starting with
+&ldquo;<b>%</b>&rdquo; indicating the current file and line
+number, rather than <b>lf</b> requests for the same
+purpose.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If both
+<b>-r</b> and <b>-t</b> are given, the last one specified
+controls.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff(1)"><i>groff</i>(1)</a></p>
+<hr>
+</body>
+</html>

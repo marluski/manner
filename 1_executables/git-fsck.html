@@ -1,0 +1,872 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:03 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-FSCK</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-FSCK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#DISCUSSION">DISCUSSION</a><br>
+<a href="#EXTRACTED DIAGNOSTICS">EXTRACTED DIAGNOSTICS</a><br>
+<a href="#FSCK MESSAGES">FSCK MESSAGES</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#GIT">GIT</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">git-fsck -
+Verifies the connectivity and validity of the objects in the
+database</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>git fsck</i>
+[--tags] [--root] [--unreachable] [--cache] [--no-reflogs]
+<br>
+[--[no-]full] [--strict] [--verbose] [--lost-found] <br>
+[--[no-]dangling] [--[no-]progress] [--connectivity-only]
+<br>
+[--[no-]name-objects] [&lt;object&gt;...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Verifies the
+connectivity and validity of the objects in the
+database.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;object&gt;</p>
+
+<p style="margin-left:14%;">An object to treat as the head
+of an unreachability trace.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If no objects
+are given, <i>git fsck</i> defaults to using the index file,
+all SHA-1 references in the <b>refs</b> namespace, and all
+reflogs (unless --no-reflogs is given) as heads.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--unreachable</p>
+
+<p style="margin-left:14%;">Print out objects that exist
+but that aren&rsquo;t reachable from any of the reference
+nodes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--[no-]dangling</p>
+
+<p style="margin-left:14%;">Print objects that exist but
+that are never <i>directly</i> used (default).
+<b>--no-dangling</b> can be used to omit this information
+from the output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--root</p>
+
+<p style="margin-left:14%;">Report root nodes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--tags</p>
+
+<p style="margin-left:14%;">Report tags.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--cache</p>
+
+<p style="margin-left:14%;">Consider any object recorded in
+the index also as a head node for an unreachability
+trace.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--no-reflogs</p>
+
+<p style="margin-left:14%;">Do not consider commits that
+are referenced only by an entry in a reflog to be reachable.
+This option is meant only to search for commits that used to
+be in a ref, but now aren&rsquo;t, but are still in that
+corresponding reflog.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--full</p>
+
+<p style="margin-left:14%;">Check not just objects in
+GIT_OBJECT_DIRECTORY ($GIT_DIR/objects), but also the ones
+found in alternate object pools listed in
+GIT_ALTERNATE_OBJECT_DIRECTORIES or
+$GIT_DIR/objects/info/alternates, and in packed Git archives
+found in $GIT_DIR/objects/pack and corresponding pack
+subdirectories in alternate object pools. This is now
+default; you can turn it off with --no-full.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--connectivity-only</p>
+
+<p style="margin-left:14%;">Check only the connectivity of
+reachable objects, making sure that any objects referenced
+by a reachable tag, commit, or tree are present. This speeds
+up the operation by avoiding reading blobs entirely (though
+it does still check that referenced blobs exist). This will
+detect corruption in commits and trees, but not do any
+semantic checks (e.g., for format errors). Corruption in
+blob objects will not be detected at all.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Unreachable
+tags, commits, and trees will also be accessed to find the
+tips of dangling segments of history. Use
+<b>--no-dangling</b> if you don&rsquo;t care about this
+output and want to speed it up further.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--strict</p>
+
+<p style="margin-left:14%;">Enable more strict checking,
+namely to catch a file mode recorded with g+w bit set, which
+was created by older versions of Git. Existing repositories,
+including the Linux kernel, Git itself, and sparse
+repository have old objects that trigger this check, but it
+is recommended to check new projects with this flag.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--verbose</p>
+
+<p style="margin-left:14%;">Be chatty.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--lost-found</p>
+
+<p style="margin-left:14%;">Write dangling objects into
+.git/lost-found/commit/ or .git/lost-found/other/, depending
+on type. If the object is a blob, the contents are written
+into the file, rather than its object name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--name-objects</p>
+
+<p style="margin-left:14%;">When displaying names of
+reachable objects, in addition to the SHA-1 also display a
+name that describes <b>how</b> they are reachable,
+compatible with <b>git-rev-parse</b>(1), e.g.
+<b>HEAD@</b>{1234567890}&#732;25&#710;2:src/.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--[no-]progress</p>
+
+<p style="margin-left:14%;">Progress status is reported on
+the standard error stream by default when it is attached to
+a terminal, unless --no-progress or --verbose is specified.
+--progress forces progress status even if the standard error
+stream is not directed to a terminal.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Everything below
+this line in this section is selectively included from the
+<b>git-config</b>(1) documentation. The content is the same
+as what&rsquo;s found there:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">fsck.&lt;msg-id&gt;</p>
+
+<p style="margin-left:14%;">During fsck git may find issues
+with legacy data which wouldn&rsquo;t be generated by
+current versions of git, and which wouldn&rsquo;t be sent
+over the wire if <b>transfer.fsckObjects</b> was set. This
+feature is intended to support working with legacy
+repositories containing such data.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Setting
+<b>fsck.</b><i>&lt;msg-id&gt;</i> will be picked up by
+<b>git-fsck</b>(1), but to accept pushes of such data set
+<b>receive.fsck.</b><i>&lt;msg-id&gt;</i> instead, or to
+clone or fetch it set
+<b>fetch.fsck.</b><i>&lt;msg-id&gt;</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The rest of the
+documentation discusses <b>fsck.</b>* for brevity, but the
+same applies for the corresponding <b>receive.fsck.</b>* and
+<b>fetch.fsck.</b>*. variables.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Unlike
+variables like <b>color.ui</b> and <b>core.editor</b>, the
+<b>receive.fsck.</b><i>&lt;msg-id&gt;</i> and
+<b>fetch.fsck.</b><i>&lt;msg-id&gt;</i> variables will not
+fall back on the <b>fsck.</b><i>&lt;msg-id&gt;</i>
+configuration if they aren&rsquo;t set. To uniformly
+configure the same fsck settings in different circumstances,
+all three of them must be set to the same values.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When
+<b>fsck.</b><i>&lt;msg-id&gt;</i> is set, errors can be
+switched to warnings and vice versa by configuring the
+<b>fsck.</b><i>&lt;msg-id&gt;</i> setting where the
+<i>&lt;msg-id&gt;</i> is the fsck message ID and the value
+is one of <b>error</b>, <b>warn</b> or <b>ignore</b>. For
+convenience, fsck prefixes the error/warning with the
+message ID, e.g. &quot;missingEmail: invalid
+author/committer line - missing email&quot; means that
+setting <b>fsck.missingEmail = ignore</b> will hide that
+issue.</p>
+
+<p style="margin-left:14%; margin-top: 1em">In general, it
+is better to enumerate existing objects with problems with
+<b>fsck.skipList</b>, instead of listing the kind of
+breakages these problematic objects share to be ignored, as
+doing the latter will allow new instances of the same
+breakages go unnoticed.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Setting an
+unknown <b>fsck.</b><i>&lt;msg-id&gt;</i> value will cause
+fsck to die, but doing the same for
+<b>receive.fsck.</b><i>&lt;msg-id&gt;</i> and
+<b>fetch.fsck.</b><i>&lt;msg-id&gt;</i> will only cause git
+to warn.</p>
+
+<p style="margin-left:14%; margin-top: 1em">See the <b>Fsck
+Messages</b> section of <b>git-fsck</b>(1) for supported
+values of <i>&lt;msg-id&gt;</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">fsck.skipList</p>
+
+<p style="margin-left:14%;">The path to a list of object
+names (i.e. one unabbreviated SHA-1 per line) that are known
+to be broken in a non-fatal way and should be ignored. On
+versions of Git 2.20 and later, comments (<i>#</i>), empty
+lines, and any leading and trailing whitespace are ignored.
+Everything but a SHA-1 per line will error out on older
+versions.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This feature is
+useful when an established project should be accepted
+despite early commits containing errors that can be safely
+ignored, such as invalid committer email addresses. Note:
+corrupt objects cannot be skipped with this setting.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Like
+<b>fsck.</b><i>&lt;msg-id&gt;</i> this variable has
+corresponding <b>receive.fsck.skipList</b> and
+<b>fetch.fsck.skipList</b> variants.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Unlike
+variables like <b>color.ui</b> and <b>core.editor</b> the
+<b>receive.fsck.skipList</b> and <b>fetch.fsck.skipList</b>
+variables will not fall back on the <b>fsck.skipList</b>
+configuration if they aren&rsquo;t set. To uniformly
+configure the same fsck settings in different circumstances,
+all three of them must be set to the same values.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Older versions
+of Git (before 2.20) documented that the object names list
+should be sorted. This was never a requirement; the object
+names could appear in any order, but when reading the list
+we tracked whether the list was sorted for the purposes of
+an internal binary search implementation, which could save
+itself some work with an already sorted list. Unless you had
+a humongous list there was no reason to go out of your way
+to pre-sort the list. After Git version 2.20 a hash
+implementation is used instead, so there&rsquo;s now no
+reason to pre-sort the list.</p>
+
+<h2>DISCUSSION
+<a name="DISCUSSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">git-fsck tests
+SHA-1 and general object sanity, and it does full tracking
+of the resulting reachability and everything else. It prints
+out any corruption it finds (missing or bad objects), and if
+you use the <b>--unreachable</b> flag it will also print out
+objects that exist but that aren&rsquo;t reachable from any
+of the specified head nodes (or the default set, as
+mentioned above).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Any corrupt
+objects you will have to find in backups or other archives
+(i.e., you can just remove them and do an <i>rsync</i> with
+some other site in the hopes that somebody else has the
+object you have corrupted).</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+core.commitGraph is true, the commit-graph file will also be
+inspected using <i>git commit-graph verify</i>. See
+<b>git-commit-graph</b>(1).</p>
+
+<h2>EXTRACTED DIAGNOSTICS
+<a name="EXTRACTED DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">unreachable
+&lt;type&gt; &lt;object&gt;</p>
+
+<p style="margin-left:14%;">The &lt;type&gt; object
+&lt;object&gt;, isn&rsquo;t actually referred to directly or
+indirectly in any of the trees or commits seen. This can
+mean that there&rsquo;s another root node that you&rsquo;re
+not specifying or that the tree is corrupt. If you
+haven&rsquo;t missed a root node then you might as well
+delete unreachable nodes since they can&rsquo;t be used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">missing
+&lt;type&gt; &lt;object&gt;</p>
+
+<p style="margin-left:14%;">The &lt;type&gt; object
+&lt;object&gt;, is referred to but isn&rsquo;t present in
+the database.</p>
+
+<p style="margin-left:9%; margin-top: 1em">dangling
+&lt;type&gt; &lt;object&gt;</p>
+
+<p style="margin-left:14%;">The &lt;type&gt; object
+&lt;object&gt;, is present in the database but never
+<i>directly</i> used. A dangling commit could be a root
+node.</p>
+
+<p style="margin-left:9%; margin-top: 1em">hash mismatch
+&lt;object&gt;</p>
+
+<p style="margin-left:14%;">The database has an object
+whose hash doesn&rsquo;t match the object database value.
+This indicates a serious data integrity problem.</p>
+
+<h2>FSCK MESSAGES
+<a name="FSCK MESSAGES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+lists the types of errors <b>git fsck</b> detects and what
+each error means, with their default severity. The severity
+of the error, other than those that are marked as
+&quot;(FATAL)&quot;, can be tweaked by setting the
+corresponding <b>fsck.</b><i>&lt;msg-id&gt;</i>
+configuration variable.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badDate</b></p>
+
+<p style="margin-left:14%;">(ERROR) Invalid date format in
+an author/committer line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badDateOverflow</b></p>
+
+<p style="margin-left:14%;">(ERROR) Invalid date value in
+an author/committer line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badEmail</b></p>
+
+<p style="margin-left:14%;">(ERROR) Invalid email format in
+an author/committer line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badFilemode</b></p>
+
+<p style="margin-left:14%;">(INFO) A tree contains a bad
+filemode entry.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badName</b></p>
+
+<p style="margin-left:14%;">(ERROR) An author/committer
+name is empty.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badObjectSha1</b></p>
+
+<p style="margin-left:14%;">(ERROR) An object has a bad
+sha1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badParentSha1</b></p>
+
+<p style="margin-left:14%;">(ERROR) A commit object has a
+bad parent sha1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badRefContent</b></p>
+
+<p style="margin-left:14%;">(ERROR) A ref has bad
+content.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badRefFiletype</b></p>
+
+<p style="margin-left:14%;">(ERROR) A ref has a bad file
+type.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badRefName</b></p>
+
+<p style="margin-left:14%;">(ERROR) A ref has an invalid
+format.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badReferentName</b></p>
+
+<p style="margin-left:14%;">(ERROR) The referent name of a
+symref is invalid.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badTagName</b></p>
+
+<p style="margin-left:14%;">(INFO) A tag has an invalid
+format.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badTimezone</b></p>
+
+<p style="margin-left:14%;">(ERROR) Found an invalid time
+zone in an author/committer line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badTree</b></p>
+
+<p style="margin-left:14%;">(ERROR) A tree cannot be
+parsed.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badTreeSha1</b></p>
+
+<p style="margin-left:14%;">(ERROR) A tree has an invalid
+format.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>badType</b></p>
+
+<p style="margin-left:14%;">(ERROR) Found an invalid object
+type.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>duplicateEntries</b></p>
+
+<p style="margin-left:14%;">(ERROR) A tree contains
+duplicate file entries.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>emptyName</b></p>
+
+<p style="margin-left:14%;">(WARN) A path contains an empty
+name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>extraHeaderEntry</b></p>
+
+<p style="margin-left:14%;">(IGNORE) Extra headers found
+after <b>tagger</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>fullPathname</b></p>
+
+<p style="margin-left:14%;">(WARN) A path contains the full
+path starting with &quot;/&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitattributesBlob</b></p>
+
+<p style="margin-left:14%;">(ERROR) A non-blob found at
+<b>.gitattributes</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitattributesLarge</b></p>
+
+<p style="margin-left:14%;">(ERROR) The
+<b>.gitattributes</b> blob is too large.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitattributesLineLength</b></p>
+
+<p style="margin-left:14%;">(ERROR) The
+<b>.gitattributes</b> blob contains too long lines.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitattributesMissing</b></p>
+
+<p style="margin-left:14%;">(ERROR) Unable to read
+<b>.gitattributes</b> blob.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitattributesSymlink</b></p>
+
+<p style="margin-left:14%;">(INFO) <b>.gitattributes</b> is
+a symlink.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitignoreSymlink</b></p>
+
+<p style="margin-left:14%;">(INFO) <b>.gitignore</b> is a
+symlink.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesBlob</b></p>
+
+<p style="margin-left:14%;">(ERROR) A non-blob found at
+<b>.gitmodules</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesLarge</b></p>
+
+<p style="margin-left:14%;">(ERROR) The <b>.gitmodules</b>
+file is too large to parse.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesMissing</b></p>
+
+<p style="margin-left:14%;">(ERROR) Unable to read
+<b>.gitmodules</b> blob.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesName</b></p>
+
+<p style="margin-left:14%;">(ERROR) A submodule name is
+invalid.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesParse</b></p>
+
+<p style="margin-left:14%;">(INFO) Could not parse
+<b>.gitmodules</b> blob.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesLarge</b>;
+(ERROR) <b>.gitmodules</b> blob is too large to parse.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesPath</b></p>
+
+<p style="margin-left:14%;">(ERROR) <b>.gitmodules</b> path
+is invalid.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesSymlink</b></p>
+
+<p style="margin-left:14%;">(ERROR) <b>.gitmodules</b> is a
+symlink.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesUpdate</b></p>
+
+<p style="margin-left:14%;">(ERROR) Found an invalid
+submodule update setting.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gitmodulesUrl</b></p>
+
+<p style="margin-left:14%;">(ERROR) Found an invalid
+submodule url.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hasDot</b></p>
+
+<p style="margin-left:14%;">(WARN) A tree contains an entry
+named ..</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hasDotdot</b></p>
+
+<p style="margin-left:14%;">(WARN) A tree contains an entry
+named ...</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hasDotgit</b></p>
+
+<p style="margin-left:14%;">(WARN) A tree contains an entry
+named <b>.git</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>largePathname</b></p>
+
+<p style="margin-left:14%;">(WARN) A tree contains an entry
+with a very long path name. If the value of
+<b>fsck.largePathname</b> contains a colon, that value is
+used as the maximum allowable length (e.g.,
+&quot;warn:10&quot; would complain about any path component
+of 11 or more bytes). The default value is 4096.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mailmapSymlink</b></p>
+
+<p style="margin-left:14%;">(INFO) <b>.mailmap</b> is a
+symlink.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingAuthor</b></p>
+
+<p style="margin-left:14%;">(ERROR) Author is missing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingCommitter</b></p>
+
+<p style="margin-left:14%;">(ERROR) Committer is
+missing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingEmail</b></p>
+
+<p style="margin-left:14%;">(ERROR) Email is missing in an
+author/committer line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingNameBeforeEmail</b></p>
+
+<p style="margin-left:14%;">(ERROR) Missing name before an
+email in an author/committer line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingObject</b></p>
+
+<p style="margin-left:14%;">(ERROR) Missing <b>object</b>
+line in tag object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingSpaceBeforeDate</b></p>
+
+<p style="margin-left:14%;">(ERROR) Missing space before
+date in an author/committer line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingSpaceBeforeEmail</b></p>
+
+<p style="margin-left:14%;">(ERROR) Missing space before
+the email in an author/committer line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingTag</b></p>
+
+<p style="margin-left:14%;">(ERROR) Unexpected end after
+<b>type</b> line in a tag object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingTagEntry</b></p>
+
+<p style="margin-left:14%;">(ERROR) Missing <b>tag</b> line
+in a tag object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingTaggerEntry</b></p>
+
+<p style="margin-left:14%;">(INFO) Missing <b>tagger</b>
+line in a tag object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingTree</b></p>
+
+<p style="margin-left:14%;">(ERROR) Missing <b>tree</b>
+line in a commit object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingType</b></p>
+
+<p style="margin-left:14%;">(ERROR) Invalid type value on
+the <b>type</b> line in a tag object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>missingTypeEntry</b></p>
+
+<p style="margin-left:14%;">(ERROR) Missing <b>type</b>
+line in a tag object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>multipleAuthors</b></p>
+
+<p style="margin-left:14%;">(ERROR) Multiple author lines
+found in a commit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nulInCommit</b></p>
+
+<p style="margin-left:14%;">(WARN) Found a NUL byte in the
+commit object body.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nulInHeader</b></p>
+
+<p style="margin-left:14%;">(FATAL) NUL byte exists in the
+object header.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nullSha1</b></p>
+
+<p style="margin-left:14%;">(WARN) Tree contains entries
+pointing to a null sha1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>refMissingNewline</b></p>
+
+<p style="margin-left:14%;">(INFO) A loose ref that does
+not end with newline(LF). As valid implementations of Git
+never created such a loose ref file, it may become an error
+in the future. Report to the
+<b><font color="#0000FF">git@vger.kernel.org</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">mailing list if you see this error, as
+we need to know what tools created such a file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>symlinkRef</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">(INFO) A
+symbolic link is used as a symref. Report to the</font>
+<b><font color="#0000FF">git@vger.kernel.org</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">mailing list if you see this error, as
+we are assessing the feasibility of dropping the support to
+drop creating symbolic links as symrefs.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>symrefTargetIsNotARef</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">(INFO)
+The target of a symbolic reference points neither to a root
+reference nor to a reference starting with
+&quot;refs/&quot;. Although we allow create a symref
+pointing to the referent which is outside the
+&quot;ref&quot; by using <b>git symbolic-ref</b>, we may
+tighten the rule in the future. Report to the</font>
+<b><font color="#0000FF">git@vger.kernel.org</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">mailing list if you see this error, as
+we need to know what tools created such a file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>trailingRefContent</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">(INFO) A
+loose ref has trailing content. As valid implementations of
+Git never created such a loose ref file, it may become an
+error in the future. Report to the</font>
+<b><font color="#0000FF">git@vger.kernel.org</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">mailing list if you see this error, as
+we need to know what tools created such a file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>treeNotSorted</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">(ERROR) A
+tree is not properly sorted.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>unknownType</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">(ERROR)
+Found an unknown object type.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>unterminatedHeader</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">(FATAL)
+Missing end-of-line in the object header.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>zeroPaddedDate</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">(ERROR)
+Found a zero padded date in an author/committer
+line.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>zeroPaddedFilemode</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">(WARN)
+Found a zero padded filemode in a tree.</font></p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">GIT_OBJECT_DIRECTORY</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">used to
+specify the object database root (usually
+$GIT_DIR/objects)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">GIT_INDEX_FILE</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">used to
+specify the index file of the index</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">GIT_ALTERNATE_OBJECT_DIRECTORIES</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">used to
+specify additional object database roots (usually
+unset)</font></p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Part
+of the <b>git</b>(1) suite</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="24%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">git@vger.kernel.org</font></p> </td>
+<td width="62%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">mailto:git@vger.kernel.org</font></p>
+<hr>
+</body>
+</html>

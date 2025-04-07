@@ -1,0 +1,3438 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:24:25 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FFMPEG-PROTOCOLS</title>
+
+</head>
+<body>
+
+<h1 align="center">FFMPEG-PROTOCOLS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#PROTOCOL OPTIONS">PROTOCOL OPTIONS</a><br>
+<a href="#PROTOCOLS">PROTOCOLS</a><br>
+<a href="#amqp">amqp</a><br>
+<a href="#async">async</a><br>
+<a href="#bluray">bluray</a><br>
+<a href="#cache">cache</a><br>
+<a href="#concat">concat</a><br>
+<a href="#concatf">concatf</a><br>
+<a href="#crypto">crypto</a><br>
+<a href="#data">data</a><br>
+<a href="#fd">fd</a><br>
+<a href="#file">file</a><br>
+<a href="#ftp">ftp</a><br>
+<a href="#gopher">gopher</a><br>
+<a href="#gophers">gophers</a><br>
+<a href="#hls">hls</a><br>
+<a href="#http">http</a><br>
+<a href="#Icecast">Icecast</a><br>
+<a href="#ipfs">ipfs</a><br>
+<a href="#mmst">mmst</a><br>
+<a href="#mmsh">mmsh</a><br>
+<a href="#md5">md5</a><br>
+<a href="#pipe">pipe</a><br>
+<a href="#prompeg">prompeg</a><br>
+<a href="#rist">rist</a><br>
+<a href="#rtmp">rtmp</a><br>
+<a href="#rtmpe">rtmpe</a><br>
+<a href="#rtmps">rtmps</a><br>
+<a href="#rtmpt">rtmpt</a><br>
+<a href="#rtmpte">rtmpte</a><br>
+<a href="#rtmpts">rtmpts</a><br>
+<a href="#libsmbclient">libsmbclient</a><br>
+<a href="#libssh">libssh</a><br>
+<a href="#librtmp rtmp, rtmpe, rtmps, rtmpt, rtmpte">librtmp rtmp, rtmpe, rtmps, rtmpt, rtmpte</a><br>
+<a href="#rtp">rtp</a><br>
+<a href="#rtsp">rtsp</a><br>
+<a href="#sap">sap</a><br>
+<a href="#sctp">sctp</a><br>
+<a href="#srt">srt</a><br>
+<a href="#srtp">srtp</a><br>
+<a href="#subfile">subfile</a><br>
+<a href="#tee">tee</a><br>
+<a href="#tcp">tcp</a><br>
+<a href="#tls">tls</a><br>
+<a href="#udp">udp</a><br>
+<a href="#unix">unix</a><br>
+<a href="#zmq">zmq</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg-protocols
+- FFmpeg protocols</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This document
+describes the input and output protocols provided by the
+libavformat library.</p>
+
+<h2>PROTOCOL OPTIONS
+<a name="PROTOCOL OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The libavformat
+library provides some generic global options, which can be
+set on all the protocols. In addition each protocol may
+support so-called private options, which are specific for
+that component.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options may be
+set by specifying -<i>option value</i> in the FFmpeg tools,
+or by setting the value explicitly in the
+&quot;AVFormatContext&quot; options or using the
+<i>libavutil/opt.h</i> API for programmatic use.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The list of
+supported options follows: <b><br>
+protocol_whitelist</b> <i>list</i>
+<b>(</b><i>input</i><b>)</b></p>
+
+<p style="margin-left:14%;">Set a &quot;,&quot;-separated
+list of allowed protocols. &quot;ALL&quot; matches all
+protocols. Protocols prefixed by &quot;-&quot; are disabled.
+All protocols are allowed by default but protocols used by
+an another protocol (nested protocols) are restricted to a
+per protocol subset.</p>
+
+<h2>PROTOCOLS
+<a name="PROTOCOLS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Protocols are
+configured elements in FFmpeg that enable access to
+resources that require specific protocols.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When you
+configure your FFmpeg build, all the supported protocols are
+enabled by default. You can list all available ones using
+the configure option &quot;--list-protocols&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can disable
+all the protocols using the configure option
+&quot;--disable-protocols&quot;, and selectively enable a
+protocol using the option
+&quot;--enable-protocol=<i>PROTOCOL</i>&quot;, or you can
+disable a particular protocol using the option
+&quot;--disable-protocol=<i>PROTOCOL</i>&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The option
+&quot;-protocols&quot; of the ff* tools will display the
+list of supported protocols.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All protocols
+accept the following options: <b><br>
+rw_timeout</b></p>
+
+<p style="margin-left:14%;">Maximum time to wait for
+(network) read/write operations to complete, in
+microseconds.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A description of
+the currently available protocols follows.</p>
+
+<h3>amqp
+<a name="amqp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Advanced Message
+Queueing Protocol (AMQP) version 0-9-1 is a broker based
+publish-subscribe communication protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">FFmpeg must be
+compiled with --enable-librabbitmq to support AMQP. A
+separate AMQP broker must also be run. An example
+open-source AMQP broker is RabbitMQ.</p>
+
+<p style="margin-left:9%; margin-top: 1em">After starting
+the broker, an FFmpeg client may stream data to the broker
+using the command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -re -i
+input -f mpegts
+amqp://[[user]:[password]@]hostname[:port][/vhost]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Where hostname
+and port (default is 5672) is the address of the broker. The
+client may also set a user/password for authentication. The
+default for both fields is &quot;guest&quot;. Name of
+virtual host on broker can be set with vhost. The default
+value is &quot;/&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Muliple
+subscribers may stream from the broker using the
+command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+amqp://[[user]:[password]@]hostname[:port][/vhost]</p>
+
+<p style="margin-left:9%; margin-top: 1em">In RabbitMQ all
+data published to the broker flows through a specific
+exchange, and each subscribing client has an assigned
+queue/buffer. When a packet arrives at an exchange, it may
+be copied to a client&rsquo;s queue depending on the
+exchange and routing_key fields.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are supported: <b><br>
+exchange</b></p>
+
+<p style="margin-left:14%;">Sets the exchange to use on the
+broker. RabbitMQ has several predefined exchanges:
+&quot;amq.direct&quot; is the default exchange, where the
+publisher and subscriber must have a matching routing_key;
+&quot;amq.fanout&quot; is the same as a broadcast operation
+(i.e. the data is forwarded to all queues on the fanout
+exchange independent of the routing_key); and
+&quot;amq.topic&quot; is similar to &quot;amq.direct&quot;,
+but allows for more complex pattern matching (refer to the
+RabbitMQ documentation).</p>
+
+<p style="margin-left:9%;"><b>routing_key</b></p>
+
+<p style="margin-left:14%;">Sets the routing key. The
+default value is &quot;amqp&quot;. The routing key is used
+on the &quot;amq.direct&quot; and &quot;amq.topic&quot;
+exchanges to decide whether packets are written to the queue
+of a subscriber.</p>
+
+<p style="margin-left:9%;"><b>pkt_size</b></p>
+
+<p style="margin-left:14%;">Maximum size of each packet
+sent/received to the broker. Default is 131072. Minimum is
+4096 and max is any large value (representable by an int).
+When receiving packets, this sets an internal buffer size in
+FFmpeg. It should be equal to or greater than the size of
+the published packets to the broker. Otherwise the received
+message may be truncated causing decoding errors.</p>
+
+<p style="margin-left:9%;"><b>connection_timeout</b></p>
+
+<p style="margin-left:14%;">The timeout in seconds during
+the initial connection to the broker. The default value is
+rw_timeout, or 5 seconds if rw_timeout is not set.</p>
+
+<p style="margin-left:9%;"><b>delivery_mode</b>
+<i>mode</i></p>
+
+<p style="margin-left:14%;">Sets the delivery mode of each
+message sent to broker. The following values are accepted:
+<b><br>
+persistent</b></p>
+
+<p style="margin-left:19%;">Delivery mode set to
+&quot;persistent&quot; (2). This is the default value.
+Messages may be written to the broker&rsquo;s disk depending
+on its setup.</p>
+
+<p style="margin-left:14%;"><b>non-persistent</b></p>
+
+<p style="margin-left:19%;">Delivery mode set to
+&quot;non-persistent&quot; (1). Messages will stay in
+broker&rsquo;s memory unless the broker is under memory
+pressure.</p>
+
+<h3>async
+<a name="async"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Asynchronous
+data filling wrapper for input stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fill data in a
+background thread, to decouple I/O operation from demux
+thread.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">async:&lt;URL&gt;
+<br>
+async:http://host/resource <br>
+async:cache:http://host/resource</p>
+
+<h3>bluray
+<a name="bluray"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Read BluRay
+playlist.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+options are: <b><br>
+angle</b></p>
+
+<p style="margin-left:14%;">BluRay angle</p>
+
+<p style="margin-left:9%;"><b>chapter</b></p>
+
+<p style="margin-left:14%;">Start chapter (1...N)</p>
+
+<p style="margin-left:9%;"><b>playlist</b></p>
+
+<p style="margin-left:14%;">Playlist to read
+(BDMV/PLAYLIST/?????.mpls)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Examples:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read longest
+playlist from BluRay mounted to /mnt/bluray:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">bluray:/mnt/bluray</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read angle 2 of
+playlist 4 from BluRay mounted to /mnt/bluray, start from
+chapter 2:</p>
+
+<p style="margin-left:9%; margin-top: 1em">-playlist 4
+-angle 2 -chapter 2 bluray:/mnt/bluray</p>
+
+<h3>cache
+<a name="cache"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Caching wrapper
+for input stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Cache the input
+stream to temporary file. It brings seeking capability to
+live streams.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+options are: <b><br>
+read_ahead_limit</b></p>
+
+<p style="margin-left:14%;">Amount in bytes that may be
+read ahead when seeking isn&rsquo;t supported. Range is -1
+to INT_MAX. -1 for unlimited. Default is 65536.</p>
+
+<p style="margin-left:9%; margin-top: 1em">URL Syntax
+is</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">cache:&lt;URL&gt;</p>
+
+<h3>concat
+<a name="concat"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Physical
+concatenation protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read and seek
+from many resources in sequence as if they were a unique
+resource.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A URL accepted
+by this protocol has the syntax:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">concat:&lt;URL1&gt;|&lt;URL2&gt;|...|&lt;URLN&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">where
+<i>URL1</i>, <i>URL2</i>, ..., <i>URLN</i> are the urls of
+the resource to be concatenated, each one possibly
+specifying a distinct protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+read a sequence of files <i>split1.mpeg</i>,
+<i>split2.mpeg</i>, <i>split3.mpeg</i> with <b>ffplay</b>
+use the command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+concat:split1.mpeg\|split2.mpeg\|split3.mpeg</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that you
+may need to escape the character &quot;|&quot; which is
+special for many shells.</p>
+
+<h3>concatf
+<a name="concatf"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Physical
+concatenation protocol using a line break delimited list of
+resources.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read and seek
+from many resources in sequence as if they were a unique
+resource.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A URL accepted
+by this protocol has the syntax:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">concatf:&lt;URL&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">where <i>URL</i>
+is the url containing a line break delimited list of
+resources to be concatenated, each one possibly specifying a
+distinct protocol. Special characters must be escaped with
+backslash or single quotes. See <b>the &quot;Quoting and
+escaping&quot; section in the ffmpeg-utils(1)
+manual</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+read a sequence of files <i>split1.mpeg</i>,
+<i>split2.mpeg</i>, <i>split3.mpeg</i> listed in separate
+lines within a file <i>split.txt</i> with <b>ffplay</b> use
+the command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+concatf:split.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Where
+<i>split.txt</i> contains the lines:</p>
+
+<p style="margin-left:9%; margin-top: 1em">split1.mpeg <br>
+split2.mpeg <br>
+split3.mpeg</p>
+
+<h3>crypto
+<a name="crypto"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">AES-encrypted
+stream reading protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+options are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>key</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>Set the AES decryption key binary block from given
+hexadecimal representation.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>iv</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>Set the AES decryption initialization vector binary
+block from given hexadecimal representation.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Accepted URL
+formats:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">crypto:&lt;URL&gt;
+<br>
+crypto+&lt;URL&gt;</p>
+
+<h3>data
+<a name="data"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Data in-line in
+the URI. See
+&lt;<b>http://en.wikipedia.org/wiki/Data_URI_scheme</b>&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+convert a GIF file given inline with <b>ffmpeg</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+&quot;data:image/gif;base64,R0lGODdhCAAIAMIEAAAAAAAA//8AAP//AP///////////////ywAAAAACAAIAAADF0gEDLojDgdGiJdJqUX02iB4E8Q9jUMkADs=&quot;
+smiley.png</p>
+
+<h3>fd
+<a name="fd"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">File descriptor
+access protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+syntax is:</p>
+
+<p style="margin-left:9%; margin-top: 1em">fd: -fd
+&lt;file_descriptor&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">If <b>fd</b> is
+not specified, by default the stdout file descriptor will be
+used for writing, stdin for reading. Unlike the pipe
+protocol, fd protocol has seek support if it corresponding
+to a regular file. fd protocol doesn&rsquo;t support pass
+file descriptor via URL for security.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options: <b><br>
+blocksize</b></p>
+
+<p style="margin-left:14%;">Set I/O operation maximum block
+size, in bytes. Default value is &quot;INT_MAX&quot;, which
+results in not limiting the requested block size. Setting
+this value reasonably low improves user termination request
+reaction time, which is valuable if data transmission is
+slow.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>fd</b></p></td>
+<td width="2%"></td>
+<td width="26%">
+
+
+<p>Set file descriptor.</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<h3>file
+<a name="file"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">File access
+protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read from or
+write to a file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A file URL can
+have the form:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">file:&lt;filename&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">where
+<i>filename</i> is the path of the file to read.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An URL that does
+not have a protocol prefix will be assumed to be a file URL.
+Depending on the build, an URL that looks like a Windows
+path with the drive letter at the beginning will also be
+assumed to be a file URL (usually not the case in builds for
+unix-like systems).</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+read from a file <i>input.mpeg</i> with <b>ffmpeg</b> use
+the command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+file:input.mpeg output.mpeg</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options: <b><br>
+truncate</b></p>
+
+<p style="margin-left:14%;">Truncate existing files on
+write, if set to 1. A value of 0 prevents truncating.
+Default value is 1.</p>
+
+<p style="margin-left:9%;"><b>blocksize</b></p>
+
+<p style="margin-left:14%;">Set I/O operation maximum block
+size, in bytes. Default value is &quot;INT_MAX&quot;, which
+results in not limiting the requested block size. Setting
+this value reasonably low improves user termination request
+reaction time, which is valuable for files on slow
+medium.</p>
+
+<p style="margin-left:9%;"><b>follow</b></p>
+
+<p style="margin-left:14%;">If set to 1, the protocol will
+retry reading at the end of the file, allowing reading files
+that still are being written. In order for this to
+terminate, you either need to use the rw_timeout option, or
+use the interrupt callback (for API users).</p>
+
+<p style="margin-left:9%;"><b>seekable</b></p>
+
+<p style="margin-left:14%;">Controls if seekability is
+advertised on the file. 0 means non-seekable, -1 means auto
+(seekable for normal files, non-seekable for named
+pipes).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Many demuxers
+handle seekable and non-seekable resources differently,
+overriding this might speed up opening certain files at the
+cost of losing some features (e.g. accurate seeking).</p>
+
+<h3>ftp
+<a name="ftp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">FTP (File
+Transfer Protocol).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read from or
+write to remote resources using FTP protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Following syntax
+is required.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">ftp://[user[:password]@]server[:port]/path/to/remote/resource.mpeg</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options. <b><br>
+timeout</b></p>
+
+<p style="margin-left:14%;">Set timeout in microseconds of
+socket I/O operations used by the underlying low level
+operation. By default it is set to -1, which means that the
+timeout is not specified.</p>
+
+<p style="margin-left:9%;"><b>ftp-user</b></p>
+
+<p style="margin-left:14%;">Set a user to be used for
+authenticating to the FTP server. This is overridden by the
+user in the FTP URL.</p>
+
+<p style="margin-left:9%;"><b>ftp-password</b></p>
+
+<p style="margin-left:14%;">Set a password to be used for
+authenticating to the FTP server. This is overridden by the
+password in the FTP URL, or by <b>ftp-anonymous-password</b>
+if no user is set.</p>
+
+
+<p style="margin-left:9%;"><b>ftp-anonymous-password</b></p>
+
+<p style="margin-left:14%;">Password used when login as
+anonymous user. Typically an e-mail address should be
+used.</p>
+
+<p style="margin-left:9%;"><b>ftp-write-seekable</b></p>
+
+<p style="margin-left:14%;">Control seekability of
+connection during encoding. If set to 1 the resource is
+supposed to be seekable, if set to 0 it is assumed not to be
+seekable. Default value is 0.</p>
+
+<p style="margin-left:9%; margin-top: 1em">NOTE: Protocol
+can be used as output, but it is recommended to not do it,
+unless special care is taken (tests, customized server
+configuration etc.). Different FTP servers behave in
+different way during seek operation. ff* tools may produce
+incomplete content due to server limitations.</p>
+
+<h3>gopher
+<a name="gopher"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Gopher
+protocol.</p>
+
+<h3>gophers
+<a name="gophers"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Gophers
+protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Gopher
+protocol with TLS encapsulation.</p>
+
+<h3>hls
+<a name="hls"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Read Apple HTTP
+Live Streaming compliant segmented stream as a uniform one.
+The M3U8 playlists describing the segments can be remote
+HTTP resources or local files, accessed using the standard
+file protocol. The nested protocol is declared by specifying
+&quot;+<i>proto</i>&quot; after the hls URI scheme name,
+where <i>proto</i> is either &quot;file&quot; or
+&quot;http&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">hls+http://host/path/to/remote/resource.m3u8
+<br>
+hls+file://path/to/local/resource.m3u8</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using this
+protocol is discouraged - the hls demuxer should work just
+as well (if not, please report the issues) and is more
+complete. To use the hls demuxer instead, simply use the
+direct URLs to the m3u8 files.</p>
+
+<h3>http
+<a name="http"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">HTTP (Hyper Text
+Transfer Protocol).</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options: <b><br>
+seekable</b></p>
+
+<p style="margin-left:14%;">Control seekability of
+connection. If set to 1 the resource is supposed to be
+seekable, if set to 0 it is assumed not to be seekable, if
+set to -1 it will try to autodetect if it is seekable.
+Default value is -1.</p>
+
+<p style="margin-left:9%;"><b>chunked_post</b></p>
+
+<p style="margin-left:14%;">If set to 1 use chunked
+Transfer-Encoding for posts, default is 1.</p>
+
+<p style="margin-left:9%;"><b>http_proxy</b></p>
+
+<p style="margin-left:14%;">set HTTP proxy to tunnel
+through e.g. http://example.com:1234</p>
+
+<p style="margin-left:9%;"><b>headers</b></p>
+
+<p style="margin-left:14%;">Set custom HTTP headers, can
+override built in default headers. The value must be a
+string encoding the headers.</p>
+
+<p style="margin-left:9%;"><b>content_type</b></p>
+
+<p style="margin-left:14%;">Set a specific content type for
+the POST messages or for listen mode.</p>
+
+<p style="margin-left:9%;"><b>user_agent</b></p>
+
+<p style="margin-left:14%;">Override the User-Agent header.
+If not specified the protocol will use a string describing
+the libavformat build.
+(&quot;Lavf/&lt;version&gt;&quot;)</p>
+
+<p style="margin-left:9%;"><b>referer</b></p>
+
+<p style="margin-left:14%;">Set the Referer header. Include
+&rsquo;Referer: URL&rsquo; header in HTTP request.</p>
+
+<p style="margin-left:9%;"><b>multiple_requests</b></p>
+
+<p style="margin-left:14%;">Use persistent connections if
+set to 1, default is 0.</p>
+
+<p style="margin-left:9%;"><b>post_data</b></p>
+
+<p style="margin-left:14%;">Set custom HTTP post data.</p>
+
+<p style="margin-left:9%;"><b>mime_type</b></p>
+
+<p style="margin-left:14%;">Export the MIME type.</p>
+
+<p style="margin-left:9%;"><b>http_version</b></p>
+
+<p style="margin-left:14%;">Exports the HTTP response
+version number. Usually &quot;1.0&quot; or
+&quot;1.1&quot;.</p>
+
+<p style="margin-left:9%;"><b>cookies</b></p>
+
+<p style="margin-left:14%;">Set the cookies to be sent in
+future requests. The format of each cookie is the same as
+the value of a Set-Cookie HTTP response field. Multiple
+cookies can be delimited by a newline character.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>icy</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>If set to 1 request ICY (SHOUTcast) metadata from the
+server. If the server supports this, the metadata has to be
+retrieved by the application by reading the
+<b>icy_metadata_headers</b> and <b>icy_metadata_packet</b>
+options. The default is 1.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>icy_metadata_headers</b></p>
+
+<p style="margin-left:14%;">If the server supports ICY
+metadata, this contains the ICY-specific HTTP reply headers,
+separated by newline characters.</p>
+
+<p style="margin-left:9%;"><b>icy_metadata_packet</b></p>
+
+<p style="margin-left:14%;">If the server supports ICY
+metadata, and <b>icy</b> was set to 1, this contains the
+last non-empty metadata packet sent by the server. It should
+be polled in regular intervals by applications interested in
+mid-stream metadata updates.</p>
+
+<p style="margin-left:9%;"><b>metadata</b></p>
+
+<p style="margin-left:14%;">Set an exported dictionary
+containing Icecast metadata from the bitstream, if present.
+Only useful with the C API.</p>
+
+<p style="margin-left:9%;"><b>auth_type</b></p>
+
+<p style="margin-left:14%;">Set HTTP authentication type.
+No option for Digest, since this method requires getting
+nonce parameters from the server first and can&rsquo;t be
+used straight away like Basic. <b><br>
+none</b></p>
+
+<p style="margin-left:19%;">Choose the HTTP authentication
+type automatically. This is the default.</p>
+
+<p style="margin-left:14%;"><b>basic</b></p>
+
+<p style="margin-left:19%;">Choose the HTTP basic
+authentication.</p>
+
+<p style="margin-left:19%; margin-top: 1em">Basic
+authentication sends a Base64-encoded string that contains a
+user name and password for the client. Base64 is not a form
+of encryption and should be considered the same as sending
+the user name and password in clear text (Base64 is a
+reversible encoding). If a resource needs to be protected,
+strongly consider using an authentication scheme other than
+basic authentication. HTTPS/TLS should be used with basic
+authentication. Without these additional security
+enhancements, basic authentication should not be used to
+protect sensitive or valuable information.</p>
+
+<p style="margin-left:9%;"><b>send_expect_100</b></p>
+
+<p style="margin-left:14%;">Send an Expect: 100-continue
+header for POST. If set to 1 it will send, if set to 0 it
+won&rsquo;t, if set to -1 it will try to send if it is
+applicable. Default value is -1.</p>
+
+<p style="margin-left:9%;"><b>location</b></p>
+
+<p style="margin-left:14%;">An exported dictionary
+containing the content location. Only useful with the C
+API.</p>
+
+<p style="margin-left:9%;"><b>offset</b></p>
+
+<p style="margin-left:14%;">Set initial byte offset.</p>
+
+<p style="margin-left:9%;"><b>end_offset</b></p>
+
+<p style="margin-left:14%;">Try to limit the request to
+bytes preceding this offset.</p>
+
+<p style="margin-left:9%;"><b>method</b></p>
+
+<p style="margin-left:14%;">When used as a client option it
+sets the HTTP method for the request.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When used as a
+server option it sets the HTTP method that is going to be
+expected from the client(s). If the expected and the
+received HTTP method do not match the client will be given a
+Bad Request response. When unset the HTTP method is not
+checked for now. This will be replaced by autodetection in
+the future.</p>
+
+<p style="margin-left:9%;"><b>reconnect</b></p>
+
+<p style="margin-left:14%;">Reconnect automatically when
+disconnected before EOF is hit.</p>
+
+<p style="margin-left:9%;"><b>reconnect_at_eof</b></p>
+
+<p style="margin-left:14%;">If set then eof is treated like
+an error and causes reconnection, this is useful for live /
+endless streams.</p>
+
+
+<p style="margin-left:9%;"><b>reconnect_on_network_error</b></p>
+
+<p style="margin-left:14%;">Reconnect automatically in case
+of TCP/TLS errors during connect.</p>
+
+
+<p style="margin-left:9%;"><b>reconnect_on_http_error</b></p>
+
+<p style="margin-left:14%;">A comma separated list of HTTP
+status codes to reconnect on. The list can include specific
+status codes (e.g. &rsquo;503&rsquo;) or the strings
+&rsquo;4xx&rsquo; / &rsquo;5xx&rsquo;.</p>
+
+<p style="margin-left:9%;"><b>reconnect_streamed</b></p>
+
+<p style="margin-left:14%;">If set then even streamed/non
+seekable streams will be reconnected on errors.</p>
+
+<p style="margin-left:9%;"><b>reconnect_delay_max</b></p>
+
+<p style="margin-left:14%;">Set the maximum delay in
+seconds after which to give up reconnecting.</p>
+
+
+<p style="margin-left:9%;"><b>reconnect_max_retries</b></p>
+
+<p style="margin-left:14%;">Set the maximum number of times
+to retry a connection. Default unset.</p>
+
+
+<p style="margin-left:9%;"><b>reconnect_delay_total_max</b></p>
+
+<p style="margin-left:14%;">Set the maximum total delay in
+seconds after which to give up reconnecting.</p>
+
+<p style="margin-left:9%;"><b>respect_retry_after</b></p>
+
+<p style="margin-left:14%;">If enabled, and a Retry-After
+header is encountered, its requested reconnection delay will
+be honored, rather than using exponential backoff. Useful
+for 429 and 503 errors. Default enabled.</p>
+
+<p style="margin-left:9%;"><b>listen</b></p>
+
+<p style="margin-left:14%;">If set to 1 enables
+experimental HTTP server. This can be used to send data when
+used as an output option, or read data from a client with
+HTTP POST when used as an input option. If set to 2 enables
+experimental multi-client HTTP server. This is not yet
+implemented in ffmpeg.c and thus must not be used as a
+command line option.</p>
+
+<p style="margin-left:14%; margin-top: 1em"># Server side
+(sending): <br>
+ffmpeg -i somefile.ogg -c copy -listen 1 -f ogg
+http://&lt;server&gt;:&lt;port&gt; <br>
+# Client side (receiving): <br>
+ffmpeg -i http://&lt;server&gt;:&lt;port&gt; -c copy
+somefile.ogg <br>
+# Client can also be done with wget: <br>
+wget http://&lt;server&gt;:&lt;port&gt; -O somefile.ogg <br>
+# Server side (receiving): <br>
+ffmpeg -listen 1 -i http://&lt;server&gt;:&lt;port&gt; -c
+copy somefile.ogg <br>
+# Client side (sending): <br>
+ffmpeg -i somefile.ogg -chunked_post 0 -c copy -f ogg
+http://&lt;server&gt;:&lt;port&gt; <br>
+# Client can also be done with wget: <br>
+wget --post-file=somefile.ogg
+http://&lt;server&gt;:&lt;port&gt;</p>
+
+<p style="margin-left:9%;"><b>resource</b></p>
+
+<p style="margin-left:14%;">The resource requested by a
+client, when the experimental HTTP server is in use.</p>
+
+<p style="margin-left:9%;"><b>reply_code</b></p>
+
+<p style="margin-left:14%;">The HTTP code returned to the
+client, when the experimental HTTP server is in use.</p>
+
+<p style="margin-left:9%;"><b>short_seek_size</b></p>
+
+<p style="margin-left:14%;">Set the threshold, in bytes,
+for when a readahead should be prefered over a seek and new
+HTTP request. This is useful, for example, to make sure the
+same connection is used for reading large video packets with
+small audio packets in between.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>HTTP
+Cookies</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Some HTTP
+requests will be denied unless cookie values are passed in
+with the request. The <b>cookies</b> option allows these
+cookies to be specified. At the very least, each cookie must
+specify a value along with a path and domain. HTTP requests
+that match both the domain and path will automatically
+include the cookie value in the HTTP Cookie header field.
+Multiple cookies can be delimited by a newline.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax to play a stream specifying a cookie is:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay -cookies
+&quot;nlqptid=nltid=tsn; path=/;
+domain=somedomain.com;&quot;
+http://somedomain.com/somestream.m3u8</p>
+
+<h3>Icecast
+<a name="Icecast"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Icecast protocol
+(stream to Icecast servers)</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options: <b><br>
+ice_genre</b></p>
+
+<p style="margin-left:14%;">Set the stream genre.</p>
+
+<p style="margin-left:9%;"><b>ice_name</b></p>
+
+<p style="margin-left:14%;">Set the stream name.</p>
+
+<p style="margin-left:9%;"><b>ice_description</b></p>
+
+<p style="margin-left:14%;">Set the stream description.</p>
+
+<p style="margin-left:9%;"><b>ice_url</b></p>
+
+<p style="margin-left:14%;">Set the stream website URL.</p>
+
+<p style="margin-left:9%;"><b>ice_public</b></p>
+
+<p style="margin-left:14%;">Set if the stream should be
+public. The default is 0 (not public).</p>
+
+<p style="margin-left:9%;"><b>user_agent</b></p>
+
+<p style="margin-left:14%;">Override the User-Agent header.
+If not specified a string of the form
+&quot;Lavf/&lt;version&gt;&quot; will be used.</p>
+
+<p style="margin-left:9%;"><b>password</b></p>
+
+<p style="margin-left:14%;">Set the Icecast mountpoint
+password.</p>
+
+<p style="margin-left:9%;"><b>content_type</b></p>
+
+<p style="margin-left:14%;">Set the stream content type.
+This must be set if it is different from audio/mpeg.</p>
+
+<p style="margin-left:9%;"><b>legacy_icecast</b></p>
+
+<p style="margin-left:14%;">This enables support for
+Icecast versions &lt; 2.4.0, that do not support the HTTP
+PUT method but the SOURCE method.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>tls</b></p></td>
+<td width="1%"></td>
+<td width="59%">
+
+
+<p>Establish a TLS (HTTPS) connection to Icecast.</p></td>
+<td width="27%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em">icecast://[&lt;username&gt;[:&lt;password&gt;]@]&lt;server&gt;:&lt;port&gt;/&lt;mountpoint&gt;</p>
+
+<h3>ipfs
+<a name="ipfs"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">InterPlanetary
+File System (IPFS) protocol support. One can access files
+stored on the IPFS network through so-called gateways. These
+are http(s) endpoints. This protocol wraps the IPFS native
+protocols (ipfs:// and ipns://) to be sent to such a
+gateway. Users can (and should) host their own node which
+means this protocol will use one&rsquo;s local gateway to
+access files on the IPFS network.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options: <b><br>
+gateway</b></p>
+
+<p style="margin-left:14%;">Defines the gateway to use.
+When not set, the protocol will first try locating the local
+gateway by looking at $IPFS_GATEWAY, $IPFS_PATH and
+&quot;$HOME/.ipfs/&quot;, in that order.</p>
+
+<p style="margin-left:9%; margin-top: 1em">One can use this
+protocol in 2 ways. Using IPFS:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+ipfs://&lt;hash&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Or the IPNS
+protocol (IPNS is mutable IPFS):</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+ipns://&lt;hash&gt;</p>
+
+<h3>mmst
+<a name="mmst"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">MMS (Microsoft
+Media Server) protocol over TCP.</p>
+
+<h3>mmsh
+<a name="mmsh"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">MMS (Microsoft
+Media Server) protocol over HTTP.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">mmsh://&lt;server&gt;[:&lt;port&gt;][/&lt;app&gt;][/&lt;playpath&gt;]</p>
+
+<h3>md5
+<a name="md5"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">MD5 output
+protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Computes the MD5
+hash of the data to be written, and on close writes this to
+the designated output or stdout if none is specified. It can
+be used to test muxers without writing an actual file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some examples
+follow.</p>
+
+<p style="margin-left:9%; margin-top: 1em"># Write the MD5
+hash of the encoded AVI file to the file output.avi.md5.
+<br>
+ffmpeg -i input.flv -f avi -y md5:output.avi.md5 <br>
+# Write the MD5 hash of the encoded AVI file to stdout. <br>
+ffmpeg -i input.flv -f avi -y md5:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that some
+formats (typically MOV) require the output protocol to be
+seekable, so they will fail with the MD5 output
+protocol.</p>
+
+<h3>pipe
+<a name="pipe"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">UNIX pipe access
+protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read and write
+from UNIX pipes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+syntax is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">pipe:[&lt;number&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">If <b>fd</b>
+isn&rsquo;t specified, <i>number</i> is the number
+corresponding to the file descriptor of the pipe (e.g. 0 for
+stdin, 1 for stdout, 2 for stderr). If <i>number</i> is not
+specified, by default the stdout file descriptor will be
+used for writing, stdin for reading.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+read from stdin with <b>ffmpeg</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">cat test.wav |
+ffmpeg -i pipe:0 <br>
+# ...this is the same as... <br>
+cat test.wav | ffmpeg -i pipe:</p>
+
+<p style="margin-left:9%; margin-top: 1em">For writing to
+stdout with <b>ffmpeg</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+test.wav -f avi pipe:1 | cat &gt; test.avi <br>
+# ...this is the same as... <br>
+ffmpeg -i test.wav -f avi pipe: | cat &gt; test.avi</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options: <b><br>
+blocksize</b></p>
+
+<p style="margin-left:14%;">Set I/O operation maximum block
+size, in bytes. Default value is &quot;INT_MAX&quot;, which
+results in not limiting the requested block size. Setting
+this value reasonably low improves user termination request
+reaction time, which is valuable if data transmission is
+slow.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>fd</b></p></td>
+<td width="2%"></td>
+<td width="26%">
+
+
+<p>Set file descriptor.</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note that some
+formats (typically MOV), require the output protocol to be
+seekable, so they will fail with the pipe output
+protocol.</p>
+
+<h3>prompeg
+<a name="prompeg"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Pro-MPEG Code of
+Practice #3 Release 2 FEC protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Pro-MPEG
+CoP#3 FEC is a 2D parity-check forward error correction
+mechanism for MPEG-2 Transport Streams sent over RTP.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+must be used in conjunction with the &quot;rtp_mpegts&quot;
+muxer and the &quot;rtp&quot; protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax is:</p>
+
+<p style="margin-left:9%; margin-top: 1em">-f rtp_mpegts
+-fec prompeg=&lt;option&gt;=&lt;val&gt;...
+rtp://&lt;hostname&gt;:&lt;port&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">The destination
+UDP ports are &quot;port + 2&quot; for the column FEC stream
+and &quot;port + 4&quot; for the row FEC stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>l=</b><i>n</i></p></td>
+<td width="1%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">The number of columns (4-20, LxD
+&lt;= 100)</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>d=</b><i>n</i></p></td>
+<td width="1%"></td>
+<td width="51%">
+
+
+<p>The number of rows (4-20, LxD &lt;= 100)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Example
+usage:</p>
+
+<p style="margin-left:9%; margin-top: 1em">-f rtp_mpegts
+-fec prompeg=l=8:d=4 rtp://&lt;hostname&gt;:&lt;port&gt;</p>
+
+<h3>rist
+<a name="rist"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Reliable
+Internet Streaming Transport protocol</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+options are: <b><br>
+rist_profile</b></p>
+
+<p style="margin-left:14%;">Supported values: <b><br>
+simple <br>
+main</b></p>
+
+<p style="margin-left:19%;">This one is default.</p>
+
+<p style="margin-left:14%;"><b>advanced</b></p>
+
+<p style="margin-left:9%;"><b>buffer_size</b></p>
+
+<p style="margin-left:14%;">Set internal RIST buffer size
+in milliseconds for retransmission of data. Default value is
+0 which means the librist default (1 sec). Maximum value is
+30 seconds.</p>
+
+<p style="margin-left:9%;"><b>fifo_size</b></p>
+
+<p style="margin-left:14%;">Size of the librist receiver
+output fifo in number of packets. This must be a power of 2.
+Defaults to 8192 (vs the librist default of 1024).</p>
+
+
+<p style="margin-left:9%;"><b>overrun_nonfatal=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">Survive in case of librist fifo
+buffer overrun. Default value is 0.</p>
+
+<p style="margin-left:9%;"><b>pkt_size</b></p>
+
+<p style="margin-left:14%;">Set maximum packet size for
+sending data. 1316 by default.</p>
+
+<p style="margin-left:9%;"><b>log_level</b></p>
+
+<p style="margin-left:14%;">Set loglevel for RIST logging
+messages. You only need to set this if you explicitly want
+to enable debug level messages or packet loss simulation,
+otherwise the regular loglevel is respected.</p>
+
+<p style="margin-left:9%;"><b>secret</b></p>
+
+<p style="margin-left:14%;">Set override of encryption
+secret, by default is unset.</p>
+
+<p style="margin-left:9%;"><b>encryption</b></p>
+
+<p style="margin-left:14%;">Set encryption type, by default
+is disabled. Acceptable values are 128 and 256.</p>
+
+<h3>rtmp
+<a name="rtmp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Real-Time
+Messaging Protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Real-Time
+Messaging Protocol (RTMP) is used for streaming multimedia
+content across a TCP/IP network.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">rtmp://[&lt;username&gt;:&lt;password&gt;@]&lt;server&gt;[:&lt;port&gt;][/&lt;app&gt;][/&lt;instance&gt;][/&lt;playpath&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+parameters are: <b><br>
+username</b></p>
+
+<p style="margin-left:14%;">An optional username (mostly
+for publishing).</p>
+
+<p style="margin-left:9%;"><b>password</b></p>
+
+<p style="margin-left:14%;">An optional password (mostly
+for publishing).</p>
+
+<p style="margin-left:9%;"><b>server</b></p>
+
+<p style="margin-left:14%;">The address of the RTMP
+server.</p>
+
+<p style="margin-left:9%;"><b>port</b></p>
+
+<p style="margin-left:14%;">The number of the TCP port to
+use (by default is 1935).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>app</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>It is the name of the application to access. It usually
+corresponds to the path where the application is installed
+on the RTMP server (e.g. <i>/ondemand/</i>,
+<i>/flash/live/</i>, etc.). You can override the value
+parsed from the URI through the &quot;rtmp_app&quot; option,
+too.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>playpath</b></p>
+
+<p style="margin-left:14%;">It is the path or name of the
+resource to play with reference to the application specified
+in <i>app</i>, may be prefixed by &quot;mp4:&quot;. You can
+override the value parsed from the URI through the
+&quot;rtmp_playpath&quot; option, too.</p>
+
+<p style="margin-left:9%;"><b>listen</b></p>
+
+<p style="margin-left:14%;">Act as a server, listening for
+an incoming connection.</p>
+
+<p style="margin-left:9%;"><b>timeout</b></p>
+
+<p style="margin-left:14%;">Maximum time to wait for the
+incoming connection. Implies listen.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Additionally,
+the following parameters can be set via command line options
+(or in code via &quot;AVOption&quot;s): <b><br>
+rtmp_app</b></p>
+
+<p style="margin-left:14%;">Name of application to connect
+on the RTMP server. This option overrides the parameter
+specified in the URI.</p>
+
+<p style="margin-left:9%;"><b>rtmp_buffer</b></p>
+
+<p style="margin-left:14%;">Set the client buffer time in
+milliseconds. The default is 3000.</p>
+
+<p style="margin-left:9%;"><b>rtmp_conn</b></p>
+
+<p style="margin-left:14%;">Extra arbitrary AMF connection
+parameters, parsed from a string, e.g. like &quot;B:1
+S:authMe O:1 NN:code:1.23 NS:flag:ok O:0&quot;. Each value
+is prefixed by a single character denoting the type, B for
+Boolean, N for number, S for string, O for object, or Z for
+null, followed by a colon. For Booleans the data must be
+either 0 or 1 for FALSE or TRUE, respectively. Likewise for
+Objects the data must be 0 or 1 to end or begin an object,
+respectively. Data items in subobjects may be named, by
+prefixing the type with &rsquo;N&rsquo; and specifying the
+name before the value (i.e. &quot;NB:myFlag:1&quot;). This
+option may be used multiple times to construct arbitrary AMF
+sequences.</p>
+
+<p style="margin-left:9%;"><b>rtmp_enhanced_codecs</b></p>
+
+<p style="margin-left:14%;">Specify the list of codecs the
+client advertises to support in an enhanced RTMP stream.
+This option should be set to a comma separated list of
+fourcc values, like &quot;hvc1,av01,vp09&quot; for multiple
+codecs or &quot;hvc1&quot; for only one codec. The specified
+list will be presented in the &quot;fourCcLive&quot;
+property of the Connect Command Message.</p>
+
+<p style="margin-left:9%;"><b>rtmp_flashver</b></p>
+
+<p style="margin-left:14%;">Version of the Flash plugin
+used to run the SWF player. The default is LNX 9,0,124,2.
+(When publishing, the default is FMLE/3.0 (compatible;
+&lt;libavformat version&gt;).)</p>
+
+<p style="margin-left:9%;"><b>rtmp_flush_interval</b></p>
+
+<p style="margin-left:14%;">Number of packets flushed in
+the same request (RTMPT only). The default is 10.</p>
+
+<p style="margin-left:9%;"><b>rtmp_live</b></p>
+
+<p style="margin-left:14%;">Specify that the media is a
+live stream. No resuming or seeking in live streams is
+possible. The default value is &quot;any&quot;, which means
+the subscriber first tries to play the live stream specified
+in the playpath. If a live stream of that name is not found,
+it plays the recorded stream. The other possible values are
+&quot;live&quot; and &quot;recorded&quot;.</p>
+
+<p style="margin-left:9%;"><b>rtmp_pageurl</b></p>
+
+<p style="margin-left:14%;">URL of the web page in which
+the media was embedded. By default no value will be
+sent.</p>
+
+<p style="margin-left:9%;"><b>rtmp_playpath</b></p>
+
+<p style="margin-left:14%;">Stream identifier to play or to
+publish. This option overrides the parameter specified in
+the URI.</p>
+
+<p style="margin-left:9%;"><b>rtmp_subscribe</b></p>
+
+<p style="margin-left:14%;">Name of live stream to
+subscribe to. By default no value will be sent. It is only
+sent if the option is specified or if rtmp_live is set to
+live.</p>
+
+<p style="margin-left:9%;"><b>rtmp_swfhash</b></p>
+
+<p style="margin-left:14%;">SHA256 hash of the decompressed
+SWF file (32 bytes).</p>
+
+<p style="margin-left:9%;"><b>rtmp_swfsize</b></p>
+
+<p style="margin-left:14%;">Size of the decompressed SWF
+file, required for SWFVerification.</p>
+
+<p style="margin-left:9%;"><b>rtmp_swfurl</b></p>
+
+<p style="margin-left:14%;">URL of the SWF player for the
+media. By default no value will be sent.</p>
+
+<p style="margin-left:9%;"><b>rtmp_swfverify</b></p>
+
+<p style="margin-left:14%;">URL to player swf file, compute
+hash/size automatically.</p>
+
+<p style="margin-left:9%;"><b>rtmp_tcurl</b></p>
+
+<p style="margin-left:14%;">URL of the target stream.
+Defaults to proto://host[:port]/app.</p>
+
+
+<p style="margin-left:9%;"><b>tcp_nodelay=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">Set TCP_NODELAY to disable
+Nagle&rsquo;s algorithm. Default value is 0.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>Remark:
+Writing to the socket is currently not optimized to minimize
+system calls and reduces the efficiency / effect of
+TCP_NODELAY.</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+read with <b>ffplay</b> a multimedia resource named
+&quot;sample&quot; from the application &quot;vod&quot; from
+an RTMP server &quot;myserver&quot;:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+rtmp://myserver/vod/sample</p>
+
+<p style="margin-left:9%; margin-top: 1em">To publish to a
+password protected server, passing the playpath and app
+names separately:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -re -i
+&lt;input&gt; -f flv -rtmp_playpath some/long/path -rtmp_app
+long/app/name rtmp://username:password@myserver/</p>
+
+<h3>rtmpe
+<a name="rtmpe"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Encrypted
+Real-Time Messaging Protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Encrypted
+Real-Time Messaging Protocol (RTMPE) is used for streaming
+multimedia content within standard cryptographic primitives,
+consisting of Diffie-Hellman key exchange and HMACSHA256,
+generating a pair of RC4 keys.</p>
+
+<h3>rtmps
+<a name="rtmps"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Real-Time
+Messaging Protocol over a secure SSL connection.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Real-Time
+Messaging Protocol (RTMPS) is used for streaming multimedia
+content across an encrypted connection.</p>
+
+<h3>rtmpt
+<a name="rtmpt"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Real-Time
+Messaging Protocol tunneled through HTTP.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Real-Time
+Messaging Protocol tunneled through HTTP (RTMPT) is used for
+streaming multimedia content within HTTP requests to
+traverse firewalls.</p>
+
+<h3>rtmpte
+<a name="rtmpte"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Encrypted
+Real-Time Messaging Protocol tunneled through HTTP.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Encrypted
+Real-Time Messaging Protocol tunneled through HTTP (RTMPTE)
+is used for streaming multimedia content within HTTP
+requests to traverse firewalls.</p>
+
+<h3>rtmpts
+<a name="rtmpts"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Real-Time
+Messaging Protocol tunneled through HTTPS.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Real-Time
+Messaging Protocol tunneled through HTTPS (RTMPTS) is used
+for streaming multimedia content within HTTPS requests to
+traverse firewalls.</p>
+
+<h3>libsmbclient
+<a name="libsmbclient"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">libsmbclient
+permits one to manipulate CIFS/SMB network resources.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Following syntax
+is required.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">smb://[[domain:]user[:password@]]server[/share[/path[/file]]]</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options. <b><br>
+timeout</b></p>
+
+<p style="margin-left:14%;">Set timeout in milliseconds of
+socket I/O operations used by the underlying low level
+operation. By default it is set to -1, which means that the
+timeout is not specified.</p>
+
+<p style="margin-left:9%;"><b>truncate</b></p>
+
+<p style="margin-left:14%;">Truncate existing files on
+write, if set to 1. A value of 0 prevents truncating.
+Default value is 1.</p>
+
+<p style="margin-left:9%;"><b>workgroup</b></p>
+
+<p style="margin-left:14%;">Set the workgroup used for
+making connections. By default workgroup is not
+specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For more
+information see: &lt;<b>http://www.samba.org/</b>&gt;.</p>
+
+<h3>libssh
+<a name="libssh"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Secure File
+Transfer Protocol via libssh</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read from or
+write to remote resources using SFTP protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Following syntax
+is required.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">sftp://[user[:password]@]server[:port]/path/to/remote/resource.mpeg</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options. <b><br>
+timeout</b></p>
+
+<p style="margin-left:14%;">Set timeout of socket I/O
+operations used by the underlying low level operation. By
+default it is set to -1, which means that the timeout is not
+specified.</p>
+
+<p style="margin-left:9%;"><b>truncate</b></p>
+
+<p style="margin-left:14%;">Truncate existing files on
+write, if set to 1. A value of 0 prevents truncating.
+Default value is 1.</p>
+
+<p style="margin-left:9%;"><b>private_key</b></p>
+
+<p style="margin-left:14%;">Specify the path of the file
+containing private key to use during authorization. By
+default libssh searches for keys in the <i>&#732;/.ssh/</i>
+directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example: Play a
+file stored on remote server.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+sftp://user:password@server_address:22/home/user/resource.mpeg</p>
+
+<h3>librtmp rtmp, rtmpe, rtmps, rtmpt, rtmpte
+<a name="librtmp rtmp, rtmpe, rtmps, rtmpt, rtmpte"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Real-Time
+Messaging Protocol and its variants supported through
+librtmp.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Requires the
+presence of the librtmp headers and library during
+configuration. You need to explicitly configure the build
+with &quot;--enable-librtmp&quot;. If enabled this will
+replace the native RTMP protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+provides most client functions and a few server functions
+needed to support RTMP, RTMP tunneled in HTTP (RTMPT),
+encrypted RTMP (RTMPE), RTMP over SSL/TLS (RTMPS) and
+tunneled variants of these encrypted types (RTMPTE,
+RTMPTS).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;rtmp_proto&gt;://&lt;server&gt;[:&lt;port&gt;][/&lt;app&gt;][/&lt;playpath&gt;]
+&lt;options&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">where
+<i>rtmp_proto</i> is one of the strings &quot;rtmp&quot;,
+&quot;rtmpt&quot;, &quot;rtmpe&quot;, &quot;rtmps&quot;,
+&quot;rtmpte&quot;, &quot;rtmpts&quot; corresponding to each
+RTMP variant, and <i>server</i>, <i>port</i>, <i>app</i> and
+<i>playpath</i> have the same meaning as specified for the
+RTMP native protocol. <i>options</i> contains a list of
+space-separated options of the form
+<i>key</i>=<i>val</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See the librtmp
+manual page (man 3 librtmp) for more information.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+stream a file in real-time to an RTMP server using
+<b>ffmpeg</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -re -i
+myfile -f flv rtmp://myserver/live/mystream</p>
+
+<p style="margin-left:9%; margin-top: 1em">To play the same
+stream using <b>ffplay</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+&quot;rtmp://myserver/live/mystream live=1&quot;</p>
+
+<h3>rtp
+<a name="rtp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Real-time
+Transport Protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax for an RTP URL is:
+rtp://<i>hostname</i>[:<i>port</i>][?<i>option</i>=<i>val</i>...]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>port</i>
+specifies the RTP port to use.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+URL options are supported: <b><br>
+ttl=</b><i>n</i></p>
+
+<p style="margin-left:14%;">Set the TTL (Time-To-Live)
+value (for multicast only).</p>
+
+<p style="margin-left:9%;"><b>rtcpport=</b><i>n</i></p>
+
+<p style="margin-left:14%;">Set the remote RTCP port to
+<i>n</i>.</p>
+
+
+<p style="margin-left:9%;"><b>localrtpport=</b><i>n</i></p>
+
+<p style="margin-left:14%;">Set the local RTP port to
+<i>n</i>.</p>
+
+
+<p style="margin-left:9%;"><b>localrtcpport=</b><i>n</i><b>&rsquo;</b></p>
+
+<p style="margin-left:14%;">Set the local RTCP port to
+<i>n</i>.</p>
+
+<p style="margin-left:9%;"><b>pkt_size=</b><i>n</i></p>
+
+<p style="margin-left:14%;">Set max packet size (in bytes)
+to <i>n</i>.</p>
+
+
+<p style="margin-left:9%;"><b>buffer_size=</b><i>size</i></p>
+
+<p style="margin-left:14%;">Set the maximum UDP socket
+buffer size in bytes.</p>
+
+<p style="margin-left:9%;"><b>connect=0|1</b></p>
+
+<p style="margin-left:14%;">Do a connect() on the UDP
+socket (if set to 1) or not (if set to 0).</p>
+
+
+<p style="margin-left:9%;"><b>sources=</b><i>ip</i><b>[,</b><i>ip</i><b>]</b></p>
+
+<p style="margin-left:14%;">List allowed source IP
+addresses.</p>
+
+
+<p style="margin-left:9%;"><b>block=</b><i>ip</i><b>[,</b><i>ip</i><b>]</b></p>
+
+<p style="margin-left:14%;">List disallowed (blocked)
+source IP addresses.</p>
+
+<p style="margin-left:9%;"><b>write_to_source=0|1</b></p>
+
+<p style="margin-left:14%;">Send packets to the source
+address of the latest received packet (if set to 1) or to a
+default remote address (if set to 0).</p>
+
+<p style="margin-left:9%;"><b>localport=</b><i>n</i></p>
+
+<p style="margin-left:14%;">Set the local RTP port to
+<i>n</i>.</p>
+
+
+<p style="margin-left:9%;"><b>localaddr=</b><i>addr</i></p>
+
+<p style="margin-left:14%;">Local IP address of a network
+interface used for sending packets or joining multicast
+groups.</p>
+
+<p style="margin-left:9%;"><b>timeout=</b><i>n</i></p>
+
+<p style="margin-left:14%;">Set timeout (in microseconds)
+of socket I/O operations to <i>n</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This is a
+deprecated option. Instead, <b>localrtpport</b> should be
+used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Important
+notes:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>If <b>rtcpport</b> is not set the RTCP port will be set
+to the RTP port value plus 1.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>If <b>localrtpport</b> (the local RTP port) is not set
+any available port will be used for the local RTP and RTCP
+ports.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>If <b>localrtcpport</b> (the local RTCP port) is not set
+it will be set to the local RTP port value plus 1.</p></td></tr>
+</table>
+
+<h3>rtsp
+<a name="rtsp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Real-Time
+Streaming Protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">RTSP is not
+technically a protocol handler in libavformat, it is a
+demuxer and muxer. The demuxer supports both normal RTSP
+(with data transferred over RTP; this is used by e.g. Apple
+and Microsoft) and Real-RTSP (with data transferred over
+RDT).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The muxer can be
+used to send a stream using RTSP ANNOUNCE to a server
+supporting it (currently Darwin Streaming Server and Mischa
+Spiegelmock&rsquo;s
+&lt;<b>https://github.com/revmischa/rtsp-server</b>&gt;).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax for a RTSP url is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">rtsp://&lt;hostname&gt;[:&lt;port&gt;]/&lt;path&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options can be
+set on the <b>ffmpeg</b>/<b>ffplay</b> command line, or set
+in code via &quot;AVOption&quot;s or in
+&quot;avformat_open_input&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Muxer</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are supported. <b><br>
+rtsp_transport</b></p>
+
+<p style="margin-left:14%;">Set RTSP transport
+protocols.</p>
+
+<p style="margin-left:14%; margin-top: 1em">It accepts the
+following values:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>udp</b></p></td>
+<td width="1%"></td>
+<td width="81%">
+
+
+<p>Use UDP as lower transport protocol.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>tcp</b></p></td>
+<td width="1%"></td>
+<td width="81%">
+
+
+<p>Use TCP (interleaving within the RTSP control channel)
+as lower transport protocol.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Default value
+is <b>0</b>.</p>
+
+<p style="margin-left:9%;"><b>rtsp_flags</b></p>
+
+<p style="margin-left:14%;">Set RTSP flags.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The following
+values are accepted: <b><br>
+latm</b></p>
+
+<p style="margin-left:19%;">Use MP4A-LATM packetization
+instead of MPEG4-GENERIC for AAC.</p>
+
+<p style="margin-left:14%;"><b>rfc2190</b></p>
+
+<p style="margin-left:19%;">Use RFC 2190 packetization
+instead of RFC 4629 for H.263.</p>
+
+<p style="margin-left:14%;"><b>skip_rtcp</b></p>
+
+<p style="margin-left:19%;">Don&rsquo;t send RTCP sender
+reports.</p>
+
+<p style="margin-left:14%;"><b>h264_mode0</b></p>
+
+<p style="margin-left:19%;">Use mode 0 for H.264 in
+RTP.</p>
+
+<p style="margin-left:14%;"><b>send_bye</b></p>
+
+<p style="margin-left:19%;">Send RTCP BYE packets when
+finishing.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default value
+is <b>0</b>.</p>
+
+<p style="margin-left:9%;"><b>min_port</b></p>
+
+<p style="margin-left:14%;">Set minimum local UDP port.
+Default value is 5000.</p>
+
+<p style="margin-left:9%;"><b>max_port</b></p>
+
+<p style="margin-left:14%;">Set maximum local UDP port.
+Default value is 65000.</p>
+
+<p style="margin-left:9%;"><b>buffer_size</b></p>
+
+<p style="margin-left:14%;">Set the maximum socket buffer
+size in bytes.</p>
+
+<p style="margin-left:9%;"><b>pkt_size</b></p>
+
+<p style="margin-left:14%;">Set max send packet size (in
+bytes). Default value is 1472.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Demuxer</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are supported. <b><br>
+initial_pause</b></p>
+
+<p style="margin-left:14%;">Do not start playing the stream
+immediately if set to 1. Default value is 0.</p>
+
+<p style="margin-left:9%;"><b>rtsp_transport</b></p>
+
+<p style="margin-left:14%;">Set RTSP transport
+protocols.</p>
+
+<p style="margin-left:14%; margin-top: 1em">It accepts the
+following values:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>udp</b></p></td>
+<td width="1%"></td>
+<td width="81%">
+
+
+<p>Use UDP as lower transport protocol.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>tcp</b></p></td>
+<td width="1%"></td>
+<td width="81%">
+
+
+<p>Use TCP (interleaving within the RTSP control channel)
+as lower transport protocol.</p></td></tr>
+</table>
+
+<p style="margin-left:14%;"><b>udp_multicast</b></p>
+
+<p style="margin-left:19%;">Use UDP multicast as lower
+transport protocol.</p>
+
+<p style="margin-left:14%;"><b>http</b></p>
+
+<p style="margin-left:19%;">Use HTTP tunneling as lower
+transport protocol, which is useful for passing proxies.</p>
+
+<p style="margin-left:14%;"><b>https</b></p>
+
+<p style="margin-left:19%;">Use HTTPs tunneling as lower
+transport protocol, which is useful for passing proxies and
+widely used for security consideration.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Multiple lower
+transport protocols may be specified, in that case they are
+tried one at a time (if the setup of one fails, the next one
+is tried). For the muxer, only the <b>tcp</b> and <b>udp</b>
+options are supported.</p>
+
+<p style="margin-left:9%;"><b>rtsp_flags</b></p>
+
+<p style="margin-left:14%;">Set RTSP flags.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The following
+values are accepted: <b><br>
+filter_src</b></p>
+
+<p style="margin-left:19%;">Accept packets only from
+negotiated peer address and port.</p>
+
+<p style="margin-left:14%;"><b>listen</b></p>
+
+<p style="margin-left:19%;">Act as a server, listening for
+an incoming connection.</p>
+
+<p style="margin-left:14%;"><b>prefer_tcp</b></p>
+
+<p style="margin-left:19%;">Try TCP for RTP transport
+first, if TCP is available as RTSP RTP transport.</p>
+
+<p style="margin-left:14%;"><b>satip_raw</b></p>
+
+<p style="margin-left:19%;">Export raw MPEG-TS stream
+instead of demuxing. The flag will simply write out the raw
+stream, with the original PAT/PMT/PIDs intact.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default value
+is <b>none</b>.</p>
+
+<p style="margin-left:9%;"><b>allowed_media_types</b></p>
+
+<p style="margin-left:14%;">Set media types to accept from
+the server.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The following
+flags are accepted: <b><br>
+video <br>
+audio <br>
+data <br>
+subtitle</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">By default it
+accepts all media types.</p>
+
+<p style="margin-left:9%;"><b>min_port</b></p>
+
+<p style="margin-left:14%;">Set minimum local UDP port.
+Default value is 5000.</p>
+
+<p style="margin-left:9%;"><b>max_port</b></p>
+
+<p style="margin-left:14%;">Set maximum local UDP port.
+Default value is 65000.</p>
+
+<p style="margin-left:9%;"><b>listen_timeout</b></p>
+
+<p style="margin-left:14%;">Set maximum timeout (in
+seconds) to establish an initial connection. Setting
+<b>listen_timeout</b> &gt; 0 sets <b>rtsp_flags</b> to
+<b>listen</b>. Default is -1 which means an infinite timeout
+when <b>listen</b> mode is set.</p>
+
+<p style="margin-left:9%;"><b>reorder_queue_size</b></p>
+
+<p style="margin-left:14%;">Set number of packets to buffer
+for handling of reordered packets.</p>
+
+<p style="margin-left:9%;"><b>timeout</b></p>
+
+<p style="margin-left:14%;">Set socket TCP I/O timeout in
+microseconds.</p>
+
+<p style="margin-left:9%;"><b>user_agent</b></p>
+
+<p style="margin-left:14%;">Override User-Agent header. If
+not specified, it defaults to the libavformat identifier
+string.</p>
+
+<p style="margin-left:9%;"><b>buffer_size</b></p>
+
+<p style="margin-left:14%;">Set the maximum socket buffer
+size in bytes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When receiving
+data over UDP, the demuxer tries to reorder received packets
+(since they may arrive out of order, or packets may get lost
+totally). This can be disabled by setting the maximum
+demuxing delay to zero (via the &quot;max_delay&quot; field
+of AVFormatContext).</p>
+
+<p style="margin-left:9%; margin-top: 1em">When watching
+multi-bitrate Real-RTSP streams with <b>ffplay</b>, the
+streams to display can be chosen with &quot;-vst&quot;
+<i>n</i> and &quot;-ast&quot; <i>n</i> for video and audio
+respectively, and can be switched on the fly by pressing
+&quot;v&quot; and &quot;a&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Examples</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+examples all make use of the <b>ffplay</b> and <b>ffmpeg</b>
+tools.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Watch a stream over UDP, with a max reordering delay of
+0.5 seconds:</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">ffplay
+-max_delay 500000 -rtsp_transport udp
+rtsp://server/video.mp4</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="44%">
+
+
+<p style="margin-top: 1em">Watch a stream tunneled over
+HTTP:</p> </td>
+<td width="42%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">ffplay
+-rtsp_transport http rtsp://server/video.mp4</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Send a stream in realtime to a
+RTSP server, for others to watch:</p></td>
+<td width="4%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg -re -i
+&lt;input&gt; -f rtsp -muxdelay 0.1
+rtsp://server/live.sdp</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em">Receive a stream in
+realtime:</p> </td>
+<td width="49%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg
+-rtsp_flags listen -i rtsp://ownaddress/live.sdp
+&lt;output&gt;</p>
+
+<h3>sap
+<a name="sap"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Session
+Announcement Protocol (RFC 2974). This is not technically a
+protocol handler in libavformat, it is a muxer and demuxer.
+It is used for signalling of RTP streams, by announcing the
+SDP for the streams regularly on a separate port.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Muxer</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The syntax for a
+SAP url given to the muxer is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">sap://&lt;destination&gt;[:&lt;port&gt;][?&lt;options&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The RTP packets
+are sent to <i>destination</i> on port <i>port</i>, or to
+port 5004 if no port is specified. <i>options</i> is a
+&quot;&amp;&quot;-separated list. The following options are
+supported: <b><br>
+announce_addr=</b><i>address</i></p>
+
+<p style="margin-left:14%;">Specify the destination IP
+address for sending the announcements to. If omitted, the
+announcements are sent to the commonly used SAP announcement
+multicast address 224.2.127.254 (sap.mcast.net), or
+ff0e::2:7ffe if <i>destination</i> is an IPv6 address.</p>
+
+
+<p style="margin-left:9%;"><b>announce_port=</b><i>port</i></p>
+
+<p style="margin-left:14%;">Specify the port to send the
+announcements on, defaults to 9875 if not specified.</p>
+
+<p style="margin-left:9%;"><b>ttl=</b><i>ttl</i></p>
+
+<p style="margin-left:14%;">Specify the time to live value
+for the announcements and RTP packets, defaults to 255.</p>
+
+<p style="margin-left:9%;"><b>same_port=</b><i>0|1</i></p>
+
+<p style="margin-left:14%;">If set to 1, send all RTP
+streams on the same port pair. If zero (the default), all
+streams are sent on unique ports, with each stream on a port
+2 numbers higher than the previous. VLC/Live555 requires
+this to be set to 1, to be able to receive the stream. The
+RTP stack in libavformat for receiving requires all streams
+to be sent on unique ports.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example command
+lines follow.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To broadcast a
+stream on the local subnet, for watching in VLC:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -re -i
+&lt;input&gt; -f sap sap://224.0.0.255?same_port=1</p>
+
+<p style="margin-left:9%; margin-top: 1em">Similarly, for
+watching in <b>ffplay</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -re -i
+&lt;input&gt; -f sap sap://224.0.0.255</p>
+
+<p style="margin-left:9%; margin-top: 1em">And for watching
+in <b>ffplay</b>, over IPv6:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -re -i
+&lt;input&gt; -f sap sap://[ff0e::1:2:3:4]</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Demuxer</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The syntax for a
+SAP url given to the demuxer is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">sap://[&lt;address&gt;][:&lt;port&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>address</i>
+is the multicast address to listen for announcements on, if
+omitted, the default 224.2.127.254 (sap.mcast.net) is used.
+<i>port</i> is the port that is listened on, 9875 if
+omitted.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The demuxers
+listens for announcements on the given address and port.
+Once an announcement is received, it tries to receive that
+particular stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example command
+lines follow.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To play back the
+first stream announced on the normal SAP multicast
+address:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+sap://</p>
+
+<p style="margin-left:9%; margin-top: 1em">To play back the
+first stream announced on one the default IPv6 SAP multicast
+address:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+sap://[ff0e::2:7ffe]</p>
+
+<h3>sctp
+<a name="sctp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Stream Control
+Transmission Protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted URL
+syntax is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">sctp://&lt;host&gt;:&lt;port&gt;[?&lt;options&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The protocol
+accepts the following options: <b><br>
+listen</b></p>
+
+<p style="margin-left:14%;">If set to any value, listen for
+an incoming connection. Outgoing connection is done by
+default.</p>
+
+<p style="margin-left:9%;"><b>max_streams</b></p>
+
+<p style="margin-left:14%;">Set the maximum number of
+streams. By default no limit is set.</p>
+
+<h3>srt
+<a name="srt"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Haivision Secure
+Reliable Transport Protocol via libsrt.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The supported
+syntax for a SRT URL is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">srt://&lt;hostname&gt;:&lt;port&gt;[?&lt;options&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>options</i>
+contains a list of &amp;-separated options of the form
+<i>key</i>=<i>val</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">or</p>
+
+<p style="margin-left:9%; margin-top: 1em">&lt;options&gt;
+srt://&lt;hostname&gt;:&lt;port&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>options</i>
+contains a list of &rsquo;-<i>key val</i>&rsquo;
+options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This protocol
+accepts the following options. <b><br>
+connect_timeout=</b><i>milliseconds</i></p>
+
+<p style="margin-left:14%;">Connection timeout; SRT cannot
+connect for RTT &gt; 1500 msec (2 handshake exchanges) with
+the default connect timeout of 3 seconds. This option
+applies to the caller and rendezvous connection modes. The
+connect timeout is 10 times the value set for the rendezvous
+mode (which can be used as a workaround for this connection
+problem with earlier versions).</p>
+
+<p style="margin-left:9%;"><b>ffs=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Flight Flag Size (Window Size),
+in bytes. FFS is actually an internal parameter and you
+should set it to not less than <b>recv_buffer_size</b> and
+<b>mss</b>. The default value is relatively large, therefore
+unless you set a very large receiver buffer, you do not need
+to change this option. Default value is 25600.</p>
+
+
+<p style="margin-left:9%;"><b>inputbw=</b><i>bytes/seconds</i></p>
+
+<p style="margin-left:14%;">Sender nominal input rate, in
+bytes per seconds. Used along with <b>oheadbw</b>, when
+<b>maxbw</b> is set to relative (0), to calculate maximum
+sending rate when recovery packets are sent along with the
+main media stream: <b>inputbw</b> * (100 + <b>oheadbw</b>) /
+100 if <b>inputbw</b> is not set while <b>maxbw</b> is set
+to relative (0), the actual input rate is evaluated inside
+the library. Default value is 0.</p>
+
+<p style="margin-left:9%;"><b>iptos=</b><i>tos</i></p>
+
+<p style="margin-left:14%;">IP Type of Service. Applies to
+sender only. Default value is 0xB8.</p>
+
+<p style="margin-left:9%;"><b>ipttl=</b><i>ttl</i></p>
+
+<p style="margin-left:14%;">IP Time To Live. Applies to
+sender only. Default value is 64.</p>
+
+
+<p style="margin-left:9%;"><b>latency=</b><i>microseconds</i></p>
+
+<p style="margin-left:14%;">Timestamp-based Packet Delivery
+Delay. Used to absorb bursts of missed packet
+retransmissions. This flag sets both <b>rcvlatency</b> and
+<b>peerlatency</b> to the same value. Note that prior to
+version 1.3.0 this is the only flag to set the latency,
+however this is effectively equivalent to setting
+<b>peerlatency</b>, when side is sender and
+<b>rcvlatency</b> when side is receiver, and the
+bidirectional stream sending is not supported.</p>
+
+
+<p style="margin-left:9%;"><b>listen_timeout=</b><i>microseconds</i></p>
+
+<p style="margin-left:14%;">Set socket listen timeout.</p>
+
+
+<p style="margin-left:9%;"><b>maxbw=</b><i>bytes/seconds</i></p>
+
+<p style="margin-left:14%;">Maximum sending bandwidth, in
+bytes per seconds. -1 infinite (CSRTCC limit is 30mbps) 0
+relative to input rate (see <b>inputbw</b>) &gt;0 absolute
+limit value Default value is 0 (relative)</p>
+
+
+<p style="margin-left:9%;"><b>mode=</b><i>caller|listener|rendezvous</i></p>
+
+<p style="margin-left:14%;">Connection mode. <b>caller</b>
+opens client connection. <b>listener</b> starts server to
+listen for incoming connections. <b>rendezvous</b> use
+Rendez-Vous connection mode. Default value is caller.</p>
+
+<p style="margin-left:9%;"><b>mss=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Maximum Segment Size, in bytes.
+Used for buffer allocation and rate calculation using a
+packet counter assuming fully filled packets. The smallest
+MSS between the peers is used. This is 1500 by default in
+the overall internet. This is the maximum size of the UDP
+packet and can be only decreased, unless you have some
+unusual dedicated network settings. Default value is
+1500.</p>
+
+<p style="margin-left:9%;"><b>nakreport=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">If set to 1, Receiver will send
+&lsquo;UMSG_LOSSREPORT&lsquo; messages periodically until a
+lost packet is retransmitted or intentionally dropped.
+Default value is 1.</p>
+
+
+<p style="margin-left:9%;"><b>oheadbw=</b><i>percents</i></p>
+
+<p style="margin-left:14%;">Recovery bandwidth overhead
+above input rate, in percents. See <b>inputbw</b>. Default
+value is 25%.</p>
+
+
+<p style="margin-left:9%;"><b>passphrase=</b><i>string</i></p>
+
+<p style="margin-left:14%;">HaiCrypt Encryption/Decryption
+Passphrase string, length from 10 to 79 characters. The
+passphrase is the shared secret between the sender and the
+receiver. It is used to generate the Key Encrypting Key
+using PBKDF2 (Password-Based Key Derivation Function). It is
+used only if <b>pbkeylen</b> is non-zero. It is used on the
+receiver only if the received data is encrypted. The
+configured passphrase cannot be recovered (write-only).</p>
+
+
+<p style="margin-left:9%;"><b>enforced_encryption=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">If true, both connection
+parties must have the same password set (including empty,
+that is, with no encryption). If the password doesn&rsquo;t
+match or only one side is unencrypted, the connection is
+rejected. Default is true.</p>
+
+
+<p style="margin-left:9%;"><b>kmrefreshrate=</b><i>packets</i></p>
+
+<p style="margin-left:14%;">The number of packets to be
+transmitted after which the encryption key is switched to a
+new key. Default is -1. -1 means auto (0x1000000 in srt
+library). The range for this option is integers in the 0 -
+&quot;INT_MAX&quot;.</p>
+
+
+<p style="margin-left:9%;"><b>kmpreannounce=</b><i>packets</i></p>
+
+<p style="margin-left:14%;">The interval between when a new
+encryption key is sent and when switchover occurs. This
+value also applies to the subsequent interval between when
+switchover occurs and when the old encryption key is
+decommissioned. Default is -1. -1 means auto (0x1000 in srt
+library). The range for this option is integers in the 0 -
+&quot;INT_MAX&quot;.</p>
+
+
+<p style="margin-left:9%;"><b>snddropdelay=</b><i>microseconds</i></p>
+
+<p style="margin-left:14%;">The sender&rsquo;s extra delay
+before dropping packets. This delay is added to the default
+drop delay time interval value.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Special value
+-1: Do not drop packets on the sender at all.</p>
+
+
+<p style="margin-left:9%;"><b>payload_size=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Sets the maximum declared size
+of a packet transferred during the single call to the
+sending function in Live mode. Use 0 if this value
+isn&rsquo;t used (which is default in file mode). Default is
+-1 (automatic), which typically means MPEG-TS; if you are
+going to use SRT to send any different kind of payload, such
+as, for example, wrapping a live stream in very small
+frames, then you can use a bigger maximum frame size, though
+not greater than 1456 bytes.</p>
+
+
+<p style="margin-left:9%;"><b>pkt_size=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Alias for
+<b>payload_size</b>.</p>
+
+
+<p style="margin-left:9%;"><b>peerlatency=</b><i>microseconds</i></p>
+
+<p style="margin-left:14%;">The latency value (as described
+in <b>rcvlatency</b>) that is set by the sender side as a
+minimum value for the receiver.</p>
+
+
+<p style="margin-left:9%;"><b>pbkeylen=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Sender encryption key length,
+in bytes. Only can be set to 0, 16, 24 and 32. Enable sender
+encryption if not 0. Not required on receiver (set to 0),
+key size obtained from sender in HaiCrypt handshake. Default
+value is 0.</p>
+
+
+<p style="margin-left:9%;"><b>rcvlatency=</b><i>microseconds</i></p>
+
+<p style="margin-left:14%;">The time that should elapse
+since the moment when the packet was sent and the moment
+when it&rsquo;s delivered to the receiver application in the
+receiving function. This time should be a buffer time large
+enough to cover the time spent for sending, unexpectedly
+extended RTT time, and the time needed to retransmit the
+lost UDP packet. The effective latency value will be the
+maximum of this options&rsquo; value and the value of
+<b>peerlatency</b> set by the peer side. Before version
+1.3.0 this option is only available as <b>latency</b>.</p>
+
+
+<p style="margin-left:9%;"><b>recv_buffer_size=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Set UDP receive buffer size,
+expressed in bytes.</p>
+
+
+<p style="margin-left:9%;"><b>send_buffer_size=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Set UDP send buffer size,
+expressed in bytes.</p>
+
+
+<p style="margin-left:9%;"><b>timeout=</b><i>microseconds</i></p>
+
+<p style="margin-left:14%;">Set raise error timeouts for
+read, write and connect operations. Note that the SRT
+library has internal timeouts which can be controlled
+separately, the value set here is only a cap on those.</p>
+
+<p style="margin-left:9%;"><b>tlpktdrop=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">Too-late Packet Drop. When
+enabled on receiver, it skips missing packets that have not
+been delivered in time and delivers the following packets to
+the application when their time-to-play has come. It also
+sends a fake ACK to the sender. When enabled on sender and
+enabled on the receiving peer, the sender drops the older
+packets that have no chance of being delivered in time. It
+was automatically enabled in the sender if the receiver
+supports it.</p>
+
+<p style="margin-left:9%;"><b>sndbuf=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Set send buffer size, expressed
+in bytes.</p>
+
+<p style="margin-left:9%;"><b>rcvbuf=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Set receive buffer size,
+expressed in bytes.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Receive buffer
+must not be greater than <b>ffs</b>.</p>
+
+
+<p style="margin-left:9%;"><b>lossmaxttl=</b><i>packets</i></p>
+
+<p style="margin-left:14%;">The value up to which the
+Reorder Tolerance may grow. When Reorder Tolerance is &gt;
+0, then packet loss report is delayed until that number of
+packets come in. Reorder Tolerance increases every time a
+&quot;belated&quot; packet has come, but it wasn&rsquo;t due
+to retransmission (that is, when UDP packets tend to come
+out of order), with the difference between the latest
+sequence and this packet&rsquo;s sequence, and not more than
+the value of this option. By default it&rsquo;s 0, which
+means that this mechanism is turned off, and the loss report
+is always sent immediately upon experiencing a
+&quot;gap&quot; in sequences.</p>
+
+<p style="margin-left:9%;"><b>minversion</b></p>
+
+<p style="margin-left:14%;">The minimum SRT version that is
+required from the peer. A connection to a peer that does not
+satisfy the minimum version requirement will be
+rejected.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The version
+format in hex is 0xXXYYZZ for x.y.z in human readable
+form.</p>
+
+
+<p style="margin-left:9%;"><b>streamid=</b><i>string</i></p>
+
+<p style="margin-left:14%;">A string limited to 512
+characters that can be set on the socket prior to
+connecting. This stream ID will be able to be retrieved by
+the listener side from the socket that is returned from
+srt_accept and was connected by a socket with that set
+stream ID. SRT does not enforce any special interpretation
+of the contents of this string. This option doesn&rsquo;t
+make sense in Rendezvous connection; the result might be
+that simply one side will override the value from the other
+side and it&rsquo;s the matter of luck which one would
+win</p>
+
+
+<p style="margin-left:9%;"><b>srt_streamid=</b><i>string</i></p>
+
+<p style="margin-left:14%;">Alias for <b>streamid</b> to
+avoid conflict with ffmpeg command line option.</p>
+
+
+<p style="margin-left:9%;"><b>smoother=</b><i>live|file</i></p>
+
+<p style="margin-left:14%;">The type of Smoother used for
+the transmission for that socket, which is responsible for
+the transmission and congestion control. The Smoother type
+must be exactly the same on both connecting parties,
+otherwise the connection is rejected.</p>
+
+
+<p style="margin-left:9%;"><b>messageapi=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">When set, this socket uses the
+Message API, otherwise it uses Buffer API. Note that in live
+mode (see <b>transtype</b>) there&rsquo;s only message API
+available. In File mode you can chose to use one of two
+modes:</p>
+
+<p style="margin-left:14%; margin-top: 1em">Stream API
+(default, when this option is false). In this mode you may
+send as many data as you wish with one sending instruction,
+or even use dedicated functions that read directly from a
+file. The internal facility will take care of any speed and
+congestion control. When receiving, you can also receive as
+many data as desired, the data not extracted will be waiting
+for the next call. There is no boundary between data
+portions in the Stream mode.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Message API. In
+this mode your single sending instruction passes exactly one
+piece of data that has boundaries (a message). Contrary to
+Live mode, this message may span across multiple UDP packets
+and the only size limitation is that it shall fit as a whole
+in the sending buffer. The receiver shall use as large
+buffer as necessary to receive the message, otherwise the
+message will not be given up. When the message is not
+complete (not all packets received or there was a packet
+loss) it will not be given up.</p>
+
+
+<p style="margin-left:9%;"><b>transtype=</b><i>live|file</i></p>
+
+<p style="margin-left:14%;">Sets the transmission type for
+the socket, in particular, setting this option sets multiple
+other parameters to their default values as required for a
+particular transmission type.</p>
+
+<p style="margin-left:14%; margin-top: 1em">live: Set
+options as for live transmission. In this mode, you should
+send by one sending instruction only so many data that fit
+in one UDP packet, and limited to the value defined first in
+<b>payload_size</b> (1316 is default in this mode). There is
+no speed control in this mode, only the bandwidth control,
+if configured, in order to not exceed the bandwidth with the
+overhead transmission (retransmitted and control
+packets).</p>
+
+<p style="margin-left:14%; margin-top: 1em">file: Set
+options as for non-live transmission. See <b>messageapi</b>
+for further explanations</p>
+
+
+<p style="margin-left:9%;"><b>linger=</b><i>seconds</i></p>
+
+<p style="margin-left:14%;">The number of seconds that the
+socket waits for unsent data when closing. Default is -1. -1
+means auto (off with 0 seconds in live mode, on with 180
+seconds in file mode). The range for this option is integers
+in the 0 - &quot;INT_MAX&quot;.</p>
+
+<p style="margin-left:9%;"><b>tsbpd=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">When true, use Timestamp-based
+Packet Delivery mode. The default behavior depends on the
+transmission type: enabled in live mode, disabled in file
+mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For more
+information see:
+&lt;<b>https://github.com/Haivision/srt</b>&gt;.</p>
+
+<h3>srtp
+<a name="srtp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Secure Real-time
+Transport Protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The accepted
+options are: <b><br>
+srtp_in_suite <br>
+srtp_out_suite</b></p>
+
+<p style="margin-left:14%;">Select input and output
+encoding suites.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Supported
+values: <b><br>
+AES_CM_128_HMAC_SHA1_80 <br>
+SRTP_AES128_CM_HMAC_SHA1_80 <br>
+AES_CM_128_HMAC_SHA1_32 <br>
+SRTP_AES128_CM_HMAC_SHA1_32</b></p>
+
+<p style="margin-left:9%;"><b>srtp_in_params <br>
+srtp_out_params</b></p>
+
+<p style="margin-left:14%;">Set input and output encoding
+parameters, which are expressed by a base64-encoded
+representation of a binary block. The first 16 bytes of this
+binary block are used as master key, the following 14 bytes
+are used as master salt.</p>
+
+<h3>subfile
+<a name="subfile"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtually
+extract a segment of a file or another stream. The
+underlying stream must be seekable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Accepted
+options: <b><br>
+start</b></p>
+
+<p style="margin-left:14%;">Start offset of the extracted
+segment, in bytes.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>end</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>End offset of the extracted segment, in bytes. If set to
+0, extract till end of file.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Examples:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Extract a
+chapter from a DVD VOB file (start and end sectors obtained
+externally and multiplied by 2048):</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">subfile,,start,153391104,end,268142592,,:/media/dvd/VIDEO_TS/VTS_08_1.VOB</p>
+
+<p style="margin-left:9%; margin-top: 1em">Play an AVI file
+directly from a TAR archive:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">subfile,,start,183241728,end,366490624,,:archive.tar</p>
+
+<p style="margin-left:9%; margin-top: 1em">Play a MPEG-TS
+file from start offset till end:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">subfile,,start,32815239,end,0,,:video.ts</p>
+
+<h3>tee
+<a name="tee"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Writes the
+output to multiple protocols. The individual outputs are
+separated by |</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">tee:file://path/to/local/this.avi|file://path/to/local/that.avi</p>
+
+<h3>tcp
+<a name="tcp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Transmission
+Control Protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax for a TCP url is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">tcp://&lt;hostname&gt;:&lt;port&gt;[?&lt;options&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>options</i>
+contains a list of &amp;-separated options of the form
+<i>key</i>=<i>val</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The list of
+supported options follows. <b><br>
+listen=</b><i>2|1|0</i></p>
+
+<p style="margin-left:14%;">Listen for an incoming
+connection. 0 disables listen, 1 enables listen in single
+client mode, 2 enables listen in multi-client mode. Default
+value is 0.</p>
+
+
+<p style="margin-left:9%;"><b>local_addr=</b><i>addr</i></p>
+
+<p style="margin-left:14%;">Local IP address of a network
+interface used for tcp socket connect.</p>
+
+
+<p style="margin-left:9%;"><b>local_port=</b><i>port</i></p>
+
+<p style="margin-left:14%;">Local port used for tcp socket
+connect.</p>
+
+
+<p style="margin-left:9%;"><b>timeout=</b><i>microseconds</i></p>
+
+<p style="margin-left:14%;">Set raise error timeout,
+expressed in microseconds.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option is
+only relevant in read mode: if no data arrived in more than
+this time interval, raise error.</p>
+
+
+<p style="margin-left:9%;"><b>listen_timeout=</b><i>milliseconds</i></p>
+
+<p style="margin-left:14%;">Set listen timeout, expressed
+in milliseconds.</p>
+
+
+<p style="margin-left:9%;"><b>recv_buffer_size=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Set receive buffer size,
+expressed bytes.</p>
+
+
+<p style="margin-left:9%;"><b>send_buffer_size=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Set send buffer size, expressed
+bytes.</p>
+
+
+<p style="margin-left:9%;"><b>tcp_nodelay=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">Set TCP_NODELAY to disable
+Nagle&rsquo;s algorithm. Default value is 0.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>Remark:
+Writing to the socket is currently not optimized to minimize
+system calls and reduces the efficiency / effect of
+TCP_NODELAY.</i></p>
+
+<p style="margin-left:9%;"><b>tcp_mss=</b><i>bytes</i></p>
+
+<p style="margin-left:14%;">Set maximum segment size for
+outgoing TCP packets, expressed in bytes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+example shows how to setup a listening TCP connection with
+<b>ffmpeg</b>, which is then accessed with
+<b>ffplay</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+&lt;input&gt; -f &lt;format&gt;
+tcp://&lt;hostname&gt;:&lt;port&gt;?listen <br>
+ffplay tcp://&lt;hostname&gt;:&lt;port&gt;</p>
+
+<h3>tls
+<a name="tls"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Transport Layer
+Security (TLS) / Secure Sockets Layer (SSL)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax for a TLS/SSL url is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">tls://&lt;hostname&gt;:&lt;port&gt;[?&lt;options&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+parameters can be set via command line options (or in code
+via &quot;AVOption&quot;s): <b><br>
+ca_file, cafile=</b><i>filename</i></p>
+
+<p style="margin-left:14%;">A file containing certificate
+authority (CA) root certificates to treat as trusted. If the
+linked TLS library contains a default this might not need to
+be specified for verification to work, but not all libraries
+and setups have defaults built in. The file must be in
+OpenSSL PEM format.</p>
+
+
+<p style="margin-left:9%;"><b>tls_verify=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">If enabled, try to verify the
+peer that we are communicating with. Note, if using OpenSSL,
+this currently only makes sure that the peer certificate is
+signed by one of the root certificates in the CA database,
+but it does not validate that the certificate actually
+matches the host name we are trying to connect to. (With
+other backends, the host name is validated as well.)</p>
+
+<p style="margin-left:14%; margin-top: 1em">This is
+disabled by default since it requires a CA database to be
+provided by the caller in many cases.</p>
+
+<p style="margin-left:9%;"><b>cert_file,
+cert=</b><i>filename</i></p>
+
+<p style="margin-left:14%;">A file containing a certificate
+to use in the handshake with the peer. (When operating as
+server, in listen mode, this is more often required by the
+peer, while client certificates only are mandated in certain
+setups.)</p>
+
+<p style="margin-left:9%;"><b>key_file,
+key=</b><i>filename</i></p>
+
+<p style="margin-left:14%;">A file containing the private
+key for the certificate.</p>
+
+<p style="margin-left:9%;"><b>listen=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">If enabled, listen for
+connections on the provided port, and assume the server role
+in the handshake instead of the client role.</p>
+
+<p style="margin-left:9%;"><b>http_proxy</b></p>
+
+<p style="margin-left:14%;">The HTTP proxy to tunnel
+through, e.g. &quot;http://example.com:1234&quot;. The proxy
+must support the CONNECT method.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example command
+lines:</p>
+
+<p style="margin-left:9%; margin-top: 1em">To create a
+TLS/SSL server that serves an input stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+&lt;input&gt; -f &lt;format&gt;
+tls://&lt;hostname&gt;:&lt;port&gt;?listen&amp;cert=&lt;server.crt&gt;&amp;key=&lt;server.key&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">To play back a
+stream from the TLS/SSL server using <b>ffplay</b>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+tls://&lt;hostname&gt;:&lt;port&gt;</p>
+
+<h3>udp
+<a name="udp"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">User Datagram
+Protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax for an UDP URL is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">udp://&lt;hostname&gt;:&lt;port&gt;[?&lt;options&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>options</i>
+contains a list of &amp;-separated options of the form
+<i>key</i>=<i>val</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In case
+threading is enabled on the system, a circular buffer is
+used to store the incoming data, which allows one to reduce
+loss of data due to UDP socket buffer overruns. The
+<i>fifo_size</i> and <i>overrun_nonfatal</i> options are
+related to this buffer.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The list of
+supported options follows. <b><br>
+buffer_size=</b><i>size</i></p>
+
+<p style="margin-left:14%;">Set the UDP maximum socket
+buffer size in bytes. This is used to set either the receive
+or send buffer size, depending on what the socket is used
+for. Default is 32 KB for output, 384 KB for input. See also
+<i>fifo_size</i>.</p>
+
+
+<p style="margin-left:9%;"><b>bitrate=</b><i>bitrate</i></p>
+
+<p style="margin-left:14%;">If set to nonzero, the output
+will have the specified constant bitrate if the input has
+enough packets to sustain it.</p>
+
+
+<p style="margin-left:9%;"><b>burst_bits=</b><i>bits</i></p>
+
+<p style="margin-left:14%;">When using <i>bitrate</i> this
+specifies the maximum number of bits in packet bursts.</p>
+
+
+<p style="margin-left:9%;"><b>localport=</b><i>port</i></p>
+
+<p style="margin-left:14%;">Override the local UDP port to
+bind with.</p>
+
+
+<p style="margin-left:9%;"><b>localaddr=</b><i>addr</i></p>
+
+<p style="margin-left:14%;">Local IP address of a network
+interface used for sending packets or joining multicast
+groups.</p>
+
+<p style="margin-left:9%;"><b>pkt_size=</b><i>size</i></p>
+
+<p style="margin-left:14%;">Set the size in bytes of UDP
+packets.</p>
+
+<p style="margin-left:9%;"><b>reuse=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">Explicitly allow or disallow
+reusing UDP sockets.</p>
+
+<p style="margin-left:9%;"><b>ttl=</b><i>ttl</i></p>
+
+<p style="margin-left:14%;">Set the time to live value (for
+multicast only).</p>
+
+<p style="margin-left:9%;"><b>connect=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">Initialize the UDP socket with
+connect(). In this case, the destination address can&rsquo;t
+be changed with ff_udp_set_remote_url later. If the
+destination address isn&rsquo;t known at the start, this
+option can be specified in ff_udp_set_remote_url, too. This
+allows finding out the source address for the packets with
+getsockname, and makes writes return with
+AVERROR(ECONNREFUSED) if &quot;destination unreachable&quot;
+is received. For receiving, this gives the benefit of only
+receiving packets from the specified peer address/port.</p>
+
+
+<p style="margin-left:9%;"><b>sources=</b><i>address</i><b>[,</b><i>address</i><b>]</b></p>
+
+<p style="margin-left:14%;">Only receive packets sent from
+the specified addresses. In case of multicast, also
+subscribe to multicast traffic coming from these addresses
+only.</p>
+
+
+<p style="margin-left:9%;"><b>block=</b><i>address</i><b>[,</b><i>address</i><b>]</b></p>
+
+<p style="margin-left:14%;">Ignore packets sent from the
+specified addresses. In case of multicast, also exclude the
+source addresses in the multicast subscription.</p>
+
+
+<p style="margin-left:9%;"><b>fifo_size=</b><i>units</i></p>
+
+<p style="margin-left:14%;">Set the UDP receiving circular
+buffer size, expressed as a number of packets with size of
+188 bytes. If not specified defaults to 7*4096.</p>
+
+
+<p style="margin-left:9%;"><b>overrun_nonfatal=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">Survive in case of UDP
+receiving circular buffer overrun. Default value is 0.</p>
+
+
+<p style="margin-left:9%;"><b>timeout=</b><i>microseconds</i></p>
+
+<p style="margin-left:14%;">Set raise error timeout,
+expressed in microseconds.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option is
+only relevant in read mode: if no data arrived in more than
+this time interval, raise error.</p>
+
+<p style="margin-left:9%;"><b>broadcast=</b><i>1|0</i></p>
+
+<p style="margin-left:14%;">Explicitly allow or disallow
+UDP broadcasting.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+broadcasting may not work properly on networks having a
+broadcast storm protection.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Examples</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="65%">
+
+
+<p>Use <b>ffmpeg</b> to stream over UDP to a remote
+endpoint:</p> </td>
+<td width="21%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg -i
+&lt;input&gt; -f &lt;format&gt;
+udp://&lt;hostname&gt;:&lt;port&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Use <b>ffmpeg</b> to stream in
+mpegts format over UDP using 188 sized UDP packets, using a
+large input buffer:</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg -i
+&lt;input&gt; -f mpegts
+udp://&lt;hostname&gt;:&lt;port&gt;?pkt_size=188&amp;buffer_size=65535</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em">Use <b>ffmpeg</b> to receive
+over UDP from a remote endpoint:</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg -i
+udp://[&lt;multicast-address&gt;]:&lt;port&gt; ...</p>
+
+<h3>unix
+<a name="unix"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unix local
+socket</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax for a Unix socket URL is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">unix://&lt;filepath&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+parameters can be set via command line options (or in code
+via &quot;AVOption&quot;s): <b><br>
+timeout</b></p>
+
+<p style="margin-left:14%;">Timeout in ms.</p>
+
+<p style="margin-left:9%;"><b>listen</b></p>
+
+<p style="margin-left:14%;">Create the Unix socket in
+listening mode.</p>
+
+<h3>zmq
+<a name="zmq"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">ZeroMQ
+asynchronous messaging using the libzmq library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library
+supports unicast streaming to multiple clients without
+relying on an external server.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The required
+syntax for streaming or connecting to a stream is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">zmq:tcp://ip-address:port</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example: Create
+a localhost stream on port 5555:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -re -i
+input -f mpegts zmq:tcp://127.0.0.1:5555</p>
+
+<p style="margin-left:9%; margin-top: 1em">Multiple clients
+may connect to the stream using:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+zmq:tcp://127.0.0.1:5555</p>
+
+<p style="margin-left:9%; margin-top: 1em">Streaming to
+multiple clients is implemented using a ZeroMQ Pub-Sub
+pattern. The server side binds to a port and publishes data.
+Clients connect to the server (via IP address/port) and
+subscribe to the stream. The order in which the server and
+client start generally does not matter.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg must be
+compiled with the --enable-libzmq option to support this
+protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options can be
+set on the <b>ffmpeg</b>/<b>ffplay</b> command line. The
+following options are supported: <b><br>
+pkt_size</b></p>
+
+<p style="margin-left:14%;">Forces the maximum packet size
+for sending/receiving data. The default value is 131,072
+bytes. On the server side, this sets the maximum size of
+sent packets via ZeroMQ. On the clients, it sets an internal
+buffer size for receiving packets. Note that pkt_size on the
+clients should be equal to or greater than pkt_size on the
+server. Otherwise the received message may be truncated
+causing decoding errors.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ffmpeg</b>(1),
+<b>ffplay</b>(1), <b>ffprobe</b>(1),
+<b>libavformat</b>(3)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The FFmpeg
+developers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For details
+about the authorship, see the Git history of the project
+(https://git.ffmpeg.org/ffmpeg), e.g. by typing the command
+<b>git log</b> in the FFmpeg source directory, or browsing
+the online repository at
+&lt;<b>https://git.ffmpeg.org/ffmpeg</b>&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Maintainers for
+the specific components are listed in the file
+<i>MAINTAINERS</i> in the source code tree.</p>
+<hr>
+</body>
+</html>

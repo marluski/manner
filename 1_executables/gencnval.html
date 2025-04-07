@@ -1,0 +1,181 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GENCNVAL</title>
+
+</head>
+<body>
+
+<h1 align="center">GENCNVAL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#VERSION">VERSION</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gencnval</b>
+- compile the converters aliases file</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gencnval</b>
+[ <b>-h</b>, <b>-?</b>, <b>--help</b> ] [ <b>-v</b>,
+<b>--verbose</b> ] [ <b>-c</b>, <b>--copyright</b> ] [
+<b>-s</b>, <b>--sourcedir</b> <i>source</i> ] [ <b>-d</b>,
+<b>--destdir</b> <i>destination</i> ] [ <i>converterfile</i>
+]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gencnval</b>
+converts the ICU aliases file <i>converterfile</i> into the
+binary file <b>cnvalias.icu</b>. This binary file can then
+be read directly by ICU, or used by <b>pkgdata</b>(1) for
+incorporation into a larger archive or library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<i>converterfile</i> is not provided, the default ICU
+<b>convrtrs.txt</b> file is used.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>-?</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Print help about usage and
+exit.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Display verbose output. This
+information can include information about conflicting
+aliases and the converters the aliases resolve to.</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--copyright</b></p>
+
+<p style="margin-left:18%;">Include a copyright notice in
+the binary data.</p>
+
+<p style="margin-left:9%;"><b>-s</b>, <b>--sourcedir</b>
+<i>source</i></p>
+
+<p style="margin-left:18%;">Set the source directory to
+<i>source</i>. The default source directory is specified by
+the environment variable <b>ICU_DATA</b>.</p>
+
+<p style="margin-left:9%;"><b>-d</b>, <b>--destdir</b>
+<i>destination</i></p>
+
+<p style="margin-left:18%;">Set the destination directory
+to <i>destination</i>. The default destination directory is
+specified by the environment variable <b>ICU_DATA</b>.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><b>ICU_DATA</b></p></td>
+<td width="3%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em">Specifies the directory
+containing ICU data. Defaults to
+<b>${prefix}/share/icu/76.1/</b>. Some tools in ICU depend
+on the presence of the trailing slash. It is thus important
+to make sure that it is present if <b>ICU_DATA</b> is
+set.</p> </td></tr>
+</table>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="47%">
+
+
+
+<p style="margin-top: 1em"><b>icu/source/data/mappings/convrtrs.txt</b></p> </td>
+<td width="4%"></td>
+<td width="40%">
+
+
+<p style="margin-top: 1em">Description of ICU&rsquo;s
+converters and their aliases. This data file is not normally
+installed, and it is available as a part of ICU source
+code.</p> </td></tr>
+</table>
+
+<h2>VERSION
+<a name="VERSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">76.1</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2000-2004 IBM, Inc. and others.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pkgdata</b>(1)</p>
+<hr>
+</body>
+</html>

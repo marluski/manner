@@ -1,0 +1,668 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>swappy</title>
+
+</head>
+<body>
+
+<h1 align="center">swappy</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#CONFIG FILE">CONFIG FILE</a><br>
+<a href="#KEY BINDINGS">KEY BINDINGS</a><br>
+<a href="#LAYOUT">LAYOUT</a><br>
+<a href="#PAINT MODE">PAINT MODE</a><br>
+<a href="#MODIFIERS">MODIFIERS</a><br>
+<a href="#HEADER BAR">HEADER BAR</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">swappy - grab
+and edit on the fly snapshots of a Wayland compositor</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>swappy</b>
+[options...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">swappy is a
+command-line utility to take and edit screenshots of Wayland
+desktops. Works great with grim, slurp and sway. But can
+easily work with other screen copy tools that can output a
+final image to <b>stdout</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">swappy will save
+the annotated images to the config <b>save_dir</b>, see
+below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If absent, then
+if it will try to default to a <b>Desktop</b> folder
+following this pattern: <b>$XDG_DESKTOP_DIR</b>. If this
+variable is not set, it will revert to:
+<b>$XDG_CONFIG_HOME/Desktop</b>. If <b>$XDG_CONFIG_HOME</b>
+is not set, it will revert to: <b>$HOME/Desktop</b>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Show version and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--file</b> &lt;file&gt;</p>
+
+<p style="margin-left:14%;">An image file to load for
+editing.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If set to
+<b>-</b>, read the file from standard input instead. This is
+grim friendly.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o,
+--output-file &lt;file&gt;</b></p>
+
+<p style="margin-left:14%;">Print the final surface to
+<b>&lt;file&gt;</b> when exiting the application.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If set to
+<b>-</b>, prints the final surface to <b>stdout</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that the
+<b>Save</b> button will save the image to the config
+<b>save_dir</b> parameter, as described in the DESCRIPTION
+section.</p>
+
+<h2>CONFIG FILE
+<a name="CONFIG FILE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The config file
+is located at <b>$XDG_CONFIG_HOME/swappy/config</b> or at
+<b>$HOME/.config/swappy/config</b>. The file follows the
+GLib <b>conf</b> format.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>[Section]</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>key=value</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+lines can be used as swappy&rsquo;s default:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>[Default]</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>save_dir=$HOME/Desktop</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>save_filename_format=swappy-%Y%m%d-%H%M%S.png</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>show_panel=false</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>line_size=5</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>text_size=20</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>text_font=sans-serif</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>paint_mode=brush</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>early_exit=false</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>fill_shape=false</p></td></tr>
+</table>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>save_dir</b> is where swappshots will be saved, can
+contain env variables, when it does not exist, swappy
+attempts to create it first, but does not abort if directory
+creation fails</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>save_filename_format</b> is the filename template, if
+it contains a date format, this will be parsed into a
+timestamp. Format is detailed in strftime(3). If this date
+format is missing, filename will have no timestamp</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>show_panel</b> is used to toggle the paint panel on
+or off upon startup</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>line_size</b> is the default line size (must be
+between 1 and 50)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>text_size</b> is the default text size (must be
+between 10 and 50)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>text_font</b> is the font used to render text, its
+format is pango friendly</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>paint_mode</b> is the mode activated at application
+start (must be one of:
+brush|text|rectangle|ellipse|arrow|blur, matching is
+case-insensitive)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>early_exit</b> is used to make the application exit
+after saving the picture or copying it to the clipboard</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>fill_shape</b> is used to toggle shape filling (for
+the rectangle and ellipsis tools) on or off upon startup</p></td></tr>
+</table>
+
+<h2>KEY BINDINGS
+<a name="KEY BINDINGS"></a>
+</h2>
+
+
+<h3>LAYOUT
+<a name="LAYOUT"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="33%">
+
+
+<p style="margin-top: 1em"><b>Ctrl+b</b>: Toggle Paint
+Panel</p> </td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h3>PAINT MODE
+<a name="PAINT MODE"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>b</b>: Switch to Brush</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>t</b>: Switch to Text</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>r</b>: Switch to Rectangle</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>o</b>: Switch to Ellipse</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>a</b>: Switch to Arrow</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>d</b>: Switch to Blur (d stands for droplet)</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>R</b>: Use Red Color</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>G</b>: Use Green Color</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>B</b>: Use Blue Color</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>C</b>: Use Custom Color</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>Minus</b>: Reduce Stroke Size</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>Plus</b>: Increase Stroke Size</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>Equal</b>: Reset Stroke Size</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>f</b>: Toggle Shape Filling</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p><b>k</b>: Clear Paints (cannot be undone)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<h3>MODIFIERS
+<a name="MODIFIERS"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="77%">
+
+
+<p style="margin-top: 1em"><b>Ctrl</b>: Center Shape
+(Rectangle &amp; Ellipse) based on draw start</p></td>
+<td width="9%">
+</td></tr>
+</table>
+
+<h3>HEADER BAR
+<a name="HEADER BAR"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em"><b>Ctrl+z</b>: Undo</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="45%">
+
+
+<p><b>Ctrl+Shift+z</b> or <b>Ctrl+y</b>: Redo</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="45%">
+
+
+<p><b>Ctrl+s</b>: Save to file (see man page)</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="45%">
+
+
+<p><b>Ctrl+c</b>: Copy to clipboard</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="45%">
+
+
+<p><b>Escape</b> or <b>q</b> or <b>Ctrl+w</b>: Quit
+swappy</p> </td>
+<td width="41%">
+</td></tr>
+</table>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written and
+maintained by jtheoof &lt;contact@jtheoof.me&gt;. See
+https://github.com/jtheoof/swappy.</p>
+<hr>
+</body>
+</html>

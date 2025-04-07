@@ -1,0 +1,753 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>p11tool</title>
+
+</head>
+<body>
+
+<h1 align="center">p11tool</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Tokens">Tokens</a><br>
+<a href="#Object listing">Object listing</a><br>
+<a href="#Key generation">Key generation</a><br>
+<a href="#Writing objects">Writing objects</a><br>
+<a href="#Other options">Other options</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>p11tool</b> -
+GnuTLS PKCS #11 tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>p11tool</b>
+[<b>-flags</b>] [<b>-flag</b> [<i>value</i>]]
+[<b>--option-name</b>[[=| ]<i>value</i>]] [url]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Operands and
+options may be intermixed. They will be reordered.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Program that
+allows operations on PKCS #11 smart cards and security
+modules.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To use PKCS #11
+tokens with GnuTLS the p11-kit configuration files need to
+be setup. That is create a .module file in
+/etc/pkcs11/modules with the contents &rsquo;module:
+/path/to/pkcs11.so&rsquo;. Alternatively the configuration
+file /etc/gnutls/pkcs11.conf has to exist and contain a
+number of lines of the form
+&rsquo;load=/usr/lib/opensc-pkcs11.so&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can provide
+the PIN to be used for the PKCS #11 operations with the
+environment variables GNUTLS_PIN and GNUTLS_SO_PIN.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Tokens
+<a name="Tokens"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-tokens</b>
+List all available tokens.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-token-urls</b>
+List the URLs available tokens.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is a more
+compact version of --list-tokens.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-mechanisms</b>
+List all available mechanisms in a token.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--initialize</b>
+Initializes a PKCS #11 token.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--initialize-pin</b>
+Initializes/Resets a PKCS #11 token user PIN.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--initialize-so-pin</b>
+Initializes/Resets a PKCS #11 token security <br>
+officer PIN.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This initializes
+the security officer&rsquo;s PIN. When used <br>
+non-interactively use the GNUTLS_NEW_SO_PIN environment
+variables to <br>
+initialize SO&rsquo;s PIN.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--set-pin</b>=<i>str</i>
+Specify the PIN to use on token operations.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Alternatively
+the GNUTLS_PIN environment variable may be used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--set-so-pin</b>=<i>str</i>
+Specify the Security Officer&rsquo;s PIN to use on token
+<br>
+initialization.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Alternatively
+the GNUTLS_SO_PIN environment variable may be used.</p>
+
+<h3>Object listing
+<a name="Object listing"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-all</b>
+List all available objects in a token.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All objects
+available in the token will be listed. That includes <br>
+objects which are potentially unaccessible using this
+tool.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-all-certs</b>
+List all available certificates in a token.</p>
+
+<p style="margin-left:9%; margin-top: 1em">That option will
+also provide more information on the certificates, for <br>
+example, expand the attached extensions in a trust token
+(like <br>
+p11-kit-trust).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-certs</b>
+List all certificates that have an associated private
+key.</p>
+
+<p style="margin-left:9%; margin-top: 1em">That option will
+only display certificates which have a private key <br>
+associated with them (share the same ID).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-all-privkeys</b>
+List all available private keys in a token.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Lists all the
+private keys in a token that match the specified URL.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-privkeys</b>
+This is an alias for the <i>--list-all-privkeys</i>
+option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-keys</b>
+This is an alias for the <i>--list-all-privkeys</i>
+option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-all-trusted</b>
+List all available certificates marked as trusted.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--export</b>
+Export the object specified by the URL. This option must not
+<br>
+appear in combination with any of the following options:
+<br>
+export-stapled, export-chain, export-pubkey.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--export-stapled</b>
+Export the certificate object specified by the URL. <br>
+This option must not appear in combination with any of the
+following <br>
+options: export, export-chain, export-pubkey.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Exports the
+certificate specified by the URL while including any <br>
+attached extensions to it. Since attached extensions are a
+p11-kit <br>
+extension, this option is only available on p11-kit
+registered trust <br>
+modules.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--export-chain</b>
+Export the certificate specified by the URL and its <br>
+chain of trust. This option must not appear in combination
+with any of <br>
+the following options: export-stapled, export,
+export-pubkey.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Exports the
+certificate specified by the URL and generates its chain of
+<br>
+trust based on the stored certificates in the module.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--export-pubkey</b>
+Export the public key for a private key. This option <br>
+must not appear in combination with any of the following
+options: <br>
+export-stapled, export, export-chain.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Exports the
+public key for the specified private key</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--info</b>
+List information on an available object in a token.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--trusted</b>
+This is an alias for the <i>--mark-trusted</i> option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--distrusted</b>
+This is an alias for the <i>--mark-distrusted</i>
+option.</p>
+
+<h3>Key generation
+<a name="Key generation"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--generate-privkey</b>=<i>str</i>
+Generate private-public key pair of given type.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Generates a
+private-public key pair in the specified token. Acceptable
+<br>
+types are RSA, ECDSA, Ed25519, and DSA. Should be combined
+with <br>
+--sec-param or --bits.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--generate-rsa</b>
+Generate an RSA private-public key pair.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Generates an RSA
+private-public key pair on the specified token. <br>
+Should be combined with --sec-param or --bits.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--generate-dsa</b> Generate a DSA private-public key
+pair.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Generates a DSA
+private-public key pair on the specified token. Should <br>
+be combined with --sec-param or --bits.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--generate-ecc</b> Generate an ECDSA private-public key
+pair.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Generates an
+ECDSA private-public key pair on the specified token. <br>
+Should be combined with --curve, --sec-param or --bits.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--bits</b>=<i>num</i> Specify the number of bits for the key
+generate. This <br>
+option takes an integer number as its argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For applications
+which have no key-size restrictions the --sec-param <br>
+option is recommended, as the sec-param levels will adapt to
+the <br>
+acceptable security levels with the new versions of
+gnutls.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--curve</b>=<i>str</i>
+Specify the curve used for EC key generation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported values
+are secp192r1, secp224r1, secp256r1, secp384r1 and <br>
+secp521r1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sec-param</b>=<i>security
+parameter</i> Specify the security level.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is
+alternative to the bits option. Available options are [low,
+<br>
+legacy, medium, high, ultra].</p>
+
+<h3>Writing objects
+<a name="Writing objects"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--set-id</b>=<i>str</i>
+Set the CKA_ID (in hex) for the specified by the URL <br>
+object. This option must not appear in combination with any
+of the <br>
+following options: write.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Modifies or sets
+the CKA_ID in the specified by the URL object. The ID <br>
+should be specified in hexadecimal format without a
+&rsquo;0x&rsquo; prefix.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--set-label</b>=<i>str</i>
+Set the CKA_LABEL for the specified by the URL object. <br>
+This option must not appear in combination with any of the
+following <br>
+options: write, set-id.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Modifies or sets
+the CKA_LABEL in the specified by the URL object</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--write</b>
+Writes the loaded objects to a PKCS #11 token.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It can be used
+to write private, public keys, certificates or secret <br>
+keys to a token. Must be combined with one of
+--load-privkey, <br>
+--load-pubkey, --load-certificate option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When writing a
+certificate object, its CKA_ID is set to the same CKA_ID
+<br>
+of the corresponding public key, if it exists on the token;
+otherwise <br>
+it will be derived from the X.509 Subject Key Identifier of
+the <br>
+certificate. If this behavior is undesired, write the public
+key to the <br>
+token beforehand.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--delete</b>
+Deletes the objects matching the given PKCS #11 URL.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--label</b>=<i>str</i>
+Sets a label for the write operation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--id</b>=<i>str</i>
+Sets an ID for the write operation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Sets the CKA_ID
+to be set by the write operation. The ID should be <br>
+specified in hexadecimal format without a &rsquo;0x&rsquo;
+prefix.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mark-wrap</b>,
+<b>--no-mark-wrap</b> Marks the generated key to be a
+wrapping <br>
+key. The <i>no-mark-wrap</i> form will disable the
+option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Marks the
+generated key with the CKA_WRAP flag.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mark-trusted</b>,
+<b>--no-mark-trusted</b> Marks the object to be written as
+<br>
+trusted. This option must not appear in combination with any
+of the <br>
+following options: mark-distrusted. The
+<i>no-mark-trusted</i> form will <br>
+disable the option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Marks the object
+to be generated/written with the CKA_TRUST flag.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mark-distrusted</b>
+When retrieving objects, it requires the objects to <br>
+be distrusted. This option must not appear in combination
+with any of <br>
+the following options: mark-trusted.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Ensures that the
+objects retrieved have the CKA_X_TRUST flag. This is <br>
+p11-kit trust module extension, thus this flag is only valid
+with <br>
+p11-kit registered trust modules.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mark-decrypt</b>,
+<b>--no-mark-decrypt</b> Marks the object to be written for
+<br>
+decryption. The <i>no-mark-decrypt</i> form will disable the
+option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Marks the object
+to be generated/written with the CKA_DECRYPT flag set <br>
+to true.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mark-sign</b>,
+<b>--no-mark-sign</b> Marks the object to be written for
+<br>
+signature generation. The <i>no-mark-sign</i> form will
+disable the option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Marks the object
+to be generated/written with the CKA_SIGN flag set to <br>
+true.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mark-ca</b>,
+<b>--no-mark-ca</b> Marks the object to be written as a CA.
+The <i><br>
+no-mark-ca</i> form will disable the option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Marks the object
+to be generated/written with the <br>
+CKA_CERTIFICATE_CATEGORY as CA.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mark-private</b>,
+<b>--no-mark-private</b> Marks the object to be written as
+<br>
+private. The <i>no-mark-private</i> form will disable the
+option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Marks the object
+to be generated/written with the CKA_PRIVATE flag. The <br>
+written object will require a PIN to be used.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ca</b> This
+is an alias for the <i>--mark-ca</i> option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--private</b>
+This is an alias for the <i>--mark-private</i> option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mark-always-authenticate</b>,
+<b>--no-mark-always-authenticate</b> Marks the <br>
+object to be written as always authenticate. The <i><br>
+no-mark-always-authenticate</i> form will disable the
+option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Marks the object
+to be generated/written with the <br>
+CKA_ALWAYS_AUTHENTICATE flag. The written object will Mark
+the object <br>
+as requiring authentication (pin entry) before every
+operation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--secret-key</b>=<i>str</i>
+Provide a hex encoded secret key.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This secret key
+will be written to the module if --write is specified.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--load-privkey</b>=<i>file</i>
+Private key file to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--load-pubkey</b>=<i>file</i>
+Public key file to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--load-certificate</b>=<i>file</i>
+Certificate file to use.</p>
+
+<h3>Other options
+<a name="Other options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>
+<i>num</i>, <b>--debug</b>=<i>num</i> Enable debugging. This
+option takes an integer <br>
+number as its argument. The value of <i>num</i> is
+constrained to being:</p>
+
+<p style="margin-left:14%;">in the range 0 through 9999</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+debug level.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--outfile</b>=<i>str</i>
+Output file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--login</b>,
+<b>--no-login</b> Force (user) login to token. The
+<i>no-login</i> form <br>
+will disable the option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--so-login</b>,
+<b>--no-so-login</b> Force security officer login to token.
+The <i><br>
+no-so-login</i> form will disable the option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Forces login to
+the token as security officer (admin).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--admin-login</b>
+This is an alias for the <i>--so-login</i> option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--test-sign</b>
+Tests the signature operation of the provided object.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It can be used
+to test the correct operation of the signature <br>
+operation. If both a private and a public key are available
+this <br>
+operation will sign and verify the signed data.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign-params</b>=<i>str</i>
+Sign with a specific signature algorithm.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This option can
+be combined with --test-sign, to sign with a specific <br>
+signature algorithm variant. The only option supported is
+&rsquo;RSA-PSS&rsquo;, <br>
+and should be specified in order to use RSA-PSS signature on
+RSA keys.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--hash</b>=<i>str</i>
+Hash algorithm to use for signing.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This option can
+be combined with test-sign. Available hash functions <br>
+are SHA1, RMD160, SHA256, SHA384, SHA512, SHA3-224,
+SHA3-256, SHA3-384, <br>
+SHA3-512.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--generate-random</b>=<i>num</i>
+Generate random data. This option takes an <br>
+integer number as its argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Asks the token
+to generate a number of bytes of random bytes.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-8</b>,
+<b>--pkcs8</b> Use PKCS #8 format for private keys.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inder</b>,
+<b>--no-inder</b> Use DER/RAW format for input. The
+<i>no-inder</i> form <br>
+will disable the option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use DER/RAW
+format for input certificates and private keys.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inraw</b>
+This is an alias for the <i>--inder</i> option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--outder</b>,
+<b>--no-outder</b> Use DER format for output certificates,
+private <br>
+keys, and DH parameters. The <i>no-outder</i> form will
+disable the option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The output will
+be in DER or RAW format.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--outraw</b>
+This is an alias for the <i>--outder</i> option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--provider</b>=<i>file</i>
+Specify the PKCS #11 provider library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will
+override the default options in /etc/gnutls/pkcs11.conf</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--provider-opts</b>=<i>str</i>
+Specify parameters for the PKCS #11 provider <br>
+library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+PKCS#11 internal option used by few modules. <br>
+Mainly for testing PKCS#11 modules.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--detailed-url</b>, <b>--no-detailed-url</b> Print detailed
+URLs. The <i><br>
+no-detailed-url</i> form will disable the option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--only-urls</b>
+Print a compact listing using only the URLs.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--batch</b>
+Disable all interaction with the tool.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In batch mode
+there will be no prompts, all parameters need to be <br>
+specified on command line.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>
+<i>arg</i>, <b>--version</b>=<i>arg</i> Output version of
+program and exit. The default <br>
+mode is &lsquo;v&rsquo;, a simple version. The
+&lsquo;c&rsquo; mode will print copyright <br>
+information and &lsquo;n&rsquo; will print the full
+copyright notice.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b> Display usage information and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-!</b>,
+<b>--more-help</b> Pass the extended usage information
+through a pager.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:18%; margin-top: 1em">To view all
+tokens in your system use:</p>
+
+<p style="margin-left:23%;">$ p11tool --list-tokens</p>
+
+<p style="margin-left:18%; margin-top: 1em">To view all
+objects in a token use:</p>
+
+<p style="margin-left:23%;">$ p11tool --login --list-all
+&quot;pkcs11:TOKEN-URL&quot;</p>
+
+<p style="margin-left:18%; margin-top: 1em">To store a
+private key and a certificate in a token run:</p>
+
+<p style="margin-left:23%;">$ p11tool --login --write
+&quot;pkcs11:URL&quot; --load-privkey key.pem --label
+&quot;Mykey&quot; <br>
+$ p11tool --login --write &quot;pkcs11:URL&quot;
+--load-certificate cert.pem --label &quot;Mykey&quot;</p>
+
+<p style="margin-left:18%;">Note that some tokens require
+the same label to be used for the certificate and its
+corresponding private key.</p>
+
+<p style="margin-left:18%; margin-top: 1em">To generate an
+RSA private key inside the token use:</p>
+
+<p style="margin-left:23%;">$ p11tool --login
+--generate-privkey rsa --bits 1024 --label
+&quot;MyNewKey&quot; --outfile MyNewKey.pub
+&quot;pkcs11:TOKEN-URL&quot;</p>
+
+<p style="margin-left:18%;">The bits parameter in the above
+example is explicitly set because some tokens only support
+limited choices in the bit length. The output file is the
+corresponding public key. This key can be used to general a
+certificate request with certtool.</p>
+
+<p style="margin-left:23%;">certtool --generate-request
+--load-privkey &quot;pkcs11:KEY-URL&quot; --load-pubkey
+MyNewKey.pub --outfile request.pem</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">One of the
+following exit values will be returned: <br>
+0 (EXIT_SUCCESS) Successful program execution.</p>
+
+<p style="margin-left:9%; margin-top: 1em">1 (EXIT_FAILURE)
+The operation failed or the command syntax was not <br>
+valid.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:18%; margin-top: 1em">certtool
+(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2020-2023 Free Software Foundation, and others all rights
+reserved. This program is released under the terms of the
+GNU General Public License, version 3 or later</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to: bugs@gnutls.org</p>
+<hr>
+</body>
+</html>

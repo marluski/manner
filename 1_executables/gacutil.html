@@ -1,0 +1,220 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gacutil - Global
+Assembly Cache management utility.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gacutil
+[-user] [command] [options]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>gacutil</i></b>
+is a tool used by developers to install versioned assemblies
+into the system Global Assembly Cache (GAC) to become part
+of the assemblies that are available for all applications at
+runtime.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Notice that they
+are not directly available to the compiler. The convention
+is that assemblies must also be placed in a separate
+directory to be accessed by the compiler. This is done with
+the -package directive to gacutil.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The tool allows
+for installation, removal, and listing of the contents of
+the assembly cache.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The GAC is
+relative to the Mono installation prefix:
+mono_prefix/lib/mono.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-i
+&lt;assembly_path&gt; [-check_refs] [-package NAME] [-root
+ROOTDIR] [-gacdir GACDIR]</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Installs an
+assembly into the global assembly cache.
+&lt;assembly_path&gt; is the name of the file that contains
+the assembly manifest</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -package
+option can be used to also create a directory in in
+prefix/lib/mono with the name NAME, and a symlink is created
+from NAME/assembly_name to the assembly on the GAC. This is
+used so developers can reference a set of libraries at
+once.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -root option
+is used to specify the &quot;libdir&quot; value of an
+installation prefix which differs from the prefix of the
+system GAC. Typical automake usage is &quot;-root
+$(DESTDIR)$(prefix)/lib&quot;. To access assemblies
+installed to a prefix other than the mono prefix, it is
+necessary to set the MONO_GAC_PREFIX environment
+variable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -gacdir
+option is included for backward compatibility but is not
+recommended for new code. Use the -root option instead.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -check_refs
+option is used to ensure that the assembly being installed
+into the GAC does not reference any non strong named
+assemblies. Assemblies being installed to the GAC should not
+reference non strong named assemblies, however the is an
+optional check.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>-l
+[assembly_name] [-root ROOTDIR] [-gacdir GACDIR]</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Lists the
+contents of the global assembly cache. When the
+&lt;assembly_name&gt; parameter is specified only matching
+assemblies are listed.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>-u
+&lt;assembly_display_name&gt; [-package NAME] [-root
+ROOTDIR] [-gacdir GACDIR]</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Uninstalls an
+assembly from the global assembly cache.
+&lt;assembly_display_name&gt; is the name of the assembly
+(partial or fully qualified) to remove from the global
+assembly cache. If a partial name is specified all matching
+assemblies will be uninstalled. As opposed to the install
+option that takes a filename, this takes as an argument the
+assembly name, which looks like this:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>MyLibrary.Something, version=1.0.0.0,
+publicKeyToken=xxxx,culture=neutral</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Notice that you
+can have spaces in the command line. There is no need to
+quote them.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Performs a
+greedy removal. If you only specify one component like,
+&quot;MyLibrary.Something&quot;, it will remove all versions
+of the library.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>-us
+&lt;assembly_path&gt; [-package NAME] [-root ROOTDIR]
+[-gacdir GACDIR]</i> Uninstalls an assembly using the
+specified assembly&rsquo;s full name. &lt;assembly path&gt;
+is the path to an assembly. The full assembly name is
+retrieved from the specified assembly if there is an
+assembly in the GAC with a matching name, it is removed.
+Unlike the -u option this option takes a file name, like
+this: <br>
+Example: -us myDll.dll</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>-ul
+&lt;assembly_list_file&gt; [-package NAME] [-root ROOTDIR]
+[-gacdir GACDIR]</i> Uninstalls one or more assemblies from
+the global assembly cache. &lt;assembly_list_file&gt; is the
+path to a test file containing a list of assembly names on
+separate lines. <br>
+Example -ul assembly_list.txt <br>
+assembly_list.txt contents: <br>
+
+assembly1,Version=1.0.0.0,Culture=en,PublicKeyToken=0123456789abcdef
+<br>
+
+assembly2,Version=2.0.0.0,Culture=en,PublicKeyToken=0123456789abcdef</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On Unix
+assemblies are loaded from the installation lib directory.
+If you set &lsquo;prefix&rsquo; to /usr, the assemblies will
+be located in /usr/lib. On Windows, the assemblies are
+loaded from the directory where mono and mint live.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">/etc/mono/config,
+&#732;/.mono/config</p>
+
+<p style="margin-left:9%; margin-top: 1em">Mono runtime
+configuration file. See the mono-config(5) manual page for
+more information.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://www.go-mono.com for details</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mcs(1),</b>mono(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,372 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GTK4-PATH-TOOL</title>
+
+</head>
+<body>
+
+<h1 align="center">GTK4-PATH-TOOL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#Decomposing">Decomposing</a><br>
+<a href="#Showing">Showing</a><br>
+<a href="#Rendering">Rendering</a><br>
+<a href="#Reversing">Reversing</a><br>
+<a href="#Info">Info</a><br>
+<a href="#REFERENCES">REFERENCES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gtk4-path-tool -
+GskPath Utility</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-path-tool</b>
+&lt;COMMAND&gt; [OPTIONS...] &lt;PATH&gt;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-path-tool</b>
+decompose [OPTIONS...] &lt;PATH&gt; <b><br>
+gtk4-path-tool</b> show [OPTIONS...] &lt;PATH&gt; <b><br>
+gtk4-path-tool</b> render [OPTIONS...] &lt;PATH&gt; <b><br>
+gtk4-path-tool</b> reverse [OPTIONS...] &lt;PATH&gt; <b><br>
+gtk4-path-tool</b> info [OPTIONS...] &lt;PATH&gt;</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-path-tool</b>
+can perform various tasks on paths. Paths are specified in
+SVG syntax, as strings like &quot;M 100 100 C 100 200 200
+200 200 100 Z&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To read a path
+from a file, use a filename that starts with a '.' or a '/'.
+To read a path from stdin, use '-'.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>Decomposing
+<a name="Decomposing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>decompose</b> command approximates the path by one with
+simpler elements. When used without options, the curves of
+the path are approximated by line segments.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--allow-quad</b></p>
+
+<p style="margin-left:13%;">Allow quadratic B&eacute;zier
+curves to be used in the generated path.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--allow-cubic</b></p>
+
+<p style="margin-left:13%;">Allow cubic B&eacute;zier
+curves to be used in the generated path.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--allow-conic</b></p>
+
+<p style="margin-left:13%;">Allow conic B&eacute;zier
+curves to be used in the generated path.</p>
+
+<h3>Showing
+<a name="Showing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>show</b>
+command displays the given path in a window. The interior of
+the path is filled.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fill</b></p>
+
+<p style="margin-left:13%;">Fill the path (this is the
+default).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--stroke</b></p>
+
+<p style="margin-left:13%;">Stroke the path instead of
+filling it.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--points</b></p>
+
+<p style="margin-left:13%;">Show points on the path.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--controls</b></p>
+
+<p style="margin-left:13%;">Show control points.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fill-rule=VALUE</b></p>
+
+<p style="margin-left:13%;">The fill rule that is used to
+determine what areas are inside the path. The possible
+values are <b>winding</b> or <b>even-odd</b>. The default is
+<b>winding</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fg-color=COLOR</b></p>
+
+<p style="margin-left:13%;">The color that is used to fill
+the interior of the path or stroke the path. If not
+specified, black is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--bg-color=COLOR</b></p>
+
+<p style="margin-left:13%;">The color that is used to
+render the background behind the path. If not specified,
+white is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--point-color=COLOR</b></p>
+
+<p style="margin-left:13%;">The color that is used to
+render the points. If not specified, red is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-width=VALUE</b></p>
+
+<p style="margin-left:13%;">The line width to use for the
+stroke. <b>VALUE</b> must be a positive number. The default
+line width is 1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-cap=VALUE</b></p>
+
+<p style="margin-left:13%;">The cap style to use at line
+ends. The possible values are <b>butt</b>, <b>round</b> or
+<b>square</b>. See the SVG specification for details on
+these styles. The default cap style is <b>butt</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-join=VALUE</b></p>
+
+<p style="margin-left:13%;">The join style to use at line
+joins. The possible values are <b>miter</b>,
+<b>miter-clip</b>, <b>round</b>, <b>bevel</b> or
+<b>arcs</b>. See the SVG specification for details on these
+styles. The default join style is <b>miter</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--miter-limit=VALUE</b></p>
+
+<p style="margin-left:13%;">The limit at which to clip
+miters at line joins. The default value is 4.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dashes=VALUE</b></p>
+
+<p style="margin-left:13%;">The dash pattern to use for
+this stroke. A dash pattern is specified by a
+comma-separated list of alternating non-negative numbers.
+Each number provides the length of alternate &quot;on&quot;
+and &quot;off&quot; portions of the stroke. If the dash
+pattern is empty, dashing is disabled, which is the default.
+See the SVG specification for details on dashing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dash-offset=VALUE</b></p>
+
+<p style="margin-left:13%;">The offset into the dash
+pattern where dashing should begin. The default value is
+0.</p>
+
+<h3>Rendering
+<a name="Rendering"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>render</b> command renders the given path as a PNG image.
+The interior of the path is filled.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fill</b></p>
+
+<p style="margin-left:13%;">Fill the path (this is the
+default).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--stroke</b></p>
+
+<p style="margin-left:13%;">Stroke the path instead of
+filling it.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--points</b></p>
+
+<p style="margin-left:13%;">Show points on the path.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--controls</b></p>
+
+<p style="margin-left:13%;">Show control points.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fill-rule=VALUE</b></p>
+
+<p style="margin-left:13%;">The fill rule that is used to
+determine what areas are inside the path. The possible
+values are <b>winding</b> or <b>even-odd</b>. The default is
+<b>winding</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fg-color=COLOR</b></p>
+
+<p style="margin-left:13%;">The color that is used to fill
+the interior of the path or stroke the path. If not
+specified, black is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--bg-color=COLOR</b></p>
+
+<p style="margin-left:13%;">The color that is used to
+render the background behind the path. If not specified,
+white is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--point-color=COLOR</b></p>
+
+<p style="margin-left:13%;">The color that is used to
+render the points. If not specified, red is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--output-file=FILE</b></p>
+
+<p style="margin-left:13%;">The file to save the PNG image
+to. If not specified, &quot;path.png&quot; is used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-width=VALUE</b></p>
+
+<p style="margin-left:13%;">The line width to use for the
+stroke. <b>VALUE</b> must be a positive number. The default
+line width is 1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-cap=VALUE</b></p>
+
+<p style="margin-left:13%;">The cap style to use at line
+ends. The possible values are <b>butt</b>, <b>round</b> or
+<b>square</b>. See the SVG specification for details on
+these styles. The default cap style is <b>butt</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-join=VALUE</b></p>
+
+<p style="margin-left:13%;">The join style to use at line
+joins. The possible values are <b>miter</b>,
+<b>miter-clip</b>, <b>round</b>, <b>bevel</b> or
+<b>arcs</b>. See the SVG specification for details on these
+styles. The default join style is <b>miter</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--miter-limit=VALUE</b></p>
+
+<p style="margin-left:13%;">The limit at which to clip
+miters at line joins. The default value is 4.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dashes=VALUE</b></p>
+
+<p style="margin-left:13%;">The dash pattern to use for
+this stroke. A dash pattern is specified by a
+comma-separated list of alternating non-negative numbers.
+Each number provides the length of alternate &quot;on&quot;
+and &quot;off&quot; portions of the stroke. If the dash
+pattern is empty, dashing is disabled, which is the default.
+See the SVG specification for details on dashing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dash-offset=VALUE</b></p>
+
+<p style="margin-left:13%;">The offset into the dash
+pattern where dashing should begin. The default value is
+0.</p>
+
+<h3>Reversing
+<a name="Reversing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>reverse</b> command changes the direction of the path.
+The resulting paths starts where the original path ends.</p>
+
+<h3>Info
+<a name="Info"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>info</b>
+command shows various information about the given path, such
+as its bounding box.</p>
+
+<h2>REFERENCES
+<a name="REFERENCES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">SVG Path Specification,
+&lt;https://www.w3.org/TR/SVG2/paths.html&gt;</p> </td>
+<td width="6%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

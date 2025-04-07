@@ -1,0 +1,207 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:20 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>MDB_LOAD</title>
+
+</head>
+<body>
+
+<h1 align="center">MDB_LOAD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mdb_load - LMDB
+environment import tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdb_load</b>
+[<b>-V</b>] [<b>-f&nbsp;</b><i>file</i>] [<b>-n</b>]
+[<b>-s&nbsp;</b><i>subdb</i>] [<b>-N</b>] [<b>-T</b>]
+&nbsp;<b>envpath</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>mdb_load</b> utility reads from the standard input and
+loads it into the LMDB environment <b>envpath</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The input to
+<b>mdb_load</b> must be in the output format specified by
+the <b>mdb_dump</b>(1) utility or as specified by the
+<b>-T</b> option below.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-V</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Write the library version number
+to the standard output, and exit.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-a</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Append all records in the order they appear in the
+input. The input is assumed to already be in correctly
+sorted order and no sorting or checking for redundant values
+will be performed. This option must be used to reload data
+that was produced by running <b>mdb_dump</b> on a database
+that uses custom compare functions.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-f&nbsp;</b>file</p>
+
+<p style="margin-left:18%;">Read from the specified file
+instead of from the standard input.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="6%"></td>
+<td width="72%">
+
+
+<p>Load an LMDB database which does not use
+subdirectories.</p> </td>
+<td width="10%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-s&nbsp;</b>subdb</p>
+
+<p style="margin-left:18%;">Load a specific subdatabase. If
+no database is specified, data is loaded into the main
+database.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-N</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Don&rsquo;t overwrite existing records when loading into
+an already existing database; just skip them.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-T</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Load data from simple text files. The input must be
+paired lines of text, where the first line of the pair is
+the key item, and the second line of the pair is its
+corresponding data item.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">A simple escape
+mechanism, where newline and backslash (\) characters are
+special, is applied to the text input. Newline characters
+are interpreted as record separators. Backslash characters
+in the text will be interpreted in one of two ways: If the
+backslash character precedes another backslash character,
+the pair will be interpreted as a literal backslash. If the
+backslash character precedes any other character, the two
+characters following the backslash will be interpreted as a
+hexadecimal specification of a single character; for
+example, \0a is a newline character in the ASCII character
+set.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For this
+reason, any backslash or newline characters that naturally
+occur in the text input must be escaped to avoid
+misinterpretation by <b>mdb_load</b>.</p>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Exit status is
+zero if no errors occur. Errors result in a non-zero exit
+status and a diagnostic message being written to standard
+error.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdb_dump</b>(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Howard Chu of
+Symas Corporation &lt;http://www.symas.com&gt;</p>
+<hr>
+</body>
+</html>

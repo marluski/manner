@@ -1,0 +1,1438 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:32 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>tbl</title>
+
+</head>
+<body>
+
+<h1 align="center">tbl</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Overview">Overview</a><br>
+<a href="#Region options">Region options</a><br>
+<a href="#Table format specification">Table format specification</a><br>
+<a href="#Column classifiers">Column classifiers</a><br>
+<a href="#Column modifiers">Column modifiers</a><br>
+<a href="#Table data">Table data</a><br>
+<a href="#Text blocks">Text blocks</a><br>
+<a href="#roff interface">roff interface</a><br>
+<a href="#Interaction with eqn">Interaction with eqn</a><br>
+<a href="#GNU tbl enhancements">GNU tbl enhancements</a><br>
+<a href="#Using GNU tbl within macros">Using GNU tbl within macros</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Limitations">Limitations</a><br>
+<a href="#Examples">Examples</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">tbl - prepare
+tables for <i>groff</i> documents</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>tbl</b></p></td>
+<td width="1%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em">[<b>-C</b>]
+[<i>file&nbsp;</i>...]</p> </td>
+<td width="67%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>tbl</b></p></td>
+<td width="1%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="67%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>tbl</b></p></td>
+<td width="1%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="67%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>tbl</b></p></td>
+<td width="1%"></td>
+<td width="19%">
+
+
+<p><b>--version</b></p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The GNU
+implementation of <i>tbl</i> is part of the
+<a href="man:groff(1)"><i>groff</i>(1)</a> document
+formatting system. <i>tbl</i> is a
+<a href="man:troff(1)"><i>troff</i>(1)</a> preprocessor that
+translates descriptions of tables embedded in
+<a href="man:roff(7)"><i>roff</i>(7)</a> input files into
+the language understood by <i>troff</i>. It copies the
+contents of each <i>file</i> to the standard output stream,
+except that lines between <b>.TS</b> and <b>.TE</b> are
+interpreted as table descriptions. While GNU
+<i>tbl</i>&rsquo;s input syntax is highly compatible with
+AT&amp;T <i>tbl</i>, the output GNU <i>tbl</i> produces
+cannot be processed by AT&amp;T <i>troff</i>; GNU
+<i>troff</i> (or a <i>troff</i> implementing any GNU
+extensions employed) must be used. Normally, <i>tbl</i> is
+not executed directly by the user, but invoked by specifying
+the <b>-t</b> option to
+<a href="man:groff(1)"><i>groff</i>(1)</a>. If no
+<i>file</i> operands are given on the command line, or if
+<i>file</i> is &ldquo;<b>-</b>&rdquo;, <i>tbl</i> reads the
+standard input stream.</p>
+
+<h3>Overview
+<a name="Overview"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>tbl</i>
+expects to find table descriptions between input lines that
+begin with <b>.TS</b> (table start) and <b>.TE</b> (table
+end). Each such <i>table region</i> encloses one or more
+table descriptions. Within a table region, table
+descriptions beyond the first must each be preceded by an
+input line beginning with <b>.T&amp;</b>. This mechanism
+does not start a new table region; all table descriptions
+are treated as part of their <b>.TS</b>/<b>.TE</b>
+enclosure, even if they are boxed or have column headings
+that repeat on subsequent pages (see below).</p>
+
+<p style="margin-left:9%; margin-top: 1em">(Experienced
+<i>roff</i> users should observe that <i>tbl</i> is not a
+<i>roff</i> language interpreter: the default control
+character must be used, and no spaces or tabs are permitted
+between the control character and the macro name. These
+<i>tbl</i> input tokens remain as-is in the output, where
+they become ordinary macro calls. Macro packages often
+define <b>TS</b>, <b>T&amp;</b>, and <b>TE</b> macros to
+handle issues of table placement on the page. <i>tbl</i>
+produces <i>groff</i> code to define these macros as empty
+if their definitions do not exist when the formatter
+encounters a table region.)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each table
+region may begin with <i>region options,</i> and must
+contain one or more <i>table definitions;</i> each table
+definition contains a <i>format specification</i> followed
+by one or more input lines (rows) of <i>entries.</i> These
+entries comprise the <i>table data.</i></p>
+
+<h3>Region options
+<a name="Region options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The line
+immediately following the <b>.TS</b> token may specify
+region options, keywords that influence the interpretation
+or rendering of the region as a whole or all table entries
+within it indiscriminately. They must be separated by
+commas, spaces, or tabs. Those that require a parenthesized
+argument permit spaces and tabs between the option&rsquo;s
+name and the opening parenthesis. Options accumulate and
+cannot be unset within a region once declared; if an option
+that takes a parameter is repeated, the last occurrence
+controls. If present, the set of region options must be
+terminated with a semicolon (<b>;</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Any of the
+<b>allbox</b>, <b>box</b>, <b>doublebox</b>, <b>frame</b>,
+and <b>doubleframe</b> region options makes a table
+&ldquo;boxed&rdquo; for the purpose of later discussion.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>allbox</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Enclose each table entry in a box; implies
+<b>box</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>box</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Enclose the entire table region in a box. As a GNU
+extension, the alternative option name <b>frame</b> is also
+recognized.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>center</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Center the table region with respect to the current
+indentation and line length; the default is to left-align
+it. As a GNU extension, the alternative option name
+<b>centre</b> is also recognized.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>decimalpoint(</b><i>c</i><b>)</b></p>
+
+<p style="margin-left:18%;">Recognize character <i>c</i> as
+the decimal separator in columns using the <b>N</b>
+(numeric) classifier (see subsection &ldquo;Column
+classifiers&rdquo; below). This is a GNU extension.</p>
+
+
+<p style="margin-left:9%;"><b>delim(</b><i>xy</i><b>)</b></p>
+
+<p style="margin-left:18%;">Recognize characters <i>x</i>
+and&nbsp;<i>y</i> as start and end delimiters, respectively,
+for <a href="man:eqn(1)"><i>eqn</i>(1)</a> input, and ignore
+input between them. <i>x</i> and&nbsp;<i>y</i> need not be
+distinct.</p>
+
+<p style="margin-left:9%;"><b>doublebox</b></p>
+
+<p style="margin-left:18%;">Enclose the entire table region
+in a double box; implies <b>box</b>. As a GNU extension, the
+alternative option name <b>doubleframe</b> is also
+recognized.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>expand</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Spread the table horizontally to fill the available
+space (line length minus indentation) by increasing column
+separation. Ordinarily, a table is made only as wide as
+necessary to accommodate the widths of its entries and its
+column separations (whether specified or default). When
+<b>expand</b> applies to a table that exceeds the available
+horizontal space, column separation is reduced as far as
+necessary (even to zero). <i>tbl</i> produces <i>groff</i>
+input that issues a diagnostic if such compression occurs.
+The column modifier <b>x</b> (see below) overrides this
+option.</p> </td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>linesize(</b><i>n</i><b>)</b></p>
+
+<p style="margin-left:18%;">Draw lines or rules (e.g., from
+<b>box</b>) with a thickness of <i>n&nbsp;</i>points. The
+default is the current type size when the region begins.
+This option is ignored on terminal devices.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>nokeep</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Don&rsquo;t use <i>roff</i> diversions to manage page
+breaks. Normally, <i>tbl</i> employs them to avoid breaking
+a page within a table row. This usage can sometimes interact
+badly with macro packages&rsquo; own use of
+diversions&mdash;when footnotes, for example, are employed.
+This is a GNU extension.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>nospaces</b></p>
+
+<p style="margin-left:18%;">Ignore leading and trailing
+spaces in table entries. This is a GNU extension.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>nowarn</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Suppress diagnostic messages produced at document
+formatting time when the line or page lengths are inadequate
+to contain a table row. This is a GNU extension.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>tab(</b><i>c</i><b>)</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Use the character <i>c</i> instead of a tab to separate
+entries in a row of table data.</p></td></tr>
+</table>
+
+<h3>Table format specification
+<a name="Table format specification"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The table format
+specification is mandatory: it determines the number of
+columns in the table and directs how the entries within it
+are to be typeset. The format specification is a series of
+column <i>descriptors.</i> Each descriptor encodes a
+<i>classifier</i> followed by zero or more <i>modifiers.</i>
+Classifiers are letters (recognized case-insensitively) or
+punctuation symbols; modifiers consist of or begin with
+letters or numerals. Spaces, tabs, newlines, and commas
+separate descriptors. Newlines and commas are special; they
+apply the descriptors following them to a subsequent row of
+the table. (This enables column headings to be centered or
+emboldened while the table entries for the data are not, for
+instance.) We term the resulting group of column descriptors
+a <i>row definition.</i> Within a row definition, separation
+between column descriptors (by spaces or tabs) is often
+optional; only some modifiers, described below, make
+separation necessary.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each column
+descriptor begins with a mandatory <i>classifier,</i> a
+character that selects from one of several arrangements.
+Some determine the positioning of table entries within a
+rectangular cell: centered, left-aligned, numeric (aligned
+to a configurable decimal separator), and so on. Others
+perform special operations like drawing lines or spanning
+entries from adjacent cells in the table. Except for
+&ldquo;<b>|</b>&rdquo;, any classifier can be followed by
+one or more <i>modifiers;</i> some of these accept an
+argument, which in GNU <i>tbl</i> can be parenthesized.
+Modifiers select fonts, set the type size, and perform other
+tasks described below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The format
+specification can occupy multiple input lines, but must
+conclude with a dot &ldquo;<b>.</b>&rdquo; followed by a
+newline. Each row definition is applied in turn to one row
+of the table. The last row definition is applied to rows of
+table data in excess of the row definitions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For clarity in
+this document&rsquo;s examples, we shall write classifiers
+in uppercase and modifiers in lowercase. Thus,
+&ldquo;<b>CbCb,LR.</b>&rdquo; defines two rows of two
+columns. The first row&rsquo;s entries are centered and
+boldfaced; the second and any further rows&rsquo; first and
+second columns are left- and right-aligned,
+respectively.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The row
+definition with the most column descriptors determines the
+number of columns in the table; any row definition with
+fewer is implicitly extended on the right-hand side with
+<b>L</b> classifiers as many times as necessary to make the
+table rectangular.</p>
+
+<h3>Column classifiers
+<a name="Column classifiers"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>L</b>,
+<b>R</b>, and <b>C</b> classifiers are the easiest to
+understand and use.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>A</b>,&nbsp;<b>a</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Center longest entry in this
+column, left-align remaining entries in the column with
+respect to the centered entry, then indent all entries by
+one en. Such &ldquo;alphabetic&rdquo; entries (hence the
+name of the classifier) can be used in the same column as
+<b>L</b>-classified entries, as in
+&ldquo;<b>LL,AR.</b>&rdquo;. The <b>A</b> entries are often
+termed &ldquo;sub-columns&rdquo; due to their
+indentation.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>C</b>,&nbsp;<b>c</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Center entry within the column.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>L</b>,&nbsp;<b>l</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Left-align entry within the column.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>N</b>,&nbsp;<b>n</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Numerically align entry in the column. <i>tbl</i> aligns
+columns of numbers vertically at the units place. If
+multiple decimal separators are adjacent to a digit, it uses
+the rightmost one for vertical alignment. If there is no
+decimal separator, the rightmost digit is used for vertical
+alignment; otherwise, <i>tbl</i> centers the entry within
+the column. The <i>roff</i> dummy character <b>\&amp;</b> in
+an entry marks the glyph preceding it (if any) as the units
+place; if multiple instances occur in the data, the leftmost
+is used for alignment.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">If
+<b>N</b>-classified entries share a column with <b>L</b> or
+<b>R&nbsp;</b>entries, <i>tbl</i> centers the widest
+<b>N&nbsp;</b>entry with respect to the widest <b>L</b> or
+<b>R&nbsp;</b>entry, preserving the alignment of
+<b>N&nbsp;</b>entries with respect to each other.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The appearance
+of <i>eqn</i> equations within <b>N</b>-classified columns
+can be troublesome due to the foregoing textual scan for a
+decimal separator. Use the <b>delim</b> region option to
+make <i>tbl</i> ignore the data within <i>eqn</i> delimiters
+for that purpose.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>R</b>,&nbsp;<b>r</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Right-align entry within the
+column.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>S</b>,&nbsp;<b>s</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Span previous entry on the left into this column.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>^</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Span entry in the same column from the previous row into
+this row.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>_</b>,&nbsp;<b>-</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Replace table entry with a horizontal rule. An empty
+table entry is expected to correspond to this classifier; if
+data are found there, <i>tbl</i> issues a diagnostic
+message.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>=</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Replace table entry with a double horizontal rule. An
+empty table entry is expected to correspond to this
+classifier; if data are found there, <i>tbl</i> issues a
+diagnostic message.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>|</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Place a vertical rule (line) on the corresponding row of
+the table (if two of these are adjacent, a double vertical
+rule). This classifier does not contribute to the column
+count and no table entries correspond to it. A <b>|</b> to
+the left of the first column descriptor or to the right of
+the last one produces a vertical rule at the edge of the
+table; these are redundant (and ignored) in boxed
+tables.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">To change the
+table format within a <i>tbl</i> region, use the
+<b>.T&amp;</b> token at the start of a line. It is followed
+by a format specification and table data, but <i>not</i>
+region options. The quantity of columns in a new table
+format thus introduced cannot increase relative to the
+previous table format; in that case, you must end the table
+region and start another. If that will not serve because the
+region uses box options or the columns align in an
+undesirable manner, you must design the initial table format
+specification to include the maximum quantity of columns
+required, and use the <b>S</b> horizontal spanning
+classifier where necessary to achieve the desired columnar
+alignment.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Attempting to
+horizontally span in the first column or vertically span on
+the first row is an error. Non-rectangular span areas are
+also not supported.</p>
+
+<h3>Column modifiers
+<a name="Column modifiers"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Any number of
+modifiers can follow a column classifier. Arguments to
+modifiers, where accepted, are case-sensitive. If the same
+modifier is applied to a column specifier more than once, or
+if conflicting modifiers are applied, only the last
+occurrence has effect. The modifier&nbsp;<b>x</b> is
+mutually exclusive with <b>e</b> and&nbsp;<b>w</b>, but
+<b>e</b> is not mutually exclusive with&nbsp;<b>w</b>; if
+these are used in combination, <b>x&nbsp;</b>unsets both
+<b>e</b> and&nbsp;<b>w</b>, while either <b>e</b> or
+<b>w</b> overrides&nbsp;<b>x</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>b</b>,&nbsp;<b>B</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Typeset entry in boldface,
+abbreviating <b>f(B)</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>d</b>,&nbsp;<b>D</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Align a vertically spanned table entry to the bottom
+(&ldquo;down&rdquo;), instead of the center, of its range.
+This is a GNU extension.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>e</b>,&nbsp;<b>E</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Equalize the widths of columns with this modifier. The
+column with the largest width controls. This modifier sets
+the default line length used in a text block.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>f</b>,&nbsp;<b>F</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Select the typeface for the table entry. This modifier
+must be followed by a font or style name (one or two
+characters not starting with a digit), font mounting
+position (a single digit), or a name or mounting position of
+any length in parentheses. The last form is a GNU extension.
+(The parameter corresponds to that accepted by the
+<i>troff</i> <b>ft</b> request.) A one-character argument
+not in parentheses must be separated by one or more spaces
+or tabs from what follows.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>i</b>,&nbsp;<b>I</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Typeset entry in an oblique or italic face, abbreviating
+<b>f(I)</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>m</b>,&nbsp;<b>M</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Call a <i>groff</i> macro before typesetting a text
+block (see subsection &ldquo;Text blocks&rdquo; below). This
+is a GNU extension. This modifier must be followed by a
+macro name of one or two characters or a name of any length
+in parentheses. A one-character macro name not in
+parentheses must be separated by one or more spaces or tabs
+from what follows. The named macro must be defined before
+the table region containing this column modifier is
+encountered. The macro should contain only simple
+<i>groff</i> requests to change text formatting, like
+adjustment or hyphenation. The macro is called <i>after</i>
+the column modifiers <b>b</b>, <b>f</b>, <b>i</b>, <b>p</b>,
+and <b>v</b> take effect; it can thus override other column
+modifiers.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>p</b>,&nbsp;<b>P</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Set the type size for the table entry. This modifier
+must be followed by an integer&nbsp;<i>n</i> with an
+optional leading sign. If unsigned, the type size is set to
+<i>n&nbsp;</i>scaled points. Otherwise, the type size is
+incremented or decremented per the sign by
+<i>n&nbsp;</i>scaled points. The use of a signed multi-digit
+number is a GNU extension. (The parameter corresponds to
+that accepted by the <i>troff</i> <b>ps</b> request.) If a
+type size modifier is followed by a column separation
+modifier (see below), they must be separated by at least one
+space or tab.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>t</b>,&nbsp;<b>T</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Align a vertically spanned table entry to the top,
+instead of the center, of its range.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>u</b>,&nbsp;<b>U</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Move the column up one half-line,
+&ldquo;staggering&rdquo; the rows. This is a GNU
+extension.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>v</b>,&nbsp;<b>V</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Set the vertical spacing to be used in a text block.
+This modifier must be followed by an integer&nbsp;<i>n</i>
+with an optional leading sign. If unsigned, the vertical
+spacing is set to <i>n&nbsp;</i>points. Otherwise, the
+vertical spacing is incremented or decremented per the sign
+by <i>n&nbsp;</i>points. The use of a signed multi-digit
+number is a GNU extension. (This parameter corresponds to
+that accepted by the <i>troff</i> <b>vs</b> request.) If a
+vertical spacing modifier is followed by a column separation
+modifier (see below), they must be separated by at least one
+space or tab.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>w</b>,&nbsp;<b>W</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Set the column&rsquo;s minimum width. This modifier must
+be followed by a number, which is either a unitless integer,
+or a <i>roff</i> horizontal measurement in parentheses.
+Parentheses are required if the width is to be followed
+immediately by an explicit column separation (alternatively,
+follow the width with one or more spaces or tabs). If no
+unit is specified, ens are assumed. This modifier sets the
+default line length used in a text block.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>x</b>,&nbsp;<b>X</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Expand the column. After computing the column widths,
+distribute any remaining line length evenly over all columns
+bearing this modifier. Applying the <b>x&nbsp;</b>modifier
+to more than one column is a GNU extension. This modifier
+sets the default line length used in a text block.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>z</b>,&nbsp;<b>Z</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Ignore the table entries corresponding to this column
+for width calculation purposes; that is, compute the
+column&rsquo;s width using only the information in its
+descriptor.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><i>n</i></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>A numeric suffix on a column descriptor sets the
+separation distance (in ens) from the succeeding column; the
+default separation is <b>3n</b>. This separation is
+proportionally multiplied if the <b>expand</b> region option
+is in effect; in the case of tables wider than the output
+line length, this separation might be zero. A negative
+separation cannot be specified. A separation amount after
+the last column in a row is nonsensical and provokes a
+diagnostic from <i>tbl</i>.</p></td></tr>
+</table>
+
+<h3>Table data
+<a name="Table data"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The table data
+come after the format specification. Each input line
+corresponds to a table row, except that a backslash at the
+end of a line of table data continues an entry on the next
+input line. (Text blocks, discussed below, also spread table
+entries across multiple input lines.) Table entries within a
+row are separated in the input by a tab character by
+default; see the <b>tab</b> region option above. Excess
+entries in a row of table data (those that have no
+corresponding column descriptor, not even an implicit one
+arising from rectangularization of the table) are discarded
+with a diagnostic message. <i>roff</i> control lines are
+accepted between rows of table data and within text blocks.
+If you wish to visibly mark an empty table entry in the
+document source, populate it with the <b>\&amp;</b>
+<i>roff</i> dummy character. The table data are interrupted
+by a line consisting of the <b>.T&amp;</b> input token, and
+conclude with the line <b>.TE</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Ordinarily, a
+table entry is typeset rigidly. It is not filled, broken,
+hyphenated, adjusted, or populated with additional
+inter-sentence space. <i>tbl</i> instructs the formatter to
+measure each table entry as it occurs in the input, updating
+the width required by its corresponding column. If the
+<b>z</b> modifier applies to the column, this measurement is
+ignored; if <b>w</b> applies and its argument is larger than
+this width, that argument is used instead. In contrast to
+conventional <i>roff</i> input (within a paragraph, say),
+changes to text formatting, such as font selection or
+vertical spacing, do not persist between entries.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Several forms of
+table entry are interpreted specially.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">If a table row contains only an
+underscore or equals sign (<b>_</b> or <b>=</b>), a single
+or double horizontal rule (line), respectively, is drawn
+across the table at that point.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>A table entry containing only <b>_</b> or <b>=</b> on an
+otherwise populated row is replaced by a single or double
+horizontal rule, respectively, joining its neighbors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Prefixing a lone underscore or equals sign with a
+backslash also has meaning. If a table entry consists only
+of <b>\_</b> or <b>\=</b> on an otherwise populated row, it
+is replaced by a single or double horizontal rule,
+respectively, that does <i>not</i> (quite) join its
+neighbors.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>A table entry consisting of <b>\R</b><i>x</i>, where
+<i>x&nbsp;</i>is any <i>roff</i> ordinary or special
+character, is replaced by enough repetitions of the glyph
+corresponding to&nbsp;<i>x</i> to fill the column, albeit
+without joining its neighbors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>On any row but the first, a table entry of <b>\^</b>
+causes the entry above it to span down into the current
+one.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">On occasion,
+these special tokens may be required as literal table data.
+To use either <b>_</b> or <b>=</b> literally and alone in an
+entry, prefix or suffix it with the <i>roff</i> dummy
+character <b>\&amp;</b>. To express <b>\_</b>, <b>\=</b>, or
+<b>\R</b>, use a <i>roff</i> escape sequence to interpolate
+the backslash (<b>\e</b> or <b>\[rs]</b>). A reliable way to
+emplace the <b>\^</b> glyph sequence within a table entry is
+to use a pair of <i>groff</i> special character escape
+sequences (<b>\[rs]\[ha]</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Rows of table
+entries can be interleaved with <i>groff</i> control lines;
+these do not count as table data. On such lines the default
+control character (<b>.</b>) must be used (and not changed);
+the no-break control character is not recognized. To start
+the first table entry in a row with a dot, precede it with
+the <i>roff</i> dummy character <b>\&amp;</b>.</p>
+
+<h3>Text blocks
+<a name="Text blocks"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">An ordinary
+table entry&rsquo;s contents can make a column, and
+therefore the table, excessively wide; the table then
+exceeds the line length of the page, and becomes ugly or is
+exposed to truncation by the output device. When a table
+entry requires more conventional typesetting, breaking
+across more than one output line (and thereby increasing the
+height of its row), it can be placed within a <i>text
+block.</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>tbl</i>
+interprets a table entry beginning with
+&ldquo;<b>T{</b>&rdquo; at the end of an input line not as
+table data, but as a token starting a text block. Similarly,
+&ldquo;<b>T}</b>&rdquo; at the start of an input line ends a
+text block; it must also end the table entry. Text block
+tokens can share an input line with other table data
+(preceding <b>T{</b> and following <b>T}</b>). Input lines
+between these tokens are formatted in a diversion by
+<i>troff</i>. Text blocks cannot be nested. Multiple text
+blocks can occur in a table row.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Text blocks are
+formatted as was the text prior to the table, modified by
+applicable column descriptors. Specifically, the classifiers
+<b>A</b>, <b>C</b>, <b>L</b>, <b>N</b>, <b>R</b>, and
+<b>S</b> determine a text block&rsquo;s <i>alignment</i>
+within its cell, but not its <i>adjustment.</i> Add
+<b>na</b> or <b>ad</b> requests to the beginning of a text
+block to alter its adjustment distinctly from other text in
+the document. As with other table entries, when a text block
+ends, any alterations to formatting parameters are
+discarded. They do not affect subsequent table entries, not
+even other text blocks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If <b>w</b> or
+<b>x</b> modifiers are not specified for <i>all</i> columns
+of a text block&rsquo;s span, the default length of the text
+block (more precisely, the line length used to process the
+text block diversion) is computed as
+<i>L</i>&times;<i>C</i>/(<i>N</i>+1), where <i>L</i> is the
+current line length, <i>C</i> the number of columns spanned
+by the text block, and <i>N</i> the number of columns in the
+table. If necessary, you can also control a text
+block&rsquo;s width by including an <b>ll</b> (line length)
+request in it prior to any text to be formatted. Because a
+diversion is used to format the text block, its height and
+width are subsequently available in the registers <b>dn</b>
+and <b>dl</b>, respectively.</p>
+
+<h3>roff interface
+<a name="roff interface"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The register
+<b>TW</b> stores the width of the table region in basic
+units; it can&rsquo;t be used within the region itself, but
+is defined before the <b>.TE</b> token is output so that a
+<i>groff</i> macro named <b>TE</b> can make use of it.
+<b>T.</b> is a Boolean-valued register indicating whether
+the bottom of the table is being processed. The <b>#T</b>
+register marks the top of the table. Avoid using these names
+for any other purpose.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>tbl</i> also
+defines a macro <b>T#</b> to produce the bottom and side
+lines of a boxed table. While <i>tbl</i> itself arranges for
+the output to include a call of this macro at the end of
+such a table, it can also be used by macro packages to
+create boxes for multi-page tables by calling it from a page
+footer macro that is itself called by a trap planted near
+the bottom of the page. See section
+&ldquo;Limitations&rdquo; below for more on multi-page
+tables.</p>
+
+<p style="margin-left:9%; margin-top: 1em">GNU <i>tbl</i>
+internally employs register, string, macro, and diversion
+names beginning with the numeral&nbsp;<b>3</b>. A document
+to be preprocessed with GNU <i>tbl</i> should not use any
+such identifiers.</p>
+
+<h3>Interaction with eqn
+<a name="Interaction with eqn"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>tbl</i>
+should always be called before
+<a href="man:eqn(1)"><i>eqn</i>(1)</a>.
+(<a href="man:groff(1)"><i>groff</i>(1)</a> automatically
+arranges preprocessors in the correct order.) Don&rsquo;t
+call the <b>EQ</b> and <b>EN</b> macros within tables;
+instead, set up delimiters in your <i>eqn</i> input and use
+the <b>delim</b> region option so that <i>tbl</i> will
+recognize them.</p>
+
+<h3>GNU tbl enhancements
+<a name="GNU tbl enhancements"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In addition to
+extensions noted above, GNU <i>tbl</i> removes constraints
+endured by users of AT&amp;T <i>tbl</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Region options can be specified
+in any lettercase.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>There is no limit on the number of columns in a table,
+regardless of their classification, nor any limit on the
+number of text blocks.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>All table rows are considered when deciding column
+widths, not just those occurring in the first 200 input
+lines of a region. Similarly, table continuation
+(<b>.T&amp;</b>) tokens are recognized outside a
+region&rsquo;s first 200 input lines.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Numeric and alphabetic entries may appear in the same
+column.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Numeric and alphabetic entries may span
+horizontally.</p> </td></tr>
+</table>
+
+<h3>Using GNU tbl within macros
+<a name="Using GNU tbl within macros"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can embed a
+table region inside a macro definition. However, since
+<i>tbl</i> writes its own macro definitions at the beginning
+of each table region, it is necessary to call end macros
+instead of ending macro definitions with
+&ldquo;<b>..</b>&rdquo;. Additionally, the escape character
+must be disabled.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Not all
+<i>tbl</i> features can be exercised from such macros
+because <i>tbl</i> is a <i>roff</i> preprocessor: it sees
+the input earlier than <i>troff</i> does. For example,
+vertically aligning decimal separators fails if the numbers
+containing them occur as macro or string parameters; the
+alignment is performed by <i>tbl</i> itself, which sees only
+<b>\$1</b>, <b>\$2</b>, and so on, and therefore can&rsquo;t
+recognize a decimal separator that only appears later when
+<i>troff</i> interpolates a macro or string definition.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using <i>tbl</i>
+macros within conditional input (that is, contingent upon an
+<b>if</b>, <b>ie</b>, <b>el</b>, or <b>while</b> request)
+can result in misleading line numbers in subsequent
+diagnostics. <i>tbl</i> unconditionally injects its output
+into the source document, but the conditional branch
+containing it may not be taken, and if it is not, the
+<b>lf</b> requests that <i>tbl</i> injects to restore the
+source line number cannot take effect. Consider copying the
+input line counter register <b>c.</b> and restoring its
+value at a convenient location after applicable
+arithmetic.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-C</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Enable AT&amp;T compatibility
+mode: recognize <b>.TS</b> and <b>.TE</b> even when followed
+by a character other than space or newline. Furthermore,
+interpret the uninterpreted leader escape sequence
+<b>\a</b>.</p> </td></tr>
+</table>
+
+<h2>Limitations
+<a name="Limitations"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Multi-page
+tables, if boxed and/or if you want their column headings
+repeated after page breaks, require support at the time the
+document is formatted. A convention for such support has
+arisen in macro packages such as <i>ms</i>, <i>mm</i>, and
+<i>me</i>. To use it, follow the <b>.TS</b> token with a
+space and then &ldquo;<b>H</b>&rdquo;; this will be
+interpreted by the formatter as a <b>TS</b> macro call with
+an <b>H</b> argument. Then, within the table data, call the
+<b>TH</b> macro; this informs the macro package where the
+headings end. If your table has no such heading rows, or you
+do not desire their repetition, call <b>TH</b> immediately
+after the table format specification. If a multi-page table
+is boxed or has repeating column headings, do not enclose it
+with keep/release macros, or divert it in any other way.
+Further, the <b>bp</b> request will not cause a page break
+in a &ldquo;<b>TS H</b>&rdquo; table. Define a macro to wrap
+<b>bp</b>: invoke it normally if there is no current
+diversion. Otherwise, pass the macro call to the enclosing
+diversion using the transparent line escape sequence
+<b>\!</b>; this will &ldquo;bubble up&rdquo; the page break
+to the output device. See section &ldquo;Examples&rdquo;
+below for a demonstration.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Double
+horizontal rules are not supported by
+<a href="man:grotty(1)"><i>grotty</i>(1)</a>; single rules
+are used instead. <i>grotty</i> also ignores half-line
+motions, so the <b>u</b> column modifier has no effect. On
+terminal devices (&ldquo;<i>nroff&nbsp;</i>mode&rdquo;),
+horizontal rules and box borders occupy a full vee of space;
+this amount is doubled for <b>doublebox</b> tables. Tables
+using these features thus require more vertical space in
+<i>nroff</i> mode than in <i>troff</i> mode: write <b>ne</b>
+requests accordingly. Vertical rules between columns are
+drawn in the space between columns in <i>nroff</i> mode;
+using double vertical rules and/or reducing the column
+separation below the default can make them ugly or
+overstrike them with table data.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A text block
+within a table must be able to fit on one page.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using <b>\a</b>
+to put leaders in table entries does not work in GNU
+<i>tbl</i>, except in compatibility mode. This is correct
+behavior: <b>\a</b> is an <i>uninterpreted</i> leader. You
+can still use the <i>roff</i> leader character (Control+A)
+or define a string to use <b>\a</b> as it was designed: to
+be interpreted only in copy mode.</p>
+
+<p style="margin-left:18%; margin-top: 1em">.ds a \a <br>
+.TS <br>
+box center tab(;); <br>
+Lw(2i)0 L. <br>
+Population\*a;6,327,119 <br>
+.TE</p>
+
+<p style="margin-left:9%; margin-top: 1em">A leading and/or
+trailing <b>|</b> in a format specification, such as
+&ldquo;<b>|LCR|.</b>&rdquo;, produces an en space between
+the vertical rules and the content of the adjacent columns.
+If no such space is desired (so that the rule abuts the
+content), you can introduce &ldquo;dummy&rdquo; columns with
+zero separation and empty corresponding table entries before
+and/or after.</p>
+
+<p style="margin-left:18%; margin-top: 1em">.TS <br>
+center tab(#); <br>
+R0|L C R0|L. <br>
+_ <br>
+#levulose#glucose#dextrose# <br>
+_ <br>
+.TE</p>
+
+<p style="margin-left:9%; margin-top: 1em">These dummy
+columns have zero width and are therefore invisible;
+unfortunately they usually don&rsquo;t work as intended on
+terminal devices.</p>
+
+<h2>Examples
+<a name="Examples"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">It can be easier
+to acquire the language of <i>tbl</i> through examples than
+formal description, especially at first.</p>
+
+<p style="margin-left:18%; margin-top: 1em">.TS <br>
+box center tab(#); <br>
+Cb Cb <br>
+L L. <br>
+Ability#Application <br>
+Strength#crushes a tomato <br>
+Dexterity#dodges a thrown tomato <br>
+Constitution#eats a month-old tomato without becoming ill
+<br>
+Intelligence#knows that a tomato is a fruit <br>
+Wisdom#chooses \f[I]not\f[] to put tomato in a fruit salad
+<br>
+Charisma#sells obligate carnivores tomato-based fruit salads
+<br>
+.TE</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>A</b> and
+<b>N</b> column classifiers can be easier to grasp in visual
+rendering than in description.</p>
+
+<p style="margin-left:18%; margin-top: 1em">.TS <br>
+center tab(;); <br>
+CbS,LN,AN. <br>
+Daily energy intake (in MJ) <br>
+Macronutrients <br>
+.\&quot; assume 3 significant figures of precision <br>
+Carbohydrates;4.5 <br>
+Fats;2.25 <br>
+Protein;3 <br>
+.T&amp; <br>
+LN,AN. <br>
+Mineral <br>
+Pu-239;14.6 <br>
+_ <br>
+.T&amp; <br>
+LN. <br>
+Total;\[ti]24.4 <br>
+.TE</p>
+
+<p style="margin-left:9%; margin-top: 1em">Next,
+we&rsquo;ll lightly adapt a compact presentation of
+spanning, vertical alignment, and zero-width column
+modifiers from the <i>mandoc</i> reference for its
+<i>tbl</i> interpreter. It rewards close study.</p>
+
+<p style="margin-left:18%; margin-top: 1em">.TS <br>
+box center tab(:); <br>
+Lz S | Rt <br>
+Ld| Cb| ^ <br>
+^ | Rz S. <br>
+left:r <br>
+l:center: <br>
+:right <br>
+.TE</p>
+
+<p style="margin-left:9%; margin-top: 1em">Row staggering
+is not visually achievable on terminal devices, but a table
+using it can remain comprehensible nonetheless.</p>
+
+<p style="margin-left:18%; margin-top: 1em">.TS <br>
+center tab(|); <br>
+Cf(BI) Cf(BI) Cf(B), C C Cu. <br>
+n|n\f[B]\[tmu]\f[]n|difference <br>
+1|1 <br>
+2|4|3 <br>
+3|9|5 <br>
+4|16|7 <br>
+5|25|9 <br>
+6|36|11 <br>
+.TE</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some <i>tbl</i>
+features cannot be illustrated in the limited environment of
+a portable man page.</p>
+
+<p style="margin-left:9%; margin-top: 1em">We can define a
+macro outside of a <i>tbl</i> region that we can call from
+within it to cause a page break inside a multi-page boxed
+table. You can choose a different name; be sure to change
+both occurrences of &ldquo;BP&rdquo;.</p>
+
+<p style="margin-left:18%; margin-top: 1em">.de BP <br>
+. ie '\\n(.z'' .bp \\$1 <br>
+. el \!.BP \\$1 <br>
+..</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&ldquo;Tbl&mdash;A
+Program to Format Tables&rdquo;, by M. E. Lesk, 1976
+(revised 16 January 1979), AT&amp;T Bell Laboratories
+Computing Science Technical Report No. 49.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The spanning
+example above was taken from
+<a href="https://man.openbsd.org/tbl.7"><i>mandoc</i>&rsquo;s
+man page for its <i>tbl</i> implementation</a>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:troff(1)"><i>troff</i>(1)</a></p>
+<hr>
+</body>
+</html>

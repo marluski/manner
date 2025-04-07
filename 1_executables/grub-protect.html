@@ -1,0 +1,175 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:46 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GRUB-PROTECT</title>
+
+</head>
+<body>
+
+<h1 align="center">GRUB-PROTECT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grub-protect -
+protect a disk key with a key protector</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>grub-protect</b>
+[<i>OPTION</i>...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grub-protect
+helps to protect a disk encryption key with a specified key
+protector.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Protect a
+cleartext key using a GRUB key protector that can retrieve
+the key during boot to unlock fully-encrypted disks
+automatically. <b><br>
+-a</b>, <b>--action</b>=<i>add</i>|remove</p>
+
+<p style="margin-left:18%;">Add or remove a key protector
+to or from a key.</p>
+
+<p style="margin-left:9%;"><b>-p</b>,
+<b>--protector</b>=<i>tpm2</i></p>
+
+<p style="margin-left:18%;">Set key protector to use (only
+tpm2 is currently supported).</p>
+
+
+<p style="margin-left:9%;"><b>--tpm2-asymmetric</b>=<i>TYPE</i>
+Set the type of SRK: RSA (RSA2048) and ECC</p>
+
+<p style="margin-left:18%;">(ECC_NIST_P256).(default:
+ECC)</p>
+
+
+<p style="margin-left:9%;"><b>--tpm2-bank</b>=<i>ALG</i></p>
+
+<p style="margin-left:18%;">Set the bank of PCRs used to
+authorize key release: SHA1, SHA256, SHA384, or SHA512.
+(default: SHA256)</p>
+
+
+<p style="margin-left:9%;"><b>--tpm2-device</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Set the path to the TPM2
+device. (default: <i>/dev/tpm0</i>)</p>
+
+<p style="margin-left:9%;"><b>--tpm2-evict</b></p>
+
+<p style="margin-left:18%;">Evict a previously persisted
+SRK from the TPM, if any.</p>
+
+
+<p style="margin-left:9%;"><b>--tpm2-keyfile</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Set the path to a file that
+contains the cleartext key to protect.</p>
+
+
+<p style="margin-left:9%;"><b>--tpm2-outfile</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">Set the path to the file that
+will contain the key after sealing (must be accessible to
+GRUB during boot).</p>
+
+
+<p style="margin-left:9%;"><b>--tpm2-pcrs</b>=<i>0[</i>,1]...</p>
+
+<p style="margin-left:18%;">Set a comma-separated list of
+PCRs used to authorize key release e.g., &rsquo;7,11&rsquo;.
+Please be aware that PCR 0&#732;7 are used by the firmware
+and the measurement result may change after a firmware
+update (for baremetal systems) or a package (OVMF/SLOF)
+update in the VM host. This may lead to the failure of key
+unsealing. (default: 7)</p>
+
+
+<p style="margin-left:9%;"><b>--tpm2-srk</b>=<i>NUM</i></p>
+
+<p style="margin-left:18%;">Set the SRK handle if the SRK
+is to be made persistent.</p>
+
+<p style="margin-left:9%;"><b>--tpm2key</b></p>
+
+<p style="margin-left:18%;">Use TPM 2.0 Key File
+format.</p>
+
+<p style="margin-left:9%;">-?, <b>--help</b></p>
+
+<p style="margin-left:18%;">give this help list</p>
+
+<p style="margin-left:9%;"><b>--usage</b></p>
+
+<p style="margin-left:18%;">give a short usage message</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">print program version</p>
+
+<p style="margin-left:9%; margin-top: 1em">Mandatory or
+optional arguments to long options are also mandatory or
+optional for any corresponding short options.</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+&lt;bug-grub@gnu.org&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <b>grub-protect</b> is maintained as a
+Texinfo manual. If the <b>info</b> and <b>grub-protect</b>
+programs are properly installed at your site, the
+command</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>info
+grub-protect</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+<hr>
+</body>
+</html>

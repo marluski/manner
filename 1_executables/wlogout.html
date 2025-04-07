@@ -1,0 +1,250 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>wlogout</title>
+
+</head>
+<body>
+
+<h1 align="center">wlogout</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wlogout - A
+Wayland logout menu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wlogout</b>
+[options...]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Show help message and stop</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l,
+--layout</b> &lt;layout&gt;</p>
+
+<p style="margin-left:14%;">Specify a custom layout
+file</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Show version number and
+stop</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C, -css</b>
+&lt;css&gt;</p>
+
+<p style="margin-left:14%;">Specify a custom css file</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b,
+--buttons-per-row</b> &lt;num&gt;</p>
+
+<p style="margin-left:14%;">Set the number of buttons per
+row</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--column-spacing</b> &lt;space&gt;</p>
+
+<p style="margin-left:14%;">Set space between buttons
+columns</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r,
+--row-spacing</b> &lt;space&gt;</p>
+
+<p style="margin-left:14%;">Set space between buttons
+rows</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m,
+--margin</b> &lt;padding&gt;</p>
+
+<p style="margin-left:14%;">Set margin on all sides</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-L,
+--margin-left</b> &lt;padding&gt;</p>
+
+<p style="margin-left:14%;">Set margin for left of
+buttons</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-R,
+--margin-right</b> &lt;padding&gt;</p>
+
+<p style="margin-left:14%;">Set margin for right of
+buttons</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-T,
+--margin-right</b> &lt;padding&gt;</p>
+
+<p style="margin-left:14%;">Set margin for top of
+buttons</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-B,
+--margin-right</b> &lt;padding&gt;</p>
+
+<p style="margin-left:14%;">Set margin for bottom of
+buttons</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p,
+--protocol</b> &lt;protocol&gt;</p>
+
+<p style="margin-left:14%;">Takes either layer-shell or
+xdg. The layer-shell allows transparency effects; however,
+only a few compositors correctly support it. The xdg
+protocol will work on almost all compositors, but does not
+allow for transparency.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--show-binds</b></p>
+
+<p style="margin-left:14%;">Will show the keybinds of a
+button by inserting the key needed to activate the button
+next to its label.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-P,
+--primary-monitor</b> &lt;num&gt;</p>
+
+<p style="margin-left:14%;">Select the monitor to display
+buttons on; Monitors are numbered from 0 up.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n,
+--no-span</b></p>
+
+<p style="margin-left:14%;">Stops wlogout from spanning
+across multiple monitors, can be combined with
+&lsquo;--primary-monitor&lsquo; to only appear on one
+monitor.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wlogout was
+created to replace oblogout with a native logout script for
+Wayland. It also seeks to be a faster alternative that does
+not rely on deprecated technology such as python 2; while
+maintaining a small code footprint.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can run
+wlogout from any Wayland environment and it should just
+work.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Wlogout searches
+for a layout and style.css file in the following locations,
+in this order:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>$XDG_CONFIG_HOME/wlogout/</p></td>
+<td width="54%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>/etc/wlogout/</p></td>
+<td width="54%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>/usr/local/etc/wlogout</p></td>
+<td width="54%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If unset,
+$XDG_CONFIG_HOME defaults to <b>&#732;/.config/</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An error is
+raised when no layout file is found; However, the style.css
+file is optional. If you would like to customise either it
+is recommended that you copy the defaults from
+<b>/etc/wlogout/</b> into <b>&#732;/.config</b> and make any
+changes there.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Haden Collins &lt;collinshaden@gmail.com&gt; for more
+information about wlogout, see
+&lt;https://github.com/ArtsyMacaw/wlogout&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wlogout</b>(5)</p>
+<hr>
+</body>
+</html>

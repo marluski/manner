@@ -1,0 +1,373 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:10 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>osinfo-query</title>
+
+</head>
+<body>
+
+<h1 align="center">osinfo-query</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#PROPERTY NAMES">PROPERTY NAMES</a><br>
+<a href="#OS">OS</a><br>
+<a href="#PLATFORM">PLATFORM</a><br>
+<a href="#DEVICE">DEVICE</a><br>
+<a href="#DEPLOYMENT">DEPLOYMENT</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">osinfo-query -
+Query information in the database</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">osinfo-query
+[OPTIONS...] TYPE [CONDITION-1 [CONDITION-2 ...]]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+&quot;osinfo-query&quot; command allows extraction of
+information from the database. <b>TYPE</b> can be one of
+&quot;os&quot;, &quot;platform&quot;, &quot;device&quot;, or
+&quot;deployment&quot;. With no conditions specified, all
+entities of the given type will be listed.</p>
+
+<p style="margin-left:9%; margin-top: 1em"># List all
+operating systems <br>
+$ osinfo-query os <br>
+Short ID | Name ... <br>
+----------------------+----------- <br>
+centos-6.0 | CentOS 6.0 ... <br>
+centos-6.1 | CentOS 6.1 ... <br>
+...</p>
+
+<p style="margin-left:9%; margin-top: 1em">Conditions allow
+filtering based on specific properties of an entity. For
+example, to filter only distros from the Fedora Project,
+use</p>
+
+<p style="margin-left:9%; margin-top: 1em"># List all
+operating systems <br>
+$ osinfo-query os vendor=&quot;Fedora Project&quot; <br>
+Short ID | Name ... <br>
+----------------------+-------------- <br>
+fedora1 | Fedora Core 1 ... <br>
+fedora2 | Fedora Core 2 ... <br>
+...</p>
+
+<p style="margin-left:9%; margin-top: 1em">The set of
+fields which are printed can be controlled using the
+<b>--fields</b> command line argument:</p>
+
+<p style="margin-left:9%; margin-top: 1em"># List all
+operating systems <br>
+$ osinfo-query --fields=short-id,version os
+vendor=&quot;Fedora Project&quot; <br>
+Short ID | Version <br>
+----------------------+---------- <br>
+fedora1 | 1 <br>
+fedora2 | 2 <br>
+...</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s
+PROPERTY</b>, <b>--sort-key PROPERTY</b></p>
+
+<p style="margin-left:19%;">Set the data sorting key.
+Defaults sorting the first column</p>
+
+<p style="margin-left:9%;"><b>-f
+PROPERTY1,PROPERTY2,...</b>, <b>--fields
+PROPERTY1,PROPERTY2,...</b></p>
+
+<p style="margin-left:19%;">Set the visibility of
+properties in output</p>
+
+<h2>PROPERTY NAMES
+<a name="PROPERTY NAMES"></a>
+</h2>
+
+
+<h3>OS
+<a name="OS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Valid property
+names for the &quot;os&quot; type are: <b><br>
+short-id</b></p>
+
+<p style="margin-left:14%;">The short OS identifier</p>
+
+<p style="margin-left:9%;"><b>name</b></p>
+
+<p style="margin-left:14%;">The long OS name</p>
+
+<p style="margin-left:9%;"><b>version</b></p>
+
+<p style="margin-left:14%;">The OS version string</p>
+
+<p style="margin-left:9%;"><b>family</b></p>
+
+<p style="margin-left:14%;">The OS kernel family</p>
+
+<p style="margin-left:9%;"><b>vendor</b></p>
+
+<p style="margin-left:14%;">The OS vendor</p>
+
+<p style="margin-left:9%;"><b>release-date</b></p>
+
+<p style="margin-left:14%;">The OS release date</p>
+
+<p style="margin-left:9%;"><b>eol-date</b></p>
+
+<p style="margin-left:14%;">The OS end-of-life date</p>
+
+<p style="margin-left:9%;"><b>codename</b></p>
+
+<p style="margin-left:14%;">The OS code name</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>id</b></p></td>
+<td width="2%"></td>
+<td width="22%">
+
+
+<p>The OS identifier</p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<h3>PLATFORM
+<a name="PLATFORM"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Valid property
+names for the &quot;platform&quot; type are: <b><br>
+short-id</b></p>
+
+<p style="margin-left:14%;">The short platform
+identifier</p>
+
+<p style="margin-left:9%;"><b>name</b></p>
+
+<p style="margin-left:14%;">The long platform name</p>
+
+<p style="margin-left:9%;"><b>version</b></p>
+
+<p style="margin-left:14%;">The platform version string</p>
+
+<p style="margin-left:9%;"><b>vendor</b></p>
+
+<p style="margin-left:14%;">The platform vendor</p>
+
+<p style="margin-left:9%;"><b>release-date</b></p>
+
+<p style="margin-left:14%;">The platform release date</p>
+
+<p style="margin-left:9%;"><b>eol-date</b></p>
+
+<p style="margin-left:14%;">The platform end-of-life
+date</p>
+
+<p style="margin-left:9%;"><b>codename</b></p>
+
+<p style="margin-left:14%;">The platform code name</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>id</b></p></td>
+<td width="2%"></td>
+<td width="30%">
+
+
+<p>The platform identifier</p></td>
+<td width="56%">
+</td></tr>
+</table>
+
+<h3>DEVICE
+<a name="DEVICE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Valid property
+names for the &quot;device&quot; type are: <b><br>
+name</b></p>
+
+<p style="margin-left:14%;">The device name</p>
+
+<p style="margin-left:9%;"><b>product</b></p>
+
+<p style="margin-left:14%;">The device product name</p>
+
+<p style="margin-left:9%;"><b>product-id</b></p>
+
+<p style="margin-left:14%;">The device product ID
+string</p>
+
+<p style="margin-left:9%;"><b>vendor</b></p>
+
+<p style="margin-left:14%;">The device vendor name</p>
+
+<p style="margin-left:9%;"><b>vendor-id</b></p>
+
+<p style="margin-left:14%;">The device vendor ID string</p>
+
+<p style="margin-left:9%;"><b>class</b></p>
+
+<p style="margin-left:14%;">The device type class</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>bus</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>The device bus type</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>id</b></p></td>
+<td width="1%"></td>
+<td width="27%">
+
+
+<p>The device identifier</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h3>DEPLOYMENT
+<a name="DEPLOYMENT"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Valid property
+names for the &quot;deployment&quot; type are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>id</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em">The deployment identifier</p></td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The exit status
+will be 0 if matching entries were found, or 1 if not
+matches were found</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>osinfo-db-validate</b>(1),
+<b>osinfo-detect</b>(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Daniel P.
+Berrange &lt;berrange@redhat.com&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2012, 2014 Red Hat, Inc.</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&quot;osinfo-query&quot;
+is distributed under the termsof the GNU LGPL v2+ license.
+This is free software; see the source for copying
+conditions. There is NO warranty; not even for
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE</p>
+<hr>
+</body>
+</html>

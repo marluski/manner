@@ -1,0 +1,160 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pw-loopback</title>
+
+</head>
+<body>
+
+<h1 align="center">pw-loopback</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pw-loopback -
+PipeWire loopback client</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-loopback</b>
+[<i>options</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>pw-loopback</i> program is a PipeWire client that uses
+the PipeWire loopback module to create loopback nodes, with
+configuration given via the command-line options.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h |
+--help</b></p>
+
+<p style="margin-left:14%;">Show help.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r |
+--remote=NAME</b></p>
+
+<p style="margin-left:14%;">The name of the <i>remote</i>
+instance to connect to. If left unspecified, a connection is
+made to the default PipeWire instance.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n |
+--name=NAME</b></p>
+
+<p style="margin-left:14%;">Name of the loopback node</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-g |
+--group=NAME</b></p>
+
+<p style="margin-left:14%;">Name of the loopback node
+group</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c |
+--channels=NUMBER</b></p>
+
+<p style="margin-left:14%;">Number of channels to
+provide</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m |
+--channel-map=MAP</b></p>
+
+<p style="margin-left:14%;">Channel map (default [ FL, FR
+])</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l |
+--latency=LATENCY</b></p>
+
+<p style="margin-left:14%;">Desired latency in ms</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d |
+--delay=DELAY</b></p>
+
+<p style="margin-left:14%;">Added delay in seconds
+(floating point allowed)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C |
+--capture=TARGET</b></p>
+
+<p style="margin-left:14%;">Target device to capture
+from</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-P |
+--playback=TARGET</b></p>
+
+<p style="margin-left:14%;">Target device to play to</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i |
+--capture-props=PROPS</b></p>
+
+<p style="margin-left:14%;">Wanted properties of capture
+node (in JSON)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o |
+--playback-props=PROPS</b></p>
+
+<p style="margin-left:14%;">Wanted properties of capture
+node (in JSON)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire(1)</b>,
+<b>pw-cat(1)</b>, <b>pactl(1)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Other ways to
+create loopback nodes are adding the loopback module in the
+configuration of a PipeWire daemon, or loading the loopback
+module using Pulseaudio commands (pactl load-module
+module-loopback ...).</p>
+<hr>
+</body>
+</html>

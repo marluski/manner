@@ -1,0 +1,308 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>libnbd-release-notes-1.4</title>
+
+</head>
+<body>
+
+<h1 align="center">libnbd-release-notes-1.4</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Security">Security</a><br>
+<a href="#New APIs">New APIs</a><br>
+<a href="#New features">New features</a><br>
+<a href="#Documentation">Documentation</a><br>
+<a href="#Tools">Tools</a><br>
+<a href="#Tests">Tests</a><br>
+<a href="#Other improvements and bug fixes">Other improvements and bug fixes</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">libnbd-release-notes-1.4
+- release notes for libnbd 1.4</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+release notes for libnbd stable release 1.4. This describes
+the major changes since 1.2.</p>
+
+<p style="margin-left:9%; margin-top: 1em">libnbd 1.4.0 was
+released on 25 August 2020.</p>
+
+<h3>Security
+<a name="Security"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">There were no
+security issues found in this release. If you find a
+security issue, please read <i>SECURITY</i> in the source
+(online here:
+https://gitlab.com/nbdkit/libnbd/blob/master/SECURITY). To
+find out about previous security issues in libnbd, see
+<b>libnbd-security</b>(3).</p>
+
+<h3>New APIs
+<a name="New APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_set_opt_mode</b>(3)
+<b><br>
+nbd_get_opt_mode</b>(3) <b><br>
+nbd_aio_is_negotiating</b>(3)</p>
+
+<p style="margin-left:14%;">libnbd 1.4 adds a new
+&ldquo;negotiating&rdquo; state during NBD handshaking. For
+backwards compatibility programs must request this before
+starting the connection by calling
+<b>nbd_set_opt_mode</b>(3). You can find out if the
+connection is in this state by calling
+<b>nbd_aio_is_negotiating</b>(3).</p>
+
+<p style="margin-left:14%; margin-top: 1em">For an in-depth
+description of how this extra state can be used to negotiate
+server options, see &quot;CONTROLLING NEGOTIATION&quot; in
+<b>libnbd</b>(3).</p>
+
+<p style="margin-left:9%;"><b>nbd_aio_opt_abort</b>(3)
+<b><br>
+nbd_opt_abort</b>(3)</p>
+
+<p style="margin-left:14%;">During the negotiating state,
+abort the connection.</p>
+
+<p style="margin-left:9%;"><b>nbd_aio_opt_go</b>(3) <b><br>
+nbd_opt_go</b>(3)</p>
+
+<p style="margin-left:14%;">During the negotiating state,
+complete the handshake.</p>
+
+<p style="margin-left:9%;"><b>nbd_aio_opt_info</b>(3)
+<b><br>
+nbd_opt_info</b>(3)</p>
+
+<p style="margin-left:14%;">During the negotiating state,
+request full information about the server export.</p>
+
+<p style="margin-left:9%;"><b>nbd_aio_opt_list</b>(3)
+<b><br>
+nbd_opt_list</b>(3)</p>
+
+<p style="margin-left:14%;">During the negotiating state,
+request the list of exports that the server provides.</p>
+
+
+<p style="margin-left:9%;"><b>nbd_get_block_size</b>(3)</p>
+
+<p style="margin-left:14%;">Return the minimum, preferred
+or maximum block size constraints for requests sent to the
+server.</p>
+
+
+<p style="margin-left:9%;"><b>nbd_get_canonical_export_name</b>(3)</p>
+
+<p style="margin-left:14%;">Return the canonical export
+name that the server defaults to. This information may only
+be available if you call <b>nbd_set_full_info</b>(3) before
+connecting.</p>
+
+
+<p style="margin-left:9%;"><b>nbd_get_export_description</b>(3)</p>
+
+<p style="margin-left:14%;">Return the optional text
+description of the current export. This information may only
+be available if you call <b>nbd_set_full_info</b>(3) before
+connecting.</p>
+
+<p style="margin-left:9%;"><b>nbd_set_full_info</b>(3)
+<b><br>
+nbd_get_full_info</b>(3)</p>
+
+<p style="margin-left:14%;">Enable extended information
+about exports from the server.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Thanks: Eric
+Blake for all of the new APIs.</p>
+
+<h3>New features
+<a name="New features"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bindings are now
+available in the Go programming language.</p>
+
+<p style="margin-left:9%; margin-top: 1em">FreeBSD and
+OpenBSD are now fully supported platforms.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Bash tab
+completion is available for all of the command line
+tools.</p>
+
+<h3>Documentation
+<a name="Documentation"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Verbatim text in
+man pages that wrapped over several lines is now typeset
+correctly.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Links within the
+documentation have been enhanced, and are now checked for
+correctness.</p>
+
+<h3>Tools
+<a name="Tools"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">New
+<b>nbdcopy</b>(1) tool lets you copy between an NBD server
+and a local file, or stream to and from an NBD server.</p>
+
+<p style="margin-left:9%; margin-top: 1em">New
+<b>nbdinfo</b>(1) tool lets you print extended information
+about an NBD server&rsquo;s exports (Eric Blake).</p>
+
+<h3>Tests
+<a name="Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Test sockets are
+created in <i>/tmp</i> (instead of the local directory).
+This stops the test suite from failing if the local
+directory path is longer than the Unix domain socket maximum
+path length.</p>
+
+<h3>Other improvements and bug fixes
+<a name="Other improvements and bug fixes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Trace messages
+have been improved: long strings are truncated, strings with
+non-printable characters are escaped, and lists of strings
+are printed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The generator
+was split from a large single script into several small
+files. To build from git the OCaml bytecode compiler
+(<b>ocamlc</b>(1)) is now required instead of the
+interpreter (<b>ocaml</b>(1)).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Long login names
+are supported in <b>nbd_get_tls_username</b>(3).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The handle name
+in <b>nbdsh</b>(1) is now set to &quot;nbdsh&quot; (instead
+of a randomly generated name).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Compatibility
+with OCaml 4.10.0 and 4.11.0.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Python AIO
+buffer adds a new &quot;is_zero&quot; method allowing Python
+clients to do sparsification when copying.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Compatibility
+with Python 3.9.</p>
+
+<p style="margin-left:9%; margin-top: 1em">External C
+programs can now be compiled against libnbd&rsquo;s build
+directory using &quot;../libnbd/run ./configure&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Honggfuzz can be
+used as another external fuzzing option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fix compilation
+with glibc 2.32 which deprecates
+&quot;sys_errlist&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Many examples
+added or extended to demonstrate uses of the new APIs (Eric
+Blake).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Eric Blake</p>
+
+<p style="margin-left:9%; margin-top: 1em">Richard W.M.
+Jones</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

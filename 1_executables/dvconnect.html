@@ -1,0 +1,177 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ENCODE</title>
+
+</head>
+<body>
+
+<h1 align="center">ENCODE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AVAILABILITY">AVAILABILITY</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">dvconnect -
+receive or transmit raw DV using the video1394 device</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dvconnect</b>
+[ <b>options</b> ] <i>raw dv files or &rsquo;-- -&rsquo; for
+stdin/stdout</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>dvconnect</b></i>
+captures raw DV streams from or sends raw DV streams to the
+Linux IEEE 1394 video1394 device. <b><br>
+--version</b></p>
+
+<p style="margin-left:18%;">show dvconnect version
+number.</p>
+
+<p style="margin-left:9%;"><b>-s</b>, <b>--send</b></p>
+
+<p style="margin-left:18%;">send data instead of
+capturing.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">show status information while
+receiving / sending.</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--channel</b>=<i>number</i></p>
+
+<p style="margin-left:18%;">channel to send / receive on
+(range: 0 - 63, default = 63).</p>
+
+<p style="margin-left:9%;"><b>-k</b>,
+<b>--kbuffers</b>=<i>number</i></p>
+
+<p style="margin-left:18%;">number of kernel video1394
+frame buffers to use. default = 8.</p>
+
+
+<p style="margin-left:9%;"><b>--start-frame</b>=<i>count</i></p>
+
+<p style="margin-left:18%;">start at <i>count</i> frame
+(defaults to 0).</p>
+
+<p style="margin-left:9%;"><b>-e</b>,
+<b>--end-frame</b>=<i>count</i></p>
+
+<p style="margin-left:18%;">end at <i>count</i> frame
+(defaults to unlimited).</p>
+
+
+<p style="margin-left:9%;"><b>--cip-n-ntsc</b>=<i>number</i></p>
+
+<p style="margin-left:18%;">cip n ntsc timing counter
+(default: 2436).</p>
+
+
+<p style="margin-left:9%;"><b>--cip-d-ntsc</b>=<i>number</i></p>
+
+<p style="margin-left:18%;">cip d ntsc timing counter
+(default: 38400).</p>
+
+
+<p style="margin-left:9%;"><b>--syt-offset</b>=<i>number</i></p>
+
+<p style="margin-left:18%;">syt offset (default: 10000
+range: 10000-26000).</p>
+
+<p style="margin-left:9%;"><b>-b</b>,
+<b>--buffers</b>=<i>number</i></p>
+
+<p style="margin-left:18%;">max number of file io thread
+buffers to use. default = 250.</p>
+
+<p style="margin-left:9%;"><b>-u</b>,
+<b>--underrun-data</b>=<i>filename</i></p>
+
+<p style="margin-left:18%;">file with the frame to send in
+case of underruns.</p>
+
+<p style="margin-left:9%;"><b>-d</b>,
+<b>--device</b>=<i>filename</i></p>
+
+<p style="margin-left:18%;">Specify the video1394 device
+(default /dev/video1394/0).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Help Options
+<br>
+-<b>?</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Show help message.</p>
+
+<p style="margin-left:9%;"><b>--usage</b></p>
+
+<p style="margin-left:18%;">Display brief usage
+message.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>playdv</b>(1),<b>dubdv</b>(1),<b>encodedv</b>(1).</p>
+
+<h2>AVAILABILITY
+<a name="AVAILABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+http://libdv.sourceforge.net/ for the latest version.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dvconnect</b>
+was written by Peter Schlaile
+&lt;udbz@rz.uni-karlsruhe.de&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+is based on dvconnect&rsquo;s help message and was written
+by Dan Dennedy &lt;dan@dennedy.org&gt;.</p>
+<hr>
+</body>
+</html>

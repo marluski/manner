@@ -1,0 +1,415 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:05 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-TOKEN</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-TOKEN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#read-only">read-only</a><br>
+<a href="#cidr">cidr</a><br>
+<a href="#registry">registry</a><br>
+<a href="#otp">otp</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-token</b>
+- Manage your authentication tokens</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm token list
+<br>
+npm token revoke &lt;id|token&gt; <br>
+npm token create [--read-only] [--cidr=list]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+command is unaware of workspaces.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This lets you
+list, create and revoke authentication tokens.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>npm token list</b>: Shows a table of all active
+authentication tokens. You can request this as JSON with
+<b>--json</b> or tab-separated values with
+<b>--parseable</b>.</p> </td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">Read only token
+npm_1f&#8230; with id 7f3134 created 2017-10-21</p>
+
+<p style="margin-left:12%; margin-top: 1em">Publish token
+npm_af&#8230; with id c03241 created 2017-10-02 <br>
+with IP Whitelist: 192.168.0.1/24</p>
+
+<p style="margin-left:12%; margin-top: 1em">Publish token
+npm_&#8230; with id e0cf92 created 2017-10-02</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em"><b>npm token create
+[--read-only] [--cidr=&lt;cidr-ranges&gt;]</b>: Create a new
+authentication token. It can be <b>--read-only</b>, or
+accept a list of <b>CIDR</b> <i>&lang;
+https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing&rang;</i>
+ranges with which to limit use of this token. This will
+prompt you for your password, and, if you have two-factor
+authentication enabled, an otp.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Currently, the
+cli can not generate automation tokens. Please refer to the
+<b>docs website</b> <i>&lang;
+https://docs.npmjs.com/creating-and-viewing-access-tokens&rang;</i>
+for more information on generating automation tokens.</p>
+
+<p style="margin-left:12%; margin-top: 1em">Created publish
+token a73c9572-f1b9-8983-983d-ba3ac3cc913d</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em"><b>npm token revoke
+&lt;token|id&gt;</b>: Immediately removes an authentication
+token from the registry. You will no longer be able to use
+it. This can accept both complete tokens (such as those you
+get back from <b>npm token create</b>, and those found in
+your <b>.npmrc</b>), and ids as seen in the parseable or
+json output of <b>npm token list</b>. This will NOT accept
+the truncated token found in the normal <b>npm token
+list</b> output.</p></td></tr>
+</table>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>read-only
+<a name="read-only"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is used to
+mark a token as unable to publish when configuring limited
+access tokens with the <b>npm token create</b> command.</p>
+
+<h3>cidr
+<a name="cidr"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="62%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="62%">
+
+
+<p>Type: null or String (can be set multiple times)</p></td>
+<td width="24%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is a list
+of CIDR address to be used when configuring limited access
+tokens with the <b>npm token create</b> command.</p>
+
+<h3>registry
+<a name="registry"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">Default:
+&quot;https://registry.npmjs.org/&quot;</p> </td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p>Type: URL</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The base URL of
+the npm registry.</p>
+
+<h3>otp
+<a name="otp"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p>Type: null or String</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+one-time password from a two-factor authenticator.
+It&rsquo;s needed when publishing or changing package
+permissions with <b>npm access</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If not set, and
+a registry response fails with a challenge for a one-time
+password, npm will prompt on the command line for one.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p style="margin-top: 1em">npm help adduser</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>npm help registry</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>npm help config</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>npm help npmrc</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>npm help owner</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>npm help whoami</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>npm help profile</p></td>
+<td width="64%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

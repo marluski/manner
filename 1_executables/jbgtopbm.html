@@ -1,0 +1,237 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:25 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>JBGTOPBM</title>
+
+</head>
+<body>
+
+<h1 align="center">JBGTOPBM</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#STANDARDS">STANDARDS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">jbgtopbm - JBIG1
+to portable bitmap file converter</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jbgtopbm</b>
+[ <i>options</i> ] [ <i>input-file</i> | - [
+<i>output-file</i> ]]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Reads in a
+<i>JBIG1</i> bi-level image entity (BIE) from a file or
+standard input, decompresses it, and outputs a portable
+bitmap (PBM) file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>JBIG1</i> is
+a highly effective lossless compression algorithm for
+bi-level images (one bit per pixel), which is particularly
+suitable for scanned document pages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A <i>JBIG1</i>
+encoded image can be stored in several resolutions in one or
+several BIEs. All resolution layers except the lowest one
+are stored efficiently as differences to the next lower
+resolution layer. Options <b>-x</b> and <b>-y</b> can be
+used to stop the decompression at a specified maximal output
+image size. With option <b>-m</b> the input file can consist
+of multiple concatenated BIEs which contain different
+increasing resolution layers of the same image.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If more than one
+bit per pixel is stored in the JBIG1 file, then a PGM file
+will be produced.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>-</b></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em">A single hyphen instead of an
+input file name will cause <i>jbgtopbm</i> to read the data
+from standard input instead from a file.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>-x</b> <i>number</i></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p>Decode only up to the largest resolution layer which is
+still not more than <i>number</i> pixels wide. If no such
+resolution layer exists, then use the smallest one
+available.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>-y</b> <i>number</i></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p>Decode only up to the largest resolution layer which is
+still not more than <i>number</i> pixels high. If no such
+resolution layer exists, then use the smallest one
+available. Options <b>-x</b> and <b>-y</b> can also be used
+together in which case the largest layer that satisfies both
+limits will be selected.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>-m</b></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p>Process multiple concatenated BIEs. If there are bytes
+left after the final SDE in the first BIE, then with this
+option <i>jbgtopbm</i> will attempt to decode these as the
+start of another BIE that may contain higher resolution
+data. Normally, any remaining bytes will generate a warning
+message.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>-b</b></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p>Use binary values instead of Gray code words in order to
+decode pixel values from multiple bitplanes. This option has
+only an effect if the input has more than one bitplane and a
+PGM output file is produced. Note that the decoder has to be
+used in the same mode as the encoder and cannot determine
+from the BIE, whether Gray or binary code words were used by
+the encoder.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>-d</b></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p>Diagnose a single BIE. With this option, <i>jbgtopbm</i>
+will print a summary of the header information found in the
+input file, followed by a list of all PSCD and ESC marker
+sequences encountered until the end of the file is
+reached.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>-p</b> <i>number</i></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p>If the input contains multiple bitplanes, then extract
+only the specified single plane as a PBM file. The first
+plane has number 0.</p></td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Using standard
+input and standard output for binary data works only on
+systems where there is no difference between binary and text
+streams (e.g., Unix). On other systems (e.g., MS-DOS), using
+standard input or standard output may cause control
+characters like CR or LF to be inserted or deleted and this
+will damage the binary data.</p>
+
+<h2>STANDARDS
+<a name="STANDARDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program
+implements the <i>JBIG1</i> image coding algorithm as
+specified in ISO/IEC 11544:1993 and ITU-T T.82(1993).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>jbgtopbm</i> program is part of the <i>JBIG-KIT</i>
+package, which has been developed by Markus Kuhn. The most
+recent version of this portable <i>JBIG1</i> library and
+tools set is available from
+&lt;http://www.cl.cam.ac.uk/&#732;mgk25/jbigkit/&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pbm(5), pgm(5),
+pbmtojbg(1)</p>
+<hr>
+</body>
+</html>

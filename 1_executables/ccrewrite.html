@@ -1,0 +1,164 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:57 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONFIGURATION OPTIONS">CONFIGURATION OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ccrewrite -
+Rewrite CLR assemblies for runtime code contract
+verification.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ccrewrite
+--assembly=&lt;assembly&gt; [options]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Rewrite CLR
+assemblies to convert calls into the
+System.Diagnostics.Contracts namespace to perform runtime
+contract verification. This includes contract inheritance
+for virtual methods.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The assembly
+must have been built with the symbol CONTRACTS_FULL defined,
+otherwise the calls to the contract methods will have been
+removed by the compiler.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Currently only
+pre-conditions are supported, using the Contract.Requires()
+method. Contract inheritance for virtual methods is
+supported. Only a limited range of operations and types can
+be used within a pre-condition, an error message will be
+shown if ccrewrite is unable to process the specified
+assembly.</p>
+
+<h2>CONFIGURATION OPTIONS
+<a name="CONFIGURATION OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>--assembly
+&lt;assembly-name&gt;</i></p>
+
+<p style="margin-left:18%;">The assembly to rewrite. If no
+--output option is specified, then this file is overwritten
+with the rewritten version.</p>
+
+<p style="margin-left:9%;"><i>--debug</i></p>
+
+<p style="margin-left:18%;">Use debug information if
+available to improve the usefulness of contract failure
+messages.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>--help</i></p></td>
+<td width="1%"></td>
+<td width="70%">
+
+
+<p>Show help for ccrewrite, listing configuration
+options.</p> </td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--level &lt;level&gt;
+(default=4)</i></p>
+
+<p style="margin-left:18%;">Set which contract types are
+present in rewritten assembly: 0 = No contracts; 1 = Release
+requires; 2 = Requires; 3 = Ensures; 4 = Invariants; (Each
+level includes all previous levels)</p>
+
+<p style="margin-left:9%;"><i>--output
+&lt;file-name&gt;</i></p>
+
+<p style="margin-left:18%;">Write the rewritten assembly to
+the specified file. If this is not present then the input
+assembly file is overwritten with the rewritten version.</p>
+
+<p style="margin-left:9%;"><i>--rewrite
+(default=true)</i></p>
+
+<p style="margin-left:18%;">Rewrite the assembly. If false,
+then nothing is done.</p>
+
+<p style="margin-left:9%;"><i>--throwOnFailure
+(default=false)</i></p>
+
+<p style="margin-left:18%;">Throw a ContractException on
+unhandled contract failure. The default behaviour is to
+Assert.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by Chris
+Bacon</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2010 Chris Bacon. Released under MIT license.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

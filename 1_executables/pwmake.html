@@ -1,0 +1,127 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>PWMAKE</title>
+
+</head>
+<body>
+
+<h1 align="center">PWMAKE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#RETURN CODES">RETURN CODES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pwmake - simple
+tool for generating random relatively easily pronounceable
+passwords</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pwmake</b>
+<i>&lt;entropy-bits&gt;</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>pwmake</b></i>
+is a simple configurable tool for generating random and
+relatively easily pronounceable passwords. The tool allows
+you to specify the number of entropy bits that are used to
+generate the password.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The entropy is
+pulled from <i>/dev/urandom</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The minimum
+number of bits is <i>56</i> which is usable for passwords on
+systems/services where brute force attacks are of very
+limited rate of tries. The <i>64</i> bits should be adequate
+for applications where the attacker does not have direct
+access to the password hash file. For situations where the
+attacker might obtain the direct access to the password hash
+or the password is used as an encryption key <i>80</i> to
+<i>128</i> bits should be used depending on your level of
+paranoia.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Any
+<i>entropy-bits</i> value outside of the <i>56</i> to
+<i>256</i> bits range will be adjusted to fit within the
+allowed range.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The first and
+only argument is the number of bits of entropy used to
+generate the password.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>/etc/security/pwquality.conf</i>
+- The configuration file for the libpwquality library.</p>
+
+<h2>RETURN CODES
+<a name="RETURN CODES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pwmake</b>
+returns 0 on success, non zero on error.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pwscore</b>(1),
+<b>pam_pwquality</b>(8)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Tomas Mraz
+&lt;tmraz@redhat.com&gt;</p>
+<hr>
+</body>
+</html>

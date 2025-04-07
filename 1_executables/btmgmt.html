@@ -1,0 +1,179 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BTMGMT</title>
+
+</head>
+<body>
+
+<h1 align="center">BTMGMT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#AUTOMATION">AUTOMATION</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">btmgmt -
+interactive bluetooth management tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>btmgmt</b>
+[--options] [commands]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>btmgmt(1)</b>
+interactive bluetooth management tool. The tool issues
+commands to the Kernel using the Bluetooth Management
+socket, some commands may require net-admin capability in
+order to work since the Bluetooth Management interface is
+considered a low-level interface meant for the likes of
+<b>bluetoothd(8)</b>, it is not recommended for applications
+to use it directly as it may result in unexpected
+behavior.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i/--index</b></p>
+
+<p style="margin-left:18%;">Specify adapter index</p>
+
+<p style="margin-left:9%;"><b>-m-/-monitor</b></p>
+
+<p style="margin-left:18%;">Enable monitor output</p>
+
+<p style="margin-left:9%;"><b>-t/--timeout</b></p>
+
+<p style="margin-left:18%;">Timeout in seconds for
+non-interactive mode</p>
+
+<p style="margin-left:9%;"><b>-v/--version</b></p>
+
+<p style="margin-left:18%;">Display version</p>
+
+<p style="margin-left:9%;"><b>-i/--init-script</b></p>
+
+<p style="margin-left:18%;">Init script file</p>
+
+<p style="margin-left:9%;"><b>-h/--help</b></p>
+
+<p style="margin-left:18%;">Display help</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>main</b></p></td>
+<td width="4%"></td>
+<td width="31%">
+
+
+<p style="margin-top: 1em">See
+<b>bluetoothctl-mgmt(1)</b></p> </td>
+<td width="51%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>monitor</b></p>
+
+<p style="margin-left:18%;">See
+<b>bluetoothctl-monitor(1)</b></p>
+
+<h2>AUTOMATION
+<a name="AUTOMATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Two common ways
+to automate the tool are to pass the commands directly like
+in the follow example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">btmgmt
+&lt;&lt;EOF <br>
+list <br>
+show <br>
+EOF</p>
+
+<p style="margin-left:9%; margin-top: 1em">Or create a
+script and pass it as init-script:</p>
+
+<p style="margin-left:13%; margin-top: 1em">$ vi
+test-script.bt <br>
+list <br>
+show <br>
+quit <br>
+:wq <br>
+$ btmgmt --init-script=test-script</p>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:08 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-MERGE-FILE</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-MERGE-FILE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#GIT">GIT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">git-merge-file -
+Run a three-way file merge</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>git
+merge-file</i> [-L &lt;current-name&gt; [-L
+&lt;base-name&gt; [-L &lt;other-name&gt;]]] <br>
+[--ours|--theirs|--union] [-p|--stdout] [-q|--quiet]
+[--marker-size=&lt;n&gt;] <br>
+[--[no-]diff3] [--object-id] &lt;current&gt; &lt;base&gt;
+&lt;other&gt;</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Given three
+files <i>&lt;current&gt;</i>, <i>&lt;base&gt;</i> and
+<i>&lt;other&gt;</i>, <i>git merge-file</i> incorporates all
+changes that lead from <i>&lt;base&gt;</i> to
+<i>&lt;other&gt;</i> into <i>&lt;current&gt;</i>. The result
+ordinarily goes into <i>&lt;current&gt;</i>. <i>git
+merge-file</i> is useful for combining separate changes to
+an original. Suppose <i>&lt;base&gt;</i> is the original,
+and both <i>&lt;current&gt;</i> and <i>&lt;other&gt;</i> are
+modifications of <i>&lt;base&gt;</i>, then <i>git
+merge-file</i> combines both changes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A conflict
+occurs if both <i>&lt;current&gt;</i> and
+<i>&lt;other&gt;</i> have changes in a common segment of
+lines. If a conflict is found, <i>git merge-file</i>
+normally outputs a warning and brackets the conflict with
+lines containing &lt;&lt;&lt;&lt;&lt;&lt;&lt; and
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; markers. A typical conflict
+will look like this:</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">&lt;&lt;&lt;&lt;&lt;&lt;&lt;
+A <br>
+lines in file A <br>
+======= <br>
+lines in file B <br>
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; B</p>
+
+<p style="margin-left:9%; margin-top: 1em">If there are
+conflicts, the user should edit the result and delete one of
+the alternatives. When <b>--ours</b>, <b>--theirs</b>, or
+<b>--union</b> option is in effect, however, these conflicts
+are resolved favouring lines from <i>&lt;current&gt;</i>,
+lines from <i>&lt;other&gt;</i>, or lines from both
+respectively. The length of the conflict markers can be
+given with the <b>--marker-size</b> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<b>--object-id</b> is specified, exactly the same behavior
+occurs, except that instead of specifying what to merge as
+files, it is specified as a list of object IDs referring to
+blobs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The exit value
+of this program is negative on error, and the number of
+conflicts otherwise (truncated to 127 if there are more than
+that many conflicts). If the merge was clean, the exit value
+is 0.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>git
+merge-file</i> is designed to be a minimal clone of RCS
+<i>merge</i>; that is, it implements all of RCS
+<i>merge</i>'s functionality which is needed by
+<b>git</b>(1).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">--object-id</p>
+
+<p style="margin-left:14%;">Specify the contents to merge
+as blobs in the current repository instead of files. In this
+case, the operation must take place within a valid
+repository.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If the
+<b>-p</b> option is specified, the merged file (including
+conflicts, if any) goes to standard output as normal;
+otherwise, the merged file is written to the object store
+and the object ID of its blob is written to standard
+output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-L
+&lt;label&gt;</p>
+
+<p style="margin-left:14%;">This option may be given up to
+three times, and specifies labels to be used in place of the
+corresponding file names in conflict reports. That is,
+<b>git merge-file -L x -L y -L z a b c</b> generates output
+that looks like it came from files x, y and z instead of
+from files a, b and c.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-p</p>
+
+<p style="margin-left:14%;">Send results to standard output
+instead of overwriting <i>&lt;current&gt;</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-q</p>
+
+<p style="margin-left:14%;">Quiet; do not warn about
+conflicts.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--diff3</p>
+
+<p style="margin-left:14%;">Show conflicts in
+&quot;diff3&quot; style.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--zdiff3</p>
+
+<p style="margin-left:14%;">Show conflicts in
+&quot;zdiff3&quot; style.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--ours,
+--theirs, --union</p>
+
+<p style="margin-left:14%;">Instead of leaving conflicts in
+the file, resolve conflicts favouring our (or their or both)
+side of the lines.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--diff-algorithm={patience|minimal|histogram|myers}</p>
+
+<p style="margin-left:14%;">Use a different diff algorithm
+while merging. The current default is &quot;myers&quot;, but
+selecting more recent algorithm such as
+&quot;histogram&quot; can help avoid mismerges that occur
+due to unimportant matching lines (such as braces from
+distinct functions). See also <b>git-diff</b>(1)
+<b>--diff-algorithm</b>.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>git
+merge-file README.my README README.upstream</b></p>
+
+<p style="margin-left:14%;">combines the changes of
+README.my and README.upstream since README, tries to merge
+them and writes the result into README.my.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>git
+merge-file -L a -L b -L c tmp/a123 tmp/b234 tmp/c345</b></p>
+
+<p style="margin-left:14%;">merges tmp/a123 and tmp/c345
+with the base tmp/b234, but uses labels <b>a</b> and
+<b>c</b> instead of <b>tmp/a123</b> and <b>tmp/c345</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>git
+merge-file -p --object-id abc1234 def567 890abcd</b></p>
+
+<p style="margin-left:14%;">combines the changes of the
+blob abc1234 and 890abcd since def567, tries to merge them
+and writes the result to standard output</p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Part of the
+<b>git</b>(1) suite</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,171 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pgmtoy4m</title>
+
+</head>
+<body>
+
+<h1 align="center">pgmtoy4m</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pgmtoy4m -
+Convert mpeg2dec pgm and pgmpipe output to YUV4MPEG2</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pgmtoy4m</b>
+[<i>options</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pgmtoy4m</b>
+repacks the PGM output from <b>mpeg2dec</b> into YUV4MPEG2
+4:2:0p. No actual changes to the data are made. The data is
+unpacked from the quasi-PGM format and placed in YUV4MPEG2
+format with the specified sample aspect, frame rate and
+field order. Output must be either to a pipe or a file,
+leaving stdout as a terminal will elicit an error and the
+program will exit.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pgmtoy4m</b>
+accepts the following options: <b><br>
+-v</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Set verbosity level. (default:
+0)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="3%"></td>
+<td width="40%">
+
+
+<p>Print a usage summary and exit.</p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-i</b> <i>t|b|p</i></p>
+
+<p style="margin-left:15%;">Set the interlacing mode. Top
+field first (t), bottom field first (b) or progressive/none
+(p). (default: t)</p>
+
+<p style="margin-left:9%;"><b>-a</b> <i>sar</i></p>
+
+<p style="margin-left:15%;">Set the sample aspect ratio.
+(default: 10:11)</p>
+
+<p style="margin-left:9%;"><b>-r</b> <i>frame rate</i></p>
+
+<p style="margin-left:15%;">Set the frame rate. (default:
+30000:1001)</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mpeg2dec -s -o
+pgmpipe file.mpg | pgmtoy4m -a 10:11 -r 24000:1001 -i b |
+yuvplay</p>
+
+<p style="margin-left:9%; margin-top: 1em">mpeg2dec -s -o
+pgm file.mpg <br>
+cat *.pgm | pgmtoy4m -r 30000:1001 -i t | yuvplay</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+specifically designed to work with the output of mpeg2dec
+and is <b>NOT</b> a general PGM (NetPBM) tool!</p>
+
+<p style="margin-left:9%; margin-top: 1em">From the
+introduction in the source file:</p>
+
+<p style="margin-left:9%; margin-top: 1em">* Note: mpeg2dec
+uses a variation of the PGM format - they&rsquo;re really
+not <br>
+* &quot;Grey Maps&quot; but rather a catenation of the 420P
+data (commonly called <br>
+* &quot;YUV&quot;). The type is P5 (&quot;raw&quot;) and the
+number of rows is really <br>
+* the total of the Y&rsquo;, Cb and Cr heights. The Cb and
+Cr data is &quot;joined&quot; <br>
+* together. After the Y&rsquo; rows you have 1 row of Cb and
+1 row of Cr per <br>
+* &quot;row&quot; of PGM data.</p>
+
+<p style="margin-left:9%; margin-top: 1em">* NOTE: You MAY
+need to know the field order (top/bottom field first), <br>
+* sample aspect ratio and frame rate because the PGM format
+makes <br>
+* none of that information available!</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manpage was
+written by Steven Schultz (sms at 2bsd dot com).</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Possible but
+none known at the present time.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>PG</title>
+
+</head>
+<body>
+
+<h1 align="center">PG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#AVAILABILITY">AVAILABILITY</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pg - browse
+pagewise through text files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pg
+-*</b><i>amount</i> <b>*-p</b> <i>prompt</i> <b>-cefnrs</b>
+<i>+line +/pattern/ file_ ...</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>pg</b></i>
+displays a text file on a CRT one screenful at once. After
+each page, a prompt is displayed. The user may then either
+press the newline key to view the next page or one of the
+keys described below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no filename
+is given on the command line, <b>pg</b> reads from standard
+input. If standard output is not a terminal, <b>pg</b> acts
+like <b>cat</b>(1) but precedes each file with its name if
+there is more than one.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If input comes
+from a pipe, <b>pg</b> stores the data in a buffer file
+while reading, to make navigation possible.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pg</b>
+accepts the following options:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>+</b><i>number</i></p>
+
+<p style="margin-left:14%;">Start at the given line
+number.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>+/</b><i>pattern</i>*/*</p>
+
+<p style="margin-left:14%;">Start at the line containing
+the Basic Regular Expression <i>pattern</i> given.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-</b><i>number</i></p>
+
+<p style="margin-left:14%;">The number of lines per page.
+By default, this is the number of CRT lines minus one.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b></p>
+
+<p style="margin-left:14%;">Clear the screen before a page
+is displayed, if the terminfo entry for the terminal
+provides this capability.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e</b></p>
+
+<p style="margin-left:14%;">Do not pause and display
+<i>(EOF)</i> at the end of a file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f</b></p>
+
+<p style="margin-left:14%;">Do not split long lines.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n</b></p>
+
+<p style="margin-left:14%;">Without this option, commands
+must be terminated by a newline character.</p>
+
+<p style="margin-left:14%; margin-top: 1em">With this
+option, <b>pg</b> advances once a command letter is
+entered.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>
+<i>string</i></p>
+
+<p style="margin-left:14%;">Instead of the normal prompt
+<i>:</i>, <i>string</i> is displayed. If <i>string</i>
+contains <b>%d</b>, its first occurrence is replaced by the
+number of the current page.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b></p>
+
+<p style="margin-left:14%;">Disallow the shell escape.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b></p>
+
+<p style="margin-left:14%;">Print messages in
+<i>standout</i> mode, if the terminfo entry for the terminal
+provides this capability.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Display help text and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b>,
+<b>--version</b></p>
+
+<p style="margin-left:14%;">Display version and exit.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+commands may be entered at the prompt. Commands preceded by
+<i>i</i> in this document accept a number as argument,
+positive or negative. If this argument starts with <b>+</b>
+or <b>-</b>, it is interpreted relative to the current
+position in the input file, otherwise relative to the
+beginning.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>&lt;Enter&gt;</b></p>
+
+<p style="margin-left:14%;">Display the next or the
+indicated page.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>d</b>
+or <b>&#710;D</b></p>
+
+<p style="margin-left:14%;">Display the next halfpage. If
+<i>i</i> is given, it is always interpreted relative to the
+current position.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>l</b></p>
+
+<p style="margin-left:14%;">Display the next or the
+indicated line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>f</b></p>
+
+<p style="margin-left:14%;">Skip a page forward. <i>i</i>
+must be a positive number and is always interpreted relative
+to the current position.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>w</b>
+or <i>i</i><b>z</b></p>
+
+<p style="margin-left:14%;">As <b>&lt;Enter&gt;</b> except
+that <i>i</i> becomes the new page size.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>.</b> or
+<b>&#710;L</b></p>
+
+<p style="margin-left:14%;">Redraw the screen.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$</b></p>
+
+<p style="margin-left:14%;">Advance to the last line of the
+input file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>/</b><i>pattern</i><b>/</b></p>
+
+<p style="margin-left:14%;">Search forward until the first
+or the <i>i</i>-th occurrence of the Basic Regular
+Expression <i>pattern</i> is found. The search starts after
+the current page and stops at the end of the file. No
+wrap-around is performed. <i>i</i> must be a positive
+number.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>?</b><i>pattern</i><b>?</b>
+or <i>ipattern</i></p>
+
+<p style="margin-left:14%;">Search backward until the first
+or the <i>i</i>-th occurrence of the Basic Regular
+Expression <i>pattern</i> is found. The search starts before
+the current page and stops at the beginning of the file. No
+wrap-around is performed. <i>i</i> must be a positive
+number.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The search
+commands accept an added letter. If <b>t</b> is given, the
+line containing the pattern is displayed at the top of the
+screen, which is the default. <b>m</b> selects the middle
+and <b>b</b> the bottom of the screen. The selected position
+is used in following searches, too.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>n</b></p>
+
+<p style="margin-left:14%;">Advance to the next file or
+<i>i</i> files forward.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>i</i><b>p</b></p>
+
+<p style="margin-left:14%;">Reread the previous file or
+<i>i</i> files backward.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>s</b>
+<i>filename</i></p>
+
+<p style="margin-left:14%;">Save the current file to the
+given <i>filename</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>h</b></p>
+
+<p style="margin-left:14%;">Display a command summary.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>!</b><i>command</i></p>
+
+<p style="margin-left:14%;">Execute <i>command</i> using
+the shell.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>q</b> or
+<b>Q</b></p>
+
+<p style="margin-left:14%;">Quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the user
+presses the interrupt or quit key while <b>pg</b> reads from
+the input file or writes on the terminal, <b>pg</b> will
+immediately display the prompt. In all other situations
+these keys will terminate <b>pg</b>.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+environment variables affect the behavior of <b>pg</b>:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>COLUMNS</b></p>
+
+<p style="margin-left:14%;">Overrides the system-supplied
+number of columns if set.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>LANG</b>,
+<b>LC_ALL</b>, <b>LC_COLLATE</b>, <b>LC_CTYPE</b>,
+<b>LC_MESSAGES</b></p>
+
+<p style="margin-left:14%;">See <b>locale</b>(7).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>LINES</b></p>
+
+<p style="margin-left:14%;">Overrides the system-supplied
+number of lines if set.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>SHELL</b></p>
+
+<p style="margin-left:14%;">Used by the <b>!</b>
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>TERM</b></p>
+
+<p style="margin-left:14%;">Determines the terminal
+type.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pg</b>
+expects the terminal tabulators to be set every eight
+positions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Files that
+include NUL characters cannot be displayed by <b>pg</b>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cat</b>(1),
+<b>more</b>(1), <b>sh</b>(1p), <b>terminfo</b>(5),
+<b>locale</b>(7), <b>regex</b>(7), <b>term</b>(7)</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For bug reports,
+use the <i>issue tracker</i>
+&lt;https://github.com/util-linux/util-linux/issues&gt;.</p>
+
+<h2>AVAILABILITY
+<a name="AVAILABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>pg</b>
+command is part of the util-linux package which can be
+downloaded from <i>Linux Kernel Archive</i>
+&lt;https://www.kernel.org/pub/linux/utils/util-linux/&gt;.</p>
+<hr>
+</body>
+</html>

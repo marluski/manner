@@ -1,0 +1,422 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:05 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>wildmidi</title>
+
+</head>
+<body>
+
+<h1 align="center">wildmidi</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#LIBRARY">LIBRARY</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#TEST OPTIONS">TEST OPTIONS</a><br>
+<a href="#USER INTERFACE">USER INTERFACE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wildmidi -
+example player for libWildMidi</p>
+
+<h2>LIBRARY
+<a name="LIBRARY"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libWildMidi</b></p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>/etc/wildmidi/wildmidi.cfg</b></p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wildmidi
+[-bhlvwnst] [-c</b> <i>config-file</i><b>] [-d</b>
+<i>audiodev</i><b>] [-m</b> <i>volume-level</i><b>] [-P</b>
+<i>playback-output</i><b>] [-o</b> <i>file</i><b>] [-f</b>
+<i>frequency-Hz(MUS)</i><b>] [-r</b> <i>sample-rate</i><b>]
+[-g</b> <i>convert-xmi-type</i><b>]</b> <i>midifile
+...</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+demonstration program to show the capabilities of
+libWildMidi.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>midifile</i>
+can be a MIDI type file in the HMI, HMP, MIDI, MUS or XMI
+formats and is processed by libWildMidi and the resulting
+audio is output by the player.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can have
+more than one <i>midifile</i> on the command line and
+<b>wildmidi</b> will pass them to libWildMidi for
+processing, one after the other. You can also use wildcards,
+for example: <b>wildmidi *.mid</b></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b> |
+<b>--reverb</b></p>
+
+<p style="margin-left:18%;">Turns on an 8 point reverb
+engine that adds depth to the final mix.</p>
+
+<p style="margin-left:9%;"><b>-c</b> <i>config-file</i> |
+<b>--config</b> <i>config-file</i></p>
+
+<p style="margin-left:18%;">Uses the configuration file
+stated by <i>config-file</i> instead of
+/etc/wildmidi/wildmidi.cfg</p>
+
+<p style="margin-left:9%;"><b>-d</b> <i>audiodev</i> |
+<b>--device=</b><i>audiodev</i></p>
+
+<p style="margin-left:18%;">Send audio to <i>audiodev</i>
+instead of the default device. <br>
+alsa : defaults to the system &quot;default&quot; <br>
+oss : defaults to &quot;/dev/dsp&quot; <br>
+netbsd : defaults to &quot;/dev/audio&quot; <br>
+Other environments do not support this option.</p>
+
+<p style="margin-left:9%;"><b>-h</b> | <b>--help</b></p>
+
+<p style="margin-left:18%;">Displays command line
+options.</p>
+
+<p style="margin-left:9%;"><b>-f</b> |
+<b>--frequency</b></p>
+
+<p style="margin-left:18%;">Use frequency F Hz for playback
+(MUS).</p>
+
+<p style="margin-left:9%;"><b>-g</b> | <b>--convert</b></p>
+
+<p style="margin-left:18%;">Convert XMI: 0 - No Conversion
+(default) <br>
+1 - MT32 to GM <br>
+2 - MT32 to GS</p>
+
+<p style="margin-left:9%;"><b>-l</b> | <b>--log_vol</b></p>
+
+<p style="margin-left:18%;">Some MIDI files have been
+recorded on hardware that uses a volume curve, making them
+sound really badly mixed on other MIDI devices. Use this
+option to use volume curves.</p>
+
+<p style="margin-left:9%;"><b>-m</b> <i>volume-level</i> |
+<b>--mastervol=</b><i>volume-level</i></p>
+
+<p style="margin-left:18%;">Set the overall volume level to
+<i>volume-level</i>. The minimum is 0 and the maximum is
+127, with the default being 100.</p>
+
+<p style="margin-left:9%;"><b>-P</b> <i>playback-output</i>
+| <b>--playback=</b><i>playback-output</i></p>
+
+<p style="margin-left:18%;">Set <i>playback-output</i> as
+playback output. See <b>--help</b> output for available
+playbacks.</p>
+
+<p style="margin-left:9%;"><b>-o</b> <i>file</i> |
+<b>--wavout=</b><i>file</i></p>
+
+<p style="margin-left:18%;">Records output to a signed 16
+bit stereo format <i>wav file</i>. Implies: <b>-P
+wave</b></p>
+
+<p style="margin-left:9%;"><b>-r</b> <i>sndrate</i> |
+<b>--rate=</b><i>sndrate</i></p>
+
+<p style="margin-left:18%;">Set the audio output rate to
+<i>sndrate</i>. The default rate is 32072.</p>
+
+<p style="margin-left:9%;"><b>-n</b> |
+<b>--roundtempo</b></p>
+
+<p style="margin-left:18%;">Round tempo to nearest whole
+number.</p>
+
+<p style="margin-left:9%;"><b>-s</b> |
+<b>--skipsilentstart</b></p>
+
+<p style="margin-left:18%;">Skips any silence at the start
+of playback.</p>
+
+<p style="margin-left:9%;"><b>-v</b> | <b>--version</b></p>
+
+<p style="margin-left:18%;">Display version and copyright
+information.</p>
+
+<p style="margin-left:9%;"><b>-x</b> | <b>--tomidi</b></p>
+
+<p style="margin-left:18%;">Convert a MUS or an XMI file to
+midi and save to file.</p>
+
+<h2>TEST OPTIONS
+<a name="TEST OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+are not designed for general use. Instead these options are
+designed to make it easier to listen to specific sound
+samples.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: These
+options are not displayed by <b>-h</b> | <b>--help <br>
+-k</b> <i>N</i> | <b>--test_bank=</b><i>N</i></p>
+
+<p style="margin-left:18%;">Set the test bank to <i>N</i>.
+Range is 0 to 127.</p>
+
+<p style="margin-left:9%;"><b>-p</b> <i>N</i> |
+<b>--test_patch=</b><i>N</i></p>
+
+<p style="margin-left:18%;">Set the test patch to <i>N</i>.
+Range is 0 to 127.</p>
+
+<p style="margin-left:9%;"><b>-t</b> |
+<b>--test_midi</b></p>
+
+<p style="margin-left:18%;">Plays the built in test midi
+which plays all 127 notes.</p>
+
+<h2>USER INTERFACE
+<a name="USER INTERFACE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The player
+accepts limited user input that allows some interaction
+while playing midi files.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>+</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Turns the master volume up.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>-</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Turns the master volume down.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>e</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Turns enhanced resampling on and off.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>l</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Turns volume curves on and off.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>r</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Turns the final mix reverb on and off.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>n</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Play the next midi on the command line.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>m</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Save the currently playing file to a midi file. NOTE:
+This saves to the current directory.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>p</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Pause the playback. Note: since the audio is buffered it
+will stop when the audio buffer is empty.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>.</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Seek forward 1 second. Note: Clears active midi events
+and will only play midi events from after the new
+position.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>,</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Seek backwards 1 second. Note: Clears active midi events
+and will only play midi events from after the new
+position.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>q</b></p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Quit wildmidi.</p></td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wildmidi.cfg</b>(5)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Chris Ison
+&lt;chrisisonwildcode@gmail.com&gt; Bret Curtis
+&lt;psi29a@gmail.com&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+WildMidi Developers 2001-2024</p>
+
+<p style="margin-left:9%; margin-top: 1em">This file is
+part of WildMIDI.</p>
+
+<p style="margin-left:9%; margin-top: 1em">WildMIDI is free
+software: you can redistribute and/or modify the player
+under the terms of the GNU General Public License and you
+can redistribute and/or modify the library under the terms
+of the GNU Lesser General Public License as published by the
+Free Software Foundation, either version 3 of the licenses,
+or(at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">WildMIDI is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License and the GNU Lesser General Public
+License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU General Public License and the
+GNU Lesser General Public License along with WildMIDI. If
+not, see &lt;http://www.gnu.org/licenses/&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This manpage is
+licensed under the Creative Commons AttributionShare Alike
+3.0 Unported License. To view a copy of this license, visit
+http://creativecommons.org/licenses/by-sa/3.0/ or send a
+letter to Creative Commons, 171 Second Street, Suite 300,
+San Francisco, California, 94105, USA.</p>
+<hr>
+</body>
+</html>

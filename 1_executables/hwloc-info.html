@@ -1,0 +1,584 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>HWLOC-INFO</title>
+
+</head>
+<body>
+
+<h1 align="center">HWLOC-INFO</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hwloc-info -
+Show some information about some objects, a topology or
+supported features</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hwloc-info</b>
+[ <i>options</i> ]... <i>&lt;object&gt;</i>...</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hwloc-info</b>
+[ <i>options</i> ] root <b>hwloc-info</b> [ <i>options</i> ]
+[ topology | levels | support ]</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>&lt;object&gt;</i>...
+may be a space-separated list of target objects to query.
+The program reports all information about one object before
+looking at the next one:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info
+core:2 package:1 pu:all <br>
+Core L#2 <br>
+type = Core <br>
+... <br>
+Package L#1 <br>
+... <br>
+PU L#0 <br>
+... <br>
+PU L#1 <br>
+...</p>
+
+<p style="margin-left:9%; margin-top: 1em">The list may
+also contain special keywords such as:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>root</b> for
+the topology root object.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>levels</b>
+for information about topology levels (default if no target
+object is given, identical to <b>--topology</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>topology</b>
+for topology info attributes stored in the root object (for
+forward compatibility with topology info attrs in hwloc
+3.0).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>support</b>
+for information about supported features (identical to
+<b>--support</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Real targets and
+special keywords may be combined:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info
+core:2 topology pu:3 levels</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+hwloc(7) provides a detailed explanation of the hwloc system
+and of valid &lt;object&gt; formats; it should be read
+before reading this man page.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--objects</b></p>
+
+<p style="margin-left:18%;">Report information specific
+objects. This is the default if some objects are given on
+the command-line.</p>
+
+<p style="margin-left:9%;"><b>--topology</b></p>
+
+<p style="margin-left:18%;">Report a summary of the
+topology instead of about some specific objects. This is
+equivalent to passing <i>levels</i> as a target object on
+the command-line. This is the default if no object is given
+on the command-line.</p>
+
+<p style="margin-left:9%;"><b>--support</b></p>
+
+<p style="margin-left:18%;">Report the features that are
+supported by hwloc on the topology. The features are those
+available through the <b>hwloc_topology_get_support()</b>
+function. This is useful for verifying which CPU or memory
+binding options are supported by the current hwloc
+installation. This is equivalent to passing <i>support</i>
+as a target object on the command-line.</p>
+
+<p style="margin-left:9%;"><b>-i</b> &lt;path&gt;,
+<b>--input</b> &lt;path&gt;</p>
+
+<p style="margin-left:18%;">Read the topology from
+&lt;path&gt; instead of discovering the topology of the
+local machine.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If &lt;path&gt;
+is a file, it may be a XML file exported by a previous hwloc
+program. If &lt;path&gt; is &quot;-&quot;, the standard
+input may be used as a XML file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">On Linux,
+&lt;path&gt; may be a directory containing the topology
+files gathered from another machine topology with
+hwloc-gather-topology.</p>
+
+<p style="margin-left:18%; margin-top: 1em">On x86,
+&lt;path&gt; may be a directory containing a cpuid dump
+gathered with hwloc-gather-cpuid.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When the
+archivemount program is available, &lt;path&gt; may also be
+a tarball containing such Linux or x86 topology files.</p>
+
+<p style="margin-left:9%;"><b>-i</b> &lt;specification&gt;,
+<b>--input</b> &lt;specification&gt;</p>
+
+<p style="margin-left:18%;">Simulate a fake hierarchy
+(instead of discovering the topology on the local machine).
+If &lt;specification&gt; is &quot;node:2 pu:3&quot;, the
+topology will contain two NUMA nodes with 3 processing units
+in each of them. The &lt;specification&gt; string must end
+with a number of PUs.</p>
+
+<p style="margin-left:9%;"><b>--if</b> &lt;format&gt;,
+<b>--input-format</b> &lt;format&gt;</p>
+
+<p style="margin-left:18%;">Enforce the input in the given
+format, among <b>xml</b>, <b>fsroot</b>, <b>cpuid</b> and
+<b>synthetic</b>.</p>
+
+<p style="margin-left:9%;"><b>-v --verbose</b></p>
+
+<p style="margin-left:18%;">Include additional detail.</p>
+
+<p style="margin-left:9%;"><b>-q --quiet -s
+--silent</b></p>
+
+<p style="margin-left:18%;">Reduce the amount of details to
+show. A single summary line per object is displayed.</p>
+
+<p style="margin-left:9%;"><b>--get-attr</b>
+&lt;name&gt;</p>
+
+<p style="margin-left:18%;">Only report the attribute of
+name &lt;name&gt; for each object (instead of all
+attributes). The name must exactly match what is usually
+reported by the program, for instance &quot;complete
+cpuset&quot; in &quot;0.1: complete cpuset =
+%0x00ffff00&quot;.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Only the value
+is reported, any other prefix or object name is ignored, so
+that the output may easily be used by other tools.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+also works on topology information but it is ignored for
+<b>levels</b> and <b>support</b> keywords.</p>
+
+<p style="margin-left:9%;"><b>--ancestors</b></p>
+
+<p style="margin-left:18%;">Display information about the
+object as well as about all its ancestors up to the root of
+the topology. This is identical to <b>--ancestor all</b></p>
+
+<p style="margin-left:9%;"><b>--ancestor</b>
+&lt;type&gt;</p>
+
+<p style="margin-left:18%;">Only display the object
+ancestors that match the given type.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Some special
+values matching multiple types may also be given:
+<i>kind=normal</i> (CPU objects, including caches),
+<i>kind=cpu</i> (CPU objects, excluding caches),
+<i>kind=cache</i> (all caches, including memory-side
+caches), <i>kind=memory</i> (NUMA nodes or memory-side
+caches), <i>kind=io</i> (IO objects), <i>kind=all</i> (all
+objects). See also <i>Object Kind</i> in Terms and
+Definitions in the documentation. The prefix <i>kind=</i>
+may be omitted if there is no ambiguity.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If multiple
+ancestors match, they are reported from the deepest to the
+highest in the topology. Adding <b>--first</b> will only
+show the first one.</p>
+
+<p style="margin-left:9%;"><b>--children</b></p>
+
+<p style="margin-left:18%;">Display information about the
+object children.</p>
+
+<p style="margin-left:9%;"><b>--descendants</b>
+&lt;type&gt;</p>
+
+<p style="margin-left:18%;">Display information about the
+object descendants that match the given type.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Some special
+values matching multiple types may also be given:
+<i>kind=normal</i> (CPU objects, including caches),
+<i>kind=cpu</i> (CPU objects, excluding caches),
+<i>kind=cache</i> (all caches, including memory-side
+caches), <i>kind=memory</i> (NUMA nodes or memory-side
+caches), <i>kind=io</i> (IO objects), <i>kind=all</i> (all
+objects). See also <i>Object Kind</i> in Terms and
+Definitions in the documentation. The prefix <i>kind=</i>
+may be omitted if there is no ambiguity.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If multiple
+objects match, they are reported in a depth-first order
+(first child, then its children, etc., then second child,
+etc.). Adding <b>--first</b> will only show the first
+one.</p>
+
+<p style="margin-left:9%;"><b>--local-memory</b></p>
+
+<p style="margin-left:18%;">Display information about the
+NUMA nodes that are local to the given object.</p>
+
+<p style="margin-left:9%;"><b>--local-memory-flags</b></p>
+
+<p style="margin-left:18%;">Change the flags used to select
+local NUMA nodes. Flags may be given as numeric values or as
+a comma-separated list of flag names that are passed to
+<i>hwloc_get_local_numanode_objs()</i>. Those names may be
+substrings of actual flag names as long as a single one
+matches. The default is <b>3</b> (or <b>smaller,larger</b>)
+which means NUMA nodes are displayed if their locality
+either contains or is contained in the locality of the given
+object.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+enables <b>--local-memory</b>.</p>
+
+<p style="margin-left:9%;"><b>--best-memattr</b>
+&lt;name&gt;</p>
+
+<p style="margin-left:18%;">Enable the listing of local
+memory nodes with <b>--local-memory</b>, but only display
+the local nodes that have the best value for the memory
+attribute given by <i>&lt;name&gt;</i> (or as an index). If
+the memory attribute values depend on the initiator, the
+object given to hwloc-info is used as the initiator.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><i>&lt;name&gt;</i>
+may be suffixed with flags to tune the selection of best
+nodes, for instance as <b>bandwidth,strict,default</b>.
+<b>default</b> means that all local nodes are reported if no
+best could be found. <b>strict</b> means that nodes are
+selected only if their performance is the best for all the
+input CPUs. On a dual-socket machine with HBM in each
+socket, both HBMs are the best for their local socket, but
+not for the remote socket. Hence both HBM are also
+considered best for the entire machine by default, but none
+if <b>strict</b>.</p>
+
+<p style="margin-left:9%;"><b>--first</b></p>
+
+<p style="margin-left:18%;">For each input object, only
+report the first matching output object (first ancestor,
+first child, etc.).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>When outputting object information, prefix each line
+with the index of the considered object within the input.
+For instance, if three cores were given in input, the output
+lines will be prefixed with &quot;0: &quot;, &quot;1: &quot;
+or &quot;2: &quot;. If <b>--ancestor</b> is also used, the
+prefix will be &quot;X.Y: &quot; where X is the index of the
+considered object within the input, and Y is the parent
+index (0 for the object itself, increasing towards the root
+of the topology).</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--disallowed</b></p>
+
+<p style="margin-left:18%;">Include objects disallowed by
+administrative limitations.</p>
+
+<p style="margin-left:9%;"><b>--restrict</b>
+&lt;cpuset&gt;</p>
+
+<p style="margin-left:18%;">Restrict the topology to the
+given cpuset. This removes some PUs and their now-child-less
+parents.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Beware that
+restricting the PUs in a topology may change the logical
+indexes of many objects, including NUMA nodes.</p>
+
+<p style="margin-left:9%;"><b>--restrict</b>
+nodeset=&lt;nodeset&gt;</p>
+
+<p style="margin-left:18%;">Restrict the topology to the
+given nodeset (unless <b>--restrict-flags</b> specifies
+something different). This removes some NUMA nodes and their
+now-child-less parents.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Beware that
+restricting the NUMA nodes in a topology may change the
+logical indexes of many objects, including PUs.</p>
+
+<p style="margin-left:9%;"><b>--restrict</b> binding</p>
+
+<p style="margin-left:18%;">Restrict the topology to the
+current process binding. This option requires the use of the
+actual current machine topology (or any other topology with
+<b>--thissystem</b> or with HWLOC_THISSYSTEM set to 1 in the
+environment).</p>
+
+<p style="margin-left:18%; margin-top: 1em">Beware that
+restricting the topology may change the logical indexes of
+many objects, including PUs and NUMA nodes.</p>
+
+<p style="margin-left:9%;"><b>--restrict-flags</b>
+&lt;flags&gt;</p>
+
+<p style="margin-left:18%;">Enforce flags when restricting
+the topology. Flags may be given as numeric values or as a
+comma-separated list of flag names that are passed to
+<i>hwloc_topology_restrict()</i>. Those names may be
+substrings of actual flag names as long as a single one
+matches, for instance <b>bynodeset,memless</b>. The default
+is <b>0</b> (or <b>none</b>).</p>
+
+<p style="margin-left:9%;"><b>--filter</b>
+&lt;type&gt;:&lt;kind&gt;, <b>--filter</b> &lt;type&gt;</p>
+
+<p style="margin-left:18%;">Filter objects of type
+&lt;type&gt;, or of any type if &lt;type&gt; is
+&quot;all&quot;. &quot;io&quot;, &quot;cache&quot; and
+&quot;icache&quot; are also supported.</p>
+
+<p style="margin-left:18%; margin-top: 1em">&lt;kind&gt;
+specifies the filtering behavior. If &quot;none&quot; or not
+specified, all objects of the given type are removed. If
+&quot;all&quot;, all objects are kept as usual. If
+&quot;structure&quot;, objects are kept when they bring
+structure to the topology. If &quot;important&quot; (only
+applicable to I/O and Misc), only important objects are
+kept. See hwloc_topology_set_type_filter() for more
+details.</p>
+
+<p style="margin-left:9%;"><b>--no-icaches</b></p>
+
+<p style="margin-left:18%;">Do not show Instruction caches,
+only Data and Unified caches are considered. This is
+identical to <b>--filter icache:none</b>.</p>
+
+<p style="margin-left:9%;"><b>--no-io</b></p>
+
+<p style="margin-left:18%;">Do not show any I/O device or
+bridge. This is identical to <b>--filter io:none</b>. By
+default, common devices (GPUs, NICs, block devices, ...) and
+interesting bridges are shown.</p>
+
+<p style="margin-left:9%;"><b>--no-bridges</b></p>
+
+<p style="margin-left:18%;">Do not show any I/O bridge
+except hostbridges. This is identical to <b>--filter
+bridge:none</b>. By default, common devices (GPUs, NICs,
+block devices, ...) and interesting bridges are shown.</p>
+
+<p style="margin-left:9%;"><b>--whole-io</b></p>
+
+<p style="margin-left:18%;">Show all I/O devices and
+bridges. This is identical to <b>--filter io:all</b>. By
+default, only common devices (GPUs, NICs, block devices,
+...) and interesting bridges are shown.</p>
+
+<p style="margin-left:9%;"><b>--thissystem</b></p>
+
+<p style="margin-left:18%;">Assume that the selected
+backend provides the topology for the system on which we are
+running. This is useful when using <b>--restrict</b> binding
+and loading a custom topology such as an XML file.</p>
+
+<p style="margin-left:9%;"><b>--pid</b> &lt;pid&gt;</p>
+
+<p style="margin-left:18%;">Detect topology as seen by
+process &lt;pid&gt;, i.e. as if process &lt;pid&gt; did the
+discovery itself. Note that this can for instance change the
+set of allowed processors. Also show this process current
+CPU binding by marking the corresponding PUs (in Green in
+the graphical output, see the COLORS section below, or by
+appending <i>(binding)</i> to the verbose text output). If 0
+is given as pid, the current binding for the lstopo process
+will be shown.</p>
+
+<p style="margin-left:9%;"><b>-p --physical</b></p>
+
+<p style="margin-left:18%;">Use OS/physical indexes instead
+of logical indexes for input.</p>
+
+<p style="margin-left:9%;"><b>-l --logical</b></p>
+
+<p style="margin-left:18%;">Use logical indexes instead of
+physical/OS indexes for input (default).</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Report version and exit.</p>
+
+<p style="margin-left:9%;"><b>-h --help</b></p>
+
+<p style="margin-left:18%;">Display help message and
+exit.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hwloc-info
+displays information about the specified objects. It is
+intended to be used with tools such as grep for filtering
+certain attribute lines. When no object is specified, or
+when <b>--topology</b> is passed, hwloc-info prints a
+summary of the topology. When <b>--support</b> is passed,
+hwloc-info lists the supported features for the
+topology.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Objects may be
+specified as location tuples, as explained in hwloc(7).
+However hexadecimal bitmasks are not accepted since they may
+correspond to multiple objects.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b> It
+is highly recommended that you read the hwloc(7) overview
+page before reading this man page. Most of the concepts
+described in hwloc(7) directly apply to the hwloc-calc
+utility.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To display
+information about each package:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info
+package:all <br>
+Package L#0 <br>
+logical index = 0 <br>
+...</p>
+
+<p style="margin-left:9%; margin-top: 1em">To display
+information about the core whose physical index is 2:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info -p
+core:2 <br>
+Core L#1 <br>
+logical index = 1 <br>
+os index = 2 <br>
+...</p>
+
+<p style="margin-left:9%; margin-top: 1em">To list the OS
+devices that are of subtype OpenCL:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info -s
+&quot;os[OpenCL]:all&quot; <br>
+CoProc:6 <br>
+CoProc:8</p>
+
+<p style="margin-left:9%; margin-top: 1em">To find the PCI
+bus ID of PCI devices containing OpenCL devices:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info
+--ancestor PCI --get-attr &quot;attr PCI bus id&quot;
+&rsquo;os[opencl]:all&rsquo; <br>
+0000:05:00.0 <br>
+0000:42:00.0</p>
+
+<p style="margin-left:9%; margin-top: 1em">To list the NUMA
+nodes that are local a PU:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info
+--local-memory pu:25 <br>
+NUMANode L#6 = local memory #0 of PU L#25 <br>
+type = NUMANode <br>
+... <br>
+NUMANode L#7 = local memory #1 of PU L#25 <br>
+type = NUMANode <br>
+...</p>
+
+<p style="margin-left:9%; margin-top: 1em">To show the
+best-bandwidth node(s) among NUMA nodes local to a PU:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info
+--local-memory --best-memattr bandwidth pu:25 <br>
+NUMANode L#7 = local memory #1 of PU L#25 <br>
+type = NUMANode <br>
+...</p>
+
+<p style="margin-left:9%; margin-top: 1em">to find where a
+NUMA node is attached in the hierarchy of CPU cores:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info
+--ancestor kind=normal --first -s numa:1 <br>
+Package:0</p>
+
+<p style="margin-left:9%; margin-top: 1em">To see levels
+and topology info attributes stored in the root object:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-info
+levels topology <br>
+depth 0: 1 Machine (type #0) <br>
+depth 1: 1 Package (type #1) <br>
+depth 2: 2 Core (type #2) <br>
+depth 3: 4 PU (type #3) <br>
+Special depth -3: 1 NUMANode (type #13) <br>
+info Backend = Linux <br>
+info LinuxCgroup = /user/622 <br>
+info Architecture = x86_64 <br>
+info hwlocVersion = 3.0.0a1-git</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hwloc(7),
+lstopo(1), hwloc-calc(1), hwloc-bind(1), hwloc-ps(1)</p>
+<hr>
+</body>
+</html>

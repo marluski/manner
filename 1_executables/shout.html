@@ -1,0 +1,218 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>SHOUT</i>(1) General Commands Manual
+<i>SHOUT</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">shout &mdash; Icecast source
+client</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:17%;"><b>shout</b> [OPTIONS]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>shout</b> reads data from
+standard input and streams it to Icecast.</p>
+
+<p style="margin-top: 1em"><b>OPTIONS <br>
+--format</b> <i>format</i></p>
+
+<p style="margin-left:17%;">Set stream format. This can be
+&quot;ogg&quot;, &quot;mp3&quot;, or &quot;webm&quot;.
+Default is &quot;ogg&quot;.</p>
+
+<p style="margin-top: 1em"><b>-H</b> <i>host</i></p>
+
+<p style="margin-left:17%;">See <b>--host</b></p>
+
+<p style="margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:17%; margin-top: 1em">See
+<b>--help</b></p>
+
+<p style="margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:17%;">Show help.</p>
+
+<p style="margin-top: 1em"><b>--host</b> <i>host</i></p>
+
+<p style="margin-left:17%;">Set destination host. Default
+is &quot;localhost&quot;.</p>
+
+<p style="margin-top: 1em"><b>--mount</b> <i>string</i></p>
+
+<p style="margin-left:17%;">Set mountpoint. Default is
+&quot;/example.ogg&quot;.</p>
+
+<p style="margin-top: 1em"><b>-P</b> <i>port</i></p>
+
+<p style="margin-left:17%;">See <b>--port</b></p>
+
+<p style="margin-top: 1em"><b>--pass</b> <i>string</i></p>
+
+<p style="margin-left:17%;">Set source password. Default is
+&quot;hackme&quot;.</p>
+
+<p style="margin-top: 1em"><b>--port</b> <i>port</i></p>
+
+<p style="margin-left:17%;">Set destination port. Symbolic
+names are supported. Default is 8000.</p>
+
+<p style="margin-top: 1em"><b>--proto</b>
+<i>protocol</i></p>
+
+<p style="margin-left:17%;">Set protocol. Default is
+&quot;http&quot;.</p>
+
+<p style="margin-top: 1em"><b>--station-description</b>
+<i>string</i></p>
+
+<p style="margin-left:17%;">Set stream description.</p>
+
+<p style="margin-top: 1em"><b>--station-genre</b>
+<i>string</i></p>
+
+<p style="margin-left:17%;">Set stream genre.</p>
+
+<p style="margin-top: 1em"><b>--station-meta</b>
+<i>key</i>=<i>value</i></p>
+
+<p style="margin-left:17%;">Set meta information. Both
+<i>key</i> and <i>value</i> are arbitrary strings.</p>
+
+<p style="margin-top: 1em"><b>--station-name</b>
+<i>string</i></p>
+
+<p style="margin-left:17%;">Set stream name.</p>
+
+<p style="margin-top: 1em"><b>--station-url</b>
+<i>string</i></p>
+
+<p style="margin-left:17%;">Set stream URL.</p>
+
+<p style="margin-top: 1em"><b>--tls-mode</b>
+<i>tls-mode</i></p>
+
+<p style="margin-left:17%;">Set TLS mode. This can be
+&quot;disabled&quot;, &quot;auto&quot;,
+&quot;auto_no_plain&quot;, &quot;rfc2818&quot;, or
+&quot;rfc2817&quot;. Default is &quot;auto&quot;.</p>
+
+<p style="margin-left:17%; margin-top: 1em">When libshout
+is build without TLS support only &quot;disabled&quot;, and
+&quot;auto&quot; are supported.</p>
+
+<p style="margin-top: 1em"><b>--usage</b>
+<i>usage{,usage}</i></p>
+
+<p style="margin-left:17%;">Set stream usages. This can
+be:</p>
+
+<p>&quot;audio&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for audio
+substreams</p>
+
+<p>&quot;visual&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for
+picture/video substreams (most often combined with
+&quot;audio&quot;)</p>
+
+<p>&quot;text&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for text
+substreams that are not subtitles</p>
+
+<p>&quot;subtitle&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for subtitle
+substreams</p>
+
+<p>&quot;light&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for light
+control substreams</p>
+
+<p>&quot;ui&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for user
+interface data, such as DVD menus or buttons</p>
+
+<p>&quot;metadata&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for substreams
+that include metadata for the stream</p>
+
+<p>&quot;application&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for application
+specific data substreams</p>
+
+<p>&quot;control&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for substreams
+that control the infrastructure</p>
+
+<p>&quot;complex&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for substreams
+that are themself a mixture of other types</p>
+
+<p>&quot;other&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for substream
+of types not listed here</p>
+
+<p>&quot;unknown&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for streams
+that may contain additional substreams of unknown nature</p>
+
+<p>&quot;3d&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for streams
+that contain information for 3D playback</p>
+
+<p>&quot;4d&quot;</p>
+
+<p style="margin-left:36%; margin-top: 1em">for streams
+that contain information for 4D/XD playback</p>
+
+<p style="margin-top: 1em"><b>--user</b> <i>string</i></p>
+
+<p style="margin-left:17%;">Set source user. Default is
+&quot;source&quot;.</p>
+
+<p style="margin-top: 1em"><b>NOTES</b></p>
+
+<p style="margin-left:9%;">If this binary is symlinked, or
+hardlinked to the name &quot;oggfwd&quot; it provides
+drop-in compatibly with <i>oggfwd</i>(1). GNU Dec&nbsp;16,
+2020$ <i>SHOUT</i>(1)</p>
+<hr>
+</body>
+</html>

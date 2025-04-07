@@ -1,0 +1,350 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-RESTORE</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-RESTORE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#GIT">GIT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">git-restore -
+Restore working tree files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>git
+restore</b> [<i>&lt;options&gt;</i>]
+[<b>--source=</b><i>&lt;tree&gt;</i>] [<b>--staged</b>]
+[<b>--worktree</b>] [<b>--</b>] <i>&lt;pathspec&gt;</i>...
+<b><br>
+git restore</b> [<i>&lt;options&gt;</i>]
+[<b>--source=</b><i>&lt;tree&gt;</i>] [<b>--staged</b>]
+[<b>--worktree</b>]
+<b>--pathspec-from-file=</b><i>&lt;file&gt;</i>
+[<b>--pathspec-file-nul</b>] <b><br>
+git restore</b> (<b>-p</b>|<b>--patch</b>)
+[<i>&lt;options&gt;</i>]
+[<b>--source=</b><i>&lt;tree&gt;</i>] [<b>--staged</b>]
+[<b>--worktree</b>] [<b>--</b>]
+[<i>&lt;pathspec&gt;</i>...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Restore
+specified paths in the working tree with some contents from
+a restore source. If a path is tracked but does not exist in
+the restore source, it will be removed to match the
+source.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command can
+also be used to restore the content in the index with
+<b>--staged</b>, or restore both the working tree and the
+index with <b>--staged --worktree</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, if
+<b>--staged</b> is given, the contents are restored from
+<b>HEAD</b>, otherwise from the index. Use <b>--source</b>
+to restore from a different commit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See &quot;Reset,
+restore and revert&quot; in <b>git</b>(1) for the
+differences between the three commands.</p>
+
+<p style="margin-left:9%; margin-top: 1em">THIS COMMAND IS
+EXPERIMENTAL. THE BEHAVIOR MAY CHANGE.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>
+<i>&lt;tree&gt;</i>, <b>--source=</b><i>&lt;tree&gt;</i></p>
+
+<p style="margin-left:14%;">Restore the working tree files
+with the content from the given tree. It is common to
+specify the source tree by naming a commit, branch or tag
+associated with it.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If not
+specified, the contents are restored from <b>HEAD</b> if
+<b>--staged</b> is given, otherwise from the index.</p>
+
+<p style="margin-left:14%; margin-top: 1em">As a special
+case, you may use
+&quot;<i>&lt;rev-A&gt;</i><b>...</b><i>&lt;rev-B&gt;</i>&quot;
+as a shortcut for the merge base of <i>&lt;rev-A&gt;</i> and
+<i>&lt;rev-B&gt;</i> if there is exactly one merge base. You
+can leave out at most one of <i>&lt;rev-A&gt;_</i> and
+<i>&lt;rev-B&gt;</i>, in which case it defaults to
+<b>HEAD</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>,
+<b>--patch</b></p>
+
+<p style="margin-left:14%;">Interactively select hunks in
+the difference between the restore source and the restore
+location. See the &quot;Interactive Mode&quot; section of
+<b>git-add</b>(1) to learn how to operate the <b>--patch</b>
+mode.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+<b>--patch</b> can accept no pathspec and will prompt to
+restore all modified paths.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-W</b>,
+<b>--worktree</b>, <b>-S</b>, <b>--staged</b></p>
+
+<p style="margin-left:14%;">Specify the restore location.
+If neither option is specified, by default the working tree
+is restored. Specifying <b>--staged</b> will only restore
+the index. Specifying both restores both.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>,
+<b>--quiet</b></p>
+
+<p style="margin-left:14%;">Quiet, suppress feedback
+messages. Implies <b>--no-progress</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--progress</b>,
+<b>--no-progress</b></p>
+
+<p style="margin-left:14%;">Progress status is reported on
+the standard error stream by default when it is attached to
+a terminal, unless <b>--quiet</b> is specified. This flag
+enables progress reporting even if not attached to a
+terminal, regardless of <b>--quiet</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ours</b>,
+<b>--theirs</b></p>
+
+<p style="margin-left:14%;">When restoring files in the
+working tree from the index, use stage #2 (<b>ours</b>) or
+#3 (<b>theirs</b>) for unmerged paths. This option cannot be
+used when checking out paths from a tree-ish (i.e. with the
+<b>--source</b> option).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+during <b>git rebase</b> and <b>git pull --rebase</b>,
+<b>ours</b> and <b>theirs</b> may appear swapped. See the
+explanation of the same options in <b>git-checkout</b>(1)
+for details.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m</b>,
+<b>--merge</b></p>
+
+<p style="margin-left:14%;">When restoring files on the
+working tree from the index, recreate the conflicted merge
+in the unmerged paths. This option cannot be used when
+checking out paths from a tree-ish (i.e. with the
+<b>--source</b> option).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--conflict=</b><i>&lt;style&gt;</i></p>
+
+<p style="margin-left:14%;">The same as <b>--merge</b>
+option above, but changes the way the conflicting hunks are
+presented, overriding the <b>merge.conflictStyle</b>
+configuration variable. Possible values are <b>merge</b>
+(default), <b>diff3</b>, and <b>zdiff3</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ignore-unmerged</b></p>
+
+<p style="margin-left:14%;">When restoring files on the
+working tree from the index, do not abort the operation if
+there are unmerged entries and neither <b>--ours</b>,
+<b>--theirs</b>, <b>--merge</b> or <b>--conflict</b> is
+specified. Unmerged paths on the working tree are left
+alone.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ignore-skip-worktree-bits</b></p>
+
+<p style="margin-left:14%;">In sparse checkout mode, the
+default is to only update entries matched by
+<i>&lt;pathspec&gt;</i> and sparse patterns in
+<b>$GIT_DIR/info/sparse-checkout</b>. This option ignores
+the sparse patterns and unconditionally restores any files
+in <i>&lt;pathspec&gt;</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--recurse-submodules</b>,
+<b>--no-recurse-submodules</b></p>
+
+<p style="margin-left:14%;">If <i>&lt;pathspec&gt;</i>
+names an active submodule and the restore location includes
+the working tree, the submodule will only be updated if this
+option is given, in which case its working tree will be
+restored to the commit recorded in the superproject, and any
+local modifications overwritten. If nothing (or
+<b>--no-recurse-submodules</b>) is used, submodules working
+trees will not be updated. Just like <b>git-checkout</b>(1),
+this will detach <b>HEAD</b> of the submodule.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--overlay</b>,
+<b>--no-overlay</b></p>
+
+<p style="margin-left:14%;">In overlay mode, never remove
+files when restoring. In no-overlay mode, remove tracked
+files that do not appear in the <i>&lt;tree&gt;</i> of
+<b>--source=</b><i>&lt;tree&gt;</i>, to make them match
+<i>&lt;tree&gt;</i> exactly. The default is no-overlay
+mode.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pathspec-from-file=</b><i>&lt;file&gt;</i></p>
+
+<p style="margin-left:14%;">Pathspec is passed in
+<i>&lt;file&gt;</i> instead of commandline args. If
+<i>&lt;file&gt;</i> is exactly <b>-</b> then standard input
+is used. Pathspec elements are separated by <i>LF</i> or
+<i>CR</i>/<i>LF</i>. Pathspec elements can be quoted as
+explained for the configuration variable
+<b>core.quotePath</b> (see <b>git-config</b>(1)). See also
+<b>--pathspec-file-nul</b> and global
+<b>--literal-pathspecs</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pathspec-file-nul</b></p>
+
+<p style="margin-left:14%;">Only meaningful with
+<b>--pathspec-from-file</b>. Pathspec elements are separated
+with <i>NUL</i> character and all other characters are taken
+literally (including newlines and quotes).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--</b></p>
+
+<p style="margin-left:14%;">Do not interpret any more
+arguments as options.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>&lt;pathspec&gt;</i>...</p>
+
+<p style="margin-left:14%;">Limits the paths affected by
+the operation.</p>
+
+<p style="margin-left:14%; margin-top: 1em">For more
+details, see the <i>pathspec</i> entry in
+<b>gitglossary</b>(7).</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+sequence switches to the <b>master</b> branch, reverts the
+<b>Makefile</b> to two revisions back, deletes
+<b>hello.c</b> by mistake, and gets it back from the
+index.</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ git switch
+master <br>
+$ git restore --source master&#732;2 Makefile <b>(1)</b>
+<br>
+$ rm -f hello.c <br>
+$ git restore hello.c <b>(2)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+restore <i>all</i> C source files to match the version in
+the index, you can say</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ git restore
+'*.c'</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note the quotes
+around *.c. The file <b>hello.c</b> will also be restored,
+even though it is no longer in the working tree, because the
+file globbing is used to match entries in the index (not in
+the working tree by the shell).</p>
+
+<p style="margin-left:9%; margin-top: 1em">To restore all
+files in the current directory</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ git restore
+.</p>
+
+<p style="margin-left:9%; margin-top: 1em">or to restore
+all working tree files with <i>top</i> pathspec magic (see
+<b>gitglossary</b>(7))</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ git restore
+:/</p>
+
+<p style="margin-left:9%; margin-top: 1em">To restore a
+file in the index to match the version in <b>HEAD</b> (this
+is the same as using <b>git-reset</b>(1))</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ git restore
+--staged hello.c</p>
+
+<p style="margin-left:9%; margin-top: 1em">or you can
+restore both the index and the working tree (this is the
+same as using <b>git-checkout</b>(1))</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ git restore
+--source=HEAD --staged --worktree hello.c</p>
+
+<p style="margin-left:9%; margin-top: 1em">or the short
+form which is more practical but less readable:</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ git restore
+-s@ -SW hello.c</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>git-checkout</b>(1),
+<b>git-reset</b>(1)</p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Part of the
+<b>git</b>(1) suite</p>
+<hr>
+</body>
+</html>

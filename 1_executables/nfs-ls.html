@@ -1,0 +1,149 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:47 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NFS-LS</title>
+
+</head>
+<body>
+
+<h1 align="center">NFS-LS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">nfs-ls - Utility
+to list NFS servers, exports and directories</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em"><b>nfs-ls [ OPTIONS ]
+&lt;NFS-URL&gt;</b></p> </td>
+<td width="5%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em"><b>nfs-ls</b>
+[-R&nbsp;--recursive] [-s&nbsp;--summary]
+[-D&nbsp;--discovery] [-?&nbsp;--help] [--usage]</p></td>
+<td width="5%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">nfs-ls is a
+utility to list NFS servers, exports or directories.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example: List
+the content of a directory on the NFS server</p>
+
+<p style="margin-left:14%; margin-top: 1em">$ nfs-ls
+nfs://127.0.0.1/data/tmp <br>
+-rwxrwxr-x 1 1000 1000 1190802 a.out <br>
+-rwxr-xr-x 1 1000 1000 13 foo123.copy <br>
+-rwxrwxrwx 1 1000 1000 8 foo123.writtenx</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-s --summary</p>
+
+<p style="margin-left:14%;">Print a summary line at the end
+of output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-R
+--recursive</p>
+
+<p style="margin-left:14%;">Recursive listing of the
+specified URL.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-D
+--discovery;</p>
+
+<p style="margin-left:14%;">This option is used to discover
+local NFS servers and to list the exports for specific
+servers.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When used with
+the 'nfs://' URL the command will try to detect all local
+NFS servers and will list their IPs.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When used with
+a 'nfs://server' the command will list all the exports on
+the specified server.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example:
+Discover and list all local NFS servers</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ nfs-ls -D
+nfs:// <br>
+nfs://10.10.10.10 <br>
+nfs://10.0.0.10</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example: List
+the exports for a server</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ nfs-ls -D
+nfs://10.10.10.10 <br>
+nfs://10.10.10.10/foo <br>
+nfs://10.10.10.10/bar</p>
+
+<p style="margin-left:9%; margin-top: 1em">-? --help</p>
+
+<p style="margin-left:14%;">Display basic help text.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--usage</p>
+
+<p style="margin-left:14%;">Display basic usage text.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><font color="#0000FF">http://github.com/sahlberg/libnfs</font></b></p>
+<hr>
+</body>
+</html>

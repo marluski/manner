@@ -1,0 +1,4525 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:59 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CDRECORD</title>
+
+</head>
+<body>
+
+<h1 align="center">CDRECORD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Device naming">Device naming</a><br>
+<a href="#Constraints for running cdrecord">Constraints for running cdrecord</a><br>
+<a href="#File to track mapping">File to track mapping</a><br>
+<a href="#GENERAL OPTIONS">GENERAL OPTIONS</a><br>
+<a href="#Informative options">Informative options</a><br>
+<a href="#Media write mode options">Media write mode options</a><br>
+<a href="#Cdrecord functional options">Cdrecord functional options</a><br>
+<a href="#SCSI options">SCSI options</a><br>
+<a href="#TRACK OPTIONS">TRACK OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Replicating an Audio CD">Replicating an Audio CD</a><br>
+<a href="#Replicating a simple CD-ROM/DVD-ROM/BD-ROM">Replicating a simple CD-ROM/DVD-ROM/BD-ROM</a><br>
+<a href="#Replicating a CD-ROM in clone mode">Replicating a CD-ROM in clone mode</a><br>
+<a href="#Creating an Audio CD">Creating an Audio CD</a><br>
+<a href="#Creating a mixed Audio-Data CD">Creating a mixed Audio-Data CD</a><br>
+<a href="#Creating a CD-ROM/DVD-ROM/BD-ROM">Creating a CD-ROM/DVD-ROM/BD-ROM</a><br>
+<a href="#Setting drive options">Setting drive options</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#CREDITS">CREDITS</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#INTERFACE STABILITY">INTERFACE STABILITY</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord -
+record audio or data CD, DVD or BluRay</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdrecord</b>
+[ <i>general options</i> ][ <b>dev=</b><i>device</i> ][
+<i>track options</i> ] <i>track1</i>...<i>trackn</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>Cdrecord</b></i>
+is used to record data or audio Compact Discs on an Orange
+Book CD-recorder, to write DVD media on a DVD-recorder or to
+write BluRay media on a BluRay-recorder.</p>
+
+<h3>Device naming
+<a name="Device naming"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Most users do
+not need to care about device naming at all. If no
+<b>dev=</b> option was specified, <b>cdrecord</b> implements
+<b>auto target</b> support and automagically finds the drive
+in case that exactly one CD-ROM type drive is available in
+the system. In case that more than one CD-ROM type drive
+exists on the system, a list of possible device name
+parameters may be retrieved with <b>cdrecord -scanbus</b> or
+from the target example from the output of <b>cdrecord
+dev=help</b>, then the <b>dev=</b> parameter may be set
+based on the device listing.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>device</i> parameter to the <b>dev=</b> option explained
+below refers to the <b>SCSI&nbsp;CAM</b> standard notation
+for <i>scsibus</i>/<i>target</i>/<i>lun</i> of the
+CD/DVD/BluRay-recorder. If a file /etc/default/cdrecord
+exists, the parameter to the <b>dev=</b> option may also be
+a drive name label in said file (see FILES section).</p>
+
+<h3>Constraints for running cdrecord
+<a name="Constraints for running cdrecord"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">On <b>SVr4</b>
+compliant systems, <b>cdrecord</b> uses the real-time class
+to get the highest scheduling priority that is possible
+(higher than all kernel processes). On systems with <b>POSIX
+real-time scheduling</b> cdrecord uses real-time scheduling
+too, but may not be able to gain a priority that is higher
+than all kernel processes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In order to be
+able to use the SCSI transport subsystem of the OS, run at
+highest priority and lock itself into core <b>cdrecord</b>
+either needs to be run as root, needs to be installed suid
+root or must be called via a fine grained privileges
+mechanism, such as the Solaris <b>privileges</b>(5)
+mechanism via <b>exec_attr</b>(4) or the Linux
+<b>capabilities</b>(7) mechanism via <b>setcap</b>(8) to
+allow cdrecord to be used as an ordinary user.</p>
+
+<h3>File to track mapping
+<a name="File to track mapping"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In <i>Track At
+Once</i> mode, each <i>track</i> corresponds to a single
+file that contains the prepared data for that track. If the
+argument is &lsquo;<b>-</b>&rsquo;, standard input is used
+for that track. Only one track may be taken from
+<i>stdin</i>. In the other write modes, the direct file to
+track relation may not be implemented. In <b>-clone</b>
+mode, a single file contains all data for the whole disk. To
+allow DVD writing on platforms that do not implement large
+file support, <b>cdrecord</b> concatenates all file
+arguments to a single track when writing to DVD media.</p>
+
+<h2>GENERAL OPTIONS
+<a name="GENERAL OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">General options
+must be before any track file name or track option.</p>
+
+<h3>Informative options
+<a name="Informative options"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>-help</b></p></td>
+<td width="3%"></td>
+<td width="77%">
+
+
+<p style="margin-top: 1em">display version information for
+<b>cdrecord</b> on standard output.</p></td>
+<td width="5%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-version</b></p>
+
+<p style="margin-left:18%;">Print version information and
+exit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Increment the level of general verbosity by one. This is
+used e.g. to display the progress of the writing
+process.</p> </td></tr>
+</table>
+
+<h3>Media write mode options
+<a name="Media write mode options"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>-dummy</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">The <b>-dummy</b> option
+modifies the current write strategy. The
+CD/DVD/BluRay-recorder will go through all steps of the
+recording process, but the laser is turned off during this
+procedure. It is recommended to run several tests before
+actually writing to a Compact Disk or Digital Versatile
+Disk, if the timing and load response of the current system
+is not yet known.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<b>-dummy</b> option does not work with all media and write
+modes. DVD+ media and BluRay media does not support
+<b>dummy</b> writes and most CD-recorders do not support
+<b>dummy</b> writes in raw mode.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>-multi</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Allow multi-session CDs or
+multi-border DVDs to be made. This flag needs to be present
+on all sessions of a multi-session or multi-border disk,
+except you want to create a session on a CD that will be the
+last session on the CD-media.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">For CD-media,
+the fixation will be done in a way that allows the
+CD/DVD/BluRay-recorder to append additional sessions later.
+This is done by generating a TOC with a link to the next
+program area. The so generated media is not 100% compatible
+to manufactured CDs (except for CDplus). Use only for
+recording of multi-session CDs. If this option is present,
+the default track type is <b>CD-ROM XA mode 2 form 1</b> and
+the sector size is 2048 bytes. The XA sector subheaders will
+be created by the drive. The <i>Sony</i> drives have no
+hardware support for <b>CD-ROM XA mode 2 form 1</b>. You
+have to specify the <b>-data</b> option in order to create
+multi-session disks on these drives. If you like to record a
+multi-session disk in SAO mode, you need to force
+<b>CD-ROM</b> sectors by including the <b>-data</b> option.
+Not all drives allow multi-session CDs in SAO mode.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For DVD media,
+<b>-multi</b> switches the write mode to <b>incremental
+packet recording</b>. There is currently no way to prevent
+the ability to append further sessions and there is
+currently only support for DVD-R/DVD-RW media. To reuse a
+DVD-RW that has previously been written in <b>incremental
+packet recording</b> mode for different write modes, you
+need to blank the entire media before.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>-dao</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-sao</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Set <b>SAO (Session At Once)</b> mode which is usually
+called <b>Disk At Once</b> mode. This currently only works
+with MMC drives that support <b>Session At Once</b> mode.
+Note that cdrecord needs to know the size of each track in
+advance for this mode (see the <b>mkisofs -print-size</b>
+option and the <i>EXAMPLES</i> section for more
+information).</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">There are
+several CD writers with bad firmware that result in broken
+disks when writing in TAO or SAO mode. If you find any
+problems with the layout of a disk or with subchannel
+content (e.g. wrong times on the display when playing the
+CD) and your drive supports to write in <b>-raw96r</b> or
+<b>-raw16</b> mode, you should give it a try.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>-tao</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Set <b>TAO (Track At Once)
+writing mode.</b> This is the default write mode in previous
+<b>cdrecord</b> versions. With most drives, this write mode
+is required for multi-session recording.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">There are
+several CD writers with bad firmware that result in broken
+disks when writing in TAO or SAO mode. If you find any
+problems with the layout of a disk or with subchannel
+content (e.g. wrong times on the display when playing the
+CD) and your drive supports to write in <b>-raw96r</b> or
+<b>-raw16</b> mode, you should give it a try.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>-raw</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Set <b>RAW writing mode.</b>
+Using this option defaults to <b>-raw96r</b>. Note that
+cdrecord needs to know the size of each track in advance for
+this mode (see the <b>mkisofs -print-size</b> option and the
+<i>EXAMPLES</i> section for more information).</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-raw96r</b></p>
+
+<p style="margin-left:18%;">Set <b>RAW writing mode</b>
+with 2352 byte sectors plus 96 bytes of raw P-W sub-channel
+data resulting in a sector size of 2448 bytes. This is the
+preferred raw writing mode as it gives best control over the
+CD-writing process. Writing data disks in raw mode needs
+significantly more CPU time than other write modes. If your
+CPU is too slow, this may result in buffer underruns. Note
+that cdrecord needs to know the size of each track in
+advance for this mode (see the <b>mkisofs -print-size</b>
+option and the <i>EXAMPLES</i> section for more
+information).</p>
+
+<p style="margin-left:9%;"><b>-raw96p</b></p>
+
+<p style="margin-left:18%;">Set <b>RAW writing mode</b>
+with 2352 byte sectors plus 96 bytes of packed P-W
+sub-channel data resulting in a sector size of 2448 bytes.
+This is the less preferred raw writing mode as only a few
+recorders support it and some of these recorders have bugs
+in the firmware implementation. Don&rsquo;t use this mode if
+your recorder supports <b>-raw96r</b> or <b>-raw16</b>.
+Writing data disks in raw mode needs significantly more CPU
+time than other write modes. If your CPU is too slow, this
+may result in buffer underruns. Note that cdrecord needs to
+know the size of each track in advance for this mode (see
+the <b>mkisofs -print-size</b> option and the
+<i>EXAMPLES</i> section for more information).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-raw16</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Set <b>RAW writing mode</b> with 2352 byte sectors plus
+16 bytes of P-Q sub-channel data resulting in a sector size
+of 2368 bytes. If a recorder does not support
+<b>-raw96r</b>, this is the preferred raw writing mode. It
+does not allow to write <i>CD-Text</i> or <i>CD+Graphics</i>
+but it is the only raw writing mode in cheap CD-writers, as
+these cheap writers in most cases do not support <b>-dao</b>
+mode. Don&rsquo;t use this mode if your recorder supports
+<b>-raw96r</b>. Writing data disks in raw mode needs
+significantly more CPU time than other write modes. If your
+CPU is too slow, this may result in buffer underruns. Note
+that cdrecord needs to know the size of each track in
+advance for this mode (see the <b>mkisofs -print-size</b>
+option and the <i>EXAMPLES</i> section for more
+information).</p> </td></tr>
+</table>
+
+<h3>Cdrecord functional options
+<a name="Cdrecord functional options"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>-abort</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Try to send an <b>abort</b>
+sequence to the drive. If you use <b>cdrecord</b> only, this
+should never be needed; but other software may leave a drive
+in an unusable condition. Calling <b>cdrecord -reset</b> may
+be needed if a previous write has been interrupted and the
+software did not tell the drive that it will not continue to
+write.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-atip</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Retrieve and print out the ATIP (Absolute Time In
+Pre-groove) info of a CD/DVD/BluRay recordable or
+CD/DVD/BluRay re-writable media. With this option,
+<b>cdrecord</b> will try to retrieve the ATIP info. If the
+actual drive does not support to read the ATIP info, it may
+be that only a reduced set of information records or even
+nothing is displayed. Only a limited number of MMC-compliant
+drives support to read the ATIP info.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">If
+<b>cdrecord</b> is able to retrieve the lead-in start time
+for the first session, it will try to decode and print the
+manufacturer info from the media. DVD media does not have
+ATIP information but there is equivalent prerecorded
+information that is read out and printed.</p>
+
+<p style="margin-left:9%;"><b>blank=</b><i>type</i></p>
+
+<p style="margin-left:18%;">Blank a CD-RW and exit or blank
+a CD-RW before writing. The blanking type may be one of:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p>help</p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Display a list of possible blanking types.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p>all</p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Blank the entire disk. This may take a long time.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p>fast</p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Minimally blank the disk. This results in erasing the
+PMA, the TOC and the pregap.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p>track</p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Blank the last track.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p>unreserve</p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Unreserve a reserved track.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p>trtail</p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Blank the tail of a track.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p>unclose</p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Unclose last session.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p>session</p></td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p>Blank the last session.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Not all drives
+support all blanking types. It may be necessary to use
+<b>blank=all</b> if a drive reports a specified command as
+being invalid. If used together with the <b>-force</b> flag,
+this option may be used to blank CD-RW disks that otherwise
+cannot be blanked. Note that you may need to specify
+<b>blank=</b><i>all</i> because some drives will not
+continue with certain types of bad CD-RW disks. Note also
+that <b>cdrecord</b> does its best if the <b>-force</b> flag
+is used but it finally depends on the drive&rsquo;s firmware
+whether the blanking operation will succeed or not.</p>
+
+<p style="margin-left:9%;"><b>-checkdrive</b></p>
+
+<p style="margin-left:18%;">Checks if a driver for the
+current drive is present and exit. If the drive is a known
+drive, <b>cdrecord</b> uses exit code 0.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-clone</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Tells <b>cdrecord</b> to handle images created by
+<i>readcd -clone</i>. The <b>-clone</b> write mode may only
+be used in conjunction with the <b>-raw96r</b> or
+<b>-raw16</b> option. Using <b>-clone</b> together with
+<b>-raw96r</b> is preferred as it allows to write all
+sub-channel data. The <b>-raw16</b> option should only be
+used with drives that do not support to write in
+<b>-raw96r</b> mode.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Note that
+copying in <b>clone</b> mode disables certain levels of
+error correction and thus always results in a quality
+degradation. Avoid copying audio CDs in <b>clone</b> mode
+for this reason.</p>
+
+
+<p style="margin-left:9%;"><b>cuefile=</b><i>filename</i></p>
+
+<p style="margin-left:18%;">Take all recording-related
+information from a CDRWIN-compliant <b>CUE sheet</b> file.
+No track-file arguments to <b>cdrecord</b> are allowed when
+this option is present and one of the following options:
+<b>-dao</b>, <b>-sao</b>, <b>-raw</b>, <b>-raw16</b>,
+<b>-raw96r</b> is needed in addition.</p>
+
+<p style="margin-left:9%;"><b>defpregap=</b>#</p>
+
+<p style="margin-left:18%;">Set the default pre-gap size
+for all tracks except track number 1. This option currently
+only makes sense with the following drives:</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Teac
+CD-R50S</b>, <b>Teac CD-R55S</b>, <b>JVC XR-W2010</b>,
+<b>Pinnacle RCD-5020</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">when creating
+track-at-once disks without the 2-second silence before each
+track. <br>
+This option may go away in the future.</p>
+
+<p style="margin-left:9%;"><b>driver=</b><i>name</i></p>
+
+<p style="margin-left:18%;">Allows the user to manually
+select a driver for the device. The reason for the existence
+of the <b>driver=</b><i>name</i> option is to allow users to
+use <b>cdrecord</b> with drives that are similar to
+supported drives but not known directly by <b>cdrecord</b>.
+All drives made after 1997 should be MMC-standard-compliant
+and thus supported by one of the MMC drivers. It is most
+unlikely that <b>cdrecord</b> is unable to find the right
+driver automatically. Use this option with extreme care. If
+a wrong driver is used for a device, the possibility of
+creating corrupted disks is high. The minimum problem
+related to a wrong driver is that the <b>-speed</b> or
+<b>-dummy</b> will not work.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The following
+driver names are supported:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>help</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>To get a list of possible drivers together with a short
+description.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>mmc_bd</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>The generic SCSI-3/mmc BluRay driver is auto-selected
+whenever <b>cdrecord</b> finds an MMC-compliant drive that
+does support to write BluRay media or a multi system that
+contains a BluRay disk as the current medium. This driver
+tries to close the tray, checks the medium found in the tray
+and then branches to the driver that matches the current
+medium.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>mmc_bdr</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc BluRay
+driver is auto-selected whenever <b>cdrecord</b> finds an
+MMC-compliant drive that does support to write BluRay BD-R
+media or a multi system that contains a BluRay BD-R disk as
+the current medium.</p>
+
+<p style="margin-left:18%;"><b>mmc_bdre</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc BluRay
+driver is auto-selected whenever <b>cdrecord</b> finds an
+MMC-compliant drive that does support to write BluRay BD-RE
+media or a multi system that contains a BluRay BD-RE disk as
+the current medium.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>mmc_cd</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>The generic SCSI-3/mmc CD-ROM driver is auto-selected
+whenever <b>cdrecord</b> finds an MMC-compliant drive that
+does not identify itself to support writing at all, or that
+only identifies to support media or write modes not
+implemented in <b>cdrecord</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>mmc_cd_dvd</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc
+CD/DVD/BluRay driver is auto-selected whenever
+<b>cdrecord</b> finds an MMC-2 or MMC-3-compliant drive that
+seems to support more than one medium type and the tray is
+open or no medium could be found to select the right driver.
+This driver tries to close the tray, checks the medium found
+in the tray and then branches to the driver that matches the
+current medium.</p>
+
+<p style="margin-left:18%;"><b>mmc_cdr</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc
+CD-R/CD-RW driver is auto-selected whenever <b>cdrecord</b>
+finds an MMC-compliant drive that only supports to write CDs
+or a multi system drive that contains a CD as the current
+medium.</p>
+
+<p style="margin-left:18%;"><b>mmc_cdr_sony</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc
+CD-R/CD-RW driver is auto-selected whenever <b>cdrecord</b>
+would otherwise select the <b>mmc_cdr</b> driver but the
+device seems to be made by Sony. The <b>mmc_cdr_sony</b> is
+definitely needed for the Sony CDU 928 as this drive does
+not completely implement the MMC standard and some of the
+MMC SCSI commands have to be replaced by Sony proprietary
+commands. It seems that all Sony drives (even newer ones)
+still implement the Sony proprietary SCSI commands so it has
+not yet become a problem to use this driver for all Sony
+drives. If you find a newer Sony drive that does not work
+with this driver, please report.</p>
+
+<p style="margin-left:18%;"><b>mmc_dvd</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc-2
+DVD-R/DVD-RW driver is auto-selected whenever
+<b>cdrecord</b> finds an MMC-2 or MMC-3-compliant drive that
+supports to write DVDs and an appropriate medium is loaded.
+There is no Track At Once mode for DVD writers.</p>
+
+<p style="margin-left:18%;"><b>mmc_dvdplus</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc-3
+DVD+R/DVD+RW driver is auto-selected whenever one of the
+DVD+ media types that are incompatible to each other is
+found. It checks media and then branches to the driver that
+matches the current medium.</p>
+
+<p style="margin-left:18%;"><b>mmc_dvdplusr</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc-3 DVD+R
+driver is auto-selected whenever a DVD+R medium is found in
+an appropriate writer. Note that for unknown reason, the
+DVD+RW Alliance does not like that there is a simulation
+mode for DVD+R media. The author of <b>cdrecord</b> tries to
+convince manufacturers to implement a simulation mode for
+DVD+R and implement support. DVD+R only supports one write
+mode that is somewhere between Track At Once and Packet
+writing; this mode is selected in <b>cdrecord</b> via the
+<b>-dao</b>/<b>-sao</b> option.</p>
+
+<p style="margin-left:18%;"><b>mmc_dvdplusrw</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-3/mmc-3 DVD+RW
+driver is auto-selected whenever a DVD+RW medium is found in
+an appropriate writer. As DVD+RW media need to be formatted
+before their first use, cdrecord auto-detects this medium
+state and performs a format before it starts to write. Note
+that for unknown reason, the DVD+RW Alliance does not like
+that there is a simulation mode nor a way to erase DVD+RW
+media. DVD+RW only supports one write mode that is close to
+Packet writing; this mode is selected in <b>cdrecord</b> via
+the <b>-dao</b>/<b>-sao</b> option.</p>
+
+<p style="margin-left:18%;"><b>cw_7501</b></p>
+
+<p style="margin-left:27%;">The driver for
+Matsushita/Panasonic CW-7501 is auto-selected when
+<b>cdrecord</b> finds this old pre-MMC drive.
+<b>Cdrecord</b> supports all write modes for this drive
+type.</p>
+
+<p style="margin-left:18%;"><b>kodak_pcd_600</b></p>
+
+<p style="margin-left:27%;">The driver for Kodak PCD-600 is
+auto-selected when <b>cdrecord</b> finds this old pre-MMC
+drive which has been the first high speed (6x) CD-writer for
+a long time. This drive behaves similarly to the Philips
+CDD-521 drive.</p>
+
+<p style="margin-left:18%;"><b>philips_cdd521</b></p>
+
+<p style="margin-left:27%;">The driver for Philips CDD-521
+is auto-selected when <b>cdrecord</b> finds a Philips
+CDD-521 drive (which is the first CD-writer ever made) or
+one of the other drives that are known to behave similarly
+to this drive. All Philips CDD-521 or similar drives (see
+other drivers in this list) do not support Session At Once
+recording.</p>
+
+<p style="margin-left:18%;"><b>philips_cdd521_old</b></p>
+
+<p style="margin-left:27%;">The driver for Philips old
+CDD-521 is auto-selected when <b>cdrecord</b> finds a
+Philips CDD-521 with very old firmware which has some known
+limitations.</p>
+
+<p style="margin-left:18%;"><b>philips_cdd522</b></p>
+
+<p style="margin-left:27%;">The driver for Philips CDD-522
+is auto-selected when <b>cdrecord</b> finds a Philips
+CDD-522 which is the successor of the 521 or one of its
+variants with Kodak label. <b>Cdrecord</b> does not support
+Session At Once recording with these drives.</p>
+
+<p style="margin-left:18%;"><b>philips_dumb</b></p>
+
+<p style="margin-left:27%;">The driver for Philips CDD-521
+with pessimistic assumptions is never auto-selected. It may
+be used by hand with drives that behave similarly to the
+Philips CDD-521.</p>
+
+<p style="margin-left:18%;"><b>pioneer_dws114x</b></p>
+
+<p style="margin-left:27%;">The driver for Pioneer DW-S114X
+is auto-selected when <b>cdrecord</b> finds one of the old
+non-MMC CD-writers from Pioneer.</p>
+
+<p style="margin-left:18%;"><b>plasmon_rf4100</b></p>
+
+<p style="margin-left:27%;">The driver for Plasmon RF 4100
+is auto-selected when <b>cdrecord</b> finds this specific
+variant of the Philips CDD-521.</p>
+
+<p style="margin-left:18%;"><b>ricoh_ro1060c</b></p>
+
+<p style="margin-left:27%;">The driver for Ricoh RO-1060C
+is auto-selected when <b>cdrecord</b> finds this drive.
+There is no real support for this drive yet.</p>
+
+<p style="margin-left:18%;"><b>ricoh_ro1420c</b></p>
+
+<p style="margin-left:27%;">The driver for Ricoh RO-1420C
+is auto-selected when <b>cdrecord</b> finds a drive with
+this specific variant of the Philips CDD-521 command
+set.</p>
+
+<p style="margin-left:18%;"><b>scsi2_cd</b></p>
+
+<p style="margin-left:27%;">The generic SCSI-2 CD-ROM
+driver is auto-selected whenever <b>cdrecord</b> finds a
+pre-MMC drive that does not support writing or a pre-MMC
+writer that is not supported by <b>cdrecord</b>.</p>
+
+<p style="margin-left:18%;"><b>sony_cdu924</b></p>
+
+<p style="margin-left:27%;">The driver for Sony CDU-924 /
+CDU-948 is auto-selected whenever <b>cdrecord</b> finds one
+of the old pre-MMC CD-writers from Sony.</p>
+
+<p style="margin-left:18%;"><b>teac_cdr50</b></p>
+
+<p style="margin-left:27%;">The driver for Teac CD-R50S,
+Teac CD-R55S, JVC XR-W2010, Pinnacle RCD-5020 is
+auto-selected whenever one of the drives is found that is
+known to use the non-MMC command set used by TEAC and JVC.
+Note that many drives from JVC will not work because they do
+not correctly implement the documented command set and JVC
+has been unwilling to fix or document the bugs. There is no
+support for the Session At Once write mode yet.</p>
+
+<p style="margin-left:18%;"><b>tyuden_ew50</b></p>
+
+<p style="margin-left:27%;">The driver for Taiyo Yuden
+EW-50 is auto-selected when <b>cdrecord</b> finds a drive
+with this specific variant of the Philips CDD-521 command
+set.</p>
+
+<p style="margin-left:18%;"><b>yamaha_cdr100</b></p>
+
+<p style="margin-left:27%;">The driver for Yamaha CDR-100 /
+CDR-102 is auto-selected when <b>cdrecord</b> finds one of
+the old pre-MMC CD-writers from Yamaha. There is no support
+for the Session At Once write mode yet.</p>
+
+<p style="margin-left:18%;"><b>bd_simul</b></p>
+
+<p style="margin-left:27%;">The simulation BluRay driver
+allows to run timing and speed tests with parameters that
+match the behavior of BluRay writers.</p>
+
+<p style="margin-left:18%;"><b>cdr_simul</b></p>
+
+<p style="margin-left:27%;">The simulation CD-R driver
+allows to run timing and speed tests with parameters that
+match the behavior of CD-writers.</p>
+
+<p style="margin-left:18%;"><b>dvd_simul</b></p>
+
+<p style="margin-left:27%;">The simulation DVD-R driver
+allows to run timing and speed tests with parameters that
+match the behavior of DVD writers.</p>
+
+<p style="margin-left:18%; margin-top: 1em">There are two
+special driver entries in the list: <b>cdr_simul</b> and
+<b>dvd_simul</b>. These driver entries are designed to make
+timing tests at any speed or timing tests for drives that do
+not support the <b>-dummy</b> option. The simulation drivers
+implement a drive with a buffer size of 1&nbsp;MB that can
+be changed via the <b>CDR_SIMUL_BUFSIZE</b> environment
+variable. The simulation driver correctly simulates even a
+buffer underrun condition. If the <b>-dummy</b> option is
+present, the simulation is not aborted in case of a buffer
+underrun.</p>
+
+<p style="margin-left:9%;"><b>driveropts=</b><i>option
+list</i></p>
+
+<p style="margin-left:18%;">Set driver specific options.
+The options are specified as a comma separated list. To get
+a list of valid options use <b>driveropts=</b><i>help</i>
+together with the <i>-checkdrive</i> option. If you like to
+set driver options without running a typical <b>cdrecord</b>
+task, you need to use the <b>-setdropts</b> option in
+addition, otherwise the command line parser in
+<b>cdrecord</b> will complain. Currently implemented driver
+options are: <b><br>
+burnfree</b></p>
+
+<p style="margin-left:27%;">Turn the support for Buffer
+Underrun Free writing on. This only works for drives that
+support Buffer Underrun Free technology. This may be called:
+<b>Sanyo BURN-Proof</b>, <b>Ricoh Just-Link</b>, <b>Yamaha
+Lossless-Link</b> or similar.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The default is
+to turn <b>BURN-Free</b> off, regardless of the defaults of
+the drive.</p>
+
+<p style="margin-left:18%;"><b>noburnfree</b></p>
+
+<p style="margin-left:27%;">Turn the support for Buffer
+Underrun Free writing off.</p>
+
+
+<p style="margin-left:18%;"><b>varirec=</b><i>value</i></p>
+
+<p style="margin-left:27%;">Turn on the <b>Plextor
+VariRec</b> writing mode. The mandatory parameter
+<i>value</i> is the laser power offset and currently may be
+selected from -2, -1, 0, 1, 2. In addition, you need to set
+the write speed to 4 in order to allow <b>VariRec</b> to
+work.</p>
+
+
+<p style="margin-left:18%;"><b>gigarec=</b><i>value</i></p>
+
+<p style="margin-left:27%;">Manage the <b>Plextor
+GigaRec</b> writing mode. The mandatory parameter
+<i>value</i> is the disk capacity ratio compared to normal
+recording and currently may be selected from 0.6, 0.7, 0.8,
+0.9, 1.0, 1,1, 1.2, 1.3, 1.4. If values &lt; 1.0 are used,
+then the effect is similar to the <b>Yamaha Audio Master Q.
+R.</b> feature. If values &gt; 1.0 are used, then the disk
+capacity is increased.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Not all drives
+support all <b>GigaRec</b> values. When a drive uses the
+<b>GigaRec</b> feature, the write speed is limited to
+8x.</p>
+
+<p style="margin-left:18%;"><b>audiomaster</b></p>
+
+<p style="margin-left:27%;">Turn on the <b>Yamaha Audio
+Master Q. R.</b> feature which usually should result in high
+quality CDs that have less reading problems in Hi-Fi
+players. As this is implemented as a variant of the Session
+At Once write mode, it will only work if you select SAO
+write mode and there is no need to turn it off. The <b>Audio
+Master</b> mode will work with a limited speed but may also
+be used with data CDs. In <b>Audio Master</b> mode, the pits
+on the CD will be written larger than usual so the capacity
+of the medium is reduced when turning this feature on. A
+74-minute CD will only have a capacity of 63 minutes if
+<b>Audio Master</b> is active and the capacity of a
+80-minute CD will be reduced to 68 minutes, the capacity in
+will be reduced to 85% of the original capacity. On newer
+Plextor drives, this feature is also present but the
+capacity will be reduced to 86.66% of the original capacity.
+For other factors on Plextor drives, see the <b>gigarec</b>
+option above.</p>
+
+<p style="margin-left:18%;"><b>forcespeed</b></p>
+
+<p style="margin-left:27%;">Normally, modern drives know
+the highest possible speed for different media and may
+reduce the speed in order to grant best write quality. This
+technology may be called: <b>Plextor PowerRec</b>, <b>Ricoh
+Just-Speed</b>, <b>Yamaha Optimum Write Speed Control</b> or
+similar. Some drives (e.g. Plextor, Ricoh and Yamaha) allow
+to force the drive to use the selected speed even if the
+medium is so bad that the write quality would be poor. This
+option tells such a drive to force to use the selected speed
+regardless of the medium quality.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Use this option
+with extreme care and note that the drive should know better
+which medium will work at full speed. The default is to turn
+<b>forcespeed</b> off, regardless of the defaults of the
+drive.</p>
+
+<p style="margin-left:18%;"><b>noforcespeed</b></p>
+
+<p style="margin-left:27%;">Turn off the <b>force speed</b>
+feature.</p>
+
+<p style="margin-left:18%;"><b>speedread</b></p>
+
+<p style="margin-left:27%;">Some ultra high speed drives
+such as 48x and faster drives from Plextor limit the read
+speed for unknown media to e.g. 40x in order to avoid
+damaged disks and drives. Using this option tells the drive
+to read any media as fast as possible. Be very careful as
+this may cause the media to break in the drive while
+reading, resulting in damaged media and drive!</p>
+
+<p style="margin-left:18%;"><b>nospeedread</b></p>
+
+<p style="margin-left:27%;">Turn off unlimited read
+speed.</p>
+
+<p style="margin-left:18%;"><b>singlesession</b></p>
+
+<p style="margin-left:27%;">Turn the drive into a
+single-session only drive. This allows to read defective or
+non-compliant (illegal) media with extremely non-standard
+additional (broken/illegal) TOC entries in the TOC from the
+second or higher session. Some of these disks become usable
+if only the information from the first session is used. You
+need to enable Single Session mode before you insert the
+defective disk!</p>
+
+<p style="margin-left:18%;"><b>nosinglesession</b></p>
+
+<p style="margin-left:27%;">Turn off single-session mode.
+The drive will again behave as usual.</p>
+
+<p style="margin-left:18%;"><b>hidecdr</b></p>
+
+<p style="margin-left:27%;">Hide the fact that a medium
+might be a recordable medium. This allows to make CD-Rs look
+like CD-ROMs and applications believe that the media in the
+drive is not a CD-R.</p>
+
+<p style="margin-left:18%;"><b>nohidecdr</b></p>
+
+<p style="margin-left:27%;">Turn off hiding CD-R media.</p>
+
+<p style="margin-left:18%;"><b>tattooinfo</b></p>
+
+<p style="margin-left:27%;">Use this option together with
+<b>-checkdrive</b> to retrieve the image size information
+for the <b>Yamaha DiskT@2</b> feature. The images always
+have a line length of 3744 pixels. Line number 0 (radius 0)
+is mapped to the center of the disk. If you know the inner
+and outer radii you will be able to create a pre distorted
+image that later may appear undistorted on the disk.</p>
+
+
+<p style="margin-left:18%;"><b>tattoofile=</b><i>name</i></p>
+
+<p style="margin-left:27%;">Use this option together with
+<b>-checkdrive</b> to write an image prepared for the
+<b>Yamaha DiskT@2</b> feature to the medium. The file must
+be a file with raw image B&amp;W data (one byte per pixel)
+in a size as retrieved by a previous call to
+<b>tattooinfo</b>. If the size of the image equals the
+maximum possible size (3744 x 320 pixels), <b>cdrecord</b>
+will use the first part of the file. This first part then
+will be written to the leftover space on the CD.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Note that the
+image must be mirrored to be readable from the pick up side
+of the CD.</p>
+
+<p style="margin-left:18%;"><b>layerbreak</b></p>
+
+<p style="margin-left:27%;">Switch a drive with DVD-R/DL
+medium into <b>layer jump recording</b> recording mode and
+use automatic layer-break position setup.</p>
+
+<p style="margin-left:27%; margin-top: 1em">By default,
+DVD-R/DL media is written in <b>sequential recording</b>
+mode that completely fills up both layers.</p>
+
+
+<p style="margin-left:18%;"><b>layerbreak=</b><i>value</i></p>
+
+<p style="margin-left:27%;">Set up a manual layer-break
+value for DVD-R/DL and DVD+R/DL. The specified layer-break
+value must not be set to less than half of the recorded data
+size and must not be set to more than the remaining <i>Layer
+0 size</i> of the medium. The manual layer-break value needs
+to be a multiple of the ECC sector size which is 16 logical
+2048 byte sectors in case of DVD media and 32 logical 2048
+byte sectors in case of HD-DVD or BD media.</p>
+
+
+<p style="margin-left:27%; margin-top: 1em"><b>Cdrecord</b>
+does not allow to write DL media in case that the total
+amount of data is less then the <i>Layer 0 size</i> of the
+medium except when a manual layer-break has been specified
+by using the <b>layerbreak=</b><i>value</i> option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-eject</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Eject disk after doing the work. Some devices (e.g.
+Philips) need to eject the medium before creating a new
+disk. Doing a -dummy test and immediately creating a real
+disk would not work on these devices.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-fix</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>The disk will only be fixated (i.e. a TOC for a
+CD-reader will be written). This may be used, if for some
+reason the disk has been written but not fixated. This
+option currently does not work with old TEAC drives (CD-R50S
+and CD-R55S).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-force</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Force to continue on some errors. Be careful when using
+this option. <b>Cdrecord</b> implements several checks that
+prevent you from doing unwanted things like damaging CD-RW
+media by improper drives. Many of the sanity checks are
+disabled when the <b>-force</b> option is used.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+also implements some tricks that will allow you to blank bad
+CD-RW disks.</p>
+
+<p style="margin-left:9%;"><b>-format</b></p>
+
+<p style="margin-left:18%;">Format a
+CD-RW/DVD-RW/DVD+RW/BD-RE disc. Formatting is currently only
+implemented for DVD+RW and BD-RE media. A
+&rsquo;maiden&rsquo; DVD+RW or BD-RE medium needs to be
+formatted before you may write to it. However, as
+<b>cdrecord</b> autodetects the need for formatting in this
+case and auto formats the medium before it starts writing,
+the <b>-format</b> option is only needed if you like to
+forcibly reformat a DVD+RW or BD-RE medium.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>fs=</b>#</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Set the FIFO (ring buffer) size to #. You may use the
+same syntax as in <b>dd</b>(1), <b>sdd</b>(1) or
+<b>star</b>(1). The number representing the size is taken in
+bytes unless otherwise specified. If a number is followed
+directly by the letter &lsquo;b&rsquo;, &lsquo;k&rsquo;,
+&lsquo;m&rsquo;, &lsquo;s&rsquo; or &lsquo;f&rsquo;, the
+size is multiplied by 512, 1024, 1024*1024, 2048 or 2352. If
+the size consists of numbers separated by &lsquo;x&rsquo; or
+&lsquo;*&rsquo;, multiplication of the two numbers is
+performed. Thus <i>fs=10x63k</i> will specify a FIFO size of
+630&nbsp;kBytes.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The size
+specified by the <i>fs=</i> argument includes the shared
+memory that is needed for administration. This is at least
+one page of memory. If no <i>fs</i>= option is present,
+<b>cdrecord</b> will try to get the FIFO size value from the
+<b>CDR_FIFOSIZE</b> environment. The default FIFO size is
+currently 4 MB.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The FIFO is
+used to increase buffering for the real-time writing
+process. It allows to run a pipe from <b>mkisofs</b>
+directly into <b>cdrecord</b>. If the FIFO is active and a
+pipe from <b>mkisofs</b> into <b>cdrecord</b> is used to
+create a CD, <b>cdrecord</b> will abort prior to do any
+modifications on the disk if <b>mkisofs</b> dies before
+writing starts. The recommended FIFO size is between 4 and
+128&nbsp;MBytes. As a rule of thumb, the FIFO size should be
+at least equal to the size of the internal buffer of the
+CD/DVD/BluRay-recorder and no more than half of the physical
+amount of RAM available in the machine. If the FIFO size is
+big enough, the FIFO statistics will print a FIFO empty
+count of zero and a FIFO min fill not below 20%. It is not
+wise to use too much space for the FIFO. If you need more
+than 8 MB to write a CD at a speed less than 20x from an
+image on a local file system on an idle machine, your
+machine is either underpowered, has hardware problems or is
+mis-configured. If you like to write DVDs or to write CDs at
+higher speed, it makes sense to use at least 16&nbsp;MB for
+the FIFO.</p>
+
+<p style="margin-left:18%; margin-top: 1em">On old and
+small machines, you need to be more careful with the FIFO
+size. If your machine has less than 256&nbsp;MB of physical
+RAM, you should not set up a FIFO size that is more than
+32&nbsp;MB. The sun4c architecture (e.g. a Sparcstation-2)
+has only MMU page table entries for 16&nbsp;MBytes per
+process. Using more than 14&nbsp;MBytes for the FIFO may
+cause the operating system in this case to spend much time
+to constantly reload the MMU tables. Newer machines from Sun
+do not have this MMU hardware problem. The author has no
+information on PC hardware reflecting this problem.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Old Linux
+systems for non-x86 platforms have broken definitions for
+the shared memory size. You need to fix them and rebuild the
+kernel or manually tell <b>cdrecord</b> to use a smaller
+FIFO.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If you have
+buffer underruns or similar problems (like a constantly
+empty drive-buffer) and observe a zero <i>fifo empty
+count</i>, you have hardware problems that prevent the data
+from flowing fast enough from the kernel memory to the
+drive. The FIFO size in this case is sufficient, but you
+should check for a working DMA setup.</p>
+
+<p style="margin-left:9%;"><b>gracetime=</b><i>#</i></p>
+
+<p style="margin-left:18%;">Set the grace time before
+starting to write to <i>#</i> seconds. Values below 3
+seconds are not allowed in order to prevent the volume
+management from interrupting the write process.</p>
+
+<p style="margin-left:9%;"><b>-ignsize</b></p>
+
+<p style="margin-left:18%;">Ignore the known size of the
+medium. This option should be used with extreme care, it
+exists only for debugging purposes so do not use it for
+other reasons. It is not needed to write disks with more
+than the nominal capacity. This option implies
+<b>-overburn</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-immed</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Tell cdrecord to set the <b>SCSI IMMED</b> flag in
+certain commands (load, eject, blank, close_track,
+close_session). This can be useful on broken systems with
+ATAPI hard-disk and CD/DVD/BluRay writer on the same bus or
+with SCSI systems that do not use disconnect/reconnect.
+These systems will freeze while blanking or fixating a
+CD/DVD/BluRay or while a DVD writer is filling up a session
+to the minimum amount (approx. 800 MB). Setting the
+<b>-immed</b> flag will request the command to return
+immediately while the operation proceeds in background,
+making the bus usable for the other devices and avoiding the
+system freeze. This is an experimental feature which may
+work or not, depending on the model of the CD/DVD/BluRay
+writer. A correct solution would be to set up a correct
+cabling but there seem to be notebooks around that have been
+set up the wrong way by the manufacturer. As it is
+impossible to fix this problem in notebooks, the
+<b>-immed</b> option has been added.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">A second
+experimental feature of the <b>-immed</b> flag is to tell
+cdrecord to try to wait short times while writing to the
+media. This is expected to free the IDE bus if the
+CD/DVD/BluRay writer and the data source are connected to
+the same IDE cable. In this case, the CD/DVD/BluRay writer
+would otherwise usually block the IDE bus for nearly all the
+time making it impossible to fetch data from the source
+drive. See also the <b>minbuf=</b> and <b>-v</b>
+options.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Use both
+features at your own risk. If it turns out that it would
+make sense to have a separate option for the wait feature,
+write to the author and convince him.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>-inq</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Do an inquiry for the drive,
+print the inquiry info for the drive and exit.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-load</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Load the media and exit. This only works with a
+tray-loading mechanism but seems to be useful when using the
+Kodak disk transporter.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-lock</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Load the media, lock the door and exit. This only works
+with a tray-loading mechanism but seems to be useful when
+using the Kodak disk transporter.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>mcn=</b><i>med_cat_nr</i></p>
+
+<p style="margin-left:18%;">Set the <b>Media Catalog
+Number</b> of the CD to <i>med_cat_nr</i>.</p>
+
+<p style="margin-left:9%;"><b>minbuf=</b><i>value</i></p>
+
+<p style="margin-left:18%;">The <b>minbuf=</b> option
+allows to define the minimum drive-buffer fill ratio for the
+experimental ATAPI wait mode that is intended to free the
+IDE bus to allow hard disk and CD/DVD/BluRay writer to be on
+the same IDE cable. As the wait mode currently only works
+when the verbose option <b>-v</b> has been specified,
+<b>cdrecord</b> implies the verbose option in case the
+<b>-immed</b> or <b>minbuf=</b> option has been specified.
+Valid values for <b>minbuf=</b> are between 25 and 95 for
+25%...95% minimum drive-buffer fill ratio.</p>
+
+<p style="margin-left:9%;"><b>-media-info</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-minfo</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Retrieve and print information about the state of the
+medium. This option currently only works for MMC-compliant
+drives.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-msinfo</b></p>
+
+<p style="margin-left:18%;">Retrieve multi-session info in
+a form suitable for <b>mkisofs-1.10</b> or later.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+makes only sense with a CD that contains at least one closed
+session and is appendable (not finally closed yet). Some
+drives create error messages if you try to get the
+multi-session info for a disk that is not suitable for this
+operation.</p>
+
+<p style="margin-left:9%;"><b>-noclose</b></p>
+
+<p style="margin-left:18%;">Do not close the current track,
+useful only when in packet writing mode. This is an
+experimental interface.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-nofix</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Do not fixate the disk after writing the tracks. This
+may be used to create an audio disk in steps. An un-fixated
+disk can usually not be used on a non CD-writer type drive
+but there are audio CD-players that will be able to play
+such a disk.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-overburn</b></p>
+
+<p style="margin-left:18%;">Allow <b>cdrecord</b> to write
+more than the official size of a medium. This feature is
+usually called <i>overburning</i> and depends on the fact
+that most blank media may hold more space than the official
+size. As the official size of the lead-out area on the disk
+is 90 seconds (6750 sectors) and a disk usually works if
+there are at least 150 sectors of lead out, all media may be
+overburned by at least 88 seconds (6600 sectors). Most
+CD-recorders only do overburning in <b>SAO</b> or <b>RAW</b>
+mode. Known exceptions are TEAC CD-R50S, TEAC CD-R55S and
+the Panasonic CW-7502. Some drives do not allow to overburn
+as much as you might like and limit the size of a CD to e.g.
+76 minutes. This problem may be circumvented by writing the
+CD in RAW mode because this way the drive has no chance to
+find the size before starting to burn. There is no guarantee
+that your drive supports overburning at all. Make a test to
+check if your drive implements the feature.</p>
+
+<p style="margin-left:9%;"><b>-packet</b></p>
+
+<p style="margin-left:18%;">Set <b>Packet writing mode.</b>
+This is an experimental interface.</p>
+
+<p style="margin-left:9%;"><b>pktsize=</b>#</p>
+
+<p style="margin-left:18%;">Set the packet size to #,
+forces fixed packet mode. This is an experimental
+interface.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-prcap</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Print the drive capabilities for SCSI-3/mmc-compliant
+drives as obtained from mode page 0x2A. Values marked with
+<i>kB</i> use 1000 bytes as kilo-byte, values marked with
+<i>KB</i> use 1024 bytes as Kilo-byte.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-setdropts</b></p>
+
+<p style="margin-left:18%;">Set the driveropts specified by
+<b>driveropts=</b><i>option list</i><b>,</b> the
+<b>speed</b> of the drive and the <b>dummy</b> flag and
+exit. This allows cdrecord to set drive specific parameters
+that are not directly used by <b>cdrecord</b> like e.g.
+<b>single session mode</b>, <b>hide cdr</b> and similar. It
+is needed in case that <b>driveropts=</b><i>option list</i>
+should be called without planning to run a typical
+<b>cdrecord</b> task.</p>
+
+<p style="margin-left:9%;"><b>speed=</b>#</p>
+
+<p style="margin-left:18%;">Set the speed factor of the
+writing process to #. # is an integer, representing a
+multiple of what has been defined as single speed for the
+medium.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For CD-media,
+single speed is the audio playback speed. This is about
+150&nbsp;KB/s for CD-ROM and about 172&nbsp;KB/s for
+CD-Audio. Single speed is about 1385&nbsp;kB/s for DVD media
+and about 4496&nbsp;kB/s for BluRay media.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If no
+<i>speed</i> option is present, <b>cdrecord</b> will try to
+get a drive specific speed value from the file
+<b>/etc/default/cdrecord</b> and if it cannot find one, it
+will try to get the speed value from the <b>CDR_SPEED</b>
+environment and later from the <b>CDR_SPEED=</b> entry in
+<b>/etc/default/cdrecord</b>. If no speed value could be
+found, cdrecord uses a drive specific default speed. The
+default for all new (MMC-compliant) drives is to use the
+maximum supported by the drive. If you use <i>speed=0</i>
+with a MMC-compliant drive, <b>cdrecord</b> will switch to
+the lowest possible speed for drive and medium. If you are
+using an old (non-MMC) drive that has problems with
+<i>speed=2</i> or <i>speed=4</i>, you should try
+<i>speed=0</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-text</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Write CD-Text information based on information taken
+from a file that contains ascii information for the text
+strings. <b>Cdrecord</b> supports CD-Text information based
+on the content of the <b>*.inf</b> files created by
+<b>cdda2wav</b> and CD-Text information based on the content
+from a <b>CUE sheet</b> file. If a <b>CUE sheet</b> file
+contains both (binary CDTEXTFILE and text based SONGWRITER)
+entries, then the information based on the CDTEXTFILE entry
+will win.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">You need to use
+the <b>-useinfo</b> option in addition in order to tell
+<b>cdrecord</b> to read the <b>*.inf</b> files or
+<b>cuefile=</b><i>filename</i> in order to tell
+<b>cdrecord</b> to read a <b>CUE sheet</b> file in addition.
+If you like to write your own CD-Text information, edit the
+<b>*.inf</b> files or the <b>CUE sheet</b> file with a text
+editor and change the fields that are relevant for
+CD-Text.</p>
+
+
+<p style="margin-left:9%;"><b>textfile=</b><i>filename</i></p>
+
+<p style="margin-left:18%;">Write CD-Text based on
+information found in the binary file <i>filename</i>. This
+file must contain information in a data format defined in
+the SCSI-3 MMC-2 standard and in the Red Book. The
+four-byte-sized header that is defined in the SCSI standard
+is optional and allows to make the recognition of correct
+data less ambiguous. This is the best option to be used to
+copy CD-Text data from existing CDs that already carry
+CD-Text information. To get data in a format suitable for
+this option use <b>cdrecord -vv -toc</b> to extract the
+information from disk. If both,
+<b>textfile=</b><i>filename</i> and CD-Text information from
+<b>*.inf</b> or <b>*.cue</b> files are present,
+<b>textfile=</b><i>filename</i> will overwrite the other
+information.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-toc</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Retrieve and print out the table of contents or PMA of a
+CD. With this option, <b>cdrecord</b> will work with CD-R
+drives and with CD-ROM drives.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-waiti</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Wait for input to become available on standard input
+before trying to open the SCSI driver. This allows
+<b>cdrecord</b> to read its input from a pipe even when
+writing additional sessions to a multi-session disk. When
+writing another session to a multi-session disk,
+<b>mkisofs</b> needs to read the old session from the device
+before writing output. This cannot be done if
+<b>cdrecord</b> opens the SCSI driver at the same time.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-useinfo</b></p>
+
+<p style="margin-left:18%;">Use <b>*.inf</b> files to
+overwrite audio options. If this option is used, the pregap
+size information, the index information, the pre-emphasis
+information and the CD-Text information is read from the
+<b>*.inf</b> file that is associated with the file that
+contains the audio data for a track.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If used
+together with the <b>-audio</b> option, <b>cdrecord</b> may
+be used to write audio CDs from a pipe from <b>cdda2wav</b>
+if you call <b>cdrecord</b> with the <b>*.inf</b> files as
+track parameter list instead of using audio files. The audio
+data is read from <b>stdin</b> in this case. See
+<i>EXAMPLES</i> section below. <b>Cdrecord</b> first
+verifies that <b>stdin</b> is not connected to a terminal
+and runs some heuristic consistency checks on the
+<b>*.inf</b> files and then sets the track lengths from the
+information in the <b>*.inf</b> files.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If you like to
+write from <b>stdin</b>, make sure that cdrecord is called
+with a large enough FIFO size, reduce the write speed to a
+value below the read speed of the source drive and switch
+the burn-free option for the recording drive on.</p>
+
+<h3>SCSI options
+<a name="SCSI options"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dev=</b><i>target</i></p>
+
+<p style="margin-left:18%;">Set the SCSI target for the
+CD/DVD/BluRay-recorder, see notes above. A typical target
+device specification is <b>dev=</b><i>1,6,0</i> . If a
+filename must be provided together with the numerical target
+specification, the filename is implementation specific. The
+correct filename in this case can be found in the system
+specific manuals of the target operating system. On a
+<i>FreeBSD</i> system without <i>CAM</i> support, you need
+to use the control device (e.g. <i>/dev/rcd0.ctl</i>). A
+correct device specification in this case may be
+<b>dev=</b><i>/dev/rcd0.ctl:@</i> .</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>General SCSI
+addressing</b> <br>
+The <i>target device</i> to the <b>dev=</b> option refers to
+the <b>SCSI&nbsp;CAM</b> standard notation for
+<i>scsibus</i>/<i>target</i>/<i>lun</i> of the
+CD/DVD/BluRay-recorder. Communication on <i>SunOS</i> is
+done with the SCSI general driver <b>scg.</b> Other
+operating systems are using a library simulation of this
+driver. Possible syntax is: <b>dev=</b>
+<i>scsibus</i>,<i>target</i>,<i>lun</i> or <b>dev=</b>
+<i>target</i>,<i>lun</i>. In the latter case, the
+CD/DVD/BluRay-recorder has to be connected to the default
+SCSI bus of the machine. <i>Scsibus</i>, <i>target</i> and
+<i>lun</i> are integer numbers. Some operating systems or
+SCSI transport implementations may require to specify a
+filename in addition. In this case the correct syntax for
+the device is: <b>dev=</b>
+<i>devicename</i>:<i>scsibus</i>,<i>target</i>,<i>lun</i> or
+<b>dev=</b> <i>devicename</i>:<i>target</i>,<i>lun</i>. If
+the name of the device node that has been specified on such
+a system refers to exactly one SCSI device, a shorthand in
+the form <b>dev=</b> <i>devicename</i>:<i>@</i> or
+<b>dev=</b> <i>devicename</i>:<i>@</i>,<i>lun</i> may be
+used instead of <b>dev=</b>
+<i>devicename</i>:<i>scsibus</i>,<i>target</i>,<i>lun</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Remote SCSI
+addressing</b> <br>
+To access remote SCSI devices, you need to prepend the SCSI
+device name by a remote device indicator. The remote device
+indicator is either <b>REMOTE:</b><i>user@host:</i> or
+<b>REMOTE:</b><i>host:</i> A valid remote SCSI device name
+may be: <b>REMOTE:</b><i>user@host:</i> to allow remote SCSI
+bus scanning or <b>REMOTE:</b><i>user@host:1,0,0</i> to
+access the SCSI device at <i>host</i> connected to SCSI bus
+# 1,target 0, lun 0. In order to allow remote access to a
+specific <i>host</i>, the <b>rscsi</b>(1) program needs to
+be present and configured on the <i>host</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Alternate
+SCSI transports <br>
+Cdrecord</b> is completely based on <b>SCSI</b> commands but
+this is no problem as all CD/DVD/BluRay writers ever made
+use <b>SCSI</b> commands for the communication. Even
+<b>ATAPI</b> drives are just <b>SCSI</b> drives that
+inherently use the <i>ATA packet interface</i> as
+<b>SCSI</b> command transport layer build into the IDE (ATA)
+transport. You may need to specify an alternate transport
+layer on the command line if your OS does not implement a
+fully integrated kernel driver subsystem that allows to
+access any drive using <b>SCSI</b> commands via a single
+unique user interface.</p>
+
+<p style="margin-left:18%; margin-top: 1em">To access SCSI
+devices via alternate transport layers, you need to prepend
+the SCSI device name by a transport layer indicator. The
+transport layer indicator may be something like
+<b>USCSI:</b> or <b>ATAPI:</b>. To get a list of supported
+transport layers for your platform, use <b>dev=</b>
+<i>HELP</i>:</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Portability
+Background</b> <br>
+To make <b>cdrecord</b> portable to all <small>UNIX</small>
+platforms, the syntax <b>dev=</b>
+<i>devicename</i>:<i>scsibus</i>,<i>target</i>,<i>lun</i> is
+preferred as it hides OS specific knowledge about device
+names from the user. A specific OS may not necessarily
+support a way to specify a real device file name nor a way
+to specify <i>scsibus</i>,<i>target</i>,<i>lun</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>Scsibus</i>
+0 is the default SCSI bus on the machine. Watch the boot
+messages for more information or look into
+<b>/var/adm/messages</b> for more information about the SCSI
+configuration of your machine. If you have problems to
+figure out what values for
+<i>scsibus</i>,<i>target</i>,<i>lun</i> should be used, try
+the <b>-scanbus</b> option of <b>cdrecord</b> described
+below.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Using
+logical names for devices</b> <br>
+If no <i>dev</i> option is present, <b>cdrecord</b> will try
+to get the device from the <b>CDR_DEVICE</b>
+environment.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If a file
+/etc/default/cdrecord exists, and if the argument to the
+<b>dev=</b> option or the <b>CDR_DEVICE</b> environment does
+not contain the characters &rsquo;,&rsquo;, &rsquo;/&rsquo;,
+&rsquo;@&rsquo; or &rsquo;:&rsquo;, it is interpreted as a
+device label name that was defined in the file
+/etc/default/cdrecord (see FILES section).</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Autotarget
+Mode</b> <br>
+If no <b>dev=</b> option and no <b>CDR_DEVICE</b>
+environment is present, or if it only contains a transport
+specifier but no address notation, <b>cdrecord</b> tries to
+scan the SCSI address space for CD-ROM drives. If exactly
+one is found, this is used by default.</p>
+
+<p style="margin-left:9%;"><b>debug=</b><i>#,</i>
+<b>-d</b></p>
+
+<p style="margin-left:18%;">Set the misc debug value to #
+(with debug=#) or increment the misc debug level by one
+(with -d). If you specify <i>-dd,</i> this equals to
+<b>debug=</b><i>2.</i> This may help to find problems while
+opening a driver for libscg as well as with sector sizes and
+sector types. Using <b>-debug</b> slows down the process and
+may be the reason for a buffer underrun.</p>
+
+<p style="margin-left:9%;"><b>kdebug=</b>#, <b>kd=</b>#</p>
+
+<p style="margin-left:18%;">Tell the <b>scg</b>-driver to
+modify the kernel debug value while SCSI commands are
+running.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-reset</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Try to reset the SCSI bus where the CD-recorder is
+located. This does not work on all operating systems.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-scanbus</b></p>
+
+<p style="margin-left:18%;">Scan all SCSI devices on all
+SCSI busses and print the inquiry strings. This option may
+be used to find SCSI address of the CD/DVD/BluRay-recorder
+on a system. The numbers printed out as labels are computed
+by: <b>bus * 100 + target</b></p>
+
+<p style="margin-left:9%;"><b>scgopts=</b><i>list</i></p>
+
+<p style="margin-left:18%;">A comma separated list of SCSI
+options that are handled by libscg. The implemented options
+may be uptated indepentendly from applications. Currently,
+one option: <b>ignore-resid</b> is supported to work around
+a Linux kernel bug.</p>
+
+<p style="margin-left:9%;"><b>-silent</b>, <b>-s</b></p>
+
+<p style="margin-left:18%;">Do not print out a status
+report for failed SCSI commands.</p>
+
+<p style="margin-left:9%;"><b>timeout=</b><i>#</i></p>
+
+<p style="margin-left:18%;">Set the default SCSI command
+timeout value to <i>#</i> seconds. The default SCSI command
+timeout is the minimum timeout used for sending SCSI
+commands. If a SCSI command fails due to a timeout, you may
+try to raise the default SCSI command timeout above the
+timeout value of the failed command. If the command runs
+correctly with a raised command timeout, please report the
+better timeout value and the corresponding command to the
+author of the program. If no <b>timeout=</b> option is
+present, a default timeout of 40 seconds is used.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>ts=</b>#</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Set the maximum transfer size for a single SCSI command
+to #. The syntax for the <b>ts=</b> option is the same as
+for cdrecord fs=# or sdd bs=#.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">If no
+<b>ts=</b> option has been specified, <b>cdrecord</b>
+defaults to a transfer size of 63&nbsp;kB. If libscg gets
+lower values from the operating system, the value is reduced
+to the maximum value that is possible with the current
+operating system. Sometimes, it may help to further reduce
+the transfer size or to enhance it, but note that it may
+take a long time to find a better value by experimenting
+with the <b>ts=</b> option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-V</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Increment the verbose level in
+respect of SCSI command transport by one. This helps to
+debug problems during the writing process, that occur in the
+CD/DVD/BluRay-recorder. If you get incomprehensible error
+messages you should use this flag to get more detailed
+output. <b>-VV</b> will show data buffer content in
+addition. Using <b>-V</b> or <b>-VV</b> slows down the
+process and may be the reason for a buffer underrun.</p></td></tr>
+</table>
+
+<h2>TRACK OPTIONS
+<a name="TRACK OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Track options
+may be mixed with track file names.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>-audio</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">If this flag is present, all
+subsequent tracks are written in <b>CD-DA</b> (similar to
+Red Book) audio format. The file with data for this tracks
+should contain stereo, 16-bit digital audio with 44100
+samples/s. The byte order should be the following: MSB left,
+LSB left, MSB right, LSB right, MSB left and so on. The
+track should be a multiple of 2352 bytes. It is not possible
+to put the master image of an audio track on a raw disk
+because data will be read in multiple of 2352 bytes during
+the recording process.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">If a filename
+ends in <i>.au</i> or <i>.wav</i> the file is considered to
+be a structured audio data file. <b>Cdrecord</b> assumes
+that the file in this case is a Sun audio file or a
+Microsoft .WAV file and extracts the audio data from the
+files by skipping over the non-audio header information. In
+all other cases, cdrecord will only work correctly if the
+audio data stream does not have any header. Because many
+structured audio files do not have an integral number of
+blocks (1/75th second each) in length, it is often necessary
+to specify the <b>-pad</b> option as well. <b>cdrecord</b>
+recognizes that audio data in a .WAV file is stored in Intel
+(little-endian) byte order, and will automatically byte-swap
+the data if the CD-recorder requires big-endian data.
+<b>Cdrecord</b> will reject any audio file that does not
+match the Red Book requirements of 16-bit stereo samples in
+PCM coding at 44100 samples/second.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Using other
+structured audio data formats as input to <b>cdrecord</b>
+will usually work if the structure of the data is the
+structure described above (raw pcm data in big-endian byte
+order). However, if the data format includes a header, you
+will hear a click at the start of the track.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+</td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">If neither <i>-data</i> nor
+<i>-audio</i> have been specified, <b>cdrecord</b> defaults
+to <i>-audio</i> for all filenames that end in <i>.au</i> or
+<i>.wav</i> and to <i>-data</i> for all other files.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-cdi</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, the TOC type for the disk is
+set to <b>CDI</b>. This only makes sense with XA disks.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-copy</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, all TOC entries for subsequent
+audio tracks of the resulting CD will indicate that the
+audio data has permission to be copied without limit. This
+option has no effect on data tracks.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-data</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, all subsequent tracks are
+written in <b>CD-ROM mode 1</b> (Yellow Book) format. The
+data size is a multiple of 2048 bytes. The file with track
+data should contain an <b>ISO-9660</b> or <b>Rock Ridge</b>
+filesystem image (see <b>mkisofs</b> for more details). If
+the track data is an <b>ufs</b> filesystem image, fragment
+size should be set to 2&nbsp;KB or more to allow CD-drives
+with 2&nbsp;KB sector size to be used for reading.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+</td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p><i>-data</i> is the default, if no other flag is present
+and the file does not appear to be of one of the well known
+audio file types.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+</td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>If neither <i>-data</i> nor <i>-audio</i> have been
+specified, <b>cdrecord</b> defaults to <i>-audio</i> for all
+filenames that end in <i>.au</i> or <i>.wav</i> and to
+<i>-data</i> for all other files.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>index=</b><i>list</i></p>
+
+<p style="margin-left:18%;">Sets an index list for the next
+track. In index list is a comma separated list of numbers
+that are counting from index 1. The first entry in this list
+must contain a 0, the following numbers must be an ascending
+list of numbers (counting in 1/75 seconds) that represent
+the start of the indices. An index list in the form:
+0,7500,15000 sets index 1 to the start of the track, index 2
+100 seconds from the start of the track and index 3 200
+seconds from the start of the track.</p>
+
+<p style="margin-left:9%;"><b>-isosize</b></p>
+
+<p style="margin-left:18%;">Use the <b>ISO-9660</b> file
+system size as the size of the next track. This option is
+needed if you want <b>cdrecord</b> to directly read the
+image of a track from a raw disk partition or from a
+<i>TAO</i> master CD. In the first case the option
+<b>-isosize</b> is needed to limit the size of the CD to the
+size of the ISO filesystem. In the second case the option
+<b>-isosize</b> is needed to prevent <b>cdrecord</b> from
+reading the two run-out blocks that are appended by each
+CD-recorder in track-at-once mode. These two run-out blocks
+cannot be read and would cause a buffer underrun that would
+cause a defective copy.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note that if
+this option is used on files created by <b>mkisofs</b>, the
+padding data that was added by <b>mkisofs</b> is lost and
+replaced by padding added by cdrecord. This may also change
+the amount of padding.</p>
+
+<p style="margin-left:18%; margin-top: 1em">In case
+<b>cdrecord</b> reads the track data from <i>stdin</i>, only
+the first track may be used with the <b>-isosize</b>
+option.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If
+<b>-isosize</b> is used for a track, <b>cdrecord</b> will
+automatically add padding for this track as if the
+<b>-pad</b> option had been used but the amount of padding
+may be less than the padding written by <b>mkisofs</b>. Note
+that if you use <b>-isosize</b> on a track that contains
+Sparc boot information, the boot information will be
+lost.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note also that
+this option cannot be used to determine the size of a file
+system if the <b>-multi</b> option is present.</p>
+
+
+<p style="margin-left:9%;"><b>isrc=</b><i>ISRC_number</i></p>
+
+<p style="margin-left:18%;">Set the <b>International
+Standard Recording Number</b> for the next track to
+<i>ISRC_number</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-mode2</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, all subsequent tracks are
+written in <b>CD-ROM mode 2</b> format. The data size is a
+multiple of 2336 bytes.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-nocopy</b></p>
+
+<p style="margin-left:18%;">If this flag is present, all
+TOC entries for subsequent audio tracks of the resulting CD
+will indicate that the audio data has permission to be
+copied only once for personal use - this is the default.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-nopad</b></p></td>
+<td width="1%"></td>
+<td width="59%">
+
+
+<p>Do not pad the following tracks - the default.</p></td>
+<td width="23%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-nopreemp</b></p>
+
+<p style="margin-left:18%;">If this flag is present, all
+TOC entries for subsequent audio tracks will indicate that
+the audio data has been mastered with linear data - this is
+the default.</p>
+
+<p style="margin-left:9%;"><b>-noshorttrack</b></p>
+
+<p style="margin-left:18%;">Re-enforce the Red Book track
+length standard. Tracks must be at least 4 seconds.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-pad</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>If the track is a data track, 15 sectors of zeroed data
+will be added to the end of this and each subsequent data
+track. In this case, the <b>-pad</b> option is superseded by
+the <b>padsize=</b> option. It will remain however as a
+shorthand for <b>padsize=</b><i>15s.</i> If the <i>-pad</i>
+option refers to an audio track, <b>cdrecord</b> will pad
+the audio data to be a multiple of 2352 bytes. The audio
+data padding is done with binary zeroes which is equal to
+absolute silence.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em"><b>-pad</b>
+remains valid until disabled by <b>-nopad</b>.</p>
+
+<p style="margin-left:9%;"><b>padsize=</b>#</p>
+
+<p style="margin-left:18%;">Set the amount of data to be
+appended as padding to the next track to #. Opposed to the
+behavior of the <b>-pad</b> option, the value for
+<i>padsize=</i> is reset to zero for each new track.
+Cdrecord assumes a sector size of 2048 bytes for the
+<i>padsize=</i> option, independent from the real sector
+size and independent from the write mode. The megabytes
+mentioned in the verbose mode output however are counting
+the output sector size which is e.g. 2448 bytes when writing
+in RAW/RAW96 mode. See the <b>fs</b>= option for possible
+arguments. To pad the equivalent of 20 minutes on a CD, you
+may write <b>padsize=</b>20x60x75s. Use this option if your
+CD-drive is not able to read the last sectors of a track or
+if you want to be able to read the CD on a <b>Linux</b>
+system with the ISO-9660 filesystem read-ahead bug. If an
+empty file is used for track data, this option may be used
+to create a disk that is entirely made of padding. This may
+e.g. be used to find out how much overburning is possible
+with a specific medium.</p>
+
+<p style="margin-left:9%;"><b>-preemp</b></p>
+
+<p style="margin-left:18%;">If this flag is present, all
+TOC entries for subsequent audio tracks will indicate that
+the audio data has been sampled with 50/15 microsec
+pre-emphasis. The data however is not modified during the
+process of transferring from file to disk. This option has
+no effect on data tracks.</p>
+
+<p style="margin-left:9%;"><b>pregap=</b>#</p>
+
+<p style="margin-left:18%;">Set the pre-gap size for the
+next track. This option currently only makes sense with the
+TEAC drive when creating track-at-once disks without the
+2-second silence before each track. <br>
+This option may go away in the future.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-scms</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, all TOC entries for subsequent
+audio tracks of the resulting CD will indicate that the
+audio data has no permission to be copied anymore.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-shorttrack</b></p>
+
+<p style="margin-left:18%;">Allow all subsequent tracks to
+violate the Red Book track length standard which requires a
+minimum track length of 4 seconds. This option is only
+useful when used in SAO or RAW mode. Not all drives support
+this feature. The drive must accept the resulting CUE sheet
+or support RAW writing.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-swab</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, audio data is assumed to be in
+byte-swapped (little-endian) order. Some types of CD-writers
+e.g. Yamaha, Sony and the new SCSI-3/mmc drives require
+audio data to be presented in little-endian order, while
+other writers require audio data to be presented in the
+big-endian (network) byte order normally used by the SCSI
+protocol. <b>Cdrecord</b> knows if a CD-recorder needs audio
+data in big- or little-endian order, and corrects the byte
+order of the data stream to match the needs of the recorder.
+You only need the <i>-swab</i> flag if your data stream is
+in Intel (little-endian) byte order.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Note that the
+verbose output of <b>cdrecord</b> will show you if swapping
+is necessary to make the byte order of the input data fit
+the required byte order of the recorder. <b>Cdrecord</b>
+will not show you if the <i>-swab</i> flag was actually
+present for a track.</p>
+
+<p style="margin-left:9%;"><b>tsize=</b>#</p>
+
+<p style="margin-left:18%;">If the master image for the
+next track has been stored on a raw disk, use this option to
+specify the valid amount of data on this disk. If the image
+of the next track is stored in a regular file, the size of
+that file is taken to determine the length of this track. If
+the track contains an ISO-9660 filesystem image use the
+<i>-isosize</i> option to determine the length of that
+filesystem image. <br>
+In Disk At Once mode and with some drives that use the TEAC
+programming interface, even in Track At Once mode,
+<b>cdrecord</b> needs to know the size of each track before
+starting to write the disk. Cdrecord now checks this and
+aborts before starting to write. If this happens you will
+need to run <b>mkisofs -print-size</b> before and use the
+output (with &lsquo;s&rsquo; appended) as an argument to the
+<b>tsize</b>= option of <b>cdrecord</b> (e.g.
+tsize=250000s). <br>
+See <b>fs</b>= option for possible arguments.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-xa</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, all subsequent tracks are
+written in <b>CD-ROM XA mode 2 form 1</b> format. The data
+size is a multiple of 2048 bytes. The XA sector sub-headers
+will be created by the drive. With this option, the write
+mode is the same as with the <b>-multi</b> option.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-xa1</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, all subsequent tracks are
+written in <b>CD-ROM XA mode 2 form 1</b> format. The data
+size is a multiple of 2056 bytes. The XA sector sub-headers
+are part of the user data and have to be supplied by the
+application that prepares the data to be written.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-xa2</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, all subsequent tracks are
+written in <b>CD-ROM XA mode 2 form 2</b> format. The data
+is a multiple of 2324 bytes. The XA sector sub-headers will
+be created by the drive.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-xamix</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>If this flag is present, all subsequent tracks are
+written in a way that allows a mix of <b>CD-ROM XA mode 2
+form 1/2</b> format. The data size is a multiple of 2332
+bytes. The XA sector sub-headers are part of the user data
+and have to be supplied by the application that prepares the
+data to be written. The CRC and the P/Q parity ECC/EDC
+information (depending on the sector type) have to be
+supplied by the application that prepares the data to be
+written.</p> </td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For all examples
+below, it will be assumed that the machine includes two
+drives. The reader is assumed to be target 1 on the primary
+SCSI bus. The CD/DVD/BluRay-recorder is assumed to be target
+2 on the primary SCSI bus of the machine.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If there is only
+one drive in the machine, the <b>dev=</b> option may be
+omitted in the examples below, but in this case the examples
+for replication without intermediate files do not apply.</p>
+
+<h3>Replicating an Audio CD
+<a name="Replicating an Audio CD"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To copy an audio
+CD in the most accurate way, first run</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdda2wav dev=1,0
+paraopts=proof -vall cddb=0 -B -Owav</p>
+
+<p style="margin-left:9%; margin-top: 1em">and then run</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord dev=2,0
+-v -dao -useinfo -text *.wav</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will try to
+copy track indices and to read CD-Text information from
+disk. If there is no CD-Text information, <b>cdda2wav</b>
+will try to get the information from freedb.org instead.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To copy an audio
+CD from a pipe (without intermediate files), first run</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdda2wav dev=1,0
+-vall cddb=0 -info-only</p>
+
+<p style="margin-left:9%; margin-top: 1em">and then run</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdda2wav dev=1,0
+-no-infofile -B -Oraw - | \ <br>
+cdrecord dev=2,0 -v -dao -audio -useinfo -text *.inf</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will get
+all information (including track size info) from the
+<b>*.inf</b> files and then read the audio data from
+stdin.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you like to
+write from <b>stdin</b>, make sure that cdrecord is called
+with a large enough FIFO size (e.g. <b>fs=128m</b>), reduce
+the write speed to a value below the read speed of the
+source drive (e.g. <b>speed=12</b>), and switch the
+burn-free option for the recording drive on by adding
+<b>driveropts=burnfree</b>. For the same reason, it is not
+recommended to extract the audio data in paranoia mode in
+this case.</p>
+
+<h3>Replicating a simple CD-ROM/DVD-ROM/BD-ROM
+<a name="Replicating a simple CD-ROM/DVD-ROM/BD-ROM"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To copy a simple
+disk, first read the master using:</p>
+
+<p style="margin-left:9%; margin-top: 1em">readcd dev=1,0
+f=somefile</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then write the
+disk using:</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord dev=2,0
+-v somefile</p>
+
+<h3>Replicating a CD-ROM in clone mode
+<a name="Replicating a CD-ROM in clone mode"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To copy a CD in
+clone mode, first read the master CD using:</p>
+
+<p style="margin-left:9%; margin-top: 1em">readcd dev=1,0
+-clone f=somefile</p>
+
+<p style="margin-left:9%; margin-top: 1em">or (in case the
+CD contains many sectors that are unreadable by intention)
+by calling:</p>
+
+<p style="margin-left:9%; margin-top: 1em">readcd dev=1,0
+-clone -nocorr f=somefile</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will create
+the files <i>somefile</i> and <i>somefile.toc</i>. Then
+write the CD using:</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord dev=2,0
+-raw96r -clone -v somefile</p>
+
+<h3>Creating an Audio CD
+<a name="Creating an Audio CD"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To record a pure
+CD-DA (audio) at single speed, with each track contained in
+files named <i>track01.cdaudio</i>, <i>track02.cdaudio</i>,
+etc.:</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord -v
+speed=1 dev=2,0 -dao -audio track*.cdaudio</p>
+
+<p style="margin-left:9%; margin-top: 1em">To check if it
+will be OK to use double speed for the example above, use
+the dummy write option:</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord -v
+-dummy speed=2 dev=2,0 -dao -audio track*.cdaudio</p>
+
+<h3>Creating a mixed Audio-Data CD
+<a name="Creating a mixed Audio-Data CD"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To record a
+mixed-mode CD with an ISO-9660 filesystem from
+<i>cdimage.raw</i> on the first track, the other tracks
+being audio tracks from the files <i>track01.cdaudio</i>,
+<i>track02.cdaudio</i>, etc.:</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord -v
+dev=2,0 -dao cdimage.raw -audio track*.cdaudio</p>
+
+<h3>Creating a CD-ROM/DVD-ROM/BD-ROM
+<a name="Creating a CD-ROM/DVD-ROM/BD-ROM"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To record a pure
+disk at double speed, using data from the file
+<i>cdimage.raw</i>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord -v
+speed=2 dev=2,0 -dao cdimage.raw</p>
+
+<p style="margin-left:9%; margin-top: 1em">To create an
+image for an ISO-9660 filesystem with Rock Ridge
+extensions:</p>
+
+<p style="margin-left:9%; margin-top: 1em">mkisofs -R -o
+cdimage.raw /home/joerg/master/tree</p>
+
+<p style="margin-left:9%; margin-top: 1em">To check the
+resulting file before writing to disk on Solaris:</p>
+
+<p style="margin-left:9%; margin-top: 1em">mount -r -F fbk
+-o type=hsfs /dev/fbk0:cdimage.raw /mnt</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>fbk</b>
+driver first appeared in 1988.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Solaris 9 or
+newer comes with a variant of the original <b>fbk</b> idea
+called <b>lofi</b>. The command for the lofi variant is:</p>
+
+<p style="margin-left:9%; margin-top: 1em">mount -r -F hsfs
+&lsquo; lofiadm -a /tmp/cdimage.raw &lsquo; /mnt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+lofiadm needs absolute path names.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On Linux:</p>
+
+<p style="margin-left:9%; margin-top: 1em">mount
+cdimage.raw -r -t iso9660 -o loop /mnt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Go on with: <br>
+ls -lR /mnt <br>
+umount /mnt</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the overall
+speed of the system is sufficient and the structure of the
+filesystem is not too complex, cdrecord will run without
+creating an image of the ISO-9660 filesystem. Simply run the
+pipeline:</p>
+
+<p style="margin-left:9%; margin-top: 1em">mkisofs -R
+/master/tree | cdrecord -v -dao fs=6m speed=2 dev=2,0 -</p>
+
+<p style="margin-left:9%; margin-top: 1em">The recommended
+minimum FIFO size for running this pipeline is 4 MBytes. As
+the default FIFO size is 4 MB, the <b>fs=</b> option needs
+to be present only if you want to use a different FIFO size.
+If your system is loaded, you should run mkisofs in the
+real-time class too. To raise the priority of <b>mkisofs</b>
+replace the command</p>
+
+<p style="margin-left:9%; margin-top: 1em">mkisofs -R
+/master/tree <br>
+by <br>
+priocntl -e -c RT -p 59 mkisofs -R /master/tree</p>
+
+<p style="margin-left:9%; margin-top: 1em">on Solaris and
+by</p>
+
+<p style="margin-left:9%; margin-top: 1em">nice --18
+mkisofs -R /master/tree</p>
+
+<p style="margin-left:9%; margin-top: 1em">on systems that
+do not have <b>UNIX International</b>-compliant real-time
+scheduling.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Cdrecord runs at
+priority 59 on Solaris, you should run mkisofs at no more
+than priority 58. On other systems, you should run mkisofs
+at no less than nice --18.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Creating a
+CD-ROM without file system image on disk has been tested on
+a Sparcstation-2 with a Yamaha CDR-400. It did work up to
+quad speed when the machine was not loaded. A faster machine
+may be able to handle quad speed also in the loaded
+case.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To handle drives
+that need to know the size of a track before starting to
+write, first run</p>
+
+<p style="margin-left:9%; margin-top: 1em">mkisofs -R
+-quiet -print-size /master/tree</p>
+
+<p style="margin-left:9%; margin-top: 1em">and then run</p>
+
+<p style="margin-left:9%; margin-top: 1em">mkisofs -R
+/master/tree | cdrecord -v -dao speed=2 dev=2,0 tsize=XXXs
+-</p>
+
+<p style="margin-left:9%; margin-top: 1em">where <i>XXX</i>
+is replaced by the output of the previous run of
+mkisofs.</p>
+
+<h3>Setting drive options
+<a name="Setting drive options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To set drive
+options without writing a disk (e.g. to switch a drive to
+single-session mode), run</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord dev=2,0
+-setdropts driveropts=singlesession</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you like to
+do this when no disk is in the drive, call</p>
+
+<p style="margin-left:9%; margin-top: 1em">cdrecord dev=2,0
+-force -setdropts driveropts=singlesession</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>CDR_DEVICE</b></p>
+
+<p style="margin-left:18%;">This may either hold a device
+identifier that is suitable to the open call of the SCSI
+transport library or a label in the file
+/etc/default/cdrecord.</p>
+
+<p style="margin-left:9%;"><b>CDR_SPEED</b></p>
+
+<p style="margin-left:18%;">Sets the default speed value
+for writing (see also <b>-speed</b> option).</p>
+
+<p style="margin-left:9%;"><b>CDR_FIFOSIZE</b></p>
+
+<p style="margin-left:18%;">Sets the default size of the
+FIFO (see also <b>fs=</b># option).</p>
+
+<p style="margin-left:9%;"><b>CDR_FORCERAWSPEED</b></p>
+
+<p style="margin-left:18%;">If this environment variable is
+set, <b>cdrecord</b> will allow you to write at the full RAW
+encoding speed a single CPU supports. This will create high
+potential of buffer underruns. Use with care.</p>
+
+<p style="margin-left:9%;"><b>CDR_FORCESPEED</b></p>
+
+<p style="margin-left:18%;">If this environment variable is
+set, <b>cdrecord</b> will allow you to write at the full DMA
+speed the system supports. There is no DMA reserve for
+reading the data that is to be written from disk. This will
+create high potential of buffer underruns. Use with
+care.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If this
+environment variable is set to the value <b>any</b>,
+<b>cdrecord</b> allows to write at any speed even though it
+may fail later with a buffer underrun.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>RSH</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>If the <b>RSH</b> environment is present, the remote
+connection will not be created via <b>rcmd</b>(3) but by
+calling the program pointed to by <b>RSH</b>. Use e.g.
+<b>RSH=</b>/usr/bin/ssh to create a secure shell
+connection.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Note that this
+forces <b>cdrecord</b> to create a pipe to the <b>rsh(1)</b>
+program and disallows <b>cdrecord</b> to directly access the
+network socket to the remote server. This makes it
+impossible to set up performance parameters and slows down
+the connection compared to a <b>root</b>-initiated
+<b>rcmd(3)</b> connection.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>RSCSI</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">If the <b>RSCSI</b> environment
+is present, the remote SCSI server will not be the program
+<b>/opt/schily/sbin/rscsi</b> but the program pointed to by
+<b>RSCSI</b>. Note that the remote SCSI server program name
+will be ignored if you log in using an account that has been
+created with a remote SCSI server program as login
+shell.</p> </td></tr>
+</table>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+exit codes are used:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>0</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">No error appeared.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-1</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>A specific error appeared. This may be a usage error
+caused by an illegal command line or another error with a
+problem specific error message from <b>cdrecord</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-2</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>An unspecified error appeared during the process of
+talking to the drive. See SCSI error message for more
+informations. The section <b>DIAGNOSTICS</b> below contains
+an explanation on how to read SCSI error messages.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>other</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>The <b>errno</b> value from a failed system call.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note that older
+operating systems and older shells may not support the full
+32 bit range of the exit code and mask the value with 0xFF.
+This results in shortened exit codes in the range
+<b>0</b>..<b>255</b> where <b>-1</b> is mapped to
+<b>255</b>.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>/etc/default/cdrecord</b></p>
+
+<p style="margin-left:18%;">Default values can be set for
+the following options in /etc/default/cdrecord. For example:
+<small>CDR_FIFOSIZE=8m</small> or <small>CDR_SPEED=2</small>
+<b><br>
+CDR_DEVICE</b></p>
+
+<p style="margin-left:27%;">This may either hold a device
+identifier that is suitable to the open call of the SCSI
+transport library or a label in the file
+/etc/default/cdrecord that allows to identify a specific
+drive on the system.</p>
+
+<p style="margin-left:18%;"><b>CDR_SPEED</b></p>
+
+<p style="margin-left:27%;">Sets the default speed value
+for writing (see also <b>-speed</b> option).</p>
+
+<p style="margin-left:18%;"><b>CDR_FIFOSIZE</b></p>
+
+<p style="margin-left:27%;">Sets the default size of the
+FIFO (see also <b>fs=</b># option).</p>
+
+<p style="margin-left:18%;"><b>CDR_MAXFIFOSIZE</b></p>
+
+<p style="margin-left:27%;">Sets the maximum size of the
+FIFO (see also <b>fs=</b># option).</p>
+
+<p style="margin-left:18%;"><b>Any other label</b></p>
+
+<p style="margin-left:27%;">is an identifier for a specific
+drive on the system. Such an identifier may not contain the
+characters &rsquo;,&rsquo;, &rsquo;/&rsquo;, &rsquo;@&rsquo;
+or &rsquo;:&rsquo;.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Each line that
+follows a label contains a TAB separated list of items.
+Currently, four items are recognized: the SCSI ID of the
+drive, the default speed that should be used for this drive,
+the default FIFO size that should be used for this drive and
+drive specific options. The values for <i>speed</i> and
+<i>fifosize</i> may be set to -1 to tell cdrecord to use the
+global defaults. The value for driveropts may be set to
+&quot;&quot; if no driveropts are used. A typical line may
+look this way:</p>
+
+<p style="margin-left:27%; margin-top: 1em">teac1= 0,5,0 4
+8m &quot;&quot;</p>
+
+<p style="margin-left:27%; margin-top: 1em">yamaha= 1,6,0
+-1 -1 burnfree</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tells
+<b>cdrecord</b> that a drive named <i>teac1</i> is at
+scsibus 0, target 5, lun 0 and should be used with speed 4
+and a FIFO size of 8 MB. A second drive may be found at
+scsibus 1, target 6, lun 0 and uses the default speed and
+the default FIFO size.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>*.inf</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>The <b>*.inf</b> files are created by <b>cdda2wav</b>
+where <b>*</b> is replaced by the actual audio file prefix.
+They are read and used by <b>cdrecord</b> in case cdrecord
+was called with the <b>-useinfo</b> option.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">There are three
+general types of parameters: <b><br>
+numerical parameters</b></p>
+
+<p style="margin-left:27%;">A numerical parameter is a
+number and directly follows the tag label without any
+quoting.</p>
+
+<p style="margin-left:18%;"><b>unquoted string type
+parameters</b></p>
+
+<p style="margin-left:27%;">An unquoted parameter is make
+from one or more words that directly follow the tag label.
+How many words from the parameter list are used by cdrecord
+depends on the tag label.</p>
+
+<p style="margin-left:18%;"><b>quoted string type
+parameters</b></p>
+
+<p style="margin-left:27%;">A string type parameter is
+enclosed in single quotes. The string starts after the first
+single quote character that follows the tag label and ends
+before the last single quote on the same line. It needs no
+escape sequences in case that a single quote appears inside
+the string. Any text to the right of the rightmost single
+quote character is ignored.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The order of
+the tag labels in the file is not important.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The following
+tag labels may appear in a <b>*.inf</b> file: <b><br>
+CDINDEX_DISCID=</b></p>
+
+<p style="margin-left:27%;">The cdindex disk ID is used by
+the <b>musicbrainz</b> CD-database.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+is ignored by <b>cdrecord</b>.</p>
+
+<p style="margin-left:18%;"><b>CDDB_DISCID=</b></p>
+
+<p style="margin-left:27%;">The cddb disk ID is used by the
+<b>cddb</b> and the <b>freedb</b> CD-database.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+is ignored by <b>cdrecord</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>MCN=</b></p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>The Media Catalog Number (MCN) is a 13 digit number that
+follows UPC/EAN-13 rules.</p></td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">The data is
+used by cdrecord to create sub-channel data.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>ISRC=</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em">The International Standard
+Recording Code (ISRC) is a 12 byte string that is created
+from two uppercase characters for the country code, followed
+by three uppercase characters for the owner, followed by two
+digits for the year of recording followed by five digits for
+the recording serial number.</p></td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">To increase the
+readability of the ISRC tag, there may be a minus sign
+between every two fields of the ISRC string.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The data is
+used by cdrecord to create sub-channel data.</p>
+
+<p style="margin-left:18%;"><b>Albumtitle=</b></p>
+
+<p style="margin-left:27%;">The <b>Album Title</b> is the
+name of the disk in the CD-Text information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Tracktitle=</b></p>
+
+<p style="margin-left:27%;">The <b>Track Title</b> is the
+name of the current track in the CD-Text information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Albumperformer=</b></p>
+
+<p style="margin-left:27%;">The <b>Album Performer</b> is
+the global name of the of the performer of the disk in the
+CD-Text information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Performer=</b></p>
+
+<p style="margin-left:27%;">The <b>Performer</b> is the
+name of the of the performer of the current track in the
+CD-Text information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Albumsongwriter=</b></p>
+
+<p style="margin-left:27%;">The <b>Album Songwriter</b> is
+the global name of the of the songwriter of the disk in the
+CD-Text information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Songwriter=</b></p>
+
+<p style="margin-left:27%;">The <b>Songwriter</b> is the
+name of the of the songwriter of the current track in the
+CD-Text information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Albumcomposer=</b></p>
+
+<p style="margin-left:27%;">The <b>Album Composer</b> is
+the global name of the of the composer of the disk in the
+CD-Text information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Composer=</b></p>
+
+<p style="margin-left:27%;">The <b>Composer</b> is the name
+of the of the composer of the current track in the CD-Text
+information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Albumarranger=</b></p>
+
+<p style="margin-left:27%;">The <b>Album Arranger</b> is
+the global name of the of the arranger of the disk in the
+CD-Text information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Arranger=</b></p>
+
+<p style="margin-left:27%;">The <b>Arranger</b> is the name
+of the of the arranger of the current track in the CD-Text
+information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Albummessage=</b></p>
+
+<p style="margin-left:27%;">The <b>Album Message</b> is the
+global message text of the disk in the CD-Text
+information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Message=</b></p>
+
+<p style="margin-left:27%;">The <b>Message</b> is the
+message text of the current track in the CD-Text
+information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Albumclosed_info=</b></p>
+
+<p style="margin-left:27%;">The <b>Album Closed_info</b> is
+the global closed info text of the disk in the CD-Text
+information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<p style="margin-left:18%;"><b>Closed_info=</b></p>
+
+<p style="margin-left:27%;">The <b>Closed_info</b> is the
+closed info text of the current track in the CD-Text
+information.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a quoted string type parameter.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>Track=</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>The parameter contains the relative number of the
+current track on the original disk. The first track always
+has the track number 1, a hidden track uses track number
+0.</p> </td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+is ignored by <b>cdrecord</b> except when checking the the
+<b>Trackstart</b> for track #1.</p>
+
+<p style="margin-left:18%;"><b>Tracknumber=</b></p>
+
+<p style="margin-left:27%;">The parameter contains the
+absolute number of the current track, taken from the TOC on
+the original disk. The first track on the original disk may
+have a number greater than 1, a hidden track always uses
+track number 0.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+is currently ignored by <b>cdrecord</b> as cdrecord assigns
+track numbers when compiling the disk information.</p>
+
+<p style="margin-left:18%;"><b>Trackstart=</b></p>
+
+<p style="margin-left:27%;">The parameter contains the
+track start offset in sectors on the original disk. If the
+current track becomes the first track on the new disk and if
+the track was the first track on the original disk.
+<b>cdrecord</b> uses this number to set up the offset for
+index 1 on the new disk.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:18%;"><b>Tracklength=</b></p>
+
+<p style="margin-left:27%;">The parameter is used by
+<b>cdrecord</b> to set up the size of the track on the new
+disk.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses an unquoted string type parameter in the form
+&quot;sectors, samples&quot;.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This label is
+mandatory for <b>cdrecord</b>.</p>
+
+<p style="margin-left:18%;"><b>Pre-emphasis=</b></p>
+
+<p style="margin-left:27%;">The pre-emphasis parameter
+controls whether the related pre-emphasis bit in the
+sub-channel data is set by cdrecord. Permitted values for
+this parameter are <b>yes</b> and <b>no</b>.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses an unquoted string type parameter. Valid values are
+<b>yes</b> and <b>no</b>.</p>
+
+<p style="margin-left:18%;"><b>Channels=</b></p>
+
+<p style="margin-left:27%;">The parameter of this tag is
+the number of channels on the disk. All CD-audio disks use
+stereo recording and thus a 2 is the correct parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This label is
+currently ignored by <b>cdrecord</b>.</p>
+
+<p style="margin-left:18%;"><b>Copy_permitted=</b></p>
+
+<p style="margin-left:27%;">The parameter for this tag
+label contains information about the copyright state of a
+track on the original disk.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses an unquoted string type parameter. Valid values
+are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="5%">
+
+
+<p><b>yes</b></p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>The <b>digital copy permitted</b> bit is set in the TOC
+and in the sub-channel data. If this bit is set, the related
+track is not copyright protected and may be copied
+infinitely.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="5%">
+
+
+<p><b>no</b></p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>The <b>digital copy permitted</b> bit is not set in the
+TOC. The <b>digital copy permitted</b> bit in the
+sub-channel data alters with 9.375 Hz. This is called
+<b>Serial Copy Management System (SCMS)</b>. The sense of
+this track state is to flag that the creator of the CD does
+not have the copyright permission to create copies of the
+related track. The related track is copyright protected and
+the creator of the CD thus is just given the permission to
+create one single copy from fair use rights and no further
+copies are permitted from this source.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="5%">
+
+
+<p><b>once</b></p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>The <b>digital copy permitted</b> bit is not set in the
+TOC and in the sub-channel data. The sense of this track
+state is to flag that the related track is copyright
+protected and thus may not be coped infinitely. One single
+copy from fair use rights is permitted.</p></td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">Note that many
+CDs sold by the music industry have <b>SCMS</b> flagged for
+one or more tracks, signalling that the related content
+company does not own the copyright to make copies from this
+track.</p>
+
+<p style="margin-left:18%;"><b>Endianess=</b></p>
+
+<p style="margin-left:27%;">The parameter for this tag is
+the byte order used in the audio data file that was created
+for this track.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses an unquoted string type parameter. Valid values are
+<b>little</b> and <b>big</b>.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This label is
+ignored by <b>cdrecord</b> as the endianess is retrieved
+from the audio file format.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>Index=</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>The parameter list for this tag is a list of numbers
+that are sector numbers counting relatively to the logical
+beginning of the track (which always is at index #1). As any
+track needs to have an entry for index #1, the first entry
+in the list is always 0. If more entries are present for
+this tag, there are more offset values that correspond to
+index values greater than 1.</p></td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses an unquoted string type parameter that contains a list
+of space separated index offset numbers.</p>
+
+<p style="margin-left:18%;"><b>Index0=</b></p>
+
+<p style="margin-left:27%;">The parameter for this tag is a
+number that represents the number of sectors relatively to
+the beginning (index #1) of this track. This number
+identifies where index #0 of the next track begins. It the
+parameter is set to -1, the next track has no index #0,
+resulting in pregap size 0 for the next track.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Note that
+<b>cdrecord</b> strictly follows the CD-standard that
+defines that the logical beginning of a track is at the
+location where index #1 starts in this track. If index #0
+for track <b>n</b> contains audio data, the related audio
+data is a logical part of track <b>n-1</b>.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:18%;"><b>MD5-offset=</b></p>
+
+<p style="margin-left:27%;">The parameter for this tag is
+the byte offset where the raw audio data begins in the
+related audio file.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This label is
+ignored by <b>cdrecord</b>.</p>
+
+<p style="margin-left:18%;"><b>MD5-size=</b></p>
+
+<p style="margin-left:27%;">The parameter for this tag is
+the number of bytes of raw audio data in the related audio
+file.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This label is
+ignored by <b>cdrecord</b>.</p>
+
+<p style="margin-left:18%;"><b>MD5-sum=</b></p>
+
+<p style="margin-left:27%;">The parameter for this tag is
+the md5 sum for the raw audio data in the related audio
+file.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This tag label
+uses a numerical parameter.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This label is
+ignored by <b>cdrecord</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>*.cue</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>The <b>*.cue</b> files are CD-structure description
+files introduced by <b>CDRWIN</b>. They are read and used by
+<b>cdrecord</b> in case cdrecord was called with the
+<b>cuefile=</b><i>name.cue</i> option.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The following
+commands are supported in CUE files: <b><br>
+ARRANGER</b> <i>arranger-string</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the name of a arranger for a disk that includes CD-Text
+enhancements.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameter
+is the name of a arranger. If the string contains any
+spaces, it must be enclosed in quotation marks.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the
+<b>ARRANGER</b> command appears before any <b>TRACK</b>
+command, the string parameter will be encoded as the
+arranger of the entire disk. If the <b>ARRANGER</b> command
+appears after a <b>TRACK</b> command, the string parameter
+will be encoded the the arranger of the current track.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This command is
+only accepted if the <b>cdrecord</b> specific CUE extensions
+are permitted.</p>
+
+<p style="margin-left:18%;"><b>CATALOG</b>
+<i>media-catalog-number</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the disc&rsquo;s <b>Media Catalog Number</b>. The
+<i>media-catalog-number</i> is a 13 digit number that
+follows UPC/EAN-13 rules.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This command
+can appear only once in the CUE SHEET file. It must appear
+before any <b>TRACK</b> command.</p>
+
+<p style="margin-left:18%;"><b>CDTEXTFILE</b>
+<i>filename</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the name of a file that contains binary encoded CD-Text
+information. <b>CDRWIN</b> only accepts headerless binary
+encoded CD-Text information, but <b>cdrecord</b> also
+accepts binary encoded CD-Text information with an
+MMC-compliant header. The CD-Text information is ignored by
+<b>cdrecord</b> unless the <b>-text</b> option is used.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the filename
+contains spaces, it must be enclosed in quotation marks.</p>
+
+<p style="margin-left:18%;"><b>COMPOSER</b>
+<i>composer-string</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the name of a composer for a disk that includes CD-Text
+enhancements.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameter
+is the name of a composer. If the string contains any
+spaces, it must be enclosed in quotation marks.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the
+<b>COMPOSER</b> command appears before any <b>TRACK</b>
+command, the string parameter will be encoded as the
+composer of the entire disk. If the <b>COMPOSER</b> command
+appears after a <b>TRACK</b> command, the string parameter
+will be encoded the the composer of the current track.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This command is
+only accepted if the <b>cdrecord</b> specific CUE extensions
+are permitted.</p>
+
+<p style="margin-left:18%;"><b>FILE</b> <i>filename
+filetype</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+a data or audio file that contains data to be written to the
+medium.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the filename
+contains spaces, it must be enclosed in quotation marks.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The following
+values are allowed for the file type parameter:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>BINARY</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>Intel binary file (LSB first)</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>MOTOTOLA</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>Motorola binary file (MSB first)</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>AIFF</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>Audio AIFF file</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>WAVE</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>Audio WAVE file</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>MP3</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>Audio MP3 file</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>AU</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>Audio AU file (only permitted if <b>cdrecord</b> CUE
+extensions are enabled)</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>OGG</b></p></td>
+<td width="5%"></td>
+<td width="58%">
+
+
+<p>Audio OGG file (only permitted if <b>cdrecord</b> CUE
+extensions are enabled)</p></td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">All audio files
+(WAVE, AIFF, MP3, AU and OGG) must be in 44100 Hz 16 bit
+stereo format. MP3 and OGG is currently unsupported.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If an audio
+file is not an exact multiple of a CDROM sector (2352
+bytes), then is is padded with zeroes to fill up to the
+needed size.</p>
+
+<p style="margin-left:27%; margin-top: 1em">All <b>FILE</b>
+commands need to be before a related <b>TRACK</b> command
+and after the last <b>INDEX</b> command or <b>POSTGAP</b>
+command for the previous track.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the
+<b>cdrecord</b> specific CUE extensions are enabled, then a
+<b>FILE</b> command may also appear between an <b>INDEX
+00</b> and an <b>INDEX 01</b> command. This allows to let
+the user create one file per track where the file starts at
+<b>INDEX 01</b> of the track and ends after <b>INDEX 00</b>
+of the following track. In this case, no <b>FILE</b> command
+is allowed before the related <b>TRACK</b> command.</p>
+
+<p style="margin-left:18%;"><b>FLAGS</b> <i>flags</i></p>
+
+<p style="margin-left:27%;">This command is used to set
+special subcode flags within a track.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The following
+flags are supported:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="5%">
+
+
+<p><b>DCP</b></p></td>
+<td width="10%"></td>
+<td width="58%">
+
+
+<p>Digital copy permitted</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="5%">
+
+
+<p><b>4CH</b></p></td>
+<td width="10%"></td>
+<td width="58%">
+
+
+<p>Four channel audio</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="5%">
+
+
+<p><b>PRE</b></p></td>
+<td width="10%"></td>
+<td width="58%">
+
+
+<p>Pre-emphasis enabled (audio tracks only)</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="5%">
+
+
+<p><b>SCMS</b></p></td>
+<td width="10%"></td>
+<td width="58%">
+
+
+<p>Serial copy management system (not supported by all
+recorders)</p> </td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">More than one
+flag type argument may appear after the FLAGS command (e.g
+FLAGS DCP PRE).</p>
+
+<p style="margin-left:27%; margin-top: 1em">The
+<b>FLAGS</b> command must appear after a <b>TRACK</b>
+command but before any <b>INDEX</b> command. Only one
+<b>FLAGS</b> command is allower per <b>TRACK
+command.</b></p>
+
+<p style="margin-left:27%; margin-top: 1em">The fourth
+subcode flag that marks data tracks is set automatically for
+data tracks.</p>
+
+<p style="margin-left:18%;"><b>INDEX</b> <i>number
+mm:ss:ff</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+indexes within a track.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The first
+parameter is the index number in the range 0-99.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The second
+parameter is a relative time in minutes, seconds and frames
+(there are 75 frames/second).</p>
+
+<p style="margin-left:27%; margin-top: 1em">All index
+numbers must be between 0 and 99 inclusive. The first index
+for a track must be either 0 or 1 with all indexes being
+sequential to the first one. The first index for a file must
+start at 00:00.00.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="11%">
+
+
+<p><b>INDEX 00</b></p></td>
+<td width="2%"></td>
+<td width="60%">
+
+
+<p>specifies the starting time of the <b>pregap</b> of the
+track.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="11%">
+
+
+<p><b>INDEX 01</b></p></td>
+<td width="2%"></td>
+<td width="60%">
+
+
+<p>specifies the starting time of the track. This is the
+index that is stored in the table of content for the disk as
+the track start.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="11%">
+
+
+<p><b>INDEX &gt; 1</b></p></td>
+<td width="2%"></td>
+<td width="60%">
+
+
+<p>specifies a subindex within a track.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>ISRC</b> <i>recording
+code</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the <b>International Standard Recording Code (ISRC)</b> of a
+track. This is a code that should exist for all commercial
+audio tracks.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The ISRC code
+must be 12 characters in length. The first two characters
+are characters that are from the two character country code.
+The next three characters are alphanumeric and describe the
+studio code. The next two characters are the last two digits
+from the recording year. The last 5 characters are digits
+that form a serial number that is unique for the same studio
+and year.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If
+<b>cdrecord</b> specific CUE extensions are permitted, the
+four fields of the ISRC may be separated by a minus
+sign.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the
+<b>ISRC</b> command is used, it must appear after a
+<b>TRACK</b> command but before any <b>INDEX</b>
+command.</p>
+
+<p style="margin-left:18%;"><b>MESSAGE</b>
+<i>message-string</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the test of a message for a disk that includes CD-Text
+enhancements.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameter
+is the test of a message. If the string contains any spaces,
+it must be enclosed in quotation marks.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the
+<b>MESSAGE</b> command appears before any <b>TRACK</b>
+command, the string parameter will be encoded as the message
+of the entire disk. If the <b>MESSAGE</b> command appears
+after a <b>TRACK</b> command, the string parameter will be
+encoded the the message of the current track.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This command is
+only accepted if the <b>cdrecord</b> specific CUE extensions
+are permitted.</p>
+
+<p style="margin-left:18%;"><b>PERFORMER</b>
+<i>performer-string</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the name of a performer for a disk that includes CD-Text
+enhancements.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameter
+is the name of the performer. If the string contains any
+spaces, it must be enclosed in quotation marks.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the
+<b>PERFORMER</b> command appears before any <b>TRACK</b>
+command, the string parameter will be encoded as the
+performer of the entire disk. If the <b>PERFORMER</b>
+command appears after a <b>TRACK</b> command, the string
+parameter will be encoded the the performer of the current
+track.</p>
+
+<p style="margin-left:18%;"><b>POSTGAP</b>
+<i>mm:ss:ff</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the length of a postgap at the end of a track. The postgap
+data is generated internally by <b>cdrecord</b>. No data is
+consumed from the current data file.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameter
+specifies the postgap length in minutes, seconds and
+frames.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The
+<b>POSTGAP</b> command must appear after all <b>INDEX</b>
+commands for the current track. Only one <b>POSTGAP</b>
+command is allowed per track.</p>
+
+<p style="margin-left:18%;"><b>PREGAP</b>
+<i>mm:ss:ff</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the length of a pregap at the beginning of a track. The
+pregap data is generated internally by <b>cdrecord</b>. No
+data is consumed from the current data file.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameter
+specifies the postgap length in minutes, seconds and
+frames.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The
+<b>PREGAP</b> command must appear after a <b>TRACK</b>
+command but before any <b>INDEX</b> command. Only one
+<b>PREGAP</b> command is allowed per track.</p>
+
+<p style="margin-left:18%;"><b>REM</b> <i>comment</i></p>
+
+<p style="margin-left:27%;">This command is used to put
+comments into a CUE file.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The text that
+appears in the line after a <b>REM</b> command is usually
+ignored. There is an exception: The special comment <b>REM
+CDRTOOLS</b> is used to enable <b>cdrecord</b> specific CUE
+extensions in the parser.</p>
+
+<p style="margin-left:18%;"><b>SONGWRITER</b>
+<i>songwriter-string</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+the name of a songwriter for a disk that includes CD-Text
+enhancements.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameter
+is the name of a songwriter. If the string contains any
+spaces, it must be enclosed in quotation marks.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the
+<b>SONGWRITER</b> command appears before any <b>TRACK</b>
+command, the string parameter will be encoded as the
+songwriter of the entire disk. If the <b>SONGWRITER</b>
+command appears after a <b>TRACK</b> command, the string
+parameter will be encoded the the songwriter of the current
+track.</p>
+
+<p style="margin-left:18%;"><b>TITLE</b>
+<i>title-string</i></p>
+
+<p style="margin-left:27%;">This command is used to specify
+a title for a disk that includes CD-Text enhancements.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The parameter
+is the title for a track or for the disk. If the string
+contains any spaces, it must be enclosed in quotation
+marks.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If the
+<b>TITLE</b> command appears before any <b>TRACK</b>
+command, the string parameter will be encoded as the title
+of the entire disk. If the <b>TITLE</b> command appears
+after a <b>TRACK</b> command, the string parameter will be
+encoded the the title of the current track.</p>
+
+<p style="margin-left:18%;"><b>TRACK</b> <i>number
+datatype</i></p>
+
+<p style="margin-left:27%;">This command is used to start a
+new <b>TRACK</b>.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The first
+parameter is a track number in the range 1-99.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The second
+parameter specifies the track data type.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The following
+datatypes are permitted:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="13%">
+
+
+<p><b>AUDIO</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>Audio/Music (2352)</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="13%">
+
+
+<p><b>CDG</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>Karaoke CD+G (2448)</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="13%">
+
+
+<p><b>MODE1/2048</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>CDROM Mode1 Data (cooked)</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="13%">
+
+
+<p><b>MODE1/2352</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>CDROM Mode1 Data (raw)</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="13%">
+
+
+<p><b>MODE2/2336</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>CDROM-XA Mode2 Data</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="13%">
+
+
+<p><b>MODE2/2352</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>CDROM-XA Mode2 Data</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="13%">
+
+
+<p><b>CDI/2336</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>CDI Mode2 Data</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="13%">
+
+
+<p><b>CDI/2352</b></p></td>
+<td width="2%"></td>
+<td width="32%">
+
+
+<p>CDI Mode2 Data</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">All track
+numbers must be between 1 and 99 inclusive. The first track
+number can be greater than one, but all track numbers after
+the first must be sequential. There must be at least one
+track per file.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdda2wav</b>(1),
+<b>readcd</b>(1), <b>scg</b>(7), <b>fbk</b>(7),
+<b>mkisofs</b>(8), <b>rcmd</b>(3), <b>ssh</b>(1).</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Not all options
+described in this manual may be supported by the OpenSource
+variant of cdrecord. Cdrecord issues a warning if an attempt
+is made to use an option that has been disabled in the
+OpenSource variant.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On Solaris
+before Solaris 10 Update 1, you need to stop the volume
+management if you like to use the USCSI fallback SCSI
+transport code. Even things like <b>cdrecord -scanbus</b>
+will not work if the volume management is running.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Disks made in
+<b>Track At Once</b> mode are not suitable as a master for
+direct mass production by CD-manufacturers. You will need
+the <b>disk at once</b> option to record such disks.
+Nevertheless the disks made in <b>Track At Once</b> will
+normally be read in all CD-players. Some old audio
+CD-players however may produce a two second click between
+two audio tracks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The minimal size
+of a track is 4 seconds or 300 sectors. If you write smaller
+tracks, the CD-recorder will add dummy blocks. This is not
+an error, even though the SCSI-error message looks this
+way.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Cdrecord</b>
+has been tested on an upgraded Philips CDD-521 recorder at
+single and double speed on a SparcStation 20/502 with no
+problems, slower computer systems should work also. The
+newer Philips/HP/Plasmon/Grundig drives as well as Yamaha
+CDR-100 and CDR-102 work also. The Plasmon RF-4100 works,
+but has not been tested in multi-session. A Philips CDD-521
+that has not been upgraded will not work. The Sony CDU-924
+has been tested, but does not support XA-mode2 in hardware.
+The Sony therefore cannot create conforming multi-session
+disks. The Ricoh RO-1420C works, but some people seem to
+have problems to use them with speed=2, try speed=0 in this
+case.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Yamaha
+CDR-400 and all new SCSI-3/mmc conforming drives are
+supported in single and multi-session.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should run
+several tests in all supported speeds of your drive with the
+<b>-dummy</b> option turned on if you are using
+<b>cdrecord</b> on an unknown system. Writing a CD is a
+real-time process. <b>NFS</b> will not always deliver
+constantly the needed data rates. If you want to use
+<b>cdrecord</b> with CD-images that are located on a
+<b>NFS</b> mounted filesystem, be sure that the FIFO size is
+big enough. The author used <b>cdrecord</b> with medium load
+on a SS20/502 and even at quad speed on a Sparcstation-2
+which was heavily loaded, but it is recommended to leave the
+system as lightly loaded as possible while writing a CD. If
+you want to make sure that buffer underruns are not caused
+by your source disk, you may use the command</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdrecord
+-dummy dev=2,0 padsize=600m /dev/null</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">to create a disk
+that is entirely made of dummy data. <b>Cdrecord</b> needs
+to run as root to get access to the <b>/dev/scg?</b> device
+nodes and to be able to lock itself into memory.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you
+don&rsquo;t want to allow users to become root on your
+system, <b>cdrecord</b> may safely be installed suid root.
+This allows all users or a group of users with no root
+privileges to use <b>cdrecord. Cdrecord</b> in this case
+checks if the real user would have been able to read the
+specified files. To give all users access to use
+<b>cdrecord,</b> enter:</p>
+
+<p style="margin-left:9%; margin-top: 1em">chown root
+/opt/schily/bin/cdrecord <br>
+chmod 4711 /opt/schily/bin/cdrecord</p>
+
+<p style="margin-left:9%; margin-top: 1em">To give a
+restricted group of users access to cdrecord enter:</p>
+
+<p style="margin-left:9%; margin-top: 1em">chown root
+/opt/schily/bin/cdrecord <br>
+chgrp cdburners /opt/schily/bin/cdrecord <br>
+chmod 4710 /opt/schily/bin/cdrecord</p>
+
+<p style="margin-left:9%; margin-top: 1em">and add a group
+<i>cdburners</i> on your system.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Never give write
+permissions for non root users to the <i>/dev/scg?</i>
+devices unless you would allow anybody to read/write/format
+all your disks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should not
+connect old drives that do not support disconnect/reconnect
+to either the SCSI bus that is connected to the CD-recorder
+or the source disk.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A Compact Disc
+can have no more than 99 tracks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When creating a
+disc with both audio and data tracks, the data should be on
+track 1 otherwise you should create a CDplus disk which is a
+multi-session disk with the first session containing the
+audio tracks and the following session containing the data
+track.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Many operating
+systems are not able to read more than a single data track,
+or need special software to do so.</p>
+
+<p style="margin-left:9%; margin-top: 1em">More information
+on the SCSI command set of a HP CD-recorder can be found
+at:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">http://www.hp.com/isgsupport/cdr/index.html</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have more
+information or SCSI command manuals for currently
+unsupported CD/DVD/BluRay-recorders please contact the
+author.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Philips CDD
+521 CD-recorder (even in the upgraded version) has several
+firmware bugs. Some of them will force you to power cycle
+the device or to reboot the machine.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When using
+<b>cdrecord</b> with the <b>Linux SCSI generic driver</b>,
+you should note that <b>cdrecord</b> uses a layer, that
+tries to emulate the functionality of the scg driver on top
+of the drives of the local operating system. Unfortunately,
+the sg driver on <b>Linux</b> has several flaws:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">It cannot see if a SCSI command
+could not be sent at all.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>It cannot get the SCSI status byte. <b>Cdrecord</b> for
+that reason cannot report failing SCSI commands in some
+situations.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>It cannot get real DMA count of transfer.
+<b>Cdrecord</b> cannot tell you if there is a DMA residual
+count.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>It cannot get number of bytes valid in auto sense data.
+<b>Cdrecord</b> cannot tell you if device transfers no sense
+data at all.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>It fetches too few data in auto request sense
+(CCS/SCSI-2/SCSI-3 needs &gt;= 18).</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The FIFO percent
+output is computed just after a block of data has been
+written to the CD/DVD/BluRay-recorder. For this reason,
+there will never be 100% FIFO fill ratio while the FIFO is
+in streaming mode.</p>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">You have 9
+seconds to type &#710;C to abort <b>cdrecord</b> after you
+see the message:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Starting to
+write CD at speed %d in %s mode for %s session.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A typical error
+message for a SCSI command looks like:</p>
+
+<p style="margin-left:18%; margin-top: 1em">cdrecord: I/O
+error. test unit ready: scsi sendcmd: no error <br>
+CDB: 00 20 00 00 00 00 <br>
+status: 0x2 (CHECK CONDITION) <br>
+Sense Bytes: 70 00 05 00 00 00 00 0A 00 00 00 00 25 00 00 00
+00 00 <br>
+Sense Key: 0x5 Illegal Request, Segment 0 <br>
+Sense Code: 0x25 Qual 0x00 (logical unit not supported) Fru
+0x0 <br>
+Sense flags: Blk 0 (not valid) <br>
+cmd finished after 0.002s timeout 40s</p>
+
+<p style="margin-left:9%; margin-top: 1em">The first line
+gives information about the transport of the command. The
+text after the first colon gives the error text for the
+system call from the view of the kernel. It usually is:
+<b>I/O error</b> unless other problems happen. The next
+words contain a short description for the SCSI command that
+fails. The rest of the line tells you if there were any
+problems for the transport of the command over the SCSI bus.
+<b>fatal error</b> means that it was not possible to
+transport the command (i.e. no device present at the
+requested SCSI address).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The second line
+prints the SCSI command descriptor block for the failed
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The third line
+gives information on the SCSI status code returned by the
+command, if the transport of the command succeeds. This is
+error information from the SCSI device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The fourth line
+is a hex dump of the auto request sense information for the
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The fifth line
+is the error text for the sense key if available, followed
+by the segment number which is only valid if the command was
+a <i>copy</i> command. If the error message is not directly
+related to the current command, the text <i>deferred
+error</i> is appended.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The sixth line
+is the error text for the sense code and the sense qualifier
+if available. If the type of the device is known, the sense
+data is decoded from tables in <i>scsierrs.c</i> . The text
+is followed by the error value for a field replaceable
+unit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The seventh line
+prints the block number that is related to the failed
+command and text for several error flags. The block number
+may not be valid.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The eighth line
+reports the timeout set up for this command and the time
+that the command really needed to complete.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+message is not an error:</p>
+
+<p style="margin-left:18%; margin-top: 1em">Track 01: Total
+bytes read/written: 2048/2048 (1 sectors). <br>
+cdrecord: I/O error. flush cache: scsi sendcmd: no error
+<br>
+CDB: 35 00 00 00 00 00 00 00 00 00 <br>
+status: 0x2 (CHECK CONDITION) <br>
+Sense Bytes: F0 00 05 80 00 00 27 0A 00 00 00 00 B5 00 00 00
+00 00 <br>
+Sense Key: 0x5 Illegal Request, Segment 0 <br>
+Sense Code: 0xB5 Qual 0x00 (dummy data blocks added) Fru 0x0
+<br>
+Sense flags: Blk -2147483609 (valid) <br>
+cmd finished after 0.002s timeout 40s</p>
+
+<p style="margin-left:9%; margin-top: 1em">It simply
+notifies that a track that is smaller than the minimum size
+has been expanded to 300 sectors.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Cdrecord</b>
+has even more options than <b>ls</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There should be
+a recover option to make disks usable, that have been
+written during a power failure.</p>
+
+<h2>CREDITS
+<a name="CREDITS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>Bill Swartz</p></td>
+<td width="13%"></td>
+<td width="7%"></td>
+<td width="74%">
+
+
+<p>(Bill_Swartz@twolf.com)</p></td></tr>
+</table>
+
+<p style="margin-left:28%;">For helping me with the TEAC
+driver support</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>Aaron Newsome</p></td>
+<td width="13%"></td>
+<td width="7%"></td>
+<td width="74%">
+
+
+<p>(aaron.d.newsome@wdc.com)</p></td></tr>
+</table>
+
+<p style="margin-left:28%;">For letting me develop Sony
+support on his drive</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>Eric Youngdale</p></td>
+<td width="13%"></td>
+<td width="7%"></td>
+<td width="74%">
+
+
+<p>(eric@andante.jic.com)</p></td></tr>
+</table>
+
+<p style="margin-left:28%;">For supplying mkisofs</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>Gadi Oxman</p></td>
+<td width="13%"></td>
+<td width="7%"></td>
+<td width="74%">
+
+
+<p>(gadio@netvision.net.il)</p></td></tr>
+</table>
+
+<p style="margin-left:28%;">For tips on the ATAPI
+standard</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>Finn Arne Gangstad</p></td>
+<td width="20%"></td>
+<td width="6%"></td>
+<td width="68%">
+
+
+<p>(finnag@guardian.no)</p></td></tr>
+</table>
+
+<p style="margin-left:28%;">For the first FIFO
+implementation.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p>Dave Platt</p></td>
+<td width="13%"></td>
+<td width="7%"></td>
+<td width="74%">
+
+
+<p>(dplatt@feghoot.ml.org)</p></td></tr>
+</table>
+
+<p style="margin-left:28%;">For creating the experimental
+packet writing support, the first implementation of CD-RW
+blanking support, the first .wav file decoder and many nice
+discussions on cdrecord.</p>
+
+<p style="margin-left:9%;">Chris P. Ross
+(cross@eng.us.uu.net)</p>
+
+<p style="margin-left:28%;">For the first implementation of
+a BSDI SCSI transport.</p>
+
+<p style="margin-left:9%;">Grant R. Guenther
+(grant@torque.net)</p>
+
+<p style="margin-left:28%;">For creating the first parallel
+port transport implementation for Linux.</p>
+
+<p style="margin-left:9%;">Kenneth D. Merry
+(ken@kdm.org)</p>
+
+<p style="margin-left:28%;">for providing the CAM port for
+FreeBSD together with Michael Smith (msmith@freebsd.org)</p>
+
+<p style="margin-left:9%;">Heiko Eiszfeldt
+(heiko@hexco.de)</p>
+
+<p style="margin-left:28%;">for making libedc_ecc available
+(needed to write RAW data sectors).</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+actively take part on the development of cdrecord, you may
+join the developer mailing list via this URL:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>https://lists.sourceforge.net/lists/listinfo/cdrtools-developers</b></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Joerg Schilling
+<br>
+Seestr. 110 <br>
+D-13353 Berlin <br>
+Germany</p>
+
+<p style="margin-left:9%; margin-top: 1em">Additional
+information can be found on: <br>
+http://cdrecord.org/private/cdrecord.html</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+support questions, send them to:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdrtools-support@lists.sourceforge.net</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+definitely found a bug, send a mail to:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdrtools-developers@lists.sourceforge.net</b>
+<br>
+or <b>joerg.schilling@fokus.fraunhofer.de</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">To subscribe,
+use:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>https://lists.sourceforge.net/lists/listinfo/cdrtools-developers</b>
+<br>
+or
+<b>https://lists.sourceforge.net/lists/listinfo/cdrtools-support</b></p>
+
+<h2>INTERFACE STABILITY
+<a name="INTERFACE STABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The interfaces
+provided by <b>cdrecord</b> are designed for long term
+stability. As <b>cdrecord</b> depends on interfaces provided
+by the underlying operating system, the stability of the
+interfaces offered by <b>cdrecord</b> depends on the
+interface stability of the OS interfaces. Modified
+interfaces in the OS may enforce modified interfaces in
+<b>cdrecord</b>.</p>
+<hr>
+</body>
+</html>

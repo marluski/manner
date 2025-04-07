@@ -1,0 +1,191 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:03 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>lookbib</title>
+
+</head>
+<body>
+
+<h1 align="center">lookbib</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Files">Files</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lookbib - search
+bibliographic databases</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>lookbib</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em">[<b>-i&nbsp;</b><i>string</i>]
+[<b>-t&nbsp;</b><i>n</i>] <i>file</i> ...</p></td>
+<td width="46%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>lookbib</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="46%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>lookbib</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="46%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>lookbib</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p><b>--version</b></p></td>
+<td width="46%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>lookbib</i></b>
+writes a prompt to the standard error stream (unless the
+standard input stream is not a terminal), reads from the
+standard input a line containing a set of keywords, searches
+each bibliographic database <i>file</i> for references
+containing those keywords, writes any references found to
+the standard output stream, and repeats this process until
+the end of input. For each database <i>file</i> to be
+searched, if an index file<i>.i</i> created by
+<a href="man:indxbib(1)"><i>indxbib</i>(1)</a> exists, then
+it will be searched instead; each index can cover multiple
+databases.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward. <b><br>
+-i&nbsp;</b><i>string</i></p>
+
+<p style="margin-left:18%;">When searching files for which
+no index exists, ignore the contents of fields whose names
+are in <i>string</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-t&nbsp;</b><i>n</i></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Require only the first <i>n</i> characters of keys to be
+given. The default is&nbsp;6.</p></td></tr>
+</table>
+
+<h2>Files
+<a name="Files"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em">file<i>.i</i></p></td>
+<td width="1%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em">Index files.</p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">&ldquo;Some
+Applications of Inverted Indexes on the Unix System&rdquo;,
+by M. E. Lesk, 1978, AT&amp;T Bell Laboratories Computing
+Science Technical Report No. 69.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:refer(1)"><i>refer</i>(1)</a>,
+<a href="man:lkbib(1)"><i>lkbib</i>(1)</a>,
+<a href="man:indxbib(1)"><i>indxbib</i>(1)</a></p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:09 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>seatd</title>
+
+</head>
+<body>
+
+<h1 align="center">seatd</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">seatd - A seat
+management daemon</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>seatd</b>
+[options]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n
+&lt;fd&gt;</b></p>
+
+<p style="margin-left:14%;">FD to notify readiness on. A
+single newline will be written and the fd closed when seatd
+is ready to serve requests. This is compatible with
+s6&rsquo;s notification protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u
+&lt;user&gt;</b></p>
+
+<p style="margin-left:14%;">User to own the seatd
+socket.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-g
+&lt;group&gt;</b></p>
+
+<p style="margin-left:14%;">Group to own the seatd
+socket.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l
+&lt;loglevel&gt;</b></p>
+
+<p style="margin-left:14%;">Log-level to use. Must be one
+of debug, info, error or silent. Defaults to error.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:14%;">Show the version number and
+quit.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">seatd provides
+central seat management, mediating access to shared
+resources such as displays and input devices in a
+multi-session, multi-seat environment.</p>
+
+<p style="margin-left:9%; margin-top: 1em">seatd operates
+over a UNIX domain socket, with <b>libseat</b> providing the
+client-side of the protocol.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The location of
+the socket for seatd is set at compile-time.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>SEATD_VTBOUND</b></p>
+
+<p style="margin-left:14%;">If set to &quot;0&quot;, the
+seat will not be bound to a VT.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The libseat
+library, <b>&lt;libseat.h&gt;</b>,
+<b>seatd-launch</b>(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Kenny Levinsen &lt;contact@kl.wtf&gt;, who is assisted by
+other open-source contributors. For more information about
+seatd development, see
+https://sr.ht/&#732;kennylevinsen/seatd.</p>
+<hr>
+</body>
+</html>

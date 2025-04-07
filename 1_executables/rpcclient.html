@@ -1,0 +1,2488 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:05 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>RPCCLIENT</title>
+
+</head>
+<body>
+
+<h1 align="center">RPCCLIENT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#LSARPC">LSARPC</a><br>
+<a href="#LSARPC-DS">LSARPC-DS</a><br>
+<a href="#DFS">DFS</a><br>
+<a href="#SHUTDOWN">SHUTDOWN</a><br>
+<a href="#SRVSVC">SRVSVC</a><br>
+<a href="#SAMR">SAMR</a><br>
+<a href="#SPOOLSS">SPOOLSS</a><br>
+<a href="#NETLOGON">NETLOGON</a><br>
+<a href="#FSRVP">FSRVP</a><br>
+<a href="#CLUSAPI">CLUSAPI</a><br>
+<a href="#DRSUAPI">DRSUAPI</a><br>
+<a href="#ECHO">ECHO</a><br>
+<a href="#EPMAPPER">EPMAPPER</a><br>
+<a href="#EVENTLOG">EVENTLOG</a><br>
+<a href="#IRemoteWinspool">IRemoteWinspool</a><br>
+<a href="#NTSVCS">NTSVCS</a><br>
+<a href="#MDSSVC">MDSSVC</a><br>
+<a href="#WINREG">WINREG</a><br>
+<a href="#WITNESS">WITNESS</a><br>
+<a href="#WKSSVC">WKSSVC</a><br>
+<a href="#GENERAL OPTIONS">GENERAL OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#VERSION">VERSION</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rpcclient - tool
+for executing client side MS-RPC functions</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">rpcclient
+[-c|--command=COMMANDS] [-I|--dest-ip=IP] [-p|--port=PORT]
+[-?|--help] [--usage] [-d|--debuglevel=DEBUGLEVEL]
+[--debug-stdout] [--configfile=CONFIGFILE]
+[--option=name=value] [-l|--log-basename=LOGFILEBASE]
+[--leak-report] [--leak-report-full]
+[-R|--name-resolve=NAME-RESOLVE-ORDER]
+[-O|--socket-options=SOCKETOPTIONS]
+[-m|--max-protocol=MAXPROTOCOL]
+[-n|--netbiosname=NETBIOSNAME] [--netbios-scope=SCOPE]
+[-W|--workgroup=WORKGROUP] [--realm=REALM]
+[-U|--user=[DOMAIN/]USERNAME[%PASSWORD]] [-N|--no-pass]
+[--password=STRING] [--pw-nt-hash]
+[-A|--authentication-file=FILE] [-P|--machine-pass]
+[--simple-bind-dn=DN] [--use-kerberos=desired|required|off]
+[--use-krb5-ccache=CCACHE] [--use-winbind-ccache]
+[--client-protection=sign|encrypt|off] [-V|--version]
+{BINDING-STRING|HOST}</p> </td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This tool is
+part of the <b>samba</b>(7) suite.</p>
+
+<p style="margin-left:9%; margin-top: 1em">rpcclient is a
+utility initially developed to test MS-RPC functionality in
+Samba itself. It has undergone several stages of development
+and stability. Many system administrators have now written
+scripts around it to manage Windows NT clients from their
+UNIX workstation.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">BINDING-STRING|HOST</p>
+
+<p style="margin-left:14%;">When connecting to a dcerpc
+service you need to specify a binding string.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The format
+is:</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">TRANSPORT:host[options]</p>
+
+<p style="margin-left:14%; margin-top: 1em">where TRANSPORT
+is either ncacn_np (named pipes) for SMB or ncacn_ip_tcp for
+DCERPC over TCP/IP.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">&quot;host&quot;
+is an IP or hostname or netbios name. If the binding string
+identifies the server side of an endpoint, &quot;host&quot;
+may be an empty string. See below for more details.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">&quot;options&quot;
+can include a SMB pipe name if using the ncacn_np transport
+or a TCP port number if using the ncacn_ip_tcp transport,
+otherwise they will be auto-determined.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Examples:</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncacn_ip_tcp:samba.example.com[1024]</i></p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncacn_ip_tcp:samba.example.com[sign,seal,krb5]</i></p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncacn_ip_tcp:samba.example.com[sign,spnego]</i></p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncacn_np:samba.example.com</i></p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncacn_np:samba.example.com[samr]</i></p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncacn_np:samba.example.com[samr,sign,print]</i></p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncalrpc:/path/to/unix/socket</i></p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>//SAMBA</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">The supported
+transports are:</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncacn_np</i> - Connect using named pipes</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncacn_ip_tcp</i> - Connect over TCP/IP</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ncalrpc</i> - Connect over local RPC (unix sockets)</p>
+
+<p style="margin-left:14%; margin-top: 1em">The supported
+options are:</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>sign</i> - Use RPC integrity authentication level</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>seal</i> - Enable RPC privacy (encryption) authentication
+level</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>connect</i> - Use RPC connect level authentication (auth,
+but no sign or seal)</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>packet</i> - Use RPC packet authentication level</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>spnego</i> - Use SPNEGO instead of NTLMSSP
+authentication</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ntlm</i> - Use plain NTLM instead of SPNEGO or
+NTLMSSP</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>krb5</i> - Use Kerberos instead of NTLMSSP
+authentication</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>schannel</i> - Create a schannel connection</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>smb1</i> - Use SMB1 for named pipes</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>smb2</i> - Use SMB2/3 for named pipes</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>validate</i> - Enable the NDR validator</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>print</i> - Enable debug output of packets</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>padcheck</i> - Check reply data for non-zero pad
+bytes</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>bigendian</i> - Use big endian for RPC</p>
+
+<p style="margin-left:28%; margin-top: 1em">&bull;
+<i>ndr64</i> - Use NDR64 for RPC</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">-c|--command=&lt;command
+string&gt;</p>
+
+<p style="margin-left:14%;">Execute semicolon separated
+commands (listed below)</p>
+
+<p style="margin-left:9%; margin-top: 1em">-I|--dest-ip
+IP-address</p>
+
+<p style="margin-left:14%;"><i>IP address</i> is the
+address of the server to connect to. It should be specified
+in standard &quot;a.b.c.d&quot; notation.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Normally the
+client would attempt to locate a named SMB/CIFS server by
+looking it up via the NetBIOS name resolution mechanism
+described above in the <i>name resolve order</i> parameter
+above. Using this parameter will force the client to assume
+that the server is on the machine with the specified IP
+address and the NetBIOS name component of the resource being
+connected to will be ignored.</p>
+
+<p style="margin-left:14%; margin-top: 1em">There is no
+default for this parameter. If not supplied, it will be
+determined automatically by the client as described
+above.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-p|--port
+port</p>
+
+<p style="margin-left:14%;">This number is the TCP port
+number that will be used when making connections to the
+server. The standard (well-known) TCP port number for an
+SMB/CIFS server is 139, which is the default.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-?|--help</p>
+
+<p style="margin-left:14%;">Print a summary of command line
+options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--usage</p>
+
+<p style="margin-left:14%;">Display brief usage
+message.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">-d|--debuglevel=level</p>
+
+<p style="margin-left:14%;"><i>level</i> is an integer from
+0 to 10. The default value if this parameter is not
+specified is 1 for client applications.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The higher this
+value, the more detail will be logged to the log files about
+the activities of the server. At level 0, only critical
+errors and serious warnings will be logged. Level 1 is a
+reasonable level for day-to-day running - it generates a
+small amount of information about operations carried
+out.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Levels above 1
+will generate considerable amounts of log data, and should
+only be used when investigating a problem. Levels above 3
+are designed for use only by developers and generate HUGE
+amounts of log data, most of which is extremely cryptic.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+specifying this parameter here will override the
+<b><font color="#0000FF">log level</font></b>
+<font color="#000000">parameter in the /etc/samba/smb.conf
+file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--debug-stdout</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">This will
+redirect debug output to STDOUT. By default all clients are
+logging to STDERR.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--configfile=&lt;configuration
+file&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The file
+specified contains the configuration details required by the
+client. The information in this file can be general for
+client and server or only provide client specific like
+options such as</font> <b><font color="#0000FF">client smb
+encrypt</font></b><font color="#000000">. See
+/etc/samba/smb.conf for more information. The default
+configuration file name is determined at compile
+time.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--option=&lt;name&gt;=&lt;value&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set the
+<b>smb.conf</b>(5) option &quot;&lt;name&gt;&quot; to value
+&quot;&lt;value&gt;&quot; from the command line. This
+overrides compiled-in defaults and options read from the
+configuration file. If a name or a value includes a space,
+wrap whole --option=name=value into quotes.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-l|--log-basename=logdirectory</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Base
+directory name for log/debug files. The extension
+<b>&quot;.progname&quot;</b> will be appended (e.g.
+log.smbclient, log.smbd, etc...). The log file is never
+removed by the client.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--leak-report</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Enable
+talloc leak reporting on exit.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--leak-report-full</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Enable
+full talloc leak reporting on exit.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-V|--version</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Prints
+the program version number.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-R|--name-resolve=NAME-RESOLVE-ORDER</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">This
+option is used to determine what naming services and in what
+order to resolve host names to IP addresses. The option
+takes a space-separated string of different name resolution
+options. The best is to wrap the whole
+--name-resolve=NAME-RESOLVE-ORDER into quotes.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+options are: &quot;lmhosts&quot;, &quot;host&quot;,
+&quot;wins&quot; and &quot;bcast&quot;. They cause names to
+be resolved as follows:</font></p>
+
+
+<p style="margin-left:28%; margin-top: 1em"><font color="#000000">&bull;
+<b>lmhosts</b>: Lookup an IP address in the Samba lmhosts
+file. If the line in lmhosts has no name type attached to
+the NetBIOS name (see the <b>lmhosts</b>(5) for details)
+then any name type matches for lookup.</font></p>
+
+
+<p style="margin-left:28%; margin-top: 1em"><font color="#000000">&bull;
+<b>host</b>: Do a standard host name to IP address
+resolution, using the system /etc/hosts, NIS, or DNS
+lookups. This method of name resolution is operating system
+dependent, for instance on IRIX or Solaris this may be
+controlled by the /etc/nsswitch.conf file). Note that this
+method is only used if the NetBIOS name type being queried
+is the 0x20 (server) name type, otherwise it is
+ignored.</font></p>
+
+
+<p style="margin-left:28%; margin-top: 1em"><font color="#000000">&bull;
+<b>wins</b>: Query a name with the IP address listed in the
+<i>wins server</i> parameter. If no WINS server has been
+specified this method will be ignored.</font></p>
+
+
+<p style="margin-left:28%; margin-top: 1em"><font color="#000000">&bull;
+<b>bcast</b>: Do a broadcast on each of the known local
+interfaces listed in the <i>interfaces</i> parameter. This
+is the least reliable of the name resolution methods as it
+depends on the target host being on a locally connected
+subnet.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">If
+this parameter is not set then the name resolve order
+defined in the /etc/samba/smb.conf file parameter
+(</font><b><font color="#0000FF">name resolve
+order</font></b><font color="#000000">) will be
+used.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+default order is lmhosts, host, wins, bcast. Without this
+parameter or any entry in the</font>
+<b><font color="#0000FF">name resolve order</font></b>
+<font color="#000000">parameter of the /etc/samba/smb.conf
+file, the name resolution methods will be attempted in this
+order.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-O|--socket-options=SOCKETOPTIONS</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">TCP
+socket options to set on the client socket. See the socket
+options parameter in the /etc/samba/smb.conf manual page for
+the list of valid options.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-m|--max-protocol=MAXPROTOCOL</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The value
+of the parameter (a string) is the highest protocol level
+that will be supported by the client.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that specifying this parameter here will override the</font>
+<b><font color="#0000FF">client max protocol</font></b>
+<font color="#000000">parameter in the /etc/samba/smb.conf
+file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-n|--netbiosname=NETBIOSNAME</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">This
+option allows you to override the NetBIOS name that Samba
+uses for itself. This is identical to setting the</font>
+<b><font color="#0000FF">netbios name</font></b>
+<font color="#000000">parameter in the /etc/samba/smb.conf
+file. However, a command line setting will take precedence
+over settings in /etc/samba/smb.conf.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--netbios-scope=SCOPE</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">This
+specifies a NetBIOS scope that nmblookup will use to
+communicate with when generating NetBIOS names. For details
+on the use of NetBIOS scopes, see rfc1001.txt and
+rfc1002.txt. NetBIOS scopes are <i>very</i> rarely used,
+only set this parameter if you are the system administrator
+in charge of all the NetBIOS systems you communicate
+with.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-W|--workgroup=WORKGROUP</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set the
+SMB domain of the username. This overrides the default
+domain which is the domain defined in smb.conf. If the
+domain specified is the same as the servers NetBIOS name, it
+causes the client to log on using the servers local SAM (as
+opposed to the Domain SAM).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that specifying this parameter here will override the</font>
+<b><font color="#0000FF">workgroup</font></b>
+<font color="#000000">parameter in the /etc/samba/smb.conf
+file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-r|--realm=REALM</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set the
+realm for the domain.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that specifying this parameter here will override the</font>
+<b><font color="#0000FF">realm</font></b>
+<font color="#000000">parameter in the /etc/samba/smb.conf
+file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-U|--user=[DOMAIN\]USERNAME[%PASSWORD]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Sets the
+SMB username or username and password.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">If
+%PASSWORD is not specified, the user will be prompted. The
+client will first check the <b>USER</b> environment variable
+(which is also permitted to also contain the password
+separated by a %), then the <b>LOGNAME</b> variable (which
+is not permitted to contain a password) and if either
+exists, the value is used. If these environmental variables
+are not found, the username found in a Kerberos Credentials
+cache may be used.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">A
+third option is to use a credentials file which contains the
+plaintext of the username and password. This option is
+mainly provided for scripts where the admin does not wish to
+pass the credentials on the command line or via environment
+variables. If this method is used, make certain that the
+permissions on the file restrict access from unwanted users.
+See the <i>-A</i> for more details.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Be
+cautious about including passwords in scripts or passing
+user-supplied values onto the command line. For security it
+is better to let the Samba client tool ask for the password
+if needed, or obtain the password once with
+kinit.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">While
+Samba will attempt to scrub the password from the process
+title (as seen in ps), this is after startup and so is
+subject to a race.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-N|--no-pass</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">If
+specified, this parameter suppresses the normal password
+prompt from the client to the user. This is useful when
+accessing a service that does not require a
+password.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Unless
+a password is specified on the command line or this
+parameter is specified, the client will request a
+password.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">If
+a password is specified on the command line and this option
+is also defined the password on the command line will be
+silently ignored and no password will be used.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--password</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Specify
+the password on the commandline.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Be
+cautious about including passwords in scripts or passing
+user-supplied values onto the command line. For security it
+is better to let the Samba client tool ask for the password
+if needed, or obtain the password once with
+kinit.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">If
+--password is not specified, the tool will check the
+<b>PASSWD</b> environment variable, followed by
+<b>PASSWD_FD</b> which is expected to contain an open file
+descriptor (FD) number.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Finally
+it will check <b>PASSWD_FILE</b> (containing a file path to
+be opened). The file should only contain the password. Make
+certain that the permissions on the file restrict access
+from unwanted users!</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">While
+Samba will attempt to scrub the password from the process
+title (as seen in ps), this is after startup and so is
+subject to a race.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--pw-nt-hash</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+supplied password is the NT hash.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-A|--authentication-file=filename</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">This
+option allows you to specify a file from which to read the
+username and password used in the connection. The format of
+the file is:</font></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+
+
+<p><font color="#000000">username =
+&lt;value&gt;</font></p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+
+
+<p><font color="#000000">password =
+&lt;value&gt;</font></p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="68%">
+
+
+<p><font color="#000000">domain = &lt;value&gt;</font></p></td></tr>
+</table>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Make
+certain that the permissions on the file restrict access
+from unwanted users!</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">-P|--machine-pass</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Use
+stored machine account password.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--simple-bind-dn=DN</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">DN to use
+for a simple bind.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--use-kerberos=desired|required|off</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">This
+parameter determines whether Samba client tools will try to
+authenticate using Kerberos. For Kerberos authentication you
+need to use dns names instead of IP addresses when
+connecting to a service.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that specifying this parameter here will override the</font>
+<b><font color="#0000FF">client use kerberos</font></b>
+<font color="#000000">parameter in the /etc/samba/smb.conf
+file.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--use-krb5-ccache=CCACHE</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Specifies
+the credential cache location for Kerberos
+authentication.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+will set --use-kerberos=required too.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--use-winbind-ccache</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Try to
+use the credential cache by winbind.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--client-protection=sign|encrypt|off</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Sets the
+connection protection the client tool should use.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that specifying this parameter here will override the</font>
+<b><font color="#0000FF">client protection</font></b>
+<font color="#000000">parameter in the /etc/samba/smb.conf
+file.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">In
+case you need more fine grained control you can use:
+--option=clientsmbencrypt=OPTION,
+--option=clientipcsigning=OPTION,
+--option=clientsigning=OPTION.</font></p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>LSARPC
+<a name="LSARPC"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaquery</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+info policy</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lookupsids</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Convert
+SIDs to names</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lookupsids3</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Convert
+SIDs to names</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lookupsids_level</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Convert
+SIDs to names</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lookupnames</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Convert
+names to SIDs</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lookupnames4</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Convert
+names to SIDs</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lookupnames_level</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Convert
+names to SIDs</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumtrust</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+trusted domains</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumprivs</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+privileges</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdispname</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get the
+privilege name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaenumsid</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+the LSA SIDS</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsacreateaccount</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create a
+new lsa account</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaenumprivsaccount</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+the privileges of an SID</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaenumacctrights</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+the rights of an SID</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaaddpriv</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Assign a
+privilege to a SID</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsadelpriv</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Revoke a
+privilege from a SID</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaaddacctrights</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Add
+rights to an account</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaremoveacctrights</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Remove
+rights from an account</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsalookupprivvalue</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get a
+privilege value given its name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaquerysecobj</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query LSA
+security object</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaquerytrustdominfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query LSA
+trusted domains info (given a SID)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaquerytrustdominfobyname</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query LSA
+trusted domains info (given a name), only works for Windows
+&gt; 2k</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsaquerytrustdominfobysid</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query LSA
+trusted domains info (given a SID)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lsasettrustdominfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set LSA
+trusted domain info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getusername</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+username</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">createsecret</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+Secret</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deletesecret</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+Secret</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querysecret</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+Secret</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setsecret</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set
+Secret</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">retrieveprivatedata</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Retrieve
+Private Data</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">storeprivatedata</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Store
+Private Data</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">createtrustdom</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+Trusted Domain</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deletetrustdom</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+Trusted Domain</font></p>
+
+<h3>LSARPC-DS
+<a name="LSARPC-DS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsroledominfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+Primary Domain Information</font></p>
+
+<h3>DFS
+<a name="DFS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dfsversion</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query DFS
+support</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dfsadd</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Add a DFS
+share</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dfsremove</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Remove a
+DFS share</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dfsgetinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query DFS
+share info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dfsenum</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+dfs shares</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dfsenumex</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+dfs shares</font></p>
+
+<h3>SHUTDOWN
+<a name="SHUTDOWN"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">shutdowninit</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">syntax:
+shutdown [-m message]</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">shutdownabort</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">syntax:
+shutdownabort</font></p>
+
+<h3>SRVSVC
+<a name="SRVSVC"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">srvinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Server
+query info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netshareenum</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+shares</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netshareenumall</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+all shares</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netsharegetinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get Share
+Info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netsharesetinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set Share
+Info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netsharesetdfsflags</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set DFS
+flags</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netfileenum</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+open files</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netremotetod</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Fetch
+remote time of day</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netnamevalidate</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Validate
+sharename</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netfilegetsec</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get File
+security</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netsessdel</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+Session</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netsessenum</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+Sessions</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netdiskenum</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+Disks</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netconnenum</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+Connections</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netshareadd</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Add
+share</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netsharedel</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+share</font></p>
+
+<h3>SAMR
+<a name="SAMR"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">queryuser</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+user info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querygroup</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+group info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">queryusergroups</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+user groups</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">queryuseraliases</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+user aliases</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querygroupmem</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+group membership</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">queryaliasmem</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+alias membership</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">queryaliasinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+alias info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deletealias</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete an
+alias</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querydispinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+display info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querydispinfo2</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+display info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querydispinfo3</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+display info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querydominfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+domain info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumdomusers</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+domain users</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumdomgroups</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+domain groups</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumalsgroups</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+alias groups</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumdomains</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+domains</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">createdomuser</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+domain user</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">createdomgroup</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+domain group</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">createdomalias</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+domain alias</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">samlookupnames</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Look up
+names</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">samlookuprids</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Look up
+names</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deletedomgroup</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+domain group</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deletedomuser</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+domain user</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">samquerysecobj</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+SAMR security object</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdompwinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Retrieve
+domain password info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getusrdompwinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Retrieve
+user domain password info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">lookupdomain</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Lookup
+Domain Name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">chgpasswd</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Change
+user password</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">chgpasswd2</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Change
+user password</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">chgpasswd3</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Change
+user password (RC4 encrypted)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">chgpasswd4</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Change
+user password (AES encrypted)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdispinfoidx</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+Display Information Index</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setuserinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set user
+info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setuserinfo2</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set user
+info2</font></p>
+
+<h3>SPOOLSS
+<a name="SPOOLSS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">adddriver
+&lt;arch&gt; &lt;config&gt; [&lt;version&gt;]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Execute
+an AddPrinterDriver() RPC to install the printer driver
+information on the server. Note that the driver files should
+already exist in the directory returned by getdriverdir.
+Possible values for <i>arch</i> are the same as those for
+the getdriverdir command. The <i>config</i> parameter is
+defined as follows:</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">Long
+Driver Name:\ <br>
+Driver File Name:\ <br>
+Data File Name:\ <br>
+Config File Name:\ <br>
+Help File Name:\ <br>
+Language Monitor Name:\ <br>
+Default Data Type:\ <br>
+Comma Separated list of Files</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Any
+empty fields should be enter as the string
+&quot;NULL&quot;.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Samba
+does not need to support the concept of Print Monitors since
+these only apply to local printers whose driver can make use
+of a bi-directional link for communication. This field
+should be &quot;NULL&quot;. On a remote NT print server, the
+Print Monitor for a driver must already be installed prior
+to adding the driver or else the RPC will fail.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+<i>version</i> parameter lets you specify the printer driver
+version number. If omitted, the default driver version for
+the specified architecture will be used. This option can be
+used to upload Windows 2000 (version 3) printer
+drivers.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">addprinter
+&lt;printername&gt; &lt;sharename&gt; &lt;drivername&gt;
+&lt;port&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Add a
+printer on the remote server. This printer will be
+automatically shared. Be aware that the printer driver must
+already be installed on the server (see adddriver) and the
+<i>port</i>must be a valid port name (see
+enumports.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deldriver
+&lt;driver&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+the specified printer driver for all architectures. This
+does not delete the actual driver files from the server,
+only the entry from the server's list of drivers.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deldriverex
+&lt;driver&gt; [architecture] [version] [flags]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+the specified printer driver and optionally files associated
+with the driver. You can limit this action to a specific
+architecture and a specific version. If no architecture is
+given, all driver files of that driver will be deleted.
+<i>flags</i> correspond to numeric DPD_* values, i.e. a
+value of 3 requests (DPD_DELETE_UNUSED_FILES |
+DPD_DELETE_SPECIFIC_VERSION).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumdata</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+all printer setting data stored on the server. On Windows NT
+clients, these values are stored in the registry, while
+Samba servers store them in the printers TDB. This command
+corresponds to the MS Platform SDK GetPrinterData() function
+(* This command is currently unimplemented).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumdataex</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+printer data for a key</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumkey</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+printer keys</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumjobs
+&lt;printer&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">List the
+jobs and status of a given printer. This command corresponds
+to the MS Platform SDK EnumJobs() function</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getjob</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get print
+job</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setjob</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set print
+job</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumports
+[level]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Executes
+an EnumPorts() call using the specified info level.
+Currently only info levels 1 and 2 are supported.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumdrivers
+[level]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Execute
+an EnumPrinterDrivers() call. This lists the various
+installed printer drivers for all architectures. Refer to
+the MS Platform SDK documentation for more details of the
+various flags and calling options. Currently supported info
+levels are 1, 2, and 3.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumprinters
+[level]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Execute
+an EnumPrinters() call. This lists the various installed and
+share printers. Refer to the MS Platform SDK documentation
+for more details of the various flags and calling options.
+Currently supported info levels are 1, 2 and 5.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdata
+&lt;printername&gt; &lt;valuename;&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Retrieve
+the data for a given printer setting. See the enumdata
+command for more information. This command corresponds to
+the GetPrinterData() MS Platform SDK function.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdataex</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+printer driver data with keyname</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdriver
+&lt;printername&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Retrieve
+the printer driver information (such as driver file, config
+file, dependent files, etc...) for the given printer. This
+command corresponds to the GetPrinterDriver() MS Platform
+SDK function. Currently info level 1, 2, and 3 are
+supported.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdriverdir
+&lt;arch&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Execute a
+GetPrinterDriverDirectory() RPC to retrieve the SMB share
+name and subdirectory for storing printer driver files for a
+given architecture. Possible values for <i>arch</i> are
+&quot;Windows 4.0&quot; (for Windows 95/98), &quot;Windows
+NT x86&quot;, &quot;Windows NT PowerPC&quot;, &quot;Windows
+Alpha_AXP&quot;, and &quot;Windows NT
+R4000&quot;.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdriverpackagepath</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get print
+driver package download directory</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getprinter
+&lt;printername&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Retrieve
+the current printer information. This command corresponds to
+the GetPrinter() MS Platform SDK function.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">openprinter
+&lt;printername&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Execute
+an OpenPrinterEx() and ClosePrinter() RPC against a given
+printer.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">openprinter_ex
+&lt;printername&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Open
+printer handle</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setdriver
+&lt;printername&gt; &lt;drivername&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Execute a
+SetPrinter() command to update the printer driver associated
+with an installed printer. The printer driver must already
+be correctly installed on the print server.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">See
+also the enumprinters and enumdrivers commands for obtaining
+a list of of installed printers and drivers.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getprintprocdir</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get print
+processor directory</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">addform</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Add
+form</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setform</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set
+form</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getform</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+form</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deleteform</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+form</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumforms</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+form</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setprinter</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set
+printer comment</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setprinterdata</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set
+REG_SZ printer data</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">setprintername
+&lt;printername&gt; &lt;newprintername&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set
+printer name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">rffpcnex</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Rffpcnex
+test</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">printercmp</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Printer
+comparison test</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumprocs</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+Print Processors</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumprocdatatypes</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+Print Processor Data Types</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enummonitors</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+Print Monitors</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">createprinteric</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+Printer IC</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">playgdiscriptonprinteric</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+Printer IC</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getcoreprinterdrivers</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+CorePrinterDriver</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">enumpermachineconnections</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+Per Machine Connections</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">addpermachineconnection</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Add Per
+Machine Connection</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">delpermachineconnection</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Delete
+Per Machine Connection</font></p>
+
+<h3>NETLOGON
+<a name="NETLOGON"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">logonctrl2</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Logon
+Control 2</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getanydcname</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+trusted DC name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdcname</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+trusted PDC name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsr_getdcname</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+trusted DC name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsr_getdcnameex</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+trusted DC name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsr_getdcnameex2</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+trusted DC name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsr_getsitename</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+sitename</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsr_getforesttrustinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+Forest Trust Info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">logonctrl</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Logon
+Control</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">samlogon</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Sam
+Logon</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">change_trust_pw</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Change
+Trust Account Password</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">gettrustrid</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get trust
+rid</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsr_enumtrustdom</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+trusted domains</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsenumdomtrusts</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+all trusted domains in an AD forest</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">deregisterdnsrecords</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Deregister
+DNS records</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netrenumtrusteddomains</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+trusted domains</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">netrenumtrusteddomainsex</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+trusted domains</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">getdcsitecoverage</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get the
+Site-Coverage from a DC</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">capabilities</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Return
+Capabilities</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">logongetdomaininfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Return
+LogonGetDomainInfo</font></p>
+
+<h3>FSRVP
+<a name="FSRVP"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fss_is_path_sup</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Check
+whether a share supports shadow-copy</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fss_get_sup_version</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+supported FSRVP version from server</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fss_create_expose</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Request
+shadow-copy creation and exposure</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fss_delete</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Request
+shadow-copy share deletion</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fss_has_shadow_copy</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Check for
+an associated share shadow-copy</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fss_get_mapping</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+shadow-copy share mapping information</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fss_recovery_complete</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Flag
+read-write snapshot as recovery complete,</font></p>
+
+<h3>CLUSAPI
+<a name="CLUSAPI"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_open_cluster</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Open
+cluster</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_get_cluster_name</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+cluster name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_get_cluster_version</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+cluster version</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_get_quorum_resource</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+quorum resource</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_create_enum</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+enum query</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_create_enumex</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Create
+enumex query</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_open_resource</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Open
+cluster resource</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_online_resource</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set
+cluster resource online</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_offline_resource</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set
+cluster resource offline</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_get_resource_state</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+cluster resource state</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_get_cluster_version2</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+cluster version2</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_pause_node</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Pause
+cluster node</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">clusapi_resume_node</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Resume
+cluster node</font></p>
+
+<h3>DRSUAPI
+<a name="DRSUAPI"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dscracknames</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Crack
+Name</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsgetdcinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+Domain Controller Info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dsgetncchanges</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get NC
+Changes</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">dswriteaccountspn</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Write
+Account SPN</font></p>
+
+<h3>ECHO
+<a name="ECHO"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">echoaddone</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Add one
+to a number</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">echodata</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Echo
+data</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">sinkdata</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Sink
+data</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">sourcedata</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Source
+data</font></p>
+
+<h3>EPMAPPER
+<a name="EPMAPPER"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">epmmap</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Map a
+binding</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">epmlookup</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Lookup
+bindings</font></p>
+
+<h3>EVENTLOG
+<a name="EVENTLOG"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">eventlog_readlog</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Read
+Eventlog</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">eventlog_numrecord</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+number of records</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">eventlog_oldestrecord</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+oldest record</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">eventlog_reportevent</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Report
+event</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">eventlog_reporteventsource</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Report
+event and source</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">eventlog_registerevsource</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Register
+event source</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">eventlog_backuplog</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Backup
+Eventlog File</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">eventlog_loginfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get
+Eventlog Information</font></p>
+
+<h3>IRemoteWinspool
+<a name="IRemoteWinspool"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">winspool_AsyncOpenPrinter</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Open
+printer handle</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">winspool_AsyncCorePrinterDriverInstalled</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+Core Printer Driver Installed</font></p>
+
+<h3>NTSVCS
+<a name="NTSVCS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">ntsvcs_getversion</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+NTSVCS version</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">ntsvcs_validatedevinst</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+NTSVCS device instance</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">ntsvcs_hwprofflags</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+NTSVCS HW prof flags</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">ntsvcs_hwprofinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+NTSVCS HW prof info</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">ntsvcs_getdevregprop</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+NTSVCS device registry property</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">ntsvcs_getdevlistsize</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+NTSVCS device list size</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">ntsvcs_getdevlist</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+NTSVCS device list</font></p>
+
+<h3>MDSSVC
+<a name="MDSSVC"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fetch_properties</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Fetch
+connection properties</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">fetch_attributes</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Fetch
+attributes for a CNID</font></p>
+
+<h3>WINREG
+<a name="WINREG"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">winreg_enumkey</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+Keys</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querymultiplevalues</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+multiple values</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">querymultiplevalues2</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+multiple values</font></p>
+
+<h3>WITNESS
+<a name="WITNESS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">GetInterfaceList</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">List the
+interfaces to which witness client connections can be
+made</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Register</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Register
+for resource state change notifications of a NetName and
+IPAddress</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">UnRegister</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Unregister
+for notifications from the server</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">AsyncNotify</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Request
+notification of registered resource changes from the
+server</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">RegisterEx</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Register
+for resource state change notifications of a NetName,
+ShareName and multiple IPAddresses</font></p>
+
+<h3>WKSSVC
+<a name="WKSSVC"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">wkssvc_wkstagetinfo</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+WKSSVC Workstation Information</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">wkssvc_getjoininformation</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Query
+WKSSVC Join Information</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">wkssvc_messagebuffersend</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Send
+WKSSVC message</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">wkssvc_enumeratecomputernames</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+WKSSVC computer names</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">wkssvc_enumerateusers</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Enumerate
+WKSSVC users</font></p>
+
+<h3>GENERAL OPTIONS
+<a name="GENERAL OPTIONS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">help</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get help
+on commands</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">?</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Get help
+on commands</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">debuglevel</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set debug
+level</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">debug</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set debug
+level</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">list</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">List
+available commands on pipe</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">exit</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Exit
+program</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">quit</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Exit
+program</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">sign</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Force RPC
+pipe connections to be signed</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">seal</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Force RPC
+pipe connections to be sealed</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">packet</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Force RPC
+pipe connections with packet authentication level</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">schannel</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Force RPC
+pipe connections to be sealed with 'schannel'. Force RPC
+pipe connections to be sealed with 'schannel'. Assumes valid
+machine account to this domain controller.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">schannelsign</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Force RPC
+pipe connections to be signed (not sealed) with 'schannel'.
+Assumes valid machine account to this domain
+controller.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">timeout</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set
+timeout (in milliseconds) for RPC operations</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">transport</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Choose
+ncacn transport for RPC operations</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">none</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Force RPC
+pipe connections to have no special properties</font></p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">rpcclient
+is designed as a developer testing tool and may not be
+robust in certain areas (such as command line parsing). It
+has been known to generate a core dump upon failures when
+invalid parameters were passed to the
+interpreter.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">From
+Luke Leighton's original rpcclient man page:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>WARNING!</i>
+The MSRPC over SMB code has been developed from examining
+Network traces. No documentation is available from the
+original creators (Microsoft) on how MSRPC over SMB works,
+or how the individual MSRPC services work. Microsoft's
+implementation of these services has been demonstrated (and
+reported) to be... a bit flaky in places.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+development of Samba's implementation is also a bit rough,
+and as more of the services are understood, it can even
+result in versions of <b>smbd</b>(8) and <b>rpcclient</b>(1)
+that are incompatible for some commands or services.
+Additionally, the developers are sending reports to
+Microsoft, and problems found or reported to Microsoft are
+fixed in Service Packs, which may result in
+incompatibilities.</font></p>
+
+<h2>VERSION
+<a name="VERSION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+man page is part of version 4.22.0 of the Samba
+suite.</font></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+original Samba software and related utilities were created
+by Andrew Tridgell. Samba is now developed by the Samba Team
+as an Open Source project similar to the way the Linux
+kernel is developed.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+original rpcclient man page was written by Matthew Geddes,
+Luke Kenneth Casson Leighton, and rewritten by Gerald
+Carter. The conversion to DocBook for Samba 2.2 was done by
+Gerald Carter. The conversion to DocBook XML 4.2 for Samba
+3.0 was done by Alexander Bokovoy.</font></p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK LIST</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK LIST</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#FIELDS">FIELDS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-list -
+List installed applications and/or runtimes</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="31%">
+
+
+<p style="margin-top: 1em"><b>flatpak list</b>
+[OPTION...]</p> </td>
+<td width="60%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Lists the names
+of the installed applications and runtimes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, both
+apps and runtimes are shown, but you can change this by
+using the <b>--app</b> or <b>--runtime</b> options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, both
+per-user and system-wide installations are shown. Use the
+<b>--user</b>, <b>--installation</b> or <b>--system</b>
+options to change this.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The list command
+can also be used to find installed apps that use a certain
+runtime, with the <b>--app-runtime</b> option.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>,
+<b>--user</b></p>
+
+<p style="margin-left:14%;">List per-user
+installations.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system</b></p>
+
+<p style="margin-left:14%;">List the default system-wide
+installations.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--installation=NAME</b></p>
+
+<p style="margin-left:14%;">List a system-wide installation
+specified by NAME among those defined in
+/etc/flatpak/installations.d/. Using
+<b>--installation=default</b> is equivalent to using
+<b>--system</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--arch=ARCH</b></p>
+
+<p style="margin-left:14%;">List apps/runtimes for this
+architecture. See <b>flatpak --supported-arches</b> for
+architectures supported by the host.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--show-details</b></p>
+
+<p style="margin-left:14%;">Show origin, sizes and other
+extra information. Equivalent to <b>--columns=all</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--app</b></p>
+
+<p style="margin-left:14%;">List applications.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--runtime</b></p>
+
+<p style="margin-left:14%;">List runtimes.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--all</b>,
+<b>-a</b></p>
+
+<p style="margin-left:14%;">List all installed runtimes,
+including locale and debug extensions. These are hidden by
+default.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--app-runtime=RUNTIME</b></p>
+
+<p style="margin-left:14%;">List applications that use the
+given runtime.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--columns=FIELD,...</b></p>
+
+<p style="margin-left:14%;">Specify what information to
+show about each ref. You can list multiple fields, or use
+this option multiple times.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Append
+:s[tart], :m[iddle], :e[nd] or :f[ull] to column names to
+change ellipsization.</p>
+
+<h2>FIELDS
+<a name="FIELDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+fields are understood by the <b>--columns</b> option:</p>
+
+<p style="margin-left:9%; margin-top: 1em">name</p>
+
+<p style="margin-left:14%;">Show the name</p>
+
+<p style="margin-left:9%; margin-top: 1em">description</p>
+
+<p style="margin-left:14%;">Show the description</p>
+
+<p style="margin-left:9%; margin-top: 1em">application</p>
+
+<p style="margin-left:14%;">Show the application or runtime
+ID</p>
+
+<p style="margin-left:9%; margin-top: 1em">arch</p>
+
+<p style="margin-left:14%;">Show the architecture</p>
+
+<p style="margin-left:9%; margin-top: 1em">branch</p>
+
+<p style="margin-left:14%;">Show the branch</p>
+
+<p style="margin-left:9%; margin-top: 1em">runtime</p>
+
+<p style="margin-left:14%;">Show the used runtime</p>
+
+<p style="margin-left:9%; margin-top: 1em">version</p>
+
+<p style="margin-left:14%;">Show the version</p>
+
+<p style="margin-left:9%; margin-top: 1em">ref</p>
+
+<p style="margin-left:14%;">Show the ref</p>
+
+<p style="margin-left:9%; margin-top: 1em">origin</p>
+
+<p style="margin-left:14%;">Show the origin remote</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">installation</p>
+
+<p style="margin-left:14%;">Show the installation</p>
+
+<p style="margin-left:9%; margin-top: 1em">active</p>
+
+<p style="margin-left:14%;">Show the active commit</p>
+
+<p style="margin-left:9%; margin-top: 1em">latest</p>
+
+<p style="margin-left:14%;">Show the latest commit</p>
+
+<p style="margin-left:9%; margin-top: 1em">size</p>
+
+<p style="margin-left:14%;">Show the installed size</p>
+
+<p style="margin-left:9%; margin-top: 1em">options</p>
+
+<p style="margin-left:14%;">Show options</p>
+
+<p style="margin-left:9%; margin-top: 1em">all</p>
+
+<p style="margin-left:14%;">Show all columns</p>
+
+<p style="margin-left:9%; margin-top: 1em">help</p>
+
+<p style="margin-left:14%;">Show the list of available
+columns</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that field
+names can be abbreviated to a unique prefix.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+--user --columns=app list</b></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>Application</b>
+<br>
+org.gnome.Builder <br>
+org.freedesktop.glxgears <br>
+org.gnome.MyApp <br>
+org.gnome.gedit</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flatpak</b>(1),
+<b>flatpak-install</b>(1), <b>flatpak-update</b>(1)</p>
+<hr>
+</body>
+</html>

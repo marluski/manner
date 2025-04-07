@@ -1,0 +1,254 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:32 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mp2enc</title>
+
+</head>
+<body>
+
+<h1 align="center">mp2enc</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#GENERAL FUNCTION LETTERS">GENERAL FUNCTION LETTERS</a><br>
+<a href="#FUNCTION LETTERS CONTROLLING OUTPUT STREAM STRUCTURE">FUNCTION LETTERS CONTROLLING OUTPUT STREAM STRUCTURE</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mp2enc - Simple
+MPEG-1 layer-II audio encoder</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mp2enc</b>
+[<b>-v</b> <i>num</i>] [<b>-b</b> <i>bitrate_kbps</i>]
+[<b>-r</b> <i>output_sampling_rate_hz</i>] [<b>-R</b>
+<i>rate,chans,bits</i>] [<b>-s</b> ] [<b>-m</b> ] [<b>-e</b>
+] [<b>-V</b> ] [<b>-?</b>]
+<b>-o&nbsp;</b><i>output_filename</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mp2enc is a
+simple MPEG-1 layer-I/II audio encoder. It is actually a
+very mildly warmed over version of the MPEG Software
+Simulation Group&rsquo;s reference encoder. It accepts a WAV
+file or stream on stdin and ouputs an a layer-I/II
+elementary audio stream. It is included in the
+<b>mjpegtools</b>(1) primarily for reasons of completeness
+and because it is able to perform sampling rate
+conversion.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Those seeking a
+faster (and probably higher quality) layer II encoder are
+recommended to use <b>toolame</b>(1) which can be obtained
+from:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><i>http://www.planckenergy.com</i></p>
+
+<h2>GENERAL FUNCTION LETTERS
+<a name="GENERAL FUNCTION LETTERS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>-o&nbsp;</b>output_filename</i></p>
+
+<p style="margin-left:18%;">Specifies the name for the
+output file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">An integer
+format code (e.g. %d) in the name is replaced the number of
+the file generated (see printf(3)).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-v&nbsp;</b><i>num</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Set verbosity level to num. 0 = warnings and errors
+only, 1 = information as well, 2=really verbose. <b>-?</b>
+Display a synopsis of the command syntax.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-R&nbsp;</b><i>rate,chans,bits</i></p>
+
+<p style="margin-left:18%;">Indicate, that the input is raw
+PCM without header. You must specify 3 numbers: rate is the
+samplerate in Hz, chans is the number of channels (1 or 2)
+and bits is the number of bits per sample. 8 bits are
+unsigned, 16 bits are signed in machine native byte
+order.</p>
+
+<h2>FUNCTION LETTERS CONTROLLING OUTPUT STREAM STRUCTURE
+<a name="FUNCTION LETTERS CONTROLLING OUTPUT STREAM STRUCTURE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b&nbsp;</b><i>bitrate</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">This sets the
+bit-rate of the output stream in kBit/sec. Typical values
+for layer II might be 224kbps for good-quality audio
+suitable for capturing Dolby pro-logic signals. A rate of
+192kbps or 128kbps is reasonable for low quality audio (e.g.
+mono TV audio). Really high compression is, of course,
+better achieved using MPEG-1 layer III (&quot;MP3&quot;)
+audio encoding or AAC. A more appropriate value for layer I
+might be 384kbps.</p>
+
+
+<p style="margin-left:9%;"><b>-r&nbsp;</b><i>sampling_rate</i></p>
+
+<p style="margin-left:18%;">Sets the audio sampling rate of
+the reconstructed output signal in Hz. Legal values are
+32000, 44100 and 48000Hz. mp2enc will automatically
+sample-rate convert the input signal if necessary.</p>
+
+<p style="margin-left:9%;"><b>-l&nbsp;</b><i>layer</i></p>
+
+<p style="margin-left:18%;">Sets the audio layer. Legal
+values are 1 and 2. The default is layer II.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-s</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Force stereo output. A mono input signal is channel
+doubled before encoding to make it stereo. This is useful
+for players which simply can&rsquo;t handle a non-stero
+signal.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-m</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Force mono output. A stereo input signal is down-mixed
+before encoding. Useful if you&rsquo;ve captured a mono
+signal in stereo and your player can handle mono MPEG-1
+Layer 2 audio.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-e</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Use CRC error protection.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Force VCD compatible output. The primary effect of this
+is to make certain that the sampling rate is set to 44100
+(-r 44100). The VCD2.0 specifications permit mono audio at
+64, 96 and 192 kbits/sec and stereo at 128, 192, 224, and
+384 kbits/sec. Using <b>-V</b> checks that the bitrate is
+valid for the number of channels. The defaults (unless -m or
+-b are used) are stereo at 224 kbits/sec.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-o&nbsp;</b><i>outputpathname</i></p>
+
+<p style="margin-left:18%;">The name of the output file to
+generate. If &rsquo;-&rsquo; is given as the pathname output
+is written to standard output.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mono output does
+not work for layer I.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Andrew Stevens. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mpeg2enc</b></i>(1),
+<b>mp2enc</b>(1), <b>lavrec</b>(1), <b>lavplay</b>(1),
+<b>lav2yuv</b>(1), <b>lav2wav</b>(1),
+<b>yuvscaler</b>(1)</p>
+<hr>
+</body>
+</html>

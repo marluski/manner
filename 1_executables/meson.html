@@ -1,0 +1,1260 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>MESON</title>
+
+</head>
+<body>
+
+<h1 align="center">MESON</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#The setup command">The setup command</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The configure command">The configure command</a><br>
+<a href="#The dist command">The dist command</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The install command">The install command</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The introspect command">The introspect command</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The init command">The init command</a><br>
+<a href="#positional arguments:">positional arguments:</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The test command">The test command</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The wrap command">The wrap command</a><br>
+<a href="#Commands:">Commands:</a><br>
+<a href="#The subprojects command">The subprojects command</a><br>
+<a href="#options:">options:</a><br>
+<a href="#commands:">commands:</a><br>
+<a href="#The rewrite command">The rewrite command</a><br>
+<a href="#options:">options:</a><br>
+<a href="#commands:">commands:</a><br>
+<a href="#The compile command">The compile command</a><br>
+<a href="#positional arguments:">positional arguments:</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The devenv command">The devenv command</a><br>
+<a href="#positional arguments:">positional arguments:</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The env2mfile command">The env2mfile command</a><br>
+<a href="#options:">options:</a><br>
+<a href="#The format command">The format command</a><br>
+<a href="#positional arguments:">positional arguments:</a><br>
+<a href="#options:">options:</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">meson - a high
+productivity build system</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Meson is a build
+system designed to optimize programmer productivity. It aims
+to do this by providing simple, out-of-the-box support for
+modern software development tools and practices, such as
+unit tests, coverage reports, Valgrind, Ccache and the
+like.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The main Meson
+executable provides many subcommands to access all the
+functionality.</p>
+
+<h2>The setup command
+<a name="The setup command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Using Meson is
+simple and follows the common two-phase process of most
+build systems. First you run Meson to configure your
+build:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson setup
+[</b> <i>options</i> <b>] [</b> <i>build directory</i> <b>]
+[</b> <i>source directory</i> <b>]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+build directory must be different from the source directory.
+Meson does not support building inside the source directory
+and attempting to do that leads to an error.</p>
+
+<p style="margin-left:9%; margin-top: 1em">After a
+successful configuration step you can build the source by
+running the actual build command in the build directory. The
+default backend of Meson is Ninja, which can be invoked like
+this.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ninja [</b>
+<i>target</i> <b>]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">You only need to
+run the Meson command once: when you first configure your
+build dir. After that you just run the build command. Meson
+will autodetect changes in your source tree and regenerate
+all files needed to build the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The setup
+command is the default operation. If no actual command is
+specified, Meson will assume you meant to do a setup. That
+means that you can set up a build directory without the
+setup command like this:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson [</b>
+<i>options</i> <b>] [</b> <i>build directory</i> <b>] [</b>
+<i>source directory</i> <b>]</b></p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:18%;">print version number</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="29%">
+
+
+<p>print command line help</p></td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h2>The configure command
+<a name="The configure command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+configure</b> provides a way to configure a Meson project
+from the command line. Its usage is simple:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+configure [</b> <i>build directory</i> <b>] [</b> <i>options
+to set</i> <b>]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If build
+directory is omitted, the current directory is used
+instead.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no parameters
+are set, <b>meson configure</b> will print the value of all
+build options to the console.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To set values,
+use the -D command line argument like this.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+configure -Dopt1=value1 -Dopt2=value2</b></p>
+
+<h2>The dist command
+<a name="The dist command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+dist</b> generates a release archive.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson dist
+[</b> <i>options</i> <b>]</b></p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-C WD</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p>directory to cd into before running</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--allow-dirty</b></p>
+
+<p style="margin-left:18%;">Allow even when repository
+contains uncommitted changes.</p>
+
+<p style="margin-left:9%;"><b>--formats FORMATS</b></p>
+
+<p style="margin-left:18%;">Comma separated list of archive
+types to create. Supports xztar (default), gztar, and
+zip.</p>
+
+
+<p style="margin-left:9%;"><b>--include-subprojects</b></p>
+
+<p style="margin-left:18%;">Include source code of
+subprojects that have been used for the build.</p>
+
+<p style="margin-left:9%;"><b>--no-tests</b></p>
+
+<p style="margin-left:18%;">Do not build and test generated
+packages.</p>
+
+<h2>The install command
+<a name="The install command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+install</b> installs the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson install
+[</b> <i>options</i> <b>]</b></p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-C WD</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p>directory to cd into before running</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--no-rebuild</b></p>
+
+<p style="margin-left:18%;">Do not rebuild before
+installing.</p>
+
+<p style="margin-left:9%;"><b>--only-changed</b></p>
+
+<p style="margin-left:18%;">Only overwrite files that are
+older than the copied file.</p>
+
+<p style="margin-left:9%;"><b>--quiet</b></p>
+
+<p style="margin-left:18%;">Do not print every file that
+was installed.</p>
+
+<p style="margin-left:9%;"><b>--destdir DESTDIR</b></p>
+
+<p style="margin-left:18%;">Sets or overrides DESTDIR
+environment. (Since 0.57.0)</p>
+
+<p style="margin-left:9%;"><b>--dry-run, -n</b></p>
+
+<p style="margin-left:18%;">Doesn&rsquo;t actually install,
+but print logs. (Since 0.57.0)</p>
+
+<p style="margin-left:9%;"><b>--skip-subprojects
+[SKIP_SUBPROJECTS]</b></p>
+
+<p style="margin-left:18%;">Do not install files from given
+subprojects. (Since 0.58.0)</p>
+
+<p style="margin-left:9%;"><b>--tags TAGS</b></p>
+
+<p style="margin-left:18%;">Install only targets having one
+of the given tags. (Since 0.60.0)</p>
+
+<p style="margin-left:9%;"><b>--strip</b></p>
+
+<p style="margin-left:18%;">Strip targets even if strip
+option was not set during configure. (Since 0.62.0)</p>
+
+<h2>The introspect command
+<a name="The introspect command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Meson introspect
+is a command designed to make it simple to integrate with
+other tools, such as IDEs. The output of this command is in
+JSON.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+introspect [</b> <i>build directory</i> <b>] [</b>
+<i>option</i> <b>]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If build
+directory is omitted, the current directory is used
+instead.</p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--targets</b></p>
+
+<p style="margin-left:18%;">print all top level targets
+(executables, libraries, etc)</p>
+
+<p style="margin-left:9%;"><b>--target-files</b></p>
+
+<p style="margin-left:18%;">print the source files of the
+given target</p>
+
+<p style="margin-left:9%;"><b>--buildsystem-files</b></p>
+
+<p style="margin-left:18%;">print all files that make up
+the build system (meson.build, meson.options,
+meson_options.txt etc)</p>
+
+<p style="margin-left:9%;"><b>--tests</b></p>
+
+<p style="margin-left:18%;">print all unit tests</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="29%">
+
+
+<p>print command line help</p></td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h2>The init command
+<a name="The init command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+init</b> creates a new project</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson init
+[</b> <i>options</i> <b>] [</b> <i>sourcefile...</i>
+<b>]</b></p>
+
+<h3>positional arguments:
+<a name="positional arguments:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">sourcefile...</p>
+
+<p style="margin-left:18%;">source files. default: all
+recognized files in current directory</p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-C WD</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p>directory to cd into before running</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-n NAME, --name NAME</b></p>
+
+<p style="margin-left:18%;">project name. default: name of
+current directory</p>
+
+<p style="margin-left:9%;"><b>-e EXECUTABLE, --executable
+EXECUTABLE</b></p>
+
+<p style="margin-left:18%;">executable name. default:
+project name</p>
+
+<p style="margin-left:9%;"><b>-d DEPS, --deps DEPS</b></p>
+
+<p style="margin-left:18%;">dependencies,
+comma-separated</p>
+
+<p style="margin-left:9%;"><b>-l
+{c,cpp,cs,cuda,d,fortran,java,objc,objcpp,rust,vala},
+--language <br>
+
+{c,cpp,cs,cuda,d,fortran,java,objc,objcpp,rust,vala}</b></p>
+
+<p style="margin-left:18%;">project language. default:
+autodetected based on source files</p>
+
+<p style="margin-left:9%;"><b>-b, --build</b></p>
+
+<p style="margin-left:18%;">build after generation</p>
+
+<p style="margin-left:9%;"><b>--builddir BUILDDIR</b></p>
+
+<p style="margin-left:18%;">directory for build</p>
+
+<p style="margin-left:9%;"><b>-f, --force</b></p>
+
+<p style="margin-left:18%;">force overwrite of existing
+files and directories.</p>
+
+<p style="margin-left:9%;"><b>--type
+{executable,library}</b></p>
+
+<p style="margin-left:18%;">project type. default:
+executable based project</p>
+
+<p style="margin-left:9%;"><b>--version VERSION</b></p>
+
+<p style="margin-left:18%;">project version. default:
+0.1</p>
+
+<h2>The test command
+<a name="The test command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+test</b> is a helper tool for running test suites of
+projects using Meson. The default way of running tests is to
+invoke the default build command:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ninja [</b>
+<i>test</i> <b>]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+test</b> provides a richer set of tools for invoking
+tests.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+test</b> automatically rebuilds the necessary targets to run
+tests when used with the Ninja backend. Upon build failure,
+<b>meson test</b> will return an exit code of 125. This
+return code tells <b>git bisect run</b> to skip the current
+commit. Thus bisecting using git can be done conveniently
+like this.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>git bisect
+run meson test -C build_dir</b></p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--repeat</b></p>
+
+<p style="margin-left:18%;">run tests as many times as
+specified</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--gdb</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p>run tests under gdb</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--list</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p>list all available tests</p></td>
+<td width="51%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--wrapper</b></p>
+
+<p style="margin-left:18%;">invoke all tests via the given
+wrapper (e.g. valgrind)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-C</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Change into the given directory before running tests
+(must be root of build directory).</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--suite</b></p>
+
+<p style="margin-left:18%;">run tests in this suite</p>
+
+<p style="margin-left:9%;"><b>--no-suite</b></p>
+
+<p style="margin-left:18%;">do not run tests in this
+suite</p>
+
+<p style="margin-left:9%;"><b>--no-stdsplit</b></p>
+
+<p style="margin-left:18%;">do not split stderr and stdout
+in test logs</p>
+
+<p style="margin-left:9%;"><b>--benchmark</b></p>
+
+<p style="margin-left:18%;">run benchmarks instead of
+tests</p>
+
+<p style="margin-left:9%;"><b>--logbase</b></p>
+
+<p style="margin-left:18%;">base of file name to use for
+writing test logs</p>
+
+<p style="margin-left:9%;"><b>--num-processes</b></p>
+
+<p style="margin-left:18%;">how many parallel processes to
+use to run tests</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">do not redirect stdout and
+stderr</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-t</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>a multiplier to use for test timeout values (usually
+something like 100 for Valgrind)</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--setup</b></p>
+
+<p style="margin-left:18%;">use the specified test
+setup</p>
+
+<h2>The wrap command
+<a name="The wrap command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Wraptool is a
+helper utility to manage source dependencies using the
+online wrapdb service.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson wrap
+&lt;</b> <i>command</i> <b>&gt; [</b> <i>options</i>
+<b>]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">You should run
+this command in the top level source directory of your
+project.</p>
+
+<h3>Commands:
+<a name="Commands:"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>list</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em">list all available projects</p></td>
+<td width="47%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>search</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p>search projects by name</p></td>
+<td width="47%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>install</b></p>
+
+<p style="margin-left:18%;">install a project with the
+given name</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>update</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>update the specified project to latest available
+version</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>info</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>show available versions of the specified project</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>status</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>show installed and available versions of currently used
+subprojects</p> </td></tr>
+</table>
+
+<h2>The subprojects command
+<a name="The subprojects command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+subprojects</b> is used to manage subprojects.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+subprojects [</b> <i>options</i> <b>] [</b> <i>command</i>
+<b>]</b></p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<h3>commands:
+<a name="commands:"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>update</b></p></td>
+<td width="1%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">Update all subprojects from wrap
+files</p> </td>
+<td width="33%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>checkout</b></p>
+
+<p style="margin-left:18%;">Checkout a branch (git
+only)</p>
+
+<p style="margin-left:9%;"><b>download</b></p>
+
+<p style="margin-left:18%;">Ensure subprojects are fetched,
+even if not in use. Already downloaded subprojects are not
+modified. This can be used to pre-fetch all subprojects and
+avoid downloads during configure.</p>
+
+<p style="margin-left:9%;"><b>foreach</b></p>
+
+<p style="margin-left:18%;">Execute a command in each
+subproject directory.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>purge</b></p></td>
+<td width="3%"></td>
+<td width="54%">
+
+
+<p>Remove all wrap-based subproject artifacts</p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>packagefiles</b></p>
+
+<p style="margin-left:18%;">Manage the packagefiles
+overlay</p>
+
+<h2>The rewrite command
+<a name="The rewrite command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+rewrite</b> modifies the project definition.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson rewrite
+[</b> <i>options</i> <b>] [</b> <i>command</i> <b>]</b></p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<p style="margin-left:9%;"><b>-s SRCDIR, --sourcedir
+SRCDIR</b></p>
+
+<p style="margin-left:18%;">Path to source directory.</p>
+
+<p style="margin-left:9%;"><b>-V, --verbose</b></p>
+
+<p style="margin-left:18%;">Enable verbose output</p>
+
+<p style="margin-left:9%;"><b>-S, --skip-errors</b></p>
+
+<p style="margin-left:18%;">Skip errors instead of
+aborting</p>
+
+<h3>commands:
+<a name="commands:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>target
+(tgt)</b></p>
+
+<p style="margin-left:18%;">Modify a target</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>kwargs</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p>Modify keyword arguments</p></td>
+<td width="51%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>default-options (def)</b></p>
+
+<p style="margin-left:18%;">Modify the project default
+options</p>
+
+<p style="margin-left:9%;"><b>command (cmd)</b></p>
+
+<p style="margin-left:18%;">Execute a JSON array of
+commands</p>
+
+<h2>The compile command
+<a name="The compile command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+compile</b> builds the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson compile
+[</b> <i>options</i> <b>] [</b> <i>TARGET...</i>
+<b>]</b></p>
+
+<h3>positional arguments:
+<a name="positional arguments:"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>TARGET</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Targets to build. Target has the
+following format:
+[PATH_TO_TARGET/]TARGET_NAME.TARGET_SUFFIX[:TARGET_TYPE].</p> </td></tr>
+</table>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<p style="margin-left:9%;"><b>--clean</b></p>
+
+<p style="margin-left:18%;">Clean the build directory.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-C WD</b></p></td>
+<td width="3%"></td>
+<td width="45%">
+
+
+<p>directory to cd into before running</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-j JOBS, --jobs JOBS</b></p>
+
+<p style="margin-left:18%;">The number of worker jobs to
+run (if supported). If the value is less than 1 the build
+program will guess.</p>
+
+<p style="margin-left:9%;"><b>-l LOAD_AVERAGE,
+--load-average LOAD_AVERAGE</b></p>
+
+<p style="margin-left:18%;">The system load average to try
+to maintain (if supported).</p>
+
+<p style="margin-left:9%;"><b>-v, --verbose</b></p>
+
+<p style="margin-left:18%;">Show more verbose output.</p>
+
+<p style="margin-left:9%;"><b>--ninja-args
+NINJA_ARGS</b></p>
+
+<p style="margin-left:18%;">Arguments to pass to
+&lsquo;ninja&lsquo; (applied only on &lsquo;ninja&lsquo;
+backend).</p>
+
+<p style="margin-left:9%;"><b>--vs-args VS_ARGS</b></p>
+
+<p style="margin-left:18%;">Arguments to pass to
+&lsquo;msbuild&lsquo; (applied only on &lsquo;vs&lsquo;
+backend).</p>
+
+<p style="margin-left:9%;"><b>--xcode-args
+XCODE_ARGS</b></p>
+
+<p style="margin-left:18%;">Arguments to pass to
+&lsquo;xcodebuild&lsquo; (applied only on
+&lsquo;xcode&lsquo; backend).</p>
+
+<h2>The devenv command
+<a name="The devenv command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+devenv</b> runs commands in the developer environment.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson devenv
+[</b> <i>options</i> <b>] [</b> <i>command</i> <b>]</b></p>
+
+<h3>positional arguments:
+<a name="positional arguments:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>command</b></p>
+
+<p style="margin-left:18%;">Command to run in developer
+environment (default: interactive shell)</p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<p style="margin-left:9%;"><b>-C BUILDDIR</b></p>
+
+<p style="margin-left:18%;">Path to build directory</p>
+
+<p style="margin-left:9%;"><b>--workdir WORKDIR, -w
+WORKDIR</b></p>
+
+<p style="margin-left:18%;">Directory to cd into before
+running (default: builddir, Since 1.0.0)</p>
+
+<p style="margin-left:9%;"><b>--dump [DUMP]</b></p>
+
+<p style="margin-left:18%;">Only print required environment
+(Since 0.62.0) Takes an optional file path (Since 1.1.0)</p>
+
+<p style="margin-left:9%;"><b>--dump-format
+{sh,export,vscode}</b></p>
+
+<p style="margin-left:18%;">Format used with --dump (Since
+1.1.0)</p>
+
+<h2>The env2mfile command
+<a name="The env2mfile command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+env2mfile</b> converts the current environment to a cross or
+native file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+env2mfile [</b> <i>options</i> <b>]</b></p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<p style="margin-left:9%;"><b>--debarch DEBARCH</b></p>
+
+<p style="margin-left:18%;">The dpkg architecture to
+generate.</p>
+
+<p style="margin-left:9%;"><b>--gccsuffix GCCSUFFIX</b></p>
+
+<p style="margin-left:18%;">A particular gcc version suffix
+if necessary.</p>
+
+<p style="margin-left:9%;"><b>-o OUTFILE</b></p>
+
+<p style="margin-left:18%;">The output file.</p>
+
+<p style="margin-left:9%;"><b>--cross</b></p>
+
+<p style="margin-left:18%;">Generate a cross compilation
+file.</p>
+
+<p style="margin-left:9%;"><b>--native</b></p>
+
+<p style="margin-left:18%;">Generate a native compilation
+file.</p>
+
+<p style="margin-left:9%;"><b>--system SYSTEM</b></p>
+
+<p style="margin-left:18%;">Define system for cross
+compilation.</p>
+
+<p style="margin-left:9%;"><b>--subsystem SUBSYSTEM</b></p>
+
+<p style="margin-left:18%;">Define subsystem for cross
+compilation.</p>
+
+<p style="margin-left:9%;"><b>--kernel KERNEL</b></p>
+
+<p style="margin-left:18%;">Define kernel for cross
+compilation.</p>
+
+<p style="margin-left:9%;"><b>--cpu CPU</b></p>
+
+<p style="margin-left:18%;">Define cpu for cross
+compilation.</p>
+
+<p style="margin-left:9%;"><b>--cpu-family
+CPU_FAMILY</b></p>
+
+<p style="margin-left:18%;">Define cpu family for cross
+compilation.</p>
+
+<p style="margin-left:9%;"><b>--endian {big,little}</b></p>
+
+<p style="margin-left:18%;">Define endianness for cross
+compilation.</p>
+
+<h2>The format command
+<a name="The format command"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson
+format</b> formats a meson source file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>meson format
+[</b> <i>options</i> <b>] [</b> <i>sources...</i>
+<b>]</b></p>
+
+<h3>positional arguments:
+<a name="positional arguments:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sources...</b></p>
+
+<p style="margin-left:18%;">meson source files</p>
+
+<h3>options:
+<a name="options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">show this help message and
+exit</p>
+
+<p style="margin-left:9%;"><b>-q, --check-only</b></p>
+
+<p style="margin-left:18%;">exit with 1 if files would be
+modified by meson format</p>
+
+<p style="margin-left:9%;"><b>-i, --inplace</b></p>
+
+<p style="margin-left:18%;">format files in-place</p>
+
+<p style="margin-left:9%;"><b>-r, --recursive</b></p>
+
+<p style="margin-left:18%;">recurse subdirs (requires
+--check-only or --inplace option)</p>
+
+<p style="margin-left:9%;"><b>-c meson.format,
+--configuration meson.format</b></p>
+
+<p style="margin-left:18%;">read configuration from
+meson.format</p>
+
+<p style="margin-left:9%;"><b>-e, --editor-config</b></p>
+
+<p style="margin-left:18%;">try to read configuration from
+.editorconfig</p>
+
+<p style="margin-left:9%;"><b>-o OUTPUT, --output
+OUTPUT</b></p>
+
+<p style="margin-left:18%;">output file (implies having
+exactly one input)</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>0</b></p></td>
+<td width="5%"></td>
+<td width="74%">
+
+
+<p style="margin-top: 1em">Successful.</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>1</b></p></td>
+<td width="5%"></td>
+<td width="74%">
+
+
+<p>Usage error, or an error parsing or executing
+meson.build.</p> </td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>2</b></p></td>
+<td width="5%"></td>
+<td width="74%">
+
+
+<p>Internal error.</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>125</b></p></td>
+<td width="5%"></td>
+<td width="74%">
+
+
+<p><b>meson test</b> could not rebuild the required
+targets.</p> </td>
+<td width="8%">
+</td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:18%; margin-top: 1em">http://mesonbuild.com/</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">https://wrapdb.mesonbuild.com/</p>
+<hr>
+</body>
+</html>

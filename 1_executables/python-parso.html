@@ -1,0 +1,2026 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>PARSO</title>
+
+</head>
+<body>
+
+<h1 align="center">PARSO</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DOCS">DOCS</a><br>
+<a href="#Installation and Configuration">Installation and Configuration</a><br>
+<a href="#The preferred way (pip)">The preferred way (pip)</a><br>
+<a href="#From git">From git</a><br>
+<a href="#Manual installation from a downloaded package (not recommended)">Manual installation from a downloaded package (not recommended)</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Loading a Grammar">Loading a Grammar</a><br>
+<a href="#Grammar methods">Grammar methods</a><br>
+<a href="#Error Retrieval">Error Retrieval</a><br>
+<a href="#Utility">Utility</a><br>
+<a href="#Used By">Used By</a><br>
+<a href="#Parser Tree">Parser Tree</a><br>
+<a href="#Parser Tree Base Classes">Parser Tree Base Classes</a><br>
+<a href="#Python Parser Tree">Python Parser Tree</a><br>
+<a href="#Changes to the Python Grammar">Changes to the Python Grammar</a><br>
+<a href="#Parser Tree Classes">Parser Tree Classes</a><br>
+<a href="#Utility">Utility</a><br>
+<a href="#Development">Development</a><br>
+<a href="#Deprecations Process">Deprecations Process</a><br>
+<a href="#Testing">Testing</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">parso - parso
+Documentation</p>
+
+<p style="margin-left:9%; margin-top: 1em">Release v0.8.4.
+(<i>Installation</i>)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Parso is a
+Python parser that supports error recovery and round-trip
+parsing for different Python versions (in multiple Python
+versions). Parso is also able to list multiple syntax errors
+in your python file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Parso has been
+battle-tested by <i>jedi</i>. It was pulled out of jedi to
+be useful for other projects as well.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Parso consists
+of a small API to parse Python and analyse the syntax
+tree.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A simple
+example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&gt;&gt;&gt;
+import parso <br>
+&gt;&gt;&gt; module = parso.parse('hello + 1',
+version=&quot;3.9&quot;) <br>
+&gt;&gt;&gt; expr = module.children[0] <br>
+&gt;&gt;&gt; expr <br>
+PythonNode(arith_expr, [&lt;Name: hello@1,0&gt;,
+&lt;Operator: +&gt;, &lt;Number: 1&gt;]) <br>
+&gt;&gt;&gt; print(expr.get_code()) <br>
+hello + 1 <br>
+&gt;&gt;&gt; name = expr.children[0] <br>
+&gt;&gt;&gt; name <br>
+&lt;Name: hello@1,0&gt; <br>
+&gt;&gt;&gt; name.end_pos <br>
+(1, 5) <br>
+&gt;&gt;&gt; expr.end_pos <br>
+(1, 9)</p>
+
+<p style="margin-left:9%; margin-top: 1em">To list multiple
+issues:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&gt;&gt;&gt;
+grammar = parso.load_grammar() <br>
+&gt;&gt;&gt; module = grammar.parse('foo +\nbar\ncontinue')
+<br>
+&gt;&gt;&gt; error1, error2 = grammar.iter_errors(module)
+<br>
+&gt;&gt;&gt; error1.message <br>
+'SyntaxError: invalid syntax' <br>
+&gt;&gt;&gt; error2.message <br>
+&quot;SyntaxError: 'continue' not properly in loop&quot;</p>
+
+<h2>DOCS
+<a name="DOCS"></a>
+</h2>
+
+
+<h3>Installation and Configuration
+<a name="Installation and Configuration"></a>
+</h3>
+
+
+<h3>The preferred way (pip)
+<a name="The preferred way (pip)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">On any system
+you can install <i>parso</i> directly from the Python
+package index using pip:</p>
+
+<p style="margin-left:13%; margin-top: 1em">sudo pip
+install parso</p>
+
+<h3>From git
+<a name="From git"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+install the current development version (master branch):</p>
+
+<p style="margin-left:13%; margin-top: 1em">sudo pip
+install -e
+git://github.com/davidhalter/parso.git#egg=parso</p>
+
+<h3>Manual installation from a downloaded package (not recommended)
+<a name="Manual installation from a downloaded package (not recommended)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you prefer
+not to use an automated package installer, you can -
+<i>download</i> a current copy of <i>parso</i> and install
+it manually.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To install it,
+navigate to the directory containing <i>setup.py</i> on your
+console and type:</p>
+
+<p style="margin-left:13%; margin-top: 1em">sudo python
+setup.py install</p>
+
+<h3>Usage
+<a name="Usage"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>parso</i>
+works around grammars. You can simply create Python grammars
+by calling <i>parso.load_grammar()</i>. Grammars (with a
+custom tokenizer and custom parser trees) can also be
+created by directly instantiating <i>parso.Grammar()</i>.
+More information about the resulting objects can be found in
+the <i>parser tree documentation</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The simplest way
+of using parso is without even loading a grammar (-
+<i>parso.parse()</i>):</p>
+
+<p style="margin-left:13%; margin-top: 1em">&gt;&gt;&gt;
+import parso <br>
+&gt;&gt;&gt; parso.parse('foo + bar') <br>
+&lt;Module: @1-1&gt;</p>
+
+<h3>Loading a Grammar
+<a name="Loading a Grammar"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Typically if you
+want to work with one specific Python version, use: <b><br>
+parso.load_grammar(*, version:</b> <i>str</i> <b>= None,
+path:</b> <i>str</i> <b>= None)</b></p>
+
+<p style="margin-left:18%;">Loads a <i>parso.Grammar</i>.
+The default version is the current Python version. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>version</b> (<i>str</i>) -- A python version string,
+e.g. <b>version='3.8'</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>path</b> (<i>str</i>) -- A path to a grammar file</p></td></tr>
+</table>
+
+<h3>Grammar methods
+<a name="Grammar methods"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You will get
+back a grammar object that you can use to parse code and
+find issues in it: <b><br>
+class parso.Grammar(text: str, *, tokenizer,
+parser=&lt;class <br>
+'parso.parser.BaseParser'&gt;, diff_parser=None)</b></p>
+
+<p style="margin-left:18%;"><i>parso.load_grammar()</i>
+returns instances of this class.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Creating custom
+none-python grammars by calling this is not supported, yet.
+<b><br>
+Parameters</b></p>
+
+<p style="margin-left:27%;"><b>text</b> -- A BNF
+representation of your grammar.</p>
+
+<p style="margin-left:18%;"><b>parse(code:</b> <i>str</i>
+<b>|</b> <i>bytes</i> <b>= None, *, error_recovery=True,
+path: -</b> <i><br>
+PathLike</i> <b>|</b> <i>str</i> <b>= None,
+start_symbol:</b> <i>str</i> <b>= None, cache=False, <br>
+diff_cache=False, cache_path:</b> <i>PathLike</i> <b>|</b>
+<i>str</i> <b>= None, file_io: <br>
+FileIO = None) -&gt; _NodeT</b></p>
+
+<p style="margin-left:27%;">If you want to parse a Python
+file you want to start here, most likely.</p>
+
+<p style="margin-left:27%; margin-top: 1em">If you need
+finer grained control over the parsed instance, there will
+be other ways to access it. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>code</b> (<i>str</i>) -- A unicode or bytes string.
+When it's not possible to decode bytes to a string, returns
+a <i>UnicodeDecodeError</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>error_recovery</b> (<i>bool</i>) -- If enabled, any
+code will be returned. If it is invalid, it will be returned
+as an error node. If disabled, you will get a ParseError
+when encountering syntax errors in your code.</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>start_symbol</b> (<i>str</i>) -- The grammar rule
+(nonterminal) that you want to parse. Only allowed to be
+used when error_recovery is False.</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>path</b> (<i>str</i>) -- The path to the file you
+want to open. Only needed for caching.</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>cache</b> (<i>bool</i>) -- Keeps a copy of the parser
+tree in RAM and on disk if a path is given. Returns the
+cached trees if the corresponding files on disk have not
+changed. Note that this stores pickle files on your file
+system (e.g. for Linux in <b>&#732;/.cache/parso/</b>).</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>diff_cache</b> (<i>bool</i>) -- Diffs the cached
+python module against the new code and tries to parse only
+the parts that have changed. Returns the same (changed)
+module that is found in cache. Using this option requires
+you to not do anything anymore with the cached modules under
+that path, because the contents of it might change. This
+option is still somewhat experimental. If you want
+stability, please don't use it.</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>cache_path</b> (<i>bool</i>) -- If given saves the
+parso cache in this directory. If not given, defaults to the
+default cache places on each platform.</p></td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Returns</b></p>
+
+<p style="margin-left:36%;">A subclass of
+<i>parso.tree.NodeOrLeaf</i>. Typically a
+<i>parso.python.tree.Module</i>.</p>
+
+<p style="margin-left:18%;"><b>iter_errors(node)</b></p>
+
+<p style="margin-left:27%;">Given a
+<i>parso.tree.NodeOrLeaf</i> returns a generator of
+<i>parso.normalizer.Issue</i> objects. For Python this is a
+list of syntax/indentation errors.</p>
+
+<p style="margin-left:18%;"><b>refactor(base_node,
+node_to_str_map)</b></p>
+
+<h3>Error Retrieval
+<a name="Error Retrieval"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>parso</i></b>
+is able to find multiple errors in your source code.
+Iterating through those errors yields the following
+instances: <b><br>
+class parso.normalizer.Issue(node, code, message)</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>code</b></p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>An integer code that stands for the type of error.</p></td>
+<td width="9%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>message</b></p>
+
+<p style="margin-left:27%;">A message (string) for the
+issue.</p>
+
+<p style="margin-left:18%;"><b>start_pos</b></p>
+
+<p style="margin-left:27%;">The start position position of
+the error as a tuple (line, column). As always in
+<i>parso</i> the first line is 1 and the first column 0.</p>
+
+<h3>Utility
+<a name="Utility"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>parso</i>
+also offers some utility functions that can be really
+useful: <b><br>
+parso.parse(code=None, **kwargs)</b></p>
+
+<p style="margin-left:18%;">A utility function to avoid
+loading grammars. Params are documented in
+<i>parso.Grammar.parse()</i>. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:27%;"><b>version</b> (<i>str</i>) --
+The version used by <i>parso.load_grammar()</i>.</p>
+
+
+<p style="margin-left:9%;"><b>parso.split_lines(string:</b>
+<i>str</i><b>, keepends:</b> <i>bool</i> <b>= False)
+-&gt;</b> <i>Sequence</i><b>[</b><i>str</i><b>]</b></p>
+
+<p style="margin-left:18%;">Intended for Python code. In
+contrast to Python's - <i>str.splitlines()</i>, looks at
+form feeds and other special characters as normal text. Just
+splits <b>\n</b> and <b>\r\n</b>. Also different: Returns
+<b>[&quot;&quot;]</b> for an empty string input.</p>
+
+<p style="margin-left:18%; margin-top: 1em">In Python 2.7
+form feeds are used as normal characters when using
+str.splitlines. However in Python 3 somewhere there was a
+decision to split also on form feeds.</p>
+
+
+<p style="margin-left:9%;"><b>parso.python_bytes_to_unicode(source:</b>
+<i>str</i> <b>|</b> <i>bytes</i><b>, encoding:</b>
+<i>str</i> <b>= <br>
+'utf-8', errors:</b> <i>str</i> <b>= 'strict') -&gt;</b>
+<i>str</i></p>
+
+<p style="margin-left:18%;">Checks for unicode BOMs and PEP
+263 encoding declarations. Then returns a unicode object
+like in <i>bytes.decode()</i>. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>encoding</b> -- See <i>bytes.decode()</i>
+documentation.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>errors</b> -- See <i>bytes.decode()</i>
+documentation. <b>errors</b> can be <b>'strict'</b>,
+<b>'replace'</b> or <b>'ignore'</b>.</p></td></tr>
+</table>
+
+<h3>Used By
+<a name="Used By"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em"><i>jedi</i> (which is used by
+IPython and a lot of editor plugins).</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p><i>mutmut</i> (mutation tester)</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<h3>Parser Tree
+<a name="Parser Tree"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The parser tree
+is returned by calling <i>parso.Grammar.parse()</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">Note that parso positions are
+always 1 based for lines and zero based for columns. This
+means the first position in a file is (1, 0).</p>
+
+<h3>Parser Tree Base Classes
+<a name="Parser Tree Base Classes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Generally there
+are two types of classes you will deal with:
+<i>parso.tree.Leaf</i> and <i>parso.tree.BaseNode</i>.
+<b><br>
+class parso.tree.BaseNode(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>NodeOrLeaf</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">The super class
+for all nodes. A node has children, a type and possibly a
+parent node. <b><br>
+children</b></p>
+
+<p style="margin-left:27%;">A list of <i>NodeOrLeaf</i>
+child nodes.</p>
+
+<p style="margin-left:18%;"><b>property start_pos:</b>
+<i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>]</b></p>
+
+<p style="margin-left:27%;">Returns the starting position
+of the prefix as a tuple, e.g. <i>(3, 4)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+
+<p style="margin-left:18%;"><b>get_start_pos_of_prefix()</b></p>
+
+<p style="margin-left:27%;">Returns the start_pos of the
+prefix. This means basically it returns the end_pos of the
+last prefix. The <i>get_start_pos_of_prefix()</i> of the
+prefix <i>+</i> in <i>2 + 1</i> would be <i>(1, 1)</i>,
+while the start_pos is <i>(1, 2)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+<p style="margin-left:18%;"><b>property end_pos:</b>
+<i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>]</b></p>
+
+<p style="margin-left:27%;">Returns the end position of the
+prefix as a tuple, e.g. <i>(3, 4)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+
+<p style="margin-left:18%;"><b>get_code(include_prefix=True)</b></p>
+
+<p style="margin-left:27%;">Returns the code that was the
+input for the parser for this node. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>include_prefix</b> --
+Removes the prefix (whitespace and comments) of e.g. a
+statement.</p>
+
+
+<p style="margin-left:18%;"><b>get_leaf_for_position(position,
+include_prefixes=False)</b></p>
+
+<p style="margin-left:27%;">Get the <i>parso.tree.Leaf</i>
+at <b>position <br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>position</b> (<i>tuple</i>) -- A position tuple, row,
+column. Rows start from 1</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>include_prefixes</b> (<i>bool</i>) -- If
+<b>False</b>, <b>None</b> will be returned if
+<b>position</b> falls on whitespace or comments before a
+leaf</p> </td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Returns</b></p>
+
+<p style="margin-left:36%;"><i>parso.tree.Leaf</i> at
+<b>position</b>, or <b>None</b></p>
+
+<p style="margin-left:18%;"><b>get_first_leaf()</b></p>
+
+<p style="margin-left:27%;">Returns the first leaf of a
+node or itself if this is a leaf.</p>
+
+<p style="margin-left:18%;"><b>get_last_leaf()</b></p>
+
+<p style="margin-left:27%;">Returns the last leaf of a node
+or itself if this is a leaf.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.tree.Leaf(value:</b> <i>str</i><b>, start_pos:</b>
+<i>Tuple</i><b>[</b><i>int</i><b>,</b> <i>int</i><b>],
+prefix: -</b> <i><br>
+str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>NodeOrLeaf</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Leafs are
+basically tokens with a better API. Leafs exactly know where
+they were defined and what text preceeds them.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>value</b></p></td>
+<td width="3%"></td>
+<td width="47%">
+
+
+<p><b>str()</b> The value of the current token.</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>prefix:</b> <i>str</i></p>
+
+<p style="margin-left:27%;"><b>str()</b> Typically a
+mixture of whitespace and comments. Stuff that is
+syntactically irrelevant for the syntax tree.</p>
+
+<p style="margin-left:18%;"><b>property start_pos:</b>
+<i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>]</b></p>
+
+<p style="margin-left:27%;">Returns the starting position
+of the prefix as a tuple, e.g. <i>(3, 4)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+
+<p style="margin-left:18%;"><b>get_start_pos_of_prefix()</b></p>
+
+<p style="margin-left:27%;">Returns the start_pos of the
+prefix. This means basically it returns the end_pos of the
+last prefix. The <i>get_start_pos_of_prefix()</i> of the
+prefix <i>+</i> in <i>2 + 1</i> would be <i>(1, 1)</i>,
+while the start_pos is <i>(1, 2)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+<p style="margin-left:18%;"><b>get_first_leaf()</b></p>
+
+<p style="margin-left:27%;">Returns the first leaf of a
+node or itself if this is a leaf.</p>
+
+<p style="margin-left:18%;"><b>get_last_leaf()</b></p>
+
+<p style="margin-left:27%;">Returns the last leaf of a node
+or itself if this is a leaf.</p>
+
+
+<p style="margin-left:18%;"><b>get_code(include_prefix=True)</b></p>
+
+<p style="margin-left:27%;">Returns the code that was the
+input for the parser for this node. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>include_prefix</b> --
+Removes the prefix (whitespace and comments) of e.g. a
+statement.</p>
+
+<p style="margin-left:18%;"><b>property end_pos:</b>
+<i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>]</b></p>
+
+<p style="margin-left:27%;">Returns the end position of the
+prefix as a tuple, e.g. <i>(3, 4)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+<p style="margin-left:9%; margin-top: 1em">All nodes and
+leaves have these methods/properties: <b><br>
+class parso.tree.NodeOrLeaf</b></p>
+
+<p style="margin-left:18%;">Bases: <i>object</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">The base class
+for nodes and leaves. <b><br>
+type:</b> <i>str</i></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>parent:</b> <i>BaseNode</i>
+<b>|</b> <i>None</i></p>
+
+<p style="margin-left:27%;">The parent <i>BaseNode</i> of
+this node or leaf. None if this is the root node.</p>
+
+<p style="margin-left:18%;"><b>get_root_node()</b></p>
+
+<p style="margin-left:27%;">Returns the root node of a
+parser tree. The returned node doesn't have a parent node
+like all the other nodes/leaves.</p>
+
+<p style="margin-left:18%;"><b>get_next_sibling()</b></p>
+
+<p style="margin-left:27%;">Returns the node immediately
+following this node in this parent's children list. If this
+node does not have a next sibling, it is None</p>
+
+
+<p style="margin-left:18%;"><b>get_previous_sibling()</b></p>
+
+<p style="margin-left:27%;">Returns the node immediately
+preceding this node in this parent's children list. If this
+node does not have a previous sibling, it is None.</p>
+
+<p style="margin-left:18%;"><b>get_previous_leaf()</b></p>
+
+<p style="margin-left:27%;">Returns the previous leaf in
+the parser tree. Returns <i>None</i> if this is the first
+element in the parser tree.</p>
+
+<p style="margin-left:18%;"><b>get_next_leaf()</b></p>
+
+<p style="margin-left:27%;">Returns the next leaf in the
+parser tree. Returns None if this is the last element in the
+parser tree.</p>
+
+<p style="margin-left:18%;"><b>abstract property
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>]</b></p>
+
+<p style="margin-left:27%;">Returns the starting position
+of the prefix as a tuple, e.g. <i>(3, 4)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+<p style="margin-left:18%;"><b>abstract property
+end_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>]</b></p>
+
+<p style="margin-left:27%;">Returns the end position of the
+prefix as a tuple, e.g. <i>(3, 4)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+<p style="margin-left:18%;"><b>abstract
+get_start_pos_of_prefix()</b></p>
+
+<p style="margin-left:27%;">Returns the start_pos of the
+prefix. This means basically it returns the end_pos of the
+last prefix. The <i>get_start_pos_of_prefix()</i> of the
+prefix <i>+</i> in <i>2 + 1</i> would be <i>(1, 1)</i>,
+while the start_pos is <i>(1, 2)</i>. <b><br>
+Return tuple of int</b></p>
+
+<p style="margin-left:36%;">(line, column)</p>
+
+<p style="margin-left:18%;"><b>abstract
+get_first_leaf()</b></p>
+
+<p style="margin-left:27%;">Returns the first leaf of a
+node or itself if this is a leaf.</p>
+
+<p style="margin-left:18%;"><b>abstract
+get_last_leaf()</b></p>
+
+<p style="margin-left:27%;">Returns the last leaf of a node
+or itself if this is a leaf.</p>
+
+<p style="margin-left:18%;"><b>abstract
+get_code(include_prefix=True)</b></p>
+
+<p style="margin-left:27%;">Returns the code that was the
+input for the parser for this node. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>include_prefix</b> --
+Removes the prefix (whitespace and comments) of e.g. a
+statement.</p>
+
+
+<p style="margin-left:18%;"><b>search_ancestor(*node_types:</b>
+<i>str</i><b>) -&gt;</b> <i>BaseNode</i> <b>|</b>
+<i>None</i></p>
+
+<p style="margin-left:27%;">Recursively looks at the
+parents of this node or leaf and returns the first found
+node that matches <b>node_types</b>. Returns <b>None</b> if
+no matching node is found. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>node_types</b> -- type names
+that are searched for.</p>
+
+<p style="margin-left:18%;"><b>dump(*, indent:</b>
+<i>str</i> <b>|</b> <i>int</i> <b>|</b> <i>None</i> <b>= 4)
+-&gt;</b> <i>str</i></p>
+
+<p style="margin-left:27%;">Returns a formatted dump of the
+parser tree rooted at this node or leaf. This is mainly
+useful for debugging purposes.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The
+<b>indent</b> parameter is interpreted in a similar way as -
+<i>ast.dump()</i>. If <b>indent</b> is a non-negative
+integer or string, then the tree will be pretty-printed with
+that indent level. An indent level of 0, negative, or
+<b>&quot;&quot;</b> will only insert newlines. <b>None</b>
+selects the single line representation. Using a positive
+integer indent indents that many spaces per level. If
+<b>indent</b> is a string (such as <b>&quot;\t&quot;</b>),
+that string is used to indent each level. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>indent</b> -- Indentation
+style as described above. The default indentation is 4
+spaces, which yields a pretty-printed dump.</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+import parso <br>
+&gt;&gt;&gt; print(parso.parse(&quot;lambda x, y: x +
+y&quot;).dump()) <br>
+Module([ <br>
+Lambda([ <br>
+Keyword('lambda', (1, 0)), <br>
+Param([ <br>
+Name('x', (1, 7), prefix=' '), <br>
+Operator(',', (1, 8)), <br>
+]), <br>
+Param([ <br>
+Name('y', (1, 10), prefix=' '), <br>
+]), <br>
+Operator(':', (1, 11)), <br>
+PythonNode('arith_expr', [ <br>
+Name('x', (1, 13), prefix=' '), <br>
+Operator('+', (1, 15), prefix=' '), <br>
+Name('y', (1, 17), prefix=' '), <br>
+]), <br>
+]), <br>
+EndMarker('', (1, 18)), <br>
+])</p>
+
+<h3>Python Parser Tree
+<a name="Python Parser Tree"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This is the
+syntax tree for Python 3 syntaxes. The classes represent
+syntax elements like functions and imports.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All of the nodes
+can be traced back to the <i>Python grammar file</i>. If you
+want to know how a tree is structured, just analyse that
+file (for each Python version it's a bit different).</p>
+
+<p style="margin-left:9%; margin-top: 1em">There's a lot of
+logic here that makes it easier for Jedi (and other
+libraries) to deal with a Python syntax tree.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By using
+<i>parso.tree.NodeOrLeaf.get_code()</i> on a module, you can
+get back the 1-to-1 representation of the input given to the
+parser. This is important if you want to refactor a parser
+tree.</p>
+
+<p style="margin-left:9%; margin-top: 1em">&gt;&gt;&gt;
+from parso import parse <br>
+&gt;&gt;&gt; parser = parse('import os') <br>
+&gt;&gt;&gt; module = parser.get_root_node() <br>
+&gt;&gt;&gt; module <br>
+&lt;Module: @1-1&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Any subclasses
+of <i>Scope</i>, including <i>Module</i> has an attribute
+<i>iter_imports</i>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&gt;&gt;&gt;
+list(module.iter_imports()) <br>
+[&lt;ImportName: import os@1,0&gt;]</p>
+
+<h3>Changes to the Python Grammar
+<a name="Changes to the Python Grammar"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">A few things
+have changed when looking at Python grammar files:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><i>Param</i> does not exist in Python grammar files. It
+is essentially a part of a <b>parameters</b> node.
+<i>parso</i> splits it up to make it easier to analyse
+parameters. However this just makes it easier to deal with
+the syntax tree, it doesn't actually change the valid
+syntax.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>A few nodes like <i>lambdef</i> and
+<i>lambdef_nocond</i> have been merged in the syntax tree to
+make it easier to do deal with them.</p></td></tr>
+</table>
+
+<h3>Parser Tree Classes
+<a name="Parser Tree Classes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>class
+parso.python.tree.DocstringMixin</b></p>
+
+<p style="margin-left:18%;">Bases: <i>object</i> <b><br>
+get_doc_node()</b></p>
+
+<p style="margin-left:27%;">Returns the string leaf of a
+docstring. e.g. <b>r'''foo'''</b>.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.PythonMixin</b></p>
+
+<p style="margin-left:18%;">Bases: <i>object</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Some Python
+specific utilities. <b><br>
+get_name_of_position(position)</b></p>
+
+<p style="margin-left:27%;">Given a (line, column) tuple,
+returns a <i>Name</i> or <b>None</b> if there is no name at
+that position.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.PythonLeaf(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>, -</b>
+<i><br>
+int</i><b>], prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonMixin</i>,
+<i>Leaf</i> <b><br>
+get_start_pos_of_prefix()</b></p>
+
+<p style="margin-left:27%;">Basically calls
+<i>parso.tree.NodeOrLeaf.get_start_pos_of_prefix()</i>.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.PythonBaseNode(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonMixin</i>,
+<i>BaseNode</i></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.PythonNode(type, children)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonMixin</i>,
+<b>Node</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.PythonErrorNode(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonMixin</i>,
+<b>ErrorNode</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.PythonErrorLeaf(token_type, value,
+start_pos, <br>
+prefix='')</b></p>
+
+<p style="margin-left:18%;">Bases: <b>ErrorLeaf</b>,
+<i>PythonLeaf</i></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.EndMarker(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>, -</b>
+<i><br>
+int</i><b>], prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <b>_LeafWithoutNewlines
+<br>
+type:</b> <i>str</i> <b>= 'endmarker'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Newline(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>], <br>
+prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonLeaf</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Contains
+NEWLINE and ENDMARKER tokens. <b><br>
+type:</b> <i>str</i> <b>= 'newline'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Name(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>], <br>
+prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases:
+<b>_LeafWithoutNewlines</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">A string.
+Sometimes it is important to know if the string belongs to a
+name or not. <b><br>
+type:</b> <i>str</i> <b>= 'name'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+
+<p style="margin-left:18%;"><b>is_definition(include_setitem=False)</b></p>
+
+<p style="margin-left:27%;">Returns True if the name is
+being defined.</p>
+
+
+<p style="margin-left:18%;"><b>get_definition(import_name_always=False,
+include_setitem=False)</b></p>
+
+<p style="margin-left:27%;">Returns None if there's no
+definition for a name. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>import_name_always</b> --
+Specifies if an import name is always a definition. Normally
+foo in <i>from foo import bar</i> is not a definition.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Literal(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>], <br>
+prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonLeaf</i></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Number(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>], <br>
+prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Literal</i> <b><br>
+type:</b> <i>str</i> <b>= 'number'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.String(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>], <br>
+prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Literal</i> <b><br>
+type:</b> <i>str</i> <b>= 'string'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>property
+string_prefix</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.FStringString(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i><br>
+int</i><b>], prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonLeaf</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">f-strings
+contain f-string expressions and normal python strings.
+These are the string parts of f-strings. <b><br>
+type:</b> <i>str</i> <b>= 'fstring_string'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.FStringStart(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i><br>
+int</i><b>], prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonLeaf</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">f-strings
+contain f-string expressions and normal python strings.
+These are the string parts of f-strings. <b><br>
+type:</b> <i>str</i> <b>= 'fstring_start'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.FStringEnd(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>, -</b>
+<i><br>
+int</i><b>], prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonLeaf</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">f-strings
+contain f-string expressions and normal python strings.
+These are the string parts of f-strings. <b><br>
+type:</b> <i>str</i> <b>= 'fstring_end'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Operator(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>, -</b>
+<i><br>
+int</i><b>], prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases:
+<b>_LeafWithoutNewlines</b>, <b>_StringComparisonMixin <br>
+type:</b> <i>str</i> <b>= 'operator'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Keyword(value:</b> <i>str</i><b>,
+start_pos:</b> <i>Tuple</i><b>[</b><i>int</i><b>,</b>
+<i>int</i><b>], <br>
+prefix:</b> <i>str</i> <b>= '')</b></p>
+
+<p style="margin-left:18%;">Bases:
+<b>_LeafWithoutNewlines</b>, <b>_StringComparisonMixin <br>
+type:</b> <i>str</i> <b>= 'keyword'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Scope(children)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonBaseNode</i>,
+<i>DocstringMixin</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Super class for
+the parser tree, which represents the state of a python text
+file. A Scope is either a function, class or lambda. <b><br>
+iter_funcdefs()</b></p>
+
+<p style="margin-left:27%;">Returns a generator of
+<i>funcdef</i> nodes.</p>
+
+<p style="margin-left:18%;"><b>iter_classdefs()</b></p>
+
+<p style="margin-left:27%;">Returns a generator of
+<i>classdef</i> nodes.</p>
+
+<p style="margin-left:18%;"><b>iter_imports()</b></p>
+
+<p style="margin-left:27%;">Returns a generator of
+<i>import_name</i> and <i>import_from</i> nodes.</p>
+
+<p style="margin-left:18%;"><b>get_suite()</b></p>
+
+<p style="margin-left:27%;">Returns the part that is
+executed by the function.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Module(children)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Scope</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">The top scope,
+which is always a module. Depending on the underlying parser
+this may be a full module or just a part of a module.
+<b><br>
+type:</b> <i>str</i> <b>= 'file_input'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>get_used_names()</b></p>
+
+<p style="margin-left:27%;">Returns all the <i>Name</i>
+leafs that exist in this module. This includes both
+definitions and references of names.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Decorator(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonBaseNode</i>
+<b><br>
+type:</b> <i>str</i> <b>= 'decorator'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.ClassOrFunc(children)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Scope</i> <b><br>
+property name</b></p>
+
+<p style="margin-left:27%;">Returns the <i>Name</i> leaf
+that defines the function or class name.</p>
+
+<p style="margin-left:18%;"><b>get_decorators()</b></p>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Decorator</i></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Class(children)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>ClassOrFunc</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Used to store
+the parsed contents of a python class. <b><br>
+type:</b> <i>str</i> <b>= 'classdef'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>get_super_arglist()</b></p>
+
+<p style="margin-left:27%;">Returns the <i>arglist</i> node
+that defines the super classes. It returns None if there are
+no arguments.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Function(children)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>ClassOrFunc</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Used to store
+the parsed contents of a python function.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Children:</p>
+
+<p style="margin-left:22%; margin-top: 1em">0. &lt;Keyword:
+def&gt; <br>
+1. &lt;Name&gt; <br>
+2. parameter list (including open-paren and close-paren
+&lt;Operator&gt;s) <br>
+3. or 5. &lt;Operator: :&gt; <br>
+4. or 6. Node() representing function body <br>
+3. -&gt; (if annotation is also present) <br>
+4. annotation (if present)</p>
+
+<p style="margin-left:18%;"><b>type:</b> <i>str</i> <b>=
+'funcdef'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>get_params()</b></p>
+
+<p style="margin-left:27%;">Returns a list of
+<i>Param()</i>.</p>
+
+<p style="margin-left:18%;"><b>property name</b></p>
+
+<p style="margin-left:27%;">Returns the <i>Name</i> leaf
+that defines the function or class name.</p>
+
+<p style="margin-left:18%;"><b>iter_yield_exprs()</b></p>
+
+<p style="margin-left:27%;">Returns a generator of
+<i>yield_expr</i>.</p>
+
+<p style="margin-left:18%;"><b>iter_return_stmts()</b></p>
+
+<p style="margin-left:27%;">Returns a generator of
+<i>return_stmt</i>.</p>
+
+<p style="margin-left:18%;"><b>iter_raise_stmts()</b></p>
+
+<p style="margin-left:27%;">Returns a generator of
+<i>raise_stmt</i>. Includes raise statements inside
+try-except blocks</p>
+
+<p style="margin-left:18%;"><b>is_generator()</b></p>
+
+<p style="margin-left:27%;"><b>Return bool</b></p>
+
+<p style="margin-left:36%;">Checks if a function is a
+generator or not.</p>
+
+<p style="margin-left:18%;"><b>property annotation</b></p>
+
+<p style="margin-left:27%;">Returns the test node after
+<i>-&gt;</i> or <i>None</i> if there is no annotation.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Lambda(children)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Function</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Lambdas are
+basically trimmed functions, so give it the same
+interface.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Children:</p>
+
+<p style="margin-left:22%; margin-top: 1em">0. &lt;Keyword:
+lambda&gt; <br>
+*. &lt;Param x&gt; for each argument x <br>
+-2. &lt;Operator: :&gt; <br>
+-1. Node() representing body</p>
+
+<p style="margin-left:18%;"><b>type:</b> <i>str</i> <b>=
+'lambdef'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>property name</b></p>
+
+<p style="margin-left:27%;">Raises an AttributeError.
+Lambdas don't have a defined name.</p>
+
+<p style="margin-left:18%;"><b>property annotation</b></p>
+
+<p style="margin-left:27%;">Returns <i>None</i>, lambdas
+don't have annotations.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Flow(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases:
+<i>PythonBaseNode</i></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.IfStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Flow</i> <b><br>
+type:</b> <i>str</i> <b>= 'if_stmt'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>get_test_nodes()</b></p>
+
+<p style="margin-left:27%;">E.g. returns all the
+<i>test</i> nodes that are named as x, below:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="31%"></td>
+<td width="6%">
+
+
+<p><b>if x:</b></p></td>
+<td width="3%"></td>
+<td width="5%">
+
+
+<p>pass</p></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<p style="margin-left:31%;"><b>elif x:</b></p>
+
+<p style="margin-left:40%;">pass</p>
+
+
+<p style="margin-left:18%;"><b>get_corresponding_test_node(node)</b></p>
+
+<p style="margin-left:27%;">Searches for the branch in
+which the node is and returns the corresponding test node
+(see function above). However if the node is in the test
+node itself and not in the suite return None.</p>
+
+
+<p style="margin-left:18%;"><b>is_node_after_else(node)</b></p>
+
+<p style="margin-left:27%;">Checks if a node is defined
+after <i>else</i>.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.WhileStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Flow</i> <b><br>
+type:</b> <i>str</i> <b>= 'while_stmt'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.ForStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Flow</i> <b><br>
+type:</b> <i>str</i> <b>= 'for_stmt'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>get_testlist()</b></p>
+
+<p style="margin-left:27%;">Returns the input node <b>y</b>
+from: <b>for x in y:</b>.</p>
+
+
+<p style="margin-left:18%;"><b>get_defined_names(include_setitem=False)</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.TryStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Flow</i> <b><br>
+type:</b> <i>str</i> <b>= 'try_stmt'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+
+<p style="margin-left:18%;"><b>get_except_clause_tests()</b></p>
+
+<p style="margin-left:27%;">Returns the <b>test</b> nodes
+found in <b>except_clause</b> nodes. Returns <b>[None]</b>
+for except clauses without an exception given.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.WithStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Flow</i> <b><br>
+type:</b> <i>str</i> <b>= 'with_stmt'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+
+<p style="margin-left:18%;"><b>get_defined_names(include_setitem=False)</b></p>
+
+<p style="margin-left:27%;">Returns the a list of
+<i>Name</i> that the with statement defines. The defined
+names are set after <i>as</i>.</p>
+
+
+<p style="margin-left:18%;"><b>get_test_node_from_name(name)</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Import(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonBaseNode</i>
+<b><br>
+get_path_for_name(name)</b></p>
+
+<p style="margin-left:27%;">The path is the list of names
+that leads to the searched name. <b><br>
+Return list of Name</b></p>
+
+<p style="margin-left:18%;"><b>is_nested() <br>
+is_star_import()</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.ImportFrom(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Import</i> <b><br>
+type:</b> <i>str</i> <b>= 'import_from'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+
+<p style="margin-left:18%;"><b>get_defined_names(include_setitem=False)</b></p>
+
+<p style="margin-left:27%;">Returns the a list of
+<i>Name</i> that the import defines. The defined names are
+set after <i>import</i> or in case an alias - <i>as</i> - is
+present that name is returned.</p>
+
+<p style="margin-left:18%;"><b>get_from_names() <br>
+property level</b></p>
+
+<p style="margin-left:27%;">The level parameter of
+<b>__import__</b>.</p>
+
+<p style="margin-left:18%;"><b>get_paths()</b></p>
+
+<p style="margin-left:27%;">The import paths defined in an
+import statement. Typically an array like this:
+<b>[&lt;Name: datetime&gt;, &lt;Name: date&gt;]</b>. <b><br>
+Return list of list of Name</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.ImportName(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Import</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">For
+<b>import_name</b> nodes. Covers normal imports without
+<b>from</b>. <b><br>
+type:</b> <i>str</i> <b>= 'import_name'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+
+<p style="margin-left:18%;"><b>get_defined_names(include_setitem=False)</b></p>
+
+<p style="margin-left:27%;">Returns the a list of
+<i>Name</i> that the import defines. The defined names is
+always the first name after <i>import</i> or in case an
+alias - <i>as</i> - is present that name is returned.</p>
+
+<p style="margin-left:18%;"><b>property level</b></p>
+
+<p style="margin-left:27%;">The level parameter of
+<b>__import__</b>.</p>
+
+<p style="margin-left:18%;"><b>get_paths() <br>
+is_nested()</b></p>
+
+<p style="margin-left:27%;">This checks for the special
+case of nested imports, without aliases and from
+statement:</p>
+
+<p style="margin-left:31%; margin-top: 1em">import
+foo.bar</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.KeywordStatement(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases:
+<i>PythonBaseNode</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">For the
+following statements: <i>assert</i>, <i>del</i>,
+<i>global</i>, <i>nonlocal</i>, <i>raise</i>, <i>return</i>,
+<i>yield</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>pass</i>,
+<i>continue</i> and <i>break</i> are not in there, because
+they are just simple keywords and the parser reduces it to a
+keyword. <b><br>
+property type</b></p>
+
+<p style="margin-left:27%;">Keyword statements start with
+the keyword and end with <i>_stmt</i>. You can crosscheck
+this with the Python grammar.</p>
+
+<p style="margin-left:18%;"><b>property keyword <br>
+get_defined_names(include_setitem=False)</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.AssertStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>KeywordStatement</i>
+<b><br>
+property assertion</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.GlobalStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>KeywordStatement</i>
+<b><br>
+get_global_names()</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.ReturnStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases:
+<i>KeywordStatement</i></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.YieldExpr(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonBaseNode</i>
+<b><br>
+type:</b> <i>str</i> <b>= 'yield_expr'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.ExprStmt(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonBaseNode</i>,
+<i>DocstringMixin</i> <b><br>
+type:</b> <i>str</i> <b>= 'expr_stmt'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+
+<p style="margin-left:18%;"><b>get_defined_names(include_setitem=False)</b></p>
+
+<p style="margin-left:27%;">Returns a list of <i>Name</i>
+defined before the <i>=</i> sign.</p>
+
+<p style="margin-left:18%;"><b>get_rhs()</b></p>
+
+<p style="margin-left:27%;">Returns the right-hand-side of
+the equals.</p>
+
+<p style="margin-left:18%;"><b>yield_operators()</b></p>
+
+<p style="margin-left:27%;">Returns a generator of
+<i>+=</i>, <i>=</i>, etc. or None if there is no
+operation.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.NamedExpr(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonBaseNode</i>
+<b><br>
+type:</b> <i>str</i> <b>= 'namedexpr_test'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+
+<p style="margin-left:18%;"><b>get_defined_names(include_setitem=False)</b></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.Param(children, parent=None)</b></p>
+
+<p style="margin-left:18%;">Bases:
+<i>PythonBaseNode</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">It's a helper
+class that makes business logic with params much easier. The
+Python grammar defines no <b>param</b> node. It defines it
+in a different way that is not really suited to working with
+parameters. <b><br>
+type:</b> <i>str</i> <b>= 'param'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+<p style="margin-left:18%;"><b>property star_count</b></p>
+
+<p style="margin-left:27%;">Is <i>0</i> in case of
+<i>foo</i>, <i>1</i> in case of <i>*foo</i> or <i>2</i> in
+case of <i>**foo</i>.</p>
+
+<p style="margin-left:18%;"><b>property default</b></p>
+
+<p style="margin-left:27%;">The default is the test node
+that appears after the <i>=</i>. Is <i>None</i> in case no
+default is present.</p>
+
+<p style="margin-left:18%;"><b>property annotation</b></p>
+
+<p style="margin-left:27%;">The default is the test node
+that appears after <i>:</i>. Is <i>None</i> in case no
+annotation is present.</p>
+
+<p style="margin-left:18%;"><b>property name</b></p>
+
+<p style="margin-left:27%;">The <i>Name</i> leaf of the
+param.</p>
+
+
+<p style="margin-left:18%;"><b>get_defined_names(include_setitem=False)
+<br>
+property position_index</b></p>
+
+<p style="margin-left:27%;">Property for the positional
+index of a paramter.</p>
+
+
+<p style="margin-left:18%;"><b>get_parent_function()</b></p>
+
+<p style="margin-left:27%;">Returns the function/lambda of
+a parameter.</p>
+
+
+<p style="margin-left:18%;"><b>get_code(include_prefix=True,
+include_comma=True)</b></p>
+
+<p style="margin-left:27%;">Like all the other get_code
+functions, but includes the param <i>include_comma</i>.
+<b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>bool</b>
+(<i>include_comma</i>) -- If enabled includes the comma in
+the string output.</p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.SyncCompFor(children:</b>
+<i>List</i><b>[</b><i>NodeOrLeaf</i><b>])</b></p>
+
+<p style="margin-left:18%;">Bases: <i>PythonBaseNode</i>
+<b><br>
+type:</b> <i>str</i> <b>= 'sync_comp_for'</b></p>
+
+<p style="margin-left:27%;">The type is a string that
+typically matches the types of the grammar file.</p>
+
+
+<p style="margin-left:18%;"><b>get_defined_names(include_setitem=False)</b></p>
+
+<p style="margin-left:27%;">Returns the a list of
+<i>Name</i> that the comprehension defines.</p>
+
+
+<p style="margin-left:9%;"><b>parso.python.tree.CompFor</b></p>
+
+<p style="margin-left:18%;">alias of <i>SyncCompFor</i></p>
+
+<p style="margin-left:9%;"><b>class
+parso.python.tree.UsedNamesMapping(dct)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Mapping</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">This class
+exists for the sole purpose of creating an immutable
+dict.</p>
+
+<h3>Utility
+<a name="Utility"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>parso.tree.search_ancestor(node:</b>
+<i>NodeOrLeaf</i><b>, *node_types:</b> <i>str</i><b>)
+-&gt;</b> <i><br>
+BaseNode</i> <b>|</b> <i>None</i></p>
+
+<p style="margin-left:18%;">Recursively looks at the
+parents of a node and returns the first found node that
+matches <b>node_types</b>. Returns <b>None</b> if no
+matching node is found.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This function
+is deprecated, use <i>NodeOrLeaf.search_ancestor()</i>
+instead. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="66%">
+
+
+<p><b>node</b> -- The ancestors of this node will be
+checked.</p> </td>
+<td width="5%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="66%">
+
+
+<p><b>node_types</b> -- type names that are searched
+for.</p> </td>
+<td width="5%">
+</td></tr>
+</table>
+
+<h3>Development
+<a name="Development"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+contribute anything to <i>parso</i>, just open an issue or
+pull request to discuss it. We welcome changes! Please check
+the <b>CONTRIBUTING.md</b> file in the repository,
+first.</p>
+
+<h3>Deprecations Process
+<a name="Deprecations Process"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The deprecation
+process is as follows:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">1.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p style="margin-top: 1em">A deprecation is announced in
+the next major/minor release.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>We wait either at least a year &amp; at least two minor
+releases until we remove the deprecated functionality.</p></td></tr>
+</table>
+
+<h3>Testing
+<a name="Testing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The test suite
+depends on <b>pytest</b>:</p>
+
+<p style="margin-left:13%; margin-top: 1em">pip install
+pytest</p>
+
+<p style="margin-left:9%; margin-top: 1em">To run the tests
+use the following:</p>
+
+<p style="margin-left:13%; margin-top: 1em">pytest</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+test only a specific Python version (e.g. Python 3.9), it's
+as easy as:</p>
+
+<p style="margin-left:13%; margin-top: 1em">python3.9 -m
+pytest</p>
+
+<p style="margin-left:9%; margin-top: 1em">Tests are also
+run automatically on <i>GitHub Actions</i>.</p>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><i>Source Code on Github</i></p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="28%">
+
+
+<p><i>GitHub Actions Testing</i></p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="28%">
+
+
+<p><i>Python Package Index</i></p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">parso
+contributors</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">parso
+contributors</p>
+<hr>
+</body>
+</html>

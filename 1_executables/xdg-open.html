@@ -1,0 +1,284 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>XDG-OPEN</title>
+
+</head>
+<body>
+
+<h1 align="center">XDG-OPEN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT CODES">EXIT CODES</a><br>
+<a href="#REPORTING ISSUES">REPORTING ISSUES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xdg-open - opens
+a file or URL in the user's preferred application</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>xdg-open</b> {<i>file</i> |
+<i>URL</i>}</p> </td>
+<td width="40%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>xdg-open</b> {<b>--help</b> |
+<b>--manual</b> | <b>--version</b>}</p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xdg-open opens a
+file or URL in the user's preferred application. If a URL is
+provided the URL will be opened in the user's preferred web
+browser. If a file is provided the file will be opened in
+the preferred application for files of that type. xdg-open
+supports file, ftp, http and https URLs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">xdg-open is for
+use inside a desktop session only. It is not recommended to
+use xdg-open as root.</p>
+
+<p style="margin-left:9%; margin-top: 1em">As xdg-open can
+not handle arguments that begin with a &ldquo;-&rdquo; it is
+recommended to pass filepaths in one of the following
+ways:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Pass
+absolute paths, i.e. by using <b>realpath</b> as a
+preprocessor.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Prefix
+known relative filepaths with a &ldquo;./&rdquo;. For
+example using sed -E 's|&#710;[&#710;/]|./\0|'.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Pass a
+file URL.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:14%;">Show command synopsis.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--manual</b></p>
+
+<p style="margin-left:14%;">Show this manual page.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Show the xdg-utils version
+information.</p>
+
+<h2>EXIT CODES
+<a name="EXIT CODES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">An exit code of
+0 indicates success while a non-zero exit code indicates
+failure. The following failure codes can be returned:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>1</b></p>
+
+<p style="margin-left:14%;">Error in command line
+syntax.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>2</b></p>
+
+<p style="margin-left:14%;">One of the files passed on the
+command line did not exist.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>3</b></p>
+
+<p style="margin-left:14%;">A required tool could not be
+found.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>4</b></p>
+
+<p style="margin-left:14%;">The action failed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In case of
+success the process launched from the .desktop file will not
+be forked off and therefore may result in xdg-open running
+for a very long time. This behaviour intentionally differs
+from most desktop specific openers to allow terminal based
+applications to run using the same terminal xdg-open was
+called from.</p>
+
+<h2>REPORTING ISSUES
+<a name="REPORTING ISSUES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please keep in
+mind <b>xdg-open</b> inherits most of the flaws of its
+configuration and the underlying opener.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In case the
+command xdg-mime query default &quot;$(xdg-mime query
+filetype path/to/troublesome_file)&quot; names the program
+responsible for any unexpected behaviour you can fix that by
+setting a different handler. (If the program is broken let
+the developers know)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Also see the
+security note on <b>xdg-mime</b>(1) for the default
+subcommand.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a flaw is
+reproducible using the desktop specific opener (and isn't a
+configuration issue): Please report to whoever is
+responsible for that first (reporting to xdg-utils is better
+than not reporting at all, but since the xdg-utils are
+maintained in very little spare time a fix will take much
+longer)</p>
+
+<p style="margin-left:9%; margin-top: 1em">In case an issue
+specific to xdg-open please report it to
+https://gitlab.freedesktop.org/xdg/xdg-utils/-/issues .</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xdg-mime</b>(1),
+<b>xdg-settings</b>(1), <b><font color="#0000FF">MIME
+applications associations specification</font></b>
+<small><font color="#000000">[1]</font></small></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">xdg-open
+'http://www.freedesktop.org/'</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Opens
+the freedesktop.org website in the user's default
+browser.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">xdg-open
+/tmp/foobar.png</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Opens
+the PNG image file /tmp/foobar.png in the user's default
+image viewing application.</font></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Kevin
+Krammer</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Author.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Jeremy
+White</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Author.</font></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+&copy; 2006</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="57%">
+
+
+<p style="margin-top: 1em"><font color="#000000">MIME
+applications associations specification</font></p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">http://www.freedesktop.org/wiki/Specifications/mime-apps-spec/</font></p>
+<hr>
+</body>
+</html>

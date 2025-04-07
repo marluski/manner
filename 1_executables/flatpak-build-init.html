@@ -1,0 +1,217 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK BUILD-INIT</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK BUILD-INIT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-build-init
+- Initialize a build directory</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>flatpak build-init</b>
+[OPTION...] DIRECTORY APPNAME SDK RUNTIME [BRANCH]</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Initializes a
+separate build directory. DIRECTORY is the name of the
+directory. APPNAME is the application id of the app that
+will be built. SDK and RUNTIME specify the sdk and runtime
+that the application should be built against and run in.
+BRANCH specify the version of sdk and runtime</p>
+
+<p style="margin-left:9%; margin-top: 1em">Initializes a
+directory as build directory which can be used as target
+directory of <b>flatpak build</b>. It creates a metadata
+inside the given directory. Additionally, empty files and
+var subdirectories are created.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is an error
+to run build-init on a directory that has already been
+initialized as a build directory.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--arch=ARCH</b></p>
+
+<p style="margin-left:14%;">The architecture to use. See
+<b>flatpak --supported-arches</b> for architectures
+supported by the host.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--var=RUNTIME</b></p>
+
+<p style="margin-left:14%;">Initialize var from the named
+runtime.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w</b>,
+<b>--writable-sdk</b></p>
+
+<p style="margin-left:14%;">Initialize /usr with a copy of
+the sdk, which is writable during flatpak build. This can be
+used if you need to install build tools in /usr during the
+build. This is stored in the usr subdirectory of the app
+dir, but will not be part of the final app.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--tag=TAG</b></p>
+
+<p style="margin-left:14%;">Add a tag to the metadata file.
+This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sdk-extension=EXTENSION</b></p>
+
+<p style="margin-left:14%;">When using
+<b>--writable-sdk</b>, in addition to the sdk, also install
+the specified extension. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--extension=NAME=VARIABLE[=VALUE]</b></p>
+
+<p style="margin-left:14%;">Add extension point info.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sdk-dir</b></p>
+
+<p style="margin-left:14%;">Specify a custom subdirectory
+to use instead of usr for <b>--writable-sdk</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--update</b></p>
+
+<p style="margin-left:14%;">Re-initialize the sdk and var,
+don't fail if already initialized.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--base=APP</b></p>
+
+<p style="margin-left:14%;">Initialize the application with
+files from another specified application.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--base-version=VERSION</b></p>
+
+<p style="margin-left:14%;">Specify the version to use for
+<b>--base</b>. If not specified, will default to
+&quot;master&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--base-extension=EXTENSION</b></p>
+
+<p style="margin-left:14%;">When using <b>--base</b>, also
+install the specified extension from the app. This option
+can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--type=TYPE</b></p>
+
+<p style="margin-left:14%;">This can be used to build
+different types of things. The default is &quot;app&quot;
+which is a regular app, but &quot;runtime&quot; creates a
+runtime based on an existing runtime, and
+&quot;extension&quot; creates an extension for an app or
+runtime.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--extension-tag=EXTENSION_TAG</b></p>
+
+<p style="margin-left:14%;">If building an extension, the
+tag to use when searching for the mount point of the
+extension.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+build-init /build/my-app org.example.myapp org.gnome.Sdk
+org.gnome.Platform 3.36</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flatpak</b>(1),
+<b>flatpak-build</b>(1), <b>flatpak-build-finish</b>(1),
+<b>flatpak-build-export</b>(1)</p>
+<hr>
+</body>
+</html>

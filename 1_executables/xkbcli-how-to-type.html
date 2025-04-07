@@ -1,0 +1,167 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>XKBCLI-HOW-TO-TYPE</i>(1) General Commands Manual
+<i>XKBCLI-HOW-TO-TYPE</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">xkbcli-how-to-type &mdash; query
+how to type a given Unicode code point or keysym</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:33%;"><b>xkbcli-how-to-type</b>
+[options] <i>character/codepoint/keysym</i></p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>xkbcli-how-to-type</b> prints
+the key combinations (keycode + modifiers) in the
+keymap&rsquo;s layouts which would produce the given Unicode
+code point or keysym.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>codepoint/keysym</i>
+is either:</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">a single character (requires a
+terminal which uses UTF-8 character encoding);</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">a Unicode code point,
+interpreted as hexadecimal if prefixed with <b>0x</b> or
+<b>U+</b> else as decimal;</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">a keysym if <b>--keysym</b> is
+used: either a <i>numeric</i> value (hexadecimal if prefixed
+with <b>0x</b> else decimal) or a keysym <i>name</i>.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES <br>
+xkbcli-how-to-type --layout</b> <i>us 97</i></p>
+
+<p style="margin-top: 1em"><b>xkbcli-how-to-type
+--layout</b> <i>us 0x61</i></p>
+
+<p style="margin-top: 1em"><b>xkbcli-how-to-type
+--layout</b> <i>us U+0061</i></p>
+
+<p style="margin-top: 1em"><b>xkbcli-how-to-type
+--layout</b> <i>us a</i></p>
+
+<p style="margin-left:19%;">Print the key combinations that
+produce the letter &quot;a&quot; (</p>
+
+<p>decimal code point: <i>97</i>, hexadecimal code point:
+<i>61</i> ) in the default <i>us</i> layout.</p>
+
+<p style="margin-top: 1em"><b>xkbcli-how-to-type
+--layout</b> <i>us</i> <b>--keysym</b> <i>97</i></p>
+
+<p style="margin-top: 1em"><b>xkbcli-how-to-type
+--layout</b> <i>us</i> <b>--keysym</b> <i>0x61</i></p>
+
+<p style="margin-top: 1em"><b>xkbcli-how-to-type
+--layout</b> <i>us</i> <b>--keysym</b> <i>a</i></p>
+
+<p style="margin-left:19%;">Print the key combinations that
+produce the keysym &quot;a&quot; (</p>
+
+<p>decimal code: <i>97</i>, hexadecimal code: <i>61</i> )
+in the default <i>us</i> layout.</p>
+
+<p style="margin-top: 1em"><b>OPTIONS <br>
+--keysym</b></p>
+
+<p style="margin-left:19%;">Treat the argument as a keysym,
+not a Unicode code point</p>
+
+<p style="margin-top: 1em"><b>--rules</b> <i>rules</i></p>
+
+<p style="margin-left:19%;">The XKB ruleset</p>
+
+<p style="margin-top: 1em"><b>--model</b> <i>model</i></p>
+
+<p style="margin-left:19%;">The XKB model</p>
+
+<p style="margin-top: 1em"><b>--layout</b>
+<i>layout</i></p>
+
+<p style="margin-left:19%;">The XKB layout</p>
+
+<p style="margin-top: 1em"><b>--variant</b>
+<i>variant</i></p>
+
+<p style="margin-left:19%;">The XKB layout variant</p>
+
+<p style="margin-top: 1em"><b>--options</b>
+<i>options</i></p>
+
+<p style="margin-left:19%;">The XKB options</p>
+
+
+<p style="margin-top: 1em"><b>--enable-environment-names</b></p>
+
+<p style="margin-left:19%;">Allow to set the default RMLVO
+values via the following environment variables:</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_RULES</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_MODEL</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_LAYOUT</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_VARIANT</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_OPTIONS</p>
+
+<p style="margin-left:19%;">Note that this option may
+affect the default values of the previous options.</p>
+
+<p style="margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Print a help
+message and exit.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>xkbcli</i>(1), <i>The
+libxkbcommon online documentation</i>: https://xkbcommon.org
+GNU September 11, 2024 <i>XKBCLI-HOW-TO-TYPE</i>(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,169 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>I3BLOCKS</title>
+
+</head>
+<body>
+
+<h1 align="center">I3BLOCKS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#COPYING">COPYING</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3blocks - A
+feed generator for text based status bars</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>i3blocks</b>
+[<i>OPTION</i>]...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The i3blocks(1)
+command generates a status line for i3bar(1). It schedules
+command lines described in a simple configuration file at
+specified time intervals, upon signal reception or on
+clicks.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:14%;">Show the help message and
+exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b>
+<i>CONFIGFILE</i></p>
+
+<p style="margin-left:14%;">Specifies an alternate
+configuration file path.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:14%;">Increase log level. This option
+is a cumulative. By default only fatal errors are shown in
+the status bar. Passing this option once will show error
+messages as well. Using <b>-vv</b> and more will show more
+debug output on standard error.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3blocks must be
+defined as the status line command of the <b>bar</b> block
+described in your i3(1) configuration file:</p>
+
+<p style="margin-left:14%; margin-top: 1em">bar { <br>
+status_command i3blocks <br>
+}</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default,
+i3blocks looks for a configuration file in the following
+order (note that /etc may be prefixed with /usr/local
+depending on the compilation flags):</p>
+
+<p style="margin-left:14%; margin-top: 1em">1.
+<i>$XDG_CONFIG_HOME/i3blocks/config</i> (or
+<i>&#732;/.config/i3blocks/config</i>)</p>
+
+<p style="margin-left:14%; margin-top: 1em">2.
+<i>&#732;/.i3blocks.conf</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">3.
+<i>$XDG_CONFIG_DIRS/i3blocks/config</i> (or
+<i>/etc/xdg/i3blocks/config</i>)</p>
+
+<p style="margin-left:14%; margin-top: 1em">4.
+<i>/etc/i3blocks.conf</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">For the content
+of the configuration file, please refer to the i3blocks
+website: &lt;https://vivien.github.io/i3blocks&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3(1), i3bar(1),
+i3status(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3blocks is
+written by Vivien Didelot and other contributors.</p>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Project web
+site:</b> &lt;https://vivien.github.io/i3blocks&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Git source
+repository and issue tracker:</b>
+&lt;https://github.com/vivien/i3blocks&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Official
+collection of scripts for i3blocks:</b>
+&lt;https://github.com/vivien/i3blocks-contrib&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>i3bar
+protocol:</b>
+&lt;http://i3wm.org/docs/i3bar-protocol.html&gt;</p>
+
+<h2>COPYING
+<a name="COPYING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+Vivien Didelot. Free use of this software is granted under
+the terms of the <i>GPLv3+</i> License.</p>
+<hr>
+</body>
+</html>

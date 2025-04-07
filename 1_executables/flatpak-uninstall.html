@@ -1,0 +1,234 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK UNINSTALL</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK UNINSTALL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-uninstall
+- Uninstall an application or runtime</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em"><b>flatpak uninstall</b>
+[OPTION...] [REF...]</p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Uninstalls an
+application or runtime. REF is a reference to the
+application or runtime to uninstall.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each REF
+argument is a full or partial identifier in the flatpak ref
+format, which looks like
+&quot;(app|runtime)/ID/ARCH/BRANCH&quot;. All elements
+except ID are optional and can be left out, including the
+slashes, so most of the time you need only specify ID. Any
+part left out will be matched against what is installed, and
+if there are multiple matches you will be prompted to choose
+between them. You will also be prompted if REF doesn't match
+any installed ref exactly but is similar (e.g.
+&quot;gedit&quot; is similar to
+&quot;org.gnome.gedit&quot;), but this fuzzy matching
+behavior is disabled if REF contains any slashes or
+periods.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default this
+looks for both installed apps and runtimes with the given
+REF, but you can limit this by using the <b>--app</b> or
+<b>--runtime</b> option, or by supplying the initial element
+in the REF.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Normally, this
+command removes the ref for this application/runtime from
+the local OSTree repository and purges any objects that are
+no longer needed to free up disk space. If the same
+application is later reinstalled, the objects will be pulled
+from the remote repository again. The <b>--keep-ref</b>
+option can be used to prevent this.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When
+<b>--delete-data</b> is specified while removing an app, its
+data directory in &#732;/.var/app and any permissions it
+might have are removed. When <b>--delete-data</b> is used
+without a REF, all 'unowned' app data is removed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unless
+overridden with the <b>--system</b>, <b>--user</b>, or
+<b>--installation</b> options, this command searches both
+the system-wide installation and the per-user one for REF
+and errors out if it exists in more than one.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keep-ref</b></p>
+
+<p style="margin-left:14%;">Keep the ref for the
+application and the objects belonging to it in the local
+repository.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>,
+<b>--user</b></p>
+
+<p style="margin-left:14%;">Uninstalls from a per-user
+installation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system</b></p>
+
+<p style="margin-left:14%;">Uninstalls from the default
+system-wide installation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--installation=NAME</b></p>
+
+<p style="margin-left:14%;">Uninstalls from a system-wide
+installation specified by NAME among those defined in
+/etc/flatpak/installations.d/. Using
+<b>--installation=default</b> is equivalent to using
+<b>--system</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--arch=ARCH</b></p>
+
+<p style="margin-left:14%;">The architecture to uninstall,
+instead of the architecture of the host system. See
+<b>flatpak --supported-arches</b> for architectures
+supported by the host.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--all</b></p>
+
+<p style="margin-left:14%;">Remove all refs on the
+system.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--unused</b></p>
+
+<p style="margin-left:14%;">Remove unused refs on the
+system.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-y</b>,
+<b>--assumeyes</b></p>
+
+<p style="margin-left:14%;">Automatically answer yes to all
+questions. This is useful for automation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--noninteractive</b></p>
+
+<p style="margin-left:14%;">Produce minimal output and
+avoid most questions. This is suitable for use in
+non-interactive situations, e.g. in a build script.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--app</b></p>
+
+<p style="margin-left:14%;">Only look for an app with the
+given name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--runtime</b></p>
+
+<p style="margin-left:14%;">Only look for a runtime with
+the given name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-related</b></p>
+
+<p style="margin-left:14%;">Don't uninstall related
+extensions, such as the locale data.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force-remove</b></p>
+
+<p style="margin-left:14%;">Remove files even if they're in
+use by a running application.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--delete-data</b></p>
+
+<p style="margin-left:14%;">Remove app data in
+&#732;/.var/app and in the permission store.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+--user uninstall org.gnome.gedit</b></p>
+<hr>
+</body>
+</html>

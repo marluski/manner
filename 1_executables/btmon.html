@@ -1,0 +1,257 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BTMON</title>
+
+</head>
+<body>
+
+<h1 align="center">BTMON</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSYS">SYNOPSYS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Capture the traces from hci0 to hcidump.log file">Capture the traces from hci0 to hcidump.log file</a><br>
+<a href="#Open the trace file">Open the trace file</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">btmon -
+Bluetooth monitor</p>
+
+<h2>SYNOPSYS
+<a name="SYNOPSYS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>btmon</b>
+[<i>OPTIONS</i> ...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The btmon(1)
+command provides access to the Bluetooth subsystem monitor
+infrastructure for reading HCI traces.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r&nbsp;</b><i>FILE</i>,&nbsp;<b>--read&nbsp;</b><i>FILE</i></p>
+
+<p style="margin-left:18%;">Read traces in btsnoop format
+from <i>FILE</i>.</p>
+
+
+<p style="margin-left:9%;"><b>-w&nbsp;</b><i>FILE</i>,&nbsp;<b>--write&nbsp;</b><i>FILE</i></p>
+
+<p style="margin-left:18%;">Save traces in btsnoop format
+to <i>FILE</i>.</p>
+
+
+<p style="margin-left:9%;"><b>-a&nbsp;</b><i>FILE</i>,&nbsp;<b>--analyze&nbsp;</b><i>FILE</i></p>
+
+<p style="margin-left:18%;">Analyze traces in btsnoop
+format from <i>FILE</i>. It displays the devices found in
+the <i>FILE</i> with its packets by type. If gnuplot is
+installed on the system it also attempts to plot packet
+latency graph.</p>
+
+
+<p style="margin-left:9%;"><b>-s&nbsp;</b><i>SOCKET</i>,&nbsp;<b>--server&nbsp;</b><i>SOCKET</i></p>
+
+<p style="margin-left:18%;">Start monitor server
+socket.</p>
+
+
+<p style="margin-left:9%;"><b>-p&nbsp;</b><i>PRIORITY</i>,&nbsp;<b>--priority&nbsp;</b><i>PRIORITY</i></p>
+
+<p style="margin-left:18%;">Show only priority or lower for
+user log.</p>
+
+
+<p style="margin-left:9%;"><b>-i&nbsp;</b><i>NUM</i>,&nbsp;<b>--index&nbsp;</b><i>NUM</i></p>
+
+<p style="margin-left:18%;">Show only specified controller.
+<i>hciNUM</i> is also acceptable. This is useful to capture
+the traces from the specific controller when the multiple
+controllers are presented.</p>
+
+
+<p style="margin-left:9%;"><b>-d&nbsp;</b><i>TTY</i>,&nbsp;<b>--tty&nbsp;</b><i>TTY</i></p>
+
+<p style="margin-left:18%;">Read data from <i>TTY</i>.</p>
+
+
+<p style="margin-left:9%;"><b>-B&nbsp;</b><i>SPEED</i>,&nbsp;<b>--rate&nbsp;</b><i>SPEED</i></p>
+
+<p style="margin-left:18%;">Set TTY speed. The default
+<i>SPEED</i> is 115300</p>
+
+
+<p style="margin-left:9%;"><b>-V&nbsp;</b><i>COMPID</i>,&nbsp;<b>--vendor&nbsp;</b><i>COMPID</i></p>
+
+<p style="margin-left:18%;">Set the default company
+identifier. The <i>COMPID</i> is a unique number assigned by
+the Bluetooth SIG to a member company and can be
+found/searched from the Bluetooth SIG webpage.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For example,
+Intel is 2 and Realtek is 93.</p>
+
+<p style="margin-left:9%;"><b>-M</b>, <b>--mgmt</b></p>
+
+<p style="margin-left:18%;">Open channel for mgmt
+events.</p>
+
+<p style="margin-left:9%;"><b>-t</b>, <b>--time</b></p>
+
+<p style="margin-left:18%;">Show a time instead of time
+offset.</p>
+
+<p style="margin-left:9%;"><b>-T</b>, <b>--date</b></p>
+
+<p style="margin-left:18%;">Show a time and date
+information instead of time offset.</p>
+
+<p style="margin-left:9%;"><b>-S</b>, <b>--sco</b></p>
+
+<p style="margin-left:18%;">Dump SCO traffic in raw hex
+format.</p>
+
+<p style="margin-left:9%;"><b>-A</b>, <b>--a2dp</b></p>
+
+<p style="margin-left:18%;">Dump A2DP stream traffic in a
+raw hex format.</p>
+
+
+<p style="margin-left:9%;"><b>-E&nbsp;</b><i>IP</i>,&nbsp;<b>--ellisys&nbsp;</b><i>IP</i></p>
+
+<p style="margin-left:18%;">Send Ellisys HCI Injection.</p>
+
+<p style="margin-left:9%;"><b>-P</b>, <b>--no-pager</b></p>
+
+<p style="margin-left:18%;">Disable pager usage while
+reading the log file.</p>
+
+
+<p style="margin-left:9%;"><b>-J&nbsp;</b><i>OPTIONS</i>,&nbsp;<b>--jlink&nbsp;</b><i>OPTIONS</i></p>
+
+<p style="margin-left:18%;">Read data from RTT. Each
+options are comma(,) seprated without spaces.</p>
+
+
+<p style="margin-left:9%;"><b>-R&nbsp;</b><i>OPTIONS</i>,&nbsp;<b>--rtt&nbsp;</b><i>OPTIONS</i></p>
+
+<p style="margin-left:18%;">RTT control block parameters.
+Each options are comma(,) seprated without spaces.</p>
+
+
+<p style="margin-left:9%;"><b>-C&nbsp;</b><i>WIDTH</i>,&nbsp;<b>--columns&nbsp;</b><i>WIDTH</i></p>
+
+<p style="margin-left:18%;">Output width if not a
+terminal</p>
+
+
+<p style="margin-left:9%;"><b>-c&nbsp;</b><i>MODE</i>,&nbsp;<b>--color&nbsp;</b><i>MODE</i></p>
+
+<p style="margin-left:18%;">Set output color. The possible
+<i>MODE</i> values are: <b>auto|always|never</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Default value
+is <b>auto</b></p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Show version</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h3>Capture the traces from hci0 to hcidump.log file
+<a name="Capture the traces from hci0 to hcidump.log file"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">$ btmon -i hci0
+-w hcidump.log</p>
+
+<h3>Open the trace file
+<a name="Open the trace file"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">$ btmon -r
+hcidump.log</p>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Marcel Holtmann
+&lt;marcel@holtmann.org&gt;, Tedd Ho-Jeong An
+&lt;tedd.an@intel.com&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

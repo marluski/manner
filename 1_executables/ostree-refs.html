@@ -1,0 +1,160 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE REFS</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE REFS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-refs -
+List refs</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>ostree refs</b> [OPTIONS...]
+[PREFIX]</p> </td>
+<td width="40%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>ostree refs</b> {EXISTING}
+{--create=NEWREF}</p> </td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Lists all refs
+available on the host. If specified, PREFIX assigns the
+refspec prefix; default prefix is null, which lists all
+refs. This command can also be used to create or delete
+refs.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list</b></p>
+
+<p style="margin-left:14%;">For historical reasons, refs
+without this option will strip the specified prefix from the
+output. Normally, one wants to see the full ref, so
+providing this option ensures the refs are printed in full,
+rather than truncated.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--create</b>=NEWREF</p>
+
+<p style="margin-left:14%;">Create a ref pointing to the
+commit EXISTING. NEWREF must not already exist, and EXISTING
+must be an existing commit. More than one ref can point to
+the same commit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--delete</b></p>
+
+<p style="margin-left:14%;">Delete refs which match PREFIX,
+rather than listing them. If you are trying to reclaim
+space, you will then need to <b>ostree prune</b> or
+<b>ostree admin cleanup</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--revision</b>,
+<b>-r</b></p>
+
+<p style="margin-left:14%;">When listing refs, also print
+their revisions. The revisions will be separated by a tab
+character.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--alias</b>,
+<b>-A</b></p>
+
+<p style="margin-left:14%;">If used with <b>--create</b>,
+create an alias. Otherwise just list aliases.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--collections</b>,
+<b>-c</b></p>
+
+<p style="margin-left:14%;">Enable interactions with refs
+using the combination of their collection IDs and ref names.
+When listing refs, this changes the output format to include
+collection IDs, and enables listing remote mirrored
+refs.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When creating
+refs, the refspec value passed to the <b>--create</b> option
+is treated as COLLECTION-ID:REF-NAME and a mirrored ref is
+created. (This is an abuse of the refspec syntax.)</p>
+
+<p style="margin-left:14%; margin-top: 1em">When deleting
+refs, all refs whose collection ID equals PREFIX are
+deleted.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force</b></p>
+
+<p style="margin-left:14%;">When creating NEWREF with
+<b>--create</b>, allow an existing ref to be updated instead
+of erroring.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+refs</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">my-branch <br>
+ gnome-ostree/buildmain/x86_64-runtime</p>
+<hr>
+</body>
+</html>

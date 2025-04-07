@@ -1,0 +1,176 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VDE_PLUG</title>
+
+</head>
+<body>
+
+<h1 align="center">VDE_PLUG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTICE">NOTICE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">vde_plug -
+Virtual Distributed Ethernet plug (two plugs creates a vde
+cable)</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_plug</b>
+[ <b>-p</b> <i>portnum</i> ] [ <b>-g</b> <i>group</i> ] [
+<b>-m</b> <i>octal-mode</i> ] [ <i>socketdir</i> ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A
+<b>vde_plug</b> is a plug to be connected into a VDE switch.
+All the data that is catched by the plug is written in its
+stdout and everything from stdin is injected in the
+switch.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This tool has
+been designed to be used together with <b>dpipe (1)</b> to
+interconnect a second vde_plug to another switch, working as
+a virtual ethernet crossed cable between the two
+switches.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command</p>
+
+<p style="margin-left:18%;"><b>dpipe vde_plug = vde_plug
+/tmp/vde2.ctl</b></p>
+
+<p style="margin-left:9%;">connects two local switches: the
+former is using the standard control socket /tmp/vde.ctl
+while the latter is using /tmp/vde2.ctl.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command</p>
+
+<p style="margin-left:18%;"><b>dpipe vde_plug = ssh
+remote.machine.org vde_plug</b></p>
+
+<p style="margin-left:9%;">connects two remote switches. If
+the two vde_switches run as daemon and they are connected to
+tap interfaces a level 2 encrypted tunnel is
+established.</p>
+
+<p style="margin-left:9%; margin-top: 1em">vde_plug can
+also be established as a login shell for users. The
+following command works as in the previous example</p>
+
+<p style="margin-left:18%;"><b>dpipe vde_plug = ssh
+vdeuser@remote.machine.org vde_plug</b></p>
+
+<p style="margin-left:9%;">where vdeuser is the user with
+vde_plug as standard shell. All the remote accesses are
+logged by syslog at the beginning and at the end of each
+session. Attempt to login without the command vde_plug at
+the end or trying to execute something else are blocked and
+the attempt is logged into syslog.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>
+<i>portnum</i></p>
+
+<p style="margin-left:18%;">It is possible to decide which
+port of the switch to use. When this option is not specified
+the switch assigns the first available unused port (if any).
+It is possible to connect several cables in the same switch
+port: in this way all this cables work concurrently. It
+means that packet can result as duplicate but no ARP table
+loops are generated. Is useful when vde is used for
+mobility. Several physical interfaces can be used at a time
+during handoffs to prevent hichups in connectivity.</p>
+
+<p style="margin-left:9%;"><b>-g</b> <i>group</i></p>
+
+<p style="margin-left:18%;">group ownership of the
+communication socket. For security when more want to share a
+switch it is better to use a unix group to own the comm
+sockets so that the network traffic cannot be sniffed.</p>
+
+<p style="margin-left:9%;"><b>-m</b> <i>octal-mode</i></p>
+
+<p style="margin-left:18%;">octal chmod like permissions
+for the comm sockets</p>
+
+<p style="margin-left:9%;"><i>socketdir</i></p>
+
+<p style="margin-left:18%;">(This option can be also set
+as: <b>-sock</b> <i>socketdir</i> ) specify the directory
+which contains the UNIX socket to be used by local programs
+for joining the VDE. The default value is
+&quot;/tmp/vde.ctl&quot;, which corresponds to the socket
+&quot;/tmp/vde.ctl/ctl&quot; (or /var/run/vde.ctl when the
+vde_switch runs as a shared daemon). It is possible for
+users to redefine their default switch as
+&quot;.vde-2/stdsock&quot; in their home directory. If
+exist, this directory (or symbolic link to the actual
+directory) is used as the default value for the user.</p>
+
+<h2>NOTICE
+<a name="NOTICE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtual
+Distributed Ethernet is not related in any way with
+www.vde.com (&quot;Verband der Elektrotechnik, Elektronik
+und Informationstechnik&quot; i.e. the German
+&quot;Association for Electrical, Electronic &amp;
+Information Technologies&quot;).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_switch</b>(1),
+<b>vde_plug2tap</b>(1), <b>vdeq</b>(1), <b>dpipe</b>(1).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">VDE is a project
+by Renzo Davoli &lt;renzo@cs.unibo.it&gt;</p>
+<hr>
+</body>
+</html>

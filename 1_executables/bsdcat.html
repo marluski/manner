@@ -1,0 +1,73 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:50 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>BSDCAT</i>(1) General Commands Manual
+<i>BSDCAT</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">bsdcat &mdash; expand files to
+standard output</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:18%;"><b>bsdcat</b> [options]
+[files]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>bsdcat</b> expands files to
+standard output.</p>
+
+<p style="margin-top: 1em"><b>OPTIONS</b></p>
+
+<p style="margin-left:9%;"><b>bsdcat</b> typically takes a
+filename as an argument or reads standard input when used in
+a pipe. In both cases decompressed data is written to
+standard output.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">To decompress a file:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>bsdcat
+example.txt.gz &gt; example.txt</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">To decompress
+standard input in a pipe:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>cat
+example.txt.gz</b> | <b>bsdcat &gt; example.txt</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Both examples
+achieve the same results - a decompressed file by
+redirecting output.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>bzcat</i>(1),
+<i>uncompress</i>(1), <i>xzcat</i>(1), <i>zcat</i>(1),
+<i>libarchive-formats</i>(5) GNU March 1, 2014
+<i>BSDCAT</i>(1)</p>
+<hr>
+</body>
+</html>

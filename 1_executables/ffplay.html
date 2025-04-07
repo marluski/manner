@@ -1,0 +1,1421 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:24:25 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FFPLAY</title>
+
+</head>
+<body>
+
+<h1 align="center">FFPLAY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Stream specifiers">Stream specifiers</a><br>
+<a href="#Generic options">Generic options</a><br>
+<a href="#AVOptions">AVOptions</a><br>
+<a href="#Main options">Main options</a><br>
+<a href="#Advanced options">Advanced options</a><br>
+<a href="#While playing">While playing</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ffplay - FFplay
+media player</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ffplay
+[<i>options</i>] [<i>input_url</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">FFplay is a very
+simple and portable media player using the FFmpeg libraries
+and the SDL library. It is mostly used as a testbed for the
+various FFmpeg APIs.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">All the
+numerical options, if not specified otherwise, accept a
+string representing a number as input, which may be followed
+by one of the SI unit prefixes, for example:
+&rsquo;K&rsquo;, &rsquo;M&rsquo;, or &rsquo;G&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+&rsquo;i&rsquo; is appended to the SI unit prefix, the
+complete prefix will be interpreted as a unit prefix for
+binary multiples, which are based on powers of 1024 instead
+of powers of 1000. Appending &rsquo;B&rsquo; to the SI unit
+prefix multiplies the value by 8. This allows using, for
+example: &rsquo;KB&rsquo;, &rsquo;MiB&rsquo;,
+&rsquo;G&rsquo; and &rsquo;B&rsquo; as number suffixes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options which do
+not take arguments are boolean options, and set the
+corresponding value to true. They can be set to false by
+prefixing the option name with &quot;no&quot;. For example
+using &quot;-nofoo&quot; will set the boolean option with
+name &quot;foo&quot; to false.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options that
+take arguments support a special syntax where the argument
+given on the command line is interpreted as a path to the
+file from which the actual argument value is loaded. To use
+this feature, add a forward slash &rsquo;/&rsquo;
+immediately before the option name (after the leading dash).
+E.g.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i INPUT
+-/filter:v filter.script OUTPUT</p>
+
+<p style="margin-left:9%; margin-top: 1em">will load a
+filtergraph description from the file named
+<i>filter.script</i>.</p>
+
+<h3>Stream specifiers
+<a name="Stream specifiers"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Some options are
+applied per-stream, e.g. bitrate or codec. Stream specifiers
+are used to precisely specify which stream(s) a given option
+belongs to.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A stream
+specifier is a string generally appended to the option name
+and separated from it by a colon. E.g. &quot;-codec:a:1
+ac3&quot; contains the &quot;a:1&quot; stream specifier,
+which matches the second audio stream. Therefore, it would
+select the ac3 codec for the second audio stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A stream
+specifier can match several streams, so that the option is
+applied to all of them. E.g. the stream specifier in
+&quot;-b:a 128k&quot; matches all audio streams.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An empty stream
+specifier matches all streams. For example, &quot;-codec
+copy&quot; or &quot;-codec: copy&quot; would copy all the
+streams without reencoding.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Possible forms
+of stream specifiers are: <i><br>
+stream_index</i></p>
+
+<p style="margin-left:14%;">Matches the stream with this
+index. E.g. &quot;-threads:1 4&quot; would set the thread
+count for the second stream to 4. If <i>stream_index</i> is
+used as an additional stream specifier (see below), then it
+selects stream number <i>stream_index</i> from the matching
+streams. Stream numbering is based on the order of the
+streams as detected by libavformat except when a stream
+group specifier or program ID is also specified. In this
+case it is based on the ordering of the streams in the group
+or program.</p>
+
+
+<p style="margin-left:9%;"><i>stream_type</i><b>[:</b><i>additional_stream_specifier</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>stream_type</i> is one of
+following: &rsquo;v&rsquo; or &rsquo;V&rsquo; for video,
+&rsquo;a&rsquo; for audio, &rsquo;s&rsquo; for subtitle,
+&rsquo;d&rsquo; for data, and &rsquo;t&rsquo; for
+attachments. &rsquo;v&rsquo; matches all video streams,
+&rsquo;V&rsquo; only matches video streams which are not
+attached pictures, video thumbnails or cover arts. If
+<i>additional_stream_specifier</i> is used, then it matches
+streams which both have this type and match the
+<i>additional_stream_specifier</i>. Otherwise, it matches
+all streams of the specified type.</p>
+
+
+<p style="margin-left:9%;"><b>g:</b><i>group_specifier</i><b>[:</b><i>additional_stream_specifier</i><b>]</b></p>
+
+<p style="margin-left:14%;">Matches streams which are in
+the group with the specifier <i>group_specifier</i>. if
+<i>additional_stream_specifier</i> is used, then it matches
+streams which both are part of the group and match the
+<i>additional_stream_specifier</i>. <i>group_specifier</i>
+may be one of the following: <i><br>
+group_index</i></p>
+
+<p style="margin-left:19%;">Match the stream with this
+group index.</p>
+
+<p style="margin-left:14%;"><b>#</b><i>group_id</i> <b>or
+i:</b><i>group_id</i></p>
+
+<p style="margin-left:19%;">Match the stream with this
+group id.</p>
+
+
+<p style="margin-left:9%;"><b>p:</b><i>program_id</i><b>[:</b><i>additional_stream_specifier</i><b>]</b></p>
+
+<p style="margin-left:14%;">Matches streams which are in
+the program with the id <i>program_id</i>. If
+<i>additional_stream_specifier</i> is used, then it matches
+streams which both are part of the program and match the
+<i>additional_stream_specifier</i>.</p>
+
+<p style="margin-left:9%;"><b>#</b><i>stream_id</i> <b>or
+i:</b><i>stream_id</i></p>
+
+<p style="margin-left:14%;">Match the stream by stream id
+(e.g. PID in MPEG-TS container).</p>
+
+
+<p style="margin-left:9%;"><b>m:</b><i>key</i><b>[:</b><i>value</i><b>]</b></p>
+
+<p style="margin-left:14%;">Matches streams with the
+metadata tag <i>key</i> having the specified value. If
+<i>value</i> is not given, matches streams that contain the
+given tag with any value.</p>
+
+
+<p style="margin-left:9%;"><b>disp:</b><i>dispositions</i><b>[:</b><i>additional_stream_specifier</i><b>]</b></p>
+
+<p style="margin-left:14%;">Matches streams with the given
+disposition(s). <i>dispositions</i> is a list of one or more
+dispositions (as printed by the <b>-dispositions</b> option)
+joined with &rsquo;+&rsquo;.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>u</b></p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Matches streams with usable configuration, the codec
+must be defined and the essential information such as video
+dimension or audio sample rate must be present.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Note that in
+<b>ffmpeg</b>, matching by metadata will only work properly
+for input files.</p>
+
+<h3>Generic options
+<a name="Generic options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+are shared amongst the ff* tools.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-L</b></p></td>
+<td width="2%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em">Show license.</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-h, -?, -help, --help
+[</b><i>arg</i><b>]</b></p>
+
+<p style="margin-left:14%;">Show help. An optional
+parameter may be specified to print help about a specific
+item. If no argument is specified, only basic (non advanced)
+tool options are shown.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Possible values
+of <i>arg</i> are: <b><br>
+long</b></p>
+
+<p style="margin-left:19%;">Print advanced tool options in
+addition to the basic tool options.</p>
+
+<p style="margin-left:14%;"><b>full</b></p>
+
+<p style="margin-left:19%;">Print complete list of options,
+including shared and private options for encoders, decoders,
+demuxers, muxers, filters, etc.</p>
+
+
+<p style="margin-left:14%;"><b>decoder=</b><i>decoder_name</i></p>
+
+<p style="margin-left:19%;">Print detailed information
+about the decoder named <i>decoder_name</i>. Use the
+<b>-decoders</b> option to get a list of all decoders.</p>
+
+
+<p style="margin-left:14%;"><b>encoder=</b><i>encoder_name</i></p>
+
+<p style="margin-left:19%;">Print detailed information
+about the encoder named <i>encoder_name</i>. Use the
+<b>-encoders</b> option to get a list of all encoders.</p>
+
+
+<p style="margin-left:14%;"><b>demuxer=</b><i>demuxer_name</i></p>
+
+<p style="margin-left:19%;">Print detailed information
+about the demuxer named <i>demuxer_name</i>. Use the
+<b>-formats</b> option to get a list of all demuxers and
+muxers.</p>
+
+
+<p style="margin-left:14%;"><b>muxer=</b><i>muxer_name</i></p>
+
+<p style="margin-left:19%;">Print detailed information
+about the muxer named <i>muxer_name</i>. Use the
+<b>-formats</b> option to get a list of all muxers and
+demuxers.</p>
+
+
+<p style="margin-left:14%;"><b>filter=</b><i>filter_name</i></p>
+
+<p style="margin-left:19%;">Print detailed information
+about the filter named <i>filter_name</i>. Use the
+<b>-filters</b> option to get a list of all filters.</p>
+
+
+<p style="margin-left:14%;"><b>bsf=</b><i>bitstream_filter_name</i></p>
+
+<p style="margin-left:19%;">Print detailed information
+about the bitstream filter named
+<i>bitstream_filter_name</i>. Use the <b>-bsfs</b> option to
+get a list of all bitstream filters.</p>
+
+
+<p style="margin-left:14%;"><b>protocol=</b><i>protocol_name</i></p>
+
+<p style="margin-left:19%;">Print detailed information
+about the protocol named <i>protocol_name</i>. Use the
+<b>-protocols</b> option to get a list of all protocols.</p>
+
+<p style="margin-left:9%;"><b>-version</b></p>
+
+<p style="margin-left:14%;">Show version.</p>
+
+<p style="margin-left:9%;"><b>-buildconf</b></p>
+
+<p style="margin-left:14%;">Show the build configuration,
+one option per line.</p>
+
+<p style="margin-left:9%;"><b>-formats</b></p>
+
+<p style="margin-left:14%;">Show available formats
+(including devices).</p>
+
+<p style="margin-left:9%;"><b>-demuxers</b></p>
+
+<p style="margin-left:14%;">Show available demuxers.</p>
+
+<p style="margin-left:9%;"><b>-muxers</b></p>
+
+<p style="margin-left:14%;">Show available muxers.</p>
+
+<p style="margin-left:9%;"><b>-devices</b></p>
+
+<p style="margin-left:14%;">Show available devices.</p>
+
+<p style="margin-left:9%;"><b>-codecs</b></p>
+
+<p style="margin-left:14%;">Show all codecs known to
+libavcodec.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that the
+term &rsquo;codec&rsquo; is used throughout this
+documentation as a shortcut for what is more correctly
+called a media bitstream format.</p>
+
+<p style="margin-left:9%;"><b>-decoders</b></p>
+
+<p style="margin-left:14%;">Show available decoders.</p>
+
+<p style="margin-left:9%;"><b>-encoders</b></p>
+
+<p style="margin-left:14%;">Show all available
+encoders.</p>
+
+<p style="margin-left:9%;"><b>-bsfs</b></p>
+
+<p style="margin-left:14%;">Show available bitstream
+filters.</p>
+
+<p style="margin-left:9%;"><b>-protocols</b></p>
+
+<p style="margin-left:14%;">Show available protocols.</p>
+
+<p style="margin-left:9%;"><b>-filters</b></p>
+
+<p style="margin-left:14%;">Show available libavfilter
+filters.</p>
+
+<p style="margin-left:9%;"><b>-pix_fmts</b></p>
+
+<p style="margin-left:14%;">Show available pixel
+formats.</p>
+
+<p style="margin-left:9%;"><b>-sample_fmts</b></p>
+
+<p style="margin-left:14%;">Show available sample
+formats.</p>
+
+<p style="margin-left:9%;"><b>-layouts</b></p>
+
+<p style="margin-left:14%;">Show channel names and standard
+channel layouts.</p>
+
+<p style="margin-left:9%;"><b>-dispositions</b></p>
+
+<p style="margin-left:14%;">Show stream dispositions.</p>
+
+<p style="margin-left:9%;"><b>-colors</b></p>
+
+<p style="margin-left:14%;">Show recognized color
+names.</p>
+
+<p style="margin-left:9%;"><b>-sources</b>
+<i>device</i><b>[,</b><i>opt1</i><b>=</b><i>val1</i><b>[,</b><i>opt2</i><b>=</b><i>val2</i><b>]...]</b></p>
+
+<p style="margin-left:14%;">Show autodetected sources of
+the input device. Some devices may provide system-dependent
+source names that cannot be autodetected. The returned list
+cannot be assumed to be always complete.</p>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg -sources
+pulse,server=192.168.0.4</p>
+
+<p style="margin-left:9%;"><b>-sinks</b>
+<i>device</i><b>[,</b><i>opt1</i><b>=</b><i>val1</i><b>[,</b><i>opt2</i><b>=</b><i>val2</i><b>]...]</b></p>
+
+<p style="margin-left:14%;">Show autodetected sinks of the
+output device. Some devices may provide system-dependent
+sink names that cannot be autodetected. The returned list
+cannot be assumed to be always complete.</p>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg -sinks
+pulse,server=192.168.0.4</p>
+
+<p style="margin-left:9%;"><b>-loglevel
+[</b><i>flags</i><b>+]</b><i>loglevel</i> <b>| -v
+[</b><i>flags</i><b>+]</b><i>loglevel</i></p>
+
+<p style="margin-left:14%;">Set logging level and flags
+used by the library.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The optional
+<i>flags</i> prefix can consist of the following values:
+<b><br>
+repeat</b></p>
+
+<p style="margin-left:19%;">Indicates that repeated log
+output should not be compressed to the first line and the
+&quot;Last message repeated n times&quot; line will be
+omitted.</p>
+
+<p style="margin-left:14%;"><b>level</b></p>
+
+<p style="margin-left:19%;">Indicates that log output
+should add a &quot;[level]&quot; prefix to each message
+line. This can be used as an alternative to log coloring,
+e.g. when dumping the log to file.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Flags can also
+be used alone by adding a &rsquo;+&rsquo;/&rsquo;-&rsquo;
+prefix to set/reset a single flag without affecting other
+<i>flags</i> or changing <i>loglevel</i>. When setting both
+<i>flags</i> and <i>loglevel</i>, a &rsquo;+&rsquo;
+separator is expected between the last <i>flags</i> value
+and before <i>loglevel</i>.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>loglevel</i>
+is a string or a number containing one of the following
+values: <b><br>
+quiet, -8</b></p>
+
+<p style="margin-left:19%;">Show nothing at all; be
+silent.</p>
+
+<p style="margin-left:14%;"><b>panic, 0</b></p>
+
+<p style="margin-left:19%;">Only show fatal errors which
+could lead the process to crash, such as an assertion
+failure. This is not currently used for anything.</p>
+
+<p style="margin-left:14%;"><b>fatal, 8</b></p>
+
+<p style="margin-left:19%;">Only show fatal errors. These
+are errors after which the process absolutely cannot
+continue.</p>
+
+<p style="margin-left:14%;"><b>error, 16</b></p>
+
+<p style="margin-left:19%;">Show all errors, including ones
+which can be recovered from.</p>
+
+<p style="margin-left:14%;"><b>warning, 24</b></p>
+
+<p style="margin-left:19%;">Show all warnings and errors.
+Any message related to possibly incorrect or unexpected
+events will be shown.</p>
+
+<p style="margin-left:14%;"><b>info, 32</b></p>
+
+<p style="margin-left:19%;">Show informative messages
+during processing. This is in addition to warnings and
+errors. This is the default value.</p>
+
+<p style="margin-left:14%;"><b>verbose, 40</b></p>
+
+<p style="margin-left:19%;">Same as &quot;info&quot;,
+except more verbose.</p>
+
+<p style="margin-left:14%;"><b>debug, 48</b></p>
+
+<p style="margin-left:19%;">Show everything, including
+debugging information.</p>
+
+<p style="margin-left:14%;"><b>trace, 56</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">For example to
+enable repeated log output, add the &quot;level&quot;
+prefix, and set <i>loglevel</i> to &quot;verbose&quot;:</p>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg
+-loglevel repeat+level+verbose -i input output</p>
+
+<p style="margin-left:14%; margin-top: 1em">Another example
+that enables repeated log output without affecting current
+state of &quot;level&quot; prefix flag or
+<i>loglevel</i>:</p>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg [...]
+-loglevel +repeat</p>
+
+<p style="margin-left:14%; margin-top: 1em">By default the
+program logs to stderr. If coloring is supported by the
+terminal, colors are used to mark errors and warnings. Log
+coloring can be disabled setting the environment variable
+<b>AV_LOG_FORCE_NOCOLOR</b>, or can be forced setting the
+environment variable <b>AV_LOG_FORCE_COLOR</b>.</p>
+
+<p style="margin-left:9%;"><b>-report</b></p>
+
+<p style="margin-left:14%;">Dump full command line and log
+output to a file named
+&quot;<i>program</i>-<i>YYYYMMDD</i>-<i>HHMMSS</i>.log&quot;
+in the current directory. This file can be useful for bug
+reports. It also implies &quot;-loglevel debug&quot;.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Setting the
+environment variable <b>FFREPORT</b> to any value has the
+same effect. If the value is a &rsquo;:&rsquo;-separated
+key=value sequence, these options will affect the report;
+option values must be escaped if they contain special
+characters or the options delimiter &rsquo;:&rsquo; (see the
+&lsquo;&lsquo;Quoting and escaping&rsquo;&rsquo; section in
+the ffmpeg-utils manual).</p>
+
+<p style="margin-left:14%; margin-top: 1em">The following
+options are recognized: <b><br>
+file</b></p>
+
+<p style="margin-left:19%;">set the file name to use for
+the report; %p is expanded to the name of the program, %t is
+expanded to a timestamp, &quot;%%&quot; is expanded to a
+plain &quot;%&quot;</p>
+
+<p style="margin-left:14%;"><b>level</b></p>
+
+<p style="margin-left:19%;">set the log verbosity level
+using a numerical value (see &quot;-loglevel&quot;).</p>
+
+<p style="margin-left:14%; margin-top: 1em">For example, to
+output a report to a file named <i>ffreport.log</i> using a
+log level of 32 (alias for log level &quot;info&quot;):</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">FFREPORT=file=ffreport.log:level=32
+ffmpeg -i input output</p>
+
+<p style="margin-left:14%; margin-top: 1em">Errors in
+parsing the environment variable are not fatal, and will not
+appear in the report.</p>
+
+<p style="margin-left:9%;"><b>-hide_banner</b></p>
+
+<p style="margin-left:14%;">Suppress printing banner.</p>
+
+<p style="margin-left:14%; margin-top: 1em">All FFmpeg
+tools will normally show a copyright notice, build options
+and library versions. This option can be used to suppress
+printing this information.</p>
+
+<p style="margin-left:9%;"><b>-cpuflags flags
+(</b><i>global</i><b>)</b></p>
+
+<p style="margin-left:14%;">Allows setting and clearing cpu
+flags. This option is intended for testing. Do not use it
+unless you know what you&rsquo;re doing.</p>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg
+-cpuflags -sse+mmx ... <br>
+ffmpeg -cpuflags mmx ... <br>
+ffmpeg -cpuflags 0 ...</p>
+
+<p style="margin-left:14%; margin-top: 1em">Possible flags
+for this option are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="9%">
+
+
+<p><b>x86</b></p></td>
+<td width="77%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="9%">
+
+
+<p><b>mmx</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:19%; margin-top: 1em"><b>mmxext</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="4%">
+
+
+<p><b>sse</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%; margin-top: 1em"><b>sse2 <br>
+sse2slow <br>
+sse3 <br>
+sse3slow <br>
+ssse3 <br>
+atom <br>
+sse4.1 <br>
+sse4.2</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="4%">
+
+
+<p><b>avx</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:19%; margin-top: 1em"><b>avx2</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="4%">
+
+
+<p><b>xop</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%; margin-top: 1em"><b>fma3 <br>
+fma4 <br>
+3dnow <br>
+3dnowext <br>
+bmi1 <br>
+bmi2 <br>
+cmov</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="4%">
+
+
+<p><b>ARM</b></p></td>
+<td width="82%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%; margin-top: 1em"><b>armv5te <br>
+armv6 <br>
+armv6t2</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="4%">
+
+
+<p><b>vfp</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%; margin-top: 1em"><b>vfpv3 <br>
+neon <br>
+setend</b></p>
+
+<p style="margin-left:14%;"><b>AArch64</b></p>
+
+<p style="margin-left:19%;"><b>armv8</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="4%">
+
+
+<p><b>vfp</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:19%; margin-top: 1em"><b>neon</b></p>
+
+<p style="margin-left:14%;"><b>PowerPC</b></p>
+
+<p style="margin-left:19%;"><b>altivec</b></p>
+
+<p style="margin-left:14%;"><b>Specific Processors</b></p>
+
+<p style="margin-left:19%;"><b>pentium2 <br>
+pentium3 <br>
+pentium4</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="4%">
+
+
+<p><b>k6</b></p></td>
+<td width="77%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="4%">
+
+
+<p><b>k62</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%; margin-top: 1em"><b>athlon <br>
+athlonxp</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="3%">
+
+
+<p><b>k8</b></p></td>
+<td width="78%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-cpucount</b>
+<i>count</i> <b>(</b><i>global</i><b>)</b></p>
+
+<p style="margin-left:14%;">Override detection of CPU
+count. This option is intended for testing. Do not use it
+unless you know what you&rsquo;re doing.</p>
+
+<p style="margin-left:14%; margin-top: 1em">ffmpeg
+-cpucount 2</p>
+
+<p style="margin-left:9%;"><b>-max_alloc</b>
+<i>bytes</i></p>
+
+<p style="margin-left:14%;">Set the maximum size limit for
+allocating a block on the heap by ffmpeg&rsquo;s family of
+malloc functions. Exercise <b>extreme caution</b> when using
+this option. Don&rsquo;t use if you do not understand the
+full consequence of doing so. Default is INT_MAX.</p>
+
+<h3>AVOptions
+<a name="AVOptions"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+are provided directly by the libavformat, libavdevice and
+libavcodec libraries. To see the list of available
+AVOptions, use the <b>-help</b> option. They are separated
+into two categories: <b><br>
+generic</b></p>
+
+<p style="margin-left:14%;">These options can be set for
+any container, codec or device. Generic options are listed
+under AVFormatContext options for containers/devices and
+under AVCodecContext options for codecs.</p>
+
+<p style="margin-left:9%;"><b>private</b></p>
+
+<p style="margin-left:14%;">These options are specific to
+the given container, device or codec. Private options are
+listed under their corresponding
+containers/devices/codecs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example to
+write an ID3v2.3 header instead of a default ID3v2.4 to an
+MP3 file, use the <b>id3v2_version</b> private option of the
+MP3 muxer:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+input.flac -id3v2_version 3 out.mp3</p>
+
+<p style="margin-left:9%; margin-top: 1em">All codec
+AVOptions are per-stream, and thus a stream specifier should
+be attached to them:</p>
+
+<p style="margin-left:9%; margin-top: 1em">ffmpeg -i
+multichannel.mxf -map 0:v:0 -map 0:a:0 -map 0:a:0 -c:a:0 ac3
+-b:a:0 640k -ac:a:1 2 -c:a:1 aac -b:2 128k out.mp4</p>
+
+<p style="margin-left:9%; margin-top: 1em">In the above
+example, a multichannel audio stream is mapped twice for
+output. The first instance is encoded with codec ac3 and
+bitrate 640k. The second instance is downmixed to 2 channels
+and encoded with codec aac. A bitrate of 128k is specified
+for it using absolute index of the output stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: the
+<b>-nooption</b> syntax cannot be used for boolean
+AVOptions, use <b>-option 0</b>/<b>-option 1</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: the old
+undocumented way of specifying per-stream AVOptions by
+prepending v/a/s to the options name is now obsolete and
+will be removed soon.</p>
+
+<h3>Main options
+<a name="Main options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-x</b>
+<i>width</i></p>
+
+<p style="margin-left:14%;">Force displayed width.</p>
+
+<p style="margin-left:9%;"><b>-y</b> <i>height</i></p>
+
+<p style="margin-left:14%;">Force displayed height.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-fs</b></p></td>
+<td width="1%"></td>
+<td width="32%">
+
+
+<p>Start in fullscreen mode.</p></td>
+<td width="54%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-an</b></p></td>
+<td width="1%"></td>
+<td width="32%">
+
+
+<p>Disable audio.</p></td>
+<td width="54%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-vn</b></p></td>
+<td width="1%"></td>
+<td width="32%">
+
+
+<p>Disable video.</p></td>
+<td width="54%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-sn</b></p></td>
+<td width="1%"></td>
+<td width="32%">
+
+
+<p>Disable subtitles.</p></td>
+<td width="54%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-ss</b> <i>pos</i></p>
+
+<p style="margin-left:14%;">Seek to <i>pos</i>. Note that
+in most formats it is not possible to seek exactly, so
+<b>ffplay</b> will seek to the nearest seek point to
+<i>pos</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>pos</i> must
+be a time duration specification, see <b>the Time duration
+section in the ffmpeg-utils(1) manual</b>.</p>
+
+<p style="margin-left:9%;"><b>-t</b> <i>duration</i></p>
+
+<p style="margin-left:14%;">Play <i>duration</i> seconds of
+audio/video.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>duration</i>
+must be a time duration specification, see <b>the Time
+duration section in the ffmpeg-utils(1) manual</b>.</p>
+
+<p style="margin-left:9%;"><b>-bytes</b></p>
+
+<p style="margin-left:14%;">Seek by bytes.</p>
+
+<p style="margin-left:9%;"><b>-seek_interval</b></p>
+
+<p style="margin-left:14%;">Set custom interval, in
+seconds, for seeking using left/right keys. Default is 10
+seconds.</p>
+
+<p style="margin-left:9%;"><b>-nodisp</b></p>
+
+<p style="margin-left:14%;">Disable graphical display.</p>
+
+<p style="margin-left:9%;"><b>-noborder</b></p>
+
+<p style="margin-left:14%;">Borderless window.</p>
+
+<p style="margin-left:9%;"><b>-alwaysontop</b></p>
+
+<p style="margin-left:14%;">Window always on top. Available
+on: X11 with SDL &gt;= 2.0.5, Windows SDL &gt;= 2.0.6.</p>
+
+<p style="margin-left:9%;"><b>-volume</b></p>
+
+<p style="margin-left:14%;">Set the startup volume. 0 means
+silence, 100 means no volume reduction or amplification.
+Negative values are treated as 0, values above 100 are
+treated as 100.</p>
+
+<p style="margin-left:9%;"><b>-f</b> <i>fmt</i></p>
+
+<p style="margin-left:14%;">Force format.</p>
+
+<p style="margin-left:9%;"><b>-window_title</b>
+<i>title</i></p>
+
+<p style="margin-left:14%;">Set window title (default is
+the input filename).</p>
+
+<p style="margin-left:9%;"><b>-left</b> <i>title</i></p>
+
+<p style="margin-left:14%;">Set the x position for the left
+of the window (default is a centered window).</p>
+
+<p style="margin-left:9%;"><b>-top</b> <i>title</i></p>
+
+<p style="margin-left:14%;">Set the y position for the top
+of the window (default is a centered window).</p>
+
+<p style="margin-left:9%;"><b>-loop</b> <i>number</i></p>
+
+<p style="margin-left:14%;">Loops movie playback
+&lt;number&gt; times. 0 means forever.</p>
+
+<p style="margin-left:9%;"><b>-showmode</b> <i>mode</i></p>
+
+<p style="margin-left:14%;">Set the show mode to use.
+Available values for <i>mode</i> are: <b><br>
+0, video</b></p>
+
+<p style="margin-left:19%;">show video</p>
+
+<p style="margin-left:14%;"><b>1, waves</b></p>
+
+<p style="margin-left:19%;">show audio waves</p>
+
+<p style="margin-left:14%;"><b>2, rdft</b></p>
+
+<p style="margin-left:19%;">show audio frequency band using
+RDFT ((Inverse) Real Discrete Fourier Transform)</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default value
+is &quot;video&quot;, if video is not present or cannot be
+played &quot;rdft&quot; is automatically selected.</p>
+
+<p style="margin-left:14%; margin-top: 1em">You can
+interactively cycle through the available show modes by
+pressing the key <b>w</b>.</p>
+
+<p style="margin-left:9%;"><b>-vf</b>
+<i>filtergraph</i></p>
+
+<p style="margin-left:14%;">Create the filtergraph
+specified by <i>filtergraph</i> and use it to filter the
+video stream.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>filtergraph</i>
+is a description of the filtergraph to apply to the stream,
+and must have a single video input and a single video
+output. In the filtergraph, the input is associated to the
+label &quot;in&quot;, and the output to the label
+&quot;out&quot;. See the ffmpeg-filters manual for more
+information about the filtergraph syntax.</p>
+
+<p style="margin-left:14%; margin-top: 1em">You can specify
+this parameter multiple times and cycle through the
+specified filtergraphs along with the show modes by pressing
+the key <b>w</b>.</p>
+
+<p style="margin-left:9%;"><b>-af</b>
+<i>filtergraph</i></p>
+
+<p style="margin-left:14%;"><i>filtergraph</i> is a
+description of the filtergraph to apply to the input audio.
+Use the option &quot;-filters&quot; to show all the
+available filters (including sources and sinks).</p>
+
+<p style="margin-left:9%;"><b>-i</b> <i>input_url</i></p>
+
+<p style="margin-left:14%;">Read <i>input_url</i>.</p>
+
+<h3>Advanced options
+<a name="Advanced options"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-stats</b></p>
+
+<p style="margin-left:14%;">Print several playback
+statistics, in particular show the stream duration, the
+codec parameters, the current position in the stream and the
+audio/video synchronisation drift. It is shown by default,
+unless the log level is lower than &quot;info&quot;. Its
+display can be forced by manually specifying this option. To
+disable it, you need to specify &quot;-nostats&quot;.</p>
+
+<p style="margin-left:9%;"><b>-fast</b></p>
+
+<p style="margin-left:14%;">Non-spec-compliant
+optimizations.</p>
+
+<p style="margin-left:9%;"><b>-genpts</b></p>
+
+<p style="margin-left:14%;">Generate pts.</p>
+
+<p style="margin-left:9%;"><b>-sync</b> <i>type</i></p>
+
+<p style="margin-left:14%;">Set the master clock to audio
+(&quot;type=audio&quot;), video (&quot;type=video&quot;) or
+external (&quot;type=ext&quot;). Default is audio. The
+master clock is used to control audio-video synchronization.
+Most media players use audio as master clock, but in some
+cases (streaming or high quality broadcast) it is necessary
+to change that. This option is mainly used for debugging
+purposes.</p>
+
+<p style="margin-left:9%;"><b>-ast</b>
+<i>audio_stream_specifier</i></p>
+
+<p style="margin-left:14%;">Select the desired audio stream
+using the given stream specifier. The stream specifiers are
+described in the <b>Stream specifiers</b> chapter. If this
+option is not specified, the &quot;best&quot; audio stream
+is selected in the program of the already selected video
+stream.</p>
+
+<p style="margin-left:9%;"><b>-vst</b>
+<i>video_stream_specifier</i></p>
+
+<p style="margin-left:14%;">Select the desired video stream
+using the given stream specifier. The stream specifiers are
+described in the <b>Stream specifiers</b> chapter. If this
+option is not specified, the &quot;best&quot; video stream
+is selected.</p>
+
+<p style="margin-left:9%;"><b>-sst</b>
+<i>subtitle_stream_specifier</i></p>
+
+<p style="margin-left:14%;">Select the desired subtitle
+stream using the given stream specifier. The stream
+specifiers are described in the <b>Stream specifiers</b>
+chapter. If this option is not specified, the
+&quot;best&quot; subtitle stream is selected in the program
+of the already selected video or audio stream.</p>
+
+<p style="margin-left:9%;"><b>-autoexit</b></p>
+
+<p style="margin-left:14%;">Exit when video is done
+playing.</p>
+
+<p style="margin-left:9%;"><b>-exitonkeydown</b></p>
+
+<p style="margin-left:14%;">Exit if any key is pressed.</p>
+
+<p style="margin-left:9%;"><b>-exitonmousedown</b></p>
+
+<p style="margin-left:14%;">Exit if any mouse button is
+pressed.</p>
+
+
+<p style="margin-left:9%;"><b>-codec:</b><i>media_specifier
+codec_name</i></p>
+
+<p style="margin-left:14%;">Force a specific decoder
+implementation for the stream identified by
+<i>media_specifier</i>, which can assume the values
+&quot;a&quot; (audio), &quot;v&quot; (video), and
+&quot;s&quot; subtitle.</p>
+
+<p style="margin-left:9%;"><b>-acodec</b>
+<i>codec_name</i></p>
+
+<p style="margin-left:14%;">Force a specific audio
+decoder.</p>
+
+<p style="margin-left:9%;"><b>-vcodec</b>
+<i>codec_name</i></p>
+
+<p style="margin-left:14%;">Force a specific video
+decoder.</p>
+
+<p style="margin-left:9%;"><b>-scodec</b>
+<i>codec_name</i></p>
+
+<p style="margin-left:14%;">Force a specific subtitle
+decoder.</p>
+
+<p style="margin-left:9%;"><b>-autorotate</b></p>
+
+<p style="margin-left:14%;">Automatically rotate the video
+according to file metadata. Enabled by default, use
+<b>-noautorotate</b> to disable it.</p>
+
+<p style="margin-left:9%;"><b>-framedrop</b></p>
+
+<p style="margin-left:14%;">Drop video frames if video is
+out of sync. Enabled by default if the master clock is not
+set to video. Use this option to enable frame dropping for
+all master clock sources, use <b>-noframedrop</b> to disable
+it.</p>
+
+<p style="margin-left:9%;"><b>-infbuf</b></p>
+
+<p style="margin-left:14%;">Do not limit the input buffer
+size, read as much data as possible from the input as soon
+as possible. Enabled by default for realtime streams, where
+data may be dropped if not read in time. Use this option to
+enable infinite buffers for all inputs, use <b>-noinfbuf</b>
+to disable it.</p>
+
+<p style="margin-left:9%;"><b>-filter_threads</b>
+<i>nb_threads</i></p>
+
+<p style="margin-left:14%;">Defines how many threads are
+used to process a filter pipeline. Each pipeline will
+produce a thread pool with this many threads available for
+parallel processing. The default is 0 which means that the
+thread count will be determined by the number of available
+CPUs.</p>
+
+<p style="margin-left:9%;"><b>-enable_vulkan</b></p>
+
+<p style="margin-left:14%;">Use vulkan renderer rather than
+SDL builtin renderer. Depends on libplacebo.</p>
+
+<p style="margin-left:9%;"><b>-vulkan_params</b></p>
+
+<p style="margin-left:14%;">Vulkan configuration using a
+list of <i>key</i>=<i>value</i> pairs separated by
+&quot;:&quot;.</p>
+
+<p style="margin-left:9%;"><b>-hwaccel</b></p>
+
+<p style="margin-left:14%;">Use HW accelerated decoding.
+Enable this option will enable vulkan renderer
+automatically.</p>
+
+<h3>While playing
+<a name="While playing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>q,
+ESC</b></p>
+
+<p style="margin-left:14%;">Quit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>f</b></p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>Toggle full screen.</p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>p, SPC</b></p>
+
+<p style="margin-left:14%;">Pause.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>m</b></p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p>Toggle mute.</p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>9, 0 <br>
+/, *</b></p>
+
+<p style="margin-left:14%;">Decrease and increase volume
+respectively.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>a</b></p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p>Cycle audio channel in the current program.</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>v</b></p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p>Cycle video channel.</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>t</b></p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p>Cycle subtitle channel in the current program.</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>c</b></p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p>Cycle program.</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>w</b></p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p>Cycle video filters or show modes.</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>s</b></p></td>
+<td width="4%"></td>
+<td width="59%">
+
+
+<p>Step to the next frame.</p></td>
+<td width="27%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Pause if the
+stream is not already paused, step to the next video frame,
+and pause.</p>
+
+<p style="margin-left:9%;"><b>left/right</b></p>
+
+<p style="margin-left:14%;">Seek backward/forward 10
+seconds.</p>
+
+<p style="margin-left:9%;"><b>down/up</b></p>
+
+<p style="margin-left:14%;">Seek backward/forward 1
+minute.</p>
+
+<p style="margin-left:9%;"><b>page down/page up</b></p>
+
+<p style="margin-left:14%;">Seek to the previous/next
+chapter. or if there are no chapters Seek backward/forward
+10 minutes.</p>
+
+<p style="margin-left:9%;"><b>right mouse click</b></p>
+
+<p style="margin-left:14%;">Seek to percentage in file
+corresponding to fraction of width.</p>
+
+<p style="margin-left:9%;"><b>left mouse
+double-click</b></p>
+
+<p style="margin-left:14%;">Toggle full screen.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ffplay-all</b>(1),
+<b>ffmpeg</b>(1), <b>ffprobe</b>(1), <b>ffmpeg-utils</b>(1),
+<b>ffmpeg-scaler</b>(1), <b>ffmpeg-resampler</b>(1),
+<b>ffmpeg-codecs</b>(1), <b>ffmpeg-bitstream-filters</b>(1),
+<b>ffmpeg-formats</b>(1), <b>ffmpeg-devices</b>(1),
+<b>ffmpeg-protocols</b>(1), <b>ffmpeg-filters</b>(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The FFmpeg
+developers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For details
+about the authorship, see the Git history of the project
+(https://git.ffmpeg.org/ffmpeg), e.g. by typing the command
+<b>git log</b> in the FFmpeg source directory, or browsing
+the online repository at
+&lt;<b>https://git.ffmpeg.org/ffmpeg</b>&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Maintainers for
+the specific components are listed in the file
+<i>MAINTAINERS</i> in the source code tree.</p>
+<hr>
+</body>
+</html>

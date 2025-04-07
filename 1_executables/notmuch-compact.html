@@ -1,0 +1,116 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-COMPACT</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-COMPACT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-compact
+- compact the notmuch database</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+compact</b> [--quiet]
+[--backup=&lt;<i>directory</i>&gt;]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>compact</b> command can be used to compact the notmuch
+database. This can both reduce the space required by the
+database and improve lookup performance.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The compacted
+database is built in a temporary directory and is later
+moved into the place of the origin database. The original
+uncompacted database is discarded, unless the
+<b>--backup=</b>&lt;directory&gt; option is used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+database write lock will be held during the compaction
+process (which may be quite long) to protect data
+integrity.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>compact</b> include <b><br>
+--backup=&lt;directory&gt;</b></p>
+
+<p style="margin-left:18%;">Save the current database to
+the given directory before replacing it with the compacted
+database. The backup directory must not exist and it must
+reside on the same mounted filesystem as the current
+database.</p>
+
+<p style="margin-left:9%;"><b>--quiet</b></p>
+
+<p style="margin-left:18%;">Do not report database
+compaction progress to stdout.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-count</i>, <i>notmuch-dump</i>,
+<i>notmuch-hooks</i>, <i>notmuch-insert</i>,
+<i>notmuch-new</i>, <i>notmuch-reply</i>,
+<i>notmuch-restore</i>, <i>notmuch-search</i>,
+<i>notmuch-search-terms</i>, <i>notmuch-show</i>,
+<i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

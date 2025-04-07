@@ -1,0 +1,210 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>DC1394_VLOOPBACK</title>
+
+</head>
+<body>
+
+<h1 align="center">DC1394_VLOOPBACK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">dc1394_vloopback
+- send format0 video to V4L vloopback device</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dc1394_vloopback
+[</b><i>--daemon</i>] [<i>--pipe</i>]
+[<i>--guid=camera-euid</i>]
+[<i>--video1394=/dev/video1394/x</i>]
+[<i>--vloopback=/dev/video0</i>]
+[<i>--palette=yuv422|rgb24</i>] [<i>--width=n</i>]
+[<i>--height=n</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Sends format0
+640x480 RGB to the vloopback input device so that it can be
+consumed by V4L applications on the vloopback output
+device.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--daemon</b></p>
+
+<p style="margin-left:18%;">run as a daemon, detached from
+console (optional).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--pipe</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>write images to vloopback device instead of using
+zero-copy mmap mode (optional).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--guid</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>select camera to use (optional). default is first camera
+on any port.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--video1394</b></p>
+
+<p style="margin-left:18%;">specifies video1394 device to
+use (optional). default is /dev/video1394/&lt;port#&gt;.</p>
+
+<p style="margin-left:9%;"><b>--vloopback</b></p>
+
+<p style="margin-left:18%;">specifies video4linux device to
+use (optional). default is to determine this
+automatically.</p>
+
+<p style="margin-left:9%;"><b>--palette</b></p>
+
+<p style="margin-left:18%;">specify the video palette to
+use (optional). yuv422 (default) or rgb24.</p>
+
+<p style="margin-left:9%;"><b>--width</b></p>
+
+<p style="margin-left:18%;">set the initial width
+(default=640)</p>
+
+<p style="margin-left:9%;"><b>--height</b></p>
+
+<p style="margin-left:18%;">set the initial height
+(default=480)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="23%">
+
+
+<p>print help message</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+maintained by the DC1394 Package Mainteners&rsquo; team
+&lt;libdc1394-packaging@lists.sourceforge.net&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The bugs related
+to libdc1394 and current packaging can be submitted
+here:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">http://bugs.launchpad.net/&#732;libdc1394-dev/</p>
+
+<p style="margin-left:9%; margin-top: 1em">For bugs related
+to library implementation, please submit to libdc1394
+developers: &lt;libdc1394-dev@lists.sourceforge.net&gt;.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was originally written by Peter De Schrijver
+&lt;p2@debian.org&gt; for the Debian GNU/Linux system (but
+may be used by others).</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+is maintained by the DC1394 Package Mainteners&rsquo; team.
+The team members and other information can be found online
+at: http://launchpad.net/&#732;libdc1394-dev</p>
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this document
+under the terms of the GNU Lesser General Public License,
+Version 2 or any later version published by the Free
+Software Foundation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On Debian
+systems (like Ubuntu), the complete text of the GNU Lesser
+General Public License can be found in
+/usr/share/common-licenses/LGPL-2.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dc1394_reset_bus</b>(1)</p>
+<hr>
+</body>
+</html>

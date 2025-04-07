@@ -1,0 +1,186 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VAPIGEN</title>
+
+</head>
+<body>
+
+<h1 align="center">VAPIGEN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Usage:">Usage:</a><br>
+<a href="#Help Options:">Help Options:</a><br>
+<a href="#Application Options:">Application Options:</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#HOMEPAGE OR CONTACT">HOMEPAGE OR CONTACT</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">vapigen -
+generate a Vala API</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vapigen</b>
+<i>SOURCE PKGBASE</i> [<i>OPTION</i>]...
+[<i>FILE</i>]...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vapigen</b>
+is a utility which generates Vala API (VAPI) files from GI
+files, which may be generated using the
+vala-gen-introspect(1) utility.</p>
+
+<h3>Usage:
+<a name="Usage:"></a>
+</h3>
+
+
+<p style="margin-left:18%; margin-top: 1em">vapigen
+[OPTION?] FILE... - Vala API Generator</p>
+
+<h3>Help Options:
+<a name="Help Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<h3>Application Options:
+<a name="Application Options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--vapidir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for package bindings in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--girdir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for GIR bindings in
+DIRECTORY</p>
+
+
+<p style="margin-left:9%;"><b>--metadatadir</b>=<i>DIRECTORY</i>...</p>
+
+<p style="margin-left:18%;">Look for GIR .metadata files in
+DIRECTORY</p>
+
+<p style="margin-left:9%;"><b>--nostdpkg</b></p>
+
+<p style="margin-left:18%;">Do not include standard
+packages</p>
+
+
+<p style="margin-left:9%;"><b>--pkg</b>=<i>PACKAGE</i>...</p>
+
+<p style="margin-left:18%;">Include binding for PACKAGE</p>
+
+
+<p style="margin-left:9%;"><b>--library</b>=<i>NAME</i></p>
+
+<p style="margin-left:18%;">Library name</p>
+
+<p style="margin-left:9%;"><b>-d</b>,
+<b>--directory</b>=<i>DIRECTORY</i></p>
+
+<p style="margin-left:18%;">Output directory</p>
+
+<p style="margin-left:9%;"><b>--disable-warnings</b></p>
+
+<p style="margin-left:18%;">Disable warnings</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Display version number</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--quiet</b></p>
+
+<p style="margin-left:18%;">Do not print messages to the
+console</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://gitlab.gnome.org/GNOME/vala/issues</p>
+
+<h2>HOMEPAGE OR CONTACT
+<a name="HOMEPAGE OR CONTACT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://vala.dev</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">J??rg Billeter,
+Raffaele Sandrini.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">After
+compilation, the following command generates a GI for pango:
+<b>vala-gen-introspect pango packages/pango</b> <br>
+This can then be converted to a Vala API as follows:</p>
+
+<p style="margin-left:18%;"><b>vapigen --pkg cairo
+--vapidir . --library pango packages/pango/pango.gi</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">vala-gen-introspect
+(1)</p>
+<hr>
+</body>
+</html>

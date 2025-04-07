@@ -1,0 +1,198 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:46 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#RUNTIME OPTIONS">RUNTIME OPTIONS</a><br>
+<a href="#LICENSE FILES">LICENSE FILES</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lc - Mono
+License Compiler</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lc -c
+filename -t targetassembly [-i reference...] [-v] [-o
+outputpath] [-nologo]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>lc</i></b>
+tool is a license compiler for Mono. It&rsquo;s used to
+convert a licenses.licx file to a resource that can be
+embedded into an executable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When using
+commercial components for .NET they often require a license
+resource at runtime to make sure the developer was licensed
+to use this control. The most common way of making sure the
+component was properly licensed is by using license
+resources. At compile time the developer uses the <i>lc</i>
+tool to convert a licenses.licx file to a
+programname.exe.licenses file and embed that as a managed
+resource during compilation.</p>
+
+<h2>RUNTIME OPTIONS
+<a name="RUNTIME OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are available: <b><br>
+--complist=filename</b>, <b>-c filename</b></p>
+
+<p style="margin-left:18%;">This option is used to specify
+the input file, the licenses.licx file to create a license
+reesource for. This option is required. The license compiler
+will read each line in this file and try to load the types
+specified on that line.</p>
+
+<p style="margin-left:9%;"><b>--target=assemblyname</b>,
+<b>-t targetassembly</b></p>
+
+<p style="margin-left:18%;">full assembly name with file
+extension for the target assembly. The license compiler uses
+this as a key when compiling the licenses. It has to match
+the assembly the resource will be embedded in. This option
+is required.</p>
+
+<p style="margin-left:9%;"><b>--load=reference</b>, <b>-i
+reference</b></p>
+
+<p style="margin-left:18%;">Assembly reference to load
+before trying to compile a license. This option is needed
+for assemblies where the references are not in the gac.
+Compilers should pass all references to the license
+compiler.</p>
+
+<p style="margin-left:9%;"><b>--verbose,</b>, <b>-v</b></p>
+
+<p style="margin-left:18%;">Gives more verbose output about
+the license compiling process.</p>
+
+<p style="margin-left:9%;"><b>--help</b>, <b>-h</b></p>
+
+<p style="margin-left:18%;">Displays usage
+instructions.</p>
+
+<p style="margin-left:9%;"><b>--outdir=path</b>, <b>-o
+path</b></p>
+
+<p style="margin-left:18%;">Target path file the licenses
+resource. By default the license compiler emits the resource
+in the current directory. The filename will always match the
+target assembly passed to --target with .licenses added.</p>
+
+<p style="margin-left:9%;"><b>--nologo</b></p>
+
+<p style="margin-left:18%;">Do not emit the &quot;Mono
+License Compiler&quot; logo on stdout while compilng.</p>
+
+<h2>LICENSE FILES
+<a name="LICENSE FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The format for
+the license files (licenses.licx) is the following:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p># comment</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>namespace.type, assemblyname</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>namespace.type, full-assemblyname</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">All lines
+starting with a # are ignored. the first form requires that
+the assembly was loaded through the --load,-i option but
+does not require the full assembly name, only the first
+part.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The second form
+requires the full assembly name including locale, version
+and publickeytoken.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mailing lists
+are listed at the
+http://www.mono-project.com/community/help/mailing-lists/</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">http://www.mono-project.com</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mono(1),
+mcs(1)</p>
+<hr>
+</body>
+</html>

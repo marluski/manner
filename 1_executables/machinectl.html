@@ -1,0 +1,1265 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>MACHINECTL</title>
+
+</head>
+<body>
+
+<h1 align="center">MACHINECTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#Machine Commands">Machine Commands</a><br>
+<a href="#Image Commands">Image Commands</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#MACHINE AND IMAGE NAMES">MACHINE AND IMAGE NAMES</a><br>
+<a href="#FILES AND DIRECTORIES">FILES AND DIRECTORIES</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">machinectl -
+Control the systemd machine manager</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="55%">
+
+
+<p style="margin-top: 1em"><b>machinectl</b> [OPTIONS...]
+{COMMAND} [NAME...]</p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>machinectl</b>
+may be used to introspect and control the state of the
+<b>systemd</b>(1) virtual machine and container registration
+manager <b>systemd-machined.service</b>(8).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>machinectl</b>
+may be used to execute operations on machines and images.
+Machines in this sense are considered running instances
+of:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Virtual
+Machines (VMs) that virtualize hardware to run full
+operating system (OS) instances (including their kernels) in
+a virtualized environment on top of the host OS.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+Containers that share the hardware and OS kernel with the
+host OS, in order to run OS userspace instances on top the
+host OS.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; The host
+system itself.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Machines are
+identified by names that follow the same rules as UNIX and
+DNS hostnames. For details, see below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Machines are
+instantiated from disk or file system images that
+frequently&nbsp;&mdash; but not necessarily&nbsp;&mdash;
+carry the same name as machines running from them. Images in
+this sense may be:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+Directory trees containing an OS, including the top-level
+directories /usr/, /etc/, and so on.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; btrfs
+subvolumes containing OS trees, similar to regular directory
+trees.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Binary
+&quot;raw&quot; disk image files containing MBR or GPT
+partition tables and Linux file systems.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+Similarly, block devices containing MBR or GPT partition
+tables and file systems.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; The file
+system tree of the host OS itself.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Images may be
+downloaded, imported and exported via the
+<b>importctl</b>(1) tool.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+commands are understood:</p>
+
+<h3>Machine Commands
+<a name="Machine Commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>list</b></p>
+
+<p style="margin-left:14%;">List currently running (online)
+virtual machines and containers. To enumerate machine images
+that can be started, use <b>list-images</b> (see below).
+Note that this command hides the special &quot;.host&quot;
+machine by default. Use the <b>--all</b> switch to show
+it.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>status</b>
+<i>NAME</i>...</p>
+
+<p style="margin-left:14%;">Show runtime status information
+about one or more virtual machines and containers, followed
+by the most recent log data from the journal. This function
+is intended to generate human-readable output. If you are
+looking for computer-parsable output, use <b>show</b>
+instead. Note that the log data shown is reported by the
+virtual machine or container manager, and frequently
+contains console output of the machine, but not necessarily
+journal contents of the machine itself.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>show</b>
+[<i>NAME</i>...]</p>
+
+<p style="margin-left:14%;">Show properties of one or more
+registered virtual machines or containers or the manager
+itself. If no argument is specified, properties of the
+manager will be shown. If a NAME is specified, properties of
+this virtual machine or container are shown. By default,
+empty properties are suppressed. Use <b>--all</b> to show
+those too. To select specific properties to show, use
+<b>--property=</b>. This command is intended to be used
+whenever computer-parsable output is required, and does not
+print the control group tree or journal entries. Use
+<b>status</b> if you are looking for formatted
+human-readable output.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>start</b>
+<i>NAME</i>...</p>
+
+<p style="margin-left:14%;">Start a container as a system
+service, using <b>systemd-nspawn</b>(1). This starts
+systemd-nspawn@.service, instantiated for the specified
+machine name, similar to the effect of <b>systemctl
+start</b> on the service name. <b>systemd-nspawn</b> looks
+for a container image by the specified name in
+/var/lib/machines/ (and other search paths, see below) and
+runs it. Use <b>list-images</b> (see below) for listing
+available container images to start.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+<b>systemd-machined.service</b>(8) also interfaces with a
+variety of other container and VM managers,
+<b>systemd-nspawn</b> is just one implementation of it. Most
+of the commands available in <b>machinectl</b> may be used
+on containers or VMs controlled by other managers, not just
+<b>systemd-nspawn</b>. Starting VMs and container images on
+those managers requires manager-specific tools.</p>
+
+<p style="margin-left:14%; margin-top: 1em">To
+interactively start a container on the command line with
+full access to the container's console, please invoke
+<b>systemd-nspawn</b> directly. To stop a running container
+use <b>machinectl poweroff</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>login</b>
+[<i>NAME</i>]</p>
+
+<p style="margin-left:14%;">Open an interactive terminal
+login session in a container or on the local host. If an
+argument is supplied, it refers to the container machine to
+connect to. If none is specified, or the container name is
+specified as the empty string, or the special machine name
+&quot;.host&quot; (see below) is specified, the connection
+is made to the local host instead. This will create a TTY
+connection to a specific container or the local host and
+asks for the execution of a getty on it. Note that this is
+only supported for containers running <b>systemd</b>(1) as
+init system.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This command
+will open a full login prompt on the container or the local
+host, which then asks for username and password. Use
+<b>shell</b> (see below) or <b>systemd-run</b>(1) with the
+<b>--machine=</b> switch to directly invoke a single
+command, either interactively or in the background.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 209.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>shell</b>
+[[<i>NAME</i>@]<i>NAME</i> [<i>PATH</i>
+[<i>ARGUMENTS</i>...]]]</p>
+
+<p style="margin-left:14%;">Open an interactive shell
+session in a container or on the local host. The first
+argument refers to the container machine to connect to. If
+none is specified, or the machine name is specified as the
+empty string, or the special machine name &quot;.host&quot;
+(see below) is specified, the connection is made to the
+local host instead. This works similarly to <b>login</b>,
+but immediately invokes a user process. This command runs
+the specified executable with the specified arguments, or
+the default shell for the user if none is specified, or
+/bin/sh if no default shell is found. By default,
+<b>--uid=</b>, or by prefixing the machine name with a
+username and an &quot;@&quot; character, a different user
+may be selected. Use <b>--setenv=</b> to set environment
+variables for the executed process.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+<b>machinectl shell</b> does not propagate the exit
+code/status of the invoked shell process. Use
+<b>systemd-run</b> instead if that information is required
+(see below).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Using the
+<b>shell</b> command without arguments (thus invoking the
+executed shell or command on the local host), is in many
+ways similar to a <b>su</b>(1) session, but, unlike
+<b>su</b>, completely isolates the new session from the
+originating session, so that it shares no process or session
+properties and is in a clean well-defined state. It will be
+tracked in a new utmp, login, audit, security, and keyring
+sessions, and will not inherit any environment variables or
+resource limits, among other properties.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+<b>systemd-run</b>(1) with its <b>--machine=</b> switch may
+be used in place of the <b>machinectl shell</b> command, and
+allows non-interactive operation, more detailed and
+low-level configuration of the invoked unit, as well as
+access to runtime and exit code/status information of the
+invoked shell process. In particular, use
+<b>systemd-run</b>'s <b>--wait</b> switch to propagate exit
+status information of the invoked process. Use
+<b>systemd-run</b>'s <b>--pty</b> switch to acquire an
+interactive shell, similarly to <b>machinectl shell</b>. In
+general, <b>systemd-run</b> is preferable for scripting
+purposes. However, note that <b>systemd-run</b> might
+require higher privileges than <b>machinectl shell</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 225.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>enable</b>
+<i>NAME</i>..., <b>disable</b> <i>NAME</i>...</p>
+
+<p style="margin-left:14%;">Enable or disable a container
+as a system service to start at system boot, using
+<b>systemd-nspawn</b>(1). This enables or disables
+systemd-nspawn@.service, instantiated for the specified
+machine name, similarly to the effect of <b>systemctl
+enable</b> or <b>systemctl disable</b> on the service
+name.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This command
+implicitly reloads the system manager configuration after
+completing the operation. Note that this command does not
+implicitly start or power off the containers that are being
+operated on. If this is desired, combine the command with
+the <b>--now</b> switch.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>poweroff</b>
+<i>NAME</i>...</p>
+
+<p style="margin-left:14%;">Power off one or more
+containers. This will trigger a shutdown by sending
+SIGRTMIN+4 to the container's init process, which causes
+systemd-compatible init systems to shut down cleanly. Use
+<b>stop</b> as alias for <b>poweroff</b>. This operation
+does not work on containers that do not run a
+<b>systemd</b>(1)-compatible init system, such as sysvinit.
+Use <b>terminate</b> (see below) to immediately terminate a
+container or VM, without cleanly shutting it down.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 212.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>reboot</b>
+<i>NAME</i>...</p>
+
+<p style="margin-left:14%;">Reboot one or more containers.
+This will trigger a reboot by sending SIGINT to the
+container's init process, which is roughly equivalent to
+pressing Ctrl+Alt+Del on a non-containerized system, and is
+compatible with containers running any system manager. Use
+<b>restart</b> as alias for <b>reboot</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 209.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>terminate</b>
+<i>NAME</i>...</p>
+
+<p style="margin-left:14%;">Immediately terminates a
+virtual machine or container, without cleanly shutting it
+down. This kills all processes of the virtual machine or
+container and deallocates all resources attached to that
+instance. Use <b>poweroff</b> to issue a clean shutdown
+request.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>kill</b>
+<i>NAME</i>...</p>
+
+<p style="margin-left:14%;">Send a signal to one or more
+processes of the virtual machine or container. This means
+processes as seen by the host, not the processes inside the
+virtual machine or container. Use <b>--kill-whom=</b> to
+select which process to kill. Use <b>--signal=</b> to select
+the signal to send.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>bind</b>
+<i>NAME PATH</i> [<i>PATH</i>]</p>
+
+<p style="margin-left:14%;">Bind mounts a file or directory
+from the host into the specified container. The first path
+argument is the source file or directory on the host, the
+second path argument is the destination file or directory in
+the container. When the latter is omitted, the destination
+path in the container is the same as the source path on the
+host. When combined with the <b>--read-only</b> switch, a
+ready-only bind mount is created. When combined with the
+<b>--mkdir</b> switch, the destination path is first created
+before the mount is applied. Note that this option is
+currently only supported for <b>systemd-nspawn</b>(1)
+containers, and only if user namespacing
+(<b>--private-users</b>) is not used. This command supports
+bind mounting directories, regular files, device nodes,
+<b>AF_UNIX</b> socket nodes, as well as FIFOs.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>copy-to</b>
+<i>NAME PATH</i> [<i>PATH</i>] <b>--force</b></p>
+
+<p style="margin-left:14%;">Copies files or directories
+from the host system into a running container. Takes a
+container name, followed by the source path on the host and
+the destination path in the container. If the destination
+path is omitted, the same as the source path is used.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If host and
+container share the same user and group namespace, file
+ownership by numeric user ID and group ID is preserved for
+the copy, otherwise all files and directories in the copy
+will be owned by the root user and group (UID/GID 0).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>copy-from</b>
+<i>NAME PATH</i> [<i>PATH</i>] <b>--force</b></p>
+
+<p style="margin-left:14%;">Copies files or directories
+from a container into the host system. Takes a container
+name, followed by the source path in the container and the
+destination path on the host. If the destination path is
+omitted, the same as the source path is used.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If host and
+container share the same user and group namespace, file
+ownership by numeric user ID and group ID is preserved for
+the copy, otherwise all files and directories in the copy
+will be owned by the root user and group (UID/GID 0).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<h3>Image Commands
+<a name="Image Commands"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>list-images</b></p>
+
+<p style="margin-left:14%;">Show a list of locally
+installed container and VM images. This enumerates all raw
+disk images and container directories and subvolumes in
+/var/lib/machines/ (and other search paths, see below). Use
+<b>start</b> (see above) to run a container off one of the
+listed images. Note that, by default, containers whose name
+begins with a dot (&quot;.&quot;) are not shown. To show
+these too, specify <b>--all</b>. Note that a special image
+&quot;.host&quot; always implicitly exists and refers to the
+image the host itself is booted from.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>image-status</b>
+[<i>NAME</i>...]</p>
+
+<p style="margin-left:14%;">Show terse status information
+about one or more container or VM images. This function is
+intended to generate human-readable output. Use
+<b>show-image</b> (see below) to generate computer-parsable
+output instead.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>show-image</b>
+[<i>NAME</i>...]</p>
+
+<p style="margin-left:14%;">Show properties of one or more
+registered virtual machine or container images, or the
+manager itself. If no argument is specified, properties of
+the manager will be shown. If a NAME is specified,
+properties of this virtual machine or container image are
+shown. By default, empty properties are suppressed. Use
+<b>--all</b> to show those too. To select specific
+properties to show, use <b>--property=</b>. This command is
+intended to be used whenever computer-parsable output is
+required. Use <b>image-status</b> if you are looking for
+formatted human-readable output.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>edit</b>
+<i>NAME|FILE</i></p>
+
+<p style="margin-left:14%;">Edit the settings file of the
+specified machines. For the format of the settings file,
+refer to <b>systemd.nspawn</b>(5). If an existing settings
+file of the given machine can't be found, <b>edit</b>
+automatically create a new settings file from scratch under
+/etc/systemd/nspawn/.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 254.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>cat</b>
+<i>NAME|FILE</i></p>
+
+<p style="margin-left:14%;">Show the settings file of the
+specified machines.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 254.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>clone</b>
+<i>NAME NAME</i></p>
+
+<p style="margin-left:14%;">Clones a container or VM image.
+The arguments specify the name of the image to clone and the
+name of the newly cloned image. Note that plain directory
+container images are cloned into btrfs subvolume images with
+this command, if the underlying file system supports this.
+Note that cloning a container or VM image is optimized for
+file systems that support copy-on-write, and might not be
+efficient on others, due to file system limitations.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that this
+command leaves hostname, machine ID and all other settings
+that could identify the instance unmodified. The original
+image and the cloned copy will hence share these
+credentials, and it might be necessary to manually change
+them in the copy.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If combined
+with the <b>--read-only</b> switch a read-only cloned image
+is created.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>rename</b>
+<i>NAME NAME</i></p>
+
+<p style="margin-left:14%;">Renames a container or VM
+image. The arguments specify the name of the image to rename
+and the new name of the image.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>read-only</b>
+<i>NAME</i> [<i>BOOL</i>]</p>
+
+<p style="margin-left:14%;">Marks or (unmarks) a container
+or VM image read-only. Takes a VM or container image name,
+followed by a boolean as arguments. If the boolean is
+omitted, positive is implied, i.e. the image is marked
+read-only.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>remove</b>
+<i>NAME</i>...</p>
+
+<p style="margin-left:14%;">Removes one or more container
+or VM images. The special image &quot;.host&quot;, which
+refers to the host's own directory tree, may not be
+removed.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>set-limit</b>
+[<i>NAME</i>] <i>BYTES</i></p>
+
+<p style="margin-left:14%;">Sets the maximum size in bytes
+that a specific container or VM image, or all images, may
+grow up to on disk (disk quota). Takes either one or two
+parameters. The first, optional parameter refers to a
+container or VM image name. If specified, the size limit of
+the specified image is changed. If omitted, the overall size
+limit of the sum of all images stored locally is changed.
+The final argument specifies the size limit in bytes,
+possibly suffixed by the usual K, M, G, T units. If the size
+limit shall be disabled, specify &quot;-&quot; as size.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+per-container size limits are only supported on btrfs file
+systems.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 220.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clean</b></p>
+
+<p style="margin-left:14%;">Remove hidden VM or container
+images (or all). This command removes all hidden machine
+images from /var/lib/machines/, i.e. those whose name begins
+with a dot. Use <b>machinectl list-images --all</b> to see a
+list of all machine images, including the hidden ones.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When combined
+with the <b>--all</b> switch removes all images, not just
+hidden ones. This command effectively empties
+/var/lib/machines/.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+commands such as <b>importctl pull-tar</b> or <b>importctl
+pull-raw</b> usually create hidden, read-only, unmodified
+machine images from the downloaded image first, before
+cloning a writable working copy of it, in order to avoid
+duplicate downloads in case of images that are reused
+multiple times. Use <b>machinectl clean</b> to remove old,
+hidden images created this way.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 230.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>,
+<b>--property=</b></p>
+
+<p style="margin-left:14%;">When showing machine or image
+properties, limit the output to certain properties as
+specified by the argument. If not specified, all set
+properties are shown. The argument should be a property
+name, such as &quot;Name&quot;. If specified more than once,
+all properties with the specified names are shown.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--value</b></p>
+
+<p style="margin-left:14%;">When printing properties with
+<b>show</b>, only print the value, and skip the property
+name and &quot;=&quot;.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 230.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-P</b></p>
+
+<p style="margin-left:14%;">Equivalent to <b>--value
+--property=</b>, i.e. shows the value of the property
+without the property name or &quot;=&quot;. Note that using
+<b>-P</b> once will also affect all properties listed with
+<b>-p</b>/<b>--property=</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a</b>,
+<b>--all</b></p>
+
+<p style="margin-left:14%;">When showing machine or image
+properties, show all properties regardless of whether they
+are set or not.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When listing VM
+or container images, do not suppress images beginning in a
+dot character (&quot;.&quot;).</p>
+
+<p style="margin-left:14%; margin-top: 1em">When cleaning
+VM or container images, remove all images, not just hidden
+ones.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l</b>,
+<b>--full</b></p>
+
+<p style="margin-left:14%;">Do not ellipsize process tree
+entries or table. This implies
+<b>--max-addresses=full</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--kill-whom=</b></p>
+
+<p style="margin-left:14%;">When used with <b>kill</b>,
+choose which processes to kill. Must be one of
+<b>leader</b>, or <b>all</b> to select whether to kill only
+the leader process of the machine or all processes of the
+machine. If omitted, defaults to <b>all</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 206.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>,
+<b>--signal=</b></p>
+
+<p style="margin-left:14%;">When used with <b>kill</b>,
+choose which signal to send to selected processes. Must be
+one of the well-known signal specifiers such as
+<b>SIGTERM</b>, <b>SIGINT</b> or <b>SIGSTOP</b>. If omitted,
+defaults to <b>SIGTERM</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The special
+value &quot;help&quot; will list the known values and the
+program will exit immediately, and the special value
+&quot;list&quot; will list known values along with the
+numerical signal numbers and the program will exit
+immediately.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--uid=</b></p>
+
+<p style="margin-left:14%;">When used with the <b>shell</b>
+command, chooses the user ID to open the interactive shell
+session as. If the argument to the <b>shell</b> command also
+specifies a user name, this option is ignored. If the name
+is not specified in either way, &quot;root&quot; will be
+used by default. Note that this switch is not supported for
+the <b>login</b> command (see below).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 225.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-E</b>
+<i>NAME</i><b>[=</b><i>VALUE</i><b>]</b>,
+<b>--setenv=</b><i>NAME</i><b>[=</b><i>VALUE</i><b>]</b></p>
+
+<p style="margin-left:14%;">When used with the <b>shell</b>
+command, sets an environment variable for the executed
+shell. This option may be used more than once to set
+multiple variables. When &quot;=&quot; and <i>VALUE</i> are
+omitted, the value of the variable with the same name in the
+program environment will be used.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that this
+option is not supported for the <b>login</b> command.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 230.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mkdir</b></p>
+
+<p style="margin-left:14%;">When used with <b>bind</b>,
+creates the destination file or directory before applying
+the bind mount. Note that even though the name of this
+option suggests that it is suitable only for directories,
+this option also creates the destination file node to mount
+over if the object to mount is not a directory, but a
+regular file, device node, socket or FIFO.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--read-only</b></p>
+
+<p style="margin-left:14%;">When used with <b>bind</b>,
+creates a read-only bind mount.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When used with
+<b>clone</b> a read-only container or VM image is
+created.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n</b>,
+<b>--lines=</b></p>
+
+<p style="margin-left:14%;">When used with <b>status</b>,
+controls the number of journal lines to show, counting from
+the most recent ones. Takes a positive integer argument.
+Defaults to 10.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--output=</b></p>
+
+<p style="margin-left:14%;">When used with <b>status</b>,
+controls the formatting of the journal entries that are
+shown. For the available choices, see <b>journalctl</b>(1).
+Defaults to &quot;short&quot;.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--runner=nspawn</b>|<b>vmspawn</b></p>
+
+<p style="margin-left:14%;">When operating on machines
+choose whether to use <b>systemd-nspawn</b>(1) or
+<b>systemd-vmspawn</b>(1). By default
+<b>systemd-nspawn</b>(1) is used.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b></p>
+
+<p style="margin-left:14%;"><b>-V</b> is a shorthand for
+<b>--runner=vmspawn</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 256.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--now</b></p>
+
+<p style="margin-left:14%;">When used with <b>enable</b> or
+<b>disable</b>, the containers will also be started or
+powered off. The start or poweroff operation is only carried
+out when the respective enable or disable operation has been
+successful.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 253.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force</b></p>
+
+<p style="margin-left:14%;">Replace target file when
+copying files.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 219.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--max-addresses=</b></p>
+
+<p style="margin-left:14%;">When used with the
+<b>list-machines</b> command, limits the number of IP
+addresses shown for every machine. Defaults to 1. All
+addresses can be requested with &quot;all&quot;. If the
+limit is 0, the address column is not shown. Otherwise, if
+the machine has more addresses than shown, &quot;...&quot;
+follows the last address.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 232.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>,
+<b>--quiet</b></p>
+
+<p style="margin-left:14%;">Suppresses additional
+informational output while running.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 236.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-H</b>,
+<b>--host=</b></p>
+
+<p style="margin-left:14%;">Execute the operation remotely.
+Specify a hostname, or a username and hostname separated by
+&quot;@&quot;, to connect to. The hostname may optionally be
+suffixed by a port ssh is listening on, separated by
+&quot;:&quot;, and then a container name, separated by
+&quot;/&quot;, which connects directly to a specific
+container on the specified host. This will use SSH to talk
+to the remote machine manager instance. Container names may
+be enumerated with <b>machinectl -H</b> <i>HOST</i>. Put
+IPv6 addresses in brackets.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-M</b>,
+<b>--machine=</b></p>
+
+<p style="margin-left:14%;">Connect to
+<b>systemd-machined.service</b>(8) running in a local
+container, to perform the specified operation within the
+container.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 235.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-pager</b></p>
+
+<p style="margin-left:14%;">Do not pipe output into a
+pager.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-legend</b></p>
+
+<p style="margin-left:14%;">Do not print the legend, i.e.
+column headers and the footer with hints.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-ask-password</b></p>
+
+<p style="margin-left:14%;">Do not query the user for
+authentication for privileged operations.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Print a short help text and
+exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print a short version string
+and exit.</p>
+
+<h2>MACHINE AND IMAGE NAMES
+<a name="MACHINE AND IMAGE NAMES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>machinectl</b> tool operates on machines and images whose
+names must be chosen following strict rules. Machine names
+must be suitable for use as hostnames following a
+conservative subset of DNS and UNIX/Linux semantics.
+Specifically, they must consist of one or more non-empty
+label strings, separated by dots. No leading or trailing
+dots are allowed. No sequences of multiple dots are allowed.
+The label strings may only consist of alphanumeric
+characters as well as the dash and underscore. The maximum
+length of a machine name is 64 characters.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A special
+machine with the name &quot;.host&quot; refers to the
+running host system itself. This is useful for execution
+operations or inspecting the host system as well. Note that
+<b>machinectl list</b> will not show this special machine
+unless the <b>--all</b> switch is specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Requirements on
+image names are less strict, however, they must be valid
+UTF-8, must be suitable as file names (hence not be the
+single or double dot, and not include a slash), and may not
+contain control characters. Since many operations search for
+an image by the name of a requested machine, it is
+recommended to name images in the same strict fashion as
+machines.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A special image
+with the name &quot;.host&quot; refers to the image of the
+running host system. It hence conceptually maps to the
+special &quot;.host&quot; machine name described above. Note
+that <b>machinectl list-images</b> will not show this
+special image either, unless <b>--all</b> is specified.</p>
+
+<h2>FILES AND DIRECTORIES
+<a name="FILES AND DIRECTORIES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Machine images
+are preferably stored in /var/lib/machines/, but are also
+searched for in /usr/local/lib/machines/ and
+/usr/lib/machines/. For compatibility reasons, the directory
+/var/lib/container/ is searched, too. Note that images
+stored below /usr/ are always considered read-only. It is
+possible to symlink machines images from other directories
+into /var/lib/machines/ to make them available for control
+with <b>machinectl</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that some
+image operations are only supported, efficient or atomic on
+btrfs file systems.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Disk images are
+understood by <b>systemd-nspawn</b>(1) and <b>machinectl</b>
+in three formats:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; A simple
+directory tree, containing the files and directories of the
+container to boot.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+Subvolumes (on btrfs file systems), which are similar to the
+simple directories, described above. However, they have
+additional benefits, such as efficient cloning and quota
+reporting.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+&quot;Raw&quot; disk images, i.e. binary images of disks
+with a GPT or MBR partition table. Images of this type are
+regular files with the suffix &quot;.raw&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>systemd-nspawn</b>(1) for more information on image
+formats, in particular its <b>--directory=</b> and
+<b>--image=</b> options.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Example&nbsp;1.&nbsp;Download
+an Ubuntu RAW image, set a root password in it, start it as
+a service</b></p>
+
+<p style="margin-left:14%; margin-top: 1em"># importctl
+pull-raw -mN \ <br>
+
+https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-disk-kvm.img
+\ <br>
+jammy <br>
+# systemd-firstboot --image=/var/lib/machines/jammy.raw
+--prompt-root-password --force <br>
+# machinectl start jammy <br>
+# machinectl login jammy</p>
+
+<p style="margin-left:9%; margin-top: 1em">This downloads
+the specified .raw image and makes it available under the
+local name &quot;jammy&quot;. Then, a root password is set
+with <b>systemd-firstboot</b>(1). Afterwards the machine is
+started as system service. With the last command a login
+prompt into the container is requested.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On success, 0 is
+returned, a non-zero failure code otherwise.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LOG_LEVEL</i></p>
+
+<p style="margin-left:14%;">The maximum log level of
+emitted messages (messages with a higher log level, i.e.
+less important ones, will be suppressed). Takes a
+comma-separated list of values. A value may be either one of
+(in order of decreasing importance) <b>emerg</b>,
+<b>alert</b>, <b>crit</b>, <b>err</b>, <b>warning</b>,
+<b>notice</b>, <b>info</b>, <b>debug</b>, or an integer in
+the range 0...7. See <b>syslog</b>(3) for more information.
+Each value may optionally be prefixed with one of
+<b>console</b>, <b>syslog</b>, <b>kmsg</b> or <b>journal</b>
+followed by a colon to set the maximum log level for that
+specific log target (e.g.
+<b>SYSTEMD_LOG_LEVEL=debug,console:info</b> specifies to log
+at debug level except when logging to the console which
+should be at info level). Note that the global maximum log
+level takes priority over any per target maximum log
+levels.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LOG_COLOR</i></p>
+
+<p style="margin-left:14%;">A boolean. If true, messages
+written to the tty will be colored according to
+priority.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This setting is
+only useful when messages are written directly to the
+terminal, because <b>journalctl</b>(1) and other tools that
+display logs will color messages based on the log level on
+their own.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LOG_TIME</i></p>
+
+<p style="margin-left:14%;">A boolean. If true, console log
+messages will be prefixed with a timestamp.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This setting is
+only useful when messages are written directly to the
+terminal or a file, because <b>journalctl</b>(1) and other
+tools that display logs will attach timestamps based on the
+entry metadata on their own.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LOG_LOCATION</i></p>
+
+<p style="margin-left:14%;">A boolean. If true, messages
+will be prefixed with a filename and line number in the
+source code where the message originates.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that the
+log location is often attached as metadata to journal
+entries anyway. Including it directly in the message text
+can nevertheless be convenient when debugging programs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LOG_TID</i></p>
+
+<p style="margin-left:14%;">A boolean. If true, messages
+will be prefixed with the current numerical thread ID
+(TID).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that the
+this information is attached as metadata to journal entries
+anyway. Including it directly in the message text can
+nevertheless be convenient when debugging programs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LOG_TARGET</i></p>
+
+<p style="margin-left:14%;">The destination for log
+messages. One of <b>console</b> (log to the attached tty),
+<b>console-prefixed</b> (log to the attached tty but with
+prefixes encoding the log level and &quot;facility&quot;,
+see <b>syslog</b>(3), <b>kmsg</b> (log to the kernel
+circular log buffer), <b>journal</b> (log to the journal),
+<b>journal-or-kmsg</b> (log to the journal if available, and
+to kmsg otherwise), <b>auto</b> (determine the appropriate
+log target automatically, the default), <b>null</b> (disable
+log output).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LOG_RATELIMIT_KMSG</i></p>
+
+<p style="margin-left:14%;">Whether to ratelimit kmsg or
+not. Takes a boolean. Defaults to &quot;true&quot;. If
+disabled, systemd will not ratelimit messages written to
+kmsg.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_PAGER</i></p>
+
+<p style="margin-left:14%;">Pager to use when
+<b>--no-pager</b> is not given; overrides <i>$PAGER</i>. If
+neither <i>$SYSTEMD_PAGER</i> nor <i>$PAGER</i> are set, a
+set of well-known pager implementations are tried in turn,
+including <b>less</b>(1) and <b>more</b>(1), until one is
+found. If no pager implementation is discovered no pager is
+invoked. Setting this environment variable to an empty
+string or the value &quot;cat&quot; is equivalent to passing
+<b>--no-pager</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note: if
+<i>$SYSTEMD_PAGERSECURE</i> is not set,
+<i>$SYSTEMD_PAGER</i> (as well as <i>$PAGER</i>) will be
+silently ignored.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LESS</i></p>
+
+<p style="margin-left:14%;">Override the options passed to
+<b>less</b> (by default &quot;FRSXMK&quot;).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Users might
+want to change two options in particular:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>K</b></p>
+
+<p style="margin-left:19%;">This option instructs the pager
+to exit immediately when Ctrl+C is pressed. To allow
+<b>less</b> to handle Ctrl+C itself to switch back to the
+pager command prompt, unset this option.</p>
+
+<p style="margin-left:19%; margin-top: 1em">If the value of
+<i>$SYSTEMD_LESS</i> does not include &quot;K&quot;, and the
+pager that is invoked is <b>less</b>, Ctrl+C will be ignored
+by the executable, and needs to be handled by the pager.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>X</b></p>
+
+<p style="margin-left:19%;">This option instructs the pager
+to not send termcap initialization and deinitialization
+strings to the terminal. It is set by default to allow
+command output to remain visible in the terminal even after
+the pager exits. Nevertheless, this prevents some pager
+functionality from working, in particular paged output
+cannot be scrolled with the mouse.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+setting the regular <i>$LESS</i> environment variable has no
+effect for <b>less</b> invocations by systemd tools.</p>
+
+<p style="margin-left:14%; margin-top: 1em">See
+<b>less</b>(1) for more discussion.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_LESSCHARSET</i></p>
+
+<p style="margin-left:14%;">Override the charset passed to
+<b>less</b> (by default &quot;utf-8&quot;, if the invoking
+terminal is determined to be UTF-8 compatible).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+setting the regular <i>$LESSCHARSET</i> environment variable
+has no effect for <b>less</b> invocations by systemd
+tools.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_PAGERSECURE</i></p>
+
+<p style="margin-left:14%;">Takes a boolean argument. When
+true, the &quot;secure&quot; mode of the pager is enabled;
+if false, disabled. If <i>$SYSTEMD_PAGERSECURE</i> is not
+set at all, secure mode is enabled if the effective UID is
+not the same as the owner of the login session, see
+<b>geteuid</b>(2) and <b>sd_pid_get_owner_uid</b>(3). In
+secure mode, <b>LESSSECURE=1</b> will be set when invoking
+the pager, and the pager shall disable commands that open or
+create new files or start new subprocesses. When
+<i>$SYSTEMD_PAGERSECURE</i> is not set at all, pagers which
+are not known to implement secure mode will not be used.
+(Currently only <b>less</b>(1) implements secure mode.)</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note: when
+commands are invoked with elevated privileges, for example
+under <b>sudo</b>(8) or <b>pkexec</b>(1), care must be taken
+to ensure that unintended interactive features are not
+enabled. &quot;Secure&quot; mode for the pager may be
+enabled automatically as describe above. Setting
+<i>SYSTEMD_PAGERSECURE=0</i> or not removing it from the
+inherited environment allows the user to invoke arbitrary
+commands. Note that if the <i>$SYSTEMD_PAGER</i> or
+<i>$PAGER</i> variables are to be honoured,
+<i>$SYSTEMD_PAGERSECURE</i> must be set too. It might be
+reasonable to completely disable the pager using
+<b>--no-pager</b> instead.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_COLORS</i></p>
+
+<p style="margin-left:14%;">Takes a boolean argument. When
+true, <b>systemd</b> and related utilities will use colors
+in their output, otherwise the output will be monochrome.
+Additionally, the variable can take one of the following
+special values: &quot;16&quot;, &quot;256&quot; to restrict
+the use of colors to the base 16 or 256 ANSI colors,
+respectively. This can be specified to override the
+automatic decision based on <i>$TERM</i> and what the
+console is connected to.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$SYSTEMD_URLIFY</i></p>
+
+<p style="margin-left:14%;">The value must be a boolean.
+Controls whether clickable links should be generated in the
+output for terminal emulators supporting this. This can be
+specified to override the decision that <b>systemd</b> makes
+based on <i>$TERM</i> and other conditions.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>systemd</b>(1),
+<b>systemd-machined.service</b>(8),
+<b>systemd-nspawn</b>(1), <b>systemd.special</b>(7),
+<b>importctl</b>(1), <b>tar</b>(1), <b>xz</b>(1),
+<b>gzip</b>(1), <b>bzip2</b>(1)</p>
+<hr>
+</body>
+</html>

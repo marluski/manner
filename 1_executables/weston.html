@@ -1,0 +1,719 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:03 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>WESTON</title>
+
+</head>
+<body>
+
+<h1 align="center">WESTON</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#BACKENDS">BACKENDS</a><br>
+<a href="#SHELLS">SHELLS</a><br>
+<a href="#XWAYLAND">XWAYLAND</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Weston core options:">Weston core options:</a><br>
+<a href="#DRM backend options:">DRM backend options:</a><br>
+<a href="#Wayland backend options:">Wayland backend options:</a><br>
+<a href="#X11 backend options:">X11 backend options:</a><br>
+<a href="#RDP backend options:">RDP backend options:</a><br>
+<a href="#VNC backend options:">VNC backend options:</a><br>
+<a href="#headless backend options:">headless backend options:</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#PROGRAM EXECUTION">PROGRAM EXECUTION</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#WWW">WWW</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">weston - the
+reference Wayland server</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>weston</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>weston</b> is
+the reference implementation of a Wayland server. A Wayland
+server is a display server, a window manager, and a
+compositor all in one. Weston has several backends as
+loadable modules: it can run on Linux KMS (kernel
+modesetting via DRM), as an X client, or inside another
+Wayland server instance.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Weston supports
+fundamentally different graphical user interface paradigms
+via shell plugins. Two plugins are provided: the desktop
+shell, and the kiosk shell.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Weston also
+supports X clients via <b>Xwayland</b>, see below.</p>
+
+<h2>BACKENDS
+<a name="BACKENDS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><i>drm</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">The DRM backend uses Linux KMS
+for output and evdev devices for input. It supports multiple
+monitors in a unified desktop with DPMS. See
+<b>weston-drm</b>(7), if installed.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>wayland</i></p>
+
+<p style="margin-left:18%;">The Wayland backend runs on
+another Wayland server, a different Weston instance, for
+example. Weston shows up as a single desktop window on the
+parent server.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>x11</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>The X11 backend runs on an X server. Each Weston output
+becomes an X window. This is a cheap way to test
+multi-monitor support of a Wayland shell, desktop, or
+applications.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>rdp</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>The RDP backend runs in memory without the need of
+graphical hardware. Access to the desktop is done by using
+the RDP protocol. Each connecting client has its own seat
+making it a cheap way to test multi-seat support. See
+<b>weston-rdp</b>(7), if installed.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>vnc</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>The VNC backend runs in memory without the need of
+graphical hardware. Access to the desktop is done by using
+the RFB protocol. Currently only one connecting client is
+supported. See <b>weston-vnc</b>(7), if installed.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>pipewire</i></p>
+
+<p style="margin-left:18%;">The PipeWire backend runs in
+memory without the need of graphical hardware and creates a
+PipeWire node for each output. It can be used to capture
+Weston outputs for processing with another application.</p>
+
+<p style="margin-left:9%;"><i>headless</i></p>
+
+<p style="margin-left:18%;">The headless backend runs in
+memory. It can be used to capture Weston outputs or to test
+client applications.</p>
+
+<h2>SHELLS
+<a name="SHELLS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Weston&rsquo;s
+user interface is implemented by individual
+&rsquo;shell&rsquo; plugins. A number of shells are provided
+for different usecases. <i><br>
+desktop</i></p>
+
+<p style="margin-left:18%;">The desktop shell is
+Weston&rsquo;s default mode. It provides an example of a
+desktop-like environment, featuring a panel with launchers
+and a clock, a background, and an interactive task switcher.
+Whilst not intended to be a full-fledged desktop environment
+in and of itself, it is an example of how such an
+environment can be built.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>kiosk</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>The kiosk shell is intended for environments which want
+to run a single application at a time. Applications will be
+made full screen and activated as they are started.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>fullscreen</i></p>
+
+<p style="margin-left:18%;">The fullscreen shell is a
+deprecated implementation of the ideas behind the kiosk
+shell. It requires specific client support for the
+<i>zwp_fullscreen_shell_v1</i> interface.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>ivi</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>The IVI shell is a special-purpose shell which exposes
+an API compatible with the GENIVI Layer Manager to
+user-provided HMI controller modules. It is intended for use
+in automotive environments.</p></td></tr>
+</table>
+
+<h2>XWAYLAND
+<a name="XWAYLAND"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Weston can
+support X11 clients running within a Weston session via an X
+server called <b>Xwayland</b>. Xwayland is built as a
+separate executable, provided by X.Org. Once built and
+installed, it can be activated with the <b>--xwayland</b>
+option. Weston will listen on a new X11 display socket and
+export it through the <b>DISPLAY</b> environment
+variable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It has also its
+own X window manager where cursor themes and sizes can be
+chosen using <b>XCURSOR_PATH</b> and <b>XCURSOR_SIZE</b>
+environment variables. See <b>ENVIRONMENT</b>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Weston core options:
+<a name="Weston core options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-B</b><i>backend1,backend2</i>,
+<b>--backend</b>=<i>backend1,backend2</i></p>
+
+<p style="margin-left:18%;">Load the comma-separated list
+of backends instead of the default backend, see
+<i>BACKENDS</i>. The backend modules are searched for in
+<i>/usr/lib/weston</i>. The default backend is <i>drm</i>
+unless the environment suggests otherwise, see
+<i>DISPLAY</i> and <i>WAYLAND_DISPLAY</i>. The first backend
+is the primary backend, and it provides the renderer. Not
+all backends support being loaded as secondary backends,
+which reuse the primary backend&rsquo;s renderer.</p>
+
+<p style="margin-left:9%;"><b>-c</b><i>config.ini</i>,
+<b>--config</b>=<i>config.ini</i></p>
+
+<p style="margin-left:18%;">Load <i>config.ini</i> instead
+of <i>weston.ini</i>. The argument can also be an absolute
+path starting with a <i>/</i>. If the path is not absolute,
+it will be searched in the normal config paths, see
+<b>weston.ini</b>(5). This option is ignored if the
+<b>--no-config</b> option is passed.</p>
+
+<p style="margin-left:9%;"><b>--debug</b></p>
+
+<p style="margin-left:18%;">Enable debug protocol extension
+<i>weston_debug_v1</i> which any client can use to receive
+debugging messages from the compositor.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>WARNING:</b>
+This is risky for two reasons. First, a client may cause a
+denial-of-service blocking the compositor by providing an
+unsuitable file descriptor, and second, the debug messages
+may expose sensitive information. Additionally this will
+expose weston-screenshooter interface allowing the user to
+take screenshots of the outputs using weston-screenshooter
+application, which can lead to silently leaking the output
+contents. This option should not be used in production.</p>
+
+<p style="margin-left:9%;"><b>-f</b><i>scope1,scope2</i>,
+<b>--flight-rec-scopes</b>=<i>scope1,scope2</i></p>
+
+<p style="margin-left:18%;">Specify to which scopes should
+subscribe to. Useful to control which streams to write data
+into the flight recorder. Flight recorder has limited space,
+once the flight recorder is full new data will overwrite the
+old data. Without any scopes specified, it subscribes to
+&rsquo;log&rsquo; and &rsquo;drm-backend&rsquo; scopes.
+Passing an empty value would disable the flight recorder
+entirely.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Print a summary of command line
+options, and quit.</p>
+
+<p style="margin-left:9%;"><b>-i</b><i>N</i>,
+<b>--idle-time</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">Set the idle timeout to
+<i>N</i> seconds. The default timeout is 300 seconds. When
+there has not been any user input for the idle timeout,
+Weston enters an inactive mode. The screen fades to black,
+monitors may switch off, and the shell may lock the session.
+A value of 0 effectively disables the timeout.</p>
+
+
+<p style="margin-left:9%;"><b>--log</b>=<i>file.log</i></p>
+
+<p style="margin-left:18%;">Append log messages to the file
+<i>file.log</i> instead of writing them to stderr.</p>
+
+<p style="margin-left:9%;"><b>-l</b><i>scope1,scope2</i>,
+<b>--logger-scopes</b>=<i>scope1,scope2</i></p>
+
+<p style="margin-left:18%;">Specify to which log scopes
+should subscribe to. When no scopes are supplied, the log
+&quot;log&quot; scope will be subscribed by default. Useful
+to control which streams to write data into the logger and
+can be helpful in diagnosing early start-up code.</p>
+
+
+<p style="margin-left:9%;"><b>--modules</b>=<i>module1.so,module2.so</i></p>
+
+<p style="margin-left:18%;">Load the comma-separated list
+of modules. Only used by the test suite. The file is
+searched for in <i>/usr/lib/weston</i>, or you can pass an
+absolute path.</p>
+
+<p style="margin-left:9%;"><b>--no-config</b></p>
+
+<p style="margin-left:18%;">Do not read <i>weston.ini</i>
+for the compositor. Avoids e.g. loading compositor modules
+via the configuration file, which is useful for unit
+tests.</p>
+
+
+<p style="margin-left:9%;"><b>--renderer</b>=<i>renderer</i></p>
+
+<p style="margin-left:18%;">Select which renderer to use
+for Weston&rsquo;s internal composition. Defaults to
+automatic selection.</p>
+
+<p style="margin-left:9%;"><b>--shell</b>=<i>shell</i></p>
+
+<p style="margin-left:18%;">Select which shell to load to
+provide Weston&rsquo;s user interface. See
+<b>ENVIRONMENT</b>.</p>
+
+<p style="margin-left:9%;"><b>-S</b><i>name</i>,
+<b>--socket</b>=<i>name</i></p>
+
+<p style="margin-left:18%;">Weston will listen in the
+Wayland socket called <i>name</i>. Weston will export
+<b>WAYLAND_DISPLAY</b> with this value in the environment
+for all child processes to allow them to connect to the
+right server automatically. <b>--version</b> Print the
+program version.</p>
+
+<p style="margin-left:9%;"><b>--wait-for-debugger</b></p>
+
+<p style="margin-left:18%;">Raises SIGSTOP before
+initializing the compositor. This allows the user to attach
+with a debugger and continue execution by sending SIGCONT.
+This is useful for debugging a crash on start-up when it
+would be inconvenient to launch weston directly from a
+debugger. There is also a <i>weston.ini</i> option to do the
+same.</p>
+
+<p style="margin-left:9%;"><b>--xwayland</b></p>
+
+<p style="margin-left:18%;">Support X11 clients through the
+Xwayland server.</p>
+
+<h3>DRM backend options:
+<a name="DRM backend options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>weston-drm</b>(7).</p>
+
+<h3>Wayland backend options:
+<a name="Wayland backend options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--display</b>=<i>display</i></p>
+
+<p style="margin-left:18%;">Name of the Wayland display to
+connect to, see also <i>WAYLAND_DISPLAY</i> of the
+environment.</p>
+
+<p style="margin-left:9%;"><b>--fullscreen</b></p>
+
+<p style="margin-left:18%;">Create a single fullscreen
+output</p>
+
+
+<p style="margin-left:9%;"><b>--output-count</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">Create <i>N</i> Wayland windows
+to emulate the same number of outputs.</p>
+
+<p style="margin-left:9%;"><b>--width</b>=<i>W</i>,
+<b>--height</b>=<i>H</i></p>
+
+<p style="margin-left:18%;">Make all outputs have a size of
+<i>W</i>x<i>H</i> pixels.</p>
+
+<p style="margin-left:9%;"><b>--scale</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">Give all outputs a scale factor
+of <i>N.</i></p>
+
+<p style="margin-left:9%;"><b>--use-pixman</b></p>
+
+<p style="margin-left:18%;">Deprecated in favour of the
+<b>--renderer</b> option. Use the pixman renderer. By
+default weston will try to use EGL and GLES2 for rendering
+and will fall back to the pixman-based renderer for software
+compositing if EGL cannot be used. Passing this option will
+force weston to use the pixman renderer.</p>
+
+<h3>X11 backend options:
+<a name="X11 backend options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fullscreen
+<br>
+--no-input</b></p>
+
+<p style="margin-left:18%;">Do not provide any input
+devices. Used for testing input-less Weston.</p>
+
+
+<p style="margin-left:9%;"><b>--output-count</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">Create <i>N</i> X windows to
+emulate the same number of outputs.</p>
+
+<p style="margin-left:9%;"><b>--width</b>=<i>W</i>,
+<b>--height</b>=<i>H</i></p>
+
+<p style="margin-left:18%;">Make the default size of each X
+window <i>W</i>x<i>H</i> pixels.</p>
+
+<p style="margin-left:9%;"><b>--scale</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">Give all outputs a scale factor
+of <i>N.</i></p>
+
+<p style="margin-left:9%;"><b>--use-pixman</b></p>
+
+<p style="margin-left:18%;">Deprecated in favour of the
+<b>--renderer</b> option. Use the pixman renderer. By
+default weston will try to use EGL and GLES2 for rendering.
+Passing this option will make weston use the pixman library
+for software compsiting.</p>
+
+<h3>RDP backend options:
+<a name="RDP backend options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>weston-rdp</b>(7).</p>
+
+<h3>VNC backend options:
+<a name="VNC backend options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>weston-vnc</b>(7).</p>
+
+<h3>headless backend options:
+<a name="headless backend options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--width</b>=<i>W</i>,
+<b>--height</b>=<i>H</i></p>
+
+<p style="margin-left:18%;">Make the default size of each
+output <i>W</i>x<i>H</i> pixels.</p>
+
+<p style="margin-left:9%;"><b>--scale</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">Give all outputs a scale factor
+of <i>N</i>.</p>
+
+
+<p style="margin-left:9%;"><b>--transform</b>=<i>transform</i></p>
+
+<p style="margin-left:18%;">Transform for the output, which
+can be rotated in 90-degree steps and possibly flipped.
+Possible values are <b>normal</b>, <b>rotate-90</b>,
+<b>rotate-180</b>, <b>rotate-270</b>, <b>flipped</b>,
+<b>flipped-rotate-90</b>, <b>flipped-rotate-180</b>, and
+<b>flipped-rotate-270</b>.</p>
+
+<p style="margin-left:9%;"><b>--no-outputs</b></p>
+
+<p style="margin-left:18%;">Do not create any virtual
+outputs.</p>
+
+
+<p style="margin-left:9%;"><b>--refresh-rate</b>=<i>N</i></p>
+
+<p style="margin-left:18%;">Give all outputs a refresh rate
+of <i>N</i> mHz (60,000 mHz by default). Supported values
+range from 0 mHz to 1,000,000 mHz. 0 is a special value that
+repaints as soon as possible on capture requests only, not
+on damages.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If the
+environment variable is set, the configuration file is read
+from the respective path.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$XDG_CONFIG_HOME</b><i>/weston.ini</i>
+<b><br>
+$HOME</b><i>/.config/weston.ini</i></p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>DISPLAY</b></i></p>
+
+<p style="margin-left:18%;">The X display. If
+<b>DISPLAY</b> is set, and <b>WAYLAND_DISPLAY</b> is not
+set, the default backend becomes <i>x11</i>.</p>
+
+<p style="margin-left:9%;"><b>WAYLAND_DEBUG</b></p>
+
+<p style="margin-left:18%;">If set to any value, causes
+libwayland to print the live protocol to stderr.</p>
+
+<p style="margin-left:9%;"><b>WAYLAND_DISPLAY</b></p>
+
+<p style="margin-left:18%;">The name of the display
+(socket) of an already running Wayland server, without the
+path. The directory path is always taken from
+<b>XDG_RUNTIME_DIR</b>. If <b>WAYLAND_DISPLAY</b> is not
+set, the socket name is &quot;wayland-0&quot;.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If
+<b>WAYLAND_DISPLAY</b> is already set, the default backend
+becomes <i>wayland</i>. This allows launching Weston as a
+nested server.</p>
+
+<p style="margin-left:9%;"><b>WAYLAND_SOCKET</b></p>
+
+<p style="margin-left:18%;">For Wayland clients, holds the
+file descriptor of an open local socket to a Wayland
+server.</p>
+
+<p style="margin-left:9%;"><b>WESTON_CONFIG_FILE</b></p>
+
+<p style="margin-left:18%;">Weston sets this variable to
+the absolute path of the configuration file it loads, or to
+the empty string if no file is used. Programs that use
+<i>weston.ini</i> will read the file specified by this
+variable instead, or do not read any file if it is empty.
+Unset variable causes falling back to the default name
+<i>weston.ini</i>.</p>
+
+<p style="margin-left:9%;"><b>XCURSOR_PATH</b></p>
+
+<p style="margin-left:18%;">Set the list of paths to look
+for cursors in. It changes both libwayland-cursor and
+libXcursor, so it affects both Wayland and X11 based
+clients. See <b>xcursor</b> (3).</p>
+
+<p style="margin-left:9%;"><b>XCURSOR_SIZE</b></p>
+
+<p style="margin-left:18%;">This variable can be set for
+choosing an specific size of cursor. Affect Wayland and X11
+clients. See <b>xcursor</b> (3).</p>
+
+<p style="margin-left:9%;"><b>XDG_CONFIG_HOME</b></p>
+
+<p style="margin-left:18%;">If set, specifies the directory
+where to look for <b>weston.ini</b>.</p>
+
+<p style="margin-left:9%;"><b>XDG_RUNTIME_DIR</b></p>
+
+<p style="margin-left:18%;">The directory for
+Weston&rsquo;s socket and lock files. Wayland clients will
+automatically use this.</p>
+
+<h2>PROGRAM EXECUTION
+<a name="PROGRAM EXECUTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to execute a program that will be run by Weston. <br>
+By using this syntax :</p>
+
+<p style="margin-left:18%;">weston [options] -- [program
+[arguments]]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&rsquo;--&rsquo; here is mandatory to execute a program.
+There are examples in the <b>EXAMPLES</b> section.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bugs should be
+reported to
+<b>https://gitlab.freedesktop.org/wayland/weston/</b>.</p>
+
+<h2>WWW
+<a name="WWW"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">https://wayland.freedesktop.org/</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Launch Weston
+with the DRM backend on a VT</p>
+
+<p style="margin-left:18%;">weston</p>
+
+<p style="margin-left:9%;">Launch Weston with the DRM
+backend and XWayland support</p>
+
+<p style="margin-left:18%;">weston --xwayland</p>
+
+<p style="margin-left:9%;">Launch Weston (wayland-1) nested
+in another Weston instance (wayland-0)</p>
+
+<p style="margin-left:18%;">WAYLAND_DISPLAY=wayland-0
+weston -Swayland-1</p>
+
+<p style="margin-left:9%;">From an X terminal, launch
+Weston with the x11 backend</p>
+
+<p style="margin-left:18%;">weston</p>
+
+<p style="margin-left:9%;">Launch Weston and make it start
+weston-terminal</p>
+
+<p style="margin-left:18%;">weston --
+/usr/local/bin/weston-terminal</p>
+
+<p style="margin-left:9%;">Launch Weston with the kiosk
+shell and make it start weston-simple-egl</p>
+
+<p style="margin-left:18%;">weston --shell=kiosk-shell.so
+-- /usr/local/bin/weston-simple-egl</p>
+
+<p style="margin-left:9%;">Launch Weston with the kiosk
+shell and open a pdf document with mupdf</p>
+
+<p style="margin-left:18%;">weston --shell=kiosk-shell.so
+-- mupdf /home/user/Documents/krh/wayland.pdf</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>weston-bindings</b>(7),
+<b>weston-debug</b>(1), <b>weston-drm</b>(7),
+<b>weston-rdp</b>(7), <b>weston-vnc</b>(7),
+<b>weston.ini</b>(5)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,949 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>RHASH</title>
+
+</head>
+<body>
+
+<h1 align="center">RHASH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#PROGRAM MODE OPTIONS">PROGRAM MODE OPTIONS</a><br>
+<a href="#HASH ALGORITHMS OPTIONS">HASH ALGORITHMS OPTIONS</a><br>
+<a href="#MISCELLANEOUS OPTIONS">MISCELLANEOUS OPTIONS</a><br>
+<a href="#OUTPUT FORMAT OPTIONS">OUTPUT FORMAT OPTIONS</a><br>
+<a href="#CONFIG FILE">CONFIG FILE</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rhash -
+calculate/check CRC32, MD5, SHA1, GOST, TTH, BTIH or other
+message digests.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>rhash [</b>
+<i>option</i> <b>]... [</b> <i>file</i> <b>]...</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>RHash</b>
+(Recursive Hasher) computes and verifies various message
+digests and checksums of files. Supported hash algorithms
+include CRC32, CRC32C, MD4, MD5, SHA1, SHA256, SHA512, SHA3,
+Tiger, DC++ TTH, BTIH, AICH, ED2K, GOST R 34.11-*,
+RIPEMD-160, HAS-160, BLAKE2s/BLAKE2b, EDON-R 256/512,
+Whirlpool, Snefru-128/256.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The program can
+create and verify Magnet links and eDonkey ed2k:// links,
+see --magnet and --ed2k-link options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A dash string
+parameter &lsquo;-&rsquo; is interpreted as the standard
+input stream (stdin).</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default
+<b>rhash</b> prints sums in SFV format with CRC32 checksum
+only. The format can be changed by options --bsd, --magnet,
+--simple, --printf, --template. To output all sums use the
+&lsquo;-a&rsquo; option.</p>
+
+<h2>PROGRAM MODE OPTIONS
+<a name="PROGRAM MODE OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The default mode
+is to print checksums for all files and directory trees
+specified by command line. The mode can be changed by the
+following options. <br>
+-c, --check</p>
+
+<p style="margin-left:18%;">Check hash files specified by
+command line. RHash can verify hash files in SFV and BSD
+formats, MD5 and SHA1 files format and text files containing
+magnet or ed2k links (one link per line). Empty lines and
+lines starting with &lsquo;;&rsquo; or &lsquo;#&rsquo; are
+ignored.</p>
+
+<p style="margin-left:18%; margin-top: 1em">RHash can
+verify hash files generated without --printf and --template
+formatting options.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the hash
+algorithm is not specified by command line options then
+RHash tries to detect algorithm from the extension of the
+hash file. If detection fails, then all hash function of the
+same hash length are calculated, and that significally slows
+down files verification. To speed up verification, in such
+case, explicitly specify the hash algorithm in the command
+line.</p>
+
+<p style="margin-left:9%;">-u,
+--update=&lt;hash-file&gt;</p>
+
+<p style="margin-left:18%;">Update the hash file specified
+by the option. Message digests will be calculated for all
+files specified by the command line and not present in this
+hash file. The calculated Message digests will be appended
+to the updated hash file in the format specified by
+formatting options. The --update option can be combined with
+--recursive to update the hash file for whole directory
+trees. Also --update option can be used with --check to
+verify the hash file before updating it.</p>
+
+<p style="margin-left:9%;">--missing=&lt;hash-file&gt;</p>
+
+<p style="margin-left:18%;">Read the hash file and print
+missing and inaccessible files, it contains.</p>
+
+
+<p style="margin-left:9%;">--unverified=&lt;hash-file&gt;</p>
+
+<p style="margin-left:18%;">Print files that can&rsquo;t be
+verified by the hash file. That means the files specified by
+the command line and not present in the hash file. The
+--unverified option can be used with --recursive to look for
+unverified files in whole directory trees.</p>
+
+<p style="margin-left:9%;">-k, --check-embedded</p>
+
+<p style="margin-left:18%;">Verify files by crc32 sum
+embedded in their names.</p>
+
+<p style="margin-left:9%;">--torrent</p>
+
+<p style="margin-left:18%;">Create a torrent file for each
+processed file.</p>
+
+<p style="margin-left:9%;">-h, --help</p>
+
+<p style="margin-left:18%;">Help: print help screen and
+exit.</p>
+
+<p style="margin-left:9%;">-V, --version</p>
+
+<p style="margin-left:18%;">Version: print version and
+exit.</p>
+
+<p style="margin-left:9%;">-B, --benchmark</p>
+
+<p style="margin-left:18%;">Run benchmark for the selected
+hash algorithm(s).</p>
+
+<h2>HASH ALGORITHMS OPTIONS
+<a name="HASH ALGORITHMS OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-C, --crc32</p>
+
+<p style="margin-left:18%;">CRC32: Select CRC32 checksum
+algorithm.</p>
+
+<p style="margin-left:9%;">--crc32c</p>
+
+<p style="margin-left:18%;">CRC32C: Select CRC32C checksum
+algorithm.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>--md4</p></td>
+<td width="3%"></td>
+<td width="38%">
+
+
+<p>MD4: Select MD4 hash function.</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">-M, --md5</p>
+
+<p style="margin-left:18%;">MD5: Select MD5 hash
+function.</p>
+
+<p style="margin-left:9%;">-H, --sha1</p>
+
+<p style="margin-left:18%;">SHA1: Select SHA1 hash
+function.</p>
+
+<p style="margin-left:9%;">--sha224, --sha256, --sha384,
+--sha512</p>
+
+<p style="margin-left:18%;">Select specified SHA2 hash
+function.</p>
+
+<p style="margin-left:9%;">--sha3-224, --sha3-256,
+--sha3-384, --sha3-512</p>
+
+<p style="margin-left:18%;">Select specified SHA3 hash
+function.</p>
+
+<p style="margin-left:9%;">--tiger</p>
+
+<p style="margin-left:18%;">Tiger: Select Tiger hash
+function.</p>
+
+<p style="margin-left:9%;">-T, --tth</p>
+
+<p style="margin-left:18%;">TTH: Select DC++ TTH hash
+function.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>--btih</p></td>
+<td width="1%"></td>
+<td width="44%">
+
+
+<p>BTIH: Select BitTorrent Info Hash.</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">-A, --aich</p>
+
+<p style="margin-left:18%;">AICH: Select AICH hash
+function.</p>
+
+<p style="margin-left:9%;">-E, --ed2k</p>
+
+<p style="margin-left:18%;">ED2K: Select eDonkey 2000 hash
+function.</p>
+
+<p style="margin-left:9%;">-L, --ed2k-link</p>
+
+<p style="margin-left:18%;">eDonkey link: calculate and
+print eDonkey link.</p>
+
+<p style="margin-left:9%;">-W, --whirlpool</p>
+
+<p style="margin-left:18%;">Whirlpool: Select Whirlpool
+hash function.</p>
+
+<p style="margin-left:9%;">-G, --gost12-256</p>
+
+<p style="margin-left:18%;">GOST-2012: Select 256-bit GOST
+R 34.11-2012, the Russian GOST standard hash function.</p>
+
+<p style="margin-left:9%;">--gost12-512</p>
+
+<p style="margin-left:18%;">GOST-2012: Select 512-bit GOST
+R 34.11-2012, the Russian GOST standard hash function.</p>
+
+<p style="margin-left:9%;">--gost94</p>
+
+<p style="margin-left:18%;">GOST-94: Select GOST R
+34.11-94, the deprecated Russian hash function.</p>
+
+<p style="margin-left:9%;">--gost94-cryptopro</p>
+
+<p style="margin-left:18%;">GOST-94-CRYPTOPRO: Select the
+CryptoPro version of the deprecated Russian GOST R 34.11-94
+hash function.</p>
+
+<p style="margin-left:9%;">--ripemd160</p>
+
+<p style="margin-left:18%;">RIPEMD-160: Select RIPEMD-160
+hash function.</p>
+
+<p style="margin-left:9%;">--has160</p>
+
+<p style="margin-left:18%;">HAS-160: Select HAS-160 hash
+function.</p>
+
+<p style="margin-left:9%;">--snefru128, --snefru256</p>
+
+<p style="margin-left:18%;">SNEFRU: Select SNEFRU-128/256
+hash function.</p>
+
+<p style="margin-left:9%;">--edonr256, --edonr512</p>
+
+<p style="margin-left:18%;">EDON-R: Select EDON-R 256/512
+hash function.</p>
+
+<p style="margin-left:9%;">--blake2b, --blake2s</p>
+
+<p style="margin-left:18%;">BLAKE2: Select BLAKE2b/BLAKE2s
+hash function.</p>
+
+<p style="margin-left:9%;">-a, --all</p>
+
+<p style="margin-left:18%;">Calculate all supported hash
+functions.</p>
+
+<p style="margin-left:9%;">--list-hashes</p>
+
+<p style="margin-left:18%;">List names of all supported
+hash functions, one per line.</p>
+
+<h2>MISCELLANEOUS OPTIONS
+<a name="MISCELLANEOUS OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-r,
+--recursive</p>
+
+<p style="margin-left:18%;">Recursively process
+directories, specified by command line.</p>
+
+<p style="margin-left:9%;">--follow</p>
+
+<p style="margin-left:18%;">Follow symbolic links when
+processing files or directories recursively.</p>
+
+<p style="margin-left:9%;">-m, --message=&lt;text&gt;</p>
+
+<p style="margin-left:18%;">Calculate message digests of
+the given text message.</p>
+
+<p style="margin-left:9%;">--file-list=&lt;file&gt;</p>
+
+<p style="margin-left:18%;">Process given file as a
+file-list. Lines of this file are interpreted as paths to
+files to be processed. Multiple file lists can be specified
+at command line.</p>
+
+<p style="margin-left:9%;">-v, --verbose</p>
+
+<p style="margin-left:18%;">Be verbose.</p>
+
+<p style="margin-left:9%;">--brief</p>
+
+<p style="margin-left:18%;">Print brief form of
+verification report (without a header and footer), when
+verifying a hash file.</p>
+
+<p style="margin-left:9%;">-P, --percents</p>
+
+<p style="margin-left:18%;">Show percents, while
+calculating or checking sums</p>
+
+<p style="margin-left:9%;">--skip-ok</p>
+
+<p style="margin-left:18%;">Don&rsquo;t print OK messages
+for successfully verified files.</p>
+
+<p style="margin-left:9%;">--ignore-missing</p>
+
+<p style="margin-left:18%;">Ignore missing files, while
+verifying a hash file.</p>
+
+<p style="margin-left:9%;">-i, --ignore-case</p>
+
+<p style="margin-left:18%;">Ignore case of filenames when
+updating crc files.</p>
+
+<p style="margin-left:9%;">--speed</p>
+
+<p style="margin-left:18%;">Print per-file and the total
+processing speed.</p>
+
+<p style="margin-left:9%;">-e, --embed-crc</p>
+
+<p style="margin-left:18%;">Rename files by inserting crc32
+sum into name.</p>
+
+
+<p style="margin-left:9%;">--embed-crc-delimiter=&lt;delimiter&gt;</p>
+
+<p style="margin-left:18%;">Insert specified
+&lt;delimiter&gt; before a crc sum in the --embed-crc mode,
+default is white space. The &lt;delimiter&gt; can be a
+character or empty string.</p>
+
+
+<p style="margin-left:9%;">--path-separator=&lt;separator&gt;</p>
+
+<p style="margin-left:18%;">Use specified path separator to
+display paths. Only slash (&lsquo;/&rsquo;) and backslash
+(&lsquo;\&rsquo;) values are accepted.</p>
+
+<p style="margin-left:9%;">-q, --accept=&lt;list&gt;</p>
+
+<p style="margin-left:18%;">Set a comma-delimited list of
+extensions of the files to process.</p>
+
+<p style="margin-left:9%;">--exclude=&lt;list&gt;</p>
+
+<p style="margin-left:18%;">Set a comma-delimited list of
+extensions of the files to exclude from processing.</p>
+
+<p style="margin-left:9%;">-t,
+--crc-accept=&lt;list&gt;</p>
+
+<p style="margin-left:18%;">Set a comma-delimited list of
+extensions of the hash files to verify.</p>
+
+<p style="margin-left:9%;">--max-depth=&lt;levels&gt;</p>
+
+<p style="margin-left:18%;">Descend at most &lt;levels&gt;
+(a non-negative integer) levels of directories below the
+command line arguments. &lsquo;--max-depth 0&rsquo; means
+only apply the tests and actions to the command line
+arguments.</p>
+
+<p style="margin-left:9%;">-o,
+--output=&lt;file-path&gt;</p>
+
+<p style="margin-left:18%;">Set the file to output
+calculated message digests or verification results to.</p>
+
+<p style="margin-left:9%;">-l, --log=&lt;file-path&gt;</p>
+
+<p style="margin-left:18%;">Set the file to log errors and
+verbose information to.</p>
+
+<p style="margin-left:9%;">--openssl=&lt;list&gt;</p>
+
+<p style="margin-left:18%;">Specify which hash functions
+should be calculated using the OpenSSL library. The
+&lt;list&gt; is a comma delimited list of hash function
+names, but only those supported by openssl are allowed: md4,
+md5, sha1, sha2*, ripemd160 and whirlpool.</p>
+
+<p style="margin-left:9%;">--gost-reverse</p>
+
+<p style="margin-left:18%;">Reverse bytes in hexadecimal
+output of a GOST hash functions. The most significant byte
+of the message digest will be printed first. Default order
+is the least significant byte first.</p>
+
+
+<p style="margin-left:9%;">--bt-batch=&lt;file-path&gt;</p>
+
+<p style="margin-left:18%;">Turn on torrent batch mode
+(implies torrent mode). Calculates batch-torrent for the
+files specified at command line and saves the torrent file
+to the file-path. The option -r &lt;directory&gt; can be
+useful in this mode.</p>
+
+<p style="margin-left:9%;">--bt-private</p>
+
+<p style="margin-left:18%;">Generate torrent file or BTIH
+for a private BitTorrent tracker.</p>
+
+<p style="margin-left:9%;">--bt-transmission</p>
+
+<p style="margin-left:18%;">Generate torrent file or BTIH
+compatible with Transmission torrent client.</p>
+
+<p style="margin-left:9%;">--bt-piece-length</p>
+
+<p style="margin-left:18%;">Set the <i>piece length</i>
+value for torrent file.</p>
+
+
+<p style="margin-left:9%;">--bt-announce=&lt;announce-url&gt;</p>
+
+<p style="margin-left:18%;">Add a tracker announce URL to
+the created torrent file(s). Several URLs can be passed by
+specifying the option mutltiple times. This option
+doesn&rsquo;t change the BTIH message digest.</p>
+
+<p style="margin-left:9%;">--benchmark-raw</p>
+
+<p style="margin-left:18%;">Switch benchmark output format
+to be a machine-readable tab-delimited text with hash
+function name, speed, cpu clocks per byte. This option works
+only if the --benchmark option was specified.</p>
+
+<p style="margin-left:9%;">--no-detect-by-ext</p>
+
+<p style="margin-left:18%;">Do not detect hash function by
+an extension of hash file, in the --check mode.</p>
+
+<p style="margin-left:9%;">--no-path-escaping</p>
+
+<p style="margin-left:18%;">Turn off escape characters in
+file paths. The option can be specified in the default,
+check or update modes.</p>
+
+<p style="margin-left:9%;">-- (double dash)</p>
+
+<p style="margin-left:18%;">Mark the end of command line
+options. All parameters following the double dash are
+interpreted as files or directories. It is typically used to
+process filenames starting with a dash &lsquo;-&rsquo;.
+Alternatively you can specify &rsquo;./&rsquo; or full path
+before such files, so they will not look like options
+anymore.</p>
+
+<h2>OUTPUT FORMAT OPTIONS
+<a name="OUTPUT FORMAT OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em">--sfv</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Print message digests in the SFV
+(Simple File Verification) output format (default). But
+unlike common SFV file, not only CRC32, but any message
+digests specified by options can be printed.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">-g, --magnet</p>
+
+<p style="margin-left:18%;">Print message digests formatted
+as magnet links.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>--bsd</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Use BSD output format. Each message digest is printed on
+a separate line after hash function name and file&rsquo;s
+path, enclosed in parentheses.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">--simple</p>
+
+<p style="margin-left:18%;">Use simple output format. Each
+line will consist of filename and message digests specified
+by options.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>--hex</p></td>
+<td width="3%"></td>
+<td width="56%">
+
+
+<p>Print message digests in hexadecimal format.</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">--base32</p>
+
+<p style="margin-left:18%;">Print message digests in Base32
+format.</p>
+
+<p style="margin-left:9%;">-b, --base64</p>
+
+<p style="margin-left:18%;">Print message digests in Base64
+format.</p>
+
+<p style="margin-left:9%;">--uppercase</p>
+
+<p style="margin-left:18%;">Print message digests in upper
+case.</p>
+
+<p style="margin-left:9%;">--lowercase</p>
+
+<p style="margin-left:18%;">Print message digests in lower
+case.</p>
+
+<p style="margin-left:9%;">--template=&lt;file&gt;</p>
+
+<p style="margin-left:18%;">Read printf-like template from
+given &lt;file&gt;. See the --printf option.</p>
+
+<p style="margin-left:9%;">-p, --printf=&lt;format&gt;</p>
+
+<p style="margin-left:18%;">Format: print <i>format</i>
+string the standard output, interpreting &lsquo;\&rsquo;
+escapes and &lsquo;%&rsquo; directives. The escapes and
+directives are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p>\n</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p>Newline.</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p>\r</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p>Carriage return.</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p>\t</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p>Horizontal tab.</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p>\\</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p>A literal backslash (&lsquo;\&rsquo;).</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p>\0</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p>ASCII NUL.</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p>\NNN</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p>The character which octal ASCII code is NNN.</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p>\xNN</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p>The character which hexadecimal ASCII code is NN.</p></td>
+<td width="10%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">A
+&lsquo;\&rsquo; character followed by any other character is
+treated as an ordinary character, so they both are
+printed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">%%</p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em">A literal percent sign.</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p>%p</p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p>File&rsquo;s path.</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p>%f</p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p>File&rsquo;s name.</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p>%d</p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p>File&rsquo;s directory.</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">%u or %U</p>
+
+<p style="margin-left:27%;">Prefix used to print a
+filename, file path or base64/raw message digest as an
+URL-encoded string. For example: &lsquo;%up&rsquo;,
+&lsquo;%ud&rsquo;, &lsquo;%uf&rsquo;, &lsquo;%uBm&rsquo;,
+&lsquo;%u@h&rsquo;. Use %u for lowercase and %U for
+uppercase hexadecimal characters.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p>%s</p></td>
+<td width="6%"></td>
+<td width="27%">
+
+
+<p>File&rsquo;s size in bytes.</p></td>
+<td width="46%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">%{mtime}</p>
+
+<p style="margin-left:27%;">File&rsquo;s last modification
+time.</p>
+
+<p style="margin-left:18%;">%a or %A</p>
+
+<p style="margin-left:27%;">AICH message digest.</p>
+
+<p style="margin-left:18%;">%c or %C</p>
+
+<p style="margin-left:27%;">CRC32 checksum. Use %c for
+lowercase and %C for uppercase characters.</p>
+
+<p style="margin-left:18%;">%g or %G</p>
+
+<p style="margin-left:27%;">GOST R 34.11-2012 256-bit
+message digest.</p>
+
+<p style="margin-left:18%;">%h or %H</p>
+
+<p style="margin-left:27%;">SHA1 message digest.</p>
+
+<p style="margin-left:18%;">%e or %E</p>
+
+<p style="margin-left:27%;">ED2K message digest.</p>
+
+<p style="margin-left:18%;">%l or %L</p>
+
+<p style="margin-left:27%;">EDonkey ed2k://... link.</p>
+
+<p style="margin-left:18%;">%m or %M</p>
+
+<p style="margin-left:27%;">MD5 message digest.</p>
+
+<p style="margin-left:18%;">%r or %R</p>
+
+<p style="margin-left:27%;">RIPEMD-160 message digest.</p>
+
+<p style="margin-left:18%;">%t or %T</p>
+
+<p style="margin-left:27%;">TTH message digest.</p>
+
+<p style="margin-left:18%;">%w or %W</p>
+
+<p style="margin-left:27%;">Whirlpool message digest.</p>
+
+<p style="margin-left:18%;">%{crc32}, %{crc32c}, %{md4},
+%{md5}, %{sha1}, %{tiger}, %{tth}, <br>
+%{btih}, %{ed2k}, %{aich}, %{whirlpool}, %{ripemd160}, <br>
+%{has160}, %{gost94}, %{gost94-cryptopro}, %{gost12-256},
+<br>
+%{gost12-512}, %{sha-224}, %{sha-256}, %{sha-384},
+%{sha-512}, <br>
+%{sha3-224}, %{sha3-256}, %{sha3-384}, %{sha3-512}, <br>
+%{edon-r256}, %{edon-r512}, %{blake2s}, %{blake2b}, <br>
+%{snefru128}, %{snefru256}</p>
+
+<p style="margin-left:27%;">Print the specified message
+digest. It is printed in uppercase, if the hash function
+name starts with a capital letter, e.g. %{TTH},
+%{Sha-512}.</p>
+
+<p style="margin-left:18%;">%x&lt;hash&gt;, %b&lt;hash&gt;,
+%B&lt;hash&gt;, %@&lt;hash&gt;</p>
+
+<p style="margin-left:27%;">Use one of these prefixes to
+output a message digest in hexadecimal, base32, base64 or
+raw (binary) format respectively, e.g. %b{md4}, %BH or
+%xT.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default
+output format can also be changed by renaming the program or
+placing a hardlink/symlink to it with a filename containing
+strings &lsquo;crc32&rsquo;, &lsquo;crc32c&rsquo;,
+&lsquo;md4&rsquo;, &lsquo;md5&rsquo;, &lsquo;sha1&rsquo;,
+&lsquo;sha224&rsquo; &lsquo;sha256&rsquo;,
+&lsquo;sha384&rsquo; &lsquo;sha512&rsquo;,
+&lsquo;sha3-256&rsquo;, &lsquo;sha3-512&rsquo;,
+&lsquo;sha3-224&rsquo;, &lsquo;sha3-384&rsquo;,
+&lsquo;tiger&rsquo;, &lsquo;tth&rsquo;, &lsquo;btih&rsquo;,
+&lsquo;aich&rsquo;, &lsquo;ed2k&rsquo;,
+&lsquo;ed2k-link&rsquo;, &lsquo;gost12-256&rsquo;,
+&lsquo;gost12-512&rsquo;, &lsquo;gost94&rsquo;,
+&lsquo;gost94-cryptopro&rsquo;, &lsquo;rmd160&rsquo;,
+&lsquo;has160&rsquo;, &lsquo;whirlpool&rsquo;,
+&lsquo;edonr256&rsquo;, &lsquo;edonr512&rsquo;,
+&lsquo;blake2s&rsquo;, &lsquo;blake2b&rsquo;,
+&lsquo;snefru128&rsquo;, &lsquo;snefru256&rsquo;,
+&lsquo;sfv&rsquo; , &lsquo;bsd&rsquo; or
+&lsquo;magnet&rsquo;.</p>
+
+<h2>CONFIG FILE
+<a name="CONFIG FILE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">RHash looks for
+a config file at $XDG_CONFIG_HOME/rhash/rhashrc,
+$HOME/.config/rhash/rhashrc, $XDG_CONFIG_DIRS/rhash/rhashrc,
+$HOME/.rhashrc and /etc/rhashrc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The config file
+consists of lines formatted as</p>
+
+<p style="margin-left:18%;">variable = value</p>
+
+<p style="margin-left:9%; margin-top: 1em">where the
+<i>variable</i> can be a name of any command line option,
+like <i>magnet, printf, percents, etc.</i> A boolean
+variable can be set to true by a value &lsquo;on&rsquo;,
+&lsquo;yes&rsquo; or &lsquo;true&rsquo;, any other value
+sets the variable to false.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Empty lines and
+lines starting with &lsquo;#&rsquo; or &lsquo;;&rsquo; are
+ignored.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example config
+file: <br>
+# This is a comment line <br>
+percents = on <br>
+crc-accept =
+.sfv,.md5,.sha1,.sha256,.sha512,.tth,.magnet</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Aleksey
+Kravchenko &lt;rhash.admin@gmail.com&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>md5sum</b>(1)
+<b>cksfv</b>(1) <b>ed2k_hash</b>(1)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bug reports are
+welcome! Post them to the GitHub issues page
+<i>https://github.com/rhash/RHash/issues</i></p>
+<hr>
+</body>
+</html>

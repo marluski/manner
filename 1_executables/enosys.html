@@ -1,0 +1,201 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:24 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ENOSYS</title>
+
+</head>
+<body>
+
+<h1 align="center">ENOSYS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#AVAILABILITY">AVAILABILITY</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">enosys - utility
+to make syscalls fail with ENOSYS</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>enosys</b>
+[<b>--syscall</b>|<b>-s</b> <i>syscall</i>] command</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>enosys</b> is
+a simple command to execute a child process for which
+certain syscalls fail with errno ENOSYS.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It can be used
+to test the behavior of applications in the face of missing
+syscalls as would happen when running on old kernels.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>,
+<b>--syscall</b></p>
+
+<p style="margin-left:14%;">Syscall to block with
+<b>ENOSYS</b>. Can be specified multiple times. An
+alternative error number or name can be specified with a
+colon.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i</b>,
+<b>--ioctl</b></p>
+
+<p style="margin-left:14%;">Ioctl to block with
+<b>ENOTTY</b>. Can be specified multiple times. An
+alternative error number or name can be specified with a
+colon.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l</b>,
+<b>--list</b></p>
+
+<p style="margin-left:14%;">List syscalls known to
+<b>enosys</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m</b>,
+<b>--list-ioctl</b></p>
+
+<p style="margin-left:14%;">List ioctls known to
+<b>enosys</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--dump</b>[<b>=</b><i>file</i>]</p>
+
+<p style="margin-left:14%;">Dump seccomp bytecode filter to
+standard output.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The dump can
+for example be used by <b>setpriv --seccomp-filter</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Display help text and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b>,
+<b>--version</b></p>
+
+<p style="margin-left:14%;">Display version and exit.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:14%; margin-top: 1em"># fail syscall
+&quot;fallocate&quot; with ENOSYS <br>
+enosys -s fallocate ...</p>
+
+<p style="margin-left:14%; margin-top: 1em"># fail syscall
+&quot;fallocate&quot; with ENOMEM <br>
+enosys -s fallocate:ENOMEM ...</p>
+
+<p style="margin-left:14%; margin-top: 1em"># fail syscall
+&quot;fallocate&quot; with value 12/ENOMEM <br>
+enosys -s fallocate:12 ...</p>
+
+<p style="margin-left:14%; margin-top: 1em"># fail ioctl
+FIOCLEX with ENOTTY <br>
+enosys -i FIOCLEX ...</p>
+
+<p style="margin-left:14%; margin-top: 1em"># fail ioctl
+FIOCLEX with ENOMEM <br>
+enosys -i FIOCLEX:ENOMEM ...</p>
+
+<p style="margin-left:14%; margin-top: 1em"># fail ioctl
+FIOCLEX with value 12/ENOMEM <br>
+enosys -i FIOCLEX:12 ...</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>enosys</b>
+exits with the status code of the executed process. The
+following values have special meanings:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>1</b></p>
+
+<p style="margin-left:14%;">internal error</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>2</b></p>
+
+<p style="margin-left:14%;">system does not provide the
+necessary functionality</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Thomas
+Wei&szlig;schuh</i> &lt;thomas@t-8ch.de&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>syscall</b>(2)</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For bug reports,
+use the <i>issue tracker</i>
+&lt;https://github.com/util-linux/util-linux/issues&gt;.</p>
+
+<h2>AVAILABILITY
+<a name="AVAILABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>enosys</b> command is part of the util-linux package
+which can be downloaded from <i>Linux Kernel Archive</i>
+&lt;https://www.kernel.org/pub/linux/utils/util-linux/&gt;.</p>
+<hr>
+</body>
+</html>

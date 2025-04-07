@@ -1,0 +1,8245 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>JEDI</title>
+
+</head>
+<body>
+
+<h1 align="center">JEDI</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DOCS">DOCS</a><br>
+<a href="#Using Jedi">Using Jedi</a><br>
+<a href="#Language Servers">Language Servers</a><br>
+<a href="#Editor Plugins">Editor Plugins</a><br>
+<a href="#Vim">Vim</a><br>
+<a href="#Visual Studio Code">Visual Studio Code</a><br>
+<a href="#Emacs">Emacs</a><br>
+<a href="#Sublime Text 2/3">Sublime Text 2/3</a><br>
+<a href="#SynWrite">SynWrite</a><br>
+<a href="#TextMate">TextMate</a><br>
+<a href="#Kate">Kate</a><br>
+<a href="#Atom">Atom</a><br>
+<a href="#GNOME Builder">GNOME Builder</a><br>
+<a href="#Gedit">Gedit</a><br>
+<a href="#Eric IDE">Eric IDE</a><br>
+<a href="#Web Debugger">Web Debugger</a><br>
+<a href="#xonsh shell">xonsh shell</a><br>
+<a href="#Tab Completion in the Python Shell">Tab Completion in the Python Shell</a><br>
+<a href="#Using PYTHONSTARTUP">Using PYTHONSTARTUP</a><br>
+<a href="#Using a Custom $HOME/.pythonrc.py">Using a Custom $HOME/.pythonrc.py</a><br>
+<a href="#Recipes">Recipes</a><br>
+<a href="#Type Hinting">Type Hinting</a><br>
+<a href="#Official Gradual Typing (Recommended)">Official Gradual Typing (Recommended)</a><br>
+<a href="#Sphinx style">Sphinx style</a><br>
+<a href="#Epydoc">Epydoc</a><br>
+<a href="#Numpydoc">Numpydoc</a><br>
+<a href="#Features and Limitations">Features and Limitations</a><br>
+<a href="#Basic Features">Basic Features</a><br>
+<a href="#Supported Python Features">Supported Python Features</a><br>
+<a href="#Limitations">Limitations</a><br>
+<a href="#Performance Issues">Performance Issues</a><br>
+<a href="#Security">Security</a><br>
+<a href="#For Script">For Script</a><br>
+<a href="#For Interpreter">For Interpreter</a><br>
+<a href="#API Overview">API Overview</a><br>
+<a href="#Script">Script</a><br>
+<a href="#Interpreter">Interpreter</a><br>
+<a href="#Projects">Projects</a><br>
+<a href="#Environments">Environments</a><br>
+<a href="#Helper Functions">Helper Functions</a><br>
+<a href="#Errors">Errors</a><br>
+<a href="#Examples">Examples</a><br>
+<a href="#Completions">Completions</a><br>
+<a href="#Type Inference / Goto">Type Inference / Goto</a><br>
+<a href="#References">References</a><br>
+<a href="#Deprecations">Deprecations</a><br>
+<a href="#API Return Classes">API Return Classes</a><br>
+<a href="#Abstract Base Class">Abstract Base Class</a><br>
+<a href="#Name">Name</a><br>
+<a href="#Completion">Completion</a><br>
+<a href="#BaseSignature">BaseSignature</a><br>
+<a href="#Signature">Signature</a><br>
+<a href="#ParamName">ParamName</a><br>
+<a href="#Refactoring">Refactoring</a><br>
+<a href="#Installation and Configuration">Installation and Configuration</a><br>
+<a href="#The normal way">The normal way</a><br>
+<a href="#With pip">With pip</a><br>
+<a href="#System-wide installation via a package manager">System-wide installation via a package manager</a><br>
+<a href="#Arch Linux">Arch Linux</a><br>
+<a href="#Debian">Debian</a><br>
+<a href="#Others">Others</a><br>
+<a href="#Manual installation from GitHub">Manual installation from GitHub</a><br>
+<a href="#Inclusion as a submodule">Inclusion as a submodule</a><br>
+<a href="#Settings">Settings</a><br>
+<a href="#Completion output">Completion output</a><br>
+<a href="#Filesystem cache">Filesystem cache</a><br>
+<a href="#Parser">Parser</a><br>
+<a href="#Dynamic stuff">Dynamic stuff</a><br>
+<a href="#Caching">Caching</a><br>
+<a href="#Jedi Development">Jedi Development</a><br>
+<a href="#Introduction">Introduction</a><br>
+<a href="#The Jedi Core">The Jedi Core</a><br>
+<a href="#Parser">Parser</a><br>
+<a href="#Type inference of python code (inference/__init__.py)">Type inference of python code (inference/__init__.py)</a><br>
+<a href="#Inference Values (inference/base_value.py)">Inference Values (inference/base_value.py)</a><br>
+<a href="#Name resolution (inference/finder.py)">Name resolution (inference/finder.py)</a><br>
+<a href="#Flow checks">Flow checks</a><br>
+<a href="#API (api/__init__.py and api/classes.py)">API (api/__init__.py and api/classes.py)</a><br>
+<a href="#Core Extensions">Core Extensions</a><br>
+<a href="#Iterables &amp; Dynamic Arrays (inference/value/iterable.py)">Iterables &amp; Dynamic Arrays (inference/value/iterable.py)</a><br>
+<a href="#Parameter completion (inference/dynamic_params.py)">Parameter completion (inference/dynamic_params.py)</a><br>
+<a href="#Docstrings (inference/docstrings.py)">Docstrings (inference/docstrings.py)</a><br>
+<a href="#Refactoring (api/refactoring.py)">Refactoring (api/refactoring.py)</a><br>
+<a href="#Imports &amp; Modules">Imports &amp; Modules</a><br>
+<a href="#Compiled Modules (inference/compiled.py)">Compiled Modules (inference/compiled.py)</a><br>
+<a href="#Imports (inference/imports.py)">Imports (inference/imports.py)</a><br>
+<a href="#Stubs &amp; Annotations (inference/gradual)">Stubs &amp; Annotations (inference/gradual)</a><br>
+<a href="#Caching &amp; Recursions">Caching &amp; Recursions</a><br>
+<a href="#Caching (cache.py)">Caching (cache.py)</a><br>
+<a href="#Recursions (recursion.py)">Recursions (recursion.py)</a><br>
+<a href="#Settings">Settings</a><br>
+<a href="#Helper Modules">Helper Modules</a><br>
+<a href="#Jedi Testing">Jedi Testing</a><br>
+<a href="#Integration Tests (run.py)">Integration Tests (run.py)</a><br>
+<a href="#How to run tests?">How to run tests?</a><br>
+<a href="#Alternate Test Runner">Alternate Test Runner</a><br>
+<a href="#Auto-Completion Tests">Auto-Completion Tests</a><br>
+<a href="#Inference Tests">Inference Tests</a><br>
+<a href="#Goto Tests">Goto Tests</a><br>
+<a href="#Reference Tests">Reference Tests</a><br>
+<a href="#Refactoring Tests (refactor.py)">Refactoring Tests (refactor.py)</a><br>
+<a href="#History &amp; Acknowledgements">History &amp; Acknowledgements</a><br>
+<a href="#Acknowledgements">Acknowledgements</a><br>
+<a href="#A Little Bit of History">A Little Bit of History</a><br>
+<a href="#Main Authors">Main Authors</a><br>
+<a href="#Code Contributors">Code Contributors</a><br>
+<a href="#Changelog">Changelog</a><br>
+<a href="#Unreleased">Unreleased</a><br>
+<a href="#0.19.2 (2024-11-10)">0.19.2 (2024-11-10)</a><br>
+<a href="#0.19.1 (2023-10-02)">0.19.1 (2023-10-02)</a><br>
+<a href="#0.19.0 (2023-07-29)">0.19.0 (2023-07-29)</a><br>
+<a href="#0.18.2 (2022-11-21)">0.18.2 (2022-11-21)</a><br>
+<a href="#0.18.1 (2021-11-17)">0.18.1 (2021-11-17)</a><br>
+<a href="#0.18.0 (2020-12-25)">0.18.0 (2020-12-25)</a><br>
+<a href="#0.17.2 (2020-07-17)">0.17.2 (2020-07-17)</a><br>
+<a href="#0.17.1 (2020-06-20)">0.17.1 (2020-06-20)</a><br>
+<a href="#0.17.0 (2020-04-14)">0.17.0 (2020-04-14)</a><br>
+<a href="#0.16.0 (2020-01-26)">0.16.0 (2020-01-26)</a><br>
+<a href="#0.15.2 (2019-12-20)">0.15.2 (2019-12-20)</a><br>
+<a href="#0.15.1 (2019-08-13)">0.15.1 (2019-08-13)</a><br>
+<a href="#0.15.0 (2019-08-11)">0.15.0 (2019-08-11)</a><br>
+<a href="#0.14.1 (2019-07-13)">0.14.1 (2019-07-13)</a><br>
+<a href="#0.14.0 (2019-06-20)">0.14.0 (2019-06-20)</a><br>
+<a href="#0.13.3 (2019-02-24)">0.13.3 (2019-02-24)</a><br>
+<a href="#0.13.2 (2018-12-15)">0.13.2 (2018-12-15)</a><br>
+<a href="#0.13.1 (2018-10-02)">0.13.1 (2018-10-02)</a><br>
+<a href="#0.13.0 (2018-10-02)">0.13.0 (2018-10-02)</a><br>
+<a href="#0.12.1 (2018-06-30)">0.12.1 (2018-06-30)</a><br>
+<a href="#0.12.0 (2018-04-15)">0.12.0 (2018-04-15)</a><br>
+<a href="#0.11.1 (2017-12-14)">0.11.1 (2017-12-14)</a><br>
+<a href="#0.11.0 (2017-09-20)">0.11.0 (2017-09-20)</a><br>
+<a href="#0.10.2 (2017-04-05)">0.10.2 (2017-04-05)</a><br>
+<a href="#0.10.1 (2017-04-05)">0.10.1 (2017-04-05)</a><br>
+<a href="#0.10.0 (2017-02-03)">0.10.0 (2017-02-03)</a><br>
+<a href="#0.9.0 (2015-04-10)">0.9.0 (2015-04-10)</a><br>
+<a href="#0.8.1 (2014-07-23)">0.8.1 (2014-07-23)</a><br>
+<a href="#0.8.0 (2014-05-05)">0.8.0 (2014-05-05)</a><br>
+<a href="#0.7.0 (2013-08-09)">0.7.0 (2013-08-09)</a><br>
+<a href="#0.6.0 (2013-05-14)">0.6.0 (2013-05-14)</a><br>
+<a href="#0.5 versions (2012)">0.5 versions (2012)</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">jedi - Jedi
+Documentation <i>GitHub starsThe percentage of open issues
+and pull requestsThe resolution time is the median time an
+issue or pull request stays open.TestsCoverage statusPyPI
+Downloads</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Github
+Repository</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Jedi is a static
+analysis tool for Python that is typically used in
+IDEs/editors plugins. Jedi has a focus on autocompletion and
+goto functionality. Other features include refactoring, code
+search and finding references.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Jedi has a
+simple API to work with. There is a reference implementation
+as a <i>VIM-Plugin</i>. Autocompletion in your REPL is also
+possible, IPython uses it natively and for the CPython REPL
+you can install it. Jedi is well tested and bugs should be
+rare.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Here's a simple
+example of the autocompletion feature:</p>
+
+<p style="margin-left:9%; margin-top: 1em">&gt;&gt;&gt;
+import jedi <br>
+&gt;&gt;&gt; source = ''' <br>
+... import json <br>
+... json.lo''' <br>
+&gt;&gt;&gt; script = jedi.Script(source, path='example.py')
+<br>
+&gt;&gt;&gt; script <br>
+&lt;Script: 'example.py' ...&gt; <br>
+&gt;&gt;&gt; completions = script.complete(3,
+len('json.lo')) <br>
+&gt;&gt;&gt; completions <br>
+[&lt;Completion: load&gt;, &lt;Completion: loads&gt;] <br>
+&gt;&gt;&gt; print(completions[0].complete) <br>
+ad <br>
+&gt;&gt;&gt; print(completions[0].name) <br>
+load</p>
+
+<p style="margin-left:9%; margin-top: 1em">Autocompletion
+can for example look like this in jedi-vim:</p>
+
+<p style="margin-left:12%;">[image]</p>
+
+<h2>DOCS
+<a name="DOCS"></a>
+</h2>
+
+
+<h3>Using Jedi
+<a name="Using Jedi"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi is can be
+used with a variety of <i>plugins</i>, <i>language
+servers</i> and other software. It is also possible to use
+Jedi in the <i>Python shell or with IPython</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Below you can
+also find a list of <i>recipes for type hinting</i>.</p>
+
+<h3>Language Servers
+<a name="Language Servers"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="66%">
+
+
+<p style="margin-top: 1em"><i>jedi-language-server</i></p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="66%">
+
+
+<p><i>python-language-server</i> (currently
+unmaintained)</p> </td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="66%">
+
+
+<p><i>python-lsp-server</i> (fork from
+python-language-server)</p> </td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="66%">
+
+
+<p><i>anakin-language-server</i></p></td>
+<td width="22%">
+</td></tr>
+</table>
+
+<h3>Editor Plugins
+<a name="Editor Plugins"></a>
+</h3>
+
+
+<h3>Vim
+<a name="Vim"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="16%">
+
+
+<p style="margin-top: 1em"><i>jedi-vim</i></p></td>
+<td width="72%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="16%">
+
+
+<p><i>YouCompleteMe</i></p></td>
+<td width="72%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="16%">
+
+
+<p><i>deoplete-jedi</i></p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<h3>Visual Studio Code
+<a name="Visual Studio Code"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><i>Python Extension</i></p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<h3>Emacs
+<a name="Emacs"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="16%">
+
+
+<p style="margin-top: 1em"><i>Jedi.el</i></p></td>
+<td width="72%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="16%">
+
+
+<p><i>elpy</i></p></td>
+<td width="72%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="16%">
+
+
+<p><i>anaconda-mode</i></p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<h3>Sublime Text 2/3
+<a name="Sublime Text 2/3"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><i>SublimeJEDI</i> (ST2 &amp;
+ST3)</p> </td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="29%">
+
+
+<p><i>anaconda</i> (only ST3)</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h3>SynWrite
+<a name="SynWrite"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><i>SynJedi</i></p></td>
+<td width="79%">
+</td></tr>
+</table>
+
+<h3>TextMate
+<a name="TextMate"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="56%">
+
+
+<p style="margin-top: 1em"><i>Textmate</i> (Not sure if
+it's actually working)</p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<h3>Kate
+<a name="Kate"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><i>Kate</i> version 4.13+
+<i>supports it natively</i>, you have to enable it,
+though.</p> </td></tr>
+</table>
+
+<h3>Atom
+<a name="Atom"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="30%">
+
+
+
+<p style="margin-top: 1em"><i>autocomplete-python-jedi</i></p> </td>
+<td width="58%">
+</td></tr>
+</table>
+
+<h3>GNOME Builder
+<a name="GNOME Builder"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p style="margin-top: 1em"><i>GNOME Builder supports it
+natively</i>, and is enabled by default.</p></td>
+<td width="9%">
+</td></tr>
+</table>
+
+<h3>Gedit
+<a name="Gedit"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><i>gedi</i></p></td>
+<td width="83%">
+</td></tr>
+</table>
+
+<h3>Eric IDE
+<a name="Eric IDE"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><i>Eric IDE</i></p></td>
+<td width="78%">
+</td></tr>
+</table>
+
+<h3>Web Debugger
+<a name="Web Debugger"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><i>wdb</i></p></td>
+<td width="85%">
+</td></tr>
+</table>
+
+<h3>xonsh shell
+<a name="xonsh shell"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi is a
+preinstalled extension in <i>xonsh shell</i>. Run the
+following command to enable:</p>
+
+<p style="margin-left:13%; margin-top: 1em">xontrib load
+jedi</p>
+
+<p style="margin-left:9%; margin-top: 1em">and many
+more!</p>
+
+<h3>Tab Completion in the Python Shell
+<a name="Tab Completion in the Python Shell"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi is a
+dependency of IPython. Autocompletion in IPython is
+therefore possible without additional configuration.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Here is an
+<i>example video</i> how REPL completion can look like in a
+different shell.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There are two
+different options how you can use Jedi autocompletion in
+your <b>python</b> interpreter. One with your custom
+<b>$HOME/.pythonrc.py</b> file and one that uses
+<b>PYTHONSTARTUP</b>.</p>
+
+<h3>Using PYTHONSTARTUP
+<a name="Using PYTHONSTARTUP"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To use Jedi
+completion in Python interpreter, add the following in your
+shell setup (e.g., <b>.bashrc</b>). This works only on
+Linux/Mac, because readline is not available on Windows. If
+you still want Jedi autocompletion in your REPL, just use
+IPython instead:</p>
+
+<p style="margin-left:13%; margin-top: 1em">export
+PYTHONSTARTUP=&quot;$(python -m jedi repl)&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then you will be
+able to use Jedi completer in your Python interpreter:</p>
+
+<p style="margin-left:13%; margin-top: 1em">$ python <br>
+Python 3.9.2+ (default, Jul 20 2020, 22:15:08) <br>
+[GCC 4.6.1] on linux2 <br>
+Type &quot;help&quot;, &quot;copyright&quot;,
+&quot;credits&quot; or &quot;license&quot; for more
+information. <br>
+&gt;&gt;&gt; import os <br>
+&gt;&gt;&gt; os.path.join('a', 'b').split().in&lt;TAB&gt; #
+doctest: +SKIP <br>
+..dex ..sert</p>
+
+<h3>Using a Custom $HOME/.pythonrc.py
+<a name="Using a Custom $HOME/.pythonrc.py"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jedi.utils.setup_readline(namespace_module=&lt;module
+'__main__' from <br>
+'/usr/bin/sphinx-build'&gt;, fuzzy=False)</b></p>
+
+<p style="margin-left:18%;">This function sets up
+<i>readline</i> to use Jedi in a Python interactive
+shell.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If you want to
+use a custom <b>PYTHONSTARTUP</b> file (typically
+<b>$HOME/.pythonrc.py</b>), you can add this piece of
+code:</p>
+
+<p style="margin-left:22%; margin-top: 1em">try: <br>
+from jedi.utils import setup_readline <br>
+except ImportError: <br>
+# Fallback to the stdlib readline completer if it is
+installed. <br>
+# Taken from
+http://docs.python.org/2/library/rlcompleter.html <br>
+print(&quot;Jedi is not installed, falling back to
+readline&quot;) <br>
+try: <br>
+import readline <br>
+import rlcompleter <br>
+readline.parse_and_bind(&quot;tab: complete&quot;) <br>
+except ImportError: <br>
+print(&quot;Readline is not installed either. No tab
+completion is enabled.&quot;) <br>
+else: <br>
+setup_readline()</p>
+
+<p style="margin-left:18%; margin-top: 1em">This will
+fallback to the readline completer if Jedi is not installed.
+The readline completer will only complete names in the
+global namespace, so for example:</p>
+
+
+<p style="margin-left:22%; margin-top: 1em">ran&lt;TAB&gt;</p>
+
+<p style="margin-left:18%; margin-top: 1em">will complete
+to <b>range</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">With Jedi the
+following code:</p>
+
+
+<p style="margin-left:22%; margin-top: 1em">range(10).cou&lt;TAB&gt;</p>
+
+<p style="margin-left:18%; margin-top: 1em">will complete
+to <b>range(10).count</b>, this does not work with the
+default cPython <i>readline</i> completer.</p>
+
+<p style="margin-left:18%; margin-top: 1em">You will also
+need to add <b>export PYTHONSTARTUP=$HOME/.pythonrc.py</b>
+to your shell profile (usually <b>.bash_profile</b> or
+<b>.profile</b> if you use bash).</p>
+
+<h3>Recipes
+<a name="Recipes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Here are some
+tips on how to use Jedi efficiently.</p>
+
+<h3>Type Hinting
+<a name="Type Hinting"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If Jedi cannot
+detect the type of a function argument correctly (due to the
+dynamic nature of Python), you can help it by hinting the
+type using one of the docstring/annotation styles below.
+<b>Only gradual typing will always work</b>, all the
+docstring solutions are glorified hacks and more complicated
+cases will probably not work.</p>
+
+<h3>Official Gradual Typing (Recommended)
+<a name="Official Gradual Typing (Recommended)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can read a
+lot about Python's gradual typing system in the
+corresponding PEPs like:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="41%">
+
+
+<p><i>PEP 484</i> as an introduction</p></td>
+<td width="47%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="41%">
+
+
+<p><i>PEP 526</i> for variable annotations</p></td>
+<td width="47%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="41%">
+
+
+<p><i>PEP 589</i> for <b>TypeDict</b></p></td>
+<td width="47%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="41%">
+
+
+<p>There are probably more :)</p></td>
+<td width="47%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Below you can
+find a few examples how you can use this feature.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Function
+annotations:</p>
+
+<p style="margin-left:13%; margin-top: 1em">def
+myfunction(node: ProgramNode, foo: str) -&gt; None: <br>
+&quot;&quot;&quot;Do something with a ``node``.</p>
+
+
+<p style="margin-left:13%; margin-top: 1em">&quot;&quot;&quot;
+<br>
+node.| # complete here</p>
+
+<p style="margin-left:9%; margin-top: 1em">Assignment,
+for-loop and with-statement type hints:</p>
+
+<p style="margin-left:13%; margin-top: 1em">import typing
+<br>
+x: int = foo() <br>
+y: typing.Optional[int] = 3</p>
+
+<p style="margin-left:13%; margin-top: 1em">key: str <br>
+value: Employee <br>
+for key, value in foo.items(): <br>
+pass</p>
+
+<p style="margin-left:13%; margin-top: 1em">f: Union[int,
+float] <br>
+with foo() as f: <br>
+print(f + 3)</p>
+
+<p style="margin-left:9%; margin-top: 1em">PEP-0484 should
+be supported in its entirety. Feel free to open issues if
+that is not the case. You can also use stub files.</p>
+
+<h3>Sphinx style
+<a name="Sphinx style"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>http://www.sphinx-doc.org/en/stable/domains.html#info-field-lists</i></p>
+
+<p style="margin-left:13%; margin-top: 1em">def
+myfunction(node, foo): <br>
+&quot;&quot;&quot; <br>
+Do something with a ``node``.</p>
+
+<p style="margin-left:13%; margin-top: 1em">:type node:
+ProgramNode <br>
+:param str foo: foo parameter description <br>
+&quot;&quot;&quot; <br>
+node.| # complete here</p>
+
+<h3>Epydoc
+<a name="Epydoc"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>http://epydoc.sourceforge.net/manual-fields.html</i></p>
+
+<p style="margin-left:13%; margin-top: 1em">def
+myfunction(node): <br>
+&quot;&quot;&quot; <br>
+Do something with a ``node``.</p>
+
+<p style="margin-left:13%; margin-top: 1em">@type node:
+ProgramNode <br>
+&quot;&quot;&quot; <br>
+node.| # complete here</p>
+
+<h3>Numpydoc
+<a name="Numpydoc"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">In order to
+support the numpydoc format, you need to install the -
+<i>numpydoc</i> package.</p>
+
+<p style="margin-left:13%; margin-top: 1em">def foo(var1,
+var2, long_var_name='hi'): <br>
+r&quot;&quot;&quot; <br>
+A one-line summary that does not use variable names or the
+<br>
+function name.</p>
+
+<p style="margin-left:13%; margin-top: 1em">...</p>
+
+<p style="margin-left:13%; margin-top: 1em">Parameters <br>
+---------- <br>
+var1 : array_like <br>
+Array_like means all those objects -- lists, nested lists,
+<br>
+etc. -- that can be converted to an array. We can also <br>
+refer to variables like `var1`. <br>
+var2 : int <br>
+The type above can either refer to an actual Python type
+<br>
+(e.g. ``int``), or describe the type of the variable in more
+<br>
+detail, e.g. ``(N,) ndarray`` or ``array_like``. <br>
+long_variable_name : {'hi', 'ho'}, optional <br>
+Choices in brackets, default first when optional.</p>
+
+<p style="margin-left:13%; margin-top: 1em">...</p>
+
+
+<p style="margin-left:13%; margin-top: 1em">&quot;&quot;&quot;
+<br>
+var2.| # complete here</p>
+
+<h3>Features and Limitations
+<a name="Features and Limitations"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi's main API
+calls and features are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Autocompletion:
+<i>Script.complete()</i>; It's also possible to get it
+working in <i>your REPL (IPython, etc.)</i></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Goto/Type Inference: <i>Script.goto()</i> and
+<i>Script.infer()</i></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Static Analysis: <i>Script.get_names()</i> and
+<i>Script.get_syntax_errors()</i></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Refactorings: <i>Script.rename()</i>,
+<i>Script.inline()</i>, <i>Script.extract_variable()</i> and
+<i>Script.extract_function()</i></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Code Search: <i>Script.search()</i> and
+<i>Project.search()</i></p> </td></tr>
+</table>
+
+<h3>Basic Features
+<a name="Basic Features"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Python 3.6+ support</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Ignores syntax errors and wrong indentation</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Can deal with complex module / function / class
+structures</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Great <b>virtualenv</b>/<b>venv</b> support</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Works great with Python's <i>type hinting</i>,</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Understands stub files</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Can infer function arguments for sphinx, epydoc and
+basic numpydoc docstrings</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Is overall a very solid piece of software that has been
+refined for a long time. Bug reports are very welcome and
+are usually fixed within a few weeks.</p></td></tr>
+</table>
+
+<h3>Supported Python Features
+<a name="Supported Python Features"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi supports
+many of the widely used Python features:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">builtins</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>returns, yields, yield from</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>tuple assignments / array indexing / dictionary indexing
+/ star unpacking</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>with-statement / exception handling</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>*args</b> / <b>**kwargs</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>decorators / lambdas / closures</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>generators / iterators</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>descriptors: property / staticmethod / classmethod /
+custom descriptors</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>some magic methods: <b>__call__</b>, <b>__iter__</b>,
+<b>__next__</b>, <b>__get__</b>, <b>__getitem__</b>,
+<b>__init__</b></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>list.append()</b>, <b>set.add()</b>,
+<b>list.extend()</b>, etc.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>(nested) list comprehensions / ternary expressions</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>relative imports</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>getattr()</b> / <b>__getattr__</b> /
+<b>__getattribute__</b></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>function annotations</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>simple/typical <b>sys.path</b> modifications</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>isinstance</b> checks for if/while/assert</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>namespace packages (includes <b>pkgutil</b>,
+<b>pkg_resources</b> and PEP420 namespaces)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Django / Flask / Buildout support</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Understands Pytest fixtures</p></td></tr>
+</table>
+
+<h3>Limitations
+<a name="Limitations"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In general
+Jedi's limit is quite high, but for very big projects or
+very complex code, sometimes Jedi intentionally stops type
+inference, to avoid hanging for a long time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Additionally
+there are some Python patterns Jedi does not support. This
+is intentional and below should be a complete list:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Arbitrary metaclasses: Some
+metaclasses like enums and dataclasses are reimplemented in
+Jedi to make them work. Most of the time stubs are good
+enough to get type inference working, even when metaclasses
+are involved.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>setattr()</b>, <b>__import__()</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Writing to some dicts: <b>globals()</b>,
+<b>locals()</b>, <b>object.__dict__</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Manipulations of instances outside the instance
+variables without using methods</p></td></tr>
+</table>
+
+<h3>Performance Issues
+<a name="Performance Issues"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Importing
+<b>numpy</b> can be quite slow sometimes, as well as loading
+the builtins the first time. If you want to speed things up,
+you could preload libraries in Jedi, with
+<i>preload_module()</i>. However, once loaded, this should
+not be a problem anymore. The same is true for huge modules
+like <b>PySide</b>, <b>wx</b>, <b>tensorflow</b>,
+<b>pandas</b>, etc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Jedi does not
+have a very good cache layer. This is probably the biggest
+and only architectural <i>issue</i> in Jedi. Unfortunately
+it is not easy to change that. Dave Halter is thinking about
+rewriting Jedi in Rust, but it has taken Jedi more than 8
+years to reach version 1.0, a rewrite will probably also
+take years.</p>
+
+<h3>Security
+<a name="Security"></a>
+</h3>
+
+
+<h3>For Script
+<a name="For Script"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Security is an
+important topic for Jedi. By default, no code is executed
+within Jedi. As long as you write pure Python, everything is
+inferred statically. If you enable
+<b>load_unsafe_extensions=True</b> for your <i>Project</i>
+and you use builtin modules (<b>c_builtin</b>) Jedi will
+execute those modules. If you don't trust a code base,
+please do not enable that option. It might lead to arbitrary
+code execution.</p>
+
+<h3>For Interpreter
+<a name="For Interpreter"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you want
+security for <i>Interpreter</i>, <b>do not</b> use it. Jedi
+does execute properties and in general is not very careful
+to avoid code execution. This is intentional: Most people
+trust the code bases they have imported, because at that
+point a malicious code base would have had code execution
+already.</p>
+
+<h3>API Overview
+<a name="API Overview"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">This documentation is mostly
+for Plugin developers, who want to improve their editors/IDE
+with Jedi.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The API consists
+of a few different parts:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">The main starting points for
+complete/goto: <i>Script</i> and <i>Interpreter</i>. If you
+work with Jedi you want to understand these classes
+first.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><i>API Result Classes</i></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><i>Python Versions/Virtualenv Support</i> with functions
+like <i>find_system_environments()</i> and
+<i>find_virtualenvs()</i></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>A way to work with different <i>Folders /
+Projects</i></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Helpful functions: <i>preload_module()</i> and
+<i>set_debug_function()</i></p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The methods that
+you are most likely going to use to work with Jedi are the
+following ones:</p>
+
+<h3>Script
+<a name="Script"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>class
+jedi.Script(code=None, *, path=None, environment=None, <br>
+project=None)</b></p>
+
+<p style="margin-left:18%;">A Script is the base for
+completions, goto or whatever you want to do with Jedi. The
+counter part of this class is <i>Interpreter</i>, which
+works with actual dictionaries and can work with a REPL.
+This class should be used when a user edits code in an
+editor.</p>
+
+<p style="margin-left:18%; margin-top: 1em">You can either
+use the <b>code</b> parameter or <b>path</b> to read a file.
+Usually you're going to want to use both of them (in an
+editor).</p>
+
+<p style="margin-left:18%; margin-top: 1em">The Script's
+<b>sys.path</b> is very customizable:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p>If <i>project</i> is provided with a <b>sys_path</b>,
+that is going to be used.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p>If <i>environment</i> is provided, its <b>sys.path</b>
+will be used (see <i>Environment.get_sys_path</i>);</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p>Otherwise <b>sys.path</b> will match that of the default
+environment of Jedi, which typically matches the sys path
+that was used at the time when Jedi was imported.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Most methods
+have a <b>line</b> and a <b>column</b> parameter. Lines in
+Jedi are always 1-based and columns are always zero based.
+To avoid repetition they are not always documented. You can
+omit both line and column. Jedi will then just do whatever
+action you are calling at the end of the file. If you
+provide only the line, just will complete at the end of that
+line.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>WARNING:</b></p>
+
+<p style="margin-left:22%;">By default
+<i>jedi.settings.fast_parser</i> is enabled, which means
+that parso reuses modules (i.e. they are not immutable).
+With this setting Jedi is <b>not thread safe</b> and it is
+also not safe to use multiple <i>Script</i> instances and
+its definitions at the same time.</p>
+
+<p style="margin-left:22%; margin-top: 1em">If you are a
+normal plugin developer this should not be an issue. It is
+an issue for people that do more complex stuff with
+Jedi.</p>
+
+<p style="margin-left:22%; margin-top: 1em">This is purely
+a performance optimization and works pretty well for all
+typical usages, however consider to turn the setting off if
+it causes you problems. See also <i>this discussion</i>.</p>
+
+<p style="margin-left:18%;"><b>Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>code</b> (<i>str</i>) -- The source code of the
+current file, separated by newlines.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>path</b> (<i>str or pathlib.Path or None</i>) -- The
+path of the file in the file system, or <b>''</b> if it
+hasn't been saved yet.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>environment</b> (<i>Environment</i>) -- Provide a
+predefined <i>Environment</i> to work with a specific Python
+version or virtualenv.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>project</b> (<i>Project</i>) -- Provide a
+<i>Project</i> to make sure finding references works well,
+because the right folder is searched. There are also ways to
+modify the sys path and other things.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>complete(line=None,
+column=None, *, fuzzy=False)</b></p>
+
+<p style="margin-left:27%;">Completes objects under the
+cursor.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Those objects
+contain information about the completions, more than just
+names. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>fuzzy</b> -- Default False.
+Will return fuzzy completions, which means that e.g.
+<b>ooa</b> will match <b>foobar</b>.</p>
+
+<p style="margin-left:27%;"><b>Returns</b></p>
+
+<p style="margin-left:36%;">Completion objects, sorted by
+name. Normal names appear before &quot;private&quot; names
+that start with <b>_</b> and those appear before magic
+methods and name mangled names that start with
+<b>__</b>.</p>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Completion</i></p>
+
+<p style="margin-left:18%;"><b>infer(line=None,
+column=None, *, only_stubs=False, <br>
+prefer_stubs=False)</b></p>
+
+<p style="margin-left:27%;">Return the definitions of under
+the cursor. It is basically a wrapper around Jedi's type
+inference.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This method
+follows complicated paths and returns the end, not the first
+definition. The big difference between <i>goto()</i> and
+<i>infer()</i> is that <i>goto()</i> doesn't follow imports
+and statements. Multiple objects may be returned, because
+depending on an option you can have two different versions
+of a function. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>only_stubs</b> -- Only return stubs for this
+method.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>prefer_stubs</b> -- Prefer stubs to Python objects
+for this method.</p></td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>goto(line=None, column=None,
+*, follow_imports=False, <br>
+follow_builtin_imports=False, only_stubs=False, <br>
+prefer_stubs=False)</b></p>
+
+<p style="margin-left:27%;">Goes to the name that defined
+the object under the cursor. Optionally you can follow
+imports. Multiple objects may be returned, depending on an
+if you can have two different versions of a function.
+<b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>follow_imports</b> -- The method will follow
+imports.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>follow_builtin_imports</b> -- If
+<b>follow_imports</b> is True will try to look up names in
+builtins (i.e. compiled or extension modules).</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>only_stubs</b> -- Only return stubs for this
+method.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>prefer_stubs</b> -- Prefer stubs to Python objects
+for this method.</p></td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>search(string, *,
+all_scopes=False)</b></p>
+
+<p style="margin-left:27%;">Searches a name in the current
+file. For a description of how the search string should look
+like, please have a look at <i>Project.search()</i>. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>all_scopes</b> (<i>bool</i>)
+-- Default False; searches not only for definitions on the
+top level of a module level, but also in functions and
+classes.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="8%">
+
+
+<p><b>Yields</b></p></td>
+<td width="1%"></td>
+<td width="5%">
+
+
+<p><i>Name</i></p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>complete_search(string,
+**kwargs)</b></p>
+
+<p style="margin-left:27%;">Like <i>Script.search()</i>,
+but completes that string. If you want to have all possible
+definitions in a file you can also provide an empty string.
+<b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>all_scopes</b> (<i>bool</i>) -- Default False;
+searches not only for definitions on the top level of a
+module level, but also in functions and classes.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>fuzzy</b> -- Default False. Will return fuzzy
+completions, which means that e.g. <b>ooa</b> will match
+<b>foobar</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>Yields</b></p></td>
+<td width="1%"></td>
+<td width="62%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:36%; margin-top: 1em"><i>Completion</i></p>
+
+<p style="margin-left:18%;"><b>help(line=None,
+column=None)</b></p>
+
+<p style="margin-left:27%;">Used to display a help window
+to users. Uses <i>Script.goto()</i> and returns additional
+definitions for keywords and operators.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Typically you
+will want to display <i>BaseName.docstring()</i> to the user
+for all the returned definitions.</p>
+
+<p style="margin-left:27%; margin-top: 1em">The additional
+definitions are <b>Name(...).type == 'keyword'</b>. These
+definitions do not have a lot of value apart from their
+docstring attribute, which contains the output of Python's
+<i>help()</i> function. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>get_references(line=None,
+column=None, **kwargs)</b></p>
+
+<p style="margin-left:27%;">Lists all references of a
+variable in a project. Since this can be quite hard to do
+for Jedi, if it is too complicated, Jedi will stop
+searching. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>include_builtins</b> -- Default <b>True</b>. If
+<b>False</b>, checks if a definition is a builtin (e.g.
+<b>sys</b>) and in that case does not return it.</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>scope</b> -- Default <b>'project'</b>. If
+<b>'file'</b>, include references in the current module
+only.</p> </td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>get_signatures(line=None,
+column=None)</b></p>
+
+<p style="margin-left:27%;">Return the function object of
+the call under the cursor.</p>
+
+<p style="margin-left:27%; margin-top: 1em">E.g. if the
+cursor is here:</p>
+
+<p style="margin-left:31%; margin-top: 1em">abs(# &lt;--
+cursor is here</p>
+
+<p style="margin-left:27%; margin-top: 1em">This would
+return the <b>abs</b> function. On the other hand:</p>
+
+<p style="margin-left:31%; margin-top: 1em">abs()# &lt;--
+cursor is here</p>
+
+<p style="margin-left:27%; margin-top: 1em">This would
+return an empty list.. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Signature</i></p>
+
+<p style="margin-left:18%;"><b>get_context(line=None,
+column=None)</b></p>
+
+<p style="margin-left:27%;">Returns the scope context under
+the cursor. This basically means the function, class or
+module where the cursor is at. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;"><i>Name</i></p>
+
+<p style="margin-left:18%;"><b>get_names(**kwargs)</b></p>
+
+<p style="margin-left:27%;">Returns names defined in the
+current file. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>all_scopes</b> -- If True lists the names of all
+scopes instead of only the module namespace.</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>definitions</b> -- If True lists the names that have
+been defined by a class, function or a statement (<b>a =
+b</b> returns <b>a</b>).</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>references</b> -- If True lists all the names that
+are not listed by <b>definitions=True</b>. E.g. <b>a = b</b>
+returns <b>b</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>get_syntax_errors()</b></p>
+
+<p style="margin-left:27%;">Lists all syntax errors in the
+current file. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>SyntaxError</i></p>
+
+<p style="margin-left:18%;"><b>rename(line=None,
+column=None, *, new_name)</b></p>
+
+<p style="margin-left:27%;">Renames all references of the
+variable under the cursor. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>new_name</b> -- The variable
+under the cursor will be renamed to this string.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="8%">
+
+
+<p><b>Raises</b></p></td>
+<td width="1%"></td>
+<td width="20%">
+
+
+<p><i>RefactoringError</i></p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;"><i>Refactoring</i></p>
+
+<p style="margin-left:18%;"><b>extract_variable(line,
+column, *, new_name, until_line=None, <br>
+until_column=None)</b></p>
+
+<p style="margin-left:27%;">Moves an expression to a new
+statement.</p>
+
+<p style="margin-left:27%; margin-top: 1em">For example if
+you have the cursor on <b>foo</b> and provide a
+<b>new_name</b> called <b>bar</b>:</p>
+
+<p style="margin-left:31%; margin-top: 1em">foo = 3.1 <br>
+x = int(foo + 1)</p>
+
+<p style="margin-left:27%; margin-top: 1em">the code above
+will become:</p>
+
+<p style="margin-left:31%; margin-top: 1em">foo = 3.1 <br>
+bar = foo + 1 <br>
+x = int(bar)</p>
+
+<p style="margin-left:27%;"><b>Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>new_name</b> -- The expression under the cursor will
+be renamed to this string.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>until_line</b> (<i>int</i>) -- The the selection
+range ends at this line, when omitted, Jedi will be clever
+and try to define the range itself.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>until_column</b> (<i>int</i>) -- The the selection
+range ends at this column, when omitted, Jedi will be clever
+and try to define the range itself.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>Raises</b></p></td>
+<td width="1%"></td>
+<td width="62%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:36%; margin-top: 1em"><i>RefactoringError</i></p>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;"><i>Refactoring</i></p>
+
+<p style="margin-left:18%;"><b>extract_function(line,
+column, *, new_name, until_line=None, <br>
+until_column=None)</b></p>
+
+<p style="margin-left:27%;">Moves an expression to a new
+function.</p>
+
+<p style="margin-left:27%; margin-top: 1em">For example if
+you have the cursor on <b>foo</b> and provide a
+<b>new_name</b> called <b>bar</b>:</p>
+
+<p style="margin-left:31%; margin-top: 1em">global_var =
+3</p>
+
+<p style="margin-left:31%; margin-top: 1em">def x(): <br>
+foo = 3.1 <br>
+x = int(foo + 1 + global_var)</p>
+
+<p style="margin-left:27%; margin-top: 1em">the code above
+will become:</p>
+
+<p style="margin-left:31%; margin-top: 1em">global_var =
+3</p>
+
+<p style="margin-left:31%; margin-top: 1em">def bar(foo):
+<br>
+return int(foo + 1 + global_var)</p>
+
+<p style="margin-left:31%; margin-top: 1em">def x(): <br>
+foo = 3.1 <br>
+x = bar(foo)</p>
+
+<p style="margin-left:27%;"><b>Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>new_name</b> -- The expression under the cursor will
+be replaced with a function with this name.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>until_line</b> (<i>int</i>) -- The the selection
+range ends at this line, when omitted, Jedi will be clever
+and try to define the range itself.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>until_column</b> (<i>int</i>) -- The the selection
+range ends at this column, when omitted, Jedi will be clever
+and try to define the range itself.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p><b>Raises</b></p></td>
+<td width="1%"></td>
+<td width="62%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:36%; margin-top: 1em"><i>RefactoringError</i></p>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;"><i>Refactoring</i></p>
+
+<p style="margin-left:18%;"><b>inline(line=None,
+column=None)</b></p>
+
+<p style="margin-left:27%;">Inlines a variable under the
+cursor. This is basically the opposite of extracting a
+variable. For example with the cursor on bar:</p>
+
+<p style="margin-left:31%; margin-top: 1em">foo = 3.1 <br>
+bar = foo + 1 <br>
+x = int(bar)</p>
+
+<p style="margin-left:27%; margin-top: 1em">the code above
+will become:</p>
+
+<p style="margin-left:31%; margin-top: 1em">foo = 3.1 <br>
+x = int(foo + 1)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="8%">
+
+
+<p><b>Raises</b></p></td>
+<td width="1%"></td>
+<td width="20%">
+
+
+<p><i>RefactoringError</i></p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;"><i>Refactoring</i></p>
+
+<h3>Interpreter
+<a name="Interpreter"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>class
+jedi.Interpreter(code, namespaces, *, project=None,
+**kwds)</b></i></p>
+
+<p style="margin-left:18%;">Jedi's API for Python
+REPLs.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Implements all
+of the methods that are present in <i>Script</i> as
+well.</p>
+
+<p style="margin-left:18%; margin-top: 1em">In addition to
+completions that normal REPL completion does like
+<b>str.upper</b>, Jedi also supports code completion based
+on static code analysis. For example Jedi will complete
+<b>str().upper</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">&gt;&gt;&gt;
+from os.path import join <br>
+&gt;&gt;&gt; namespace = locals() <br>
+&gt;&gt;&gt; script = Interpreter('join(&quot;&quot;).up',
+[namespace]) <br>
+&gt;&gt;&gt; print(script.complete()[0].name) <br>
+upper</p>
+
+<p style="margin-left:18%; margin-top: 1em">All keyword
+arguments are same as the arguments for <i>Script</i>.
+<b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>code</b> (<i>str</i>) -- Code to parse.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>namespaces</b> (<i>List[dict]</i>) -- A list of
+namespace dictionaries such as the one returned by
+<i>globals()</i> and <i>locals()</i>.</p></td></tr>
+</table>
+
+<h3>Projects
+<a name="Projects"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Projects are a
+way to handle Python projects within Jedi. For simpler
+plugins you might not want to deal with projects, but if you
+want to give the user more flexibility to define sys paths
+and Python interpreters for a project, <i>Project</i> is the
+perfect way to allow for that.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Projects can be
+saved to disk and loaded again, to allow project definitions
+to be used across repositories. <b><br>
+jedi.get_default_project(path=None)</b></p>
+
+<p style="margin-left:18%;">If a project is not defined by
+the user, Jedi tries to define a project by itself as well
+as possible. Jedi traverses folders until it finds one of
+the following:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p>A <b>.jedi/config.json</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p>One of the following files: <b>setup.py</b>,
+<b>.git</b>, <b>.hg</b>, <b>requirements.txt</b> and
+<b>MANIFEST.in</b>.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>class jedi.Project(path, *,
+environment_path=None, <br>
+load_unsafe_extensions=False, sys_path=None,
+added_sys_path=(), <br>
+smart_sys_path=True)</b></p>
+
+<p style="margin-left:18%;">Projects are a simple way to
+manage Python folders and define how Jedi does import
+resolution. It is mostly used as a parameter to
+<i>Script</i>. Additionally there are functions to search a
+whole project. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>path</b> -- The base path for this project.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>environment_path</b> -- The Python executable path,
+typically the path of a virtual environment.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>load_unsafe_extensions</b> -- Default False, Loads
+extensions that are not in the sys path and in the local
+directories. With this option enabled, this is potentially
+unsafe if you clone a git repository and analyze it's code,
+because those compiled extensions will be important and
+therefore have execution privileges.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>sys_path</b> -- list of str. You can override the sys
+path if you want. By default the <b>sys.path.</b> is
+generated by the environment (virtualenvs, etc).</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>added_sys_path</b> -- list of str. Adds these paths
+at the end of the sys path.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>smart_sys_path</b> -- If this is enabled (default),
+adds paths from local directories. Otherwise you will have
+to rely on your packages being properly configured on the
+<b>sys.path</b>.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>classmethod
+load(path)</b></p>
+
+<p style="margin-left:27%;">Loads a project from a specific
+path. You should not provide the path to
+<b>.jedi/project.json</b>, but rather the path to the
+project folder. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>path</b> -- The path of the
+directory you want to use as a project.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>save()</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Saves the project configuration in the project in
+<b>.jedi/project.json</b>.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>added_sys_path</b></p>
+
+<p style="margin-left:27%;">The sys path that is going to
+be added at the end of the</p>
+
+<p style="margin-left:18%;"><b>property path</b></p>
+
+<p style="margin-left:27%;">The base path for this
+project.</p>
+
+<p style="margin-left:18%;"><b>property sys_path</b></p>
+
+<p style="margin-left:27%;">The sys path provided to this
+project. This can be None and in that case will be auto
+generated.</p>
+
+<p style="margin-left:18%;"><b>property
+smart_sys_path</b></p>
+
+<p style="margin-left:27%;">If the sys path is going to be
+calculated in a smart way, where additional paths are
+added.</p>
+
+<p style="margin-left:18%;"><b>property
+load_unsafe_extensions</b></p>
+
+<p style="margin-left:27%;">Wheter the project loads unsafe
+extensions.</p>
+
+<p style="margin-left:18%;"><b>search(string, *,
+all_scopes=False)</b></p>
+
+<p style="margin-left:27%;">Searches a name in the whole
+project. If the project is very big, at some point Jedi will
+stop searching. However it's also very much recommended to
+not exhaust the generator. Just display the first ten
+results to the user.</p>
+
+<p style="margin-left:27%; margin-top: 1em">There are
+currently three different search patterns:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>foo</b> to search for a definition foo in any file or
+a file called <b>foo.py</b> or <b>foo.pyi</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>foo.bar</b> to search for the <b>foo</b> and then an
+attribute <b>bar</b> in it.</p></td></tr>
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>class foo.bar.Bar</b> or <b>def foo.bar.baz</b> to
+search for a specific API type.</p></td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Parameters</b></p>
+
+<p style="margin-left:36%;"><b>all_scopes</b> (<i>bool</i>)
+-- Default False; searches not only for definitions on the
+top level of a module level, but also in functions and
+classes.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="8%">
+
+
+<p><b>Yields</b></p></td>
+<td width="1%"></td>
+<td width="5%">
+
+
+<p><i>Name</i></p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>complete_search(string,
+**kwargs)</b></p>
+
+<p style="margin-left:27%;">Like <i>Script.search()</i>,
+but completes that string. An empty string lists all
+definitions in a project, so be careful with that. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>all_scopes</b> (<i>bool</i>)
+-- Default False; searches not only for definitions on the
+top level of a module level, but also in functions and
+classes.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="8%">
+
+
+<p><b>Yields</b></p></td>
+<td width="1%"></td>
+<td width="13%">
+
+
+<p><i>Completion</i></p></td>
+<td width="51%">
+</td></tr>
+</table>
+
+<h3>Environments
+<a name="Environments"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Environments are
+a way to activate different Python versions or Virtualenvs
+for static analysis. The Python binary in that environment
+is going to be executed. <b><br>
+jedi.find_system_environments(*, env_vars=None)</b></p>
+
+<p style="margin-left:18%;">Ignores virtualenvs and returns
+the Python versions that were installed on your system. This
+might return nothing, if you're running Python e.g. from a
+portable version.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+environments are sorted from latest to oldest Python
+version.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>Yields</b></p></td>
+<td width="1%"></td>
+<td width="14%">
+
+
+<p><i>Environment</i></p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>jedi.find_virtualenvs(paths=None,
+*, safe=True, <br>
+use_environment_vars=True)</b></p>
+
+<p style="margin-left:18%;"><b>Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>paths</b> -- A list of paths in your file system to
+be scanned for Virtualenvs. It will search in these paths
+and potentially execute the Python binaries.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>safe</b> -- Default True. In case this is False, it
+will allow this function to execute potential <i>python</i>
+environments. An attacker might be able to drop an
+executable in a path this function is searching by default.
+If the executable has not been installed by root, it will
+not be executed.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="10%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="71%">
+
+
+<p><b>use_environment_vars</b> -- Default True. If True,
+the VIRTUAL_ENV variable will be checked if it contains a
+valid VirtualEnv. CONDA_PREFIX will be checked to see if it
+contains a valid conda environment.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="10%">
+
+
+<p><b>Yields</b></p></td>
+<td width="1%"></td>
+<td width="71%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:27%; margin-top: 1em"><i>Environment</i></p>
+
+
+<p style="margin-left:9%;"><b>jedi.get_system_environment(version,
+*, env_vars=None)</b></p>
+
+<p style="margin-left:18%;">Return the first Python
+environment found for a string of the form 'X.Y' where X and
+Y are the major and minor versions of Python.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>Raises</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p><i>InvalidPythonEnvironment</i></p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>Returns</b></p>
+
+<p style="margin-left:27%;"><i>Environment</i></p>
+
+
+<p style="margin-left:9%;"><b>jedi.create_environment(path,
+*, safe=True, env_vars=None)</b></p>
+
+<p style="margin-left:18%;">Make it possible to manually
+create an Environment object by specifying a Virtualenv path
+or an executable path and optional environment
+variables.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>Raises</b></p></td>
+<td width="1%"></td>
+<td width="31%">
+
+
+<p><i>InvalidPythonEnvironment</i></p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>Returns</b></p>
+
+<p style="margin-left:27%;"><i>Environment</i></p>
+
+
+<p style="margin-left:9%;"><b>jedi.get_default_environment()</b></p>
+
+<p style="margin-left:18%;">Tries to return an active
+Virtualenv or conda environment. If there is no VIRTUAL_ENV
+variable or no CONDA_PREFIX variable set set it will return
+the latest Python version installed on the system. This
+makes it possible to use as many new Python features as
+possible when using autocompletion and other functionality.
+<b><br>
+Returns</b></p>
+
+<p style="margin-left:27%;"><i>Environment</i></p>
+
+<p style="margin-left:9%;"><b>exception
+jedi.InvalidPythonEnvironment</b></p>
+
+<p style="margin-left:18%;">If you see this exception, the
+Python executable or Virtualenv you have been trying to use
+is probably not a correct Python version.</p>
+
+<p style="margin-left:9%;"><b>class
+jedi.api.environment.Environment(executable,
+env_vars=None)</b></p>
+
+<p style="margin-left:18%;">This class is supposed to be
+created by internal Jedi architecture. You should not create
+it directly. Please use create_environment or the other
+functions instead. It is then returned by that function.
+<b><br>
+get_sys_path()</b></p>
+
+<p style="margin-left:27%;">The sys path for this
+environment. Does not include potential modifications from
+e.g. appending to <i>sys.path</i>. <b><br>
+Returns</b></p>
+
+<p style="margin-left:36%;">list of str</p>
+
+<h3>Helper Functions
+<a name="Helper Functions"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jedi.preload_module(*modules)</b></p>
+
+<p style="margin-left:18%;">Preloading modules tells Jedi
+to load a module now, instead of lazy parsing of modules.
+This can be useful for IDEs, to control which modules to
+load on startup. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:27%;"><b>modules</b> -- different
+module names, list of string.</p>
+
+
+<p style="margin-left:9%;"><b>jedi.set_debug_function(func_cb=&lt;function
+print_to_stdout&gt;, <br>
+warnings=True, notices=True, speed=True)</b></p>
+
+<p style="margin-left:18%;">Define a callback debug
+function to get all the debug messages.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If you don't
+specify any arguments, debug messages will be printed to
+stdout. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:27%;"><b>func_cb</b> -- The callback
+function for debug messages.</p>
+
+<h3>Errors
+<a name="Errors"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>exception
+jedi.InternalError</b></p>
+
+<p style="margin-left:18%;">This error might happen a
+subprocess is crashing. The reason for this is usually
+broken C code in third party libraries. This is not a very
+common thing and it is safe to use Jedi again. However using
+the same calls might result in the same error again.</p>
+
+<p style="margin-left:9%;"><b>exception
+jedi.RefactoringError</b></p>
+
+<p style="margin-left:18%;">Refactorings can fail for
+various reasons. So if you work with refactorings like
+<i>Script.rename()</i>, <i>Script.inline()</i>,
+<i>Script.extract_variable()</i> and
+<i>Script.extract_function()</i>, make sure to catch these.
+The descriptions in the errors are usually valuable for end
+users.</p>
+
+<p style="margin-left:18%; margin-top: 1em">A typical
+<b>RefactoringError</b> would tell the user that inlining is
+not possible if no name is under the cursor.</p>
+
+<h3>Examples
+<a name="Examples"></a>
+</h3>
+
+
+<h3>Completions
+<a name="Completions"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">&gt;&gt;&gt;
+import jedi <br>
+&gt;&gt;&gt; code = '''import json; json.l''' <br>
+&gt;&gt;&gt; script = jedi.Script(code, path='example.py')
+<br>
+&gt;&gt;&gt; script <br>
+&lt;Script: 'example.py' &lt;SameEnvironment: 3.9.0 in
+/usr&gt;&gt; <br>
+&gt;&gt;&gt; completions = script.complete(1, 19) <br>
+&gt;&gt;&gt; completions <br>
+[&lt;Completion: load&gt;, &lt;Completion: loads&gt;] <br>
+&gt;&gt;&gt; completions[1] <br>
+&lt;Completion: loads&gt; <br>
+&gt;&gt;&gt; completions[1].complete <br>
+'oads' <br>
+&gt;&gt;&gt; completions[1].name <br>
+'loads'</p>
+
+<h3>Type Inference / Goto
+<a name="Type Inference / Goto"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">&gt;&gt;&gt;
+import jedi <br>
+&gt;&gt;&gt; code = '''\ <br>
+... def my_func(): <br>
+... print 'called' <br>
+... <br>
+... alias = my_func <br>
+... my_list = [1, None, alias] <br>
+... inception = my_list[2] <br>
+... <br>
+... inception()''' <br>
+&gt;&gt;&gt; script = jedi.Script(code) <br>
+&gt;&gt;&gt; <br>
+&gt;&gt;&gt; script.goto(8, 1) <br>
+[&lt;Name full_name='__main__.inception',
+description='inception = my_list[2]'&gt;] <br>
+&gt;&gt;&gt; <br>
+&gt;&gt;&gt; script.infer(8, 1) <br>
+[&lt;Name full_name='__main__.my_func', description='def
+my_func'&gt;]</p>
+
+<h3>References
+<a name="References"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">&gt;&gt;&gt;
+import jedi <br>
+&gt;&gt;&gt; code = '''\ <br>
+... x = 3 <br>
+... if 1 == 2: <br>
+... x = 4 <br>
+... else: <br>
+... del x''' <br>
+&gt;&gt;&gt; script = jedi.Script(code) <br>
+&gt;&gt;&gt; rns = script.get_references(5, 8) <br>
+&gt;&gt;&gt; rns <br>
+[&lt;Name full_name='__main__.x', description='x = 3'&gt;,
+<br>
+&lt;Name full_name='__main__.x', description='x = 4'&gt;,
+<br>
+&lt;Name full_name='__main__.x', description='del x'&gt;]
+<br>
+&gt;&gt;&gt; rns[1].line <br>
+3 <br>
+&gt;&gt;&gt; rns[1].column <br>
+4</p>
+
+<h3>Deprecations
+<a name="Deprecations"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The deprecation
+process is as follows:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p>A deprecation is announced in any release.</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p>The next major release removes the deprecated
+functionality.</p> </td>
+<td width="10%">
+</td></tr>
+</table>
+
+<h3>API Return Classes
+<a name="API Return Classes"></a>
+</h3>
+
+
+<h3>Abstract Base Class
+<a name="Abstract Base Class"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>class
+jedi.api.classes.BaseName(inference_state, name)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>object</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">The base class
+for all definitions, completions and signatures. <b><br>
+property module_path: Path |</b> <i>None</i></p>
+
+<p style="margin-left:27%;">Shows the file path of a
+module. e.g. <b>/usr/lib/python3.9/os.py</b></p>
+
+<p style="margin-left:18%;"><b>property name</b></p>
+
+<p style="margin-left:27%;">Name of
+variable/function/class/module.</p>
+
+<p style="margin-left:27%; margin-top: 1em">For example,
+for <b>x = None</b> it returns <b>'x'</b>. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;"><i>str</i> or None</p>
+
+<p style="margin-left:18%;"><b>property type</b></p>
+
+<p style="margin-left:27%;">The type of the definition.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Here is an
+example of the value of this attribute. Let's consider the
+following source. As what is in <b>variable</b> is
+unambiguous to Jedi, <i>jedi.Script.infer()</i> should
+return a list of definition for <b>sys</b>, <b>f</b>,
+<b>C</b> and <b>x</b>.</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+from jedi import Script <br>
+&gt;&gt;&gt; source = ''' <br>
+... import keyword <br>
+... <br>
+... class C: <br>
+... pass <br>
+... <br>
+... class D: <br>
+... pass <br>
+... <br>
+... x = D() <br>
+... <br>
+... def f(): <br>
+... pass <br>
+... <br>
+... for variable in [keyword, f, C, x]: <br>
+... variable'''</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+script = Script(source) <br>
+&gt;&gt;&gt; defs = script.infer()</p>
+
+<p style="margin-left:27%; margin-top: 1em">Before showing
+what is in <b>defs</b>, let's sort it by <i>line</i> so that
+it is easy to relate the result to the source code.</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+defs = sorted(defs, key=lambda d: d.line) <br>
+&gt;&gt;&gt; print(defs) <br>
+[&lt;Name full_name='keyword', description='module
+keyword'&gt;, <br>
+&lt;Name full_name='__main__.C', description='class C'&gt;,
+<br>
+&lt;Name full_name='__main__.D', description='instance
+D'&gt;, <br>
+&lt;Name full_name='__main__.f', description='def
+f'&gt;]</p>
+
+<p style="margin-left:27%; margin-top: 1em">Finally, here
+is what you can get from <i>type</i>:</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+defs = [d.type for d in defs] <br>
+&gt;&gt;&gt; defs[0] <br>
+'module' <br>
+&gt;&gt;&gt; defs[1] <br>
+'class' <br>
+&gt;&gt;&gt; defs[2] <br>
+'instance' <br>
+&gt;&gt;&gt; defs[3] <br>
+'function'</p>
+
+<p style="margin-left:27%; margin-top: 1em">Valid values
+for type are <b>module</b>, <b>class</b>, <b>instance</b>,
+<b>function</b>, <b>param</b>, <b>path</b>, <b>keyword</b>,
+<b>property</b> and <b>statement</b>.</p>
+
+<p style="margin-left:18%;"><b>property module_name</b></p>
+
+<p style="margin-left:27%;">The module name, a bit similar
+to what <b>__name__</b> is in a random Python module.</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+from jedi import Script <br>
+&gt;&gt;&gt; source = 'import json' <br>
+&gt;&gt;&gt; script = Script(source, path='example.py') <br>
+&gt;&gt;&gt; d = script.infer()[0] <br>
+&gt;&gt;&gt; print(d.module_name) <br>
+json</p>
+
+<p style="margin-left:18%;"><b>in_builtin_module()</b></p>
+
+<p style="margin-left:27%;">Returns True, if this is a
+builtin module.</p>
+
+<p style="margin-left:18%;"><b>property line</b></p>
+
+<p style="margin-left:27%;">The line where the definition
+occurs (starting with 1).</p>
+
+<p style="margin-left:18%;"><b>property column</b></p>
+
+<p style="margin-left:27%;">The column where the definition
+occurs (starting with 0).</p>
+
+
+<p style="margin-left:18%;"><b>get_definition_start_position()</b></p>
+
+<p style="margin-left:27%;">The (row, column) of the start
+of the definition range. Rows start with 1, columns start
+with 0. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">Optional[Tuple[<i>int</i>,
+<i>int</i>]]</p>
+
+
+<p style="margin-left:18%;"><b>get_definition_end_position()</b></p>
+
+<p style="margin-left:27%;">The (row, column) of the end of
+the definition range. Rows start with 1, columns start with
+0. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">Optional[Tuple[<i>int</i>,
+<i>int</i>]]</p>
+
+<p style="margin-left:18%;"><b>docstring(raw=False,
+fast=True)</b></p>
+
+<p style="margin-left:27%;">Return a document string for
+this completion object.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Example:</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+from jedi import Script <br>
+&gt;&gt;&gt; source = '''\ <br>
+... def f(a, b=1): <br>
+... &quot;Document for function f.&quot; <br>
+... ''' <br>
+&gt;&gt;&gt; script = Script(source, path='example.py') <br>
+&gt;&gt;&gt; doc = script.infer(1, len('def
+f'))[0].docstring() <br>
+&gt;&gt;&gt; print(doc) <br>
+f(a, b=1)</p>
+
+<p style="margin-left:27%; margin-top: 1em">Document for
+function f.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Notice that
+useful extra information is added to the actual docstring,
+e.g. function signatures are prepended to their docstrings.
+If you need the actual docstring, use <b>raw=True</b>
+instead.</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+print(script.infer(1, len('def f'))[0].docstring(raw=True))
+<br>
+Document for function f. <b><br>
+Parameters</b></p>
+
+<p style="margin-left:36%;"><b>fast</b> -- Don't follow
+imports that are only one level deep like <b>import foo</b>,
+but follow <b>from foo import bar</b>. This makes sense for
+speed reasons. Completing <i>import a</i> is slow if you use
+the <b>foo.docstring(fast=False)</b> on every object,
+because it parses all libraries starting with <b>a</b>.</p>
+
+<p style="margin-left:18%;"><b>property description</b></p>
+
+<p style="margin-left:27%;">A description of the
+<i>Name</i> object, which is heavily used in testing. e.g.
+for <b>isinstance</b> it returns <b>def isinstance</b>.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Example:</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+from jedi import Script <br>
+&gt;&gt;&gt; source = ''' <br>
+... def f(): <br>
+... pass <br>
+... <br>
+... class C: <br>
+... pass <br>
+... <br>
+... variable = f if random.choice([0,1]) else C''' <br>
+&gt;&gt;&gt; script = Script(source) # line is maximum by
+default <br>
+&gt;&gt;&gt; defs = script.infer(column=3) <br>
+&gt;&gt;&gt; defs = sorted(defs, key=lambda d: d.line) <br>
+&gt;&gt;&gt; print(defs) <br>
+[&lt;Name full_name='__main__.f', description='def f'&gt;,
+<br>
+&lt;Name full_name='__main__.C', description='class C'&gt;]
+<br>
+&gt;&gt;&gt; str(defs[0].description) <br>
+'def f' <br>
+&gt;&gt;&gt; str(defs[1].description) <br>
+'class C'</p>
+
+<p style="margin-left:18%;"><b>property full_name</b></p>
+
+<p style="margin-left:27%;">Dot-separated path of this
+object.</p>
+
+<p style="margin-left:27%; margin-top: 1em">It is in the
+form of
+<b>&lt;module&gt;[.&lt;submodule&gt;[...]][.&lt;object&gt;]</b>.
+It is useful when you want to look up Python manual of the
+object at hand.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Example:</p>
+
+<p style="margin-left:27%; margin-top: 1em">&gt;&gt;&gt;
+from jedi import Script <br>
+&gt;&gt;&gt; source = ''' <br>
+... import os <br>
+... os.path.join''' <br>
+&gt;&gt;&gt; script = Script(source, path='example.py') <br>
+&gt;&gt;&gt; print(script.infer(3,
+len('os.path.join'))[0].full_name) <br>
+os.path.join</p>
+
+<p style="margin-left:27%; margin-top: 1em">Notice that it
+returns <b>'os.path.join'</b> instead of (for example)
+<b>'posixpath.join'</b>. This is not correct, since the
+modules name would be <b>&lt;module 'posixpath'
+...&gt;`</b>. However most users find the latter more
+practical.</p>
+
+<p style="margin-left:18%;"><b>is_stub()</b></p>
+
+<p style="margin-left:27%;">Returns True if the current
+name is defined in a stub file.</p>
+
+<p style="margin-left:18%;"><b>is_side_effect()</b></p>
+
+<p style="margin-left:27%;">Checks if a name is defined as
+<b>self.foo = 3</b>. In case of self, this function would
+return False, for foo it would return True.</p>
+
+<p style="margin-left:18%;"><b>goto(*,
+follow_imports=False, follow_builtin_imports=False, <br>
+only_stubs=False, prefer_stubs=False)</b></p>
+
+<p style="margin-left:27%;">Like <i>Script.goto()</i> (also
+supports the same params), but does it for the current name.
+This is typically useful if you are using something like
+<i>Script.get_names()</i>. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>follow_imports</b> -- The goto call will follow
+imports.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>follow_builtin_imports</b> -- If follow_imports is
+True will try to look up names in builtins (i.e. compiled or
+extension modules).</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>only_stubs</b> -- Only return stubs for this goto
+call.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>prefer_stubs</b> -- Prefer stubs to Python objects
+for this goto call.</p></td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>infer(*, only_stubs=False,
+prefer_stubs=False)</b></p>
+
+<p style="margin-left:27%;">Like <i>Script.infer()</i>, it
+can be useful to understand which type the current name
+has.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Return the
+actual definitions. I strongly recommend not using it for
+your completions, because it might slow down Jedi. If you
+want to read only a few objects (&lt;=20), it might be
+useful, especially to get the original docstrings. The basic
+problem of this function is that it follows all results.
+This means with 1000 completions (e.g. numpy), it's just
+very, very slow. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>only_stubs</b> -- Only return stubs for this goto
+call.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>prefer_stubs</b> -- Prefer stubs to Python objects
+for this type inference call.</p></td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>parent()</b></p>
+
+<p style="margin-left:27%;">Returns the parent scope of
+this identifier. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;"><i>Name</i></p>
+
+<p style="margin-left:18%;"><b>get_line_code(before=0,
+after=0)</b></p>
+
+<p style="margin-left:27%;">Returns the line of code where
+this object was defined. <b><br>
+Parameters</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>before</b> -- Add n lines before the current line to
+the output.</p></td></tr>
+<tr valign="top" align="left">
+<td width="36%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="62%">
+
+
+<p><b>after</b> -- Add n lines after the current line to
+the output.</p></td></tr>
+</table>
+
+<p style="margin-left:27%;"><b>Return str</b></p>
+
+<p style="margin-left:36%;">Returns the line(s) of code or
+an empty string if it's a builtin.</p>
+
+<p style="margin-left:18%;"><b>get_signatures()</b></p>
+
+<p style="margin-left:27%;">Returns all potential
+signatures for a function or a class. Multiple signatures
+are typical if you use Python stubs with <b>@overload</b>.
+<b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">list of
+<i>BaseSignature</i></p>
+
+<p style="margin-left:18%;"><b>execute()</b></p>
+
+<p style="margin-left:27%;">Uses type inference to
+&quot;execute&quot; this identifier and returns the executed
+objects. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>get_type_hint()</b></p>
+
+<p style="margin-left:27%;">Returns type hints like
+<b>Iterable[int]</b> or <b>Union[int, str]</b>.</p>
+
+<p style="margin-left:27%; margin-top: 1em">This method
+might be quite slow, especially for functions. The problem
+is finding executions for those functions to return
+something like <b>Callable[[int, str], str]</b>. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;"><i>str</i></p>
+
+<h3>Name
+<a name="Name"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>class
+jedi.api.classes.Name(inference_state,
+definition)</b></i></p>
+
+<p style="margin-left:18%;">Bases: <i>BaseName</i></p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>Name</i>
+objects are returned from many different APIs including
+<i>Script.goto()</i> or <i>Script.infer()</i>. <b><br>
+defined_names()</b></p>
+
+<p style="margin-left:27%;">List sub-definitions (e.g.,
+methods in class). <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>is_definition()</b></p>
+
+<p style="margin-left:27%;">Returns True, if defined as a
+name in a statement, function or class. Returns False, if
+it's a reference to such a definition.</p>
+
+<h3>Completion
+<a name="Completion"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>class
+jedi.api.classes.Completion(inference_state, name, stack,
+<br>
+like_name_length, is_fuzzy, cached_name=None)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>BaseName</i></p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Completion</b>
+objects are returned from <i>Script.complete()</i>. They
+provide additional information about a completion. <b><br>
+property complete</b></p>
+
+<p style="margin-left:27%;">Only works with non-fuzzy
+completions. Returns None if fuzzy completions are used.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Return the rest
+of the word, e.g. completing <b>isinstance</b>:</p>
+
+<p style="margin-left:31%; margin-top: 1em">isinstan#
+&lt;-- Cursor is here</p>
+
+<p style="margin-left:27%; margin-top: 1em">would return
+the string 'ce'. It also adds additional stuff, depending on
+your <b>settings.py</b>.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Assuming the
+following function definition:</p>
+
+<p style="margin-left:31%; margin-top: 1em">def
+foo(param=0): <br>
+pass</p>
+
+<p style="margin-left:27%; margin-top: 1em">completing
+<b>foo(par</b> would give a <b>Completion</b> which
+<b>complete</b> would be <b>am=</b>.</p>
+
+<p style="margin-left:18%;"><b>property
+name_with_symbols</b></p>
+
+<p style="margin-left:27%;">Similar to <i>name</i>, but
+like <i>name</i> returns also the symbols, for example
+assuming the following function definition:</p>
+
+<p style="margin-left:31%; margin-top: 1em">def
+foo(param=0): <br>
+pass</p>
+
+<p style="margin-left:27%; margin-top: 1em">completing
+<b>foo(</b> would give a <b>Completion</b> which
+<b>name_with_symbols</b> would be &quot;param=&quot;.</p>
+
+<p style="margin-left:18%;"><b>docstring(raw=False,
+fast=True)</b></p>
+
+<p style="margin-left:27%;">Documented under
+<i>BaseName.docstring()</i>.</p>
+
+<p style="margin-left:18%;"><b>property type</b></p>
+
+<p style="margin-left:27%;">Documented under
+<i>BaseName.type()</i>.</p>
+
+
+<p style="margin-left:18%;"><b>get_completion_prefix_length()</b></p>
+
+<p style="margin-left:27%;">Returns the length of the
+prefix being completed. For example, completing
+<b>isinstance</b>:</p>
+
+<p style="margin-left:31%; margin-top: 1em">isinstan#
+&lt;-- Cursor is here</p>
+
+<p style="margin-left:27%; margin-top: 1em">would return 8,
+because len('isinstan') == 8.</p>
+
+<p style="margin-left:27%; margin-top: 1em">Assuming the
+following function definition:</p>
+
+<p style="margin-left:31%; margin-top: 1em">def
+foo(param=0): <br>
+pass</p>
+
+<p style="margin-left:27%; margin-top: 1em">completing
+<b>foo(par</b> would return 3.</p>
+
+<h3>BaseSignature
+<a name="BaseSignature"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>class
+jedi.api.classes.BaseSignature(inference_state,
+signature)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>Name</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">These
+signatures are returned by <i>BaseName.get_signatures()</i>
+calls. <b><br>
+property params</b></p>
+
+<p style="margin-left:27%;">Returns definitions for all
+parameters that a signature defines. This includes stuff
+like <b>*args</b> and <b>**kwargs</b>. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>ParamName</i></p>
+
+<p style="margin-left:18%;"><b>to_string()</b></p>
+
+<p style="margin-left:27%;">Returns a text representation
+of the signature. This could for example look like
+<b>foo(bar, baz: int, **kwargs)</b>. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;"><i>str</i></p>
+
+<h3>Signature
+<a name="Signature"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>class
+jedi.api.classes.Signature(inference_state, signature, <br>
+call_details)</b></i></p>
+
+<p style="margin-left:18%;">Bases: <i>BaseSignature</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">A full
+signature object is the return value of
+<i>Script.get_signatures()</i>. <b><br>
+property index</b></p>
+
+<p style="margin-left:27%;">Returns the param index of the
+current cursor position. Returns None if the index cannot be
+found in the curent call. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;"><i>int</i></p>
+
+<p style="margin-left:18%;"><b>property
+bracket_start</b></p>
+
+<p style="margin-left:27%;">Returns a line/column tuple of
+the bracket that is responsible for the last function call.
+The first line is 1 and the first column 0. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;"><i>int</i>, <i>int</i></p>
+
+<h3>ParamName
+<a name="ParamName"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>class
+jedi.api.classes.ParamName(inference_state,
+definition)</b></i></p>
+
+<p style="margin-left:18%;">Bases: <i>Name</i> <b><br>
+infer_default()</b></p>
+
+<p style="margin-left:27%;">Returns default values like the
+<b>1</b> of <b>def foo(x=1):</b>. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+
+<p style="margin-left:18%;"><b>infer_annotation(**kwargs)</b></p>
+
+<p style="margin-left:27%;"><b>Parameters</b></p>
+
+<p style="margin-left:36%;"><b>execute_annotation</b> --
+Default True; If False, values are not executed and classes
+are returned instead of instances.</p>
+
+<p style="margin-left:27%;"><b>Return type</b></p>
+
+<p style="margin-left:36%;">list of <i>Name</i></p>
+
+<p style="margin-left:18%;"><b>to_string()</b></p>
+
+<p style="margin-left:27%;">Returns a simple representation
+of a param, like <b>f: Callable[..., Any]</b>. <b><br>
+Return type</b></p>
+
+<p style="margin-left:36%;"><i>str</i></p>
+
+<p style="margin-left:18%;"><b>property kind</b></p>
+
+<p style="margin-left:27%;">Returns an enum instance of
+<i>inspect</i>'s <b>Parameter</b> enum. <b><br>
+Return type</b></p>
+
+
+<p style="margin-left:36%;"><i>inspect.Parameter.kind</i></p>
+
+<h3>Refactoring
+<a name="Refactoring"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>class
+jedi.api.refactoring.Refactoring(inference_state, <br>
+file_to_node_changes, renames=())</b></i></p>
+
+<p style="margin-left:18%;">Bases: <i>object</i> <b><br>
+get_renames() -&gt;</b>
+<i>Iterable</i><b>[</b><i>Tuple</i><b>[Path, Path]]</b></p>
+
+<p style="margin-left:27%;">Files can be renamed in a
+refactoring.</p>
+
+<p style="margin-left:18%;"><b>apply()</b></p>
+
+<p style="margin-left:27%;">Applies the whole refactoring
+to the files, which includes renames.</p>
+
+<p style="margin-left:9%;"><b>class
+jedi.api.errors.SyntaxError(parso_error)</b></p>
+
+<p style="margin-left:18%;">Bases: <i>object</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Syntax errors
+are generated by <i>Script.get_syntax_errors()</i>. <b><br>
+property line</b></p>
+
+<p style="margin-left:27%;">The line where the error starts
+(starting with 1).</p>
+
+<p style="margin-left:18%;"><b>property column</b></p>
+
+<p style="margin-left:27%;">The column where the error
+starts (starting with 0).</p>
+
+<p style="margin-left:18%;"><b>property until_line</b></p>
+
+<p style="margin-left:27%;">The line where the error ends
+(starting with 1).</p>
+
+<p style="margin-left:18%;"><b>property
+until_column</b></p>
+
+<p style="margin-left:27%;">The column where the error ends
+(starting with 0).</p>
+
+<h3>Installation and Configuration
+<a name="Installation and Configuration"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>WARNING:</b></p>
+
+<p style="margin-left:13%;">Most people will want to
+install Jedi as a submodule/vendored and not through
+pip/system wide. The reason for this is that it makes sense
+that the plugin that uses Jedi has always access to it.
+Otherwise Jedi will not work properly when virtualenvs are
+activated. So please read the documentation of your
+editor/IDE plugin to install Jedi.</p>
+
+<p style="margin-left:13%; margin-top: 1em">For plugin
+developers, Jedi works best if it is always available.
+Vendoring is a pretty good option for that.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can either
+include Jedi as a submodule in your text editor plugin (like
+<i>jedi-vim</i> does by default), or you can install it
+systemwide.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">This just installs the Jedi
+library, not the <i>editor plugins</i>. For information
+about how to make it work with your editor, refer to the
+corresponding documentation.</p>
+
+<h3>The normal way
+<a name="The normal way"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Most people use
+Jedi with a <i>editor plugins</i>. Typically you install
+Jedi by installing an editor plugin. No necessary steps are
+needed. Just take a look at the instructions for the
+plugin.</p>
+
+<h3>With pip
+<a name="With pip"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">On any system
+you can install Jedi directly from the Python package index
+using pip:</p>
+
+<p style="margin-left:13%; margin-top: 1em">sudo pip
+install jedi</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+install the current development version (master branch):</p>
+
+<p style="margin-left:13%; margin-top: 1em">sudo pip
+install -e
+git://github.com/davidhalter/jedi.git#egg=jedi</p>
+
+<h3>System-wide installation via a package manager
+<a name="System-wide installation via a package manager"></a>
+</h3>
+
+
+<h3>Arch Linux
+<a name="Arch Linux"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can install
+Jedi directly from official Arch Linux packages:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="14%">
+
+
+<p><i>python-jedi</i></p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">(There is also a
+packaged version of the vim plugin available: <i>vim-jedi at
+Arch Linux</i>.)</p>
+
+<h3>Debian
+<a name="Debian"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Debian packages
+are available in the <i>unstable repository</i>.</p>
+
+<h3>Others
+<a name="Others"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">We are in the
+discussion of adding Jedi to the Fedora repositories.</p>
+
+<h3>Manual installation from GitHub
+<a name="Manual installation from GitHub"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you prefer
+not to use an automated package installer, you can clone the
+source from GitHub and install it manually. To install it,
+run these commands:</p>
+
+<p style="margin-left:13%; margin-top: 1em">git clone
+--recurse-submodules https://github.com/davidhalter/jedi
+<br>
+cd jedi <br>
+sudo python setup.py install</p>
+
+<h3>Inclusion as a submodule
+<a name="Inclusion as a submodule"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you use an
+editor plugin like <i>jedi-vim</i>, you can simply include
+Jedi as a git submodule of the plugin directory. Vim plugin
+managers like - <i>Vundle</i> or <i>Pathogen</i> make it
+very easy to keep submodules up to date.</p>
+
+<h3>Settings
+<a name="Settings"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This module
+contains variables with global Jedi settings. To change the
+behavior of Jedi, change the variables defined in
+<i>jedi.settings</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Plugins should
+expose an interface so that the user can adjust the
+configuration.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example
+usage:</p>
+
+<p style="margin-left:13%; margin-top: 1em">from jedi
+import settings <br>
+settings.case_insensitive_completion = True</p>
+
+<h3>Completion output
+<a name="Completion output"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jedi.settings.case_insensitive_completion
+= True</b></p>
+
+<p style="margin-left:18%;">Completions are by default case
+insensitive.</p>
+
+
+<p style="margin-left:9%;"><b>jedi.settings.add_bracket_after_function
+= False</b></p>
+
+<p style="margin-left:18%;">Adds an opening bracket after a
+function for completions.</p>
+
+<h3>Filesystem cache
+<a name="Filesystem cache"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jedi.settings.cache_directory
+= '/build/.cache/jedi'</b></p>
+
+<p style="margin-left:18%;">The path where the cache is
+stored.</p>
+
+<p style="margin-left:18%; margin-top: 1em">On Linux, this
+defaults to <b>&#732;/.cache/jedi/</b>, on OS X to
+<b>&#732;/Library/Caches/Jedi/</b> and on Windows to
+<b>%LOCALAPPDATA%\Jedi\Jedi\</b>. On Linux, if the
+environment variable <b>$XDG_CACHE_HOME</b> is set,
+<b>$XDG_CACHE_HOME/jedi</b> is used instead of the default
+one.</p>
+
+<h3>Parser
+<a name="Parser"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jedi.settings.fast_parser
+= True</b></p>
+
+<p style="margin-left:18%;">Uses Parso's diff parser. If it
+is enabled, this might cause issues, please read the warning
+on <i>Script</i>. This feature makes it possible to only
+parse the parts again that have changed, while reusing the
+rest of the syntax tree.</p>
+
+<h3>Dynamic stuff
+<a name="Dynamic stuff"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jedi.settings.dynamic_array_additions
+= True</b></p>
+
+<p style="margin-left:18%;">check for <i>append</i>, etc.
+on arrays: [], {}, () as well as list/set calls.</p>
+
+<p style="margin-left:9%;"><b>jedi.settings.dynamic_params
+= True</b></p>
+
+<p style="margin-left:18%;">A dynamic param completion,
+finds the callees of the function, which define the params
+of a function.</p>
+
+
+<p style="margin-left:9%;"><b>jedi.settings.dynamic_params_for_other_modules
+= True</b></p>
+
+<p style="margin-left:18%;">Do the same for other
+modules.</p>
+
+
+<p style="margin-left:9%;"><b>jedi.settings.auto_import_modules
+= ['gi']</b></p>
+
+<p style="margin-left:18%;">Modules that will not be
+analyzed but imported, if they contain Python code. This
+improves autocompletion for libraries that use
+<b>setattr</b> or <b>globals()</b> modifications a lot.</p>
+
+<h3>Caching
+<a name="Caching"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>jedi.settings.call_signatures_validity
+= 3.0</b></p>
+
+<p style="margin-left:18%;">Finding function calls might be
+slow (0.1-0.5s). This is not acceptible for normal writing.
+Therefore cache it for a short time.</p>
+
+<h3>Jedi Development
+<a name="Jedi Development"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">This documentation is for Jedi
+developers who want to improve Jedi itself, but have no idea
+how Jedi works. If you want to use Jedi for your IDE, look
+at the <i>plugin api</i>. It is also important to note that
+it's a pretty old version and some things might not apply
+anymore.</p>
+
+<h3>Introduction
+<a name="Introduction"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This page tries
+to address the fundamental demand for documentation of the
+Jedi internals. Understanding a dynamic language is a
+complex task. Especially because type inference in Python
+can be a very recursive task. Therefore Jedi couldn't get
+rid of complexity. I know that <b>simple is better than
+complex</b>, but unfortunately it sometimes requires complex
+solutions to understand complex systems.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In six chapters
+I'm trying to describe the internals of Jedi:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="25%">
+
+
+<p><i>The Jedi Core</i></p></td>
+<td width="63%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="25%">
+
+
+<p><i>Core Extensions</i></p></td>
+<td width="63%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="25%">
+
+
+<p><i>Imports &amp; Modules</i></p></td>
+<td width="63%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="25%">
+
+
+<p><i>Stubs &amp; Annotations</i></p></td>
+<td width="63%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="25%">
+
+
+<p><i>Caching &amp; Recursions</i></p></td>
+<td width="63%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="25%">
+
+
+<p><i>Helper modules</i></p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">Testing is not documented here,
+you'll find that <i>right here</i>.</p>
+
+<h3>The Jedi Core
+<a name="The Jedi Core"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The core of Jedi
+consists of three parts:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><i>Parser</i></p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="26%">
+
+
+<p><i>Python type inference</i></p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="26%">
+
+
+<p><i>API</i></p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Most people are
+probably interested in <i>type inference</i>, because that's
+where all the magic happens. I need to introduce the
+<i>parser</i> first, because <i>jedi.inference</i> uses it
+extensively.</p>
+
+<h3>Parser
+<a name="Parser"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi used to
+have its internal parser, however this is now a separate
+project and is called <i>parso</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The parser
+creates a syntax tree that Jedi analyses and tries to
+understand. The grammar that this parser uses is very
+similar to the official Python <i>grammar files</i>.</p>
+
+<h3>Type inference of python code (inference/__init__.py)
+<a name="Type inference of python code (inference/__init__.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Type inference
+of Python code in Jedi is based on three assumptions:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">The code uses as least side
+effects as possible. Jedi understands certain list/tuple/set
+modifications, but there's no guarantee that Jedi detects
+everything (list.append in different modules for
+example).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>No magic is being used:</p></td></tr>
+</table>
+
+<p style="margin-left:12%;">&bull;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%"></td>
+<td width="1%"></td>
+<td width="60%">
+
+
+<p style="margin-top: 1em">metaclasses</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="60%">
+
+
+<p><b>setattr()</b> / <b>__import__()</b></p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="60%">
+
+
+<p>writing to <b>globals()</b>, <b>locals()</b>,
+<b>object.__dict__</b></p> </td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="60%"></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The programmer
+is not a total dick, e.g. like <i>this</i> :-)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The actual
+algorithm is based on a principle I call lazy type
+inference. That said, the typical entry point for static
+analysis is calling <b>infer_expr_stmt</b>. There's separate
+logic for autocompletion in the API, the inference_state is
+all about inferring an expression.</p>
+
+<p style="margin-left:9%; margin-top: 1em">TODO this
+paragraph is not what jedi does anymore, it's similar, but
+not the same.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Now you need to
+understand what follows after <b>infer_expr_stmt</b>. Let's
+make an example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">import datetime
+<br>
+datetime.date.toda# &lt;-- cursor here</p>
+
+<p style="margin-left:9%; margin-top: 1em">First of all,
+this module doesn't care about completion. It really just
+cares about <b>datetime.date</b>. At the end of the
+procedure <b>infer_expr_stmt</b> will return the <b>date</b>
+class.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To
+<i>visualize</i> this (simplified):</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+
+<p style="margin-top: 1em"><b>InferenceState.infer_expr_stmt</b>
+doesn't do much, because there's no assignment.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>Context.infer_node</b> cares for resolving the dotted
+path</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>InferenceState.find_types</b> searches for global
+definitions of datetime, which it finds in the definition of
+an import, by scanning the syntax tree.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Using the import logic, the datetime module is
+found.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Now <b>find_types</b> is called again by
+<b>infer_node</b> to find <b>date</b> inside the datetime
+module.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Now what would
+happen if we wanted <b>datetime.date.foo.bar</b>? Two more
+calls to <b>find_types</b>. However the second call would be
+ignored, because the first one would return nothing (there's
+no foo attribute in <b>date</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">What if the
+import would contain another <b>ExprStmt</b> like this:</p>
+
+<p style="margin-left:13%; margin-top: 1em">from foo import
+bar <br>
+Date = bar.baz</p>
+
+<p style="margin-left:9%; margin-top: 1em">Well... You get
+it. Just another <b>infer_expr_stmt</b> recursion. It's
+really easy. Python can obviously get way more complicated
+then this. To understand tuple assignments, list
+comprehensions and everything else, a lot more code had to
+be written.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Jedi has been
+tested very well, so you can just start modifying code. It's
+best to write your own test first for your &quot;new&quot;
+feature. Don't be scared of breaking stuff. As long as the
+tests pass, you're most likely to be fine.</p>
+
+<p style="margin-left:9%; margin-top: 1em">I need to
+mention now that lazy type inference is really good because
+it only <i>inferes</i> what needs to be <i>inferred</i>. All
+the statements and modules that are not used are just being
+ignored.</p>
+
+<h3>Inference Values (inference/base_value.py)
+<a name="Inference Values (inference/base_value.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Values are the
+&quot;values&quot; that Python would return. However Values
+are at the same time also the &quot;values&quot; that a user
+is currently sitting in.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A ValueSet is
+typically used to specify the return of a function or any
+other static analysis operation. In jedi there are always
+multiple returns and not just one.</p>
+
+<h3>Name resolution (inference/finder.py)
+<a name="Name resolution (inference/finder.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Searching for
+names with given scope and name. This is very central in
+Jedi and Python. The name resolution is quite complicated
+with descripter, <b>__getattribute__</b>,
+<b>__getattr__</b>, <b>global</b>, etc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+understand name resolution, please read the first few
+chapters in -
+<i>http://blog.ionelmc.ro/2015/02/09/understanding-python-metaclasses/</i>.</p>
+
+<h3>Flow checks
+<a name="Flow checks"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Flow checks are
+not really mature. There's only a check for
+<b>isinstance</b>. It would check whether a flow has the
+form of <b>if isinstance(a, type_or_tuple)</b>.
+Unfortunately every other thing is being ignored (e.g. a ==
+'' would be easy to check for -&gt; a is a string). There's
+big potential in these checks.</p>
+
+<h3>API (api/__init__.py and api/classes.py)
+<a name="API (api/__init__.py and api/classes.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The API has been
+designed to be as easy to use as possible. The API
+documentation can be found <i>here</i>. The API itself
+contains little code that needs to be mentioned here.
+Generally I'm trying to be conservative with the API. I'd
+rather not add new API features if they are not necessary,
+because it's much harder to deprecate stuff than to add it
+later.</p>
+
+<h3>Core Extensions
+<a name="Core Extensions"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Core Extensions
+is a summary of the following topics:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="33%">
+
+
+<p style="margin-top: 1em"><i>Iterables &amp; Dynamic
+Arrays</i></p> </td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="33%">
+
+
+<p><i>Dynamic Parameters</i></p></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="33%">
+
+
+<p><i>Docstrings</i></p></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="33%">
+
+
+<p><i>Refactoring</i></p></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">These topics are
+very important to understand what Jedi additionally does,
+but they could be removed from Jedi and Jedi would still
+work. But slower and without some features.</p>
+
+<h3>Iterables &amp; Dynamic Arrays (inference/value/iterable.py)
+<a name="Iterables &amp; Dynamic Arrays (inference/value/iterable.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To understand
+Python on a deeper level, Jedi needs to understand some of
+the dynamic features of Python like lists that are filled
+after creation:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Contains all
+classes and functions to deal with lists, dicts, generators
+and iterators in general.</p>
+
+<h3>Parameter completion (inference/dynamic_params.py)
+<a name="Parameter completion (inference/dynamic_params.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">One of the
+really important features of Jedi is to have an option to
+understand code like this:</p>
+
+<p style="margin-left:13%; margin-top: 1em">def foo(bar):
+<br>
+bar. # completion here <br>
+foo(1)</p>
+
+<p style="margin-left:9%; margin-top: 1em">There's no doubt
+wheter bar is an <b>int</b> or not, but if there's also a
+call like <b>foo('str')</b>, what would happen? Well, we'll
+just show both. Because that's what a human would
+expect.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It works as
+follows:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Jedi sees a param</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="51%">
+
+
+<p>search for function calls named <b>foo</b></p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="51%">
+
+
+<p>execute these calls and check the input.</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h3>Docstrings (inference/docstrings.py)
+<a name="Docstrings (inference/docstrings.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Docstrings are
+another source of information for functions and classes.
+<i>jedi.inference.dynamic_params</i> tries to find all
+executions of functions, while the docstring parsing is much
+easier. There are three different types of docstrings that
+Jedi understands:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><i>Sphinx</i></p></td>
+<td width="78%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="10%">
+
+
+<p><i>Epydoc</i></p></td>
+<td width="78%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="10%">
+
+
+<p><i>Numpydoc</i></p></td>
+<td width="78%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">For example, the
+sphinx annotation <b>:type foo: str</b> clearly states that
+the type of <b>foo</b> is <b>str</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">As an addition
+to parameter searching, this module also provides return
+annotations.</p>
+
+<h3>Refactoring (api/refactoring.py)
+<a name="Refactoring (api/refactoring.py)"></a>
+</h3>
+
+
+<h3>Imports &amp; Modules
+<a name="Imports &amp; Modules"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><i>Modules</i></p></td>
+<td width="69%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="19%">
+
+
+<p><i>Builtin Modules</i></p></td>
+<td width="69%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="19%">
+
+
+<p><i>Imports</i></p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<h3>Compiled Modules (inference/compiled.py)
+<a name="Compiled Modules (inference/compiled.py)"></a>
+</h3>
+
+
+<h3>Imports (inference/imports.py)
+<a name="Imports (inference/imports.py)"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>jedi.inference.imports</i>
+is here to resolve import statements and return the
+modules/classes/functions/whatever, which they stand for.
+However there's not any actual importing done. This module
+is about finding modules in the filesystem. This can be
+quite tricky sometimes, because Python imports are not
+always that simple.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This module also
+supports import autocompletion, which means to complete
+statements like <b>from datetim</b> (cursor at the end would
+return <b>datetime</b>).</p>
+
+<h3>Stubs &amp; Annotations (inference/gradual)
+<a name="Stubs &amp; Annotations (inference/gradual)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">It is
+unfortunately not well documented how stubs and annotations
+work in Jedi. If somebody needs an introduction, please let
+me know.</p>
+
+<h3>Caching &amp; Recursions
+<a name="Caching &amp; Recursions"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><i>Caching</i></p></td>
+<td width="76%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p><i>Recursions</i></p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<h3>Caching (cache.py)
+<a name="Caching (cache.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This caching is
+very important for speed and memory optimizations. There's
+nothing really spectacular, just some decorators. The
+following cache types are available:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>time_cache</b> can be used to
+cache something for just a limited time span, which can be
+useful if there's user interaction and the user cannot react
+faster than a certain time.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This module is
+one of the reasons why Jedi is not thread-safe. As you can
+see there are global variables, which are holding the cache
+information. Some of these variables are being cleaned after
+every API usage.</p>
+
+<h3>Recursions (recursion.py)
+<a name="Recursions (recursion.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Recursions are
+the recipe of Jedi to conquer Python code. However, someone
+must stop recursions going mad. Some settings are here to
+make Jedi stop at the right time. You can read more about
+them <i>here</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Next to the
+internal <b>jedi.inference.cache</b> this module also makes
+Jedi not thread-safe, because
+<b>execution_recursion_decorator</b> uses class variables to
+count the function calls.</p>
+
+<h3>Settings
+<a name="Settings"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Recursion
+settings are important if you don't want extremely recursive
+python code to go absolutely crazy.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default
+values are based on experiments while completing the Jedi
+library itself (inception!). But I don't think there's any
+other Python library that uses recursion in a similarly
+extreme way. Completion should also be fast and therefore
+the quality might not always be maximal. <b><br>
+jedi.inference.recursion.recursion_limit = 15</b></p>
+
+<p style="margin-left:18%;">Like
+<i>sys.getrecursionlimit()</i>, just for Jedi.</p>
+
+
+<p style="margin-left:9%;"><b>jedi.inference.recursion.total_function_execution_limit
+= 200</b></p>
+
+<p style="margin-left:18%;">This is a hard limit of how
+many non-builtin functions can be executed.</p>
+
+
+<p style="margin-left:9%;"><b>jedi.inference.recursion.per_function_execution_limit
+= 6</b></p>
+
+<p style="margin-left:18%;">The maximal amount of times a
+specific function may be executed.</p>
+
+
+<p style="margin-left:9%;"><b>jedi.inference.recursion.per_function_recursion_limit
+= 2</b></p>
+
+<p style="margin-left:18%;">A function may not be executed
+more than this number of times recursively.</p>
+
+<h3>Helper Modules
+<a name="Helper Modules"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Most other
+modules are not really central to how Jedi works. They all
+contain relevant code, but you if you understand the modules
+above, you pretty much understand Jedi.</p>
+
+<h3>Jedi Testing
+<a name="Jedi Testing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The test suite
+depends on <b>pytest</b>:</p>
+
+<p style="margin-left:13%; margin-top: 1em">pip install
+pytest</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+test only a specific Python version (e.g. Python 3.8), it is
+as easy as:</p>
+
+<p style="margin-left:13%; margin-top: 1em">python3.8 -m
+pytest</p>
+
+<p style="margin-left:9%; margin-top: 1em">Tests are also
+run automatically on <i>GitHub Actions</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You want to add
+a test for Jedi? Great! We love that. Normally you should
+write your tests as <i>Blackbox Tests</i>. Most tests would
+fit right in there.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For specific API
+testing we're using simple unit tests, with a focus on a
+simple and readable testing structure.</p>
+
+<h3>Integration Tests (run.py)
+<a name="Integration Tests (run.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi is mostly
+being tested by what I would call &quot;integration
+tests&quot;. These tests are testing type inference with the
+public API. This makes a lot of sense for Jedi. Also, it is
+hard to write doctests/unittests for the internal data
+structures.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There are
+different kinds of tests:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="33%">
+
+
+<p>completions / inference <b>#?</b></p></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="33%">
+
+
+<p>goto: <b>#!</b></p></td>
+<td width="55%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="33%">
+
+
+<p>references: <b>#&lt;</b></p></td>
+<td width="55%">
+</td></tr>
+</table>
+
+<h3>How to run tests?
+<a name="How to run tests?"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi uses
+<i>pytest</i> to run unit and integration tests. To run
+tests, simply run <b>pytest</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Most integration
+test cases are located in the <b>test/completion</b>
+directory and each test case starts with one of these
+comments:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em"><b>#?</b> (completions /
+inference)</p> </td>
+<td width="53%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="35%">
+
+
+<p><b>#!</b> (goto)</p></td>
+<td width="53%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="35%">
+
+
+<p><b>#&lt;</b> (references)</p></td>
+<td width="53%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">There is also
+support for third party libraries. In a normal test run they
+are not being executed, you have to provide a
+<b>--thirdparty</b> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In addition to
+pytest's <b>-k</b> and <b>-m</b> options, you can use the
+<b>-T</b> (<b>--test-files`) option to specify which test
+cases should run. It takes the format of
+``FILE_NAME[:LINE[,LINE[,...]]]</b> where <b>FILE_NAME</b>
+is a file in <b>test/completion</b> and <b>LINE</b> is a
+line number of the test comment. Here are some examples:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run tests only
+in <b>completion/basic.py</b> and
+<b>completion/imports.py</b>:</p>
+
+<p style="margin-left:13%; margin-top: 1em">pytest
+test/test_integration.py -T basic.py -T imports.py</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run test at line
+4, 6, and 8 in <b>completion/basic.py</b>:</p>
+
+<p style="margin-left:13%; margin-top: 1em">pytest
+test/test_integration.py -T basic.py:4,6,8</p>
+
+<p style="margin-left:9%; margin-top: 1em">See <b>pytest
+--help</b> for more information.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+debug a test, just use the <b>--pdb</b> option.</p>
+
+<h3>Alternate Test Runner
+<a name="Alternate Test Runner"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you don't
+like the output of <b>pytest</b>, there's an alternate test
+runner that you can start by running <b>./run.py</b>. The
+above example could be run by:</p>
+
+<p style="margin-left:13%; margin-top: 1em">./run.py basic
+4 6 8 50-80</p>
+
+<p style="margin-left:9%; margin-top: 1em">The advantage of
+this runner is simplicity and more customized error
+reports.</p>
+
+<h3>Auto-Completion Tests
+<a name="Auto-Completion Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Uses a comment
+to specify a test on the next line. The comment defines the
+expected completions. The comment always begins with
+<i>#?</i>. The last row symbolizes the cursor. For
+example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#? ['upper']
+<br>
+a = 'foo'; a.upp</p>
+
+<h3>Inference Tests
+<a name="Inference Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Inference tests
+look very simliar. The difference is that inference tests
+don't use brackets:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#? int() <br>
+ab = 3; ab</p>
+
+<h3>Goto Tests
+<a name="Goto Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Goto Tests look
+like this:</p>
+
+<p style="margin-left:13%; margin-top: 1em">abc = 1 <br>
+#! ['abc=1'] <br>
+abc</p>
+
+<p style="margin-left:9%; margin-top: 1em">Additionally it
+is possible to specify the column by adding a number, which
+describes the position of the test (otherwise it's just the
+end of line):</p>
+
+<p style="margin-left:13%; margin-top: 1em">#! 2 ['abc=1']
+<br>
+abc</p>
+
+<h3>Reference Tests
+<a name="Reference Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Tests look like
+this:</p>
+
+<p style="margin-left:13%; margin-top: 1em">abc = 1 <br>
+#&lt; (1,0), (3,0) <br>
+abc</p>
+
+<h3>Refactoring Tests (refactor.py)
+<a name="Refactoring Tests (refactor.py)"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Refactoring
+tests work a little bit similar to integration tests. But
+the idea is here to compare two versions of code. If you
+want to add a new test case, just look at the existing ones
+in the <b>test/refactor</b> folder and copy them.</p>
+
+<h3>History &amp; Acknowledgements
+<a name="History &amp; Acknowledgements"></a>
+</h3>
+
+
+<h3>Acknowledgements
+<a name="Acknowledgements"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Dave Halter for creating and
+maintaining Jedi &amp; Parso.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Takafumi Arakaki (@tkf) for creating a solid test
+environment and a lot of other things.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Danilo Bargen (@dbrgn) for general housekeeping and
+being a good friend :).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Guido van Rossum (@gvanrossum) for creating the parser
+generator pgen2 (originally used in lib2to3).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Thanks to all the <i>contributors</i>.</p></td></tr>
+</table>
+
+<h3>A Little Bit of History
+<a name="A Little Bit of History"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Dave.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Star Wars
+Jedi are awesome. My Jedi software tries to imitate a little
+bit of the precognition the Jedi have. There's even an
+awesome - <i>scene</i> of Monty Python Jedis :-).</p>
+
+<p style="margin-left:9%; margin-top: 1em">But actually the
+name has not much to do with Star Wars. It's part of my
+second name Jedidjah.</p>
+
+<p style="margin-left:9%; margin-top: 1em">I actually
+started Jedi back in 2012, because there were no good
+solutions available for VIM. Most auto-completion solutions
+just did not work well. The only good solution was PyCharm.
+But I liked my good old VIM very much. There was also a
+solution called Rope that did not work at all for me. So I
+decided to write my own version of a completion engine.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The first idea
+was to execute non-dangerous code. But I soon realized, that
+this would not work. So I started to build a static analysis
+tool. The biggest problem that I had at the time was that I
+did not know a thing about parsers. I did not even know the
+word static analysis. It turns out they are the foundation
+of a good static analysis tool. I of course did not know
+that and tried to write my own poor version of a parser that
+I ended up throwing away two years later.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Because of my
+lack of knowledge, everything after 2012 and before 2020 was
+basically refactoring. I rewrote the core parts of Jedi
+probably like 5-10 times. The last big rewrite (that I did
+twice) was the inclusion of gradual typing and stubs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">I learned during
+that time that it is crucial to have a good understanding of
+your problem. Otherwise you just end up doing it again. I
+only wrote features in the beginning and in the end.
+Everything else was bugfixing and refactoring. However now I
+am really happy with the result. It works well, bugfixes can
+be quick and is pretty much feature complete.</p>
+
+<p align="center" style="margin-top: 1em">----</p>
+
+<p style="margin-top: 1em">I will leave you with a small
+anecdote that happened in 2012, if I remember correctly.
+After I explained Guido van Rossum, how some parts of my
+auto-completion work, he said:</p>
+
+<p style="margin-left:13%;"><i>&quot;Oh, that worries
+me...&quot;</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Now that it is
+finished, I hope he likes it :-).</p>
+
+<h3>Main Authors
+<a name="Main Authors"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em">David Halter (@davidhalter)
+&lt;<i>davidhalter88@gmail.com</i>&gt;</p> </td>
+<td width="21%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="67%">
+
+
+<p>Takafumi Arakaki (@tkf)
+&lt;<i>aka.tkf@gmail.com</i>&gt;</p> </td>
+<td width="21%">
+</td></tr>
+</table>
+
+<h3>Code Contributors
+<a name="Code Contributors"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em">Danilo Bargen (@dbrgn)
+&lt;<i>mail@dbrgn.ch</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Laurens Van Houtven (@lvh) &lt;<i>_@lvh.cc</i>&gt;</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Aldo Stracquadanio (@Astrac)
+&lt;<i>aldo.strac@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Jean-Louis Fuchs (@ganwell)
+&lt;<i>ganwell@fangorn.ch</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>tek (@tek)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Yasha Borevich (@jjay)
+&lt;<i>j.borevich@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Aaron Griffin &lt;<i>aaronmgriffin@gmail.com</i>&gt;</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>andviro (@andviro)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Mike Gilbert (@floppym)
+&lt;<i>floppym@gentoo.org</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Aaron Meurer (@asmeurer)
+&lt;<i>asmeurer@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Lubos Trilety &lt;<i>ltrilety@redhat.com</i>&gt;</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Akinori Hattori (@hattya)
+&lt;<i>hattya@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>srusskih (@srusskih)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Steven Silvester (@blink1073)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Colin Duquesnoy (@ColinDuquesnoy)
+&lt;<i>colin.duquesnoy@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Jorgen Schaefer (@jorgenschaefer)
+&lt;<i>contact@jorgenschaefer.de</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Fredrik Bergroth (@fbergroth)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Mathias Fu&szlig;enegger (@mfussenegger)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Syohei Yoshida (@syohex)
+&lt;<i>syohex@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>ppalucky (@ppalucky)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>immerrr (@immerrr) <i>immerrr@gmail.com</i></p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Albertas Agejevas (@alga)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Savor d'Isavano (@KenetJervet)
+&lt;<i>newelevenken@163.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Phillip Berndt (@phillipberndt)
+&lt;<i>phillip.berndt@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Ian Lee (@IanLee1521)
+&lt;<i>IanLee1521@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Farkhad Khatamov (@hatamov)
+&lt;<i>comsgn@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Kevin Kelley (@kelleyk)
+&lt;<i>kelleyk@kelleyk.net</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Sid Shanker (@squidarth)
+&lt;<i>sid.p.shanker@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Reinoud Elhorst (@reinhrst)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Guido van Rossum (@gvanrossum)
+&lt;<i>guido@python.org</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Dmytro Sadovnychyi (@sadovnychyi)
+&lt;<i>jedi@dmit.ro</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Cristi Burc&#259; (@scribu)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>bstaint (@bstaint)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Mathias Rav (@Mortal) &lt;<i>rav@cs.au.dk</i>&gt;</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Daniel Fiterman (@dfit99)
+&lt;<i>fitermandaniel2@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Simon Ruggier (@sruggier)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>&Eacute;lie Gouzien (@ElieGouzien)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Robin Roth (@robinro)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Malte Plath (@langsamer)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Anton Zub (@zabulazza)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Maksim Novikov (@m-novikov)
+&lt;<i>mnovikov.work@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Tobias Rzepka (@TobiasRzepka)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>micbou (@micbou)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Dima Gerasimov (@karlicoss)
+&lt;<i>karlicoss@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Max Woerner Chase (@mwchase)
+&lt;<i>max.chase@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Johannes Maria Frank (@jmfrank63)
+&lt;<i>jmfrank63@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Shane Steinert-Threlkeld (@shanest)
+&lt;<i>ssshanest@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Tim Gates (@timgates42)
+&lt;<i>tim.gates@iress.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Lior Goldberg (@goldberglior)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Ryan Clary (@mrclary)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Max M&auml;usezahl (@mmaeusezahl)
+&lt;<i>maxmaeusezahl@googlemail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Vladislav Serebrennikov (@endilll)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Andrii Kolomoiets (@muffinmad)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Leo Ryu (@Leo-Ryu)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Joseph Birkner (@josephbirkner)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>M&aacute;rcio Mazza (@marciomazza)</p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Martin Vielsmaier (@moser)
+&lt;<i>martin@vielsmaier.net</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>TingJia Wu (@WutingjiaX)
+&lt;<i>wutingjia@bytedance.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>Nguy&#7877;n H&#7891;ng Qu&acirc;n
+&lt;<i>ng.hong.quan@gmail.com</i>&gt;</p> </td>
+<td width="10%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">And a few more
+&quot;anonymous&quot; contributors.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: (@user)
+means a github user name.</p>
+
+<h3>Changelog
+<a name="Changelog"></a>
+</h3>
+
+
+<h3>Unreleased
+<a name="Unreleased"></a>
+</h3>
+
+
+<h3>0.19.2 (2024-11-10)
+<a name="0.19.2 (2024-11-10)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em">Python 3.13 support</p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<h3>0.19.1 (2023-10-02)
+<a name="0.19.1 (2023-10-02)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="44%">
+
+
+<p style="margin-top: 1em">Python 3.12 support (Thanks
+Peter!)</p> </td>
+<td width="44%">
+</td></tr>
+</table>
+
+<h3>0.19.0 (2023-07-29)
+<a name="0.19.0 (2023-07-29)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Python 3.11 support</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Massive improvements in performance for
+<b>Interpreter</b> (e.g. IPython) users. This especially
+affects <b>pandas</b> users with large datasets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Add
+<b>jedi.settings.allow_unsafe_interpreter_executions</b> to
+make it easier for IPython users to avoid unsafe
+executions.</p> </td></tr>
+</table>
+
+<h3>0.18.2 (2022-11-21)
+<a name="0.18.2 (2022-11-21)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Added dataclass-equivalent for
+attrs.define</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Find fixtures from Pytest entrypoints; Examples of
+pytest plugins installed like this are pytest-django,
+pytest-sugar and Faker.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Fixed Project.search, when a venv was involved, which is
+why for example <i>:Pyimport django.db</i> did not work in
+some cases in jedi-vim.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>And many smaller bugfixes</p></td></tr>
+</table>
+
+<h3>0.18.1 (2021-11-17)
+<a name="0.18.1 (2021-11-17)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="74%">
+
+
+<p style="margin-top: 1em">Implict namespaces are now a
+separate types in <b>Name().type</b></p></td>
+<td width="14%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="74%">
+
+
+<p>Python 3.10 support</p></td>
+<td width="14%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="74%">
+
+
+<p>Mostly bugfixes</p></td>
+<td width="14%">
+</td></tr>
+</table>
+
+<h3>0.18.0 (2020-12-25)
+<a name="0.18.0 (2020-12-25)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Dropped Python 2 and Python
+3.5</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Using <b>pathlib.Path()</b> as an output instead of
+<b>str</b> in most places: - <b>Project.path</b> -
+<b>Script.path</b> - <b>Definition.module_path</b> -
+<b>Refactoring.get_renames</b> -
+<b>Refactoring.get_changed_files</b></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Functions with <b>@property</b> now return
+<b>property</b> instead of <b>function</b> in
+<b>Name().type</b></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Started using annotations</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Better support for the walrus operator</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Project attributes are now read accessible</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Removed all deprecations</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is likely
+going to be the last minor release before 1.0.</p>
+
+<h3>0.17.2 (2020-07-17)
+<a name="0.17.2 (2020-07-17)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em">Added an option to pass
+environment variables to <b>Environment</b></p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p><b>Project(...).path</b> exists now</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p>Support for Python 3.9</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p>A few bugfixes</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This will be the
+last release that supports Python 2 and Python 3.5.
+<b>0.18.0</b> will be Python 3.6+.</p>
+
+<h3>0.17.1 (2020-06-20)
+<a name="0.17.1 (2020-06-20)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Django <b>Model</b> meta class
+support</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Django Manager support (completion on
+Managers/QuerySets)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added Django Stubs to Jedi, thanks to all contributors
+of the <i>Django Stubs</i> project</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added <b>SyntaxError.get_message</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Python 3.9 support</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Bugfixes (mostly towards Generics)</p></td></tr>
+</table>
+
+<h3>0.17.0 (2020-04-14)
+<a name="0.17.0 (2020-04-14)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Added <b>Project</b> support.
+This allows a user to specify which folders Jedi should work
+with.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added support for Refactoring. The following
+refactorings have been implemented: <b>Script.rename</b>,
+<b>Script.inline</b>, <b>Script.extract_variable</b> and
+<b>Script.extract_function</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added <b>Script.get_syntax_errors</b> to display syntax
+errors in the current script.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added code search capabilities both for individual files
+and projects. The new functions are <b>Project.search</b>,
+<b>Project.complete_search</b>, <b>Script.search</b> and
+<b>Script.complete_search</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added <b>Script.help</b> to make it easier to display a
+help window to people. Now returns pydoc information as well
+for Python keywords/operators. This means that on the class
+keyword it will now return the docstring of Python's builtin
+function <b>help('class')</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>The API documentation is now way more readable and
+complete. Check it out under
+<i>https://jedi.readthedocs.io</i>. A lot of it has been
+rewritten.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Removed Python 3.4 support</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Many bugfixes</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is likely
+going to be the last minor version that supports Python 2
+and Python3.5. Bugfixes will be provided in 0.17.1+. The
+next minor/major version will probably be Jedi 1.0.0.</p>
+
+<h3>0.16.0 (2020-01-26)
+<a name="0.16.0 (2020-01-26)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>Added Script.get_context</b>
+to get information where you currently are.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Completions/type inference of <b>Pytest
+fixtures</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Tensorflow, Numpy and Pandas completions should now be
+about <b>4-10x faster</b> after the first time they are
+used.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Dict key completions are working now. e.g. <b>d = {1000:
+3}; d[10</b> will expand to <b>1000</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Completion for &quot;proxies&quot; works now. These are
+classes that have a <b>__getattr__(self, name)</b> method
+that does a <b>return getattr(x, name)</b>. after loading
+them initially.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Goto on a function/attribute in a class now goes to the
+definition in its super class.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">Big <b>Script
+API Changes</b>:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p>The line and column parameters of <b>jedi.Script</b> are
+now deprecated</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p><b>completions</b> deprecated, use <b>complete</b>
+instead</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p><b>goto_assignments</b> deprecated, use <b>goto</b>
+instead</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p><b>goto_definitions</b> deprecated, use <b>infer</b>
+instead</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p><b>call_signatures</b> deprecated, use
+<b>get_signatures</b> instead</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p><b>usages</b> deprecated, use <b>get_references</b>
+instead</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p><b>jedi.names</b> deprecated, use
+<b>jedi.Script(...).get_names()</b></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:12%; margin-top: 1em"><b>BaseName.goto_assignments</b>
+renamed to <b>BaseName.goto</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Add follow_imports to
+<b>Name.goto</b>. Now its signature matches
+<b>Script.goto</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>Python 2 support deprecated</b>. For this release it
+is best effort. Python 2 has reached the end of its life and
+now it's just about a smooth transition. Bugs for Python 2
+will not be fixed anymore and a third of the tests are
+already skipped.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Removed <b>settings.no_completion_duplicates</b>. It
+wasn't tested and nobody was probably using it anyway.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Removed <b>settings.use_filesystem_cache</b> and
+<b>settings.additional_dynamic_modules</b>, they have no
+usage anymore. Pretty much nobody was probably using
+them.</p> </td></tr>
+</table>
+
+<h3>0.15.2 (2019-12-20)
+<a name="0.15.2 (2019-12-20)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Signatures are now detected a
+lot better</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Add fuzzy completions with
+<b>Script(...).completions(fuzzy=True)</b></p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Files bigger than one MB (about 20kLOC) get cropped to
+avoid getting stuck completely.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Many small Bugfixes</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>A big refactoring around contexts/values</p></td></tr>
+</table>
+
+<h3>0.15.1 (2019-08-13)
+<a name="0.15.1 (2019-08-13)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="57%">
+
+
+<p style="margin-top: 1em">Small bugfix and removal of a
+print statement</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<h3>0.15.0 (2019-08-11)
+<a name="0.15.0 (2019-08-11)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Added file path completions,
+there's a <b>new Completion.type</b> now: <b>path</b>.
+Example: <b>'/ho</b> -&gt; <b>'/home/</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>*args</b>/<b>**kwargs</b> resolving. If possible Jedi
+replaces the parameters with the actual alternatives.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Better support for enums/dataclasses</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>When using Interpreter, properties are now executed,
+since a lot of people have complained about this. Discussion
+in #1299, #1347.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">New APIs:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>Name.get_signatures() -&gt;
+List[Signature]</b>. Signatures are similar to
+<b>CallSignature</b>. <b>Name.params</b> is therefore
+deprecated.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>Signature.to_string()</b> to format signatures.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>Signature.params -&gt; List[ParamName]</b>, ParamName
+has the following additional attributes
+<b>infer_default()</b>, <b>infer_annotation()</b>,
+<b>to_string()</b>, and <b>kind</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>Name.execute() -&gt; List[Name]</b>, makes it
+possible to infer return values of functions.</p></td></tr>
+</table>
+
+<h3>0.14.1 (2019-07-13)
+<a name="0.14.1 (2019-07-13)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em">CallSignature.index should now
+be working a lot better</p></td>
+<td width="19%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="69%">
+
+
+<p>A couple of smaller bugfixes</p></td>
+<td width="19%">
+</td></tr>
+</table>
+
+<h3>0.14.0 (2019-06-20)
+<a name="0.14.0 (2019-06-20)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="87%">
+
+
+<p style="margin-top: 1em">Added
+<b>goto_*(prefer_stubs=True)</b> as well as
+<b>goto_*(prefer_stubs=True)</b></p> </td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="87%">
+
+
+<p>Stubs are used now for type inference</p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="87%">
+
+
+<p>Typeshed is used for better type inference</p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="87%">
+
+
+<p>Reworked Name.full_name, should have more correct return
+values</p> </td>
+<td width="1%">
+</td></tr>
+</table>
+
+<h3>0.13.3 (2019-02-24)
+<a name="0.13.3 (2019-02-24)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Fixed an issue with embedded
+Python, see -
+<i>https://github.com/davidhalter/jedi-vim/issues/870</i></p> </td></tr>
+</table>
+
+<h3>0.13.2 (2018-12-15)
+<a name="0.13.2 (2018-12-15)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em">Fixed a bug that led to Jedi
+spawning a lot of subprocesses.</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<h3>0.13.1 (2018-10-02)
+<a name="0.13.1 (2018-10-02)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em">Bugfixes, because tensorflow
+completions were still slow.</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<h3>0.13.0 (2018-10-02)
+<a name="0.13.0 (2018-10-02)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">A small release. Some bug
+fixes.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Remove Python 3.3 support. Python 3.3 support has been
+dropped by the Python foundation.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Default environments are now using the same Python
+version as the Python process. In 0.12.x, we used to load
+the latest Python version on the system.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added <b>include_builtins</b> as a parameter to
+usages.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>goto_assignments</b> has a new
+<b>follow_builtin_imports</b> parameter that changes the
+previous behavior slightly.</p></td></tr>
+</table>
+
+<h3>0.12.1 (2018-06-30)
+<a name="0.12.1 (2018-06-30)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">This release forces you to
+upgrade parso. If you don't, nothing will work anymore.
+Otherwise changes should be limited to bug fixes.
+Unfortunately Jedi still uses a few internals of parso that
+make it hard to keep compatibility over multiple releases.
+Parso &gt;=0.3.0 is going to be needed.</p></td></tr>
+</table>
+
+<h3>0.12.0 (2018-04-15)
+<a name="0.12.0 (2018-04-15)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Virtualenv/Environment
+support</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>F-String Completion/Goto Support</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Cannot crash with segfaults anymore</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Cleaned up import logic</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Understand async/await and autocomplete it (including
+async generators)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Better namespace completions</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Passing tests for Windows (including CI for Windows)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Remove Python 2.6 support</p></td></tr>
+</table>
+
+<h3>0.11.1 (2017-12-14)
+<a name="0.11.1 (2017-12-14)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em">Parso update - the caching layer
+was broken</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="85%">
+
+
+<p>Better usages - a lot of internal code was ripped out
+and improved.</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h3>0.11.0 (2017-09-20)
+<a name="0.11.0 (2017-09-20)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p style="margin-top: 1em">Split Jedi's parser into a
+separate project called <b>parso</b>.</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p>Avoiding side effects in REPL completion.</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p>Numpy docstring support should be much better.</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p>Moved the <i>settings.*recursion*</i> away, they are no
+longer usable.</p></td>
+<td width="8%">
+</td></tr>
+</table>
+
+<h3>0.10.2 (2017-04-05)
+<a name="0.10.2 (2017-04-05)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p style="margin-top: 1em">Python Packaging sucks. Some
+files were not included in 0.10.1.</p></td>
+<td width="8%">
+</td></tr>
+</table>
+
+<h3>0.10.1 (2017-04-05)
+<a name="0.10.1 (2017-04-05)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="60%">
+
+
+<p style="margin-top: 1em">Fixed a few very annoying
+bugs.</p> </td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="60%">
+
+
+<p>Prepared the parser to be factored out of Jedi.</p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<h3>0.10.0 (2017-02-03)
+<a name="0.10.0 (2017-02-03)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Actual semantic completions for
+the complete Python syntax.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Basic type inference for <b>yield from</b> PEP 380.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>PEP 484 support (most of the important features of it).
+Thanks Claude! (@reinhrst)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added <b>get_line_code</b> to <b>Name</b> and
+<b>Completion</b> objects.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Completely rewritten the type inference engine.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>A new and better parser for (fast) parsing diffs of
+Python code.</p></td></tr>
+</table>
+
+<h3>0.9.0 (2015-04-10)
+<a name="0.9.0 (2015-04-10)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">The import logic has been
+rewritten to look more like Python's. There is now an
+<b>InferState.modules</b> import cache, which resembles
+<b>sys.modules</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Integrated the parser of 2to3. This will make
+refactoring possible. It will also be possible to check for
+error messages (like compiling an AST would give) in the
+future.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>With the new parser, the type inference also completely
+changed. It's now simpler and more readable.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Completely rewritten REPL completion.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added <b>jedi.names</b>, a command to do static
+analysis. Thanks to that sourcegraph guys for sponsoring
+this!</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Alpha version of the linter.</p></td></tr>
+</table>
+
+<h3>0.8.1 (2014-07-23)
+<a name="0.8.1 (2014-07-23)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Bugfix release, the last release
+forgot to include files that improve autocompletion for
+builtin libraries. Fixed.</p></td></tr>
+</table>
+
+<h3>0.8.0 (2014-05-05)
+<a name="0.8.0 (2014-05-05)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Memory Consumption for compiled
+modules (e.g. builtins, sys) has been reduced drastically.
+Loading times are down as well (it takes basically as long
+as an import).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>REPL completion is starting to become usable.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Various small API changes. Generally this release
+focuses on stability and refactoring of internal APIs.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Introducing operator precedence, which makes calculating
+correct Array indices and <b>__getattr__</b> strings
+possible.</p> </td></tr>
+</table>
+
+<h3>0.7.0 (2013-08-09)
+<a name="0.7.0 (2013-08-09)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Switched from LGPL to MIT
+license.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added an Interpreter class to the API to make
+autocompletion in REPL possible.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Added autocompletion support for namespace packages.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Add sith.py, a new random testing method.</p></td></tr>
+</table>
+
+<h3>0.6.0 (2013-05-14)
+<a name="0.6.0 (2013-05-14)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="57%">
+
+
+<p style="margin-top: 1em">Much faster parser with builtin
+part caching.</p></td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="57%">
+
+
+<p>A test suite, thanks @tkf.</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<h3>0.5 versions (2012)
+<a name="0.5 versions (2012)"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="25%">
+
+
+<p style="margin-top: 1em">Initial development.</p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+stay <b>up-to-date</b> with releases, please
+<b>subscribe</b> to this mailing list:
+<i>https://groups.google.com/g/jedi-announce</i>. To
+subscribe you can simply send an empty email to
+<b>jedi-announce+subscribe@googlegroups.com</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><i>Source Code on Github</i></p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="26%">
+
+
+<p><i>Python Package Index</i></p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Jedi
+contributors</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">jedi
+contributors</p>
+<hr>
+</body>
+</html>

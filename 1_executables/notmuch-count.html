@@ -1,0 +1,160 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-COUNT</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-COUNT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-count -
+count messages matching the given search terms</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+count</b> [<i>option</i> ...] &lt;<i>search-term</i>&gt;
+...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Count messages
+matching the search terms.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The number of
+matching messages (or threads) is output to stdout.</p>
+
+<p style="margin-left:9%; margin-top: 1em">With no search
+terms, a count of all messages (or threads) in the database
+will be displayed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<i>notmuch-search-terms</i> for details of the supported
+syntax for &lt;search-terms&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>count</b> include <b><br>
+--output=(messages|threads|files)</b></p>
+
+<p style="margin-left:18%;"><b>messages</b></p>
+
+<p style="margin-left:27%;">Output the number of matching
+messages. This is the default.</p>
+
+<p style="margin-left:18%;"><b>threads</b></p>
+
+<p style="margin-left:27%;">Output the number of matching
+threads.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>files</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Output the number of files associated with matching
+messages. This may be bigger than the number of matching
+messages due to duplicates (i.e. multiple files having the
+same message-id).</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--exclude=(true|false)</b></p>
+
+<p style="margin-left:18%;">Specify whether to omit
+messages matching search.exclude_tags from the count (the
+default) or not.</p>
+
+<p style="margin-left:9%;"><b>--batch</b></p>
+
+<p style="margin-left:18%;">Read queries from a file (stdin
+by default), one per line, and output the number of matching
+messages (or threads) to stdout, one per line. On an empty
+input line the count of all messages (or threads) in the
+database will be output. This option is not compatible with
+specifying search terms on the command line.</p>
+
+<p style="margin-left:9%;"><b>--lastmod</b></p>
+
+<p style="margin-left:18%;">Append lastmod (counter for
+number of database updates) and UUID to the output. lastmod
+values are only comparable between databases with the same
+UUID.</p>
+
+
+<p style="margin-left:9%;"><b>--input=&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Read input from given file,
+instead of from stdin. Implies <b>--batch</b>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-config</i>, <i>notmuch-dump</i>,
+<i>notmuch-hooks</i>, <i>notmuch-insert</i>,
+<i>notmuch-new</i>, <i>notmuch-reply</i>,
+<i>notmuch-restore</i>, <i>notmuch-search</i>,
+<i>notmuch-search-terms</i>, <i>notmuch-show</i>,
+<i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

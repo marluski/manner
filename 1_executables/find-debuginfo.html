@@ -1,0 +1,163 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FIND-DEBUGINFO</title>
+
+</head>
+<body>
+
+<h1 align="center">FIND-DEBUGINFO</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">find-debuginfo -
+finds debuginfo and processes it</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>find-debuginfo</b>
+[<i>OPTION</i>]... [<i>builddir</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">automagically
+generates debug info and file lists</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">[--strict-build-id]
+[-g] [-r] [-m] [-i] [-n] [-q] [-v] [--keep-section SECTION]
+[--remove-section SECTION] [--g-libs] [-j N] [--jobs N] [-o
+debugfiles.list] [-S debugsourcefiles.list] [--run-dwz]
+[--dwz-low-mem-die-limit N] [--dwz-max-die-limit N]
+[--dwz-single-file-mode] [--build-id-seed SEED]
+[--unique-debug-suffix SUFFIX] [--unique-debug-src-base
+BASE] [[-l filelist]... [-p &rsquo;pattern&rsquo;] <b>-o</b>
+debuginfo.list] [builddir]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>-g</b>
+flag says to use strip <b>-g</b> instead of full strip on
+DSOs or EXEs. The <b>--g-libs</b> flag says to use strip
+<b>-g</b> instead of full strip ONLY on DSOs. Options
+<b>-g</b> and <b>--g-libs</b> are mutually exclusive.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>-r</b>
+flag says to use eu-strip <b>--reloc-debug-sections</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use
+<b>--keep-section</b> SECTION or <b>--remove-section</b>
+SECTION to explicitly keep a (non-allocated) section in the
+main executable or explicitly remove it into the .debug
+file. SECTION is an extended wildcard pattern. Both options
+can be given more than once.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>--strict-build-id</b> flag says to exit with failure
+status if any ELF binary processed fails to contain a
+build-id note.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>-m</b>
+flag says to include a .gnu_debugdata section
+(MiniDebugInfo) in the main binary.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>-i</b>
+flag says to include a .gdb_index section in the .debug
+file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>-n</b>
+flag says to not recompute the build-id.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>-j</b>,
+<b>--jobs</b> N option will spawn N processes to do the
+debuginfo extraction in parallel.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A single
+<b>-o</b> switch before any <b>-l</b> or <b>-p</b> switches
+simply renames the primary output file from debugfiles.list
+to something else. A <b>-o</b> switch that follows a
+<b>-p</b> switch or some <b>-l</b> switches produces an
+additional output file with the debuginfo for the files in
+the <b>-l</b> filelist file, or whose names match the
+<b>-p</b> pattern. The <b>-p</b> argument is an grep <b>-E
+-style</b> regexp matching the a file name, and must not use
+anchors (&#710; or $).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>--run-dwz</b> flag instructs find-debuginfo to run the
+dwz utility if available, and <b>--dwz-low-mem-die-limit</b>
+and <b>--dwz-max-die-limit</b> provide detailed limits. See
+dwz(1) <b>-l</b> and <b>-L</b> option for details. Use
+<b>--dwz-single-file-mode</b> to disable multi-file mode,
+see dwz(1) <b>-m</b> for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<b>--build-id-seed</b> SEED is given then debugedit is
+called to update the build-ids it finds adding the SEED as
+seed to recalculate the build-id hash. This makes sure the
+build-ids in the ELF files are unique between versions and
+releases of the same package. (Use <b>--build-id-seed</b>
+&quot;%{VERSION}-%{RELEASE}&quot;.)</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<b>--unique-debug-suffix</b> SUFFIX is given then the debug
+files created for &lt;FILE&gt; will be named
+&lt;FILE&gt;-&lt;SUFFIX&gt;.debug. This makes sure .debug
+are unique between package version, release and
+architecture. (Use <b>--unique-debug-suffix</b>
+&quot;-%{VERSION}-%{RELEASE}.%{_arch}&quot;.)</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<b>--unique-debug-src-base</b> BASE is given then the source
+directory will be called /usr/debug/src/&lt;BASE&gt;. This
+makes sure the debug source dirs are unique between package
+version, release and achitecture (Use
+<b>--unique-debug-src-base</b>
+&quot;%{name}-%{VERSION}-%{RELEASE}.%{_arch}&quot;)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>-q</b> or
+<b>--quiet</b> flag silences all non-error output from the
+script. The <b>-v</b> or <b>--verbose</b> flag add more
+output for all files processed. When neither <b>-q</b> or
+<b>-v</b> is given then only output for each pass is
+given.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All file names
+in switches are relative to builddir (&rsquo;.&rsquo; if not
+given).</p>
+<hr>
+</body>
+</html>

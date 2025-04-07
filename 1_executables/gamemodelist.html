@@ -1,0 +1,130 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>gamemodelist</title>
+
+</head>
+<body>
+
+<h1 align="center">gamemodelist</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#USAGE">USAGE</a><br>
+<a href="#OUTPUT">OUTPUT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#ABOUT">ABOUT</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gamemodelist -
+search for processes running with gamemode</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gamemodelist</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gamemodelist</b>
+will search the runtime of all processes running which
+started <b>GameMode</b> via <b>libgamemodeauto.so</b> and
+print them with <b>ps</b>(1) command output. This helper
+script makes it easy to find which processes are utilizing
+<b>GameMode</b> via <b>libgamemodeauto.so</b> when
+troubleshooting potential game issues.</p>
+
+<h2>USAGE
+<a name="USAGE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libgamemodeauto.so.0</b>
+will be found in the shared object maps of running processes
+utilizing <b>GameMode</b>. Run the following command to
+print processes loaded with <b>libgamemodeauto.so.0</b>.
+<b>GameMode</b> can be started other ways but this script
+will only detect processes utilizing <b>GameMode</b> via
+<b>libgamemodeauto.so</b>.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">gamemodelist</p>
+
+<h2>OUTPUT
+<a name="OUTPUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The output is a
+process table from <b>ps</b>(1) command.</p>
+
+<p style="margin-left:14%; margin-top: 1em">PID PPID USER
+NI PSR COMMAND</p>
+
+<p style="margin-left:9%; margin-top: 1em">Where each of
+these fields are defined in <b>ps</b>(1) manual. For your
+convenience here&rsquo;s a definition for each field.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gamemodrun</b>(1),
+<b>nice</b>(1), <b>ps</b>(1), <b>taskset</b>(1).</p>
+
+<h2>ABOUT
+<a name="ABOUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GameMode source
+can be found at
+<i>https://github.com/FeralInteractive/gamemode.git</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>gamemodelist</b></i>
+was authored by Sam Gleske
+(https://github.com/samrocketman/)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>GameMode</b>
+was authored by Feral Interactive
+(linux-contact@feralinteractive.com)</p>
+<hr>
+</body>
+</html>

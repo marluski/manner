@@ -1,0 +1,299 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BLUETOOTHCTL-MONITOR</title>
+
+</head>
+<body>
+
+<h1 align="center">BLUETOOTHCTL-MONITOR</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#MONITOR COMMANDS">MONITOR COMMANDS</a><br>
+<a href="#set-rssi-threshold">set-rssi-threshold</a><br>
+<a href="#set-rssi-timeout">set-rssi-timeout</a><br>
+<a href="#set-rssi-sampling-period">set-rssi-sampling-period</a><br>
+<a href="#add-or-pattern">add-or-pattern</a><br>
+<a href="#get-pattern">get-pattern</a><br>
+<a href="#remove-pattern">remove-pattern</a><br>
+<a href="#get-supported-info">get-supported-info</a><br>
+<a href="#print-usage">print-usage</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">bluetoothctl-monitor
+- Monitor Submenu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl</b>
+[--options] [monitor.commands]</p>
+
+<h2>MONITOR COMMANDS
+<a name="MONITOR COMMANDS"></a>
+</h2>
+
+
+<h3>set-rssi-threshold
+<a name="set-rssi-threshold"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set RSSI
+threshold parameter</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="68%">
+
+
+<p><b>&gt; set-rssi-threshold &lt;low_threshold&gt;
+&lt;high_threshold&gt;</b></p> </td>
+<td width="14%">
+</td></tr>
+</table>
+
+<h3>set-rssi-timeout
+<a name="set-rssi-timeout"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set RSSI timeout
+parameter</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="60%">
+
+
+<p style="margin-top: 1em"><b>&gt; set-rssi-timeout
+&lt;low_timeout&gt; &lt;high_timeout&gt;</b></p></td>
+<td width="22%">
+</td></tr>
+</table>
+
+<h3>set-rssi-sampling-period
+<a name="set-rssi-sampling-period"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set RSSI
+sampling period parameter</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="60%">
+
+
+<p style="margin-top: 1em"><b>&gt; set-rssi-timeout
+&lt;low_timeout&gt; &lt;high_timeout&gt;</b></p></td>
+<td width="22%">
+</td></tr>
+</table>
+
+<h3>add-or-pattern
+<a name="add-or-pattern"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Register 'or
+pattern' type monitor with the specified RSSI parameters</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="63%">
+
+
+<p style="margin-top: 1em"><b>&gt; add-or-pattern
+[patterns=pattern1 pattern2 ...]</b></p></td>
+<td width="19%">
+</td></tr>
+</table>
+
+<h3>get-pattern
+<a name="get-pattern"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get
+advertisement monitor</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em"><b>&gt; get-pattern
+&lt;monitor-id/all&gt;</b></p> </td>
+<td width="44%">
+</td></tr>
+</table>
+
+<h3>remove-pattern
+<a name="remove-pattern"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove
+advertisement monitor</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em"><b>&gt; remove-pattern
+&lt;monitor-id/all&gt;</b></p> </td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h3>get-supported-info
+<a name="get-supported-info"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get
+advertisement manager supported features and supported
+monitor types</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><b>&gt;
+get-supported-info</b></p> </td>
+<td width="56%">
+</td></tr>
+</table>
+
+<h3>print-usage
+<a name="print-usage"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print the
+command usage</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em"><b>&gt; print-usage
+&lt;add-or-pattern&gt;</b></p> </td>
+<td width="44%">
+</td></tr>
+</table>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

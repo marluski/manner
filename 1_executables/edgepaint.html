@@ -1,0 +1,195 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CLARIFY</title>
+
+</head>
+<body>
+
+<h1 align="center">CLARIFY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">edgepaint - edge
+coloring to disambiguate crossing edges</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>[</b>
+<i>options</i> ] [ <b>-o</b> <i>outfile</i> ] [ <i>files</i>
+]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>edgepaint</b>
+takes as input a graph in DOT format with node position
+information (the <i>pos</i> attribute) and colors the edges
+in a manner making it easier to tell them apart.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are supported: <b><br>
+--accuracy=</b><i>e</i></p>
+
+<p style="margin-left:18%;">Accuracy with which to find the
+maximally different coloring for each node with regard to
+its neighbors. Default <i>e</i> = 0.01.</p>
+
+<p style="margin-left:9%;"><b>--angle=</b><i>a</i></p>
+
+<p style="margin-left:18%;">Color two edges differently if
+their incidence angle is less than <i>a</i> degrees. Default
+<i>a</i> = 15.</p>
+
+
+<p style="margin-left:9%;"><b>--random_seed=</b><i>s</i></p>
+
+<p style="margin-left:18%;">Random seed to use. <i>s</i>
+must be an integer. If <i>s</i> is negative, we do
+|<i>s</i>| iterations with different seeds and pick the
+best.</p>
+
+
+<p style="margin-left:9%;"><b>--lightness=</b><i>l1,l2</i></p>
+
+<p style="margin-left:18%;">Only applies for the
+&quot;lab&quot; color scheme: <i>l1</i> and <i>l2</i> must
+integers, with 0 &lt;= <i>l1</i> &lt;= <i>l2</i> &lt;=100.
+By default, we use &quot;0,70&quot;.</p>
+
+<p style="margin-left:9%;"><b>--share_endpoint</b></p>
+
+<p style="margin-left:18%;">If this option is specified,
+edges that share a node are not considered in conflict if
+they are close to parallel but are on the opposite sides of
+the node (around 180 degree).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-o</b> <i>f</i></p></td>
+<td width="4%"></td>
+<td width="53%">
+
+
+<p>Write output to file <i>f</i> (default: stdout).</p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--color_scheme=</b><i>c</i></p>
+
+<p style="margin-left:18%;">Specifies the color scheme.
+This can be &quot;rgb&quot;, &quot;gray&quot;,
+&quot;lab&quot; (default); or a comma-separated list of RGB
+colors in hex (e.g., &quot;#ff0000,#aabbed,#eeffaa&quot;)
+representing a palette; or a string specifying a Brewer
+color scheme (e.g., &quot;accent7&quot;; see
+https://graphviz.org/doc/info/colors.html#brewer).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="6%"></td>
+<td width="28%">
+
+
+<p>Turns on verbose mode.</p></td>
+<td width="54%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-?</b></p></td>
+<td width="6%"></td>
+<td width="28%">
+
+
+<p>Print usage and exit.</p></td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">At present,
+<b>edgepaint</b> does not handle graphs with loops or
+directed multiedges. So, a graph with edges
+<i>a&nbsp;-&gt;&nbsp;b</i> and <i>b&nbsp;-&gt;&nbsp;a</i> is
+acceptable, but not if it has edges
+<i>a&nbsp;-&gt;&nbsp;b</i> and <i>a&nbsp;-&gt;&nbsp;b</i> or
+<i>a&nbsp;--&nbsp;b</i> and <i>a&nbsp;--&nbsp;b</i>. Ports
+are ignored in this analysis, so having
+<i>a.x&nbsp;-&gt;&nbsp;b</i> and
+<i>a.y&nbsp;-&gt;&nbsp;b</i> is also not supported.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Yifan Hu
+&lt;yifanhu@yahoo.com&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gvmap(1),
+sfdp(1), neato (1), dot(1)</p>
+<hr>
+</body>
+</html>

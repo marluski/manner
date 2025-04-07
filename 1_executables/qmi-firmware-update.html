@@ -1,0 +1,287 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>QMI-FIRMWARE-UPDATE</title>
+
+</head>
+<body>
+
+<h1 align="center">QMI-FIRMWARE-UPDATE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Usage:">Usage:</a><br>
+<a href="#Generic device selection options:">Generic device selection options:</a><br>
+<a href="#Update options (normal mode):">Update options (normal mode):</a><br>
+<a href="#Reset options (normal mode):">Reset options (normal mode):</a><br>
+<a href="#Update options (download mode):">Update options (download mode):</a><br>
+<a href="#Verify options:">Verify options:</a><br>
+<a href="#Application Options:">Application Options:</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">qmi-firmware-update
+- Update firmware in QMI devices</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<h3>Usage:
+<a name="Usage:"></a>
+</h3>
+
+
+
+<p style="margin-left:18%; margin-top: 1em">qmi-firmware-update
+[OPTION?] FILE1 FILE2... - Update firmware in QMI
+devices</p>
+
+<h3>Generic device selection options:
+<a name="Generic device selection options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>,
+<b>--busnum-devnum</b>=<i>[BUS</i>:]DEV</p>
+
+<p style="margin-left:18%;">Select device by bus and device
+number (in decimal).</p>
+
+<p style="margin-left:9%;"><b>-d</b>,
+<b>--vid-pid</b>=<i>VID[</i>:PID]</p>
+
+<p style="margin-left:18%;">Select device by device vendor
+and product id (in hexadecimal).</p>
+
+<p style="margin-left:9%;"><b>-w</b>,
+<b>--cdc-wdm</b>=<i>[PATH]</i></p>
+
+<p style="margin-left:18%;">Select device by QMI/MBIM
+cdc-wdm device path (e.g. <i>/dev/cdc-wdm0</i>).</p>
+
+<p style="margin-left:9%;"><b>-t</b>,
+<b>--tty</b>=<i>[PATH]</i></p>
+
+<p style="margin-left:18%;">Select device by serial device
+path (e.g. <i>/dev/ttyUSB2</i>).</p>
+
+<h3>Update options (normal mode):
+<a name="Update options (normal mode):"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>,
+<b>--update</b></p>
+
+<p style="margin-left:18%;">Launch firmware update
+process.</p>
+
+<p style="margin-left:9%;"><b>-f</b>,
+<b>--firmware-version</b>=<i>[VERSION]</i></p>
+
+<p style="margin-left:18%;">Firmware version (e.g.
+&rsquo;05.05.58.00&rsquo;).</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--config-version</b>=<i>[VERSION]</i></p>
+
+<p style="margin-left:18%;">Config version (e.g.
+&rsquo;005.025_002&rsquo;).</p>
+
+<p style="margin-left:9%;"><b>-C</b>,
+<b>--carrier</b>=<i>[CARRIER]</i></p>
+
+<p style="margin-left:18%;">Carrier name (e.g.
+&rsquo;Generic&rsquo;).</p>
+
+
+<p style="margin-left:9%;"><b>--ignore-version-errors</b></p>
+
+<p style="margin-left:18%;">Run update operation even with
+version string errors.</p>
+
+<p style="margin-left:9%;"><b>--override-download</b></p>
+
+<p style="margin-left:18%;">Download images even if module
+says it already has them.</p>
+
+
+<p style="margin-left:9%;"><b>--modem-storage-index</b>=<i>[INDEX]</i></p>
+
+<p style="margin-left:18%;">Index storage for the modem
+image.</p>
+
+<p style="margin-left:9%;"><b>--skip-validation</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t wait to validate
+the running firmware after update.</p>
+
+<h3>Reset options (normal mode):
+<a name="Reset options (normal mode):"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>,
+<b>--reset</b></p>
+
+<p style="margin-left:18%;">Reset device into download
+mode.</p>
+
+<h3>Update options (download mode):
+<a name="Update options (download mode):"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-U</b>,
+<b>--update-download</b></p>
+
+<p style="margin-left:18%;">Launch firmware update process
+while in download (boot &amp; hold) mode.</p>
+
+<h3>Verify options:
+<a name="Verify options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-z</b>,
+<b>--verify</b></p>
+
+<p style="margin-left:18%;">Analyze and verify firmware
+images.</p>
+
+<h3>Application Options:
+<a name="Application Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>,
+<b>--device-open-proxy</b></p>
+
+<p style="margin-left:18%;">Request to use the
+&rsquo;qmi-proxy&rsquo; proxy.</p>
+
+<p style="margin-left:9%;"><b>--device-open-qmi</b></p>
+
+<p style="margin-left:18%;">Open a cdc-wdm device
+explicitly in QMI mode</p>
+
+<p style="margin-left:9%;"><b>--device-open-mbim</b></p>
+
+<p style="margin-left:18%;">Open a cdc-wdm device
+explicitly in MBIM mode</p>
+
+<p style="margin-left:9%;"><b>--device-open-auto</b></p>
+
+<p style="margin-left:18%;">Open a cdc-wdm device in either
+QMI or MBIM mode (default)</p>
+
+
+<p style="margin-left:9%;"><b>--ignore-mm-runtime-check</b></p>
+
+<p style="margin-left:18%;">Ignore ModemManager runtime
+check</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Run action with verbose
+messages in standard output, including the debug ones.</p>
+
+<p style="margin-left:9%;"><b>-S</b>, <b>--silent</b></p>
+
+<p style="margin-left:18%;">Run action with no messages in
+standard output; not even the error ones.</p>
+
+<p style="margin-left:9%;"><b>-L</b>,
+<b>--verbose-log</b>=<i>[PATH]</i></p>
+
+<p style="margin-left:18%;">Write verbose messages to an
+output file.</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Print version.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Show help.</p>
+
+<p style="margin-left:9%;"><b>-H</b>,
+<b>--help-examples</b></p>
+
+<p style="margin-left:18%;">Show help examples.</p>
+
+
+<p style="margin-left:9%;">***************************************************************************</p>
+
+<p style="margin-left:18%;">Warning!</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">***************************************************************************</p>
+
+<p style="margin-left:18%; margin-top: 1em">Use this
+program with caution. The authors take *no* responsibility
+if any device gets broken as a result of using this
+program.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Please report
+issues to the libqmi mailing list at:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">libqmi-devel@lists.freedesktop.org</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">qmi-firmware-update
+1.34.0</p>
+
+<p style="margin-left:18%; margin-top: 1em">Copyright (C)
+2016-2022 Aleksander Morgado Copyright (C) 2022 VMware, Inc.
+Copyright (C) 2016-2019 Bj?rn Mork Copyright (C) 2016-2018
+Zodiac Inflight Innovations</p>
+
+<p style="margin-left:9%; margin-top: 1em">License GPLv2+:
+GNU GPL version 2 or later
+&lt;http://gnu.org/licenses/gpl-2.0.html&gt; This is free
+software: you are free to change and redistribute it. There
+is NO WARRANTY, to the extent permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <b>qmi-firmware-update</b> is maintained
+as a Texinfo manual. If the <b>info</b> and
+<b>qmi-firmware-update</b> programs are properly installed
+at your site, the command</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>info
+qmi-firmware-update</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+<hr>
+</body>
+</html>

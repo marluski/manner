@@ -1,0 +1,641 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:04 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-SEARCH</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-SEARCH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#json">json</a><br>
+<a href="#color">color</a><br>
+<a href="#parseable">parseable</a><br>
+<a href="#description">description</a><br>
+<a href="#searchlimit">searchlimit</a><br>
+<a href="#searchopts">searchopts</a><br>
+<a href="#searchexclude">searchexclude</a><br>
+<a href="#registry">registry</a><br>
+<a href="#prefer-online">prefer-online</a><br>
+<a href="#prefer-offline">prefer-offline</a><br>
+<a href="#offline">offline</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-search</b>
+- Search for packages</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm search
+&lt;search term&gt; [&lt;search term&gt; ...]</p>
+
+<p style="margin-left:12%; margin-top: 1em">aliases: find,
+s, se</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+command is unaware of workspaces.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Search the
+registry for packages matching the search terms. <b>npm
+search</b> performs a linear, incremental, lexically-ordered
+search through package metadata for all files in the
+registry. If your terminal has color support, it will
+further highlight the matches in the results. This can be
+disabled with the config item <b>color</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Additionally,
+using the <b>--searchopts</b> and <b>--searchexclude</b>
+options paired with more search terms will include and
+exclude further patterns. The main difference between
+<b>--searchopts</b> and the standard search terms is that
+the former does not highlight results in the output and you
+can use them more fine-grained filtering. Additionally, you
+can add both of these to your config to change default
+search filtering behavior.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Search also
+allows targeting of maintainers in search results, by
+prefixing their npm username with <b>=</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a term starts
+with <b>/</b>, then it&rsquo;s interpreted as a regular
+expression and supports standard JavaScript RegExp syntax.
+In this case search will ignore a trailing <b>/</b> . (Note
+you must escape or quote many regular expression characters
+in most shells.)</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>json
+<a name="json"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Whether or not
+to output JSON data, rather than the normal output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">In <b>npm pkg set</b> it enables
+parsing set values with JSON.parse() before saving them to
+your <b>package.json</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Not supported by
+all npm commands.</p>
+
+<h3>color
+<a name="color"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: true unless the
+NO_COLOR environ is set to something other than
+&rsquo;0&rsquo;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: &quot;always&quot; or Boolean</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If false, never
+shows colors. If <b>&quot;always&quot;</b> then always shows
+colors. If true, then only prints color codes for tty file
+descriptors.</p>
+
+<h3>parseable
+<a name="parseable"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Output parseable
+results from commands that write to standard output. For
+<b>npm search</b>, this will be tab-separated table
+format.</p>
+
+<h3>description
+<a name="description"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em">Default: true</p></td>
+<td width="69%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p>Type: Boolean</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Show the
+description in <b>npm search</b></p>
+
+<h3>searchlimit
+<a name="searchlimit"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em">Default: 20</p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p>Type: Number</p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Number of items
+to limit search results to. Will not apply at all to legacy
+searches.</p>
+
+<h3>searchopts
+<a name="searchopts"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em">Default: &quot;&quot;</p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p>Type: String</p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Space-separated
+options that are always passed to search.</p>
+
+<h3>searchexclude
+<a name="searchexclude"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em">Default: &quot;&quot;</p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="15%">
+
+
+<p>Type: String</p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Space-separated
+options that limit the results from search.</p>
+
+<h3>registry
+<a name="registry"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">Default:
+&quot;https://registry.npmjs.org/&quot;</p> </td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p>Type: URL</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The base URL of
+the npm registry.</p>
+
+<h3>prefer-online
+<a name="prefer-online"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If true,
+staleness checks for cached data will be forced, making the
+CLI look for updates immediately even for fresh package
+data.</p>
+
+<h3>prefer-offline
+<a name="prefer-offline"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If true,
+staleness checks for cached data will be bypassed, but
+missing data will be requested from the server. To force
+full offline mode, use <b>--offline</b>.</p>
+
+<h3>offline
+<a name="offline"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Force offline
+mode: no network requests will be done during install. To
+allow the CLI to fill in missing cache data, see
+<b>--prefer-offline</b>.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em">npm help registry</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="42%">
+
+
+<p>npm help config</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="42%">
+
+
+<p>npm help npmrc</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="42%">
+
+
+<p>npm help view</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="42%">
+
+
+<p>npm help cache</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="42%">
+
+
+<p>https://npm.im/npm-registry-fetch</p></td>
+<td width="44%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

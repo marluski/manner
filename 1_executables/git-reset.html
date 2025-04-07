@@ -1,0 +1,518 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-RESET</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-RESET</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#DISCUSSION">DISCUSSION</a><br>
+<a href="#GIT">GIT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">git-reset -
+Reset current HEAD to the specified state</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>git reset</i>
+[-q] [&lt;tree-ish&gt;] [--] &lt;pathspec&gt;... <i><br>
+git reset</i> [-q] [--pathspec-from-file=&lt;file&gt;
+[--pathspec-file-nul]] [&lt;tree-ish&gt;] <i><br>
+git reset</i> (--patch | -p) [&lt;tree-ish&gt;] [--]
+[&lt;pathspec&gt;...] <i><br>
+git reset</i> [--soft | --mixed [-N] | --hard | --merge |
+--keep] [-q] [&lt;commit&gt;]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">In the first
+three forms, copy entries from <i>&lt;tree-ish&gt;</i> to
+the index. In the last form, set the current branch head
+(<b>HEAD</b>) to <i>&lt;commit&gt;</i>, optionally modifying
+index and working tree to match. The
+<i>&lt;tree-ish&gt;</i>/<i>&lt;commit&gt;</i> defaults to
+<b>HEAD</b> in all forms.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>git reset</i>
+[-q] [&lt;tree-ish&gt;] [--] &lt;pathspec&gt;..., <i>git
+reset</i> [-q] [--pathspec-from-file=&lt;file&gt;
+[--pathspec-file-nul]] [&lt;tree-ish&gt;]</p>
+
+<p style="margin-left:14%;">These forms reset the index
+entries for all paths that match the <i>&lt;pathspec&gt;</i>
+to their state at <i>&lt;tree-ish&gt;</i>. (It does not
+affect the working tree or the current branch.)</p>
+
+<p style="margin-left:14%; margin-top: 1em">This means that
+<b>git reset</b> <i>&lt;pathspec&gt;</i> is the opposite of
+<b>git add</b> <i>&lt;pathspec&gt;</i>. This command is
+equivalent to <b>git restore</b>
+[<b>--source=</b><i>&lt;tree-ish&gt;</i>] <b>--staged</b>
+<i>&lt;pathspec&gt;</i>....</p>
+
+<p style="margin-left:14%; margin-top: 1em">After running
+<b>git reset</b> <i>&lt;pathspec&gt;</i> to update the index
+entry, you can use <b>git-restore</b>(1) to check the
+contents out of the index to the working tree.
+Alternatively, using <b>git-restore</b>(1) and specifying a
+commit with <b>--source</b>, you can copy the contents of a
+path out of a commit to the index and to the working tree in
+one go.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>git reset</i>
+(--patch | -p) [&lt;tree-ish&gt;] [--]
+[&lt;pathspec&gt;...]</p>
+
+<p style="margin-left:14%;">Interactively select hunks in
+the difference between the index and <i>&lt;tree-ish&gt;</i>
+(defaults to <b>HEAD</b>). The chosen hunks are applied in
+reverse to the index.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This means that
+<b>git reset -p</b> is the opposite of <b>git add -p</b>,
+i.e. you can use it to selectively reset hunks. See the
+&ldquo;Interactive Mode&rdquo; section of <b>git-add</b>(1)
+to learn how to operate the <b>--patch</b> mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>git reset</i>
+[&lt;mode&gt;] [&lt;commit&gt;]</p>
+
+<p style="margin-left:14%;">This form resets the current
+branch head to <i>&lt;commit&gt;</i> and possibly updates
+the index (resetting it to the tree of
+<i>&lt;commit&gt;</i>) and the working tree depending on
+<i>&lt;mode&gt;</i>. Before the operation, <b>ORIG_HEAD</b>
+is set to the tip of the current branch. If
+<i>&lt;mode&gt;</i> is omitted, defaults to <b>--mixed</b>.
+The <i>&lt;mode&gt;</i> must be one of the following:</p>
+
+<p style="margin-left:14%; margin-top: 1em">--soft</p>
+
+<p style="margin-left:19%;">Does not touch the index file
+or the working tree at all (but resets the head to
+<i>&lt;commit&gt;</i>, just like all modes do). This leaves
+all your changed files &quot;Changes to be committed&quot;,
+as <b>git status</b> would put it.</p>
+
+<p style="margin-left:14%; margin-top: 1em">--mixed</p>
+
+<p style="margin-left:19%;">Resets the index but not the
+working tree (i.e., the changed files are preserved but not
+marked for commit) and reports what has not been updated.
+This is the default action.</p>
+
+<p style="margin-left:19%; margin-top: 1em">If <b>-N</b> is
+specified, removed paths are marked as intent-to-add (see
+<b>git-add</b>(1)).</p>
+
+<p style="margin-left:14%; margin-top: 1em">--hard</p>
+
+<p style="margin-left:19%;">Resets the index and working
+tree. Any changes to tracked files in the working tree since
+<i>&lt;commit&gt;</i> are discarded. Any untracked files or
+directories in the way of writing any tracked files are
+simply deleted.</p>
+
+<p style="margin-left:14%; margin-top: 1em">--merge</p>
+
+<p style="margin-left:19%;">Resets the index and updates
+the files in the working tree that are different between
+<i>&lt;commit&gt;</i> and <b>HEAD</b>, but keeps those which
+are different between the index and working tree (i.e. which
+have changes which have not been added). If a file that is
+different between <i>&lt;commit&gt;</i> and the index has
+unstaged changes, reset is aborted.</p>
+
+<p style="margin-left:19%; margin-top: 1em">In other words,
+<b>--merge</b> does something like a <b>git read-tree -u
+-m</b> <i>&lt;commit&gt;</i>, but carries forward unmerged
+index entries.</p>
+
+<p style="margin-left:14%; margin-top: 1em">--keep</p>
+
+<p style="margin-left:19%;">Resets index entries and
+updates files in the working tree that are different between
+<i>&lt;commit&gt;</i> and <b>HEAD</b>. If a file that is
+different between <i>&lt;commit&gt;</i> and <b>HEAD</b> has
+local changes, reset is aborted.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">--[no-]recurse-submodules</p>
+
+<p style="margin-left:19%;">When the working tree is
+updated, using --recurse-submodules will also recursively
+reset the working tree of all active submodules according to
+the commit recorded in the superproject, also setting the
+submodules' HEAD to be detached at that commit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See &quot;Reset,
+restore and revert&quot; in <b>git</b>(1) for the
+differences between the three commands.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-q, --quiet</p>
+
+<p style="margin-left:14%;">Be quiet, only report
+errors.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--refresh,
+--no-refresh</p>
+
+<p style="margin-left:14%;">Refresh the index after a mixed
+reset. Enabled by default.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--pathspec-from-file=&lt;file&gt;</p>
+
+<p style="margin-left:14%;">Pathspec is passed in
+<i>&lt;file&gt;</i> instead of commandline args. If
+<i>&lt;file&gt;</i> is exactly <b>-</b> then standard input
+is used. Pathspec elements are separated by LF or CR/LF.
+Pathspec elements can be quoted as explained for the
+configuration variable <b>core.quotePath</b> (see
+<b>git-config</b>(1)). See also <b>--pathspec-file-nul</b>
+and global <b>--literal-pathspecs</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--pathspec-file-nul</p>
+
+<p style="margin-left:14%;">Only meaningful with
+<b>--pathspec-from-file</b>. Pathspec elements are separated
+with NUL character and all other characters are taken
+literally (including newlines and quotes).</p>
+
+<p style="margin-left:9%; margin-top: 1em">--</p>
+
+<p style="margin-left:14%;">Do not interpret any more
+arguments as options.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;pathspec&gt;...</p>
+
+<p style="margin-left:14%;">Limits the paths affected by
+the operation.</p>
+
+<p style="margin-left:14%; margin-top: 1em">For more
+details, see the <i>pathspec</i> entry in
+<b>gitglossary</b>(7).</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Undo add</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ edit
+<b>(1)</b> <br>
+$ git add frotz.c filfre.c <br>
+$ mailx <b>(2)</b> <br>
+$ git reset <b>(3)</b> <br>
+$ git pull git://info.example.com/ nitfol <b>(4)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Undo a commit
+and redo</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git commit
+... <br>
+$ git reset --soft HEAD&#710; <b>(1)</b> <br>
+$ edit <b>(2)</b> <br>
+$ git commit -a -c ORIG_HEAD <b>(3)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Undo a commit,
+making it a topic branch</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git branch
+topic/wip <b>(1)</b> <br>
+$ git reset --hard HEAD&#732;3 <b>(2)</b> <br>
+$ git switch topic/wip <b>(3)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Undo commits
+permanently</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git commit
+... <br>
+$ git reset --hard HEAD&#732;3 <b>(1)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Undo a merge or
+pull</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git pull
+<b>(1)</b> <br>
+Auto-merging nitfol <br>
+CONFLICT (content): Merge conflict in nitfol <br>
+Automatic merge failed; fix conflicts and then commit the
+result. <br>
+$ git reset --hard <b>(2)</b> <br>
+$ git pull . topic/branch <b>(3)</b> <br>
+Updating from 41223... to 13134... <br>
+Fast-forward <br>
+$ git reset --hard ORIG_HEAD <b>(4)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Undo a merge or
+pull inside a dirty working tree</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git pull
+<b>(1)</b> <br>
+Auto-merging nitfol <br>
+Merge made by recursive. <br>
+nitfol | 20 +++++---- <br>
+... <br>
+$ git reset --merge ORIG_HEAD <b>(2)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Interrupted
+workflow</p>
+
+<p style="margin-left:14%;">Suppose you are interrupted by
+an urgent fix request while you are in the middle of a large
+change. The files in your working tree are not in any shape
+to be committed yet, but you need to get to the other branch
+for a quick bugfix.</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git switch
+feature ;# you were working in &quot;feature&quot; branch
+and <br>
+$ work work work ;# got interrupted <br>
+$ git commit -a -m &quot;snapshot WIP&quot; <b>(1)</b> <br>
+$ git switch master <br>
+$ fix fix fix <br>
+$ git commit ;# commit with real log <br>
+$ git switch feature <br>
+$ git reset --soft HEAD&#710; ;# go back to WIP state
+<b>(2)</b> <br>
+$ git reset <b>(3)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Reset a single
+file in the index</p>
+
+<p style="margin-left:14%;">Suppose you have added a file
+to your index, but later decide you do not want to add it to
+your commit. You can remove the file from the index while
+keeping your changes with git reset.</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git reset --
+frotz.c <b>(1)</b> <br>
+$ git commit -m &quot;Commit files in index&quot; <b>(2)</b>
+<br>
+$ git add frotz.c <b>(3)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Keep changes in
+working tree while discarding some previous commits</p>
+
+<p style="margin-left:14%;">Suppose you are working on
+something and you commit it, and then you continue working a
+bit more, but now you think that what you have in your
+working tree should be in another branch that has nothing to
+do with what you committed previously. You can start a new
+branch and reset it while keeping the changes in your
+working tree.</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git tag start
+<br>
+$ git switch -c branch1 <br>
+$ edit <br>
+$ git commit ... <b>(1)</b> <br>
+$ edit <br>
+$ git switch -c branch2 <b>(2)</b> <br>
+$ git reset --keep start <b>(3)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Split a commit
+apart into a sequence of commits</p>
+
+<p style="margin-left:14%;">Suppose that you have created
+lots of logically separate changes and committed them
+together. Then, later you decide that it might be better to
+have each logical chunk associated with its own commit. You
+can use git reset to rewind history without changing the
+contents of your local files, and then successively use
+<b>git add -p</b> to interactively select which hunks to
+include into each commit, using <b>git commit -c</b> to
+pre-populate the commit message.</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ git reset -N
+HEAD&#710; <b>(1)</b> <br>
+$ git add -p <b>(2)</b> <br>
+$ git diff --cached <b>(3)</b> <br>
+$ git commit -c HEAD@{1} <b>(4)</b> <br>
+... <b>(5)</b> <br>
+$ git add ... <b>(6)</b> <br>
+$ git diff --cached <b>(7)</b> <br>
+$ git commit ... <b>(8)</b></p>
+
+<h2>DISCUSSION
+<a name="DISCUSSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The tables below
+show what happens when running:</p>
+
+<p style="margin-left:14%; margin-top: 1em">git reset
+--option target</p>
+
+<p style="margin-left:9%; margin-top: 1em">to reset the
+<b>HEAD</b> to another commit (<b>target</b>) with the
+different reset options depending on the state of the
+files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In these tables,
+<b>A</b>, <b>B</b>, <b>C</b> and <b>D</b> are some different
+states of a file. For example, the first line of the first
+table means that if a file is in state <b>A</b> in the
+working tree, in state <b>B</b> in the index, in state
+<b>C</b> in <b>HEAD</b> and in state <b>D</b> in the target,
+then <b>git reset --soft target</b> will leave the file in
+the working tree in state <b>A</b> and in the index in state
+<b>B</b>. It resets (i.e. moves) the <b>HEAD</b> (i.e. the
+tip of the current branch, if you are on one) to
+<b>target</b> (which has the file in state <b>D</b>).</p>
+
+<p style="margin-left:14%; margin-top: 1em">working index
+HEAD target working index HEAD <br>
+---------------------------------------------------- <br>
+A B C D --soft A B D <br>
+--mixed A D D <br>
+--hard D D D <br>
+--merge (disallowed) <br>
+--keep (disallowed)</p>
+
+<p style="margin-left:14%; margin-top: 1em">working index
+HEAD target working index HEAD <br>
+---------------------------------------------------- <br>
+A B C C --soft A B C <br>
+--mixed A C C <br>
+--hard C C C <br>
+--merge (disallowed) <br>
+--keep A C C</p>
+
+<p style="margin-left:14%; margin-top: 1em">working index
+HEAD target working index HEAD <br>
+---------------------------------------------------- <br>
+B B C D --soft B B D <br>
+--mixed B D D <br>
+--hard D D D <br>
+--merge D D D <br>
+--keep (disallowed)</p>
+
+<p style="margin-left:14%; margin-top: 1em">working index
+HEAD target working index HEAD <br>
+---------------------------------------------------- <br>
+B B C C --soft B B C <br>
+--mixed B C C <br>
+--hard C C C <br>
+--merge C C C <br>
+--keep B C C</p>
+
+<p style="margin-left:14%; margin-top: 1em">working index
+HEAD target working index HEAD <br>
+---------------------------------------------------- <br>
+B C C D --soft B C D <br>
+--mixed B D D <br>
+--hard D D D <br>
+--merge (disallowed) <br>
+--keep (disallowed)</p>
+
+<p style="margin-left:14%; margin-top: 1em">working index
+HEAD target working index HEAD <br>
+---------------------------------------------------- <br>
+B C C C --soft B C C <br>
+--mixed B C C <br>
+--hard C C C <br>
+--merge B C C <br>
+--keep B C C</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>reset
+--merge</b> is meant to be used when resetting out of a
+conflicted merge. Any mergy operation guarantees that the
+working tree file that is involved in the merge does not
+have a local change with respect to the index before it
+starts, and that it writes the result out to the working
+tree. So if we see some difference between the index and the
+target and also between the index and the working tree, then
+it means that we are not resetting out from a state that a
+mergy operation left after failing with a conflict. That is
+why we disallow <b>--merge</b> option in this case.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>reset
+--keep</b> is meant to be used when removing some of the
+last commits in the current branch while keeping changes in
+the working tree. If there could be conflicts between the
+changes in the commit we want to remove and the changes in
+the working tree we want to keep, the reset is disallowed.
+That&rsquo;s why it is disallowed if there are both changes
+between the working tree and <b>HEAD</b>, and between
+<b>HEAD</b> and the target. To be safe, it is also
+disallowed when there are unmerged entries.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+tables show what happens when there are unmerged
+entries:</p>
+
+<p style="margin-left:14%; margin-top: 1em">working index
+HEAD target working index HEAD <br>
+---------------------------------------------------- <br>
+X U A B --soft (disallowed) <br>
+--mixed X B B <br>
+--hard B B B <br>
+--merge B B B <br>
+--keep (disallowed)</p>
+
+<p style="margin-left:14%; margin-top: 1em">working index
+HEAD target working index HEAD <br>
+---------------------------------------------------- <br>
+X U A A --soft (disallowed) <br>
+--mixed X A A <br>
+--hard A A A <br>
+--merge A A A <br>
+--keep (disallowed)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>X</b> means
+any state and <b>U</b> means an unmerged index.</p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Part of the
+<b>git</b>(1) suite</p>
+<hr>
+</body>
+</html>

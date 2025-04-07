@@ -1,0 +1,249 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VDE_CRYPTCAB</title>
+
+</head>
+<body>
+
+<h1 align="center">VDE_CRYPTCAB</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#KNOWN ISSUES">KNOWN ISSUES</a><br>
+<a href="#NOTICE">NOTICE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">vde_cryptcab -
+Virtual Distributed Ethernet encrypted cable manager</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_cryptcab</b>
+[ <b>-p</b> <i>portnum</i> ] [ <b>-s</b> <i>socketpath</i> ]
+[ <b>-c</b> <i>[remote_user@]host[:remote_portnum]</i> ] [
+<b>-P</b> <i>pre_shared.key</i> ]| [ <b>-x</b> ] [ <b>-v</b>
+<i>[v][v][v]</i> ] [ <b>-k</b> ] [ <b>-d</b> ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A
+<b>vde_cryptcab</b> is a distributed cable manager for VDE
+switches. It allows two VDE switches on two machines to
+communicate using a ChaCha encrypted channel.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When used in
+client mode (i.e., with -c option), it generates a random
+ChaCha key, and uses <b>scp (1)</b> to transfer the key to
+the remote server.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On the client
+side, the environment variable SCP_EXTRA_OPTIONS may be set
+in order to append options to the scp command line (this is
+useful for example when dropbear or another non-standard ssh
+client is used to transfer the ChaCha key).</p>
+
+<p style="margin-left:9%; margin-top: 1em">After a 4-way
+handshake phase to verify client credentials, server and
+client will exchange VDE datagrams encapsulating them into
+cryptograms that are sent via udp to each remote host.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On server side,
+one could run:</p>
+
+<p style="margin-left:18%;"><b>vde_cryptcab -s
+/tmp/vde2.ctl -p 2100</b></p>
+
+<p style="margin-left:9%;">To start a multi-peer cryptcab
+server, accepting udp datagrams on port 2100, that connects
+each authenticated remote client to a different port of the
+switch. In fact, a new instance of <b>vde_plug (1)</b> is
+started and connected to the switch through local unix
+socket.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command</p>
+
+<p style="margin-left:18%;"><b>vde_cryptcab -s
+/tmp/vde2.ctl -c foo@remote.machine.org:2100</b></p>
+
+<p style="margin-left:9%;">will connect a client to the
+remote server, running on udp port 2100. At this point, on
+server side a verify for user &quot;foo&quot; credentials is
+required, typically it could be: host-based authentication,
+password challenge or public key authentication. See <b>ssh
+(1)</b> for more details about it.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the two
+vde_switches run as daemon and they are connected to tap
+interfaces a level 2 encrypted tunnel is established.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>
+<i>portnum</i></p>
+
+<p style="margin-left:18%;">It is possible to decide which
+local udp port to use. When this option is not specified,
+cryptcab will use default udp port number, 7667.</p>
+
+<p style="margin-left:9%;"><b>-c</b>
+<i>[remote_user@]host[:remote_portnum]</i></p>
+
+<p style="margin-left:18%;">run vde_cryptcab in client
+mode, trying to connect to <b>host .</b> Both
+<b>remote_user</b> and <b>remote_portnum</b> parameters are
+not required. If not specified, the same user running
+vde_cryptcab is used for authentication on server, and
+default udp port 7667 is used.</p>
+
+<p style="margin-left:9%;"><b>-s</b> <i>socketpath</i></p>
+
+<p style="margin-left:18%;">specify the UNIX socket to be
+used by local programs for joining the VDE. The default
+value is &quot;/tmp/vde.ctl&quot;.</p>
+
+<p style="margin-left:9%;"><b>-P</b>
+<i>pre_shared.keypath</i></p>
+
+<p style="margin-left:18%;">if specified, vde_cryptcab will
+run in pre-shared key mode, instead of generating a random
+key to transmit with ssh. Given option is the path to the
+pre-shared symmetric key file to use for data encryption.
+The same key has to be used on both client and server.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-x</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Disable symmetric key encryption.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-k</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Send periodic &quot;keepalive&quot; packets to avoid
+server timeouts. Useful when you want to keep a low-traffic
+link available.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-d</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Run as daemon.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Verbose. (Use -vv -vvv or -vvvv for more verbosity)</p></td></tr>
+</table>
+
+<h2>KNOWN ISSUES
+<a name="KNOWN ISSUES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Encapsulating IP
+packets into session+udp layer results in real datagrams
+larger than tap device mtu. Since vde_cryptcab gets confused
+by packet fragmentation, the tap device mtu must be set to a
+smaller value than real interface mtu. Use <b>ip</b>(8) or
+<b>ifconfig</b>(8) to set up your tap device mtu.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+disabling encryption leads to obvious security problems. It
+is advised to avoid unencrypted mode (-x) in non-controlled
+networks.</p>
+
+<h2>NOTICE
+<a name="NOTICE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtual
+Distributed Ethernet is not related in any way with
+www.vde.com (&quot;Verband der Elektrotechnik, Elektronik
+und Informationstechnik&quot; i.e. the German
+&quot;Association for Electrical, Electronic &amp;
+Information Technologies&quot;).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_switch</b>(1),
+<b>vdeq</b>(1), <b>vde_plug</b>(1), <b>vde_plug2tap</b>(1),
+<b>scp</b>(1), <b>ssh</b>(1).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">VDE is a project
+by Renzo Davoli &lt;renzo@cs.unibo.it&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">vde_cryptcab is
+a VDE component by Daniele Lacamera
+&lt;root@danielinux.net&gt;</p>
+<hr>
+</body>
+</html>

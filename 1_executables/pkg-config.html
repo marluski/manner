@@ -1,0 +1,397 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:34 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>PKGCONF</i>(1) General Commands Manual
+<i>PKGCONF</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">pkgconf &mdash; a system for
+configuring build dependency information</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:19%;"><b>pkgconf</b> [<i>options</i>]
+[<i>list&nbsp;of&nbsp;modules</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>pkgconf</b> is a program
+which helps to configure compiler and linker flags for
+development libraries. This allows build systems to detect
+other dependencies and use them with the system
+toolchain.</p>
+
+<p style="margin-top: 1em"><b>GENERAL OPTIONS <br>
+--version</b></p>
+
+<p style="margin-left:19%;">Display the supported
+pkg-config version and exit.</p>
+
+
+<p style="margin-top: 1em"><b>--atleast-pkgconfig-version</b>=<i>VERSION</i></p>
+
+<p style="margin-left:19%;">Exit with error if we do not
+support the requested pkg-config version.</p>
+
+<p style="margin-top: 1em"><b>--errors-to-stdout</b></p>
+
+<p style="margin-left:19%;">Print all errors on the main
+output stream instead of the error output stream.</p>
+
+<p style="margin-top: 1em"><b>--silence-errors</b></p>
+
+<p style="margin-left:19%;">Do not display any errors at
+all.</p>
+
+<p style="margin-top: 1em"><b>--list-all</b></p>
+
+<p style="margin-left:19%;">Walk all directories listed in
+the <i>PKG_CONFIG_PATH</i> environmental variable and
+display information on packages which have registered
+information there.</p>
+
+<p style="margin-top: 1em"><b>--simulate</b></p>
+
+<p style="margin-left:19%;">Simulates resolving a
+dependency graph based on the requested modules on the
+command line. Dumps a series of trees denoting
+pkgconf&rsquo;s resolver state.</p>
+
+<p style="margin-top: 1em"><b>--no-cache</b></p>
+
+<p style="margin-left:19%;">Skip caching packages when they
+are loaded into the internal resolver. This may result in an
+alternate dependency graph being computed.</p>
+
+<p style="margin-top: 1em"><b>--ignore-conflicts</b></p>
+
+<p style="margin-left:19%;">Ignore &lsquo;Conflicts&rsquo;
+rules in modules.</p>
+
+<p style="margin-top: 1em"><b>--env-only</b></p>
+
+<p style="margin-left:19%;">Learn about pkgconf&rsquo;s
+configuration strictly from environmental variables.</p>
+
+<p style="margin-top: 1em"><b>--validate</b> <i>package
+...</i></p>
+
+<p style="margin-left:19%;">Validate specific
+&lsquo;.pc&rsquo; files for correctness.</p>
+
+
+<p style="margin-top: 1em"><b>--maximum-traverse-depth</b>=<i>DEPTH</i></p>
+
+<p style="margin-left:19%;">Impose a limit on the allowed
+depth in the dependency graph. For example, a depth of 2
+will restrict the resolver from acting on child dependencies
+of modules added to the resolver&rsquo;s solution.</p>
+
+<p style="margin-top: 1em"><b>--static</b></p>
+
+<p style="margin-left:19%;">Compute a deeper dependency
+graph and use compiler/linker flags intended for static
+linking.</p>
+
+<p style="margin-top: 1em"><b>--shared</b></p>
+
+<p style="margin-left:19%;">Compute a simple dependency
+graph that is only suitable for shared linking.</p>
+
+<p style="margin-top: 1em"><b>--pure</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Treats the
+computed dependency graph as if it were pure. This is mainly
+intended for use with the <b>--static</b> flag.</p>
+
+<p style="margin-top: 1em"><b>--no-provides</b></p>
+
+<p style="margin-left:19%;">Ignore &lsquo;Provides&rsquo;
+rules in modules when resolving dependencies.</p>
+
+
+<p style="margin-top: 1em"><b>--with-path</b>=<i>PATH</i></p>
+
+<p style="margin-left:19%;">Adds a new module search path
+to pkgconf&rsquo;s dependency resolver. Paths added in this
+way are given preference before other paths.</p>
+
+<p style="margin-top: 1em"><b>--define-prefix</b></p>
+
+<p style="margin-left:19%;">Attempts to determine the
+prefix variable to use for CFLAGS and LIBS entry
+relocations. This is mainly useful for platforms where
+framework SDKs are relocatable, such as Windows.</p>
+
+<p style="margin-top: 1em"><b>--dont-define-prefix</b></p>
+
+<p style="margin-left:19%;">Disables the
+&lsquo;define-prefix&rsquo; feature.</p>
+
+
+<p style="margin-top: 1em"><b>--prefix-variable</b>=<i>VARIABLE</i></p>
+
+<p style="margin-left:19%;">Sets the &lsquo;prefix&rsquo;
+variable used by the &lsquo;define-prefix&rsquo;
+feature.</p>
+
+
+<p style="margin-top: 1em"><b>--relocate</b>=<i>PATH</i></p>
+
+<p style="margin-left:19%;">Relocates a path using the
+pkgconf_path_relocate API. This is mainly used by the
+testsuite to provide a guaranteed interface to the
+system&rsquo;s path relocation backend.</p>
+
+
+<p style="margin-top: 1em"><b>--dont-relocate-paths</b></p>
+
+<p style="margin-left:19%;">Disables the path relocation
+feature.</p>
+
+<p style="margin-top: 1em"><b>MODULE-SPECIFIC OPTIONS <br>
+--atleast-version</b>=<i>VERSION</i></p>
+
+<p style="margin-left:19%;">Exit with error if a
+module&rsquo;s version is less than the specified
+version.</p>
+
+
+<p style="margin-top: 1em"><b>--exact-version</b>=<i>VERSION</i></p>
+
+<p style="margin-left:19%;">Exit with error if a
+module&rsquo;s version is not exactly the specified
+version.</p>
+
+
+<p style="margin-top: 1em"><b>--max-version</b>=<i>VERSION</i></p>
+
+<p style="margin-left:19%;">Exit with error if a
+module&rsquo;s version is greater than the specified
+version.</p>
+
+<p style="margin-top: 1em"><b>--exists</b></p>
+
+<p style="margin-left:19%;">Exit with a non-zero result if
+the dependency resolver was unable to find all of the
+requested modules.</p>
+
+<p style="margin-top: 1em"><b>--uninstalled</b></p>
+
+<p style="margin-left:19%;">Exit with a non-zero result if
+the dependency resolver uses an &lsquo;uninstalled&rsquo;
+module as part of its solution.</p>
+
+<p style="margin-top: 1em"><b>--no-uninstalled</b></p>
+
+<p style="margin-left:19%;">Forbids the dependency resolver
+from considering &rsquo;uninstalled&rsquo; modules as part
+of a solution.</p>
+
+<p style="margin-top: 1em"><b>QUERY-SPECIFIC OPTIONS <br>
+--cflags</b>, <b>--cflags-only-I</b>,
+<b>--cflags-only-other</b></p>
+
+<p style="margin-left:19%;">Display either all CFLAGS, only
+<b>-I</b> CFLAGS or only CFLAGS that are not <b>-I</b>.</p>
+
+<p style="margin-top: 1em"><b>--libs</b>,
+<b>--libs-only-L</b>, <b>--libs-only-l</b>,
+<b>--libs-only-other</b></p>
+
+<p style="margin-left:19%;">Display either all linker
+flags, only <b>-L</b> linker flags, only <b>-l</b> linker
+flags or only linker flags that are not <b>-L</b> or
+<b>-l</b>.</p>
+
+<p style="margin-top: 1em"><b>--keep-system-cflags</b>,
+<b>--keep-system-libs</b></p>
+
+<p style="margin-left:19%;">Keep CFLAGS or linker flag
+fragments that would be filtered due to being included by
+default in the compiler.</p>
+
+
+<p style="margin-top: 1em"><b>--define-variable</b>=<i>VARNAME</i>=<i>VALUE</i></p>
+
+<p style="margin-left:19%;">Define <i>VARNAME</i> as
+<i>VALUE</i>. Variables are used in query output, and some
+modules&rsquo; results may change based on the presence of a
+variable definition.</p>
+
+<p style="margin-top: 1em"><b>--print-variables</b></p>
+
+<p style="margin-left:19%;">Print all seen variables for a
+module to the output channel.</p>
+
+<p style="margin-top: 1em"><b>--print-provides</b></p>
+
+<p style="margin-left:19%;">Print all relevant
+&lsquo;Provides&rsquo; entries for a module to the output
+channel.</p>
+
+
+<p style="margin-top: 1em"><b>--variable</b>=<i>VARNAME</i></p>
+
+<p style="margin-left:19%;">Print the value of
+<i>VARNAME</i>.</p>
+
+<p style="margin-top: 1em"><b>--print-requires</b>,
+<b>--print-requires-private</b></p>
+
+<p style="margin-left:19%;">Print the modules included in
+either the <i>Requires</i> field or the
+<i>Requires.private</i> field.</p>
+
+<p style="margin-top: 1em"><b>--digraph</b></p>
+
+<p style="margin-left:19%;">Dump the dependency
+resolver&rsquo;s solution as a graphviz &lsquo;dot&rsquo;
+file. This can be used with graphviz to visualize module
+interdependencies.</p>
+
+<p style="margin-top: 1em"><b>--path</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Display the
+filenames of the &lsquo;.pc&rsquo; files used by the
+dependency resolver for a given dependency set.</p>
+
+<p style="margin-top: 1em"><b>--env</b>=<i>VARNAME</i></p>
+
+<p style="margin-left:19%;">Print the requested values as
+variable declarations in a similar format as the
+<i>env</i>(1) command.</p>
+
+
+<p style="margin-top: 1em"><b>--fragment-filter</b>=<i>TYPES</i></p>
+
+<p style="margin-left:19%;">Filter the fragment lists for
+the specified types.</p>
+
+<p style="margin-top: 1em"><b>--modversion</b></p>
+
+<p style="margin-left:19%;">Print the version of the
+queried module.</p>
+
+<p style="margin-top: 1em"><b>ENVIRONMENT</b> <i><br>
+PKG_CONFIG_PATH</i></p>
+
+<p style="margin-left:19%;">List of secondary directories
+where &lsquo;.pc&rsquo; files are looked up.</p>
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_LIBDIR</i></p>
+
+<p style="margin-left:19%;">List of primary directories
+where &lsquo;.pc&rsquo; files are looked up.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_SYSROOT_DIR</i></p>
+
+<p style="margin-left:19%;">&lsquo;sysroot&rsquo;
+directory, will be prepended to every path defined in
+<i>PKG_CONFIG_PATH</i>. Useful for cross compilation.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_TOP_BUILD_DIR</i></p>
+
+<p style="margin-left:19%;">Provides an alternative setting
+for the &lsquo;pc_top_builddir&rsquo; global variable.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_PURE_DEPGRAPH</i></p>
+
+<p style="margin-left:19%;">If set, enables the same
+behaviour as the <b>--pure</b> flag.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_SYSTEM_INCLUDE_PATH</i></p>
+
+<p style="margin-left:19%;">List of paths that are
+considered system include paths by the toolchain. This is a
+pkgconf-specific extension.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_SYSTEM_LIBRARY_PATH</i></p>
+
+<p style="margin-left:19%;">List of paths that are
+considered system library paths by the toolchain. This is a
+pkgconf-specific extension.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_DISABLE_UNINSTALLED</i></p>
+
+<p style="margin-left:19%;">If set, enables the same
+behaviour as the <b>--no-uninstalled</b> flag.</p>
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_LOG</i></p>
+
+<p style="margin-left:19%;">&lsquo;logfile&rsquo; which is
+used for dumping audit information concerning installed
+module versions.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_DEBUG_SPEW</i></p>
+
+<p style="margin-left:19%;">If set, enables additional
+debug logging. The format of the debug log messages is
+implementation-specific.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_DONT_RELOCATE_PATHS</i></p>
+
+<p style="margin-left:19%;">If set, disables the path
+relocation feature.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_MSVC_SYNTAX</i></p>
+
+<p style="margin-left:19%;">If set, uses MSVC syntax for
+fragments.</p>
+
+
+<p style="margin-top: 1em"><i>PKG_CONFIG_FDO_SYSROOT_RULES</i></p>
+
+<p style="margin-left:19%;">If set, follow the sysroot
+prefixing rules that freedesktop.org pkg-config uses.</p>
+
+<p style="margin-top: 1em"><i>DESTDIR</i></p>
+
+<p style="margin-left:19%;">If set to
+PKG_CONFIG_SYSROOT_DIR, assume that
+PKG_CONFIG_FDO_SYSROOT_RULES is set.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">Displaying the CFLAGS of a
+package:</p>
+
+<p style="margin-left:17%;"><b>$ pkgconf --cflags foo <br>
+-fPIC -I/usr/include/foo</b></p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>pc</i>(5), <i>pkg.m4</i>(7)
+GNU November 15, 2016 <i>PKGCONF</i>(1)</p>
+<hr>
+</body>
+</html>

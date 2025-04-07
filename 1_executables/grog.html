@@ -1,0 +1,380 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:41 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>grog</title>
+
+</head>
+<body>
+
+<h1 align="center">grog</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Details">Details</a><br>
+<a href="#Limitations">Limitations</a><br>
+<a href="#Exit status">Exit status</a><br>
+<a href="#Examples">Examples</a><br>
+<a href="#Authors">Authors</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grog -
+&ldquo;groff guess&rdquo;&mdash;infer the <i>groff</i>
+command a document requires</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>grog</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em">[<b>--run</b>]
+[<b>--ligatures</b>] [<i>groff-option&nbsp;</i>...]
+[<b>--</b>] [<i>file&nbsp;</i>...]</p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>grog</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em"><b>-h</b></p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>grog</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p><b>--help</b></p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>grog</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>grog</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p><b>--version</b></p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>grog</i></b>
+reads its input and guesses which
+<a href="man:groff(1)"><i>groff</i>(1)</a> options are
+needed to render it. If no operands are given, or if
+<i>file</i> is &ldquo;<b>-</b>&rdquo;, <i>grog</i> reads the
+standard input stream. The corresponding <i>groff</i>
+command is normally written to the standard output stream.
+With the option <b>--run</b>, the inferred command is
+written to the standard error stream and then executed.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b> and
+<b>--help</b> display a usage message, whereas <b>-v</b> and
+<b>--version</b> display version information; all exit
+afterward. <b><br>
+--ligatures</b></p>
+
+<p style="margin-left:18%;">includes the arguments <b>-P-y
+-PU</b> in the inferred <i>groff</i> command. These are
+supported only by the <b>pdf</b> output device.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--run</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>writes the inferred command to the standard error stream
+and then executes it.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">All other
+specified short options (that is, arguments beginning with a
+minus sign &ldquo;<b>-</b>&rdquo; followed by a letter) are
+interpreted as <i>groff</i> options or option clusters with
+or without an option argument. Such options are included in
+the constructed <i>groff</i> command line.</p>
+
+<h2>Details
+<a name="Details"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grog</i>
+reads each <i>file</i> operand, pattern-matching strings
+that are statistically likely to be characteristic of
+<a href="man:roff(7)"><i>roff</i>(7)</a> documents. It tries
+to guess which of the following <i>groff</i> options are
+required to correctly render the input: <b>-e</b>,
+<b>-g</b>, <b>-G</b>, <b>-j</b>, <b>-p</b>, <b>-R</b>,
+<b>-t</b> (preprocessors); and <b>-man</b>, <b>-mdoc</b>,
+<b>-mdoc-old</b>, <b>-me</b>, <b>-mm</b>, <b>-mom</b>, and
+<b>-ms</b> (macro packages). The inferred <i>groff</i>
+command including these options and any <i>file</i>
+parameters is written to the standard output stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to specify arbitrary <i>groff</i> options on the command
+line. These are included in the inferred command without
+change. Choices of <i>groff</i> options include <b>-C</b> to
+enable AT&amp;T <i>troff</i> compatibility mode and
+<b>-T</b> to select a non-default output device. If the
+input is not encoded in US-ASCII, ISO 8859-1, or IBM code
+page 1047, specification of a <i>groff</i> option to run the
+<a href="man:preconv(1)"><i>preconv</i>(1)</a> preprocessor
+is advised; see the <b>-D</b>, <b>-k</b>, and <b>-K</b>
+options of <a href="man:groff(1)"><i>groff</i>(1)</a>. For
+UTF-8 input, <b>-k</b> is a good choice.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>groff</i> may
+issue diagnostic messages when an inappropriate <b>-m</b>
+option, or multiple conflicting ones, are specified.
+Consequently, it is best to specify no <b>-m</b> options to
+<i>grog</i> unless it cannot correctly infer all of the
+<b>-m</b> arguments a document requires. A <i>roff</i>
+document can also be written without recourse to any macro
+package. In such cases, <i>grog</i> will infer a
+<i>groff</i> command without an <b>-m</b> option.</p>
+
+<h3>Limitations
+<a name="Limitations"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grog</i>
+presumes that the input does not change the escape, control,
+or no-break control characters. <i>grog</i> does not parse
+<i>roff</i> input line continuation or control structures
+(brace escape sequences and the &ldquo;<b>if</b>&rdquo;,
+&ldquo;<b>ie</b>&rdquo;, and &ldquo;<b>el</b>&rdquo;
+requests) nor <i>groff</i>&rsquo;s
+&ldquo;<b>while</b>&rdquo;. Thus the input</p>
+
+<p style="margin-left:18%;">.if \ <br>
+t .NH 1 <br>
+.if n .SH <br>
+Introduction</p>
+
+<p style="margin-left:9%;">will conceal the use of the
+<i>ms</i> macros <b>NH</b> and <b>SH</b> from <i>grog</i>.
+Such constructions are regarded by <i>grog</i>&rsquo;s
+implementors as insufficiently common to cause many
+inference problems. Preprocessors can be even stricter when
+matching macro calls that bracket the regions of an input
+file they replace. <i>pic</i>, for example, requires
+<b>PS</b>, <b>PE</b>, and <b>PF</b> calls to immediately
+follow the default control character at the beginning of a
+line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Detection of the
+<b>-s</b> option (the
+<a href="man:soelim(1)"><i>soelim</i>(1)</a> preprocessor)
+is tricky; to correctly infer its necessity would require
+<i>grog</i> to recursively open all files given as arguments
+to the <b>.so</b> request under the same conditions that
+<i>soelim</i> itself does so; see its man page. Recall that
+<i>soelim</i> is necessary only if sourced files need to be
+preprocessed. Therefore, as a workaround, you may want to
+run the input through <i>soelim</i> manually, piping it to
+<i>grog</i>, and compare the output to running <i>grog</i>
+on the input directly. If the &ldquo;<i>soelim</i>&rdquo;ed
+input causes <i>grog</i> to infer additional preprocessor
+options, then <b>-s</b> is likely necessary.</p>
+
+<p style="margin-left:18%; margin-top: 1em">$ <b>printf
+&quot;.TS\nl.\nI'm a table.\n.TE\n&quot; &gt; 3.roff</b>
+<br>
+$ <b>printf &quot;.so 3.roff\n&quot; &gt; 2.roff</b> <br>
+$ <b>printf &quot;.XP\n.so 2.roff\n&quot; &gt; 1.roff</b>
+<br>
+$ <b>grog 1.roff</b> <br>
+groff -ms 1.roff <br>
+$ <b>soelim 1.roff | grog</b> <br>
+groff -t -ms -</p>
+
+<p style="margin-left:9%; margin-top: 1em">In the foregoing
+example, we see that this procedure enabled <i>grog</i> to
+detect <a href="man:tbl(1)"><i>tbl</i>(1)</a> macros, so we
+would add <b>-s</b> as well as the detected <b>-t</b> option
+to a revised <i>grog</i> or <i>groff</i> command.</p>
+
+<p style="margin-left:18%; margin-top: 1em">$ <b>grog -st
+1.roff</b> <br>
+groff -st -ms 1.roff</p>
+
+<h2>Exit status
+<a name="Exit status"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grog</i>
+exits with error status <b>1</b> if a macro package appears
+to be in use by the input document, but <i>grog</i> was
+unable to infer which one, or <b>2</b> if there were
+problems handling an option or operand. It otherwise exits
+with status <b>0</b>. (If the <b>--run</b> option is
+specified, <i>groff</i>&rsquo;s exit status is discarded.)
+Inferring no preprocessors or macro packages is not an error
+condition; a valid <i>roff</i> document need not use either.
+Even plain text is valid input, if one is mindful of the
+syntax of the control and escape characters.</p>
+
+<h2>Examples
+<a name="Examples"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Running</p>
+
+<p style="margin-left:18%;"><b>grog
+/usr/share/doc/groff-1.23.0/meintro.me</b></p>
+
+<p style="margin-left:9%;">at the command line results
+in</p>
+
+<p style="margin-left:18%;">groff -me
+/usr/share/doc/groff-1.23.0/meintro.me</p>
+
+<p style="margin-left:9%;">because <i>grog</i> recognizes
+that the file <i>meintro.me</i> is written using macros from
+the <i>me</i> package. The command</p>
+
+<p style="margin-left:18%;"><b>grog
+/usr/share/doc/groff-1.23.0/pic.ms</b></p>
+
+<p style="margin-left:9%;">outputs</p>
+
+<p style="margin-left:18%;">groff -e -p -t -ms
+/usr/share/doc/groff-1.23.0/pic.ms</p>
+
+<p style="margin-left:9%;">on the other hand. Besides
+discerning the <i>ms</i> macro package, <i>grog</i>
+recognizes that the file <i>pic.ms</i> additionally needs
+the combination of <b>-t</b> for <i>tbl</i>, <b>-e</b> for
+<i>eqn</i>, and <b>-p</b> for <i>pic</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Consider a file
+<i>doc/grnexampl.me</i>, which uses the <i>grn</i>
+preprocessor to include a
+<a href="man:gremlin(1)"><i>gremlin</i>(1)</a> picture file
+in an <i>me</i> document. Let&rsquo;s say we want to
+suppress color output, produce a DVI file, and get
+backtraces for any errors that <i>troff</i> encounters. The
+command</p>
+
+<p style="margin-left:18%;"><b>grog -bc -Idoc -Tdvi
+doc/grnexmpl.me</b></p>
+
+<p style="margin-left:9%;">is processed by <i>grog</i>
+into</p>
+
+<p style="margin-left:18%;">groff -bc -Idoc -Tdvi -e -g -me
+doc/grnexmpl.me</p>
+
+<p style="margin-left:9%;">where we can see that
+<i>grog</i> has inferred the <i>me</i> macro package along
+with the <i>eqn</i> and <i>grn</i> preprocessors. (The input
+file is located in <i>/usr/ share/doc/groff-1.23.0</i> if
+you&rsquo;d like to try this example yourself.)</p>
+
+<h2>Authors
+<a name="Authors"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grog</i> was
+originally written in Bourne shell by James Clark. The
+current implementation in Perl was written by
+<a href="mailto:groff-bernd.warken-72@web.de">Bernd
+Warken</a> and heavily revised by
+<a href="mailto:g.branden.robinson@gmail.com">G. Branden
+Robinson</a>.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff(1)"><i>groff</i>(1)</a></p>
+<hr>
+</body>
+</html>

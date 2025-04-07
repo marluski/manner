@@ -1,0 +1,301 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:24 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ISOTEST</title>
+
+</head>
+<body>
+
+<h1 align="center">ISOTEST</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#MODES">MODES</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Unicast Central">Unicast Central</a><br>
+<a href="#Unicast Central connecting to 2 peers using CIG 0x01">Unicast Central connecting to 2 peers using CIG 0x01</a><br>
+<a href="#Unicast Peripheral">Unicast Peripheral</a><br>
+<a href="#Broadcaster">Broadcaster</a><br>
+<a href="#Broadcast Receiver using hci1">Broadcast Receiver using hci1</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">isotest - ISO
+testing</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>isotest</b>
+&lt;<i>MODE</i>&gt; [<i>OPTIONS</i>] [<i>bdaddr</i>]
+[<i>bdaddr1</i>]...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>isotest(1)</b>
+is used to test Isochronous (CIS/BIS) communications on the
+BlueZ stack</p>
+
+<h2>MODES
+<a name="MODES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--dump=[FILE] Listen and dump incoming data</b></p>
+
+<p style="margin-left:18%;">(CIS server/BIS broadcaster)
+and optionally save the contents to <i>FILE</i>.</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--reconnect</b></p>
+
+<p style="margin-left:18%;">Reconnect (CIS client).</p>
+
+<p style="margin-left:9%;"><b>-m</b>, <b>--multiple</b></p>
+
+<p style="margin-left:18%;">Multiple connects (CIS
+client).</p>
+
+<p style="margin-left:9%;"><b>-r, --receive=[FILE] Receive
+(CIS server/BIS broadcast receiver) and</b></p>
+
+<p style="margin-left:18%;">optionally save the contents to
+<i>FILE</i>.</p>
+
+<p style="margin-left:9%;"><b>-s, --send=[FILE] Connect and
+send (CIS client/BIS broadcaster), can</b></p>
+
+<p style="margin-left:18%;">optionally use contents from
+<i>FILE</i>.</p>
+
+<p style="margin-left:9%;"><b>-n</b>, <b>--silent</b></p>
+
+<p style="margin-left:18%;">Connect and be silent (CIS
+client/BIS broadcaster).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>,<i>--bytes</i><b>=&lt;SIZE&gt;</b></p>
+
+<p style="margin-left:18%;">Send or Receive packet size</p>
+
+
+<p style="margin-left:9%;"><b>-i</b>,<i>--index</i><b>=&lt;NUM&gt;</b></p>
+
+<p style="margin-left:18%;">Select the specified HCI device
+index. <i>hciNUM</i> is also acceptable.</p>
+
+
+<p style="margin-left:9%;"><b>-j</b>,<i>--jitter</i><b>=&lt;JITTER&gt;</b></p>
+
+<p style="margin-left:18%;">Socket jitter buffer.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-h, --help
+<b><br>
+-q</b>, <b>--quiet</b></p>
+
+<p style="margin-left:18%;">Disables packet logging.</p>
+
+
+<p style="margin-left:9%;"><b>-t</b>,<i>--timeout</i><b>=&lt;USEC&gt;</b></p>
+
+<p style="margin-left:18%;">Socket send timeout.</p>
+
+<p style="margin-left:9%;"><b>-C</b>, <b>--continue</b></p>
+
+<p style="margin-left:18%;">Continuously send packets
+starting over in case of a file.</p>
+
+
+<p style="margin-left:9%;"><b>-W</b>,<i>--defer</i><b>=&lt;SEC&gt;</b></p>
+
+<p style="margin-left:18%;">Enable deferred setup.</p>
+
+
+<p style="margin-left:9%;"><b>-M</b>,<i>--mtu</i><b>=&lt;SDU&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS SDU.</p>
+
+<p style="margin-left:9%;"><b>-S,
+--sca/adv-interval=&lt;SCA/INTERVAL&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS CIS SCA/BIS
+advertising interval.</p>
+
+
+<p style="margin-left:9%;"><b>-P</b>,<i>--packing</i><b>=&lt;PACKING&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS Packing.</p>
+
+
+<p style="margin-left:9%;"><b>-F</b>,<i>--framing</i><b>=&lt;FRAMING&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS Framing.</p>
+
+
+<p style="margin-left:9%;"><b>-I</b>,<i>--interval</i><b>=&lt;USEC&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS Interval.</p>
+
+
+<p style="margin-left:9%;"><b>-L</b>,<i>--latency</i><b>=&lt;MSEC&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS Latency.</p>
+
+
+<p style="margin-left:9%;"><b>-Y</b>,<i>--phy</i><b>=&lt;PHY&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS PHY.</p>
+
+
+<p style="margin-left:9%;"><b>-R</b>,<i>--rtn</i><b>=&lt;NUM&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS retransmissions.</p>
+
+
+<p style="margin-left:9%;"><b>-B</b>,<i>--preset</i><b>=&lt;PRESET&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS preset.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-G,
+--CIG/BIG=&lt;ID&gt; Socket QoS CIG/BIG ID.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-T,
+--CIS/BIS=&lt;ID&gt; Socket QoS CIS/BIS ID. <b><br>
+-V</b>,<i>--type</i><b>=&lt;TYPE&gt;</b></p>
+
+<p style="margin-left:18%;">Socket destination address
+type:</p>
+
+
+<p style="margin-left:9%;"><b>-e</b>,<i>--enc</i><b>=&lt;ENCRYPTION&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS BIG Encryption</p>
+
+
+<p style="margin-left:9%;"><b>-k</b>,<i>--bcode</i><b>=&lt;BCODE&gt;</b></p>
+
+<p style="margin-left:18%;">Socket QoS Broadcast Code</p>
+
+
+<p style="margin-left:9%;"><b>-N</b>,<i>--nbis</i><b>=&lt;NBIS&gt;</b></p>
+
+<p style="margin-left:18%;">Number of BISes to create as
+part of a BIG (BIS broadcaster) or to synchronize to (BIS
+broadcast receiver)</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h3>Unicast Central
+<a name="Unicast Central"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">$ tools/isotest
+-s XX:XX:XX:XX:XX:XX</p>
+
+<h3>Unicast Central connecting to 2 peers using CIG 0x01
+<a name="Unicast Central connecting to 2 peers using CIG 0x01"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">$ tools/isotest
+-G 0x01 -s XX:XX:XX:XX:XX:XX YY:YY:YY:YY:YY:YY</p>
+
+<h3>Unicast Peripheral
+<a name="Unicast Peripheral"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">$ tools/isotest
+-d</p>
+
+<h3>Broadcaster
+<a name="Broadcaster"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">$ tools/isotest
+-s 00:00:00:00:00:00</p>
+
+<h3>Broadcast Receiver using hci1
+<a name="Broadcast Receiver using hci1"></a>
+</h3>
+
+
+<p style="margin-left:13%; margin-top: 1em">$ tools/isotest
+-i hci1 -d XX:XX:XX:XX:XX:XX</p>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Luiz Augusto Von
+Dentz &lt;luiz.von.dentz@intel.com&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

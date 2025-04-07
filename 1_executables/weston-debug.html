@@ -1,0 +1,117 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:03 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>WESTON-DEBUG</title>
+
+</head>
+<body>
+
+<h1 align="center">WESTON-DEBUG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">weston-debug - a
+tool for getting debug messages from compositor.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>weston-debug
+[options] [names]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>weston-debug</b>
+is a debugging tool which uses weston_debug_v1 interface to
+get the debug messages from the compositor. The debug
+messages are categorized into different debug streams by the
+compositor (example: logs, proto, list, etc.,) and the
+compositor requires a file descriptor to stream the
+messages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This tool
+accepts a file name or a file descriptor (not both) and any
+desired debug stream names from the user as command line
+arguments and subscribes the desired streams from the
+compositor by using the weston_debug_v1 interface. After the
+subscription, the compositor will start to write the debug
+messages to the shared file descriptor.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no file name
+or file descriptor argument is given, the tool will use the
+stdout file descriptor.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>weston-debug</b>
+accepts the following command line options. <b><br>
+-h, --help</b></p>
+
+<p style="margin-left:18%;">Print the help text and exit
+with success.</p>
+
+<p style="margin-left:9%;"><b>-l, --list</b></p>
+
+<p style="margin-left:18%;">List the available debug
+streams supported by the compositor. May be used together
+with --all or a list of debug stream names.</p>
+
+<p style="margin-left:9%;"><b>-a, --all</b></p>
+
+<p style="margin-left:18%;">Bind all debug streams offered
+by the compositor. Mututally exclusive with explicitly
+specifying stream names.</p>
+
+<p style="margin-left:9%;"><b>-o FILE, --output
+FILE</b></p>
+
+<p style="margin-left:18%;">Direct output to file named
+FILE. Use - for stdout. Stdout is the default. Mutually
+exclusive with -f.</p>
+
+<p style="margin-left:9%;"><b>-f FD, --outfd FD</b></p>
+
+<p style="margin-left:18%;">Direct output to the file
+descriptor FD. Stdout (1) is the default. Mutually exclusive
+with -o.</p>
+
+<p style="margin-left:9%;"><b>[names]</b></p>
+
+<p style="margin-left:18%;">A list of debug streams to bind
+to. Mutually exclusive with --all.</p>
+<hr>
+</body>
+</html>

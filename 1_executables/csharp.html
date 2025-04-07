@@ -1,0 +1,651 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:08 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>csharp</title>
+
+</head>
+<body>
+
+<h1 align="center">csharp</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OPERATION">OPERATION</a><br>
+<a href="#INTERACTIVE EDITING">INTERACTIVE EDITING</a><br>
+<a href="#STATIC PROPERTIES AND METHODS">STATIC PROPERTIES AND METHODS</a><br>
+<a href="#GUI METHODS AND PROPERTIES">GUI METHODS AND PROPERTIES</a><br>
+<a href="#STARTUP FILES">STARTUP FILES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#MAILING LIST">MAILING LIST</a><br>
+<a href="#MORE INFORMATION">MORE INFORMATION</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">csharp -
+Interactive C# Shell and Scripting</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>csharp
+[--attach PID] [-e EXPRESSION] [file1 [file2]]</b>
+[compiler-options] [--|-s script-options]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>csharp</i> command is an interactive C# shell and
+scripting host that allows the user to enter and evaluate C#
+statements and expressions from the command line or execute
+C# scripts. The regular <i>mcs</i> command line options can
+be used in this version of the compiler.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Files specified
+in the command line will be loaded and executed as
+scripts.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Starting with
+Mono 2.10, the <i>csharp</i> command can be used as an
+interpreter executed by executables flagged with the Unix
+execute attribute. To do this, make the first line of your
+C# source code look like this:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">#!/usr/bin/csharp
+<br>
+Console.WriteLine (&quot;Hello, World&quot;);</p>
+
+<p style="margin-left:9%; margin-top: 1em">Starting with
+Mono 5.0, command line arguments may now be passed to the
+<i>csharp</i> command by specifying either the <i>-s</i> or
+<i>--</i> (script) options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <i>-s</i>
+option is ideal for interpreting executable scripts that
+utilize shebang syntax (introduced in Mono 2.10). This
+allows command line arguments to be passed to and consumed
+cleanly by the script:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">#!/usr/bin/csharp
+-s <br>
+foreach (var arg in Args) <br>
+Console.WriteLine ($&quot;script argument: {arg}&quot;);</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The commands
+accept all of the commands that are available to the
+<i>mcs</i> command, so you can reference assemblies, specify
+paths, language level and so on from the command line. In
+addition, the following command line options are supported:
+<i><br>
+-s SCRIPT_FILE</i></p>
+
+<p style="margin-left:18%;">This option is ideal for
+authoring executable scripts that utilize the Unix shebang
+feature. Unix will implicitly append as an argument the path
+of the script to execute. When the executable is invoked,
+any arguments then passed to it will be available in the
+<i>Args</i> global. Example: <i>#!/usr/bin/env csharp
+-s</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>--</i></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Any arguments that follow will not be passed to the
+compiler driver, and instead will be made available in the
+<i>Args</i> global. Example: <i>csharp -- a b c</i> will
+result in Args = { &quot;a&quot;, &quot;b&quot;,
+&quot;c&quot; } in the interactive shell.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--attach</i></p>
+
+<p style="margin-left:18%;">This is an advanced option and
+should only be used if you have a deep understanding of
+multi-threading. This option is availble on the
+<i>csharp</i> command and allows the compiler to be injected
+into other processes. This is done by injecting the C# shell
+in a separate thread that runs concurrently with your
+application. This means that you must take special measures
+to avoid crashing the target application while using it. For
+example, you might have to take the proper locks before
+issuing any commands that might affect the target process
+state, or sending commands through a method dispatcher.</p>
+
+<p style="margin-left:9%;"><i>-e EXPRESSION</i></p>
+
+<p style="margin-left:18%;">This will evaluate the
+specified C# EXPRESSION and exit</p>
+
+<h2>OPERATION
+<a name="OPERATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Once you launch
+the csharp command, you will be greeted with the interactive
+prompt:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ csharp <br>
+Mono C# Shell, type &quot;help;&quot; for help</p>
+
+<p style="margin-left:9%; margin-top: 1em">Enter statements
+below. <br>
+csharp&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">A number of
+namespaces are pre-defined with C# these include System,
+System.Linq, System.Collections and
+System.Collections.Generic. Unlike the compiled mode, it is
+possible to add new using statements as you type code, for
+example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; new
+XmlDocument (); <br>
+&lt;interactive&gt;(1,6): error CS0246: The type or
+namespace name &lsquo;XmlDocument&rsquo; could not be found.
+Are you missing a using directive or an assembly reference?
+<br>
+csharp&gt; using System.Xml; <br>
+csharp&gt; new XmlDocument (); <br>
+System.Xml.XmlDocument</p>
+
+<p style="margin-left:9%; margin-top: 1em">Every time a
+command is typed, the scope of that command is one of a
+class that derives from the class
+Mono.CSharp.InteractiveBase. This class defines a number of
+static properties and methods. To display a list of
+available commands access the &lsquo;help&rsquo; property:
+<br>
+csharp&gt; help; <br>
+&quot;Static methods: <br>
+LoadPackage (pkg); - Loads the given Package (like
+-pkg:FILE) <br>
+[...] <br>
+ShowVars (); - Shows defined local variables. <br>
+ShowUsing (); - Show active using decltions. <br>
+help; <br>
+&quot; <br>
+csharp&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">When expressions
+are entered, the C# shell will display the result of
+executing the expression:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt;
+Math.Sin (Math.PI/4); <br>
+0.707106781186547 <br>
+csharp&gt; 1+1; <br>
+2 <br>
+csharp&gt; &quot;Hello, world&quot;.IndexOf
+(&rsquo;,&rsquo;); <br>
+5</p>
+
+<p style="margin-left:9%; margin-top: 1em">The C# shell
+uses the ToString() method on the returned object to display
+the object, this sometimes can be limiting since objects
+that do not override the ToString() method will get the
+default behavior from System.Object which is merely to
+display their type name:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; var a
+= new XmlDocument (); <br>
+csharp&gt; a; <br>
+System.Xml.Document <br>
+csharp&gt; csharp&gt; a.Name; <br>
+&quot;#document&quot; <br>
+csharp&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">A few datatypes
+are handled specially by the C# interactive shell like
+arrays, System.Collections.Hashtable, objects that implement
+System.Collections.IEnumerable and IDictionary and are
+rendered specially instead of just using ToString ():</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; var
+pages = new Hashtable () { <br>
+&gt; { &quot;Mono&quot;,
+&quot;http://www.mono-project.com/&quot; }, <br>
+&gt; { &quot;Linux&quot;, &quot;http://kernel.org&quot; } };
+<br>
+csharp&gt; pages; <br>
+{{ &quot;Mono&quot;,
+&quot;http://www.mono-project.com/&quot; }, {
+&quot;Linux&quot;, &quot;http://kernel.org&quot; }}</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to use LINQ directly in the C# interactive shell since the
+System.Linq namespace has been imported at startup. The
+following sample gets a list of all the files that have not
+been accessed in a week from /tmp:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; using
+System.IO; <br>
+csharp&gt; var last_week = DateTime.Now - TimeSpan.FromDays
+(7); <br>
+csharp&gt; var old_files = from f in Directory.GetFiles
+(&quot;/tmp&quot;) <br>
+&gt; let fi = new FileInfo (f) <br>
+&gt; where fi.LastAccessTime &lt; LastWeek select f; <br>
+csharp&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can of
+course print the results in a single statement as well:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; using
+System.IO; <br>
+csharp&gt; var last_week = DateTime.Now - TimeSpan.FromDays
+(7); <br>
+csharp&gt; from f in Directory.GetFiles (&quot;/tmp&quot;)
+<br>
+&gt; let fi = new FileInfo (f) <br>
+&gt; where fi.LastAccessTime &lt; last_week select f; <br>
+[...] <br>
+csharp&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">LINQ and its
+functional foundation produce on-demand code for IEnumerable
+return values. For instance, the return value from a using
+&lsquo;from&rsquo; is an IEnumerable that is evaluated on
+demand. The automatic rendering of IEnumerables on the
+command line will trigger the IEnumerable pipeline to
+execute at that point instead of having its execution
+delayed until a later point.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+avoid having the IEnumerable rendered at this point, simply
+assign the value to a variable.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unlike compiled
+C#, the type of a variable can be changed if a new
+declaration is entered, for example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; var a
+= 1; <br>
+csharp&gt; a.GetType (); <br>
+System.Int32 <br>
+csharp&gt; var a = &quot;Hello&quot;; <br>
+csharp&gt; a.GetType (); <br>
+System.String <br>
+csharp&gt; ShowVars (); <br>
+string a = &quot;Hello&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">In the case that
+an expression or a statement is not completed in a single
+line, a continuation prompt is displayed, for example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; var
+protocols = new string [] { <br>
+&gt; &quot;ftp&quot;, <br>
+&gt; &quot;http&quot;, <br>
+&gt; &quot;gopher&quot; <br>
+&gt; }; <br>
+csharp&gt; protocols; <br>
+{ &quot;ftp&quot;, &quot;http&quot;, &quot;gopher&quot;
+}</p>
+
+<p style="margin-left:9%; margin-top: 1em">Long running
+computations can be interrupted by using the Control-C
+sequence:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; var
+done = false; <br>
+csharp&gt; while (!done) { } <br>
+Interrupted! <br>
+System.Threading.ThreadAbortException: Thread was being
+aborted <br>
+at Class1.Host (System.Object&amp; $retval) [0x00000] <br>
+at Mono.CSharp.InteractiveShell.ExecuteBlock
+(Mono.CSharp.Class host, Mono.CSharp.Undo undo) [0x00000]
+<br>
+csharp&gt;</p>
+
+<h2>INTERACTIVE EDITING
+<a name="INTERACTIVE EDITING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The C#
+interactive shell contains a line-editor that provides a
+more advanced command line editing functionality than the
+operating system provides. These are available in the
+command line version, the GUI versions uses the standard
+Gtk# key bindings.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command set
+is similar to many other applications (cursor keys) and
+incorporates some of the Emacs commands for editing as well
+as a history mechanism too.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+keyboard input is supported: <i><br>
+Home Key, Control-a</i></p>
+
+<p style="margin-left:18%;">Goes to the beginning of the
+line.</p>
+
+<p style="margin-left:9%;"><i>End Key, Control-e</i></p>
+
+<p style="margin-left:18%;">Goes to the end of the
+line.</p>
+
+<p style="margin-left:9%;"><i>Left Arrow Key,
+Control-b</i></p>
+
+<p style="margin-left:18%;">Moves the cursor back one
+character.</p>
+
+<p style="margin-left:9%;"><i>Right Arrow Key,
+Control-f</i></p>
+
+<p style="margin-left:18%;">Moves the cursor forward one
+character.</p>
+
+<p style="margin-left:9%;"><i>Up Arrow Key,
+Control-p</i></p>
+
+<p style="margin-left:18%;">Goes back in the history,
+replaces the current line with the previous line in the
+history.</p>
+
+<p style="margin-left:9%;"><i>Down Arrow Key,
+Control-n</i></p>
+
+<p style="margin-left:18%;">Moves forward in the history,
+replaces the current line with the next line in the
+history.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>Return</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Executes the current line if the statement or expression
+is complete, or waits for further input.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>Control-C</i></p>
+
+<p style="margin-left:18%;">Cancel the current line being
+edited. This will kill any currently in-progress edits or
+partial editing and go back to a toplevel definition.</p>
+
+<p style="margin-left:9%;"><i>Backspace Key</i></p>
+
+<p style="margin-left:18%;">Deletes the character before
+the cursor</p>
+
+<p style="margin-left:9%;"><i>Delete Key, Control-d</i></p>
+
+<p style="margin-left:18%;">Deletes the character at the
+current cursor position.</p>
+
+<p style="margin-left:9%;"><i>Control-k</i></p>
+
+<p style="margin-left:18%;">Erases the contents of the line
+until the end of the line and places the result in the cut
+and paste buffer.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>Alt-D</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Deletes the word starting at the cursor position and
+appends into the cut and paste buffer. By pressing Alt-d
+repeatedly, multiple words can be appended into the paste
+buffer.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>Control-Y</i></p>
+
+<p style="margin-left:18%;">Pastes the content of the kill
+buffer at the current cursor position.</p>
+
+<p style="margin-left:9%;"><i>Control-Q</i></p>
+
+<p style="margin-left:18%;">This is the quote character. It
+allows the user to enter control-characters that are
+otherwise taken by the command editing facility. Press
+Control-Q followed by the character you want to insert, and
+it will be inserted verbatim into the command line.</p>
+
+<p style="margin-left:9%;"><i>Control-D</i></p>
+
+<p style="margin-left:18%;">Terminates the program. This
+terminates the input for the program.</p>
+
+<h2>STATIC PROPERTIES AND METHODS
+<a name="STATIC PROPERTIES AND METHODS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Since the
+methods and properties of the base class from where the
+statements and expressions are executed are static, they can
+be invoked directly from the shell. These are the available
+properties and methods:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><i>Args</i></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>An easy to consume array of any arguments specified
+after either <i>-s</i> or <i>--</i> on the command line.
+Ideal for self-executing scripts utilizing the <i>-s</i>
+option.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>void LoadAssembly(string
+assembly)</i></p>
+
+<p style="margin-left:18%;">Loads the given assembly. This
+is equivalent to passing the compiler the -r: flag with the
+specified string.</p>
+
+<p style="margin-left:9%;"><i>void LoadPackage(string
+package)</i></p>
+
+<p style="margin-left:18%;">Imports the package specified.
+This is equivalent to invoking the compiler with the -pkg:
+flag with the specified string.</p>
+
+<p style="margin-left:9%;"><i>string Prompt { get; set
+}</i></p>
+
+<p style="margin-left:18%;">The prompt used by the shell.
+It defaults to the value &quot;csharp&gt; &quot;. <i>string
+ContinuationPrompt { get; set; }</i> The prompt used by the
+shell when further input is required to complete the
+expression or statement.</p>
+
+<p style="margin-left:9%;"><i>void ShowVars()</i></p>
+
+<p style="margin-left:18%;">Displays all the variables that
+have been defined so far and their types. In the csharp
+shell declaring new variables will shadow previous variable
+declarations, this is different than C# when compiled.
+<i>void ShowUsing()</i> Displays all the using statements in
+effect. <i>TimeSpan Time (Action a)</i> Handy routine to
+time the time that some code takes to execute. The parameter
+is an Action delegate, and the return value is a TimeSpan.
+For example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">csharp&gt; Time
+(() =&gt; { for (int i = 0; i &lt; 5; i++) Console.WriteLine
+(i);}); <br>
+0 <br>
+1 <br>
+2 <br>
+3 <br>
+4 <br>
+00:00:00.0043230 <br>
+csharp&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">The return value
+is a TimeSpan, that you can store in a variable for
+benchmarking purposes.</p>
+
+<h2>GUI METHODS AND PROPERTIES
+<a name="GUI METHODS AND PROPERTIES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">In addition to
+the methods and properties available in the console version
+there are a handful of extra properties available on the GUI
+version. For example a &quot;PaneContainer&quot;
+Gtk.Container is exposed that you can use to host Gtk#
+widgets while prototyping or the &quot;MainWindow&quot;
+property that gives you access to the current toplevel
+window.</p>
+
+<h2>STARTUP FILES
+<a name="STARTUP FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The C# shell
+will load all the Mono assemblies and C# script files
+located in the &#732;/.config/csharp directory on Unix. The
+assemblies are loaded before the source files are
+loaded.</p>
+
+<p style="margin-left:9%; margin-top: 1em">C# script files
+are files that have the extension .cs and they should only
+contain statements and expressions, they can not contain
+full class definitions (at least not as of Mono 2.0). Full
+class definitions should be compiled into dlls and stored in
+that directory.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono C#
+Compiler was written by Miguel de Icaza, Ravi Pratap, Martin
+Baulig, Marek Safar and Raja Harinath. The development was
+funded by Ximian, Novell and Marek Safar.</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono
+Compiler Suite is released under the terms of the GNU GPL or
+the MIT X11. Please read the accompanying
+&lsquo;COPYING&rsquo; file for details. Alternative
+licensing for the compiler is available from Novell.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gmcs(1), mcs(1),
+mdb(1), mono(1), pkg-config(1)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To report bugs
+in the compiler, you must file them on our bug tracking
+system, at: http://www.mono-project.com/community/bugs/</p>
+
+<h2>MAILING LIST
+<a name="MAILING LIST"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono Mailing
+lists are listed at
+http://www.mono-project.com/community/help/mailing-lists/</p>
+
+<h2>MORE INFORMATION
+<a name="MORE INFORMATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono C#
+compiler was developed by Novell, Inc
+(http://www.novell.com, http) and is based on the ECMA C#
+language standard available here:
+http://www.ecma.ch/ecma1/STAND/ecma-334.htm</p>
+
+<p style="margin-left:9%; margin-top: 1em">The home page
+for the Mono C# compiler is at
+http://www.mono-project.com/docs/about-mono/languages/csharp/
+information about the interactive mode for C# is available
+in
+http://mono-project.com/docs/tools+libraries/tools/repl/</p>
+<hr>
+</body>
+</html>

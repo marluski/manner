@@ -1,0 +1,234 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>QQWING</title>
+
+</head>
+<body>
+
+<h1 align="center">QQWING</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">qqwing - A tool
+for generating and solving Sudoku puzzles</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>qqwing</b>
+--generate [<i>OPTIONS...</i>] <b><br>
+qqwing</b> --solve [<i>OPTIONS...</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>qqwing</b> is
+a Sudoku puzzle generator and solver. It offers the
+following features: <br>
+&bull; Fast. It can solve 1000 puzzles in 1 second and
+generate 1000 puzzles <br>
+in 25 seconds. <br>
+&bull; Uses logic. Uses as many solve techniques as possible
+when solving <br>
+puzzles rather than guessing. <br>
+&bull; Rates puzzles. Most generators don&rsquo;t give an
+indication of the <br>
+difficulty of a Sudoku puzzle. QQwing does. <br>
+&bull; Can print solve instructions. Tells steps that need
+to be taken to <br>
+solve any puzzle. <br>
+&bull; Customizable output style, including a CSV style that
+is easy to <br>
+import into a database.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--generate&nbsp;&lt;num&gt;</b></p>
+
+<p style="margin-left:18%;">Generate new puzzles</p>
+
+<p style="margin-left:9%;"><b>--solve</b></p>
+
+<p style="margin-left:18%;">Solve all the puzzles from
+standard input</p>
+
+<p style="margin-left:9%;"><b>--difficulty</b></p>
+
+<p style="margin-left:18%;">Generate only simple, easy,
+intermediate, expert, or any</p>
+
+
+<p style="margin-left:9%;"><b>--symmetry&nbsp;&lt;sym&gt;</b></p>
+
+<p style="margin-left:18%;">Symmetry: none, rotate90,
+rotate180, mirror, flip, or random</p>
+
+<p style="margin-left:9%;"><b>--puzzle</b></p>
+
+<p style="margin-left:18%;">Print the puzzle (default when
+generating)</p>
+
+<p style="margin-left:9%;"><b>--nopuzzle</b></p>
+
+<p style="margin-left:18%;">Do not print the puzzle
+(default when solving)</p>
+
+<p style="margin-left:9%;"><b>--solution</b></p>
+
+<p style="margin-left:18%;">Print the solution (default
+when solving)</p>
+
+<p style="margin-left:9%;"><b>--nosolution</b></p>
+
+<p style="margin-left:18%;">Do not print the solution
+(default when generating)</p>
+
+<p style="margin-left:9%;"><b>--stats</b></p>
+
+<p style="margin-left:18%;">Print statistics about moves
+used to solve the puzzle</p>
+
+<p style="margin-left:9%;"><b>--nostats</b></p>
+
+<p style="margin-left:18%;">Do not print statistics
+(default)</p>
+
+<p style="margin-left:9%;"><b>--timer</b></p>
+
+<p style="margin-left:18%;">Print time to generate or solve
+each puzzle</p>
+
+<p style="margin-left:9%;"><b>--notimer</b></p>
+
+<p style="margin-left:18%;">Do not print solve or
+generation times (default)</p>
+
+<p style="margin-left:9%;"><b>--count-solutions</b></p>
+
+<p style="margin-left:18%;">Count the number of solutions
+to puzzles</p>
+
+<p style="margin-left:9%;"><b>--nocount-solutions</b></p>
+
+<p style="margin-left:18%;">Do not count the number of
+solutions (default)</p>
+
+<p style="margin-left:9%;"><b>--history</b></p>
+
+<p style="margin-left:18%;">Print trial and error used when
+solving</p>
+
+<p style="margin-left:9%;"><b>--nohistory</b></p>
+
+<p style="margin-left:18%;">Do not print trial and error to
+solve (default)</p>
+
+<p style="margin-left:9%;"><b>--instructions</b></p>
+
+<p style="margin-left:18%;">Print the steps (at least 81)
+needed to solve the puzzle</p>
+
+<p style="margin-left:9%;"><b>--noinstructions</b></p>
+
+<p style="margin-left:18%;">Do not print steps to solve
+(default)</p>
+
+<p style="margin-left:9%;"><b>--log-history</b></p>
+
+<p style="margin-left:18%;">Print trial and error to solve
+as it happens</p>
+
+<p style="margin-left:9%;"><b>--nolog-history</b></p>
+
+<p style="margin-left:18%;">Do not print trial and error to
+solve as it happens</p>
+
+<p style="margin-left:9%;"><b>--one-line</b></p>
+
+<p style="margin-left:18%;">Print puzzles on one line of 81
+characters</p>
+
+<p style="margin-left:9%;"><b>--compact</b></p>
+
+<p style="margin-left:18%;">Print puzzles on 9 lines of 9
+characters</p>
+
+<p style="margin-left:9%;"><b>--readable</b></p>
+
+<p style="margin-left:18%;">Print puzzles in human readable
+form (default)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--csv</b></p></td>
+<td width="3%"></td>
+<td width="50%">
+
+
+<p>Output CSV format with one line puzzles</p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-h</b>,&nbsp;<b>--help</b></p>
+
+<p style="margin-left:18%;">Display help message</p>
+
+<p style="margin-left:9%;"><b>--about</b></p>
+
+<p style="margin-left:18%;">Display author and license
+information</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Display version number</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">http://qqwing.com/</p>
+<hr>
+</body>
+</html>

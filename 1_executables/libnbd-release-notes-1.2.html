@@ -1,0 +1,369 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>libnbd-release-notes-1.2</title>
+
+</head>
+<body>
+
+<h1 align="center">libnbd-release-notes-1.2</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Security">Security</a><br>
+<a href="#New APIs">New APIs</a><br>
+<a href="#New features">New features</a><br>
+<a href="#Documentation">Documentation</a><br>
+<a href="#Tools">Tools</a><br>
+<a href="#Tests">Tests</a><br>
+<a href="#Other improvements and bug fixes">Other improvements and bug fixes</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">libnbd-release-notes-1.2
+- release notes for libnbd 1.2</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+release notes for libnbd stable release 1.2. This describes
+the major changes since 1.0.</p>
+
+<p style="margin-left:9%; margin-top: 1em">libnbd 1.2.0 was
+released on 14th November 2019.</p>
+
+<h3>Security
+<a name="Security"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Two security
+problems were found during development of libnbd 1.2. Both
+were backported to the 1.0 stable branch. Upgrading is
+highly advisable.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>CVE-2019-14842
+protocol downgrade attack when using
+&quot;LIBNBD_TLS_REQUIRE&quot;</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">See the full
+announcement and links to mitigation, tests and fixes here:
+https://www.redhat.com/archives/libguestfs/2019-September/msg00128.html</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>remote code
+execution vulnerability</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">See the full
+announcement here:
+https://www.redhat.com/archives/libguestfs/2019-October/msg00060.html</p>
+
+<h3>New APIs
+<a name="New APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_can_fast_zero</b>(3)</p>
+
+<p style="margin-left:14%;">Test support by the server for
+fast zeroing (Eric Blake).</p>
+
+<p style="margin-left:9%;"><b>nbd_connect_socket</b>(3)
+<b><br>
+nbd_aio_connect_socket</b>(3)</p>
+
+<p style="margin-left:14%;">Connect to a local connected
+socket which you create in your main program using your own
+chosen method.</p>
+
+
+<p style="margin-left:9%;"><b>nbd_connect_systemd_socket_activation</b>(3)
+<b><br>
+nbd_aio_connect_systemd_socket_activation</b>(3)</p>
+
+<p style="margin-left:14%;">Connect to local processes that
+support systemd socket activation.</p>
+
+<p style="margin-left:9%;"><b>nbd_connect_vsock</b>(3)
+<b><br>
+nbd_aio_connect_vsock</b>(3)</p>
+
+<p style="margin-left:14%;">Used to connect to servers over
+&quot;AF_VSOCK&quot;.</p>
+
+
+<p style="margin-left:9%;"><b>nbd_get_handshake_flags</b>(3)
+<b><br>
+nbd_set_handshake_flags</b>(3) <b><br>
+nbd_get_request_structured_replies</b>(3) <b><br>
+nbd_set_request_structured_replies</b>(3) <b><br>
+nbd_get_structured_replies_negotiated</b>(3)</p>
+
+<p style="margin-left:14%;">Can be used when testing NBD
+servers to avoid various NBD features (Eric Blake).</p>
+
+<p style="margin-left:9%;"><b>nbd_get_protocol</b>(3)</p>
+
+<p style="margin-left:14%;">Get the NBD protocol variant
+that the server supports.</p>
+
+
+<p style="margin-left:9%;"><b>nbd_get_tls_negotiated</b>(3)</p>
+
+<p style="margin-left:14%;">Did we actually negotiate a TLS
+connection?</p>
+
+
+<p style="margin-left:9%;"><b>nbd_set_uri_allow_local_file</b>(3)
+<b><br>
+nbd_set_uri_allow_tls</b>(3) <b><br>
+nbd_set_uri_allow_transports</b>(3)</p>
+
+<p style="margin-left:14%;">These can be used to filter NBD
+URIs before calling <b>nbd_connect_uri</b>(3).</p>
+
+<h3>New features
+<a name="New features"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">New tool
+<b>nbdfuse</b>(1) lets you create a loop-mounted file backed
+by an NBD server without needing root.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&quot;AF_VSOCK&quot;
+is now a supported protocol (thanks Stefan Hajnoczi and
+Stefano Garzarella).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Support for the
+&quot;FAST_ZERO&quot; flag (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Allow disabling
+certain protocol features, to make it easier to test servers
+(Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Stack-allocated
+Variable Length Arrays (VLAs) are now banned throughout the
+library, making the library easier to consume from threads
+and other small stack situations.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Reproducible
+builds (Chris Lamb).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Support for
+filtering potentially dangerous or undesirable NBD URI
+features.</p>
+
+<h3>Documentation
+<a name="Documentation"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Many
+improvements to the generated manual pages, including:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Separate &quot;RETURN VALUE&quot; and &quot;ERRORS&quot;
+sections for each API function.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Example code.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Relevant links can be added to the &quot;SEE ALSO&quot;
+section.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Link to NBD URI specification where relevant, and
+improve documentation around what URIs libnbd supports.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Document libnbd version number scheme.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Document limits on export name length, encoding etc.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">New
+<b>libnbd-security</b>(3) man page listing past security
+issues and remediations (Eric Blake).</p>
+
+<h3>Tools
+<a name="Tools"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdsh</b>(1)
+has a new <i>--base-allocation</i> option which can be used
+to request &quot;base:allocation&quot; metadata context.</p>
+
+<p style="margin-left:9%; margin-top: 1em">New
+<b>nbdsh</b>(1) <i>--uri</i> (<i>-u</i>) option to connect
+to URIs.</p>
+
+<h3>Tests
+<a name="Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can now fuzz
+libnbd using either American Fuzzy Lop or clang&rsquo;s
+libFuzzer.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Add unit tests
+for <b>nbdsh</b>(1) (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Improved interop
+testing with various NBD servers and features.</p>
+
+<h3>Other improvements and bug fixes
+<a name="Other improvements and bug fixes"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbd_connect_tcp</b>(3)
+now tries to return the correct <b>errno</b>(3) from the
+underlying <b>connect</b>(2) call when that fails.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>nbd-protocol.h</i> header file is now shared between
+libnbd and nbdkit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Better
+fork-safety in &quot;nbd_connect_*&quot; APIs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The code was
+analyzed with Coverity and various problems identified and
+fixed.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Eric Blake</p>
+
+<p style="margin-left:9%; margin-top: 1em">Richard W.M.
+Jones</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

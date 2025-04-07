@@ -1,0 +1,918 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:02 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-PUBLISH</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-PUBLISH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Files included in package">Files included in package</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#tag">tag</a><br>
+<a href="#access">access</a><br>
+<a href="#dry-run">dry-run</a><br>
+<a href="#otp">otp</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#include-workspace-root">include-workspace-root</a><br>
+<a href="#provenance">provenance</a><br>
+<a href="#provenance-file">provenance-file</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-publish</b>
+- Publish a package</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm publish
+&lt;package-spec&gt;</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Publishes a
+package to the registry so that it can be installed by
+name.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default npm
+will publish to the public registry. This can be overridden
+by specifying a different default registry or using a npm
+help scope in the name, combined with a scope-configured
+registry (see <b>package.json</b> <i>&lang;
+/configuring-npm/package-json&rang;</i> ).</p>
+
+<p style="margin-left:9%; margin-top: 1em">A <b>package</b>
+is interpreted the same way as other commands (like <b>npm
+install</b>) and can be:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>a) a folder containing a program described by a
+<b>package.json</b> <i>&lang;
+/configuring-npm/package-json&rang;</i> file</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>b) a gzipped tarball containing (a)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>c) a url that resolves to (b)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>d) a <b>&lt;name&gt;@&lt;version&gt;</b> that is
+published on the registry (see npm help registry) with
+(c)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>e) a <b>&lt;name&gt;@&lt;tag&gt;</b> (see npm help
+dist-tag) that points to (d)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>f) a <b>&lt;name&gt;</b> that has a &quot;latest&quot;
+tag satisfying (e)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>g) a <b>&lt;git remote url&gt;</b> that resolves to
+(a)</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The publish will
+fail if the package name and version combination already
+exists in the specified registry.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Once a package
+is published with a given name and version, that specific
+name and version combination can never be used again, even
+if it is removed with npm help unpublish.</p>
+
+<p style="margin-left:9%; margin-top: 1em">As of
+<b>npm@5</b>, both a sha1sum and an integrity field with a
+sha512sum of the tarball will be submitted to the registry
+during publication. Subsequent installs will use the
+strongest supported algorithm to verify downloads.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Similar to
+<b>--dry-run</b> see npm help pack, which figures out the
+files to be included and packs them into a tarball to be
+uploaded to the registry.</p>
+
+<h3>Files included in package
+<a name="Files included in package"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To see what will
+be included in your package, run <b>npm pack --dry-run</b>.
+All files are included by default, with the following
+exceptions:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Certain files that are relevant
+to package installation and distribution are always
+included. For example, <b>package.json</b>,
+<b>README.md</b>, <b>LICENSE</b>, and so on.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>If there is a &quot;files&quot; list in
+<b>package.json</b> <i>&lang;
+/configuring-npm/package-json&rang;</i> , then only the
+files specified will be included. (If directories are
+specified, then they will be walked recursively and their
+contents included, subject to the same ignore rules.)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>If there is a <b>.gitignore</b> or <b>.npmignore</b>
+file, then ignored files in that and all child directories
+will be excluded from the package. If <i>both</i> files
+exist, then the <b>.gitignore</b> is ignored, and only the
+<b>.npmignore</b> is used.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>.npmignore</b>
+files follow the <b>same pattern rules</b> <i>&lang;
+https://git-scm.com/book/en/v2/Git-Basics-Recording-Changes-to-the-Repository#_ignoring&rang;</i>
+as <b>.gitignore</b> files</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">If the file matches certain
+patterns, then it will <i>never</i> be included, unless
+explicitly added to the <b>&quot;files&quot;</b> list in
+<b>package.json</b>, or un-ignored with a <b>!</b> rule in a
+<b>.npmignore</b> or <b>.gitignore</b> file.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Symbolic links are never included in npm packages.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">See npm help
+developers for full details on what&rsquo;s included in the
+published package, as well as details on how the package is
+built.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>package.json</b> <i>&lang;
+/configuring-npm/package-json&rang;</i> for more info on
+what can and can&rsquo;t be ignored.</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>tag
+<a name="tag"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p style="margin-top: 1em">Default: &quot;latest&quot;</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>Type: String</p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If you ask npm
+to install a package and don&rsquo;t tell it a specific
+version, then it will install the specified tag.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is the tag
+added to the package@version specified in the <b>npm
+dist-tag add</b> command, if no explicit tag is given.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When used by the
+<b>npm diff</b> command, this is the tag used to fetch the
+tarball that will be compared with the local files by
+default.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If used in the
+<b>npm publish</b> command, this is the tag that will be
+added to the package submitted to the registry.</p>
+
+<h3>access
+<a name="access"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: &rsquo;public&rsquo;
+for new packages, existing packages it will not change the
+current level</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: null, &quot;restricted&quot;, or
+&quot;public&quot;</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If you do not
+want your scoped package to be publicly viewable (and
+installable) set <b>--access=restricted</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unscoped
+packages can not be set to <b>restricted</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+defaults to not changing the current access level for
+existing packages. Specifying a value of <b>restricted</b>
+or <b>public</b> during publish will change the access for
+an existing package the same way that <b>npm access set
+status</b> would.</p>
+
+<h3>dry-run
+<a name="dry-run"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Indicates that
+you don&rsquo;t want npm to make any changes and that it
+should only report what it would have done. This can be
+passed into any of the commands that modify your local
+installation, eg, <b>install</b>, <b>update</b>,
+<b>dedupe</b>, <b>uninstall</b>, as well as <b>pack</b> and
+<b>publish</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This is
+NOT honored by other network related commands, eg
+<b>dist-tags</b>, <b>owner</b>, etc.</p>
+
+<h3>otp
+<a name="otp"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p>Type: null or String</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+one-time password from a two-factor authenticator.
+It&rsquo;s needed when publishing or changing package
+permissions with <b>npm access</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If not set, and
+a registry response fails with a challenge for a one-time
+password, npm will prompt on the command line for one.</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Set to true to
+run the command in the context of <b>all</b> configured
+workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+setting this to false will cause commands like
+<b>install</b> to ignore workspaces altogether. When not set
+explicitly:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Commands that operate on the
+<b>node_modules</b> tree (install, update, etc.) will link
+workspaces into the <b>node_modules</b> folder. - Commands
+that do other things (test, exec, publish, etc.) will
+operate on the root project, <i>unless</i> one or more
+workspaces are specified in the <b>workspace</b> config.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>include-workspace-root
+<a name="include-workspace-root"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Include the
+workspace root when workspaces are enabled for a
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When false,
+specifying individual workspaces via the <b>workspace</b>
+config, or all workspaces via the <b>workspaces</b> flag,
+will cause npm to operate only on the specified workspaces,
+and not on the root project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>provenance
+<a name="provenance"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When publishing
+from a supported cloud CI/CD system, the package will be
+publicly linked to where it was built and published
+from.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This config can
+not be used with: <b>provenance-file</b></p>
+
+<h3>provenance-file
+<a name="provenance-file"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="69%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p>Type: Path</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When publishing,
+the provenance bundle at the given path will be used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This config can
+not be used with: <b>provenance</b></p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p style="margin-top: 1em">npm help &quot;package
+spec&quot;</p> </td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p><b>npm-packlist package</b> <i>&lang;
+http://npm.im/npm-packlist&rang;</i></p> </td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help registry</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help scope</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help adduser</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help owner</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help deprecate</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help dist-tag</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help pack</p></td>
+<td width="22%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="64%">
+
+
+<p>npm help profile</p></td>
+<td width="22%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

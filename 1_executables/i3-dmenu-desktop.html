@@ -1,0 +1,171 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>I3-DMENU-DESKTOP</title>
+
+</head>
+<body>
+
+<h1 align="center">I3-DMENU-DESKTOP</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#VERSION">VERSION</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#LICENSE AND COPYRIGHT">LICENSE AND COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-dmenu-desktop
+- run .desktop files with dmenu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-dmenu-desktop
+[--dmenu='dmenu -i'] [--entry-type=name]
+[--show-duplicates]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-dmenu-desktop
+is a script which extracts the (localized) name from
+application .desktop files, offers the user a choice via
+<b>dmenu</b>(1) and then starts the chosen application via
+i3 (for startup notification support). The advantage of
+using .desktop files instead of <b>dmenu_run</b>(1) is that
+dmenu_run offers <b>all</b> binaries in your $PATH,
+including non-interactive utilities like &quot;sed&quot;.
+Also, .desktop files contain a proper name, information
+about whether the application runs in a terminal and whether
+it supports startup notifications.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The .desktop
+files are searched in $XDG_DATA_HOME/applications (by
+default $HOME/.local/share/applications) and in the
+&quot;applications&quot; subdirectory of each entry of
+$XDG_DATA_DIRS (by default
+/usr/local/share/:/usr/share/).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Files with the
+same name in $XDG_DATA_HOME/applications take precedence
+over files in $XDG_DATA_DIRS, so that you can overwrite
+parts of the system-wide .desktop files by copying them to
+your local directory and making changes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-dmenu-desktop
+displays the &quot;Name&quot; value in the localized version
+depending on LC_MESSAGES as specified in the Desktop Entry
+Specification.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can pass a
+filename or URL (%f/%F and %u/%U field codes in the .desktop
+file respectively) by appending it to the name of the
+application. E.g., if you want to launch &quot;GNU Emacs
+24&quot; with the patch /tmp/foobar.txt, you would type
+&quot;emacs&quot;, press TAB, type &quot;
+/tmp/foobar.txt&quot; and press ENTER.</p>
+
+<p style="margin-left:9%; margin-top: 1em">.desktop files
+with Terminal=true are started using
+<b>i3-sensible-terminal</b>(1).</p>
+
+<p style="margin-left:9%; margin-top: 1em">.desktop files
+with NoDisplay=true or Hidden=true are skipped.</p>
+
+<p style="margin-left:9%; margin-top: 1em">UTF-8 is
+supported, of course, but dmenu does not support displaying
+all glyphs. E.g., xfce4-terminal.desktop&rsquo;s
+Name[fi]=P&auml;&auml;te will be displayed just fine, but
+not its
+Name[ru]=&#1058;&#1077;&#1088;&#1084;&#1080;&#1085;&#1072;&#1083;.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dmenu=command</b></p>
+
+<p style="margin-left:14%;">Execute command instead of
+&rsquo;dmenu -i&rsquo;. This option can be used to pass
+custom parameters to dmenu, or to make i3-dmenu-desktop
+start a custom (patched?) version of dmenu.</p>
+
+<p style="margin-left:9%;"><b>--entry-type=type</b></p>
+
+<p style="margin-left:14%;">Display the (localized)
+&quot;Name&quot; (type = name), the command (type = command)
+or the (*.desktop) filename (type = filename) in dmenu. This
+option can be specified multiple times. Duplicates will be
+removed, see &rsquo;--show-duplicates&rsquo;.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Examples are
+&quot;GNU Image Manipulation Program&quot; (type = name),
+&quot;gimp&quot; (type = command), and
+&quot;libreoffice-writer&quot; (type = filename).</p>
+
+<p style="margin-left:9%;"><b>--show-duplicates</b></p>
+
+<p style="margin-left:14%;">Show duplicates if
+&rsquo;--entry-type&rsquo; is specified multiple times.</p>
+
+<h2>VERSION
+<a name="VERSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Version 1.5</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Michael
+Stapelberg, &quot;&lt;michael at i3wm.org&gt;&quot;</p>
+
+<h2>LICENSE AND COPYRIGHT
+<a name="LICENSE AND COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright 2012
+Michael Stapelberg.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+free software; you can redistribute it and/or modify it
+under the terms of the BSD license.</p>
+<hr>
+</body>
+</html>

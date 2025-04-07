@@ -1,0 +1,389 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:40 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ADIG</title>
+
+</head>
+<body>
+
+<h1 align="center">ADIG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#ARGS">ARGS</a><br>
+<a href="#FLAGS">FLAGS</a><br>
+<a href="#QUERY OPTIONS">QUERY OPTIONS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">adig - print
+information collected from Domain Name System (DNS)
+servers</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>adig</b>
+[<i>@server</i>] [<i>-c class</i>] [<i>-p port#</i>] [<i>-q
+name</i>] [<i>-t type</i>] [<i>-x addr</i>] [<i>name</i>]
+[<i>type</i>] [<i>class</i>] [<i>queryopt</i>...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Send queries to
+DNS servers about name and print received information, where
+<i>name</i> is a valid DNS name (e.g. www.example.com,
+1.2.3.10.in-addr.arpa).</p>
+
+<p style="margin-left:9%; margin-top: 1em">This utility
+comes with the <b>c-ares</b> asynchronous resolver
+library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to specify default arguments for <b>adig</b> via
+<b>${XDG_CONFIG_HOME}/adigrc</b>.</p>
+
+<h2>ARGS
+<a name="ARGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>@server</b></p>
+
+<p style="margin-left:18%;">Server ip address. May specify
+multiple in comma delimited format. May be specified in URI
+format.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>name</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Name of the resource record that is to be looked up</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>type</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>What type of query is required. e.g. - A, AAAA, MX, TXT,
+etc. If not specified, A will be used.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>class</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Sets the query class, defaults to IN. May also be HS or
+CH.</p> </td></tr>
+</table>
+
+<h2>FLAGS
+<a name="FLAGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b>
+class</p>
+
+<p style="margin-left:18%;">Sets the query class, defaults
+to IN. May also be HS or CH.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="6%"></td>
+<td width="20%">
+
+
+<p>Prints the help.</p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-p</b> port</p>
+
+<p style="margin-left:18%;">Sends query to a port other
+than 53. Often recommended to set the port using
+<i>@server</i> instead.</p>
+
+<p style="margin-left:9%;"><b>-q</b> name</p>
+
+<p style="margin-left:18%;">Specifies the domain name to
+query. Useful to distinguish name from other arguments</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-r</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Skip adigrc processing</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-s</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Server (alias for @server syntax), compatibility with
+old cmdline</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-t</b> type</p>
+
+<p style="margin-left:18%;">Indicates resource record type
+to query. Useful to distinguish type from other
+arguments</p>
+
+<p style="margin-left:9%;"><b>-x</b> addr</p>
+
+<p style="margin-left:18%;">Simplified reverse lookups.
+Sets the type to PTR and forms a valid in-arpa query
+string</p>
+
+<h2>QUERY OPTIONS
+<a name="QUERY OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>+[no]aaonly</b></p>
+
+<p style="margin-left:18%;">Sets the aa flag in the query.
+Default is off.</p>
+
+<p style="margin-left:9%;"><b>+[no]aaflag</b></p>
+
+<p style="margin-left:18%;">Alias for +[no]aaonly</p>
+
+<p style="margin-left:9%;"><b>+[no]additional</b></p>
+
+<p style="margin-left:18%;">Toggles printing the additional
+section. On by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]adflag</b></p>
+
+<p style="margin-left:18%;">Sets the ad (authentic data)
+bit in the query. Default is off.</p>
+
+<p style="margin-left:9%;"><b>+[no]aliases</b></p>
+
+<p style="margin-left:18%;">Whether or not to honor the
+HOSTALIASES file. Default is on.</p>
+
+<p style="margin-left:9%;"><b>+[no]all</b></p>
+
+<p style="margin-left:18%;">Toggles all of +[no]cmd,
++[no]stats, +[no]question, +[no]answer, +[no]authority,
++[no]additional, +[no]comments</p>
+
+<p style="margin-left:9%;"><b>+[no]answer</b></p>
+
+<p style="margin-left:18%;">Toggles printing the answer. On
+by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]authority</b></p>
+
+<p style="margin-left:18%;">Toggles printing the authority.
+On by default.</p>
+
+<p style="margin-left:9%;"><b>+bufsize=</b>#</p>
+
+<p style="margin-left:18%;">UDP EDNS 0 packet size allowed.
+Defaults to 1232.</p>
+
+<p style="margin-left:9%;"><b>+[no]cdflag</b></p>
+
+<p style="margin-left:18%;">Sets the CD (checking disabled)
+bit in the query. Default is off.</p>
+
+<p style="margin-left:9%;"><b>+[no]class</b></p>
+
+<p style="margin-left:18%;">Display the class when printing
+the record. On by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]cmd</b></p>
+
+<p style="margin-left:18%;">Toggles printing the command
+requested. On by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]comments</b></p>
+
+<p style="margin-left:18%;">Toggles printing the comments.
+On by default</p>
+
+<p style="margin-left:9%;"><b>+[no]defname</b></p>
+
+<p style="margin-left:18%;">Alias for +[no]search</p>
+
+<p style="margin-left:9%;"><b>+domain=somename</b></p>
+
+<p style="margin-left:18%;">Sets the search list to a
+single domain.</p>
+
+<p style="margin-left:9%;"><b>+[no]dns0x20</b></p>
+
+<p style="margin-left:18%;">Whether or not to use DNS 0x20
+case randomization when sending queries. Default is off.</p>
+
+<p style="margin-left:9%;"><b>+[no]edns</b>[=#]</p>
+
+<p style="margin-left:18%;">Enable or disable EDNS. Only
+allows a value of 0 if specified. Default is to enable
+EDNS.</p>
+
+<p style="margin-left:9%;"><b>+[no]ignore</b></p>
+
+<p style="margin-left:18%;">Ignore truncation on UDP, by
+default retried on TCP.</p>
+
+<p style="margin-left:9%;"><b>+[no]keepopen</b></p>
+
+<p style="margin-left:18%;">Whether or not the server
+connection should be persistent. Default is off.</p>
+
+<p style="margin-left:9%;"><b>+ndots</b>=#</p>
+
+<p style="margin-left:18%;">Sets the number of dots that
+must appear before being considered absolute. Defaults to
+1.</p>
+
+<p style="margin-left:9%;"><b>+[no]primary</b></p>
+
+<p style="margin-left:18%;">Whether or not to only use a
+single server if more than one server is available. Defaults
+to using all servers.</p>
+
+<p style="margin-left:9%;"><b>+[no]qr</b></p>
+
+<p style="margin-left:18%;">Toggles printing the request
+query. Off by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]question</b></p>
+
+<p style="margin-left:18%;">Toggles printing the question.
+On by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]recurse</b></p>
+
+<p style="margin-left:18%;">Toggles the RD (Recursion
+Desired) bit. On by default.</p>
+
+<p style="margin-left:9%;"><b>+retry</b>=#</p>
+
+<p style="margin-left:18%;">Same as +tries but does not
+include the initial attempt.</p>
+
+<p style="margin-left:9%;"><b>+[no]search</b></p>
+
+<p style="margin-left:18%;">To use or not use the search
+list. Search list is not used by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]stats</b></p>
+
+<p style="margin-left:18%;">Toggles printing the
+statistics. On by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]tcp</b></p>
+
+<p style="margin-left:18%;">Whether to use TCP when
+querying name servers. Default is UDP.</p>
+
+<p style="margin-left:9%;"><b>+tries</b>=#</p>
+
+<p style="margin-left:18%;">Number of query tries. Defaults
+to 3.</p>
+
+<p style="margin-left:9%;"><b>+[no]ttlid</b></p>
+
+<p style="margin-left:18%;">Display the TTL when printing
+the record. On by default.</p>
+
+<p style="margin-left:9%;"><b>+[no]vc</b></p>
+
+<p style="margin-left:18%;">Alias for +[no]tcp</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">${XDG_CONFIG_HOME}/adigrc</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+the c-ares github issues tracker <b><br>
+https://github.com/c-ares/c-ares/issues</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+ 
+<p style="margin-left:9%; margin-top: 1em">ahost(1).</p>
+<hr>
+</body>
+</html>

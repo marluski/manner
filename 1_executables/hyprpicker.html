@@ -1,0 +1,146 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>HYPRPICKER</i>(1) General Commands Manual
+<i>HYPRPICKER</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">hyprpicker &mdash;
+wlroots-compatible wayland color picker</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:23%;"><b>hyprpicker</b> [<b>-anh</b>]
+[<b>-f&nbsp;</b><i>fmt</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;">The <b>hyprpicker</b> utility is
+a color-picker with support for various output formats. When
+<b>hyprpicker</b> is invoked the cursor is transformed into
+a magnifying lens, and clicking on any pixel of the screen
+will print out that pixels color to the standard output. The
+default output format is hexadecimal, but that can be
+configured with the <b>-f</b> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The options are
+as follows:</p>
+
+<p style="margin-top: 1em"><b>-a</b>, <b>--autocopy</b></p>
+
+<p style="margin-left:19%;">Automatically copy the output
+of <b>hyprpicker</b> to the clipboard. This option requires
+that the <i>wl-copy</i>(1) command is installed on
+system.</p>
+
+<p style="margin-top: 1em"><b>-f</b> <i>fmt</i>,
+<b>--format</b>=<i>fmt</i></p>
+
+<p style="margin-left:19%;">Select the format to output the
+selected pixels color in. The argument <i>fmt</i> is
+case-insensitive. The available options are:</p>
+
+<p style="margin-top: 1em"><i>cmyk</i></p>
+
+<p style="margin-left:29%;">(&ldquo;C% M% Y% K%&rdquo;)</p>
+
+<p><i>hex</i></p>
+
+<p style="margin-left:29%;">(&ldquo;#RRGGBB&rdquo;)</p>
+
+<p><i>rgb</i></p>
+
+<p style="margin-left:29%;">(&ldquo;R G B&rdquo;)</p>
+
+<p><i>hsl</i></p>
+
+<p style="margin-left:29%;">(&ldquo;H S% L%&rdquo;)</p>
+
+<p><i>hsv</i></p>
+
+<p style="margin-left:29%;">(&ldquo;H S% V%&rdquo;)</p>
+
+<p style="margin-left:19%; margin-top: 1em">The default
+format is <i>hex</i>.</p>
+
+<p style="margin-top: 1em"><b>-n</b>, <b>--no-fancy</b></p>
+
+<p style="margin-left:19%;">Disable colored output. Default
+behavior is to color the output in the same color as the
+selected pixel.</p>
+
+<p style="margin-top: 1em"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:19%;">Display a help message and exit
+successfully from the program.</p>
+
+<p style="margin-top: 1em"><b>ENVIRONMENT</b> <br>
+NO_COLOR</p>
+
+<p style="margin-left:22%; margin-top: 1em">If set,
+disables colored output.</p>
+
+<p style="margin-top: 1em"><b>EXIT STATUS</b></p>
+
+<p style="margin-left:9%;">The <b>hyprpicker</b> utility
+exits&nbsp;0 on success, and&nbsp;&gt;0 if an error
+occurs.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">Get a pixels color:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$
+hyprpicker</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Get a pixels
+color in HSL, wrapped in a CSS <b>hsl</b>() function:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$ hyprpicker
+-f hsl</b> | <b>sed &rsquo;s/&#710;/rgb(/; s/$/)/; y/
+/,/&rsquo;</b></p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>hyprctl</i>(1),
+<i>hyprland</i>(1), <i>sed</i>(1), <i>wl-copy</i>(1)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>The
+Hyprpicker Sources</i>:
+https://github.com/hyprwm/hyprpicker</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">The <b>hyprpicker</b> utility
+was originally written by Vaxerski
+&lt;https://github.com/vaxerski&gt; and the manual page by
+Thomas Voss &lt;<i>mail@thomasvoss.com</i>&gt;.</p>
+
+<p style="margin-top: 1em"><b>BUGS</b></p>
+
+<p style="margin-left:9%;"><i>The Hyprpicker Bug
+Tracker</i>: https://github.com/hyprwm/hyprpicker/issues
+Linux November&nbsp;14, 2022 <i>HYPRPICKER</i>(1)</p>
+<hr>
+</body>
+</html>

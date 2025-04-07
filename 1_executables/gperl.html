@@ -1,0 +1,421 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>gperl</title>
+
+</head>
+<body>
+
+<h1 align="center">gperl</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Perl regions">Perl regions</a><br>
+<a href="#Starting Perl mode">Starting Perl mode</a><br>
+<a href="#Ending Perl mode without storage">Ending Perl mode without storage</a><br>
+<a href="#Ending Perl mode with storage">Ending Perl mode with storage</a><br>
+<a href="#Example">Example</a><br>
+<a href="#Authors">Authors</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gperl - execute
+Perl commands in <i>groff</i> documents</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>gperl</b></p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em">[<i>file&nbsp;</i>...]</p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>gperl</b></p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>-h</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>gperl</b></p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p><b>--help</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>gperl</b></p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>gperl</b></p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p><b>--version</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+preprocessor for <a href="man:groff(1)"><i>groff</i>(1)</a>.
+It allows the use of
+<a href="man:perl(7)"><i>perl</i>(7)</a> code in
+<a href="man:groff(7)"><i>groff</i>(7)</a> files. The result
+of a <i>Perl part</i> can be stored in groff <i>strings</i>
+or <i>numerical registers</i> based on the arguments at a
+final line of a <i>Perl part</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no operands
+are given, or if <i>file</i> is &ldquo;<b>-</b>&rdquo;,
+<i>gperl</i> reads the standard input stream. A double-dash
+argument (&ldquo;<b>--</b>&rdquo;) causes all subsequent
+arguments to be interpreted as <i>file</i> operands, even if
+their names start with a dash. <b>-h</b> and <b>--help</b>
+display a usage message, whereas <b>-v</b> and
+<b>--version</b> display version information; all exit
+afterward.</p>
+
+<h2>Perl regions
+<a name="Perl regions"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Perl</i>
+parts in <i>groff files</i> are enclosed by two <b>.Perl</b>
+requests with different arguments, a <i>starting</i> and an
+<i>ending</i> command.</p>
+
+<h3>Starting Perl mode
+<a name="Starting Perl mode"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The starting
+<i>Perl request</i> can either be without arguments, or by a
+request that has the term <b>start</b> as its only
+argument.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="14%">
+
+
+<p><b>.Perl</b></p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="14%">
+
+
+<p><b>.Perl start</b></p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<h3>Ending Perl mode without storage
+<a name="Ending Perl mode without storage"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">A <b>.Perl</b>
+command line with an argument different from <b>start</b>
+finishes a running <i>Perl part</i>. Of course, it would be
+reasonable to add the argument <b>stop</b>; that&rsquo;s
+possible, but not necessary.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="8%"></td>
+<td width="28%">
+
+
+<p style="margin-top: 1em"><b>.Perl stop</b></p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="28%">
+
+
+<p><b>.Perl</b> <i>other_than_start</i></p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">The argument
+<i>other_than_start</i> can additionally be used as a
+<i>groff</i> string variable name for storage &mdash; see
+next section.</p>
+
+<h3>Ending Perl mode with storage
+<a name="Ending Perl mode with storage"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">A useful feature
+of <i>gperl</i> is to store one or more results from the
+<i>Perl mode</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The output of a
+<i>Perl part</i> can be got with backticks <b>`...`</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program
+collects all printing to STDOUT (normal standard output) by
+the Perl <b>print</b> program. This pseudo-printing output
+can have several lines, due to printed line breaks with
+<b>\n</b>. By that, the output of a Perl run should be
+stored into a Perl array, with a single line for each array
+member.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This Perl array
+output can be stored by <i>gperl</i> in either <i><br>
+groff strings</i></p>
+
+<p style="margin-left:18%;">by creating a groff command
+<b>.ds</b></p>
+
+<p style="margin-left:9%;"><i>groff register</i></p>
+
+<p style="margin-left:18%;">by creating a groff command
+<b>.rn</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The storage
+modes can be determined by arguments of a final stopping
+<b>.Perl</b> command. Each argument <b>.ds</b> changes the
+mode into <i>groff string</i> and <b>.nr</b> changes the
+mode into <i>groff register</i> for all following output
+parts.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default, all
+output is saved as strings, so <b>.ds</b> is not really
+needed before the first <b>.nr</b> command. That suits to
+<a href="man:groff(7)"><i>groff</i>(7)</a>, because every
+output can be saved as <i>groff</i> string, but the
+registers can be very restrictive.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In <i>string
+mode</i>, <i>gperl</i> generates a <i>groff string</i>
+storage line</p>
+
+<p style="margin-left:18%;"><b>.ds</b> <i>var_name
+content</i></p>
+
+<p style="margin-left:9%;">In <i>register mode</i> the
+following groff command is generated</p>
+
+<p style="margin-left:18%;"><b>.nr</b> <i>var_name
+content</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">We present
+argument collections in the following. You can add as first
+argument for all <b>stop</b>. We omit this additional
+element. <b><br>
+.Perl .ds</b> <i>var_name</i></p>
+
+<p style="margin-left:18%;">This will store 1 output line
+into the groff string named <i>var_name</i> by the
+automatically created command</p>
+
+<p style="margin-left:27%;"><b>.ds</b> <i>var_name
+output</i></p>
+
+<p style="margin-left:9%;"><b>.Perl</b> <i>var_name</i></p>
+
+<p style="margin-left:18%;">If <i>var_name</i> is different
+from <b>start</b> this is equivalent to the former command,
+because the string mode is string with <b>.ds</b> command.
+default.</p>
+
+<p style="margin-left:9%;"><b>.Perl</b> <i>var_name1
+var_name2</i></p>
+
+<p style="margin-left:18%;">This will store 2 output lines
+into groff string names <i>var_name1</i> and
+<i>var_name2</i>, because the default mode <b>.ds</b> is
+active, such that no <b>.ds</b> argument is needed. Of
+course, this is equivalent to</p>
+
+<p style="margin-left:27%;"><b>.Perl .ds</b> <i>var_name1
+var_name2</i></p>
+
+<p style="margin-left:18%;">and</p>
+
+<p style="margin-left:27%;"><b>.Perl .ds</b>
+<i>var_name1</i> <b>.ds</b> <i>var_name2</i></p>
+
+<p style="margin-left:9%;"><b>.Perl .nr</b> <i>var_name1
+varname2</i></p>
+
+<p style="margin-left:18%;">stores both variables as
+register variables. <i>gperl</i> generates <b><br>
+.nr</b> <i>var_name1 output_line1</i> <b><br>
+.nr</b> <i>var_name2 output_line2</i></p>
+
+<p style="margin-left:9%;"><b>.Perl .nr</b>
+<i>var_name1</i> <b>.ds</b> <i>var_name2</i></p>
+
+<p style="margin-left:18%;">stores the 1st argument as
+<i>register</i> and the second as <i>string</i> by <b><br>
+.nr</b> <i>var_name1 output_line1</i> <b><br>
+.ds</b> <i>var_name2 output_line2</i></p>
+
+<h2>Example
+<a name="Example"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A possible
+<i>Perl part</i> in a <i>roff file</i> could look like
+that:</p>
+
+<p style="margin-left:18%;">before <br>
+.Perl start <br>
+my $result = 'some data'; <br>
+print $result; <br>
+.Perl stop .ds string_var <br>
+after</p>
+
+<p style="margin-left:9%; margin-top: 1em">This stores the
+result <b>&rdquo;some data&rdquo;</b> into the <i>roff
+string</i> called <b>string_var</b>, such that the following
+line is printed:</p>
+
+<p style="margin-left:18%;">.ds string_var some data</p>
+
+<p style="margin-left:9%;">by <i>gperl</i> as food for the
+coming <i>groff</i> run.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A <i>Perl
+part</i> with several outputs is:</p>
+
+<p style="margin-left:18%;">.Perl start <br>
+print &rdquo;first\n&rdquo;; <br>
+print &rdquo;second line\n&rdquo;; <br>
+print &rdquo;3\n&rdquo;; <br>
+.Perl var1 var2 .nr var3</p>
+
+<p style="margin-left:9%;">This stores 3 printed lines into
+3 <i>groff</i> strings. <b>var1</b>,<b>var2</b>,<b>var3</b>.
+So the following <i>groff</i> command lines are created:</p>
+
+<p style="margin-left:18%;">.ds var1 first <br>
+.ds var2 second line <br>
+.nr var3 3</p>
+
+<h2>Authors
+<a name="Authors"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>gperl</i> was
+written by
+<a href="mailto:groff-bernd.warken-72@web.de">Bernd
+Warken</a>.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Man pages
+related to <i>groff</i> are
+<a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:groff(7)"><i>groff</i>(7)</a>, and
+<a href="man:grog(1)"><i>grog</i>(1)</a>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Documents
+related to <i>Perl</i> are
+<a href="man:perl(1)"><i>perl</i>(1)</a>,
+<a href="man:perl(7)"><i>perl</i>(7)</a>.</p>
+<hr>
+</body>
+</html>

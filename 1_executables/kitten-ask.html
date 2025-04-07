@@ -1,0 +1,139 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-ask</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-ask</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-ask - Ask
+the user for input</p>
+
+<h2>Usage
+<a name="Usage"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em"><b>kitten ask</b></p></td>
+<td width="78%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Ask the user for
+input</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--type,
+-t</b> <i>[=line]</i></p>
+
+<p style="margin-left:18%;">Type of input. Defaults to
+asking for a line of text.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Choices: line,
+choices, password, yesno</p>
+
+<p style="margin-left:9%;"><b>--message, -m</b></p>
+
+<p style="margin-left:18%;">The message to display to the
+user. If not specified a default message is shown.</p>
+
+<p style="margin-left:9%;"><b>--name, -n</b></p>
+
+<p style="margin-left:18%;">The name for this question.
+Used to store history of previous answers which can be used
+for completions and via the browse history readline
+bindings.</p>
+
+<p style="margin-left:9%;"><b>--title,
+--window-title</b></p>
+
+<p style="margin-left:18%;">The title for the window in
+which the question is displayed. Only implemented for yesno
+and choices types.</p>
+
+<p style="margin-left:9%;"><b>--choice, -c</b></p>
+
+<p style="margin-left:18%;">A choice for the choices type.
+Can be specified multiple times. Every choice has the
+syntax: ``letter[;color]:text``, where text is the choice
+text and letter is the selection key. letter is a single
+letter belonging to text. This letter is highlighted within
+the choice text. There can be an optional color
+specification after the letter to indicate what color it
+should be. For example: y:Yes and n;red:No</p>
+
+<p style="margin-left:9%;"><b>--default, -d</b></p>
+
+<p style="margin-left:18%;">A default choice or text. If
+unspecified, it is y for the type yesno, the first choice
+for choices and empty for others types. The default choice
+is selected when the user presses the Enter key.</p>
+
+<p style="margin-left:9%;"><b>--prompt, -p</b>
+<i>[=&quot;&gt; &quot;]</i></p>
+
+<p style="margin-left:18%;">The prompt to use when
+inputting a line of text or a password.</p>
+
+<p style="margin-left:9%;"><b>--unhide-key</b>
+<i>[=u]</i></p>
+
+<p style="margin-left:18%;">The key to be pressed to unhide
+hidden text</p>
+
+
+<p style="margin-left:9%;"><b>--hidden-text-placeholder</b></p>
+
+<p style="margin-left:18%;">The text in the message to be
+replaced by hidden text. The hidden text is read via
+STDIN.</p>
+
+<p style="margin-left:9%;"><b>--help, -h</b></p>
+
+<p style="margin-left:18%;">Show help for this command</p>
+<hr>
+</body>
+</html>

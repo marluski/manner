@@ -1,0 +1,384 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BLUETOOTHCTL-ENDPOINT</title>
+
+</head>
+<body>
+
+<h1 align="center">BLUETOOTHCTL-ENDPOINT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#ENDPOINT COMMANDS">ENDPOINT COMMANDS</a><br>
+<a href="#list">list</a><br>
+<a href="#show">show</a><br>
+<a href="#register">register</a><br>
+<a href="#unregister">unregister</a><br>
+<a href="#config">config</a><br>
+<a href="#presets">presets</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">bluetoothctl-endpoint
+- Endpoint Submenu</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bluetoothctl</b>
+[--options] [endpoint.commands]</p>
+
+<h2>ENDPOINT COMMANDS
+<a name="ENDPOINT COMMANDS"></a>
+</h2>
+
+
+<h3>list
+<a name="list"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List available
+endpoints.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="18%">
+
+
+<p><b>&gt; list [local]</b></p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<h3>show
+<a name="show"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Endpoint
+information.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="22%">
+
+
+<p style="margin-top: 1em"><b>&gt; show [endpoint]</b></p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<h3>register
+<a name="register"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Register
+Endpoint.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="68%">
+
+
+<p style="margin-top: 1em"><b>&gt; register &lt;UUID&gt;
+&lt;codec[:company]&gt; [capabilities...]</b></p></td>
+<td width="14%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example LC3 BAP
+source</b></p>
+
+<p style="margin-left:18%;"><b>&gt;endpoint.register
+00002bcb-0000-1000-8000-00805f9b34fb 0x06 <br>
+&gt;Auto Accept (yes/no):</b> y <b><br>
+&gt;Max Transports (auto/value):</b> a <b><br>
+&gt;Locations:</b> a <b><br>
+&gt;Supported Context (value):</b> 3 <b><br>
+&gt;Context (value):</b> 3 <b><br>
+&gt;CIG (auto/value):</b> a <b><br>
+&gt;CIS (auto/value):</b> a</p>
+
+<p style="margin-left:9%;"><b>Example LC3 BAP sink with
+extra capabilities</b></p>
+
+<p style="margin-left:18%;"><b>&gt;endpoint.register
+00002bc9-0000-1000-8000-00805f9b34fb 0x06 &quot;0x03 0xe5
+0x03 0x00 0x02 0xe6 0x07&quot; <br>
+&gt;Enter Metadata (value/no):</b> n <b><br>
+&gt;Auto Accept (yes/no):</b> y <b><br>
+&gt;Max Transports (auto/value):</b> a <b><br>
+&gt;Locations:</b> a <b><br>
+&gt;Supported Context (value):</b> 3 <b><br>
+&gt;Context (value):</b> 3 <b><br>
+&gt;CIG (auto/value):</b> a <b><br>
+&gt;CIS (auto/value):</b> a</p>
+
+<p style="margin-left:9%;"><b>Example LC3 BAP Broadcast
+source</b></p>
+
+<p style="margin-left:18%;"><b>&gt;endpoint.register
+00001852-0000-1000-8000-00805f9b34fb 0x06 <br>
+&gt;Auto Accept (yes/no):</b> y <b><br>
+&gt;Max Transports (auto/value):</b> a <b><br>
+&gt;Locations:</b> 3 <b><br>
+&gt;Supported Context (value):</b> 1</p>
+
+<p style="margin-left:9%;"><b>Example LC3 BAP Broadcast
+sink</b></p>
+
+<p style="margin-left:18%;"><b>&gt;endpoint.register
+00001851-0000-1000-8000-00805f9b34fb 0x06 <br>
+&gt;Auto Accept (yes/no):</b> y <b><br>
+&gt;Max Transports (auto/value):</b> a <b><br>
+&gt;Locations:</b> 3 <b><br>
+&gt;Supported Context (value):</b> 1</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note:</p>
+
+<p style="margin-left:9%; margin-top: 1em">If running the
+setup with an audio server that has LE Audio support (such
+as PipeWire) it will automatically register endpoints
+according to the configured roles. For more details about
+configuring a Broadcast Source with PipeWire check: <br>
+
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/-/blob/master/doc/dox/config/pipewire-props.7.md&gt;</p>
+
+<h3>unregister
+<a name="unregister"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unregister
+Endpoint.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="33%">
+
+
+<p><b>&gt; unregister &lt;UUID/object&gt;</b></p></td>
+<td width="49%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note:</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the endpoint
+was registered by an audio server, it can't be unregistered
+from bluetoothctl. This must be done by the audio server as
+well.</p>
+
+<h3>config
+<a name="config"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Configure
+Endpoint.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="58%">
+
+
+<p style="margin-top: 1em"><b>&gt; config &lt;endpoint&gt;
+&lt;local endpoint&gt; [preset]</b></p></td>
+<td width="24%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Note:</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the endpoint
+was registered by an audio server, it can't be configured
+from bluetoothctl. This must be done by the audio server as
+well.</p>
+
+<h3>presets
+<a name="presets"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List available
+presets.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>Usage</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><b>&gt; presets
+&lt;endpoint&gt;/&lt;UUID&gt; [codec[:company]] [preset]
+[codec config] [metadata]</b></p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Example using
+endpoint</b></p>
+
+<p style="margin-left:18%;"><b>&gt;presets
+/local/endpoint/ep0 32_1_1 <br>
+&gt;presets /local/endpoint/ep0</b> <br>
+Preset 32_1_1 <br>
+Configuration.**&gt;0: len 0x02 type 0x01 <br>
+Configuration.Sampling Frequency: 32 Khz (0x06) <br>
+Configuration.**&gt;1: len 0x02 type 0x02 <br>
+Configuration.Frame Duration: 7.5 ms (0x00) <br>
+Configuration.**&gt;2: len 0x03 type 0x04 <br>
+Configuration.Frame Length: 60 (0x003c)</p>
+
+<p style="margin-left:9%;"><b>Example using UUID</b></p>
+
+<p style="margin-left:18%;"><b>&gt;presets
+00002bc9-0000-1000-8000-00805f9b34fb 0x06 32_1_1 <br>
+&gt;presets 00002bc9-0000-1000-8000-00805f9b34fb 0x06</b>
+<br>
+... <b><br>
+*32_1_1</b></p>
+
+<p style="margin-left:9%;"><b>Example setting up LC3 custom
+preset</b></p>
+
+<p style="margin-left:18%;"><b>&gt;presets
+00002bc9-0000-1000-8000-00805f9b34fb 0x06 custom <br>
+&gt;[Codec] Enter frequency (Khz):</b> 48 <b><br>
+&gt;[Codec] Enter frame duration (ms):</b> 10 <b><br>
+&gt;[Codec] Enter channel allocation:</b> 3 <b><br>
+&gt;[Codec] Enter frame length:</b> 100 <b><br>
+&gt;[QoS] Enter Target Latency (Low, Balance, High):</b> Low
+<b><br>
+&gt;[QoS] Enter SDU Interval (us):</b> 1000 <b><br>
+&gt;[QoS] Enter Framing (Unframed, Framed):</b> Unframed
+<b><br>
+&gt;[QoS] Enter PHY (1M, 2M):</b> 2M <b><br>
+&gt;[QoS] Enter Max SDU:</b> 200 <b><br>
+&gt;[QoS] Enter RTN:</b> 3 <b><br>
+&gt;[QoS] Enter Max Transport Latency (ms):</b> 10 <b><br>
+&gt;[QoS] Enter Presentation Delay (us):</b> 20000 <b><br>
+&gt;presets 00002bc9-0000-1000-8000-00805f9b34fb 0x06</b>
+<br>
+... <b><br>
+*custom</b></p>
+
+<p style="margin-left:9%;"><b>Example setting up LC3 custom
+preset with extra configuration</b></p>
+
+<p style="margin-left:18%;"><b>&gt;presets
+00002bc9-0000-1000-8000-00805f9b34fb 0x06 custom &quot;0x03
+0xe8 0x00 0x00 0x02 0xe9 0x00&quot; <br>
+&gt;[Codec] Enter frequency (Khz):</b> 48 <b><br>
+&gt;[Codec] Enter frame duration (ms):</b> 10 <b><br>
+&gt;[Codec] Enter channel allocation:</b> 3 <b><br>
+&gt;[Codec] Enter frame length:</b> 100 <b><br>
+&gt;[QoS] Enter Target Latency (Low, Balance, High):</b> Low
+<b><br>
+&gt;[QoS] Enter SDU Interval (us):</b> 1000 <b><br>
+&gt;[QoS] Enter Framing (Unframed, Framed):</b> Unframed
+<b><br>
+&gt;[QoS] Enter PHY (1M, 2M):</b> 2M <b><br>
+&gt;[QoS] Enter Max SDU:</b> 200 <b><br>
+&gt;[QoS] Enter RTN:</b> 3 <b><br>
+&gt;[QoS] Enter Max Transport Latency (ms):</b> 10 <b><br>
+&gt;[QoS] Enter Presentation Delay (us):</b> 20000 <b><br>
+&gt;presets 00002bc9-0000-1000-8000-00805f9b34fb 0x06</b>
+<br>
+... <b><br>
+*custom</b></p>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;http://www.bluez.org&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;linux-bluetooth@vger.kernel.org&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Free use of this
+software is granted under the terms of the GNU Lesser
+General Public Licenses (LGPL).</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,127 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:47 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIF2RGB</title>
+
+</head>
+<body>
+
+<h1 align="center">GIF2RGB</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gif2rgb -
+convert images saved as GIF to 24-bit RGB triplets</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="83%">
+
+
+<p style="margin-top: 1em"><b>gif2rgb</b> [-v] [-1]
+[-c&nbsp;<i>colors</i>] [-s&nbsp;<i>width&nbsp;height</i>]
+[-o&nbsp;<i>outfile</i>] [-h] [<i>gif-file</i>]</p></td>
+<td width="8%">
+</td></tr>
+</table>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-v</p>
+
+<p style="margin-left:14%;">Verbose mode (show progress).
+Enables printout of running scan lines.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-1</p>
+
+<p style="margin-left:14%;">Only one file in the format of
+RGBRGB... triplets (Each of R, G,B is a byte) is being read
+or written. This file size is 3 * Width * Height. If stdin
+is used for input or stdout for output, this option is
+implicitly applied. The default (if not &lsquo;-1') is 3
+files with the names OutFileName.R, OutFileName.G,
+OutFileName.B, each of which is Width * Height bytes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-c colors</p>
+
+<p style="margin-left:14%;">Specifies number of colors to
+use in RGB-to-GIF conversions, in bits per pixels, so '-c 8'
+actually specifies 256 colors (maximum and default).</p>
+
+<p style="margin-left:9%; margin-top: 1em">-s width
+height</p>
+
+<p style="margin-left:14%;">Sets RGB-to-GIF conversion mode
+and specifies the size of the image to read.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-o</p>
+
+<p style="margin-left:14%;">specifies the name of the out
+file (see also &lsquo;-1' above).</p>
+
+<p style="margin-left:9%; margin-top: 1em">-h</p>
+
+<p style="margin-left:14%;">Print one line of command line
+help, similar to Usage above.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default,
+convert a GIF input file to RGB triplets. If -s is
+specified, convert RGB input to a GIF.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no input file
+is given, gif2rgb will try to read data from stdin.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Feeding this
+utility a GIF with an invalid colormap, or other kinds of
+malformations, index will produce invalid output and may
+core-dump the tool. Don't do that.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Gershon
+Elber.</p>
+<hr>
+</body>
+</html>

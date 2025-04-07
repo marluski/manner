@@ -1,0 +1,100 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE ADMIN UNDEPLO</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE ADMIN UNDEPLO</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-admin-undeploy
+- Delete deployment at a given index</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em"><b>ostree admin undeploy</b>
+{INDEX}</p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Deletes the
+deployment at INDEX. INDEX must be in range and not
+reference the currently booted deployment.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin status</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">* gnome-ostree
+67e382b11d213a402a5313e61cbc69dfd5ab93cb07.0 <br>
+origin refspec: gnome-ostree/buildmain/x86_64-runtime <br>
+gnome-ostree ce19c41036cc45e49b0cecf6b157523c2105c4de1c.0
+<br>
+origin refspec: gnome-ostree/buildmain/x86_64-runtime</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin undeploy 1</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Transaction
+complete; bootconfig swap: no deployment count change: -1)
+<br>
+Freed objects: 326.5 kB <br>
+Deleted deployment
+ce19c41036cc45e49b0cecf6b157523c2105c4de1c.0</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin status</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">* gnome-ostree
+67e382b11d213a402a5313e61cbc69dfd5ab93cb07.0 <br>
+origin refspec: gnome-ostree/buildmain/x86_64-runtime</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:38 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>grap2graph</title>
+
+</head>
+<body>
+
+<h1 align="center">grap2graph</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Environment">Environment</a><br>
+<a href="#Authors">Authors</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grap2graph -
+convert a <i>grap</i> diagram into a cropped image</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em"><b>grap2graph</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em">[<b>-unsafe</b>]
+[<b>-format&nbsp;</b><i>output-format</i>]
+[<i>convert-argument&nbsp;</i>...]</p> </td>
+<td width="5%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em"><b>grap2graph</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="5%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p style="margin-top: 1em"><b>grap2graph</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="5%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p><b>grap2graph</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p><b>--version</b></p></td>
+<td width="5%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>grap2graph</i></b>
+reads a <a href="man:grap(1)"><i>grap</i>(1)</a> program
+from the standard input and writes an image file, by default
+in Portable Network Graphics (PNG) format, to the standard
+output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The input GRAP
+code should <i>not</i> be wrapped with the <b>.G1</b> and
+<b>.G2</b> macros that normally guard it within
+<a href="man:groff(1)"><i>groff</i>(1)</a> documents.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Arguments not
+recognized by <i>grap2graph</i> are passed to the
+ImageMagick or GraphicsMagick program
+<a href="man:convert(1)"><i>convert</i>(1)</a>. By
+specifying these, you can give your image a border, set the
+image&rsquo;s pixel density, or perform other useful
+transformations.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The output image
+is clipped using <i>convert</i>&rsquo;s <b>-trim</b> option
+to the smallest possible bounding box that contains all the
+black pixels.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward. <b><br>
+-format&nbsp;</b><i>output-format</i></p>
+
+<p style="margin-left:18%;">Write the image in
+<i>output-format</i>, which must be understood by
+<i>convert</i>; the default is PNG.</p>
+
+<p style="margin-left:9%;"><b>-unsafe</b></p>
+
+<p style="margin-left:18%;">Run <i>groff</i> in
+<i>unsafe</i> mode, enabling the PIC command <b>sh</b> to
+execute arbitrary Unix shell commands. The <i>groff</i>
+default is to forbid this.</p>
+
+<h2>Environment
+<a name="Environment"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>GROFF_TMPDIR</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>TMPDIR</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>TMP</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>TEMP</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>These environment variables are searched in the given
+order to determine the directory where temporary files will
+be created. If none are set, <i>/tmp</i> is used.</p></td></tr>
+</table>
+
+<h2>Authors
+<a name="Authors"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grap2graph</i>
+was written by <a href="mailto:esr@thyrsus.com">Eric S.
+Raymond</a>, based on a recipe for
+<a href="man:pic2graph(1)"><i>pic2graph</i>(1)</a>, by W.
+Richard Stevens.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:pic2graph(1)"><i>pic2graph</i>(1)</a>,
+<a href="man:eqn2graph(1)"><i>eqn2graph</i>(1)</a>,
+<a href="man:grap(1)"><i>grap</i>(1)</a>,
+<a href="man:pic(1)"><i>pic</i>(1)</a>,
+<a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:convert(1)"><i>convert</i>(1)</a></p>
+<hr>
+</body>
+</html>

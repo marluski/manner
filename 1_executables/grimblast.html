@@ -1,0 +1,246 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:39 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>grimblast</title>
+
+</head>
+<body>
+
+<h1 align="center">grimblast</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#TARGETS">TARGETS</a><br>
+<a href="#OUTPUT">OUTPUT</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT CODES">EXIT CODES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grimblast - a
+helper for screenshots within hyprland</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>grimblast</b>
+[--notify] [--cursor] [--freeze] [--wait N] [--scale
+&lt;scale&gt;] (copy|save|copysave|edit) [TARGET] [FILE]
+<b><br>
+grimblast</b> check <b><br>
+grimblast</b> usage</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--notify</b></p>
+
+<p style="margin-left:14%;">Show notifications to the user
+that a screenshot has been taken.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--openfile</b></p>
+
+<p style="margin-left:14%;">Uses dbus to display the folder
+containing the file when interacting with the notification,
+only works with --notify</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--cursor</b></p>
+
+<p style="margin-left:14%;">Include cursors in the
+screenshot.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--freeze</b></p>
+
+<p style="margin-left:14%;">Freezes the screen before area
+selection.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--wait
+N</b></p>
+
+<p style="margin-left:14%;">Wait for N seconds before
+taking a screenshot. Decimal values are also supported.
+Waits after any manual selection is made. Recommended to
+combine with --notify in order to know when the screenshot
+has been taken.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--scale
+&lt;scale&gt;</b></p>
+
+<p style="margin-left:14%;">Passes the &lsquo;-s&lsquo;
+argument to &lsquo;grim&lsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>save</b></p>
+
+<p style="margin-left:14%;">Save the screenshot into a
+regular file. Grimblast will write image files to
+<b>XDG_SCREENSHOTS_DIR</b> if this is set (or defined in
+<b>user-dirs.dir</b>), or otherwise fall back to
+<b>XDG_PICTURES_DIR</b>. Set FILE to &rsquo;-&rsquo; to pipe
+the output to STDOUT.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>copy</b></p>
+
+<p style="margin-left:14%;">Copy the screenshot data (as
+image/png) into the clipboard.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>copysave</b></p>
+
+<p style="margin-left:14%;">Combine the previous 2
+options.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>edit</b></p>
+
+<p style="margin-left:14%;">Open screenshot in the image
+editor of your choice. The default is gimp, but you can set
+a different one with the enviroment variable
+$GRIMBLAST_EDITOR. Example: &lsquo;export
+GRIMBLAST_EDITOR=gimp&lsquo;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>check</b></p>
+
+<p style="margin-left:14%;">Verify whether the required
+tools are installed.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>usage</b></p>
+
+<p style="margin-left:14%;">Show help message.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Grimblast is an
+easy-to-use screenshot utility for hyprland, based on
+grimshot. It provides a convenient interface over grim,
+slurp and jq, and supports storing the screenshot either
+directly to the clipboard using wl-copy or to a file.</p>
+
+<h2>TARGETS
+<a name="TARGETS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grimblast can
+capture the following named targets:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>active</i></p>
+
+<p style="margin-left:14%;">Captures the currently active
+window.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>screen</i></p>
+
+<p style="margin-left:14%;">Captures the entire screen.
+This includes all visible outputs.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>area</i></p>
+
+<p style="margin-left:14%;">Allows manually selecting a
+rectangular region or window (by clicking on it), and
+captures that. Slurp can be customized by setting its
+arguments in the <b>SLURP_ARGS</b> environment variable. If
+you experience high cpu loads when taking a screenshot with
+this target, you can set the <b>GRIMBLAST_HIDE_CURSOR</b>
+environment variable to 0.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>output</i></p>
+
+<p style="margin-left:14%;">Captures the currently active
+output.</p>
+
+<h2>OUTPUT
+<a name="OUTPUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Grimblast will
+print the filename of the captured screenshot to stdout if
+called with the <i>save</i> subcommand.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">An example usage
+pattern is to add these bindings to your hyprland
+config:</p>
+
+<p style="margin-left:14%; margin-top: 1em"># Screenshots:
+<br>
+# Super+P: Current window <br>
+# Super+Shift+p: Select area <br>
+# Super+Alt+p Current output <br>
+# Super+Ctrl+p All outputs</p>
+
+<p style="margin-left:14%; margin-top: 1em"># Optionally,
+customize slurp&rsquo;s appearance <br>
+env = SLURP_ARGS, -d -b -B F050F022 -b 10101022 -c
+ff00ff</p>
+
+<p style="margin-left:14%; margin-top: 1em"># Can fix high
+cpu loads on some machines <br>
+env = GRIMBLAST_HIDE_CURSOR, 0</p>
+
+<p style="margin-left:14%; margin-top: 1em">bind = SUPER,
+p, exec, grimblast save active <br>
+bind = SUPER SHIFT, p, exec, grimblast save area <br>
+bind = SUPER ALT, p, exec, grimblast save output <br>
+bind = SUPER CTRL, p, exec, grimblast save screen</p>
+
+<h2>EXIT CODES
+<a name="EXIT CODES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">0 - Normal exit
+<br>
+2 - Another instance of grimblast is running</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>grim</b>(1)
+<b>slurp</b>(1) <b>grimshot</b>(1)</p>
+<hr>
+</body>
+</html>

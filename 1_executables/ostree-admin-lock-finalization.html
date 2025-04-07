@@ -1,0 +1,98 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE ADMIN LOCK-F</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE ADMIN LOCK-F</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-admin-lock-finalization
+- Change whether staged deployment will be queued for next
+boot</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="55%">
+
+
+<p style="margin-top: 1em"><b>ostree admin
+lock-finalization</b> [OPTIONS...]</p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+requires a staged deployment. By default, this command
+ensures the deployment will be set into a &quot;finalization
+locked&quot; state, which means it will not be queued for
+the next boot by default.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is the same
+as the --lock-finalization argument for ostree admin deploy,
+which is the recommended way to use this feature in a
+race-free way.</p>
+
+<p style="margin-left:9%; margin-top: 1em">However more
+commonly, one will use the --unlock argument for this
+command to later unlock a deployment which was finalization
+locked.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sysroot</b>=&quot;PATH&quot;</p>
+
+<p style="margin-left:14%;">Path to the system to use
+rather than the current one.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--unlock</b>,<b>-u</b></p>
+
+<p style="margin-left:14%;">Unlock the deployment
+finalization state.</p>
+<hr>
+</body>
+</html>

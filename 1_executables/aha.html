@@ -1,0 +1,210 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:40 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>AHA</i>(1) General Commands Manual <i>AHA</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">aha &mdash; Convert ANSI escape
+sequences to HTML</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:14%;"><b>aha</b> [<b>-bhlnprsvwx</b>]
+[<b>-c&nbsp;</b><i>file</i>] [<b>-f&nbsp;</b><i>file</i>]
+[<b>-i&nbsp;</b><i>X</i>] [<b>-L&nbsp;</b><i>LANG</i>]
+[<b>-t&nbsp;</b><i>TITLE</i>]
+[<b>-y&nbsp;</b><i>STYLE</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>aha</b> reads ECMA-48
+SGR-colored text from the standard input, converts it to
+colored HTML and writes it to the standard output. The
+options are as follows:</p>
+
+<p style="margin-top: 1em"><b>-b</b>, <b>--black</b></p>
+
+<p style="margin-left:19%;">Style HTML output to use a
+black background with white text.</p>
+
+<p style="margin-top: 1em"><b>-c</b> <i>file</i>,
+<b>--css</b> <i>file</i></p>
+
+<p style="margin-left:19%;">Adds the given css <i>file</i>
+to the output. In fact just adds &lt;link
+rel=&quot;stylesheet&quot; href=&quot; <i>file</i> &quot;
+/&gt; to the header.</p>
+
+<p style="margin-top: 1em"><b>-f</b> <i>file</i></p>
+
+<p style="margin-left:19%;">Read from <i>file</i> instead
+of from the standard input.</p>
+
+<p style="margin-top: 1em"><b>-h</b>, <b>--help</b>,
+<b>-?</b></p>
+
+<p style="margin-left:19%;">Print help for <b>aha</b> to
+the standard output.</p>
+
+<p style="margin-top: 1em"><b>-i</b> <i>X</i>, <b>--iso</b>
+<i>X</i></p>
+
+<p style="margin-left:19%;">Use the <i>ISO-8859-X</i>
+character encoding instead of UTF-8 for the output, where
+<i>X</i> is a number from 1-16.</p>
+
+<p style="margin-top: 1em"><b>-l</b>, <b>--line-fix</b></p>
+
+<p style="margin-left:19%;">Use a fix for inputs using
+control sequences to change the cursor position. This is a
+hot fix, thus it may not work with every program.</p>
+
+<p style="margin-top: 1em"><b>-L</b> <i>LANG</i>,
+<b>--lang</b> <i>LANG</i></p>
+
+<p style="margin-left:19%;">Uses the <i>ISO-639-1</i> code
+<i>LANG</i> for the language.</p>
+
+<p style="margin-top: 1em"><b>-n</b>,
+<b>--no-header</b></p>
+
+<p style="margin-left:19%;">Do not enclose HTML output in
+<i>&lt;html&gt;</i>, <i>&lt;head&gt;</i> and
+<i>&lt;body&gt;</i> tags.</p>
+
+<p style="margin-top: 1em"><b>-p</b>, <b>--pink</b></p>
+
+<p style="margin-left:19%;">Style HTML output to use a pink
+background.</p>
+
+<p style="margin-top: 1em"><b>-r</b>,
+<b>--ignore-cr</b></p>
+
+<p style="margin-left:19%;">Ignore all carriage-returns
+(ASCII sign 13, \r) which may lead to double new lines in
+html.</p>
+
+<p style="margin-top: 1em"><b>-s</b>,
+<b>--stylesheet</b></p>
+
+<p style="margin-left:19%;">Use a stylesheet instead of
+inline styles.</p>
+
+<p style="margin-top: 1em"><b>-t</b> <i>TITLE</i>,
+<b>--title</b> <i>TITLE</i></p>
+
+<p style="margin-left:19%;">Set the HTML document title to
+<i>TITLE</i> instead of &quot;stdin&quot; or the
+filename.</p>
+
+<p style="margin-top: 1em"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:19%;">Print version number of
+<b>aha</b> to the standard output and exit.</p>
+
+<p style="margin-top: 1em"><b>-w</b>,
+<b>--word-wrap</b></p>
+
+<p style="margin-left:19%;">Wrap long lines in the html
+output. Works with CSS3 supporting browsers and many older
+ones.</p>
+
+<p style="margin-top: 1em"><b>-x</b>, <b>--no-xml</b></p>
+
+<p style="margin-left:19%;">Don&rsquo;t use doctype xml but
+html (may useful for old browsers like IE)</p>
+
+<p style="margin-top: 1em"><b>-y</b> <i>STYLE</i>,
+<b>--style</b> <i>STYLE</i></p>
+
+<p style="margin-left:19%;">Sets the style used in the
+<i>&lt;body&gt;</i> element to <i>STYLE</i> after styles set
+by other parameters.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">Create an HTML file with a black
+background, a custom title and a larger font-size using
+<b>aha</b>&rsquo;s help:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$ aha -h</b>
+| <b>aha -b -t &rsquo;the awesome aha help&rsquo; -y
+&rsquo;font-size:1.875em&rsquo; &gt; aha-help.html</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Create an HTML
+file with a white background using the output of
+<i>diff</i>(1):</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$ diff -u
+--color=always oldfile.c newfile.c</b> | <b>aha &gt;
+diff.html</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Create an HTML
+file with a black background from the output of
+<i>htop</i>(1). You have to use option <b>-l</b> due the
+other new-line-commands htop uses:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$ echo q</b>
+| <b>htop</b> | <b>aha -b -l &gt; htop.html</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Create an HTML
+file from the output of this man page. <i>man</i>(1) uses
+bold and underline formatting from <i>nroff</i>(1), which
+<i>ul</i>(1) converts to SGR:</p>
+
+<p style="margin-left:17%; margin-top: 1em"><b>$
+MAN_KEEP_FORMATTING=1 COLUMNS=80 man aha</b> | <b>ul</b> |
+<b>aha &gt; man-aha.html</b></p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>console_codes</i>(4)</p>
+
+<p style="margin-top: 1em"><i>Control Functions for Coded
+Character Sets</i></p>
+
+<p style="margin-left:9%;">,</p>
+
+<p><i>Ecma</i> , <br>
+ECMA-48 , <br>
+61 , <br>
+1991 .</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">The <b>aha</b> utility is
+maintained by Alexander Matthes &lsquo;</p>
+
+<p>Ziz &rsquo; &lt;<i>ziz@mailbox.org</i>&gt;.</p>
+
+<p style="margin-top: 1em"><b>BUGS</b></p>
+
+<p style="margin-left:9%;">Blinking text using the HTML tag
+<i>&lt;blink&gt;</i> and the css property
+<i>text-decoration:blink</i> have been deprecated on modern
+browsers, thus requiring the use of option <b>-s</b> and
+redefining the <i>.blink</i> css class. GNU August 4, 2020
+<i>AHA</i>(1)</p>
+<hr>
+</body>
+</html>

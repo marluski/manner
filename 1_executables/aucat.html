@@ -1,0 +1,331 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:43 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>AUCAT</i>(1) General Commands Manual
+<i>AUCAT</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">aucat &mdash; audio file
+manipulation tool</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:17%;"><b>aucat</b> [<b>-dn</b>]
+[<b>-b&nbsp;</b><i>size</i>]
+[<b>-c&nbsp;</b><i>channels</i>] [<b>-e&nbsp;</b><i>enc</i>]
+[<b>-f&nbsp;</b><i>device</i>]
+[<b>-g&nbsp;</b><i>position</i>] [<b>-h&nbsp;</b><i>fmt</i>]
+[<b>-i&nbsp;</b><i>file</i>]
+[<b>-m&nbsp;</b><i>min</i>:<i>max</i>/<i>min</i>:<i>max</i>]
+[<b>-o&nbsp;</b><i>file</i>]
+[<b>-p&nbsp;</b><i>position</i>]
+[<b>-q&nbsp;</b><i>port</i>] [<b>-r&nbsp;</b><i>rate</i>]
+[<b>-v&nbsp;</b><i>volume</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;">The <b>aucat</b> utility can
+play, record, mix, and process audio files on the fly.
+During playback, <b>aucat</b> reads audio data concurrently
+from all played files, mixes it and plays the result on the
+device. Similarly, it stores audio data recorded from the
+device into corresponding files. An <i>off-line</i> mode
+could be used to process audio files without involving audio
+hardware. Processing includes:</p>
+
+<p style="margin-top: 1em"><b>&bull;</b></p>
+
+<p style="margin-left:22%;">Change the sound encoding.</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">Route the sound from one
+channel to another.</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">Control the per-file playback
+volume.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Finally,
+<b>aucat</b> can accept MIDI messages usable for:</p>
+
+<p style="margin-top: 1em"><b>&bull;</b></p>
+
+<p style="margin-left:22%;">Volume control.</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">Start, stop and relocate
+playback and recording.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The options are
+as follows:</p>
+
+<p style="margin-top: 1em"><b>-b</b> <i>size</i></p>
+
+<p style="margin-left:19%;">The buffer size of the audio
+device in frames. Default is 7680.</p>
+
+<p style="margin-top: 1em"><b>-c</b> <i>channels</i></p>
+
+<p style="margin-left:19%;">The audio file channels count.
+The default is 2, i.e. stereo.</p>
+
+<p style="margin-top: 1em"><b>-d</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Increase log
+verbosity.</p>
+
+<p style="margin-top: 1em"><b>-e</b> <i>enc</i></p>
+
+<p style="margin-left:19%; margin-top: 1em">Encoding of the
+audio file. The default is <i>s24</i>. Encoding names use
+the following scheme: signedness (</p>
+
+<p><i>s</i> or <i>u</i> ) followed by the precision in
+bits, the byte-order ( <i><br>
+le</i> or <i>be</i> ), the number of bytes per sample, and
+the alignment ( <i><br>
+msb</i> or <i>lsb</i> ). Only the signedness and the
+precision are mandatory. Examples: <i>u8</i>, <i>s16le</i>,
+<i>s24le3</i>, <i>s24le4lsb</i>.</p>
+
+<p style="margin-top: 1em"><b>-f</b> <i>device</i></p>
+
+<p style="margin-left:19%;">Use this <i>sndio</i>(7) audio
+device. Device mode and parameters are determined from audio
+files. Default is <i>default</i>.</p>
+
+<p style="margin-top: 1em"><b>-g</b> <i>position</i></p>
+
+<p style="margin-left:19%;">Go to the given time position
+and start playback or recording there. This option is
+equivalent to an incoming MMC relocate message with the same
+position. The position is expressed as the number of samples
+(at device sample rate).</p>
+
+<p style="margin-top: 1em"><b>-h</b> <i>fmt</i></p>
+
+<p style="margin-left:19%; margin-top: 1em">Audio file
+type. The following file types are supported:</p>
+
+<p style="margin-top: 1em"><b>raw</b></p>
+
+<p style="margin-left:28%; margin-top: 1em">Headerless
+file.</p>
+
+<p><b>wav</b></p>
+
+<p style="margin-left:28%; margin-top: 1em">Microsoft WAV
+file format.</p>
+
+<p><b>aiff</b></p>
+
+<p style="margin-left:28%; margin-top: 1em">Apple&rsquo;s
+audio interchange file format.</p>
+
+<p><b>au</b></p>
+
+<p style="margin-left:28%; margin-top: 1em">Sun/NeXT audio
+file format.</p>
+
+<p><b>auto</b></p>
+
+<p style="margin-left:28%; margin-top: 1em">Try to guess,
+depending on the file name. This is the default.</p>
+
+<p style="margin-top: 1em"><b>-i</b> <i>file</i></p>
+
+<p style="margin-left:19%;">Play this audio file. If the
+option argument is &lsquo;-&rsquo; then standard input will
+be used.</p>
+
+<p style="margin-top: 1em"><b>-m</b>
+<i>min</i>:<i>max</i>/<i>min</i>:<i>max</i></p>
+
+<p style="margin-left:19%;">Map the given range of source
+channels into the given range of destination channels.</p>
+
+<p style="margin-top: 1em"><b>-n</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Off-line mode.
+Read input files and store the result in the output files,
+processing them on the fly. This mode is useful to mix,
+demultiplex, resample or re-encode audio files off-line. It
+requires at least one input (<b>-i</b>) and one output
+(<b>-o</b>).</p>
+
+<p style="margin-top: 1em"><b>-o</b> <i>file</i></p>
+
+<p style="margin-left:19%;">Record into this audio file. If
+the option argument is &lsquo;-&rsquo; then standard output
+will be used.</p>
+
+<p style="margin-top: 1em"><b>-p</b> <i>position</i></p>
+
+<p style="margin-left:19%;">Time offset where the beginning
+of the file belongs. The first sample of the file will be
+played or recorded when the device reaches the given
+position. The position is expressed as the number of samples
+(at device sample rate).</p>
+
+<p style="margin-top: 1em"><b>-q</b> <i>port</i></p>
+
+<p style="margin-left:19%;">Control audio device properties
+through this MIDI port. This includes per-stream volumes and
+the ability to synchronously start, stop and relocate audio
+files.</p>
+
+<p style="margin-top: 1em"><b>-r</b> <i>rate</i></p>
+
+<p style="margin-left:19%;">Sample rate in Hertz of the
+audio file. The default is <b>48000</b>.</p>
+
+<p style="margin-top: 1em"><b>-v</b> <i>volume</i></p>
+
+<p style="margin-left:19%;">Software volume attenuation of
+the file to play. The value must be between 1 and 127,
+corresponding to -42dB and -0dB attenuation in 1/3dB steps.
+The default is 127, i.e. no attenuation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On the command
+line, per-file parameters (<b>-cehmrv</b>) must precede the
+file definition (<b>-io</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">If <b>aucat</b>
+is sent SIGHUP, SIGINT or SIGTERM, it terminates recording
+to files.</p>
+
+<p style="margin-top: 1em"><b>MIDI CONTROL</b></p>
+
+<p style="margin-left:9%;"><b>aucat</b> can be controlled
+through MIDI (<b>-q</b>) as follows: a MIDI channel is
+assigned to each stream, and the volume is changed using the
+standard volume controller (number 7). The master volume can
+be changed using the standard master volume system exclusive
+message.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All audio files
+are controlled by the following MMC messages:</p>
+
+<p style="margin-top: 1em">relocate</p>
+
+<p style="margin-left:31%; margin-top: 1em">All files are
+relocated to the requested time position. If it is beyond
+the end of a file, the file is temporarily disabled until a
+valid position is requested.</p>
+
+<p>start</p>
+
+<p style="margin-left:31%; margin-top: 1em">Playback and/or
+recording is started.</p>
+
+<p>stop</p>
+
+<p style="margin-left:31%; margin-top: 1em">Playback and/or
+recording is stopped and all files are rewound back to the
+starting position.</p>
+
+<p style="margin-left:9%; margin-top: 1em">MIDI control is
+intended to be used together with <i>sndiod</i>(8). For
+instance, the following command will create two devices: the
+default <i>snd/default</i> and a MMC-controlled one
+<i>snd/default.mmc</i>:</p>
+
+<p style="margin-left:17%; margin-top: 1em">$ sndiod -r
+48000 -z 480 -s default -t slave -s mmc</p>
+
+<p style="margin-left:9%; margin-top: 1em">Programs using
+<i>snd/default</i> behave normally, while programs using
+<i>snd/mmc</i> wait for the MMC start signal and start
+synchronously. Then, the following command will play a file
+on the <i>snd/mmc</i> audio device, giving full control to
+MIDI software or hardware connected to the <i>midithru/0</i>
+MIDI port:</p>
+
+<p style="margin-left:17%; margin-top: 1em">$ aucat -f
+snd/mmc -q midithru/0 -i file.wav</p>
+
+<p style="margin-left:9%; margin-top: 1em">At this stage,
+<b>aucat</b> will start, stop and relocate automatically
+following all user actions in the MIDI sequencer, assuming
+it&rsquo;s configured to transmit MMC on <i>midithru/0</i>
+and <i>snd/mmc</i>. Furthermore, the MIDI sequencer could be
+configured to use the <i>snd/mmc</i> port as MTC clock
+source, assured to be synchronous to playback of
+<i>file.wav</i>.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">Mix and play two files while
+recording a third file:</p>
+
+<p style="margin-left:17%; margin-top: 1em">$ aucat -i
+file1.wav -i file2.wav -o file3.wav</p>
+
+<p style="margin-left:9%; margin-top: 1em">Record channels
+2 and 3 into one stereo file and channels 6 and 7 into
+another stereo file using a 44.1kHz sampling rate for
+both:</p>
+
+<p style="margin-left:17%; margin-top: 1em">$ aucat -r
+44100 -m 2:3/0:1 -o file1.wav -m 6:7/0:1 -o file2.wav</p>
+
+<p style="margin-left:9%; margin-top: 1em">Split a stereo
+file into two mono files:</p>
+
+<p style="margin-left:17%; margin-top: 1em">$ aucat -n -i
+stereo.wav -c 1 -m 0:0/0:0 -o left.wav \</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="10%">
+
+
+<p>-m 1:1/0:0 -o right.wav</p></td>
+<td width="63%">
+</td></tr>
+</table>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>cdio</i>(1), <i>audio</i>(4),
+<i>sndio</i>(7), <i>audioctl</i>(8), <i>mixerctl</i>(8),
+<i>sndiod</i>(8)</p>
+
+<p style="margin-top: 1em"><b>BUGS</b></p>
+
+<p style="margin-left:9%;">Resampling is low quality.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There are
+limitations inherent to the <i>wav</i>, <i>aiff</i>, and
+<i>au</i> file formats: not all encodings are supported,
+file sizes are limited to 2GB, and the files must support
+the <i>lseek</i>(2) operation (e.g. pipes do not support
+it). GNU $Mdocdate$ <i>AUCAT</i>(1)</p>
+<hr>
+</body>
+</html>

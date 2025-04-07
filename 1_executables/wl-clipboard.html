@@ -1,0 +1,450 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>WL-CLIPBOARD</title>
+
+</head>
+<body>
+
+<h1 align="center">WL-CLIPBOARD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wl-clipboard -
+Wayland copy and paste command line utilities</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wl-copy</b>
+[<b>--primary</b>] [<b>--type</b> <i>mime/type</i>]
+[<i>text</i>...]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>wl-paste</b>
+[<b>--primary</b>] [<b>--type</b> <i>mime/type</i>]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Only the most
+useful options are listed here; see below for the full
+list.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wl-copy</b>
+copies the given <i>text</i> to the Wayland clipboard. If no
+<i>text</i> is given, <b>wl-copy</b> copies data from its
+standard input.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>wl-paste</b>
+pastes data from the Wayland clipboard to its standard
+output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Although
+<b>wl-copy</b> and <b>wl-paste</b> are particularly
+optimized for plain text and other textual content formats,
+they fully support content of arbitrary MIME types.
+<b>wl-copy</b> automatically infers the type of the copied
+content by running <b>xdg-mime</b>(1) on it. <b>wl-paste</b>
+tries its best to pick a type to paste based on the list of
+offered MIME types and the extension of the file it&rsquo;s
+pasting into. If you&rsquo;re not satisfied with the type
+they pick or don&rsquo;t want to rely on this implicit type
+inference, you can explicitly specify the type to use with
+the <b>--type</b> option.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To parse
+options, wl-clipboard uses the <b>getopt</b>(3) library
+routines, whose features depend on the C library in use. In
+particular, it may be possible to specify <b>--</b> as an
+argument on its own to prevent any further arguments from
+getting parsed as options (which lets you copy text
+containing words that start with the <b>-</b> sign), and to
+shorten long options to their unambiguous prefixes. <b><br>
+-p</b>, <b>--primary</b></p>
+
+<p style="margin-left:18%;">Use the &quot;primary&quot;
+clipboard instead of the regular clipboard.</p>
+
+<p style="margin-left:9%;"><b>-o</b>, <b>--paste-once</b>
+(for <b>wl-copy</b>)</p>
+
+<p style="margin-left:18%;">Only serve one paste request
+and then exit. Unless a clipboard manager specifically
+designed to prevent this is in use, this has the effect of
+clearing the clipboard after the first paste, which is
+useful for copying sensitive data such as passwords. Note
+that this may break pasting into some clients that expect to
+be able to paste multiple times, in particular pasting into
+XWayland windows is known to break when this option is
+used.</p>
+
+<p style="margin-left:9%;"><b>-f</b>, <b>--foreground</b>
+(for <b>wl-copy</b>)</p>
+
+<p style="margin-left:18%;">By default, <b>wl-copy</b>
+forks and serves data requests in the background; this
+option overrides that behavior, causing <b>wl-copy</b> to
+run in the foreground.</p>
+
+<p style="margin-left:9%;"><b>-c</b>, <b>--clear</b> (for
+<b>wl-copy</b>)</p>
+
+<p style="margin-left:18%;">Instead of copying anything,
+clear the clipboard so that nothing is copied.</p>
+
+<p style="margin-left:9%;"><b>-n</b>, <b>--trim-newline</b>
+(for <b>wl-copy</b>)</p>
+
+<p style="margin-left:18%;">Do not copy the trailing
+newline character if it is present in the input file.</p>
+
+<p style="margin-left:9%;"><b>-n</b>, <b>--no-newline</b>
+(for <b>wl-paste</b>)</p>
+
+<p style="margin-left:18%;">Do not append a newline
+character after the pasted clipboard content. This option is
+automatically enabled for non-text content types and when
+using the <b>--watch</b> mode.</p>
+
+<p style="margin-left:9%;"><b>-t</b> <i>mime/type</i>,
+<b>--type</b> <i>mime/type</i></p>
+
+<p style="margin-left:18%;">Override the automatically
+selected MIME type. For <b>wl-copy</b> this option controls
+which type <b>wl-copy</b> will offer the content as. For
+<b>wl-paste</b> it controls which of the offered types
+<b>wl-paste</b> will request the content in. In addition to
+specific MIME types such as <i>image/png</i>,
+<b>wl-paste</b> also accepts generic type names such as
+<i>text</i> and <i>image</i> which make it automatically
+pick some offered MIME type that matches the given generic
+name.</p>
+
+<p style="margin-left:9%;"><b>-s</b> <i>seat-name</i>,
+<b>--seat</b> <i>seat-name</i></p>
+
+<p style="margin-left:18%;">Specify which seat
+<b>wl-copy</b> and <b>wl-paste</b> should work with. Wayland
+natively supports multi-seat configurations where each seat
+gets its own mouse pointer, keyboard focus, and among other
+things its own separate clipboard. The name of the default
+seat is likely <i>default</i> or <i>seat0</i>, and
+additional seat names normally come from the <b>udev</b>(7)
+property <b>ENV{WL_SEAT}</b>. You can view the list of the
+currently available seats as advertised by the compositor
+using the <b>weston-info</b>(1) tool. If you don&rsquo;t
+specify the seat name explicitly, <b>wl-copy</b> and
+<b>wl-paste</b> will pick a seat arbitrarily. If you are
+using a single-seat system, there is little reason to use
+this option.</p>
+
+<p style="margin-left:9%;"><b>-l</b>, <b>--list-types</b>
+(for <b>wl-paste</b>)</p>
+
+<p style="margin-left:18%;">Instead of pasting the
+selection, output the list of MIME types it is offered
+in.</p>
+
+<p style="margin-left:9%;"><b>-w</b> <i>command</i>...,
+<b>--watch</b> <i>command</i>... (for <b>wl-paste</b>)</p>
+
+<p style="margin-left:18%;">Instead of pasting once and
+exiting, continuously watch the clipboard for changes, and
+run the specified <i>command</i> each time a new selection
+appears. The spawned process can read the clipboard contents
+from its standard input. <b>wl-paste</b> also sets the
+<b>CLIPBOARD_STATE</b> variable in the environment of the
+spawned processes (see below).</p>
+
+<p style="margin-left:18%; margin-top: 1em">This mode
+requires a compositor that supports the wlroots data-control
+protocol.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Display the version of
+wl-clipboard and some short info about its license.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Display a short help message
+listing the available options.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>WAYLAND_DISPLAY</b></p>
+
+<p style="margin-left:18%;">Specifies what Wayland server
+<b>wl-copy</b> and <b>wl-paste</b> should connect to. This
+is the same environment variable that you pass to other
+Wayland clients, such as graphical applications, that
+connect to this Wayland server. It is normally set up
+automatically by the graphical session and the Wayland
+compositor. See <b>wl_display_connect</b>(3) for more
+details.</p>
+
+<p style="margin-left:9%;"><b>WAYLAND_DEBUG</b></p>
+
+<p style="margin-left:18%;">When set to <b>1</b>, causes
+the <b>wayland-client</b>(7) library to log every
+interaction <b>wl-copy</b> and <b>wl-paste</b> make with the
+Wayland compositor to stderr.</p>
+
+<p style="margin-left:9%;"><b>CLIPBOARD_STATE</b></p>
+
+<p style="margin-left:18%;">Set by <b>wl-paste</b> for the
+spawned command in <b>--watch</b> mode. Currently the
+following possible values are <i>defined</i>: <br>
+CLIPBOARD_STATE=<b>data</b></p>
+
+<p style="margin-left:27%;">Indicates that the clipboard
+contains data that the spawned command can read from its
+standard input. This is the most common case.</p>
+
+<p style="margin-left:18%;">CLIPBOARD_STATE=<b>nil</b></p>
+
+<p style="margin-left:27%;">Indicates that the clipboard is
+empty. In this case the spawned command&rsquo;s standard
+input will be attached to <i>/dev/null</i>. Note that this
+is subtly different from the clipboard containing zero-sized
+data (which can be achieved, for instance, by running
+<b>wl-copy &lt; /dev/null</b>).</p>
+
+
+<p style="margin-left:18%;">CLIPBOARD_STATE=<b>clear</b></p>
+
+<p style="margin-left:27%;">Indicates that the clipboard is
+empty because of an explicit clear request, such as after
+running <b>wl-copy --clear</b>. As for <b>nil</b>, the
+command&rsquo;s standard input will be attached to
+<i>/dev/null</i>.</p>
+
+
+<p style="margin-left:18%;">CLIPBOARD_STATE=<b>sensitive</b></p>
+
+<p style="margin-left:27%;">Indicates that the clipboard
+contains sensitive data such as a password or a key. It is
+probably best to avoid visibly displaying or persistently
+saving clipboard contents.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Any client
+programs implementing the <b>CLIPBOARD_STATE</b> protocol
+are encouraged to implement proper support for all the
+values listed above, as well as to fall back to some
+sensible behavior if <b>CLIPBOARD_STATE</b> is unset or set
+to some unrecognized value (this is to leave the design
+space open for future extensions). However, the currently
+existing Wayland clipboard protocols don&rsquo;t let
+wl-clipboard identify the cases where <b>clear</b> and
+<b>sensitive</b> values should be set, so currently
+wl-clipboard only ever sets <b>CLIPBOARD_STATE</b> to
+<b>data</b> or <b>nil</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<b>CLIPBOARD_STATE</b> protocol was intentionally designed
+to not be specific to either wl-clipboard or Wayland; in
+fact, other clipboard tools are encouraged to implement the
+same protocol. Currently, the SerenityOS <b>paste</b>(1)
+utility is known to implement the same
+<b>CLIPBOARD_STATE</b> protocol.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>/etc/mime.types</i></p>
+
+<p style="margin-left:18%;">If present, read by
+<b>wl-paste</b> to infer the MIME type to paste in based on
+the file name extension of its standard output.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unless the
+Wayland compositor implements the wlroots data-control
+protocol, wl-clipboard has to resort to using a hack to
+access the clipboard: it will briefly pop up a tiny
+transparent surface (window). On some desktop environments
+(in particular when using tiling window managers), this can
+cause visual issues such as brief flashing. In some cases
+the Wayland compositor doesn&rsquo;t give focus to the popup
+surface, which prevents wl-clipboard from accessing the
+clipboard and manifests as a hang.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There is
+currently no way to copy data in multiple MIME types, such
+as multiple image formats, at the same time. <br>
+See
+&lt;https://github.com/bugaevc/wl-clipboard/issues/71&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">wl-clipboard is
+not always able to detect that a MIME type is textual, which
+may break pasting into clients that expect textual formats,
+not <i>application/something</i>. The workaround, same as
+for all format inference issues, is to specify the desired
+MIME type explicitly, such as <b>wl-copy --type</b>
+<i>text/plain</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>wl-copy
+--clear</b> and <b>wl-copy --paste-once</b> don&rsquo;t
+always interact well with clipboard managers that are
+overeager to preserve clipboard contents.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Applications
+written using the GTK 3 toolkit copy text with
+&quot;\r\n&quot; (also known as CR LF) line endings, which
+takes most other software by surprise. wl-cipboard does
+nothing to rectify this. The recommended workaround is
+piping <b>wl-paste</b> output through <b>dos2unix</b>(1)
+when pasting from a GTK 3 application. <br>
+See
+&lt;https://gitlab.gnome.org/GNOME/gtk/-/issues/2307&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When trying to
+paste content copied with <b>wl-copy</b>, <b>wl-copy</b>
+does not check whether the requested MIME type is among
+those it has offered, and always provides the same data in
+response.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copy a simple
+text message:</p>
+
+<p style="margin-left:18%;">$ <b>wl-copy</b> <i>Hello
+world!</i></p>
+
+<p style="margin-left:9%;">Copy a message starting with
+dashes:</p>
+
+<p style="margin-left:18%;"><b>wl-copy --</b>
+<i>--long</i></p>
+
+<p style="margin-left:9%;">Copy the list of files in
+<i>&#732;/Downloads</i>:</p>
+
+<p style="margin-left:18%;">$ <i>ls &#732;/Downloads</i>
+<b>| wl-copy</b></p>
+
+<p style="margin-left:9%;">Copy an image:</p>
+
+<p style="margin-left:18%;">$ <b>wl-copy &lt;</b>
+<i>&#732;/Pictures/photo.png</i></p>
+
+<p style="margin-left:9%;">Copy the previous command:</p>
+
+<p style="margin-left:18%;">$ <b>wl-copy
+&quot;!!&quot;</b></p>
+
+<p style="margin-left:9%;">Paste to a file, without
+appending a newline:</p>
+
+<p style="margin-left:18%;">$ <b>wl-paste -n &gt;</b>
+<i>clipboard.txt</i></p>
+
+<p style="margin-left:9%;">Sort clipboard contents:</p>
+
+<p style="margin-left:18%;">$ <b>wl-paste | sort |
+wl-copy</b></p>
+
+<p style="margin-left:9%;">Upload clipboard contents to a
+pastebin on each change:</p>
+
+<p style="margin-left:18%;">$ <b>wl-paste --watch nc</b>
+<i>paste.example.org 5555</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Sergey Bugaev.</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report
+wl-clipboard bugs to
+&lt;https://github.com/bugaevc/wl-clipboard/issues&gt; <br>
+Please make sure to mention which Wayland compositor you are
+using, and attach <b>WAYLAND_DEBUG=1</b> debugging logs of
+wl-clipboard.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2018-2023 Sergey Bugaev. License GPLv3+: GNU GPL version 3
+or later &lt;https://gnu.org/licenses/gpl.html&gt;. <br>
+This is free software: you are free to change and
+redistribute it. There is NO WARRANTY, to the extent
+permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xclip</b>(1),
+<b>xsel</b>(1), <b>wl-clipboard-x11</b>(1)</p>
+<hr>
+</body>
+</html>

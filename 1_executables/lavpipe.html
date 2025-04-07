@@ -1,0 +1,373 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>lavpipe</title>
+
+</head>
+<body>
+
+<h1 align="center">lavpipe</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#USAGE">USAGE</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lavpipe -
+creates raw YUV streams from pipe list scripts</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lavpipe</b>
+[<b>-o</b> <i>num</i>] [<b>-n</b> <i>num</i>]
+<i>pipe-list</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lavpipe reads a
+script file called &rsquo;pipe list&rsquo; that is of a
+similar structure as the edit lists that can be fed into
+lav2yuv. For info about the pipe list format see below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The pipe list
+defines several video sources and filters that are combined
+by lavpipe to produce a single output YUV stream on stdout
+(which for example can be compressed and stored to disk via
+<b>mpeg2enc</b>(1) or <b>yuv2lav</b>(1)).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The command line
+options are used to output a specific part of the resulting
+video stream. That means you can tell lavpipe how many
+frames to skip and how many frames to deliver from that
+point on.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-o</b> <i>num</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>This is the frame offset of the output video. The first
+<i>num</i> frames of the resulting video simply are neither
+calculated nor written to stdout. This value defaults to
+0.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-n</b> <i>num</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>This is the frame count. If the input files or streams
+defined in the pipe list script are long enough, the output
+will be of exactly <i>num</i> frames length. A value of 0
+means that all frames until the last one as defined in the
+pipe list will be written out, as long as there&rsquo;s some
+input (0 is the default).</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>pipe-list</i></p>
+
+<p style="margin-left:18%;">This is name of the pipe list
+file that lavpipe will &rsquo;execute&rsquo;. For
+information about this file&rsquo;s format see below.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-?</b></p></td>
+<td width="6%"></td>
+<td width="53%">
+
+
+<p>Display a synopsis of the command syntax.</p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lavpipe -o 100
+-n 25 film.pli</p>
+
+<p style="margin-left:18%;">would calculate and output to
+stdout frames 100 to 124 as defined in film.pli (in PAL this
+would be the 5th second of the film).</p>
+
+<p style="margin-left:9%;">lavpipe input.pli | yuv2lav -q80
+output.avi</p>
+
+<p style="margin-left:18%;">would save the movie assembled
+by lavpipe as a single AVI file.</p>
+
+<h2>USAGE
+<a name="USAGE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">In this section
+the format of lavpipe&rsquo;s input files the pipe list
+scripts is explained. If you need some examples or a more
+detailed tutorial, please read the <b>mjpegtools</b>(1)
+manpage&rsquo;s section about <b>CREATING MOVIE
+TRANSITIONS</b>. and the file <i>README.lavpipe</i> that
+should be included in the distribution. Also feel free to
+contact us via the mailing list (see below).</p>
+
+<p style="margin-left:9%; margin-top: 1em">A pipe list
+contains of two parts: the YUV <b>source list</b> and after
+this, as many <b>sequence descriptions</b> as wanted. It
+always begins with the following two lines: <b><br>
+LAV Pipe List</b></p>
+
+<p style="margin-left:18%;">This is the first line in every
+pipe list script. It is used as a simple test if lavpipe
+really was given a pipe list script and not your PhD thesis
+as input.</p>
+
+<p style="margin-left:9%;"><b>NTSC</b>|<b>PAL</b></p>
+
+<p style="margin-left:18%;">This is the second line in
+every pipe list and can be either PAL or NTSC, depending on
+what video standard you use. I don&rsquo;t remember if this
+is used at the moment.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Now follows the
+<b>source list</b>:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>num</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>This is the number of input commands. lavpipe will read
+the next <i>num</i> lines and interpret them as input stream
+commands.</p> </td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><i>command&nbsp;</i>(<i>num&nbsp;</i>times)</p>
+
+<p style="margin-left:18%;">This is a valid command line
+with two variables $o and $n that will be replaced by
+lavpipe with the offset and number of frames that the
+program has to output. Example: <b><br>
+lav2yuv -o $o -f $n input.avi</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Thus, an example
+<b>source list</b> could look like this: <b><br>
+2 <br>
+lav2yuv -o $o -f $n scene1.avi <br>
+lav2yuv -o $o -f $n scene2.avi</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">after this you
+can append as many <b>sequence descriptions</b> as needed.
+Each of them is built up as follows:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>num</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>The number of frames that this sequence will last.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>num</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>The number of inputs that will be used in this sequence.
+This number must of course be less than or equal to the
+number of inputs that are defined above.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>idx</i> [<i>ofs</i>]
+(<i>num</i> times)</p>
+
+<p style="margin-left:18%;">These are the indices to the
+sources that are defined at the beginning of the file (first
+source is 0) with an optional frame offset (i.e. sequence
+starts with frame number <i>ofs</i> of this input.) - this
+value defaults to 0. Example: <b><br>
+0 150</b></p>
+
+<p style="margin-left:9%;"><i>command</i></p>
+
+<p style="margin-left:18%;">This is a valid command line to
+a YUV filter tool that reads <i>num</i> input streams and
+writes one output stream, combining its inputs. Optionally,
+the filter tool can be given the two $o and $n variables
+that will be replaced by lavpipe as in the source commands
+(see above). For further info read <i>README.lavpipe</i> or
+the documentation for the filter programs (if available). An
+example filter could look like this: <b><br>
+transist.flt -o 0 -O 255 -s $o -n $n -d 50</b> <br>
+And if the sequence only has one input that simply should be
+copied to the output, you can use a dash instead of a
+command line: <b><br>
+-</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">And here&rsquo;s
+an example for a complete pipe list that implements a
+transistion from scene1.avi to scene2.avi</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>REMOVE THE
+COMMENTS AFTER The #</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>LAV Pipe List
+<br>
+PAL <br>
+2 <br>
+lav2yuv -o $o -f $n scene1.avi <br>
+lav2yuv -o $o -f $n scene2.avi <br>
+50</b> # first sequence: 50 frames <b><br>
+1</b> # contains one input: <b><br>
+0 0</b> # scene1.avi, offset 0 <b><br>
+-</b> # simple output <b><br>
+25</b> # second sequence: 25 frames <b><br>
+2</b> # contains two inputs: <b><br>
+0 50</b> # scene1.avi, offset 50 <b><br>
+1</b> # scene2.avi, offset 0 <b><br>
+transist.flt -o 0 -O 255 -s $o -n $n -d 50</b> # transistion
+<b><br>
+50</b> # third sequence: 50 frames <b><br>
+1</b> # contains one input: <b><br>
+1 25</b> # scene2.avi, offset 25 <b><br>
+-</b> # simple output</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">I&rsquo;m sure
+there are enough of them. lavpipe often accepts malformed
+pipe lists and then writes out a video that was all but
+intended - without warning.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>The mention
+of $n above is wrong. At one time there were two parameters
+but now a program is allowed to produce as many frames as it
+wants. THe author of the program hard coded, for reasons
+unknown, $n to be 0.</b></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">There are also
+some serious limitations in the system, such as
+frame-by-frame processing. But as the goal when writing
+lavpipe was the simplicity of the pipeline, other tools will
+have to be written to do more interesting tasks. <br>
+But I want to note that it is very well possible to write a
+pipe list that combines several files, and then use that
+pipe list as an input for another pipe list by simply using
+the lavpipe command in the source list (see above) - this
+can be already used to do some nice things, if you have some
+nice filters.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Comments are
+NOT allowed in pipelist files. The comments (text after #)
+above are for illustration only.</b></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Philipp Zabel. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>lav2yuv</b></i>(1),
+<b>lavplay</b>(1), <b>lavrec</b>(1), <b>mpeg2enc</b>(1),
+<b>yuv2lav</b>(1), <b>yuvscaler</b>(1)</p>
+<hr>
+</body>
+</html>

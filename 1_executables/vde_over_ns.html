@@ -1,0 +1,172 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VDE_OVER_NS</title>
+
+</head>
+<body>
+
+<h1 align="center">VDE_OVER_NS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#NOTICE">NOTICE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">vde_over_ns -
+Steganographic cable over NS protocol for Virtual
+Distributed Ethernet</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_over_ns</b>
+[<b>-D</b>] [<b>-c</b> <i>server_address</i>] [<b>-s</b>
+<i>vde_plug</i>] [<b>-i</b> <i>ip.to.bi.nd</i>]
+<i>domain.name</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A
+<b>vde_over_ns</b> allows to connect two remote vde_switches
+through steganographic NS query/response datagrams.
+e.g.:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>dpipe
+vde_plug /tmp/s1 = vde_over_ns tun.mydomain.vde</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">binds to udp
+port 53 and listen for incoming steganographic NS queries
+(server mode). All the traffic to/from stdout/stdin is
+redirected to the client via ns responses.</p>
+
+<p style="margin-left:9%; margin-top: 1em">creates a wire
+between two vde_switches (with sockets /tmp/s1 and /tmp/s2
+respectively). This cable looses 10% of the packets in each
+direction.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The same
+vde_over_dns server can be created using:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_over_ns
+-s /tmp/s1 tun.mydomain.vde</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The syntax is
+almost identical for the client mode, except that to have a
+vde_over_ns client connect to that server, the <b>-c</b>
+<i>server</i> option must be specified.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>
+<i>vdeplug</i></p>
+
+<p style="margin-left:18%;">If specified, the vde_over_ns
+will connect to the local vde socket <i>vdeplug</i> instead
+pf stdin/stdout, using the libvdeplug library.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-D</b></p></td>
+<td width="6%"></td>
+<td width="64%">
+
+
+<p>Detach console and send the process to background.</p></td>
+<td width="18%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-b</b> <i>ip.to.bind</i></p>
+
+<p style="margin-left:18%;">The NS server will bind only to
+the specified ip, instead of any ip. Only valid in server
+mode (without -c)</p>
+
+<p style="margin-left:9%;"><b>-c</b> <i>server_addr</i></p>
+
+<p style="margin-left:18%;">If specified, client mode is
+enabled. Vde_over_ns will try to send NS requests to
+<i>server_addr</i>. If not specified, server mode is enabled
+by default.</p>
+
+<h2>NOTICE
+<a name="NOTICE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtual
+Distributed Ethernet is not related in any way with
+www.vde.com (&quot;Verband der Elektrotechnik, Elektronik
+und Informationstechnik&quot; i.e. the German
+&quot;Association for Electrical, Electronic &amp;
+Information Technologies&quot;).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_switch</b>(1),
+<b>vdeq</b>(1). <b>dpipe</b>(1). <b>unixterm</b>(1).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">VDE_OVER_NS is a
+tool by Daniele Lacamera &lt;root@danielinux.net&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">VDE is a project
+by Renzo Davoli &lt;renzo@cs.unibo.it&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">based on nstx, a
+steganographic ns client/server software by:</p>
+
+<p style="margin-left:9%; margin-top: 1em">Florian Heinz
+&lt;sky@sysv.de&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Julien Oster
+&lt;frodo@sysv.de&gt;</p>
+<hr>
+</body>
+</html>

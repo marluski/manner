@@ -1,0 +1,1207 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VIRT-QEMU-SEV-VALIDATE</title>
+
+</head>
+<body>
+
+<h1 align="center">VIRT-QEMU-SEV-VALIDATE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Common options">Common options</a><br>
+<a href="#Guest state options">Guest state options</a><br>
+<a href="#Guest config options">Guest config options</a><br>
+<a href="#Libvirt options">Libvirt options</a><br>
+<a href="#Secret injection options">Secret injection options</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Fully offline execution">Fully offline execution</a><br>
+<a href="#Fetch from remote libvirt">Fetch from remote libvirt</a><br>
+<a href="#Fetch from local libvirt">Fetch from local libvirt</a><br>
+<a href="#COMMON MISTAKES CHECKLIST">COMMON MISTAKES CHECKLIST</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">virt-qemu-sev-validate
+- validate a domain AMD SEV launch measurement</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>virt-qemu-sev-validate</b>
+[<i>OPTIONS</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program
+validates the reported measurement for a domain launched
+with AMD SEV. If the program exits with a status of zero,
+the guest owner can be confident that their guest OS is
+running under the protection offered by the SEV / SEV-ES
+platform.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+level of protection varies depending on the AMD SEV platform
+generation and describing the differences is outside the
+scope of this document.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For the results
+of this program to be considered trustworthy, it is required
+to be run on a machine that is already trusted by the guest
+owner. This could be a machine that the guest owner has
+direct physical control over, or it could be another virtual
+machine protected by AMD SEV that has already had its launch
+measurement validated. Running this program on the
+virtualization host will not produce an answer that can be
+trusted.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If told to
+connect to libvirt, it will refuse to use a libvirt
+connection that is local to the machine, since that cannot
+be trusted. For the sake of testing or demonstration
+purposes, however, it can be forced to run in this scenario
+using the <b>--insecure</b> flag. The result will, of
+course, still not be trustworthy.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Common options
+<a name="Common options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Display command
+line help usage then exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--debug</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Show debug
+information while running</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>,
+<b>--quiet</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Don't print
+information about the attestation result.</p>
+
+<h3>Guest state options
+<a name="Guest state options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+provide information about the state of the guest that needs
+its boot attested.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--measurement
+BASE64-STRING</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The launch
+measurement reported by the hypervisor of the domain to be
+validated. The measurement must be 48 bytes of binary data
+encoded as a base64 string.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--api-major
+VERSION</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The SEV API
+major version of the hypervisor the domain is running
+on.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--api-minor
+VERSION</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The SEV API
+major version of the hypervisor the domain is running
+on.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--build-id
+ID</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The SEV build ID
+of the hypervisor the domain is running on.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--policy
+POLiCY</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The policy
+bitmask associated with the session launch data of the
+domain to be validated.</p>
+
+<h3>Guest config options
+<a name="Guest config options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+provide items needed to calculate the expected domain launch
+measurement. This will then be compared to the reported
+launch measurement.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f PATH</b>,
+<b>--firmware=PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Path to the
+firmware loader binary. This is the EDK2 build that knows
+how to initialize AMD SEV. For the validation to be
+trustworthy it important that the firmware build used has no
+support for loading non-volatile variables from NVRAM, even
+if NVRAM is expose to the guest.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-k PATH</b>,
+<b>--kernel=PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Path to the
+kernel binary if doing direct kernel boot.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r PATH</b>,
+<b>--initrd=PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Path to the
+initrd binary if doing direct kernel boot. Defaults to zero
+length content if omitted.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e
+STRING</b>, <b>--cmdline=STRING</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">String
+containing any kernel command line parameters used during
+boot of the domain. Defaults to the empty string if
+omitted.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n COUNT</b>,
+<b>--num-cpus=COUNT</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The number of
+virtual CPUs for the domain. This is required when the
+domain policy is set to require SEV-ES.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-0 PATH</b>,
+<b>--vmsa-cpu0=PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Path to the VMSA
+initial state for the boot CPU. This is required when the
+domain policy is set to require SEV-ES. The file contents
+must be exactly 4096 bytes in length.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-1 PATH</b>,
+<b>--vmsa-cpu1=PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Path to the VMSA
+initial state for the non-boot CPU. This is required when
+the domain policy is set to require SEV-ES and the domain
+has more than one CPU present. The file contents must be
+exactly 4096 bytes in length.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--tik
+PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">TIK file for
+domain. This file must be exactly 16 bytes in size and
+contains the unique transport integrity key associated with
+the domain session launch data. This is mutually exclusive
+with the <b>--tk</b> argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--tek
+PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">TEK file for
+domain. This file must be exactly 16 bytes in size and
+contains the unique transport encryption key associated with
+the domain session launch data. This is mutually exclusive
+with the <b>--tk</b> argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--tk
+PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">TEK/TIK combined
+file for the domain. This file must be exactly 32 bytes in
+size, with the first 16 bytes containing the TEK and the
+last 16 bytes containing the TIK. This is mutually exclusive
+with the <b>--tik</b> and <b>--tek</b> arguments.</p>
+
+<h3>Libvirt options
+<a name="Libvirt options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+are used when connecting to libvirt to automatically obtain
+state and configuration information about the domain to be
+attested.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b>,
+<b>--connect URI</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Libvirt
+connection URI. For the validation to be trustworthy this
+must be a URI resolving to a remote virtualization host.
+This requirement can be overridden using the
+<b>--insecure</b> argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--domain ID|NAME|UUID</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Domain ID, or
+domain name or domain UUID. Used to identify which libvirt
+domain is to have its launch measured. The domain must be
+running, and would usually have been started in a paused
+state, to allow validation to be performed before guest CPUs
+begin execution.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i</b>,
+<b>--insecure</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Proceed even if
+usage scenario is known to be insecure. This allows the
+program to connect to a local libvirt hypervisor and rely on
+file content from the virtualization host. It also allows
+the validation to proceed even if the virtual machine CPUs
+are not in the initial paused state. The result of the
+validation must not be trusted.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-g</b>,
+<b>--ignore-config</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Do not attempt
+to sanity check the domain config. The default behaviour is
+to print out errors if identifying configuration elements in
+the guest XML that would invalidate the launch measurement.
+This can help the guest owner to understand any
+configuration mistakes that have been made. If the
+<b>--ignore-config</b> argument is given, this sanity
+checking of configuration will be skipped. The result is
+that the validation will likely be reported as failed.</p>
+
+<h3>Secret injection options
+<a name="Secret injection options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+provide a way to inject a secret if validation of the launch
+measurement passes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inject-secret
+ALIAS-OR-GUID:PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Path to a file
+containing a secret to inject into the guest OS. Typical
+usage would be to supply a password for unlocking the root
+filesystem full disk encryption. <b>ALIAS</b> can be one of
+the well known secrets:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>luks-key</b> - bytes to use as a key for unlocking a
+LUKS key slot. GUID of
+<b>736869e5-84f0-4973-92ec-06879ce3da0b</b>.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Alternatively
+<b>GUID</b> refers to an arbitrary UUID of the callers
+choosing. The contents of <b>PATH</b> are defined by the
+requirements of the associated GUID, and will used as-is
+without modification. In particular be aware:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em">Avoid unwanted trailing newline
+characters in <b>PATH</b> unless mandated by the
+<b>GUID</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="85%">
+
+
+<p>Any trailing <b>NUL</b> byte must be explicitly included
+in <b>PATH</b> if mandated by the <b>GUID</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This argument
+can be repeated multiple times, provided a different
+<b>GUID</b> is given for each instance.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--secret-header
+PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Path to a file
+in which the injected secret header will be written in
+base64 format and later injected into the domain. This is
+required if there is no connection to libvirt, otherwise the
+secret will be directly injected.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--secret-payload
+PATH</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Path to a file
+in which the injected secret payload will be written in
+base64 format and later injected into the domain. This is
+required if there is no connection to libvirt, otherwise the
+secret will be directly injected.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h3>Fully offline execution
+<a name="Fully offline execution"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This scenario
+allows a measurement to be securely validated in a
+completely offline state without any connection to the
+hypervisor host. All required data items must be provided as
+command line parameters. This usage model is considered
+secure, because all input data is provided by the user.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest booting from disk:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--firmware OVMF.sev.fd \ <br>
+--tk this-guest-tk.bin \ <br>
+--measurement
+Zs2pf19ubFSafpZ2WKkwquXvACx9Wt/BV+eJwQ/taO8jhyIj/F8swFrybR1fZ2ID
+\ <br>
+--api-major 0 \ <br>
+--api-minor 24 \ <br>
+--build-id 13 \ <br>
+--policy 3</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest with direct kernel boot:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--firmware OVMF.sev.fd \ <br>
+--kernel vmlinuz-5.11.12 \ <br>
+--initrd initramfs-5.11.12 \ <br>
+--cmdline &quot;root=/dev/vda1&quot; \ <br>
+--tk this-guest-tk.bin \ <br>
+--measurement
+Zs2pf19ubFSafpZ2WKkwquXvACx9Wt/BV+eJwQ/taO8jhyIj/F8swFrybR1fZ2ID
+\ <br>
+--api-major 0 \ <br>
+--api-minor 24 \ <br>
+--build-id 13 \ <br>
+--policy 3</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV-ES SMP guest booting from disk:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--firmware OVMF.sev.fd \ <br>
+--num-cpus 2 \ <br>
+--vmsa-cpu0 vmsa0.bin \ <br>
+--vmsa-cpu1 vmsa1.bin \ <br>
+--tk this-guest-tk.bin \ <br>
+--measurement
+Zs2pf19ubFSafpZ2WKkwquXvACx9Wt/BV+eJwQ/taO8jhyIj/F8swFrybR1fZ2ID
+\ <br>
+--api-major 0 \ <br>
+--api-minor 24 \ <br>
+--build-id 13 \ <br>
+--policy 7</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV-ES SMP guest booting from disk, with
+automatically constructed VMSA:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--firmware OVMF.sev.fd \ <br>
+--num-cpus 2 \ <br>
+--cpu-family 23 \ <br>
+--cpu-model 49 \ <br>
+--cpu-stepping 0 \ <br>
+--tk this-guest-tk.bin \ <br>
+--measurement
+Zs2pf19ubFSafpZ2WKkwquXvACx9Wt/BV+eJwQ/taO8jhyIj/F8swFrybR1fZ2ID
+\ <br>
+--api-major 0 \ <br>
+--api-minor 24 \ <br>
+--build-id 13 \ <br>
+--policy 7</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest booting from disk and inject a
+disk password on success:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--firmware OVMF.sev.fd \ <br>
+--tk this-guest-tk.bin \ <br>
+--measurement
+Zs2pf19ubFSafpZ2WKkwquXvACx9Wt/BV+eJwQ/taO8jhyIj/F8swFrybR1fZ2ID
+\ <br>
+--api-major 0 \ <br>
+--api-minor 24 \ <br>
+--build-id 13 \ <br>
+--policy 3 \ <br>
+--inject-secret
+736869e5-84f0-4973-92ec-06879ce3da0b:passwd.txt \ <br>
+--secret-header secret-header.b64 \ <br>
+--secret-payload secret-payload.b64</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>secret-header.b64</b> and <b>secret-payload.b64</b> files
+can now be sent to the virtualization host for
+injection.</p>
+
+<h3>Fetch from remote libvirt
+<a name="Fetch from remote libvirt"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This scenario
+allows fetching certain data from a remote hypervisor via a
+connection to libvirt. It will aid in debugging by analysing
+the guest configuration and reporting anything that could
+invalidate the measurement of the guest. This usage model is
+considered secure, because the limited information obtained
+from the untrusted hypervisor cannot be used to change the
+result.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest booting from disk:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--connect qemu+ssh://root@some.remote.host/system \ <br>
+--firmware OVMF.sev.fd \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest with direct kernel boot:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--connect qemu+ssh://root@some.remote.host/system \ <br>
+--firmware OVMF.sev.fd \ <br>
+--kernel vmlinuz-5.11.12 \ <br>
+--initrd initramfs-5.11.12 \ <br>
+--cmdline &quot;root=/dev/vda1&quot; \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV-ES SMP guest booting from disk:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--connect qemu+ssh://root@some.remote.host/system \ <br>
+--firmware OVMF.sev.fd \ <br>
+--num-cpus 2 \ <br>
+--vmsa-cpu0 vmsa0.bin \ <br>
+--vmsa-cpu1 vmsa1.bin \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV-ES SMP guest booting from disk, with
+automatically constructed VMSA:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--connect qemu+ssh://root@some.remote.host/system \ <br>
+--firmware OVMF.sev.fd \ <br>
+--cpu-family 23 \ <br>
+--cpu-model 49 \ <br>
+--cpu-stepping 0 \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest booting from disk and inject a
+disk password on success:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--connect qemu+ssh://root@some.remote.host/system \ <br>
+--firmware OVMF.sev.fd \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64 \ <br>
+--inject-secret
+736869e5-84f0-4973-92ec-06879ce3da0b:passwd.txt</p>
+
+<h3>Fetch from local libvirt
+<a name="Fetch from local libvirt"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This scenario
+allows fetching all data from the local hypervisor via a
+connection to libvirt. It is only to be used for the purpose
+of testing, debugging, or demonstrations, because running on
+the local hypervisor is not a secure scenario. To enable
+this usage, the <b>--insecure</b> flag must be specified.
+Given a pointer to the libvirt guest to validate, all
+information needed to perform a validation, except the
+TIK/TEK pair can be acquired automatically.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest booting from disk:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--insecure \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest with direct kernel boot:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--insecure \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV-ES SMP guest booting from disk:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--insecure \ <br>
+--vmsa-cpu0 vmsa0.bin \ <br>
+--vmsa-cpu1 vmsa1.bin \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV-ES SMP guest booting from disk, with
+automatically constructed VMSA:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--insecure \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64</p>
+
+<p style="margin-left:9%; margin-top: 1em">Validate the
+measurement of a SEV guest booting from disk and inject a
+disk password on success:</p>
+
+<p style="margin-left:13%; margin-top: 1em">#
+virt-qemu-sev-validate \ <br>
+--insecure \ <br>
+--tk this-guest-tk.bin \ <br>
+--domain fedora34x86_64 \ <br>
+--inject-secret
+736869e5-84f0-4973-92ec-06879ce3da0b:passwd.txt</p>
+
+<h2>COMMON MISTAKES CHECKLIST
+<a name="COMMON MISTAKES CHECKLIST"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The complexity
+of configuring a guest and validating its boot measurement
+means it is very likely to see the failure:</p>
+
+<p style="margin-left:13%; margin-top: 1em">ERROR:
+Measurement does not match, VM is not trustworthy</p>
+
+<p style="margin-left:9%; margin-top: 1em">This error
+message assumes the worst, but in most cases will failure
+will be a result of either mis-configuring the guest, or
+passing the wrong information when trying to validate it.
+The following information is a guide for what items to check
+in order to stand the best chance of diagnosing the
+problem</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Check the VM configuration for
+the DH certificate and session blob in the libvirt guest
+XML.</p> </td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The content for
+these fields should be in base64 format, which is what
+<b>sevctl session</b> generates. Other tools may generate
+the files in binary format, so ensure it has been correctly
+converted to base64.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Check the VM configuration
+policy value matches the session blob</p></td>
+<td width="6%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The
+<b>&lt;policy&gt;</b> value in libvirt guest XML has to
+match the value passed to the <b>sevctl session</b> command.
+If this is mismatched then the guest will not even start,
+and QEMU will show an error such as:</p>
+
+
+<p style="margin-left:15%; margin-top: 1em">sev_launch_start:
+LAUNCH_START ret=1 fw_error=11 'Bad measurement'</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="56%">
+
+
+<p style="margin-top: 1em">Check the correct TIK/TEK
+keypair are passed</p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The TIK/TEK
+keypair are uniquely tied to each DH cert and session blob.
+Make sure that the TIK/TEK keypair passed to this program
+the ones matched to the DH cert and session blob configured
+for the libvirt guest XML. This is one of the most common
+mistakes. Further ensure that the TIK and TEK files are not
+swapped.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="69%">
+
+
+<p style="margin-top: 1em">Check the firmware binary
+matches the one used to boot</p></td>
+<td width="19%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The firmware
+binary content is part of the data covered by the launch
+measurement. Ensure that the firmware binary passed to this
+program matches the one used to launch the guest. The
+hypervisor host will periodically get software updates which
+introduce a new firmware binary version.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="80%">
+
+
+<p style="margin-top: 1em">Check the kernel, initrd and
+cmdline match the one used to boot</p></td>
+<td width="8%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">If the guest is
+configured to use direct kernel boot, check that the kernel,
+initrd and cmdline passed to this program match the ones
+used to boot the guest. In the kernel cmdline whitespace
+must be preserved exactly, including any leading or trailing
+spaces.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="66%">
+
+
+<p style="margin-top: 1em">Check whether the kernel hash
+measurement is enabled</p></td>
+<td width="22%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The
+<b>kernelHashes</b> property in the libvirt guest XML
+controls whether hashes of the kernel, initrd and cmdline
+content are covered by the boot measurement. If enabled,
+then the matching content must be passed to this program.
+UIf disabled, then the content must <b>NOT</b> be
+passed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="62%">
+
+
+<p style="margin-top: 1em">Check that the correct
+measurement hash is passed</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The measurement
+hash includes a nonce, so it will be different on every boot
+attempt. Thus when validating the measuremnt it is important
+ensure the most recent measurement is used.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em">Check the correct VMSA blobs /
+CPU SKU values for the host are used</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The VMSA blobs
+provide the initial register state for the boot CPU and any
+additional CPUs. One of the registers encodes the CPU SKU
+(family, model, stepping) of the physical host CPU. Make
+sure that the VMSA blob used for validation is one that
+matches the SKU of the host the guest is booted on. Passing
+the CPU SKU values directly to the tool can reduce the
+likelihood of using the wrong ones.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em">Check the CPU count is
+correct</p> </td>
+<td width="50%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">When passing
+VMSA blobs for SEV-ES guests, the number of CPUs present
+will influence the measurement result. Ensure that the
+correct vCPU count is used corresponding to the guest boot
+attempt.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Best practice is
+to run this tool in completely offline mode and pass all
+information as explicit command line parameters. When
+debugging failures, however, it can be useful to tell it to
+connect to libvirt and fetch information. If connecting to a
+remote libvirt instance, it will fetch any information that
+can be trusted, which is the basic VM launch state data. It
+will also sanity check the XML configuration to identify
+some common mistakes. If the <b>--insecure</b> flag is
+passed it can extract some configuration information and use
+that for the attestation process.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the mistake
+still can't be identified, then this tool can be run on the
+virtualization host. In that scenario the only three command
+line parameters required are for the TIK, TEK and libvirt
+domain name. It should be able to automatically determine
+all the other information required. If it still reports a
+failure, this points very strongly to the TIK/TEK pair not
+matching the configured DH certificate and session blob.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>--debug</b> flag will display hashes and/or hex dumps for
+various pieces of information used in the attestation
+process. Comparing the <b>--debug</b> output from running on
+the hypervisor host, against that obtained when running in
+offline mode can give further guidance to which parameter is
+inconsistent.</p>
+
+<p style="margin-left:9%; margin-top: 1em">As mentioned
+earlier in this document, bear in mind that in general any
+attestation answers obtained from running on the hypervisor
+host should not be trusted. So if a configuration mistake is
+identified it is strongly recommended to re-run the
+attestation in offline mode on a trusted machine.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Upon successful
+attestation of the launch measurement, an exit status of 0
+will be set.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Upon failure to
+attest the launch measurement one of the following codes
+will be set:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="48%">
+
+
+<p style="margin-top: 1em"><b>1</b> - <i>Guest measurement
+did not validate</i></p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">Assuming the
+inputs to this program are correct, the virtual machine
+launch has been compromised and it should not be trusted
+henceforth.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="48%">
+
+
+<p style="margin-top: 1em"><b>2</b> - <i>Usage scenario
+cannot be supported</i></p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The way in
+which this program has been invoked prevent it from being
+able to validate the launch measurement.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="41%">
+
+
+<p style="margin-top: 1em"><b>3</b> - <i>Usage scenario is
+not secure</i></p></td>
+<td width="47%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The way in
+which this program has been invoked means that the result of
+any launch measurement validation will not be secure.</p>
+
+<p style="margin-left:12%; margin-top: 1em">The program can
+be reinvoked with <b>--insecure</b> argument to force a
+validation, however, the results of this should not be
+trusted. This should only be used for testing, debugging or
+demonstration purposes, never in a production
+deployment.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em"><b>4</b> - <i>Domain has
+incorrect configuration to be measured</i></p></td>
+<td width="21%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The way in
+which the guest has been configured prevent this program
+from being able to validate the launch measurement. Note
+that in general the guest configuration reported by the
+hypervisor is not trustworthy, so it is possible this error
+could be a false positive designed to cause a denial of
+service.</p>
+
+<p style="margin-left:12%; margin-top: 1em">This program
+can be reinvoked with the <b>--ignore-config</b> argument to
+skip the sanity checks on the domain XML. This will likely
+result in it failing with an exit code of <b>1</b>
+indicating the measurement is invalid</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="60%">
+
+
+<p style="margin-top: 1em"><b>5</b> - <i>Domain is in
+incorrect state to be measured</i></p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">The domain has
+to be running in order to validate a launch measurement.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="52%">
+
+
+<p style="margin-top: 1em"><b>6</b> - <i>unexpected error
+occurred in the code</i></p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">A logic flaw in
+this program means it is unable to complete the validation
+of the measurement. This is a bug which should be reported
+to the maintainers.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Daniel P.
+Berrang&eacute;</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+all bugs you discover. This should be done via either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">1.</p></td>
+<td width="1%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em">the mailing list</p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:13%; margin-top: 1em">&lt;https://libvirt.org/contact.html&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">2.</p></td>
+<td width="1%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em">the bug tracker</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:13%; margin-top: 1em">&lt;https://libvirt.org/bugs.html&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Alternatively,
+you may report bugs to your software distributor /
+vendor.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2022 by Red Hat, Inc.</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>virt-qemu-sev-validate</b>
+is distributed under the terms of the GNU LGPL v2.1+. This
+is free software; see the source for copying conditions.
+There is NO warranty; not even for MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">virsh(1), SEV
+launch security usage
+&lt;https://libvirt.org/kbase/launch_security_sev.html&gt; ,
+<br>
+ &lt;https://libvirt.org/&gt;</p>
+<hr>
+</body>
+</html>

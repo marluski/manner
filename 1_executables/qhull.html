@@ -1,0 +1,2353 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>qhull</title>
+
+</head>
+<body>
+
+<h1 align="center">qhull</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#INTRODUCTION">INTRODUCTION</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#IMPRECISION">IMPRECISION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#E-MAIL">E-MAIL</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#ACKNOWLEDGEMENTS">ACKNOWLEDGEMENTS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">qhull - convex
+hull, Delaunay triangulation, Voronoi diagram, halfspace
+intersection about a point, hull volume, facet area</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">qhull- compute
+convex hulls and related structures <br>
+input (stdin): dimension, #points, point coordinates <br>
+first comment (non-numeric) is listed in the summary <br>
+halfspace: use dim plus one with offsets after
+coefficients</p>
+
+<p style="margin-left:9%; margin-top: 1em">options
+(qh-quick.htm): <br>
+d - Delaunay triangulation by lifting points to a paraboloid
+<br>
+d Qu - furthest-site Delaunay triangulation (upper convex
+hull) <br>
+v - Voronoi diagram as the dual of the Delaunay
+triangulation <br>
+v Qu - furthest-site Voronoi diagram <br>
+H1,1 - Halfspace intersection about [1,1,0,...] via polar
+duality <br>
+Qt - triangulated output <br>
+QJ - joggled input instead of merged facets <br>
+Tv - verify result: structure, convexity, and point
+inclusion <br>
+. - concise list of all options <br>
+- - one-line description of each option <br>
+-? - this message <br>
+-V - version</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output options
+(subset): <br>
+s - summary of results (default) <br>
+i - vertices incident to each facet <br>
+n - normals with offsets <br>
+p - vertex coordinates (if &rsquo;Qc&rsquo;, includes
+coplanar points) <br>
+if &rsquo;v&rsquo;, Voronoi vertices <br>
+FA - report total area and volume <br>
+Fp - halfspace intersections <br>
+FS - total area and volume <br>
+Fx - extreme points (convex hull vertices) <br>
+G - Geomview output (2-d, 3-d and 4-d) <br>
+m - Mathematica output (2-d and 3-d) <br>
+o - OFF format (if &rsquo;v&rsquo;, outputs Voronoi regions)
+<br>
+QVn - print facets that include point n, -n if not <br>
+TI file - input file, may be enclosed in single quotes <br>
+TO file - output file, may be enclosed in single quotes</p>
+
+<p style="margin-left:9%; margin-top: 1em">examples: <br>
+rbox D4 | qhull Tv rbox 1000 s | qhull Tv s FA <br>
+rbox 10 D2 | qhull d QJ s i TO result rbox 10 D2 | qhull v
+Qbb Qt p <br>
+rbox 10 D2 | qhull d Qu QJ m rbox 10 D2 | qhull v Qu QJ o
+<br>
+rbox c d D2 | qhull Qc s f Fx | more rbox c | qhull FV n |
+qhull H Fp <br>
+rbox d D12 | qhull QR0 FA rbox c D7 | qhull FA TF1000 <br>
+rbox y 1000 W0 | qhull Qc rbox c | qhull n</p>
+
+<p style="margin-left:9%; margin-top: 1em">- html manual:
+html/index.htm <br>
+- installation: README.txt <br>
+- see also: COPYING.txt, REGISTER.txt, Changes.txt <br>
+- WWW: &lt;http://www.qhull.org&gt; <br>
+- GIT: &lt;git@github.com:qhull/qhull.git&gt; <br>
+- news: &lt;http://www.qhull.org/news&gt; <br>
+- Geomview: &lt;http://www.geomview.org&gt; <br>
+- news group: &lt;news:comp.graphics.algorithms&gt; <br>
+- FAQ:
+&lt;http://www.faqs.org/faqs/graphics/algorithms-faq/&gt;
+<br>
+- email: qhull@qhull.org <br>
+- bug reports: qhull_bug@qhull.org</p>
+
+<p style="margin-left:9%; margin-top: 1em">The sections
+are: <br>
+- INTRODUCTION <br>
+- DESCRIPTION, a description of Qhull <br>
+- IMPRECISION, how Qhull handles imprecision <br>
+- OPTIONS <br>
+- Input and output options <br>
+- Additional input/output formats <br>
+- Precision options <br>
+- Geomview options <br>
+- Print options <br>
+- Qhull options <br>
+- Trace options <br>
+- BUGS <br>
+- E-MAIL <br>
+- SEE ALSO <br>
+- AUTHORS <br>
+- ACKNOWLEGEMENTS</p>
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+briefly describes all Qhull options. Please report any
+mismatches with Qhull&rsquo;s html manual
+(html/index.htm).</p>
+
+<h2>INTRODUCTION
+<a name="INTRODUCTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Qhull is a
+general dimension code for computing convex hulls, Delaunay
+triangulations, Voronoi diagram, furthest-site Voronoi
+diagram, furthest-site Delaunay triangulations, and
+halfspace intersections about a point. It implements the
+Quickhull algorithm for computing the convex hull. Qhull
+handles round-off errors from floating point arithmetic. It
+can approximate a convex hull.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The program
+includes options for hull volume, facet area, partial hulls,
+input transformations, randomization, tracing, multiple
+output formats, and execution statistics. The program can be
+called from within your application. You can view the
+results in 2-d, 3-d and 4-d with Geomview.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The format of
+input is the following: first line contains the dimension,
+second line contains the number of input points, and point
+coordinates follow. The dimension and number of points can
+be reversed. Comments and line breaks are ignored. A comment
+starts with a non-numeric character and continues to the end
+of line. The first comment is reported in summaries and
+statistics. Error reporting is better if there is one point
+per line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default
+printout option is a short summary. There are many other
+output formats.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Qhull implements
+the Quickhull algorithm for convex hull. This algorithm
+combines the 2-d Quickhull algorithm with the n-d
+beneath-beyond algorithm [c.f., Preparata &amp; Shamos
+&rsquo;85]. It is similar to the randomized algorithms of
+Clarkson and others [Clarkson et al. &rsquo;93]. The main
+advantages of Quickhull are output sensitive performance,
+reduced space requirements, and automatic handling of
+precision problems.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The data
+structure produced by Qhull consists of vertices, ridges,
+and facets. A vertex is a point of the input set. A ridge is
+a set of d vertices and two neighboring facets. For example
+in 3-d, a ridge is an edge of the polyhedron. A facet is a
+set of ridges, a set of neighboring facets, a set of
+incident vertices, and a hyperplane equation. For simplicial
+facets, the ridges are defined by the vertices and
+neighboring facets. When Qhull merges two facets, it
+produces a non-simplicial facet. A non-simplicial facet has
+more than d neighbors and may share more than one ridge with
+a neighbor.</p>
+
+<h2>IMPRECISION
+<a name="IMPRECISION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Since Qhull uses
+floating point arithmetic, roundoff error may occur for each
+calculation. This causes problems for most geometric
+algorithms.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Qhull
+automatically sets option &rsquo;C-0&rsquo; in 2-d, 3-d, and
+4-d, or option &rsquo;Qx&rsquo; in 5-d and higher. These
+options handle precision problems by merging facets.
+Alternatively, use option &rsquo;QJ&rsquo; to joggle the
+input.</p>
+
+<p style="margin-left:9%; margin-top: 1em">With
+&rsquo;C-0&rsquo;, Qhull merges non-convex facets while
+constructing the hull. The remaining facets are clearly
+convex. With &rsquo;Qx&rsquo;, Qhull merges coplanar horizon
+facets, flipped facets, concave facets and duplicated
+ridges. It merges coplanar facets after constructing the
+hull. With &rsquo;Qx&rsquo;, coplanar points may be missed,
+but it appears to be unlikely.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To guarantee
+triangular output, joggle the input with option
+&rsquo;QJ&rsquo;. Facet merging will not occur.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To get a list of
+the most important options, execute &rsquo;qhull -?&rsquo;.
+To get a complete list of options, execute &rsquo;qhull
+-&rsquo;. To get a complete, concise list of options,
+execute &rsquo;qhull .&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Options can be
+in any order. Capitalized options take an argument (except
+&rsquo;PG&rsquo; and &rsquo;F&rsquo; options). Single
+letters are used for output formats and precision constants.
+The other options are grouped into menus: output formats
+(&rsquo;F&rsquo;), Geomview output (&rsquo;G&rsquo;),
+printing (&rsquo;P&rsquo;), Qhull control (&rsquo;Q&rsquo;),
+and tracing (&rsquo;T&rsquo;). <br>
+Main options: <br>
+default</p>
+
+<p style="margin-left:18%;">Compute the convex hull of the
+input points. Report a summary of the result.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>d</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Compute the Delaunay triangulation by lifting the input
+points to a paraboloid. The &rsquo;o&rsquo; option prints
+the input points and facets. The &rsquo;QJ&rsquo; option
+guarantees triangular output. The &rsquo;Ft&rsquo; option
+prints a triangulation. It adds points (the centrums) to
+non-simplicial facets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>v</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Compute the Voronoi diagram from the Delaunay
+triangulation. The &rsquo;p&rsquo; option prints the Voronoi
+vertices. The &rsquo;o&rsquo; option prints the Voronoi
+vertices and the vertices in each Voronoi region. It lists
+regions in site ID order. The &rsquo;Fv&rsquo; option prints
+each ridge of the Voronoi diagram. The first or
+zero&rsquo;th vertex indicates the infinity vertex. Its
+coordinates are qh_INFINITE (-10.101). It indicates
+unbounded Voronoi regions or degenerate Delaunay
+triangles.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;">Hn,n,...</p>
+
+<p style="margin-left:18%;">Compute halfspace intersection
+about [n,n,0,...]. The input is a set of halfspaces defined
+in the same format as &rsquo;n&rsquo;, &rsquo;Fo&rsquo;, and
+&rsquo;Fi&rsquo;. Use &rsquo;Fp&rsquo; to print the
+intersection points. Use &rsquo;Fv&rsquo; to list the
+intersection points for each halfspace. The other output
+formats display the dual convex hull.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The point
+[n,n,n,...] is a feasible point for the halfspaces, i.e., a
+point that is inside all of the halfspaces (Hx+b &lt;= 0).
+The default coordinate value is 0.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The input may
+start with a feasible point. If so, use &rsquo;H&rsquo; by
+itself. The input starts with a feasible point when the
+first number is the dimension, the second number is
+&quot;1&quot;, and the coordinates complete a line. The
+&rsquo;FV&rsquo; option produces a feasible point for a
+convex hull.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>d Qu</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Compute the furthest-site Delaunay triangulation from
+the upper convex hull. The &rsquo;o&rsquo; option prints the
+input points and facets. The &rsquo;QJ&rsquo; option
+guarantees triangular otuput. You can also use
+&rsquo;Ft&rsquo; to triangulate via the centrums of
+non-simplicial facets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>v Qu</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Compute the furthest-site Voronoi diagram. The
+&rsquo;p&rsquo; option prints the Voronoi vertices. The
+&rsquo;o&rsquo; option prints the Voronoi vertices and the
+vertices in each Voronoi region. The &rsquo;Fv&rsquo; option
+prints each ridge of the Voronoi diagram. The first or
+zero&rsquo;th vertex indicates the infinity vertex at
+infinity. Its coordinates are qh_INFINITE (-10.101). It
+indicates unbounded Voronoi regions and degenerate Delaunay
+triangles.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;">Input/Output options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>f</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Print all facets and all fields of each facet.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>G</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Output the hull in Geomview format. For imprecise hulls,
+Geomview displays the inner and outer hull. Geomview can
+also display points, ridges, vertices, coplanar points, and
+facet intersections. See below for a list of options.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">For Delaunay
+triangulations, &rsquo;G&rsquo; displays the corresponding
+paraboloid. For halfspace intersection, &rsquo;G&rsquo;
+displays the dual polytope.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">i</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Output the incident vertices for
+each facet. Qhull prints the number of facets followed by
+the vertices of each facet. One facet is printed per line.
+The numbers are the 0-relative indices of the corresponding
+input points. The facets are oriented.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">In 4d and
+higher, Qhull triangulates non-simplicial facets. Each apex
+(the first vertex) is a created point that corresponds to
+the facet&rsquo;s centrum. Its index is greater than the
+indices of the input points. Each base corresponds to a
+simplicial ridge between two facets. To print the vertices
+without triangulation, use option &rsquo;Fv&rsquo;. To print
+the centrum coordinates, use option &rsquo;Ft&rsquo;. The
+centrum indices for option &rsquo;i&rsquo; are one more than
+the centrum indices for option &rsquo;Ft&rsquo;.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">m</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Output the hull in Mathematica
+format. Qhull writes a Mathematica file for 2-d and 3-d
+convex hulls and for 2-d Delaunay triangulations. Qhull
+produces a list of objects that you can assign to a variable
+in Mathematica, for example: &quot;list= &lt;&lt;
+&lt;outputfilename&gt; &quot;. If the object is 2-d, it can
+be visualized by &quot;Show[Graphics[list]] &quot;. For 3-d
+objects the command is
+&quot;Show[Graphics3D[list]]&quot;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>n</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Output the normal equation for each facet. Qhull prints
+the dimension (plus one), the number of facets, and the
+normals for each facet. The facet&rsquo;s offset follows its
+normal coefficients.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>o</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Output the facets in OFF file format. Qhull prints the
+dimension, number of points, number of facets, and number of
+ridges. Then it prints the coordinates of the input points
+and the vertices for each facet. Each facet is on a separate
+line. The first number is the number of vertices. The
+remainder are the indices of the corresponding points. The
+vertices are oriented in 2-d, 3-d, and in simplicial
+facets.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">For 2-d Voronoi
+diagrams, the vertices are sorted by adjacency, but not
+oriented. In 3-d and higher, the Voronoi vertices are sorted
+by index. See the &rsquo;v&rsquo; option for more
+information.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">p</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Output the coordinates of each
+vertex point. Qhull prints the dimension, the number of
+points, and the coordinates for each vertex. With the
+&rsquo;Gc&rsquo; and &rsquo;Gi&rsquo; options, it also
+prints coplanar and interior points. For Voronoi diagrams,
+it prints the coordinates of each Voronoi vertex.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>s</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>Print a summary to stderr. If no output options are
+specified, a summary goes to stdout. The summary lists the
+number of input points, the dimension, the number of
+vertices in the convex hull, the number of facets in the
+convex hull, the number of good facets (if
+&rsquo;Pg&rsquo;), and statistics.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The last two
+statistics (if needed) measure the maximum distance from a
+point or vertex to a facet. The number in parenthesis (e.g.,
+2.1x) is the ratio between the maximum distance and the
+worst-case distance due to merging two simplicial
+facets.</p>
+
+<p style="margin-left:9%;">Precision options</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>An</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Maximum angle given as a cosine. If the angle between a
+pair of facet normals is greater than n, Qhull merges one of
+the facets into a neighbor. If &rsquo;n&rsquo; is negative,
+Qhull tests angles after adding each point to the hull
+(pre-merging). If &rsquo;n&rsquo; is positive, Qhull tests
+angles after constructing the hull (post-merging). Both pre-
+and post-merging can be defined.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Option
+&rsquo;C0&rsquo; or &rsquo;C-0&rsquo; is set if the
+corresponding &rsquo;Cn&rsquo; or &rsquo;C-n&rsquo; is not
+set. If &rsquo;Qx&rsquo; is set, then &rsquo;A-n&rsquo; and
+&rsquo;C-n&rsquo; are checked after the hull is constructed
+and before &rsquo;An&rsquo; and &rsquo;Cn&rsquo; are
+checked.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">Cn</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Centrum radius. If a centrum is
+less than n below a neighboring facet, Qhull merges one of
+the facets. If &rsquo;n&rsquo; is negative or
+&rsquo;-0&rsquo;, Qhull tests and merges facets after adding
+each point to the hull. This is called
+&quot;pre-merging&quot;. If &rsquo;n&rsquo; is positive,
+Qhull tests for convexity after constructing the hull
+(&quot;post-merging&quot;). Both pre- and post-merging can
+be defined.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">For 5-d and
+higher, &rsquo;Qx&rsquo; should be used instead of
+&rsquo;C-n&rsquo;. Otherwise, most or all facets may be
+merged together.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">En</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Maximum roundoff error for
+distance computations.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Rn</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Randomly perturb distance computations up to +/- n *
+max_coord. This option perturbs every distance, hyperplane,
+and angle computation. To use time as the random number
+seed, use option &rsquo;QR-1&rsquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Vn</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Minimum distance for a facet to be visible. A facet is
+visible if the distance from the point to the facet is
+greater than &rsquo;Vn&rsquo;.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Without
+merging, the default value for &rsquo;Vn&rsquo; is the
+round-off error (&rsquo;En&rsquo;). With merging, the
+default value is the pre-merge centrum (&rsquo;C-n&rsquo;)
+in 2-d or 3-d, or three times that in other dimensions. If
+the outside width is specified (&rsquo;Wn&rsquo;), the
+maximum, default value for &rsquo;Vn&rsquo; is
+&rsquo;Wn&rsquo;.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">Un</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Maximum distance below a facet
+for a point to be coplanar to the facet. The default value
+is &rsquo;Vn&rsquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Wn</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Minimum outside width of the hull. Points are added to
+the convex hull only if they are clearly outside of a facet.
+A point is outside of a facet if its distance to the facet
+is greater than &rsquo;Wn&rsquo;. The normal value for
+&rsquo;Wn&rsquo; is &rsquo;En&rsquo;. If the user specifies
+pre-merging and does not set &rsquo;Wn&rsquo;, than
+&rsquo;Wn&rsquo; is set to the premerge &rsquo;Cn&rsquo; and
+maxcoord*(1-An).</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;">Additional input/output
+formats</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fa</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print area for each facet. For Delaunay triangulations,
+the area is the area of the triangle. For Voronoi diagrams,
+the area is the area of the dual facet. Use
+&rsquo;PAn&rsquo; for printing the n largest facets, and
+option &rsquo;PFn&rsquo; for printing facets larger than
+&rsquo;n&rsquo;.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The area for
+non-simplicial facets is the sum of the areas for each ridge
+to the centrum. Vertices far below the facet&rsquo;s
+hyperplane are ignored. The reported area may be
+significantly less than the actual area.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">FA</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Compute the total area and
+volume for option &rsquo;s&rsquo;. It is an approximation
+for non-simplicial facets (see &rsquo;Fa&rsquo;).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fc</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print coplanar points for each facet. The output starts
+with the number of facets. Then each facet is printed one
+per line. Each line is the number of coplanar points
+followed by the point ids. Option &rsquo;Qi&rsquo; includes
+the interior points. Each coplanar point (interior point) is
+assigned to the facet it is furthest above (resp., least
+below).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>FC</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print centrums for each facet. The output starts with
+the dimension followed by the number of facets. Then each
+facet centrum is printed, one per line.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fd</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Read input in cdd format with homogeneous points. The
+input starts with comments. The first comment is reported in
+the summary. Data starts after a &quot;begin&quot; line. The
+next line is the number of points followed by the
+dimension+1 and &quot;real&quot; or &quot;integer&quot;.
+Then the points are listed with a leading &quot;1&quot; or
+&quot;1.0&quot;. The data ends with an &quot;end&quot;
+line.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">For halfspaces
+(&rsquo;Fd Hn,n,...&rsquo;), the input format is the same.
+Each halfspace starts with its offset. The sign of the
+offset is the opposite of Qhull&rsquo;s convention.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">FD</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Print normals (&rsquo;n&rsquo;,
+&rsquo;Fo&rsquo;, &rsquo;Fi&rsquo;) or points
+(&rsquo;p&rsquo;) in cdd format. The first line is the
+command line that invoked Qhull. Data starts with a
+&quot;begin&quot; line. The next line is the number of
+normals or points followed by the dimension+1 and
+&quot;real&quot;. Then the normals or points are listed with
+the offset before the coefficients. The offset for points is
+1.0. The offset for normals has the opposite sign. The data
+ends with an &quot;end&quot; line.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>FF</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print facets (as in &rsquo;f&rsquo;) without printing
+the ridges.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fi</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print inner planes for each facet. The inner plane is
+below all vertices.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fi</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print separating hyperplanes for bounded, inner regions
+of the Voronoi diagram. The first line is the number of
+ridges. Then each hyperplane is printed, one per line. A
+line starts with the number of indices and floats. The first
+pair lists adjacent input sites, the next d floats are the
+normalized coefficients for the hyperplane, and the last
+float is the offset. The hyperplane is oriented toward
+&rsquo;QVn&rsquo; (if defined), or the first input site of
+the pair. Use &rsquo;Tv&rsquo; to verify that the
+hyperplanes are perpendicular bisectors. Use
+&rsquo;Fo&rsquo; for unbounded regions, and &rsquo;Fv&rsquo;
+for the corresponding Voronoi vertices.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>FI</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print facet identifiers.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fm</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print number of merges for each facet. At most 511
+merges are reported for a facet. See &rsquo;PMn&rsquo; for
+printing the facets with the most merges.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>FM</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Output the hull in Maple format. Qhull writes a Maple
+file for 2-d and 3-d convex hulls and for 2-d Delaunay
+triangulations. Qhull produces a &rsquo;.mpl&rsquo; file for
+displaying with display3d().</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fn</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print neighbors for each facet. The output starts with
+the number of facets. Then each facet is printed one per
+line. Each line is the number of neighbors followed by an
+index for each neighbor. The indices match the other facet
+output formats.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">A negative
+index indicates an unprinted facet due to printing only good
+facets (&rsquo;Pg&rsquo;). It is the negation of the
+facet&rsquo;s ID (option &rsquo;FI&rsquo;). For example,
+negative indices are used for facets &quot;at infinity&quot;
+in the Delaunay triangulation.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">FN</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Print vertex neighbors or
+coplanar facet for each point. The first line is the number
+of points. Then each point is printed, one per line. If the
+point is coplanar, the line is &quot;1&quot; followed by the
+facet&rsquo;s ID. If the point is not a selected vertex, the
+line is &quot;0&quot;. Otherwise, each line is the number of
+neighbors followed by the corresponding facet indices (see
+&rsquo;Fn&rsquo;).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fo</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print outer planes for each facet in the same format as
+&rsquo;n&rsquo;. The outer plane is above all points.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fo</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print separating hyperplanes for unbounded, outer
+regions of the Voronoi diagram. The first line is the number
+of ridges. Then each hyperplane is printed, one per line. A
+line starts with the number of indices and floats. The first
+pair lists adjacent input sites, the next d floats are the
+normalized coefficients for the hyperplane, and the last
+float is the offset. The hyperplane is oriented toward
+&rsquo;QVn&rsquo; (if defined), or the first input site of
+the pair. Use &rsquo;Tv&rsquo; to verify that the
+hyperplanes are perpendicular bisectors. Use
+&rsquo;Fi&rsquo; for bounded regions, and &rsquo;Fv&rsquo;
+for the corresponding Voronoi vertices.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>FO</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>List all options to stderr, including the default
+values. Additional &rsquo;FO&rsquo;s are printed to
+stdout.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fp</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print points for halfspace intersections (option
+&rsquo;Hn,n,...&rsquo;). Each intersection corresponds to a
+facet of the dual polytope. The &quot;infinity&quot; point
+[-10.101,-10.101,...] indicates an unbounded
+intersection.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>FP</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>For each coplanar point (&rsquo;Qc&rsquo;) print the
+point ID of the nearest vertex, the point ID, the facet ID,
+and the distance.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>FQ</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print command used for qhull and input.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fs</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print a summary. The first line consists of the number
+of integers (&quot;8&quot;), followed by the dimension, the
+number of points, the number of vertices, the number of
+facets, the number of vertices selected for output, the
+number of facets selected for output, the number of coplanar
+points selected for output, number of simplicial, unmerged
+facets in output</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The second line
+consists of the number of reals (&quot;2&quot;), followed by
+the maxmimum offset to an outer plane and and minimum offset
+to an inner plane. Roundoff is included. Later versions of
+Qhull may produce additional integers or reals.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">FS</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Print the size of the hull. The
+first line consists of the number of integers
+(&quot;0&quot;). The second line consists of the number of
+reals (&quot;2&quot;), followed by the total facet area, and
+the total volume. Later versions of Qhull may produce
+additional integers or reals.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The total
+volume measures the volume of the intersection of the
+halfspaces defined by each facet. Both area and volume are
+approximations for non-simplicial facets. See option
+&rsquo;Fa&rsquo;.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">Ft</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Print a triangulation with added
+points for non-simplicial facets. The first line is the
+dimension and the second line is the number of points and
+the number of facets. The points follow, one per line, then
+the facets follow as a list of point indices. With option
+&rsquo;Qz&rsquo;, the points include the
+point-at-infinity.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fv</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print vertices for each facet. The first line is the
+number of facets. Then each facet is printed, one per line.
+Each line is the number of vertices followed by the
+corresponding point ids. Vertices are listed in the order
+they were added to the hull (the last one is first).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fv</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print all ridges of a Voronoi diagram. The first line is
+the number of ridges. Then each ridge is printed, one per
+line. A line starts with the number of indices. The first
+pair lists adjacent input sites, the remaining indices list
+Voronoi vertices. Vertex &rsquo;0&rsquo; indicates the
+vertex-at-infinity (i.e., an unbounded ray). In 3-d, the
+vertices are listed in order. See &rsquo;Fi&rsquo; and
+&rsquo;Fo&rsquo; for separating hyperplanes.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>FV</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print average vertex. The average vertex is a feasible
+point for halfspace intersection.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Fx</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>List extreme points (vertices) of the convex hull. The
+first line is the number of points. The other lines give the
+indices of the corresponding points. The first point is
+&rsquo;0&rsquo;. In 2-d, the points occur in
+counter-clockwise order; otherwise they occur in input
+order. For Delaunay triangulations, &rsquo;Fx&rsquo; lists
+the extreme points of the input sites. The points are
+unordered.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;">Geomview options</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>G</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Produce a file for viewing with Geomview. Without other
+options, Qhull displays edges in 2-d, outer planes in 3-d,
+and ridges in 4-d. A ridge can be explicit or implicit. An
+explicit ridge is a dim-1 dimensional simplex between two
+facets. In 4-d, the explicit ridges are triangles. When
+displaying a ridge in 4-d, Qhull projects the ridge&rsquo;s
+vertices to one of its facets&rsquo; hyperplanes. Use
+&rsquo;Gh&rsquo; to project ridges to the intersection of
+both hyperplanes.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Ga</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Display all input points as dots.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Gc</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Display the centrum for each facet in 3-d. The centrum
+is defined by a green radius sitting on a blue plane. The
+plane corresponds to the facet&rsquo;s hyperplane. The
+radius is defined by &rsquo;C-n&rsquo; or
+&rsquo;Cn&rsquo;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>GDn</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Drop dimension n in 3-d or 4-d. The result is a 2-d or
+3-d object.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Gh</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Display hyperplane intersections in 3-d and 4-d. In 3-d,
+the intersection is a black line. It lies on two neighboring
+hyperplanes (c.f., the blue squares associated with centrums
+(&rsquo;Gc&rsquo;)). In 4-d, the ridges are projected to the
+intersection of both hyperplanes.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Gi</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Display inner planes in 2-d and 3-d. The inner plane of
+a facet is below all of its vertices. It is parallel to the
+facet&rsquo;s hyperplane. The inner plane&rsquo;s color is
+the opposite (1-r,1-g,1-b) of the outer plane. Its edges are
+determined by the vertices.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Gn</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Do not display inner or outer planes. By default,
+Geomview displays the precise plane (no merging) or both
+inner and output planes (merging). Under merging, Geomview
+does not display the inner plane if the the difference
+between inner and outer is too small.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Go</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Display outer planes in 2-d and 3-d. The outer plane of
+a facet is above all input points. It is parallel to the
+facet&rsquo;s hyperplane. Its color is determined by the
+facet&rsquo;s normal, and its edges are determined by the
+vertices.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Gp</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Display coplanar points and vertices as radii. A radius
+defines a ball which corresponds to the imprecision of the
+point. The imprecision is the maximum of the roundoff error,
+the centrum radius, and maxcoord * (1-An). It is at least
+1/20&rsquo;th of the maximum coordinate, and ignores
+post-merging if pre-merging is done.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Gr</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Display ridges in 3-d. A ridge connects the two vertices
+that are shared by neighboring facets. Ridges are always
+displayed in 4-d.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Gt</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>A 3-d Delaunay triangulation looks like a convex hull
+with interior facets. Option &rsquo;Gt&rsquo; removes the
+outside ridges to reveal the outermost facets. It
+automatically sets options &rsquo;Gr&rsquo; and
+&rsquo;GDn&rsquo;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Gv</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Display vertices as spheres. The radius of the sphere
+corresponds to the imprecision of the data. See
+&rsquo;Gp&rsquo; for determining the radius.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">Print options</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>PAn</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Only the n largest facets are marked good for printing.
+Unless &rsquo;PG&rsquo; is set, &rsquo;Pg&rsquo; is
+automatically set.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Pdk:n</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Drop facet from output if normal[k] &lt;= n. The option
+&rsquo;Pdk&rsquo; uses the default value of 0 for n.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>PDk:n</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Drop facet from output if normal[k] &gt;= n. The option
+&rsquo;PDk&rsquo; uses the default value of 0 for n.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>PFn</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Only facets with area at least &rsquo;n&rsquo; are
+marked good for printing. Unless &rsquo;PG&rsquo; is set,
+&rsquo;Pg&rsquo; is automatically set.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Pg</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Print only good facets. A good facet is either visible
+from a point (the &rsquo;QGn&rsquo; option) or includes a
+point (the &rsquo;QVn&rsquo; option). It also meets the
+requirements of &rsquo;Pdk&rsquo; and &rsquo;PDk&rsquo;
+options. Option &rsquo;Pg&rsquo; is automatically set for
+options &rsquo;d&rsquo;, &rsquo;PAn&rsquo;,
+&rsquo;PFn&rsquo;, and &rsquo;PMn&rsquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>PG</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Print neighbors of good facets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>PMn</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Only the n facets with the most merges are marked good
+for printing. Unless &rsquo;PG&rsquo; is set,
+&rsquo;Pg&rsquo; is automatically set.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Po</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Force output despite precision problems. Verify
+(&rsquo;Tv&rsquo;) does not check coplanar points. Flipped
+facets are reported and concave facets are counted. If
+&rsquo;Po&rsquo; is used, points are not partitioned into
+flipped facets and a flipped facet is always visible to a
+point. Also, if an error occurs before the completion of
+Qhull and tracing is not active, &rsquo;Po&rsquo; outputs a
+neighborhood of the erroneous facets (if any).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Pp</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Do not report precision problems.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">Qhull control options</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>Qa</p></td>
+<td width="6%"></td>
+<td width="69%">
+
+
+<p>Allow input with fewer or more points than
+coordinates</p> </td>
+<td width="13%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">Qbk:0Bk:0</p>
+
+<p style="margin-left:18%;">Drop dimension k from the input
+points. This allows the user to take convex hulls of
+sub-dimensional objects. It happens before the Delaunay and
+Voronoi transformation.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>QbB</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Scale the input points to fit the unit cube. After
+scaling, the lower bound will be -0.5 and the upper bound
++0.5 in all dimensions. For Delaunay and Voronoi diagrams,
+scaling happens after projection to the paraboloid. Under
+precise arithmetic, scaling does not change the topology of
+the convex hull.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qbb</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Scale the last coordinate to [0, m] where m is the
+maximum absolute value of the other coordinates. For
+Delaunay and Voronoi diagrams, scaling happens after
+projection to the paraboloid. It reduces roundoff error for
+inputs with integer coordinates. Under precise arithmetic,
+scaling does not change the topology of the convex hull.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qbk:n</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Scale the k&rsquo;th coordinate of the input points.
+After scaling, the lower bound of the input points will be
+n. &rsquo;Qbk&rsquo; scales to -0.5.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>QBk:n</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Scale the k&rsquo;th coordinate of the input points.
+After scaling, the upper bound will be n. &rsquo;QBk&rsquo;
+scales to +0.5.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qc</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Keep coplanar points with the nearest facet. Output
+formats &rsquo;p&rsquo;, &rsquo;f&rsquo;, &rsquo;Gp&rsquo;,
+&rsquo;Fc&rsquo;, &rsquo;FN&rsquo;, and &rsquo;FP&rsquo;
+will print the points.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qf</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Partition points to the furthest outside facet.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qg</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Only build good facets. With the &rsquo;Qg&rsquo;
+option, Qhull will only build those facets that it needs to
+determine the good facets in the output. See
+&rsquo;QGn&rsquo;, &rsquo;QVn&rsquo;, and &rsquo;PdD&rsquo;
+for defining good facets, and &rsquo;Pg&rsquo; and
+&rsquo;PG&rsquo; for printing good facets and their
+neighbors.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>QGn</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>A facet is good (see &rsquo;Qg&rsquo; and
+&rsquo;Pg&rsquo;) if it is visible from point n. If n &lt;
+0, a facet is good if it is not visible from point n. Point
+n is not added to the hull (unless &rsquo;TCn&rsquo; or
+&rsquo;TPn&rsquo;). With rbox, use the &rsquo;Pn,m,r&rsquo;
+option to define your point; it will be point 0 (QG0).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qi</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Keep interior points with the nearest facet. Output
+formats &rsquo;p&rsquo;, &rsquo;f&rsquo;, &rsquo;Gp&rsquo;,
+&rsquo;FN&rsquo;, &rsquo;FP&rsquo;, and &rsquo;Fc&rsquo;
+will print the points.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>QJn</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Joggle each input coordinate by adding a random number
+in [-n,n]. If a precision error occurs, then qhull increases
+n and tries again. It does not increase n beyond a certain
+value, and it stops after a certain number of attempts [see
+user.h]. Option &rsquo;QJ&rsquo; selects a default value for
+n. The output will be simplicial. For Delaunay
+triangulations, &rsquo;QJn&rsquo; sets &rsquo;Qbb&rsquo; to
+scale the last coordinate (not if &rsquo;Qbk:n&rsquo; or
+&rsquo;QBk:n&rsquo; is set). &acute;QJn&rsquo; is deprecated
+for Voronoi diagrams. See also &rsquo;Qt&rsquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qm</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Only process points that would otherwise increase
+max_outside. Other points are treated as coplanar or
+interior points.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qr</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Process random outside points instead of furthest ones.
+This makes Qhull equivalent to the randomized incremental
+algorithms. CPU time is not reported since the randomization
+is inefficient.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>QRn</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Randomly rotate the input points. If n=0, use time as
+the random number seed. If n&gt;0, use n as the random
+number seed. If n=-1, don&rsquo;t rotate but use time as the
+random number seed. For Delaunay triangulations
+(&rsquo;d&rsquo; and &rsquo;v&rsquo;), rotate about the last
+axis.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qs</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Search all points for the initial simplex.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qt</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Triangulated output. Triangulate all non-simplicial
+facets. &acute;Qt&rsquo; is deprecated for Voronoi diagrams.
+See also &rsquo;Qt&rsquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qv</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Test vertex neighbors for convexity after post-merging.
+To use the &rsquo;Qv&rsquo; option, you also need to set a
+merge option (e.g., &rsquo;Qx&rsquo; or
+&rsquo;C-0&rsquo;).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>QVn</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>A good facet (see &rsquo;Qg&rsquo; and &rsquo;Pg&rsquo;)
+includes point n. If n&lt;0, then a good facet does not
+include point n. The point is either in the initial simplex
+or it is the first point added to the hull. Option
+&rsquo;QVn&rsquo; may not be used with merging.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qw</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Allow option warnings. Otherwise Qhull returns an error
+after most option warnings</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>Qx</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Perform exact merges while building the hull. The
+&quot;exact&quot; merges are merging a point into a coplanar
+facet (defined by &rsquo;Vn&rsquo;, &rsquo;Un&rsquo;, and
+&rsquo;C-n&rsquo;), merging concave facets, merging
+duplicate ridges, and merging flipped facets. Coplanar
+merges and angle coplanar merges (&rsquo;A-n&rsquo;) are not
+performed. Concavity testing is delayed until a merge
+occurs.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">After the hull
+is built, all coplanar merges are performed (defined by
+&rsquo;C-n&rsquo; and &rsquo;A-n&rsquo;), then post-merges
+are performed (defined by &rsquo;Cn&rsquo; and
+&rsquo;An&rsquo;).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">Qz</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Add a point &quot;at
+infinity&quot; that is above the paraboloid for Delaunay
+triangulations and Voronoi diagrams. This reduces precision
+problems and allows the triangulation of cospherical
+points.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;">Qhull experiments and
+speedups</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q0</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Turn off pre-merging as a default option. With
+&rsquo;Q0&rsquo;/&rsquo;Qx&rsquo; and without explicit
+pre-merge options, Qhull ignores precision issues while
+constructing the convex hull. This may lead to precision
+errors. If so, a descriptive warning is generated.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q1</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q1&rsquo;, Qhull merges by mergetype/angle
+instead of mergetype/distance.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q2</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q2&rsquo;, Qhull merges all facets at once
+instead of using independent sets of merges and then
+retesting.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q3</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q3&rsquo;, Qhull does not remove redundant
+vertices.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q4</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q4&rsquo;, Qhull avoids merges of an old
+facet into a new facet.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q5</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q5&rsquo;, Qhull does not correct outer
+planes at the end. The maximum outer plane is used
+instead.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q6</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q6&rsquo;, Qhull does not pre-merge concave
+or coplanar facets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q7</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q7&rsquo;, Qhull processes facets in
+depth-first order instead of breadth-first order.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q8</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q8&rsquo; and merging, Qhull does not retain
+near-interior points for adjusting outer planes.
+&rsquo;Qc&rsquo; will probably retain all points that adjust
+outer planes.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q9</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q9&rsquo;, Qhull processes the furthest of
+all outside sets at each iteration.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q10</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q10&rsquo;, Qhull does not use special
+processing for narrow distributions.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q11</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q11&rsquo;, Qhull copies normals and
+recompute centrums for tricoplanar facets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q12</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q12&rsquo;, Qhull allows wide facets and
+wide dupridge.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q14</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q14&rsquo;, Qhull merges pinched vertices
+that create a dupridge.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Q15</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>With &rsquo;Q15&rsquo;, Qhull checks for duplicate
+ridges with the same vertices.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">Trace options</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Tn</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Trace at level n. Qhull includes full execution tracing.
+&rsquo;T-1&rsquo; traces events. &rsquo;T1&rsquo; traces the
+overall execution of the program. &rsquo;T2&rsquo; and
+&rsquo;T3&rsquo; trace overall execution and geometric and
+topological events. &rsquo;T4&rsquo; traces the algorithm.
+&rsquo;T5&rsquo; includes information about memory
+allocation and Gaussian elimination.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Ta</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Annotate output with codes that identify the
+corresponding qh_fprintf() statement.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>TAn</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Stop Qhull after adding n vertices.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Tc</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Check frequently during execution. This will catch most
+inconsistency errors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>TCn</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Stop Qhull after building the cone of new facets for
+point n. The output for &rsquo;f&rsquo; includes the cone
+and the old hull. See also &rsquo;TVn&rsquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Tf</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Flush output after each qh_fprintf. Use &rsquo;Tf&rsquo;
+for debugging segfaults. See &rsquo;Tz&rsquo; for
+redirecting stderr.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>TFn</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Report progress whenever more than n facets are created
+During post-merging, &rsquo;TFn&rsquo; reports progress
+after more than n/2 merges.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">TI file</p>
+
+<p style="margin-left:18%;">Input data from
+&rsquo;file&rsquo;. The filename may not include spaces or
+quotes.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>TMn</p></td>
+<td width="5%"></td>
+<td width="38%">
+
+
+<p>Turn on tracing at n&rsquo;th merge.</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">TO file</p>
+
+<p style="margin-left:18%;">Output results to
+&rsquo;file&rsquo;. The name may be enclosed in single
+quotes.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>TPn</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Turn on tracing when point n is added to the hull. Trace
+partitions of point n. If used with TWn, turn off tracing
+after adding point n to the hull.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>TP-1</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Turn on tracing after qh_buildhull and qh_postmerge.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>TRn</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Rerun qhull n times. Usually used with &rsquo;QJn&rsquo;
+to determine the probability that a given joggle will
+fail.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>Ts</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Collect statistics and print to stderr at the end of
+execution.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>Tv</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Verify the convex hull. This checks the topological
+structure, facet convexity, and point inclusion. If
+precision problems occurred, facet convexity is tested
+whether or not &rsquo;Tv&rsquo; is selected. Option
+&rsquo;Tv&rsquo; does not check point inclusion if forcing
+output with &rsquo;Po&rsquo;, or if &rsquo;Q5&rsquo; is
+set.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">For point
+inclusion testing, Qhull verifies that all points are below
+all outer planes (facet-&gt;maxoutside). Point inclusion is
+exhaustive if merging or if the facet-point product is small
+enough; otherwise Qhull verifies each point with a directed
+search (qh_findbest).</p>
+
+<p style="margin-left:18%; margin-top: 1em">Point inclusion
+testing occurs after producing output. It prints a message
+to stderr unless option &rsquo;Pp&rsquo; is used. This
+allows the user to interrupt Qhull without changing the
+output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em">TVn</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Stop Qhull after adding point n.
+If n &lt; 0, stop Qhull before adding point n. Output shows
+the hull at this time. See also &rsquo;TCn&rsquo;</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>TWn</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Trace merge facets when the width is greater than n.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>Tz</p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Redirect stderr to stdout. See &rsquo;Tf&rsquo; for
+flushing writes.</p></td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+bugs to Brad Barber at qhull_bug@qhull.org.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If Qhull does
+not compile, it is due to an incompatibility between your
+system and ours. The first thing to check is that your
+compiler is ANSI standard. If it is, check the man page for
+the best options, or find someone to help you. If you locate
+the cause of your problem, please send email since it might
+help others.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If Qhull
+compiles but crashes on the test case (rbox D4),
+there&rsquo;s still incompatibility between your system and
+ours. Typically it&rsquo;s been due to mem.c and memory
+alignment. You can use qh_NOmem in mem.h to turn off memory
+management. Please let us know if you figure out how to fix
+these problems.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you do find a
+problem, try to simplify it before reporting the error. Try
+different size inputs to locate the smallest one that causes
+an error. You&rsquo;re welcome to hunt through the code
+using the execution trace as a guide. This is especially
+true if you&rsquo;re incorporating Qhull into your own
+program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When you do
+report an error, please attach a data set to the end of your
+message. This allows us to see the error for ourselves.
+Qhull is maintained part-time.</p>
+
+<h2>E-MAIL
+<a name="E-MAIL"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send
+correspondence to qhull@qhull.org and report bugs to
+qhull_bug@qhull.org. Let us know how you use Qhull. If you
+mention it in a paper, please send the reference and an
+abstract.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you would
+like to get Qhull announcements (e.g., a new version) and
+news (any bugs that get fixed, etc.), let us know and we
+will add you to our mailing list. If you would like to
+communicate with other Qhull users, we will add you to the
+qhull_users alias. For Internet news about geometric
+algorithms and convex hulls, look at
+comp.graphics.algorithms and sci.math.num-analysis</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rbox(1)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Barber, C. B.,
+D.P. Dobkin, and H.T. Huhdanpaa, &quot;The Quickhull
+Algorithm for Convex Hulls,&quot; ACM Trans. on Mathematical
+Software, 22(4):469&ndash;483, Dec. 1996.
+http://portal.acm.org/citation.cfm?doid=235815.235821
+http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.117.405</p>
+
+<p style="margin-left:9%; margin-top: 1em">Clarkson, K.L.,
+K. Mehlhorn, and R. Seidel, &quot;Four results on randomized
+incremental construction,&quot; Computational Geometry:
+Theory and Applications, vol. 3, p. 185&ndash;211, 1993.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Preparata, F.
+and M. Shamos, Computational Geometry, Springer-Verlag, New
+York, 1985.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">C. Bradford
+Barber Hannu Huhdanpaa <br>
+bradb@shore.net hannu@qhull.org</p>
+
+<p style="margin-left:9%; margin-top: 1em">.fi</p>
+
+<h2>ACKNOWLEDGEMENTS
+<a name="ACKNOWLEDGEMENTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A special thanks
+to Albert Marden, Victor Milenkovic, the Geometry Center,
+Harvard University, and Endocardial Solutions, Inc. for
+supporting this work.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Qhull 1.0 and
+2.0 were developed under National Science Foundation grants
+NSF/DMS-8920161 and NSF-CCR-91-15793 750-7504. David Dobkin
+guided the original work at Princeton University. If you
+find it useful, please let us know.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Geometry
+Center is supported by grant DMS-8920161 from the National
+Science Foundation, by grant DOE/DE-FG02-92ER25137 from the
+Department of Energy, by the University of Minnesota, and by
+Minnesota Technology, Inc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Qhull is
+available from http://www.qhull.org</p>
+<hr>
+</body>
+</html>

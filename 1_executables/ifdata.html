@@ -1,0 +1,423 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ifdata</title>
+
+</head>
+<body>
+
+<h1 align="center">ifdata</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ifdata - get
+network interface info without parsing ifconfig output</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ifdata</b>
+[options] {<i>iface</i>}</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ifdata</b>
+can be used to check for the existence of a network
+interface, or to get information about the interface, such
+as its IP address. Unlike <b>ifconfig</b> or <b>ip</b>,
+<b>ifdata</b> has simple to parse output that is designed to
+be easily used by a shell script.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>-h</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Print out a help summary.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-e</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Test to see if the interface exists, exit nonzero if it
+does not.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-p</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Prints out the whole configuration of the interface.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-pe</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Prints &quot;yes&quot; or &quot;no&quot; if the
+interface exists or not.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-pa</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Prints the IPv4 address of the interface.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-pn</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Prints the netmask of the interface.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-pN</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Prints the network address of the interface.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-pb</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Prints the broadcast address of the interface.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-pm</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Prints the MTU of the interface.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Following
+options are Linux only.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>-ph</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Prints the hardware address of
+the interface. Exit with a failure exit code if there is not
+hardware address for the given network interface.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-pf</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the flags of the interface.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-si</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints out all the input statistics of the
+interface.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sip</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of input packets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sib</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of input bytes.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sie</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of input errors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sid</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of dropped input packets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sif</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of input fifo overruns.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sic</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Print the number of compressed input packets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sim</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of input multicast packets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-so</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints out all the output statistics of the
+interface.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sop</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of output packets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sob</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of output bytes.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-soe</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of output errors.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sod</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of dropped output packets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sof</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of output fifo overruns.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-sox</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Print the number of output collisions.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-soc</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of output carrier losses.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-som</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of output multicast packets.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-bips</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of bytes of incoming traffic measured
+in one second.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-bops</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Prints the number of bytes of outgoing traffic measured
+in one second.</p></td></tr>
+</table>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Benjamin
+BAYART</p>
+<hr>
+</body>
+</html>

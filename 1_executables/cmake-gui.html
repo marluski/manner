@@ -1,0 +1,390 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:04 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CMAKE-GUI</title>
+
+</head>
+<body>
+
+<h1 align="center">CMAKE-GUI</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cmake-gui -
+CMake GUI Command-Line Reference</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">cmake-gui
+[&lt;options&gt;] <br>
+cmake-gui [&lt;options&gt;] -B &lt;path-to-build&gt; [-S
+&lt;path-to-source&gt;] <br>
+cmake-gui [&lt;options&gt;] &lt;path-to-source |
+path-to-existing-build&gt; <br>
+cmake-gui [&lt;options&gt;] --browse-manual
+[&lt;filename&gt;]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>cmake-gui</b> executable is the CMake GUI. Project
+configuration settings may be specified interactively. Brief
+instructions are provided at the bottom of the window when
+the program is running.</p>
+
+<p style="margin-left:9%; margin-top: 1em">CMake is a
+cross-platform build system generator. Projects specify
+their build process with platform-independent CMake
+listfiles included in each directory of a source tree with
+the name <b>CMakeLists.txt</b>. Users build a project by
+using CMake to generate a build system for a native tool on
+their platform.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-S
+&lt;path-to-source&gt;</b></p>
+
+<p style="margin-left:18%;">Path to root directory of the
+CMake project to build.</p>
+
+<p style="margin-left:9%;"><b>-B
+&lt;path-to-build&gt;</b></p>
+
+<p style="margin-left:18%;">Path to directory which CMake
+will use as the root of build directory.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the
+directory doesn't already exist CMake will make it.</p>
+
+
+<p style="margin-left:9%;"><b>--preset=&lt;preset-name&gt;</b></p>
+
+<p style="margin-left:18%;">Name of the preset to use from
+the project's <i>presets</i> files, if it has them.</p>
+
+<p style="margin-left:9%;"><b>--browse-manual
+[&lt;filename&gt;]</b></p>
+
+<p style="margin-left:18%;">Open the CMake reference manual
+in a browser and immediately exit. If
+<b>&lt;filename&gt;</b> is specified, open that file within
+the reference manual instead of <b>index.html</b>.</p>
+
+<p style="margin-left:9%;"><b>-version [&lt;file&gt;],
+--version [&lt;file&gt;], /V [&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Show program name/version
+banner and exit. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>-h, -H, --help, -help,
+-usage, /?</b></p>
+
+<p style="margin-left:18%;">Print usage information and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Usage describes
+the basic command line interface and its options.</p>
+
+<p style="margin-left:9%;"><b>--help &lt;keyword&gt;
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print help for one CMake
+keyword.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>&lt;keyword&gt;</b>
+can be a property, variable, command, policy, generator or
+module.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The relevant
+manual entry for <b>&lt;keyword&gt;</b> is printed in a
+human-readable text format. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Changed in
+version 3.28: Prior to CMake 3.28, this option supported
+command names only.</p>
+
+<p style="margin-left:9%;"><b>--help-full
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print all help manuals and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">All manuals are
+printed in a human-readable text format. The output is
+printed to a named <b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-manual &lt;man&gt;
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print one help manual and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The specified
+manual is printed in a human-readable text format. The
+output is printed to a named <b>&lt;file&gt;</b> if
+given.</p>
+
+<p style="margin-left:9%;"><b>--help-manual-list
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">List help manuals available and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The list
+contains all manuals for which help may be obtained by using
+the <b>--help-manual</b> option followed by a manual name.
+The output is printed to a named <b>&lt;file&gt;</b> if
+given.</p>
+
+<p style="margin-left:9%;"><b>--help-command &lt;cmd&gt;
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print help for one command and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-commands(7)</i> manual entry for <b>&lt;cmd&gt;</b>
+is printed in a human-readable text format. The output is
+printed to a named <b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-command-list
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">List commands with help
+available and exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The list
+contains all commands for which help may be obtained by
+using the <b>--help-command</b> option followed by a command
+name. The output is printed to a named <b>&lt;file&gt;</b>
+if given.</p>
+
+<p style="margin-left:9%;"><b>--help-commands
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print cmake-commands manual and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-commands(7)</i> manual is printed in a
+human-readable text format. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-module &lt;mod&gt;
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print help for one module and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-modules(7)</i> manual entry for <b>&lt;mod&gt;</b>
+is printed in a human-readable text format. The output is
+printed to a named <b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-module-list
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">List modules with help
+available and exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The list
+contains all modules for which help may be obtained by using
+the <b>--help-module</b> option followed by a module name.
+The output is printed to a named <b>&lt;file&gt;</b> if
+given.</p>
+
+<p style="margin-left:9%;"><b>--help-modules
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print cmake-modules manual and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-modules(7)</i> manual is printed in a
+human-readable text format. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-policy &lt;cmp&gt;
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print help for one policy and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-policies(7)</i> manual entry for <b>&lt;cmp&gt;</b>
+is printed in a human-readable text format. The output is
+printed to a named <b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-policy-list
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">List policies with help
+available and exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The list
+contains all policies for which help may be obtained by
+using the <b>--help-policy</b> option followed by a policy
+name. The output is printed to a named <b>&lt;file&gt;</b>
+if given.</p>
+
+<p style="margin-left:9%;"><b>--help-policies
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print cmake-policies manual and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-policies(7)</i> manual is printed in a
+human-readable text format. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-property &lt;prop&gt;
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print help for one property and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-properties(7)</i> manual entries for
+<b>&lt;prop&gt;</b> are printed in a human-readable text
+format. The output is printed to a named <b>&lt;file&gt;</b>
+if given.</p>
+
+<p style="margin-left:9%;"><b>--help-property-list
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">List properties with help
+available and exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The list
+contains all properties for which help may be obtained by
+using the <b>--help-property</b> option followed by a
+property name. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-properties
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print cmake-properties manual
+and exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-properties(7)</i> manual is printed in a
+human-readable text format. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-variable &lt;var&gt;
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print help for one variable and
+exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-variables(7)</i> manual entry for
+<b>&lt;var&gt;</b> is printed in a human-readable text
+format. The output is printed to a named <b>&lt;file&gt;</b>
+if given.</p>
+
+<p style="margin-left:9%;"><b>--help-variable-list
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">List variables with help
+available and exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The list
+contains all variables for which help may be obtained by
+using the <b>--help-variable</b> option followed by a
+variable name. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<p style="margin-left:9%;"><b>--help-variables
+[&lt;file&gt;]</b></p>
+
+<p style="margin-left:18%;">Print cmake-variables manual
+and exit.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<i>cmake-variables(7)</i> manual is printed in a
+human-readable text format. The output is printed to a named
+<b>&lt;file&gt;</b> if given.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+resources are available to get help using CMake: <b><br>
+Home Page</b></p>
+
+<p style="margin-left:18%;"><i>https://cmake.org</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">The primary
+starting point for learning about CMake.</p>
+
+<p style="margin-left:9%;"><b>Online Documentation and
+Community Resources</b></p>
+
+
+<p style="margin-left:18%;"><i>https://cmake.org/documentation</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Links to
+available documentation and community resources may be found
+on this web page.</p>
+
+<p style="margin-left:9%;"><b>Discourse Forum</b></p>
+
+
+<p style="margin-left:18%;"><i>https://discourse.cmake.org</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">The Discourse
+Forum hosts discussion and questions about CMake.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2000-2025
+Kitware, Inc. and Contributors</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,698 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:28 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>glilypond</title>
+
+</head>
+<body>
+
+<h1 align="center">glilypond</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Option overview">Option overview</a><br>
+<a href="#Options for building EPS files">Options for building EPS files</a><br>
+<a href="#Directories and files">Directories and files</a><br>
+<a href="#Output">Output</a><br>
+<a href="#Short option collections">Short option collections</a><br>
+<a href="#Handling of long options">Handling of long options</a><br>
+<a href="#LilyPond regions in roff input">LilyPond regions in roff input</a><br>
+<a href="#Integrated LilyPond code">Integrated LilyPond code</a><br>
+<a href="#Inclusion of .ly files">Inclusion of .ly files</a><br>
+<a href="#Generated files">Generated files</a><br>
+<a href="#Command-line options for directories">Command-line options for directories</a><br>
+<a href="#Transformation processes for generating EPS files">Transformation processes for generating EPS files</a><br>
+<a href="#Mode pdf2eps">Mode pdf2eps</a><br>
+<a href="#Mode ly2eps">Mode ly2eps</a><br>
+<a href="#Generated groff output">Generated groff output</a><br>
+<a href="#Authors">Authors</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">glilypond -
+embed LilyPond musical notation in <i>groff</i>
+documents</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em">[<b>-k</b>]
+[{<b>--ly2eps</b>|<b>--pdf2eps</b>}] [<b>-e</b>
+<i>directory</i>] [<b>-o</b> <i>output-file</i>] [<b>-p</b>
+<i>filename-prefix</i>] [<b>-t</b> <i>tdir</i>]
+[{<b>-v</b>|<b>-V</b>}] [<b>--</b>]
+[<i>file&nbsp;</i>...]</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p>[{<b>--ly2eps</b>|<b>--pdf2eps</b>}] [<b>--eps_dir</b>
+<i>directory</i>] [<b>--keep_all</b>] [<b>--output</b>
+<i>output-file</i>] [<b>--prefix</b> <i>filename-prefix</i>]
+[<b>--temp_dir</b> <i>tdir</i>] [<b>--verbose</b>]
+[<b>--</b>] [<i>file&nbsp;</i>...]</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em"><b>-?</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p><b>-h</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p><b>--help</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p><b>--usage</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em"><b>-l</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p><b>--license</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>glilypond</b></p></td>
+<td width="1%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em"><b>--version</b></p></td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>glilypond</i></b>
+is a <a href="man:groff(7)"><i>groff</i>(7)</a> preprocessor
+that enables the embedding of LilyPond music scores in
+<i>groff</i> documents. If no operands are given, or if
+<i>file</i> is &ldquo;<b>-</b>&rdquo;, <i>glilypond</i>
+reads the standard input stream. A double-dash argument
+(&ldquo;<b>--</b>&rdquo;) causes all subsequent arguments to
+be interpreted as <i>file</i> operands, even if their names
+start with a dash.</p>
+
+<h2>Usage
+<a name="Usage"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">At present,
+<i>glilypond</i> works with the <i>groff</i> <b>ps</b>,
+<b>dvi</b>, <b>html</b>, and <b>xhtml</b> devices. The
+<b>lbp</b> and <b>lj4</b> devices are untested.
+Unfortunately, the <b>pdf</b> device does not yet work.</p>
+
+<h2>Option overview
+<a name="Option overview"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-?</b>|<b>-h</b>|<b>--help</b>|<b>--usage</b></p>
+
+<p style="margin-left:18%;">Display usage information and
+exit.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Display version information and
+exit.</p>
+
+<p style="margin-left:9%;"><b>-l</b>|<b>--license</b></p>
+
+<p style="margin-left:18%;">Display copyright license
+information and exit.</p>
+
+<h3>Options for building EPS files
+<a name="Options for building EPS files"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ly2eps</b></p>
+
+<p style="margin-left:18%;">Direct
+<a href="man:lilypond(1)"><i>lilypond</i>(1)</a> to create
+Encapsulated PostScript (EPS) files. This is the
+default.</p>
+
+<p style="margin-left:9%;"><b>--pdf2eps</b></p>
+
+<p style="margin-left:18%;">The program <i>glilypond</i>
+generates a PDF file using <i>lilypond</i>. Then the EPS
+file is generated by <i>pdf2ps</i> and <i>ps2eps</i>.</p>
+
+<h3>Directories and files
+<a name="Directories and files"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e</b>|<b>--eps_dir</b>
+<i>directory_name</i></p>
+
+<p style="margin-left:18%;">Normally all <i>EPS</i> files
+are sent to the temporary directory. With this option, you
+can generate your own directory, in which all useful
+<i>EPS</i> files are send. So at last, the temporary
+directory can be removed.</p>
+
+<p style="margin-left:9%;"><b>-p</b>|<b>--prefix</b>
+<i>begin_of_name</i></p>
+
+<p style="margin-left:18%;">Normally all temporary files
+get names that start with the <b>ly</b><i>...</i> prefix.
+With this option, you can freely change this prefix.</p>
+
+<p style="margin-left:9%;"><b>-k</b>|<b>--keep_all</b></p>
+
+<p style="margin-left:18%;">Normally all temporary files
+without the <i>eps</i> files are deleted. With this option,
+all generated files either by the <i>lilypond</i> program or
+other format transposers are kept.</p>
+
+<p style="margin-left:9%;"><b>-t</b>|<b>--temp_dir</b>
+<i>dir</i></p>
+
+<p style="margin-left:18%;">With this option, you call a
+directory that is the base for the temporary directory. This
+directory name is used as is without any extensions. If this
+directory does not exist it is be created. The temporary
+directory is created by Perl&rsquo;s security operations
+directly under this directory. In this temporary directory,
+the temporary files are stored.</p>
+
+<h3>Output
+<a name="Output"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>|<b>--output</b>
+<i>file_name</i></p>
+
+<p style="margin-left:18%;">Normally all <i>groff</i>
+output of this program is sent to <b>STDOUT</b>. With this
+option, that can be changed, such that the output is stored
+into a file named in the option argument
+<i>file_name</i>.</p>
+
+
+<p style="margin-left:9%;"><b>-v</b>|<b>-V</b>|<b>--verbose</b></p>
+
+<p style="margin-left:18%;">A lot more of information is
+sent to STDERR.</p>
+
+<h3>Short option collections
+<a name="Short option collections"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The argument
+handling of options</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Short
+options</i> are arguments that start with a single dash
+<b>-</b>. Such an argument can consist of arbitrary many
+options without option argument, composed as a collection of
+option characters following the single dash.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Such a
+collection can be terminated by an option character that
+expects an option argument. If this option character is not
+the last character of the argument, the following final part
+of the argument is the option argument. If it is the last
+character of the argument, the next argument is taken as the
+option argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is the
+standard for <i>POSIX</i> and <i>GNU</i> option
+management.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example,
+<b><br>
+-kVe</b> <i>some_dir</i></p>
+
+<p style="margin-left:18%;">is a collection of the short
+options <b>-k</b> and <b>-V</b> without option argument,
+followed by the short option <b>-e</b> with option argument
+that is the following part of the argument <i>some_dir</i>.
+So this argument could also be written as several arguments
+<b>-k -V -e</b> <i>some_dir</i>.</p>
+
+<h3>Handling of long options
+<a name="Handling of long options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Arguments that
+start with a double dash <b>--</b> are so-called <i>long
+options R .</i> Each double dash argument can only have a
+single long option.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Long
+options</i> have or have not an option argument. An option
+argument can be the next argument or can be appended with an
+equal sign <b>=</b> to the same argument as the long
+option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="56%">
+
+
+<p>is a long option without an option argument.</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--eps_dir</b> <i>some_dir</i>
+<b><br>
+--eps_dir=</b><i>some_dir</i></p>
+
+<p style="margin-left:18%;">is the long option
+<b>--eps_dir</b> with the option argument
+<i>some_dir</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Moreover the
+program allows abbreviations of long options, as much as
+possible.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <i>long
+option</i> <b>--keep_all</b> can be abbreviated from
+<b>--keep_al</b> up to <b>--k</b> because the program does
+not have another <i>long option</i> whose name starts with
+the character <b>k</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On the other
+hand, the option <b>--version</b> cannot be abbreviated
+further than <b>--vers</b> because there is also the <i>long
+option</i> <b>--verbose</b> that can be abbreviated up to
+<b>--verb</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An option
+argument can also be appended to an abbreviation. So is
+<b>--e=</b><i>some_dir</i> the same as <b>--eps_dir</b>
+<i>some_dir</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Moreover the
+program allows an arbitrary usage of upper and lower case in
+the option name. This is <i>Perl</i> style.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, the
+<i>long option</i> <b>--keep_all</b> can as well be written
+as <b>--Keep_All</b> or even as an abbreviation like
+<b>--KeE</b>.</p>
+
+<h2>LilyPond regions in roff input
+<a name="LilyPond regions in roff input"></a>
+</h2>
+
+
+<h3>Integrated LilyPond code
+<a name="Integrated LilyPond code"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">A
+<i>lilypond</i> part within a structure written in the
+<i>groff</i> language is the whole part between the
+marks</p>
+
+<p style="margin-left:18%;"><b>.lilypond start</b></p>
+
+<p style="margin-left:9%;">and</p>
+
+<p style="margin-left:18%;"><b>.lilypond end</b></p>
+
+<p style="margin-left:9%;">A <i>groff</i> input can have
+several of these <i>lilypond</i> parts.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When processing
+such a <i>lilypond</i> part between <b>.lilypond start</b>
+and <b>.lilypond end</b> we say that the <b>glilypond</b>
+program is in <i>lilypond mode</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">These
+<i>lilypond</i> parts are sent into temporary
+<i>lilypond</i> files with the file name extension
+<b>.ly</b>. These files are transformed later on into
+<i>EPS</i> files.</p>
+
+<h3>Inclusion of .ly files
+<a name="Inclusion of .ly files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">An additional
+command line for file inclusion of <i>lilypond</i> files is
+given by <b><br>
+.lilypond include</b> <i>file_name</i> <br>
+in <i>groff</i> input. For each such <i>include</i> command,
+one file of <i>lilypond</i> code can be included into the
+<i>groff</i> code. Arbitrarily many of these commands can be
+included in the <i>groff</i> input.</p>
+
+<p style="margin-left:9%; margin-top: 1em">These include
+commands can only be used outside the <i>lilypond</i> parts.
+Within the <i>lilypond mode</i>, this inclusion is not
+possible. So <b>.lilypond include</b> may not be used in
+<i>lilypond mode</i>, i.e. between <b>.lilypond start</b>
+and <b>.lilypond end</b>. These included <i>ly</i>-files are
+also transformed into <i>EPS</i> files.</p>
+
+<h2>Generated files
+<a name="Generated files"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">By the
+transformation process of <i>lilypond</i> parts into
+<i>EPS</i> files, there are many files generated. By
+default, these files are regarded as temporary files and as
+such stored in a temporary directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This process can
+be changed by command-line options.</p>
+
+<h3>Command-line options for directories
+<a name="Command-line options for directories"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The temporary
+directory for this program is either created automatically
+or can be named by the option <b>-t</b>|<b>--temp_dir</b>
+<i>dir</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Moreover, the
+<i>EPS</i> files that are later on referred by <b>.PSPIC</b>
+command in the final <i>groff</i> output can be stored in a
+different directory that can be set by the command-line
+option <b>-e</b>|<b>--eps_dir</b> <i>directory_name</i>.
+With this option, the temporary directory can be removed
+completely at the end of the program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The beginning of
+the names of the temporary files can be set by the
+command-line options <b>-p</b> or <b>--prefix</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All of the
+temporary files except the <i>EPS</i> files are deleted
+finally. This can be changed by setting the command-line
+options <b>-k</b> or <b>--keep_files</b>. With this, all
+temporary files and directories are kept, not deleted.</p>
+
+<p style="margin-left:9%; margin-top: 1em">These <i>EPS</i>
+files are stored in a temporary or <i>EPS</i> directory. But
+they cannot be deleted by the transformation process because
+they are needed for the display which can take a long
+time.</p>
+
+<h2>Transformation processes for generating EPS files
+<a name="Transformation processes for generating EPS files"></a>
+</h2>
+
+
+<h3>Mode pdf2eps
+<a name="Mode pdf2eps"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This mode is the
+actual default and can also be chosen by the option
+<b>--pdf2eps</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In this mode,
+the <b>.ly</b> files are transformed by the
+<a href="man:lilypond(1)"><i>lilypond</i>(1)</a> program
+into <i>PDF</i> files, using</p>
+
+<p style="margin-left:18%;"><b>lilypond --pdf
+--output=</b><i>file-name</i></p>
+
+<p style="margin-left:9%;">for each <b>.ly</b> file. The
+<i>file-name</i> must be provided without the extension
+<b>.pdf</b>. By this process, a file
+<i>file-name</i><b>.pdf</b> is generated.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The next step is
+to transform these <i>PDF</i> files into a <i>PS</i> file.
+This is done by the
+<a href="man:pdf2ps(1)"><i>pdf2ps</i>(1)</a> program
+using</p>
+
+
+<p style="margin-left:18%;">$&nbsp;<b>pdf2ps&nbsp;</b><i>file-name</i><b>.pdf&nbsp;</b><i>file-name</i><b>.pds</b></p>
+
+<p style="margin-left:9%;">The next step creates an
+<i>EPS</i> file from the <i>PS</i> file. This is done by the
+<a href="man:ps2eps(1)"><i>ps2eps</i>(1)</a> program
+using</p>
+
+<p style="margin-left:18%;">$ <b>ps2eps</b>
+<i>file-name</i><b>.ps</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">By that, a file
+<i>file-name</i><b>.eps</b> is created for each
+<i>lilypond</i> part in the <i>groff</i> file or standard
+input.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The last step to
+be done is replacing all <i>lilypond</i> parts by the
+<i>groff</i> command</p>
+
+<p style="margin-left:18%;"><b>.PSPIC</b>
+<i>file-name</i><b>.eps</b></p>
+
+<h3>Mode ly2eps
+<a name="Mode ly2eps"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In earlier time,
+this mode was the default. But now it does not work any
+more, so accept the new default <i>pdf2eps</i>. For testing,
+this mode can also be chosen by the <i>glilypond</i> option
+<b>--ly2eps</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In this mode,
+the <b>.ly</b> files are transformed by the <i>lilypond</i>
+program into many files of different formats, including
+<i>eps</i> files, using</p>
+
+<p style="margin-left:18%;">$&nbsp;<b>lilypond --ps
+-dbackend=eps -dgs-load-fonts
+--output=</b><i>file-name</i></p>
+
+<p style="margin-left:9%;">for each <b>.ly</b> file. The
+output <i>file-name</i> must be provided without an
+extension, its directory is temporary.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There are many
+<i>EPS</i> files created. One having the complete
+transformed <b>ly</b> file, named
+<i>file-name</i><b>.eps</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Moreover there
+are <i>EPS</i> files for each page, named
+<i>file-name</i><b>-</b><i>digit</i><b>.eps</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The last step to
+be done is replacing all <i>lilypond</i> parts by the
+collection of the corresponding <i>EPS</i> page files. This
+is done by <i>groff</i> commands <b><br>
+.PSPIC</b>
+<i>file-name</i><b>-</b><i>digit</i><b>.eps</b></p>
+
+<h2>Generated groff output
+<a name="Generated groff output"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The new
+<a href="man:groff(7)"><i>groff</i>(7)</a> structure
+generated by <i>glilypond</i> is either</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1)</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>sent to standard output and can there be saved into a
+file or piped into
+<a href="man:groff(1)"><i>groff</i>(1)</a> or</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2)</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>stored into a file by given the option
+<b>-o&nbsp;&nbsp;|&nbsp;</b>--output <i>file_name</i></p></td></tr>
+</table>
+
+<h2>Authors
+<a name="Authors"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>glilypond</i>
+was written by
+<a href="mailto:groff-bernd.warken-72@web.de">Bernd
+Warken</a>.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff(1)"><i>groff</i>(1)</a></p>
+
+<p style="margin-left:18%;">describes the usage of the
+<i>groff</i> command and contains pointers to further
+documentation of the <i>groff</i> system.</p>
+
+
+<p style="margin-left:9%;"><a href="man:groff_tmac(5)"><i>groff_tmac</i>(5)</a></p>
+
+<p style="margin-left:18%;">describes the <b>.PSPIC</b>
+request.</p>
+
+
+<p style="margin-left:9%;"><a href="man:lilypond(1)"><i>lilypond</i>(1)</a></p>
+
+<p style="margin-left:18%;">briefly describes the
+<i>lilypond</i> command and contains pointers to further
+documentation.</p>
+
+
+<p style="margin-left:9%;"><a href="man:pdf2ps(1)"><i>pdf2ps</i>(1)</a></p>
+
+<p style="margin-left:18%;">transforms a <i>PDF</i> file
+into a <i>PostScript</i> format.</p>
+
+
+<p style="margin-left:9%;"><a href="man:ps2eps(1)"><i>ps2eps</i>(1)</a></p>
+
+<p style="margin-left:18%;">transforms a <i>PS</i> file
+into an <i>EPS</i> format.</p>
+<hr>
+</body>
+</html>

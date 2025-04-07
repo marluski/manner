@@ -1,0 +1,258 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SPEEXDEC</title>
+
+</head>
+<body>
+
+<h1 align="center">SPEEXDEC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#input_file can be:">input_file can be:</a><br>
+<a href="#output_file can be:">output_file can be:</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">speexdec - The
+reference implementation speex decoder.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>speexdec</b>
+[<i>options</i>] <i>input_file.spx</i>
+[<i>output_file</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Decodes a Speex
+file and produce a WAV file or raw file</p>
+
+<h3>input_file can be:
+<a name="input_file can be:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">filename.spx</p>
+
+<p style="margin-left:18%;">regular Speex file</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>-</p></td>
+<td width="8%"></td>
+<td width="6%">
+
+
+<p>stdin</p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<h3>output_file can be:
+<a name="output_file can be:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">filename.wav</p>
+
+<p style="margin-left:18%;">Wav file</p>
+
+<p style="margin-left:9%;">filename.*</p>
+
+<p style="margin-left:18%;">Raw PCM file (any extension
+other that .wav)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>-</p></td>
+<td width="8%"></td>
+<td width="8%">
+
+
+<p>stdout</p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">(nothing)</p>
+
+<p style="margin-left:18%;">Will be played to soundcard</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>--enh</b></p></td>
+<td width="3%"></td>
+<td width="50%">
+
+
+<p style="margin-top: 1em">Enable perceptual enhancement
+(default)</p> </td>
+<td width="32%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--no-enh</b></p>
+
+<p style="margin-left:18%;">Disable perceptual
+enhancement</p>
+
+<p style="margin-left:9%;"><b>--force-nb</b></p>
+
+<p style="margin-left:18%;">Force decoding in
+narrowband</p>
+
+<p style="margin-left:9%;"><b>--force-wb</b></p>
+
+<p style="margin-left:18%;">Force decoding in wideband</p>
+
+<p style="margin-left:9%;"><b>--force-uwb</b></p>
+
+<p style="margin-left:18%;">Force decoding in
+ultra-wideband</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--mono</b></p></td>
+<td width="1%"></td>
+<td width="28%">
+
+
+<p>Force decoding in mono</p></td>
+<td width="54%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--stereo</b></p>
+
+<p style="margin-left:18%;">Force decoding in stereo</p>
+
+<p style="margin-left:9%;"><b>--rate</b> n</p>
+
+<p style="margin-left:18%;">Force decoding at sampling rate
+n Hz</p>
+
+<p style="margin-left:9%;"><b>--packet-loss</b> n</p>
+
+<p style="margin-left:18%;">Simulate n % random packet
+loss</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="6%"></td>
+<td width="36%">
+
+
+<p>Verbose mode (show bit-rate)</p></td>
+<td width="46%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">This help</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Version information</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>--pf</b></p></td>
+<td width="4%"></td>
+<td width="37%">
+
+
+<p>Deprecated, use <b>--enh</b> instead</p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--no-pf</b></p>
+
+<p style="margin-left:18%;">Deprecated, use <b>--no-enh</b>
+instead</p>
+
+<p style="margin-left:9%; margin-top: 1em">More information
+is available from the Speex site: http://www.speex.org</p>
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+bugs to the mailing list
+&lsquo;speex-dev@xiph.org&rsquo;.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2002 Jean-Marc Valin</p>
+<hr>
+</body>
+</html>

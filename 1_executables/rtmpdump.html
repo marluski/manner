@@ -1,0 +1,992 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>RTMPDUMP</title>
+
+</head>
+<body>
+
+<h1 align="center">RTMPDUMP</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Network Parameters">Network Parameters</a><br>
+<a href="#Connection Parameters">Connection Parameters</a><br>
+<a href="#Session Parameters">Session Parameters</a><br>
+<a href="#Security Parameters">Security Parameters</a><br>
+<a href="#Miscellaneous">Miscellaneous</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rtmpdump - RTMP
+streaming media client</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>rtmpdump
+-r&nbsp;</b><i>url</i> [<b>-n&nbsp;</b><i>hostname</i>]
+[<b>-c&nbsp;</b><i>port</i>]
+[<b>-l&nbsp;</b><i>protocol</i>]
+[<b>-S&nbsp;</b><i>host:port</i>]
+[<b>-a&nbsp;</b><i>app</i>] [<b>-t&nbsp;</b><i>tcUrl</i>]
+[<b>-p&nbsp;</b><i>pageUrl</i>]
+[<b>-s&nbsp;</b><i>swfUrl</i>]
+[<b>-f&nbsp;</b><i>flashVer</i>]
+[<b>-u&nbsp;</b><i>auth</i>]
+[<b>-C&nbsp;</b><i>conndata</i>]
+[<b>-y&nbsp;</b><i>playpath</i>] [<b>-Y</b>] [<b>-v</b>]
+[<b>-d&nbsp;</b><i>subscription</i>] [<b>-e</b>]
+[<b>-k&nbsp;</b><i>skip</i>] [<b>-A&nbsp;</b><i>start</i>]
+[<b>-B&nbsp;</b><i>stop</i>] [<b>-b&nbsp;</b><i>buffer</i>]
+[<b>-m&nbsp;</b><i>timeout</i>] [<b>-T&nbsp;</b><i>key</i>]
+[<b>-j&nbsp;</b><i>JSON</i>] [<b>-w&nbsp;</b><i>swfHash</i>]
+[<b>-x&nbsp;</b><i>swfSize</i>]
+[<b>-W&nbsp;</b><i>swfUrl</i>]
+[<b>-X&nbsp;</b><i>swfAge</i>]
+[<b>-o&nbsp;</b><i>output</i>] [<b>-#</b>] [<b>-q</b>]
+[<b>-V</b>] [<b>-z</b>] <b><br>
+rtmpdump -h</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>rtmpdump</b>
+is a tool for dumping media content streamed over RTMP.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>rtmpdump</b>
+makes a connection to the specified RTMP server and plays
+the media specified by the given <i>url</i>. The url should
+be of the form <br>
+rtmp[t][e]://hostname[:port][/app[/playpath]]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Plain rtmp, as
+well as tunneled and encrypted sessions are supported.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Network Parameters
+<a name="Network Parameters"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+define how to connect to the media server. <b><br>
+--rtmp -r&nbsp;</b><i>url</i></p>
+
+<p style="margin-left:18%;">URL of the server and media
+content.</p>
+
+<p style="margin-left:9%;"><b>--host
+-n&nbsp;</b><i>hostname</i></p>
+
+<p style="margin-left:18%;">Overrides the hostname in the
+RTMP URL.</p>
+
+<p style="margin-left:9%;"><b>--port
+-c&nbsp;</b><i>port</i></p>
+
+<p style="margin-left:18%;">Overrides the port number in
+the RTMP URL.</p>
+
+<p style="margin-left:9%;"><b>--protocol
+-l&nbsp;</b><i>number</i></p>
+
+<p style="margin-left:18%;">Overrides the protocol in the
+RTMP URL. <br>
+0 = rtmp <br>
+1 = rtmpt <br>
+2 = rtmpe <br>
+3 = rtmpte <br>
+4 = rtmps <br>
+5 = rtmpts</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--socks</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-S&nbsp;</b><i>host:port</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Use the specified SOCKS4
+proxy.</p>
+
+<h3>Connection Parameters
+<a name="Connection Parameters"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+define the content of the RTMP Connect request packet. If
+correct values are not provided, the media server will
+reject the connection attempt.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--app</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-a&nbsp;</b><i>app</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Name of application to connect
+to on the RTMP server. Overrides the app in the RTMP URL.
+Sometimes the rtmpdump URL parser cannot determine the app
+name automatically, so it must be given explicitly using
+this option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--tcUrl</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-t&nbsp;</b><i>url</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">URL of the target stream.
+Defaults to rtmp[e]://host[:port]/app/playpath.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--pageUrl</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-p&nbsp;</b><i>url</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">URL of the web page in which
+the media was embedded. By default no value will be
+sent.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--swfUrl</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-s&nbsp;</b><i>url</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">URL of the SWF player for the
+media. By default no value will be sent.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--flashVer</b></p></td>
+<td width="13%"></td>
+<td width="6%">
+
+
+<p><b>-f&nbsp;</b><i>version</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Version of the Flash plugin
+used to run the SWF player. The default is &quot;LNX
+10,0,32,18&quot;.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--auth</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-u&nbsp;</b><i>string</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">An authentication string to be
+appended to the Connect message. Using this option will
+append a Boolean TRUE and then the specified string. This
+option is only used by some particular servers and is
+deprecated. The more general <b>--conn</b> option should be
+used instead.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--conn</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-C&nbsp;</b><i>type:data</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Append arbitrary AMF data to
+the Connect message. The type must be B for Boolean, N for
+number, S for string, O for object, or Z for null. For
+Booleans the data must be either 0 or 1 for FALSE or TRUE,
+respectively. Likewise for Objects the data must be 0 or 1
+to end or begin an object, respectively. Data items in
+subobjects may be named, by prefixing the type with
+&rsquo;N&rsquo; and specifying the name before the value,
+e.g. NB:myFlag:1. This option may be used multiple times to
+construct arbitrary AMF sequences. E.g. <br>
+-C B:1 -C S:authMe -C O:1 -C NN:code:1.23 -C NS:flag:ok -C
+O:0</p>
+
+<h3>Session Parameters
+<a name="Session Parameters"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+take effect after the Connect request has succeeded.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--playpath</b></p></td>
+<td width="13%"></td>
+<td width="6%">
+
+
+<p><b>-y&nbsp;</b><i>path</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Overrides the playpath parsed
+from the RTMP URL. Sometimes the rtmpdump URL parser cannot
+determine the correct playpath automatically, so it must be
+given explicitly using this option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--playlist</b></p></td>
+<td width="13%"></td>
+<td width="6%">
+</td>
+<td width="7%">
+
+
+<p><b>-Y</b></p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Issue a set_playlist command
+before sending the play command. The playlist will just
+contain the current playpath.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--live</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-v</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Specify that the media is a
+live stream. No resuming or seeking in live streams is
+possible.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--subscribe</b></p></td>
+<td width="13%"></td>
+<td width="6%">
+
+
+<p><b>-d&nbsp;</b><i>stream</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Name of live stream to
+subscribe to. Defaults to <i>playpath</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--realtime</b></p></td>
+<td width="13%"></td>
+<td width="6%">
+
+
+<p><b>-R</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Download approximately in
+realtime, without attempting to speed up via Pause/Unpause
+commands (&quot;the BUFX hack&quot;). Useful for servers
+that jump backwards in time at the Unpause command. Resuming
+and seeking in realtime streams is still possible.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--resume</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-e</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Resume an incomplete RTMP
+download.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--skip</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-k&nbsp;</b><i>num</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Skip <i>num</i> keyframes when
+looking for the last keyframe from which to resume. This may
+be useful if a regular attempt to resume fails. The default
+is 0.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--start</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-A&nbsp;</b><i>num</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Start at <i>num</i> seconds
+into the stream. Not valid for live streams.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--stop</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-B&nbsp;</b><i>num</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Stop at <i>num</i> seconds into
+the stream.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--buffer</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-b&nbsp;</b><i>num</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Set buffer time to <i>num</i>
+milliseconds. The default is 36000000.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--timeout</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-m&nbsp;</b><i>num</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Timeout the session after
+<i>num</i> seconds without receiving any data from the
+server. The default is 120.</p>
+
+<h3>Security Parameters
+<a name="Security Parameters"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+handle additional authentication requests from the
+server.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--token</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-T&nbsp;</b><i>key</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Key for SecureToken response,
+used if the server requires SecureToken authentication.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--jtv</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-j&nbsp;</b><i>JSON</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">JSON token used by legacy
+Justin.tv servers. Invokes
+NetStream.Authenticate.UsherToken</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--swfhash</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-w&nbsp;</b><i>hexstring</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">SHA256 hash of the decompressed
+SWF file. This option may be needed if the server uses SWF
+Verification, but see the <b>--swfVfy</b> option below. The
+hash is 32 bytes, and must be given in hexadecimal. The
+<b>--swfsize</b> option must always be used with this
+option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--swfsize</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-x&nbsp;</b><i>num</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Size of the decompressed SWF
+file. This option may be needed if the server uses SWF
+Verification, but see the <b>--swfVfy</b> option below. The
+<b>--swfhash</b> option must always be used with this
+option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--swfVfy</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-W&nbsp;</b><i>url</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">URL of the SWF player for this
+media. This option replaces all three of the
+<b>--swfUrl</b>, <b>--swfhash</b>, and <b>--swfsize</b>
+options. When this option is used, the SWF player is
+retrieved from the specified URL and the hash and size are
+computed automatically. Also the information is cached in a
+<i>.swfinfo</i> file in the user&rsquo;s home directory, so
+that it doesn&rsquo;t need to be retrieved and recalculated
+every time rtmpdump is run. The .swfinfo file records the
+URL, the time it was fetched, the modification timestamp of
+the SWF file, its size, and its hash. By default, the cached
+info will be used for 30 days before re-checking.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--swfAge</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-X&nbsp;</b><i>days</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Specify how many days to use
+the cached SWF info before re-checking. Use 0 to always
+check the SWF URL. Note that if the check shows that the SWF
+file has the same modification timestamp as before, it will
+not be retrieved again.</p>
+
+<h3>Miscellaneous
+<a name="Miscellaneous"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--flv</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-o&nbsp;</b><i>output</i></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Specify the output file name.
+If the name is - or is omitted, the stream is written to
+stdout.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--hashes</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-#</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Display streaming progress with
+a hash mark for each 1% of progress, instead of a byte
+counter.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--quiet</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-q</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Suppress all command
+output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--verbose</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-V</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Verbose command output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--debug</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-z</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Debug level output. Extremely
+verbose, including hex dumps of all packet data.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>--help</b></p></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="6%">
+
+
+<p><b>-h</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Print a summary of command
+options.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>0</b></p></td>
+<td width="8%"></td>
+<td width="59%">
+
+
+<p style="margin-top: 1em">Successful program
+execution.</p> </td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>1</b></p></td>
+<td width="8%"></td>
+<td width="59%">
+
+
+<p>Unrecoverable error.</p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>2</b></p></td>
+<td width="8%"></td>
+<td width="59%">
+
+
+<p>Incomplete transfer, resuming may get further.</p></td>
+<td width="23%">
+</td></tr>
+</table>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>HOME</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">The value of $<b>HOME</b> is
+used as the location for the <i>.swfinfo</i> file.</p></td></tr>
+</table>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>$HOME/.swfinfo</i></p>
+
+<p style="margin-left:18%;">Cache of SWF Verification
+information</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>rtmpgw</b>(8)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Andrej
+Stepanchuk, Howard Chu, The Flvstreamer Team <br>
+ &lt;http://rtmpdump.mplayerhq.hu&gt;</p>
+<hr>
+</body>
+</html>

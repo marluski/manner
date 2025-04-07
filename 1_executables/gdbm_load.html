@@ -1,0 +1,196 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:43 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GDBM_LOAD</title>
+
+</head>
+<body>
+
+<h1 align="center">GDBM_LOAD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gdbm_load -
+re-create a GDBM database from a dump file.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gdbm_load</b>
+[<b>-MUnr</b>] [<b>-b</b> <i>NUM</i>] [<b>-c</b> <i>NUM]
+[</i><b>-m</b> <i>MODE</i>] [<b>-u</b>
+<i>NAME</i>|<i>UID</i>[:<i>NAME</i>|<i>GID</i>]]
+[<b>--block-size</b>=<i>NUM</i>]
+[<b>--cache-size</b>=<i>NUM</i>] [<b>--mmap</b>=<i>NUM</i>]
+[<b>--mode</b>=<i>MODE</i>] [<b>--no-meta</b>]
+[<b>--replace</b>] [<b>--update</b>]
+[<b>--user</b>=<i>NAME</i>|<i>UID</i>[:<i>NAME</i>|<i>GID</i>]]
+<i>FILE</i> [<i>DB_FILE</i>]</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gdbm_load</b>
+[<b>-Vh</b>] [<b>--help</b>] [<b>--usage</b>]
+[<b>--version</b>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Create a
+<b>gdbm</b> database file <i>DB_FILE</i> from the dump file
+<i>FILE</i>. If the <i>FILE</i> argument is not supplied,
+output the created database to the standard error.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the input
+file is in ASCII dump format, the mode and ownership of the
+created database are restored from the information in the
+dump. This can be overridden using the command line options
+(see below).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>,
+<b>--block-size</b>=<i>NUM</i></p>
+
+<p style="margin-left:18%;">Sets block size.</p>
+
+<p style="margin-left:9%;"><b>-c</b>,
+<b>--cache-size</b>=<i>NUM</i></p>
+
+<p style="margin-left:18%;">Sets cache size.</p>
+
+<p style="margin-left:9%;"><b>-M</b>, <b>--mmap</b></p>
+
+<p style="margin-left:18%;">Use memory mapping.</p>
+
+<p style="margin-left:9%;"><b>-m</b>,
+<b>--mode</b>=<i>MODE</i></p>
+
+<p style="margin-left:18%;">Set database file mode (octal
+number).</p>
+
+<p style="margin-left:9%;"><b>-n</b>, <b>--no-meta</b></p>
+
+<p style="margin-left:18%;">Do not attempt to restore
+database meta-data (mode and ownership).</p>
+
+<p style="margin-left:9%;"><b>-r</b>, <b>--replace</b></p>
+
+<p style="margin-left:18%;">Replace existing keys. This
+must be used together with the <b>-U</b> (<b>--update</b>)
+option.</p>
+
+<p style="margin-left:9%;"><b>-U</b>, <b>--update</b></p>
+
+<p style="margin-left:18%;">Update an existing database.
+Key/value pairs from the dump file will be added to that
+database, without removing the existing keys. To overwrite
+keys that are duplicated in the dump file, use the
+<b>--replace</b> option.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the database
+does not exist, it will be created.</p>
+
+<p style="margin-left:9%;"><b>-u</b>,
+<b>--user</b>=<i>NAME</i>|<i>UID</i>[:<i>NAME</i>|<i>GID</i>]</p>
+
+<p style="margin-left:18%;">Set file ownership.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Print a short usage
+summary.</p>
+
+<p style="margin-left:9%;"><b>--usage</b></p>
+
+<p style="margin-left:18%;">Print a list of available
+options.</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Print program version</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gdbm_dump</b>(1),
+<b>gdbmtool</b>(1), <b>gdbm</b>(3).</p>
+
+<p style="margin-left:9%; margin-top: 1em">For a detailed
+description of <b>gdbm_load</b> and other <b>gdbm</b>
+utilities, refer to the <b>GDBM Manual</b> available in
+Texinfo format. To access it, run:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>info
+gdbm</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+documentation is also available online at</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>https://www.gnu.org/software/gdbm/manual</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Should any
+discrepancies occur between this manpage and the <b>GDBM
+Manual</b>, the later shall be considered the authoritative
+source.</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+&lt;bug-gdbm@gnu.org&gt;.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2013-2025 Free Software Foundation, Inc <br>
+License GPLv3+: GNU GPL version 3 or later
+&lt;http://gnu.org/licenses/gpl.html&gt; <br>
+This is free software: you are free to change and
+redistribute it. There is NO WARRANTY, to the extent
+permitted by law.</p>
+<hr>
+</body>
+</html>

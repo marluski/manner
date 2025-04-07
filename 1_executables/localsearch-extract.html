@@ -1,0 +1,142 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:01 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>LOCALSEARCH-EXTRACT</title>
+
+</head>
+<body>
+
+<h1 align="center">LOCALSEARCH-EXTRACT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSYS">SYNOPSYS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">localsearch-extract
+- Extract metadata from a file.</p>
+
+<h2>SYNOPSYS
+<a name="SYNOPSYS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>localsearch
+extract</b> <i>FILE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>localsearch
+extract</b></i> reads the file provided and extracts any
+metadata it can from this file, then displays the metadata
+on standard output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The metadata is
+displayed as a SPARQL update command, that can be run
+against a SPARQL endpoint to update its copy of the
+metadata.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The actual
+extraction is done by a separate process. This is done to
+isolate the calling process from any memory leaks or crashes
+in the libraries Tracker uses to extract metadata.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For more
+information see the libtracker-extract reference
+documentation.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o,
+--output-format=&lt;</b><i>FORMAT</i><b>&gt;</b></p>
+
+<p style="margin-left:14%;">Choose which format to use to
+output results. Supported formats are <i>sparql</i>,
+<i>turtle</i> and <i>json-ld</i>.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Using command
+line to extract metadata from a file</p>
+
+<p style="margin-left:14%;">$ localsearch extract
+/path/to/some/file.mp3</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>G_MESSAGES_DEBUG</b></p>
+
+<p style="margin-left:14%;">Controls verbose log output
+from GLib-based code. Use G_MESSAGES_DEBUG=Tracker to see
+only Tracker-related logs, or G_MESSAGES_DEBUG=all to see
+everything.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>TRACKER_DEBUG</b></p>
+
+<p style="margin-left:14%;">Enables more specialized debug
+output. Pass a comma-separated list of one or more
+keywords:</p>
+
+<p style="margin-left:14%; margin-top: 1em">config</p>
+
+<p style="margin-left:19%;">extractor configuration</p>
+
+<p style="margin-left:14%; margin-top: 1em">statistics</p>
+
+<p style="margin-left:19%;">show statistics about how many
+files were processed</p>
+
+<p style="margin-left:9%; margin-top: 1em">status</p>
+
+<p style="margin-left:14%;">log the status messages that
+are published over D-Bus</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>localsearch
+status</b>(1), <b>localsearch info</b>(1).</p>
+<hr>
+</body>
+</html>

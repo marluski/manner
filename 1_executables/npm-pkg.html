@@ -1,0 +1,781 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:01 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-PKG</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-PKG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Workspaces support">Workspaces support</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#force">force</a><br>
+<a href="#json">json</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-pkg</b> -
+Manages your package.json</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg set
+&lt;key&gt;=&lt;value&gt; [&lt;key&gt;=&lt;value&gt; ...]
+<br>
+npm pkg get [&lt;key&gt; [&lt;key&gt; ...]] <br>
+npm pkg delete &lt;key&gt; [&lt;key&gt; ...] <br>
+npm pkg set
+[&lt;array&gt;[&lt;index&gt;].&lt;key&gt;=&lt;value&gt; ...]
+<br>
+npm pkg set [&lt;array&gt;[].&lt;key&gt;=&lt;value&gt; ...]
+<br>
+npm pkg fix</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">A command that
+automates the management of <b>package.json</b> files.
+<b>npm pkg</b> provide 3 different sub commands that allow
+you to modify or retrieve values for given object keys in
+your <b>package.json</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The syntax to
+retrieve and set fields is a dot separated representation of
+the nested object properties to be found within your
+<b>package.json</b>, it&rsquo;s the same notation used in
+npm help view to retrieve information from the registry
+manifest, below you can find more examples on how to use
+it.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Returned values
+are always in <b>json</b> format.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p><b>npm pkg get &lt;field&gt;</b></p></td>
+<td width="62%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Retrieves a
+value <b>key</b>, defined in your <b>package.json</b>
+file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, in
+order to retrieve the name of the current package, you can
+run:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg get
+name</p>
+
+<p style="margin-left:9%; margin-top: 1em">It&rsquo;s also
+possible to retrieve multiple values at once:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg get
+name version</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can view
+child fields by separating them with a period. To retrieve
+the value of a test <b>script</b> value, you would run the
+following command:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg get
+scripts.test</p>
+
+<p style="margin-left:9%; margin-top: 1em">For fields that
+are arrays, requesting a non-numeric field will return all
+of the values from the objects in the list. For example, to
+get all the contributor emails for a package, you would
+run:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg get
+contributors.email</p>
+
+<p style="margin-left:9%; margin-top: 1em">You may also use
+numeric indices in square braces to specifically select an
+item in an array field. To just get the email address of the
+first contributor in the list, you can run:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg get
+contributors[0].email</p>
+
+<p style="margin-left:9%; margin-top: 1em">For complex
+fields you can also name a property in square brackets to
+specifically select a child field. This is especially
+helpful with the exports object:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg get
+&quot;exports[.].require&quot;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="35%">
+
+
+<p style="margin-top: 1em"><b>npm pkg set
+&lt;field&gt;=&lt;value&gt;</b></p> </td>
+<td width="51%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Sets a
+<b>value</b> in your <b>package.json</b> based on the
+<b>field</b> value. When saving to your <b>package.json</b>
+file the same set of rules used during <b>npm install</b>
+and other cli commands that touches the <b>package.json</b>
+file are used, making sure to respect the existing
+indentation and possibly applying some validation prior to
+saving values to the file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The same syntax
+used to retrieve values from your package can also be used
+to define new properties or overriding existing ones, below
+are some examples of how the dot separated syntax can be
+used to edit your <b>package.json</b> file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Defining a new
+bin named <b>mynewcommand</b> in your <b>package.json</b>
+that points to a file <b>cli.js</b>:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg set
+bin.mynewcommand=cli.js</p>
+
+<p style="margin-left:9%; margin-top: 1em">Setting multiple
+fields at once is also possible:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg set
+description=&rsquo;Awesome package&rsquo;
+engines.node=&rsquo;&gt;=10&rsquo;</p>
+
+<p style="margin-left:9%; margin-top: 1em">It&rsquo;s also
+possible to add to array values, for example to add a new
+contributor entry:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg set
+contributors[0].name=&rsquo;Foo&rsquo;
+contributors[0].email=&rsquo;foo@bar.ca&rsquo;</p>
+
+<p style="margin-left:9%; margin-top: 1em">You may also
+append items to the end of an array using the special empty
+bracket notation:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg set
+contributors[].name=&rsquo;Foo&rsquo;
+contributors[].name=&rsquo;Bar&rsquo;</p>
+
+<p style="margin-left:9%; margin-top: 1em">It&rsquo;s also
+possible to parse values as json prior to saving them to
+your <b>package.json</b> file, for example in order to set a
+<b>&quot;private&quot;: true</b> property:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg set
+private=true --json</p>
+
+<p style="margin-left:9%; margin-top: 1em">It also enables
+saving values as numbers:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg set
+tap.timeout=60 --json</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em"><b>npm pkg delete
+&lt;key&gt;</b></p> </td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Deletes a
+<b>key</b> from your <b>package.json</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The same syntax
+used to set values from your package can also be used to
+remove existing ones. For example, in order to remove a
+script named build:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg delete
+scripts.build</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><b>npm pkg fix</b></p></td>
+<td width="72%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Auto corrects
+common errors in your <b>package.json</b>. npm already does
+this during <b>publish</b>, which leads to subtle (mostly
+harmless) differences between the contents of your
+<b>package.json</b> file and the manifest that npm uses
+during installation.</p>
+
+<h3>Workspaces support
+<a name="Workspaces support"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can
+set/get/delete items across your configured workspaces by
+using the <b>workspace</b> <i>&lang;
+/using-npm/config#workspace&rang;</i> or <b>workspaces</b>
+<i>&lang; /using-npm/config#workspaces&rang;</i> config
+options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example,
+setting a <b>funding</b> value across all configured
+workspaces of a project:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg set
+funding=https://example.com --ws</p>
+
+<p style="margin-left:9%; margin-top: 1em">When using
+<b>npm pkg get</b> to retrieve info from your configured
+workspaces, the returned result will be in a json format in
+which top level keys are the names of each workspace, the
+values of these keys will be the result values returned from
+each of the configured workspaces, e.g:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm pkg get
+name version --ws <br>
+{ <br>
+&quot;a&quot;: { <br>
+&quot;name&quot;: &quot;a&quot;, <br>
+&quot;version&quot;: &quot;1.0.0&quot; <br>
+}, <br>
+&quot;b&quot;: { <br>
+&quot;name&quot;: &quot;b&quot;, <br>
+&quot;version&quot;: &quot;1.0.0&quot; <br>
+} <br>
+}</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>force
+<a name="force"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Removes various
+protections against unfortunate side effects, common
+mistakes, unnecessary performance degradation, and malicious
+input.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Allow clobbering non-npm files
+in global installs.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow the <b>npm version</b> command to work on an
+unclean git repository.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow deleting the cache folder with <b>npm cache
+clean</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow installing packages that have an <b>engines</b>
+declaration requiring a different version of npm.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow installing packages that have an <b>engines</b>
+declaration requiring a different version of <b>node</b>,
+even if <b>--engine-strict</b> is enabled.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow <b>npm audit fix</b> to install modules outside
+your stated dependency range (including SemVer-major
+changes).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow unpublishing all versions of a published
+package.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow conflicting peerDependencies to be installed in
+the root project.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Implicitly set <b>--yes</b> during <b>npm init</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow clobbering existing values in <b>npm pkg</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Allow unpublishing of entire packages (not just a single
+version).</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If you
+don&rsquo;t have a clear idea of what you want to do, it is
+strongly recommended that you do not use this option!</p>
+
+<h3>json
+<a name="json"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Whether or not
+to output JSON data, rather than the normal output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">In <b>npm pkg set</b> it enables
+parsing set values with JSON.parse() before saving them to
+your <b>package.json</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Not supported by
+all npm commands.</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Set to true to
+run the command in the context of <b>all</b> configured
+workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+setting this to false will cause commands like
+<b>install</b> to ignore workspaces altogether. When not set
+explicitly:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Commands that operate on the
+<b>node_modules</b> tree (install, update, etc.) will link
+workspaces into the <b>node_modules</b> folder. - Commands
+that do other things (test, exec, publish, etc.) will
+operate on the root project, <i>unless</i> one or more
+workspaces are specified in the <b>workspace</b> config.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p style="margin-top: 1em">npm help install</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help init</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help config</p></td>
+<td width="62%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="24%">
+
+
+<p>npm help workspaces</p></td>
+<td width="62%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

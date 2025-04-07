@@ -1,0 +1,215 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE PULL</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE PULL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-pull -
+Download data from a remote repository</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em"><b>ostree pull {REMOTE}
+[BRANCH]</b></p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--commit-metadata-only</b></p>
+
+<p style="margin-left:14%;">Fetch only the commit
+metadata.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--cache-dir</b>=DIR</p>
+
+<p style="margin-left:14%;">Use an alternate cache
+directory in DIR.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disable-fsync</b></p>
+
+<p style="margin-left:14%;">Do no invoke fsync().</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--localcache-repo</b></p>
+
+<p style="margin-left:14%;">Like git's clone --reference.
+Reuse the provided OSTree repo as a local object cache when
+doing HTTP fetches. May be specified multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--untrusted</b></p>
+
+<p style="margin-left:14%;">Do not trust local sources,
+verify checksums and don't hardlink into source.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disable-static-deltas</b></p>
+
+<p style="margin-left:14%;">Do not use static deltas.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mirror</b></p>
+
+<p style="margin-left:14%;">Write refs suitable for a
+mirror, i.e. refs are stored in the heads/ directory rather
+than the remotes/ directory. This makes the target repo
+suitable to be exported for other clients to pull from as an
+ostree remote. If no specific refs are specified, all refs
+will be fetched (the remote must have a summary file
+present).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--subpath</b>=SUBPATH</p>
+
+<p style="margin-left:14%;">Only pull the provided
+subpath.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--depth</b>=DEPTH</p>
+
+<p style="margin-left:14%;">Traverse DEPTH parents
+(-1=infinite) (default: 0).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--network-retries</b>=N</p>
+
+<p style="margin-left:14%;">Specifies how many times each
+download should be retried upon error (default: 5)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disable-retry-on-network-errors</b></p>
+
+<p style="margin-left:14%;">Do not retry when network
+issues happen, instead fail automatically. (Currently only
+affects libcurl)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--low-speed-limit-bytes</b>=N</p>
+
+<p style="margin-left:14%;">The average transfer speed per
+second of a transfer during the time set via
+'low-speed-time-seconds' for libcurl to abort (default:
+1000)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--low-speed-time-seconds</b>=N</p>
+
+<p style="margin-left:14%;">The time in number seconds that
+the transfer speed should be below the
+'low-speed-limit-bytes' setting for libcurl to abort
+(default: 30)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--max-outstanding-fetcher-requests</b>=N</p>
+
+<p style="margin-left:14%;">The max amount of concurrent
+connections allowed. (default: 8)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disable-verify-bindings</b></p>
+
+<p style="margin-left:14%;">Disable verification of commit
+metadata bindings.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Without
+--mirror, this command will create new refs under
+remotes/REMOTE/ directory for each pulled branch unless they
+are already created. Such refs can be then referenced by
+REMOTE:BRANCH in ostree subcommands (e.g. ostree log
+origin:exampleos/x86_64/standard).</p>
+
+<p style="margin-left:9%; margin-top: 1em">This command can
+retrieve just a specific commit, or go all the way to
+performing a full mirror of the remote repository. If no
+BRANCH is specified, all configured branches are
+retrieved.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A special syntax
+in the @ character allows specifying a specific commit to
+retrieve from a branch. The use cases for this are somewhat
+similar to pulling a specific git tag; one could e.g. script
+a system upgrade to a known-good version, rather than the
+latest from the content provider.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+--repo=repo pull --depth=-1 --mirror remote_name</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Perform a
+complete mirror of the remote. (This is likely most useful
+if your repository is also archive mode)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+--repo=repo pull remote_name
+exampleos/x86_64/standard</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Fetch the most
+recent commit to exampleos/x86_64/standard.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+--repo=repo pull remote_name
+exampleos/x86_64/standard@98ea6e4f216f2fb4b69fff9b3a44842c38686ca685f3f55dc48c5d3fb1107be4</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Download the
+specific commit starting with 98ea6e as if it was the latest
+commit for exampleos/x86_64/standard.</p>
+<hr>
+</body>
+</html>

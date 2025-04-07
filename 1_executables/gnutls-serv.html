@@ -1,0 +1,672 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>gnutls-serv</title>
+
+</head>
+<body>
+
+<h1 align="center">gnutls-serv</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gnutls-serv</b>
+- GnuTLS server</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gnutls-serv</b>
+[<b>-flags</b>] [<b>-flag</b> [<i>value</i>]]
+[<b>--option-name</b>[[=| ]<i>value</i>]]</p>
+
+<p style="margin-left:9%; margin-top: 1em">All arguments
+must be options.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Server program
+that listens to incoming TLS connections.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>
+<i>num</i>, <b>--debug</b>=<i>num</i> Enable debugging. This
+option takes an integer <br>
+number as its argument. The value of <i>num</i> is
+constrained to being:</p>
+
+<p style="margin-left:14%;">in the range 0 through 9999</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+debug level.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sni-hostname</b>=<i>str</i>
+Server&rsquo;s hostname for server name extension.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Server name of
+type host_name that the server will recognise as its <br>
+own. If the server receives client hello with different
+name, it will <br>
+send a warning-level unrecognized_name alert.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sni-hostname-fatal</b>
+Send fatal alert on sni-hostname mismatch.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--alpn</b>=<i>str</i>
+Specify ALPN protocol to be enabled by the server. This <br>
+option may appear an unlimited number of times.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify the
+(textual) ALPN protocol for the server to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--alpn-fatal</b>
+Send fatal alert on non-matching ALPN name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--noticket</b>
+Don&rsquo;t accept session tickets.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--earlydata</b>
+Accept early data.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--maxearlydata</b>=<i>num</i>
+The maximum early data size to accept. This option <br>
+takes an integer number as its argument. The value of
+<i>num</i> is <br>
+constrained to being:</p>
+
+<p style="margin-left:14%;">in the range 1 through
+2147483648</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nocookie</b>
+Don&rsquo;t require cookie on DTLS sessions.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-g</b>,
+<b>--generate</b> Generate Diffie-Hellman parameters.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>,
+<b>--quiet</b> Suppress some messages.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nodb</b> Do
+not use a resumption database.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--http</b>
+Act as an HTTP server.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--echo</b>
+Act as an Echo server.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--crlf</b> Do
+not replace CRLF by LF in Echo server mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>,
+<b>--udp</b> Use DTLS (datagram TLS) over UDP.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--mtu</b>=<i>num</i>
+Set MTU for datagram TLS. This option takes an integer <br>
+number as its argument. The value of <i>num</i> is
+constrained to being:</p>
+
+<p style="margin-left:14%;">in the range 0 through
+17000</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--srtp-profiles</b>=<i>str</i>
+Offer SRTP profiles.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a</b>,
+<b>--disable-client-cert</b> Do not request a client
+certificate. This <br>
+option must not appear in combination with any of the
+following <br>
+options: require-client-cert.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b>,
+<b>--require-client-cert</b> Require a client
+certificate.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This option
+before 3.6.0 used to imply --verify-client-cert. Since <br>
+3.6.0 it will no longer verify the certificate by
+default.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--verify-client-cert</b>
+If a client certificate is sent then verify it.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Do not require,
+but if a client certificate is sent then verify it and <br>
+close the connection if invalid.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--compress-cert</b>=<i>str</i>
+Compress certificate. This option may appear an <br>
+unlimited number of times.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This option sets
+a supported compression method for certificate <br>
+compression.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>,
+<b>--heartbeat</b> Activate heartbeat support.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Regularly ping
+client via heartbeat extension messages</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--x509fmtder</b>
+Use DER format for certificates to read from.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--priority</b>=<i>str</i>
+Priorities string.</p>
+
+<p style="margin-left:9%; margin-top: 1em">TLS algorithms
+and protocols to enable. You can use predefined sets of <br>
+ciphersuites such as PERFORMANCE, NORMAL, SECURE128,
+SECURE256. The <br>
+default is NORMAL.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Check the GnuTLS
+manual on section &ldquo;Priority strings&rdquo; for more
+<br>
+information on allowed keywords</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dhparams</b>=<i>file</i>
+DH params file to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--x509cafile</b>=<i>str</i>
+Certificate file or PKCS #11 URL to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--x509crlfile</b>=<i>file</i>
+CRL file to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pgpkeyfile</b>=<i>file</i>
+PGP Key file to use.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--x509keyfile</b>=<i>str</i> X.509 key file or PKCS #11 URL
+to use. This option <br>
+may appear an unlimited number of times.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify the
+private key file or URI to use; it must correspond to the
+<br>
+certificate specified in --x509certfile. Multiple keys and
+certificates <br>
+can be specified with this option and in that case each
+occurrence of <br>
+keyfile must be followed by the corresponding x509certfile
+or <br>
+vice-versa.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--x509certfile</b>=<i>str</i>
+X.509 Certificate file or PKCS #11 URL to use. This <br>
+option may appear an unlimited number of times.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify the
+certificate file or URI to use; it must correspond to the
+<br>
+key specified in --x509keyfile. Multiple keys and
+certificates can be <br>
+specified with this option and in that case each occurrence
+of keyfile <br>
+must be followed by the corresponding x509certfile or
+vice-versa.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--x509dsakeyfile</b>
+This is an alias for the <i>--x509keyfile</i> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--x509dsacertfile</b> This is an alias for the
+<i>--x509certfile</i> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--x509ecckeyfile</b> This is an alias for the
+<i>--x509keyfile</i> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--x509ecccertfile</b> This is an alias for the
+<i>--x509certfile</i> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+--rawpkkeyfile</b>=<i>str</i> Private key file (PKCS #8 or
+PKCS #12) or PKCS #11 <br>
+URL to use. This option may appear an unlimited number of
+times.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify the
+private key file or URI to use; it must correspond to the
+<br>
+raw public-key specified in --rawpkfile. Multiple key pairs
+can be <br>
+specified with this option and in that case each occurrence
+of keyfile <br>
+must be followed by the corresponding rawpkfile or
+vice-versa.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In order to
+instruct the application to negotiate raw public keys one
+<br>
+must enable the respective certificate types via the
+priority strings <br>
+(i.e. CTYPE-CLI-* and CTYPE-SRV-* flags).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Check the GnuTLS
+manual on section &ldquo;Priority strings&rdquo; for more
+<br>
+information on how to set certificate types.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--rawpkfile</b>=<i>str</i>
+Raw public-key file to use. This option may appear an <br>
+unlimited number of times. This option must appear in
+combination with <br>
+the following options: rawpkkeyfile.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify the raw
+public-key file to use; it must correspond to the <br>
+private key specified in --rawpkkeyfile. Multiple key pairs
+can be <br>
+specified with this option and in that case each occurrence
+of keyfile <br>
+must be followed by the corresponding rawpkfile or
+vice-versa.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In order to
+instruct the application to negotiate raw public keys one
+<br>
+must enable the respective certificate types via the
+priority strings <br>
+(i.e. CTYPE-CLI-* and CTYPE-SRV-* flags).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Check the GnuTLS
+manual on section &ldquo;Priority strings&rdquo; for more
+<br>
+information on how to set certificate types.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--srppasswd</b>=<i>file</i>
+SRP password file to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--srppasswdconf</b>=<i>file</i>
+SRP password configuration file to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pskpasswd</b>=<i>file</i>
+PSK password file to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pskhint</b>=<i>str</i>
+PSK identity hint to use.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ocsp-response</b>=<i>str</i>
+The OCSP response to send to client. This option <br>
+may appear an unlimited number of times.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the client
+requested an OCSP response, return data from this file to
+<br>
+the client.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ignore-ocsp-response-errors</b>
+Ignore any errors when setting the OCSP <br>
+response.</p>
+
+<p style="margin-left:9%; margin-top: 1em">That option
+instructs gnutls to not attempt to match the provided OCSP
+<br>
+responses with the certificates.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>
+<i>num</i>, <b>--port</b>=<i>num</i> The port to connect to.
+This option takes an <br>
+integer number as its argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l</b>,
+<b>--list</b> Print a list of the supported algorithms and
+modes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Print a list of
+the supported algorithms and modes. If a priority <br>
+string is given then only the enabled ciphersuites are
+shown.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--provider</b>=<i>file</i>
+Specify the PKCS #11 provider library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This will
+override the default options in /etc/gnutls/pkcs11.conf</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keymatexport</b>=<i>str</i>
+Label used for exporting keying material.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keymatexportsize</b>=<i>num</i>
+Size of the exported keying material. This <br>
+option takes an integer number as its argument.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--recordsize</b>=<i>num</i>
+The maximum record size to advertise. This option <br>
+takes an integer number as its argument. The value of
+<i>num</i> is <br>
+constrained to being:</p>
+
+<p style="margin-left:14%;">in the range 0 through
+16384</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--httpdata</b>=<i>file</i>
+The data used as HTTP response.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--timeout</b>=<i>num</i>
+The timeout period for server. This option takes an <br>
+integer number as its argument.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--attime</b>=<i>timestamp</i>
+Perform validation at the timestamp instead of the <br>
+system time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">timestamp is an
+instance in time encoded as Unix time or in a human <br>
+readable timestring such as &quot;29 Feb 2004&quot;,
+&quot;2004-02-29&quot;. Full <br>
+documentation available at <br>
+
+&lt;https://www.gnu.org/software/coreutils/manual/html_node/Date-input-formats.html&gt;
+<br>
+or locally via info &rsquo;(coreutils) date
+invocation&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>
+<i>arg</i>, <b>--version</b>=<i>arg</i> Output version of
+program and exit. The default <br>
+mode is &lsquo;v&rsquo;, a simple version. The
+&lsquo;c&rsquo; mode will print copyright <br>
+information and &lsquo;n&rsquo; will print the full
+copyright notice.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b> Display usage information and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-!</b>,
+<b>--more-help</b> Pass the extended usage information
+through a pager.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:18%; margin-top: 1em">Running your
+own TLS server based on GnuTLS can be useful when debugging
+clients and/or GnuTLS itself. This section describes how to
+use <b>gnutls-serv</b> as a simple HTTPS server.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The most basic
+server can be started as:</p>
+
+<p style="margin-left:23%; margin-top: 1em">gnutls-serv
+--http --priority &quot;NORMAL:+ANON-ECDH:+ANON-DH&quot;</p>
+
+<p style="margin-left:18%; margin-top: 1em">It will only
+support anonymous ciphersuites, which many TLS clients
+refuse to use.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The next step
+is to add support for X.509. First we generate a CA:</p>
+
+<p style="margin-left:23%; margin-top: 1em">$ certtool
+--generate-privkey &gt; x509-ca-key.pem <br>
+$ echo &rsquo;cn = GnuTLS test CA&rsquo; &gt; ca.tmpl <br>
+$ echo &rsquo;ca&rsquo; &gt;&gt; ca.tmpl <br>
+$ echo &rsquo;cert_signing_key&rsquo; &gt;&gt; ca.tmpl <br>
+$ certtool --generate-self-signed --load-privkey
+x509-ca-key.pem --template ca.tmpl --outfile x509-ca.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">Then generate a
+server certificate. Remember to change the dns_name value to
+the name of your server host, or skip that command to avoid
+the field.</p>
+
+<p style="margin-left:23%; margin-top: 1em">$ certtool
+--generate-privkey &gt; x509-server-key.pem <br>
+$ echo &rsquo;organization = GnuTLS test server&rsquo; &gt;
+server.tmpl <br>
+$ echo &rsquo;cn = test.gnutls.org&rsquo; &gt;&gt;
+server.tmpl <br>
+$ echo &rsquo;tls_www_server&rsquo; &gt;&gt; server.tmpl
+<br>
+$ echo &rsquo;encryption_key&rsquo; &gt;&gt; server.tmpl
+<br>
+$ echo &rsquo;signing_key&rsquo; &gt;&gt; server.tmpl <br>
+$ echo &rsquo;dns_name = test.gnutls.org&rsquo; &gt;&gt;
+server.tmpl <br>
+$ certtool --generate-certificate --load-privkey
+x509-server-key.pem --load-ca-certificate x509-ca.pem
+--load-ca-privkey x509-ca-key.pem --template server.tmpl
+--outfile x509-server.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">For use in the
+client, you may want to generate a client certificate as
+well.</p>
+
+<p style="margin-left:23%; margin-top: 1em">$ certtool
+--generate-privkey &gt; x509-client-key.pem <br>
+$ echo &rsquo;cn = GnuTLS test client&rsquo; &gt;
+client.tmpl <br>
+$ echo &rsquo;tls_www_client&rsquo; &gt;&gt; client.tmpl
+<br>
+$ echo &rsquo;encryption_key&rsquo; &gt;&gt; client.tmpl
+<br>
+$ echo &rsquo;signing_key&rsquo; &gt;&gt; client.tmpl <br>
+$ certtool --generate-certificate --load-privkey
+x509-client-key.pem --load-ca-certificate x509-ca.pem
+--load-ca-privkey x509-ca-key.pem --template client.tmpl
+--outfile x509-client.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">To be able to
+import the client key/certificate into some applications,
+you will need to convert them into a PKCS#12 structure. This
+also encrypts the security sensitive key with a
+password.</p>
+
+<p style="margin-left:23%; margin-top: 1em">$ certtool
+--to-p12 --load-ca-certificate x509-ca.pem --load-privkey
+x509-client-key.pem --load-certificate x509-client.pem
+--outder --outfile x509-client.p12</p>
+
+<p style="margin-left:18%; margin-top: 1em">For icing,
+we&rsquo;ll create a proxy certificate for the client
+too.</p>
+
+<p style="margin-left:23%; margin-top: 1em">$ certtool
+--generate-privkey &gt; x509-proxy-key.pem <br>
+$ echo &rsquo;cn = GnuTLS test client proxy&rsquo; &gt;
+proxy.tmpl <br>
+$ certtool --generate-proxy --load-privkey
+x509-proxy-key.pem --load-ca-certificate x509-client.pem
+--load-ca-privkey x509-client-key.pem --load-certificate
+x509-client.pem --template proxy.tmpl --outfile
+x509-proxy.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">Then start the
+server again:</p>
+
+<p style="margin-left:23%; margin-top: 1em">$ gnutls-serv
+--http --x509cafile x509-ca.pem --x509keyfile
+x509-server-key.pem --x509certfile x509-server.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">Try connecting
+to the server using your web browser. Note that the server
+listens to port 5556 by default.</p>
+
+<p style="margin-left:18%; margin-top: 1em">While you are
+at it, to allow connections using ECDSA, you can also create
+a ECDSA key and certificate for the server. These
+credentials will be used in the final example below.</p>
+
+<p style="margin-left:23%; margin-top: 1em">$ certtool
+--generate-privkey --ecdsa &gt; x509-server-key-ecc.pem <br>
+$ certtool --generate-certificate --load-privkey
+x509-server-key-ecc.pem --load-ca-certificate x509-ca.pem
+--load-ca-privkey x509-ca-key.pem --template server.tmpl
+--outfile x509-server-ecc.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">The next step
+is to add support for SRP authentication. This requires an
+SRP password file created with <b>srptool</b>. To start the
+server with SRP support:</p>
+
+<p style="margin-left:23%; margin-top: 1em">gnutls-serv
+--http --priority NORMAL:+SRP-RSA:+SRP --srppasswdconf
+srp-tpasswd.conf --srppasswd srp-passwd.txt</p>
+
+<p style="margin-left:18%; margin-top: 1em">Let&rsquo;s
+also start a server with support for PSK. This would require
+a password file created with <b>psktool</b>.</p>
+
+<p style="margin-left:23%; margin-top: 1em">gnutls-serv
+--http --priority NORMAL:+ECDHE-PSK:+PSK --pskpasswd
+psk-passwd.txt</p>
+
+<p style="margin-left:18%; margin-top: 1em">If you want a
+server with support for raw public-keys we can also add
+these credentials. Note however that there is no identity
+information linked to these keys as is the case with regular
+x509 certificates. Authentication must be done via different
+means. Also we need to explicitly enable raw public-key
+certificates via the priority strings.</p>
+
+<p style="margin-left:23%; margin-top: 1em">gnutls-serv
+--http --priority NORMAL:+CTYPE-CLI-RAWPK:+CTYPE-SRV-RAWPK
+--rawpkfile srv.rawpk.pem --rawpkkeyfile srv.key.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">Finally, we
+start the server with all the earlier parameters and you get
+this command:</p>
+
+<p style="margin-left:23%; margin-top: 1em">gnutls-serv
+--http --priority
+NORMAL:+PSK:+SRP:+CTYPE-CLI-RAWPK:+CTYPE-SRV-RAWPK
+--x509cafile x509-ca.pem --x509keyfile x509-server-key.pem
+--x509certfile x509-server.pem --x509keyfile
+x509-server-key-ecc.pem --x509certfile x509-server-ecc.pem
+--srppasswdconf srp-tpasswd.conf --srppasswd srp-passwd.txt
+--pskpasswd psk-passwd.txt --rawpkfile srv.rawpk.pem
+--rawpkkeyfile srv.key.pem</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">One of the
+following exit values will be returned: <br>
+0 (EXIT_SUCCESS) Successful program execution.</p>
+
+<p style="margin-left:9%; margin-top: 1em">1 (EXIT_FAILURE)
+The operation failed or the command syntax was not <br>
+valid.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:18%; margin-top: 1em">gnutls-cli-debug(1),
+gnutls-cli(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2020-2023 Free Software Foundation, and others all rights
+reserved. This program is released under the terms of the
+GNU General Public License, version 3 or later</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to: bugs@gnutls.org</p>
+<hr>
+</body>
+</html>

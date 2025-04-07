@@ -1,0 +1,230 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:54 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-RESTORE</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-RESTORE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#GZIPPED INPUT">GZIPPED INPUT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-restore
+- restores the tags from the given file (see notmuch
+dump)</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+restore</b> [--accumulate] [--format=(auto|batch-tag|sup)]
+[--input=&lt;<i>filename</i>&gt;]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Restores the
+tags from the given file (see <i>notmuch-dump</i>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The input is
+read from the given filename, if any, or from stdin.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>restore</b> include <b><br>
+--accumulate</b></p>
+
+<p style="margin-left:18%;">The union of the existing and
+new tags is applied, instead of replacing each message's
+tags as they are read in from the dump file.</p>
+
+
+<p style="margin-left:9%;"><b>--format=(sup|batch-tag|auto)</b></p>
+
+<p style="margin-left:18%;">Notmuch restore supports two
+plain text dump formats, with each line specifying a
+message-id and a set of tags. For details of the actual
+formats, see <i>notmuch-dump</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>sup</b></p></td>
+<td width="5%"></td>
+<td width="73%">
+
+
+<p>The <b>sup</b> dump file format is specifically chosen
+to be compatible with the format of files produced by
+sup-dump. So if you've previously been using sup for mail,
+then the <b>notmuch restore</b> command provides you a way
+to import all of your tags (or labels as sup calls
+them).</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>batch-tag</b></p>
+
+<p style="margin-left:27%;">The <b>batch-tag</b> dump
+format is intended to more robust against malformed
+message-ids and tags containing whitespace or
+non-<b>ascii(7)</b> characters. See <i>notmuch-dump</i> for
+details on this format.</p>
+
+<p style="margin-left:27%; margin-top: 1em"><b>notmuch
+restore</b> updates the maildir flags according to tag
+changes if the <b>maildir.synchronize_flags</b>
+configuration option is enabled. See <i>notmuch-config</i>
+for details.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>auto</b></p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>This option (the default) tries to guess the format from
+the input. For correctly formed input in either supported
+format, this heuristic, based the fact that batch-tag format
+contains no parentheses, should be accurate.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--include=(config|properties|tags)</b></p>
+
+<p style="margin-left:18%;">Control what kind of metadata
+is restored.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>config</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Restore configuration data to the database. Each
+configuration line starts with &quot;#@ &quot;, followed by
+a space separated key-value pair. Both key and value are hex
+encoded if needed.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>properties</b></p>
+
+<p style="margin-left:27%;">Restore per-message (key,value)
+metadata. Each line starts with &quot;#= &quot;, followed by
+a message id, and a space separated list of key=value pairs.
+Ids, keys and values are hex encoded if needed. See
+<i>notmuch-properties</i> for more details.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>tags</b></p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>Restore per-message metadata, namely tags. See
+<i>format</i> above for more details.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+to restore all available types of data. The option can be
+specified multiple times to select some subset.</p>
+
+
+<p style="margin-left:9%;"><b>--input=&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Read input from given file
+instead of stdin.</p>
+
+<h2>GZIPPED INPUT
+<a name="GZIPPED INPUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+restore</b> will detect if the input is compressed in
+<i>gzip(1) format and automatically decompress it while
+reading. This detection does not depend on file naming and
+in particular works for standard input.</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-config</i>, <i>notmuch-count</i>,
+<i>notmuch-dump</i>, <i>notmuch-hooks</i>,
+<i>notmuch-insert</i>, <i>notmuch-new</i>,
+<i>notmuch-properties</i>, <i>notmuch-reply</i>,
+<i>notmuch-search</i>, <i>notmuch-search-terms</i>,
+<i>notmuch-show</i>, <i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

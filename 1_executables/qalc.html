@@ -1,0 +1,2033 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>QALC</title>
+
+</head>
+<body>
+
+<h1 align="center">QALC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#KEYBINDINGS">KEYBINDINGS</a><br>
+<a href="#SETTINGS">SETTINGS</a><br>
+<a href="#SYNTAX">SYNTAX</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">qalc - Powerful
+and easy to use command line calculator</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>qalc</b>
+[<i>options</i>] [<i>expression</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Qalculate! is a
+multi-purpose cross-platform desktop calculator. It is
+simple to use but provides power and versatility normally
+reserved for complicated math packages, as well as useful
+tools for everyday needs (such as currency conversion and
+percent calculation). Features include a large library of
+customizable functions, unit calculations and conversion,
+physical constants, symbolic calculations (including
+integrals and equations), arbitrary precision, uncertainty
+propagation, interval arithmetic, plotting, and a
+user-friendly interface. <b>qalc</b> is the command line
+interface of Qalculate!.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b,
+--base</b> <i>base</i></p>
+
+<p style="margin-left:19%;">set the number base for results
+and, optionally, expressions</p>
+
+<p style="margin-left:9%;"><b>-c, --color</b></p>
+
+<p style="margin-left:19%;">use colors to highlight
+different elements of expressions and results</p>
+
+<p style="margin-left:9%;"><b>--defaults</b></p>
+
+<p style="margin-left:19%;">load default settings</p>
+
+<p style="margin-left:9%;"><b>-e, --exrates</b></p>
+
+<p style="margin-left:19%;">update exchange rates</p>
+
+<p style="margin-left:9%;"><b>-f, --file</b>
+<i>file</i></p>
+
+<p style="margin-left:19%;">execute commands from a file
+first</p>
+
+<p style="margin-left:9%;"><b>-h, --help</b></p>
+
+<p style="margin-left:19%;">display a list of command line
+options and exit</p>
+
+<p style="margin-left:9%;"><b>-i, --interactive</b></p>
+
+<p style="margin-left:19%;">start in interactive mode</p>
+
+<p style="margin-left:9%;"><b>-l, --list</b> <i>[search
+term]</i></p>
+
+<p style="margin-left:19%;">display a list of all
+user-defined or matching variables, functions, units, and
+prefixes, and exit</p>
+
+<p style="margin-left:9%;"><b>--list-functions</b>
+<i>[search term]</i></p>
+
+<p style="margin-left:19%;">display a list of all or
+matching functions and exit</p>
+
+<p style="margin-left:9%;"><b>--list-prefixes</b>
+<i>[search term]</i></p>
+
+<p style="margin-left:19%;">display a list of all or
+matching prefixes and exit</p>
+
+<p style="margin-left:9%;"><b>--list-units</b> <i>[search
+term]</i></p>
+
+<p style="margin-left:19%;">display a list of all or
+matching units and exit</p>
+
+<p style="margin-left:9%;"><b>--list-variables</b>
+<i>[search term]</i></p>
+
+<p style="margin-left:19%;">display a list of all or
+matching variables and exit</p>
+
+<p style="margin-left:9%;"><b>-m, --time</b>
+<i>milliseconds</i></p>
+
+<p style="margin-left:19%;">terminate calculation and
+display of result after specified amount of time</p>
+
+<p style="margin-left:9%;"><b>-n, --nodefs</b></p>
+
+<p style="margin-left:19%;">do not load any functions,
+units, or variables from file</p>
+
+<p style="margin-left:9%;"><b>--nocurrencies</b></p>
+
+<p style="margin-left:19%;">do not load any global
+currencies from file</p>
+
+<p style="margin-left:9%;"><b>--nodatasets</b></p>
+
+<p style="margin-left:19%;">do not load any global data
+sets from file</p>
+
+<p style="margin-left:9%;"><b>--nofunctions</b></p>
+
+<p style="margin-left:19%;">do not load any global
+functions from file</p>
+
+<p style="margin-left:9%;"><b>--nounits</b></p>
+
+<p style="margin-left:19%;">do not load any global units
+from file</p>
+
+<p style="margin-left:9%;"><b>--novariables</b></p>
+
+<p style="margin-left:19%;">do not load any global
+variables from file</p>
+
+<p style="margin-left:9%;"><b>-p</b> <i>[base]</i></p>
+
+<p style="margin-left:19%;">start in programming mode (same
+as -b &quot;base base&quot; -s &quot;xor&#710;&quot;, with
+base conversion)</p>
+
+<p style="margin-left:9%;"><b>-s, --set &quot;</b><i>option
+value</i><b>&quot;</b></p>
+
+<p style="margin-left:19%;">as set command in interactive
+program session (ex. --set &quot;base 16&quot;)</p>
+
+<p style="margin-left:9%;"><b>-t, --terse</b></p>
+
+<p style="margin-left:19%;">reduce output to just the
+result of the input expression</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-/+u8</b></p></td>
+<td width="4%"></td>
+<td width="37%">
+
+
+<p>switch unicode support on/off</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:19%;">show application version and
+exit</p>
+
+<p style="margin-left:9%; margin-top: 1em">The program will
+start in interactive mode if no expression and no file is
+specified (or interactive mode is explicitly selected).</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>approximate</b></p>
+
+<p style="margin-left:19%;">Equivalent to set approximation
+try exact.</p>
+
+<p style="margin-left:9%;"><b>assume</b>
+<i>assumptions</i></p>
+
+<p style="margin-left:19%;">Set default assumptions for
+unknown variables (unknown, non-zero, positive, negative,
+non-positive, non-negative + number, real, rational,
+integer, boolean).</p>
+
+<p style="margin-left:9%;"><b>base</b> <i>base</i></p>
+
+<p style="margin-left:19%;">Sets the result number base
+(equivalent to set base).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>clear</b></p></td>
+<td width="4%"></td>
+<td width="23%">
+
+
+<p>Clears the screen.</p></td>
+<td width="58%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>clear history</b></p>
+
+<p style="margin-left:19%;">Clears the expression
+history.</p>
+
+<p style="margin-left:9%;"><b>delete</b> <i>name</i></p>
+
+<p style="margin-left:19%;">Removes the user-defined
+variable or function with the specified name. <br>
+Example: delete var1.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>exact</b></p></td>
+<td width="1%"></td>
+<td width="66%">
+
+
+<p>Equivalent to set approximation exact.</p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>expand</b></p></td>
+<td width="1%"></td>
+<td width="66%">
+
+
+<p>Expands the current result.</p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>exrates</b></p></td>
+<td width="1%"></td>
+<td width="66%">
+
+
+<p>Downloads current exchange rates from the Internet.</p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>factor</b></p></td>
+<td width="1%"></td>
+<td width="66%">
+
+
+<p>Factorizes the current result.</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>find, list</b>
+<i>[name]</i></p>
+
+<p style="margin-left:19%;">Displays a list of variables,
+functions and units. Enter with argument
+&rsquo;currencies&rsquo;, &rsquo;functions&rsquo;,
+&rsquo;variables&rsquo;, &rsquo;units&rsquo;, or
+&rsquo;prefixes&rsquo; to show a list of all currencies,
+functions, variables, units, or prefixes. Enter a search
+term to find matching variables, functions, units, and/or
+prefixes. If command is called with no argument all
+user-definied objects are listed. <br>
+Example: list functions. <br>
+Example: find dinar. <br>
+Example: find variables planck.</p>
+
+<p style="margin-left:9%;"><b>function</b> <i>name
+expression</i></p>
+
+<p style="margin-left:19%;">Creates a function with the
+specified name and expression. Use &rsquo;\x&rsquo;,
+&rsquo;\y&rsquo;, &rsquo;\z&rsquo;, &rsquo;\a&rsquo;, etc.
+for arguments in the expression. The function is persistent
+unless the command is invoked from file or in result only
+mode. <br>
+Example: function func1 5*\x.</p>
+
+<p style="margin-left:9%;"><b>help</b> <i>[command]</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>history</b></p></td>
+<td width="1%"></td>
+<td width="37%">
+
+
+<p>Lists the expression history.</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>info</b> <i>name</i></p>
+
+<p style="margin-left:19%;">Displays information about a
+function, variable, unit, or prefix. <br>
+Example: info sin.</p>
+
+<p style="margin-left:9%;"><b>keep/unkeep</b>
+<i>name</i></p>
+
+<p style="margin-left:19%;">Make the temporary user-defined
+variable or function with the specified name non-temporary.
+<br>
+Example: keep var1.</p>
+
+<p style="margin-left:9%;"><b>MC/MS/M+/M-</b></p>
+
+<p style="margin-left:19%;">Memory operations (memory
+clear, memory store, memory plus, memory minus). Recall the
+memory using the MR/MRC variable.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>mode</b></p></td>
+<td width="5%"></td>
+<td width="34%">
+
+
+<p>Displays the current mode.</p></td>
+<td width="47%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>partial fraction</b></p>
+
+<p style="margin-left:19%;">Applies partial fraction
+decomposition to the current result.</p>
+
+<p style="margin-left:9%;"><b>save, store</b> <i>name
+[category] [title]</i></p>
+
+<p style="margin-left:19%;">Saves the current result in a
+variable with the specified name. You may optionally also
+provide a category (default &quot;Temporary&quot;) and a
+title. If name equals &quot;mode&quot; or
+&quot;definitions&quot;, the current mode and definitions,
+respectively, will be saved. <br>
+Example: store var1.</p>
+
+<p style="margin-left:9%;"><b>save definitions <br>
+save mode <br>
+set</b> <i>option value</i> <b><br>
+to, convert, -&gt;</b>
+<i>unit/&quot;to&quot;-command</i></p>
+
+<p style="margin-left:19%;">Converts the previous result.
+Equivalent to using &quot;to&quot; at the end of an
+expression. Example: to m/s <br>
+Example: to bin</p>
+
+<p style="margin-left:9%;"><b>variable</b> <i>name
+expression</i></p>
+
+<p style="margin-left:19%;">Create a variable with the
+specified name and expression. The variable is persistent
+unless the command is invoked from file or in result only
+mode. <br>
+Example: variable var1 pi / 2.</p>
+
+<p style="margin-left:9%;"><b>quit/exit</b></p>
+
+<p style="margin-left:19%;">Terminates the program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Commands for RPN
+mode: <b><br>
+rpn</b> <i>state</i></p>
+
+<p style="margin-left:19%;">(De)activates the Reverse
+Polish Notation stack and syntax. &quot;syntax&quot;
+activates only the RPN syntax and &quot;stack&quot; enables
+the RPN stack. &quot;on&quot; (1) and &quot;off&quot; (0)
+(de)activates both.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>stack</b></p></td>
+<td width="4%"></td>
+<td width="30%">
+
+
+<p>Displays the RPN stack.</p></td>
+<td width="51%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>clear stack</b></p>
+
+<p style="margin-left:19%;">Clears the entire RPN
+stack.</p>
+
+<p style="margin-left:9%;"><b>copy</b> <i>[index]</i></p>
+
+<p style="margin-left:19%;">Duplicates a value on the RPN
+stack to the top of the stack. If no index is specified, the
+top of the stack is duplicated. Index 1 is the top of stack
+and negative index values count from the bottom of the
+stack.</p>
+
+<p style="margin-left:9%;"><b>move</b> <i>index 1 [index
+2]</i></p>
+
+<p style="margin-left:19%;">Changes the position of a value
+on the RPN stack. Index 1 is the top of stack and negative
+index values count from the bottom of the stack. <br>
+Example: move 2 4</p>
+
+<p style="margin-left:9%;"><b>pop</b> <i>[index]</i></p>
+
+<p style="margin-left:19%;">Removes the top of the RPN
+stack or the value at the specified index. Index 1 is the
+top of stack and negative index values count from the bottom
+of the stack.</p>
+
+<p style="margin-left:9%;"><b>rotate</b>
+<i>[direction]</i></p>
+
+<p style="margin-left:19%;">Rotates the RPN stack up
+(default) or down.</p>
+
+<p style="margin-left:9%;"><b>swap</b> <i>[index 1] [index
+2]</i></p>
+
+<p style="margin-left:19%;">Swaps position of values on the
+RPN stack. If no index is specified, the values on the top
+of the stack (index 1 and index 2) will be swapped and if
+only one index is specified, the value at this index will be
+swapped with the top value. Index 1 is the top of stack and
+negative index values count from the bottom of the stack.
+<br>
+Example: swap 2 4</p>
+
+<p style="margin-left:9%; margin-top: 1em">When a line
+begins with &rsquo;/&rsquo;, the text that follows is always
+interpreted as a command.</p>
+
+<h2>KEYBINDINGS
+<a name="KEYBINDINGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Tab
+(Ctrl+I)</b></p>
+
+<p style="margin-left:19%;">shows a list of functions,
+variables, and units that matches the last object in the
+current expression, or, if cursor is at beginning of line or
+after operator, inserts the previous result (either with
+text of value, or as a temporary variable for approximate or
+long values)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>Ctrl+A</b></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>saves the current result in a temporary variable</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>Ctrl+D</b></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>terminates the program</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>Ctrl+E</b></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>switches between approximation modes (exact, try exact,
+auto)</p> </td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>Ctrl+F</b></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>switches between fraction modes (simple, decimal,
+auto)</p> </td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>Ctrl+L</b></p></td>
+<td width="2%"></td>
+<td width="78%">
+
+
+<p>clears the screen</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h2>SETTINGS
+<a name="SETTINGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These settings
+are changed using the <i>set</i> command (e.g. set base 16)
+or the <i>-s, --set</i> command line option (e.g. qalc -s
+&quot;base 16&quot;). Possible values are shown in
+parenthesis. 1 and 0 can be used instead of on and off, yes
+and no. If the value is left out, a value of 1 is generally
+assumed. The default value is marked with
+&rsquo;*&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Algebraic mode:
+<b><br>
+algebra mode, alg</b> <i>(1* = expand, 2 =
+factorize)</i></p>
+
+<p style="margin-left:19%;">Determines if the expression is
+factorized or not after calculation.</p>
+
+<p style="margin-left:9%;"><b>assume nonzero denominators,
+nzd</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Determines if unknown values
+will be assumed non-zero (x/x=1).</p>
+
+<p style="margin-left:9%;"><b>warn nonzero denominators,
+warnnzd</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Display a message after a value
+has been assumed non-zero.</p>
+
+<p style="margin-left:9%;"><b>assumptions, asm</b>
+<i>(unknown*, non-zero, positive, negative, non-positive,
+<br>
+non-negative + number, real*, rational, integer,
+boolean)</i></p>
+
+<p style="margin-left:19%;">Default assumptions for unknown
+variables.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Calculation:
+<b><br>
+angle unit, angle</b> <i>(0 = none, 1* = radians, 2 =
+degrees, 3 = gradians, 4 <br>
+= custom)</i></p>
+
+<p style="margin-left:19%;">Default angle unit for
+trigonometric functions.</p>
+
+<p style="margin-left:9%;"><b>approximation, appr</b>
+<i>(-1* = auto, 0 = exact, 1 = try exact, 2 = <br>
+approximate, 3 = dual)</i></p>
+
+<p style="margin-left:19%;">How approximate variables and
+calculations are handled. In exact mode approximate values
+will not be calculated.</p>
+
+<p style="margin-left:9%;"><b>interval arithmetic, ia</b>
+<i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">If activated, interval
+arithmetic determines the final precision of calculations
+(avoids wrong results after loss of significance) with
+approximate functions and/or irrational numbers.</p>
+
+<p style="margin-left:9%;"><b>interval calculation, ic</b>
+<i>(1* = variance formula, 2 = interval <br>
+arithmetic)</i></p>
+
+<p style="margin-left:19%;">Determines the method used for
+interval calculation / uncertainty propagation.</p>
+
+<p style="margin-left:9%;"><b>precision, prec</b> <i>(&gt;
+0) 10*</i></p>
+
+<p style="margin-left:19%;">Specifies the default number of
+significant digits displayed and determines the precision
+used for approximate calculations.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Enabled objects:
+<b><br>
+calculate functions, calcfunc</b> <i>(on*, off)</i> <b><br>
+calculate variables, calcvar</b> <i>(on*, off)</i> <b><br>
+complex numbers, cplx</b> <i>(on*, off)</i> <b><br>
+functions, func</b> <i>(on*, off)</i> <b><br>
+infinite numbers, inf</b> <i>(on*, off)</i> <b><br>
+units</b> <i>(on*, off)</i> <b><br>
+unknowns</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Interpret undefined symbols in
+expressions as unknown variables.</p>
+
+<p style="margin-left:9%;"><b>variables, var</b> <i>(on*,
+off)</i> <b><br>
+variable units, varunits</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">If activated physical constants
+include units (e.g. c = 299&#8201;792&#8201;458
+m&#8725;s).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Generic display
+options: <b><br>
+abbreviations, abbr</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Use abbreviated names for units
+and variables.</p>
+
+<p style="margin-left:9%;"><b>color</b> <i>(0 = off, 1* =
+default, 2 = light)</i></p>
+
+<p style="margin-left:19%;">Use colors to highlight
+different elements of expressions and results.</p>
+
+<p style="margin-left:9%;"><b>division sign, divsign</b>
+<i>(0* = /, 1 = division slash, 2 = division sign)</i>
+<b><br>
+excessive parentheses, expar</b> <i>(on, off*)</i> <b><br>
+minus last, minlast</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Always place negative values
+last.</p>
+
+<p style="margin-left:9%;"><b>multiplication sign,
+mulsign</b> <i>(0 = *, 1 = multiplication dot, 2* = <br>
+multiplication x, 3 = middle dot)</i> <b><br>
+short multiplication, shortmul</b> <i>(on*, off)</i> <b><br>
+spacious, space</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Add extra space around
+operators.</p>
+
+<p style="margin-left:9%;"><b>spell out logical,
+spellout</b> <i>(on*, off)</i> <b><br>
+unicode, uni</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Display Unicode characters.</p>
+
+<p style="margin-left:9%;"><b>unicode exponents, uniexp</b>
+<i>(0 = off, 1* = on, 2 = units)</i></p>
+
+<p style="margin-left:19%;">Display exponents 0-9 using
+Unicode superscript characters.</p>
+
+<p style="margin-left:9%;"><b>vertical space, vspace</b>
+<i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Add empty lines before and
+after result.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Numerical
+display: <b><br>
+base</b> <i>(-1114112 - 1114112, bin, oct, dec*, hex, sexa,
+time, roman)</i> <b><br>
+base display, basedisp</b> <i>(0 = none, 1* = normal, 2 =
+alternative)</i> <b><br>
+binary bits, bits</b> <i>(0* = auto, &gt;= 2)</i> <b><br>
+complex form, cplxform</b> <i>(0* = rectangular, 1 =
+exponential, 2 = polar, 3 <br>
+= cis, 4 = angle)</i> <b><br>
+decimal comma</b> <i>(locale*, off, on)</i></p>
+
+<p style="margin-left:19%;">Determines the default decimal
+separator.</p>
+
+<p style="margin-left:9%;"><b>digit grouping, group</b>
+<i>(0* = off, 1 = standard, 2 = locale)</i> <b><br>
+digits</b> <i>(-1* = auto, &gt;= 2)</i></p>
+
+<p style="margin-left:19%;">Specifies the number of
+displayed significant digits (by default determined by
+precision).</p>
+
+<p style="margin-left:9%;"><b>exp display, edisp</b>
+<i>(E*, e, 10)</i></p>
+
+<p style="margin-left:19%;">Determines how scientific
+notation are displayed (e.g. 3E6, 3e6, or 3 *
+10&#710;6).</p>
+
+<p style="margin-left:9%;"><b>fractions, fr</b> <i>(-1* =
+auto, 0 = off, 1 = exact, 2 = on, 3 = mixed, 4 = <br>
+long, 5 = dual, 1/n)</i></p>
+
+<p style="margin-left:19%;">Determines how rational numbers
+are displayed (e.g. 5/4 = 1 + 1/4 = 1.25).
+&rsquo;long&rsquo; removes limits on the size of the
+numerator and denonimator.</p>
+
+<p style="margin-left:9%;"><b>hexadecimal two&rsquo;s,
+hextwos</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Enables two&rsquo;s complement
+representation for display of negative hexadecimal
+numbers.</p>
+
+<p style="margin-left:9%;"><b>imaginary j, imgj</b> <i>(on,
+off*)</i></p>
+
+<p style="margin-left:19%;">Use &rsquo;j&rsquo; (instead of
+&rsquo;i&rsquo;) as default symbol for the imaginary
+unit.</p>
+
+<p style="margin-left:9%;"><b>interval display, ivdisp</b>
+<i>(0* = adaptive, 1 = significant, 2 = interval, <br>
+3 = plusminus, 4 = midpoint, 5 = lower, 6 = upper, 7 =
+concise, 8 = <br>
+relative)</i> <b><br>
+lowercase numbers, lownum</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Use lowercase letters for
+number bases &gt; 10.</p>
+
+<p style="margin-left:9%;"><b>max decimals, maxdeci</b>
+<i>(-1* = off, &gt;= 0)</i> <b><br>
+min decimals, mindeci</b> <i>(-1* = off, &gt;= 0)</i>
+<b><br>
+repeating decimals, repdeci</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">If activated, 1/6 is displayed
+as &rsquo;0.1 666...&rsquo;, otherwise as
+&rsquo;0.166667&rsquo;.</p>
+
+<p style="margin-left:9%;"><b>rounding</b> <i>(0* = half
+away from zero, 1 = half to even, 2 = toward zero, <br>
+3 = half to odd, 4 = half toward zero, 5 = half up, 6 = half
+down, 7 = <br>
+half random, 8 = away from zero, 9 = up, 10 = down)</i></p>
+
+<p style="margin-left:19%;">Determines how approximate
+numbers are rounded.</p>
+
+<p style="margin-left:9%;"><b>scientific notation, exp</b>
+<i>(0 = off, -1* = auto, -3 = engineering, 1 = <br>
+pure, 3 = scientific, &gt;= 0, &lt;= -2)</i></p>
+
+<p style="margin-left:19%;">Determines how scientific
+notation is used (e.g. 5 543 000 = 5.543E6). A value &gt;= 0
+specifies the minimum exponent used. A value &lt;= -2
+specifies the multiplier used for the exponent.</p>
+
+<p style="margin-left:9%;"><b>show ending zeroes,
+zeroes</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">If actived, zeroes are kept at
+the end of approximate numbers.</p>
+
+<p style="margin-left:9%;"><b>two&rsquo;s complement,
+twos</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Enables two&rsquo;s complement
+representation for display of negative binary numbers.</p>
+
+<p style="margin-left:9%;"><b>duodecimal symbols,
+duosyms</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Use special symbols for digits
+10 and 11 in numbers with base 12.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Parsing: <b><br>
+caret as xor, xor&#710;</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Use &#710; as bitwise exclusive
+OR operator.</p>
+
+<p style="margin-left:9%;"><b>concise uncertainty,
+concise</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Allow input of uncertainty
+using concise notation.</p>
+
+<p style="margin-left:9%;"><b>decimal comma</b>
+<i>(locale*, off, on)</i></p>
+
+<p style="margin-left:19%;">Determines the default decimal
+separator.</p>
+
+<p style="margin-left:9%;"><b>hexadecimal two&rsquo;s
+input, hextwosin</b><i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Enables two&rsquo;s complement
+representation for input of negative hexadecimal numbers.
+All hexadecimal numbers starting with 8 or higher are
+negative, unless binary bits is set.</p>
+
+<p style="margin-left:9%;"><b>ignore comma</b> <i>(on,
+off*)</i></p>
+
+<p style="margin-left:19%;">Allows use of &rsquo;,&rsquo;
+as thousands separator.</p>
+
+<p style="margin-left:9%;"><b>ignore dot</b> <i>(on,
+off*)</i></p>
+
+<p style="margin-left:19%;">Allows use of &rsquo;.&rsquo;
+as thousands separator.</p>
+
+<p style="margin-left:9%;"><b>imaginary j, imgj</b> <i>(on,
+off*)</i></p>
+
+<p style="margin-left:19%;">Use &rsquo;j&rsquo; (instead of
+&rsquo;i&rsquo;) as default symbol for the imaginary
+unit.</p>
+
+<p style="margin-left:9%;"><b>input base, inbase</b>
+<i>(-1114112 - 1114112, bin, oct, dec*, hex, roman)</i>
+<b><br>
+limit implicit multiplication, limimpl</b> <i>(on, off*)</i>
+<b><br>
+parsing mode, syntax</b> <i>(0* = adaptive, 1 = implicit
+first, 2 = <br>
+conventional, 3 = chain, 4 = rpn)</i></p>
+
+<p style="margin-left:19%;">See syntax section.</p>
+
+<p style="margin-left:9%;"><b>read precision, readprec</b>
+<i>(0* = off, 1 = always, 2 = when decimals)</i></p>
+
+<p style="margin-left:19%;">If activated, numbers are
+interpreted as approximate with precision equal to the
+number of significant digits (3.20 = 3.20+/-0.005).</p>
+
+<p style="margin-left:9%;"><b>simplified percentage,
+percent</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Interpret addition/subtraction
+of percentage as percentage increase/decrease of the first
+term (100 + 10% = 110).</p>
+
+<p style="margin-left:9%;"><b>two&rsquo;s input, twosin</b>
+<i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Enables two&rsquo;s complement
+representation for input of negative binary numbers. All
+binary numbers starting with 1 are negative, unless binary
+bits is set.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Units: <b><br>
+all prefixes, allpref</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Enables automatic use of hecto,
+deca, deci, and centi.</p>
+
+<p style="margin-left:9%;"><b>autoconversion, conv</b>
+<i>(0 = none, 1* = optimal, 2 = base, 3 = optimalsi, <br>
+4 = mixed)</i></p>
+
+<p style="margin-left:19%;">Controls automatic unit
+conversion of the result. &rsquo;optimalsi&rsquo; always
+converts non-SI units, while &rsquo;optimal&rsquo; only
+converts to more optimal unit expressions, with less units
+and exponents.</p>
+
+<p style="margin-left:9%;"><b>binary prefixes, binpref</b>
+<i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">If activated, binary prefixes
+are used by default for information units.</p>
+
+<p style="margin-left:9%;"><b>currency conversion,
+curconv</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Enables automatic conversion to
+the local currency when optimal unit conversion is
+enabled.</p>
+
+<p style="margin-left:9%;"><b>denominator prefixes,
+denpref</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">Enables automatic use of
+prefixes in the denominator of unit expressions.</p>
+
+<p style="margin-left:9%;"><b>place units separately,
+unitsep</b> <i>(on*, off)</i></p>
+
+<p style="margin-left:19%;">If activated, units are
+separated from variables at the end of the result.</p>
+
+<p style="margin-left:9%;"><b>prefixes, pref</b> <i>(on*,
+off)</i></p>
+
+<p style="margin-left:19%;">Enables automatic use of
+prefixes in the result.</p>
+
+<p style="margin-left:9%;"><b>show negative exponents,
+negexp</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Use negative exponents instead
+of division for units in result (m/s = m*s&#710;-1).</p>
+
+<p style="margin-left:9%;"><b>sync units, sync</b> <i>(on*,
+off)</i> <b><br>
+temperature calculation, temp</b> <i>(0* = hybrid, 1 =
+absolute, 2 = relative)</i></p>
+
+<p style="margin-left:19%;">Determines how expressions with
+temperature units are calculated (hybrid acts as absolute if
+the expression contains different temperature units,
+otherwise as relative).</p>
+
+<p style="margin-left:9%;"><b>update exchange rates,
+upxrates</b> <i>(-1* = ask, 0 = never, &gt; 0 =
+days)</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Other: <b><br>
+calculate as you type, autocalc</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Activates continuous
+calculation of the currently edited expression.</p>
+
+<p style="margin-left:9%;"><b>clear history</b> <i>(yes,
+no*)</i></p>
+
+<p style="margin-left:19%;">Do not save expression history
+on exit.</p>
+
+<p style="margin-left:9%;"><b>ignore locale</b> <i>(yes,
+no*)</i></p>
+
+<p style="margin-left:19%;">Ignore system language and use
+English (requires restart).</p>
+
+<p style="margin-left:9%;"><b>rpn</b> <i>(on, off*)</i></p>
+
+<p style="margin-left:19%;">Activates the Reverse Polish
+Notation stack.</p>
+
+<p style="margin-left:9%;"><b>save definitions</b>
+<i>(yes*, no)</i></p>
+
+<p style="margin-left:19%;">Save functions, units, and
+variables on exit.</p>
+
+<p style="margin-left:9%;"><b>save mode</b> <i>(yes*,
+no)</i></p>
+
+<p style="margin-left:19%;">Save settings on exit.</p>
+
+<p style="margin-left:9%;"><b>sigint action, sigint</b>
+<i>(0 = kill, 1* = exit, 2 = interrupt)</i></p>
+
+<p style="margin-left:19%;">Determines how the SIGINT
+signal (Ctrl+C) is handled.</p>
+
+<h2>SYNTAX
+<a name="SYNTAX"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mathematical
+entities:</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Numbers</b>
+<br>
+These are the regular numbers composed by digits 0-9 and a
+decimal sign &mdash; a dot, or a comma if it is the default
+decimal point in the locale/language used. If comma is used
+as decimal sign, the dot is still kept as an alternative
+decimal sign, if not explicitly deactivated. Numbers include
+integers, real numbers, and complex numbers. The imaginary
+part of complex numbers are written with as regular number
+followed by the special variable &quot;i&quot; (can be
+changed to a &quot;j&quot;), which represents the square
+root of -1. Spaces between digits are ignored (&quot;5 5 =
+55&quot;). &quot;E&quot; (or &quot;e&quot;) can be
+considered as a shortcut for writing many zeroes and is
+equivalent to multiplication by 10 raised to the power of
+the right-hand value (e.g. &quot;5E3 = 5000&quot;).
+Sexagesimal numbers (and time) can be entered directly using
+colons (e.g. &quot;5:30 = 5.5&quot;). A number immediately
+preceded &quot;0b&quot;, &quot;0o&quot;, &quot;0d&quot; or
+&quot;0x&quot; are interpreted as a number with base 2, 8,
+12 or 16, respectively (e.g. &quot;0x3f = 63&quot;).</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Intervals</b>
+<br>
+A number interval can be entered using the interval()
+function, the uncertainty() function, or using
+&quot;&plusmn;&quot; or &quot;+/-&quot; (e.g. 5&plusmn;1 =
+uncertainty(5, 0.2) = interval(4, 6)). If the read precision
+option is activated, decimal numbers are interpreted as an
+interval between the numbers that are normally rounded to
+the entered number (e.g. 1.1 = 1.1&plusmn;0.05). If interval
+calculation using variance formula is activated (default),
+the interval represents the standard uncertainty (deviation)
+of the value.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Vectors and
+Matrices</b> <br>
+A matrix is a two-dimensional rectangular array of
+mathematical objects. Vectors are matrices with only one row
+or column, and thus one-dimensional sequences of objects.
+Vectors and matrices are generated by various functions, or
+using syntax in the form of [1 2 3 4] and [1 2; 3 4], with
+columns separated by space or comma and rows separated by
+semi-colon, or (1, 2, 3, 4) and ((1, 2), (3, 4)). A vector
+with sequence of numbers can be created using
+&quot;...&quot; (e.g. &quot;1...4&quot;), or colon (e.g.
+&quot;[1:4]&quot;, or &quot;[1:1:4]&quot; where the second
+value specifies the increment). A single element of a vector
+can be selected by placing the index (first index is 1) in
+parenthesis after a variable or function (e.g.
+&quot;v(1)&quot; or &quot;f[1]&quot;).</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Variables/Constants</b>
+<br>
+See the list of variables in the GUI manual or using the
+command .I list variables</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Functions</b>
+<br>
+See the list of functions in the GUI manual or using the
+command .I list functions</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Units and
+Prefixes</b> <br>
+See the list of units and prefixes in the GUI manual or
+using the command .I list units. Abbreviated, plural and
+singular forms of unit names and prefixes are generally
+allowed. Prefixes must be put immediately before the unit to
+be interpreted as prefixes (eg. 5 mm = 0.005 m, but 5 m m =
+5 m&#710;2). For convenience units allow the power operator
+to be left out (e.g. 5 m2 = 5 m&#710;2), with currencies
+excluded.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Unknowns</b>
+<br>
+Unknowns are text strings without any associated value.
+These are temporary unknown variables with default
+assumptions. Unknowns can also be explicitly entered by
+placing a backslash (\) before a single character (e.g. 5\a
++ 2\b) or using quotation mark before and after a text
+string (e.g. 5 &quot;apples&quot; + 2 &quot;bananas&quot;).
+If unknowns are activated characters without any associated
+variable, function or unit in an expression, will be
+regarded as an unknown variable.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Date and
+Time</b> <br>
+Date/time values are specified using quoted text string
+(quotation marks are not needed for function arguments),
+using standard date and time format (YYYY-MM-DDTHH:MM:SS).
+Some local formats are also supported, but not recommended.
+The local time zone are used, unless a time zone is
+specified at the end of the time string (Z/UTC/GMT or
++/-HH:MM). Date/time supports a small subset of arithmetic
+operations. The time units represents calendar time, instead
+of average values, when added or subtracted to a date.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Text</b>
+<br>
+This category represent a number of different function
+argument types, such as regular text and file names. They
+can, but do not need to be put in quotes except when
+containing the argument separator.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Comments</b>
+<br>
+All text after a hashtag (e.g. (5*2)/2 #calculating triangle
+area) is treated as a comment.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Operations and
+operators (word operators such as AND must be surrounded by
+space):</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Addition
+(+)</b></p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Subtraction
+(-)</b></p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Multiplication
+(*)</b></p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Division
+(/)</b></p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Remainder
+(%, rem) and modulo (%%, mod)</b> <br>
+Returns the remainder after division.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Integer
+division (//, div)</b> <br>
+Rounds the result of division towards zero.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Exponentiation
+(&#710;, **)</b> <br>
+Note that x&#710;y&#710;z equals x&#710;(y&#710;z), and not
+(x&#710;y)&#710;z. Note also that for non-integer exponents
+with negative bases, the principal root is returned and not
+the real root ((-8)&#710;(1/3) equals 1 + 1.73i, and not
+-2). To calculate the real root for negative values, use the
+cbrt() and root() functions.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>10&#710;x
+(E)</b></p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Parenthesis
+((, ))</b></p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Parellel sum
+(&#8741;, ||)</b> <br>
+Returns the reciprocal value of a sum of reciprocal values.
+|| is interpreted as parallel if units are used, otherwise
+as logical OR.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Logical
+operators (!, NOT, ||, OR, &amp;&amp;, AND, XOR, NOR,
+NAND)</b></p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Bitwise
+operators (&#732;, |, &amp;, &lt;&lt;, &gt;&gt;,
+XOR)</b></p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Comparison
+operators (=, !=, &lt;, &lt;=, &gt;, &gt;=)</b> <br>
+Returns 1 if expression is true and 0 if false. The x
+variable is isolated if the expression does not evaluate as
+true or false. Primarily used for equations and
+inequalities.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Dot product
+(.)</b></p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Element-wise
+operators (.*, ./, .&#710;)</b></p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Save
+operator (:=, =)</b> <br>
+Saves the expression to the right of the operator as a
+variable or function (e.g. var1:=5, func1():=x+y,
+var1=ln(5)+2). If the colon is omitted the expression is
+calculated before it is assigned to the variable.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Evaluation
+priority order:</b> parenthesis, 10&#710;x, exponentiation,
+functions, bitwise NOT, logical NOT,
+multiplication/division/remainder, parallel sum,
+addition/subtraction, bitwise NOT, bitwise shift,
+comparisons, bitwise AND, bitwise XOR, bitwise OR, logical
+AND, logical OR.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The evaluation
+of <i>short/implicit multiplication</i> without any
+multiplication sign (e.g. 5x, 5(2+3)), differs depending on
+the parsing mode. In the <i>conventional mode</i> implicit
+multiplication does not differ from explicit multiplication
+(12/2(1+2) = 12/2*3 = 18, 5x/5y = 5 * x/5 * y = xy). In the
+parse <i>implicit multiplication first</i> mode, implicit
+multiplication is parsed before explicit multiplication
+(12/2(1+2) = 12/(2 * 3) = 2, 5x/5y = (5 * x)/(5 * y) = x/y).
+The default <i>adaptive mode</i> works as the parse implicit
+multiplication first mode, unless spaces are found (1/5x =
+1/(5 * x), but 1/5 x = (1/5) * x). In the adaptive mode unit
+expressions are parsed separately (5 m/5 m/s = (5 * m)/(5 *
+(m/s)) = 1 s). Function arguments without parentheses are an
+exception, where implicit multiplication in front of
+variables and units is parsed first regardless of mode (sqrt
+2x = sqrt(2x)).</p>
+
+<p style="margin-left:9%; margin-top: 1em">In <i>chain
+mode</i>, expressions are calculated from left to right,
+ignoring standard order of operations, like the immediate
+execution mode of a traditional calculator (1+2*3 = (1+2)*3
+= 9).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>&quot;to&quot;-operator</i> is used for unit conversion
+and manipulation of how the result is presented. Place
+&quot; to &quot; or a right arrow (e.g. &quot;-&gt;&quot;)
+followed by one of expressions/commands listed below, at the
+end of an expression. <b><br>
+Unit conversion</b></p>
+
+<p style="margin-left:19%;">- a unit or unit expression
+(e.g. meter or km/h) <br>
+prepend with ? to request the optimal prefix <br>
+prepend with b? to request the optimal binary prefix <br>
+prepend with + or - to force/disable use of mixed units <br>
+- a variable or physical constant (e.g. c) <br>
+- base (convert to base units) <br>
+- optimal (convert to optimal unit) <br>
+- prefix (convert to optimal prefix) <br>
+- mixed (convert to mixed units, e.g. hours + minutes)</p>
+
+<p style="margin-left:9%;"><b>Number base
+conversion</b></p>
+
+<p style="margin-left:19%;">- bin, binary (show as binary
+number) <br>
+- bin# (show as binary number with specified number of bits)
+<br>
+- oct, octal (show as octal number) <br>
+- duo, duodecimal (show as duodecimal number) <br>
+- hex, hexadecimal (show as hexadecimal number) <br>
+- hex# (show as hexadecimal number with specified number of
+bits) <br>
+- sexa, sexa2, sexa3, sexagesimal (show as sexagesimal
+number; sexa2 hides and sexa3 rounds arcseconds) <br>
+- latitude, latitude2, longitude, longitude2 (show as
+sexagesimal latitude/longitude; latitude2 and longitude2
+hide arcseconds) <br>
+- bijective (shown in bijective base-26) <br>
+- fp16, fp32, fp64, fp80, fp128 (show in binary
+floating-point format) <br>
+- bcd (show as binary-coded decimal) <br>
+- roman (show as roman numerals) <br>
+- time (show in time format) <br>
+- unicode <br>
+- base # (show in specified number base) <br>
+- bases (show as binary, octal, decimal and hexadecimal
+number)</p>
+
+<p style="margin-left:9%;"><b>Complex format</b></p>
+
+<p style="margin-left:19%;">- rectangular, cartesian (show
+complex numbers in rectangular form) <br>
+- exponential (show complex numbers in exponential form)
+<br>
+- polar (show complex numbers in polar form) <br>
+- cis (show complex numbers in cis form) <br>
+- angle, phasor (show complex numbers in angle/phasor
+notation)</p>
+
+<p style="margin-left:9%;"><b>Time and date
+conversion</b></p>
+
+<p style="margin-left:19%;">- UTC (show date and time in
+UTC time zone) <br>
+- UTC+/-hh[:mm] (show date and time in specified time zone)
+<br>
+- calendars</p>
+
+<p style="margin-left:9%;"><b>Fractions</b></p>
+
+<p style="margin-left:19%;">- fraction (show result as
+mixed fraction) <br>
+- decimals (show result as decimal fraction) <br>
+- 1/# (show as mixed fraction with specified denominator)
+<br>
+prepend with - to show as simple fraction</p>
+
+<p style="margin-left:9%;"><b>Other conversion
+commands</b></p>
+
+<p style="margin-left:19%;">- factors (factorize
+result)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Similarly
+<i>where</i> (or alternatively &quot;/.&quot;) can be used
+at the end (but before &quot;to&quot;), for variable
+assignments, function replacements, etc. (e.g. &quot;x+y
+where x=1 and y=2&quot;, &quot;x&#710;2=4 where
+x&gt;0&quot;, and &quot;sin(5) where sin()=cos()&quot;).
+Variables assignments can also be placed before the
+expression, separated by comma, e.g. &lt;quote&gt;x=1, y=2,
+x+y&lt;/quote&gt;, but this syntax is more strict.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+<i>to</i> and <i>where</i> can only be applied to the whole
+expression. Everything before the operator is always treated
+as the expression to convert (or apply replacement to), and
+everything after as the conversion/replacement expression,
+regardless of any parentheses.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+semicolon can be replaced with comma, if comma is not used
+as decimal or thousands separator.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Basic
+functions and operators</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>sqrt 4</p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p>= sqrt(4)</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%;">= 4&#710;(0.5) <br>
+= 4&#710;(1/2) <br>
+= 2</p>
+
+<p style="margin-left:9%;">sqrt(25; 16; 9; 4)</p>
+
+<p style="margin-left:19%;">= [5 4 3 2]</p>
+
+<p style="margin-left:9%;">sqrt(32)</p>
+
+<p style="margin-left:19%;">= 4 * sqrt(2) <i>(in exact
+mode)</i></p>
+
+<p style="margin-left:9%;">cbrt(-27)</p>
+
+<p style="margin-left:19%;">= root(-27; 3) <br>
+= -3 <i>(real root)</i></p>
+
+<p style="margin-left:9%;">(-27)&#710;(1/3)</p>
+
+<p style="margin-left:19%;">= 1.5 + 2.5980762i
+<i>(principal root)</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>ln 25</p></td>
+<td width="4%"></td>
+<td width="16%">
+
+
+<p>= log(25; e)</p></td>
+<td width="65%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%;">= 3.2188758</p>
+
+<p style="margin-left:9%;">log2(4)/log10(100)</p>
+
+<p style="margin-left:19%;">= log(4; 2)/log(100; 10) <br>
+= 1</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>5!</p></td>
+<td width="7%"></td>
+<td width="25%">
+
+
+<p>= 1 * 2 * 3 * 4 * 5</p></td>
+<td width="56%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%;">= 120</p>
+
+<p style="margin-left:9%;">5\2 <i>(integer
+division)</i></p>
+
+<p style="margin-left:19%;">= 5//2 <br>
+= trunc(5/2) <br>
+= 2</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p>5 mod 3</p></td>
+<td width="1%"></td>
+<td width="14%">
+
+
+<p>= mod(5; 3)</p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%;">= 2</p>
+
+<p style="margin-left:9%;">52 to factors</p>
+
+<p style="margin-left:19%;">= 2&#710;2 * 13</p>
+
+<p style="margin-left:9%;">25/4 * 3/5 to fraction</p>
+
+<p style="margin-left:19%;">= 3 + 3/4</p>
+
+<p style="margin-left:9%;">gcd(63; 27)</p>
+
+<p style="margin-left:19%;">= 9</p>
+
+<p style="margin-left:9%;">sin(pi/2) - cos(pi)</p>
+
+<p style="margin-left:19%;">= sin(90 deg) - cos(180 deg)
+<br>
+= 2</p>
+
+<p style="margin-left:9%;">sum(x; 1; 5)</p>
+
+<p style="margin-left:19%;">= 1 + 2 + 3 + 4 + 5 = 15</p>
+
+<p style="margin-left:9%;">sum(\i&#710;2+sin(\i); 1; 5;
+\i)</p>
+
+<p style="margin-left:19%;">= 1&#710;2 + sin(1) + 2&#710;2
++ sin(2) + ... = 55.176162</p>
+
+<p style="margin-left:9%;">product(x; 1; 5)</p>
+
+<p style="margin-left:19%;">= 1 * 2 * 3 * 4 * 5 = 120</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p>var1:=5</p></td>
+<td width="1%"></td>
+<td width="39%">
+
+
+<p>store value 5 in variable var1</p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">5&#710;2 #this is a comment</p>
+
+<p style="margin-left:19%;">= 25</p>
+
+<p style="margin-left:9%;">sinh(0.5) where
+sinh()=cosh()</p>
+
+<p style="margin-left:19%;">= cosh(0.5) = 1.1276260</p>
+
+<p style="margin-left:9%;">plot(x&#710;2; -5; 5)</p>
+
+<p style="margin-left:19%;">plots the function y=x&#710;2
+from -5 to 5</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Units</b>
+<br>
+5 dm3 to L = 5 dm&#710;3 to L</p>
+
+<p style="margin-left:19%;">= 5 L</p>
+
+<p style="margin-left:9%;">20 miles / 2h to km/h</p>
+
+<p style="margin-left:19%;">= 16.09344 km/h</p>
+
+<p style="margin-left:9%;">1.74 to ft = 1.74 m to ft</p>
+
+<p style="margin-left:19%;">= 5 ft + 8.5039370 in</p>
+
+<p style="margin-left:9%;">1.74 m to -ft</p>
+
+<p style="margin-left:19%;">= 5.7086614 ft</p>
+
+<p style="margin-left:9%;">100 lbf * 60 mph to hp</p>
+
+<p style="margin-left:19%;">= 16 hp</p>
+
+<p style="margin-left:9%;">50 &Omega; * 2 A</p>
+
+<p style="margin-left:19%;">= 100 V</p>
+
+<p style="margin-left:9%;">50 &Omega; * 2 A to base</p>
+
+<p style="margin-left:19%;">= 100
+kg*m&#710;2*s&#710;-3*A&#710;-1</p>
+
+<p style="margin-left:9%;">10 N / 5 Pa</p>
+
+<p style="margin-left:19%;">= (10 N)/(5 Pa) = 2
+m&#710;2</p>
+
+<p style="margin-left:9%;">5 m/s to s/m</p>
+
+<p style="margin-left:19%;">= 0.2 s/m</p>
+
+<p style="margin-left:9%;">500 EUR - 20% to USD</p>
+
+<p style="margin-left:19%;">= 451.04 USD</p>
+
+<p style="margin-left:9%;">500 megabit/s * 2 h to
+b?byte</p>
+
+<p style="margin-left:19%;">= 419.09516 gibibytes</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Physical
+constants</b> <br>
+k_e / G * a_0</p>
+
+<p style="margin-left:19%;">= (coulombs_constant /
+newtonian_constant) * bohr_radius <br>
+= 7.126e9 kg*H*m&#710;-1</p>
+
+<p style="margin-left:9%;">planck &#8725;
+(compton_wavelength * c)</p>
+
+<p style="margin-left:19%;">= 9.1093837e-31 kg</p>
+
+<p style="margin-left:9%;">5 ns * rydberg to c</p>
+
+<p style="margin-left:19%;">= 6.0793194E-8c</p>
+
+<p style="margin-left:9%;">atom(Hg; weight) + atom(C;
+weight) * 4 to g</p>
+
+<p style="margin-left:19%;">= 4.129e-22 g</p>
+
+<p style="margin-left:9%;">(G * planet(earth; mass) *
+planet(mars; mass))/(54.6e6 km)&#710;2</p>
+
+<p style="margin-left:19%;">= 8.58e16 N <i>(gravitational
+attraction between earth and mars)</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Uncertainty
+and interval arithmetic</b> <i><br>
+result with interval arithmetic activated is shown in
+parenthesis</i> <br>
+sin(5+/-0.2)&#710;2/2+/-0.3</p>
+
+<p style="margin-left:19%;">= 0.460&plusmn;0.088
+(0.46+/-0.12)</p>
+
+<p style="margin-left:9%;">(2+/-0.02 J)/(523+/-5 W)</p>
+
+<p style="margin-left:19%;">= 3.824+/-0.053 ms
+(3.82+/-&plusmn;0.075 ms)</p>
+
+<p style="margin-left:9%;">interval(-2; 5)&#710;2</p>
+
+<p style="margin-left:19%;">= interval(-8.2500000;
+12.750000) (interval(0; 25))</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Algebra</b>
+<br>
+(5x&#710;2 + 2)/(x - 3)</p>
+
+<p style="margin-left:19%;">= 5x + 15 + 47/(x - 3)</p>
+
+<p style="margin-left:9%;">(\a + \b)(\a - \b) =
+(&quot;a&quot; + &quot;b&quot;)(&quot;a&quot; -
+&quot;b&quot;)</p>
+
+<p style="margin-left:19%;">= &rsquo;a&rsquo;&#710;2 -
+&rsquo;b&rsquo;&#710;2</p>
+
+<p style="margin-left:9%;">(x + 2)(x - 3)&#710;3</p>
+
+<p style="margin-left:19%;">= x&#710;4 - 7x&#710;3 +
+9x&#710;2 + 27x - 54</p>
+
+<p style="margin-left:9%;">factorize x&#710;4 - 7x&#710;3 +
+9x&#710;2 + 27x - 54</p>
+
+<p style="margin-left:19%;">= x&#710;4 - 7x&#710;3 +
+9x&#710;2 + 27x - 54 to factors <br>
+= (x + 2)(x - 3)&#710;3</p>
+
+<p style="margin-left:9%;">cos(x)+3y&#710;2 where x=pi and
+y=2</p>
+
+<p style="margin-left:19%;">= 11</p>
+
+<p style="margin-left:9%;">gcd(25x; 5x&#710;2)</p>
+
+<p style="margin-left:19%;">= 5x</p>
+
+<p style="margin-left:9%;">1/(x&#710;2+2x-3) to partial
+fraction</p>
+
+<p style="margin-left:19%;">= 1/(4x - 4) - 1/(4x + 12)</p>
+
+<p style="margin-left:9%;">x+x&#710;2+4 = 16</p>
+
+<p style="margin-left:19%;">x = 3 or x = -4</p>
+
+<p style="margin-left:9%;">x&#710;2/(5 m) - hypot(x; 4 m) =
+2 m where x &gt; 0</p>
+
+<p style="margin-left:19%;">x = 7.1340411 m</p>
+
+<p style="margin-left:9%;">cylinder(20cm; x) = 20L</p>
+
+<p style="margin-left:19%;">x = (1 / (2pi)) m <br>
+x = 16 cm <i>(height of 20 L cylinder with radius 20
+cm)</i></p>
+
+<p style="margin-left:9%;">asin(sqrt(x)) = 0.2</p>
+
+<p style="margin-left:19%;">x = sin(0.2)&#710;2 <br>
+x = 0.039469503</p>
+
+<p style="margin-left:9%;">x&#710;2 &gt; 25x</p>
+
+<p style="margin-left:19%;">= x &gt; 25 or x &lt; 0</p>
+
+<p style="margin-left:9%;">solve(x = y+ln(y); y)</p>
+
+<p style="margin-left:19%;">= lambertw(e&#710;x)</p>
+
+<p style="margin-left:9%;">solve2(5x=2y&#710;2; sqrt(y)=2;
+x; y)</p>
+
+<p style="margin-left:19%;">= 32/5</p>
+
+<p style="margin-left:9%;">multisolve([5x=2y+32, y=2z,
+z=2x]; [x, y, z])</p>
+
+<p style="margin-left:19%;">= [-32/3 -128/3 -64/3]</p>
+
+<p style="margin-left:9%;">dsolve(diff(y; x) - 2y = 4x;
+5)</p>
+
+<p style="margin-left:19%;">= 6e&#710;(2x) - 2x - 1</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Calculus</b>
+<br>
+diff(6x&#710;2)</p>
+
+<p style="margin-left:19%;">= 12x</p>
+
+<p style="margin-left:9%;">diff(sinh(x&#710;2)/(5x) +
+3xy/sqrt(x))</p>
+
+<p style="margin-left:19%;">= (2/5) * cosh(x&#710;2) -
+sinh(x&#710;2)/(5x&#710;2) + (3y)/(2 * sqrt(x))</p>
+
+<p style="margin-left:9%;">integrate(6x&#710;2)</p>
+
+<p style="margin-left:19%;">= 2x&#710;3 + C</p>
+
+<p style="margin-left:9%;">integrate(6x&#710;2; 1; 5)</p>
+
+<p style="margin-left:19%;">= 248</p>
+
+<p style="margin-left:9%;">integrate(sinh(x&#710;2)/(5x) +
+3xy/sqrt(x))</p>
+
+<p style="margin-left:19%;">= 2x * sqrt(x) * y +
+Shi(x&#710;2) / 10 + C</p>
+
+<p style="margin-left:9%;">integrate(sinh(x&#710;2)/(5x) +
+3xy/sqrt(x); 1; 2)</p>
+
+<p style="margin-left:19%;">= 3.6568542y + 0.87600760</p>
+
+<p style="margin-left:9%;">limit(ln(1 + 4x)/(3&#710;x - 1);
+0)</p>
+
+<p style="margin-left:19%;">= 4 / ln(3)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Matrices and
+vectors</b> <br>
+[1, 2, 3; 4, 5, 6]</p>
+
+<p style="margin-left:19%;">= ((1; 2; 3); (4; 5; 6)) <br>
+= [1 2 3; 4 5 6] <i>(2x3 matrix)</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>1...5</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>= (1:5) = (1:1:5)</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%;">= [1 2 3 4 5]</p>
+
+<p style="margin-left:9%;">(1; 2; 3) * 2 - 2</p>
+
+<p style="margin-left:19%;">= [(1 * 2 - 2), (2 * 2 - 2), (3
+* 2 - 2)] <br>
+= [0 2 4]</p>
+
+<p style="margin-left:9%;">[1 2 3].[4 5 6]</p>
+
+<p style="margin-left:19%;">= dot([1 2 3]; [4 5 6]) <br>
+= 32 <i>(dot product)</i></p>
+
+<p style="margin-left:9%;">cross([1 2 3]; [4 5 6])</p>
+
+<p style="margin-left:19%;">= [-3 6 -3] <i>(cross
+product)</i></p>
+
+<p style="margin-left:9%;">[1 2 3; 4 5 6].*[7 8 9; 10 11
+12]</p>
+
+<p style="margin-left:19%;">= hadamard([1 2 3; 4 5 6]; [7 8
+9; 10 11 12]) <br>
+= [7 16 27; 40 55 72] <i>(hadamard product)</i></p>
+
+<p style="margin-left:9%;">[1 2 3; 4 5 6] * [7 8; 9 10; 11
+12]</p>
+
+<p style="margin-left:19%;">= [58 64; 139 154] <i>(matrix
+multiplication)</i></p>
+
+<p style="margin-left:9%;">[1 2; 3 4]&#710;-1</p>
+
+<p style="margin-left:19%;">= inverse([1 2; 3 4]) <br>
+= [-2 1; 1.5 -0.5]</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Statistics</b>
+<br>
+mean(5; 6; 4; 2; 3; 7)</p>
+
+<p style="margin-left:19%;">= 4.5</p>
+
+<p style="margin-left:9%;">stdev(5; 6; 4; 2; 3; 7)</p>
+
+<p style="margin-left:19%;">= 1.87</p>
+
+<p style="margin-left:9%;">quartile([5 6 4 2 3 7]; 1)</p>
+
+<p style="margin-left:19%;">= percentile((5; 6; 4; 2; 3;
+7); 25) <br>
+= 2.9166667</p>
+
+<p style="margin-left:9%;">normdist(7; 5)</p>
+
+<p style="margin-left:19%;">= 0.053990967</p>
+
+<p style="margin-left:9%;">spearman(column(load(test.csv);
+1); column(load(test.csv); 2))</p>
+
+<p style="margin-left:19%;">= -0.33737388 <i>(depends on
+the data in the CSV file)</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Time and
+date</b> <br>
+10:31 + 8:30 to time</p>
+
+<p style="margin-left:19%;">= 19:01</p>
+
+<p style="margin-left:9%;">10h 31min + 8h 30min to time</p>
+
+<p style="margin-left:19%;">= 19:01</p>
+
+<p style="margin-left:9%;">now to utc</p>
+
+<p style="margin-left:19%;">=
+&quot;2020-07-10T07:50:40Z&quot;</p>
+
+<p style="margin-left:9%;">&quot;2020-07-10T07:50CET&quot;
+to utc+8</p>
+
+<p style="margin-left:19%;">=
+&quot;2020-07-10T14:50:00+08:00&quot;</p>
+
+<p style="margin-left:9%;">&quot;2020-05-20&quot; +
+523d</p>
+
+<p style="margin-left:19%;">= addDays(2020-05-20; 523) <br>
+= &quot;2021-10-25&quot;</p>
+
+<p style="margin-left:9%;">today - 5 days</p>
+
+<p style="margin-left:19%;">= &quot;2020-07-05&quot;</p>
+
+<p style="margin-left:9%;">&quot;2020-10-05&quot; -
+today</p>
+
+<p style="margin-left:19%;">= days(today; 2020-10-05) <br>
+= 87</p>
+
+<p style="margin-left:9%;">timestamp(2020-05-20)</p>
+
+<p style="margin-left:19%;">= 1 589 925 600</p>
+
+<p style="margin-left:9%;">stamptodate(1 589 925 600)</p>
+
+<p style="margin-left:19%;">=
+&quot;2020-05-20T00:00:00&quot;</p>
+
+<p style="margin-left:9%;">&quot;2020-05-20&quot; to
+calendars</p>
+
+<p style="margin-left:19%;">returns date in Hebrew,
+Islamic, Persian, Indian, Chinese, Julian, Coptic, and
+Ethiopian calendars</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Number
+bases</b> <br>
+52 to bin</p>
+
+<p style="margin-left:19%;">= 0011 0100</p>
+
+<p style="margin-left:9%;">52 to bin16</p>
+
+<p style="margin-left:19%;">= 0000 0000 0011 0100</p>
+
+<p style="margin-left:9%;">52 to oct</p>
+
+<p style="margin-left:19%;">= 064</p>
+
+<p style="margin-left:9%;">52 to hex</p>
+
+<p style="margin-left:19%;">= 0x34</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>0x34</p></td>
+<td width="5%"></td>
+<td width="12%">
+
+
+<p>= hex(34)</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:19%;">= base(34; 16) <br>
+= 52</p>
+
+<p style="margin-left:9%;">523&lt;&lt;2&amp;250 to bin</p>
+
+<p style="margin-left:19%;">= 0010 1000</p>
+
+<p style="margin-left:9%;">52.345 to float</p>
+
+<p style="margin-left:19%;">= 0100 0010 0101 0001 0110 0001
+0100 1000</p>
+
+
+<p style="margin-left:9%;">float(01000010010100010110000101001000)</p>
+
+<p style="margin-left:19%;">= 1715241/32768 <br>
+= 52.345001</p>
+
+<p style="margin-left:9%;">floatError(52.345)</p>
+
+<p style="margin-left:19%;">= 1.2207031e-6</p>
+
+<p style="margin-left:9%;">52.34 to sexa</p>
+
+<p style="margin-left:19%;">= 52&deg;20&rsquo;24&quot;</p>
+
+<p style="margin-left:9%;">1978 to roman</p>
+
+<p style="margin-left:19%;">= MCMLXXVIII</p>
+
+<p style="margin-left:9%;">52 to base 32</p>
+
+<p style="margin-left:19%;">= 1K</p>
+
+<p style="margin-left:9%;">sqrt(32) to base sqrt(2)</p>
+
+<p style="margin-left:19%;">= 100000</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The manual of
+the graphical user interface at
+<i>https://qalculate.github.io/manual/index.html</i>
+(includes more details about the syntax and elements
+supported in mathematical expressions, and various options,
+and includes a complete list of functions, variables, and
+units)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+any bugs at
+<i>https://github.com/Qalculate/libqalculate/issues</i></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Hanna Knutsson
+&lt;hanna.knutsson@protonmail.com&gt;.</p>
+<hr>
+</body>
+</html>

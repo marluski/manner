@@ -1,0 +1,1673 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>flac</title>
+
+</head>
+<body>
+
+<h1 align="center">flac</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#GENERAL USAGE">GENERAL USAGE</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Encoding examples">Encoding examples</a><br>
+<a href="#Decoding examples">Decoding examples</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#GENERAL OPTIONS">GENERAL OPTIONS</a><br>
+<a href="#DECODING OPTIONS">DECODING OPTIONS</a><br>
+<a href="#ENCODING OPTIONS">ENCODING OPTIONS</a><br>
+<a href="#FORMAT OPTIONS">FORMAT OPTIONS</a><br>
+<a href="#raw format options">raw format options</a><br>
+<a href="#ANALYSIS OPTIONS">ANALYSIS OPTIONS</a><br>
+<a href="#NEGATIVE OPTIONS">NEGATIVE OPTIONS</a><br>
+<a href="#ReplayGain application specification">ReplayGain application specification</a><br>
+<a href="#Picture specification">Picture specification</a><br>
+<a href="#Apodization functions">Apodization functions</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">flac - Free
+Lossless Audio Codec</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flac</b> [
+<i>OPTIONS</i> ] [ <i>infile.wav</i> | <i>infile.rf64</i> |
+<i>infile.aiff</i> | <i>infile.raw</i> | <i>infile.flac</i>
+| <i>infile.oga</i> | <i>infile.ogg</i> | <b>-</b>
+<i>...</i> ]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>flac</b> [
+<b>-d</b> | <b>--decode</b> | <b>-t</b> | <b>--test</b> |
+<b>-a</b> | <b>--analyze</b> ] [ <i>OPTIONS</i> ] [
+<i>infile.flac</i> | <i>infile.oga</i> | <i>infile.ogg</i> |
+<b>-</b> <i>...</i> ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flac</b> is a
+command-line tool for encoding, decoding, testing and
+analyzing FLAC streams.</p>
+
+<h2>GENERAL USAGE
+<a name="GENERAL USAGE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flac</b>
+supports as input RIFF WAVE, Wave64, RF64, AIFF, FLAC or Ogg
+FLAC format, or raw interleaved samples. The decoder
+currently can output to RIFF WAVE, Wave64, RF64, or AIFF
+format, or raw interleaved samples. flac only supports
+linear PCM samples (in other words, no A-LAW, uLAW, etc.),
+and the input must be between 4 and 32 bits per sample.</p>
+
+<p style="margin-left:9%; margin-top: 1em">flac assumes
+that files ending in &ldquo;.wav&rdquo; or that have the
+RIFF WAVE header present are WAVE files, files ending in
+&ldquo;.w64&rdquo; or have the Wave64 header present are
+Wave64 files, files ending in &ldquo;.rf64&rdquo; or have
+the RF64 header present are RF64 files, files ending in
+&ldquo;.aif&rdquo; or &ldquo;.aiff&rdquo; or have the AIFF
+header present are AIFF files, files ending in
+&ldquo;.flac&rdquo; or have the FLAC header present are FLAC
+files and files ending in &ldquo;.oga&rdquo; or
+&ldquo;.ogg&rdquo; or have the Ogg FLAC header present are
+Ogg FLAC files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Other than this,
+flac makes no assumptions about file extensions, though the
+convention is that FLAC files have the extension
+&ldquo;.flac&rdquo; (or &ldquo;.fla&rdquo; on ancient
+&ldquo;8.3&rdquo; file systems like FAT-16).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Before going
+into the full command-line description, a few other things
+help to sort it out:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>flac encodes by default, so you must use -d to
+decode</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>Encoding options -0 .. -8 (or --fast and --best) that
+control the compression level actually are just synonyms for
+different groups of specific encoding options (described
+later).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>The order in which options are specified is generally
+not important except when they contradict each other, then
+the latter takes precedence except that compression presets
+are overridden by any option given before or after. For
+example, -0M, -M0, -M2 and -2M are all the same as -1, and
+-l 12 -6 the same as -7.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>4.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+<p>flac behaves similarly to gzip in the way it handles
+input and output files</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Skip to the
+EXAMPLES section below for examples of some typical
+tasks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">flac will be
+invoked one of four ways, depending on whether you are
+encoding, decoding, testing, or analyzing. Encoding is the
+default invocation, but can be switch to decoding with
+<b>-d</b>, analysis with <b>-a</b> or testing with
+<b>-t</b>. Depending on which way is chosen, encoding,
+decoding, analysis or testing options can be used, see
+section OPTIONS for details. General options can be used for
+all.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If only one
+inputfile is specified, it may be &ldquo;-&rdquo; for stdin.
+When stdin is used as input, flac will write to stdout.
+Otherwise flac will perform the desired operation on each
+input file to similarly named output files (meaning for
+encoding, the extension will be replaced with
+&ldquo;.flac&rdquo;, or appended with &ldquo;.flac&rdquo; if
+the input file has no extension, and for decoding, the
+extension will be &ldquo;.wav&rdquo; for WAVE output and
+&ldquo;.raw&rdquo; for raw output). The original file is not
+deleted unless --delete-input-file is specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you are
+encoding/decoding from stdin to a file, you should use the
+-o option like so:</p>
+
+<p style="margin-left:18%; margin-top: 1em">flac [options]
+-o outputfile <br>
+flac -d [options] -o outputfile</p>
+
+<p style="margin-left:9%; margin-top: 1em">which are better
+than:</p>
+
+<p style="margin-left:18%; margin-top: 1em">flac [options]
+&gt; outputfile <br>
+flac -d [options] &gt; outputfile</p>
+
+<p style="margin-left:9%; margin-top: 1em">since the former
+allows flac to seek backwards to write the STREAMINFO or
+RIFF WAVE header contents when necessary.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Also, you can
+force output data to go to stdout using -c.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To encode or
+decode files that start with a dash, use -- to signal the
+end of options, to keep the filenames themselves from being
+treated as options:</p>
+
+<p style="margin-left:18%; margin-top: 1em">flac -V --
+-01-filename.wav</p>
+
+<p style="margin-left:9%; margin-top: 1em">The encoding
+options affect the compression ratio and encoding speed. The
+format options are used to tell flac the arrangement of
+samples if the input file (or output file when decoding) is
+a raw file. If it is a RIFF WAVE, Wave64, RF64, or AIFF file
+the format options are not needed since they are read from
+the file&rsquo;s header.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In test mode,
+flac acts just like in decode mode, except no output file is
+written. Both decode and test modes detect errors in the
+stream, but they also detect when the MD5 signature of the
+decoded audio does not match the stored MD5 signature, even
+when the bitstream is valid.</p>
+
+<p style="margin-left:9%; margin-top: 1em">flac can also
+re-encode FLAC files. In other words, you can specify a FLAC
+or Ogg FLAC file as an input to the encoder and it will
+decoder it and re-encode it according to the options you
+specify. It will also preserve all the metadata unless you
+override it with other options (e.g. specifying new tags,
+seekpoints, cuesheet, padding, etc.).</p>
+
+<p style="margin-left:9%; margin-top: 1em">flac has been
+tuned so that the default settings yield a good speed vs.
+compression tradeoff for many kinds of input. However, if
+you are looking to maximize the compression rate or speed,
+or want to use the full power of FLAC&rsquo;s metadata
+system, see the page titled &lsquo;About the FLAC
+Format&rsquo; on the FLAC website.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Some typical
+encoding and decoding tasks using flac:</p>
+
+<h3>Encoding examples
+<a name="Encoding examples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">flac abc.wav</p>
+
+<p style="margin-left:18%;">Encode abc.wav to abc.flac
+using the default compression setting. abc.wav is not
+deleted.</p>
+
+<p style="margin-left:9%;">flac --delete-input-file
+abc.wav</p>
+
+<p style="margin-left:18%;">Like above, except abc.wav is
+deleted if there were no errors.</p>
+
+<p style="margin-left:9%;">flac --delete-input-file -w
+abc.wav</p>
+
+<p style="margin-left:18%;">Like above, except abc.wav is
+deleted if there were no errors and no warnings.</p>
+
+<p style="margin-left:9%;">flac --best abc.wav or flac -8
+abc.wav</p>
+
+<p style="margin-left:18%;">Encode abc.wav to abc.flac
+using the highest compression preset.</p>
+
+<p style="margin-left:9%;">flac --verify abc.wav or flac -V
+abc.wav</p>
+
+<p style="margin-left:18%;">Encode abc.wav to abc.flac and
+internally decode abc.flac to make sure it matches
+abc.wav.</p>
+
+<p style="margin-left:9%;">flac -o my.flac abc.wav</p>
+
+<p style="margin-left:18%;">Encode abc.wav to my.flac.</p>
+
+<p style="margin-left:9%;">flac abc.aiff foo.rf64
+bar.w64</p>
+
+<p style="margin-left:18%;">Encode abc.aiff to abc.flac,
+foo.rf64 to foo.flac and bar.w64 to bar.flac</p>
+
+<p style="margin-left:9%;">flac *.wav *.aif?</p>
+
+<p style="margin-left:18%;">Wildcards are supported. This
+command will encode all .wav files and all .aif/.aiff/.aifc
+files (as well as other supported files ending in .aif+one
+character) in the current directory.</p>
+
+<p style="margin-left:9%;">flac abc.flac --force or flac
+abc.flac -f</p>
+
+<p style="margin-left:18%;">Recompresses, keeping metadata
+like tags. The syntax is a little tricky: this is an
+<i>encoding</i> command (which is the default: you need to
+specify -d for decoded output), and will thus want to output
+the file abc.flac - which already exists. flac will require
+the --force or shortform -f option to overwrite an existing
+file. Recompression will first write a temporary file, which
+afterwards replaces the old abc.flac (provided flac has
+write access to that file). The above example uses default
+settings. More often, recompression is combined with a
+different - usually higher - compression option. Note: If
+the FLAC file does not end with .flac - say, it is abc.fla -
+the -f is not needed: A new abc.flac will be created and the
+old kept, just like for an uncompressed input file.</p>
+
+<p style="margin-left:9%;">flac
+--tag-from-file=&quot;ALBUM=albumtitle.txt&quot; -T
+&quot;ARTIST=Queen&quot; *.wav</p>
+
+<p style="margin-left:18%;">Encode every .wav file in the
+directory and add some tags. Every file will get the same
+set of tags. Warning: Will wipe all existing tags, when the
+input file is (Ogg) FLAC - not just those tags listed in the
+option. Use the metaflac utility to tag FLAC files.</p>
+
+<p style="margin-left:9%;">flac
+--keep-foreign-metadata-if-present abc.wav</p>
+
+<p style="margin-left:18%;">FLAC files can store non-audio
+chunks of input WAVE/AIFF/RF64/W64 files. The related option
+--keep-foreign-metadata works the same way, but will instead
+exit with an error if the input has no such non-audio
+chunks. The encoder only stores the chunks as they are, it
+cannot import the content into its own tags (vorbis
+comments). To transfer such tags from a source file, use
+tagging software which supports them.</p>
+
+<p style="margin-left:9%;">flac -Vj2 -m3fo Track07.flac --
+-7.wav</p>
+
+<p style="margin-left:18%;">flac employs the commonplace
+convention that options in a short version - invoked with
+single dash - can be shortened together until one that takes
+an argument. Here -j and -o do, and after the
+&ldquo;2&rdquo; a whitespace is needed to start new options
+with single/double dash. The -m option does not, and the
+following &ldquo;3&rdquo; is the -3 compression setting. The
+options could equally well have been written out as -V -j 2
+-m -3 -f -o Track04.flac , or as -fo Track04.flac -3mVj2.
+flac also employs the convention that -- (with whitespace!)
+signifies end of options, treating everything to follow as
+filename. That is needed when an input filenames could
+otherwise be read as an option, and &ldquo;-7&rdquo; is one
+such. In total, this line takes the input file -7.wav as
+input; -o will give output filename as Track07.flac, and the
+-f will overwrite if the file Track04.flac is already
+present. The encoder will select encoding preset -3 modified
+with the -m switch, and use two CPU threads. Afterwards, the
+-V will make it decode the flac file and compare the audio
+to the input, to ensure they are indeed equal.</p>
+
+<h3>Decoding examples
+<a name="Decoding examples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">flac --decode
+abc.flac or flac -d abc.flac</p>
+
+<p style="margin-left:18%;">Decode abc.flac to abc.wav.
+abc.flac is not deleted. If abc.wav is already present, the
+process will exit with an error instead of overwriting; use
+&ndash;force / -f to force overwrite. NOTE: A mere flac
+abc.flac <i>without &ndash;decode or its shortform -d</i>,
+would mean to re-encode abc.flac to abc.flac (see above),
+and that command would err out because abc.flac already
+exists.</p>
+
+<p style="margin-left:9%;">flac -d --force-aiff-format
+abc.flac or flac -d -o abc.aiff abc.flac</p>
+
+<p style="margin-left:18%;">Two different ways of decoding
+abc.flac to abc.aiff (AIFF format). abc.flac is not deleted.
+-d -o could be shortened to -do. The decoder can force other
+output formats, or different versions of the WAVE/AIFF
+formats, see the options below.</p>
+
+<p style="margin-left:9%;">flac -d
+--keep-foreign-metadata-if-present abc.flac</p>
+
+<p style="margin-left:18%;">If the FLAC file has non-audio
+chunks stored from the original input file, this option will
+restore both audio and non-audio. The chunks will reveal the
+original file type, and the decoder will select output
+format and output file extension accordingly - note that
+this is not compatible with forcing a particular output
+format except if it coincides with the original, as the
+decoder cannot transcode non-audio between formats. If there
+are no such chunks stored, it will decode to abc.wav. The
+related option --keep-foreign-metadata will instead exit
+with an error if no such non-audio chunks are found.</p>
+
+<p style="margin-left:9%;">flac -d -F abc.flac</p>
+
+<p style="margin-left:18%;">Decode abc.flac to abc.wav and
+don&rsquo;t abort if errors are found. This is potentially
+useful for recovering as much as possible from a corrupted
+file. Note: Be careful about trying to &ldquo;repair&rdquo;
+files this way. Often it will only conceal an error, and not
+play any subjectively &ldquo;better&rdquo; than the
+corrupted file. It is a good idea to at least keep it, and
+possibly try several decoders, including the one that
+generated the file, and hear if one has less detrimental
+audible errors than another. Make sure output volume is
+limited, as corrupted audio can generate loud noises.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A summary of
+options is included below. Several of the options can be
+negated, see the <b>Negative options</b> section below.</p>
+
+<h3>GENERAL OPTIONS
+<a name="GENERAL OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--version</b></p>
+
+<p style="margin-left:18%;">Show the flac version number,
+and quit.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Show basic usage and a list of
+all options, and quit.</p>
+
+<p style="margin-left:9%;"><b>-d</b>, <b>--decode</b></p>
+
+<p style="margin-left:18%;">Decode (the default behavior is
+to encode)</p>
+
+<p style="margin-left:9%;"><b>-t</b>, <b>--test</b></p>
+
+<p style="margin-left:18%;">Test a flac encoded file. This
+works the same as -d except no decoded file is written, and
+with some additional checks like parsing of all metadata
+blocks.</p>
+
+<p style="margin-left:9%;"><b>-a</b>, <b>--analyze</b></p>
+
+<p style="margin-left:18%;">Analyze a FLAC encoded file.
+This works the same as -d except the output is an analysis
+file, not a decoded file.</p>
+
+<p style="margin-left:9%;"><b>-c</b>, <b>--stdout</b></p>
+
+<p style="margin-left:18%;">Write output to stdout</p>
+
+<p style="margin-left:9%;"><b>-f</b>, <b>--force</b></p>
+
+<p style="margin-left:18%;">Force overwriting of output
+files. By default, flac warns that the output file already
+exists and continues to the next file.</p>
+
+<p style="margin-left:9%;"><b>--delete-input-file</b></p>
+
+<p style="margin-left:18%;">Automatically delete the input
+file after a successful encode or decode. If there was an
+error (including a verify error) the input file is left
+intact.</p>
+
+<p style="margin-left:9%;"><b>-o</b> <i>FILENAME</i>,
+<b>--output-name</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Force the output file name
+(usually flac just changes the extension). May only be used
+when encoding a single file. May not be used in conjunction
+with --output-prefix.</p>
+
+
+<p style="margin-left:9%;"><b>--output-prefix</b>=<i>STRING</i></p>
+
+<p style="margin-left:18%;">Prefix each output file name
+with the given string. This can be useful for encoding or
+decoding files to a different directory. Make sure if your
+string is a path name that it ends with a trailing `/&rsquo;
+(slash).</p>
+
+<p style="margin-left:9%;"><b>--preserve-modtime</b></p>
+
+<p style="margin-left:18%;">(Enabled by default.) Output
+files have their timestamps/permissions set to match those
+of their inputs. Use --no-preserve-modtime to make output
+files have the current time and default permissions.</p>
+
+
+<p style="margin-left:9%;"><b>--keep-foreign-metadata</b></p>
+
+<p style="margin-left:18%;">If encoding, save WAVE, RF64,
+or AIFF non-audio chunks in FLAC metadata. If decoding,
+restore any saved non-audio chunks from FLAC metadata when
+writing the decoded file. Foreign metadata cannot be
+transcoded, e.g.&nbsp;WAVE chunks saved in a FLAC file
+cannot be restored when decoding to AIFF. Input and output
+must be regular files (not stdin or stdout). With this
+option, FLAC will pick the right output format on decoding.
+It will exit with error if no such chunks are found.</p>
+
+
+<p style="margin-left:9%;"><b>--keep-foreign-metadata-if-present</b></p>
+
+<p style="margin-left:18%;">Like --keep-foreign-metadata,
+but without throwing an error if foreign metadata cannot be
+found or restored. Instead, prints a warning.</p>
+
+
+<p style="margin-left:9%;"><b>--skip</b>={#|<i>MM:SS</i>}</p>
+
+<p style="margin-left:18%;">Skip the first number of
+samples of the input. To skip over a given initial time,
+specify instead minutes and seconds: there must then be at
+least one digit on each side of the colon sign. Fractions of
+a second can be specified, with locale-dependent decimal
+point, e.g. --skip=123:9,867 if your decimal point is a
+comma. A --skip option is applied to each input file if more
+are given. This option cannot be used with -t. When used
+with -a, the analysis file will enumerate frames from
+starting point.</p>
+
+
+<p style="margin-left:9%;"><b>--until</b>={#|[+|]<i>MM:SS</i>}</p>
+
+<p style="margin-left:18%;">Stop at the given sample number
+(which is not included). A negative number is taken relative
+to the end of the audio, a `+&rsquo; (plus) sign means that
+the --until point is taken relative to the --skip point. For
+other considerations, see --skip.</p>
+
+<p style="margin-left:9%;"><b>--no-utf8-convert</b></p>
+
+<p style="margin-left:18%;">Do not convert tags from local
+charset to UTF-8. This is useful for scripts, and setting
+tags in situations where the locale is wrong. This option
+must appear before any tag options!</p>
+
+<p style="margin-left:9%;"><b>-s</b>, <b>--silent</b></p>
+
+<p style="margin-left:18%;">Silent mode (do not write
+runtime encode/decode statistics to stderr)</p>
+
+<p style="margin-left:9%;"><b>--totally-silent</b></p>
+
+<p style="margin-left:18%;">Do not print anything of any
+kind, including warnings or errors. The exit code will be
+the only way to determine successful completion.</p>
+
+<p style="margin-left:9%;"><b>-w</b>,
+<b>--warnings-as-errors</b></p>
+
+<p style="margin-left:18%;">Treat all warnings as errors
+(which cause flac to terminate with a non-zero exit
+code).</p>
+
+<h3>DECODING OPTIONS
+<a name="DECODING OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-F</b>,
+<b>--decode-through-errors</b></p>
+
+<p style="margin-left:18%;">By default flac stops decoding
+with an error message and removes the partially decoded file
+if it encounters a bitstream error. With -F, errors are
+still printed but flac will continue decoding to completion.
+Note that errors may cause the decoded audio to be missing
+some samples or have silent sections.</p>
+
+<p style="margin-left:9%;"><b>--cue</b>=[#.#][-[#.#]]</p>
+
+<p style="margin-left:18%;">Set the beginning and ending
+cuepoints to decode. Decimal points are locale-dependent
+(dot or comma). The optional first #.# is the track and
+index point at which decoding will start; the default is the
+beginning of the stream. The optional second #.# is the
+track and index point at which decoding will end; the
+default is the end of the stream. If the cuepoint does not
+exist, the closest one before it (for the start point) or
+after it (for the end point) will be used. If those
+don&rsquo;t exist , the start of the stream (for the start
+point) or end of the stream (for the end point) will be
+used. The cuepoints are merely translated into sample
+numbers then used as --skip and --until. A CD track can
+always be cued by, for example, --cue=9.1-10.1 for track 9,
+even if the CD has no 10th track.</p>
+
+
+<p style="margin-left:9%;"><b>&ndash;decode-chained-stream</b></p>
+
+<p style="margin-left:18%;">Decode all links in a chained
+Ogg stream, not just the first one.</p>
+
+
+<p style="margin-left:9%;"><b>--apply-replaygain-which-is-not-lossless</b>[=<i>SPECIFICATION</i>]</p>
+
+<p style="margin-left:18%;">Applies ReplayGain values while
+decoding. <b>WARNING: THIS IS NOT LOSSLESS. DECODED AUDIO
+WILL NOT BE IDENTICAL TO THE ORIGINAL WITH THIS OPTION.</b>
+This option is useful for example in transcoding media
+servers, where the client does not support ReplayGain. For
+details on the use of this option, see the section
+<b>ReplayGain application specification</b>.</p>
+
+<h3>ENCODING OPTIONS
+<a name="ENCODING OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Encoding will
+default to -5, -A &ldquo;tukey(5e-1)&rdquo; and one CPU
+thread. <b><br>
+-V</b>, <b>--verify</b></p>
+
+<p style="margin-left:18%;">Verify a correct encoding by
+decoding the output in parallel and comparing to the
+original.</p>
+
+<p style="margin-left:9%;"><b>-0</b>,
+<b>--compression-level-0</b>, <b>--fast</b></p>
+
+<p style="margin-left:18%;">Fastest compression preset.
+Currently synonymous with -l 0 -b 1152 -r 3
+--no-mid-side</p>
+
+<p style="margin-left:9%;"><b>-1</b>,
+<b>--compression-level-1</b></p>
+
+<p style="margin-left:18%;">Currently synonymous with -l 0
+-b 1152 -M -r 3</p>
+
+<p style="margin-left:9%;"><b>-2</b>,
+<b>--compression-level-2</b></p>
+
+<p style="margin-left:18%;">Currently synonymous with -l 0
+-b 1152 -m -r 3</p>
+
+<p style="margin-left:9%;"><b>-3</b>,
+<b>--compression-level-3</b></p>
+
+<p style="margin-left:18%;">Currently synonymous with -l 6
+-b 4096 -r 4 --no-mid-side</p>
+
+<p style="margin-left:9%;"><b>-4</b>,
+<b>--compression-level-4</b></p>
+
+<p style="margin-left:18%;">Currently synonymous with -l 8
+-b 4096 -M -r 4</p>
+
+<p style="margin-left:9%;"><b>-5</b>,
+<b>--compression-level-5</b></p>
+
+<p style="margin-left:18%;">Currently synonymous with -l 8
+-b 4096 -m -r 5</p>
+
+<p style="margin-left:9%;"><b>-6</b>,
+<b>--compression-level-6</b></p>
+
+<p style="margin-left:18%;">Currently synonymous with -l 8
+-b 4096 -m -r 6 -A &quot;subdivide_tukey(2)&quot;</p>
+
+<p style="margin-left:9%;"><b>-7</b>,
+<b>--compression-level-7</b></p>
+
+<p style="margin-left:18%;">Currently synonymous with -l 12
+-b 4096 -m -r 6 -A &quot;subdivide_tukey(2)&quot;</p>
+
+<p style="margin-left:9%;"><b>-8</b>,
+<b>--compression-level-8</b>, <b>--best</b></p>
+
+<p style="margin-left:18%;">Currently synonymous with -l 12
+-b 4096 -m -r 6 -A &quot;subdivide_tukey(3)&quot;</p>
+
+<p style="margin-left:9%;"><b>-l</b> #,
+<b>--max-lpc-order</b>=#</p>
+
+<p style="margin-left:18%;">Specifies the maximum LPC
+order. This number must be &lt;= 32. For subset streams, it
+must be &lt;=12 if the sample rate is &lt;=48kHz. If 0, the
+encoder will not attempt generic linear prediction, and only
+choose among a set of fixed (hard-coded) predictors.
+Restricting to fixed predictors only is faster, but
+compresses weaker - typically five percentage points / ten
+percent larger files.</p>
+
+<p style="margin-left:9%;"><b>-b</b> #,
+<b>--blocksize</b>=#</p>
+
+<p style="margin-left:18%;">Specify the blocksize in
+samples. The current default is 1152 for -l 0, else 4096.
+Blocksize must be between 16 and 65535 (inclusive). For
+subset streams it must be &lt;= 4608 if the samplerate is
+&lt;= 48kHz, for subset streams with higher samplerates it
+must be &lt;= 16384.</p>
+
+<p style="margin-left:9%;"><b>-m</b>, <b>--mid-side</b></p>
+
+<p style="margin-left:18%;">Try mid-side coding for each
+frame (stereo only, otherwise ignored).</p>
+
+<p style="margin-left:9%;"><b>-M</b>,
+<b>--adaptive-mid-side</b></p>
+
+<p style="margin-left:18%;">Adaptive mid-side coding for
+all frames (stereo only, otherwise ignored).</p>
+
+<p style="margin-left:9%;"><b>-r</b> [#,]#,
+<b>--rice-partition-order</b>=[#,]#</p>
+
+<p style="margin-left:18%;">Set the [min,]max residual
+partition order (0..15). For subset streams, max must be
+&lt;=8. min defaults to 0. Default is -r 5. Actual
+partitioning will be restricted by block size and prediction
+order, and the encoder will silently reduce too high
+values.</p>
+
+<p style="margin-left:9%;"><b>-A</b> <i>FUNCTION(S)</i>,
+<b>--apodization</b>=<i>FUNCTION(S)</i></p>
+
+<p style="margin-left:18%;">Window audio data with given
+apodization function. More can be given, comma-separated.
+See section <b>Apodization functions</b> for details.</p>
+
+<p style="margin-left:9%;"><b>-e</b>,
+<b>--exhaustive-model-search</b></p>
+
+<p style="margin-left:18%;">Do exhaustive model search
+(expensive!).</p>
+
+<p style="margin-left:9%;"><b>-q</b> #,
+<b>--qlp-coeff-precision</b>=#</p>
+
+<p style="margin-left:18%;">Precision of the quantized
+linear-predictor coefficients. This number must be in
+between 5 and 16, or 0 (the default) to let encoder decide.
+Does nothing if using -l 0.</p>
+
+<p style="margin-left:9%;"><b>-p</b>,
+<b>--qlp-coeff-precision-search</b></p>
+
+<p style="margin-left:18%;">Do exhaustive search of LP
+coefficient quantization (expensive!). Overrides -q; does
+nothing if using -l 0.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--lax</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Allow encoder to generate non-Subset files. The
+resulting FLAC file may not be streamable or might have
+trouble being played in all players (especially hardware
+devices), so you should only use this option in combination
+with custom encoding options meant for archival.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--limit-min-bitrate</b></p>
+
+<p style="margin-left:18%;">Limit minimum bitrate by not
+allowing frames consisting of only constant subframes. This
+ensures a bitrate of at least 1 bit/sample, for example
+48kbit/s for 48kHz input. This is mainly useful for internet
+streaming.</p>
+
+<p style="margin-left:9%;"><b>-j</b> #,
+<b>--threads</b>=#</p>
+
+<p style="margin-left:18%;">Try to set a maximum number of
+threads to use for encoding. If multithreading was not
+enabled on compilation or when setting a number of threads
+that is too high, this fails with a warning. The value of 0
+means a default set by the encoder; currently that is 1
+thread (i.e.&nbsp;no multithreading), but that could change
+in the future. Currently, up to 128 threads are supported.
+Using a value higher than the number of available CPU
+threads harms performance.</p>
+
+<p style="margin-left:9%;"><b>--ignore-chunk-sizes</b></p>
+
+<p style="margin-left:18%;">When encoding to flac, ignore
+the file size headers in WAV and AIFF files to attempt to
+work around problems with over-sized or malformed files. WAV
+and AIFF files both specifies length of audio data with an
+unsigned 32-bit number, limiting audio to just over 4
+gigabytes. Files larger than this are malformed, but should
+be read correctly using this option. Beware however, it
+could misinterpret any data following the audio chunk, as
+audio.</p>
+
+<p style="margin-left:9%;"><b>--replay-gain</b></p>
+
+<p style="margin-left:18%;">Calculate ReplayGain values and
+store them as FLAC tags, similar to vorbisgain. Title
+gains/peaks will be computed for each input file, and an
+album gain/peak will be computed for all files. All input
+files must have the same resolution, sample rate, and number
+of channels. Only mono and stereo files are allowed, and the
+sample rate must be 8, 11.025, 12, 16, 18.9, 22.05, 24, 28,
+32, 36, 37.8, 44.1, 48, 56, 64, 72, 75.6, 88.2, 96, 112,
+128, 144, 151.2, 176.4, 192, 224, 256, 288, 302.4, 352.8,
+384, 448, 512, 576, or 604.8 kHz. Also note that this option
+may leave a few extra bytes in a PADDING block as the exact
+size of the tags is not known until all files are processed.
+Note that this option cannot be used when encoding to
+standard output (stdout).</p>
+
+
+<p style="margin-left:9%;"><b>--cuesheet</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Import the given cuesheet file
+and store it in a CUESHEET metadata block. This option may
+only be used when encoding a single file. A seekpoint will
+be added for each index point in the cuesheet to the
+SEEKTABLE unless --no-cued-seekpoints is specified.</p>
+
+
+<p style="margin-left:9%;"><b>--picture</b>={<i>FILENAME|SPECIFICATION</i>}</p>
+
+<p style="margin-left:18%;">Import a picture and store it
+in a PICTURE metadata block. More than one --picture option
+can be specified. Either a filename for the picture file or
+a more complete specification form can be used. The
+<i>SPECIFICATION</i> is a string whose parts are separated
+by | (pipe) characters. Some parts may be left empty to
+invoke default values. Specifying only <i>FILENAME</i> is
+just shorthand for &ldquo;||||FILENAME&rdquo;. See the
+section <b>Picture specification</b> for
+<i>SPECIFICATION</i> format.</p>
+
+<p style="margin-left:9%;"><b>-S</b> {#|X|#x|#s},
+<b>--seekpoint</b>={#|X|#x|#s}</p>
+
+<p style="margin-left:18%;">Specifies point(s) to include
+in SEEKTABLE, to override the encoder&rsquo;s default choice
+of one per ten seconds (&lsquo;-s 10s&rsquo;). Using #, a
+seek point at that sample number is added. Using X, a
+placeholder point is added at the end of a the table. Using
+#x, # evenly spaced seek points will be added, the first
+being at sample 0. Using #s, a seekpoint will be added every
+# seconds, where decimal points are locale-dependent,
+e.g.&nbsp; &lsquo;-s 9.5s&rsquo; or &lsquo;-s 9,5s&rsquo;.
+Several -S options may be given; the resulting SEEKTABLE
+will contain all seekpoints specified (duplicates removed).
+Note: &lsquo;-S #x&rsquo; and &lsquo;-S #s&rsquo; will not
+work if the encoder cannot determine the input size before
+starting. Note: if you use &lsquo;-S #&rsquo; with # being
+&gt;= the number of samples in the input, there will be
+either no seek point entered (if the input size is
+determinable before encoding starts) or a placeholder point
+(if input size is not determinable). Use --no-seektable for
+no SEEKTABLE.</p>
+
+<p style="margin-left:9%;"><b>-P</b> #,
+<b>--padding</b>=#</p>
+
+<p style="margin-left:18%;">(Default: 8192 bytes, although
+65536 for input above 20 minutes.) Tell the encoder to write
+a PADDING metadata block of the given length (in bytes)
+after the STREAMINFO block. This is useful for later
+tagging, where one can write over the PADDING block instead
+of having to rewrite the entire file. Note that a block
+header of 4 bytes will come on top of the length
+specified.</p>
+
+<p style="margin-left:9%;"><b>-T</b>
+&ldquo;<i>FIELD=VALUE</i>&rdquo;<b>,
+--tag</b>=&ldquo;<i>FIELD=VALUE</i>&rdquo;</p>
+
+<p style="margin-left:18%;">Add a FLAC tag. The comment
+must adhere to the Vorbis comment spec; i.e.&nbsp;the FIELD
+must contain only legal characters, terminated by an
+&lsquo;equals&rsquo; sign. Make sure to quote the content if
+necessary. This option may appear more than once to add
+several Vorbis comments. NOTE: all tags will be added to all
+encoded files.</p>
+
+
+<p style="margin-left:9%;"><b>--tag-from-file</b>=&ldquo;<i>FIELD=FILENAME</i>&rdquo;</p>
+
+<p style="margin-left:18%;">Like --tag, except FILENAME is
+a file whose contents will be read verbatim to set the tag
+value. The contents will be converted to UTF-8 from the
+local charset. This can be used to store a cuesheet in a tag
+(e.g.&nbsp;--tag-from-file=&ldquo;CUESHEET=image.cue&rdquo;).
+Do not try to store binary data in tag fields! Use
+APPLICATION blocks for that.</p>
+
+<h3>FORMAT OPTIONS
+<a name="FORMAT OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Encoding
+defaults to FLAC and not OGG. Decoding defaults to WAVE
+(more specifically WAVE_FORMAT_PCM for mono/stereo with 8/16
+bits, and to WAVE_FORMAT_EXTENSIBLE otherwise), except: will
+be overridden by chunks found by
+--keep-foreign-metadata-if-present or
+--keep-foreign-metadata</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--ogg</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>When encoding, generate Ogg FLAC output instead of
+native FLAC. Ogg FLAC streams are FLAC streams wrapped in an
+Ogg transport layer. The resulting file should have an
+&lsquo;.oga&rsquo; extension and will still be decodable by
+flac. When decoding, force the input to be treated as Ogg
+FLAC. This is useful when piping input from stdin or when
+the filename does not end in &lsquo;.oga&rsquo; or
+&lsquo;.ogg&rsquo;.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--serial-number</b>=#</p>
+
+<p style="margin-left:18%;">When used with --ogg, specifies
+the serial number to use for the first Ogg FLAC stream,
+which is then incremented for each additional stream. When
+encoding and no serial number is given, flac uses a random
+number for the first stream, then increments it for each
+additional stream. When decoding and no number is given,
+flac uses the serial number of the first page.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force-aiff-format
+<br>
+--force-rf64-format <br>
+--force-wave64-format</b> : For decoding: Override default
+output format and force output to AIFF/RF64/WAVE64,
+respectively. This option is not needed if the output
+filename (as set by -o) ends with <i>.aif</i> or
+<i>.aiff</i>, <i>.rf64</i> and <i>.w64</i> respectively. The
+encoder auto-detects format and ignores this option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force-legacy-wave-format
+<br>
+--force-extensible-wave-format</b> : Instruct the decoder to
+output a WAVE file with WAVE_FORMAT_PCM and
+WAVE_FORMAT_EXTENSIBLE respectively, overriding default
+choice.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force-aiff-c-none-format
+<br>
+--force-aiff-c-sowt-format</b> : Instruct the decoder to
+output an AIFF-C file with format NONE and sowt
+respectively. <b><br>
+--force-raw-format</b></p>
+
+<p style="margin-left:18%;">Force input (when encoding) or
+output (when decoding) to be treated as raw samples (even if
+filename suggests otherwise).</p>
+
+<h3>raw format options
+<a name="raw format options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">When encoding
+from or decoding to raw PCM, format must be specified.
+<b><br>
+--sign</b>={signed|unsigned}</p>
+
+<p style="margin-left:18%;">Specify the sign of
+samples.</p>
+
+
+<p style="margin-left:9%;"><b>--endian</b>={big|little}</p>
+
+<p style="margin-left:18%;">Specify the byte order for
+samples</p>
+
+<p style="margin-left:9%;"><b>--channels</b>=#</p>
+
+<p style="margin-left:18%;">(Input only) specify number of
+channels. The channels must be interleaved, and in the order
+of the FLAC format (see the format specification); the
+encoder (/decoder) cannot re-order channels.</p>
+
+<p style="margin-left:9%;"><b>--bps</b>=#</p>
+
+<p style="margin-left:18%;">(Input only) specify bits per
+sample (per channel: 16 for CDDA.)</p>
+
+<p style="margin-left:9%;"><b>--sample-rate</b>=#</p>
+
+<p style="margin-left:18%;">(Input only) specify sample
+rate (in Hz. Only integers supported.)</p>
+
+<p style="margin-left:9%;"><b>--input-size</b>=#</p>
+
+<p style="margin-left:18%;">(Input only) specify the size
+of the raw input in bytes. This option is only compulsory
+when encoding from stdin and using options that need to know
+the input size beforehand (like, --skip, --until, --cuesheet
+) The encoder will truncate at the specified size if the
+input stream is bigger. If the input stream is smaller, it
+will complain about an unexpected end-of-file.</p>
+
+<h3>ANALYSIS OPTIONS
+<a name="ANALYSIS OPTIONS"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--residual-text</b></p>
+
+<p style="margin-left:18%;">Includes the residual signal in
+the analysis file. This will make the file very big, much
+larger than even the decoded file.</p>
+
+<p style="margin-left:9%;"><b>--residual-gnuplot</b></p>
+
+<p style="margin-left:18%;">Generates a gnuplot file for
+every subframe; each file will contain the residual
+distribution of the subframe. This will create a lot of
+files. gnuplot must be installed separately.</p>
+
+<h3>NEGATIVE OPTIONS
+<a name="NEGATIVE OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+will negate an option previously given:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-adaptive-mid-side
+<br>
+--no-cued-seekpoints <br>
+--no-decode-through-errors <br>
+--no-delete-input-file <br>
+--no-preserve-modtime <br>
+--no-keep-foreign-metadata <br>
+--no-exhaustive-model-search <br>
+--no-force <br>
+--no-lax <br>
+--no-mid-side <br>
+--no-ogg <br>
+--no-padding <br>
+--no-qlp-coeff-prec-search <br>
+--no-replay-gain <br>
+--no-residual-gnuplot <br>
+--no-residual-text <br>
+--no-seektable <br>
+--no-silent <br>
+--no-verify <br>
+--no-warnings-as-errors</b></p>
+
+<h3>ReplayGain application specification
+<a name="ReplayGain application specification"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The option
+--apply-replaygain-which-is-not-lossless[=&lt;specification&gt;]
+applies ReplayGain values while decoding. <b>WARNING: THIS
+IS NOT LOSSLESS. DECODED AUDIO WILL NOT BE IDENTICAL TO THE
+ORIGINAL WITH THIS OPTION.</b> This option is useful for
+example in transcoding media servers, where the client does
+not support ReplayGain.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&lt;specification&gt; is a shorthand notation for describing
+how to apply ReplayGain. All elements are optional -
+defaulting to 0aLn1 - but order is important. The format
+is:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[&lt;preamp&gt;][a|t][l|L][n{0|1|2|3}]</p>
+
+<p style="margin-left:9%; margin-top: 1em">In which the
+following parameters are used:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>preamp</b>: A floating point number in dB. This is
+added to the existing gain value.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>a|t</b>: Specify &lsquo;a&rsquo; to use the album
+gain, or &lsquo;t&rsquo; to use the track gain. If tags for
+the preferred kind (album/track) do not exist but tags for
+the other (track/album) do, those will be used instead.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>l|L</b>: Specify &lsquo;l&rsquo; to peak-limit the
+output, so that the ReplayGain peak value is full-scale.
+Specify &lsquo;L&rsquo; to use a 6dB hard limiter that kicks
+in when the signal approaches full-scale.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p><b>n{0|1|2|3}</b>: Specify the amount of noise shaping.
+ReplayGain synthesis happens in floating point; the result
+is dithered before converting back to integer. This
+quantization adds noise. Noise shaping tries to move the
+noise where you won&rsquo;t hear it as much. 0 means no
+noise shaping, 1 means &lsquo;low&rsquo;, 2 means
+&lsquo;medium&rsquo;, 3 means &lsquo;high&rsquo;.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">For example, the
+default of 0aLn1 means 0dB preamp, use album gain, 6dB hard
+limit, low noise shaping.
+--apply-replaygain-which-is-not-lossless=3 means 3dB preamp,
+use album gain, no limiting, no noise shaping.</p>
+
+<p style="margin-left:9%; margin-top: 1em">flac uses the
+ReplayGain tags for the calculation. If a stream does not
+have the required tags or they can&rsquo;t be parsed,
+decoding will continue with a warning, and no ReplayGain is
+applied to that stream.</p>
+
+<h3>Picture specification
+<a name="Picture specification"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This described
+the specification used for the <b>--picture</b> option.
+[<i>TYPE</i>]|[<i>MIME-TYPE</i>]|[<i>DESCRIPTION</i>]|[<i>WIDTHxHEIGHTxDEPTH</i>[/<i>COLORS</i>]]|<i>FILE</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>TYPE</i> is
+optional; it is a number from one of:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em">0.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em">Other</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>1.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>32x32 pixels &lsquo;file icon&rsquo; (PNG only)</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Other file icon</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>3.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Cover (front)</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>4.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Cover (back)</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>5.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Leaflet page</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>6.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Media (e.g.&nbsp;label side of CD)</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>7.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Lead artist/lead performer/soloist</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>8.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Artist/performer</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>9.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Conductor</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>10.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Band/Orchestra</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>11.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Composer</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>12.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Lyricist/text writer</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>13.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Recording Location</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>14.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>During recording</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>15.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>During performance</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>16.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Movie/video screen capture</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>17.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>A bright coloured fish</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>18.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Illustration</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>19.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Band/artist logotype</p></td>
+<td width="41%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p>20.</p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Publisher/Studio logotype</p></td>
+<td width="41%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The default is 3
+(front cover). There may only be one picture each of type 1
+and 2 in a file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>MIME-TYPE</i>
+is optional; if left blank, it will be detected from the
+file. For best compatibility with players, use pictures with
+MIME type image/jpeg or image/png. The MIME type can also be
+--&gt; to mean that FILE is actually a URL to an image,
+though this use is discouraged.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>DESCRIPTION</i>
+is optional; the default is an empty string.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The next part
+specifies the resolution and color information. If the
+<i>MIME-TYPE</i> is image/jpeg, image/png, or image/gif, you
+can usually leave this empty and they can be detected from
+the file. Otherwise, you must specify the width in pixels,
+height in pixels, and color depth in bits-per-pixel. If the
+image has indexed colors you should also specify the number
+of colors used. When manually specified, it is not checked
+against the file for accuracy.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>FILE</i> is
+the path to the picture file to be imported, or the URL if
+MIME type is --&gt;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Specification
+examples:</b> &ldquo;|image/jpeg|||../cover.jpg&rdquo; will
+embed the JPEG file at ../cover.jpg, defaulting to type 3
+(front cover) and an empty description. The resolution and
+color info will be retrieved from the file itself.
+&ldquo;4|--&gt;|CD|320x300x24/173|http://blah.blah/backcover.tiff&rdquo;
+will embed the given URL, with type 4 (back cover),
+description &ldquo;CD&rdquo;, and a manually specified
+resolution of 320x300, 24 bits-per-pixel, and 173 colors.
+The file at the URL will not be fetched; the URL itself is
+stored in the PICTURE metadata block.</p>
+
+<h3>Apodization functions
+<a name="Apodization functions"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">To improve LPC
+analysis, the audio data is windowed. An <b>-A</b> option
+applies the specified apodization function(s) instead of the
+default (which is &ldquo;tukey(5e-1)&rdquo;, though
+different for presets -6 to -8.) Specifying one more
+function effectively means, for each subframe, to try
+another weighting of the data and see if it happens to
+result in a smaller encoded subframe. Specifying several
+functions is time-expensive, at typically diminishing
+compression gains.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+subdivide_tukey(<i>N</i>) functions (see below) used in
+presets -6 to -8 were developed to recycle calculations for
+speed, compared to using a number of independent functions.
+Even then, a high number like <i>N</i>&gt;4 or 5, will often
+become less efficient than other options considered
+expensive, like the slower -p, though results vary with
+signal.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Up to 32
+functions can be given as comma-separated list and/or
+individual <b>-A</b> options. Any mis-specified function is
+silently ignored. Quoting a function which takes options
+(and has parentheses) may be necessary, depending on shell.
+Currently the following functions are implemented: bartlett,
+bartlett_hann, blackman, blackman_harris_4term_92db, connes,
+flattop, gauss(<i>STDDEV</i>), hamming, hann, kaiser_bessel,
+nuttall, rectangle, triangle, tukey(<i>P</i>),
+partial_tukey(<i>N</i>[/<i>OV</i>[/<i>P</i>]]),
+punchout_tukey(<i>N</i>[/<i>OV</i>[/<i>P</i>]]),
+subdivide_tukey(<i>N</i>[/<i>P</i>]), welch.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For parameters
+<i>P</i>, <i>STDDEV</i> and <i>OV</i>, scientific notation
+is supported, e.g.&nbsp; tukey(5e-1). Otherwise, the decimal
+point must agree with the locale, e.g.&nbsp;tukey(0.5) or
+tukey(0,5) depending on your system.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">For gauss(<i>STDDEV</i>),
+<i>STDDEV</i> is the standard deviation
+(0&lt;<i>STDDEV</i>&lt;=5e-1).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>For tukey(<i>P</i>), <i>P</i> (between 0 and 1)
+specifies the fraction of the window that is cosine-tapered;
+<i>P</i>=0 corresponds to &ldquo;rectangle&rdquo; and
+<i>P</i>=1 to &ldquo;hann&rdquo;.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>partial_tukey(<i>N</i>) and punchout_tukey(<i>N</i>) are
+largely obsoleted by the more time-effective
+subdivide_tukey(<i>N</i>), see next item. They generate
+<i>N</i> functions each spanning a part of each block.
+Optional arguments are an overlap <i>OV</i> (&lt;1, may be
+negative), for example partial_tukey(2/2e-1); and then a
+taper parameter <i>P</i>, for example
+partial_tukey(2/2e-1/5e-1).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>subdivide_tukey(<i>N</i>) is a more efficient
+reimplementation of partial_tukey and punchout_tukey taken
+together, combining the windows they would generate up to
+the specified <i>N</i>. Specifying subdivide_tukey(3)
+entails a tukey, a partial_tukey(2), a partial_tukey(3) and
+a punchout_tukey(3); specifying subdivide_tukey(5) will on
+top of that add a partial_tukey(4), a punchout_tukey(4), a
+partial_tukey(5) and a punchout_tukey(5) - but all with
+tapering chosen to facilitate the re-use of computation.
+Thus the <i>P</i> parameter (defaulting to 5e-1) is applied
+for the smallest used window: For example,
+subdivide_tukey(2/5e-1) results in the same taper as that of
+tukey(25e-2) and subdivide_tukey(5) in the same taper as of
+tukey(1e-1).</p> </td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>metaflac(1)</b></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was initially written by Matt Zimmerman
+&lt;mdz@debian.org&gt; for the Debian GNU/Linux system (but
+may be used by others). It has been kept up-to-date by the
+Xiph.org Foundation.</p>
+<hr>
+</body>
+</html>

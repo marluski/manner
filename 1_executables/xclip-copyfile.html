@@ -1,0 +1,161 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>XCLIP-COPYFILE</title>
+
+</head>
+<body>
+
+<h1 align="center">XCLIP-COPYFILE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xclip-copyfile,
+xclip-cutfile, xclip-pastefile - copy and move files via the
+X clipboard</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xclip-copyfile</b>
+[-p] FILES...</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xclip-cutfile</b>
+[-p] FILES...</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xclip-pastefile</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xclip-copyfile</b>
+copies files into the X clipboard, recursing into
+directories.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xclip-cutfile</b>
+copies the files, but also deletes them afterwards.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-p</b></p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p>preserve path formation</p></td>
+<td width="53%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xclip-pastefile</b>
+pastes the files out of the clipboard</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Copying a
+file to a remote host</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[maggie.lkpg.cendio.se
+&#732;]$ echo &quot;A file created on ${HOSTNAME}&quot; &gt;
+file1 <br>
+[maggie.lkpg.cendio.se &#732;]$ xclip-copyfile file1 <br>
+[sofie.homeip.net &#732;/doc]$ xclip-pastefile <br>
+file1 <br>
+[sofie.homeip.net &#732;/doc]$ cat file1 <br>
+A file created on maggie.lkpg.cendio.se</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Copying an
+entire tree structure</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[sofie.homeip.net
+&#732;]$ xclip-copyfile doc <br>
+[maggie.lkpg.cendio.se &#732;/tmp]$ xclip-pastefile <br>
+doc/ <br>
+doc/letter-mom-april.txt <br>
+doc/file1 <br>
+doc/letter-dad-march.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Copying files
+with preserved path information</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[maggie.lkpg.cendio.se
+&#732;]$ xclip-copyfile -p /etc/sysconfig/grub <br>
+tar: Removing leading &lsquo;/&rsquo; from member names <br>
+[sofie.homeip.net &#732;/tmp]$ xclip-pastefile <br>
+etc/sysconfig/grub <br>
+[sofie.homeip.net &#732;/tmp]$ ls etc/sysconfig/grub <br>
+etc/sysconfig/grub</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Moving
+files</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[sofie.homeip.net
+&#732;]$ ls letter-brother-may.txt <br>
+letter-brother-may.txt <br>
+[sofie.homeip.net &#732;]$ xclip-cutfile
+letter-brother-may.txt <br>
+[sofie.homeip.net &#732;]$ ls letter-brother-may.txt <br>
+ls: cannot access letter-brother-may.txt: No such file or
+directory <br>
+[sofie.homeip.net &#732;]$ cd doc <br>
+[sofie.homeip.net &#732;/doc]$ xclip-pastefile <br>
+letter-brother-may.txt</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written by Maximilian Gass
+&lt;mxey@cloudconnected.org&gt; for the Debian project. It
+may be used for everything else, of course.</p>
+<hr>
+</body>
+</html>

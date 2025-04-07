@@ -1,0 +1,288 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>winpr-makecert</title>
+
+</head>
+<body>
+
+<h1 align="center">winpr-makecert</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">winpr-makecert -
+A tool to create X.509 certificates.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>winpr-makecert</b>
+[<b>-rdp</b>] [<b>-silent</b>] [<b>-live</b>]
+[<b>-format</b> { <i>crt</i> | <i>pem</i> | <i>pfx</i> }]
+[<b>-p</b> password] [<b>-n</b> common_name] [<b>-y</b>
+years] [<b>-m</b> months] [<b>-len</b> length] [<b>-#</b>
+serial] [<b>-a</b> { <i>md5</i> | <i>sha1</i> |
+<i>sha256</i> | <i>s384</i> | <i>sha512</i> }] [<b>-path</b>
+outputpath] [outputname]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>winpr-makecert</b>
+is a tool for generating X.509 certificates modeled after
+the Windows command MakeCert. winpr-makecert aims to be
+command line compatible with MakeCert however not all
+options are supported or implemented yet.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unimplemented
+features are not described here. They are marked as
+&quot;Unsupported&quot; in winpr-makecerts help.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In contrast to
+it&rsquo;s Windows counterpart winpr-makecert does, unless
+the <b>-live</b> option is given, always creates and save a
+certificate. If <i>outputname</i> isn&rsquo;t set it is
+tried to determine the host name of the computer the command
+is run on. <b><br>
+Warning:</b> if the file already exists it will be
+overwritten without asking.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Without further
+options the generated certificates have the following
+properties:</p>
+
+<p style="margin-left:9%; margin-top: 1em">* 2048 bit long
+<br>
+* sha256 as hash algorithm <br>
+* the detected host name is used as common name <br>
+* a time stamp is used as serial number <br>
+* validity period of one year <br>
+* saved in the current working directory in crt format</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em">-rdp</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Dummy parameter. Can be used to
+quickly generate a certificate with default properties
+without specifying any further parameters.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">-silent</p>
+
+<p style="margin-left:18%;">Don&rsquo;t print the generated
+certificate to stdout.</p>
+
+<p style="margin-left:9%;">-f format</p>
+
+<p style="margin-left:18%;">Three formats are supported:
+crt, pem and pfx. <i><br>
+crt</i> outputs the key and the certificate in a separate
+file each with the file endings .key and .crt. <i><br>
+pem</i> outputs the key and certificate into a single file
+with the file ending pem. <br>
+And <i>pfx</i> outputs key and certificate into a pkcs12
+file with the ending .pfx.</p>
+
+<p style="margin-left:9%;">-p password</p>
+
+<p style="margin-left:18%;">Password to use if the pfx
+format is used as format.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>-live</p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Don&rsquo;t write the key/certificate to disk. When used
+from the command line this can be thought as
+&quot;dummy&quot; mode.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">-n common_name</p>
+
+<p style="margin-left:18%;">The common name to use in the
+certificate.</p>
+
+<p style="margin-left:9%;">-m months</p>
+
+<p style="margin-left:18%;">Validity period in months.</p>
+
+<p style="margin-left:9%;">-y years</p>
+
+<p style="margin-left:18%;">Validity period in years. If
+months and years are specified the specified month parameter
+will take precedence.</p>
+
+<p style="margin-left:9%;">-len length</p>
+
+<p style="margin-left:18%;">Key length in bits to use.</p>
+
+<p style="margin-left:9%;">-a { <i>md5</i> | <i>sha1</i> |
+<i>sha256</i> | <i>s384</i> | <i>sha512</i> }</p>
+
+<p style="margin-left:18%;">The hashing algorithm to
+use.</p>
+
+<p style="margin-left:9%;">-# serial</p>
+
+<p style="margin-left:18%;">The serial number to use for
+the certificate.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>-path</p></td>
+<td width="3%"></td>
+<td width="70%">
+
+
+<p>A directory where the certificate should be created
+in.</p> </td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">outputname</p>
+
+<p style="margin-left:18%;">The base name of the created
+file(s). A suffix, the format specific suffix is appended to
+this name.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">winpr-makecert
+-rdp</p>
+
+<p style="margin-left:9%; margin-top: 1em">Creates a
+certificate with the default properties, saved to a file in
+the current working directory in crt format named like the
+host. If the host is named freerdp the created files are
+called freerdp.key and freerdp.crt.</p>
+
+<p style="margin-left:9%; margin-top: 1em">winpr-makecert
+-len 4096 -a sha384 -path /tmp -# 22 -m 144 -y 1 -format crt
+mycert</p>
+
+<p style="margin-left:9%; margin-top: 1em">The command
+above creates the file /tmp/mycert.pem containing a key and
+a certificate with a length of 4096. It will use sha384 as
+hash algorithm. The certificate has the serial number 22 and
+is valid for 12 years (144 months).</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>0</b></p></td>
+<td width="8%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em">Successful program
+execution.</p> </td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>1</b></p></td>
+<td width="8%"></td>
+<td width="37%">
+
+
+<p>Otherwise.</p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">MakeCert help
+page &lang; URL:
+https://msdn.microsoft.com/library/windows/desktop/aa386968.aspx
+&rang;</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">FreeRDP
+&lt;team@freerdp.com&gt;</p>
+<hr>
+</body>
+</html>

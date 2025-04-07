@@ -1,0 +1,162 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:28 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mmroff</title>
+
+</head>
+<body>
+
+<h1 align="center">mmroff</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Authors">Authors</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mmroff -
+cross-referencing front end for GNU <i>roff mm</i> macro
+package</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>mmroff</b></p></td>
+<td width="1%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em">[<b>-x</b>]
+<i>groff-argument&nbsp;</i>...</p> </td>
+<td width="53%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>mmroff</b></p></td>
+<td width="1%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="53%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>mmroff</b></p></td>
+<td width="1%"></td>
+<td width="29%">
+
+
+<p style="margin-top: 1em"><b>--version</b></p></td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>mmroff</i></b>
+is a simple wrapper for <i>groff</i>, used to expand cross
+references in <i>mm</i>; see
+<a href="man:groff_mm(7)"><i>groff_mm</i>(7)</a>. It runs
+<i>groff</i> with the <b>-mm</b> option twice, first with
+<b>-z</b> and <b>-rRef=1</b> to populate cross-reference and
+index files with their corresponding entries, and then again
+to produce the document. It also handles the inclusion of
+PostScript images with the <b>PIC</b> macro. Documents that
+do not use these features of <i>groff mm</i> (the
+<b>INITI</b>, <b>IND</b>, <b>INDP</b>, <b>INITR</b>,
+<b>SETR</b>, <b>GETHN</b>, <b>GETPN</b>, <b>GETR</b>,
+<b>GETST</b>, and <b>PIC</b> macros) do not require
+<i>mmroff</i>.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>--version</b> shows
+version information; both exit afterward.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-x</b></p></td>
+<td width="6%"></td>
+<td width="65%">
+
+
+<p>Create or update the cross-reference file and exit.</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<h2>Authors
+<a name="Authors"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>mmroff</i>
+was written by <a href="mailto:jh@axis.se">J&ouml;rgen
+H&auml;gg</a> of Lund, Sweden.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff_mm(7)"><i>groff_mm</i>(7)</a>,
+<a href="man:groff_mmse(7)"><i>groff_mmse</i>(7)</a>,
+<a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:troff(1)"><i>troff</i>(1)</a>,
+<a href="man:tbl(1)"><i>tbl</i>(1)</a>,
+<a href="man:pic(1)"><i>pic</i>(1)</a>,
+<a href="man:eqn(1)"><i>eqn</i>(1)</a></p>
+<hr>
+</body>
+</html>

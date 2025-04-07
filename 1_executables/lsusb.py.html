@@ -1,0 +1,142 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>lsusb.py</title>
+
+</head>
+<body>
+
+<h1 align="center">lsusb.py</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lsusb.py - list
+USB devices</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lsusb.py</b>
+[ <i>options</i> ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lsusb.py</b>
+is a utility for displaying information about USB buses in
+the system and the devices connected to them. It uses the
+<b>usb.ids</b> file to associate a human-readable name to
+the vendor and product IDs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In comparison
+with <b>lsusb</b>(8), this program can display additional
+information such as the interface speed of a device, and
+details of a device&rsquo;s interfaces including the driver
+bound to them and Linux devices provided by the driver, and
+the details of device and interface endpoints.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Displays options supported by
+<b>lsusb</b>(1).</p>
+
+<p style="margin-left:9%;"><b>-i</b>,
+<b>--interfaces</b></p>
+
+<p style="margin-left:18%;">Display information about the
+interfaces of each device, excluding hubs.</p>
+
+<p style="margin-left:9%;"><b>-I</b>,
+<b>--hub-interfaces</b></p>
+
+<p style="margin-left:18%;">Display information about the
+interfaces of each device, including hubs., excluding
+hubs.</p>
+
+<p style="margin-left:9%;"><b>-u</b>,
+<b>--hide-empty-hubs</b></p>
+
+<p style="margin-left:18%;">Suppress information about hubs
+that have no devices connected.</p>
+
+<p style="margin-left:9%;"><b>-U</b>,
+<b>--hide-hubs</b></p>
+
+<p style="margin-left:18%;">Suppress information about
+hubs, even if they have devices connected.</p>
+
+<p style="margin-left:9%;"><b>-c</b>, <b>--color</b></p>
+
+<p style="margin-left:18%;">Use color</p>
+
+<p style="margin-left:9%;"><b>-C</b>, <b>--no-color</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t use color</p>
+
+<p style="margin-left:9%;"><b>-e</b>,
+<b>--endpoints</b></p>
+
+<p style="margin-left:18%;">Include information about
+device (and interface, with <b>-i</b>) endpoints.</p>
+
+<p style="margin-left:9%;"><b>-f</b>,
+<b>--usbids-path</b></p>
+
+<p style="margin-left:18%;">Overrides the path of the
+<b>usb.ids</b> file.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lspci</b>(8),
+<b>lsusb</b>(8), <b>usbview</b>(8).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Thomas Sailer,
+&lt;sailer@ife.ee.ethz.ch&gt;, Sam Morris
+&lt;sam@robots.org.uk&gt;.</p>
+<hr>
+</body>
+</html>

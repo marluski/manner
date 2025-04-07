@@ -1,0 +1,192 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:58 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>HEIF-ENC</title>
+
+</head>
+<body>
+
+<h1 align="center">HEIF-ENC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">heif-enc -
+convert image to HEIC/HEIF</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>heif-enc</b>
+[<b>-h</b>|<b>--help</b>] [<b>-q</b>
+<i>QUALITY</i>|<b>--quality</b> <i>QUALITY</i>]
+[<b>-L</b>|<b>--lossless</b>] [<b>-t</b>
+<i>SIZE</i>|<b>--thumb</b> <i>SIZE</i>] [<b>--no-alpha</b>]
+[<b>--no-thumb-alpha</b>] [<b>-o</b>
+<i>FILENAME</i>|<b>--output</b> <i>FILENAME</i>]
+[<b>-v</b>|<b>--verbose</b>] [<b>-P</b>|<b>--params</b>]
+[<b>-b</b> <i>DEPTH</i>] [<b>-p</b>
+<i>NAME</i><b>=</b><i>VALUE</i>]
+<i>filename[.jpg|.png|.y4m]</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>heif-enc</b></i>
+Convert image to HEIC/HEIF.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q&nbsp;</b><i>QUALITY</i>,
+<b>--quality&nbsp;</b><i>QUALITY</i></p>
+
+<p style="margin-left:18%;">Defines quality level between 0
+and 100 for the generated output file.</p>
+
+<p style="margin-left:9%;"><b>-L</b>, <b>--lossless</b></p>
+
+<p style="margin-left:18%;">Generate lossless output
+(<b>-q</b> has no effect)</p>
+
+<p style="margin-left:9%;"><b>-t&nbsp;</b><i>SIZE</i>,
+<b>--thumb&nbsp;</b><i>SIZE</i></p>
+
+<p style="margin-left:18%;">Generate thumbnail with maximum
+size <i>SIZE</i> pixels (default: off).</p>
+
+<p style="margin-left:9%;"><b>--no-alpha</b></p>
+
+<p style="margin-left:18%;">Do not save alpha channel.</p>
+
+<p style="margin-left:9%;"><b>--no-thumb-alpha</b></p>
+
+<p style="margin-left:18%;">Do not save alpha channel in
+thumbnail image.</p>
+
+<p style="margin-left:9%;"><b>-o&nbsp;</b><i>FILENAME</i>,
+<b>--output&nbsp;</b><i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Output filename (optional).</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">Enable logging output (more
+will increase logging level).</p>
+
+<p style="margin-left:9%;"><b>-P</b>, <b>--params</b></p>
+
+<p style="margin-left:18%;">Show all encoder parameters and
+exit. Input file is not required or used.</p>
+
+<p style="margin-left:9%;"><b>-b&nbsp;</b><i>DEPTH</i></p>
+
+<p style="margin-left:18%;">Bit-depth of generated HEIF
+file when using 16-bit PNG input (default: 10 bit).</p>
+
+
+<p style="margin-left:9%;"><b>-p&nbsp;</b><i>NAME</i><b>=</b><i>VALUE</i></p>
+
+<p style="margin-left:18%;">Set additional encoder
+parameters. See <b>NOTES</b> below.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>0</b></p>
+
+<p style="margin-left:14%;">Success</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>1</b></p>
+
+<p style="margin-left:14%;">Failure (syntax or usage error;
+error while loading, converting or writing image).</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The available
+input formats depend on the libraries that were available at
+compile time. Supported are JPEG, PNG and Y4M, the file type
+is determined based on the extension of the input file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When specifying
+multiple source images, they will all be saved into the same
+HEIF file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When using the
+x265 encoder, you may pass it any of its parameters by
+prefixing the parameter name with <b>x265:</b>. Hence, to
+set the <b>ctu</b> parameter, you will have to set
+<b>x265:ctu</b> in libheif (e.g.: <b>-p
+x265:ctu=64</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that there
+is no checking for valid parameters when using the
+prefix.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please reports
+bugs or issues at https://github.com/strukturag/libheif</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Dirk Farin,
+struktur AG</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2017 struktur AG</p>
+<hr>
+</body>
+</html>

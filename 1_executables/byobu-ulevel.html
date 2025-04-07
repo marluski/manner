@@ -1,0 +1,200 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:55 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>byobu-ulevel</title>
+
+</head>
+<body>
+
+<h1 align="center">byobu-ulevel</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#USAGE">USAGE</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu-ulevel</b>
+- helper script for notification level indicators</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu-ulevel</b>
+is a helper script that can be used to create history graphs
+with UTF8 characters</p>
+
+<h2>USAGE
+<a name="USAGE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu-ulevel</b>
+[options] -c &lt;current_num&gt;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu-ulevel</b>
+[options] &lt;current_num&gt;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu-ulevel</b>
+&lt;current_num&gt;</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-a :
+Accessibility mode: only output ASCII. (Also enabled if
+variable &rsquo;$a11y_variable&rsquo; set). <br>
+-b : Display current value as space if zero, rather than
+lowest &rsquo;value&rsquo; of theme. <br>
+-c &lt;num&gt; : Current value of your indicator. <br>
+-d : Enable debug output. <br>
+-e &lt;int&gt; : Number of decimal places to use for
+accessibility mode (default=$default_decimal_places). <br>
+-h : Show this help. <br>
+-i : Invert colour scheme (rating themes only). <br>
+-l : List available themes. If &rsquo;-t&rsquo; also
+specified, show all values for specified theme. <br>
+-m &lt;num&gt; : Minimum value (default=$min_default). <br>
+-n : Supress output of newline character. <br>
+-p : Permissive mode - if current value out of bounds, set
+it to the nearest bound (min or max). <br>
+-q : Suppress messages (requires &rsquo;-t&rsquo;). <br>
+-r : Reverse &rsquo;direction&rsquo; of display (rating
+theme only). <br>
+-t &lt;theme&gt; : Name of theme (default=$theme_default).
+<br>
+-u &lt;chars&gt; : Specify a user theme (2 or more values).
+<br>
+-w &lt;int&gt; : Width of rating theme
+(default=$width_default). <br>
+-x &lt;num&gt; : Maximum value (default=$max_default).</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Display
+character representing 27% using default theme. <br>
+byobu-ulevel 27</p>
+
+<p style="margin-left:9%; margin-top: 1em">As above. <br>
+byobu-ulevel -c 27</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example showing
+floating-point and negative values. <br>
+byobu-ulevel -c 1.100001 -m -5.00234 -x 2.71828 -t
+dice_6</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use
+accessibility mode to display a percentage value (rounded to
+nearest percentage) <br>
+byobu-ulevel -m -22.613 -x 5.00212 -c 0.10203 -a -e 0</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display value
+using a &quot;rating theme&quot; (displayed left-to-right).
+<br>
+byobu-ulevel -c 83 -t stars_2</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display
+right-to-left inverted &quot;rating theme&quot;. <br>
+byobu-ulevel -c 60 -t diamonds_2 -ri</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display all
+glyphs in &rsquo;solid_numbers_a_10&rsquo; theme. <br>
+byobu-ulevel -l -t solid_numbers_a_10</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display a
+user-specified rating theme 10 glyphs wide. <br>
+byobu-ulevel -c 666.321 -m -273.15 -x 1370 -u &quot;&middot;
+&#9762;&quot; -w 10</p>
+
+<p style="margin-left:9%; margin-top: 1em">A multi-element
+user theme (this prints &rsquo;e&rsquo;). <br>
+byobu-ulevel -c 50 -u &quot;a b c d e f g h i j&quot;</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Arguments of
+type &quot;&lt;int&gt;&quot; denote an integer value,
+whereas arguments of type &quot;&lt;num&gt;&quot; denotes
+either an integer or a floating-point number.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The final
+&rsquo;_&lt;number&gt;&rsquo; in a theme name denotes the
+number of glyphs in it.</p>
+
+<p style="margin-left:9%; margin-top: 1em">&quot;Rating
+themes&quot; are those with only 2 values.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&lt;chars&gt; argument to &rsquo;-u&rsquo; must contain
+space-delimited characters.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>byobu</b>(1)
+<i><br>
+http://byobu.org</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This utility was
+written by James Hunt &lt;james.hunt@canonical.com&gt;, and
+this manpage was written by Dustin Kirkland
+&lt;kirkland@byobu.org&gt; for Ubuntu systems (but may be
+used by others). Permission is granted to copy, distribute
+and/or modify this document and the utility under the terms
+of the GNU General Public License, Version 3 published by
+the Free Software Foundation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The complete
+text of the GNU General Public License can be found in
+<i>/usr/share/common-licenses/GPL</i> on Debian/Ubuntu
+systems, or in <i>/usr/share/doc/fedora-release-*/GPL</i> on
+Fedora systems, or on the web at
+<i>http://www.gnu.org/licenses/gpl.txt</i>.</p>
+<hr>
+</body>
+</html>

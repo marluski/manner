@@ -1,0 +1,664 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NMBUG</title>
+
+</head>
+<body>
+
+<h1 align="center">NMBUG</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SUBCOMMANDS">SUBCOMMANDS</a><br>
+<a href="#REPOSITORY CONTENTS">REPOSITORY CONTENTS</a><br>
+<a href="#Version 0">Version 0</a><br>
+<a href="#Version 1">Version 1</a><br>
+<a href="#REPOSITORY LOCATION">REPOSITORY LOCATION</a><br>
+<a href="#PREFIX VALUE">PREFIX VALUE</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">nmbug - manage
+notmuch bugs with git</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+git</b> [-h] [-N] [-C <i>repo</i>] [-p <i>prefix</i>] [-v]
+[-l <i>log level</i>] <i>subcommand</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>nmbug</b>
+[-h] [-C <i>repo</i>] [-p <i>prefix</i>] [-v] [-l <i>log
+level</i>] <i>subcommand</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Manage notmuch
+tags with Git.</p>
+
+<h3>OPTIONS
+<a name="OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <i>notmuch git</i> include <b><br>
+-h, --help</b></p>
+
+<p style="margin-left:18%;">show help message and exit</p>
+
+<p style="margin-left:9%;"><b>-N, --nmbug</b></p>
+
+<p style="margin-left:18%;">Set defaults for
+<i>--tag-prefix</i> and <i>--git-dir</i> suitable for the
+<i>notmuch</i> bug tracker</p>
+
+<p style="margin-left:9%;"><b>-C &lt;repo&gt;, --git-dir
+&lt;repo&gt;</b></p>
+
+<p style="margin-left:18%;">Operate on git repository
+<i>repo</i>. See <i>REPOSITORY LOCATION</i> for
+defaults.</p>
+
+<p style="margin-left:9%;"><b>-p &lt;prefix&gt;,
+--tag-prefix &lt;prefix&gt;</b></p>
+
+<p style="margin-left:18%;">Operate only on tags with
+prefix <i>prefix</i>. See <i>PREFIX VALUE</i> for
+defaults.</p>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:18%;">show notmuch-git's version
+number and exit</p>
+
+<p style="margin-left:9%;"><b>-l &lt;level&gt;, --log-level
+&lt;level&gt;</b></p>
+
+<p style="margin-left:18%;">Log verbosity, one of:
+<i>critical</i>, <i>error</i>, <i>warning</i>, <i>info</i>,
+<i>debug</i>. Defaults to <i>warning</i>.</p>
+
+<h3>SUBCOMMANDS
+<a name="SUBCOMMANDS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">For help on a
+particular subcommand, run: 'notmuch-git ... &lt;command&gt;
+--help'. <b><br>
+archive [tree-ish] [arg ...]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Dump a tar
+archive of a committed tag set using 'git archive'. See
+<i>REPOSITORY CONTENTS</i> for details of the archive
+contents.</p>
+
+<p style="margin-left:13%;"><b>tree-ish</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">The tree or
+commit to produce an archive for. Defaults to 'HEAD'.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="4%">
+
+
+<p><b>arg</b></p></td>
+<td width="83%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">If present, any
+optional arguments are passed through to <b>-</b>
+<i>git-archive(1). Arguments to git-archive are reordered so
+that tree-ish comes last.</i></p>
+
+<p style="margin-left:9%;"><b>checkout [-f|--force]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Update the
+notmuch database from git.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is mainly
+useful to discard your changes in notmuch relative to
+git.</p>
+
+<p style="margin-left:13%;"><b>[-f|--force]</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">Override checks
+that prevent modifying tags for large fractions of messages
+in the database. See also <i>git.safe_fraction</i>.</p>
+
+<p style="margin-left:9%;"><b>clone
+&lt;repository&gt;</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Create a local
+<i>notmuch git</i> repository from a remote source.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This wraps 'git
+clone', adding some options to avoid creating a working tree
+while preserving remote-tracking branches and upstreams.</p>
+
+<p style="margin-left:13%;"><b>repository</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">The (possibly
+remote) repository to clone from. See the URLS section of
+<i>git-clone(1) for more information on specifying
+repositories.</i></p>
+
+<p style="margin-left:9%;"><b>commit [-f|--force]
+[message]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Commit
+prefix-matching tags from the notmuch database to git.</p>
+
+<p style="margin-left:13%;"><b>message</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">Optional text
+for the commit message. <b><br>
+-f|--force</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">Override checks
+that prevent modifying tags for large fractions of messages
+in the database. See also <i>git.safe_fraction</i>.</p>
+
+<p style="margin-left:9%;"><b>fetch [remote]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Fetch changes
+from the remote repository.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="8%">
+
+
+<p><b>remote</b></p></td>
+<td width="79%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">Override the
+default configured in <i>branch.&lt;name&gt;.remote</i> to
+fetch from a particular remote repository (e.g.
+<i>origin</i>).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>help</b></p></td>
+<td width="86%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Show brief help
+for an <i>notmuch git</i> command. <b><br>
+init [--format-version=N]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Create an empty
+<i>notmuch git</i> repository.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This wraps 'git
+init' with a few extra steps to support subsequent status
+and commit commands.</p>
+
+<p style="margin-left:13%;"><b>--format-version=N</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">Create a repo
+in format version N. By default <i>notmuch-git</i> uses the
+highest supported version, which is the best choice for most
+use-cases.</p>
+
+<p style="margin-left:9%;"><b>log [arg ...]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">A wrapper for
+'git log'.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="4%">
+
+
+<p><b>arg</b></p></td>
+<td width="83%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">Additional
+arguments are passed through to 'git log'.</p>
+
+<p style="margin-left:9%; margin-top: 1em">After running
+<i>notmuch git fetch</i>, you can inspect the changes
+with</p>
+
+<p style="margin-left:13%; margin-top: 1em">$ notmuch git
+log HEAD..@{upstream}</p>
+
+<p style="margin-left:9%;"><b>merge [reference]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Merge changes
+from 'reference' into HEAD and load the result into
+notmuch.</p>
+
+<p style="margin-left:13%;"><b>reference</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">Reference,
+usually other branch heads, to merge into our branch.
+Defaults to <i>@{upstream}</i>.</p>
+
+<p style="margin-left:9%;"><b>pull [repository] [refspec
+...]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Pull (merge)
+remote repository changes to notmuch.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pull</b> is
+equivalent to <b>fetch</b> followed by <b>merge</b>. We use
+the git-configured repository for your current branch
+(<i>branch.&lt;name&gt;.repository</i>, likely
+<i>origin</i>, and <i>branch.&lt;name&gt;.merge</i>, likely
+<i>master</i> or <i>main</i>).</p>
+
+<p style="margin-left:13%;"><b>repository</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">The
+&quot;remote&quot; repository that is the source of the
+pull. This parameter can be either a URL (see the section
+GIT URLS in <b>-</b> <i>git-pull(1)) or the name of a remote
+(see the section REMOTES in</i> <b>-</b>
+<i>git-pull(1)).</i> <b><br>
+refspec</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">Refspec
+(usually a branch name) to fetch and merge. See the
+<i>refspec</i> entry in the OPTIONS section of
+<i>git-pull(1) for other possibilities.</i></p>
+
+<p style="margin-left:9%;"><b>push [repository]
+[refspec]</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Push the local
+<i>notmuch git</i> git state to a remote repository.</p>
+
+<p style="margin-left:13%;"><b>repository</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">The
+&quot;remote&quot; repository that is the destination of the
+push. This parameter can be either a URL (see the section
+GIT URLS in <b>-</b> <i>git-push(1)) or the name of a remote
+(see the section REMOTES in</i> <b>-</b>
+<i>git-push(1)).</i> <b><br>
+refspec</b></p>
+
+<p style="margin-left:13%; margin-top: 1em">Refspec
+(usually a branch name) to push. See the <i>refspec</i>
+entry in the OPTIONS section of <i>git-push(1) for other
+possibilities.</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>status</b></p></td>
+<td width="83%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Show pending
+updates in notmuch or git repo.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Prints lines of
+the form <br>
+ng Message-Id tag</p>
+
+<p style="margin-left:9%; margin-top: 1em">where n is a
+single character representing notmuch database status</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>A</b></p></td>
+<td width="86%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">Tag is present
+in notmuch database, but not committed to git (equivalently,
+tag has been deleted in git repo, e.g. by a pull, but not
+restored to notmuch database).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>D</b></p></td>
+<td width="86%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">Tag is present
+in git repo, but not restored to notmuch database
+(equivalently, tag has been deleted in notmuch).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>U</b></p></td>
+<td width="86%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">Message is
+unknown (missing from local notmuch database).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The second
+character <i>g</i> (if present) represents a difference
+between local and upstream branches. Typically <i>notmuch
+git fetch</i> needs to be run to update this.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>a</b></p></td>
+<td width="86%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">Tag is present
+in upstream, but not in the local git branch.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="13%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>d</b></p></td>
+<td width="86%">
+</td></tr>
+</table>
+
+<p style="margin-left:13%; margin-top: 1em">Tag is present
+in local git branch, but not upstream.</p>
+
+<h2>REPOSITORY CONTENTS
+<a name="REPOSITORY CONTENTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The tags are
+stored in the git repo (and exported) as a set of empty
+files. These empty files are contained within a directory
+named after the message-id.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In what follows
+<i>encode()</i> represents a POSIX filesystem safe encoding.
+The encoding preserves alphanumerics, and the characters
+<i>+-_@=.,:</i>. All other octets are replaced with <i>%</i>
+followed by a two digit hex number.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Currently
+<i>notmuch-git</i> can read any format version, but can only
+create (via <i>init</i>) <i>version 1</i> repositories.</p>
+
+<h3>Version 0
+<a name="Version 0"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This is the
+legacy format created by the <i>nmbug</i> tool prior to
+release 0.37. For a message with Message-Id <i>id</i>, for
+each tag <i>tag</i>, there is an empty file with path</p>
+
+<p style="margin-left:13%;">tags/ <i>encode</i> (<i>id</i>)
+/ <i>encode</i> (<i>tag</i>)</p>
+
+<h3>Version 1
+<a name="Version 1"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In format
+version 1 and later, the format version is contained in a
+top level file called FORMAT.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For a message
+with Message-Id <i>id</i>, for each tag <i>tag</i>, there is
+an empty file with path</p>
+
+<p style="margin-left:13%;">tags/ <i>hash1</i> (<i>id</i>)
+/ <i>hash2</i> (<i>id</i>) <i>encode</i> (<i>id</i>) /
+<i>encode</i> (<i>tag</i>)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The hash
+functions each represent one byte of the <i>blake2b</i> hex
+digest.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Compared to
+<i>version 0</i>, this reduces the number of subdirectories
+within each directory.</p>
+
+<h2>REPOSITORY LOCATION
+<a name="REPOSITORY LOCATION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch-git</i>
+uses the first of the following with a non-empty value to
+locate the git repository.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Option <i>--git-dir</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Environment variable <i>NOTMUCH_GIT_DIR</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Configuration item <i>git.path</i></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>If invoked as <i>nmbug</i> or with the <i>--nmbug</i>
+option, <b>$HOME/.nmbug</b>; otherwise
+<b>$XDG_DATA_HOME/notmuch/$NOTMUCH_PROFILE/git</b>.</p> </td></tr>
+</table>
+
+<h2>PREFIX VALUE
+<a name="PREFIX VALUE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch-git</i>
+uses the first of the following with a non-null value to
+define the tag prefix.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Option <i>--tag-prefix</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Environment variable <i>NOTMUCH_GIT_PREFIX</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Configuration item <i>git.tag_prefix</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>If invoked as <i>nmbug</i> or with the <i>--nmbug</i>
+option, <b>notmuch::</b>, otherwise the empty string.</p></td></tr>
+</table>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Variable
+<i>NOTMUCH_PROFILE</i> influences <i>REPOSITORY
+LOCATION</i>. If it is unset, 'default' is assumed. <b><br>
+NOTMUCH_GIT_DIR</b></p>
+
+<p style="margin-left:18%;">Default location of git
+repository. Overridden by <i>--git-dir</i>.</p>
+
+<p style="margin-left:9%;"><b>NOTMUCH_GIT_PREFIX</b></p>
+
+<p style="margin-left:18%;">Default tag prefix (filter).
+Overridden by <i>--tag-prefix</i>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-dump</i>, <i>notmuch-restore</i>,
+<i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

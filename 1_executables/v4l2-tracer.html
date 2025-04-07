@@ -1,0 +1,224 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>V4L2-TRACER</title>
+
+</head>
+<body>
+
+<h1 align="center">V4L2-TRACER</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Trace">Trace</a><br>
+<a href="#Retrace">Retrace</a><br>
+<a href="#Clean">Clean</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Common Options">Common Options</a><br>
+<a href="#Retrace Options">Retrace Options</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">v4l2-tracer - An
+application to trace and replay stateless video
+decoding.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>v4l2-tracer</b>
+[options] <b>trace</b> &lt;<i>tracee</i>&gt; <b><br>
+v4l2-tracer</b> [options] <b>retrace</b>
+&lt;<i>trace_file</i>&gt;<b>.json <br>
+v4l2-tracer clean</b> &lt;<i>file</i>&gt;<b>.json</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The v4l2-tracer
+utility traces, records and replays userspace applications
+that implement the v4l2 memory-to-memory stateless video
+decoder interface.</p>
+
+<h3>Trace
+<a name="Trace"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Trace system
+calls and video frame data passed by userspace application
+&lt;<i>tracee</i>&gt; to kernel driver. All stateless codec
+controls in user-space API can be traced. Outputs a
+JSON-formatted trace file.</p>
+
+<h3>Retrace
+<a name="Retrace"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Read the
+JSON-formatted &lt;<i>trace_file</i>&gt;<b>.json</b>. Replay
+the same system calls and pass the same video frame data to
+kernel driver. Outputs a JSON-formatted retrace file.</p>
+
+<h3>Clean
+<a name="Clean"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove lines
+with irrelevant differences (e.g. file descriptors and
+memory addresses) from JSON files. Outputs a clean copy, not
+necessarily still in JSON-format.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Common Options
+<a name="Common Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b>,
+<b>--compact</b></p>
+
+<p style="margin-left:18%;">Write minimal whitespace in
+JSON file.</p>
+
+<p style="margin-left:9%;"><b>-g</b>, <b>--debug</b></p>
+
+<p style="margin-left:18%;">Turn on verbose reporting plus
+additional debug info.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Display this message.</p>
+
+<p style="margin-left:9%;"><b>-r</b>, <b>--raw</b></p>
+
+<p style="margin-left:18%;">Write decoded video frame data
+to JSON file.</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Turn on verbose reporting.</p>
+
+<p style="margin-left:9%;"><b>-y</b>, <b>--yuv</b></p>
+
+<p style="margin-left:18%;">Write decoded video frame data
+to yuv file.</p>
+
+<h3>Retrace Options
+<a name="Retrace Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--device</b> &lt;<i>dev</i>&gt;</p>
+
+<p style="margin-left:18%;">Use a different video device
+than specified in the trace file. <br>
+&lt;<i>dev</i>&gt; must be a digit corresponding to an
+existing /dev/video&lt;<i>dev</i>&gt;</p>
+
+<p style="margin-left:9%;"><b>-m</b>, <b>--media</b>
+&lt;<i>dev</i>&gt;</p>
+
+<p style="margin-left:18%;">Use a different media device
+than specified in the trace file. <br>
+&lt;<i>dev</i>&gt; must be a digit corresponding to an
+existing /dev/media&lt;<i>dev</i>&gt;</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On success, it
+returns 0. Otherwise, it will return 1 or an error code.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Trace an
+application decoding VP8 video:</p>
+
+<p style="margin-left:18%;"><i>v4l2-tracer trace
+gst-launch-1.0 -- filesrc location=test-25fps.vp8 ! parsebin
+! v4l2slvp8dec ! videocodectestsink</i></p>
+
+<p style="margin-left:9%;">A trace file is generated:</p>
+
+<p style="margin-left:18%;"><i>71827_trace.json</i></p>
+
+<p style="margin-left:9%;">Retrace the trace file:</p>
+
+<p style="margin-left:18%;"><i>v4l2-tracer retrace
+71827_trace.json</i></p>
+
+<p style="margin-left:9%;">Specify device nodes if
+retracing on a different driver:</p>
+
+<p style="margin-left:18%;"><i>v4l2-tracer -d0 -m0 retrace
+71827_trace.json</i></p>
+
+<p style="margin-left:9%;">A retrace file is generated:</p>
+
+
+<p style="margin-left:18%;"><i>71827_trace_retrace.json</i></p>
+
+<p style="margin-left:9%;">Remove file descriptors and
+addresses (optional):</p>
+
+<p style="margin-left:18%;"><i>v4l2-tracer clean
+71827_trace.json <br>
+v4l2-tracer clean 71827_trace_retrace.json</i></p>
+
+<p style="margin-left:9%;">Clean files are generated for
+comparison:</p>
+
+<p style="margin-left:18%;"><i>clean_71827_trace.json <br>
+clean_71827_trace_retrace.json</i></p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bug reports or
+questions about this utility should be sent to the
+linux-media@vger.kernel.org mailinglist.</p>
+<hr>
+</body>
+</html>

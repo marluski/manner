@@ -1,0 +1,322 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:41 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>al</title>
+
+</head>
+<body>
+
+<h1 align="center">al</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">al, al2 - Mono
+Assembly Linker</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>al [option]
+[source-files]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">AL is the Mono
+assembly linker.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This linker is
+used to put together assemblies from a collection of modules
+(.netmodule files), assembly manifest files and
+resources.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Do not confuse
+this with the <b>monolinker,</b> which is a tool to reduce
+the size of assemblies based on the code used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use al for
+processing 1.0 assemblies, use al2 to process 2.0
+assemblies.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>@&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Read response file for more
+options.</p>
+
+<p style="margin-left:9%;"><b>-algid:&lt;id&gt;</b></p>
+
+<p style="margin-left:18%;">Algorithm used to hash files.
+The &lt;id&gt; must be specified in hexadecimal.</p>
+
+<p style="margin-left:9%;"><b>-base:&lt;addr&gt; |
+-baseaddress:&lt;addr&gt;</b></p>
+
+<p style="margin-left:18%;">Base address for the library.
+THIS FEATURE ISN&rsquo;T IMPLEMENTED.</p>
+
+
+<p style="margin-left:9%;"><b>-bugreport:&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Create a &rsquo;Bug
+Report&rsquo; file. THIS FEATURE ISN&rsquo;T
+IMPLEMENTED.</p>
+
+<p style="margin-left:9%;"><b>-comp:&lt;text&gt; |
+-company:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts the company name
+into the assembly metadata. This is equivalent to adding the
+[AssemblyCompany (&quot;&lt;text&gt;&quot;)] attribute into
+C# source code.</p>
+
+<p style="margin-left:9%;"><b>-config:&lt;text&gt; |
+-configuration:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts the configuration
+string into the assembly metadata. This is equivalent to
+adding the [AssemblyConfiguration
+(&quot;&lt;text&gt;&quot;)] attribute into C# source
+code.</p>
+
+<p style="margin-left:9%;"><b>-copy:&lt;text&gt; |
+-copyright:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts the copyright
+message into the assembly metadata. This is equivalent to
+adding the [AssemblyCopyright (&quot;&lt;text&gt;&quot;)]
+attribute into C# source code.</p>
+
+<p style="margin-left:9%;"><b>-c:&lt;text&gt; |
+-culture:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts the supported
+culture into the assembly metadata. This is equivalent to
+adding the [AssemblyCulture (&quot;&lt;text&gt;&quot;)]
+attribute into C# source code.</p>
+
+<p style="margin-left:9%;"><b>-delay | -delay+ | -delaysign
+| -delaysign+</b></p>
+
+<p style="margin-left:18%;">The generated assembly will be
+delay signed. This is equivalent to adding the
+[AssemblyDelaySignAttribute (true)] attribute into C# source
+code.</p>
+
+<p style="margin-left:9%;"><b>-delay- | -delaysign-</b></p>
+
+<p style="margin-left:18%;">The generated assembly will be
+fully signed (i.e. not delay signed). This is the default
+option when signing (-keyfile or -keyname).</p>
+
+<p style="margin-left:9%;"><b>-descr:&lt;text&gt; |
+-description:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts a description of
+the assembly into the assembly metadata. This is equivalent
+to adding the [AssemblyDescription
+(&quot;&lt;text&gt;&quot;)] attribute into C# source
+code.</p>
+
+<p style="margin-left:9%;"><b>-e:&lt;filename&gt; |
+-evidence:&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">This embed into the assembly
+the specified file as assembly security evidences.</p>
+
+
+<p style="margin-left:9%;"><b>-fileversion:&lt;version&gt;</b></p>
+
+<p style="margin-left:18%;">Optional Win32 version. This
+overrides the normal assembly version.</p>
+
+<p style="margin-left:9%;"><b>-flags:&lt;flags&gt;</b></p>
+
+<p style="margin-left:18%;">Assembly flags. The
+&lt;flags&gt; must be specified in hexadecimal.</p>
+
+<p style="margin-left:9%;"><b>-fullpaths</b></p>
+
+<p style="margin-left:18%;">Display files using
+fully-qualified filenames.</p>
+
+<p style="margin-left:9%;"><b>-keyf:&lt;filename&gt; |
+-keyfile:&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Strongname (sign) the output
+assembly using the key pair present in the specified strong
+name key file (snk). A full key pair is required unless the
+delay signing option is also specified (-delay+). This is
+equivalent to adding the [AssemblyKeyFile
+(&quot;&lt;text&gt;&quot;)] attribute into C# source
+code.</p>
+
+<p style="margin-left:9%;"><b>-keyn:&lt;text&gt; |
+-keyname:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">Strongname (sign) the output
+assembly using the key pair present in the specified
+container. Delay signing isn&rsquo;t supported when using
+key containers. This is equivalent to adding the
+[AssemblyKeyName (&quot;&lt;text&gt;&quot;)] attribute into
+C# source code.</p>
+
+<p style="margin-left:9%;"><b>-main:&lt;method&gt;</b></p>
+
+<p style="margin-left:18%;">Specifies the method name of
+the assembly entry point.</p>
+
+<p style="margin-left:9%;"><b>-nologo</b></p>
+
+<p style="margin-left:18%;">Suppress the startup banner and
+copyright message.</p>
+
+
+<p style="margin-left:9%;"><b>-out:&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Output file name for the
+assembly manifest.</p>
+
+<p style="margin-left:9%;"><b>-prod:&lt;text&gt; |
+product:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts the product name
+into the assembly metadata. This is equivalent to adding the
+[AssemblyProduct (&quot;&lt;text&gt;&quot;)] attribute into
+C# source code.</p>
+
+
+<p style="margin-left:9%;"><b>-productv[ersion]:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts the product
+version into the assembly metadata. This is equivalent to
+adding the [AssemblyInformationalVersion
+(&quot;&lt;text&gt;&quot;)] attribute into C# source
+code.</p>
+
+<p style="margin-left:9%;"><b>-t[arget]:&lt;target&gt; |
+-target=&lt;target&gt;</b></p>
+
+<p style="margin-left:18%;">Valid &lt;target&gt;s are:
+<b>lib | library</b> to create a library (.dll), <b>exe</b>
+to create a console executable (.exe), and <b>win |
+winexe</b> to create a Windows executable (.exe).</p>
+
+
+<p style="margin-left:9%;"><b>-template:&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Specifies an assembly to get
+default options from.</p>
+
+<p style="margin-left:9%;"><b>-title:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts an assembly title
+into the assembly metadata. This is equivalent to adding the
+[AssemblyTitle (&quot;&lt;text&gt;&quot;)] attribute into C#
+source code.</p>
+
+<p style="margin-left:9%;"><b>-trade:&lt;text&gt; |
+-trademark:&lt;text&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts a trademark
+message into the assembly metadata. This is equivalent to
+adding the [AssemblyTrademark (&quot;&lt;text&gt;&quot;)]
+attribute into C# source code.</p>
+
+<p style="margin-left:9%;"><b>-v:&lt;version&gt; |
+-version:&lt;version&gt;</b></p>
+
+<p style="margin-left:18%;">This inserts the assembly
+version into the assembly metadata. You can use * to
+auto-generate remaining numbers. This is equivalent to
+adding the [AssemblyVersion (&quot;&lt;text&gt;&quot;)]
+attribute into C# source code.</p>
+
+
+<p style="margin-left:9%;"><b>-win32icon:&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Use this icon for the
+output.</p>
+
+
+<p style="margin-left:9%;"><b>-win32res:&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Specifies the Win32 resource
+file.</p>
+
+<p style="margin-left:9%;"><b>-? | -help</b></p>
+
+<p style="margin-left:18%;">Display information about
+AL</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sn(1),
+monolinker(1)</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2005 Novell, Inc (http://www.novell.com)</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

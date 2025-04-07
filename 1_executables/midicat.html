@@ -1,0 +1,100 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:24 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>MIDICAT</i>(1) General Commands Manual
+<i>MIDICAT</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">midicat &mdash; send to or
+receive from MIDI ports</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:19%;"><b>midicat</b> [<b>-d</b>]
+[<b>-i&nbsp;</b><i>file</i>] [<b>-o&nbsp;</b><i>file</i>]
+[<b>-q&nbsp;</b><i>port</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;">The <b>midicat</b> utility
+receives MIDI data from the given input MIDI port and/or
+sends it to the given output MIDI port. The options are as
+follows:</p>
+
+<p style="margin-top: 1em"><b>-d</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Dump
+transferred data in hex on stderr.</p>
+
+<p style="margin-top: 1em"><b>-i</b> <i>file</i></p>
+
+<p style="margin-left:19%;">Read MIDI data from this file
+instead of receiving it from the MIDI port. If the option
+argument is &lsquo;-&rsquo; then standard input will be
+used.</p>
+
+<p style="margin-top: 1em"><b>-o</b> <i>file</i></p>
+
+<p style="margin-left:19%;">Write MIDI data to this file
+instead of sending it to the MIDI port. If the option
+argument is &lsquo;-&rsquo; then standard output will be
+used.</p>
+
+<p style="margin-top: 1em"><b>-q</b> <i>port</i></p>
+
+<p style="margin-left:19%;">Use this <i>sndio</i>(7) MIDI
+port for input/output. If the option is used twice, the
+first one specifies the input port and the second one the
+output port.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no files are
+specified, then <b>midicat</b> transfers data from the MIDI
+input port to the MIDI output port.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">Send the given file to
+<i>rmidi/0</i>:</p>
+
+<p style="margin-left:17%; margin-top: 1em">$ midicat -i
+file.syx -q rmidi/0</p>
+
+<p style="margin-left:9%; margin-top: 1em">Dump data
+received from <i>rmidi/0</i> to stderr:</p>
+
+<p style="margin-left:17%; margin-top: 1em">$ midicat -d -q
+rmidi/0 -o /dev/null</p>
+
+<p style="margin-left:9%; margin-top: 1em">Send data from
+<i>rmidi/0</i> to <i>midithru/0</i>:</p>
+
+<p style="margin-left:17%; margin-top: 1em">$ midicat -q
+rmidi/0 -q midithru/0</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>midi</i>(4), <i>sndio</i>(7),
+<i>sndiod</i>(8) GNU $Mdocdate$ <i>MIDICAT</i>(1)</p>
+<hr>
+</body>
+</html>

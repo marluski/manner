@@ -1,0 +1,175 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>I3-INPUT</title>
+
+</head>
+<body>
+
+<h1 align="center">I3-INPUT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#I3SOCK">I3SOCK</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-input -
+interactively take a command for i3 window manager</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-input [-s
+&lt;socket&gt;] [-F &lt;format&gt;] [-l &lt;limit&gt;] [-P
+&lt;prompt&gt;] [-f &lt;font&gt;] [-v]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-input is a
+tool to take commands (or parts of a command) composed by
+the user, and send it/them to i3. This is useful, for
+example, for the mark/goto command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can press
+Escape to close i3-input without sending any commands.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-s
+&lt;socket&gt;</p>
+
+<p style="margin-left:14%;">Specify the path to the i3 IPC
+socket (it should not be necessary to use this option,
+i3-input will figure out the path on its own).</p>
+
+<p style="margin-left:9%; margin-top: 1em">-F
+&lt;format&gt;</p>
+
+<p style="margin-left:14%;">Every occurrence of
+&quot;%s&quot; in the &lt;format&gt; string is replaced by
+the user input, and the result is sent to i3 as a command.
+Default value is &quot;%s&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-l
+&lt;limit&gt;</p>
+
+<p style="margin-left:14%;">Set the maximum allowed length
+of the user input to &lt;limit&gt; characters. i3-input will
+automatically issue the command when the user input reaches
+that length.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-P
+&lt;prompt&gt;</p>
+
+<p style="margin-left:14%;">Display the &lt;prompt&gt;
+string in front of user input text field. The prompt string
+is not included in the user input/command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-f
+&lt;font&gt;</p>
+
+<p style="margin-left:14%;">Use the specified X11 core font
+(use xfontsel to choose a font).</p>
+
+<p style="margin-left:9%; margin-top: 1em">-v</p>
+
+<p style="margin-left:14%;">Show version and exit.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mark a container
+with a single character:</p>
+
+<p style="margin-left:14%; margin-top: 1em">i3-input -F
+'mark %s' -l 1 -P 'Mark: '</p>
+
+<p style="margin-left:9%; margin-top: 1em">Go to the
+container marked with above example:</p>
+
+<p style="margin-left:14%; margin-top: 1em">i3-input -F
+'[con_mark=&quot;%s&quot;] focus' -l 1 -P 'Go to: '</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<h3>I3SOCK
+<a name="I3SOCK"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3-input handles
+the different sources of socket paths in the following
+order:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; I3SOCK
+environment variable</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; I3SOCK
+gets overwritten by the -s parameter, if specified</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; if
+neither are available, i3-input reads the socket path from
+the X11 property, which is the recommended way</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; if
+everything fails, i3-input tries /tmp/i3-ipc.sock</p>
+
+<p style="margin-left:9%; margin-top: 1em">The socket path
+is necessary to connect to i3 and actually issue the
+command.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Michael
+Stapelberg and contributors</p>
+<hr>
+</body>
+</html>

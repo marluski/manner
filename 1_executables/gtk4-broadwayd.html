@@ -1,0 +1,108 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:50 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GTK4-BROADWAYD</title>
+
+</head>
+<body>
+
+<h1 align="center">GTK4-BROADWAYD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gtk4-broadwayd -
+The Broadway display server</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-broadwayd</b>
+[OPTIONS...] &lt;DISPLAY&gt; <b><br>
+gtk4-broadwayd</b> --port=PORT --address=ADDRESS
+&lt;DISPLAY&gt; <b><br>
+gtk4-broadwayd</b> --unixaddress=ADDRESS &lt;DISPLAY&gt;</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-broadwayd</b>
+is a display server for the Broadway GDK backend. It allows
+multiple GTK applications to display their windows in the
+same web browser, by connecting to gtk4-broadwayd.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When using
+gtk4-broadwayd, specify the display number to use, prefixed
+with a colon, similar to X. The default display number is
+0.</p>
+
+<p style="margin-left:13%; margin-top: 1em">gtk4-broadwayd
+:5</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then point your
+web browser at <b>http://127.0.0.1:8085</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Start your
+applications like this:</p>
+
+
+<p style="margin-left:13%; margin-top: 1em">GDK_BACKEND=broadway
+BROADWAY_DISPLAY=:5 gtk4-demo</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--port
+PORT</b></p>
+
+<p style="margin-left:13%;">Use the given <b>PORT</b> for
+the HTTP connection, instead of the default <b>8080 +
+(DISPLAY - 1)</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--address
+ADDRESS</b></p>
+
+<p style="margin-left:13%;">Use the given <b>address</b>
+for the HTTP connection, instead of the default
+<b>http://127.0.0.1</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--unixsocket
+ADDRESS</b></p>
+
+<p style="margin-left:13%;">Use the given <b>address</b> as
+the unix domain socket address. This option overrides
+<b>--address</b> and <b>--port</b>, and it is available only
+on Unix-like systems.</p>
+<hr>
+</body>
+</html>

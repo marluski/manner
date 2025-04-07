@@ -1,0 +1,180 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:01 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>QV4L2</title>
+
+</head>
+<body>
+
+<h1 align="center">QV4L2</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#HOTKEYS">HOTKEYS</a><br>
+<a href="#Main Window">Main Window</a><br>
+<a href="#Capture Window">Capture Window</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">qv4l2 - A test
+bench application for video4linux devices</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>qv4l2</b>
+[<i>-R</i>] [<i>-h</i>] [<i>-d &lt;dev&gt;</i>] [<i>-r
+&lt;dev&gt;</i>] [<i>-V &lt;dev&gt;</i>] [<i>-S
+&lt;dev&gt;</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The qv4l2 tool
+is used to test video4linux capture and output devices,
+either video, vbi, radio or swradio. This application can
+also serve as a generic video/TV viewer application or as a
+video generator for video output devices.</p>
+
+<p style="margin-left:9%; margin-top: 1em">However, it does
+not (yet) support compressed video streams other than
+MJPEG</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--device</b>=<i>&lt;dev&gt;</i></p>
+
+<p style="margin-left:18%;">Use device &lt;dev&gt; as the
+video device. If &lt;dev&gt; is a number, then
+/dev/video&lt;dev&gt; is used.</p>
+
+<p style="margin-left:9%;"><b>-V</b>,
+<b>--vbi-device</b>=<i>&lt;dev&gt;</i></p>
+
+<p style="margin-left:18%;">Use device &lt;dev&gt; as the
+vbi device. If &lt;dev&gt; is a number, then
+/dev/vbi&lt;dev&gt; is used.</p>
+
+<p style="margin-left:9%;"><b>-r</b>,
+<b>--radio-device</b>=<i>&lt;dev&gt;</i></p>
+
+<p style="margin-left:18%;">Use device &lt;dev&gt; as the
+radio device. If &lt;dev&gt; is a number, then
+/dev/radio&lt;dev&gt; is used.</p>
+
+<p style="margin-left:9%;"><b>-S</b>,
+<b>--sdr-device</b>=<i>&lt;dev&gt;</i></p>
+
+<p style="margin-left:18%;">Use device &lt;dev&gt; as the
+SDR device. If &lt;dev&gt; is a number, then
+/dev/swradio&lt;dev&gt; is used.</p>
+
+<p style="margin-left:9%;"><b>-R</b>, <b>--raw</b></p>
+
+<p style="margin-left:18%;">Open device in raw mode, i.e.
+without using the libv4l2 wrapper functions.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">Prints the help message.</p>
+
+<h2>HOTKEYS
+<a name="HOTKEYS"></a>
+</h2>
+
+
+<h3>Main Window
+<a name="Main Window"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Ctrl +
+O</i></p>
+
+<p style="margin-left:18%;">Open device</p>
+
+<p style="margin-left:9%;"><i>Ctrl + R</i></p>
+
+<p style="margin-left:18%;">Open device in raw mode</p>
+
+<p style="margin-left:9%;"><i>Ctrl + W</i></p>
+
+<p style="margin-left:18%;">Close the device</p>
+
+<p style="margin-left:9%;"><i>Ctrl + V</i></p>
+
+<p style="margin-left:18%;">Start capture</p>
+
+<p style="margin-left:9%;"><i>Ctrl + F</i></p>
+
+<p style="margin-left:18%;">Resize Capture Window to frame
+size</p>
+
+<p style="margin-left:9%;"><i>Ctrl + Q</i></p>
+
+<p style="margin-left:18%;">Exit the application</p>
+
+<h3>Capture Window
+<a name="Capture Window"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Ctrl +
+W</i></p>
+
+<p style="margin-left:18%;">Closes the window and stops
+capture</p>
+
+<p style="margin-left:9%;"><i>Ctrl + F</i></p>
+
+<p style="margin-left:18%;">Resize Capture Window to frame
+size</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On success, it
+returns 0. Otherwise, it will return the error code.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+Hans Verkuil &lt;hverkuil@xs4all.nl&gt;</p>
+<hr>
+</body>
+</html>

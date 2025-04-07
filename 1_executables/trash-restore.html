@@ -1,0 +1,171 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:39 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>TRASH-RESTORE</title>
+
+</head>
+<body>
+
+<h1 align="center">TRASH-RESTORE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#PATH">PATH</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#IF YOU WANT SAY THANKS">IF YOU WANT SAY THANKS</a><br>
+<a href="#CREDITS">CREDITS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">trash-restore -
+Restore for Command line trash utility.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>trash-restore</b>
+[<i>OPTION</i>] ... [<i>PATH</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Use to restore a
+trashed file or directory to the original path. This command
+is a part of the trash-cli package that provides a command
+line interface trashcan utility compliant with the
+FreeDesktop.org Trash Specification. It remembers the name,
+original path, deletion date, and permissions of each
+trashed file.</p>
+
+<h2>PATH
+<a name="PATH"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Destination file
+path to restore from the trash. If omitted, an <br>
+interactive</p>
+
+<p style="margin-left:18%;">selection interface is
+used.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">--overwrite</p>
+
+<p style="margin-left:18%;">Overwrite existing files with
+files coming out of the trash.</p>
+
+<p style="margin-left:9%;">--sort {date,path,none}</p>
+
+<p style="margin-left:18%;">Sort list of restore candidates
+by given field (default: date).</p>
+
+<p style="margin-left:9%;">--trash-dir=TRASHDIR</p>
+
+<p style="margin-left:18%;">Restore from TRASHDIR, for
+files that were trashed using a custom TRASHDIR.</p>
+
+<p style="margin-left:9%;">-h, --help</p>
+
+<p style="margin-left:18%;">Show help message and exit.</p>
+
+<p style="margin-left:9%;">--version</p>
+
+<p style="margin-left:18%;">Show the program&rsquo;s
+version number and exit.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">$ trash-restore
+<br>
+0 2007-08-30 12:36:00 /home/andrea/foo <br>
+1 2007-08-30 12:39:41 /home/andrea/bar <br>
+2 2007-08-30 12:39:41 /home/andrea/bar2 <br>
+3 2007-08-30 12:39:41 /home/andrea/foo2 <br>
+4 2007-08-30 12:39:41 /home/andrea/foo <br>
+What file to restore [0..4]: 4 <br>
+$ ls foo <br>
+foo</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please, report
+bugs to
+https://github.com/andreafrancia/trash-cli/issues</p>
+
+<h2>IF YOU WANT SAY THANKS
+<a name="IF YOU WANT SAY THANKS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Tweet (to
+@andreafrancia or #trash-cli) or donate 1, 2 or 5 euros
+using paypal:
+https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=93L6PYT4WBN5A</p>
+
+<h2>CREDITS
+<a name="CREDITS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Trash was
+written by Andrea Francia &lt;andrea@andreafrancia.it&gt;.
+The original version of trash-empty was contributed by Einar
+Orn Olason &lt;eoo@hi.is&gt;. The first version of manual
+pages was written by Steve Stalcup &lt;vorian@ubuntu.com&gt;
+and was modified by Massimo Cavalleri
+&lt;submax@tiscalinet.it&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">trash-put(1),
+trash-list(1), trash-empty(1), trash-rm(1), and the
+FreeDesktop.org Trash Specification at
+https://specifications.freedesktop.org/trash-spec/trashspec-1.0.html.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Both are
+released under the <small>GNU</small> General Public
+License, version 2 or later.</p>
+<hr>
+</body>
+</html>

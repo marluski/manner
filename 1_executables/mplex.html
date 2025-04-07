@@ -1,0 +1,427 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:34 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mplex</title>
+
+</head>
+<body>
+
+<h1 align="center">mplex</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#GENERAL FUNCTION LETTERS">GENERAL FUNCTION LETTERS</a><br>
+<a href="#FUNCTION LETTERS">FUNCTION LETTERS</a><br>
+<a href="#DIAGNOSTIC OUTPUT">DIAGNOSTIC OUTPUT</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mplex - MPEG 1/2
+program/system stream multiplexer</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mplex</b>
+[<b>-f|--format</b> <i>format_code</i>]
+[<b>-i|--vdr-index]</b> <i>index_pathname</i>
+[<b>-v|--verbose</b> <i>num</i>] [<b>-b|--video-buffer</b>
+<i>video_buffer_size_kB</i>[,
+<i>video_buffer_size_kB</i>...]<i>]</i>
+[<b>-L|--lpcm-params</b> <i>params</i>[,
+<i>params</i>...<i>]</i>] [<b>-r|--mux-bitrate</b>
+<i>muxed_bitrate_kbps</i>] [<b>-l|--mux-limit</b>
+<i>num</i>] [<b>-O|--sync-offset</b>
+<i>num[</i><b>ms</b><i>|</i><b>s</b><i>|</i><b>mpt</b><i>]</i>]
+[<b>-d|--subpicture-delay</b>
+<i>[</i><b>ms</b><i>|</i><b>s</b><i>|</i><b>mpt|c]</b>[:stream-id]<i>[,</i>delay[:stream-id]<i>]</i>
+[<b>-R|--run-in</b> <i>num</i>] [<b>-V|--vbr]</b>
+[<b>-C|--cbr]</b> [<b>-s|--sector-size</b>
+<i>sector_size_B</i>] [<b>-p|--packets-per-pack</b>
+<i>num</i>] [<b>-h|--system-headers</b>]
+[<b>-S|--max-segment-size</b>
+<i>output_filesize_limit_MB</i>]
+[<b>-M|--split-segment]</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[<b>-?|--help</b>]
+<b>-o|--output&nbsp;</b><i>output_pathname_pattern&nbsp;</i><b>input_file...</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mplex is a
+general-purpose audio/video multiplexer for MPEG-1/MPEG-2.
+It accepts one or more MPEG-1/2 video stream, MPEG layer
+I/II/III, DTS, AC3 and LPCM audio streams and multiplexes
+them into a combined program/system stream according to the
+constraints specified. Many different types of output
+structure are supported along with presets for standard VCD
+and SVCD streams. These latter can be burned to CD using
+tools such as <b>vcdimager</b>(1) and played in stand-alone
+players.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is also
+capable of automatically splitting the output stream into
+chunks of a specified size either independently or at
+sequence end/start points in the input video stream.</p>
+
+<h2>GENERAL FUNCTION LETTERS
+<a name="GENERAL FUNCTION LETTERS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o|--output&nbsp;</b><i>output_filename_pattern</i></p>
+
+<p style="margin-left:18%;">This mandatory option sets the
+pattern for the name(s) of output files.</p>
+
+<p style="margin-left:18%; margin-top: 1em">An integer
+format code (e.g. %d) in the name is replaced by the number
+of the file generated (see <b>printf</b>(3)).</p>
+
+
+<p style="margin-left:9%;"><b>-v|--verbose&nbsp;</b><i>num</i></p>
+
+<p style="margin-left:18%;">Set verbosity level to
+<i>num</i>: <br>
+0 - warnings and errors only, <br>
+1 - information as well, <br>
+2 - really verbose.</p>
+
+<p style="margin-left:9%;"><b>-?|--help</b></p>
+
+<p style="margin-left:18%;">Display a synopsis of the
+command syntax.</p>
+
+<h2>FUNCTION LETTERS
+<a name="FUNCTION LETTERS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f|--format&nbsp;</b><i>format_code</i></p>
+
+<p style="margin-left:18%;">This command allows one of a
+number of convenient preset output formats or generic MPEG1
+or MPEG2 output to be selected. For the generic formats
+other function letters can be used to control many aspects
+of the multiplexed stream. For VCD/SVCD/DVD compliant output
+the corresponding formats <i>must</i> be used as the
+standards require the multiplexer to enforce a variety of
+special constraints on the structure of the output
+stream.</p>
+
+<p style="margin-left:18%; margin-top: 1em">0 - Generic
+MPEG1. A simple general-purpose MPEG1 format primarily
+suitable for software decoders. Buffer sizes and VBR must be
+specified. Bit-rate can be auto-detected. <br>
+1 - VCD. Standard VCD. Overrides other option settings. <br>
+2 - User VCD. VCD format but buffer size, bit rate and VBR
+can be set manually. <br>
+3 - Generic MPEG2. Like 0 except MPEG2. <br>
+4 - SVCD. Standard SVCD. Overrides other option settings.
+<br>
+5 - User-rate SVCD. SVCD format but buffer size bit rate and
+VBR can be set.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="-12%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>6 - VCD Stills stream (mixed mode with hi-res and
+standard-res image streams</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="-12%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>multiplexed are supported).</p></td></tr>
+</table>
+
+<p style="margin-left:18%;">7 - SVCD Stills stream. <br>
+8 - DVD (with NAV sectors). Don&rsquo;t get too excited.
+This is really a <br>
+very minimal mux format. It includes empty versions of the
+peculiar <br>
+VOBU start sectors DVD VOB&rsquo;s include. This is enough
+to persuade some <br>
+hardware players to play the stream but is a long way from
+full DVD authoring. <br>
+9 - DVD. As above but without the empty VOBU sectors.</p>
+
+
+<p style="margin-left:9%;"><b>-W|--workarounds&nbsp;</b><i>workaround_flag&nbsp;[,workaround_flag...]</i></p>
+
+<p style="margin-left:18%;">A comma-seperated list of flags
+that set special work-arounds for what are suspected to be
+parser Bugs in widely used players. No workarounds are
+(currently) implemented but history suggests this may change
+quickly ;-) <b>-i|--vdr-index&nbsp;</b><i>index_pathname</i>
+This tells mplex to generate an index file for the output in
+the format used by the &rsquo;vdr&rsquo; (video disk
+recorder package). Useful if you want to write output into
+vdr&rsquo;s recordings directory for playback on your video
+recorder PC. This probably only useful in combination with
+-f 9.</p>
+
+
+<p style="margin-left:9%;"><b>-r|--mux-bitrate&nbsp;</b><i>num</i></p>
+
+<p style="margin-left:18%;">The total (non VBR) / peak
+(VBR) bit-rate of the output stream in k Bits/sec. If
+unspecified and not set by a preset it is automatically
+calculated from the input stream.</p>
+
+
+<p style="margin-left:9%;"><b>-b|--video-buffer&nbsp;</b><i>numlist</i></p>
+
+<p style="margin-left:18%;">A comma-seperateed list of
+video decoder buffer sizes in KB for the video streams
+(given in the order the video streams appear on the command
+line). The default is 46KB the (tiny) size specified for
+VCD. The size to use for SVCD is the (more reasonable)
+230KB. If you are encoding for a half-decent software
+decoder it makes sense to push this up to 500K or more.</p>
+
+<p style="margin-left:9%;"><b>-L|--lpcm-params</b></p>
+
+
+<p style="margin-left:18%;"><i>samples_per_sec:channels:bits_per_sample</i>
+<br>
+[, <i>samples_per_sec:channels:bits_per_sample</i> <br>
+...] <br>
+A comma-seperated list of paramter sets for the lpcm audio
+streams (given in the order the lpcm streams appear on the
+command line). Each parameter set comprises the sampling
+rate in Hz, the number of channels, and the number of bits
+per sample seperated by colons. For example, the default
+48kHz two-channel 16-bit audio would be specified as
+48000:2:16.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note: these
+parameters are necessary because mplex expects raw LPCM
+audio data without any headers. That is: for each sample
+point a group of 16,20, or 24 bit amplitude values, one for
+each channel. Amplitude values are signed with the
+constituent bytes in big-endian (most significant bytes
+first) order. For 20 bit samples I am not sure but what
+documentation I have suggests such samples are padded at the
+lsb end so that they byte-align at the most significant
+bits.</p>
+
+
+<p style="margin-left:9%;"><b>-l|--mux-limit&nbsp;</b><i>num</i></p>
+
+<p style="margin-left:18%;">Multiplex limit. Multiplex only
+the specified number of seconds. Useful for tuning and
+debugging.</p>
+
+
+<p style="margin-left:9%;"><b>-O|--sync-offset&nbsp;</b><i>num[</i><b>ms</b><i>|</i><b>s</b><i>|</i><b>mpt</b><i>|</i><b>c</b><i>]</i></p>
+
+<p style="margin-left:18%;">Set the presentation timestamp
+offset of video stream w.r.t. audio stream (video-audio) in
+mSec. This flag is used to produce a stream with
+synchronised audio/video when one stream started
+before/after the other. This is common when transcoding as
+the synchronisation information is typically lost during the
+(seperate) decoding/encoding of audio and video.</p>
+
+<p style="margin-left:18%; margin-top: 1em">By appending
+&rsquo;s&rsquo;, &rsquo;ms&rsquo; or &rsquo;mpt&rsquo; the
+offset can given in seconds, milliseconds or MPEG clock
+ticks (1/90000th of a second) respectively. If no suffix is
+given milliseconds are assumed.</p>
+
+
+<p style="margin-left:9%;"><b>-d|--subpicture-delay&nbsp;</b><i>num</i><b>[ms|s|mpt|c]</b><i>[:stream-id]</i><b>[,</b><i>delay[:stream-id]]</i></p>
+
+<p style="margin-left:18%;">Specify offset of timestamps
+(video-subpicture) in msec sec, mpt or clock-ticks. If no
+suffix is given milliseconds are assumed.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The intention
+of the adding subtitle support was to enable mplex to mux
+all streams necessary for a DVD so that the mpeg2 stream
+created can be used directly for further dvd creation.
+Currently only ps1 streams (like created by tcextract) are
+supported</p>
+
+<p style="margin-left:18%; margin-top: 1em">Valid subtitle
+stream are in a range of 32-63 (including). You may want to
+specify each stream you mplex, use &quot;,&quot; to delimit
+each stream.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Example:</b>
+If you want to mux one video, one audio and two subtitle
+streams having delays of 500 and 1000 ms, the first shall
+have id 32, the second is 33 (Subtitle streams 0 and 1):</p>
+
+<p style="margin-left:18%; margin-top: 1em">$ mplex -f 8 -o
+my_mpeg.mpeg -d 500:32,1000:33 video_in.mpv audio_in.m2a
+subtitle_0.ps1 subtitle_1.ps1</p>
+
+
+<p style="margin-left:9%;"><b>-R|--run-in&nbsp;</b><i>num</i></p>
+
+<p style="margin-left:18%;">Set a non-default run-in (the
+time data is preloaded into buffers before decoding is
+scheduled) at the start of each sequence in video frame
+intervals. By default a run-in matching the specified size
+of the video and audio buffers in the decoder and the type
+of multiplexing (constant or variable bit-rate) is selected
+automatically.</p>
+
+<p style="margin-left:9%;"><b>-V|--vbr</b></p>
+
+<p style="margin-left:18%;">Force variable bit rate
+multiplexing even if selected profile defaults to
+constant-bit-rate.</p>
+
+<p style="margin-left:9%;"><b>-C||-cbr</b></p>
+
+<p style="margin-left:18%;">Force constant bit rate
+multiplexing even if selected profile defaults to variable
+bit-rate.</p>
+
+
+<p style="margin-left:9%;"><b>-s|--sector-size&nbsp;</b><i>num</i></p>
+
+<p style="margin-left:18%;">This option specifies the
+sector size of the output stream in bytes.</p>
+
+
+<p style="margin-left:9%;"><b>-p|--packets-per-pack&nbsp;</b><i>num</i></p>
+
+<p style="margin-left:18%;">This option specifies the
+number of packets per pack in the output stream.</p>
+
+
+<p style="margin-left:9%;"><b>-S|--max-segment-size&nbsp;</b><i>num</i></p>
+
+<p style="margin-left:18%;">This option specifies the
+maximum size of output files in MBytes (2&#710;10) When the
+limit is reached a new file is started. The default is (0)
+unlimited.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note: This
+option is <i>not</i> for splitting a long video across
+multiple VCD&rsquo;s or SVCD&rsquo;s.</p>
+
+<p style="margin-left:18%; margin-top: 1em">It simply
+splits a single long sequence into in a way that prevents
+bits of a video GOP(group of pictures) or audio frame being
+split between chunks. This is fine for formats like that
+used for DVDs where all stream parameters appear every GOP.
+However, for VCD / SVCD it won&rsquo;t work as the players
+expect each file to start a new MPEG sequence.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For VCD / SVCD
+a different technique is used. If mplex encounters a
+sequence break (sequence end followed by start) in the input
+video stream it starts a new output stream and file at the
+sequence start. Thus to split a long video across
+VCD&rsquo;s/SVCD&rsquo;s you have to get the MPEG video
+encoder to introduce sequence splits at the right points
+(see mpeg2enc(1) for details of how to do this).</p>
+
+
+<p style="margin-left:9%;"><b>-M|--ignore-seqend-markers</b></p>
+
+<p style="margin-left:18%;">This flag makes mplex ignore
+sequence end markers embedded in the first video stream
+instead of switching to a new output file. This is sometimes
+useful splitting a long stream in files based on a -S limit
+that doesn&rsquo;t need a run-in/run-out like (S)VCD.</p>
+
+<p style="margin-left:9%;"><b>-h|--system-headers</b></p>
+
+<p style="margin-left:18%;">A system header is generated in
+every pack rather than just in the first.</p>
+
+<h2>DIAGNOSTIC OUTPUT
+<a name="DIAGNOSTIC OUTPUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When
+multiplexing using mplex you may get warning or error
+messages complaining about buffer underflow. This means that
+the bit-rate you have specified is simply too low to permit
+the video and audio to be played back without skipping. The
+fix is to either reduce the data-rate of the input material
+or increased the output stream bit-rate.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The multiplexer
+should handle MPEG(5.1) audio.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Andrew Stevens. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">For more info,
+see our website at <i><br>
+http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mpeg2enc</b></i>(1),
+<b>mp2enc</b>(1), <b>lavrec</b>(1), <b>lavplay</b>(1),
+<b>lav2yuv</b>(1), <b>lav2wav</b>(1),
+<b>yuvscaler</b>(1)</p>
+<hr>
+</body>
+</html>

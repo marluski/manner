@@ -1,0 +1,262 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>gnutls-cli-debug</title>
+
+</head>
+<body>
+
+<h1 align="center">gnutls-cli-debug</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gnutls-cli-debug</b>
+- GnuTLS debug client</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gnutls-cli-debug</b>
+[<b>-flags</b>] [<b>-flag</b> [<i>value</i>]]
+[<b>--option-name</b>[[=| ]<i>value</i>]] [hostname]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Operands and
+options may be intermixed. They will be reordered.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">TLS debug
+client. It sets up multiple TLS connections to a server and
+queries its capabilities. It was created to assist in
+debugging GnuTLS, but it might be useful to extract a TLS
+server&rsquo;s capabilities. It connects to a TLS server,
+performs tests and print the server&rsquo;s capabilities. If
+called with the &lsquo;-V&rsquo; parameter more checks will
+be performed. Can be used to check for servers with special
+needs or bugs.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>
+<i>num</i>, <b>--debug</b>=<i>num</i> Enable debugging. This
+option takes an integer <br>
+number as its argument. The value of <i>num</i> is
+constrained to being:</p>
+
+<p style="margin-left:14%;">in the range 0 through 9999</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+debug level.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b>,
+<b>--verbose</b> More verbose output.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>
+<i>num</i>, <b>--port</b>=<i>num</i> The port to connect to.
+This option takes an <br>
+integer number as its argument. The value of <i>num</i> is
+constrained to <br>
+being:</p>
+
+<p style="margin-left:14%;">in the range 0 through
+65536</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--app-proto</b>
+This is an alias for the <i>--starttls-proto</i> option.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--starttls-proto</b>=<i>str</i>
+The application protocol to be used to obtain the <br>
+server&rsquo;s certificate (https, ftp, smtp, imap, ldap,
+xmpp, lmtp, pop3, <br>
+nntp, sieve, postgres).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specify the
+application layer protocol for STARTTLS. If the protocol is
+<br>
+supported, gnutls-cli will proceed to the TLS
+negotiation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--attime</b>=<i>timestamp</i>
+Perform validation at the timestamp instead of the <br>
+system time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">timestamp is an
+instance in time encoded as Unix time or in a human <br>
+readable timestring such as &quot;29 Feb 2004&quot;,
+&quot;2004-02-29&quot;. Full <br>
+documentation available at <br>
+
+&lt;https://www.gnu.org/software/coreutils/manual/html_node/Date-input-formats.html&gt;
+<br>
+or locally via info &rsquo;(coreutils) date
+invocation&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>
+<i>arg</i>, <b>--version</b>=<i>arg</i> Output version of
+program and exit. The default <br>
+mode is &lsquo;v&rsquo;, a simple version. The
+&lsquo;c&rsquo; mode will print copyright <br>
+information and &lsquo;n&rsquo; will print the full
+copyright notice.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b> Display usage information and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-!</b>,
+<b>--more-help</b> Pass the extended usage information
+through a pager.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:23%; margin-top: 1em">$
+gnutls-cli-debug localhost <br>
+GnuTLS debug client 3.5.0 <br>
+Checking localhost:443 <br>
+for SSL 3.0 (RFC6101) support... yes <br>
+whether we need to disable TLS 1.2... no <br>
+whether we need to disable TLS 1.1... no <br>
+whether we need to disable TLS 1.0... no <br>
+whether %NO_EXTENSIONS is required... no <br>
+whether %COMPAT is required... no <br>
+for TLS 1.0 (RFC2246) support... yes <br>
+for TLS 1.1 (RFC4346) support... yes <br>
+for TLS 1.2 (RFC5246) support... yes <br>
+fallback from TLS 1.6 to... TLS1.2 <br>
+for RFC7507 inappropriate fallback... yes <br>
+for HTTPS server name... Local <br>
+for certificate chain order... sorted <br>
+for safe renegotiation (RFC5746) support... yes <br>
+for Safe renegotiation support (SCSV)... no <br>
+for encrypt-then-MAC (RFC7366) support... no <br>
+for ext master secret (RFC7627) support... no <br>
+for heartbeat (RFC6520) support... no <br>
+for version rollback bug in RSA PMS... dunno <br>
+for version rollback bug in Client Hello... no <br>
+whether the server ignores the RSA PMS version... yes <br>
+whether small records (512 bytes) are tolerated on
+handshake... yes <br>
+whether cipher suites not in SSL 3.0 spec are accepted...
+yes <br>
+whether a bogus TLS record version in the client hello is
+accepted... yes <br>
+whether the server understands TLS closure alerts...
+partially <br>
+whether the server supports session resumption... yes <br>
+for anonymous authentication support... no <br>
+for ephemeral Diffie-Hellman support... no <br>
+for ephemeral EC Diffie-Hellman support... yes <br>
+ephemeral EC Diffie-Hellman group info... SECP256R1 <br>
+for AES-128-GCM cipher (RFC5288) support... yes <br>
+for AES-128-CCM cipher (RFC6655) support... no <br>
+for AES-128-CCM-8 cipher (RFC6655) support... no <br>
+for AES-128-CBC cipher (RFC3268) support... yes <br>
+for CAMELLIA-128-GCM cipher (RFC6367) support... no <br>
+for CAMELLIA-128-CBC cipher (RFC5932) support... no <br>
+for 3DES-CBC cipher (RFC2246) support... yes <br>
+for ARCFOUR 128 cipher (RFC2246) support... yes <br>
+for MD5 MAC support... yes <br>
+for SHA1 MAC support... yes <br>
+for SHA256 MAC support... yes <br>
+for ZLIB compression support... no <br>
+for max record size (RFC6066) support... no <br>
+for OCSP status response (RFC6066) support... no <br>
+for OpenPGP authentication (RFC6091) support... no</p>
+
+<p style="margin-left:18%; margin-top: 1em">You could also
+use the client to debug services with starttls
+capability.</p>
+
+<p style="margin-left:23%;">$ gnutls-cli-debug
+--starttls-proto smtp --port 25 localhost</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">One of the
+following exit values will be returned: <br>
+0 (EXIT_SUCCESS) Successful program execution.</p>
+
+<p style="margin-left:9%; margin-top: 1em">1 (EXIT_FAILURE)
+The operation failed or the command syntax was not <br>
+valid.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:18%; margin-top: 1em">gnutls-cli(1),
+gnutls-serv(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2020-2023 Free Software Foundation, and others all rights
+reserved. This program is released under the terms of the
+GNU General Public License, version 3 or later</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to: bugs@gnutls.org</p>
+<hr>
+</body>
+</html>

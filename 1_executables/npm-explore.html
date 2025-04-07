@@ -1,0 +1,180 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:58 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-EXPLORE</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-EXPLORE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#shell">shell</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-explore</b>
+- Browse an installed package</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm explore
+&lt;pkg&gt; [ -- &lt;command&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+command is unaware of workspaces.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Spawn a subshell
+in the directory of the installed package specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a command is
+specified, then it is run in the subshell, which then
+immediately terminates.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is
+particularly handy in the case of git submodules in the
+<b>node_modules</b> folder:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm explore
+some-dependency -- git pull origin master</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+package is <i>not</i> automatically rebuilt afterwards, so
+be sure to use <b>npm rebuild &lt;pkg&gt;</b> if you make
+any changes.</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>shell
+<a name="shell"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: SHELL environment
+variable, or &quot;bash&quot; on Posix, or
+&quot;cmd.exe&quot; on Windows</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: String</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The shell to run
+for the <b>npm explore</b> command.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="21%">
+
+
+<p style="margin-top: 1em">npm help folders</p></td>
+<td width="65%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="21%">
+
+
+<p>npm help edit</p></td>
+<td width="65%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="21%">
+
+
+<p>npm help rebuild</p></td>
+<td width="65%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="21%">
+
+
+<p>npm help install</p></td>
+<td width="65%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

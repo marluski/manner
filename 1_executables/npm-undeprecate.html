@@ -1,0 +1,226 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:05 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-UNDEPRECATE</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-UNDEPRECATE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#registry">registry</a><br>
+<a href="#otp">otp</a><br>
+<a href="#dry-run">dry-run</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-undeprecate</b>
+- Undeprecate a version of a package</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm undeprecate
+&lt;package-spec&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+command is unaware of workspaces.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+will update the npm registry entry for a package, removing
+any deprecation warnings that currently exist.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It works in the
+same way as npm help deprecate, except that this command
+removes deprecation warnings instead of adding them.</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>registry
+<a name="registry"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">Default:
+&quot;https://registry.npmjs.org/&quot;</p> </td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p>Type: URL</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The base URL of
+the npm registry.</p>
+
+<h3>otp
+<a name="otp"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p>Type: null or String</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+one-time password from a two-factor authenticator.
+It&rsquo;s needed when publishing or changing package
+permissions with <b>npm access</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If not set, and
+a registry response fails with a challenge for a one-time
+password, npm will prompt on the command line for one.</p>
+
+<h3>dry-run
+<a name="dry-run"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Indicates that
+you don&rsquo;t want npm to make any changes and that it
+should only report what it would have done. This can be
+passed into any of the commands that modify your local
+installation, eg, <b>install</b>, <b>update</b>,
+<b>dedupe</b>, <b>uninstall</b>, as well as <b>pack</b> and
+<b>publish</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This is
+NOT honored by other network related commands, eg
+<b>dist-tags</b>, <b>owner</b>, etc.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="23%">
+
+
+<p style="margin-top: 1em">npm help deprecate</p></td>
+<td width="63%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

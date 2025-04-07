@@ -1,0 +1,144 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:46 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>lavtrans</title>
+
+</head>
+<body>
+
+<h1 align="center">lavtrans</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lavtrans -
+Convert MJPEG videos to other MJPEG video formats</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lavtrans
+-o</b> <i>outputfile</i>
+<b>-f&nbsp;a</b>|<b>q</b>|<b>i</b>|<b>w</b> [<b>-i</b>
+<i>num</i>] <i>lavfile1</i> [<i>lavfile2</i> ...
+<i>lavfileN</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lavtrans</b>
+can be used to convert the recorded videos from one MJPEG
+&quot;container&quot; format to another one. It can also be
+used to split the streams, or do destructive edits.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Like all the
+other <b>mjpegtools</b>(1) lavtrans also accept a edit list
+file in place of actual video files. This allows it to be
+used to construct a stand-alone copy of the editted video
+sequence described in the editlist.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+lavtrans can only change the container type of MJPEG video,
+not the format. As such it is not possible to use it combine
+streams of different format.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lavtrans</b>
+accepts the following options: <b><br>
+-f</b> [<b>a</b>|<b>q</b>|<b>m</b>|<b>i</b>|<b>w</b>]</p>
+
+<p style="margin-left:15%;">Specifies the output format
+that should be saved. <br>
+a - output to AVI file <br>
+q - output to Qicktime file <br>
+i - output single JPEG images, <br>
+w - output WAV file (sound only!)</p>
+
+<p style="margin-left:9%;"><b>-i</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Convert a single frame to a
+JPEG file.</p>
+
+<p style="margin-left:9%;"><b>-o</b> <i>outputfile</i></p>
+
+<p style="margin-left:15%;">Specifies the name of the
+output file If you want as output single JPEG images the
+output file string must be a valid format string</p>
+
+<p style="margin-left:9%;"><i>filename</i></p>
+
+<p style="margin-left:15%;">Multiple filenames as input are
+acceped, also mixing of edit list files and other in video
+files.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">There seem to be
+problems with the transoding of large Quicktime movies. One
+other thing is that with interlaced movies only one field is
+extracted. So you get pictures with the full horizontal size
+and half vertical size.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Bernhard Praschinger. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>lavplay</b>(1)</p>
+<hr>
+</body>
+</html>

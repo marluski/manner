@@ -1,0 +1,288 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-ADDRESS</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-ADDRESS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-address
+- output addresses from matching messages</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+address</b> [<i>option</i> ...] &lt;<i>search-term</i>&gt;
+...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Search for
+messages matching the given search terms, and display the
+addresses from them. Duplicate addresses are filtered
+out.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<i>notmuch-search-terms</i> for details of the supported
+syntax for &lt;search-terms&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>address</b> include <b><br>
+--format=(json|sexp|text|text0)</b></p>
+
+<p style="margin-left:18%;">Presents the results in either
+JSON, S-Expressions, newline character separated plain-text
+(default), or null character separated plain-text
+(compatible with <i>xargs(1) -0 option where
+available).</i></p>
+
+<p style="margin-left:9%;"><b>--format-version=N</b></p>
+
+<p style="margin-left:18%;">Use the specified structured
+output format version. This is intended for programs that
+invoke <i>notmuch</i> internally. If omitted, the latest
+supported version will be used.</p>
+
+
+<p style="margin-left:9%;"><b>--output=(sender|recipients|count|address)</b></p>
+
+<p style="margin-left:18%;">Controls which information
+appears in the output. This option can be given multiple
+times to combine different outputs. When neither
+<b>--output=sender</b> nor <b>--output=recipients</b> is
+given, <b>--output=sender</b> is implied.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>sender</b></p></td>
+<td width="1%"></td>
+<td width="54%">
+
+
+<p>Output all addresses from the <i>From</i> header.</p></td>
+<td width="19%">
+</td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">Note: Searching
+for <b>sender</b> should be much faster than searching for
+<b>recipients</b>, because sender addresses are cached
+directly in the database whereas other addresses need to be
+fetched from message files.</p>
+
+<p style="margin-left:18%;"><b>recipients</b></p>
+
+<p style="margin-left:27%;">Output all addresses from the
+<i>To</i>, <i>Cc</i> and <i>Bcc</i> headers.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>count</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Print the count of how many times was the address
+encountered during search.</p></td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">Note: With this
+option, addresses are printed only after the whole search is
+finished. This may take long time.</p>
+
+<p style="margin-left:18%;"><b>address</b></p>
+
+<p style="margin-left:27%;">Output only the email addresses
+instead of the full mailboxes with names and email
+addresses. This option has no effect on the JSON or
+S-Expression output formats.</p>
+
+
+<p style="margin-left:9%;"><b>--deduplicate=(no|mailbox|address)</b></p>
+
+<p style="margin-left:18%;">Control the deduplication of
+results.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p><b>no</b></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p>Output all occurrences of addresses in the matching
+messages. This is not applicable with
+<b>--output=count</b>.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>mailbox</b></p>
+
+<p style="margin-left:27%;">Deduplicate addresses based on
+the full, case sensitive name and email address, or mailbox.
+This is effectively the same as piping the
+<b>--deduplicate=no</b> output to <b>sort | uniq</b>, except
+for the order of results. This is the default.</p>
+
+<p style="margin-left:18%;"><b>address</b></p>
+
+<p style="margin-left:27%;">Deduplicate addresses based on
+the case insensitive address part of the mailbox. Of all the
+variants (with different name or case), print the one
+occurring most frequently among the matching messages. If
+<b>--output=count</b> is specified, include all variants in
+the count.</p>
+
+
+<p style="margin-left:9%;"><b>--sort=(newest-first|oldest-first)</b></p>
+
+<p style="margin-left:18%;">This option can be used to
+present results in either chronological order
+(<b>oldest-first</b>) or reverse chronological order
+(<b>newest-first</b>).</p>
+
+<p style="margin-left:18%; margin-top: 1em">By default,
+results will be displayed in reverse chronological order,
+(that is, the newest results will be displayed first).</p>
+
+<p style="margin-left:18%; margin-top: 1em">However, if
+either <b>--output=count</b> or <b>--deduplicate=address</b>
+is specified, this option is ignored and the order of the
+results is unspecified.</p>
+
+
+<p style="margin-left:9%;"><b>--exclude=(true|false)</b></p>
+
+<p style="margin-left:18%;">A message is called
+&quot;excluded&quot; if it matches at least one tag in
+search.exclude_tags that does not appear explicitly in the
+search terms. This option specifies whether to omit excluded
+messages in the search process.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The default
+value, <b>true</b>, prevents excluded messages from matching
+the search terms.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>false</b>
+allows excluded messages to match search terms and appear in
+displayed results.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+supports the following special exit status codes</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>20</b></p></td>
+<td width="6%"></td>
+<td width="51%">
+
+
+<p>The requested format version is too old.</p></td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>21</b></p></td>
+<td width="6%"></td>
+<td width="51%">
+
+
+<p>The requested format version is too new.</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-config</i>, <i>notmuch-count</i>,
+<i>notmuch-dump</i>, <i>notmuch-hooks</i>,
+<i>notmuch-insert</i>, <i>notmuch-new</i>,
+<i>notmuch-reply</i>, <i>notmuch-restore</i>,
+<i>notmuch-search</i>, <i>notmuch-search-terms</i>,
+<i>notmuch-show</i>, <i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

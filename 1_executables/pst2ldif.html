@@ -1,0 +1,198 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:46 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>PST2LDIF</title>
+
+</head>
+<body>
+
+<h1 align="center">PST2LDIF</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#VERSION">VERSION</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pst2ldif -
+extract contacts from an MS Outlook .pst file in .ldif
+format</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="91%">
+
+
+<p style="margin-top: 1em"><b>pst2ldif</b> [<b>-V</b>]
+[<b>-b&nbsp;</b><i>ldap-base</i>]
+[<b>-c&nbsp;</b><i>class</i>]
+[<b>-d&nbsp;</b><i>debug-file</i>]
+[<b>-l&nbsp;</b><i>extra-line</i>] [<b>-o</b>] [<b>-h</b>]
+pstfilename</p> </td></tr>
+</table>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-V</p>
+
+<p style="margin-left:14%;">Show program version.
+Subsequent options are then ignored.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-b
+<i>ldap-base</i></p>
+
+<p style="margin-left:14%;">Sets the ldap base value used
+in the dn records. You probably want to use something like
+&quot;o=organization, c=US&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-c
+<i>class</i></p>
+
+<p style="margin-left:14%;">Sets the objectClass values for
+the contact items. This class needs to be defined in the
+schema used by your LDAP server, and at a minimum it must
+contain the ldap attributes given below. This option may be
+specified multiple times to generate entries with multiple
+object classes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-d
+<i>debug-file</i></p>
+
+<p style="margin-left:14%;">Specify name of debug log file.
+The log file is now an ascii file, instead of the binary
+file used in previous versions.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-l
+<i>extra-line</i></p>
+
+<p style="margin-left:14%;">Specify an extra line to be
+added to each ldap entry. This option may be specified
+multiple times to add multiple lines to each ldap entry.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-o</p>
+
+<p style="margin-left:14%;">Use the old ldap schema, rather
+than the default new ldap schema. The old schema generates
+multiple postalAddress attributes for a single entry. The
+new schema generates a single postalAddress (and
+homePostalAddress when available) attribute with $
+delimiters as specified in RFC4517. Using the old schema
+also generates two extra leading entries, one for
+&quot;dn:ldap base&quot;, and one for &quot;dn: cn=root,
+ldap base&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-h</p>
+
+<p style="margin-left:14%;">Show summary of options.
+Subsequent options are then ignored.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pst2ldif</b>
+reads the contact information from an MS Outlook .pst file
+and produces a .ldif file that may be used to import those
+contacts into an LDAP database. The following ldap
+attributes are generated for the old ldap schema:</p>
+
+<p style="margin-left:14%;">cn <br>
+givenName <br>
+sn <br>
+personalTitle <br>
+company <br>
+mail <br>
+postalAddress <br>
+l <br>
+st <br>
+postalCode <br>
+c <br>
+homePhone <br>
+telephoneNumber <br>
+facsimileTelephoneNumber <br>
+mobile <br>
+description</p>
+
+<p style="margin-left:9%;">The following attributes are
+generated for the new ldap schema:</p>
+
+<p style="margin-left:14%;">cn <br>
+givenName <br>
+sn <br>
+title <br>
+o <br>
+mail <br>
+postalAddress <br>
+homePostalAddress <br>
+l <br>
+st <br>
+postalCode <br>
+c <br>
+homePhone <br>
+telephoneNumber <br>
+facsimileTelephoneNumber <br>
+mobile <br>
+description <br>
+labeledURI</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2008 by 510 Software Group &lt;carl@five-ten-sg.com&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2,
+or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU General Public License along with
+this program; see the file COPYING. If not, please write to
+the Free Software Foundation, 675 Mass Ave, Cambridge, MA
+02139, USA.</p>
+
+<h2>VERSION
+<a name="VERSION"></a>
+</h2>
+
+ 
+<p style="margin-left:9%; margin-top: 1em">0.6.76</p>
+<hr>
+</body>
+</html>

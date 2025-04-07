@@ -1,0 +1,377 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:47 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pw-cli</title>
+
+</head>
+<body>
+
+<h1 align="center">pw-cli</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#GENERAL COMMANDS">GENERAL COMMANDS</a><br>
+<a href="#MODULE MANAGEMENT">MODULE MANAGEMENT</a><br>
+<a href="#OBJECT INTROSPECTION">OBJECT INTROSPECTION</a><br>
+<a href="#WORKING WITH REMOTES">WORKING WITH REMOTES</a><br>
+<a href="#NODE MANAGEMENT">NODE MANAGEMENT</a><br>
+<a href="#DEVICE MANAGEMENT">DEVICE MANAGEMENT</a><br>
+<a href="#LINK MANAGEMENT">LINK MANAGEMENT</a><br>
+<a href="#GLOBALS MANAGEMENT">GLOBALS MANAGEMENT</a><br>
+<a href="#PARAMETER MANAGEMENT">PARAMETER MANAGEMENT</a><br>
+<a href="#PERMISSION MANAGEMENT">PERMISSION MANAGEMENT</a><br>
+<a href="#COMMAND MANAGEMENT">COMMAND MANAGEMENT</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pw-cli - The
+PipeWire Command Line Interface</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-cli</b>
+[<i>command</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Interact with a
+PipeWire instance.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When a command
+is given, <b>pw-cli</b> will execute the command and
+exit</p>
+
+<p style="margin-left:9%; margin-top: 1em">When no command
+is given, <b>pw-cli</b> starts an interactive session with
+the default PipeWire instance <i>pipewire-0</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Connections to
+other, remote instances can be made. The current instance
+name is displayed at the prompt.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+<b>pw-cli</b> also creates a local PipeWire instance. Some
+commands operate on the current (remote) instance and some
+on the local instance, such as module loading.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use the
+&rsquo;help&rsquo; command to list the available
+commands.</p>
+
+<h2>GENERAL COMMANDS
+<a name="GENERAL COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>help |
+h</b></p>
+
+<p style="margin-left:14%;">Show a quick help on the
+commands available. It also lists the aliases for many
+commands.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>quit |
+q</b></p>
+
+<p style="margin-left:14%;">Exit from <b>pw-cli</b></p>
+
+<h2>MODULE MANAGEMENT
+<a name="MODULE MANAGEMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Modules are
+loaded and unloaded in the local instance, thus the pw-cli
+binary itself and can add functionality or objects to the
+local instance. It is not possible in PipeWire to load
+modules in another instance.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>load-module</b>
+<i>name</i> <b>[</b><i>arguments...</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>Load a module specified by
+its name and arguments in the local instance. For most
+modules it is OK to be loaded more than once.</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">This command
+returns a module variable that can be used to unload the
+module.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The locally
+module is <i>not</i> visible in the remote instance. It is
+not possible in PipeWire to load modules in a remote
+instance.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>unload-module</b>
+<i>module-var</i></p>
+
+<p style="margin-left:14%;"><i>Unload a module, specified
+either by its variable.</i></p>
+
+<h2>OBJECT INTROSPECTION
+<a name="OBJECT INTROSPECTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>list-objects</b></i></p>
+
+<p style="margin-left:14%;">List the objects of the current
+instance.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Objects are
+listed with their <i>id</i>, <i>type</i> and
+<i>version</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>info</b>
+<i>id</i> <b>|</b> <i>all</i></p>
+
+<p style="margin-left:14%;"><i>Get information about a
+specific object or all objects.</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">Requesting info
+about an object will also notify you of changes.</p>
+
+<h2>WORKING WITH REMOTES
+<a name="WORKING WITH REMOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>connect
+[</b><i>remote-name</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>Connect to a remote instance
+and make this the new current instance.</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">If no remote
+name is specified, a connection is made to the default
+remote instance, usually <i>pipewire-0</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The special
+remote name called <i>internal</i> can be used to connect to
+the local <b>pw-cli</b> PipeWire instance.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This command
+returns a remote var that can be used to disconnect or
+switch remotes.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>disconnect
+[</b><i>remote-var</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>Disconnect from a remote
+instance.</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">If no remote
+name is specified, the current instance is disconnected.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>list-remotes</b></p>
+
+<p style="margin-left:14%;">List all <i>remote
+instances</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>switch-remote
+[</b><i>remote-var</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>Make the specified remote
+the current instance.</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">If no remote
+name is specified, the first instance is made current.</p>
+
+<h2>NODE MANAGEMENT
+<a name="NODE MANAGEMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>create-node</b>
+<i>factory-name</i> <b>[</b><i>properties...</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>Create a node from a factory
+in the current instance.</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Properties are
+key=value pairs separated by whitespace.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This command
+returns a <i>node variable</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>export-node</b>
+<i>node-id</i> <b>[</b><i>remote-var</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>Export a node from the local
+instance to the specified instance. When no instance is
+specified, the node will be exported to the current
+instance.</i></p>
+
+<h2>DEVICE MANAGEMENT
+<a name="DEVICE MANAGEMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>create-device</b>
+factory-name</i> <b>[</b><i>properties...</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>Create a device from a
+factory in the current instance.</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Properties are
+key=value pairs separated by whitespace.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This command
+returns a <i>device variable</i>.</p>
+
+<h2>LINK MANAGEMENT
+<a name="LINK MANAGEMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>create-link</b>
+<i>node-id port-id node-id port-id</i>
+<b>[</b><i>properties...</i><b>]</b></p>
+
+<p style="margin-left:14%;"><i>Create a link between 2
+nodes and ports.</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Port <i>ids</i>
+and Node <i>ids</i> can be set to - to automatically select
+a node or a port.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Port <i>ids</i>
+can be * to automatically link matching ports ids in the
+nodes.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Properties are
+key=value pairs separated by whitespace.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This command
+returns one or more <i>link variables</i>.</p>
+
+<h2>GLOBALS MANAGEMENT
+<a name="GLOBALS MANAGEMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>destroy</b>
+<i>object-id</i></p>
+
+<p style="margin-left:14%;"><i>Destroy a global
+object.</i></p>
+
+<h2>PARAMETER MANAGEMENT
+<a name="PARAMETER MANAGEMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>enum-params</b>
+object-id param-id</i></p>
+
+<p style="margin-left:14%;"><i>Enumerate params of an
+object.</i></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>param-id</i>
+can also be given as the param short name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>set-param</b>
+<i>object-id param-id param-json</i></p>
+
+<p style="margin-left:14%;"><i>Set param of an
+object.</i></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>param-id</i>
+can also be given as the param short name.</p>
+
+<h2>PERMISSION MANAGEMENT
+<a name="PERMISSION MANAGEMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>permissions</b>
+<i>client-id object-id permission</i></p>
+
+<p style="margin-left:14%;"><i>Set permissions for a
+client.</i></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>object-id</i>
+can be <i>-1</i> to set the default permissions.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get-permissions</b>
+<i>client-id</i></p>
+
+<p style="margin-left:14%;"><i>Get permissions of a
+client.</i></p>
+
+<h2>COMMAND MANAGEMENT
+<a name="COMMAND MANAGEMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>send-command</b>
+object-id</i></p>
+
+<p style="margin-left:14%;"><i>Send a command to an
+object.</i></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire(1)</b>,
+<b>pw-mon(1)</b>,</p>
+<hr>
+</body>
+</html>

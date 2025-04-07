@@ -1,0 +1,663 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:59 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>LLDB</title>
+
+</head>
+<body>
+
+<h1 align="center">LLDB</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#ATTACHING">ATTACHING</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#REPL">REPL</a><br>
+<a href="#SCRIPTING">SCRIPTING</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#USING LLDB">USING LLDB</a><br>
+<a href="#CONFIGURATION FILES">CONFIGURATION FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lldb - LLDB
+Documentation</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lldb</b>
+[<i>options</i>] <i>executable</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>lldb</b></i>
+is a next generation, high-performance debugger. It is built
+as a set of reusable components which highly leverage
+existing libraries in the larger LLVM Project, such as the
+Clang expression parser and LLVM disassembler.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>lldb</b> is
+the default debugger in Xcode on macOS and supports
+debugging C, Objective-C and C++ on the desktop and iOS
+devices and simulator.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All of the code
+in the LLDB project is available under the Apache 2.0
+License with LLVM exceptions.</p>
+
+<h2>ATTACHING
+<a name="ATTACHING"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--attach-name
+&lt;name&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to attach to
+a process with the given name.</p>
+
+<p style="margin-left:9%;"><b>--attach-pid
+&lt;pid&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to attach to
+a process with the given pid.</p>
+
+<p style="margin-left:9%;"><b>-n &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --attach-name</p>
+
+<p style="margin-left:9%;"><b>-p &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --attach-pid</p>
+
+<p style="margin-left:9%;"><b>--wait-for</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to wait for
+a process with the given pid or name to launch before
+attaching.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-w</b></p></td>
+<td width="6%"></td>
+<td width="26%">
+
+
+<p>Alias for --wait-for</p></td>
+<td width="56%">
+</td></tr>
+</table>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--batch</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to run the
+commands from -s, -S, -o &amp; -O, and then quit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-b</b></p></td>
+<td width="6%"></td>
+<td width="22%">
+
+
+<p>Alias for --batch</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-K &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --source-on-crash</p>
+
+<p style="margin-left:9%;"><b>-k &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for
+--one-line-on-crash</p>
+
+<p style="margin-left:9%;"><b>--local-lldbinit</b></p>
+
+<p style="margin-left:18%;">Allow the debugger to parse the
+.lldbinit files in the current working directory, unless
+--no-lldbinit is passed.</p>
+
+<p style="margin-left:9%;"><b>--no-lldbinit</b></p>
+
+<p style="margin-left:18%;">Do not automatically parse any
+'.lldbinit' files.</p>
+
+<p style="margin-left:9%;"><b>--one-line-before-file
+&lt;command&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to execute
+this one-line lldb command before any file provided on the
+command line has been loaded.</p>
+
+<p style="margin-left:9%;"><b>--one-line-on-crash
+&lt;command&gt;</b></p>
+
+<p style="margin-left:18%;">When in batch mode, tells the
+debugger to run this one-line lldb command if the target
+crashes.</p>
+
+<p style="margin-left:9%;"><b>--one-line
+&lt;command&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to execute
+this one-line lldb command after any file provided on the
+command line has been loaded.</p>
+
+<p style="margin-left:9%;"><b>-O &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for
+--one-line-before-file</p>
+
+<p style="margin-left:9%;"><b>-o &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --one-line</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-Q</b></p></td>
+<td width="6%"></td>
+<td width="33%">
+
+
+<p>Alias for --source-quietly</p></td>
+<td width="49%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--source-before-file
+&lt;file&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to read in
+and execute the lldb commands in the given file, before any
+file has been loaded.</p>
+
+<p style="margin-left:9%;"><b>--source-on-crash
+&lt;file&gt;</b></p>
+
+<p style="margin-left:18%;">When in batch mode, tells the
+debugger to source this file of lldb commands if the target
+crashes.</p>
+
+<p style="margin-left:9%;"><b>--source-quietly</b></p>
+
+<p style="margin-left:18%;">Tells the debugger not to echo
+commands while sourcing files or one-line commands provided
+on the command line.</p>
+
+<p style="margin-left:9%;"><b>--source &lt;file&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to read in
+and execute the lldb commands in the given file, after any
+file has been loaded.</p>
+
+<p style="margin-left:9%;"><b>-S &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for
+--source-before-file</p>
+
+<p style="margin-left:9%;"><b>-s &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --source</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-x</b></p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p>Alias for --no-lldbinit</p></td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--arch
+&lt;architecture&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to use the
+specified architecture when starting and running the
+program.</p>
+
+<p style="margin-left:9%;"><b>-a &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --arch</p>
+
+<p style="margin-left:9%;"><b>--capture-path
+&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to use the
+given filename for the reproducer.</p>
+
+<p style="margin-left:9%;"><b>--capture</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to capture a
+reproducer.</p>
+
+<p style="margin-left:9%;"><b>--core
+&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to use the
+full path to &lt;filename&gt; as the core file.</p>
+
+<p style="margin-left:9%;"><b>-c &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --core</p>
+
+<p style="margin-left:9%;"><b>--debug</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to print out
+extra information for debugging itself.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-d</b></p></td>
+<td width="6%"></td>
+<td width="22%">
+
+
+<p>Alias for --debug</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--editor</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to open
+source files using the host's &quot;external editor&quot;
+mechanism.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-e</b></p></td>
+<td width="6%"></td>
+<td width="23%">
+
+
+<p>Alias for --editor</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--file
+&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to use the
+file &lt;filename&gt; as the program to be debugged.</p>
+
+<p style="margin-left:9%;"><b>-f &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --file</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="70%">
+
+
+<p>Prints out the usage information for the LLDB
+debugger.</p> </td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-h</b></p></td>
+<td width="1%"></td>
+<td width="70%">
+
+
+<p>Alias for --help</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--no-use-colors</b></p>
+
+<p style="margin-left:18%;">Do not use colors.</p>
+
+<p style="margin-left:9%;"><b>--replay
+&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to replay a
+reproducer from &lt;filename&gt;.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Prints out the current version
+number of the LLDB debugger.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="6%"></td>
+<td width="31%">
+
+
+<p>Alias for --version</p></td>
+<td width="51%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-X</b></p></td>
+<td width="6%"></td>
+<td width="31%">
+
+
+<p>Alias for --no-use-color</p></td>
+<td width="51%">
+</td></tr>
+</table>
+
+<h2>REPL
+<a name="REPL"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r=&lt;flags&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for
+--repl=&lt;flags&gt;</p>
+
+<p style="margin-left:9%;"><b>--repl-language
+&lt;language&gt;</b></p>
+
+<p style="margin-left:18%;">Chooses the language for the
+REPL.</p>
+
+<p style="margin-left:9%;"><b>--repl=&lt;flags&gt;</b></p>
+
+<p style="margin-left:18%;">Runs lldb in REPL mode with a
+stub process with the given flags.</p>
+
+<p style="margin-left:9%;"><b>-R &lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --repl-language</p>
+
+<h2>SCRIPTING
+<a name="SCRIPTING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l
+&lt;value&gt;</b></p>
+
+<p style="margin-left:18%;">Alias for --script-language</p>
+
+
+<p style="margin-left:9%;"><b>--print-script-interpreter-info</b></p>
+
+<p style="margin-left:18%;">Prints out a json dictionary
+with information about the scripting language
+interpreter.</p>
+
+<p style="margin-left:9%;"><b>--python-path</b></p>
+
+<p style="margin-left:18%;">Prints out the path to the
+lldb.py file for this version of lldb.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-P</b></p></td>
+<td width="6%"></td>
+<td width="29%">
+
+
+<p>Alias for --python-path</p></td>
+<td width="53%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--script-language
+&lt;language&gt;</b></p>
+
+<p style="margin-left:18%;">Tells the debugger to use the
+specified scripting language for user-defined scripts.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The debugger can
+be started in several modes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Passing an
+executable as a positional argument prepares lldb to debug
+the given executable. To disambiguate between arguments
+passed to lldb and arguments passed to the debugged
+executable, arguments starting with a - must be passed after
+--.</p>
+
+<p style="margin-left:13%;">lldb --arch x86_64
+/path/to/program program argument -- --arch armv7</p>
+
+<p style="margin-left:9%; margin-top: 1em">For convenience,
+passing the executable after -- is also supported.</p>
+
+<p style="margin-left:13%;">lldb --arch x86_64 --
+/path/to/program program argument --arch armv7</p>
+
+<p style="margin-left:9%; margin-top: 1em">Passing one of
+the attach options causes <b>lldb</b> to immediately attach
+to the given process.</p>
+
+<p style="margin-left:13%;">lldb -p &lt;pid&gt; lldb -n
+&lt;process-name&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Passing --repl
+starts <b>lldb</b> in REPL mode.</p>
+
+<p style="margin-left:13%;">lldb -r</p>
+
+<p style="margin-left:9%; margin-top: 1em">Passing --core
+causes <b>lldb</b> to debug the core file.</p>
+
+<p style="margin-left:13%;">lldb -c /path/to/core</p>
+
+<p style="margin-left:9%; margin-top: 1em">Command options
+can be combined with these modes and cause <b>lldb</b> to
+run the specified commands before or after events, like
+loading the file or crashing, in the order provided on the
+command line.</p>
+
+<p style="margin-left:13%;">lldb -O 'settings set
+stop-disassembly-count 20' -o 'run' -o 'bt' lldb -S
+/source/before/file -s /source/after/file lldb -K
+/source/before/crash -k /source/after/crash</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: In REPL
+mode no file is loaded, so commands specified to run after
+loading the file (via -o or -s) will be ignored.</p>
+
+<h2>USING LLDB
+<a name="USING LLDB"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">In <b>lldb</b>
+there is a help command which can be used to find
+descriptions and examples of all <b>lldb</b> commands. To
+get help on &quot;breakpoint set&quot; you would type
+&quot;help breakpoint set&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There is also an
+apropos command which will search the help text of all
+commands for a given term -- this is useful for locating a
+command by topic. For instance, &quot;apropos
+breakpoint&quot; will list any command that has the word
+&quot;breakpoint&quot; in its help text.</p>
+
+<h2>CONFIGURATION FILES
+<a name="CONFIGURATION FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lldb</b>
+reads things like settings, aliases and commands from the
+.lldbinit file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">First,
+<b>lldb</b> will try to read the application specific init
+file whose name is &#732;/.lldbinit followed by a
+&quot;-&quot; and the name of the current program. This
+would be &#732;/.lldbinit-lldb for the command line
+<b>lldb</b> and &#732;/.lldbinit-Xcode for Xcode. If there
+is no application specific init file, <b>lldb</b> will look
+for an init file in the home directory. If launched with a
+<i>REPL</i> option, it will first look for a REPL
+configuration file, specific to the REPL language. The init
+file should be named as follow:
+<b>.lldbinit-&lt;language&gt;-repl</b> (i.e.
+<b>.lldbinit-swift-repl</b>). If this file doesn't exist, or
+<b>lldb</b> wasn't launch with <i>REPL</i>, meaning there is
+neither a REPL init file nor an application specific init
+file, <b>lldb</b> will fallback to the global
+&#732;/.lldbinit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Secondly, it
+will look for an .lldbinit file in the current working
+directory. For security reasons, <b>lldb</b> will print a
+warning and not source this file by default. This behavior
+can be changed by changing the target.load-cwd-lldbinit
+setting.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To always load
+the .lldbinit file in the current working directory, add the
+following command to &#732;/.lldbinit:</p>
+
+<p style="margin-left:13%;">settings set
+target.load-cwd-lldbinit true</p>
+
+<p style="margin-left:9%; margin-top: 1em">To never load
+the .lldbinit file in the current working directory and
+silence the warning, add the following command to
+&#732;/.lldbinit:</p>
+
+<p style="margin-left:13%;">settings set
+target.load-cwd-lldbinit false</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The LLDB project
+page <i>https://lldb.llvm.org</i> has many different
+resources for <b>lldb</b> users -- the gdb/lldb command
+equivalence page - <i>https://lldb.llvm.org/use/map.html</i>
+can be especially helpful for users coming from gdb.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">LLVM project</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2007-2025, The
+LLDB Team</p>
+<hr>
+</body>
+</html>

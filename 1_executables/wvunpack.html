@@ -1,0 +1,348 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:08 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>WVUNPACK</i>(1) General Commands Manual
+<i>WVUNPACK</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">wvunpack &mdash; decode wavpack
+encoded files</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:21%;"><b>wvunpack</b>
+[<b>-options</b>] [<b>-o&nbsp;</b><i>output</i>]
+<i>file&nbsp;...</i></p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>wvunpack</b> decodes WavPack
+files back to their original uncompressed form. Unless
+overridden with the <b>-o</b> switch, the output filename
+will be the source filename with the original file extension
+replacing WavPack&rsquo;s &ldquo;.wv&rdquo; extension. It is
+also possible to output raw audio without headers using the
+<b>--raw</b> option. Multiple WavPack input files may be
+specified resulting in multiple output files, and in that
+case <b>-o</b> may be used to specify an alternate target
+directory. A filename of &ldquo;-&rdquo; specifies
+<i>stdin</i> or <i>stdout</i>. It is also possible to export
+to one of the alternate file formats below, but in that case
+the information in the original headers and trailers will be
+lost, even if the alternate format is the same as the source
+format. WavPack files are generally created with the
+<b>wavpack</b> program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If multiple
+input files are specified with piped output (&ldquo;-o
+-&rdquo;), then the output from all the files is
+concatenated. This can be utilized as an easy way to
+concatenate WavPack files (assuming the output is
+subsequently piped into <b>wavpack</b>), but only makes
+sense with raw output (<b>--raw</b>) to avoid headers being
+interleaved with the audio data.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On multicore
+machines <b>wvunpack</b> will attempt to use multiple
+threads to speed up the operation, often by 3x or more. To
+force single-threaded operation use the <b>--no-threads</b>
+option, or use the <b>--threads</b> option to fine-tune the
+number of threads utilized.</p>
+
+<p style="margin-left:4%; margin-top: 1em"><b>OUTPUT
+FORMATS</b></p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">Microsoft RIFF
+(&ldquo;.wav&rdquo;), force with <b>--wav</b>, creates RF64
+if &gt; 4 GB</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">Sony Wave64
+(&ldquo;.w64&rdquo;), force with <b>--w64</b></p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">Apple AIFF
+(&ldquo;.aif&rdquo;), force with <b>--aif</b> or
+<b>--aif-le</b></p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">Apple Core Audio
+(&ldquo;.caf&rdquo;), force with <b>--caf-be</b> or
+<b>--caf-le</b></p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">Raw PCM or DSD
+(&ldquo;.raw&rdquo;), force with <b>-r</b> or
+<b>--raw</b></p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">Philips DSDIFF
+(&ldquo;.dff&rdquo;), force with <b>--dsdiff</b> or
+<b>--dff</b></p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:14%;">Sony DSD Stream
+(&ldquo;.dsf&rdquo;), force with <b>--dsf</b></p>
+
+
+<p style="margin-left:4%; margin-top: 1em"><b>OPTIONS</b></p>
+
+<p><b>--aif</b>, <b>--aif-le</b></p>
+
+<p style="margin-left:19%;">force output to Apple AIFF (or
+AIFF-C/sowt), extension &ldquo;.aif&rdquo;</p>
+
+<p style="margin-top: 1em"><b>-b</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">blindly decode
+all stream blocks and ignore length info</p>
+
+<p style="margin-top: 1em"><b>-c</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">do not decode
+audio but instead just extract cuesheet stored in APEv2 tag
+to <i>stdout</i> (equivalent to <b>-x</b>
+&ldquo;cuesheet&rdquo;)</p>
+
+<p style="margin-top: 1em"><b>-cc</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">extract
+cuesheet stored in APEv2 tag to <i>source-name.cue</i> file
+in same directory as decoded audio file (equivalent to
+<b>-xx</b> &ldquo;cuesheet=%a.cue&rdquo;)</p>
+
+<p style="margin-top: 1em"><b>--caf-be</b>,
+<b>--caf-le</b></p>
+
+<p style="margin-left:19%;">force output to big-endian or
+little-endian Core Audio, extension &ldquo;.caf&rdquo;</p>
+
+<p style="margin-top: 1em"><b>-d</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">delete source
+file if successful; <b>use with caution!</b></p>
+
+<p style="margin-top: 1em"><b>--dff</b>,
+<b>--dsdiff</b></p>
+
+<p style="margin-left:19%;">force output to Philips DSDIFF,
+DSD audio source only, extension &ldquo;.dff&rdquo;</p>
+
+<p style="margin-top: 1em"><b>--dsf</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">force output to
+Sony DSF, DSD audio source only, extension
+&ldquo;.dsf&rdquo;</p>
+
+<p style="margin-top: 1em"><b>-f</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">do not decode
+audio but simply display summary information about WavPack
+file to <i>stdout</i> in a machine-parsable format (see
+<i>doc/wavpack_doc.html</i> or <i>cli/wvunpack.c</i> for
+details)</p>
+
+<p style="margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">display
+extended help</p>
+
+<p style="margin-top: 1em"><b>-i</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">ignore .wvc
+file (forces hybrid lossy decompression)</p>
+
+<p style="margin-top: 1em"><b>-m</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">calculate and
+display MD5 signature; verify if lossless</p>
+
+<p style="margin-top: 1em"><b>-n</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">no audio
+decoding (use with <b>-xx</b> to extract tags only)</p>
+
+<p style="margin-top: 1em"><b>--no-overwrite</b></p>
+
+<p style="margin-left:19%;">Never overwrite, nor ask to
+overwrite, an existing file. This is handy for resuming a
+cancelled batch operation and obviously cannot be mixed with
+the <b>-y</b> option.</p>
+
+<p style="margin-top: 1em"><b>--normalize-floats</b></p>
+
+<p style="margin-left:19%;">normalize float audio to +/-1.0
+if it isn&rsquo;t normalized already (rarely the case, but
+alters audio and fails MD5)</p>
+
+<p style="margin-top: 1em"><b>--no-threads</b></p>
+
+<p style="margin-left:19%;">force single-threaded
+operation, equivalent to <b>--threads=1</b></p>
+
+<p style="margin-top: 1em"><b>--no-utf8-convert</b></p>
+
+<p style="margin-left:19%;">leave extracted text tags in
+UTF-8 encoding during extraction or display</p>
+
+<p style="margin-top: 1em"><b>-o</b> <i>OUTFILE</i></p>
+
+<p style="margin-left:19%;">specify output filename (only
+if single source file) or target directory (must already
+exist)</p>
+
+<p style="margin-top: 1em"><b>-q</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">quiet (keep
+console output to a minimum)</p>
+
+<p style="margin-top: 1em"><b>-r</b>, <b>--raw</b></p>
+
+<p style="margin-left:19%;">force raw PCM or DSD audio
+decode by skipping headers &amp; trailers, results in
+<i>source-name.raw</i></p>
+
+<p style="margin-top: 1em"><b>--raw-pcm</b></p>
+
+<p style="margin-left:19%;">similar to <b>-r</b> and
+<b>--raw</b> above except that DSD audio will be converted
+to 24-bit PCM (8x decimation)</p>
+
+<p style="margin-top: 1em"><b>-s</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">do not decode
+audio but simply display summary information about WavPack
+file to <i>stdout</i></p>
+
+<p style="margin-top: 1em"><b>-ss</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">do not decode
+audio but simply display summary and tag information about
+WavPack file to <i>stdout</i></p>
+
+
+<p style="margin-top: 1em"><b>--skip=[-][</b><i>sample</i>|<i>hh</i>:<i>mm</i>:<i>ss.ss</i>]</p>
+
+<p style="margin-left:19%;">start decoding at specified
+sample or time index, specifying a &lsquo;-&rsquo; causes
+sample/time to be relative to EOF</p>
+
+<p style="margin-top: 1em"><b>-t</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">copy input
+file&rsquo;s time stamp to output file(s)</p>
+
+<p style="margin-top: 1em"><b>--threads=</b><i>n</i></p>
+
+<p style="margin-left:19%;">Enable (or disable)
+multithreaded operation with <i>n=1</i> (no threading) to
+<i>n=12</i> (max threads). Significantly improves
+performance of all modes, including verify. Omitting the
+parameter will select an optimum number of threads.</p>
+
+
+<p style="margin-top: 1em"><b>--until=[+|-][</b><i>sample</i>|<i>hh</i>:<i>mm</i>:<i>ss.ss</i>]</p>
+
+<p style="margin-left:19%;">stop decoding at specified
+sample or time index, specifying a &lsquo;+&rsquo; causes
+sample/time to be relative to <b>--skip</b> point,
+specifying a &lsquo;-&rsquo; causes sample/time to be
+relative to EOF</p>
+
+<p style="margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">verify source
+data only (no output file created)</p>
+
+<p style="margin-top: 1em"><b>-vv</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">quick verify
+(no output, version 5+ files only)</p>
+
+<p style="margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:19%;">write program version to
+<i>stdout</i></p>
+
+<p style="margin-top: 1em"><b>-w</b>, <b>--wav</b></p>
+
+<p style="margin-left:19%;">force output to Microsoft
+RIFF/RF64, extension &ldquo;.wav&rdquo;</p>
+
+<p style="margin-top: 1em"><b>--w64</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">force output to
+Sony Wave64, extension &ldquo;.w64&rdquo;</p>
+
+<p style="margin-top: 1em"><b>-x</b> &ldquo; <i><br>
+Field</i>&rdquo;</p>
+
+<p style="margin-left:19%;">do not decode audio but instead
+just extract the specified tag field to <i>stdout</i></p>
+
+<p style="margin-top: 1em"><b>-xx</b> &ldquo; <i><br>
+Field</i>[=<i>file</i>]&rdquo;</p>
+
+<p style="margin-left:19%;">extract the specified tag field
+into a named file in the same directory as the decoded audio
+file; optional filename specification may contain
+&lsquo;%a&rsquo; which is replaced with the audio file base
+name, &lsquo;%t&rsquo; replaced with the tag field name
+(note: comes from data for binary tags) and &lsquo;%e&rsquo;
+replaced with the extension from the binary tag source file
+(or &ldquo;txt&rdquo; for text tag).</p>
+
+<p style="margin-top: 1em"><b>-y</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">yes to
+overwrite warning; <b>use with caution!</b></p>
+
+<p style="margin-top: 1em"><b>-z[</b><i>n</i>]</p>
+
+<p style="margin-left:19%; margin-top: 1em">don&rsquo;t set
+(n = 0 or omitted) or set (n = 1) console title to indicate
+progress (leaves &quot;WvUnpack Completed&quot;)</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>wavpack</i>(1),
+<i>wvgain</i>(1), <i>wvtag</i>(1), www.wavpack.com</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">David Bryant
+&lt;<i>david@wavpack.com</i>&gt; <br>
+Sebastian Dr&ouml;ge &lt;<i>slomo@debian.org</i>&gt; <br>
+Jan Star&yacute; &lt;<i>hans@stare.cz</i>&gt; GNU February
+9, 2024 <i>WVUNPACK</i>(1)</p>
+<hr>
+</body>
+</html>

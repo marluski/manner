@@ -1,0 +1,119 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE ADMIN INIT-F</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE ADMIN INIT-F</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-admin-init-fs
+- Initialize a new root filesystem</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em"><b>ostree admin init-fs</b>
+[OPTIONS...] {PATH}</p></td>
+<td width="40%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Initialize an
+empty physical root filesystem in the designated PATH, with
+normal toplevels and correct permissions for each directory.
+Primarily useful for operating system installers.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--modern</b></p>
+
+<p style="margin-left:14%;">Equivalent to --epoch=1.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--epoch</b></p>
+
+<p style="margin-left:14%;">This accepts an integer value
+in the range [0-1], inclusive. The default is zero for
+compatibility.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When set to 1,
+the command will skip adding a number of toplevel &quot;API
+filesystems&quot; such as /proc to the toplevel of the
+physical root. These should be unnecessary, as they should
+only be mounted in the final deployment root. The main
+exception is /boot, which may need to be mounted in some
+setups before the target root.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Epoch 2 is the
+same as 1, except that the toplevel ostree directory is mode
+0700, denying access from unprivileged code. This is a new
+recommended best practice as it avoids access to old
+configuration files in /etc in previous deployments, as well
+as potentially old setuid binaries in /ostree/repo.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ mkdir
+/example</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+admin init-fs --epoch=1 /example</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ls
+/example</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>boot&nbsp;&nbsp;</i></p>
+<hr>
+</body>
+</html>

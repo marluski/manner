@@ -1,0 +1,175 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>XKBCLI-INTERACTIVE-EVDEV</i>(1) General Commands
+Manual<i>XKBCLI-INTERACTIVE-EVDEV</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">xkbcli-interactive-evdev &mdash;
+interactive debugger for X Keyboard keymaps</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+
+<p style="margin-left:41%;"><b>xkbcli-interactive-evdev</b>
+[<i>options</i>] [<i>KEYMAP_PATH</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>xkbcli-interactive-evdev</b>
+is a commandline tool to interactively debug XKB keymaps by
+listening to <i>/dev/input/eventX</i> evdev devices.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xkbcli-interactive-evdev</b>
+requires permission to open the evdev device nodes. This
+usually requires being the &ldquo;root&rdquo; user or
+belonging to the &ldquo;input&rdquo; group.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Press the &lang;
+Escape&rang; key to exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+debugging tool, its behavior or output is not guaranteed to
+be stable.</p>
+
+<p style="margin-top: 1em"><i>KEYMAP_PATH</i></p>
+
+<p style="margin-left:19%;">Path to a keymap file, or
+&ldquo;-&rdquo; to read the standard input</p>
+
+<p style="margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Print help and
+exit</p>
+
+<p style="margin-top: 1em"><b>--include</b> <i>PATH</i></p>
+
+<p style="margin-left:19%;">Add the given path to the
+include path list. This option is order-dependent, include
+paths given first are searched first. If an include path is
+given, the default include path list is not used. Use
+<b>--include-defaults</b> to add the default include
+paths.</p>
+
+<p style="margin-top: 1em"><b>--include-defaults</b></p>
+
+<p style="margin-left:19%;">Add the default set of include
+directories. This option is order-dependent, include paths
+given first are searched first.</p>
+
+<p style="margin-top: 1em"><b>--rules</b> <i>rules</i></p>
+
+<p style="margin-left:19%;">The XKB ruleset</p>
+
+<p style="margin-top: 1em"><b>--model</b> <i>model</i></p>
+
+<p style="margin-left:19%;">The XKB model</p>
+
+<p style="margin-top: 1em"><b>--layout</b>
+<i>layout</i></p>
+
+<p style="margin-left:19%;">The XKB layout</p>
+
+<p style="margin-top: 1em"><b>--variant</b>
+<i>variant</i></p>
+
+<p style="margin-left:19%;">The XKB layout variant</p>
+
+<p style="margin-top: 1em"><b>--option</b>
+<i>options</i></p>
+
+<p style="margin-left:19%;">The XKB options</p>
+
+
+<p style="margin-top: 1em"><b>--enable-environment-names</b></p>
+
+<p style="margin-left:19%;">Allow to set the default RMLVO
+values via the following environment variables:</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_RULES</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_MODEL</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_LAYOUT</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_VARIANT</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_OPTIONS</p>
+
+<p style="margin-left:19%;">Note that this option may
+affect the default values of the previous options.</p>
+
+<p style="margin-top: 1em"><b>--keymap</b> <i>file</i></p>
+
+<p style="margin-left:19%;">Specify a keymap path. This
+option is mutually exclusive with the RMLVO options.</p>
+
+<p style="margin-top: 1em"><b>--short</b></p>
+
+<p style="margin-left:19%;">Do not print layout nor Unicode
+keysym translation.</p>
+
+
+<p style="margin-top: 1em"><b>--report-state-changes</b></p>
+
+<p style="margin-left:19%;">Report changes to the keyboard
+state</p>
+
+<p style="margin-top: 1em"><b>--enable-compose</b></p>
+
+<p style="margin-left:19%;">Enable Compose
+functionality</p>
+
+<p style="margin-top: 1em"><b>--consumed-mode</b>
+{xkb|gtk}</p>
+
+<p style="margin-left:19%;">Set the consumed modifiers mode
+(default: xkb)</p>
+
+<p style="margin-top: 1em"><b>--without-x11-offset</b></p>
+
+<p style="margin-left:19%;">Don&rsquo;t add an offset of 8
+when converting an evdev keycode to an XKB keycode. You
+probably don&rsquo;t want this option.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>xkbcli</i>(1),
+<i>xkbcli-interactive-wayland</i>(1),
+<i>xkbcli-interactive-x11</i>(1), <i>The libxkbcommon online
+documentation</i>: https://xkbcommon.org GNU June 4, 2024
+<i>XKBCLI-INTERACTIVE-EVDEV</i>(1)</p>
+<hr>
+</body>
+</html>

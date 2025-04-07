@@ -1,0 +1,244 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIFTOOL</title>
+
+</head>
+<body>
+
+<h1 align="center">GIFTOOL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">giftool - GIF
+transformation tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="90%">
+
+
+<p style="margin-top: 1em"><b>giftool</b>
+[-a&nbsp;<i>aspect</i>] [-b&nbsp;<i>bgcolor</i>]
+[-d&nbsp;<i>delaytime</i>] [-i&nbsp;<i>interlacing</i>]
+[-n&nbsp;<i>imagelist</i>] [-p&nbsp;<i>left,top</i>]
+[-s&nbsp;<i>width,height</i>] [-t&nbsp;<i>transcolor</i>]
+[-u&nbsp;<i>sort-flag</i>] [-x&nbsp;<i>disposal</i>]
+[-z&nbsp;<i>sort-flag</i>]</p> </td>
+<td width="1%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A filter for
+transforming GIFS. With no options, it's an expensive copy
+of a GIF in standard input to standard output. Options
+specify filtering operations and are performed in the order
+specified on the command line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -n option
+selects images, allowing the tool to act on a subset of
+images in a multi-image GIF. This option takes a
+comma-separated list of decimal integers which are
+interpreted as 1-origin image indices; these are the images
+that will be acted on. If no -n option is specified, the
+tool will select and transform all images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -b option
+takes a decimal integer argument and uses it to set the
+(0-origin) screen background color index.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -f option
+accepts a printf-style format string and substitutes into it
+the values of image-descriptor and graphics-control fields.
+The string is formatted and output once for each selected
+image. Normal C-style escapes \b, \f, \n, \r, \t. \v, and
+\xNN are interpreted; also \e produces ESC (ASCII 0x1b). The
+following format cookies are substituted:</p>
+
+<p style="margin-left:9%; margin-top: 1em">%a</p>
+
+<p style="margin-left:14%;">Pixel aspect byte.</p>
+
+<p style="margin-left:9%; margin-top: 1em">%b</p>
+
+<p style="margin-left:14%;">Screen background color.</p>
+
+<p style="margin-left:9%; margin-top: 1em">%d</p>
+
+<p style="margin-left:14%;">Image delay time</p>
+
+<p style="margin-left:9%; margin-top: 1em">%h</p>
+
+<p style="margin-left:14%;">Image height (y dimension)</p>
+
+<p style="margin-left:9%; margin-top: 1em">%n</p>
+
+<p style="margin-left:14%;">Image index</p>
+
+<p style="margin-left:9%; margin-top: 1em">%p</p>
+
+<p style="margin-left:14%;">Image position (as an x,y
+pair)</p>
+
+<p style="margin-left:9%; margin-top: 1em">%s</p>
+
+<p style="margin-left:14%;">Screen size (as an x,y
+pair)</p>
+
+<p style="margin-left:9%; margin-top: 1em">%t</p>
+
+<p style="margin-left:14%;">Image transparent-color
+index</p>
+
+<p style="margin-left:9%; margin-top: 1em">%u</p>
+
+<p style="margin-left:14%;">Image user-input flag
+(boolean)</p>
+
+<p style="margin-left:9%; margin-top: 1em">%v</p>
+
+<p style="margin-left:14%;">GIF version string</p>
+
+<p style="margin-left:9%; margin-top: 1em">%w</p>
+
+<p style="margin-left:14%;">Image width (x dimension)</p>
+
+<p style="margin-left:9%; margin-top: 1em">%x</p>
+
+<p style="margin-left:14%;">Image GIF89 disposal mode</p>
+
+<p style="margin-left:9%; margin-top: 1em">%z</p>
+
+<p style="margin-left:14%;">Image's color table sort flag
+(boolean, false if no local color map)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Boolean
+substitutions may take a prefix to modify how they are
+displayed:</p>
+
+<p style="margin-left:9%; margin-top: 1em">1</p>
+
+<p style="margin-left:14%;">&quot;1&quot; or
+&quot;0&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">o</p>
+
+<p style="margin-left:14%;">&quot;on&quot; or
+&quot;off&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">t</p>
+
+<p style="margin-left:14%;">&quot;t&quot; or
+&quot;f&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">y</p>
+
+<p style="margin-left:14%;">&quot;yes&quot; or
+&quot;no&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Thus, for
+example, &quot;%oz&quot; displays image sort flags using the
+strings &quot;on&quot; and &quot;off&quot;. The default with
+no prefix is numeric.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -a option
+takes an unsigned decimal integer argument and uses it to
+set the aspect-ratio bye in the logical screen descriptor
+block.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -b option
+takes an unsigned decimal integer argument and uses it to
+set the background color index in the logical screen
+descriptor block.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -d option
+takes a decimal integer argument and uses it to set a delay
+time, in hundredths of a second, on selected images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -i option
+sets or clears interlaccing in selected images. Acceptable
+arguments are &quot;1&quot;, &quot;0&quot;, &quot;yes&quot;,
+&quot;no&quot;, &quot;on&quot;, &quot;off&quot;,
+&quot;t&quot;, &quot;f&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -p option
+takes a (0-origin) x,y coordinate-pair and sets it as the
+preferred upper-left-corner coordinates of selected
+images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -s option
+takes a (0-origin) x,y coordinate-pair and sets it as the
+expected display screen size.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -t option
+takes a decimal integer argument and uses it to set the
+(0-origin) index of the transparency color in selected
+images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -u option
+sets or clears the user-input flag in selected images.
+Acceptable arguments are &quot;1&quot;, &quot;0&quot;,
+&quot;yes&quot;, &quot;no&quot;, &quot;on&quot;,
+&quot;off&quot;, &quot;t&quot;, &quot;f&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -x option
+takes a decimal integer argument and uses it to set the
+GIF89 disposal mode in selected images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -z option
+sets or clears the color-table sort flag in selected images.
+Acceptable arguments are &quot;1&quot;, &quot;0&quot;,
+&quot;yes&quot;, &quot;no&quot;, &quot;on&quot;,
+&quot;off&quot;, &quot;t&quot;, &quot;f&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+-a, -b, -p, -s, and -z options are included to complete the
+ability to modify all fields defined in the GIF standard,
+but should have no effect on how an image renders on
+browsers or modern viewers.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Eric S.
+Raymond.</p>
+<hr>
+</body>
+</html>

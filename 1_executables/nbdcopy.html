@@ -1,0 +1,541 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:39 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>nbdcopy</title>
+
+</head>
+<body>
+
+<h1 align="center">nbdcopy</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#nbdcopy nbd://example.com local.img">nbdcopy nbd://example.com local.img</a><br>
+<a href="#nbdcopy nbd://example.com - | file -">nbdcopy nbd://example.com - | file -</a><br>
+<a href="#nbdcopy -p /dev/sdX &quot;nbd+unix:///?socket=/tmp/unixsock&quot;">nbdcopy -p /dev/sdX &quot;nbd+unix:///?socket=/tmp/unixsock&quot;</a><br>
+<a href="#nbdcopy nbd://server1 nbd://server2">nbdcopy nbd://server1 nbd://server2</a><br>
+<a href="#nbdcopy -- [ qemu-nbd -r -f qcow2 https://example.com/disk.qcow2 ] -">nbdcopy -- [ qemu-nbd -r -f qcow2 https://example.com/disk.qcow2 ] -</a><br>
+<a href="#cat disk1 disk2 | nbdcopy -- - [ qemu-nbd -f qcow2 output.qcow2 ]">cat disk1 disk2 | nbdcopy -- - [ qemu-nbd -f qcow2 output.qcow2 ]</a><br>
+<a href="#nbdcopy nbd://server null:">nbdcopy nbd://server null:</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#MULTI-CONN, THREADS, REQUESTS IN FLIGHT">MULTI-CONN, THREADS, REQUESTS IN FLIGHT</a><br>
+<a href="#RUNNING NBD SERVER AS A SUBPROCESS">RUNNING NBD SERVER AS A SUBPROCESS</a><br>
+<a href="#nbdcopy -- [ qemu-nbd -f qcow2 disk.qcow2 ] - | hexdump -C">nbdcopy -- [ qemu-nbd -f qcow2 disk.qcow2 ] - | hexdump -C</a><br>
+<a href="#nbdcopy -- [ qemu-nbd -f qcow2 disk.qcow2 ] [ nbdkit memory 1G ]">nbdcopy -- [ qemu-nbd -f qcow2 disk.qcow2 ] [ nbdkit memory 1G ]</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">nbdcopy - copy
+to and from an NBD server</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">nbdcopy
+[--allocated] [-C N|--connections=N] <br>
+[--destination-is-zero|--target-is-zero] [--flush] <br>
+[--no-extents] [-p|--progress|--progress=FD] <br>
+[--queue-size=N] [--request-size=N] [-R N|--requests=N] <br>
+[-S N|--sparse=N] [--synchronous] [-T N|--threads=N] <br>
+[-v|--verbose] <br>
+SOURCE DESTINATION</p>
+
+<p style="margin-left:9%; margin-top: 1em">SOURCE,
+DESTINATION := - | FILE | DEVICE | NBD-URI | [ CMD ARGS ...
+] <br>
+DESTINATION += null:</p>
+
+<p style="margin-left:9%; margin-top: 1em">nbdcopy
+--help</p>
+
+<p style="margin-left:9%; margin-top: 1em">nbdcopy
+-V|--version</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h3>nbdcopy nbd://example.com local.img
+<a name="nbdcopy nbd://example.com local.img"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This copies
+everything from the NBD server at &quot;example.com&quot; to
+a local file called <i>local.img</i>.</p>
+
+<h3>nbdcopy nbd://example.com - | file -
+<a name="nbdcopy nbd://example.com - | file -"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This streams the
+first part of the disk on the NBD server at
+&quot;example.com&quot; into the <b>file</b>(1) command.
+Note here that &quot;-&quot; means to stream to stdout (and
+therefore into the pipe to the file command).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdinfo</b>(1)
+is another way to detect the content on an NBD server.</p>
+
+<h3>nbdcopy -p /dev/sdX &quot;nbd+unix:///?socket=/tmp/unixsock&quot;
+<a name="nbdcopy -p /dev/sdX &quot;nbd+unix:///?socket=/tmp/unixsock&quot;"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copy the full
+local hard disk &quot;/dev/sdX&quot; to the NBD server
+listening on the Unix domain socket <i>/tmp/unixsock</i>.
+Because of the <i>-p</i> option this will print a progress
+bar.</p>
+
+<h3>nbdcopy nbd://server1 nbd://server2
+<a name="nbdcopy nbd://server1 nbd://server2"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copy a full disk
+from one NBD server to another.</p>
+
+<h3>nbdcopy -- [ qemu-nbd -r -f qcow2 https://example.com/disk.qcow2 ] -
+<a name="nbdcopy -- [ qemu-nbd -r -f qcow2 https://example.com/disk.qcow2 ] -"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Run
+<b>qemu-nbd</b>(8) as a subprocess to open URL
+&quot;https://example.com/disk.qcow2&quot;, which is then
+streamed to stdout (&quot;-&quot;), converted to blocks of
+raw format data. Note &quot;--&quot; to prevent qemu-nbd
+flags from being interpreted as nbdcopy flags.</p>
+
+<h3>cat disk1 disk2 | nbdcopy -- - [ qemu-nbd -f qcow2 output.qcow2 ]
+<a name="cat disk1 disk2 | nbdcopy -- - [ qemu-nbd -f qcow2 output.qcow2 ]"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Concatenate two
+raw-format disk images into the qcow2 file
+<i>output.qcow2</i>. The output file has to be
+precreated.</p>
+
+<h3>nbdcopy nbd://server null:
+<a name="nbdcopy nbd://server null:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Read the
+contents of the NBD server as fast as possible and throw it
+away (write it to a virtual null device). This is useful for
+benchmarking NBD servers and/or nbdcopy.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">nbdcopy copies
+to and from an NBD server. It can upload a local file to an
+NBD server, or download the contents of an NBD server to a
+local file, device or stdin/stdout. It can also copy between
+NBD servers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The local file
+can be a file, a block device (eg. &quot;/dev/cdrom&quot;),
+or &quot;-&quot; which means stream in from stdin or stream
+out to stdout.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The NBD server
+can be specified using an NBD URI (like
+&quot;nbd://localhost&quot;). The NBD server can be local or
+remote, and encryption can be used if libnbd was built with
+encryption support. Alternately you can use square brackets
+around a <b>qemu-nbd</b>(8) or <b>nbdkit</b>(1) command to
+run the NBD server as a subprocess of nbdcopy.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The destination
+may be the special word &quot;null:&quot; to throw away the
+output.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For more complex
+copying operations including converting between disk formats
+use &quot;qemu-img convert&quot;, see
+<b>qemu-img</b>(1).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:14%;">Display brief command line help
+and exit.</p>
+
+<p style="margin-left:9%;"><b>--allocated</b></p>
+
+<p style="margin-left:14%;">Normally nbdcopy tries to
+create sparse output (with holes) if the destination
+supports that. It does this in two ways: either using extent
+information from the source to copy holes (see
+<i>--no-extents</i>), or by detecting runs of zeroes (see
+<i>-S</i>). If you use <i>--allocated</i> then nbdcopy
+creates a fully allocated, non-sparse output on the
+destination.</p>
+
+<p style="margin-left:9%;"><b>-C</b> N <b><br>
+--connections=</b>N</p>
+
+<p style="margin-left:14%;">Set the maximum number of NBD
+connections (&quot;multi-conn&quot;). By default nbdcopy
+will try to use multi-conn with up to 4 connections if the
+NBD server supports it. If copying between NBD servers then
+nbdcopy cannot use multi-conn if either of the servers does
+not support it.</p>
+
+<p style="margin-left:9%;"><b>--destination-is-zero <br>
+--target-is-zero</b></p>
+
+<p style="margin-left:14%;">Assume the destination is
+already zeroed. This allows nbdcopy to skip copying blocks
+of zeroes from the source to the destination. This is not
+safe unless the destination device is already zeroed.
+(<i>--target-is-zero</i> is provided for compatibility with
+<b>qemu-img</b>(1).)</p>
+
+<p style="margin-left:9%;"><b>--flush</b></p>
+
+<p style="margin-left:14%;">Flush writes to ensure that
+everything is written to persistent storage before nbdcopy
+exits.</p>
+
+<p style="margin-left:9%;"><b>--no-extents</b></p>
+
+<p style="margin-left:14%;">Normally nbdcopy uses extent
+metadata to skip over parts of the source disk which contain
+holes. If you use this flag, nbdcopy ignores extent
+information and reads everything, which is usually slower.
+You might use this flag in two situations: the source NBD
+server has incorrect metadata information; or the source has
+very slow extent querying so it&rsquo;s faster to simply
+read all of the data.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-p</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--progress</b></p>
+
+<p style="margin-left:14%;">Display a progress bar.</p>
+
+<p style="margin-left:9%;"><b>--progress=</b>FD</p>
+
+<p style="margin-left:14%;">Write a progress bar to the
+file descriptor &quot;FD&quot; (a number) in a format which
+is easily parsable by other programs. nbdcopy will
+periodically write the string &quot;N/100\n&quot; (where N
+is an integer between 0 and 100) to the file descriptor.</p>
+
+<p style="margin-left:14%; margin-top: 1em">To get nbdcopy
+to write the progress bar to a file you can use the
+following shell commands:</p>
+
+<p style="margin-left:14%; margin-top: 1em">exec
+3&gt;/tmp/progress <br>
+nbdcopy --progress=3 ... <br>
+exec 3&gt;&amp;-</p>
+
+<p style="margin-left:9%;"><b>--queue-size=</b>N</p>
+
+<p style="margin-left:14%;">Set the maximum number of bytes
+to queue for in flight requests. The default value is 16
+MiB, allowing up to 64 256k requests per NBD connection. If
+you use larger <b>--request-size</b> you may want to
+increase this value.</p>
+
+<p style="margin-left:9%;"><b>--request-size=</b>N</p>
+
+<p style="margin-left:14%;">Set the maximum request size in
+bytes. The maximum value is 32 MiB, specified by the NBD
+protocol.</p>
+
+<p style="margin-left:9%;"><b>-R</b> N <b><br>
+--requests=</b>N</p>
+
+<p style="margin-left:14%;">Set the maximum number of
+requests in flight per NBD connection.</p>
+
+<p style="margin-left:9%;"><b>-S</b> N <b><br>
+--sparse=</b>N</p>
+
+<p style="margin-left:14%;">Detect all zero blocks of size
+N (bytes) and make them sparse on the output. You can also
+turn off sparse detection using <i>-S&nbsp;0</i>. The
+default is 4096 bytes, or the destination preferred block
+size, whichever is larger.</p>
+
+<p style="margin-left:9%;"><b>--synchronous</b></p>
+
+<p style="margin-left:14%;">Force synchronous copying using
+the <b>libnbd</b>(3) synchronous (&quot;high level&quot;)
+API. This is slow but may be necessary for some broken NBD
+servers which cannot handle multiple requests in flight.
+This mode is also used when streaming to and from stdio,
+pipes and sockets.</p>
+
+<p style="margin-left:9%;"><b>-T</b> N <b><br>
+--threads=</b>N</p>
+
+<p style="margin-left:14%;">Use up to N threads for
+copying. By default this is set to the number of processor
+cores available.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note
+<i>--threads=0</i> means autodetect and <i>--threads=1</i>
+means use a single thread.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--verbose</b></p>
+
+<p style="margin-left:14%;">Verbose output. This enables
+debug in libnbd (see <b>nbd_set_debug</b>(3)) as well as
+printing other useful information.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Display the package name and
+version and exit.</p>
+
+<h2>MULTI-CONN, THREADS, REQUESTS IN FLIGHT
+<a name="MULTI-CONN, THREADS, REQUESTS IN FLIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The three
+options <i>--connections</i>, <i>--threads</i> and
+<i>--requests</i> are related and control the amount of
+parallelism available. The defaults should ensure a
+reasonable amount of parallelism if possible and you
+don&rsquo;t need to adjust them, but this section tries to
+describe what is going on.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Firstly if
+either side of the copy is streaming to or from stdio, a
+pipe, or a socket, or if you use the <i>--synchronous</i>
+option, then nbdcopy works in synchronous mode with no
+parallelism, and nothing else in this section applies.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>--connections=N</i> option controls NBD multi-conn (see
+&quot;Multi-conn&quot; in <b>libnbd</b>(3)), opening up to N
+connections to the NBD server (or to both NBD servers if
+copying between NBD servers). This defaults to 4. The NBD
+servers must support and advertise multi-conn. For
+<b>nbdkit</b>(1) availability of multi-conn can depend on
+the plugin. You can use <b>nbdinfo</b>(1) to find out if a
+particular NBD server is advertising multi-conn. If the NBD
+server doesn&rsquo;t advertise multi-conn then only one
+connection will be opened regardless of the
+<i>--connections</i> flag.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When copying
+between two NBD servers, the number of connections is
+limited to the minimum multi-conn supported on both sides.
+For the purposes of this calculation, you can consider local
+files and block devices as supporting infinite
+multi-conn.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When you run an
+NBD server as a subprocess (using the
+&quot;[&nbsp;...&nbsp;]&quot; syntax) multi-conn cannot be
+used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>--threads=N</i> option allows nbdcopy to start up to N
+threads (defaulting to the number of cores). However nbdcopy
+cannot use more threads than the number of NBD
+connections.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>--requests=N</i> option controls the maximum number of
+requests in flight on each NBD connection. This enables the
+NBD server to process requests in parallel even when
+multi-conn isn&rsquo;t available or when using a single
+thread. The default is chosen to allow a reasonable amount
+of parallelism without using too much memory.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Because of this
+parallelism, nbdcopy does not read or write blocks in order.
+If for some reason you require that blocks are copied in
+strict order then you must use <i>--synchronous</i>.</p>
+
+<h2>RUNNING NBD SERVER AS A SUBPROCESS
+<a name="RUNNING NBD SERVER AS A SUBPROCESS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Instead of
+connecting to an already running server using an NBD URI,
+you can run an NBD server as a subprocess using:</p>
+
+<p style="margin-left:9%; margin-top: 1em">nbdcopy -- [ CMD
+ARGS ... ] ...</p>
+
+<p style="margin-left:9%; margin-top: 1em">This requires
+the server to support systemd socket activation, which both
+<b>qemu-nbd</b>(8) and <b>nbdkit</b>(1) support (see also
+<b>nbd_connect_systemd_socket_activation</b>(3)).</p>
+
+<p style="margin-left:9%; margin-top: 1em">&quot;[&quot;
+and &quot;]&quot; must be separate command line parameters.
+You will usually need to use &quot;--&quot; to stop nbdcopy
+from misinterpreting NBD server flags as nbdcopy flags. Both
+the source and destination may be subprocesses. nbdcopy
+cleans up the subprocess on exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some examples
+follow.</p>
+
+<h3>nbdcopy -- [ qemu-nbd -f qcow2 disk.qcow2 ] - | hexdump -C
+<a name="nbdcopy -- [ qemu-nbd -f qcow2 disk.qcow2 ] - | hexdump -C"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In this example,
+<b>qemu-nbd</b>(8) is run as a subprocess. The subprocess
+opens <i>disk.qcow2</i> and exposes it as NBD to nbdcopy.
+nbdcopy streams this to stdout (&quot;-&quot;) into the pipe
+which is read by <b>hexdump</b>(1). (See also
+<b>nbddump</b>(1))</p>
+
+<h3>nbdcopy -- [ qemu-nbd -f qcow2 disk.qcow2 ] [ nbdkit memory 1G ]
+<a name="nbdcopy -- [ qemu-nbd -f qcow2 disk.qcow2 ] [ nbdkit memory 1G ]"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Two subprocesses
+are created, <b>qemu-nbd</b>(8) as the source and
+<b>nbdkit</b>(1) as the destination. The qcow2 file is
+converted to raw and stored temporarily in the RAM disk
+(<b>nbdkit-memory-plugin</b>(1)).</p>
+
+<p style="margin-left:9%; margin-top: 1em">When nbdcopy
+exits both servers are killed and the RAM disk goes away, so
+this command has no overall effect, but is useful for
+testing.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3),
+<b>nbddump</b>(1), <b>nbdfuse</b>(1), <b>nbdinfo</b>(1),
+<b>nbdsh</b>(1), <b>nbdublk</b>(1), <b>nbdkit</b>(1),
+<b>qemu-img</b>(1).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Richard W.M.
+Jones</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

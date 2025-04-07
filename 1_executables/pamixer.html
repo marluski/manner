@@ -1,0 +1,177 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:18 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pamixer</title>
+
+</head>
+<body>
+
+<h1 align="center">pamixer</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pamixer -
+Pulseaudio command line mixer</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pamixer</b>
+[OPTIONS]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pamixer</b>
+controls the volume levels of Pulseaudio sinks and
+sources.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">Show help message.</p>
+
+<p style="margin-left:9%;"><b>--sink</b> <i>INDEX</i></p>
+
+<p style="margin-left:18%;">Choose a different sink than
+the default.</p>
+
+<p style="margin-left:9%;"><b>--source</b> <i>INDEX</i></p>
+
+<p style="margin-left:18%;">Choose a different source than
+the default.</p>
+
+<p style="margin-left:9%;"><b>--default-source</b></p>
+
+<p style="margin-left:18%;">Select the default source.</p>
+
+<p style="margin-left:9%;"><b>--get-volume</b></p>
+
+<p style="margin-left:18%;">Get the current volume.</p>
+
+<p style="margin-left:9%;"><b>--get-volume-human</b></p>
+
+<p style="margin-left:18%;">Get the current volume
+percentage or the string &quot;muted&quot;.</p>
+
+<p style="margin-left:9%;"><b>--set-volume</b>
+<i>PERCENTAGE</i></p>
+
+<p style="margin-left:18%;">Set the volume.</p>
+
+<p style="margin-left:9%;"><b>-i, --increase</b>
+<i>PERCENTAGE</i></p>
+
+<p style="margin-left:18%;">Increase the volume.</p>
+
+<p style="margin-left:9%;"><b>-d, --decrease</b>
+<i>PERCENTAGE</i></p>
+
+<p style="margin-left:18%;">Decrease the volume.</p>
+
+<p style="margin-left:9%;"><b>-t, --toggle-mute</b></p>
+
+<p style="margin-left:18%;">Switch between mute and
+unmute.</p>
+
+<p style="margin-left:9%;"><b>-m, --mute</b></p>
+
+<p style="margin-left:18%;">Set mute.</p>
+
+<p style="margin-left:9%;"><b>--allow-boost</b></p>
+
+<p style="margin-left:18%;">Allow volume to go above
+100%.</p>
+
+<p style="margin-left:9%;"><b>--gamma</b> <i>AMOUNT</i></p>
+
+<p style="margin-left:18%;">Increase/decrease using gamma
+correction e.g. 2.2.</p>
+
+<p style="margin-left:9%;"><b>-u, --unmute</b></p>
+
+<p style="margin-left:18%;">Unset mute.</p>
+
+<p style="margin-left:9%;"><b>--get-mute</b></p>
+
+<p style="margin-left:18%;">Display true if the volume is
+mute, false otherwise.</p>
+
+<p style="margin-left:9%;"><b>--list-sinks</b></p>
+
+<p style="margin-left:18%;">List the sinks.</p>
+
+<p style="margin-left:9%;"><b>--list-sources</b></p>
+
+<p style="margin-left:18%;">List the sources.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pamixer -d
+5</b></p>
+
+<p style="margin-left:18%;">Will decrease the volume by 5%
+on the default sink.</p>
+
+<p style="margin-left:9%;"><b>pamixer --source 2 -m</b></p>
+
+<p style="margin-left:18%;">Will mute source 2.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>amixer</b>(1),
+<b>alsamixer</b>(1)</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2011 - 2022 Cl&eacute;ment D&eacute;moulins
+&lt;clement@archivel.fr&gt;.</p>
+<hr>
+</body>
+</html>

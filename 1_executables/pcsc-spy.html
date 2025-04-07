@@ -1,0 +1,169 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:25 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>PCSC-SPY</title>
+
+</head>
+<body>
+
+<h1 align="center">PCSC-SPY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Starting the spy tool">Starting the spy tool</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pcsc-spy - A
+PC/SC spy command</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pcsc-spy
+[<b>-n</b>|<b>--nocolor</b>] [<b>-d</b>|<b>--diffable</b>]
+[<b>-h</b>|<b>--help</b>] [<b>-v</b>|<b>--version</b>]
+[<b>-t</b>|<b>--thread</b>] [<i>fifo_filename</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pcsc-spy
+displays PC/SC calls of an application. It must be used with
+the <i>libpcscspy.so.0</i> library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To be able to
+spy the PC/SC layer, the application flow must be modified
+using &quot;LIBPCSCLITE_DELEGATE&quot; so that all PC/SC
+calls are redirected.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--diffable</b></p>
+
+<p style="margin-left:14%;">Remove the variable parts (like
+handler values) from the output so that two execution can be
+more easily compared.</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:14%;">Display a short help text.</p>
+
+<p style="margin-left:9%;"><b>-n</b>, <b>--nocolor</b></p>
+
+<p style="margin-left:14%;">Disable the output colorization
+(if you want redirect the output in a file for example).</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:14%;">Print the version of the
+<i>pcsc-spy</i> program plus a copyright, a list of
+authors.</p>
+
+<p style="margin-left:9%;"><b>-t</b>, <b>--thread</b></p>
+
+<p style="margin-left:14%;">Add a thread number before each
+line of log to identify the calls from the same threads.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">We will use the
+&quot;LIBPCSCLITE_DELEGATE&quot; environment variable to
+load our spying library.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">sh
+/usr/share/doc/libpcsclite-dev/setup_spy.sh <br>
+export
+LIBPCSCLITE_DELEGATE=/lib/x86_64-linux-gnu/libpcscspy.so.0
+<br>
+LIBPCSCLITE_DELEGATE=/lib/x86_64-linux-gnu/libpcscspy.so.0
+my_application</p>
+
+<h3>Starting the spy tool
+<a name="Starting the spy tool"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">pcsc-spy</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a command
+argument is passed we use it instead of the default
+<i>&#732;/pcsc-spy</i> FIFO file. It is then possible to
+record an execution log and use pcsc-spy multiple times on
+the same log.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To create the
+log file just do:</p>
+
+<p style="margin-left:9%; margin-top: 1em">mkfifo
+&#732;/pcsc-spy <br>
+cat &#732;/pcsc-spy &gt; logfile</p>
+
+<p style="margin-left:9%; margin-top: 1em">and run your
+PC/SC application.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>&#732;/pcsc-spy</i>
+FIFO file is used by <i>libpcscspy.so.0</i> to send the raw
+log lines</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pcscd</b>(8)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written by Ludovic Rousseau &lt;rousseau@free.fr&gt;</p>
+<hr>
+</body>
+</html>

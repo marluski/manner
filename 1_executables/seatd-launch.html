@@ -1,0 +1,161 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:09 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>seatd-launch</title>
+
+</head>
+<body>
+
+<h1 align="center">seatd-launch</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">seatd-launch -
+Start a process with its own seatd instance</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>seatd-launch</b>
+[options] [--] command</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l
+&lt;loglevel&gt;</b></p>
+
+<p style="margin-left:14%;">Log-level to pass to seatd. See
+<b>seatd</b>(1) for information about available
+log-levels.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:14%;">Show the version number and
+quit.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">seatd-launch
+starts a seatd instance with a dedicated socket path, waits
+for it to be ready, and starts the specified command with
+SEATD_SOCK set appropriately. Once the specified command
+terminates, the seatd instance is also terminated.</p>
+
+<p style="margin-left:9%; margin-top: 1em">seatd requires
+root privileges to perform its tasks. This can be achieved
+through SUID of seatd-launch or by running seatd-launch as
+root. seatd-launch will drop privileges from the effective
+user to the real user before running the specified command.
+If the real user is root, this is simply a noop. You should
+only run seatd-launch as root if you intend for the
+specified command to run as root as well.</p>
+
+<p style="margin-left:9%; margin-top: 1em">seatd-launch
+serves a similar purpose to the libseat &quot;builtin&quot;
+backend, but is superior to it for two reasons:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="2%"></td>
+<td width="73%">
+
+
+<p>The specified command never runs as root</p></td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="2%"></td>
+<td width="73%">
+
+
+<p>The standard seatd executable and libseat backend is
+used</p> </td>
+<td width="13%">
+</td></tr>
+</table>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">seatd-launch
+exits with the status of its child. When the child
+terminates on a signal <i>N</i>, seatd-launch exits with the
+status 128 + <i>N</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If seatd-launch
+fails because of another error, it exits with a non-zero
+status.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The libseat
+library, <b>&lt;libseat.h&gt;</b>, <b>seatd</b>(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Kenny Levinsen &lt;contact@kl.wtf&gt;, who is assisted by
+other open-source contributors. For more information about
+seatd development, see
+https://sr.ht/&#732;kennylevinsen/seatd.</p>
+<hr>
+</body>
+</html>

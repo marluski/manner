@@ -1,0 +1,897 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:21 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>IMPORTCTL</title>
+
+</head>
+<body>
+
+<h1 align="center">IMPORTCTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">importctl -
+Download, import or export disk images</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="54%">
+
+
+<p style="margin-top: 1em"><b>importctl</b> [OPTIONS...]
+{COMMAND} [NAME...]</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>importctl</b>
+may be used to download, import, and export disk images via
+<b>systemd-importd.service</b>(8).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>importctl</b>
+operates both on block-level disk images (such as DDIs) as
+well as file-system-level images (tarballs). It supports
+disk images in one of the four following classes:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; VM
+images or full OS container images, that may be run via
+<b>systemd-vmspawn</b>(1) or <b>systemd-nspawn</b>(1), and
+managed via <b>machinectl</b>(1).</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Portable
+service images, that may be attached and managed via
+<b>portablectl</b>(1).</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; System
+extension (sysext) images, that may be activated via
+<b>systemd-sysext</b>(8).</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+Configuration extension (confext) images, that may be
+activated via <b>systemd-confext</b>(8).</p>
+
+<p style="margin-left:9%; margin-top: 1em">When images are
+downloaded or imported they are placed in the following
+directories, depending on the <b>--class=</b> parameter:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Table&nbsp;1.&nbsp;Classes
+and Directories</b></p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+commands are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>pull-tar</b>
+<i>URL</i> [<i>NAME</i>]</p>
+
+<p style="margin-left:14%;">Downloads a .tar image from the
+specified URL, and makes it available under the specified
+local name in the image directory for the selected
+<b>--class=</b>. The URL must be of type &quot;http://&quot;
+or &quot;https://&quot;, and must refer to a .tar, .tar.gz,
+.tar.xz or .tar.bz2 archive file. If the local image name is
+omitted, it is automatically derived from the last component
+of the URL, with its suffix removed.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The image is
+verified before it is made available, unless
+<b>--verify=no</b> is specified. Verification is done either
+via an inline signed file with the name of the image and the
+suffix .sha256 or via separate SHA256SUMS and SHA256SUMS.gpg
+files. The signature files need to be made available on the
+same web server, under the same URL as the .tar file. With
+<b>--verify=checksum</b>, only the SHA256 checksum for the
+file is verified, based on the .sha256 suffixed file or the
+SHA256SUMS file. With <b>--verify=signature</b>, the sha
+checksum file is first verified with the inline signature in
+the .sha256 file or the detached GPG signature file
+SHA256SUMS.gpg. The public key for this verification step
+needs to be available in /usr/lib/systemd/import-pubring.gpg
+or /etc/systemd/import-pubring.gpg.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If
+<b>-keep-download=yes</b> is specified the image will be
+downloaded and stored in a read-only subvolume/directory in
+the image directory that is named after the specified URL
+and its HTTP etag (see <b><font color="#0000FF">HTTP
+ETag</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">for more information). A writable
+snapshot is then taken from this subvolume, and named after
+the specified local name. This behavior ensures that
+creating multiple instances of the same URL is efficient, as
+multiple downloads are not necessary. In order to create
+only the read-only image, and avoid creating its writable
+snapshot, specify &quot;-&quot; as local name.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that pressing Control-c during execution of this command
+will not abort the download. Use <b>cancel-transfer</b>,
+described below.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>pull-raw</b>
+<i>URL</i> [<i>NAME</i>]</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Downloads
+a .raw disk image from the specified URL, and makes it
+available under the specified local name in the image
+directory for the selected <b>--class=</b>. The URL must be
+of type &quot;http://&quot; or &quot;https://&quot;. The
+image must either be a qcow2 or raw disk image, optionally
+compressed as .gz, .xz, or .bz2. If the local name is
+omitted, it is automatically derived from the last component
+of the URL, with its suffix removed.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Image
+verification is identical for raw and tar images (see
+above).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">If
+the downloaded image is in qcow2 format it is converted into
+a raw image file before it is made available.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">If
+<b>-keep-download=yes</b> is specified the image will be
+downloaded and stored in a read-only file in the image
+directory that is named after the specified URL and its HTTP
+etag. A writable copy is then made from this file, and named
+after the specified local name. This behavior ensures that
+creating multiple instances of the same URL is efficient, as
+multiple downloads are not necessary. In order to create
+only the read-only image, and avoid creating its writable
+copy, specify &quot;-&quot; as local name.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that pressing Control-c during execution of this command
+will not abort the download. Use <b>cancel-transfer</b>,
+described below.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>import-tar</b>
+<i>FILE</i> [<i>NAME</i>], <b>import-raw</b> <i>FILE</i>
+[<i>NAME</i>]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Imports a
+TAR or RAW image, and places it under the specified name in
+the image directory for the image class selected via
+<b>--class=</b>. When <b>import-tar</b> is used, the file
+specified as the first argument should be a <b>tar</b>(1)
+archive, possibly compressed with <b>xz</b>(1),
+<b>gzip</b>(1), or <b>bzip2</b>(1). It will then be unpacked
+into its own subvolume/directory. When <b>import-raw</b> is
+used, the file should be a qcow2 or raw disk image, possibly
+compressed with xz, gzip or bzip2. If the second argument
+(the resulting image name) is not specified, it is
+automatically derived from the file name. If the filename is
+passed as &quot;-&quot;, the image is read from standard
+input, in which case the second argument is
+mandatory.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">No
+cryptographic validation is done when importing the
+images.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Much
+like image downloads, ongoing imports may be listed with
+<b>list</b> and aborted with
+<b>cancel-transfer</b>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>import-fs</b>
+<i>DIRECTORY</i> [<i>NAME</i>]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Imports
+an image stored in a local directory into the image
+directory for the image class selected via <b>--class=</b>
+and operates similarly to <b>import-tar</b> or
+<b>import-raw</b>, but the first argument is the source
+directory. If supported, this command will create a
+<b>btrfs</b>(8) snapshot or subvolume for the new
+image.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>export-tar</b>
+<i>NAME</i> [<i>FILE</i>], <b>export-raw</b> <i>NAME</i>
+[<i>FILE</i>]</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Exports a
+TAR or RAW image and stores it in the specified file. The
+first parameter should be an image name. The second
+parameter should be a file path the TAR or RAW image is
+written to. If the path ends in &quot;.gz&quot;, the file is
+compressed with <b>gzip</b>(1), if it ends in
+&quot;.xz&quot;, with <b>xz</b>(1), and if it ends in
+&quot;.bz2&quot;, with <b>bzip2</b>(1). If the path ends in
+neither, the file is left uncompressed. If the second
+argument is missing, the image is written to standard
+output. The compression may also be explicitly selected with
+the <b>--format=</b> switch. This is in particular useful if
+the second parameter is left unspecified.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Much
+like image downloads and imports, ongoing exports may be
+listed with <b>list</b> and aborted with
+<b>cancel-transfer</b>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that, currently, only directory and subvolume images may be
+exported as TAR images, and only raw disk images as RAW
+images.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>list-transfer</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Shows a
+list of image downloads, imports and exports that are
+currently in progress.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>cancel-transfer</b>
+<i>ID</i>...</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Aborts a
+download, import or export of the image with the specified
+ID. To list ongoing transfers and their IDs, use
+<b>list</b>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>list-images</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Shows a
+list of already downloaded/imported images.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+following options are understood:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--read-only</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When used
+with <b>pull-raw</b>, <b>pull-tar</b>, <b>import-raw</b>,
+<b>import-tar</b> or <b>import-fs</b> a read-only image is
+created.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--verify=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When
+downloading an image, specify whether the image shall be
+verified before it is made available. Takes one of
+&quot;no&quot;, &quot;checksum&quot; and
+&quot;signature&quot;. If &quot;no&quot;, no verification is
+done. If &quot;checksum&quot; is specified, the download is
+checked for integrity after the transfer is complete, but no
+signatures are verified. If &quot;signature&quot; is
+specified, the checksum is verified and the image's
+signature is checked against a local keyring of trustable
+vendors. It is strongly recommended to set this option to
+&quot;signature&quot; if the server and protocol support
+this. Defaults to &quot;signature&quot;.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--force</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When
+downloading an image, and a local copy by the specified
+local name already exists, delete it first and replace it by
+the newly downloaded image.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--format=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">When used
+with the <b>export-tar</b> or <b>export-raw</b> commands,
+specifies the compression format to use for the resulting
+file. Takes one of &quot;uncompressed&quot;, &quot;xz&quot;,
+&quot;gzip&quot;, &quot;bzip2&quot;. By default, the format
+is determined automatically from the output image file name
+passed.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-q</b>,
+<b>--quiet</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Suppresses
+additional informational output while running.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-H</b>,
+<b>--host=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Execute
+the operation remotely. Specify a hostname, or a username
+and hostname separated by &quot;@&quot;, to connect to. The
+hostname may optionally be suffixed by a port ssh is
+listening on, separated by &quot;:&quot;, and then a
+container name, separated by &quot;/&quot;, which connects
+directly to a specific container on the specified host. This
+will use SSH to talk to the remote machine manager instance.
+Container names may be enumerated with <b>machinectl -H</b>
+<i>HOST</i>. Put IPv6 addresses in brackets.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-M</b>,
+<b>--machine=</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Connect
+to <b>systemd-import.service</b>(8) running in a local
+container, to perform the specified operation within the
+container.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--class=</b>,
+<b>-m</b>, <b>-P</b>, <b>-S</b>, <b>-C</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Selects
+the image class for the downloaded images. This primarily
+selects the directory to download into. The <b>--class=</b>
+switch takes &quot;machine&quot;, &quot;portable&quot;,
+&quot;sysext&quot; or &quot;confext&quot; as argument. The
+short options <b>-m</b>, <b>-P</b>, <b>-S</b>, <b>-C</b> are
+shortcuts for <b>--class=machine</b>,
+<b>--class=portable</b>, <b>--class=sysext</b>,
+<b>--class=confext</b>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that <b>--keep-download=</b> defaults to true for
+<b>--class=machine</b> and false otherwise, see
+below.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--keep-download=</b>,
+<b>-N</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Takes a
+boolean argument. When specified with <b>pull-raw</b> or
+<b>pull-tar</b>, selects whether to download directly into
+the specified local image name, or whether to download into
+a read-only copy first of which to make a writable copy
+after the download is completed. Defaults to true for
+<b>--class=machine</b>, false otherwise.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+<b>-N</b> switch is a shortcut for
+<b>--keep-download=no</b>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Added
+in version 256.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--json=</b><i>MODE</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Shows
+output formatted as JSON. Expects one of &quot;short&quot;
+(for the shortest possible output without any redundant
+whitespace or line breaks), &quot;pretty&quot; (for a pretty
+version of the same, with indentation and line breaks) or
+&quot;off&quot; (to turn off JSON output, the
+default).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-j</b></font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Equivalent
+to <b>--json=pretty</b> if running on a terminal, and
+<b>--json=short</b> otherwise.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--no-pager</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Do not
+pipe output into a pager.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--no-legend</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Do not
+print the legend, i.e. column headers and the footer with
+hints.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--no-ask-password</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Do not
+query the user for authentication for privileged
+operations.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>-h</b>,
+<b>--help</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print a
+short help text and exit.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--version</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print a
+short version string and exit.</font></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Example&nbsp;1.&nbsp;Download
+an Ubuntu TAR image and open a shell in it</b></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+importctl pull-tar -mN
+https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-root.tar.xz
+<br>
+# systemd-nspawn -M
+jammy-server-cloudimg-amd64-root</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+downloads and verifies the specified .tar image, and then
+uses <b>systemd-nspawn</b>(1) to open a shell in
+it.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Example&nbsp;2.&nbsp;Download
+an Ubuntu RAW image, set a root password in it, start it as
+a service</b></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+importctl pull-raw -mN \ <br>
+
+https://cloud-images.ubuntu.com/jammy/current/jammy-server-cloudimg-amd64-disk-kvm.img
+\ <br>
+jammy <br>
+# systemd-firstboot --image=/var/lib/machines/jammy.raw
+--prompt-root-password --force <br>
+# machinectl start jammy <br>
+# machinectl login jammy</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+downloads the specified .raw image and makes it available
+under the local name &quot;jammy&quot;. Then, a root
+password is set with <b>systemd-firstboot</b>(1). Afterwards
+the machine is started as system service. With the last
+command a login prompt into the container is
+requested.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Example&nbsp;3.&nbsp;Exports
+a container image as tar file</b></font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">#
+importctl export-tar -m fedora myfedora.tar.xz</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Exports
+the container &quot;fedora&quot; as an xz-compressed tar
+file myfedora.tar.xz into the current directory.</font></p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">On
+success, 0 is returned, a non-zero failure code
+otherwise.</font></p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LOG_LEVEL</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+maximum log level of emitted messages (messages with a
+higher log level, i.e. less important ones, will be
+suppressed). Takes a comma-separated list of values. A value
+may be either one of (in order of decreasing importance)
+<b>emerg</b>, <b>alert</b>, <b>crit</b>, <b>err</b>,
+<b>warning</b>, <b>notice</b>, <b>info</b>, <b>debug</b>, or
+an integer in the range 0...7. See <b>syslog</b>(3) for more
+information. Each value may optionally be prefixed with one
+of <b>console</b>, <b>syslog</b>, <b>kmsg</b> or
+<b>journal</b> followed by a colon to set the maximum log
+level for that specific log target (e.g.
+<b>SYSTEMD_LOG_LEVEL=debug,console:info</b> specifies to log
+at debug level except when logging to the console which
+should be at info level). Note that the global maximum log
+level takes priority over any per target maximum log
+levels.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LOG_COLOR</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">A
+boolean. If true, messages written to the tty will be
+colored according to priority.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+setting is only useful when messages are written directly to
+the terminal, because <b>journalctl</b>(1) and other tools
+that display logs will color messages based on the log level
+on their own.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LOG_TIME</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">A
+boolean. If true, console log messages will be prefixed with
+a timestamp.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">This
+setting is only useful when messages are written directly to
+the terminal or a file, because <b>journalctl</b>(1) and
+other tools that display logs will attach timestamps based
+on the entry metadata on their own.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LOG_LOCATION</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">A
+boolean. If true, messages will be prefixed with a filename
+and line number in the source code where the message
+originates.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that the log location is often attached as metadata to
+journal entries anyway. Including it directly in the message
+text can nevertheless be convenient when debugging
+programs.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LOG_TID</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">A
+boolean. If true, messages will be prefixed with the current
+numerical thread ID (TID).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that the this information is attached as metadata to journal
+entries anyway. Including it directly in the message text
+can nevertheless be convenient when debugging
+programs.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LOG_TARGET</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The
+destination for log messages. One of <b>console</b> (log to
+the attached tty), <b>console-prefixed</b> (log to the
+attached tty but with prefixes encoding the log level and
+&quot;facility&quot;, see <b>syslog</b>(3), <b>kmsg</b> (log
+to the kernel circular log buffer), <b>journal</b> (log to
+the journal), <b>journal-or-kmsg</b> (log to the journal if
+available, and to kmsg otherwise), <b>auto</b> (determine
+the appropriate log target automatically, the default),
+<b>null</b> (disable log output).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LOG_RATELIMIT_KMSG</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Whether
+to ratelimit kmsg or not. Takes a boolean. Defaults to
+&quot;true&quot;. If disabled, systemd will not ratelimit
+messages written to kmsg.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_PAGER</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Pager to
+use when <b>--no-pager</b> is not given; overrides
+<i>$PAGER</i>. If neither <i>$SYSTEMD_PAGER</i> nor
+<i>$PAGER</i> are set, a set of well-known pager
+implementations are tried in turn, including <b>less</b>(1)
+and <b>more</b>(1), until one is found. If no pager
+implementation is discovered no pager is invoked. Setting
+this environment variable to an empty string or the value
+&quot;cat&quot; is equivalent to passing
+<b>--no-pager</b>.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note:
+if <i>$SYSTEMD_PAGERSECURE</i> is not set,
+<i>$SYSTEMD_PAGER</i> (as well as <i>$PAGER</i>) will be
+silently ignored.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LESS</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Override
+the options passed to <b>less</b> (by default
+&quot;FRSXMK&quot;).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Users
+might want to change two options in particular:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>K</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">This
+option instructs the pager to exit immediately when Ctrl+C
+is pressed. To allow <b>less</b> to handle Ctrl+C itself to
+switch back to the pager command prompt, unset this
+option.</font></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><font color="#000000">If
+the value of <i>$SYSTEMD_LESS</i> does not include
+&quot;K&quot;, and the pager that is invoked is <b>less</b>,
+Ctrl+C will be ignored by the executable, and needs to be
+handled by the pager.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>X</b></font></p>
+
+<p style="margin-left:19%;"><font color="#000000">This
+option instructs the pager to not send termcap
+initialization and deinitialization strings to the terminal.
+It is set by default to allow command output to remain
+visible in the terminal even after the pager exits.
+Nevertheless, this prevents some pager functionality from
+working, in particular paged output cannot be scrolled with
+the mouse.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that setting the regular <i>$LESS</i> environment variable
+has no effect for <b>less</b> invocations by systemd
+tools.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">See
+<b>less</b>(1) for more discussion.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_LESSCHARSET</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Override
+the charset passed to <b>less</b> (by default
+&quot;utf-8&quot;, if the invoking terminal is determined to
+be UTF-8 compatible).</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note
+that setting the regular <i>$LESSCHARSET</i> environment
+variable has no effect for <b>less</b> invocations by
+systemd tools.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_PAGERSECURE</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Takes a
+boolean argument. When true, the &quot;secure&quot; mode of
+the pager is enabled; if false, disabled. If
+<i>$SYSTEMD_PAGERSECURE</i> is not set at all, secure mode
+is enabled if the effective UID is not the same as the owner
+of the login session, see <b>geteuid</b>(2) and
+<b>sd_pid_get_owner_uid</b>(3). In secure mode,
+<b>LESSSECURE=1</b> will be set when invoking the pager, and
+the pager shall disable commands that open or create new
+files or start new subprocesses. When
+<i>$SYSTEMD_PAGERSECURE</i> is not set at all, pagers which
+are not known to implement secure mode will not be used.
+(Currently only <b>less</b>(1) implements secure
+mode.)</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Note:
+when commands are invoked with elevated privileges, for
+example under <b>sudo</b>(8) or <b>pkexec</b>(1), care must
+be taken to ensure that unintended interactive features are
+not enabled. &quot;Secure&quot; mode for the pager may be
+enabled automatically as describe above. Setting
+<i>SYSTEMD_PAGERSECURE=0</i> or not removing it from the
+inherited environment allows the user to invoke arbitrary
+commands. Note that if the <i>$SYSTEMD_PAGER</i> or
+<i>$PAGER</i> variables are to be honoured,
+<i>$SYSTEMD_PAGERSECURE</i> must be set too. It might be
+reasonable to completely disable the pager using
+<b>--no-pager</b> instead.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_COLORS</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Takes a
+boolean argument. When true, <b>systemd</b> and related
+utilities will use colors in their output, otherwise the
+output will be monochrome. Additionally, the variable can
+take one of the following special values: &quot;16&quot;,
+&quot;256&quot; to restrict the use of colors to the base 16
+or 256 ANSI colors, respectively. This can be specified to
+override the automatic decision based on <i>$TERM</i> and
+what the console is connected to.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>$SYSTEMD_URLIFY</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The value
+must be a boolean. Controls whether clickable links should
+be generated in the output for terminal emulators supporting
+this. This can be specified to override the decision that
+<b>systemd</b> makes based on <i>$TERM</i> and other
+conditions.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>systemd</b>(1),
+<b>systemd-importd.service</b>(8), <b>systemd-nspawn</b>(1),
+<b>systemd-vmspawn</b>(1), <b>machinectl</b>(1),
+<b>portablectl</b>(1), <b>systemd-sysext</b>(8),
+<b>systemd-confext</b>(8), <b>tar</b>(1), <b>xz</b>(1),
+<b>gzip</b>(1), <b>bzip2</b>(1)</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><font color="#000000">HTTP
+ETag</font></p> </td>
+<td width="74%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://en.wikipedia.org/wiki/HTTP_ETag</font></p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:32 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>PIDOF</title>
+
+</head>
+<body>
+
+<h1 align="center">PIDOF</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pidof - find the
+process ID of a running program</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pidof</b>
+[<b>-s</b>] [<b>-c</b>] [<b>-q</b>] [<b>-w</b>] [<b>-x</b>]
+[<b>-o</b> <i>omitpid</i>[,...]] ... [<b>-t</b>] [<b>-S</b>
+<i>separator</i>] <i>program</i> ...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Pidof</b>
+finds the process id&rsquo;s (pids) of the named programs.
+It prints those id&rsquo;s on the standard output.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-s</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Single shot - this instructs the
+program to only return one <i>pid</i>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-c</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Only return process ids that are running with the same
+root directory. This option is ignored for non-root users,
+as they will be unable to check the current root directory
+of processes they do not own.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-q</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Quiet mode, suppress any output and only sets the exit
+status accordingly.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-w</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Show also processes that do not have visible command
+line (e.g. kernel worker threads).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-x</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Scripts too - this causes the program to also return
+process id&rsquo;s of shells running the named scripts.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-o</b> <i>omitpid</i></p>
+
+<p style="margin-left:18%;">Tells <b>pidof</b> to omit
+processes with that process id. The special pid <b>%PPID</b>
+can be used to name the parent process of the <b>pidof</b>
+program, in other words the calling shell or shell
+script.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-t</b></p></td>
+<td width="6%"></td>
+<td width="47%">
+
+
+<p>Shows all thread ids instead of pids.</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-S</b> <i>separator</i></p>
+
+<p style="margin-left:18%;">Use <i>separator</i> as a
+separator put between pids. Used only when more than one
+pids are printed for the program. The <b>-d</b> option is an
+alias for this option for sysvinit <b>pidof</b>
+compatibility.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>0</b></p></td>
+<td width="8%"></td>
+<td width="70%">
+
+
+<p style="margin-top: 1em">At least one program was found
+with the requested name.</p></td>
+<td width="12%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p><b>1</b></p></td>
+<td width="8%"></td>
+<td width="70%">
+
+
+<p>No program was found with the requested name.</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When using the
+<b>-x</b> option, <b>pidof</b> only has a simple method for
+detecting scripts and will miss scripts that, for example,
+use env. This limitation is due to how the scripts look in
+the proc filesystem.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pgrep</b>(1),
+<b>pkill</b>(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="mailto:jcapik@redhat.com">Jaromir
+Capik</a></p>
+<hr>
+</body>
+</html>

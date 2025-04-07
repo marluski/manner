@@ -1,0 +1,195 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:20 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ilasm</title>
+
+</head>
+<body>
+
+<h1 align="center">ilasm</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ilasm, ilasm2 -
+Mono IL assembler</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ilasm</b>
+[option] [source-files]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>ilasm2</b>
+[option] [source-files]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ilasm is the
+Mono ILAsm assembler. You can pass one or more options to
+drive the compiler, and a set of source files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use <i>ilasm</i>
+to generate 1.0 assemblies and use <i>ilasm2</i> to assemble
+programs that use the 2.0 features (generics).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Mono ILAsm
+assembler accepts options starting with / or - for mosted
+options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Mono ILAsm
+assembler generates images (.exe and .dll files) that
+contain CIL byte code that can be executed by any system
+that implemented a Common Language Infrastructure virtual
+machine.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>/output:&lt;file_name&gt;</b></p>
+
+<p style="margin-left:18%;">Specify the output file
+name.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>/exe</b></p></td>
+<td width="4%"></td>
+<td width="23%">
+
+
+<p>Generate an exe</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>/dll</b></p></td>
+<td width="4%"></td>
+<td width="23%">
+
+
+<p>Generate a library</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>/scan_only</b></p>
+
+<p style="margin-left:18%;">Just scan the IL code and
+display tokens.</p>
+
+<p style="margin-left:9%;"><b>/show_tokens</b></p>
+
+<p style="margin-left:18%;">Show tokens as they are
+parsed.</p>
+
+<p style="margin-left:9%;"><b>/show_method_def</b></p>
+
+<p style="margin-left:18%;">Display method information when
+a method is defined.</p>
+
+<p style="margin-left:9%;"><b>/show_method_ref</b></p>
+
+<p style="margin-left:18%;">Display method information when
+a method is referenced</p>
+
+<p style="margin-left:9%;"><b>/key:KEYFILE</b></p>
+
+<p style="margin-left:18%;">Strongname (sign) the output
+assembly using the key pair present in the specified strong
+name key file (snk). A full key pair is required (i.e. delay
+signing is done using a .publickey directive in the
+sources).</p>
+
+<p style="margin-left:9%;"><b>/key:@CONTAINER</b></p>
+
+<p style="margin-left:18%;">Strongname (sign) the output
+assembly using the key pair present in the specified
+container.</p>
+
+<p style="margin-left:9%;"><b>--about</b></p>
+
+<p style="margin-left:18%;">Display information about
+ilasm</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Display ilasm version</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono(1),</b>mcs(1)</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2004, 2007 Novell, Inc (http://www.novell.com)</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

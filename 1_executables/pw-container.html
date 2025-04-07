@@ -1,0 +1,168 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pw-container</title>
+
+</head>
+<body>
+
+<h1 align="center">pw-container</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pw-container -
+The PipeWire container utility</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-container</b>
+[<i>options</i>] [<i>PROGRAM</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Run a program in
+a new security context [1].</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-container</b>
+will create a new temporary unix socket and uses the
+SecurityContext extension API to create a server on this
+socket with the given properties. Clients created from this
+server socket will have the security properties attached to
+them.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This can be used
+to simulate the behaviour of Flatpak or other
+containers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Without any
+arguments, <b>pw-container</b> simply creates the new socket
+and prints the address on stdout. Other PipeWire programs
+can then be run with PIPEWIRE_REMOTE=&lt;socket-address&gt;
+to connect through this security context.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When
+<i>PROGRAM</i> is given, the PIPEWIRE_REMOTE env variable
+will be set and <i>PROGRAM</i> will be passed to system().
+Argument to <i>PROGRAM</i> need to be properly quoted.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-P |
+--properties=VALUE</b></p>
+
+<p style="margin-left:14%;">Set extra context properties as
+a JSON object.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r |
+--remote=NAME</b></p>
+
+<p style="margin-left:14%;">The name the <i>remote</i>
+instance to connect to. If left unspecified, a connection is
+made to the default PipeWire instance.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h |
+--help</b></p>
+
+<p style="margin-left:14%;">Show help.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Show version information.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If the security
+context was successfully created, <b>pw-container</b> does
+not exit until terminated with a signal. It exits with
+status 0 if terminated by SIGINT or SIGTERM in this
+case.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Otherwise, it
+exits with nonzero exit status.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-container</b>
+&rsquo;pw-dump i 0&rsquo;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run pw-dump of
+the Core object. Note the difference in the object
+permissions when running pw-dump with and without
+<b>pw-container</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-container</b>
+&rsquo;pw-dump pw-dump&rsquo;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run pw-dump of
+itself. Note the difference in the Client security tokens
+when running pw-dump with and without
+<b>pw-container</b>.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">[1]
+https://gitlab.freedesktop.org/wayland/wayland-protocols/-/blob/main/staging/security-context/security-context-v1.xml
+- Creating a security context</p>
+<hr>
+</body>
+</html>

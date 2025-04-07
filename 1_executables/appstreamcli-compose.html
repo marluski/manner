@@ -1,0 +1,338 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:41 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>APPSTREAMCLI COMPOSE</title>
+
+</head>
+<body>
+
+<h1 align="center">APPSTREAMCLI COMPOSE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">appstreamcli-compose
+- Compose AppStream metadata catalog from directory
+trees</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em"><b>appstreamcli compose</b>
+[<b>COMMAND</b>]</p> </td>
+<td width="53%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+documents briefly the <b>appstreamcli compose</b>
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>appstreamcli compose</b> tool is used to construct
+AppStream metadata catalogs from directory trees. The tool
+will also perform many related metadata generation actions,
+like resizing icons and screenshots and merging in data from
+referenced desktop-entry files as well as translation status
+information. Therefore, the tool provides a fast way to test
+how the final processed metadata for an application that is
+shipped to users may look like. It also provides a way to
+easily generate AppStream data for projects which do not
+need a more complex data generator like
+<b>appstream-generator</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In order for the
+<b>appstreamcli compose</b> command to be available, you may
+need to install the optional compose module for
+<b>appstreamcli</b> first.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For more
+information about the AppStream project and the other
+components which are part of it, take a look at the
+AppStream pages at
+<b><font color="#0000FF">Freedesktop.org</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">.</font></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>SOURCE-DIRECTORIES</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">A list of
+directories to process needs to be provided as positional
+parameters. Data from all directories will be combined into
+one output namespace.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--origin</b>
+<i>NAME</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set the
+AppStream data origin identifier. This can be a value like
+&quot;debian-unstable-main&quot; or
+&quot;flathub&quot;.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--result-root</b>
+<i>DIR</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Sets the
+directory where all generated output that is deployed to a
+user's machine is exported to. If this parameter is not set
+and we only have one directory to process, we use that
+directory as default output path.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">If
+both <b>--data-dir</b> and <b>--icons-dir</b> are set,
+<b>--result-root</b> is not necessary and no data will be
+written to that directory.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--data-dir</b>
+<i>DIR</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Override
+the directory where the generated AppStream metadata catalog
+will be written to. Data will be written directly to this
+directory, and no supdirectories will be created (unlike
+when using <b>--result-root</b> to set an output
+location).</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--icons-dir</b>
+<i>DIR</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Override
+the directory where the cached icons are exported
+to.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--hints-dir</b>
+<i>DIR</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set a
+directory where hints reported generated during metadata
+processing are saved to. If this parameter is not set, no
+HTML/YAML hint reports will be saved.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--media-dir</b>
+<i>DIR</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">If set,
+creates a directory with media content (icons, screenshots,
+...) that can be served via a webserver. The metadata will
+be extended to include information about these remote
+media.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--media-baseurl</b>
+<i>URL</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">The URL
+under which the contents of a directory set via
+<b>--media-dir</b> will be served. This value must be set if
+a media directory is created.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--prefix</b>
+<i>DIR</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set the
+default prefix that is used in the processed directories. If
+none is set explicitly, /usr is assumed.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--print-report</b>
+<i>MODE</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Print the
+issue hints report (that gets exported as HTML and YAML
+document when <b>--hints-dir</b> was set) to the console in
+text form.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">Various
+print modes are supported: <i>on-error</i> only prints a
+short report if the run failed (default), <i>short</i>
+generates an abridged report that is always printed and
+<i>full</i> results in a detailed report to be
+printed.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--no-partial-urls</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">If set,
+all URLs in the generated data will be absolute and
+media_baseurl will not be used. This makes changing the
+media mirror harder without regenerating all data and is
+generally not recommended, to increase
+flexibility.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--icon-policy</b>
+<i>POLICY-STRING</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Override
+the existing icon policy with a custom one. The icon policy
+sets how icons of different sizes should be dealt with. They
+can be in the icon cache only, be a remote icon in the media
+location or be both cached and available in the remote
+location.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">The
+icon-policy string is comprised of comma-separated
+%{size}x%{size}@%{scale}=%{state} statements. The size and
+scale are that of the respective icon, with the scale being
+allowed to be omitted if it is 1. The state can be one of
+remote, cached or cached-remote.</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000">By
+default, a policy of
+48x48=cached,48x48@2=cached,64x64=cached,64x64@2=cached,128x128=cached-remote,128x128@2=cached-remote
+is selected.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--allow-custom</b>
+<i>CUSTOM-KEY-NAMES</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">By
+default, all custom entries set in MetaInfo input data are
+removed. This flag allows one to whitelist custom keys to be
+propagated to the final catalog output data. The custom-key
+names should be provided as a comma-separated
+list.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--components</b>
+<i>COMPONENT-IDs</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Set a
+comma-separated list of AppStream component IDs that should
+be considered for the generated metadata. All components
+that exist in the input data but are not mentioned in this
+list will be ignored for the generated output.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--no-color</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Don't
+print colored output.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--verbose</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Display
+extra debugging information</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--version</b></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Display
+the version number of appstreamcli compose</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>appstreamcli</b>(1),
+<b>appstream-generator</b>(1).</font></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+manual page was written by Matthias Klumpp
+&lt;matthias@tenstral.net&gt;.</font></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+&copy; 2020-2024 Matthias Klumpp</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="19%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">Freedesktop.org</font></p> </td>
+<td width="67%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://www.freedesktop.org/wiki/Distributions/AppStream/</font></p>
+<hr>
+</body>
+</html>

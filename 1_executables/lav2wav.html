@@ -1,0 +1,173 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>lav2wav</title>
+
+</head>
+<body>
+
+<h1 align="center">lav2wav</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lav2wav -
+Extract the audio out of MJPEG container files to stdout</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lav2wav</b>
+[<b>-s</b> <i>num</i>] [<b>-c</b> <i>num</i>] [<b>-v</b>
+<i>num</i>] [<b>-I</b>] [<b>-R</b>] [<b>-r</b>
+<i>samplerate, bitesize, channels</i>] <i>lavfile1</i>
+[<i>lavfile2</i> ... <i>lavfileN</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lav2wav</b>
+can be used to extract the audio to stdout. This output goes
+to stdout and can be saved as a wav file or piped to another
+sound processing tool that is able to handle the wav format.
+This can be mp2enc and toolame for mpeg layer 2 audio, or
+for example lame for mpeg layer 3 audio.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The input files
+may be any combination of AVI (.avi), Quicktime (.qt) or
+editlist files so long as they are all lavtools- readable
+(e.g. MJPEG-encoded AVI/Quicktime or DV type 2 AVI).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lav2wav</b>
+accepts the following options: <b><br>
+-s</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Start extracting at video frame
+(num)</p>
+
+<p style="margin-left:9%;"><b>-c</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Extract (num) frames of
+audio</p>
+
+<p style="margin-left:9%;"><b>-v</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Verbosity level (0, 1 or 2)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-I</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>Ignore unsupported bitrates/bits per sample</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-R</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>If the file does not contain any sound. lav2wav will
+create silence with 44100kHz Sampelrate, 16 Bit audio
+bitsize and 2 Chanels</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-r</b> <i>sr,bs,ch</i></p>
+
+<p style="margin-left:15%;">If the file does not contain
+any sound lav2wav will generate silence with the values you
+supply the samplerate (sr), audio-bitsize (bs) and channel
+(ch).</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+&quot;WAV&quot; file format (technically: RIFF) is really
+very much less than ideal for a tool intended to be used in
+pipelines as lav2wav is. The problem is that the header
+includes a field specifying the length of the file. This
+can&rsquo;t be filled in except by seeking back to the
+begining and over-writing. If the output is unseekable (e.g.
+pipe) lav2wav simply writes a large length into the header
+and leaves it at that. Most tools like sox(1) or mp2enc(1)
+either ignore the length field anyway or only give a
+warning. <br>
+The audio length is inacurate calculated when lav2wav
+generates silence. This happens only if you have NTSC
+framerate and than it creates for every hour of video
+1.1498sec too less of silence.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Bernhard Praschinger. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>mp2enc</b>(1), <b>sox(1)</b></p>
+<hr>
+</body>
+</html>

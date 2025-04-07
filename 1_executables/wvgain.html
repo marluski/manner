@@ -1,0 +1,122 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>WVGAIN</i>(1) General Commands Manual
+<i>WVGAIN</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">wvgain &mdash; add ReplayGain
+information to wavpack files</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:18%;"><b>wvgain</b>
+[<b>-acdinqsvz</b>] <i>file&nbsp;...</i></p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>wvgain</b> perceptually
+analyzes WavPack audio files for volume, calculates
+ReplayGain information based on this, and adds the
+appropriate APEv2 tag fields. ReplayGain-enabled players
+will use this information to produce the same perceived
+loudness on all tracks. Both individual track and whole
+album ReplayGain information can be calculated. On multicore
+machines multiple threads are used to improve the speed by
+about 2x, unless the <b>-1</b> option is specified.</p>
+
+
+<p style="margin-left:4%; margin-top: 1em"><b>OPTIONS</b></p>
+
+<p><b>-a</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">album mode (all
+files scanned are considered an album)</p>
+
+<p style="margin-top: 1em"><b>-c</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">clean
+ReplayGain values from all files</p>
+
+<p style="margin-top: 1em"><b>-d</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">display
+calculated values only (no files are modified)</p>
+
+<p style="margin-top: 1em"><b>-i</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">ignore .wvc
+file (forces hybrid lossy)</p>
+
+<p style="margin-top: 1em"><b>-n</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">new files only
+(skip files with track info, or album info if album mode
+specified)</p>
+
+<p style="margin-top: 1em"><b>-q</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">quiet (keep
+console output to a minimum)</p>
+
+<p style="margin-top: 1em"><b>-s</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">show stored
+values only (no analysis)</p>
+
+<p style="margin-top: 1em"><b>-t</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">use
+multithreading to improve performance</p>
+
+<p style="margin-top: 1em"><b>-1</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">don&rsquo;t use
+multithreading to improve performance</p>
+
+<p style="margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">write program
+version to <i>stdout</i></p>
+
+<p style="margin-top: 1em"><b>-z[</b><i>n</i>]</p>
+
+<p style="margin-left:19%; margin-top: 1em">don&rsquo;t set
+(n = 0 or omitted) or set (n = 1) console title to indicate
+progress (leaves &quot;WvGain Completed&quot;)</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>wavpack</i>(1),
+<i>wvtag</i>(1), <i>wvunpack</i>(1), www.wavpack.com</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">David Bryant
+&lt;<i>david@wavpack.com</i>&gt; <br>
+Sebastian Dr&ouml;ge &lt;<i>slomo@debian.org</i>&gt; <br>
+Jan Star&yacute; &lt;<i>hans@stare.cz</i>&gt; GNU February
+9, 2024 <i>WVGAIN</i>(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:01 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>WAL</title>
+
+</head>
+<body>
+
+<h1 align="center">WAL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#TEMPLATES">TEMPLATES</a><br>
+<a href="#ORIGINAL AUTHOR">ORIGINAL AUTHOR</a><br>
+<a href="#MAINTAINER">MAINTAINER</a><br>
+<a href="#CONTRIBUTORS">CONTRIBUTORS</a><br>
+<a href="#HOMEPAGE">HOMEPAGE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wal - Generate
+colorschemes on the fly</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wal</b>
+[<b>-hclnqrRstvwe</b>] [<b>-a</b> <i>alpha</i>] [<b>-b</b>
+<i>background</i>] [<b>--fg</b> <i>foreground</i>]
+[<b>--backend</b> <i>[backend]</i>] [<b>--theme</b>
+<i>/path/to/file</i> or <i>theme_name</i>]
+[<b>--iterative</b>] [<b>--cols16</b> <i>[method]</i>]
+[<b>--recursive</b>] [<b>--saturate</b> <i>0.0-1.0</i>]
+[<b>--preview</b>] [<b>--vte</b>] [<b>-i</b>
+<i>/path/to/img.jpg</i>] [<b>-o</b> <i>script_name</i>]
+[<b>-p</b> <i>theme_name</i>] [<b>--contrast</b>
+<i>[1.0-21.0]</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wal is a tool
+that generates a color palette from the dominant colors in
+an image. It then applies the colors system-wide and
+on-the-fly in all of your favourite programs.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">Print brief usage information
+to standard output and exit.</p>
+
+<p style="margin-left:9%;"><b>-a</b> <i>alpha</i></p>
+
+<p style="margin-left:18%;">Set terminal background
+transparency to <i>alpha</i>. <br>
+*Only works in URxvt*</p>
+
+<p style="margin-left:9%;"><b>-b</b> <i>background</i></p>
+
+<p style="margin-left:18%;">Custom <i>background</i> color
+to use.</p>
+
+<p style="margin-left:9%;"><b>--fg</b>
+<i>foreground</i></p>
+
+<p style="margin-left:18%;">Custom <i>foreground</i> color
+to use.</p>
+
+<p style="margin-left:9%;"><b>--backend</b>
+<i>backend</i></p>
+
+<p style="margin-left:18%;">Which color backend to use. Use
+&rsquo;wal --backend&rsquo; to list backends.</p>
+
+<p style="margin-left:9%;"><b>-f, --theme</b>
+<i>/path/to/file&nbsp;or&nbsp;theme_name</i></p>
+
+<p style="margin-left:18%;">Which colorscheme file to use.
+Use &rsquo;wal --theme&rsquo; to list builtin and user
+themes.</p>
+
+<p style="margin-left:9%;"><b>--iterative</b></p>
+
+<p style="margin-left:18%;">When pywal is given a directory
+as input and this flag is used: Go through the images in
+order instead of shuffled.</p>
+
+<p style="margin-left:9%;"><b>--cols16</b>
+<i>method</i></p>
+
+<p style="margin-left:18%;">Use 16 color mode, this will
+generate 16 color themes or convert 9 color themes to 16
+colors. Method is either <i>darken</i> or <i>lighten</i>
+default: <i>darken</i></p>
+
+<p style="margin-left:9%;"><b>--recursive</b></p>
+
+<p style="margin-left:18%;">When pywal is given a directory
+as input and this flag is used: Search for images
+recursively in subdirectories instead of the root only.</p>
+
+<p style="margin-left:9%;"><b>--saturate</b>
+<i>[0.0-1.0]</i></p>
+
+<p style="margin-left:18%;">Set the color saturation.</p>
+
+<p style="margin-left:9%;"><b>--preview</b></p>
+
+<p style="margin-left:18%;">Print the current color
+palette.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--vte</b></p></td>
+<td width="3%"></td>
+<td width="56%">
+
+
+<p>Fix text-artifacts printed in VTE terminals.</p></td>
+<td width="26%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-c</b></p></td>
+<td width="3%"></td>
+<td width="56%">
+
+
+<p>Delete all cached colorschemes.</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-i</b>
+<i>/path/to/img.jpg</i></p>
+
+<p style="margin-left:18%;">Which image or directory to
+use.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-l</b></p></td>
+<td width="6%"></td>
+<td width="37%">
+
+
+<p>Generate a light colorscheme.</p></td>
+<td width="45%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="6%"></td>
+<td width="37%">
+
+
+<p>Skip setting the wallpaper.</p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-o</b> <i>script_name</i></p>
+
+<p style="margin-left:18%;">External script to run after
+&quot;wal&quot;.</p>
+
+<p style="margin-left:9%;"><b>-p</b> <i>theme_name</i></p>
+
+<p style="margin-left:18%;">permanently save theme to
+<i>$XDG_CONFIG_HOME/wal/colorschemes</i> with the specified
+<i>theme_name</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-q</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Quiet mode, don&rsquo;t print anything.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-r</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>&acute;wal -r&acute; is deprecated: Use (cat
+&#732;/.cache/wal/sequences &amp;) instead.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-R</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Restore previous colorscheme.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-s</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Skip changing colors in terminals.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-t</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Skip changing colors in tty.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Print &quot;wal&quot; version.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-w</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Use last used wallpaper for color generation.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-e</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Skip reloading xrdb/i3/sway/polybar</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--contrast</i>
+<b>[1.0-21.0]</b></p>
+
+<p style="margin-left:18%;">Specify a minimum contrast
+ratio between palette colors and the source image according
+to W3 contrast specifications. Values between 1.5-4.5
+typically work best.</p>
+
+<h2>TEMPLATES
+<a name="TEMPLATES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Wal supports
+user defined template files. What this means is that similar
+to the export files in the <b>$XDG_CACHE_HOME/wal/</b>
+directory, you can create your own files which will be
+processed by pywal and spit out in this directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Subdirectories
+with templates are also supported inside the templates
+dir.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The user defined
+files are read from <b>$XDG_CONFIG_HOME/wal/templates/</b>
+and are exported to <b>$XDG_CACHE_HOME/wal/</b> under the
+same name. Using this feature you can also overwrite the
+default export files</p>
+
+<h2>ORIGINAL AUTHOR
+<a name="ORIGINAL AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Dylan Araps
+&lt;dylan.araps at gmail.com&gt;</p>
+
+<h2>MAINTAINER
+<a name="MAINTAINER"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">eylles
+&lt;ed.ylles1997 at gmail.com&gt;</p>
+
+<h2>CONTRIBUTORS
+<a name="CONTRIBUTORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For a list of
+contributors, run &lsquo;git shortlog -s&lsquo; in the nsxiv
+git repository.</p>
+
+<h2>HOMEPAGE
+<a name="HOMEPAGE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Source code:</p>
+
+
+<p style="margin-left:18%;">https://github.com/eylles/pywal16</p>
+<hr>
+</body>
+</html>

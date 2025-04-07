@@ -1,0 +1,738 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:42 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>grohtml</title>
+
+</head>
+<body>
+
+<h1 align="center">grohtml</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Typefaces">Typefaces</a><br>
+<a href="#Font description files">Font description files</a><br>
+<a href="#Dependencies">Dependencies</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Environment">Environment</a><br>
+<a href="#Files">Files</a><br>
+<a href="#Bugs">Bugs</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grohtml,
+post-grohtml, pre-grohtml - <i>groff</i> output driver for
+HTML</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>pre-grohtml</b></p></td>
+<td width="75%">
+
+
+<p style="margin-top: 1em">[<b>-epV</b>] [<b>-a</b>
+<i>anti-aliasing-text-bits</i>] [<b>-D</b>
+<i>image-directory</i>] [<b>-F</b> <i>font-directory</i>]
+[<b>-g</b> <i>anti-aliasing-graphic-bits</i>] [<b>-i</b>
+<i>resolution</i>] [<b>-I</b> <i>image-stem</i>] [<b>-o</b>
+<i>image-vertical-offset</i>] [<b>-x</b>
+<i>html-dialect</i>] <i>troff-command troff-argument</i>
+...</p> </td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>pre-grohtml</b></p></td>
+<td width="75%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>pre-grohtml</b></p></td>
+<td width="75%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="15%">
+
+
+<p><b>pre-grohtml</b></p></td>
+<td width="75%">
+
+
+<p><b>--version</b></p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>post-grohtml</b></p></td>
+<td width="75%">
+
+
+<p style="margin-top: 1em">[<b>-bCGhlnrVy</b>] [<b>-F</b>
+<i>font-directory</i>] [<b>-j</b> <i>output-stem</i>]
+[<b>-s</b> <i>base-point-size</i>] [<b>-S</b>
+<i>heading-level</i>] [<b>-x</b> <i>html-dialect</i>]
+[<i>file&nbsp;</i>...]</p> </td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>post-grohtml</b></p></td>
+<td width="75%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>post-grohtml</b></p></td>
+<td width="75%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="15%">
+
+
+<p><b>post-grohtml</b></p></td>
+<td width="75%">
+
+
+<p><b>--version</b></p></td>
+<td width="1%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The GNU
+<i>roff</i> system&rsquo;s HTML support consists of a
+preprocessor, <i>pre-grohtml</i>, and an output driver,
+<i>post-grohtml</i>; together, they translate
+<a href="man:roff(7)"><i>roff</i>(7)</a> documents to HTML.
+Because a preprocessor is (uniquely) required for this
+output driver, users should invoke <i>grohtml</i> via the
+<a href="man:groff(1)"><i>groff</i>(1)</a> command with the
+<b>-Thtml</b> or <b>-Txhtml</b> options. (In this
+installation, <b>ps</b> is the default output device.) Use
+<i>groff</i>&rsquo;s <b>-P</b> option to pass any options
+shown above to <i>grohtml</i>. If no operands are given, or
+if <i>file</i> is &ldquo;<b>-</b>&rdquo;, <i>grohtml</i>
+reads the standard input stream. Output is written to the
+standard output stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>grohtml</i>
+invokes <i>groff</i> twice. In the first pass, the
+preprocessor <i>pre-grohtml</i> renders pictures, equations,
+and tables as images in PostScript format using the
+<b>ps</b> output device. In the second pass, the output
+driver <i>post-grohtml</i> translates the output of
+<a href="man:troff(1)"><i>troff</i>(1)</a> to HTML.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>grohtml</i>
+writes output encoded in UTF-8 and has built-in HTML
+entities for all non-composite Unicode characters. In spite
+of this, <i>groff</i> may issue warnings about unknown
+special characters if they can&rsquo;t be found during the
+first pass. Such warnings can be safely ignored unless the
+special characters appear inside a table or equation.</p>
+
+<h3>Typefaces
+<a name="Typefaces"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grohtml</i>
+supports the standard four styles: <b>R</b> (roman),
+<b>I</b> (<i>italic</i>), <b>B</b> (<b>bold</b>), and
+<b>BI</b> (<b><i>bold-italic</i></b>). Fonts are grouped
+into families <b>T</b> and <b>C</b> having members in each
+style.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>TR</b></p></td>
+<td width="5%"></td>
+<td width="24%">
+
+
+<p>Times roman</p></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>TI</b></p></td>
+<td width="5%"></td>
+<td width="24%">
+
+
+<p>Times italic</p></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>TB</b></p></td>
+<td width="5%"></td>
+<td width="24%">
+
+
+<p>Times bold</p></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>TBI</b></p></td>
+<td width="5%"></td>
+<td width="24%">
+
+
+<p>Times bold-italic</p></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>CR</b></p></td>
+<td width="5%"></td>
+<td width="24%">
+
+
+<p>Courier roman</p></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>CI</b></p></td>
+<td width="5%"></td>
+<td width="24%">
+
+
+<p>Courier italic</p></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>CB</b></p></td>
+<td width="5%"></td>
+<td width="24%">
+
+
+<p>Courier bold</p></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>CBI</b></p></td>
+<td width="5%"></td>
+<td width="24%">
+
+
+<p>Courier bold-italic</p></td>
+<td width="49%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">A special font,
+<b>S</b>, is also provided to accommodate <i>roff</i>
+documents that expect it to always be available.</p>
+
+<h3>Font description files
+<a name="Font description files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The font
+description files used with <i>grohtml</i> expose the same
+glyph repertoire in their <b>charset</b> sections. See
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>.</p>
+
+<h3>Dependencies
+<a name="Dependencies"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>pre-grohtml</i>
+generates an image whenever an <i>eqn</i> equation,
+<i>tbl</i> table, or <i>pic</i> picture is encountered in
+the input. <i>grohtml</i> therefore may run several commands
+as part of its operation. These include the Netpbm tools
+<i>pnmcrop</i>, <i>pnmcut</i>, and <i>pnmtopng</i>;
+Ghostscript (<i>gs</i>); and the PSUtils tool
+<i>psselect</i>.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward. <b><br>
+-a&nbsp;</b><i>anti-aliasing-text-bits</i></p>
+
+<p style="margin-left:18%;">Number of bits of antialiasing
+information to be used by text when generating PNG images.
+The default is&nbsp;<b>4</b> but <b>0</b>, <b>1</b>, and
+<b>2</b> are also valid. Your system&rsquo;s version of
+<i>gs</i> must support the <b>-dTextAlphaBits</b> option in
+order to exploit antialiasing. A value of&nbsp;<b>0</b>
+stops <i>grohtml</i> from issuing antialiasing commands to
+<i>gs</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-b</b></p></td>
+<td width="6%"></td>
+<td width="61%">
+
+
+<p>Initialize the background color to white.</p></td>
+<td width="21%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-C</b></p></td>
+<td width="6%"></td>
+<td width="61%">
+
+
+<p>Suppress output of &ldquo;CreationDate:&rdquo; HTML
+comment.</p> </td>
+<td width="21%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-D&nbsp;</b><i>image-directory</i></p>
+
+<p style="margin-left:18%;">Instruct <i>grohtml</i> to
+place all image files into directory
+<i>image-directory</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-e</b></p></td>
+<td width="6%"></td>
+<td width="37%">
+
+
+<p>Direct <i>eqn</i> to produce MathML.</p></td>
+<td width="45%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+should not be manually specified; it is synthesized by
+<i>groff</i> depending on whether it was given the
+<b>-Thtml</b> or <b>-Txhtml</b> option.</p>
+
+
+<p style="margin-left:9%;"><b>-F&nbsp;</b><i>font-directory</i></p>
+
+<p style="margin-left:18%;">Prepend directory
+font-directory<i>/dev</i>name to the search path for font
+and device description files; <i>name</i> is the name of the
+device, usually <b>html</b>.</p>
+
+
+<p style="margin-left:9%;"><b>-g&nbsp;</b><i>anti-aliasing-graphic-bits</i></p>
+
+<p style="margin-left:18%;">Number of bits of antialiasing
+information to be used by graphics when generating PNG
+images. The default is&nbsp;<b>4</b> but <b>0</b>, <b>1</b>,
+and <b>2</b> are also valid. Your system&rsquo;s version of
+<i>gs</i> must support the <b>-dGraphicAlphaBits</b> option
+in order to exploit antialiasing. A value of&nbsp;<b>0</b>
+stops <i>grohtml</i> from issuing antialiasing commands to
+<i>gs</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-G</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Suppress output of &ldquo;Creator:&rdquo; HTML
+comment.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Generate section headings by using HTML <b>B</b>
+elements and increasing the font size, rather than HTML
+<b>H</b> elements.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-i&nbsp;</b><i>resolution</i></p>
+
+<p style="margin-left:18%;">Set the image resolution in
+pixels per inch; the default is&nbsp;<b>100</b>.</p>
+
+
+<p style="margin-left:9%;"><b>-I&nbsp;</b><i>image-stem</i></p>
+
+<p style="margin-left:18%;">Determine the image file name
+stem. If omitted, <i>grohtml</i> uses <i>grohtml-</i>XXXXX
+(where <i>XXXXX</i> is the process ID). A dash is appended
+to the stem to separate it from the following image
+number.</p>
+
+
+<p style="margin-left:9%;"><b>-j&nbsp;</b><i>output-stem</i></p>
+
+<p style="margin-left:18%;">Instruct <i>grohtml</i> to
+split the HTML output into multiple files. Output is written
+to a new file at each section heading (but see option
+<b>-S</b> below) named <i>output-stem-</i>n<i>.html</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-l</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Turn off the production of automatic section links at
+the top of the document.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Generate simple heading anchors whenever a
+section/number heading is found. Without the option the
+anchor value is the textual heading. This can cause problems
+when a heading contains a &ldquo;?&rdquo; on older versions
+of some browsers. This feature is automatically enabled if a
+heading contains an image.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-o&nbsp;</b><i>image-vertical-offset</i></p>
+
+<p style="margin-left:18%;">Specify the vertical offset of
+images in points.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-p</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Display page rendering progress to the standard error
+stream. <i>grohtml</i> displays a page number only when an
+image is required.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-r</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Turn off the automatic header and footer line (HTML
+rule).</p> </td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-s&nbsp;</b><i>base-type-size</i></p>
+
+<p style="margin-left:18%;">Set the document&rsquo;s base
+type size in points. When this size is used in the source,
+it corresponds to the HTML base type size. Every increase of
+two points in the source will produce a
+&ldquo;<b>big</b>&rdquo; element, and conversely when a
+decrease of two points is seen, a &ldquo;<b>small</b>&rdquo;
+element is emitted.</p>
+
+
+<p style="margin-left:9%;"><b>-S&nbsp;</b><i>heading-level</i></p>
+
+<p style="margin-left:18%;">When splitting HTML output (see
+option <b>-j</b> above), split at each nested heading level
+defined by <i>heading-level</i>, or higher). The default is
+<b>1</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Create an XHTML or HTML validator button at the bottom
+of each page of the document.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-x&nbsp;</b><i>html-dialect</i></p>
+
+<p style="margin-left:18%;">Select HTML dialect. Currently,
+<i>html-dialect</i> should be either the digit&nbsp;<b>4</b>
+or the letter&nbsp;<b>x</b>, which indicates whether
+<i>grohtml</i> should generate HTML&nbsp;4 or XHTML,
+respectively.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+should not be manually specified; it is synthesized by
+<i>groff</i> depending on whether it was given the
+<b>-Thtml</b> or <b>-Txhtml</b> option.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-y</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Produce a right-aligned <i>groff</i> signature at the
+end of the document (only if <b>-V</b> is also
+specified).</p> </td></tr>
+</table>
+
+<h2>Environment
+<a name="Environment"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>GROFF_FONT_PATH</i></p>
+
+<p style="margin-left:18%;">lists directories in which to
+search for <i>devhtml</i>, <i>grohtml</i>&rsquo;s directory
+of device and font description files. See
+<a href="man:troff(1)"><i>troff</i>(1)</a> and
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>.</p>
+
+<p style="margin-left:9%;"><i>SOURCE_DATE_EPOCH</i></p>
+
+<p style="margin-left:18%;">A timestamp (expressed as
+seconds since the Unix epoch) to use as the output creation
+timestamp in place of the current time. The time is
+converted to human-readable form using
+<a href="man:ctime(3)"><i>ctime</i>(3)</a> and recorded in
+an HTML comment.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>TZ</i></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>The time zone to use when converting the current time
+(or value of <i>SOURCE_DATE_EPOCH</i>) to human-readable
+form; see <a href="man:tzset(3)"><i>tzset</i>(3)</a>.</p></td></tr>
+</table>
+
+<h2>Files
+<a name="Files"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>/usr/share/groff/1.23.0/font/devhtml/DESC</i></p>
+
+<p style="margin-left:18%;">describes the <b>html</b>
+output device.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/font/devhtml/</i>F</p>
+
+<p style="margin-left:18%;">describes the font known
+as&nbsp;<i>F</i> on device <b>html</b>.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/tmac/html.tmac</i></p>
+
+<p style="margin-left:18%;">defines font mappings, special
+characters, and colors for use with the <b>html</b> output
+device. It is automatically loaded by <i>troffrc</i> when
+either of the <b>html</b> or <b>xhtml</b> output devices is
+selected.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/tmac/html-end.tmac</i></p>
+
+<p style="margin-left:18%;">finalizes setup of the
+<b>html</b> output device. It is automatically loaded by
+<i>troffrc-end</i> when either of the <b>html</b> or
+<b>xhtml</b> output devices is selected.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>grohtml</i>
+uses temporary files. See
+<a href="man:groff(1)"><i>groff</i>(1)</a> for details about
+where such files are created.</p>
+
+<h2>Bugs
+<a name="Bugs"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grohtml</i>
+is still beta code.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>grohtml</i>
+does not truly support hyphenation, but you can fool it into
+hyphenating long input lines, which can appear in HTML
+output with a hyphenated word followed by a space but no
+line break.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:troff(1)"><i>troff</i>(1)</a>,
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a></p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,175 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:34 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>TINYSPARQL-QUERY</title>
+
+</head>
+<body>
+
+<h1 align="center">TINYSPARQL-QUERY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">tinysparql-query
+- Query to SPARQL endpoints.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">tinysparql query
+[(-d |--database) &lt;file&gt; | (-b | --dbus-service)
+&lt;busname&gt; | (-r | --remote-service) &lt;url&gt;] <br>
+(-f | --file) &lt;file&gt;] [(-u | --update)] [-a
+&lt;parameter&gt;:&lt;value&gt;]... [SPARQL]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+allows running queries or updates on a SPARQL endpoint.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When the caller
+runs a query, the query is in the SPARQL language. This can
+be done two ways. Either by providing a <i>file</i> with the
+query or by providing a string with the <i>sparql</i>
+query.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <i>file</i>
+argument can be either a local path or a URI. It also does
+not have to be an absolute path.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b,
+--dbus-service=&lt;</b><i>service_name</i><b>&gt;</b></p>
+
+<p style="margin-left:14%;">Connects to a SPARQL endpoint
+at a D-Bus name.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--database-path=&lt;</b><i>database_path</i><b>&gt;</b></p>
+
+<p style="margin-left:14%;">Connects to a database by
+location in the filesystem.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r,
+--remote-service=&lt;</b><i>url</i><b>&gt;</b></p>
+
+<p style="margin-left:14%;">Connects to a HTTP SPARQL
+endpoint.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--file=&lt;</b><i>file</i><b>&gt;</b></p>
+
+<p style="margin-left:14%;">Use a <i>file</i> with SPARQL
+content to query or update.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u,
+--update</b></p>
+
+<p style="margin-left:14%;">This has to be used with
+<b>--query</b>. This tells &quot;tinysparql query&quot; to
+use the SPARQL update extensions so it knows it isn&rsquo;t
+a regular data lookup request. So if your query is intended
+to change data in the database, this option is needed.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a,
+--arg=&lt;</b><i>parameter</i><b>&gt;:&lt;</b><i>value</i><b>&gt;</b></p>
+
+<p style="margin-left:14%;">Provides an argument for a
+parameter declared in the SPARQL query string. This may be
+used with <b>--file</b>, <b>--query</b> or <b>--update</b>.
+Multiple arguments may be provided for multiple parameters.
+Argument values are provided as a colon separated string
+containing 3 values: name, type and value. The name is the
+same as used in the query string, the value is the desired
+value, and the type is a single-character string defining
+the type:</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull;
+<b>i</b>: The value will describe an integer</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull;
+<b>d</b>: The value will describe a floating point
+number</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull;
+<b>b</b>: The value will describe a boolean</p>
+
+<p style="margin-left:19%; margin-top: 1em">&bull;
+<b>s</b>: The value will describe a plain string</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Querying a D-Bus
+endpoint</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ tinysparql
+query --dbus-service org.example.Endpoint &quot;SELECT
+('Hello World' AS ?str) {}&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Updating a
+database directly from a query in a file</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ tinysparql
+query --database /tmp/db/ --update --file ./update.rq</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using
+<b>--arg</b> to provide a arguments to query parameters</p>
+
+<p style="margin-left:19%; margin-top: 1em">$ tinysparql
+query -b org.example.Endpoint \ <br>
+-a name:s:&quot;John&quot; -a age:i:42 -a available:b:true \
+<br>
+&quot;SELECT (&#732;name AS ?name) (&#732;age AS ?age)
+(&#732;available AS ?avail) { }&quot;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>tinysparql-endpoint</b>(1).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">https://gnome.pages.gitlab.gnome.org/tinysparql/tutorial.html.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,131 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mangohud</title>
+
+</head>
+<body>
+
+<h1 align="center">mangohud</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#USAGE">USAGE</a><br>
+<a href="#CONFIG">CONFIG</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#ABOUT">ABOUT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mangohud -
+enable MangoHud on any application</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mangohud</b>
+[--dlsym] COMMAND</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">MangoHud is a
+Vulkan/OpenGL overlay for monitoring FPS, temperatures,
+CPU/GPU load and more.</p>
+
+<h2>USAGE
+<a name="USAGE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">MangoHud can be
+enabled for Vulkan applications by setting <b>MANGOHUD=1</b>
+as environment variable. <br>
+To load MangoHud for any application, including OpenGL
+applications, the <b>mangohud</b> executable can be used. It
+preloads a library via ld into the application. <br>
+Note: some OpenGL applications may also need dlsym hooking.
+This can be done by passing option <b>--dlsym</b> or by
+setting <b>MANGOHUD_DLSYM=1</b> as environment variable.</p>
+
+<h2>CONFIG
+<a name="CONFIG"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">MangoHud comes
+with a config file which can be used to set configuration
+options globally or per application. The priorities of
+different config files are:</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">/path/to/application/MangoHud.conf
+<br>
+$XDG_CONFIG_HOME/MangoHud/{application_name}.conf <br>
+$XDG_CONFIG_HOME/MangoHud/MangoHud.conf</p>
+
+<p style="margin-left:9%; margin-top: 1em">An example
+config file is located in
+/usr/share/doc/mangohud/MangoHud.conf, containing all
+available options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A custom config
+file location can also be specified with the
+<b>MANGOHUD_CONFIGFILE</b> environment variable. <br>
+Config options can also be set with the
+<b>MANGOHUD_CONFIG</b> environment variable. This takes
+priority over any config file.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">OpenGL:
+<b>mangohud glxgears</b> <br>
+Vulkan: <b>MANGOHUD=1 vkcube</b> <br>
+Steam: set your launch option to <b>mangohud %command%</b>
+<br>
+Lutris: add <b>mangohud</b> to the Command prefix setting
+<br>
+OpenGL with dlsym: <b>mangohud --dlsym glxgears</b> <br>
+Custom config options:
+<b>MANGOHUD_CONFIG=&quot;gpu_stats=0,font_size=12&quot;
+mangohud glxgears</b></p>
+
+<h2>ABOUT
+<a name="ABOUT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">MangoHud
+development takes place at
+<i>https://github.com/flightlessmango/MangoHud</i>. <br>
+Benchmarks created with MangoHud can be uploaded to
+<i>https://flightlessmango.com</i>.</p>
+<hr>
+</body>
+</html>

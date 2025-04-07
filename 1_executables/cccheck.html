@@ -1,0 +1,169 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:57 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONFIGURATION OPTIONS">CONFIGURATION OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cccheck -
+Perform static code contracts verification for CLR
+assemblies.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cccheck
+--assembly=&lt;assembly&gt; [options]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Perform static
+code contracts verification to find bugs and inconsistencies
+between code and specification. This includes non-null,
+integer analyses.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The assembly
+must have been built with the symbol CONTRACTS_FULL defined,
+otherwise the calls to the contract methods will have been
+removed by the compiler.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Currently only
+Contract.Assume() and Contract.Assert() methods are
+supported. Only non-null analysis is supported, the
+consecutive analyses are in development. An error message
+will be shown if cccheck is unable to process all or some of
+the methods of specified assembly.</p>
+
+<h2>CONFIGURATION OPTIONS
+<a name="CONFIGURATION OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>--assembly
+&lt;assembly-name&gt;</i></p>
+
+<p style="margin-left:18%;">The assembly to perform static
+verification.</p>
+
+<p style="margin-left:9%;"><i>--debug</i></p>
+
+<p style="margin-left:18%;">Shows debug information about
+process of proving the assertions. It shows four layers of
+abstraction, raw layer, stack layer, heap layer, and
+substituted expression level.</p>
+
+
+<p style="margin-left:9%;"><i>--method=&lt;method-name-substring&gt;</i></p>
+
+<p style="margin-left:18%;">String for finding method. It
+filters all methods in assembly where method name has this
+parameter as a substring.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>--help</i></p></td>
+<td width="1%"></td>
+<td width="68%">
+
+
+<p>Show help for cccheck, listing configuration
+options.</p> </td>
+<td width="14%">
+</td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Suppose you have
+a method:</p>
+
+<p style="margin-left:18%;">void Method() { <br>
+object x = null; <br>
+int y = 1; <br>
+if (y % 2 == 1) <br>
+x = new object(); <br>
+else <br>
+x = new string();</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">Contract.Assert(x
+!= null); }</p>
+
+<p style="margin-left:18%; margin-top: 1em">After the
+verification the tool will have results in following format:
+&quot;Assertion at : [Subroutine: &lt;id&gt; Block
+&lt;blockId&gt; PC &lt;id&gt;] : <br>
+is (true|false|unproven|unreachable)&quot;. (PC is a program
+counter)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Alexander Chebaturkin</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright 2011
+Alexander Chebaturkin. Released under MIT license.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

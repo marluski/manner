@@ -1,0 +1,931 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-INSTALL-CI-TEST</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-INSTALL-CI-TEST</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#install-strategy">install-strategy</a><br>
+<a href="#legacy-bundling">legacy-bundling</a><br>
+<a href="#global-style">global-style</a><br>
+<a href="#omit">omit</a><br>
+<a href="#include">include</a><br>
+<a href="#strict-peer-deps">strict-peer-deps</a><br>
+<a href="#foreground-scripts">foreground-scripts</a><br>
+<a href="#ignore-scripts">ignore-scripts</a><br>
+<a href="#audit">audit</a><br>
+<a href="#bin-links">bin-links</a><br>
+<a href="#fund">fund</a><br>
+<a href="#dry-run">dry-run</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#include-workspace-root">include-workspace-root</a><br>
+<a href="#install-links">install-links</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-install-ci-test</b>
+- Install a project with a clean slate and run tests</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm
+install-ci-test</p>
+
+<p style="margin-left:12%; margin-top: 1em">aliases: cit,
+clean-install-test, sit</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+runs <b>npm ci</b> followed immediately by <b>npm
+test</b>.</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>install-strategy
+<a name="install-strategy"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p style="margin-top: 1em">Default: &quot;hoisted&quot;</p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="63%">
+
+
+<p>Type: &quot;hoisted&quot;, &quot;nested&quot;,
+&quot;shallow&quot;, or &quot;linked&quot;</p></td>
+<td width="23%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Sets the
+strategy for installing packages in node_modules. hoisted
+(default): Install non-duplicated in top-level, and
+duplicated as necessary within directory structure. nested:
+(formerly --legacy-bundling) install in place, no hoisting.
+shallow (formerly --global-style) only install direct deps
+at top-level. linked: (experimental) install in
+node_modules/.store, link in place, unhoisted.</p>
+
+<h3>legacy-bundling
+<a name="legacy-bundling"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: false</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: Boolean</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>DEPRECATED: This option has been deprecated in favor of
+<b>--install-strategy=nested</b></p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Instead of
+hoisting package installs in <b>node_modules</b>, install
+packages in the same manner that they are depended on. This
+may cause very deep directory structures and duplicate
+package installs as there is no de-duplicating. Sets
+<b>--install-strategy=nested</b>.</p>
+
+<h3>global-style
+<a name="global-style"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: false</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: Boolean</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>DEPRECATED: This option has been deprecated in favor of
+<b>--install-strategy=shallow</b></p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Only install
+direct dependencies in the top level <b>node_modules</b>,
+but hoist on deeper dependencies. Sets
+<b>--install-strategy=shallow</b>.</p>
+
+<h3>omit
+<a name="omit"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: &rsquo;dev&rsquo; if
+the <b>NODE_ENV</b> environment variable is set to
+&rsquo;production&rsquo;, otherwise empty.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: &quot;dev&quot;, &quot;optional&quot;, or
+&quot;peer&quot; (can be set multiple times)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Dependency types
+to omit from the installation tree on disk.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that these
+dependencies <i>are</i> still resolved and added to the
+<b>package-lock.json</b> or <b>npm-shrinkwrap.json</b> file.
+They are just not physically installed on disk.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a package
+type appears in both the <b>--include</b> and <b>--omit</b>
+lists, then it will be included.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the resulting
+omit list includes <b>&rsquo;dev&rsquo;</b>, then the
+<b>NODE_ENV</b> environment variable will be set to
+<b>&rsquo;production&rsquo;</b> for all lifecycle
+scripts.</p>
+
+<h3>include
+<a name="include"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default:</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: &quot;prod&quot;, &quot;dev&quot;,
+&quot;optional&quot;, or &quot;peer&quot; (can be set
+multiple times)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Option that
+allows for defining which types of dependencies to
+install.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is the
+inverse of <b>--omit=&lt;type&gt;</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Dependency types
+specified in <b>--include</b> will not be omitted,
+regardless of the order in which omit/include are specified
+on the command-line.</p>
+
+<h3>strict-peer-deps
+<a name="strict-peer-deps"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If set to
+<b>true</b>, and <b>--legacy-peer-deps</b> is not set, then
+<i>any</i> conflicting <b>peerDependencies</b> will be
+treated as an install failure, even if npm could reasonably
+guess the appropriate resolution based on non-peer
+dependency relationships.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default,
+conflicting <b>peerDependencies</b> deep in the dependency
+graph will be resolved using the nearest non-peer dependency
+specification, even if doing so will result in some packages
+receiving a peer dependency outside the range set in their
+package&rsquo;s <b>peerDependencies</b> object.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When such an
+override is performed, a warning is printed, explaining the
+conflict and the packages involved. If
+<b>--strict-peer-deps</b> is set, then this warning is
+treated as a failure.</p>
+
+<h3>foreground-scripts
+<a name="foreground-scripts"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: <b>false</b> unless
+when using <b>npm pack</b> or <b>npm publish</b> where it
+defaults to <b>true</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: Boolean</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Run all build
+scripts (ie, <b>preinstall</b>, <b>install</b>, and
+<b>postinstall</b>) scripts for installed packages in the
+foreground process, sharing standard input, output, and
+error with the main npm process.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that this
+will generally make installs run slower, and be much
+noisier, but can be useful for debugging.</p>
+
+<h3>ignore-scripts
+<a name="ignore-scripts"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If true, npm
+does not run scripts specified in package.json files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+commands explicitly intended to run a particular script,
+such as <b>npm start</b>, <b>npm stop</b>, <b>npm
+restart</b>, <b>npm test</b>, and <b>npm run-script</b> will
+still run their intended script if <b>ignore-scripts</b> is
+set, but they will <i>not</i> run any pre- or
+post-scripts.</p>
+
+<h3>audit
+<a name="audit"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em">Default: true</p></td>
+<td width="69%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p>Type: Boolean</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When
+&quot;true&quot; submit audit reports alongside the current
+npm command to the default registry and all registries
+configured for scopes. See the documentation for npm help
+audit for details on what is submitted.</p>
+
+<h3>bin-links
+<a name="bin-links"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em">Default: true</p></td>
+<td width="69%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p>Type: Boolean</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Tells npm to
+create symlinks (or <b>.cmd</b> shims on Windows) for
+package executables.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Set to false to
+have it not do this. This can be used to work around the
+fact that some file systems don&rsquo;t support symlinks,
+even on ostensibly Unix systems.</p>
+
+<h3>fund
+<a name="fund"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em">Default: true</p></td>
+<td width="69%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="17%">
+
+
+<p>Type: Boolean</p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When
+&quot;true&quot; displays the message at the end of each
+<b>npm install</b> acknowledging the number of dependencies
+looking for funding. See npm help fund for details.</p>
+
+<h3>dry-run
+<a name="dry-run"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Indicates that
+you don&rsquo;t want npm to make any changes and that it
+should only report what it would have done. This can be
+passed into any of the commands that modify your local
+installation, eg, <b>install</b>, <b>update</b>,
+<b>dedupe</b>, <b>uninstall</b>, as well as <b>pack</b> and
+<b>publish</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This is
+NOT honored by other network related commands, eg
+<b>dist-tags</b>, <b>owner</b>, etc.</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Set to true to
+run the command in the context of <b>all</b> configured
+workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+setting this to false will cause commands like
+<b>install</b> to ignore workspaces altogether. When not set
+explicitly:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Commands that operate on the
+<b>node_modules</b> tree (install, update, etc.) will link
+workspaces into the <b>node_modules</b> folder. - Commands
+that do other things (test, exec, publish, etc.) will
+operate on the root project, <i>unless</i> one or more
+workspaces are specified in the <b>workspace</b> config.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>include-workspace-root
+<a name="include-workspace-root"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Include the
+workspace root when workspaces are enabled for a
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When false,
+specifying individual workspaces via the <b>workspace</b>
+config, or all workspaces via the <b>workspaces</b> flag,
+will cause npm to operate only on the specified workspaces,
+and not on the root project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>install-links
+<a name="install-links"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set file:
+protocol dependencies will be packed and installed as
+regular dependencies instead of creating a symlink. This
+option has no effect on workspaces.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">npm help install-test</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>npm help ci</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>npm help test</p></td>
+<td width="59%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

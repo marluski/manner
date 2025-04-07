@@ -1,0 +1,281 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-REPLY</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-REPLY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-reply -
+constructs a reply template for a set of messages</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+reply</b> [option ...] &lt;<i>search-term</i>&gt; ...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Constructs a
+reply template for a set of messages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To make replying
+to email easier, <b>notmuch reply</b> takes an existing set
+of messages and constructs a suitable mail template. Its To:
+address is set according to the original email in this way:
+if the Reply-to: header is present and different from any
+To:/Cc: address it is used, otherwise From: header is used.
+Unless <b>--reply-to=sender</b> is specified, values from
+the To: and Cc: headers are copied, but not including any of
+the current user's email addresses (as configured in
+primary_mail or other_email in the .notmuch-config file) in
+the recipient list.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It also builds a
+suitable new subject, including Re: at the front (if not
+already present), and adding the message IDs of the messages
+being replied to to the References list and setting the
+In-Reply-To: field correctly.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Finally, the
+original contents of the emails are quoted by prefixing each
+line with '&gt; ' and included in the body.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The resulting
+message template is output to stdout.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>reply</b> include <b><br>
+--duplicate=N</b></p>
+
+<p style="margin-left:18%;">Reply to duplicate number N.
+The numbering starts from 1, and matches the order used by
+<i>show --duplicate</i> and <i>search
+--output=files</i>.</p>
+
+
+<p style="margin-left:9%;"><b>--format=(default|json|sexp|headers-only)</b></p>
+
+<p style="margin-left:18%;"><b>default</b></p>
+
+<p style="margin-left:27%;">Includes subject and quoted
+message body as an RFC 2822 message.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>json</b></p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>Produces JSON output containing headers for a reply
+message and the contents of the original message. This
+output can be used by a client to create a reply message
+intelligently.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>sexp</b></p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>Produces S-Expression output containing headers for a
+reply message and the contents of the original message. This
+output can be used by a client to create a reply message
+intelligently.</p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>headers-only</b></p>
+
+<p style="margin-left:27%;">Only produces In-Reply-To,
+References, To, Cc, and Bcc headers.</p>
+
+<p style="margin-left:9%;"><b>--format-version=N</b></p>
+
+<p style="margin-left:18%;">Use the specified structured
+output format version. This is intended for programs that
+invoke <i>notmuch</i> internally. If omitted, the latest
+supported version will be used.</p>
+
+
+<p style="margin-left:9%;"><b>--reply-to=(all|sender)</b></p>
+
+<p style="margin-left:18%;"><b>all (default)</b></p>
+
+<p style="margin-left:27%;">Replies to all addresses.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>sender</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Replies only to the sender. If replying to user's own
+message (Reply-to: or From: header is one of the user's
+configured email addresses), try To:, Cc:, and Bcc: headers
+in this order, and copy values from the first that contains
+something other than only the user's addresses.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--decrypt=(false|auto|true)</b></p>
+
+<p style="margin-left:18%;">If <b>true</b>, decrypt any
+MIME encrypted parts found in the selected content (i.e.,
+&quot;multipart/encrypted&quot; parts). Status of the
+decryption will be reported (currently only supported with
+<b>--format=json</b> and <b>--format=sexp</b>), and on
+successful decryption the multipart/encrypted part will be
+replaced by the decrypted content.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If <b>auto</b>,
+and a session key is already known for the message, then it
+will be decrypted, but notmuch will not try to access the
+user's secret keys.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Use
+<b>false</b> to avoid even automatic decryption.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Non-automatic
+decryption expects a functioning <i>gpg-agent(1) to provide
+any needed credentials. Without one, the decryption will
+likely fail.</i></p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><i>Default:</i>
+<b>auto</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>See
+notmuch-search-terms for details of the supported syntax for
+&lt;search-terms&gt;.</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Note: It is
+most common to use</i> <b>notmuch reply</b> <i>with a search
+string matching a single message, (such as
+id:&lt;message-id&gt;), but it can be useful to reply to
+several messages at once. For example, when a series of
+patches are sent in a single thread, replying to the entire
+thread allows for the reply to comment on issues found in
+multiple patches. The default format supports replying to
+multiple messages at once, but the JSON and S-Expression
+formats do not.</i></p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+supports the following special exit status codes</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>20</b></p></td>
+<td width="6%"></td>
+<td width="51%">
+
+
+<p>The requested format version is too old.</p></td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>21</b></p></td>
+<td width="6%"></td>
+<td width="51%">
+
+
+<p>The requested format version is too new.</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-config</i>, <i>notmuch-count</i>,
+<i>notmuch-dump</i>, <i>notmuch-hooks</i>,
+<i>notmuch-insert</i>, <i>notmuch-new</i>,
+<i>notmuch-restore</i>, <i>notmuch-search</i>,
+<i>notmuch-search-terms</i>, <i>notmuch-show</i>,
+<i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

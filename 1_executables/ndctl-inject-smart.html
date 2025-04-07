@@ -1,0 +1,237 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:42 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NDCTL-INJECT-SMART</title>
+
+</head>
+<body>
+
+<h1 align="center">NDCTL-INJECT-SMART</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ndctl-inject-smart
+- perform smart threshold/injection operations on a DIMM</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>ndctl
+inject-smart</i> &lt;dimm&gt; [&lt;options&gt;]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A generic DIMM
+device object, named /dev/nmemX, is registered for each
+memory device indicated in the ACPI NFIT table, or other
+platform NVDIMM resource discovery mechanism.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">ndctl-inject-smart
+can be used to set smart thresholds, and inject smart
+attributes.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set smart
+controller temperature and spares threshold for DIMM-0 to
+32C, spares threshold to 8, and enable the spares alarm.</p>
+
+<p style="margin-left:9%; margin-top: 1em">ndctl
+inject-smart --ctrl-temperature-threshold=32
+--spares-threshold=8 --spares-alarm nmem0</p>
+
+<p style="margin-left:9%; margin-top: 1em">Inject a media
+temperature value of 52 and fatal health status flag for
+DIMM-0</p>
+
+<p style="margin-left:9%; margin-top: 1em">ndctl
+inject-smart --media-temperature=52 --health=fatal nmem0</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-b, --bus=</p>
+
+<p style="margin-left:14%;">A bus id number, or a provider
+string (e.g. &quot;ACPI.NFIT&quot;). Restrict the operation
+to the specified bus(es). The keyword <i>all</i> can be
+specified to indicate the lack of any restriction, however
+this is the same as not supplying a --bus option at all.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-m,
+--media-temperature=</p>
+
+<p style="margin-left:14%;">Inject &lt;value&gt; for the
+media temperature smart attribute.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-M,
+--media-temperature-threshold=</p>
+
+<p style="margin-left:14%;">Set &lt;value&gt; for the smart
+media temperature threshold.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--media-temperature-alarm=</p>
+
+<p style="margin-left:14%;">Enable or disable the smart
+media temperature alarm. Options are <i>on</i> or
+<i>off</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--media-temperature-uninject</p>
+
+<p style="margin-left:14%;">Uninject any media temperature
+previously injected.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-c,
+--ctrl-temperature=</p>
+
+<p style="margin-left:14%;">Inject &lt;value&gt; for the
+controller temperature smart attribute.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-C,
+--ctrl-temperature-threshold=</p>
+
+<p style="margin-left:14%;">Set &lt;value&gt; for the smart
+controller temperature threshold.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--ctrl-temperature-alarm=</p>
+
+<p style="margin-left:14%;">Enable or disable the smart
+controller temperature alarm. Options are <i>on</i> or
+<i>off</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--ctrl-temperature-uninject</p>
+
+<p style="margin-left:14%;">Uninject any controller
+temperature previously injected.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-s,
+--spares=</p>
+
+<p style="margin-left:14%;">Inject &lt;value&gt; for the
+spares smart attribute.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-S,
+--spares-threshold=</p>
+
+<p style="margin-left:14%;">Set &lt;value&gt; for the smart
+spares threshold.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--spares-alarm=</p>
+
+<p style="margin-left:14%;">Enable or disable the smart
+spares alarm. Options are <i>on</i> or <i>off</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--spares-uninject</p>
+
+<p style="margin-left:14%;">Uninject any spare percentage
+previously injected.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-f, --fatal</p>
+
+<p style="margin-left:14%;">Set the flag to spoof fatal
+health status.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--fatal-uninject</p>
+
+<p style="margin-left:14%;">Uninject the fatal health
+status flag.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-U,
+--unsafe-shutdown</p>
+
+<p style="margin-left:14%;">Set the flag to spoof an unsafe
+shutdown on the next power down.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--unsafe-shutdown-uninject</p>
+
+<p style="margin-left:14%;">Uninject the unsafe shutdown
+flag.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-N,
+--uninject-all</p>
+
+<p style="margin-left:14%;">Uninject all possible smart
+fields/values irrespective of whether they have been
+previously injected or not.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-v,
+--verbose</p>
+
+<p style="margin-left:14%;">Emit debug messages for the
+error injection process</p>
+
+<p style="margin-left:9%; margin-top: 1em">-u, --human</p>
+
+<p style="margin-left:14%;">Format numbers representing
+storage sizes, or offsets as human readable strings with
+units instead of the default machine-friendly raw-integer
+data. Convert other numeric fields into hexadecimal
+strings.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2016 - 2022, Intel Corporation. License GPLv2: GNU GPL
+version 2 &lt;http://gnu.org/licenses/gpl.html&gt;. This is
+free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ndctl-list(1),</p>
+<hr>
+</body>
+</html>

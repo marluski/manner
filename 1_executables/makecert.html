@@ -1,0 +1,443 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#PARAMETERS">PARAMETERS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#KNOWN RESTRICTIONS">KNOWN RESTRICTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">MakeCert -
+Create X.509 certificates for test purposes</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>makecert
+[options] certificate</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Create an X.509
+certificate using the provided informations. This is useful
+for testing Authenticode signatures, SSL and S/MIME
+technologies.</p>
+
+<h2>PARAMETERS
+<a name="PARAMETERS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><i>-# num</i></p></td>
+<td width="1%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em">Specify the certificate serial
+number.</p> </td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>-n dn</i></p></td>
+<td width="1%"></td>
+<td width="67%">
+
+
+<p>Specify the subject Distinguished Name (DN).</p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>-in dn</i></p></td>
+<td width="1%"></td>
+<td width="67%">
+
+
+<p>Specify the issuer Distinguished Name (DN).</p></td>
+<td width="15%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>-r</i></p></td>
+<td width="1%"></td>
+<td width="67%">
+
+
+<p>Create a self-signed, also called root, certificate.</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>-iv pvkfile</i></p>
+
+<p style="margin-left:18%;">Specify the private key file
+(.PVK) for the issuer. The private key in the specified file
+will be used to sign the new certificate.</p>
+
+<p style="margin-left:9%;"><i>-ic certfile</i></p>
+
+<p style="margin-left:18%;">Extract the issuer&rsquo;s name
+from the specified certificate file - i.e. the subject name
+of the specified certificate becomes the issuer name of the
+new certificate.</p>
+
+<p style="margin-left:9%;"><i>-in name</i></p>
+
+<p style="margin-left:18%;">Use the issuer&rsquo;s name
+from the specified parameter.</p>
+
+<p style="margin-left:9%;"><i>-ik container</i></p>
+
+<p style="margin-left:18%;">Specify the key container name
+to be used for the issuer.</p>
+
+<p style="margin-left:9%;"><i>-iky [signature | exchange |
+#]</i></p>
+
+<p style="margin-left:18%;">Specify the key number to be
+used in the provider (when used with -ik).</p>
+
+<p style="margin-left:9%;"><i>-ip provider</i></p>
+
+<p style="margin-left:18%;">Specify the cryptographic
+provider to be used for the issuer.</p>
+
+<p style="margin-left:9%;"><i>-ir [localmachine |
+currentuser]</i></p>
+
+<p style="margin-left:18%;">Specify the provider will
+search the user or the machine keys containers for the
+issuer.</p>
+
+<p style="margin-left:9%;"><i>-iy number</i></p>
+
+<p style="margin-left:18%;">Specify the provider type to be
+used for the issuer.</p>
+
+<p style="margin-left:9%;"><i>-sv pkvfile</i></p>
+
+<p style="margin-left:18%;">Specify the private key file
+(.PVK) for the subject. The public part of the key will be
+inserted into the created certificate. If non-existant the
+specified file will be created with a new key pair (default
+to 1024 bits RSA key pair).</p>
+
+<p style="margin-left:9%;"><i>-sk container</i></p>
+
+<p style="margin-left:18%;">Specify the key container name
+to be used for the subject.</p>
+
+<p style="margin-left:9%;"><i>-sky [signature | exchange |
+#]</i></p>
+
+<p style="margin-left:18%;">Specify the key number to be
+used in the provider (when used with -sk).</p>
+
+<p style="margin-left:9%;"><i>-sp provider</i></p>
+
+<p style="margin-left:18%;">Specify the cryptographic
+provider to be used for the subject.</p>
+
+<p style="margin-left:9%;"><i>-sr [localmachine |
+currentuser]</i></p>
+
+<p style="margin-left:18%;">Specify the provider will
+search the user or the machine keys containers for the
+subject.</p>
+
+<p style="margin-left:9%;"><i>-sy number</i></p>
+
+<p style="margin-left:18%;">Specify the provider type to be
+used for the issuer.</p>
+
+<p style="margin-left:9%;"><i>-a hash</i></p>
+
+<p style="margin-left:18%;">Select hash algorithm. Only MD5
+and SHA1 algorithms are supported.</p>
+
+<p style="margin-left:9%;"><i>-b date</i></p>
+
+<p style="margin-left:18%;">The date since when the
+certificate is valid (notBefore).</p>
+
+<p style="margin-left:9%;"><i>-e date</i></p>
+
+<p style="margin-left:18%;">The date until when the
+certificate is valid (notAfter).</p>
+
+<p style="margin-left:9%;"><i>-m number</i></p>
+
+<p style="margin-left:18%;">Specify the certificate
+validity period in months. This is added to the notBefore
+validity date which can be set with -b or will default to
+the current date/time.</p>
+
+<p style="margin-left:9%;"><i>-cy [authority|end]</i></p>
+
+<p style="margin-left:18%;">Basic constraints. Select
+Authority or End-Entity certificate. Only Authority
+certificates can be used to sign other certificates (-ic).
+End-Entity can be used by clients (e.g. Authenticode,
+S/MIME) or servers (e.g. SSL).</p>
+
+<p style="margin-left:9%;"><i>-h number</i></p>
+
+<p style="margin-left:18%;">Add a path length restriction
+to the certificate chain. This is only applicable for
+certificates that have BasicConstraint set to Authority (-cy
+authority). This is used to limit the chain of certificates
+than can be issued under this authority.</p>
+
+<p style="margin-left:9%;"><i>-alt filename</i></p>
+
+<p style="margin-left:18%;">Add a subjectAltName extension
+to the certificate. Each line from &rsquo;filename&rsquo;
+will be added as a DNS entry of the extension. This option
+is useful if you want to create a single SSL certificate to
+work on several hosts that do not share a common domain name
+(i.e. CN=*.domain.com would not work).</p>
+
+<p style="margin-left:9%;"><i>-eku oid[,oid]</i></p>
+
+<p style="margin-left:18%;">Add some extended key usage OID
+to the certificate.</p>
+
+<p style="margin-left:9%;"><i>-p12 pkcs12file
+password</i></p>
+
+<p style="margin-left:18%;">Create a new PKCS#12 file
+containing both the certificates (the subject and possibly
+the issuer&rsquo;s) and the private key. The PKCS#12 file is
+protected with the specified password. This option is
+<b>mono exclusive.</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>-?</i></p></td>
+<td width="6%"></td>
+<td width="46%">
+
+
+<p>Help (display this help message)</p></td>
+<td width="36%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>-!</i></p></td>
+<td width="6%"></td>
+<td width="46%">
+
+
+<p>Extended help (for advanced options)</p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To create a SSL
+test (i.e. non trusted) certificate is easy once your know
+your host&rsquo;s name. The following command will create a
+test certificate for an SSL server: <br>
+$ hostname</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>pollux</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>$ makecert -r -eku 1.3.6.1.5.5.7.3.1 -n
+&quot;CN=pollux&quot; -sv pollux.pvk pollux.cer</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Success</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">In particular in
+the above example, the parameters used to build this test
+certificate were:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><i>-r</i></p></td>
+<td width="6%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em">Create a self-signed certificate
+(i.e. without an hierarchy).</p></td>
+<td width="4%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>-eku
+1.3.6.1.5.5.7.3.1</i></p>
+
+<p style="margin-left:18%;">Optional (as sadly most client
+don&rsquo;t require it). This indicates that your
+certificate is intended for server-side authentication.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>-n</i></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Common Name (CN) = Host name. This is verified the SSL
+client and must match the connected host (or else
+you&rsquo;ll get a warning or error or *gasp* nothing).</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>-sv private.key</i></p>
+
+<p style="margin-left:18%;">The private key file. The key
+(1024 bits RSA key pair) will be automatically generated if
+the specified file isn&rsquo;t present.</p>
+
+<p style="margin-left:9%;"><i>pollux.cer</i></p>
+
+<p style="margin-left:18%;">The SSL certificate to be
+created for your host.</p>
+
+<h2>KNOWN RESTRICTIONS
+<a name="KNOWN RESTRICTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Compared to the
+Windows version some options aren&rsquo;t supported (-$, -d,
+-l, -nscp, -is, -sc, -ss). Also PVK files with passwords
+aren&rsquo;t supported.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Sebastien Pouliot</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2003 Motus Technologies. Copyright (C) 2004-2005 Novell.
+Released under BSD license.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>signcode(1)</b></p>
+<hr>
+</body>
+</html>

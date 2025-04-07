@@ -1,0 +1,493 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:58 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-FUND</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-FUND</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Example">Example</a><br>
+<a href="#Workspaces support">Workspaces support</a><br>
+<a href="#Example:">Example:</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#json">json</a><br>
+<a href="#browser">browser</a><br>
+<a href="#unicode">unicode</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#which">which</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-fund</b>
+- Retrieve funding information</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm fund
+[&lt;package-spec&gt;]</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+retrieves information on how to fund the dependencies of a
+given project. If no package name is provided, it will list
+all dependencies that are looking for funding in a tree
+structure, listing the type of funding and the url to visit.
+If a package name is provided then it tries to open its
+funding url using the <b>--browser</b> config <i>&lang;
+/using-npm/config#browser&rang;</i> param; if there are
+multiple funding sources for the package, the user will be
+instructed to pass the <b>--which</b> option to
+disambiguate.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The list will
+avoid duplicated entries and will stack all packages that
+share the same url as a single entry. Thus, the list does
+not have the same shape of the output from <b>npm
+ls</b>.</p>
+
+<h3>Example
+<a name="Example"></a>
+</h3>
+
+
+<h3>Workspaces support
+<a name="Workspaces support"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">It&rsquo;s
+possible to filter the results to only include a single
+workspace and its dependencies using the <b>workspace</b>
+config <i>&lang; /using-npm/config#workspace&rang;</i>
+option.</p>
+
+<h3>Example:
+<a name="Example:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Here&rsquo;s an
+example running <b>npm fund</b> in a project with a
+configured workspace <b>a</b>:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm fund <br>
+test-workspaces-fund@1.0.0 <br>
++-- https://example.com/a <br>
+| | &lsquo;-- a@1.0.0 <br>
+| &lsquo;-- https://example.com/maintainer <br>
+| &lsquo;-- foo@1.0.0 <br>
++-- https://example.com/npmcli-funding <br>
+| &lsquo;-- @npmcli/test-funding <br>
+&lsquo;-- https://example.com/org <br>
+&lsquo;-- bar@2.0.0</p>
+
+<p style="margin-left:9%; margin-top: 1em">And here is an
+example of the expected result when filtering only by a
+specific workspace <b>a</b> in the same project:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm fund -w a
+<br>
+test-workspaces-fund@1.0.0 <br>
+&lsquo;-- https://example.com/a <br>
+| &lsquo;-- a@1.0.0 <br>
+&lsquo;-- https://example.com/maintainer <br>
+&lsquo;-- foo@2.0.0</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>json
+<a name="json"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Whether or not
+to output JSON data, rather than the normal output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">In <b>npm pkg set</b> it enables
+parsing set values with JSON.parse() before saving them to
+your <b>package.json</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Not supported by
+all npm commands.</p>
+
+<h3>browser
+<a name="browser"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="76%">
+
+
+<p style="margin-top: 1em">Default: OS X:
+<b>&quot;open&quot;</b>, Windows: <b>&quot;start&quot;</b>,
+Others: <b>&quot;xdg-open&quot;</b></p></td>
+<td width="10%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="76%">
+
+
+<p>Type: null, Boolean, or String</p></td>
+<td width="10%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The browser that
+is called by npm commands to open websites.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Set to
+<b>false</b> to suppress browser behavior and instead print
+urls to terminal.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Set to
+<b>true</b> to use default system URL opener.</p>
+
+<h3>unicode
+<a name="unicode"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Default: false on windows, true
+on mac/unix systems with a unicode locale, as defined by the
+<b>LC_ALL</b>, <b>LC_CTYPE</b>, or <b>LANG</b> environment
+variables.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Type: Boolean</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set to
+true, npm uses unicode characters in the tree output. When
+false, it uses ascii characters instead of unicode
+glyphs.</p>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>which
+<a name="which"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p>Type: null or Number</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If there are
+multiple funding sources, which 1-indexed source URL to
+open.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="30%">
+
+
+<p style="margin-top: 1em">npm help &quot;package
+spec&quot;</p> </td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="30%">
+
+
+<p>npm help install</p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="30%">
+
+
+<p>npm help docs</p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="30%">
+
+
+<p>npm help ls</p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="30%">
+
+
+<p>npm help config</p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="30%">
+
+
+<p>npm help workspaces</p></td>
+<td width="56%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

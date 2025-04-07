@@ -1,0 +1,217 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE CHECKOUT</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE CHECKOUT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-checkout
+- Check out a commit into a filesystem</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="65%">
+
+
+<p style="margin-top: 1em"><b>ostree checkout</b>
+[OPTIONS...] {COMMIT} [DESTINATION]</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Checks out the
+given commit into the filesystem under directory
+DESTINATION. If DESTINATION is not specified, the COMMIT
+will become the destination checkout target. If COMMIT
+destination already exists, command will error unless
+<b>--union</b> option is selected.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--user-mode</b>,
+<b>-U</b></p>
+
+<p style="margin-left:14%;">Do not change file ownership or
+initialize extended attributes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--subpath</b>=&quot;PATH&quot;</p>
+
+<p style="margin-left:14%;">Checkout sub-directory
+PATH.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--union</b></p>
+
+<p style="margin-left:14%;">Keep existing directories and
+unchanged files, overwrite existing files.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--union-add</b></p>
+
+<p style="margin-left:14%;">Keep existing directories and
+files.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--union-identical</b></p>
+
+<p style="margin-left:14%;">Like --union, but error out if
+a file would be replaced with a different file. Add new
+files and directories, ignore identical files, and keep
+existing directories. Requires -H.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--whiteouts</b></p>
+
+<p style="margin-left:14%;">Process whiteout files (Docker
+style).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--process-passthrough-whiteouts</b></p>
+
+<p style="margin-left:14%;">Enable overlayfs whiteout
+extraction into 0:0 character devices. Overlayfs whiteouts
+are encoded inside ostree as .ostree-wh.filename and
+extracted as 0:0 character devices. This is useful to carry
+container storage embedded into ostree.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--allow-noent</b></p>
+
+<p style="margin-left:14%;">Do nothing if specified path
+does not exist.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--from-stdin</b></p>
+
+<p style="margin-left:14%;">Process many checkouts from
+standard input.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--from-file</b>=&quot;FILE&quot;</p>
+
+<p style="margin-left:14%;">Process many checkouts from
+input file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fsync</b>=&quot;POLICY&quot;</p>
+
+<p style="margin-left:14%;">POLICY is a boolean which
+specifies whether fsync should be used or not. Default to
+true.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--require-hardlinks</b>,
+<b>-H</b></p>
+
+<p style="margin-left:14%;">Do not fall back to full copies
+if hardlinking fails.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force-copy-zerosized</b>,
+<b>-z</b></p>
+
+<p style="margin-left:14%;">This option does nothing; the
+functionality is now always on by default.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--force-copy</b>,
+<b>-C</b></p>
+
+<p style="margin-left:14%;">Never hardlink (but may reflink
+if available).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--bareuseronly-dirs</b>,
+<b>-M</b></p>
+
+<p style="margin-left:14%;">Suppress mode bits outside of
+0775 for directories (suid, world writable, etc.).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--skip-list</b>=&quot;FILE&quot;</p>
+
+<p style="margin-left:14%;">Skip checking out the absolute
+file paths listed in FILE, one per line.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--selinux-policy</b></p>
+
+<p style="margin-left:14%;">Set SELinux labels based on
+policy in root filesystem PATH (may be /). This implies
+--force-copy.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--composefs</b></p>
+
+<p style="margin-left:14%;">Only generate a composefs, not
+a directory.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--composefs-noverity</b></p>
+
+<p style="margin-left:14%;">Only generate a composefs, not
+a directory; fsverity digests will not be included. This is
+best used for &quot;opportunistic&quot; use of
+composefs.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+checkout my-branch</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ls</b></p>
+
+
+<p style="margin-left:14%; margin-top: 1em">file1&nbsp;&nbsp;&nbsp;&nbsp;file2&nbsp;&nbsp;&nbsp;&nbsp;<i>my-branch</i></p>
+<hr>
+</body>
+</html>

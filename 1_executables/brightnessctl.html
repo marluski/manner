@@ -1,0 +1,224 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:50 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BRIGHTNESSCTL</title>
+
+</head>
+<body>
+
+<h1 align="center">BRIGHTNESSCTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OPERATIONS">OPERATIONS</a><br>
+<a href="#VALUES">VALUES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">brightnessctl -
+read and control device brightness</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>brightnessctl</i>
+[options] <i>[operation]</i> [value...]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Print this help.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l,
+--list</b></p>
+
+<p style="margin-left:14%;">List devices with available
+brightness controls.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q,
+--quiet</b></p>
+
+<p style="margin-left:14%;">Suppress output.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p,
+--pretend</b></p>
+
+<p style="margin-left:14%;">Do not perform write
+operations.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m,
+--machine-readable</b></p>
+
+<p style="margin-left:14%;">Produce machine-readable
+output.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n,
+--min-value</b>=<i>VALUE</i></p>
+
+<p style="margin-left:14%;">Set minimum brightness when
+using delta values, defaults to 1.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e,
+--exponent</b>=<i>K</i></p>
+
+<p style="margin-left:14%;">Changes percentage scaling
+curve to exponential (linear by default). Default exponent
+is 4.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Percentage
+equation: % = <i>[VALUE]</i>&#710;<i>[K]</i> * <i>[MAX]</i>
+* 100&#710;-<i>[K]</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The exponential
+curve may make the adjustments perceptually equal.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--save</b></p>
+
+<p style="margin-left:14%;">Save state in a temporary
+file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r,
+--restore</b></p>
+
+<p style="margin-left:14%;">Restore previously-saved
+state.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--device</b>=<i>DEVICE</i></p>
+
+<p style="margin-left:14%;">Specify device name (can be a
+wildcard).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--class</b>=<i>CLASS</i></p>
+
+<p style="margin-left:14%;">Specify device class.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Print version and exit.</p>
+
+<h2>OPERATIONS
+<a name="OPERATIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>i,
+info</b></p>
+
+<p style="margin-left:14%;">Get device info.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>g,
+get</b></p>
+
+<p style="margin-left:14%;">Get the current brightness of
+the device.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>m,
+max</b></p>
+
+<p style="margin-left:14%;">Get the maximum brightness of
+the device.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>s, set</b>
+<i>VALUE</i></p>
+
+<p style="margin-left:14%;">Set the brightness of the
+device.</p>
+
+<h3>VALUES
+<a name="VALUES"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You may specify
+<i>VALUE</i> for the <b>set</b> command in absolute or
+relative form, and as a value or a delta from the current
+value. For example:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>brightnessctl
+set 500</b></p>
+
+<p style="margin-left:14%;">Sets brightness to 500.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>brightnessctl
+set 50%</b></p>
+
+<p style="margin-left:14%;">Sets brightness to 50% of the
+maximum.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>brightnessctl
+set 50-</b></p>
+
+<p style="margin-left:14%;">Subtracts 50 from the current
+brightness.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>brightnessctl
+set +10</b></p>
+
+<p style="margin-left:14%;">Adds 10 to the current
+brightness.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>brightnessctl
+set 50%-</b></p>
+
+<p style="margin-left:14%;">Subtracts 50% of the maximum
+from the current brightness.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>brightnessctl
+set +10%</b></p>
+
+<p style="margin-left:14%;">Adds 10% of the maximum to the
+current brightness.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Mykyta Holubakha, who is assisted by other open source
+contributors. For more information about brightnessctl
+development, visit:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">https://github.com/Hummer12007/brightnessctl</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,392 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:32 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ZBARCAM</title>
+
+</head>
+<body>
+
+<h1 align="center">ZBARCAM</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">zbarcam - scan
+and decode bar codes from a video device</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em"><b>zbarcam</b> [<b>-qv</b>]
+[<b>--quiet</b>] [<b>--nodisplay</b>] [<b>--xml</b>]
+[<b>--verbose[=</b><i>n</i>]]
+[<b>--prescale=</b><i>W</i><b>x</b><i>H</i>]
+[<b>-S[</b><i>symbology</i>.]<i>config</i><b>[=</b><i>value</i>]]
+[<b>--set&nbsp;[</b><i>symbology</i>.]<i>config</i><b>[=</b><i>value</i>]]
+[<i>device</i>]</p> </td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em"><b>zbarcam</b> {<b>-h</b> |
+<b>--help</b> | <b>--version</b>}</p></td>
+<td width="13%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>zbarcam</b>
+scans a video4linux video source (eg, a webcam) for bar
+codes and prints any decoded data to the standard output.
+The video stream is also displayed to the screen.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>device</i> is
+the path to the video4linux (version 1 or 2) character
+device special file (major number 81 and minor number 0 thru
+63). It defaults to /dev/video0</p>
+
+<p style="margin-left:9%; margin-top: 1em">The underlying
+library currently supports EAN-13 (including UPC and ISBN
+subsets), EAN-8, DataBar, DataBar Expanded, Code 128, Code
+93, Code 39, Codabar, Interleaved 2 of 5 and QR Code
+symbologies. The specific type of each detected symbol is
+printed with the decoded data.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program
+follows the usual GNU command line syntax. Single letter
+options may be bundled, long options start with two dashes
+(&lsquo;-').</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Print a short help message
+describing command line options to standard output and
+exit</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print program version
+information to standard output and exit</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose[=</b><i>n</i>]</p>
+
+<p style="margin-left:14%;">Increase debug output level.
+Multiple <b>-v</b> options create more spew. Alternatively
+specify <i>n</i> to set the debug level directly</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-S[</b><i>symbology</i>.]<i>config</i><b>[=</b><i>value</i>],
+<b>--set
+[</b><i>symbology</i>.]<i>config</i><b>[=</b><i>value</i>]</p>
+
+<p style="margin-left:14%;">Set decoder configuration
+option <i>config</i> for <i>symbology</i> to <i>value</i>.
+<i>value</i> defaults to 1 if omitted. <i>symbology</i> is
+one of <b>ean13</b>, <b>ean8</b>, <b>upca</b>, <b>upce</b>,
+<b>isbn13</b>, <b>isbn10</b>, <b>i25</b>, <b>codabar</b>,
+<b>code39</b>, <b>code93</b>, <b>code128</b>, <b>qrcode</b>
+or the special value <b>*</b>. If <i>symbology</i> is
+omitted or <b>*</b>, the <i>config</i> will be set for all
+applicable symbologies. These are the currently recognized
+<i>config</i>s. Prefix a config with &quot;no-&quot; to
+negate it. Not all configs are appropriate for every
+symbology.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>enable</b></p>
+
+<p style="margin-left:19%;">Control decoding/reporting of a
+symbology. For symbologies which are just subsets of
+<b>ean13</b> (<b>upca</b>, <b>upce</b>, <b>isbn13</b>,
+<b>isbn10</b>), this config controls whether the subsets are
+detected and reported as such. These special cases are
+disabled by default, all other symbologies default to
+enabled</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>disable</b></p>
+
+<p style="margin-left:19%;">Antonym for <b>enable</b></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>emit-check</b></p>
+
+<p style="margin-left:19%;">Control whether check digits
+are included in the decoded output. Enabled by default. This
+config does not apply for <b>code128</b>, which never
+returns the check digit. It also not apply for cases where
+the check digit is disabled (see <b>add-check</b>). Check
+digits are currently not implemented for <b>i25</b> or
+<b>code39</b></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>add-check</b></p>
+
+<p style="margin-left:19%;">Enable decode and verification
+of a check digit for symbologies where it is optional: this
+will include <b>code39</b> and <b>i25</b>, neither of which
+implements the check digit yet</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>ascii</b></p>
+
+<p style="margin-left:19%;">Enable escape sequences that
+encode the full ASCII character set. This would apply to
+<b>code39</b>, except that it's not implemented
+either...</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>position</b></p>
+
+<p style="margin-left:19%;">Enable collection of symbol
+position information. Enabled by default. Currently, the
+position information is unusable, so you can save a few
+cycles by disabling this.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>test-inverted</b></p>
+
+<p style="margin-left:19%;">Specially for QR code images,
+sometimes the image is inverted, e. g. lines are written in
+white instead of black. This option makes ZBar to invert the
+image and parse again, in case it fails using the normal
+order. Enabling it affects all decoders.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>min-length=</b><i>n</i>,
+<b>max-length=</b><i>n</i></p>
+
+<p style="margin-left:19%;">Bound the number of decoded
+characters in a valid symbol. If a decode result is outside
+the configured min/max range (inclusive), it will not be
+reported. Set to 0 to disable the corresponding check. This
+setting applies to variable-length symbologies: <b>i25</b>,
+<b>codabar</b>, <b>code39</b>, <b>code128</b> and
+<b>pdf417</b>. <b>min-length</b> defaults to 6 for
+<b>i25</b> and 1 for <b>code39</b> (per Code 39
+autodiscrimination recommendation); all others default to
+0</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>x-density=</b><i>n</i>,
+<b>y-density=</b><i>n</i></p>
+
+<p style="margin-left:19%;">Adjust the density of the
+scanner passes. Lower values scan more of the image at the
+cost of decreased performance. Setting to 0 disables
+scanning along that axis. Defaults are both 1.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>,
+<b>--quiet</b></p>
+
+<p style="margin-left:14%;">Quiet operation; disable the
+audible beep otherwise emitted when a symbol is decoded</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nodisplay</b></p>
+
+<p style="margin-left:14%;">Disable output video window.
+Video input will be scanned until the program is interrupted
+or otherwise signaled</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--xml</b></p>
+
+<p style="margin-left:14%;">Stream results using an XML
+output format. This format wraps the raw data from the
+symbol with information about the scan in an easy to parse
+format. The latest schema is available from
+<b><font color="#0000FF">http://zbar.sourceforge.net/2008/barcode.xsd</font></b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><font color="#000000">--raw</font></b></p>
+
+<p style="margin-left:14%;"><font color="#000000">Use raw
+symbol data output format. This format prints symbol data
+separated by newlines without the additional symbology type
+information that is printed by default</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>--prescale=</b><i>W</i><b>x</b><i>H</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Request
+video input scaling from the camera driver. Possibly useful
+for reducing huge frames to achieve a higher frame rate.
+Note that the driver may adjust or completely ignore the
+scaling request</font></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Scan
+for barcodes using the second video device and pipe the
+resulting data through a script that searches for each code
+in a database and does something useful with
+them:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>zbarcam</b>
+/dev/video1 | <b>upcrpc.py</b></font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">The
+<b>upcrpc.py</b> example script included in the examples/
+subdirectory of the distribution will make an XMLRPC call to
+a popular internet UPC database and print the product
+description if found.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Scan
+for barcodes using the default video device and stream
+results to stdout in XML format, also disable recognition of
+Interleaved 2 of 5 codes to prevent confusion with other
+symbologies or background noise:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>zbarcam
+--xml -Si25.disable</b></font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Scan
+only for Code 39, without using the preview window - maybe
+for a fixed installation. To enable only Code 39, first all
+symbologies are disabled, then Code 39 is
+re-enabled:</font></p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><font color="#000000"><b>zbarcam
+--nodisplay -Sdisable -Scode39.enable</b></font></p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>zbarcam</b>
+returns an exit code to indicate the status of the program
+execution. Current exit codes are:</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">0</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Successful
+program completion.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">1</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">An error
+occurred. This includes bad arguments and I/O
+errors.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">2</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">A fatal
+error occurred.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">zbarimg(1)</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><font color="#0000FF">http://zbar.sf.net/</font></b></p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">See</font>
+<b><font color="#0000FF">http://sf.net/tracker/?group_id=189236&amp;atid=928515</font></b></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><font color="#000000">Jeff
+Brown</font></b>
+<font color="#000000">&lt;spadix@users.sourceforge.net&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Lead
+developer</font></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+&copy; 2007-2010 Jeff Brown</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">All
+Rights Reserved</font></p>
+<hr>
+</body>
+</html>

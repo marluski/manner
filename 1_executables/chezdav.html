@@ -1,0 +1,173 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:01 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CHEZDAV</title>
+
+</head>
+<body>
+
+<h1 align="center">CHEZDAV</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#RESOURCES">RESOURCES</a><br>
+<a href="#COPYING">COPYING</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">chezdav - simple
+WebDAV server</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>chezdav</b>
+[<i>OPTIONS...</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The chezdav(1)
+command starts a WebDAV server. This allows clients to
+access your files, and modify them. A simple Web browser is
+sufficient to browse for files. The default shared folder is
+the home directory, but you may specifiy a different folder
+with the <b>-P</b> option.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-P,
+--path</b>=PATH</p>
+
+<p style="margin-left:14%;">Path to export.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p,
+--port</b>=PORT</p>
+
+<p style="margin-left:14%;">Port to listen from. By
+default, a port is allocated randomly.</p>
+
+<p style="margin-left:9%; margin-top: 1em">*--local</p>
+
+<p style="margin-left:14%;">Listen on loopback interface
+only.</p>
+
+<p style="margin-left:9%; margin-top: 1em">*--public</p>
+
+<p style="margin-left:14%;">Listen on all network
+interfaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">*--no-mdns</p>
+
+<p style="margin-left:14%;">Don&rsquo;t broadcast the share
+on the local network. By default, shares are broadcast with
+mDNS/DNS-SD (when compiled with Avahi).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--htdigest</b>=PATH</p>
+
+<p style="margin-left:14%;">Path to a htdigest file, to
+secure the server with DIGEST authentication.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--realm</b>=REALM</p>
+
+<p style="margin-left:14%;">The DIGEST realm string (must
+be identical to the string used in the htdigest file). The
+default value is &quot;USER&rsquo;s public share&quot;
+(where USER is the owner&rsquo;s username of the current
+process).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--verbose</b></p>
+
+<p style="margin-left:14%;">Verbosely print running
+information.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print program version
+number.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>0</b></p>
+
+<p style="margin-left:14%;">Success</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>1</b></p>
+
+<p style="margin-left:14%;">Failure (syntax or usage error;
+unexpected error).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>htdigest</b>(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">chezdav was
+originally written by Marc-Andr&eacute; Lureau.</p>
+
+<h2>RESOURCES
+<a name="RESOURCES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Main web site:
+<b><font color="#0000FF">https://wiki.gnome.org/phodav</font></b></p>
+
+<h2>COPYING
+<a name="COPYING"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Copyright
+(C) 2013-2014 Red Hat, Inc. Free use of this software is
+granted under the terms of the GNU Lesser General Public
+License (lGPL).</font></p>
+<hr>
+</body>
+</html>

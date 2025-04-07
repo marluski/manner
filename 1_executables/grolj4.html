@@ -1,0 +1,1101 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:42 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>grolj4</title>
+
+</head>
+<body>
+
+<h1 align="center">grolj4</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Typefaces">Typefaces</a><br>
+<a href="#Paper format and device description file">Paper format and device description file</a><br>
+<a href="#Font description files">Font description files</a><br>
+<a href="#Drawing commands">Drawing commands</a><br>
+<a href="#Fonts">Fonts</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Environment">Environment</a><br>
+<a href="#Files">Files</a><br>
+<a href="#Bugs">Bugs</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grolj4 -
+<i>groff</i> output driver for HP LaserJet 4 and compatible
+printers</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>grolj4</b></p></td>
+<td width="1%"></td>
+<td width="63%">
+
+
+<p style="margin-top: 1em">[<b>-l</b>]
+[<b>-c&nbsp;</b><i>num-copies</i>] [<b>-d</b> [<i>n</i>]]
+[<b>-F&nbsp;</b><i>font-directory</i>]
+[<b>-p&nbsp;</b><i>paper-format</i>]
+[<b>-w&nbsp;</b><i>line-width</i>]
+[<i>file&nbsp;</i>...]</p> </td>
+<td width="19%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>grolj4</b></p></td>
+<td width="1%"></td>
+<td width="63%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="19%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>grolj4</b></p></td>
+<td width="1%"></td>
+<td width="63%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="19%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>grolj4</b></p></td>
+<td width="1%"></td>
+<td width="63%">
+
+
+<p><b>--version</b></p></td>
+<td width="19%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This GNU
+<i>roff</i> output driver translates the output of
+<a href="man:troff(1)"><i>troff</i>(1)</a> into a PCL5
+format suitable for an HP LaserJet 4 printer. Normally,
+<i>grolj4</i> is invoked by
+<a href="man:groff(1)"><i>groff</i>(1)</a> when the latter
+is given the &ldquo;<b>-T&nbsp;lj4</b>&rdquo; option. (In
+this installation, <b>ps</b> is the default output device.)
+Use <i>groff</i>&rsquo;s <b>-P</b> option to pass any
+options shown above to <i>grolj4</i>. If no <i>file</i>
+arguments are given, or if <i>file</i> is &ldquo;-&rdquo;,
+<i>grolj4</i> reads the standard input stream. Output is
+written to the standard output stream.</p>
+
+<h3>Typefaces
+<a name="Typefaces"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grolj4</i>
+supports the standard four styles: <b>R</b> (roman),
+<b>I</b> (<i>italic</i>), <b>B</b> (<b>bold</b>), and
+<b>BI</b> (<b><i>bold-italic</i></b>). Fonts are grouped
+into families <b>A</b>, <b>C</b>, <b>G</b>, <b>O</b>,
+<b>T</b>, <b>TN</b>, <b>U</b>, and <b>UC</b> having members
+in each style.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>AB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Arial Bold</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>ABI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Arial Bold Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>AI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Arial Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>AR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Arial Roman</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>CB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Courier Bold</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>CBI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Courier Bold Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>CI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Courier Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>CR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Courier Roman</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>GB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Garamond Halbfett</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>GBI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Garamond Kursiv Halbfett</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>GI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Garamond Kursiv</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>GR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Garamond Antiqua</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>OB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Omega Bold</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>OBI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Omega Bold Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>OI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Omega Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>OR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Omega Roman</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>OB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Omega Bold</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>OBI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Omega Bold Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>OI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Omega Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>OR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Omega Roman</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>TB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Times Bold</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>TBI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Times Bold Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>TI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Times Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>TR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>CG Times Roman</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>TNRB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>M Times Bold</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>TNRBI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>M Times Bold Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>TNRI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>M Times Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>TNRR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>M Times Roman</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>UB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Univers Bold</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>UBI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Univers Bold Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>UI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Univers Medium Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>UR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Univers Medium</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>UCB</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Univers Condensed Bold</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>UCBI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Univers Condensed Bold Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>UCI</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Univers Condensed Medium Italic</p></td>
+<td width="24%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>UCR</b></p></td>
+<td width="12%"></td>
+<td width="40%">
+
+
+<p>Univers Condensed Medium</p></td>
+<td width="24%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+fonts are not members of a family.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><b>ALBB</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">Albertus Extra Bold</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>ALBR</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Albertus Medium</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>AOB</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Antique Olive Bold</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>AOI</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Antique Olive Italic</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>AOR</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Antique Olive Roman</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>CLARENDON</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Clarendon</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>CORONET</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Coronet</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>LGB</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Letter Gothic Bold</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>LGI</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Letter Gothic Italic</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>LGR</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Letter Gothic Roman</p></td>
+<td width="38%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+<p><b>MARIGOLD</b></p></td>
+<td width="7%"></td>
+<td width="26%">
+
+
+<p>Marigold</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The special font
+is <b>S</b> (PostScript Symbol); <b>SYMBOL</b> (M Symbol),
+and <b>WINGDINGS</b> (Wingdings) are also available but not
+mounted by default.</p>
+
+<h3>Paper format and device description file
+<a name="Paper format and device description file"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grolj4</i>
+supports paper formats &ldquo;<b>A4</b>&rdquo;,
+&ldquo;<b>B5</b>&rdquo;, &ldquo;<b>C5</b>&rdquo;,
+&ldquo;<b>com10</b>&rdquo;, &ldquo;<b>DL</b>&rdquo;,
+&ldquo;<b>executive</b>&rdquo;, &ldquo;<b>legal</b>&rdquo;,
+&ldquo;<b>letter</b>&rdquo;, and
+&ldquo;<b>monarch</b>&rdquo;. These are matched
+case-insensitively. The <b>-p</b> option overrides any
+setting in the device description file <i>DESC</i>. If
+neither specifies a paper format, &ldquo;letter&rdquo; is
+assumed.</p>
+
+<h3>Font description files
+<a name="Font description files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grolj4</i>
+recognizes four font description file directives in addition
+to those documented in
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>.
+<b><br>
+pclweight&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">Set the stroke weight to
+<i>n</i>, an integer in the range -7 to +7; the default
+is&nbsp;0.</p>
+
+
+<p style="margin-left:9%;"><b>pclstyle&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">Set the style to <i>n</i>, an
+integer in the range 0 to 32767; the default is&nbsp;0.</p>
+
+
+<p style="margin-left:9%;"><b>pclproportional&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">Set the proportional spacing
+Boolean flag to <i>n</i>, which can be either 0 or&nbsp;1;
+the default is&nbsp;0.</p>
+
+
+<p style="margin-left:9%;"><b>pcltypeface&nbsp;</b><i>n</i></p>
+
+<p style="margin-left:18%;">Set the typeface family to
+<i>n</i>, an integer in the range 0 to 65535; the default
+is&nbsp;0.</p>
+
+<h3>Drawing commands
+<a name="Drawing commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">An additional
+drawing command is recognized as an extension to those
+documented in <a href="man:groff(7)"><i>groff</i>(7)</a>.
+<b><br>
+\D'R&nbsp;</b><i>dh dv</i><b>'</b></p>
+
+<p style="margin-left:18%;">Draw a rule (solid black
+rectangle) with one corner at the drawing position, and the
+diagonally opposite corner at the drawing position
++(<i>dh</i>,<i>dv</i>), at which the drawing position will
+be afterward. This generates a PCL fill rectangle command,
+and so will work on printers that do not support HP-GL/2,
+unlike the other <b>\D</b> commands.</p>
+
+<h3>Fonts
+<a name="Fonts"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Nominally, all
+Hewlett-Packard LaserJet&nbsp;4-series and newer printers
+have the same internal fonts: 45 scalable fonts and one
+bitmapped Lineprinter font. The scalable fonts are available
+in sizes between 0.25 points and 999.75 points, in
+0.25-point increments; the Lineprinter font is available
+only in 8.5-point size.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The LaserJet
+font files included with <i>groff</i> assume that all
+printers since the LaserJet&nbsp;4 are identical. There are
+some differences between fonts in the earlier and more
+recent printers, however. The LaserJet&nbsp;4 printer used
+Agfa Intellifont technology for 35 of the internal scalable
+fonts; the remaining 10 scalable fonts were TrueType.
+Beginning with the LaserJet&nbsp;4000-series printers
+introduced in 1997, all scalable internal fonts have been
+TrueType. The number of printable glyphs differs slightly
+between Intellifont and TrueType fonts (generally, the
+TrueType fonts include more glyphs), and there are some
+minor differences in glyph metrics. Differences among
+printer models are described in the <i>PCL&nbsp;5 Comparison
+Guide</i> and the <i>PCL&nbsp;5 Comparison Guide
+Addendum</i> (for printers introduced since approximately
+2001).</p>
+
+<p style="margin-left:9%; margin-top: 1em">LaserJet
+printers reference a glyph by a combination of a 256-glyph
+symbol set and an index within that symbol set. Many glyphs
+appear in more than one symbol set; all combinations of
+symbol set and index that reference the same glyph are
+equivalent. For each glyph,
+<a href="man:hpftodit(1)"><i>hpftodit</i>(1)</a> searches a
+list of symbol sets, and selects the first set that contains
+the glyph. The printing code generated by <i>hpftodit</i> is
+an integer that encodes a numerical value for the symbol set
+in the high byte(s), and the index in the low byte. See
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a> for a
+complete description of the font file format; symbol sets
+are described in greater detail in the <i>PCL&nbsp;5 Printer
+Language Technical Reference Manual</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Two of the
+scalable fonts, Symbol and Wingdings, are bound to 256-glyph
+symbol sets; the remaining scalable fonts, as well as the
+Lineprinter font, support numerous symbol sets, sufficient
+to enable printing of more than 600 glyphs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The metrics
+generated by <i>hpftodit</i> assume that the <i>DESC</i>
+file contains values of 1200 for <i>res</i> and 6350 for
+<i>unitwidth</i>, or any combination (e.g., 2400 and 3175)
+for which
+<i>res&nbsp;</i>&times;&nbsp;<i>unitwidth&nbsp;</i>=&nbsp;7620000.
+Although HP PCL&nbsp;5 LaserJet printers support an internal
+resolution of 7200 units per inch, they use a 16-bit signed
+integer for positioning; if <b>devlj4</b> is to support U.S.
+ledger paper (11&nbsp;in&nbsp;&times;&nbsp;17&nbsp;in; in =
+inch), the maximum usable resolution is
+32767&nbsp;&divide;&nbsp;17, or 1927 units per inch, which
+rounds down to 1200 units per inch. If the largest required
+paper dimension is less (e.g.,
+8.5&nbsp;in&nbsp;&times;&nbsp;11&nbsp;in, or A5), a greater
+<i>res</i> (and lesser <i>unitwidth</i>) can be
+specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Font metrics for
+Intellifont fonts were provided by Tagged Font Metric (TFM)
+files originally developed by Agfa/Compugraphic. The TFM
+files provided for these fonts supported 600+ glyphs and
+contained extensive lists of kerning pairs.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To accommodate
+developers who had become accustomed to TFM files, HP also
+provided TFM files for the 10 TrueType fonts included in the
+LaserJet&nbsp;4. The TFM files for TrueType fonts generally
+included less information than the Intellifont TFMs,
+supporting fewer glyphs, and in most cases, providing no
+kerning information. By the time the LaserJet&nbsp;4000
+printer was introduced, most developers had migrated to
+other means of obtaining font metrics, and support for new
+TFM files was very limited. The TFM files provided for the
+TrueType fonts in the LaserJet&nbsp;4000 support only the
+Latin 2 (ISO 8859-2) symbol set, and include no kerning
+information; consequently, they are of little value for any
+but the most rudimentary documents.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Because the
+Intellifont TFM files contain considerably more information,
+they generally are preferable to the TrueType TFM files even
+for use with the TrueType fonts in the newer printers. The
+metrics for the TrueType fonts are very close, though not
+identical, to those for the earlier Intellifont fonts of the
+same names. Although most output using the Intellifont
+metrics with the newer printers is quite acceptable, a few
+glyphs may fail to print as expected. The differences in
+glyph metrics may be particularly noticeable with composite
+parentheses, brackets, and braces used by
+<a href="man:eqn(1)"><i>eqn</i>(1)</a>. A script, located in
+<i>/usr/share/groff/1.23.0/font/devlj4/generate</i>, can be
+used to adjust the metrics for these glyphs in the special
+font &ldquo;S&rdquo; for use with printers that have all
+TrueType fonts.</p>
+
+<p style="margin-left:9%; margin-top: 1em">At the time HP
+last supported TFM files, only version 1.0 of the Unicode
+standard was available. Consequently, many glyphs lacking
+assigned code points were assigned by HP to the Private Use
+Area (PUA). Later versions of the Unicode standard included
+code points outside the PUA for many of these glyphs. The
+HP-supplied TrueType TFM files use the PUA assignments; TFM
+files generated from more recent TrueType font files require
+the later Unicode values to access the same glyphs.
+Consequently, two different mapping files may be required:
+one for the HP-supplied TFM files, and one for more recent
+TFM files.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward. <b><br>
+-c&nbsp;</b><i>num-copies</i></p>
+
+<p style="margin-left:18%;">Format <i>num-copies</i> copies
+of each page.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-d&nbsp;</b>[<i>n</i>]</p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Use duplex mode <i>n</i>: 1&nbsp;is long-side binding
+(default), and 2&nbsp;is short-side binding.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-F</b>
+<i>font-directory</i></p>
+
+<p style="margin-left:18%;">Prepend directory
+<i>font-directory</i>/dev<i>name</i> to the search path for
+font and device description files; <i>name</i> is the name
+of the device, usually <b>lj4</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-l</b></p></td>
+<td width="6%"></td>
+<td width="58%">
+
+
+<p>Format the document in landscape orientation.</p></td>
+<td width="24%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-p</b>
+<i>paper-format</i></p>
+
+<p style="margin-left:18%;">Set the paper format to
+<i>paper-format</i>, which must be a valid paper format as
+described above.</p>
+
+<p style="margin-left:9%;"><b>-w</b> <i>line-width</i></p>
+
+<p style="margin-left:18%;">Set the default line thickness
+to <i>line-width</i> thousandths of an em; the default is
+<b>40</b> (0.04&nbsp;em).</p>
+
+<h2>Environment
+<a name="Environment"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>GROFF_FONT_PATH</i></p>
+
+<p style="margin-left:18%;">lists directories in which to
+seek the selected output device&rsquo;s directory of device
+and font description files. See
+<a href="man:troff(1)"><i>troff</i>(1)</a> and
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>.</p>
+
+<h2>Files
+<a name="Files"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>/usr/share/groff/1.23.0/font/devlj4/DESC</i></p>
+
+<p style="margin-left:18%;">describes the <b>lj4</b> output
+device.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/font/devlj4/</i>F</p>
+
+<p style="margin-left:18%;">describes the font known
+as&nbsp;<i>F</i> on device <b>lj4</b>.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/tmac/lj4.tmac</i></p>
+
+<p style="margin-left:18%;">defines macros for use with the
+<b>lj4</b> output device. It is automatically loaded by
+<i>troffrc</i> when the <b>lj4</b> output device is
+selected.</p>
+
+<h2>Bugs
+<a name="Bugs"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Small dots.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="http://www.hp.com/ctg/Manual/bpl13210.pdf"><i>HP
+PCL/PJL Reference: PCL&nbsp;5 Printer Language Technical
+Reference Manu- al, Part I</i></a></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:hpftodit(1)"><i>hpftodit</i>(1)</a>,
+<a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:troff(1)"><i>troff</i>(1)</a>,
+<a href="man:groff_out(5)"><i>groff_out</i>(5)</a>,
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>,
+<a href="man:groff_char(7)"><i>groff_char</i>(7)</a></p>
+<hr>
+</body>
+</html>

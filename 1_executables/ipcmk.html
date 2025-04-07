@@ -1,0 +1,177 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>IPCMK</title>
+
+</head>
+<body>
+
+<h1 align="center">IPCMK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#AVAILABILITY">AVAILABILITY</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ipcmk - make
+various IPC resources</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ipcmk</b>
+[options]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ipcmk</b>
+allows you to create POSIX and System V inter-process
+communication (IPC) objects: shared memory segments, message
+queues, and semaphore (arrays for System V).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Resources can be
+specified with these options:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-M</b>,
+<b>--shmem</b> <i>size</i></p>
+
+<p style="margin-left:14%;">Create a shared memory segment
+of <i>size</i> bytes. The <i>size</i> argument may be
+followed by the multiplicative suffixes KiB (=1024), MiB
+(=1024*1024), and so on for GiB, etc. (the &quot;iB&quot; is
+optional, e.g., &quot;K&quot; has the same meaning as
+&quot;KiB&quot;) or the suffixes KB (=1000), MB
+(=1000*1000), and so on for GB, etc.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m</b>,
+<b>--posix-shmem</b> <i>size</i></p>
+
+<p style="margin-left:14%;">Create a POSIX shared memory
+segment of <i>size</i> bytes. The <i>size</i> argument may
+be followed by the multiplicative suffixes KiB (=1024), MiB
+(=1024*1024), and so on for GiB, etc. (the &quot;iB&quot; is
+optional, e.g., &quot;K&quot; has the same meaning as
+&quot;KiB&quot;) or the suffixes KB (=1000), MB
+(=1000*1000), and so on for GB, etc.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-Q</b>,
+<b>--queue</b></p>
+
+<p style="margin-left:14%;">Create a message queue.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>,
+<b>--posix-mqueue</b></p>
+
+<p style="margin-left:14%;">Create a POSIX message
+queue.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-S</b>,
+<b>--semaphore</b> <i>number</i></p>
+
+<p style="margin-left:14%;">Create a semaphore array with
+<i>number</i> of elements.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>,
+<b>--posix-semaphore</b></p>
+
+<p style="margin-left:14%;">Create a POSIX named
+semaphore.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n</b>,
+<b>--name</b> <i>name</i></p>
+
+<p style="margin-left:14%;">Name of the POSIX IPC object.
+This option is mandatory for POSIX IPC objects.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Other options
+are:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>,
+<b>--mode</b> <i>mode</i></p>
+
+<p style="margin-left:14%;">Access permissions for the
+resource. Default is 0644.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Display help text and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b>,
+<b>--version</b></p>
+
+<p style="margin-left:14%;">Display version and exit.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Hayden A.
+James</i> &lt;hayden.james@gmail.com&gt;, <i>Prasanna
+Paithankar</i> &lt;paithankarprasanna@gmail.com&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ipcrm</b>(1),
+<b>ipcs</b>(1), <b>lsipc</b>(1), <b>sysvipc</b>(7)</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For bug reports,
+use the <i>issue tracker</i>
+&lt;https://github.com/util-linux/util-linux/issues&gt;.</p>
+
+<h2>AVAILABILITY
+<a name="AVAILABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>ipcmk</b>
+command is part of the util-linux package which can be
+downloaded from <i>Linux Kernel Archive</i>
+&lt;https://www.kernel.org/pub/linux/utils/util-linux/&gt;.</p>
+<hr>
+</body>
+</html>

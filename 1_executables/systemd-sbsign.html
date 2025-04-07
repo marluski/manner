@@ -1,0 +1,148 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SYSTEMD-SBSIGN</title>
+
+</head>
+<body>
+
+<h1 align="center">SYSTEMD-SBSIGN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">systemd-sbsign -
+Sign PE binaries for EFI Secure Boot</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="47%">
+
+
+<p style="margin-top: 1em"><b>systemd-sbsign</b>
+[OPTIONS...] {COMMAND}</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>systemd-sbsign</b>
+can be used to sign PE binaries for EFI Secure Boot.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sign</b></p>
+
+<p style="margin-left:14%;">Signs the given PE binary for
+EFI Secure Boot. Takes a path to a PE binary as its
+argument. If the PE binary already has a certificate table,
+the new signature will be added to it. Otherwise a new
+certificate table will be created. The signed PE binary will
+be written to the path specified with <b>--output=</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 257.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--output=</b><i>PATH</i></p>
+
+<p style="margin-left:14%;">Specifies the path where to
+write the signed PE binary.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 257.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--private-key=</b><i>PATH/URI</i>,
+<b>--private-key-source=</b><i>TYPE</i><b>[:</b><i>NAME</i><b>]</b>,
+<b>--certificate=</b><i>PATH</i>,
+<b>--certificate-source=</b><i>TYPE</i><b>[:</b><i>NAME</i><b>]</b></p>
+
+<p style="margin-left:14%;">Set the Secure Boot private key
+and certificate for use with the <b>sign</b>. The
+<b>--certificate=</b> option takes a path to a PEM encoded
+X.509 certificate or a URI that's passed to the OpenSSL
+provider configured with <b>--certificate-source</b>. The
+<b>--certificate-source</b> takes one of &quot;file&quot; or
+&quot;provider&quot;, with the latter being followed by a
+specific provider identifier, separated with a colon, e.g.
+&quot;provider:pkcs11&quot;. The <b>--private-key=</b>
+option can take a path or a URI that will be passed to the
+OpenSSL engine or provider, as specified by
+<b>--private-key-source=</b> as a &quot;type:name&quot;
+tuple, such as &quot;engine:pkcs11&quot;. The specified
+OpenSSL signing engine or provider will be used to sign the
+PE binary.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Added in
+version 257.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Print a short help text and
+exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print a short version string
+and exit.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>bootctl</b>(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,973 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:05 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>RSCSI</title>
+
+</head>
+<body>
+
+<h1 align="center">RSCSI</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#HISTORY">HISTORY</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#INTERFACE STABILITY">INTERFACE STABILITY</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">rscsi - remote
+generic SCSI transport protocol server</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>/opt/schily/sbin/rscsi</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>rscsi</b>
+command is a remote generic SCSI transport server program.
+<b>rscsi</b> is a program that is run locally on the machine
+with SCSI devices, it is used by remote programs like
+<b>cdrecord</b>(1), <b>cdda2wav</b>(1), <b>readcd</b>(1),
+and <b>sformat</b>(1) that like to access SCSI devices
+through an interprocess communication connection via
+<b>libscg</b>. <b>rscsi</b> is normally started up with an
+<b>rexec</b>(3) or <b>rcmd</b>(3) call but it may also be
+connected via an internal pipe to an <b>ssh</b>(1) session
+that was set up by the remote user.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>rscsi</b>
+program accepts <b>scg_open</b>, <b>scg_close</b>,
+<b>scg_cmd</b> and similar requests that are all related to
+the interface of <b>libscg</b>. <b>rscsi</b> performs the
+commands and then responds with a status indication.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>rscsi</b>
+program is prepared to be installed as a <b>user shell</b>
+in the passwd file to create remote SCSI specific logins and
+security checking.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All requests are
+send to the <b>rscsi</b> program in <small>ASCII</small> and
+thus are byte order and machine independent.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All responses
+are send back in <small>ASCII</small> and in one of the
+following two forms.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All successful
+commands (except for the &quot;S&quot; command that sends
+SCSI commands) have responses of</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>A</b><i>number\n</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">where
+<i>number</i> is the <small>ASCII</small> representation of
+a decimal number that usually is the return code of the
+corresponding system call or function.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All unsuccessful
+commands are responded to with</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>E</b><i>error-number</i><b>\n</b><i>error-message</i><b>\n</b><i>xerror-len</i><b>\n</b><i>xerror-txt</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">where
+<i>error-number</i> is one of the possible error numbers
+described in <b>intro</b>(2), and <i>error-message</i> is
+the corresponding error string as retrieved by
+<b>strerror</b>(3), <i>xerror-len</i> is the length of the
+additional error text <i>xerror-txt</i> and may be 0. In
+case <i>xerror-len</i> is 0, no <i>xerror-txt</i> is send.
+Note that a failed SCSI command that returned SCSI sense
+data counts as a successful command and does not use the
+default error format.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>rscsi</b>
+protocol implements the following commands:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="9%">
+
+
+<p><b>V</b><i>what</i><b>\n</b></p></td>
+<td width="6%"></td>
+<td width="67%">
+
+
+<p>Return the <b>version</b> for several instances of the
+software in the <b>rscsi</b> server. The parameter
+<b>what</b> may have the following values:</p></td></tr>
+</table>
+
+<p style="margin-left:33%;"><b>0</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="3%"></td>
+<td width="6%"></td>
+<td width="58%">
+
+
+<p style="margin-top: 1em">Return <b>SCG_VERSION</b> from
+<b>libscg</b> on the <b>rscsi</b> server. This returns the
+version string for the low level SCSI transport adaptation
+layer.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="3%">
+
+
+<p><b>1</b></p></td>
+<td width="6%"></td>
+<td width="58%">
+
+
+<p>Return <b>SCG_AUTHOR</b> from <b>libscg</b> on the
+<b>rscsi</b> server. This returns the author name for the
+low level SCSI transport adaptation layer.</p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="3%">
+
+
+<p><b>2</b></p></td>
+<td width="6%"></td>
+<td width="58%">
+
+
+<p>Return <b>SCG_SCCS_ID</b> from <b>libscg</b> on the
+<b>rscsi</b> server. This returns the SCCS version string
+for the low level SCSI transport adaptation layer.</p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="3%">
+
+
+<p><b>20</b></p></td>
+<td width="6%"></td>
+<td width="58%">
+
+
+<p>Return <b>SCG_KVERSION</b> from <b>libscg</b> on the
+<b>rscsi</b> server. This returns the version of kernel
+instance of the driver that is underneath the low level SCSI
+transport adaptation layer.</p></td></tr>
+</table>
+
+<p style="margin-left:42%; margin-top: 1em">This call may
+not be supported for all operating systems.</p>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_version</b>(3) function from
+<b>libscg</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+
+<p style="margin-top: 1em"><b>O</b><i>device</i><b>\n</b></p> </td>
+<td width="4%"></td>
+<td width="40%">
+
+
+<p style="margin-top: 1em">Open the specified SCSI
+<i>device</i>.</p> </td>
+<td width="27%">
+</td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">See the
+description of the <b>dev=</b> option in <b>cdrecord</b>(1)
+for more information on possible values of the <i>device</i>
+parameter.</p>
+
+<p style="margin-left:33%; margin-top: 1em">If a device is
+already open, it is closed before a new open is
+performed.</p>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_open</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value in case of success is 0.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="11%">
+
+
+
+<p style="margin-top: 1em"><b>C</b><i>device</i><b>\n</b></p> </td>
+<td width="4%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em">Close the currently open device
+or file. The argument <i>device</i> is ignored.</p></td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_close</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value is the return value from the <b>scg_close</b>(3)
+function.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="9%">
+
+
+
+<p style="margin-top: 1em"><b>D</b><i>size</i><b>\n</b></p> </td>
+<td width="6%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em">Set up the maximum DMA size for
+the currently open SCSI device. The <i>size</i> parameter is
+the desired DMA size in bytes.</p></td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_bufsize</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The returned
+value is the actual DMA size that could be set up. This
+value may be lower than the <i>size</i> parameter.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="9%">
+
+
+
+<p style="margin-top: 1em"><b>M</b><i>size</i><b>\n</b></p> </td>
+<td width="6%"></td>
+<td width="64%">
+
+
+<p style="margin-top: 1em">Allocate a buffer suitable for
+SCSI DMA transfers.</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_getbuf</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The returned
+value is the actual DMA size that could be set up. This
+value may be lower than the <i>size</i> parameter.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>F\n</b></p></td>
+<td width="11%"></td>
+<td width="45%">
+
+
+<p style="margin-top: 1em">Free a previously allocated
+buffer.</p> </td>
+<td width="22%">
+</td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_freebuf</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value in case of success is 0.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>N\n</b></p></td>
+<td width="11%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em">Retrieve the maximum permitted
+value for the SCSI bus number.</p></td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_numbus</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value is the return value from the <b>scg_numbus</b>(3)
+function.</p>
+
+
+<p style="margin-left:18%;"><b>B</b><i>busno</i><b>\n</b><i>chan</i><b>\n</b></p>
+
+<p style="margin-left:33%;">Checks whether there is a SCSI
+bus with a busnumber that is equal to <i>busno</i>. The
+<i>chan</i> parameter is currently ignored.</p>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_havebus</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value is the return value from the <b>scg_havebus</b>(3)
+function.</p>
+
+
+<p style="margin-left:18%;"><b>T</b><i>busno</i><b>\n</b><i>chan</i><b>\n</b><i>target</i><b>\n</b><i>lun</i><b>\n</b></p>
+
+<p style="margin-left:33%;">Set the SCSI target address to
+<i>busno</i>, <i>target</i>, <i>lun</i>. The parameter
+<i>chan</i> is currently ignored.</p>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_settarget</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value is the return value from the <b>scg_havebus</b>(3)
+function.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>I\n</b></p></td>
+<td width="11%"></td>
+<td width="67%">
+
+
+<p>Retrieve the SCSI initiator ID for the current SCSI
+bus.</p> </td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_initiator_id</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value is the return value from the
+<b>scg_initiator_id</b>(3) function.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>A\n</b></p></td>
+<td width="11%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em">Check whether the current target
+is or may be an ATAPI device.</p></td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_isatapi</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value is the return value from the <b>scg_isatapi</b>(3)
+function.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="9%">
+
+
+
+<p style="margin-top: 1em"><b>R</b><i>what</i><b>\n</b></p> </td>
+<td width="6%"></td>
+<td width="67%">
+
+
+<p style="margin-top: 1em">Perform a SCSI reset. The
+parameter <i>what</i> may have the following values:</p></td></tr>
+</table>
+
+<p style="margin-left:33%;">0</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="2%"></td>
+<td width="7%"></td>
+<td width="58%">
+
+
+<p style="margin-top: 1em">Test whether a SCSI reset is
+supported as with the <b>SCG_RESET_NOP</b> parameter.</p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="2%">
+
+
+<p>1</p></td>
+<td width="7%"></td>
+<td width="58%">
+
+
+<p>Perform a SCSI target reset as with the
+<b>SCG_RESET_TGT</b> parameter.</p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="2%">
+
+
+<p>2</p></td>
+<td width="7%"></td>
+<td width="58%">
+
+
+<p>Perform a SCSI bus reset as with the
+<b>SCG_RESET_BUS</b> parameter.</p></td></tr>
+</table>
+
+<p style="margin-left:33%; margin-top: 1em">This command
+corresponds to the <b>scg_reset</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The return
+value is the return value from the <b>scg_reset</b>(3)
+function.</p>
+
+
+<p style="margin-left:18%;"><b>S</b><i>count</i><b>\n</b><i>flags</i><b>\n</b><i>cdb_len</i><b>\n</b><i>sense_len</i><b>\n</b><i>timeout</i><b>\n</b></p>
+
+<p style="margin-left:33%;">Send a SCSI command to the
+currently selected target. This command takes the following
+parameters:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="7%">
+
+
+<p><b>count</b></p></td>
+<td width="2%"></td>
+<td width="58%">
+
+
+<p>The DMA count for this command. If the command is a
+command that transfers data to the target, the related data
+is send directly after the SCSI command descriptor block.
+that is described above.</p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="7%">
+
+
+<p><b>flags</b></p></td>
+<td width="2%"></td>
+<td width="58%">
+
+
+<p>The flags that apply to this SCSI command:</p></td></tr>
+</table>
+
+<p style="margin-left:42%;"><b>1</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="42%"></td>
+<td width="3%"></td>
+<td width="6%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">Tell the kernel that the SCSI
+command will transfer data from the target to the host. This
+corresponds to the flag value <b>SCG_RECV_DATA</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="42%"></td>
+<td width="3%">
+
+
+<p><b>2</b></p></td>
+<td width="6%"></td>
+<td width="49%">
+
+
+<p>Tell the kernel to send the SCSI command with
+disconnect/reconnect enabled. This corresponds to the flag
+value <b>SCG_DISRE_ENA</b>. This flag is not supported on
+all platforms.</p></td></tr>
+<tr valign="top" align="left">
+<td width="42%"></td>
+<td width="3%">
+
+
+<p><b>4</b></p></td>
+<td width="6%"></td>
+<td width="49%">
+
+
+<p>Make the kernel silent on SCSI errors. This corresponds
+to the flag value <b>SCG_SILENT</b>. This flag is not
+supported on all platforms.</p></td></tr>
+<tr valign="top" align="left">
+<td width="42%"></td>
+<td width="3%">
+
+
+<p><b>8</b></p></td>
+<td width="6%"></td>
+<td width="49%">
+
+
+<p>Tell the kernel to retry the SCSI command in case of a
+retryable SCSI transport error. This corresponds to the flag
+value <b>SCG_CMD_RETRY</b>. This flag is not supported on
+all platforms.</p></td></tr>
+<tr valign="top" align="left">
+<td width="42%"></td>
+<td width="3%">
+
+
+<p><b>16</b></p></td>
+<td width="6%"></td>
+<td width="49%">
+
+
+<p>Tell the kernel to send the SCSI command with parity
+disabled. This corresponds to the flag value
+<b>SCG_NOPARITY</b>. This flag is not supported on all
+platforms.</p> </td></tr>
+</table>
+
+<p style="margin-left:33%;"><b>cdb_len</b></p>
+
+<p style="margin-left:42%;">The SCSI command descriptor
+length for this command. The SCSI command descriptor has to
+be send with the correct length directly after the new line
+past the <b>timeout</b> value.</p>
+
+<p style="margin-left:33%;"><b>sense_len</b></p>
+
+<p style="margin-left:42%;">The amount of sense data that
+is expected in return of a failed SCSI command that produces
+SCSI sense data.</p>
+
+<p style="margin-left:33%;"><b>timeout</b></p>
+
+<p style="margin-left:42%;">The timeout for the SCSI
+command in seconds. Fractions of a second may be specified
+by sending a floating point number.</p>
+
+<p style="margin-left:33%; margin-top: 1em">The reply for a
+SCSI command that could be send to the target is:</p>
+
+
+<p style="margin-left:33%; margin-top: 1em"><b>A</b><i>count</i><b>\n</b><i>error</i><b>\n</b><i>errno</i><b>\n</b><i>scb</i><b>\n</b><i>sense_count</i><b>\n</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="7%">
+
+
+<p><b>count</b></p></td>
+<td width="2%"></td>
+<td width="58%">
+
+
+<p>The DMA count of any data returned from the target. If
+this count is nonzero, the data is send back directly after
+the reply block mentioned above.</p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="7%">
+
+
+<p><b>error</b></p></td>
+<td width="2%"></td>
+<td width="58%">
+
+
+<p>A SCSI error classification from one of the following
+values:</p> </td></tr>
+</table>
+
+<p style="margin-left:42%;"><b>0</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="11%"></td>
+<td width="7%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">No error occurred. This value
+corresponds to the value <b>SCG_NO_ERROR .</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="11%">
+
+
+<p><b>1</b></p></td>
+<td width="7%"></td>
+<td width="49%">
+
+
+<p>A retryable error occurred while trying to transport the
+SCSI command to the target. This value corresponds to the
+value <b>SCG_RETRYABLE .</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="11%">
+
+
+<p><b>2</b></p></td>
+<td width="7%"></td>
+<td width="49%">
+
+
+<p>A fatal error occurred while trying to transport the
+SCSI command to the target. This value corresponds to the
+value <b>SCG_FATAL .</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="11%">
+
+
+<p><b>3</b></p></td>
+<td width="7%"></td>
+<td width="49%">
+
+
+<p>A SCSI timeout occurred. This value corresponds to the
+value <b>SCG_TIMEOUT .</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="11%">
+
+
+<p><b>errno</b></p></td>
+<td width="7%"></td>
+<td width="49%">
+</td></tr>
+</table>
+
+<p style="margin-left:42%; margin-top: 1em">Any possible
+<b>UNIX errno</b> value for the SCSI command.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="33%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>scb</b></p></td>
+<td width="5%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">The SCSI status byte</p></td>
+<td width="32%">
+</td></tr>
+</table>
+
+<p style="margin-left:33%;"><b>sense_count</b></p>
+
+<p style="margin-left:42%;">The sense count returned for
+the SCSI command. The SCSI sense data is send back directly
+after any possible SCSI DMA data received from the
+target.</p>
+
+<p style="margin-left:42%; margin-top: 1em">This command
+corresponds to the <b>scg_cmd</b>(3) function from
+<b>libscg</b>.</p>
+
+<p style="margin-left:42%; margin-top: 1em">The return
+value is the return value from the <b>scg_cmd</b>(3)
+function.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Any other
+command causes <b>rscsi</b> to exit.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">/etc/default/rscsi</p>
+
+<p style="margin-left:18%;">Default values can be set for
+the following options in /etc/default/rscsi. For
+example:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>DEBUG=</b>/tmp/rscsi.debug
+<b><br>
+USER=</b>rscsi <b><br>
+ACCESS=</b>rscsi myhost.mydomain.org 1 -1 3 0</p>
+
+<p style="margin-left:18%; margin-top: 1em">All keywords
+must be on the beginning of a line.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>DEBUG</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>If you like to get debug information, set this to a file
+name where <b>rscsi</b> should put debug information.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>USER</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>The name of a user (local to the RSCSI server) that may
+use the services of the <b>rscsi</b> server. More than one
+<b>USER=</b><i>name</i> line is possible. A line
+<b>USER=</b>* grants access to all users.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>ACCESS</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>This keyword is followed by six parameters separated by
+a TAB. The <b>name</b> of a user (local to the RSCSI server
+host) that may use the services of the <b>rscsi</b> server
+followed by the <b>name of a host</b> from where operation
+is granted followed by a <b>SCSI device</b> specification
+that is made of <b>bus-number channel</b> (ignored for now)
+<b>target-id</b> and <b>lun</b> that specify a SCSI device
+that may be accessed if this <b>ACCESS</b> line matches. If
+one or more entries of the <b>bus-number channel target-id
+lun</b> specification is set to -1, this matches any
+possible value for the related part of the SCSI device
+specification. More than one <b>ACCESS=</b><i>name host
+SCSI-device</i> line is possible.</p></td></tr>
+</table>
+
+<p style="margin-left:27%; margin-top: 1em">If standard
+input of <b>rscsi</b> is not a socket from a remote host,
+<b>rscsi</b> will compare the <b>host entry</b> from
+<b>/etc/default/rscsi</b> with the following strings:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>PIPE</b></p></td>
+<td width="8%"></td>
+<td width="31%">
+
+
+<p style="margin-top: 1em">If <b>stdin</b> is a
+<small>UNIX</small> pipe.</p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+<p style="margin-left:40%; margin-top: 1em">If you like to
+allow remote connections that use the <b>ssh</b> protocol,
+you need to use the word <b>PIPE</b> instead of the real
+hostname in the matching <b>ACCESS=</b> line.</p>
+
+<p style="margin-left:27%;"><b>ILLEGAL_SOCKET</b></p>
+
+<p style="margin-left:40%;">If <b>getpeername()</b> does
+not work for <b>stdin</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="27%"></td>
+<td width="8%">
+
+
+<p><b>NOT_IP</b></p></td>
+<td width="5%"></td>
+<td width="60%">
+
+
+<p>If <b>getpeername()</b> works for <b>stdin</b> but is
+not connected to an internet socket.</p></td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdrecord</b>(1),
+<b>cdda2wav</b>(1), <b>readcd</b>(1), <b>sformat</b>(1),
+<b>ssh</b>(1), <b>intro</b>(2), <b>open</b>(2),
+<b>close</b>(2), <b>read</b>(2), <b>write</b>(2),
+<b>ioctl</b>(2), <b>getpeername(3) rcmd</b>(3),
+<b>rexec</b>(3), <b>strerror</b>(3)</p>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">All responses
+are send to the network connection. They use the form
+described above.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The possibility
+to create a debug file by calling <b>rscsi</b> <i>file</i>
+has been disabled for security reasons. If you like to debug
+<b>rscsi</b> edit <b>/etc/default/rscsi</b> and insert a
+<b>DEBUG</b> entry.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">None known.</p>
+
+<h2>HISTORY
+<a name="HISTORY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>rscsi</b>
+command has been developed by Joerg Schilling in June
+2000.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Joerg Schilling
+<br>
+Seestr. 110 <br>
+D-13353 Berlin <br>
+Germany</p>
+
+<p style="margin-left:9%; margin-top: 1em">Mail bugs and
+suggestions to:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>joerg.schilling@fokus.fraunhofer.de</b>
+or <b>js@cs.tu-berlin.de</b> or
+<b>joerg@schily.isdn.cs.tu-berlin.de</b></p>
+
+<h2>INTERFACE STABILITY
+<a name="INTERFACE STABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The interfaces
+provided by <b>rscsi</b> are designed for long term
+stability. As <b>rscsi</b> depends on interfaces provided by
+the underlying operating system, the stability of the
+interfaces offered by <b>rscsi</b> depends on the interface
+stability of the OS interfaces. Modified interfaces in the
+OS may enforce modified interfaces in <b>rscsi</b>.</p>
+<hr>
+</body>
+</html>

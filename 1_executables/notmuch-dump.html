@@ -1,0 +1,255 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:52 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-DUMP</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-DUMP</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-dump -
+creates a plain-text dump of the tags of each message</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+dump</b> [--gzip] [--format=(batch-tag|sup)]
+[--output=&lt;<i>file</i>&gt;] [--]
+[&lt;<i>search-term</i>&gt; ...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Dump tags for
+messages matching the given search terms.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output is to the
+given filename, if any, or to stdout.</p>
+
+<p style="margin-left:9%; margin-top: 1em">These tags are
+the only data in the notmuch database that can't be
+recreated from the messages themselves. The output of
+notmuch dump is therefore the only critical thing to backup
+(and much more friendly to incremental backup than the
+native database files.)</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<i>notmuch-search-terms</i> for details of the supported
+syntax for &lt;search-terms&gt;. With no search terms, a
+dump of all messages in the database will be generated. A
+<b>--</b> argument instructs notmuch that the remaining
+arguments are search terms.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>dump</b> include</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--gzip</b></p></td>
+<td width="1%"></td>
+<td width="72%">
+
+
+<p>Compress the output in a format compatible with
+<i>gzip(1).</i></p> </td>
+<td width="10%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--format=(sup|batch-tag)</b></p>
+
+<p style="margin-left:18%;">Notmuch restore supports two
+plain text dump formats, both with one message-id per line,
+followed by a list of tags. <b><br>
+batch-tag</b></p>
+
+<p style="margin-left:27%;">The default <b>batch-tag</b>
+dump format is intended to more robust against malformed
+message-ids and tags containing whitespace or
+non-<i>ascii(7) characters. Each line has the form:</i></p>
+
+
+<p style="margin-left:31%; margin-top: 1em">+&lt;*encoded-tag*\
+&gt; +&lt;*encoded-tag*\ &gt; ... --
+id:&lt;*quoted-message-id*\ &gt;</p>
+
+<p style="margin-left:27%; margin-top: 1em"><i>Tags are
+hex-encoded by replacing every byte not matching the
+regex</i> <b>[A-Za-z0-9@=.,_+-]</b> <i>with</i> <b>%nn</b>
+<i>where nn is the two digit hex encoding. The message ID is
+a valid Xapian query, quoted using Xapian boolean term
+quoting rules: if the ID contains whitespace or a close
+paren or starts with a double quote, it must be enclosed in
+double quotes and double quotes inside the ID must be
+doubled. The astute reader will notice this is a special
+case of the batch input format for notmuch-tag; note that
+the single message-id query is mandatory for
+notmuch-restore.</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="4%">
+
+
+<p><b>sup</b></p></td>
+<td width="5%"></td>
+<td width="73%">
+
+
+<p>The <b>sup</b> dump file format is specifically chosen
+to be compatible with the format of files produced by
+<b>-</b> <i>sup-dump(1). So if you've previously been using
+sup for mail, then the notmuch-restore command provides you
+a way to import all of your tags (or labels as sup calls
+them). Each line has the following form:</i></p></td></tr>
+</table>
+
+
+<p style="margin-left:31%; margin-top: 1em">&lt;*message-id*\
+&gt; **(** &lt;*tag*\ &gt; ... **)**</p>
+
+<p style="margin-left:27%; margin-top: 1em"><i>with zero or
+more tags are separated by spaces. Note that (malformed)
+message-ids may contain arbitrary non-null characters. Note
+also that tags with spaces will not be correctly restored
+with this format.</i></p>
+
+
+<p style="margin-left:9%;"><b>--include=(config|properties|tags)</b></p>
+
+<p style="margin-left:18%;">Control what kind of metadata
+is included in the output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>config</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>Output configuration data stored in the database. Each
+line starts with &quot;#@ &quot;, followed by a space
+separated key-value pair. Both key and value are hex encoded
+if needed.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>properties</b></p>
+
+<p style="margin-left:27%;">Output per-message (key,value)
+metadata. Each line starts with &quot;#= &quot;, followed by
+a message id, and a space separated list of key=value pairs.
+Ids, keys and values are hex encoded if needed. See
+<i>notmuch-properties</i> for more details.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>tags</b></p></td>
+<td width="4%"></td>
+<td width="73%">
+
+
+<p>Output per-message boolean metadata, namely tags. See
+<i>format</i> above for description of the output.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">The default is
+to include all available types of data. The option can be
+specified multiple times to select some subset. As of
+version 3 of the dump format, there is a header line of the
+following form:</p>
+
+<p style="margin-left:22%; margin-top: 1em">#notmuch-dump
+&lt;*format*&gt;:&lt;*version*&gt; &lt;*included*&gt;</p>
+
+<p style="margin-left:18%; margin-top: 1em">where
+&lt;<i>included</i>&gt; is a comma separated list of the
+above options.</p>
+
+
+<p style="margin-left:9%;"><b>--output=&lt;filename&gt;</b></p>
+
+<p style="margin-left:18%;">Write output to given file
+instead of stdout.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-config</i>, <i>notmuch-count</i>,
+<i>notmuch-hooks</i>, <i>notmuch-insert</i>,
+<i>notmuch-new</i>, <i>notmuch-properties</i>,
+<i>notmuch-reply</i>, <i>notmuch-restore</i>,
+<i>notmuch-search</i>, <i>notmuch-search-terms</i>,
+<i>notmuch-show</i>, <i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

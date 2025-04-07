@@ -1,0 +1,192 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:43 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>KWALLET-QUERY</title>
+
+</head>
+<body>
+
+<h1 align="center">KWALLET-QUERY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYING">COPYING</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">kwallet-query -
+KDE Wallet command-line manipulation tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>kwallet-query</b>
+<i>OPTIONS wallet</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>kwallet-query</b></i>
+comes in handy when shell scripts need to read or update the
+KDE Wallet. It works by manipulating the entries displayed
+in the <b>KDE Wallet Manager</b> utility. It&rsquo;s only
+parameter is the <i>wallet</i>name the tool should read or
+update. The operation mode is specified by the options.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,--help</b></p>
+
+<p style="margin-left:14%;">Display a short help
+message.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l,--list-entries</b></p>
+
+<p style="margin-left:14%;">List password entries. These
+are the folder names displayed in the <b>KDE Wallet
+Manager</b> utility. If the <b>-f</b> option is given, this
+will only display the subfolders of the specified
+folder.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r,--read-password</b>
+<i>Entry</i></p>
+
+<p style="margin-left:14%;">Read the contents of the given
+<i>Entry</i> from the <b>Folder</b>section of the
+<i>wallet</i> and output it on the standard output. Maps are
+exported as JSON object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w,--write-password</b>
+<i>Entry</i></p>
+
+<p style="margin-left:14%;">Write secrets to the given
+<i>Entry</i> under the <b>Folder</b> section of the given
+<i>wallet</i>. The secrets are read from the standard input.
+Maps take in input a well-formed JSON object.
+<b>IMPORTANT</b> previous wallet entry value will be
+overwritten by this option, so be careful when using it!</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,--folder</b>
+<i>Folder</i></p>
+
+<p style="margin-left:14%;">Set the <i>wallet</i> folder to
+<i>Folder</i> value. By default <b>Passwords</b> is
+used.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,--verbose</b></p>
+
+<p style="margin-left:14%;">Output more information when
+performing the operation, to help debugging.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>0</b></p>
+
+<p style="margin-left:14%;">Success.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>1</b></p>
+
+<p style="margin-left:14%;">The wallet <i>wallet</i> was
+not found.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>2</b></p>
+
+<p style="margin-left:14%;">The wallet <i>wallet</i> could
+not be opened. For example, that would be an indication of a
+bad password entry or some other problem with the KDE Wallet
+system.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>3</b></p>
+
+<p style="margin-left:14%;">The <b>Folder</b> section was
+not found inside the wallet <i>wallet</i>. Perhaps the
+wallet file is corrupt?</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>4</b></p>
+
+<p style="margin-left:14%;">The read or write operation has
+failed for some reason.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+all bugs on the KDE bug reporting website: bugs.kde.org. Be
+sure to select &ldquo;kwallet-query&rdquo; when submitting
+your bug-report.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>kwallet-query</b>
+was originally written by Valentin Rusu and is part of
+KDE.</p>
+
+<h2>COPYING
+<a name="COPYING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2015 Valentin Rusu. Free use of this software is granted
+under the terms of the GNU General Public License (GPL).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Valentin
+Rusu</b> &lt;kde@rusu.info&gt;</p>
+
+<p style="margin-left:14%;">Original author</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,476 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:44 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>lav2mpeg</title>
+
+</head>
+<body>
+
+<h1 align="center">lav2mpeg</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#MODES">MODES</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">lav2mpeg - easy
+conversion of lav files to mpeg</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lav2mpeg [
+options ]</b> <i>lavfile1 [lavfile2 ... lavfileN]</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>lav2mpeg</b></i>
+is a shell script to ease the use of the mjpeg utilities,
+providing a convenient way to convert from MJPEG files to
+popular MPEG file formats. It supports output in VCD, medium
+and high rate VCD, SVCD, high rate SVCD, and generic mpeg1
+and mpeg2</p>
+
+<p style="margin-left:9%; margin-top: 1em">The input files
+may be any combination of AVI (.avi), Quicktime (.qt) or
+editlist files so long as they are all lavtools- readable
+(e.g. MJPEG-encoded AVI/Quicktime or DV type 2 AVI).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em">-s/S</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Turn stereo off/on (default
+auto)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-k/K</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Turn keeping of raw files off/on (default off)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-f/F</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Turn use of fifos off/on (default off)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-l/L</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Turn logging of entire process off/on (default off)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-n/N</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Turn &quot;noisy logging&quot; off/on (default off)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-y/Y</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Turn use of yuvdenoise off/on (default off)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-m</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>one of MODES (see below) (default vcd)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-e</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>encoding quality : 0, 1, or 2 (default 2)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-o</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>output file ( defaults to firstInputFileName.mpg )</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-b</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>video bitrate in kbps ( only used when -o is
+&quot;mpeg1&quot; or &quot;mpeg2&quot; )</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-a</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>audio bitrate in kpbs ( only used when -o is not
+&quot;vcd*&quot; )</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-q</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>quality for mpeg2enc ( only used when -o is
+&quot;mpeg1&quot; or &quot;mpeg2&quot; )</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>-d</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>dimensions XxY ( only used when -o is &quot;mpeg1&quot;
+or &quot;mpeg2&quot; ) defaults to same as input</p></td></tr>
+</table>
+
+<h2>MODES
+<a name="MODES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vcd</b> --
+standard VCD (352x240 or 352x288)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vcd_medium</b>
+-- 1550kbps video VCD (352x240 or 352x288)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>vcd_high</b>
+-- 1800kbps video VCD (352x240 or 352x288)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>svcd</b> --
+standard SVCD (480x480 or 480x576)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>svcd_high</b>
+-- 3000kbps(max) vbr @qual=5 (480x480 or 480x576)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>mpeg1</b> --
+honor -a -b -q -d flags default resolution same as input</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>mpeg2</b> --
+honor -a -b -q -d flags default resolution same as input</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>&#732;/.lav2mpegrc</i></p>
+
+<p style="margin-left:18%;">user configuration file. It is
+bash sourceable, and can modify any of the environment
+variables mentioned in the ENVIRONMENT section, or set the
+LAV2MPEG_OPTIONS variable to add default options.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">NICEVAL</p>
+
+<p style="margin-left:18%;">the nice value of each command,
+set using &rsquo;nice -n command&rsquo;</p>
+
+<p style="margin-left:9%;">YUVSCALER</p>
+
+<p style="margin-left:18%;">modify which command is called
+for yuvscaler</p>
+
+<p style="margin-left:9%;">LAV2WAV</p>
+
+<p style="margin-left:18%;">modify which command is called
+for lav2wav</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>MPLEX</p></td>
+<td width="3%"></td>
+<td width="51%">
+
+
+<p>modify which command is called for mplex</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">YUVDENOISE</p>
+
+<p style="margin-left:18%;">modify which command is called
+for yuvdenoise</p>
+
+<p style="margin-left:9%;">MPEG2ENC</p>
+
+<p style="margin-left:18%;">modify which command is called
+for mpeg2enC</p>
+
+<p style="margin-left:9%;">AUDIOENC</p>
+
+<p style="margin-left:18%;">audioenc is similar to those
+above, however, if it is set to &rsquo;mp2enc&rsquo; it will
+use mp2enc rather than toolame, and set flags
+appropriotely.</p>
+
+<p style="margin-left:9%;">NOISYLOGFILE</p>
+
+<p style="margin-left:18%;">set the file used for noisy
+logging (-N) defaults to outputfile.log</p>
+
+<p style="margin-left:9%;">QUIETLOG</p>
+
+<p style="margin-left:18%;">set the file used for quiet
+logging. defaults to lav2mpeg.log if set to &quot;&quot; it
+will log only to screen</p>
+
+<p style="margin-left:9%;">LOGDATE</p>
+
+<p style="margin-left:18%;">defaults to 1, set to 0 to not
+have the date logged in log or output (see man date for more
+info)</p>
+
+<p style="margin-left:9%;">LOGDATESTR</p>
+
+<p style="margin-left:18%;">will pass this on to
+&rsquo;date&rsquo; to describe what time format to use. Only
+used if LOGDATE is not 0</p>
+
+<p style="margin-left:9%;">LOGCOMMANDS</p>
+
+<p style="margin-left:18%;">if set to non-zero, will log to
+the quite log the commands used. Commands are always logged
+to NOISYLOGFILE if used</p>
+
+<p style="margin-left:9%;">LOGONLY</p>
+
+<p style="margin-left:18%;">if set to non-zero, will only
+log the commands it would use but not actually run any
+commands</p>
+
+<p style="margin-left:9%;">LAV2MPEGRC</p>
+
+<p style="margin-left:18%;">the lav2mpegrc file. Only
+beneficial if set from environment variable.</p>
+
+<p style="margin-left:9%;">VCD_MEDIUM_BR</p>
+
+<p style="margin-left:18%;">video bitrate for
+mode=vcd_medium</p>
+
+<p style="margin-left:9%;">VCD_HIGH_BR</p>
+
+<p style="margin-left:18%;">video bitrate for
+mode=vcd_high</p>
+
+<p style="margin-left:9%;">SVCD_HIGH_BR</p>
+
+<p style="margin-left:18%;">video bitrate for
+mode=svcd_high</p>
+
+<p style="margin-left:9%;">SVCD_HIGH_QUAL</p>
+
+<p style="margin-left:18%;">quality used (-q 0-30 to
+mpeg2enc) for SVCD_HIGH</p>
+
+<p style="margin-left:9%;">SVCD_HIGH_BUFFSIZE</p>
+
+<p style="margin-left:18%;">buffsize (-V to mpeg2enc) used
+for svcd_high defaults to 100</p>
+
+<p style="margin-left:9%;">EXTRA_LAV2YUV</p>
+
+<p style="margin-left:18%;">set extra command line
+arguments to lav2yuv, which will be added on the end</p>
+
+<p style="margin-left:9%;">EXTRA_YUVSCALER</p>
+
+<p style="margin-left:18%;">set extra command line
+arguments to yuvscaler, which will be added on the end</p>
+
+<p style="margin-left:9%;">EXTRA_MPEG2ENC</p>
+
+<p style="margin-left:18%;">set extra command line
+arguments to mpeg2enc, which will be added on the end</p>
+
+<p style="margin-left:9%;">EXTRA_LAV2WAV</p>
+
+<p style="margin-left:18%;">set extra command line
+arguments to lav2wav, which will be added on the end</p>
+
+<p style="margin-left:9%;">EXTRA_AUDIOENC</p>
+
+<p style="margin-left:18%;">set extra command line
+arguments to mp2enc or toolame (depending on AUDIOENC),
+which will be added on the end</p>
+
+<p style="margin-left:9%;">EXTRA_MPLEX</p>
+
+<p style="margin-left:18%;">set extra command line
+arguments to mplex, which will be added on the end</p>
+
+<p style="margin-left:9%;">EXTRA_YUVDENOISE</p>
+
+<p style="margin-left:18%;">set extra command line
+arguments to yuvdenoise, which will be added on the end</p>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To simply see
+the commands that lav2mpeg would have called, run
+&rsquo;LOGONLY=1 lav2mpeg ...&rsquo;</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Possibly. Please
+let the author know.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Scott Moser
+&lt;smoser at brickies dot net&gt;</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">create a VCD
+compliant mpeg regardless of input named file.mpg <b><br>
+lav2mpeg file.avi</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">create a SVCD
+high rate mpeg from input named out.mpg <b><br>
+lav2mpeg -o out.mpg -m svcd_high file.avi</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">use lav2yuv.new
+for instead of lav2yuv, and add the &rsquo;-M MMX&rsquo;
+flag to <br>
+yuvscaler: <b><br>
+LAV2YUV=&quot;lav2yuv.new&quot; EXTRA_YUVSCALER=&quot;-M
+MMX&quot; lav2mpeg file.avi</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Please read
+other examples included in documentation for .lav2mpegrc
+<br>
+ usage</p>
+<hr>
+</body>
+</html>

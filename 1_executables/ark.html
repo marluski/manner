@@ -1,0 +1,271 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:42 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ARK</title>
+
+</head>
+<body>
+
+<h1 align="center">ARK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPERATION MODES">OPERATION MODES</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Options for adding files">Options for adding files</a><br>
+<a href="#Options for batch extraction">Options for batch extraction</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#MAINTAINERSHIP">MAINTAINERSHIP</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ark - KDE
+archiving tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ark</b> [<b>-b</b>]
+[<b>-a</b>] [<b>-e</b>] [<b>-O</b>] [<b>-c</b>] [<b>-f</b>
+<i>suffix</i>] [<b>-p</b>] [<b>-t</b> <i>file</i>]
+[<b>-d</b>] [<b>-m</b>] [<b>-o</b> <i>directory</i>]
+[KDE&nbsp;Frameworks&nbsp;Generic&nbsp;Options]
+[Qt(TM)&nbsp;Generic&nbsp;Options]</p> </td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Ark is a program
+for managing various compressed file formats within KDE.
+Archives can be viewed, extracted, created and modified with
+Ark. The program can handle various formats such as tar,
+gzip, bzip2, zip, rar (when the appropriate libraries or
+command-line programs are installed).</p>
+
+<h2>OPERATION MODES
+<a name="OPERATION MODES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Ark can be used
+either as a stand-alone GUI program as well as a
+command-line program in order to perform some specific
+tasks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If invoked
+without the -b (--batch) or -c (--add) options, Ark is
+started as a normal GUI program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When the -b
+(--batch) option is used, Ark can be used to extract the
+contents of one or more files directly from the
+command-line, without launching its GUI.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When the -c
+(--add) option is used, Ark prompts for files that should be
+added to a new archive or to an existing archive.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--dialog</b></p>
+
+<p style="margin-left:14%;">Show a dialog for specifying
+the options for a batch or add operation.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m,
+--mimetypes</b></p>
+
+<p style="margin-left:14%;">List supported MIME types.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o,
+--destination</b> <i>directory</i></p>
+
+<p style="margin-left:14%;">Default the extraction
+directory to <i>directory</i>. If not passed, the current
+path is used.</p>
+
+<h3>Options for adding files
+<a name="Options for adding files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--add</b></p>
+
+<p style="margin-left:14%;">Query the user for an archive
+filename and add specified files to it. Quit when
+finished.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t,
+--add-to</b> <i>filename</i></p>
+
+<p style="margin-left:14%;">Add the specified files to
+<i>filename</i>. Create archive if it does not exist. Quit
+when finished.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p,
+--changetofirstpath</b></p>
+
+<p style="margin-left:14%;">Change the current directory to
+the first entry and add all other entries relative to this
+one.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--autofilename</b> <i>suffix</i></p>
+
+<p style="margin-left:14%;">Automatically choose a
+filename, with the selected <i>suffix</i> (for example rar,
+tar.gz, zip or any other supported types).</p>
+
+<h3>Options for batch extraction
+<a name="Options for batch extraction"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b,
+--batch</b></p>
+
+<p style="margin-left:14%;">Use the batch interface instead
+of the usual dialog. This option is implied if more than one
+url is specified.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e,
+--autodestination</b></p>
+
+<p style="margin-left:14%;">The destination argument will
+be set to the path of the first file supplied.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a,
+--autosubfolder</b></p>
+
+<p style="margin-left:14%;">Archive contents will be read,
+and if detected to not be a single folder archive, a
+subfolder by the name of the archive will be created.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-O,
+--opendestination</b></p>
+
+<p style="margin-left:14%;">Open the destination folder
+when the extraction is complete.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:14%; margin-top: 1em">More detailed
+user documentation is available from
+<b><font color="#0000FF">help:/ark</font></b>
+<font color="#000000">(either enter this URL into Konqueror,
+or run <b>khelpcenter</b> <i>help:/ark</i>). <br>
+kf6options(7) <br>
+qt6options(7)</font></p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>ark
+--batch</b> <i>archive.tar.bz2</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Will
+extract <i>archive.tar.bz2</i> into the current directory
+without showing any GUI.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>ark
+-b -d</b> <i>archive.tar.bz2 archive2.zip</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Will
+first show an extraction options dialog and then extract
+both <i>archive.tar.bz2</i> and <i>archive2.zip</i> into the
+directory chosen in the dialog.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>ark
+--add-to</b> <i>my-archive.zip photo1.jpg
+text.txt</i></font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Will
+create <i>my-archive.zip</i> if does not exist and then add
+<i>photo1.jpg</i> and <i>text.txt</i> to it.</font></p>
+
+<h2>MAINTAINERSHIP
+<a name="MAINTAINERSHIP"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Ark
+is currently maintained by <b>Elvis Angelaccio</b> and
+<b>Ragnar Thomsen</b>.</font></p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Lauri
+Watts</b> &lt;lauri@kde.org&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Initial
+version of Ark man page in 2005.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Raphael
+Kubo da Costa</b> &lt;rakuco@FreeBSD.org&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Update of
+Ark man page in 2009.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>Ragnar
+Thomsen</b> &lt;rthomsen6@gmail.com&gt;</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Update of
+Ark man page in 2015 and 2016.</font></p>
+<hr>
+</body>
+</html>

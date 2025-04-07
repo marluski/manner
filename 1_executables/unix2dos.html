@@ -1,0 +1,1441 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>dos2unix</title>
+
+</head>
+<body>
+
+<h1 align="center">dos2unix</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#MAC MODE">MAC MODE</a><br>
+<a href="#CONVERSION MODES">CONVERSION MODES</a><br>
+<a href="#UNICODE">UNICODE</a><br>
+<a href="#Encodings">Encodings</a><br>
+<a href="#Conversion">Conversion</a><br>
+<a href="#Byte Order Mark">Byte Order Mark</a><br>
+<a href="#Unicode file names on Windows">Unicode file names on Windows</a><br>
+<a href="#Unicode examples">Unicode examples</a><br>
+<a href="#GB18030">GB18030</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#RECURSIVE CONVERSION">RECURSIVE CONVERSION</a><br>
+<a href="#LOCALIZATION">LOCALIZATION</a><br>
+<a href="#RETURN VALUE">RETURN VALUE</a><br>
+<a href="#STANDARDS">STANDARDS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix -
+DOS/Mac to Unix and vice versa text file format
+converter</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix
+[options] [FILE ...] [-n INFILE OUTFILE ...] <br>
+unix2dos [options] [FILE ...] [-n INFILE OUTFILE ...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Dos2unix
+package includes utilities &quot;dos2unix&quot; and
+&quot;unix2dos&quot; to convert plain text files in
+<small>DOS</small> or Mac format to Unix format and vice
+versa.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In DOS/Windows
+text files a line break, also known as newline, is a
+combination of two characters: a Carriage Return (
+<small>CR</small> ) followed by a Line Feed (
+<small>LF</small> ). In Unix text files a line break is a
+single character: the Line Feed ( <small>LF</small> ). In
+Mac text files, prior to Mac <small>OS X,</small> a line
+break was single Carriage Return ( <small>CR</small> )
+character. Nowadays Mac <small>OS</small> uses Unix style (
+<small>LF</small> ) line breaks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Besides line
+breaks Dos2unix can also convert the encoding of files. A
+few <small>DOS</small> code pages can be converted to Unix
+Latin-1. And Windows Unicode ( <small>UTF-16</small> ) files
+can be converted to Unix Unicode ( <small>UTF-8</small> )
+files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Binary files are
+automatically skipped, unless conversion is forced.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Non-regular
+files, such as directories and FIFOs, are automatically
+skipped.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Symbolic links
+and their targets are by default kept untouched. Symbolic
+links can optionally be replaced, or the output can be
+written to the symbolic link target. Writing to a symbolic
+link target is not supported on Windows.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Dos2unix was
+modelled after dos2unix under SunOS/Solaris. There is one
+important difference with the original SunOS/Solaris
+version. This version does by default in-place conversion
+(old file mode), while the original SunOS/Solaris version
+only supports paired conversion (new file mode). See also
+options &quot;-o&quot; and &quot;-n&quot;. Another
+difference is that the SunOS/Solaris version uses by default
+<i>iso</i> mode conversion while this version uses by
+default <i>ascii</i> mode conversion.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>--</b></p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Treat all following options as
+file names. Use this option if you want to convert files
+whose names start with a dash. For instance to convert a
+file named &quot;-foo&quot;, you can use this command:</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix --
+-foo</p>
+
+<p style="margin-left:14%; margin-top: 1em">Or in new file
+mode:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -n --
+-foo out.txt</p>
+
+<p style="margin-left:9%;"><b>--allow-chown</b></p>
+
+<p style="margin-left:14%;">Allow file ownership change in
+old file mode.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When this
+option is used, the conversion will not be aborted when the
+user and/or group ownership of the original file can&rsquo;t
+be preserved in old file mode. Conversion will continue and
+the converted file will get the same new ownership as if it
+was converted in new file mode. See also options
+&quot;-o&quot; and &quot;-n&quot;. This option is only
+available if dos2unix has support for preserving the user
+and group ownership of files.</p>
+
+<p style="margin-left:9%;"><b>-ascii</b></p>
+
+<p style="margin-left:14%;">Default conversion mode. See
+also section <small>CONVERSION MODES.</small></p>
+
+<p style="margin-left:9%;"><b>-iso</b></p>
+
+<p style="margin-left:14%;">Conversion between
+<small>DOS</small> and <small>ISO-8859-1</small> character
+set. See also section <small>CONVERSION MODES.</small></p>
+
+<p style="margin-left:9%;"><b>-1252</b></p>
+
+<p style="margin-left:14%;">Use Windows code page 1252
+(Western European).</p>
+
+<p style="margin-left:9%;"><b>-437</b></p>
+
+<p style="margin-left:14%;">Use <small>DOS</small> code
+page 437 ( <small>US</small> ). This is the default code
+page used for <small>ISO</small> conversion.</p>
+
+<p style="margin-left:9%;"><b>-850</b></p>
+
+<p style="margin-left:14%;">Use <small>DOS</small> code
+page 850 (Western European).</p>
+
+<p style="margin-left:9%;"><b>-860</b></p>
+
+<p style="margin-left:14%;">Use <small>DOS</small> code
+page 860 (Portuguese).</p>
+
+<p style="margin-left:9%;"><b>-863</b></p>
+
+<p style="margin-left:14%;">Use <small>DOS</small> code
+page 863 (French Canadian).</p>
+
+<p style="margin-left:9%;"><b>-865</b></p>
+
+<p style="margin-left:14%;">Use <small>DOS</small> code
+page 865 (Nordic).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-7</b></p></td>
+<td width="2%"></td>
+<td width="51%">
+
+
+<p>Convert 8 bit characters to 7 bit space.</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-b, --keep-bom</b></p>
+
+<p style="margin-left:14%;">Keep Byte Order Mark (
+<small>BOM</small> ). When the input file has a
+<small>BOM,</small> write a <small>BOM</small> in the output
+file. This is the default behavior when converting to
+<small>DOS</small> line breaks. See also option
+&quot;-r&quot;.</p>
+
+<p style="margin-left:9%;"><b>-c, --convmode
+<small>CONVMODE</small></b></p>
+
+<p style="margin-left:14%;">Set conversion mode. Where
+<small>CONVMODE</small> is one of: <i>ascii</i>,
+<i>7bit</i>, <i>iso</i>, <i>mac</i> with ascii being the
+default.</p>
+
+<p style="margin-left:9%;"><b>-D, --display-enc
+<small>ENCODING</small></b></p>
+
+<p style="margin-left:14%;">Set encoding of displayed text.
+Where <small>ENCODING</small> is one of: <i>ansi</i>,
+<i>unicode</i>, <i>unicodebom</i>, <i>utf8</i>,
+<i>utf8bom</i> with ansi being the default.</p>
+
+<p style="margin-left:14%; margin-top: 1em">This option is
+only available in dos2unix for Windows with Unicode file
+name support. This option has no effect on the actual file
+names read and written, only on how they are displayed.</p>
+
+<p style="margin-left:14%; margin-top: 1em">There are
+several methods for displaying text in a Windows console
+based on the encoding of the text. They all have their own
+advantages and disadvantages. <b><br>
+ansi</b></p>
+
+<p style="margin-left:19%;">Dos2unix&rsquo;s default method
+is to use <small>ANSI</small> encoded text. The advantage is
+that it is backwards compatible. It works with raster and
+TrueType fonts. In some regions you may need to change the
+active <small>DOS OEM</small> code page to the Windows
+system <small>ANSI</small> code page using the
+&quot;chcp&quot; command, because dos2unix uses the Windows
+system code page.</p>
+
+<p style="margin-left:19%; margin-top: 1em">The
+disadvantage of ansi is that international file names with
+characters not inside the system default code page are not
+displayed properly. You will see a question mark, or a wrong
+symbol instead. When you don&rsquo;t work with foreign file
+names this method is <small>OK.</small></p>
+
+<p style="margin-left:14%;"><b>unicode, unicodebom</b></p>
+
+<p style="margin-left:19%;">The advantage of unicode (the
+Windows name for <small>UTF-16</small> ) encoding is that
+text is usually properly displayed. There is no need to
+change the active code page. You may need to set the
+console&rsquo;s font to a TrueType font to have
+international characters displayed properly. When a
+character is not included in the TrueType font you usually
+see a small square, sometimes with a question mark in
+it.</p>
+
+<p style="margin-left:19%; margin-top: 1em">When you use
+the ConEmu console all text is displayed properly, because
+ConEmu automatically selects a good font.</p>
+
+<p style="margin-left:19%; margin-top: 1em">The
+disadvantage of unicode is that it is not compatible with
+<small>ASCII.</small> The output is not easy to handle when
+you redirect it to another program.</p>
+
+<p style="margin-left:19%; margin-top: 1em">When method
+&quot;unicodebom&quot; is used the Unicode text will be
+preceded with a <small>BOM</small> (Byte Order Mark). A
+<small>BOM</small> is required for correct redirection or
+piping in PowerShell.</p>
+
+<p style="margin-left:14%;"><b>utf8, utf8bom</b></p>
+
+<p style="margin-left:19%;">The advantage of utf8 is that
+it is compatible with <small>ASCII.</small> You need to set
+the console&rsquo;s font to a TrueType font. With a TrueType
+font the text is displayed similar as with the
+&quot;unicode&quot; encoding.</p>
+
+<p style="margin-left:19%; margin-top: 1em">The
+disadvantage is that when you use the default raster font
+all non-ASCII characters are displayed wrong. Not only
+unicode file names, but also translated messages become
+unreadable. On Windows configured for an East-Asian region
+you may see a lot of flickering of the console when the
+messages are displayed.</p>
+
+<p style="margin-left:19%; margin-top: 1em">In a ConEmu
+console the utf8 encoding method works well.</p>
+
+<p style="margin-left:19%; margin-top: 1em">When method
+&quot;utf8bom&quot; is used the <small>UTF-8</small> text
+will be preceded with a <small>BOM</small> (Byte Order
+Mark). A <small>BOM</small> is required for correct
+redirection or piping in PowerShell.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The default
+encoding can be changed with environment variable
+<small>DOS2UNIX_DISPLAY_ENC</small> by setting it to
+&quot;unicode&quot;, &quot;unicodebom&quot;,
+&quot;utf8&quot;, or &quot;utf8bom&quot;.</p>
+
+<p style="margin-left:9%;"><b>-e, --add-eol</b></p>
+
+<p style="margin-left:14%;">Add a line break to the last
+line if there isn&rsquo;t one. This works for every
+conversion.</p>
+
+<p style="margin-left:14%; margin-top: 1em">A file
+converted from <small>DOS</small> to Unix format may lack a
+line break on the last line. There are text editors that
+write text files without a line break on the last line. Some
+Unix programs have problems processing these files, because
+the <small>POSIX</small> standard defines that every line in
+a text file must end with a terminating newline character.
+For instance concatenating files may not give the expected
+result.</p>
+
+<p style="margin-left:9%;"><b>-f, --force</b></p>
+
+<p style="margin-left:14%;">Force conversion of binary
+files.</p>
+
+<p style="margin-left:9%;"><b>-gb, --gb18030</b></p>
+
+<p style="margin-left:14%;">On Windows
+<small>UTF-16</small> files are by default converted to
+<small>UTF-8,</small> regardless of the locale setting. Use
+this option to convert <small>UTF-16</small> files to
+<small>GB18030.</small> This option is only available on
+Windows. See also section <small>GB18030.</small></p>
+
+<p style="margin-left:9%;"><b>-h, --help</b></p>
+
+<p style="margin-left:14%;">Display help and exit.</p>
+
+<p style="margin-left:9%;"><b>-i[ <small>FLAGS</small> ],
+--info[=FLAGS] <small>FILE ...</small></b></p>
+
+<p style="margin-left:14%;">Display file information. No
+conversion is done.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The following
+information is printed, in this order: number of
+<small>DOS</small> line breaks, number of Unix line breaks,
+number of Mac line breaks, byte order mark, text or binary,
+file name.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example
+output:</p>
+
+<p style="margin-left:14%; margin-top: 1em">6 0 0 no_bom
+text dos.txt <br>
+0 6 0 no_bom text unix.txt <br>
+0 0 6 no_bom text mac.txt <br>
+6 6 6 no_bom text mixed.txt <br>
+50 0 0 UTF-16LE text utf16le.txt <br>
+0 50 0 no_bom text utf8unix.txt <br>
+50 0 0 UTF-8 text utf8dos.txt <br>
+2 418 219 no_bom binary dos2unix.exe</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that
+sometimes a binary file can be mistaken for a text file. See
+also option &quot;-s&quot;.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If in addition
+option &quot;-e&quot; or &quot;--add-eol&quot; is used also
+the type of the line break of the last line is printed, or
+&quot;noeol&quot; if there is none.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example
+output:</p>
+
+<p style="margin-left:14%; margin-top: 1em">6 0 0 no_bom
+text dos dos.txt <br>
+0 6 0 no_bom text unix unix.txt <br>
+0 0 6 no_bom text mac mac.txt <br>
+1 0 0 no_bom text noeol noeol_dos.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Optionally
+extra flags can be set to change the output. One or more
+flags can be added.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>0</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Print the file information lines followed by a null
+character instead of a newline character. This enables
+correct interpretation of file names with spaces or quotes
+when flag c is used. Use this flag in combination with
+<b>xargs</b>(1) option &quot;-0&quot; or
+&quot;--null&quot;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>d</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Print number of <small>DOS</small> line breaks.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>u</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Print number of Unix line breaks.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>m</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Print number of Mac line breaks.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>b</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Print the byte order mark.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>t</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Print if file is text or binary.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>e</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Print the type of the line break of the last line, or
+&quot;noeol&quot; if there is none.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>c</b></p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Print only the files that would be converted.</p></td></tr>
+</table>
+
+<p style="margin-left:19%; margin-top: 1em">With the
+&quot;c&quot; flag dos2unix will print only the files that
+contain <small>DOS</small> line breaks, unix2dos will print
+only file names that have Unix line breaks.</p>
+
+<p style="margin-left:19%; margin-top: 1em">If in addition
+option &quot;-e&quot; or &quot;--add-eol&quot; is used also
+the files that lack a line break on the last line will be
+printed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em"><b>h</b></p></td>
+<td width="4%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em">Print a header.</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p><b>p</b></p></td>
+<td width="4%"></td>
+<td width="37%">
+
+
+<p>Show file names without path.</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Examples:</p>
+
+<p style="margin-left:14%; margin-top: 1em">Show
+information for all *.txt files:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -i
+*.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Show only the
+number of <small>DOS</small> line breaks and Unix line
+breaks:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -idu
+*.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Show only the
+byte order mark:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix
+--info=b *.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">List the files
+that have <small>DOS</small> line breaks:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -ic
+*.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">List the files
+that have Unix line breaks:</p>
+
+<p style="margin-left:14%; margin-top: 1em">unix2dos -ic
+*.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">List the files
+that have <small>DOS</small> line breaks or lack a line
+break on the last line:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -e -ic
+*.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert only
+files that have <small>DOS</small> line breaks and leave the
+other files untouched:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -ic0
+*.txt | xargs -0 dos2unix</p>
+
+<p style="margin-left:14%; margin-top: 1em">Find text files
+that have <small>DOS</small> line breaks:</p>
+
+<p style="margin-left:14%; margin-top: 1em">find -name
+'*.txt' -print0 | xargs -0 dos2unix -ic</p>
+
+<p style="margin-left:9%;"><b>-k, --keepdate</b></p>
+
+<p style="margin-left:14%;">Keep the date stamp of output
+file same as input file.</p>
+
+<p style="margin-left:9%;"><b>-L, --license</b></p>
+
+<p style="margin-left:14%;">Display program&rsquo;s
+license.</p>
+
+<p style="margin-left:9%;"><b>-l, --newline</b></p>
+
+<p style="margin-left:14%;">Add additional newline.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>dos2unix</b>:
+Only <small>DOS</small> line breaks are changed to two Unix
+line breaks. In Mac mode only Mac line breaks are changed to
+two Unix line breaks.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>unix2dos</b>:
+Only Unix line breaks are changed to two <small>DOS</small>
+line breaks. In Mac mode Unix line breaks are changed to two
+Mac line breaks.</p>
+
+<p style="margin-left:9%;"><b>-m, --add-bom</b></p>
+
+<p style="margin-left:14%;">Write a Byte Order Mark (
+<small>BOM</small> ) in the output file. By default an
+<small>UTF-8 BOM</small> is written.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When the input
+file is <small>UTF-16,</small> and the option &quot;-u&quot;
+is used, an <small>UTF-16 BOM</small> will be written.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Never use this
+option when the output encoding is other than <small>UTF-8,
+UTF-16,</small> or <small>GB18030.</small> See also section
+<small>UNICODE.</small></p>
+
+<p style="margin-left:9%;"><b>-n, --newfile <small>INFILE
+OUTFILE ...</small></b></p>
+
+<p style="margin-left:14%;">New file mode. Convert file
+<small>INFILE</small> and write output to file
+<small>OUTFILE.</small> File names must be given in pairs
+and wildcard names should <i>not</i> be used or you
+<i>will</i> lose your files.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The person who
+starts the conversion in new file (paired) mode will be the
+owner of the converted file. The read/write permissions of
+the new file will be the permissions of the original file
+minus the <b>umask</b>(1) of the person who runs the
+conversion.</p>
+
+<p style="margin-left:9%;"><b>--no-allow-chown</b></p>
+
+<p style="margin-left:14%;">Don&rsquo;t allow file
+ownership change in old file mode (default).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Abort
+conversion when the user and/or group ownership of the
+original file can&rsquo;t be preserved in old file mode. See
+also options &quot;-o&quot; and &quot;-n&quot;. This option
+is only available if dos2unix has support for preserving the
+user and group ownership of files.</p>
+
+<p style="margin-left:9%;"><b>--no-add-eol</b></p>
+
+<p style="margin-left:14%;">Do not add a line break to the
+last line if there isn&rsquo;t one.</p>
+
+<p style="margin-left:9%;"><b>-O, --to-stdout</b></p>
+
+<p style="margin-left:14%;">Write to standard output, like
+a Unix filter. Use option &quot;-o&quot; to go back to old
+file (in-place) mode.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Combined with
+option &quot;-e&quot; files can be properly concatenated. No
+merged last and first lines, and no Unicode byte order marks
+in the middle of the concatenated file. Example:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -e -O
+file1.txt file2.txt &gt; output.txt</p>
+
+<p style="margin-left:9%;"><b>-o, --oldfile <small>FILE
+...</small></b></p>
+
+<p style="margin-left:14%;">Old file mode. Convert file
+<small>FILE</small> and overwrite output to it. The program
+defaults to run in this mode. Wildcard names may be
+used.</p>
+
+<p style="margin-left:14%; margin-top: 1em">In old file
+(in-place) mode the converted file gets the same owner,
+group, and read/write permissions as the original file. Also
+when the file is converted by another user who has write
+permissions on the file (e.g. user root). The conversion
+will be aborted when it is not possible to preserve the
+original values. Change of owner could mean that the
+original owner is not able to read the file any more. Change
+of group could be a security risk, the file could be made
+readable for persons for whom it is not intended.
+Preservation of owner, group, and read/write permissions is
+only supported on Unix.</p>
+
+<p style="margin-left:14%; margin-top: 1em">To check if
+dos2unix has support for preserving the user and group
+ownership of files type &quot;dos2unix -V&quot;.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Conversion is
+always done via a temporary file. When an error occurs
+halfway the conversion, the temporary file is deleted and
+the original file stays intact. When the conversion is
+successful, the original file is replaced with the temporary
+file. You may have write permission on the original file,
+but no permission to put the same user and/or group
+ownership properties on the temporary file as the original
+file has. This means you are not able to preserve the user
+and/or group ownership of the original file. In this case
+you can use option &quot;--allow-chown&quot; to continue
+with the conversion:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix
+--allow-chown foo.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Another option
+is to use new file mode:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -n
+foo.txt foo.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">The advantage
+of the &quot;--allow-chown&quot; option is that you can use
+wildcards, and the ownership properties will be preserved
+when possible.</p>
+
+<p style="margin-left:9%;"><b>-q, --quiet</b></p>
+
+<p style="margin-left:14%;">Quiet mode. Suppress all
+warnings and messages. The return value is zero. Except when
+wrong command-line options are used.</p>
+
+<p style="margin-left:9%;"><b>-r, --remove-bom</b></p>
+
+<p style="margin-left:14%;">Remove Byte Order Mark (
+<small>BOM</small> ). Do not write a <small>BOM</small> in
+the output file. This is the default behavior when
+converting to Unix line breaks. See also option
+&quot;-b&quot;.</p>
+
+<p style="margin-left:9%;"><b>-s, --safe</b></p>
+
+<p style="margin-left:14%;">Skip binary files
+(default).</p>
+
+<p style="margin-left:14%; margin-top: 1em">The skipping of
+binary files is done to avoid accidental mistakes. Be aware
+that the detection of binary files is not 100% foolproof.
+Input files are scanned for binary symbols which are
+typically not found in text files. It is possible that a
+binary file contains only normal text characters. Such a
+binary file will mistakenly be seen as a text file.</p>
+
+<p style="margin-left:9%;"><b>-u, --keep-utf16</b></p>
+
+<p style="margin-left:14%;">Keep the original
+<small>UTF-16</small> encoding of the input file. The output
+file will be written in the same <small>UTF-16</small>
+encoding, little or big endian, as the input file. This
+prevents transformation to <small>UTF-8.</small> An
+<small>UTF-16 BOM</small> will be written accordingly. This
+option can be disabled with the &quot;-ascii&quot;
+option.</p>
+
+<p style="margin-left:9%;"><b>-ul, --assume-utf16le</b></p>
+
+<p style="margin-left:14%;">Assume that the input file
+format is <small>UTF-16LE.</small></p>
+
+<p style="margin-left:14%; margin-top: 1em">When there is a
+Byte Order Mark in the input file the <small>BOM</small> has
+priority over this option.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When you made a
+wrong assumption (the input file was not in
+<small>UTF-16LE</small> format) and the conversion
+succeeded, you will get an <small>UTF-8</small> output file
+with wrong text. You can undo the wrong conversion with
+<b>iconv</b>(1) by converting the <small>UTF-8</small>
+output file back to <small>UTF-16LE.</small> This will bring
+back the original file.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The assumption
+of <small>UTF-16LE</small> works as a <i>conversion
+mode</i>. By switching to the default <i>ascii</i> mode the
+<small>UTF-16LE</small> assumption is turned off.</p>
+
+<p style="margin-left:9%;"><b>-ub, --assume-utf16be</b></p>
+
+<p style="margin-left:14%;">Assume that the input file
+format is <small>UTF-16BE.</small></p>
+
+<p style="margin-left:14%; margin-top: 1em">This option
+works the same as option &quot;-ul&quot;.</p>
+
+<p style="margin-left:9%;"><b>-v, --verbose</b></p>
+
+<p style="margin-left:14%;">Display verbose messages. Extra
+information is displayed about Byte Order Marks and the
+amount of converted line breaks.</p>
+
+<p style="margin-left:9%;"><b>-F, --follow-symlink</b></p>
+
+<p style="margin-left:14%;">Follow symbolic links and
+convert the targets.</p>
+
+<p style="margin-left:9%;"><b>-R, --replace-symlink</b></p>
+
+<p style="margin-left:14%;">Replace symbolic links with
+converted files (original target files remain
+unchanged).</p>
+
+<p style="margin-left:9%;"><b>-S, --skip-symlink</b></p>
+
+<p style="margin-left:14%;">Keep symbolic links and targets
+unchanged (default).</p>
+
+<p style="margin-left:9%;"><b>-V, --version</b></p>
+
+<p style="margin-left:14%;">Display version information and
+exit.</p>
+
+<h2>MAC MODE
+<a name="MAC MODE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">By default line
+breaks are converted from <small>DOS</small> to Unix and
+vice versa. Mac line breaks are not converted.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In Mac mode line
+breaks are converted from Mac to Unix and vice versa.
+<small>DOS</small> line breaks are not changed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To run in Mac
+mode use the command-line option &quot;-c mac&quot; or use
+the commands &quot;mac2unix&quot; or
+&quot;unix2mac&quot;.</p>
+
+<h2>CONVERSION MODES
+<a name="CONVERSION MODES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ascii</b></p>
+
+<p style="margin-left:14%;">This is the default conversion
+mode. This mode is for converting <small>ASCII</small> and
+ASCII-compatible encoded files, like <small>UTF-8.</small>
+Enabling <b>ascii</b> mode disables <b>7bit</b> and
+<b>iso</b> mode.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If dos2unix has
+<small>UTF-16</small> support, <small>UTF-16</small> encoded
+files are converted to the current locale character encoding
+on <small>POSIX</small> systems and to <small>UTF-8</small>
+on Windows. Enabling <b>ascii</b> mode disables the option
+to keep <small>UTF-16</small> encoding (&quot;-u&quot;) and
+the options to assume <small>UTF-16</small> input
+(&quot;-ul&quot; and &quot;-ub&quot;). To see if dos2unix
+has <small>UTF-16</small> support type &quot;dos2unix
+-V&quot;. See also section <small>UNICODE.</small></p>
+
+<p style="margin-left:9%;"><b>7bit</b></p>
+
+<p style="margin-left:14%;">In this mode all 8 bit
+non-ASCII characters (with values from 128 to 255) are
+converted to a 7 bit space.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>iso</b></p></td>
+<td width="1%"></td>
+<td width="86%">
+
+
+<p>Characters are converted between a <small>DOS</small>
+character set (code page) and <small>ISO</small> character
+set <small>ISO-8859-1</small> (Latin-1) on Unix.
+<small>DOS</small> characters without
+<small>ISO-8859-1</small> equivalent, for which conversion
+is not possible, are converted to a dot. The same counts for
+<small>ISO-8859-1</small> characters without
+<small>DOS</small> counterpart.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">When only
+option &quot;-iso&quot; is used dos2unix will try to
+determine the active code page. When this is not possible
+dos2unix will use default code page <small>CP437,</small>
+which is mainly used in the <small>USA.</small> To force a
+specific code page use options &quot;-437&quot; (
+<small>US</small> ), &quot;-850&quot; (Western European),
+&quot;-860&quot; (Portuguese), &quot;-863&quot; (French
+Canadian), or &quot;-865&quot; (Nordic). Windows code page
+<small>CP1252</small> (Western European) is also supported
+with option &quot;-1252&quot;. For other code pages use
+dos2unix in combination with <b>iconv</b>(1). Iconv can
+convert between a long list of character encodings.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Never use
+<small>ISO</small> conversion on Unicode text files. It will
+corrupt <small>UTF-8</small> encoded files.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Some
+examples:</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert from
+<small>DOS</small> default code page to Unix Latin-1:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -iso
+-n in.txt out.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert from
+<small>DOS CP850</small> to Unix Latin-1:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -850
+-n in.txt out.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert from
+Windows <small>CP1252</small> to Unix Latin-1:</p>
+
+<p style="margin-left:14%; margin-top: 1em">dos2unix -1252
+-n in.txt out.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert from
+Windows <small>CP1252</small> to Unix <small>UTF-8</small>
+(Unicode):</p>
+
+<p style="margin-left:14%; margin-top: 1em">iconv -f CP1252
+-t UTF-8 in.txt | dos2unix &gt; out.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert from
+Unix Latin-1 to <small>DOS</small> default code page:</p>
+
+<p style="margin-left:14%; margin-top: 1em">unix2dos -iso
+-n in.txt out.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert from
+Unix Latin-1 to <small>DOS CP850:</small></p>
+
+<p style="margin-left:14%; margin-top: 1em">unix2dos -850
+-n in.txt out.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert from
+Unix Latin-1 to Windows <small>CP1252:</small></p>
+
+<p style="margin-left:14%; margin-top: 1em">unix2dos -1252
+-n in.txt out.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">Convert from
+Unix <small>UTF-8</small> (Unicode) to Windows
+<small>CP1252:</small></p>
+
+<p style="margin-left:14%; margin-top: 1em">unix2dos &lt;
+in.txt | iconv -f UTF-8 -t CP1252 &gt; out.txt</p>
+
+<p style="margin-left:14%; margin-top: 1em">See also
+&lt;http://czyborra.com/charsets/codepages.html&gt; and
+&lt;http://czyborra.com/charsets/iso8859.html&gt;.</p>
+
+<h2>UNICODE
+<a name="UNICODE"></a>
+</h2>
+
+
+<h3>Encodings
+<a name="Encodings"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">There exist
+different Unicode encodings. On Unix and Linux Unicode files
+are typically encoded in <small>UTF-8</small> encoding. On
+Windows Unicode text files can be encoded in <small>UTF-8,
+UTF-16,</small> or <small>UTF-16</small> big endian, but are
+mostly encoded in <small>UTF-16</small> format.</p>
+
+<h3>Conversion
+<a name="Conversion"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Unicode text
+files can have <small>DOS,</small> Unix or Mac line breaks,
+like <small>ASCII</small> text files.</p>
+
+<p style="margin-left:9%; margin-top: 1em">All versions of
+dos2unix and unix2dos can convert <small>UTF-8</small>
+encoded files, because <small>UTF-8</small> was designed for
+backward compatibility with <small>ASCII.</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">Dos2unix and
+unix2dos with Unicode <small>UTF-16</small> support, can
+read little and big endian <small>UTF-16</small> encoded
+text files. To see if dos2unix was built with
+<small>UTF-16</small> support type &quot;dos2unix
+-V&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On Unix/Linux
+<small>UTF-16</small> encoded files are converted to the
+locale character encoding. Use the <b>locale</b>(1) command
+to find out what the locale character encoding is. When
+conversion is not possible a conversion error will occur and
+the file will be skipped.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On Windows
+<small>UTF-16</small> files are by default converted to
+<small>UTF-8. UTF-8</small> formatted text files are well
+supported on both Windows and Unix/Linux.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><small>UTF-16</small>
+and <small>UTF-8</small> encoding are fully compatible,
+there will no text be lost in the conversion. When an
+<small>UTF-16</small> to <small>UTF-8</small> conversion
+error occurs, for instance when the <small>UTF-16</small>
+input file contains an error, the file will be skipped.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When option
+&quot;-u&quot; is used, the output file will be written in
+the same <small>UTF-16</small> encoding as the input file.
+Option &quot;-u&quot; prevents conversion to
+<small>UTF-8.</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">Dos2unix and
+unix2dos have no option to convert <small>UTF-8</small>
+files to <small>UTF-16.</small></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><small>ISO</small>
+and 7-bit mode conversion do not work on
+<small>UTF-16</small> files.</p>
+
+<h3>Byte Order Mark
+<a name="Byte Order Mark"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">On Windows
+Unicode text files typically have a Byte Order Mark (
+<small>BOM</small> ), because many Windows programs
+(including Notepad) add BOMs by default. See also
+&lt;https://en.wikipedia.org/wiki/Byte_order_mark&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On Unix Unicode
+files typically don&rsquo;t have a <small>BOM.</small> It is
+assumed that text files are encoded in the locale character
+encoding.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Dos2unix can
+only detect if a file is in <small>UTF-16</small> format if
+the file has a <small>BOM.</small> When an
+<small>UTF-16</small> file doesn&rsquo;t have a
+<small>BOM,</small> dos2unix will see the file as a binary
+file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Use option
+&quot;-ul&quot; or &quot;-ub&quot; to convert an
+<small>UTF-16</small> file without <small>BOM.</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">Dos2unix writes
+by default no <small>BOM</small> in the output file. With
+option &quot;-b&quot; Dos2unix writes a <small>BOM</small>
+when the input file has a <small>BOM.</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">Unix2dos writes
+by default a <small>BOM</small> in the output file when the
+input file has a <small>BOM.</small> Use option
+&quot;-r&quot; to remove the <small>BOM.</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">Dos2unix and
+unix2dos write always a <small>BOM</small> when option
+&quot;-m&quot; is used.</p>
+
+<h3>Unicode file names on Windows
+<a name="Unicode file names on Windows"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Dos2unix has
+optional support for reading and writing Unicode file names
+in the Windows Command Prompt. That means that dos2unix can
+open files that have characters in the name that are not
+part of the default system <small>ANSI</small> code page. To
+see if dos2unix for Windows was built with Unicode file name
+support type &quot;dos2unix -V&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There are some
+issues with displaying Unicode file names in a Windows
+console. See option &quot;-D&quot;,
+&quot;--display-enc&quot;. The file names may be displayed
+wrongly in the console, but the files will be written with
+the correct name.</p>
+
+<h3>Unicode examples
+<a name="Unicode examples"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Convert from
+Windows <small>UTF-16</small> (with <small>BOM</small> ) to
+Unix <small>UTF-8:</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix -n
+in.txt out.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert from
+Windows <small>UTF-16LE</small> (without <small>BOM</small>
+) to Unix <small>UTF-8:</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix -ul -n
+in.txt out.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert from
+Unix <small>UTF-8</small> to Windows <small>UTF-8</small>
+with <small>BOM:</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">unix2dos -m -n
+in.txt out.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert from
+Unix <small>UTF-8</small> to Windows
+<small>UTF-16:</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">unix2dos &lt;
+in.txt | iconv -f UTF-8 -t UTF-16 &gt; out.txt</p>
+
+<h2>GB18030
+<a name="GB18030"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><small>GB18030</small>
+is a Chinese government standard. A mandatory subset of the
+<small>GB18030</small> standard is officially required for
+all software products sold in China. See also
+&lt;https://en.wikipedia.org/wiki/GB_18030&gt;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><small>GB18030</small>
+is fully compatible with Unicode, and can be considered an
+unicode transformation format. Like <small>UTF-8,
+GB18030</small> is compatible with <small>ASCII.
+GB18030</small> is also compatible with Windows code page
+936, also known as <small>GBK.</small></p>
+
+<p style="margin-left:9%; margin-top: 1em">On Unix/Linux
+<small>UTF-16</small> files are converted to
+<small>GB18030</small> when the locale encoding is set to
+<small>GB18030.</small> Note that this will only work if the
+locale is supported by the system. Use command &quot;locale
+-a&quot; to get the list of supported locales.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On Windows you
+need to use option &quot;-gb&quot; to convert
+<small>UTF-16</small> files to <small>GB18030.</small></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><small>GB18030</small>
+encoded files can have a Byte Order Mark, like Unicode
+files.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Read input from
+&rsquo;stdin&rsquo; and write output to
+&rsquo;stdout&rsquo;:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix &lt;
+a.txt <br>
+cat a.txt | dos2unix</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert and
+replace a.txt. Convert and replace b.txt:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix a.txt
+b.txt <br>
+dos2unix -o a.txt b.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert and
+replace a.txt in ascii conversion mode:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix
+a.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert and
+replace a.txt in ascii conversion mode, convert and replace
+b.txt in 7bit conversion mode:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix a.txt
+-c 7bit b.txt <br>
+dos2unix -c ascii a.txt -c 7bit b.txt <br>
+dos2unix -ascii a.txt -7 b.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert a.txt
+from Mac to Unix format:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix -c mac
+a.txt <br>
+mac2unix a.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert a.txt
+from Unix to Mac format:</p>
+
+<p style="margin-left:9%; margin-top: 1em">unix2dos -c mac
+a.txt <br>
+unix2mac a.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert and
+replace a.txt while keeping original date stamp:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix -k
+a.txt <br>
+dos2unix -k -o a.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert a.txt
+and write to e.txt:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix -n
+a.txt e.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert a.txt
+and write to e.txt, keep date stamp of e.txt same as
+a.txt:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix -k -n
+a.txt e.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert and
+replace a.txt, convert b.txt and write to e.txt:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix a.txt
+-n b.txt e.txt <br>
+dos2unix -o a.txt -n b.txt e.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">Convert c.txt
+and write to e.txt, convert and replace a.txt, convert and
+replace b.txt, convert d.txt and write to f.txt:</p>
+
+<p style="margin-left:9%; margin-top: 1em">dos2unix -n
+c.txt e.txt -o a.txt b.txt -n d.txt f.txt</p>
+
+<h2>RECURSIVE CONVERSION
+<a name="RECURSIVE CONVERSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">In a Unix shell
+the <b>find</b>(1) and <b>xargs</b>(1) commands can be used
+to run dos2unix recursively over all text files in a
+directory tree. For instance to convert all .txt files in
+the directory tree under the current directory type:</p>
+
+<p style="margin-left:9%; margin-top: 1em">find . -name
+'*.txt' -print0 |xargs -0 dos2unix</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>find</b>(1) option &quot;-print0&quot; and corresponding
+<b>xargs</b>(1) option &quot;-0&quot; are needed when there
+are files with spaces or quotes in the name. Otherwise these
+options can be omitted. Another option is to use
+<b>find</b>(1) with the &quot;-exec&quot; option:</p>
+
+<p style="margin-left:9%; margin-top: 1em">find . -name
+'*.txt' -exec dos2unix {} \;</p>
+
+<p style="margin-left:9%; margin-top: 1em">In a Windows
+Command Prompt the following command can be used:</p>
+
+<p style="margin-left:9%; margin-top: 1em">for /R %G in
+(*.txt) do dos2unix &quot;%G&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">PowerShell users
+can use the following command in Windows PowerShell:</p>
+
+<p style="margin-left:9%; margin-top: 1em">get-childitem
+-path . -filter '*.txt' -recurse | foreach-object {dos2unix
+$_.Fullname}</p>
+
+<h2>LOCALIZATION
+<a name="LOCALIZATION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><small>LANG</small></b></p>
+
+<p style="margin-left:14%;">The primary language is
+selected with the environment variable <small>LANG.</small>
+The <small>LANG</small> variable consists out of several
+parts. The first part is in small letters the language code.
+The second is optional and is the country code in capital
+letters, preceded with an underscore. There is also an
+optional third part: character encoding, preceded with a
+dot. A few examples for <small>POSIX</small> standard type
+shells:</p>
+
+<p style="margin-left:14%; margin-top: 1em">export LANG=nl
+Dutch <br>
+export LANG=nl_NL Dutch, The Netherlands <br>
+export LANG=nl_BE Dutch, Belgium <br>
+export LANG=es_ES Spanish, Spain <br>
+export LANG=es_MX Spanish, Mexico <br>
+export LANG=en_US.iso88591 English, USA, Latin-1 encoding
+<br>
+export LANG=en_GB.UTF-8 English, UK, UTF-8 encoding</p>
+
+<p style="margin-left:14%; margin-top: 1em">For a complete
+list of language and country codes see the gettext manual:
+&lt;https://www.gnu.org/software/gettext/manual/html_node/Usual-Language-Codes.html&gt;</p>
+
+<p style="margin-left:14%; margin-top: 1em">On Unix systems
+you can use the command <b>locale</b>(1) to get locale
+specific information.</p>
+
+
+<p style="margin-left:9%;"><b><small>LANGUAGE</small></b></p>
+
+<p style="margin-left:14%;">With the
+<small>LANGUAGE</small> environment variable you can specify
+a priority list of languages, separated by colons. Dos2unix
+gives preference to <small>LANGUAGE</small> over
+<small>LANG.</small> For instance, first Dutch and then
+German: &quot;LANGUAGE=nl:de&quot;. You have to first enable
+localization, by setting <small>LANG</small> (or
+<small>LC_ALL</small> ) to a value other than &quot;C&quot;,
+before you can use a language priority list through the
+<small>LANGUAGE</small> variable. See also the gettext
+manual:
+&lt;https://www.gnu.org/software/gettext/manual/html_node/The-LANGUAGE-variable.html&gt;</p>
+
+<p style="margin-left:14%; margin-top: 1em">If you select a
+language which is not available you will get the standard
+English messages.</p>
+
+
+<p style="margin-left:9%;"><b><small>DOS2UNIX_LOCALEDIR</small></b></p>
+
+<p style="margin-left:14%;">With the environment variable
+<small>DOS2UNIX_LOCALEDIR</small> the
+<small>LOCALEDIR</small> set during compilation can be
+overruled. <small>LOCALEDIR</small> is used to find the
+language files. The <small>GNU</small> default value is
+&quot;/usr/local/share/locale&quot;. Option <b>--version</b>
+will display the <small>LOCALEDIR</small> that is used.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example (
+<small>POSIX</small> shell):</p>
+
+<p style="margin-left:14%; margin-top: 1em">export
+DOS2UNIX_LOCALEDIR=$HOME/share/locale</p>
+
+<h2>RETURN VALUE
+<a name="RETURN VALUE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">On success, zero
+is returned. When a system error occurs the last system
+error will be returned. For other errors 1 is returned.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The return value
+is always zero in quiet mode, except when wrong command-line
+options are used.</p>
+
+<h2>STANDARDS
+<a name="STANDARDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;https://en.wikipedia.org/wiki/Text_file&gt;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;https://en.wikipedia.org/wiki/Carriage_return&gt;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;https://en.wikipedia.org/wiki/Newline&gt;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;https://en.wikipedia.org/wiki/Unicode&gt;</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Benjamin Lin -
+&lt;blin@socs.uts.edu.au&gt;, Bernd Johannes Wuebben
+(mac2unix mode) - &lt;wuebben@kde.org&gt;, Christian Wurll
+(add extra newline) - &lt;wurll@ira.uka.de&gt;, Erwin
+Waterlander - &lt;waterlan@xs4all.nl&gt; (maintainer)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Project page:
+&lt;https://waterlan.home.xs4all.nl/dos2unix.html&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">SourceForge
+page: &lt;https://sourceforge.net/projects/dos2unix/&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>file</b>(1)
+<b>find</b>(1) <b>iconv</b>(1) <b>locale</b>(1)
+<b>xargs</b>(1)</p>
+<hr>
+</body>
+</html>

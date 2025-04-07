@@ -1,0 +1,167 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:36 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>png2yuv</title>
+
+</head>
+<body>
+
+<h1 align="center">png2yuv</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">png2yuv -
+Convert PNG images to the YUV4MPEG stream format.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>png2yuv</b>
+[<b>-b</b> <i>num</i>] [<b>-f</b> <i>num</i>] [<b>-I</b>
+<i>num</i>] [<b>-L</b> <i>num</i>] [<b>-n</b> num<b>]</b>
+[<b>-j</b> <i>filename</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>png2yuv</b>
+decompresses a sequence of PNG files and pipes the image
+data to stdout as a YUV4MPEG2 stream. Any 8bit/pixel PNG
+format supported by libpng can be read. stdout will be
+filled with the YUV4MPEG movie data stream, so be prepared
+to pipe it on to mpeg2enc or to write it into a file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>This tool is
+incomplete.</b> The alternative utility you are probably
+looking for is <b>ppmtoy4m</b>(1), which is also included in
+MJPEGtools.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>png2yuv</b>
+accepts the following options: <b><br>
+-b</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Frame offset: skip output of
+the first &rsquo;num&rsquo; frames. (default: 0)</p>
+
+<p style="margin-left:9%;"><b>-f</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Set the frame rate of stream
+accepts the same numbers. Not default, this option has to be
+specified.</p>
+
+<p style="margin-left:9%;"><b>-I</b> <i>num</i></p>
+
+<p style="margin-left:15%;">interlacing mode: p = none /
+progressive <br>
+t = top field first <br>
+b = bottom field first <br>
+No default, this option has to be specified.</p>
+
+<p style="margin-left:9%;"><b>-L</b> <i>num</i></p>
+
+<p style="margin-left:15%;">0 = non-interleaved (two
+successive fields per PNG file) <br>
+1 = interleaved fields</p>
+
+<p style="margin-left:9%;"><b>-S</b> <i>samp_mode</i></p>
+
+<p style="margin-left:15%;">chroma subsampling mode, only
+for professionals, for more info see ppmtoy4m and the YUV
+guide on http://www.mir.com/DMG/. <br>
+default: 420_jpeg</p>
+
+<p style="margin-left:9%;"><b>-n</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Specifies the nummber of frames
+to process. (default: all = -1)</p>
+
+<p style="margin-left:9%;"><b>-j</b> <i>{1}%{2}d{3}</i></p>
+
+<p style="margin-left:15%;">Read PNG frames with the name
+components as follows: <br>
+{1} PNG filename prefix (e g: picture_ ) <br>
+{2} Counting placeholder (like in C, printf, eg 06 )) <br>
+{3} File extension. Something like this: .png A correct
+description of the files could look like this:
+picture_%06d.png</p>
+
+<p style="margin-left:9%;"><b>-v</b> <i>num</i></p>
+
+<p style="margin-left:15%;">Verbosity level (0, 1 or 2)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The frame rate
+description does not seem to be up to date. The NTSC integer
+ratios are not supported (use floating point instead). As
+workaround specify a PAL (25) or native FILM (24) and set
+the right frame rate in mpeg2enc with the -F option.
+Interlaced handling is not implemented yet.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Gernot Ziegler. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>mpeg2enc</b>(1), <b>ppmtoy4m</b>(1), <b>yuv2lav</b>(1),
+<b>yuvdenoise</b>(1), <b>yuvmedianfilter</b>(1),
+<b>yuvscaler</b>(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:40 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>AERC-SEARCH</title>
+
+</head>
+<body>
+
+<h1 align="center">AERC-SEARCH</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNTAX">SYNTAX</a><br>
+<a href="#CUSTOM IMAP EXTENSIONS">CUSTOM IMAP EXTENSIONS</a><br>
+<a href="#NOTMUCH">NOTMUCH</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">aerc-search -
+search and filter patterns and options for
+<b>aerc</b>(1)</p>
+
+<h2>SYNTAX
+<a name="SYNTAX"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This syntax is
+common to all backends.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:filter</b>
+[<b>-rubae</b>] [<b>-x</b> <i>&lt;flag&gt;</i>] [<b>-X</b>
+<i>&lt;flag&gt;</i>] [<b>-H</b>
+<i>&lt;header&gt;:[&lt;value&gt;]</i>] [<b>-f</b>
+<i>&lt;from&gt;</i>] [<b>-t</b> <i>&lt;to&gt;</i>]
+[<b>-c</b> <i>&lt;cc&gt;</i>] [<b>-d</b>
+<i>&lt;start[..end]&gt;</i>] [<i>&lt;terms&gt;</i>...]
+<b><br>
+:search</b> [<b>-rubae</b>] [<b>-x</b> <i>&lt;flag&gt;</i>]
+[<b>-X</b> <i>&lt;flag&gt;</i>] [<b>-H</b>
+<i>&lt;header&gt;:[&lt;value&gt;]</i>] [<b>-f</b>
+<i>&lt;from&gt;</i>] [<b>-t</b> <i>&lt;to&gt;</i>]
+[<b>-c</b> <i>&lt;cc&gt;</i>] [<b>-d</b>
+<i>&lt;start[..end]&gt;</i>] [<i>&lt;terms&gt;</i>...]</p>
+
+<p style="margin-left:14%;">Searches the current folder for
+messages matching the given set of conditions.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>:filter</b>
+restricts the displayed messages to only the search
+results.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Each space
+separated term of <i>&lt;terms&gt;</i>, if provided, is
+searched case-insensitively among subject lines unless
+<b>-b</b> or <b>-a</b> are provided.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-r</b>:
+Search for read messages</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-u</b>:
+Search for unread messages</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-x</b>
+<i>&lt;flag&gt;</i>, <b>-X</b> <i>&lt;flag&gt;</i>: Restrict
+search to messages with or without <i>&lt;flag&gt;</i></p>
+
+<p style="margin-left:19%;">Use <b>-x</b> to search for
+messages with the flag set. Use <b>-X</b> to search for
+messages without the flag set.</p>
+
+<p style="margin-left:19%; margin-top: 1em">Possible values
+are:</p>
+
+<p style="margin-left:24%;"><i>Seen</i></p>
+
+<p style="margin-left:29%;">Read messages</p>
+
+<p style="margin-left:24%;"><i>Answered</i></p>
+
+<p style="margin-left:29%;">Replied messages</p>
+
+<p style="margin-left:24%;"><i>Forwarded</i></p>
+
+<p style="margin-left:29%;">Forwarded messages</p>
+
+<p style="margin-left:24%;"><i>Flagged</i></p>
+
+<p style="margin-left:29%;">Flagged messages</p>
+
+<p style="margin-left:24%;"><i>Draft</i></p>
+
+<p style="margin-left:29%;">Draft messages</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-H</b>
+<i>&lt;header&gt;:[&lt;value&gt;]</i>:</p>
+
+<p style="margin-left:19%;">Search in the headers of the
+messages for a specific <i>&lt;header&gt;</i> that matches
+<i>&lt;value&gt;</i>, <i>&lt;value&gt;</i> can be omitted to
+only search for a <i>&lt;header&gt;</i>. If either the
+<i>&lt;header&gt;</i> or the <i>&lt;value&gt;</i> contain a
+space then the whole argument needs to be escaped with
+quotes, note: spaces around <i>&lt;value&gt;</i> are
+trimmed.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-b</b>:
+Search in the body of the messages</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-a</b>:
+Search in the entire text of the messages</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-e</b>:
+Instruct the backend to use a custom search extension</p>
+
+<p style="margin-left:19%;">(such as X-GM-EXT-1 if
+available). Search terms are expected in
+<i>&lt;terms&gt;</i>; other flags will be ignored.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-f</b>
+<i>&lt;from&gt;</i>: Search for messages from
+<i>&lt;from&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-t</b>
+<i>&lt;to&gt;</i>: Search for messages to
+<i>&lt;to&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-c</b>
+<i>&lt;cc&gt;</i>: Search for messages cc&rsquo;ed to
+<i>&lt;cc&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-d</b>
+<i>&lt;since[..until]&gt;</i>:</p>
+
+<p style="margin-left:19%;">Search for messages within a
+particular date range between <i>since</i> and <i>until</i>,
+excluding the latter (in mathematical notation: search for
+messages in the [<i>since</i>, <i>until</i>) interval).
+<i>until</i> can be omitted to only search for
+<i>&lt;since&gt;</i> to present.</p>
+
+<p style="margin-left:19%; margin-top: 1em">Spaces and
+underscores are allowed in relative dates to improve
+readability.</p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><i>YYYY-MM-DD</i></p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>today</b>,
+<b>yesterday</b></p>
+
+<p style="margin-left:19%; margin-top: 1em"><b>(this|last)
+(year|month|week)</b></p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><b>Weekdays</b>,
+<b>Monthnames</b></p>
+
+<p style="margin-left:24%;">Can also be abbreviated, so
+Monday..Tuesday can be written as Mon..Tue and
+February..March as Feb..Mar.</p>
+
+
+<p style="margin-left:19%; margin-top: 1em"><i>&lt;N&gt;</i>
+<b>(y[ear]|m[onth]|w[eek]|d[ay])</b></p>
+
+<p style="margin-left:24%;"><i>&lt;N&gt;</i> is a positive
+integer that represents the number of time units in the
+past. Multiple relative terms can be accumulated. The units
+can also be abbreviated by a single letter such that
+yesterday would correspond to <i>1d</i> (equivalent to <i>1
+day</i> or <i>1_day</i>) and <i>8 days ago</i> would be
+either <i>1w1d</i> or <i>8d</i>.</p>
+
+<h2>CUSTOM IMAP EXTENSIONS
+<a name="CUSTOM IMAP EXTENSIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Gmail IMAP
+extension (X-GM-EXT-1) can be used for searching and
+filtering. To use this custom extension, make sure it is
+activated (see <b>aerc-imap</b>(5)) and use the extension
+<b>-e</b> flag in your <b>:filter</b> or <b>:search</b>
+commands.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example:</p>
+
+<p style="margin-left:19%; margin-top: 1em">:filter -e
+filename:pdf from:bob :filter -e has:attachment
+newer_than:2d</p>
+
+<p style="margin-left:19%; margin-top: 1em">:search -e
+is:read is:starred :search -e
+list:&#732;rjarry/aerc-devel@lists.sr.ht</p>
+
+<h2>NOTMUCH
+<a name="NOTMUCH"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For notmuch, it
+is possible to avoid using the above flags and only rely on
+notmuch search syntax.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>:filter</b>
+<i>query</i>... <b><br>
+:search</b> <i>query</i>...</p>
+
+<p style="margin-left:14%;">You can use the full notmuch
+query language as described in
+<b>notmuch-search-terms</b>(7).</p>
+
+<p style="margin-left:14%; margin-top: 1em">The query will
+only apply on top of the active folder query.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example, jump
+to next unread:</p>
+
+<p style="margin-left:19%; margin-top: 1em">:search
+tag:unread</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>aerc</b>(1)
+<b>aerc-config</b>(5)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Originally
+created by Drew DeVault and maintained by Robin Jarry who is
+assisted by other open source contributors. For more
+information about aerc development, see
+<i>https://sr.ht/&#732;rjarry/aerc/</i>.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,266 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:18 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>soapsuds</title>
+
+</head>
+<body>
+
+<h1 align="center">soapsuds</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#INPUT SOURCES">INPUT SOURCES</a><br>
+<a href="#INPUT OPTIONS">INPUT OPTIONS</a><br>
+<a href="#OUTPUTS">OUTPUTS</a><br>
+<a href="#OUTPUT OPTIONS">OUTPUT OPTIONS</a><br>
+<a href="#GENERAL OPTIONS">GENERAL OPTIONS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">soapsuds -
+Mono&rsquo;s Remoting Proxy Generator</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>soapsuds</b>
+[options] [inputs] [outputs]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>soapsuds</i>
+is a tool for generating WSDL documents and client proxies
+for remoting services. A WSDL document describes the methods
+that a service provides together with XML schemas of all
+referenced data structures. A client proxy is a class which
+offers the same methods as the service it represents, but
+provides no implementation, it just forwards calls to the
+remote service.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Generated client
+proxies are not strictly necessary, since the runtime can
+automatically generate proxies from the original service
+types. However, it implies the need of distributing the
+service class to all clients. In some scenarios a better
+approach is to use soapsuds to generate a proxy class which
+has the same interface as the service, but without any
+implementation.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>soapsuds</i>
+can generate a WSDL document from a set of types specified
+with the option <i>-types</i> or can extract the types from
+an assembly specified with <i>-inputassemblyfile.</i> In
+this last case, soapsuds will include schemas for all
+serializable classes in the WSDL document.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Taking as input
+a WSDL document (or anything from which such document can be
+generated) the tool can generate source code for the client
+proxy (using the <i>-gc</i> option) or it can directly
+generate an assembly that implements the proxy (with the
+<i>-outputassemblyfile</i> option). soapsuds will also
+generate fake serializable classes for all types defined in
+the schema. However, beware that those classes will lack the
+semantics of the original classes, since only data structure
+is generated.</p>
+
+<h2>INPUT SOURCES
+<a name="INPUT SOURCES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+sources are available (only one can be specified): <i><br>
+-urltoschema:url -url:url</i></p>
+
+<p style="margin-left:18%;">Url from which to retrieve the
+WSDL document.</p>
+
+
+<p style="margin-left:9%;"><i>-types:type1,assembly[,serviceEndPoint][;type2,assembly[,serviceEndPoint]]...</i></p>
+
+<p style="margin-left:18%;">Specifies types for which to
+generate a schema or proxy. If no service endpoint is
+provided, the one provided with the <i>-serviceendpoint</i>
+option is used.</p>
+
+<p style="margin-left:9%;"><i>-inputassemblyfile:file ,
+-ia:file</i></p>
+
+<p style="margin-left:18%;">Assembly that contains the
+types to export.</p>
+
+<p style="margin-left:9%;"><i>-inputschemafile:schena ,
+-is:schema</i></p>
+
+<p style="margin-left:18%;">Schema from which to generate
+proxy classes.</p>
+
+<h2>INPUT OPTIONS
+<a name="INPUT OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are available: <i><br>
+-inputdirectory:directory , -id:directory</i></p>
+
+<p style="margin-left:18%;">Directory where DLLs are
+located.</p>
+
+<p style="margin-left:9%;"><i>-serviceendpoint:url ,
+-se:url</i></p>
+
+<p style="margin-left:18%;">Url of the service to be placed
+in the WSDL document.</p>
+
+<h2>OUTPUTS
+<a name="OUTPUTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+output options are available (more than one can be
+specified): <i><br>
+-outputassemblyfile:file , -oa:file</i></p>
+
+<p style="margin-left:18%;">Generates the proxy code and
+compiles it into an assembly with the provided name.</p>
+
+<p style="margin-left:9%;"><i>-outputschemafile:file ,
+-os:file</i></p>
+
+<p style="margin-left:18%;">Generates a WSDL document that
+represents the provided types.</p>
+
+<p style="margin-left:9%;"><i>-generatecode , -gc</i></p>
+
+<p style="margin-left:18%;">Generates proxy source code for
+the provided WSDL document or types.</p>
+
+<h2>OUTPUT OPTIONS
+<a name="OUTPUT OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are available: <i><br>
+-outputdirectory:directory , -od:directory</i></p>
+
+<p style="margin-left:18%;">Directory where generated files
+will be placed.</p>
+
+<p style="margin-left:9%;"><i>-proxynamespace:namespace ,
+-pn:namespace</i></p>
+
+<p style="margin-left:18%;">Namespace of the generated
+proxy.</p>
+
+<p style="margin-left:9%;"><i>-nowrappedproxy ,
+-nowp</i></p>
+
+<p style="margin-left:18%;">Do not generate a wrapped
+proxy.</p>
+
+<p style="margin-left:9%;"><i>-wrappedproxy , -wp</i></p>
+
+<p style="margin-left:18%;">Generate a wrapped proxy.</p>
+
+<p style="margin-left:9%;"><i>-strongnamefile:file ,
+-sn:file</i></p>
+
+<p style="margin-left:18%;">Strong name file.</p>
+
+<h2>GENERAL OPTIONS
+<a name="GENERAL OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are available: <i><br>
+-nologo</i></p>
+
+<p style="margin-left:18%;">Supress the startup logo.</p>
+
+<p style="margin-left:9%;"><i>-u:username ,
+-user:username</i></p>
+
+<p style="margin-left:18%;">The user name to use when
+connecting to the server.</p>
+
+<p style="margin-left:9%;"><i>-p:password ,
+-password:password</i></p>
+
+<p style="margin-left:18%;">The password to use when
+connecting to the server.</p>
+
+<p style="margin-left:9%;"><i>-d:domain ,
+-domain:domain</i></p>
+
+<p style="margin-left:18%;">The domain to use when
+connecting to the server.</p>
+
+<p style="margin-left:9%;"><i>-httpproxyname:name ,
+-hpn:name</i></p>
+
+<p style="margin-left:18%;">Name of the http proxy.</p>
+
+<p style="margin-left:9%;"><i>-httpproxyport:port ,
+-hpp:port</i></p>
+
+<p style="margin-left:18%;">Port of the http proxy.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Lluis Sanchez
+Gual (lluis@ximian.com)</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wsdl is released
+under the terms of the GNU GPL.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wsdl(1),
+disco(1), mono(1), mcs(1)</p>
+<hr>
+</body>
+</html>

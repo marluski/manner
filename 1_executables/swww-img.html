@@ -1,0 +1,440 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>swww-img</title>
+
+</head>
+<body>
+
+<h1 align="center">swww-img</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#ABOUT THE CACHE">ABOUT THE CACHE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">swww-img</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>swww img</b>
+[OPTIONS] &lt;path/to/img&gt;</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f</b>,
+<b>--filter</b> &lt;FILTER&gt;</p>
+
+<p style="margin-left:14%;">Filter to use when scaling
+images</p>
+
+<p style="margin-left:14%; margin-top: 1em">Available
+options are:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>Nearest</i>
+| <i>Bilinear</i> | <i>CatmullRom</i> | <i>Mitchell</i> |
+<i>Lanczos3</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">These are
+offered by the fast_image_resize crate
+(https://docs.rs/fast_image_resize/2.5.0/fast_image_resize/).
+<i>Nearest</i> is what I recommend for pixel art stuff, and
+ONLY for pixel art stuff. It is also the fastest filter.</p>
+
+<p style="margin-left:14%; margin-top: 1em">For non pixel
+art stuff, I would usually recommend one of the last three,
+though some experimentation will be necessary to see which
+one you like best.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note you can
+also pass the flag <b>--no-resize</b>, explained below. In
+which case the <b>--filter</b> flag will have no effect.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+Lanczos3.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-resize</b></p>
+
+<p style="margin-left:14%;">Do not resize the image.
+Equivalent to <b>--resize</b> <i>no</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If this is set,
+the image won&rsquo;t be resized, and will be centralized in
+the middle of the screen instead. If it is smaller than the
+screen&rsquo;s size, it will be padded with the value of
+<b>--fill_color</b>, below.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--resize</b>
+&lt;RESIZE&gt;</p>
+
+<p style="margin-left:14%;">Whether to resize the image and
+the method by which to resize it.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Possible
+values:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="2%">
+
+
+<p>&bull;</p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p><i>no</i>: Do not resize the image</p></td></tr>
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="2%">
+
+
+<p>&bull;</p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p><i>crop</i>: Resize the image to fill the whole screen,
+cropping out parts that don&rsquo;t fit</p></td></tr>
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="2%">
+
+
+<p>&bull;</p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p><i>fit</i>: Resize the image to fit inside the screen,
+preserving the original aspect ratio</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+<i>crop</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fill-color</b>
+&lt;RRGGBB&gt;</p>
+
+<p style="margin-left:14%;">Which color to fill the padding
+with when not resizing.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+<i>000000</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--outputs</b></p>
+
+<p style="margin-left:14%;">Comma separated list of outputs
+to display the image at. Use <b>swww query</b> to know which
+outputs are currently being used.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If it
+isn&rsquo;t set, the image is displayed on all outputs.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t</b>,
+<b>--transition-type</b> &lt;TRANSITION_TYPE&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable
+$SWWW_TRANSITION]</p>
+
+<p style="margin-left:14%; margin-top: 1em">Sets the type
+of transition. Default is <i>simple</i>, that fades into the
+new image.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Possible
+transitions are:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>none</i>
+will complete the transition instantly.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>fade</i> is
+like <i>simple</i> but uses bezier curves while fading the
+image, its a more polished looking version of <i>simple</i>
+with less artifacts</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="-8%">
+
+
+<p>The <i>left</i>, <i>right</i>, <i>top</i> and
+<i>bottom</i> options make the transition</p></td>
+<td width="71%"></td>
+<td width="6%"></td>
+<td width="17%">
+
+
+<p>happen from that position to its opposite in the
+screen.</p> </td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em"><i>wipe</i> is
+similar to <i>left</i> but allows you to specify the angle
+for transition with the &lsquo;--transition-angle&lsquo;
+flag.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>wave</i> is
+similar to <i>wipe</i> but the sweeping line is wavy. You
+can control the &quot;waviness&quot; with
+&lsquo;--transition-wave&lsquo;.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>grow</i>
+causes a growing circle to transition across the screen and
+allows changing the circle&rsquo;s center position with the
+&lsquo;--transition-pos&lsquo; flag.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>center</i>
+is an alias to <i>grow</i> with position set to center of
+screen.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>any</i> is
+an alias to <i>grow</i> with position set to a random point
+on screen.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>outer</i> is
+the same as grow but the circle shrinks instead of
+growing.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Finally,
+<i>random</i> will select a transition effect at random</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--transition-step</b>
+&lt;0-255&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable
+$SWWW_TRANSITION_STEP]</p>
+
+<p style="margin-left:14%; margin-top: 1em">How fast the
+transition approaches the new image.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The transition
+logic works by adding or subtracting from the current rgb
+values until the old image transforms in the new one. This
+controls by how much we add or subtract.</p>
+
+<p style="margin-left:14%; margin-top: 1em">For example, if
+pixel A is 000010, and we need it to transition to pixel B,
+which is 000020, if <b>transition-step</b> is 2, then in one
+frame pixel A will turn to 000012, in the next frame to
+000014, and so on.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Larger values
+will make the transition faster, but more abrupt. A value of
+255 will always switch to the new image immediately.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is 90.
+If <b>transition-type</b> is <i>simple</i>, default is
+2.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--transition-duration</b>
+&lt;seconds (can have decimals)&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable
+$SWWW_TRANSITION_DURATION]</p>
+
+<p style="margin-left:14%; margin-top: 1em">How long the
+transition takes to complete, in seconds.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note this
+doesn&rsquo;t work with the <i>simple</i> transition.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+3.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--transition-fps</b>
+&lt;frames per second (max 255)&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable:
+$SWWW_TRANSITION_FPS]</p>
+
+<p style="margin-left:14%; margin-top: 1em">Frame rate for
+the transition effect.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note there is
+no point in setting this to a value smaller than what your
+monitor supports.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Also note this
+is different from the transition-step. That one controls by
+how much we approach the new image every frame.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+30.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--transition-angle</b>
+&lt;angle, in degrees (parsed as a float)&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable:
+SWWW_TRANSITION_ANGLE]</p>
+
+<p style="margin-left:14%; margin-top: 1em">This is used
+for the <i>wipe</i> and <i>wave</i> transitions. It controls
+the angle of the wipe.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note that the
+angle is in degrees, where &rsquo;0&rsquo; is right to left
+and &rsquo;90&rsquo; is top to bottom, and &rsquo;270&rsquo;
+bottom to top</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+45.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--transition-pos</b>
+&lt;x,y&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable:
+SWWW_TRANSITION_POS]</p>
+
+<p style="margin-left:14%; margin-top: 1em">This is only
+used for the <i>grow</i> and <i>outer</i> transitions. It
+controls the center of circle (default is
+<i>center</i>).</p>
+
+<p style="margin-left:14%; margin-top: 1em">Position values
+can be given in both percentage values and pixel values:
+float values are interpreted as percentages and integer
+values as pixel values. Eg.: 0.5,0.5 means 50% of the screen
+width and 50% of the screen height, while 200,400 means 200
+pixels from the left and 400 pixels from the bottom.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The value can
+also be an alias which will set the position
+accordingly:</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+<i>center</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--invert-y</b>
+&lt;bool&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable:
+SWWW_INVERT_Y]</p>
+
+<p style="margin-left:14%; margin-top: 1em">inverts the y
+position sent in &lsquo;transiiton_pos&lsquo; flag</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--transition-bezier</b>
+&lt;f1,f2,f3,f4 (all floats)&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable:
+SWWW_TRANSITION_BEZIER]</p>
+
+<p style="margin-left:14%; margin-top: 1em">Bezier curve to
+use for the transition animation. https://cubic-bezier.com
+is a good website to get these values from.</p>
+
+<p style="margin-left:14%; margin-top: 1em">eg:
+0.0,0.0,1.0,1.0 for linear animation</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is
+.54,0,.34,.99</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--transition-wave</b>
+&lt;width,height (both floats)&gt;</p>
+
+<p style="margin-left:14%;">[Environment Variable:
+SWWW_TRANSITION_WAVE]</p>
+
+<p style="margin-left:14%; margin-top: 1em">Currently only
+used for <i>wave</i> transition to control the width and
+height of each wave.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default is :
+20,20</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Print help (see a summary with
+&rsquo;-h&rsquo;)</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Sends an image
+(or animated gif) for the daemon to display. You can also
+use &lsquo;-&lsquo; to read from stdin instead.</p>
+
+<h2>ABOUT THE CACHE
+<a name="ABOUT THE CACHE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The images sent
+will be cached at <i>$XDG_CACHE_HOME/swww</i> or
+<i>$HOME/.cache/swww</i> if $XDG_CACHE_HOME does not exist.
+For each monitor, there will be a file in those locations
+corresponding to the current image/animation being
+displayed. Importantly, cache will only be loaded during
+initialization if you use swww init. That is, calling
+&lsquo;swww-daemon&lsquo; directly will NOT load the cache,
+but calling &lsquo;swww-init&lsquo; will.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+&lsquo;swww-daemon&lsquo; will actually wait until the first
+image has been set before trying to load the cache.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Finally, the
+cache will keep preprocessed versions of &lsquo;gif&lsquo;s.
+So, if you load a large &lsquo;gif&lsquo;, you would have to
+pay the price for its processing the first time. If you
+constantly load large &lsquo;gif&lsquo;s, this could cause
+the cache to get very big. You can simply run &lsquo;swww
+clean-cache&lsquo; if this happens.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>swww-clear-cache</b>(1)
+<b>swww-daemon</b>(1) <b>swww-query</b>(1)</p>
+<hr>
+</body>
+</html>

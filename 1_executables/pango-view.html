@@ -1,0 +1,326 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>PANGO-VIEW</title>
+
+</head>
+<body>
+
+<h1 align="center">PANGO-VIEW</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#HELP OPTIONS">HELP OPTIONS</a><br>
+<a href="#CAIRO BACKEND OPTIONS">CAIRO BACKEND OPTIONS</a><br>
+<a href="#APPLICATION OPTIONS">APPLICATION OPTIONS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pango-view -
+Pango text viewer</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pango-view</b>
+[OPTIONS...] FILE</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pango-view</b>
+formats a text using Pango, with options to exercise most of
+Pango's layout features.</p>
+
+<h2>HELP OPTIONS
+<a name="HELP OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:13%;">Show help options.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help-all</b></p>
+
+<p style="margin-left:13%;">Show all help options.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help-cairo</b></p>
+
+<p style="margin-left:13%;">Show help for options
+understood by the cairo backend.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:13%;">Print the command's version and
+exit.</p>
+
+<h2>CAIRO BACKEND OPTIONS
+<a name="CAIRO BACKEND OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--annotate=FLAGS</b></p>
+
+<p style="margin-left:13%;">Annotate the output.
+Comma-separated list of gravity, progression, baselines,
+layout, line, run, cluster, char, glyph, caret, slope</p>
+
+<h2>APPLICATION OPTIONS
+<a name="APPLICATION OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-auto-dir</b></p>
+
+<p style="margin-left:13%;">No layout direction according
+to contents.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--backend=cairo/xft/ft2</b></p>
+
+<p style="margin-left:13%;">Pango backend to use for
+rendering (default: cairo).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--background=red/#rrggbb/#rrggbbaa/transparent</b></p>
+
+<p style="margin-left:13%;">Set the background color.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q,
+--no-display</b></p>
+
+<p style="margin-left:13%;">Do not display (just write to
+file or whatever).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dpi=number</b></p>
+
+<p style="margin-left:13%;">Set the resolution.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--align=left/center/right</b></p>
+
+<p style="margin-left:13%;">Set text alignment.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ellipsize=start/middle/end</b></p>
+
+<p style="margin-left:13%;">Set ellipsization mode.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--font=description</b></p>
+
+<p style="margin-left:13%;">Set the font description.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--foreground=red/#rrggbb/#rrggbbaa</b></p>
+
+<p style="margin-left:13%;">Set the text color.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gravity=south/east/north/west/auto</b></p>
+
+<p style="margin-left:13%;">Set base gravity: glyph
+rotation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gravity-hint=natural/strong/line</b></p>
+
+<p style="margin-left:13%;">Set gravity hint.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--header</b></p>
+
+<p style="margin-left:13%;">Display the options in the
+output.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--height=+points/-numlines</b></p>
+
+<p style="margin-left:13%;">Set height in points (positive)
+or number of lines (negative) for ellipsizing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--hinting=none/auto/slight/medium/full</b></p>
+
+<p style="margin-left:13%;">Set hinting style.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--antialias=none/gray/subpixel</b></p>
+
+<p style="margin-left:13%;">Set antialiasing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--hint-metrics=on/off</b></p>
+
+<p style="margin-left:13%;">Set hint metrics.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--subpixel-positions</b></p>
+
+<p style="margin-left:13%;">Set subpixel positioning.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--subpixel-order=rgb/bgr/vrgb/vbgr</b></p>
+
+<p style="margin-left:13%;">Set subpixel order.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--indent=points</b></p>
+
+<p style="margin-left:13%;">Set paragraph indentation (in
+points).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--spacing=points</b></p>
+
+<p style="margin-left:13%;">Set line spacing (in
+points).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--line-spacing=factor</b></p>
+
+<p style="margin-left:13%;">Set spread factor for line
+height.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--justify</b></p>
+
+<p style="margin-left:13%;">Stretch paragraph lines to be
+justified.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--justify-last-line</b></p>
+
+<p style="margin-left:13%;">Justify the last line of the
+paragraph.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--language=en_US/etc</b></p>
+
+<p style="margin-left:13%;">Set language to use for font
+selection.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--margin=CSS-style
+numbers in pixels</b></p>
+
+<p style="margin-left:13%;">Set the margin on the output in
+pixels.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--markup</b></p>
+
+<p style="margin-left:13%;">Interpret text as Pango
+markup.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o,
+--output=file</b></p>
+
+<p style="margin-left:13%;">Save rendered image to output
+file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pixels</b></p>
+
+<p style="margin-left:13%;">Use pixel units instead of
+points (sets dpi to 72).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pango-units</b></p>
+
+<p style="margin-left:13%;">Use Pango units instead of
+points.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--rtl</b></p>
+
+<p style="margin-left:13%;">Set base direction to
+right-to-left.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--rotate=degrees</b></p>
+
+<p style="margin-left:13%;">Set angle at which to rotate
+results,</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n,
+--runs=integer</b></p>
+
+<p style="margin-left:13%;">Run Pango layout engine this
+many times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--single-par</b></p>
+
+<p style="margin-left:13%;">Enable single-paragraph
+mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t,
+--text=string</b></p>
+
+<p style="margin-left:13%;">Text to display (instead of a
+file).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--waterfall</b></p>
+
+<p style="margin-left:13%;">Create a waterfall display.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w,
+--width=points</b></p>
+
+<p style="margin-left:13%;">Width in points to which to
+wrap lines or ellipsize.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--wrap=word/char/word-char</b></p>
+
+<p style="margin-left:13%;">Text wrapping mode (needs a
+width to be set).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--serialized=FILE</b></p>
+
+<p style="margin-left:13%;">Create layout from a serialized
+file,</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--serialize-to=FILE</b></p>
+
+<p style="margin-left:13%;">Serialize result to a file.</p>
+<hr>
+</body>
+</html>

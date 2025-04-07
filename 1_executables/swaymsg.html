@@ -1,0 +1,296 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>swaymsg</title>
+
+</head>
+<body>
+
+<h1 align="center">swaymsg</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#IPC MESSAGE TYPES">IPC MESSAGE TYPES</a><br>
+<a href="#RETURN CODES">RETURN CODES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">swaymsg - Send
+messages to a running instance of sway over the IPC
+socket.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>swaymsg</i>
+[options...] [message]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m,
+--monitor</b></p>
+
+<p style="margin-left:14%;">Monitor for responses until
+killed instead of exiting after the first response. This can
+only be used with the IPC message type <i>subscribe</i>. If
+there is a malformed response or an invalid event type was
+requested, swaymsg will stop monitoring and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p,
+--pretty</b></p>
+
+<p style="margin-left:14%;">Use pretty output even when not
+using a tty. Not available for all message types.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q,
+--quiet</b></p>
+
+<p style="margin-left:14%;">Sends the IPC message but does
+not print the response from sway.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r,
+--raw</b></p>
+
+<p style="margin-left:14%;">Use raw JSON output even if
+using a tty.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--socket</b> &lt;path&gt;</p>
+
+<p style="margin-left:14%;">Use the specified socket path.
+Otherwise, swaymsg will ask sway where the socket is (which
+is the value of $SWAYSOCK, then of $I3SOCK).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t,
+--type</b> &lt;type&gt;</p>
+
+<p style="margin-left:14%;">Specify the type of IPC
+message. See below.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Print the version (of swaymsg)
+and quit.</p>
+
+<h2>IPC MESSAGE TYPES
+<a name="IPC MESSAGE TYPES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>&lt;command&gt;</b></p>
+
+<p style="margin-left:14%;">The message is a sway command
+(the same commands you can bind to keybindings in your sway
+config file). It will be executed immediately.</p>
+
+<p style="margin-left:14%; margin-top: 1em">See
+<b>sway</b>(5) for a list of commands.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="-8%">
+
+
+<p><i>swaymsg</i> can return pretty printed
+(standalone-default) or JSON-formatted (<b>--raw</b>)
+output. For detailed documentation on the returned JSON-data
+of each message type listed below,</p></td>
+<td width="39%"></td>
+<td width="6%"></td>
+<td width="49%">
+
+
+<p>refer to <b>sway-ipc</b>(7). The JSON-format can contain
+more information than the pretty print.</p></td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Tips:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>Command expansion is performed twice: once by swaymsg,
+and again by sway. If you have quoted multi-word strings in
+your command, enclose the entire command in single-quotes.
+For example, use <i>swaymsg &rsquo;output &quot;Foobar
+Display&quot; enable&rsquo;</i> instead of <i>swaymsg output
+&quot;Foobar Display&quot; enable</i>. Furthermore, note
+that comma separated options also count as multi-word
+strings, because commas can be used to execute commands on
+the same line.</p></td></tr>
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>If you are providing a command that contains a leading
+hyphen (<i>-</i>), insert two hyphens (<i>--</i>) before the
+command to signal to swaymsg not to parse anything beyond
+that point as an option. For example, use <i>swaymsg -- mark
+--add test</i> instead of <i>swaymsg mark --add
+test</i>.</p> </td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_workspaces</b></p>
+
+<p style="margin-left:14%;">Gets a list of workspaces and
+their status.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_inputs</b></p>
+
+<p style="margin-left:14%;">Gets a list of current
+inputs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_outputs</b></p>
+
+<p style="margin-left:14%;">Gets a list of current
+outputs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_tree</b></p>
+
+<p style="margin-left:14%;">Gets a JSON-encoded layout tree
+of all open windows, containers, outputs, workspaces, and so
+on.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_seats</b></p>
+
+<p style="margin-left:14%;">Gets a list of all seats, its
+properties and all assigned devices.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_marks</b></p>
+
+<p style="margin-left:14%;">Get a JSON-encoded list of
+marks.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_bar_config</b></p>
+
+<p style="margin-left:14%;">Get a JSON-encoded
+configuration for swaybar.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_version</b></p>
+
+<p style="margin-left:14%;">Get version information for the
+running instance of sway.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_binding_modes</b></p>
+
+<p style="margin-left:14%;">Gets a JSON-encoded list of
+currently configured binding modes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_binding_state</b></p>
+
+<p style="margin-left:14%;">Gets JSON-encoded info about
+the current binding state.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>get_config</b></p>
+
+<p style="margin-left:14%;">Gets a copy of the current
+configuration. Doesn&rsquo;t expand includes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>send_tick</b></p>
+
+<p style="margin-left:14%;">Sends a tick event to all
+subscribed clients.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>subscribe</b></p>
+
+<p style="margin-left:14%;">Subscribe to a list of event
+types. The argument for this type should be provided in the
+form of a valid JSON array. If any of the types are invalid
+or if a valid JSON array is not provided, this will result
+in a failure. For a list of valid event types and the data
+returned with them refer to <b>sway-ipc</b>(7).</p>
+
+<h2>RETURN CODES
+<a name="RETURN CODES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>0</b></p>
+
+<p style="margin-left:14%;">Success</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>1</b></p>
+
+<p style="margin-left:14%;">swaymsg errors such as invalid
+syntax, unable to connect to the ipc socket or unable to
+parse sway&rsquo;s reply</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>2</b></p>
+
+<p style="margin-left:14%;">Sway returned an error when
+processing the command (ex. invalid command, command failed,
+and invalid subscription request)</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sway</b>(5)
+<b>sway-bar</b>(5) <b>sway-input</b>(5)
+<b>sway-output</b>(5) <b>sway-ipc</b>(7)</p>
+<hr>
+</body>
+</html>

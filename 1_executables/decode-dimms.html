@@ -1,0 +1,163 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>decode-dimms</title>
+
+</head>
+<body>
+
+<h1 align="center">decode-dimms</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#PARAMETERS">PARAMETERS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">decode-dimms -
+decode the information found in memory module SPD
+EEPROMs</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>decode-dimms</b>
+[-c] [-f [-b]] [-x|-X file [files..]] <b><br>
+decode-dimms</b> -h</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The purpose of
+the <b>decode-dimms</b> tool is to decode the information
+found in memory module SPD EEPROMs. The SPD data is read
+either from the running system or dump files. In the former
+case, the tool requires a kernel module to be loaded:
+eeprom, at24 or ee1004 (for DDR4 SDRAM.)</p>
+
+<h2>PARAMETERS
+<a name="PARAMETERS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--format</b></p>
+
+<p style="margin-left:18%;">Print nice html output</p>
+
+<p style="margin-left:9%;"><b>-b, --bodyonly</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t print html header
+(useful for postprocessing the output)</p>
+
+<p style="margin-left:9%;"><b>--side-by-side</b></p>
+
+<p style="margin-left:18%;">Display all DIMMs side-by-side
+if possible</p>
+
+<p style="margin-left:9%;"><b>--merge-cells</b></p>
+
+<p style="margin-left:18%;">Merge neighbour cells with
+identical values (side-by-side output only, default)</p>
+
+<p style="margin-left:9%;"><b>--no-merge-cells</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t merge neighbour
+cells with identical values (side-by-side output only)</p>
+
+<p style="margin-left:9%;"><b>-c, --checksum</b></p>
+
+<p style="margin-left:18%;">Decode completely even if
+checksum fails</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-x</b></p></td>
+<td width="6%"></td>
+<td width="76%">
+
+
+<p>Read data from hexdump files</p></td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-X</b></p></td>
+<td width="6%"></td>
+<td width="76%">
+
+
+<p>Same as -x except treat multibyte hex data as little
+endian</p> </td>
+<td width="6%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-h, --help</b></p>
+
+<p style="margin-left:18%;">Display the usage summary</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To report bugs
+or send fixes, please write to the Linux I2C mailing list
+&lt;linux-i2c@vger.kernel.org&gt; with Cc to the current
+maintainer: Jean Delvare &lt;jdelvare@suse.de&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>decode-vaio</b>(1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Philip
+Edelbrock, Christian Zuckschwerdt, Burkart Lingner, Jean
+Delvare</p>
+<hr>
+</body>
+</html>

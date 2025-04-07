@@ -1,0 +1,165 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:36 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-query-terminal</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-query-terminal</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-query-terminal
+- Query the terminal for various capabilities</p>
+
+<h2>Usage
+<a name="Usage"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="65%">
+
+
+<p style="margin-top: 1em"><b>kitten query-terminal
+[options] [query1 query2 ...]</b></p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Query the
+terminal this kitten is run in for various capabilities.
+This sends escape codes to the terminal and based on its
+response prints out data about supported capabilities. Note
+that this is a blocking operation, since it has to wait for
+a response from the terminal. You can control the maximum
+wait time via the --wait-for option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The output is
+lines of the form::</p>
+
+<p style="margin-left:9%; margin-top: 1em">query: data</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a particular
+query is unsupported by the running kitty version, the data
+will be blank.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that when
+calling this from another program, be very careful not to
+perform any I/O on the terminal device until this kitten
+exits.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Available
+queries are:</p>
+
+<p style="margin-left:9%; margin-top: 1em">name: <br>
+Terminal name (e.g. xterm-kitty)</p>
+
+<p style="margin-left:9%; margin-top: 1em">version: <br>
+Terminal version (e.g. 0.40.1)</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">allow_hyperlinks:
+<br>
+The config option <b>allow_hyperlinks in</b> <i>kitty.conf
+for allowing hyperlinks can be yes, no or ask</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">font_family:
+<br>
+The current font's PostScript name</p>
+
+<p style="margin-left:9%; margin-top: 1em">bold_font: <br>
+The current bold font's PostScript name</p>
+
+<p style="margin-left:9%; margin-top: 1em">italic_font:
+<br>
+The current italic font's PostScript name</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">bold_italic_font:
+<br>
+The current bold-italic font's PostScript name</p>
+
+<p style="margin-left:9%; margin-top: 1em">font_size: <br>
+The current font size in pts</p>
+
+<p style="margin-left:9%; margin-top: 1em">dpi_x: <br>
+The current DPI on the x-axis</p>
+
+<p style="margin-left:9%; margin-top: 1em">dpi_y: <br>
+The current DPI on the y-axis</p>
+
+<p style="margin-left:9%; margin-top: 1em">foreground: <br>
+The current foreground color as a 24-bit # color code</p>
+
+<p style="margin-left:9%; margin-top: 1em">background: <br>
+The current background color as a 24-bit # color code</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">background_opacity:
+<br>
+The current background opacity as a number between 0 and
+1</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">clipboard_control:
+<br>
+The config option <b>clipboard_control in</b> <i>kitty.conf
+for allowing reads/writes to/from the clipboard</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">os_name: <br>
+The name of the OS the terminal is running on. kitty returns
+values: bsd, linux, macos, unknown</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--wait-for</b>
+<i>[=10]</i></p>
+
+<p style="margin-left:18%;">The amount of time (in seconds)
+to wait for a response from the terminal, after querying
+it.</p>
+
+<p style="margin-left:9%;"><b>--help, -h</b></p>
+
+<p style="margin-left:18%;">Show help for this command</p>
+<hr>
+</body>
+</html>

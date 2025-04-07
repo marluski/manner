@@ -1,0 +1,464 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:05 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-TEAM</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-TEAM</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Details">Details</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#registry">registry</a><br>
+<a href="#otp">otp</a><br>
+<a href="#parseable">parseable</a><br>
+<a href="#json">json</a><br>
+<a href="#See Also">See Also</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-team</b>
+- Manage organization teams and team memberships</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm team create
+&lt;scope:team&gt; [--otp &lt;otpcode&gt;] <br>
+npm team destroy &lt;scope:team&gt; [--otp &lt;otpcode&gt;]
+<br>
+npm team add &lt;scope:team&gt; &lt;user&gt; [--otp
+&lt;otpcode&gt;] <br>
+npm team rm &lt;scope:team&gt; &lt;user&gt; [--otp
+&lt;otpcode&gt;] <br>
+npm team ls &lt;scope&gt;|&lt;scope:team&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note: This
+command is unaware of workspaces.</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Used to manage
+teams in organizations, and change team memberships. Does
+not handle permissions for packages.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Teams must
+always be fully qualified with the organization/scope they
+belong to when operating on them, separated by a colon
+(<b>:</b>). That is, if you have a <b>newteam</b> team in an
+<b>org</b> organization, you must always refer to that team
+as <b>@org:newteam</b> in these commands.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+two-factor authentication enabled in <b>auth-and-writes</b>
+mode, then you can provide a code from your authenticator
+with <b>[--otp &lt;otpcode&gt;]</b>. If you don&rsquo;t
+include this then you will be taken through a second factor
+flow based on your <b>authtype</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>create / destroy: Create a new team, or destroy an
+existing one. Note: You cannot remove the <b>developers</b>
+team, <b>learn more.</b> <i>&lang;
+https://docs.npmjs.com/about-developers-team&rang;</i></p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Here&rsquo;s how
+to create a new team <b>newteam</b> under the <b>org</b>
+org:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm team create
+@org:newteam</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should see a
+confirming message such as: <b>+@org:newteam</b> once the
+new team has been created.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="46%">
+
+
+<p style="margin-top: 1em">add: Add a user to an existing
+team.</p> </td>
+<td width="40%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Adding a new
+user <b>username</b> to a team named <b>newteam</b> under
+the <b>org</b> org:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm team add
+@org:newteam username</p>
+
+<p style="margin-left:9%; margin-top: 1em">On success, you
+should see a message: <b>username added to
+@org:newteam</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">rm: Using <b>npm team rm</b> you
+can also remove users from a team they belong to.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Here&rsquo;s an
+example removing user <b>username</b> from <b>newteam</b>
+team in <b>org</b> organization:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm team rm
+@org:newteam username</p>
+
+<p style="margin-left:9%; margin-top: 1em">Once the user is
+removed a confirmation message is displayed: <b>username
+removed from @org:newteam</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">ls: If performed on an
+organization name, will return a list of existing teams
+under that organization. If performed on a team, it will
+instead return a list of all users belonging to that
+particular team.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Here&rsquo;s an
+example of how to list all teams from an org named
+<b>org</b>:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm team ls
+@org</p>
+
+<p style="margin-left:9%; margin-top: 1em">Example listing
+all members of a team named <b>newteam</b>:</p>
+
+<p style="margin-left:12%; margin-top: 1em">npm team ls
+@org:newteam</p>
+
+<h3>Details
+<a name="Details"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm team</b>
+always operates directly on the current registry,
+configurable from the command line using
+<b>--registry=&lt;registry url&gt;</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You must be a
+<i>team admin</i> to create teams and manage team
+membership, under the given organization. Listing teams and
+team memberships may be done by any member of the
+organization.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Organization
+creation and management of team admins and
+<i>organization</i> members is done through the website, not
+the npm CLI.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To use teams to
+manage permissions on packages belonging to your
+organization, use the <b>npm access</b> command to grant or
+revoke the appropriate permissions.</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>registry
+<a name="registry"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em">Default:
+&quot;https://registry.npmjs.org/&quot;</p> </td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="49%">
+
+
+<p>Type: URL</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The base URL of
+the npm registry.</p>
+
+<h3>otp
+<a name="otp"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p>Type: null or String</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This is a
+one-time password from a two-factor authenticator.
+It&rsquo;s needed when publishing or changing package
+permissions with <b>npm access</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If not set, and
+a registry response fails with a challenge for a one-time
+password, npm will prompt on the command line for one.</p>
+
+<h3>parseable
+<a name="parseable"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Output parseable
+results from commands that write to standard output. For
+<b>npm search</b>, this will be tab-separated table
+format.</p>
+
+<h3>json
+<a name="json"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Whether or not
+to output JSON data, rather than the normal output.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">In <b>npm pkg set</b> it enables
+parsing set values with JSON.parse() before saving them to
+your <b>package.json</b>.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Not supported by
+all npm commands.</p>
+
+<h3>See Also
+<a name="See Also"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p style="margin-top: 1em">npm help access</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>npm help config</p></td>
+<td width="64%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="22%">
+
+
+<p>npm help registry</p></td>
+<td width="64%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

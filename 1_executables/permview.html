@@ -1,0 +1,149 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:29 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">permview -
+Viewer for declarative security permission sets inside
+assemblies.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>permview
+[options] assembly</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This tools allow
+to list the declarative security attributes present in an
+assembly. The security attributes are either found on the
+assembly level, on the classes and the methods. This tool is
+useful to diagnose why an assembly won&rsquo;t load or why
+some class/method throws SecurityException.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-output
+filename</i></p>
+
+<p style="margin-left:18%;">Output all declarative security
+attributes related informations into the specified file.</p>
+
+<p style="margin-left:9%;"><i>-xml | --xml | /XML</i></p>
+
+<p style="margin-left:18%;">Output all declarative security
+attributes in an XML format.</p>
+
+<p style="margin-left:9%;"><i>-decl | --decl |
+/DECL</i></p>
+
+<p style="margin-left:18%;">Show declarative security
+attributes on classes and methods. The default, without the
+<b>-decl</b> option, is to show only the assembly level
+permission sets.</p>
+
+<p style="margin-left:9%;"><i>-? | /? | -h[elp] |
+/h[elp]</i></p>
+
+<p style="margin-left:18%;">Display help informations about
+the permview tool.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>permview
+mscorlib.dll</i></p>
+
+<p style="margin-left:18%;">This will show the minimum,
+optional and refused permissions sets (i.e. the assembly
+level security actions) that are compiled inside the
+mscorlib assembly.</p>
+
+<p style="margin-left:9%;"><i>permview -decl
+permview.exe</i></p>
+
+<p style="margin-left:18%;">This will show all (assembly,
+class or method level) declarative security attributes
+present in the permview.exe assembly.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Sebastien Pouliot</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2004-2005 Novell, Inc (http://www.novell.com)</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

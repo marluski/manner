@@ -1,0 +1,169 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>pw-metadata</title>
+
+</head>
+<body>
+
+<h1 align="center">pw-metadata</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">pw-metadata -
+The PipeWire metadata</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-metadata</b>
+[<i>options</i>] [<i>id</i> [<i>key</i> [<i>value</i>
+[<i>type</i> ] ] ] ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Monitor, set and
+delete metadata on PipeWire objects.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Metadata are
+key/type/value triplets attached to objects identified by
+<i>id</i>. The metadata is shared between all applications
+binding to the same metadata object. When an object is
+destroyed, all its metadata is automatically removed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When no
+<i>value</i> is given, <b>pw-metadata</b> will query and log
+the metadata matching the optional arguments <i>id</i> and
+<i>key</i>. Without any arguments, all metadata is
+displayed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When
+<i>value</i> is given, <b>pw-metadata</b> will set the
+metadata for <i>id</i> and <i>key</i> to <i>value</i> and an
+optional <i>type</i>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r |
+--remote=NAME</b></p>
+
+<p style="margin-left:14%;">The name the remote instance to
+use. If left unspecified, a connection is made to the
+default PipeWire instance.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h |
+--help</b></p>
+
+<p style="margin-left:14%;">Show help.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Show version information.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l |
+--list</b></p>
+
+<p style="margin-left:14%;">List available metadata
+objects</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m |
+--monitor</b></p>
+
+<p style="margin-left:14%;">Keeps running and log the
+changes to the metadata.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d |
+--delete</b></p>
+
+<p style="margin-left:14%;">Delete all metadata for
+<i>id</i> or for the specified <i>key</i> of object
+<i>id</i>. Without any option, all metadata is removed.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n |
+--name</b></p>
+
+<p style="margin-left:14%;">Metadata name (Default:
+&quot;default&quot;).</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-metadata</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Show metadata in
+default name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-metadata</b>
+-n settings 0</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display
+settings.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pw-metadata</b>
+-n settings 0 clock.quantum 1024</p>
+
+<p style="margin-left:9%; margin-top: 1em">Change
+clock.quantum to 1024.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The PipeWire
+Developers
+&lt;https://gitlab.freedesktop.org/pipewire/pipewire/issues&gt;;
+PipeWire is available from &lt;https://pipewire.org&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pipewire(1)</b>,
+<b>pw-mon(1)</b>, <b>pw-cli(1)</b>,</p>
+<hr>
+</body>
+</html>

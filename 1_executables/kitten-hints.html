@@ -1,0 +1,502 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:34 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-hints</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-hints</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Overview">Overview</a><br>
+<a href="#Completely customizing the matching and actions of the kitten">Completely customizing the matching and actions of the kitten</a><br>
+<a href="#Source code for hints">Source code for hints</a><br>
+<a href="#Command line interface">Command line interface</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Author">Author</a><br>
+<a href="#Copyright">Copyright</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-hints -
+Select text from screen with keyboard</p>
+
+<h2>Overview
+<a name="Overview"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>kitty</i> has
+a <i>hints mode</i> to select and act on arbitrary text
+snippets currently visible on the screen. For example, you
+can press <i>ctrl+shift+e</i> to choose any URL visible on
+the screen and then open it using your default web
+browser.</p>
+
+<p style="margin-left:12%;">URL hints mode (images not
+supported)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Similarly, you
+can press <i>ctrl+shift+p&gt;f</i> to select anything that
+looks like a path or filename and then insert it into the
+terminal, very useful for picking files from the output of a
+<b>git</b> or <b>ls</b> command and adding them to the
+command line for the next command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can also
+press <i>ctrl+shift+p&gt;n</i> to select anything that looks
+like a path or filename followed by a colon and a line
+number and open the file in your default editor at the
+specified line number (opening at line number will work only
+if your editor supports the +linenum command line syntax or
+is a &quot;known&quot; editor). The patterns and editor to
+be used can be modified using options passed to the kitten.
+For example:</p>
+
+<p style="margin-left:13%; margin-top: 1em">map ctrl+g
+kitten hints --type=linenum --linenum-action=tab nvim
++{line} {path}</p>
+
+<p style="margin-left:9%; margin-top: 1em">will open the
+selected file in a new tab inside <i>Neovim</i> when you
+press <b>Ctrl</b>+<b>G</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Pressing
+<i>ctrl+shift+p&gt;y</i> will open <i>hyperlinks</i>, i.e. a
+URL that has been marked as such by the program running in
+the terminal, for example, by <b>ls --hyperlink=auto</b>. If
+<b>ls</b> comes with your OS does not support hyperlink, you
+may need to install <i>GNU Coreutils</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can also
+<i>customize what actions are taken for different types of
+URLs</i>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">If there are more hints than
+letters, hints will use multiple letters. In this case, when
+you press the first letter, only hints starting with that
+letter are displayed. Pressing the second letter will select
+that hint or press <b>Enter</b> or <b>Space</b> to select
+the empty hint.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For mouse
+lovers, the hints kitten also allows you to click on any
+matched text to select it instead of typing the hint
+character.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The hints kitten
+is very powerful to see more detailed help on its various
+options and modes of operation, see below. You can use these
+options to create mappings in <b>kitty.conf</b> to select
+various different text snippets. See
+<i>insert_selected_path</i> for examples.</p>
+
+<h2>Completely customizing the matching and actions of the kitten
+<a name="Completely customizing the matching and actions of the kitten"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The hints kitten
+supports writing simple Python scripts that can be used to
+completely customize how it finds matches and what happens
+when a match is selected. This allows the hints kitten to
+provide the user interface, while you can provide the logic
+for finding matches and performing actions on them. This is
+best illustrated with an example. Create the file
+<b>custom-hints.py</b> in the <i>kitty config directory</i>
+with the following contents:</p>
+
+<p style="margin-left:13%; margin-top: 1em">import re</p>
+
+<p style="margin-left:13%; margin-top: 1em">def mark(text,
+args, Mark, extra_cli_args, *a): <br>
+# This function is responsible for finding all <br>
+# matching text. extra_cli_args are any extra arguments <br>
+# passed on the command line when invoking the kitten. <br>
+# We mark all individual word for potential selection <br>
+for idx, m in enumerate(re.finditer(r'\w+', text)): <br>
+start, end = m.span() <br>
+mark_text = text[start:end].replace('\n', '').replace('\0',
+'') <br>
+# The empty dictionary below will be available as groupdicts
+<br>
+# in handle_result() and can contain string keys and
+arbitrary JSON <br>
+# serializable values. <br>
+yield Mark(idx, start, end, mark_text, {})</p>
+
+<p style="margin-left:13%; margin-top: 1em">def
+handle_result(args, data, target_window_id, boss,
+extra_cli_args, *a): <br>
+# This function is responsible for performing some <br>
+# action on the selected text. <br>
+# matches is a list of the selected entries and groupdicts
+contains <br>
+# the arbitrary data associated with each entry in mark()
+above <br>
+matches, groupdicts = [], [] <br>
+for m, g in zip(data['match'], data['groupdicts']): <br>
+if m: <br>
+matches.append(m), groupdicts.append(g) <br>
+for word, match_data in zip(matches, groupdicts): <br>
+# Lookup the word in a dictionary, the open_url function
+<br>
+# will open the provided url in the system browser <br>
+
+boss.open_url(f'https://www.google.com/search?q=define:{word}')</p>
+
+<p style="margin-left:9%; margin-top: 1em">Now run kitty
+with:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitty -o 'map
+f1 kitten hints --customize-processing custom-hints.py'</p>
+
+<p style="margin-left:9%; margin-top: 1em">When you press
+the <b>F1</b> key you will be able to select a word to look
+it up in the Google dictionary.</p>
+
+<h2>Source code for hints
+<a name="Source code for hints"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The source code
+for this kitten is <i>available on GitHub</i>.</p>
+
+<h2>Command line interface
+<a name="Command line interface"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">kitten hints
+[options]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Select text from
+the screen using the keyboard. Defaults to searching for
+URLs.</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--program
+&lt;PROGRAM&gt;</b></p>
+
+<p style="margin-left:18%;">What program to use to open
+matched text. Defaults to the default open program for the
+operating system. Various special values are supported:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>-</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>paste the match into the terminal window.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>@</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>copy the match to the clipboard</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>*</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>copy the match to the primary selection (on systems that
+support primary selections)</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><b>@NAME</b></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>copy the match to the specified buffer, e.g.
+<b>@a</b></p> </td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>default</b></p>
+
+<p style="margin-left:27%;">run the default open program.
+Note that when using the hyperlink <b>--type</b> the default
+is to use the kitty <i>hyperlink handling</i>
+facilities.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p><b>launch</b></p></td>
+<td width="1%"></td>
+<td width="73%">
+
+
+<p>run <i>The launch command</i> to open the program in a
+new kitty tab, window, overlay, etc. For example:</p></td></tr>
+</table>
+
+<p style="margin-left:31%; margin-top: 1em">--program
+&quot;launch --type=tab vim&quot;</p>
+
+<p style="margin-left:18%; margin-top: 1em">Can be
+specified multiple times to run multiple programs.</p>
+
+<p style="margin-left:9%;"><b>--type &lt;TYPE&gt;</b></p>
+
+<p style="margin-left:18%;">The type of text to search for.
+A value of <b>linenum</b> is special, it looks for error
+messages using the pattern specified with <i>--regex</i>,
+which must have the named groups: <b>path</b> and
+<b>line</b>. If not specified, will look for
+<b>path:line</b>. The <i>--linenum-action</i> option
+controls where to display the selected error message, other
+options are ignored. Default: <b>url</b> Choices:
+<b>hash</b>, <b>hyperlink</b>, <b>ip</b>, <b>line</b>,
+<b>linenum</b>, <b>path</b>, <b>regex</b>, <b>url</b>,
+<b>word</b></p>
+
+<p style="margin-left:9%;"><b>--regex &lt;REGEX&gt;</b></p>
+
+<p style="margin-left:18%;">The regular expression to use
+when option <i>--type</i> is set to <b>regex</b>, in Perl 5
+syntax. If you specify a numbered group in the regular
+expression, only the group will be matched. This allow you
+to match text ignoring a prefix/suffix, as needed. The
+default expression matches lines. To match text over
+multiple lines, things get a little tricky, as line endings
+are a sequence of zero or more null bytes followed by either
+a carriage return or a newline character. To have a pattern
+match over line endings you will need to match the character
+set <b>[\0\r\n]</b>. The newlines and null bytes are
+automatically stripped from the returned text. If you
+specify named groups and a <i>--program</i>, then the
+program will be passed arguments corresponding to each named
+group of the form <b>key=value</b>. Default:
+<b>(?m)&#710;s*(.+)s*$</b></p>
+
+<p style="margin-left:9%;"><b>--linenum-action
+&lt;LINENUM_ACTION&gt;</b></p>
+
+<p style="margin-left:18%;">Where to perform the action on
+matched errors. <b>self</b> means the current window,
+<b>window</b> a new kitty window, <b>tab</b> a new tab,
+<b>os_window</b> a new OS window and <b>background</b> run
+in the background. The actual action is whatever arguments
+are provided to the kitten, for example: <b>kitten hints
+--type=linenum --linenum-action=tab vim +{line} {path}</b>
+will open the matched path at the matched line number in vim
+in a new kitty tab. Note that in order to use
+<i>--program</i> to copy or paste the provided arguments,
+you need to use the special value <b>self</b>. Default:
+<b>self</b> Choices: <b>background</b>, <b>os_window</b>,
+<b>self</b>, <b>tab</b>, <b>window</b></p>
+
+<p style="margin-left:9%;"><b>--url-prefixes
+&lt;URL_PREFIXES&gt;</b></p>
+
+<p style="margin-left:18%;">Comma separated list of
+recognized URL prefixes. Defaults to the list of prefixes
+defined by the <i>url_prefixes</i> option in
+<b>kitty.conf</b>. Default: <b>default</b></p>
+
+<p style="margin-left:9%;"><b>--url-excluded-characters
+&lt;URL_EXCLUDED_CHARACTERS&gt;</b></p>
+
+<p style="margin-left:18%;">Characters to exclude when
+matching URLs. Defaults to the list of characters defined by
+the <i>url_excluded_characters</i> option in
+<b>kitty.conf</b>. The syntax for this option is the same as
+for <i>url_excluded_characters</i>. Default:
+<b>default</b></p>
+
+<p style="margin-left:9%;"><b>--word-characters
+&lt;WORD_CHARACTERS&gt;</b></p>
+
+<p style="margin-left:18%;">Characters to consider as part
+of a word. In addition, all characters marked as
+alphanumeric in the Unicode database will be considered as
+word characters. Defaults to the
+<i>select_by_word_characters</i> option from
+<b>kitty.conf</b>.</p>
+
+<p style="margin-left:9%;"><b>--minimum-match-length
+&lt;MINIMUM_MATCH_LENGTH&gt;</b></p>
+
+<p style="margin-left:18%;">The minimum number of
+characters to consider a match. Default: <b>3</b></p>
+
+<p style="margin-left:9%;"><b>--multiple</b></p>
+
+<p style="margin-left:18%;">Select multiple matches and
+perform the action on all of them together at the end. In
+this mode, press <b>Esc</b> to finish selecting.</p>
+
+<p style="margin-left:9%;"><b>--multiple-joiner
+&lt;MULTIPLE_JOINER&gt;</b></p>
+
+<p style="margin-left:18%;">String for joining multiple
+selections when copying to the clipboard or inserting into
+the terminal. The special values are: <b>space</b> - a space
+character, <b>newline</b> - a newline, <b>empty</b> - an
+empty joiner, <b>json</b> - a JSON serialized list,
+<b>auto</b> - an automatic choice, based on the type of text
+being selected. In addition, integers are interpreted as
+zero-based indices into the list of selections. You can use
+<b>0</b> for the first selection and <b>-1</b> for the last.
+Default: <b>auto</b></p>
+
+<p style="margin-left:9%;"><b>--add-trailing-space
+&lt;ADD_TRAILING_SPACE&gt;</b></p>
+
+<p style="margin-left:18%;">Add trailing space after
+matched text. Defaults to <b>auto</b>, which adds the space
+when used together with <i>--multiple</i>. Default:
+<b>auto</b> Choices: <b>always</b>, <b>auto</b>,
+<b>never</b></p>
+
+<p style="margin-left:9%;"><b>--hints-offset
+&lt;HINTS_OFFSET&gt;</b></p>
+
+<p style="margin-left:18%;">The offset (from zero) at which
+to start hint numbering. Note that only numbers greater than
+or equal to zero are respected. Default: <b>1</b></p>
+
+<p style="margin-left:9%;"><b>--alphabet
+&lt;ALPHABET&gt;</b></p>
+
+<p style="margin-left:18%;">The list of characters to use
+for hints. The default is to use numbers and lowercase
+English alphabets. Specify your preference as a string of
+characters. Note that you need to specify the
+<i>--hints-offset</i> as zero to use the first character to
+highlight the first match, otherwise it will start with the
+second character by default.</p>
+
+<p style="margin-left:9%;"><b>--ascending</b></p>
+
+<p style="margin-left:18%;">Make the hints increase from
+top to bottom, instead of decreasing from top to bottom.</p>
+
+<p style="margin-left:9%;"><b>--hints-foreground-color
+&lt;HINTS_FOREGROUND_COLOR&gt;</b></p>
+
+<p style="margin-left:18%;">The foreground color for hints.
+You can use color names or hex values. For the eight basic
+named terminal colors you can also use the <b>bright-</b>
+prefix to get the bright variant of the color. Default:
+<b>black</b></p>
+
+<p style="margin-left:9%;"><b>--hints-background-color
+&lt;HINTS_BACKGROUND_COLOR&gt;</b></p>
+
+<p style="margin-left:18%;">The background color for hints.
+You can use color names or hex values. For the eight basic
+named terminal colors you can also use the <b>bright-</b>
+prefix to get the bright variant of the color. Default:
+<b>green</b></p>
+
+<p style="margin-left:9%;"><b>--hints-text-color
+&lt;HINTS_TEXT_COLOR&gt;</b></p>
+
+<p style="margin-left:18%;">The foreground color for text
+pointed to by the hints. You can use color names or hex
+values. For the eight basic named terminal colors you can
+also use the <b>bright-</b> prefix to get the bright variant
+of the color. The default is to pick a suitable color
+automatically. Default: <b>auto</b></p>
+
+<p style="margin-left:9%;"><b>--customize-processing
+&lt;CUSTOMIZE_PROCESSING&gt;</b></p>
+
+<p style="margin-left:18%;">Name of a python file in the
+kitty config directory which will be imported to provide
+custom implementations for pattern finding and performing
+actions on selected matches. You can also specify absolute
+paths to load the script from elsewhere. See -
+<i>https://sw.kovidgoyal.net/kitty/kittens/hints/</i> for
+details.</p>
+
+<p style="margin-left:9%;"><b>--window-title
+&lt;WINDOW_TITLE&gt;</b></p>
+
+<p style="margin-left:18%;">The title for the hints window,
+default title is based on the type of text being hinted.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b></p>
+
+<p style="margin-left:13%;">To avoid having to specify the
+same command line options on every invocation, you can use
+the <i>action_alias</i> option in <b>kitty.conf</b>,
+creating aliases that have common sets of options. For
+example:</p>
+
+<p style="margin-left:18%; margin-top: 1em">action_alias
+myhints kitten hints --alphabet
+qfjdkslaureitywovmcxzpq1234567890 <br>
+map f1 myhints --customize-processing custom-hints.py</p>
+
+<h2>Author
+<a name="Author"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kovid Goyal</p>
+
+<h2>Copyright
+<a name="Copyright"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2025, Kovid
+Goyal</p>
+<hr>
+</body>
+</html>

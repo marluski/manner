@@ -1,0 +1,1007 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:24 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OLD EMBEDDING">OLD EMBEDDING</a><br>
+<a href="#OLD EMBEDDING OPTIONS">OLD EMBEDDING OPTIONS</a><br>
+<a href="#AOT Options">AOT Options</a><br>
+<a href="#WINDOWS">WINDOWS</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#WINDOWS VISUAL STUDIO ENVIRONMENT VARIABLES">WINDOWS VISUAL STUDIO ENVIRONMENT VARIABLES</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mkbundle,
+mkbundle2 - Creates a bundled executable.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mkbundle
+[options] assembly1 [assembly2 ...]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b><i>mkbundle</i></b>
+generates an executable program that will contain static
+copies of the assemblies listed on the command line. By
+default only the assemblies specified in the command line
+will be included in the bundle. To automatically include all
+of the dependencies referenced, use the &quot;--deps&quot;
+command line option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">There are two
+modes of operation, one uses an existing Mono binary or a
+server-hosted list of binaries and is enabled when you use
+either the <b>--cross, --sdk</b> or the <b>--runtime</b>
+command line options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An older
+mechanism creates a small C stub that links against the
+libmono library to produce a self-contained executable and
+requires a C compiler. It is described in the &quot;OLD
+EMBEDDING&quot; section below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+create a bundle for hello world, use the following
+command:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>$ mkbundle -o hello --simple hello.exe</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">You can
+configure options to be passed to the Mono runtime directly
+into your executable, for this, use the <i>--options</i>
+flag. For example, the following disables inlining, by
+passing the &quot;-O=-inline&quot; command line option to
+the embedded executable:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>$ mkbundle -o hello --options -O=-inline --simple
+hello.exe</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The simple
+version allows for cross-compiling, this requires a Mono
+<br>
+runtime to be installed in the
+&#732;/.mono/targets/TARGET/mono to be <br>
+available. You can use the &quot;--local-targets&quot; to
+list all available <br>
+targets, and the &quot;--cross&quot; argument to specify the
+target, like this:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+
+
+<p>$ mkbundle --local-targets</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>Available targets:</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>default</p></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>- Current System Mono</p></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>4.4.0-macosx-x86</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>4.4.0-debian-8-arm64</p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+
+
+<p>$ mkbundle --cross 4.4.0-debian-8-powerpc hello.exe -o
+hello-debian</p> </td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="13%"></td>
+<td width="6%"></td>
+<td width="49%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The above will
+bundle your native library into hello-debian for a Debian 8
+system running on a PowerPC machine.</p>
+
+<p style="margin-left:9%; margin-top: 1em">We provide
+pre-packages binaries for Mono for various architectures,
+which allow you to cross compile, use the
+<b>--list-targets</b> to get a list of all targets
+supported, and use the <b>--fetch-target</b> flag to
+retrieve a target that you do not have installed, like
+this:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>$ mkbundle --list-targets</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>Cross-compilation targets available:</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.0-linux-libc2.13-amd64</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.0-linux-libc2.13-armel</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.0-linux-libc2.13-armhf</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.0-linux-libc2.13-i386</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.0-macos-10.7-amd64</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.0-macos-10.7-i386</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.2-linux-libc2.13-amd64</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.2-linux-libc2.13-armel</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.2-linux-libc2.13-armhf</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.2-linux-libc2.13-i386</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.2-macos-10.7-amd64</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>4.4.2-macos-10.7-i386</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>$ mkbundle --fetch-target 4.4.2-macos-10.7-i386</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">And then you can
+produce a binary that will run on 32-bit Mono on MacOS:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="94%">
+
+
+<p>$ mkbundle --cross 4.4.2-macos-10.7-i386 hello.exe -o
+hello-macos</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Downloaded
+targets are stored <b>&#732;/.mono/targets</b>
+directory.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>--config
+FILE</i></p>
+
+<p style="margin-left:18%;">Specifies that a DLLMAP Mono
+config file must be bundled as well. In the simple and cross
+compiler modes, if no config file is specified the one for
+the current target is picked (either the system one in the
+case of the simple mode, or the one that came from the cross
+compilation target for the cross compiling mode).</p>
+
+<p style="margin-left:9%;"><i>--config-dir DIR</i></p>
+
+<p style="margin-left:18%;">When passed, DIR will be set
+for the MONO_CFG_DIR environment variable</p>
+
+<p style="margin-left:9%;"><i>--cross target</i></p>
+
+<p style="margin-left:18%;">Use this to request mkbundle
+generate a cross-compiled binary. It Creates a bundle for
+the specified target platform. The target must be a
+directory in &#732;/.mono/targets/ that contains an SDK
+installation as produced by the mono-package-runtime tool.
+You can get a list of the precompiled versions of the
+runtime using --list-targets and you can fetch a specific
+target using the --fetch-target command line option.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This flag is
+mutually exclusive with <i>--sdk</i> which is used to
+specify an absolute path to resolve the Mono runtime from
+and the --runtime option which is used to manually construct
+the cross-platform package.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>--deps</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>This option will bundle all of the referenced assemblies
+for the assemblies listed on the command line option. This
+is useful to distribute a self-contained image.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--env KEY=VALUE</i></p>
+
+<p style="margin-left:18%;">Use this to hardcode an
+environment variable at runtime for KEY to be mapped to
+VALUE. This is useful in scenarios where you want to enable
+certain Mono runtime configuration options that are
+controlled by environment variables.</p>
+
+<p style="margin-left:9%;"><i>--fetch-target target</i></p>
+
+<p style="margin-left:18%;">Downloads a precompiled runtime
+for the specified target from the Mono distribution
+site.</p>
+
+<p style="margin-left:9%;"><i>--i18n encoding</i></p>
+
+<p style="margin-left:18%;">Specified which encoding tables
+to ship with the executable. By default, Mono ships the
+supporting I18N.dll assembly and the I18N.West.dll assembly.
+If your application will use the
+System.Text.Encoding.GetEncoding with encodings other than
+the West encodings, you should specify them here.</p>
+
+<p style="margin-left:18%; margin-top: 1em">You can use the
+<b>none</b> parameter to request that no implicit encodings
+should be bundled, including the supporting I18N.dll, use
+this option if you have ran a linker on your own.</p>
+
+<p style="margin-left:18%; margin-top: 1em">You can use the
+<b>all</b> flag to bundle all available encodings.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Or you can use
+a comma delimited list of the workds CJK, MidWest, Other,
+Rare and West to specificy which encoding assemblies to
+distribute.</p>
+
+<p style="margin-left:9%;"><i>-L path</i></p>
+
+<p style="margin-left:18%;">Adds the &lsquo;path&rsquo; do
+the search list for assemblies. The rules are the same as
+for the compiler -lib: or -L flags.</p>
+
+<p style="margin-left:9%;"><i>--library [LIB,]PATH</i></p>
+
+<p style="margin-left:18%;">Embeds the dynamic library file
+pointed to by &lsquo;PATH&rsquo; and optionally give it the
+name &lsquo;LIB&rsquo; into the bundled executable. This is
+used to ship native library dependencies that are unpacked
+at startup and loaded from the runtime. Multiple libraries
+should be specified in dependency order, where later ones on
+the command line depend on earlier ones.</p>
+
+<p style="margin-left:9%;"><i>--lists-targets</i></p>
+
+<p style="margin-left:18%;">Lists all of the available
+local cross compilation targets available as precompiled
+binaries on the Mono distribution server.</p>
+
+<p style="margin-left:9%;"><i>--local-targets</i></p>
+
+<p style="margin-left:18%;">Lists all of the available
+local cross compilation targets.</p>
+
+<p style="margin-left:9%;"><i>--cil-strip PATH</i></p>
+
+<p style="margin-left:18%;">Provides a CIL stripper that
+mkbundle will use if able to. The intended use is to help
+reduce file size on AOT.</p>
+
+<p style="margin-left:9%;"><i>--in-tree
+path/to/mono/source/root</i></p>
+
+<p style="margin-left:18%;">Provides mkbundle with a mono
+source repository from which to pull the necessary headers
+for compilation. This allows mkbundle to run out of the
+project&rsquo;s source tree, useful for working with
+multiple runtimes and for testing without installing.</p>
+
+<p style="margin-left:9%;"><i>--managed-linker PATH</i></p>
+
+<p style="margin-left:18%;">Provides mkbundle access to a
+managed linker to preprocess the assemblies.</p>
+
+<p style="margin-left:9%;"><i>--machine-config FILE</i></p>
+
+<p style="margin-left:18%;">Uses the given FILE as the
+machine.config file for the generated application. The
+machine config contains an XML file that is used by
+System.Configuration APIs to configure the .NET stack.
+Typically this is
+<i>$prefix/etc/mono/4.5/machine.config.</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">If you want to
+disable this automatic bundling, you can use the
+<i>--no-machine-config</i> flag. In the simple and cross
+compiler modes, if no machine.config file is specified the
+one for the current target is picked (either the system one
+in the case of the simple mode, or the one that came from
+the cross compilation target for the cross compiling
+mode).</p>
+
+<p style="margin-left:9%;"><i>--no-config</i></p>
+
+<p style="margin-left:18%;">In simple or cross compiling
+mode, this prevents mkbundle from automatically bundling a
+config file.</p>
+
+<p style="margin-left:9%;"><i>--nodeps</i></p>
+
+<p style="margin-left:18%;">This is the default:
+<i>mkbundle</i> will only include the assemblies that were
+specified on the command line to reduce the size of the
+resulting image created.</p>
+
+<p style="margin-left:9%;"><i>--no-machine-config</i></p>
+
+<p style="margin-left:18%;">In simple or cross compiling
+mode, this prevents mkbundle from automatically bundling a
+machine.config file.</p>
+
+<p style="margin-left:9%;"><i>-o filename</i></p>
+
+<p style="margin-left:18%;">Places the output on
+&lsquo;out&rsquo;. If the flag -c is specified, this is the
+C host program. If not, this contains the resulting
+executable.</p>
+
+<p style="margin-left:9%;"><i>--options OPTS</i></p>
+
+<p style="margin-left:18%;">Since the resulting executable
+will be treated as a standalone program, you can use this
+option to pass configuration options to the Mono runtime and
+bake those into the resulting executable. These options are
+specified as <i>OPTS.</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">You can use the
+above to configure options that you would typically pass on
+the command line to Mono, before the main program is
+executed.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Additionally,
+users of your binary can still configure their own options
+by setting the <i>MONO_ENV_OPTIONS</i> environment
+variable.</p>
+
+<p style="margin-left:9%;"><i>--sdk SDK_PATH</i></p>
+
+<p style="margin-left:18%;">Use this flag to specify a path
+from which mkbundle will resolve the Mono SDK from. The SDK
+path should be the prefix path that you used to configure a
+Mono installation. And would typically contain files lik
+<i>SDK_PATH/bin/mono</i> , <i>SDK_PATH/lib/mono/4.5</i> and
+so on.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When this flag
+is specified, <i>mkbundle</i> will resolve the runtime, the
+framework libraries, unmanaged resources and configuration
+files from the files located in this directory.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This flag is
+mutually exlusive with <i>--cross</i></p>
+
+<p style="margin-left:9%;"><i>--target-server
+SERVER</i></p>
+
+<p style="margin-left:18%;">By default the mkbundle tool
+will download from a Mono server the target runtimes, you
+can specify a different server to provide cross-compiled
+runtimes.</p>
+
+<p style="margin-left:9%;"><i>--mono-api-struct-path
+FILE</i></p>
+
+<p style="margin-left:18%;">FILE points to a file with the
+definition of the <i>BundleMonoAPI</i> structure which
+contains the required pointers to various Mono API functions
+used throughout the generated code. This mechanism is meant
+to be used by third parties which embed the Mono runtime and
+dynamically load and initialize it as part of the
+application startup, in which case the Mono APIs will not be
+available for the shared library loader and the bundle will
+fail to work (one example of such an embedding third party
+is Xamarin.Android).</p>
+
+<p style="margin-left:18%; margin-top: 1em">After providing
+the definition FILE, the embedder must call the <i>void
+initialize_mono_api (const BundleMonoAPI *info)</i> function
+found in the generated code <b>before</b> calling <i>void
+mono_mkbundle_init ()</i>. The structure passed to
+<i>initialize_mono_api</i> doesn&rsquo;t need to be
+dynamically allocated as its contents is copied to the local
+structure in the generated code and no pointer to the passed
+structure is retained or used after
+<i>initialize_mono_api</i> returns.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The list of
+pointers is not documented here. Instead, please look at the
+<i>bundle-mono-api.inc</i> file found in the mkbundle source
+directory in your Mono source tree
+(<i>mcs/tools/mkbundle</i>) or in the Mono&rsquo;s GitHub
+repository,
+https://github.com/mono/mono/blob/master/mcs/tools/mkbundle/bundle-mono-api.inc</p>
+
+<p style="margin-left:18%; margin-top: 1em">Please note
+that your structure must match the one expected by your
+version of the Mono runtime.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The file must
+also define the <i>mkbundle_log_error</i> function with the
+following signature:</p>
+
+<p style="margin-left:18%; margin-top: 1em">static void
+mkbundle_log_error (const char *format, ...) {}</p>
+
+<p style="margin-left:18%; margin-top: 1em">The function
+should implement logging API specific to the embedder.</p>
+
+<h2>OLD EMBEDDING
+<a name="OLD EMBEDDING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The old
+embedding system compiles a small C stub that embeds the C
+code and compiles the resulting executable using the system
+compiler. This requires both a working C compiler
+installation and only works to bundle binaries for the
+current host.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The feature is
+still available, but we recommend the simpler, faster and
+more convenient new mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example, to
+create a bundle for hello world, use the following
+command:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ mkbundle -o
+hello hello.exe</p>
+
+<p style="margin-left:9%; margin-top: 1em">The above will
+pull hello.exe into a native program called
+&quot;hello&quot;. Notice that the produced image still
+contains the CIL image and no precompilation is done.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In addition, it
+is possible to control whether <i>mkbundle</i> should
+compile the resulting executable or not with the -c option.
+This is useful if you want to link additional libraries or
+control the generated output in more detail. For example,
+this could be used to link some libraries statically:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ mkbundle -c -o
+host.c -oo bundles.o --deps hello.exe</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>$ cc host.c bundles.o /usr/lib/libmono.a -lc -lrt</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">You may also use
+<i>mkbundle</i> to generate a bundle you can use when
+embedding the Mono runtime in a native application. In that
+case, use both the -c and --nomain options. The resulting
+host.c file will not have a main() function. Call
+mono_mkbundle_init() before initializing the JIT in your
+code so that the bundled assemblies are available to the
+embedded runtime.</p>
+
+<h2>OLD EMBEDDING OPTIONS
+<a name="OLD EMBEDDING OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+can only be used instead of using the <b>--cross,
+--runtime</b> or <b>--simple</b> options.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>-c</i></p></td>
+<td width="6%"></td>
+<td width="73%">
+
+
+<p>Produce the stub file, do not compile the resulting
+stub.</p> </td>
+<td width="9%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>-oo filename</i></p>
+
+<p style="margin-left:18%;">Specifies the name to be used
+for the helper object file that contains the bundle.</p>
+
+<p style="margin-left:9%;"><i>--keeptemp</i></p>
+
+<p style="margin-left:18%;">By default <i>mkbundle</i> will
+delete the temporary files that it uses to produce the
+bundle. This option keeps the file around.</p>
+
+<p style="margin-left:9%;"><i>--nomain</i></p>
+
+<p style="margin-left:18%;">With the -c option, generate
+the host stub without a main() function.</p>
+
+<p style="margin-left:9%;"><i>--static</i></p>
+
+<p style="margin-left:18%;">By default <i>mkbundle</i>
+dynamically links to mono and glib. This option causes it to
+statically link instead.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>-z</i></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Compresses the assemblies before embedding. This results
+in smaller executable files, but increases startup time and
+requires zlib to be installed on the target system.</p></td></tr>
+</table>
+
+<h2>AOT Options
+<a name="AOT Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These options
+support an mkbundle using AOT compilation with static
+linking. A native compiler toolchain is required. <i><br>
+--aot-runtime PATH</i></p>
+
+<p style="margin-left:18%;">Provide the path to the mono
+runtime to use for AOTing assemblies.</p>
+
+<p style="margin-left:9%;"><i>--aot-dedup</i></p>
+
+<p style="margin-left:18%;">(Experimental) Deduplicate
+AOT&rsquo;ed methods based on a unique mangling of method
+names.</p>
+
+<p style="margin-left:9%;"><i>--aot-mode MODE</i></p>
+
+<p style="margin-left:18%;">MODE can be either
+&quot;full&quot; or &quot;llvmonly&quot; at this time.
+Currently, mkbundle supports three AOT modes. The default
+mode (this option unset) will AOT methods but will fall back
+on runtime codegen where it is much faster or offers a more
+full compatibility profile. The &quot;full&quot; setting
+will generate the necessary stubs to not require runtime
+code generation. The &quot;llvmonly&quot; setting does the
+same, but forces all codegen to go through the llvm
+backend.</p>
+
+<h2>WINDOWS
+<a name="WINDOWS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">If you are using
+the old embedding on Windows systems, it possible to use a
+Unix-like toolchain like cygwin&rsquo;s and install gcc,
+gcc-mingw packages or use Visual Studio 2015/2017 VC
+toolchain together with Clang for Visual Studio as
+assembler. Clang can be installed as an individual
+component, &quot;Clang/C2&quot;, using Visual Studio
+installer.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using Visual
+Studio toolchain, mkbundle will, by default, use latest
+installed Visual Studio compiler and linker as well as
+Windows SDK. If executed from one of the Visual Studio
+developer command prompts, mkbundle will retrieve
+information directly from that build environment.</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><i>AS</i></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Assembler command. The default
+is &quot;as&quot;. For Visual Studio, default is
+&quot;clang.exe&quot;. If &quot;clang.exe&quot; for Visual
+Studio is not installed, mkbundle will fall back using
+&quot;as&quot;.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>CC</i></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>C compiler command. The default is &quot;cc&quot; for
+Linux, &quot;gcc&quot; for cygwin and &quot;cl.exe&quot; for
+Visual Studio.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>MONO_BUNDLED_OPTIONS</i></p>
+
+<p style="margin-left:18%;">Options to be passed to the
+bundled Mono runtime, separated by spaces. See the mono(1)
+manual page or run mono --help.</p>
+
+<h2>WINDOWS VISUAL STUDIO ENVIRONMENT VARIABLES
+<a name="WINDOWS VISUAL STUDIO ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>VisualStudioVersion</i></p>
+
+<p style="margin-left:18%;">Visual Studio version used in
+mkbundle build. Default, latest installed Visual Studio
+version. Values, &quot;14.0&quot; for Visual Studio 2015 or
+&quot;15.0&quot; for Visual Studio 2017.</p>
+
+<p style="margin-left:9%;"><i>WindowsSdkVersion</i></p>
+
+<p style="margin-left:18%;">Windows SDK version used in
+mkbundle build. Default/unknown, latest installed Windows
+SDK. Values, &quot;8.1&quot;, &quot;10.0.10240.0&quot;,
+&quot;10.0.15063.0&quot; etc.</p>
+
+<p style="margin-left:9%;"><i>VSCMD_ARG_TGT_ARCH</i></p>
+
+<p style="margin-left:18%;">Output target architecture used
+in mkbundle build. Default/unknown, use architecture of .NET
+runtime executing mkbundle. Values, &quot;x86&quot; or
+&quot;x64&quot;. NOTE, when running from a Visual Studio
+command prompt, this variable should already be set by the
+command prompt and match the rest of that build
+environment.</p>
+
+<p style="margin-left:9%;"><i>INCLUDE</i></p>
+
+<p style="margin-left:18%;">Override all custom include
+paths passed to &quot;cl.exe&quot;. Predefined by Visual
+Studio developer command prompt or auto detected by mkbundle
+when undefined.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>LIB</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Override all custom library paths passed to
+&quot;link.exe&quot;. Predefined by Visual Studio developer
+command prompt or auto detected by mkbundle when
+undefined.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>MONOPREFIX</i></p>
+
+<p style="margin-left:18%;">Use a custom Mono SDK install
+root matching the output target architecture (x86/x64).
+Default, mkbundle will look for installed Mono SDK&rsquo;s
+matching targeted architecture.</p>
+
+<p style="margin-left:9%;"><i>MONOLIB</i></p>
+
+<p style="margin-left:18%;">Use a different mono library
+name or an absolute path to the mono library passed to
+linker. Default, mkbundle will use default mono library name
+depending on mkbundle dynamic/static use case. NOTE,
+supplied mono library needs to match mkbundle dynamic/static
+use case and target architecture.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><i>VCCRT</i></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Override C-runtime library linker settings. Default
+&quot;MD&quot;, mkbundle will use dynamic C-runtime linking
+on Windows compatible with Mono SDK distribution. If a
+custom built Mono runtime using static C-Runtime linkage is
+used, setting this variable to &quot;MT&quot; will link
+using static C-runtime libraries.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>VCSUBSYSTEM</i></p>
+
+<p style="margin-left:18%;">Override Windows subsystem.
+Default, &quot;windows&quot;. If console subsystem is
+preferred, use &quot;console&quot;. NOTE, if console output
+is expected from output target process then set this
+variable to &quot;console&quot;.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program
+will load referenced assemblies from the Mono assembly
+cache.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Targets are
+loaded from &#732;/.mono/targets/TARGETNAME/mono</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit:
+http://www.mono-project.com for details</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mcs(1),</b>mono(1),<b>mono-config(5).</b></p>
+<hr>
+</body>
+</html>

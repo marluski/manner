@@ -1,0 +1,367 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:29 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>Mono</title>
+
+</head>
+<body>
+
+<h1 align="center">Mono</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OPTIONS TO DISPLAY METADATA TABLES">OPTIONS TO DISPLAY METADATA TABLES</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">monodis - CIL
+image content dumper and disassembler.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>monodis</b>
+[-h] [--help] [--output=FILENAME] [--mscorlib] [--assembly]
+[--assemblyref] [--classlayout] [--constant] [--customattr]
+[--declsec] [--event] [--exported] [--fields] [--file]
+[--forward-decls] [--genericpar] [--implmap] [--interface]
+[--manifest] [--marshal] [--memberref] [--method]
+[--methodimpl] [--methodsem] [--methodspec] [--module]
+[--moduleref] [--mresources] [--presources] [--nested]
+[--param] [--parconst] [--property] [--propertymap]
+[--standalonesig] [--typedef] [--typeref] [--typespec]
+[--blob] [--strings] [--userstrings] [FILES...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<i>monodis</i> program is used to dump the contents an
+ECMA/ISO CIL image (contained in .EXE files that contain
+extended PE/COFF CIL code).</p>
+
+<p style="margin-left:9%; margin-top: 1em">To roundtrip
+assemblies using ilasm, it is best to use the --output
+argument, as that will make monodis save the embedded
+resources in files that can later be properly embedded back
+by ilasm.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Additionally,
+the tool can be used to dump the contents of the various
+ECMA CIL metadata tables.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+Generic options are supported: <i><br>
+--help , -h</i></p>
+
+<p style="margin-left:18%;">Displays usage
+instructions.</p>
+
+<p style="margin-left:9%;"><i>--output=FILENAME</i></p>
+
+<p style="margin-left:18%;">Write output into
+<i>FILENAME</i> and dump any embedded managed resources.</p>
+
+<p style="margin-left:9%;"><i>--mscorlib</i></p>
+
+<p style="margin-left:18%;">For non-corlib assemblies, use
+&quot;mscorlib&quot; as the assembly name. This is useful
+for round-tripping the IL with ilasm.</p>
+
+<p style="margin-left:9%;"><i>--show-method-tokens</i></p>
+
+<p style="margin-left:18%;">Display tokens for disassembled
+methods.</p>
+
+<p style="margin-left:9%;"><i>--show-tokens</i></p>
+
+<p style="margin-left:18%;">Display tokens for strings,
+types, methods, fields, etc.</p>
+
+<h2>OPTIONS TO DISPLAY METADATA TABLES
+<a name="OPTIONS TO DISPLAY METADATA TABLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are used to display metadata tables instead of
+disassembling the CIL image. <i><br>
+--assembly</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+Assembly table.</p>
+
+<p style="margin-left:9%;"><i>--assemblyref</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+AssemblyRef table.</p>
+
+<p style="margin-left:9%;"><i>--classlayout</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+ClassLayout table.</p>
+
+<p style="margin-left:9%;"><i>--constant</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+Constant table.</p>
+
+<p style="margin-left:9%;"><i>--customattr</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+CustomAttribute table.</p>
+
+<p style="margin-left:9%;"><i>--declsec</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+DeclSec table.</p>
+
+<p style="margin-left:9%;"><i>--event</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the Event
+table.</p>
+
+<p style="margin-left:9%;"><i>--exported</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+ExportedType table.</p>
+
+<p style="margin-left:9%;"><i>--fields</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the Field
+table.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>--file</i></p></td>
+<td width="1%"></td>
+<td width="47%">
+
+
+<p>Dumps the contents of the File table.</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--forward-decls</i></p>
+
+<p style="margin-left:18%;">Dumps forward declarations for
+classes.</p>
+
+<p style="margin-left:9%;"><i>--genericpar</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+GenericParam table.</p>
+
+<p style="margin-left:9%;"><i>--implmap</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+ImplMap table.</p>
+
+<p style="margin-left:9%;"><i>--interface</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+InterfaceImpl table.</p>
+
+<p style="margin-left:9%;"><i>--manifest</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+ManifestResource table.</p>
+
+<p style="margin-left:9%;"><i>--marshal</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+FieldMarshal table.</p>
+
+<p style="margin-left:9%;"><i>--memberref</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+MemberRef table.</p>
+
+<p style="margin-left:9%;"><i>--method</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+MethodDef table.</p>
+
+<p style="margin-left:9%;"><i>--methodimpl</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+MethodImpl table.</p>
+
+<p style="margin-left:9%;"><i>--methodspec</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+MethodSpec table.</p>
+
+<p style="margin-left:9%;"><i>--methodsem</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+MethodSemantics table.</p>
+
+<p style="margin-left:9%;"><i>--module</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+Module table.</p>
+
+<p style="margin-left:9%;"><i>--moduleref</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+ModuleRef table.</p>
+
+<p style="margin-left:9%;"><i>--mresources</i></p>
+
+<p style="margin-left:18%;">Saves all the managed resources
+embedded in the assembly into the current directory. To get
+a list of the embedded resources use the --manifest
+option.</p>
+
+<p style="margin-left:9%;"><i>--presources</i></p>
+
+<p style="margin-left:18%;">Prints offsets and names of
+manifest resources embedded in the assembly.</p>
+
+<p style="margin-left:9%;"><i>--nested</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+NestedClass table.</p>
+
+<p style="margin-left:9%;"><i>--param</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the Param
+table.</p>
+
+<p style="margin-left:9%;"><i>--parconst</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+GenericParameterConstraint table.</p>
+
+<p style="margin-left:9%;"><i>--property</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+Property table.</p>
+
+<p style="margin-left:9%;"><i>--propertymap</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+PropertyMap table.</p>
+
+<p style="margin-left:9%;"><i>--standalonesig</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+StandAloneSig table.</p>
+
+<p style="margin-left:9%;"><i>--typedef</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+TypeDef table.</p>
+
+<p style="margin-left:9%;"><i>--typespec</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+TypeSpec table.</p>
+
+<p style="margin-left:9%;"><i>--typeref</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+TypeRef table.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>--blob</i></p></td>
+<td width="1%"></td>
+<td width="67%">
+
+
+<p>Dumps the entire contents of the blob stream as hex.</p></td>
+<td width="15%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--strings</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+Strings heap.</p>
+
+<p style="margin-left:9%;"><i>--userstrings</i></p>
+
+<p style="margin-left:18%;">Dumps the contents of the
+User-Strings heap</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no flags are
+specified the program dumps the content of the image in a
+format that can be used to rountrip the code.</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>MONO_PATH</i></p>
+
+<p style="margin-left:18%;">Provides a search path to mono
+and mint where to look for library files. Directories are
+separated by the platform path separator (colons on unix).
+Example: <b>/home/username/lib:/usr/local/mono/lib</b></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">monodis was
+written by Miguel de Icaza, Paolo Molaro and Dietmar
+Maurer.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>pedump(1)</b></p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,291 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:54 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>libnbd-release-notes-1.12</title>
+
+</head>
+<body>
+
+<h1 align="center">libnbd-release-notes-1.12</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Security">Security</a><br>
+<a href="#New APIs">New APIs</a><br>
+<a href="#Enhancements to existing APIs">Enhancements to existing APIs</a><br>
+<a href="#Tools">Tools</a><br>
+<a href="#Tests">Tests</a><br>
+<a href="#Other improvements and bug fixes">Other improvements and bug fixes</a><br>
+<a href="#Documentation">Documentation</a><br>
+<a href="#Build">Build</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">libnbd-release-notes-1.12
+- release notes for libnbd 1.12</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+release notes for libnbd stable release 1.12. This describes
+the major changes since 1.10.</p>
+
+<p style="margin-left:9%; margin-top: 1em">libnbd 1.12.0
+was released on <b>24 February 2022</b>.</p>
+
+<h3>Security
+<a name="Security"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">CVE-2022-0485</p>
+
+<p style="margin-left:14%;">Silent data corruption when
+using <b>nbdcopy</b>(1).</p>
+
+<p style="margin-left:14%; margin-top: 1em">See the full
+announcement here:
+https://listman.redhat.com/archives/libguestfs/2022-February/msg00104.html</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you find a
+security issue, please read <i>SECURITY</i> in the source
+(online here:
+https://gitlab.com/nbdkit/libnbd/blob/master/SECURITY). To
+find out about previous security issues in libnbd, see
+<b>libnbd-security</b>(3).</p>
+
+<h3>New APIs
+<a name="New APIs"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">get_pread_initialize
+<br>
+set_pread_initialize</p>
+
+<p style="margin-left:14%;">Control whether libnbd clears
+the pread buffer to avoid leaking memory contents if the
+client does not properly handle errors. These were added as
+part of the fix for CVE-2022-0485 (Eric Blake).</p>
+
+<p style="margin-left:9%;">get_request_block_size <br>
+set_request_block_size</p>
+
+<p style="margin-left:14%;">Control whether libnbd requests
+block size constraints from the server during negotiation
+(Eric Blake).</p>
+
+<h3>Enhancements to existing APIs
+<a name="Enhancements to existing APIs"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Error messages
+about incorrect URIs in <b>nbd_connect_uri</b>(3) have been
+improved to make common mistakes clearer for the user.</p>
+
+<h3>Tools
+<a name="Tools"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">New syntax:
+&quot;nbdinfo [ CMD ... ]&quot; allowing you to query the
+properties of an NBD server directly.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdcopy</b>(1)
+new <i>--queue-size</i> option to control the maximum size
+of the internal buffer (Nir Soffer).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>nbdcopy</b>(1)
+now names the source and destination handles to make it
+easier to understand debug output.</p>
+
+<h3>Tests
+<a name="Tests"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Adopt
+libvirt-ci&rsquo;s <i>ci/gitlab.yml</i> (Martin
+Kletzander).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Fix the OCaml
+extents example (thanks Laszlo Ersek).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Golang
+benchmarks were added to the test suite (Nir Soffer).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The large
+<i>tests/errors.c</i> test was split into about a dozen
+separate tests. Also this adds a new test for checking
+server-side block size constraint error policy which was
+missing before.</p>
+
+<h3>Other improvements and bug fixes
+<a name="Other improvements and bug fixes"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">New OCaml
+&quot;NBD.with_handle&quot; helper which ensures that
+&quot;NBD.close&quot; is always called even if the inner
+code throws an exception.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The OCaml
+bindings now consistently use the correct types for buffer
+sizes everywhere (Laszlo Ersek).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Several
+improvements and fixes to the golang bindings and tests. The
+golang bindings have been relicensed to LGPLv2+ like the
+rest of the library and are now published as a golang module
+at https://libguestfs.org/libnbd (Nir Soffer).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Python
+bindings no longer crash if you pass &quot;None&quot; in
+place of a buffer parameter. In addition some memory leaks
+were fixed (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Various memory
+leaks have been fixed when using the optional strict_mode
+settings (Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The performance
+of the internal vector library has been improved greatly and
+overflow is now handled correctly (Nir Soffer, Laszlo Ersek
+and Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Add
+&quot;simple_copy&quot; and &quot;aio_copy&quot; Golang
+examples (Nir Soffer).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Error handling
+was reviewed and fixed across many of the example programs
+and documentation (Eric Blake, Nir Soffer).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Simplify and
+optimize handling of the extents callback in Golang (Nir
+Soffer).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Golang AioBuffer
+was enhanced, making it safer to use, faster and adding
+documentation (Nir Soffer).</p>
+
+<h3>Documentation
+<a name="Documentation"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Document the
+limits on lengths and sizes of parameters to various APIs
+(Eric Blake).</p>
+
+<h3>Build
+<a name="Build"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You can now
+build programs that use the OCaml bindings of libnbd against
+the libnbd build directory instead of requiring libnbd to be
+installed (Laszlo Ersek).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Compatibility
+with OCaml 4.13.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Line locations
+in the state machine should be more accurate when stepping
+through with a debugger like gdb.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>.editorconfig</i>
+file can be used to help code formatting, see
+https://editorconfig.org/ (Nir Soffer, Eric Blake).</p>
+
+<p style="margin-left:9%; margin-top: 1em">&quot;MIN&quot;
+and &quot;MAX&quot; macros can be nested (thanks Eric
+Blake).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>libnbd</b>(3).</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Eric Blake <br>
+Laszlo Ersek <br>
+Martin Kletzander <br>
+Nir Soffer <br>
+Richard W.M. Jones</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright Red
+Hat</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU Lesser General Public License as
+published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This library is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU Lesser General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU Lesser General Public License
+along with this library; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+MA 02110-1301 USA</p>
+<hr>
+</body>
+</html>

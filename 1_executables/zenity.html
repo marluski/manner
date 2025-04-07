@@ -1,0 +1,870 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:33 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ZENITY</title>
+
+</head>
+<body>
+
+<h1 align="center">ZENITY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Usage:">Usage:</a><br>
+<a href="#Help Options:">Help Options:</a><br>
+<a href="#Application Options:">Application Options:</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">zenity - manual
+page for zenity 4.1.90</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>zenity</b> is
+a program that will display GTK+ dialogs, and return (either
+in the return code, or on standard output) the users input.
+This allows you to present information, and ask for
+information from the user, from all manner of shell
+scripts.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example,
+<b>zenity --question</b> will return either 0, 1 or 5,
+depending on whether the user pressed <i>OK</i>,
+<i>Cancel</i> or timeout has been reached. <b>zenity
+--entry</b> will output on standard output what the user
+typed into the text entry field.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Comprehensive
+documentation is also available in the GNOME Help
+Browser.</p>
+
+<h3>Usage:
+<a name="Usage:"></a>
+</h3>
+
+
+<p style="margin-left:18%; margin-top: 1em">zenity
+[OPTION?]</p>
+
+<h3>Help Options:
+<a name="Help Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<p style="margin-left:9%;"><b>--help-all</b></p>
+
+<p style="margin-left:18%;">Show all help options</p>
+
+<p style="margin-left:9%;"><b>--help-general</b></p>
+
+<p style="margin-left:18%;">Show general options</p>
+
+<p style="margin-left:9%;"><b>--help-calendar</b></p>
+
+<p style="margin-left:18%;">Show calendar options</p>
+
+<p style="margin-left:9%;"><b>--help-entry</b></p>
+
+<p style="margin-left:18%;">Show text entry options</p>
+
+<p style="margin-left:9%;"><b>--help-error</b></p>
+
+<p style="margin-left:18%;">Show error options</p>
+
+<p style="margin-left:9%;"><b>--help-info</b></p>
+
+<p style="margin-left:18%;">Show info options</p>
+
+
+<p style="margin-left:9%;"><b>--help-file-selection</b></p>
+
+<p style="margin-left:18%;">Show file selection options</p>
+
+<p style="margin-left:9%;"><b>--help-list</b></p>
+
+<p style="margin-left:18%;">Show list options</p>
+
+<p style="margin-left:9%;"><b>--help-notification</b></p>
+
+<p style="margin-left:18%;">Show notification options</p>
+
+<p style="margin-left:9%;"><b>--help-progress</b></p>
+
+<p style="margin-left:18%;">Show progress options</p>
+
+<p style="margin-left:9%;"><b>--help-question</b></p>
+
+<p style="margin-left:18%;">Show question options</p>
+
+<p style="margin-left:9%;"><b>--help-warning</b></p>
+
+<p style="margin-left:18%;">Show warning options</p>
+
+<p style="margin-left:9%;"><b>--help-scale</b></p>
+
+<p style="margin-left:18%;">Show scale options</p>
+
+<p style="margin-left:9%;"><b>--help-text-info</b></p>
+
+<p style="margin-left:18%;">Show text information
+options</p>
+
+
+<p style="margin-left:9%;"><b>--help-color-selection</b></p>
+
+<p style="margin-left:18%;">Show color selection
+options</p>
+
+<p style="margin-left:9%;"><b>--help-password</b></p>
+
+<p style="margin-left:18%;">Show password dialog
+options</p>
+
+<p style="margin-left:9%;"><b>--help-forms</b></p>
+
+<p style="margin-left:18%;">Show forms dialog options</p>
+
+<p style="margin-left:9%;"><b>--help-misc</b></p>
+
+<p style="margin-left:18%;">Show miscellaneous options</p>
+
+<p style="margin-left:9%; margin-top: 1em">General options
+<b><br>
+--title</b>=<i>TITLE</i></p>
+
+<p style="margin-left:18%;">Set the dialog title</p>
+
+<p style="margin-left:9%;"><b>--width</b>=<i>WIDTH</i></p>
+
+<p style="margin-left:18%;">Set the width</p>
+
+
+<p style="margin-left:9%;"><b>--height</b>=<i>HEIGHT</i></p>
+
+<p style="margin-left:18%;">Set the height</p>
+
+
+<p style="margin-left:9%;"><b>--timeout</b>=<i>TIMEOUT</i></p>
+
+<p style="margin-left:18%;">Set dialog timeout in
+seconds</p>
+
+
+<p style="margin-left:9%;"><b>--ok-label</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the label of the OK
+button</p>
+
+
+<p style="margin-left:9%;"><b>--cancel-label</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the label of the Cancel
+button</p>
+
+
+<p style="margin-left:9%;"><b>--extra-button</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Add an extra button</p>
+
+<p style="margin-left:9%;"><b>--modal</b></p>
+
+<p style="margin-left:18%;">Set the modal hint</p>
+
+
+<p style="margin-left:9%;"><b>--attach</b>=<i>WINDOW</i></p>
+
+<p style="margin-left:18%;">DEPRECATED; does nothing</p>
+
+<p style="margin-left:9%; margin-top: 1em">Calendar options
+<b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+<p style="margin-left:9%;"><b>--day</b>=<i>DAY</i></p>
+
+<p style="margin-left:18%;">Set the calendar day</p>
+
+<p style="margin-left:9%;"><b>--month</b>=<i>MONTH</i></p>
+
+<p style="margin-left:18%;">Set the calendar month</p>
+
+<p style="margin-left:9%;"><b>--year</b>=<i>YEAR</i></p>
+
+<p style="margin-left:18%;">Set the calendar year</p>
+
+
+<p style="margin-left:9%;"><b>--date-format</b>=<i>PATTERN</i></p>
+
+<p style="margin-left:18%;">Set the format for the returned
+date</p>
+
+<p style="margin-left:9%; margin-top: 1em">Text entry
+options <b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+
+<p style="margin-left:9%;"><b>--entry-text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the entry text</p>
+
+<p style="margin-left:9%;"><b>--hide-text</b></p>
+
+<p style="margin-left:18%;">Hide the entry text</p>
+
+<p style="margin-left:9%; margin-top: 1em">Error options
+<b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+
+<p style="margin-left:9%;"><b>--icon</b>=<i>ICON-NAME</i></p>
+
+<p style="margin-left:18%;">Set the icon name</p>
+
+<p style="margin-left:9%;"><b>--no-wrap</b></p>
+
+<p style="margin-left:18%;">Do not enable text wrapping</p>
+
+<p style="margin-left:9%;"><b>--no-markup</b></p>
+
+<p style="margin-left:18%;">Do not enable Pango markup</p>
+
+<p style="margin-left:9%;"><b>--ellipsize</b></p>
+
+<p style="margin-left:18%;">Enable ellipsizing in the
+dialog text. This fixes the high window size with long
+texts</p>
+
+<p style="margin-left:9%; margin-top: 1em">Info options
+<b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+
+<p style="margin-left:9%;"><b>--icon</b>=<i>ICON-NAME</i></p>
+
+<p style="margin-left:18%;">Set the icon name</p>
+
+<p style="margin-left:9%;"><b>--no-wrap</b></p>
+
+<p style="margin-left:18%;">Do not enable text wrapping</p>
+
+<p style="margin-left:9%;"><b>--no-markup</b></p>
+
+<p style="margin-left:18%;">Do not enable Pango markup</p>
+
+<p style="margin-left:9%;"><b>--ellipsize</b></p>
+
+<p style="margin-left:18%;">Enable ellipsizing in the
+dialog text. This fixes the high window size with long
+texts</p>
+
+<p style="margin-left:9%; margin-top: 1em">File selection
+options <b><br>
+--filename</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Set the filename</p>
+
+<p style="margin-left:9%;"><b>--multiple</b></p>
+
+<p style="margin-left:18%;">Allow multiple files to be
+selected</p>
+
+<p style="margin-left:9%;"><b>--directory</b></p>
+
+<p style="margin-left:18%;">Activate directory-only
+selection</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--save</b></p></td>
+<td width="1%"></td>
+<td width="23%">
+
+
+<p>Activate save mode</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>--separator</b>=<i>SEPARATOR</i></p>
+
+<p style="margin-left:18%;">Set output separator
+character</p>
+
+
+<p style="margin-left:9%;"><b>--file-filter</b>=<i>NAME</i>
+| PATTERN1 PATTERN2 ...</p>
+
+<p style="margin-left:18%;">Set a filename filter</p>
+
+<p style="margin-left:9%;"><b>--confirm-overwrite</b></p>
+
+<p style="margin-left:18%;">DEPRECATED; does nothing</p>
+
+<p style="margin-left:9%; margin-top: 1em">List options
+<b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+
+<p style="margin-left:9%;"><b>--column</b>=<i>COLUMN</i></p>
+
+<p style="margin-left:18%;">Set the column header</p>
+
+<p style="margin-left:9%;"><b>--checklist</b></p>
+
+<p style="margin-left:18%;">Use check boxes for the first
+column</p>
+
+<p style="margin-left:9%;"><b>--radiolist</b></p>
+
+<p style="margin-left:18%;">Use radio buttons for the first
+column</p>
+
+<p style="margin-left:9%;"><b>--imagelist</b></p>
+
+<p style="margin-left:18%;">Use an image for the first
+column</p>
+
+
+<p style="margin-left:9%;"><b>--separator</b>=<i>SEPARATOR</i></p>
+
+<p style="margin-left:18%;">Set output separator
+character</p>
+
+<p style="margin-left:9%;"><b>--multiple</b></p>
+
+<p style="margin-left:18%;">Allow multiple rows to be
+selected</p>
+
+<p style="margin-left:9%;"><b>--editable</b></p>
+
+<p style="margin-left:18%;">Allow changes to text</p>
+
+
+<p style="margin-left:9%;"><b>--print-column</b>=<i>NUMBER</i></p>
+
+<p style="margin-left:18%;">Print a specific column
+(Default is 1. &rsquo;ALL&rsquo; can be used to print all
+columns)</p>
+
+
+<p style="margin-left:9%;"><b>--hide-column</b>=<i>NUMBER</i></p>
+
+<p style="margin-left:18%;">Hide a specific column</p>
+
+<p style="margin-left:9%;"><b>--hide-header</b></p>
+
+<p style="margin-left:18%;">Hide the column headers</p>
+
+<p style="margin-left:9%;"><b>--mid-search</b></p>
+
+<p style="margin-left:18%;">DEPRECATED; does nothing</p>
+
+<p style="margin-left:9%; margin-top: 1em">Notification
+options <b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the notification text</p>
+
+
+<p style="margin-left:9%;"><b>--icon</b>=<i>ICON-NAME</i></p>
+
+<p style="margin-left:18%;">Set the icon name</p>
+
+<p style="margin-left:9%;"><b>--listen</b></p>
+
+<p style="margin-left:18%;">Listen for commands on
+stdin</p>
+
+<p style="margin-left:9%;"><b>--hint</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">DEPRECATED; does nothing</p>
+
+<p style="margin-left:9%; margin-top: 1em">Progress options
+<b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+
+<p style="margin-left:9%;"><b>--percentage</b>=<i>PERCENTAGE</i></p>
+
+<p style="margin-left:18%;">Set initial percentage</p>
+
+<p style="margin-left:9%;"><b>--pulsate</b></p>
+
+<p style="margin-left:18%;">Pulsate progress bar</p>
+
+<p style="margin-left:9%;"><b>--auto-close</b></p>
+
+<p style="margin-left:18%;">Dismiss the dialog when 100%
+has been reached</p>
+
+<p style="margin-left:9%;"><b>--auto-kill</b></p>
+
+<p style="margin-left:18%;">Kill parent process if Cancel
+button is pressed</p>
+
+<p style="margin-left:9%;"><b>--no-cancel</b></p>
+
+<p style="margin-left:18%;">Hide Cancel button</p>
+
+<p style="margin-left:9%;"><b>--time-remaining</b></p>
+
+<p style="margin-left:18%;">Estimate when progress will
+reach 100%</p>
+
+<p style="margin-left:9%; margin-top: 1em">Question options
+<b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+
+<p style="margin-left:9%;"><b>--icon</b>=<i>ICON-NAME</i></p>
+
+<p style="margin-left:18%;">Set the icon name</p>
+
+<p style="margin-left:9%;"><b>--no-wrap</b></p>
+
+<p style="margin-left:18%;">Do not enable text wrapping</p>
+
+<p style="margin-left:9%;"><b>--no-markup</b></p>
+
+<p style="margin-left:18%;">Do not enable Pango markup</p>
+
+<p style="margin-left:9%;"><b>--default-cancel</b></p>
+
+<p style="margin-left:18%;">Give Cancel button focus by
+default</p>
+
+<p style="margin-left:9%;"><b>--ellipsize</b></p>
+
+<p style="margin-left:18%;">Enable ellipsizing in the
+dialog text. This fixes the high window size with long
+texts</p>
+
+<p style="margin-left:9%;"><b>--switch</b></p>
+
+<p style="margin-left:18%;">Suppress OK and Cancel
+buttons</p>
+
+<p style="margin-left:9%; margin-top: 1em">Warning options
+<b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+
+<p style="margin-left:9%;"><b>--icon</b>=<i>ICON-NAME</i></p>
+
+<p style="margin-left:18%;">Set the icon name</p>
+
+<p style="margin-left:9%;"><b>--no-wrap</b></p>
+
+<p style="margin-left:18%;">Do not enable text wrapping</p>
+
+<p style="margin-left:9%;"><b>--no-markup</b></p>
+
+<p style="margin-left:18%;">Do not enable Pango markup</p>
+
+<p style="margin-left:9%;"><b>--ellipsize</b></p>
+
+<p style="margin-left:18%;">Enable ellipsizing in the
+dialog text. This fixes the high window size with long
+texts</p>
+
+<p style="margin-left:9%; margin-top: 1em">Scale options
+<b><br>
+--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+<p style="margin-left:9%;"><b>--value</b>=<i>VALUE</i></p>
+
+<p style="margin-left:18%;">Set initial value</p>
+
+
+<p style="margin-left:9%;"><b>--min-value</b>=<i>VALUE</i></p>
+
+<p style="margin-left:18%;">Set minimum value</p>
+
+
+<p style="margin-left:9%;"><b>--max-value</b>=<i>VALUE</i></p>
+
+<p style="margin-left:18%;">Set maximum value</p>
+
+<p style="margin-left:9%;"><b>--step</b>=<i>VALUE</i></p>
+
+<p style="margin-left:18%;">Set step size</p>
+
+<p style="margin-left:9%;"><b>--print-partial</b></p>
+
+<p style="margin-left:18%;">Print partial values</p>
+
+<p style="margin-left:9%;"><b>--hide-value</b></p>
+
+<p style="margin-left:18%;">Hide value</p>
+
+<p style="margin-left:9%; margin-top: 1em">Text information
+options <b><br>
+--filename</b>=<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Open file</p>
+
+<p style="margin-left:9%;"><b>--editable</b></p>
+
+<p style="margin-left:18%;">Allow changes to text</p>
+
+<p style="margin-left:9%;"><b>--font</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the text font</p>
+
+
+<p style="margin-left:9%;"><b>--checkbox</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Enable an I read and agree
+checkbox</p>
+
+<p style="margin-left:9%;"><b>--auto-scroll</b></p>
+
+<p style="margin-left:18%;">Auto scroll the text to the
+end. Only when text is captured from stdin</p>
+
+<p style="margin-left:9%; margin-top: 1em">Color selection
+options <b><br>
+--color</b>=<i>VALUE</i></p>
+
+<p style="margin-left:18%;">Set the color</p>
+
+<p style="margin-left:9%;"><b>--show-palette</b></p>
+
+<p style="margin-left:18%;">Show the palette</p>
+
+<p style="margin-left:9%; margin-top: 1em">Password dialog
+options <b><br>
+--username</b></p>
+
+<p style="margin-left:18%;">Display the username option</p>
+
+<p style="margin-left:9%; margin-top: 1em">Forms dialog
+options <b><br>
+--add-entry</b>=<i>Field</i> name</p>
+
+<p style="margin-left:18%;">Add a new Entry in forms
+dialog</p>
+
+
+<p style="margin-left:9%;"><b>--add-password</b>=<i>Field</i>
+name</p>
+
+<p style="margin-left:18%;">Add a new Password Entry in
+forms dialog</p>
+
+
+<p style="margin-left:9%;"><b>--add-multiline-entry</b>=<i>Field</i>
+name</p>
+
+<p style="margin-left:18%;">Add a new multi-line entry in
+forms dialog (Since: 4.2)</p>
+
+
+<p style="margin-left:9%;"><b>--add-calendar</b>=<i>Calendar</i>
+field name</p>
+
+<p style="margin-left:18%;">Add a new Calendar in forms
+dialog</p>
+
+<p style="margin-left:9%;"><b>--add-list</b>=<i>List</i>
+field and header name</p>
+
+<p style="margin-left:18%;">Add a new List in forms
+dialog</p>
+
+
+<p style="margin-left:9%;"><b>--list-values</b>=<i>List</i>
+of values separated by |</p>
+
+<p style="margin-left:18%;">List of values for List</p>
+
+
+<p style="margin-left:9%;"><b>--column-values</b>=<i>List</i>
+of values separated by |</p>
+
+<p style="margin-left:18%;">List of values for columns</p>
+
+<p style="margin-left:9%;"><b>--add-combo</b>=<i>Combo</i>
+box field name</p>
+
+<p style="margin-left:18%;">Add a new combo box in forms
+dialog</p>
+
+
+<p style="margin-left:9%;"><b>--combo-values</b>=<i>List</i>
+of values separated by |</p>
+
+<p style="margin-left:18%;">List of values for combo
+box</p>
+
+<p style="margin-left:9%;"><b>--show-header</b></p>
+
+<p style="margin-left:18%;">Show the columns header</p>
+
+<p style="margin-left:9%;"><b>--text</b>=<i>TEXT</i></p>
+
+<p style="margin-left:18%;">Set the dialog text</p>
+
+
+<p style="margin-left:9%;"><b>--separator</b>=<i>SEPARATOR</i></p>
+
+<p style="margin-left:18%;">Set output separator
+character</p>
+
+
+<p style="margin-left:9%;"><b>--forms-date-format</b>=<i>PATTERN</i></p>
+
+<p style="margin-left:18%;">Set the format for the returned
+date</p>
+
+<p style="margin-left:9%; margin-top: 1em">Miscellaneous
+options <b><br>
+--about</b></p>
+
+<p style="margin-left:18%;">About zenity</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Print version</p>
+
+<h3>Application Options:
+<a name="Application Options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--calendar</b></p>
+
+<p style="margin-left:18%;">Display calendar dialog</p>
+
+<p style="margin-left:9%;"><b>--entry</b></p>
+
+<p style="margin-left:18%;">Display text entry dialog</p>
+
+<p style="margin-left:9%;"><b>--error</b></p>
+
+<p style="margin-left:18%;">Display error dialog</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--info</b></p></td>
+<td width="1%"></td>
+<td width="24%">
+
+
+<p>Display info dialog</p></td>
+<td width="58%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--file-selection</b></p>
+
+<p style="margin-left:18%;">Display file selection
+dialog</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--list</b></p></td>
+<td width="1%"></td>
+<td width="24%">
+
+
+<p>Display list dialog</p></td>
+<td width="58%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--notification</b></p>
+
+<p style="margin-left:18%;">Display notification</p>
+
+<p style="margin-left:9%;"><b>--progress</b></p>
+
+<p style="margin-left:18%;">Display progress indication
+dialog</p>
+
+<p style="margin-left:9%;"><b>--question</b></p>
+
+<p style="margin-left:18%;">Display question dialog</p>
+
+<p style="margin-left:9%;"><b>--warning</b></p>
+
+<p style="margin-left:18%;">Display warning dialog</p>
+
+<p style="margin-left:9%;"><b>--scale</b></p>
+
+<p style="margin-left:18%;">Display scale dialog</p>
+
+<p style="margin-left:9%;"><b>--text-info</b></p>
+
+<p style="margin-left:18%;">Display text information
+dialog</p>
+
+<p style="margin-left:9%;"><b>--color-selection</b></p>
+
+<p style="margin-left:18%;">Display color selection
+dialog</p>
+
+<p style="margin-left:9%;"><b>--password</b></p>
+
+<p style="margin-left:18%;">Display password dialog</p>
+
+<p style="margin-left:9%;"><b>--forms</b></p>
+
+<p style="margin-left:18%;">Display forms dialog</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Display a file
+selector with the title <i>Select a file to remove</i>. The
+file selected is returned on standard output.</p>
+
+<p style="margin-left:18%; margin-top: 1em">zenity
+--title=&quot;Select a file to remove&quot;
+--file-selection</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display a text
+entry dialog with the title <i>Select Host</i> and the text
+<i>Select the host you would like to flood-ping</i>. The
+entered text is returned on standard output.</p>
+
+<p style="margin-left:18%; margin-top: 1em">zenity --title
+&quot;Select Host&quot; --entry --text &quot;Select the host
+you would like to flood-ping&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display a
+dialog, asking <i>Microsoft Windows has been found! Would
+you like to remove it?</i>. The return code will be 0 (true
+in shell) if <i>OK</i> is selected, and 1 (false) if
+<i>Cancel</i> is selected.</p>
+
+<p style="margin-left:18%; margin-top: 1em">zenity
+--question --title &quot;Alert&quot; --text &quot;Microsoft
+Windows has been found! Would you like to remove
+it?&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Show the search
+results in a list dialog with the title <i>Search
+Results</i> and the text <i>Finding all header
+files...</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">find . -name
+&rsquo;*.h&rsquo; | zenity --list --title &quot;Search
+Results&quot; --text &quot;Finding all header files..&quot;
+--column &quot;Files&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Show a passive
+notification</p>
+
+<p style="margin-left:18%; margin-top: 1em">zenity
+--notification --icon=software-update-available --text
+&quot;System update necessary!&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display a weekly
+shopping list in a check list dialog with <i>Apples</i> and
+<i>Oranges</i> pre selected</p>
+
+<p style="margin-left:18%; margin-top: 1em">zenity --list
+--checklist --column &quot;Buy&quot; --column
+&quot;Item&quot; TRUE Apples TRUE Oranges FALSE Pears FALSE
+Toothpaste</p>
+
+<p style="margin-left:9%; margin-top: 1em">Display a
+progress dialog while searching for all the postscript files
+in your home directory</p>
+
+<p style="margin-left:9%; margin-top: 1em">find $HOME -name
+&rsquo;*.ps&rsquo; | zenity --progress --pulsate</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Zenity</b>
+was originally written by Glynn Foster
+&lt;glynn.foster@sun.com&gt;. It has since been maintained
+by a number of contributors since then.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was originally written by Ross Burton
+&lt;ross@burtonini.com&gt;. It currently contains portions
+which are automatically generated, and other portions
+written by its original author.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dialog</b>(1)</p>
+<hr>
+</body>
+</html>

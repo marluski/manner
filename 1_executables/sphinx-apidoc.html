@@ -1,0 +1,409 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SPHINX-APIDOC</title>
+
+</head>
+<body>
+
+<h1 align="center">SPHINX-APIDOC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sphinx-apidoc -
+Sphinx API doc generator tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sphinx-apidoc</b>
+[<i>OPTIONS</i>] -o &lt;<i>OUTPUT_PATH</i>&gt;
+&lt;<i>MODULE_PATH</i>&gt; [<i>EXCLUDE_PATTERN</i> ...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sphinx-apidoc</b>
+is a tool for automatic generation of Sphinx sources that,
+using the <i>autodoc</i> extension, document a whole package
+in the style of other automatic API documentation tools.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>MODULE_PATH</i>
+is the path to a Python package to document, and
+<i>OUTPUT_PATH</i> is the directory where the generated
+sources are placed. Any <i>EXCLUDE_PATTERN</i>s given are
+<i>fnmatch-style</i> file and/or directory patterns that
+will be excluded from generation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>WARNING:</b></p>
+
+<p style="margin-left:13%;"><b>sphinx-apidoc</b> generates
+source files that use <i>sphinx.ext.autodoc</i> to document
+all found modules. If any modules have side effects on
+import, these will be executed by <b>autodoc</b> when
+<b>sphinx-build</b> is run.</p>
+
+<p style="margin-left:13%; margin-top: 1em">If you document
+scripts (as opposed to library modules), make sure their
+main routine is protected by a <b>if __name__ ==
+'__main__'</b> condition.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o
+&lt;OUTPUT_PATH&gt;</b></p>
+
+<p style="margin-left:18%;">Directory to place the output
+files. If it does not exist, it is created.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-q</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Do not output anything on standard output, only write
+warnings and errors to standard error.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-f, --force</b></p>
+
+<p style="margin-left:18%;">Force overwriting of any
+existing generated files.</p>
+
+<p style="margin-left:9%;"><b>-l, --follow-links</b></p>
+
+<p style="margin-left:18%;">Follow symbolic links. Defaults
+to <b>False</b>.</p>
+
+<p style="margin-left:9%;"><b>-n, --dry-run</b></p>
+
+<p style="margin-left:18%;">Do not create or remove any
+files.</p>
+
+<p style="margin-left:9%;"><b>-s &lt;suffix&gt;</b></p>
+
+<p style="margin-left:18%;">Suffix for the source files
+generated. Defaults to <b>rst</b>.</p>
+
+<p style="margin-left:9%;"><b>-d &lt;MAXDEPTH&gt;</b></p>
+
+<p style="margin-left:18%;">Maximum depth for the generated
+table of contents file. Defaults to <b>4</b>.</p>
+
+<p style="margin-left:9%;"><b>--tocfile</b></p>
+
+<p style="margin-left:18%;">Filename for a table of
+contents file. Defaults to <b>modules</b>.</p>
+
+<p style="margin-left:9%;"><b>-T, --no-toc</b></p>
+
+<p style="margin-left:18%;">Do not create a table of
+contents file. Ignored when <i>--full</i> is provided.</p>
+
+<p style="margin-left:9%;"><b>--remove-old</b></p>
+
+<p style="margin-left:18%;">Remove existing files in the
+output directory that are not created anymore. Not
+compatible with <i>--full</i>.</p>
+
+<p style="margin-left:9%;"><b>-F, --full</b></p>
+
+<p style="margin-left:18%;">Generate a full Sphinx project
+(<b>conf.py</b>, <b>Makefile</b> etc.) using the same
+mechanism as <b>sphinx-quickstart</b>.</p>
+
+<p style="margin-left:9%;"><b>-e, --separate</b></p>
+
+<p style="margin-left:18%;">Put documentation for each
+module on its own page.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Added in
+version 1.2.</p>
+
+<p style="margin-left:9%;"><b>-E, --no-headings</b></p>
+
+<p style="margin-left:18%;">Do not create headings for the
+modules/packages. This is useful, for example, when
+docstrings already contain headings.</p>
+
+<p style="margin-left:9%;"><b>-P, --private</b></p>
+
+<p style="margin-left:18%;">Include &quot;_private&quot;
+modules.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Added in
+version 1.2.</p>
+
+
+<p style="margin-left:9%;"><b>--implicit-namespaces</b></p>
+
+<p style="margin-left:18%;">Without this option,
+<b>sphinx-apidoc</b> searches <i>sys.path</i> for Python
+packages containing <b>__init__.py</b> files, or single-file
+Python modules.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This option
+instead uses <i>PEP 420</i> implicit namespaces that allow
+layouts paths such as <b>foo/bar/module.py</b> or
+<b>foo/bar/baz/__init__.py</b> (note that <b>bar</b> and
+<b>foo</b> are namespaces, not modules).</p>
+
+<p style="margin-left:9%;"><b>-M, --module-first</b></p>
+
+<p style="margin-left:18%;">Put module documentation before
+submodule documentation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">These options
+are used when <i>--full</i> is specified:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-a</b></p></td>
+<td width="6%"></td>
+<td width="40%">
+
+
+<p>Append module_path to sys.path.</p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-H &lt;project&gt;</b></p>
+
+<p style="margin-left:18%;">Sets the project name to put in
+generated files (see <i>project</i>).</p>
+
+<p style="margin-left:9%;"><b>-A &lt;author&gt;</b></p>
+
+<p style="margin-left:18%;">Sets the author name(s) to put
+in generated files (see <i>copyright</i>).</p>
+
+<p style="margin-left:9%;"><b>-V &lt;version&gt;</b></p>
+
+<p style="margin-left:18%;">Sets the project version to put
+in generated files (see <i>version</i>).</p>
+
+<p style="margin-left:9%;"><b>-R &lt;release&gt;</b></p>
+
+<p style="margin-left:18%;">Sets the project release to put
+in generated files (see <i>release</i>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Project
+templating</p>
+
+<p style="margin-left:9%; margin-top: 1em">Added in version
+2.2: Project templating options for sphinx-apidoc <b><br>
+-t, --templatedir=TEMPLATEDIR</b></p>
+
+<p style="margin-left:18%;">Template directory for template
+files. You can modify the templates of sphinx project files
+generated by apidoc. Following Jinja2 template files are
+allowed:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>module.rst.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>package.rst.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>toc.rst.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>root_doc.rst.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>conf.py.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>Makefile.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>Makefile.new.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>make.bat.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="23%">
+
+
+<p><b>make.bat.new.jinja</b></p></td>
+<td width="56%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">In detail,
+please refer the system template files Sphinx provides.
+(<b>sphinx/templates/apidoc</b> and
+<b>sphinx/templates/quickstart</b>)</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>SPHINX_APIDOC_OPTIONS</b></p>
+
+<p style="margin-left:18%;">A comma-separated list of
+option to append to generated <b>automodule</b> directives.
+Defaults to
+<b>members,undoc-members,show-inheritance</b>.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sphinx-build(1)</b>,
+<b>sphinx-autogen(1)</b></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2007-2025, the
+Sphinx developers</p>
+<hr>
+</body>
+</html>

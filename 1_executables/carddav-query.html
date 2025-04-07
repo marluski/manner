@@ -1,0 +1,228 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:57 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CARDDAV-QUERY</title>
+
+</head>
+<body>
+
+<h1 align="center">CARDDAV-QUERY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#POSITIONAL ARGUMENTS">POSITIONAL ARGUMENTS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#Fastmail">Fastmail</a><br>
+<a href="#Gmail">Gmail</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">carddav-query -
+Query a CardDAV server for contact names and emails.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>carddav-query</b>
+[<b>-h</b>] [<b>-l</b> <i>&lt;limit&gt;</i>] [<b>-v</b>]
+[<b>-c</b> <i>&lt;file&gt;</i>] [<b>-s</b>
+<i>&lt;section&gt;</i>] [<b>-k</b>
+<i>&lt;key_source&gt;</i>] [<b>-C</b>
+<i>&lt;key_cred_cmd&gt;</i>] [<b>-s</b>
+<i>&lt;server_url&gt;</i>] [<b>-u</b>
+<i>&lt;username&gt;</i>] [<b>-p</b> <i>&lt;password&gt;</i>]
+<i>&lt;term&gt;</i> [<i>&lt;term&gt;</i> ...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">This tool has
+been tailored for use as <b>address-book-cmd</b> in
+<b>aerc-config</b>(5).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">show this help message and
+exit</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug info on stderr.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l</b>
+<i>&lt;limit&gt;</i>, <b>--limit</b>
+<i>&lt;limit&gt;</i></p>
+
+<p style="margin-left:14%;">Maximum number of results
+returned by the server. If the server does not support
+limiting, this option will be disregarded.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default:
+<i>10</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b>
+<i>&lt;file&gt;</i>, <b>--config-file</b>
+<i>&lt;file&gt;</i></p>
+
+<p style="margin-left:14%;">INI configuration file from
+which to read the CardDAV URL endpoint.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default:
+<i>&#732;/.config/aerc/accounts.conf</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-S</b>
+<i>&lt;section&gt;</i>, <b>--config-section</b>
+<i>&lt;section&gt;</i></p>
+
+<p style="margin-left:14%;">INI configuration section where
+to find <i>&lt;key_source&gt;</i> and
+<i>&lt;key_cred_cmd&gt;</i>. By default the first section
+where <i>&lt;key_source&gt;</i> is found will be used.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-k</b>
+<i>&lt;key_source&gt;</i>, <b>--config-key-source</b>
+<i>&lt;key_source&gt;</i></p>
+
+<p style="margin-left:14%;">INI configuration key to lookup
+in <i>&lt;section&gt;</i> from <i>&lt;file&gt;</i>. The
+value must respect the following format:</p>
+
+
+<p style="margin-left:19%; margin-top: 1em">https?://<i>&lt;username&gt;</i>[:<i>&lt;password&gt;</i>]@<i>&lt;hostname&gt;</i>/<i>&lt;path/to/addressbook&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Both
+<i>&lt;username&gt;</i> and <i>&lt;password&gt;</i> must be
+percent encoded. If <i>&lt;password&gt;</i> is omitted, it
+can be provided via <b>--config-key-cred-cmd</b> or
+<b>--password</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default:
+<i>carddav-source</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C</b>
+<i>&lt;key_cred_cmd&gt;</i>, <b>--config-key-cred-cmd</b>
+<i>&lt;key_cred_cmd&gt;</i></p>
+
+<p style="margin-left:14%;">INI configuration key to lookup
+in <i>&lt;section&gt;</i> from <i>&lt;file&gt;</i>. The
+value is a command that will be executed with <b>sh -c</b>
+to determine <i>&lt;password&gt;</i> if it is not present in
+<i>&lt;key_source&gt;</i>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default:
+<i>carddav-source-cred-cmd</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>
+<i>&lt;server_url&gt;</i>, <b>--server-url</b>
+<i>&lt;server_url&gt;</i></p>
+
+<p style="margin-left:14%;">CardDAV server URL endpoint.
+Overrides configuration file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>
+<i>&lt;username&gt;</i>, <b>--username</b>
+<i>&lt;username&gt;</i></p>
+
+<p style="margin-left:14%;">Username to authenticate on the
+server. Overrides configuration file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>
+<i>&lt;password&gt;</i>, <b>--password</b>
+<i>&lt;password&gt;</i></p>
+
+<p style="margin-left:14%;">Password for the specified
+user. Overrides configuration file.</p>
+
+<h2>POSITIONAL ARGUMENTS
+<a name="POSITIONAL ARGUMENTS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>&lt;term&gt;</i></p>
+
+<p style="margin-left:14%;">Search term. Will be used to
+search contacts from their FN (formatted name), EMAIL,
+NICKNAME, ORG (company) and TITLE fields.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are
+excerpts of <i>&#732;/.config/aerc/accounts.conf</i>.</p>
+
+<h3>Fastmail
+<a name="Fastmail"></a>
+</h3>
+
+
+<p style="margin-left:14%; margin-top: 1em">[fastmail] <br>
+carddav-source =
+https://janedoe%40fastmail.com@carddav.fastmail.com/dav/addressbooks/user/janedoe@fastmail.com/Default
+<br>
+carddav-source-cred-cmd = pass fastmail.com/janedoe <br>
+address-book-cmd = carddav-query -S fastmail %s</p>
+
+<h3>Gmail
+<a name="Gmail"></a>
+</h3>
+
+
+<p style="margin-left:14%; margin-top: 1em">[gmail] <br>
+carddav-source =
+https://johndoe%40gmail.com@www.googleapis.com/carddav/v1/principals/johndoe@gmail.com/lists/default
+<br>
+carddav-source-cred-cmd = pass gmail.com/johndoe <br>
+address-book-cmd = carddav-query -S gmail %s</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>aerc-config</b>(5)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Originally
+created by Drew DeVault and maintained by Robin Jarry who is
+assisted by other open source contributors. For more
+information about aerc development, see
+<i>https://sr.ht/&#732;rjarry/aerc/</i>.</p>
+<hr>
+</body>
+</html>

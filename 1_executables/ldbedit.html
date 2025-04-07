@@ -1,0 +1,223 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>LDBEDIT</title>
+
+</head>
+<body>
+
+<h1 align="center">LDBEDIT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#VERSION">VERSION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ldbedit - Edit
+LDB databases using your preferred editor</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em"><b>ldbedit</b> [-?] [--usage]
+[-s&nbsp;base|one|sub] [-b&nbsp;basedn] [-a]
+[-e&nbsp;editor] [-H&nbsp;LDB-URL] [expression]
+[attributes...]</p> </td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ldbedit is a
+utility that allows you to edit LDB entries (in tdb files,
+sqlite files or LDAP servers) using your preferred editor.
+ldbedit generates an LDIF file based on your query, allows
+you to edit the LDIF, and then merges that LDIF back into
+the LDB backend.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-?, --help</p>
+
+<p style="margin-left:14%;">Show list of available options,
+and a phrase describing what that option does.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--usage</p>
+
+<p style="margin-left:14%;">Show list of available options.
+This is similar to the help option, however it does not
+provide any description, and is hence shorter.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-H
+&lt;ldb-url&gt;</p>
+
+<p style="margin-left:14%;">LDB URL to connect to. For a
+tdb database, this will be of the form
+tdb://<i>filename</i>. For a LDAP connection over unix
+domain sockets, this will be of the form
+ldapi://<i>socket</i>. For a (potentially remote) LDAP
+connection over TCP, this will be of the form
+ldap://<i>hostname</i>. For an SQLite database, this will be
+of the form sqlite://<i>filename</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-s
+one|sub|base</p>
+
+<p style="margin-left:14%;">Search scope to use. One-level,
+subtree or base.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-a, -all</p>
+
+<p style="margin-left:14%;">Edit all records. This allows
+you to apply the same change to a number of records at once.
+You probably want to combine this with an expression of the
+form &quot;objectclass=*&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-e editor,
+--editor editor</p>
+
+<p style="margin-left:14%;">Specify the editor that should
+be used (overrides the VISUAL and EDITOR environment
+variables). If this option is not used, and neither VISUAL
+nor EDITOR environment variables are set, then the vi editor
+will be used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-b basedn</p>
+
+<p style="margin-left:14%;">Specify Base Distinguished Name
+to use.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-v,
+--verbose</p>
+
+<p style="margin-left:14%;">Make ldbedit more verbose about
+the operations that are being performed. Without this
+option, ldbedit will only provide a summary change line.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">LDB_URL</p>
+
+<p style="margin-left:14%;">LDB URL to connect to. This can
+be overridden by using the -H command-line option.)</p>
+
+<p style="margin-left:9%; margin-top: 1em">VISUAL and
+EDITOR</p>
+
+<p style="margin-left:14%;">Environment variables used to
+determine what editor to use. VISUAL takes precedence over
+EDITOR, and both are overridden by the -e command-line
+option.</p>
+
+<h2>VERSION
+<a name="VERSION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page is
+correct for version 1.1 of LDB.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ldb(3),
+ldbmodify(1), ldbdel(1), ldif(5), vi(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ldb was written
+by <b><font color="#0000FF">Andrew Tridgell</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">If
+you wish to report a problem or make a suggestion then
+please see the</font>
+<b><font color="#0000FF">http://ldb.samba.org/</font></b>
+<font color="#000000">web site for current contact and
+maintainer information.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+manpage was written by Jelmer Vernooij and updated by Brad
+Hards.</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><font color="#000000">Andrew
+Tridgell</font></p> </td>
+<td width="67%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">https://www.samba.org/&#732;tridge/</font></p>
+<hr>
+</body>
+</html>

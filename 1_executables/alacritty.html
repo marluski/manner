@@ -1,0 +1,369 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:41 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ALACRITTY</title>
+
+</head>
+<body>
+
+<h1 align="center">ALACRITTY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#FLAGS">FLAGS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SUBCOMMANDS">SUBCOMMANDS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#MAINTAINERS">MAINTAINERS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Alacritty - A
+fast, cross-platform, OpenGL terminal emulator.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Alacritty is a
+modern terminal emulator that comes with sensible defaults,
+but allows for extensive configuration. By integrating with
+other applications, rather than reimplementing their
+functionality, it manages to provide a flexible set of
+features with high performance.</p>
+
+<h2>FLAGS
+<a name="FLAGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Prints help
+information.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--hold</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Remain open
+after child process exits.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--daemon</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Do not spawn an
+initial window.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--print-events</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Print all
+events to STDOUT.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Reduces the
+level of verbosity (the min level is <b>-qq</b>).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ref-test</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Generates ref
+test</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Increases the
+level of verbosity (the max level is <b>-vvv</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V,
+--version</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Prints version
+information.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--class</b>
+<i>&lt;GENERAL&gt;</i> |
+<i>&lt;GENERAL&gt;</i>,<i>&lt;INSTANCE&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Defines the
+window class hint on Linux.</p>
+
+<p style="margin-left:14%; margin-top: 1em">When only the
+general class is passed, instance will be set to the same
+value.</p>
+
+<p style="margin-left:14%; margin-top: 1em">On Wayland the
+general class sets the <i>app_id</i>, while the instance
+class is ignored.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default:
+<i>Alacritty,Alacritty</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e,
+--command</b> <i>&lt;COMMAND&gt;...</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Command and
+args to execute (must be last argument).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--config-file</b>
+<i>&lt;CONFIG_FILE&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Specify
+alternative configuration file.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Alacritty
+doesn&rsquo;t create the config file for you, but it looks
+for one in the following locations on UNIX systems:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="2%"></td>
+<td width="53%">
+
+
+<p><i>$XDG_CONFIG_HOME/alacritty/alacritty.toml</i></p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="2%"></td>
+<td width="53%">
+
+
+<p><i>$XDG_CONFIG_HOME/alacritty.toml</i></p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="2%"></td>
+<td width="53%">
+
+
+<p><i>$HOME/.config/alacritty/alacritty.toml</i></p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="3%">
+
+
+<p>4.</p></td>
+<td width="2%"></td>
+<td width="53%">
+
+
+<p><i>$HOME/.alacritty.toml</i></p></td>
+<td width="23%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">On Windows, the
+config file will be looked for in:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="19%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">1.</p></td>
+<td width="2%"></td>
+<td width="44%">
+
+
+
+<p style="margin-top: 1em"><i>%APPDATA%\alacritty\alacritty.toml</i></p> </td>
+<td width="32%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--embed</b>
+<i>&lt;PARENT&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">X11 window ID
+to embed Alacritty within (decimal or hexadecimal with
+<i>0x</i> prefix).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o,
+--option</b> <i>&lt;OPTION&gt;...</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Override
+configuration file options.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Example:
+<i>alacritty -o
+&rsquo;cursor.style=&quot;Beam&quot;&rsquo;</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--socket</b>
+<i>&lt;SOCKET&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Path for IPC
+socket creation.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-T,
+--title</b> <i>&lt;TITLE&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Defines the
+window title.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Default:
+<i>Alacritty</i></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--working-directory</b>
+<i>&lt;WORKING_DIRECTORY&gt;</i></p>
+
+<p style="margin-left:14%; margin-top: 1em">Start the shell
+in the specified working directory.</p>
+
+<h2>SUBCOMMANDS
+<a name="SUBCOMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>msg</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Send IPC socket
+messages (see <b>alacritty-msg</b>(1)).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>migrate</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Migrate the
+configuration file.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-c,
+--config-file</b> <i>&lt;CONFIG_FILE&gt;</i></p>
+
+<p style="margin-left:19%; margin-top: 1em">Path to the
+configuration file.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-d,
+--dry-run</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Only output
+TOML config to STDOUT.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-i,
+--skip-imports</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Do not recurse
+over imports.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b>--skip-renames</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Do not move
+renamed fields to their new location.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-s,
+--silent</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Do not output
+to STDOUT.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Print help
+information.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>alacritty-msg</b>(1),
+<b>alacritty</b>(5), <b>alacritty-bindings</b>(5)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Found a bug?
+Please report it at
+<i>https://github.com/alacritty/alacritty/issues</i>.</p>
+
+<h2>MAINTAINERS
+<a name="MAINTAINERS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="57%">
+
+
+<p style="margin-top: 1em">Christian Duerr
+&lt;contact@christianduerr.com&gt;</p> </td>
+<td width="29%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="57%">
+
+
+<p>Kirill Chibisov &lt;contact@kchibisov.com&gt;</p></td>
+<td width="29%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

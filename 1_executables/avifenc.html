@@ -1,0 +1,639 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>AVIFENC</title>
+
+</head>
+<body>
+
+<h1 align="center">AVIFENC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BASIC OPTIONS">BASIC OPTIONS</a><br>
+<a href="#ADVANCED OPTIONS">ADVANCED OPTIONS</a><br>
+<a href="#UPDATABLE OPTIONS">UPDATABLE OPTIONS</a><br>
+<a href="#AOM-SPECIFIC ADVANCED OPTIONS">AOM-SPECIFIC ADVANCED OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">avifenc -
+compress an image file to an AVIF file</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>avifenc</b>
+[<i>options</i>]
+<i>input.</i>[<i>jpg</i>|<i>jpeg</i>|<i>png</i>|<i>y4m</i>]
+<i>output.avif</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>avifenc</b></i>
+compresses an image file to an AVIF file. Input format can
+be either JPEG, PNG or YUV4MPEG2 (Y4M).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show syntax help.</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Show the version number.</p>
+
+<h3>BASIC OPTIONS
+<a name="BASIC OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>,
+<b>--qcolor</b> <i>Q</i></p>
+
+<p style="margin-left:18%;">Quality for color in 0..100
+where 100 is lossless.</p>
+
+<p style="margin-left:9%;"><b>--qalpha</b> <i>Q</i></p>
+
+<p style="margin-left:18%;">Quality for alpha in 0..100
+where 100 is lossless.</p>
+
+<p style="margin-left:9%;"><b>-s</b>, <b>--speed</b>
+<i>S</i></p>
+
+<p style="margin-left:18%;">Encoder speed in 0..10 where 0
+is the slowest, 10 is the fastest. Or &lsquo;default&rsquo;
+or &lsquo;d&rsquo; for codec internal defaults. (Default:
+6).</p>
+
+<h3>ADVANCED OPTIONS
+<a name="ADVANCED OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-j</b>,
+<b>--jobs</b> <i>J</i></p>
+
+<p style="margin-left:18%;">Number of jobs (worker
+threads), or &lsquo;all&rsquo; to potentially use as many
+cores as possible. (Default: all).</p>
+
+<p style="margin-left:9%;"><b>--no-overwrite</b></p>
+
+<p style="margin-left:18%;">Never overwrite existing output
+file.</p>
+
+<p style="margin-left:9%;"><b>-o</b>, <b>--output</b>
+<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Instead of using the last
+filename given as output, use this filename.</p>
+
+<p style="margin-left:9%;"><b>-l</b>, <b>--lossless</b></p>
+
+<p style="margin-left:18%;">Set all defaults to encode
+losslessly, and emit warnings when settings/input
+don&rsquo;t allow for it.</p>
+
+<p style="margin-left:9%;"><b>-d</b>, <b>--depth</b>
+<i>D</i></p>
+
+<p style="margin-left:18%;">Output depth, one of 8, 10 or
+12. (JPEG/PNG only; For y4m or stdin, depth is
+retained).</p>
+
+<p style="margin-left:9%;"><b>-y</b>, <b>--yuv</b>
+<i>FORMAT</i></p>
+
+<p style="margin-left:18%;">Output format, one of
+&lsquo;auto&rsquo; (default), 444, 422, 420 or 400. Ignored
+for y4m or stdin (y4m format is retained).</p>
+
+<p style="margin-left:18%; margin-top: 1em">For JPEG, auto
+honors the JPEG&rsquo;s internal format, if possible. For
+grayscale PNG, auto defaults to 400. <br>
+For all other cases, auto defaults to 444.</p>
+
+<p style="margin-left:9%;"><b>-p</b>,
+<b>--premultiply</b></p>
+
+<p style="margin-left:18%;">Premultiply color by the alpha
+channel and signal this in the AVIF.</p>
+
+<p style="margin-left:9%;"><b>--sharpyuv</b></p>
+
+<p style="margin-left:18%;">Use sharp RGB to YUV420
+conversion (if supported). Ignored for y4m or if output is
+not 420.</p>
+
+<p style="margin-left:9%;"><b>--stdin</b></p>
+
+<p style="margin-left:18%;">Read y4m frames from stdin
+instead of files; no input filenames allowed, must set
+before offering output filename.</p>
+
+<p style="margin-left:9%;"><b>--cicp</b>, <b>--nclx</b>
+<i>P</i>/<i>T</i>/<i>M</i></p>
+
+<p style="margin-left:18%;">Set CICP values (nclx colr box)
+(3 raw numbers, use <b>-r</b> to set range flag).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="35%">
+
+
+<p><i>P</i> = color primaries</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="35%">
+
+
+<p><i>T</i> = transfer characteristics</p></td>
+<td width="44%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="35%">
+
+
+<p><i>M</i> = matrix coefficients</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Use 2 for any
+you wish to leave unspecified.</p>
+
+<p style="margin-left:9%;"><b>-r</b>, <b>--range</b>
+<i>RANGE</i></p>
+
+<p style="margin-left:18%;">YUV range, one of
+&lsquo;limited&rsquo; or &lsquo;l&rsquo;, &lsquo;full&rsquo;
+or &lsquo;f&rsquo;. (JPEG/PNG only, default: full; For y4m
+or stdin, range is retained).</p>
+
+<p style="margin-left:9%;"><b>--target-size</b>
+<i>S</i></p>
+
+<p style="margin-left:18%;">Set target file size in bytes
+(up to 7 times slower)</p>
+
+<p style="margin-left:9%;"><b>--progressive</b></p>
+
+<p style="margin-left:18%;">EXPERIMENTAL: Auto set
+parameters to encode a simple layered image supporting
+progressive rendering from a single input frame.</p>
+
+<p style="margin-left:9%;"><b>--layered</b></p>
+
+<p style="margin-left:18%;">EXPERIMENTAL: Encode a layered
+AVIF. Each input is encoded as one layer and at most 4
+layers can be encoded.</p>
+
+<p style="margin-left:9%;"><b>-g</b>, <b>--grid</b>
+<i>MxN</i></p>
+
+<p style="margin-left:18%;">Encode a single-image grid AVIF
+with M cols &amp; N rows. Either supply MxN identical W/H/D
+images, or a single image that can be evenly split into the
+MxN grid and follow AVIF grid image restrictions. The grid
+will adopt the color profile of the first image
+supplied.</p>
+
+<p style="margin-left:9%;"><b>-c</b>, <b>--codec</b>
+<i>C</i></p>
+
+<p style="margin-left:18%;">Codec to use.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Possible values
+depend on the codecs enabled at build time (see
+<b>--help</b> or <b>--version</b> for the available codecs).
+Default is auto-selected from the available codecs. <br>
+Possible values are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="6%">
+
+
+<p><b>aom</b></p></td>
+<td width="73%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="6%">
+
+
+<p><b>rav1e</b></p></td>
+<td width="73%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="6%">
+
+
+<p><b>svt</b></p></td>
+<td width="73%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--exif</b>
+<i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Provide an Exif metadata
+payload to be associated with the primary item (implies
+--ignore-exif).</p>
+
+<p style="margin-left:9%;"><b>--xmp</b> <i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Provide an XMP metadata payload
+to be associated with the primary item (implies
+--ignore-xmp).</p>
+
+<p style="margin-left:9%;"><b>--icc</b> <i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Provide an ICC profile payload
+to be associated with the primary item (implies
+--ignore-icc).</p>
+
+<p style="margin-left:9%;"><b>--timescale</b>, <b>--fps</b>
+<i>V</i></p>
+
+<p style="margin-left:18%;">Timescale for image sequences.
+If all frames are 1 timescale in length, this is equivalent
+to frames per second. (Default: 30) If neither duration nor
+timescale are set, avifenc will attempt to use the framerate
+stored in a y4m header, if present.</p>
+
+<p style="margin-left:9%;"><b>-k</b>, <b>--keyframe</b>
+<i>INTERVAL</i></p>
+
+<p style="margin-left:18%;">Maximum keyframe interval for
+image sequences (any set of <i>INTERVAL</i> consecutive
+frames will have at least one keyframe). Set to 0 to disable
+(default).</p>
+
+<p style="margin-left:9%;"><b>--ignore-exif</b></p>
+
+<p style="margin-left:18%;">If the input file contains
+embedded Exif metadata, ignore it (no-op if absent).</p>
+
+<p style="margin-left:9%;"><b>--ignore-xmp</b></p>
+
+<p style="margin-left:18%;">If the input file contains
+embedded XMP metadata, ignore it (no-op if absent).</p>
+
+<p style="margin-left:9%;"><b>--ignore-profile</b>,
+<b>--ignore-icc</b></p>
+
+<p style="margin-left:18%;">If the input file contains an
+embedded color profile, ignore it (no-op if absent).</p>
+
+<p style="margin-left:9%;"><b>--ignore-gain-map</b></p>
+
+<p style="margin-left:18%;">If the input file contains an
+embedded gain map, ignore it (no-op if absent).</p>
+
+<p style="margin-left:9%;"><b>--qgain-map</b> <i>Q</i></p>
+
+<p style="margin-left:18%;">Quality for the gain map in
+0..100 where 100 is lossless.</p>
+
+<p style="margin-left:9%;"><b>--pasp</b>
+<i>H</i>,<i>V</i></p>
+
+<p style="margin-left:18%;">Add pasp property (aspect
+ratio). H=horizontal spacing, V=vertical spacing.</p>
+
+<p style="margin-left:9%;"><b>--crop</b>
+<i>CROPX</i>,<i>CROPY</i>,<i>CROPW</i>,<i>CROPH</i></p>
+
+<p style="margin-left:18%;">Add clap property (clean
+aperture), but calculated from a crop rectangle.</p>
+
+<p style="margin-left:9%;"><b>--clap</b>
+<i>WN</i>,<i>WD</i>,<i>HN</i>,<i>HD</i>,<i>HON</i>,<i>HOD</i>,<i>VON</i>,<i>VOD</i></p>
+
+<p style="margin-left:18%;">Add clap property (clean
+aperture). Width, Height, HOffset, VOffset (in
+numerator/denominator pairs).</p>
+
+<p style="margin-left:9%;"><b>--irot</b> <i>ANGLE</i></p>
+
+<p style="margin-left:18%;">Add irot property (rotation) in
+0..3. Makes (90 * ANGLE) degree rotation anti-clockwise.</p>
+
+<p style="margin-left:9%;"><b>--imir</b> <i>AXIS</i></p>
+
+<p style="margin-left:18%;">Add imir property (mirroring).
+0=top-to-bottom, 1=left-to-right.</p>
+
+<p style="margin-left:9%;"><b>--clli</b>
+<i>MaxCLL</i>,<i>MaxPALL</i></p>
+
+<p style="margin-left:18%;">Add clli property (content
+light level information).</p>
+
+<p style="margin-left:9%;"><b>--repetition-count</b>
+<i>N</i></p>
+
+<p style="margin-left:18%;">Number of times an animated
+image sequence will be repeated, or &lsquo;infinite&rsquo;
+for infinite repetitions. (Default: infinite).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>--</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Signal the end of options. Everything after this is
+interpreted as file names.</p></td></tr>
+</table>
+
+<h3>UPDATABLE OPTIONS
+<a name="UPDATABLE OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options can optionally have a <b>:u</b> (or <b>:update</b>)
+suffix like <b>-q:u</b> <b><i>Q</i></b>, to apply only to
+input files appearing after the option: <b><br>
+-q</b>, <b>--qcolor</b> <i>Q</i></p>
+
+<p style="margin-left:18%;">Quality for color in 0..100
+where 100 is lossless.</p>
+
+<p style="margin-left:9%;"><b>--qalpha</b> <i>Q</i></p>
+
+<p style="margin-left:18%;">Quality for alpha in 0..100
+where 100 is lossless.</p>
+
+<p style="margin-left:9%;"><b>--qgain-map</b> <i>Q</i></p>
+
+<p style="margin-left:18%;">Quality for the gain map in
+0..100 where 100 is lossless.</p>
+
+<p style="margin-left:9%;"><b>--tilerowslog2</b>
+<i>R</i></p>
+
+<p style="margin-left:18%;">log2 of number of tile rows in
+0..6. (Default: 0).</p>
+
+<p style="margin-left:9%;"><b>--tilecolslog2</b>
+<i>C</i></p>
+
+<p style="margin-left:18%;">log2 of number of tile columns
+in 0..6. (Default: 0).</p>
+
+<p style="margin-left:9%;"><b>--autotiling</b></p>
+
+<p style="margin-left:18%;">Set --tilerowslog2 and
+--tilecolslog2 automatically.</p>
+
+<p style="margin-left:9%;"><b>--scaling-mode</b>
+<i>N</i>[/<i>D</i>]</p>
+
+<p style="margin-left:18%;">EXPERIMENTAL: Set frame (layer)
+scaling mode as given fraction. If omitted, the denominator
+defaults to 1. (Default: 1/1).</p>
+
+<p style="margin-left:9%;"><b>--duration</b> <i>D</i></p>
+
+<p style="margin-left:18%;">Frame durations (in timescales)
+(default: 1). This option always applies to following inputs
+with or without the :u suffix.</p>
+
+<p style="margin-left:9%;"><b>-a</b>, <b>--advanced</b>
+<i>KEY</i>[=<i>VALUE</i>]</p>
+
+<p style="margin-left:18%;">Pass an advanced,
+codec-specific key/value string pair directly to the codec.
+avifenc will warn on any not used by the codec.</p>
+
+<h3>AOM-SPECIFIC ADVANCED OPTIONS
+<a name="AOM-SPECIFIC ADVANCED OPTIONS"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">1.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+
+<p style="margin-top: 1em"><b><i>&lt;key&gt;</i></b><b>=</b><b><i>&lt;value&gt;</i></b>
+applies to both the color (YUV) planes and the alpha plane
+(if present).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+
+<p><b>color:</b><b><i>&lt;key&gt;</i></b><b>=</b><b><i>&lt;value&gt;</i></b>
+or
+<b>c:</b><b><i>&lt;key&gt;</i></b><b>=</b><b><i>&lt;value&gt;</i></b>
+applies only to the color (YUV) planes.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="1%"></td>
+<td width="87%">
+
+
+
+<p><b>alpha:</b><b><i>&lt;key&gt;</i></b><b>=</b><b><i>&lt;value&gt;</i></b>
+or
+<b>a:</b><b><i>&lt;key&gt;</i></b><b>=</b><b><i>&lt;value&gt;</i></b>
+applies only to the alpha plane (if present). Since the
+alpha plane is encoded as a monochrome image, the options
+that refer to the chroma planes, such as
+enable-chroma-deltaq=B, should not be used with the alpha
+plane. In addition, the film grain options are unlikely to
+make sense for the alpha plane.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When used with
+libaom 3.0.0 or later, any key-value pairs supported by the
+aom_codec_set_option() function can be used. When used with
+libaom 2.0.x or older, the following key-value pairs can be
+used: <b><br>
+aq-mode=</b><b><i>M</i></b></p>
+
+<p style="margin-left:18%;">Adaptive quantization mode.
+0=off (default), 1=variance, 2=complexity, 3=cyclic
+refresh.</p>
+
+
+<p style="margin-left:9%;"><b>cq-level=</b><b><i>Q</i></b></p>
+
+<p style="margin-left:18%;">Constant/Constrained Quality
+level in 0..63, end-usage must be set to cq or q.</p>
+
+
+<p style="margin-left:9%;"><b>enable-chroma-deltaq=</b><b><i>B</i></b></p>
+
+<p style="margin-left:18%;">Enable delta quantization in
+chroma planes. 0=disable (default), 1=enable.</p>
+
+
+<p style="margin-left:9%;"><b>end-usage=</b><b><i>MODE</i></b></p>
+
+<p style="margin-left:18%;">Rate control mode, one of
+&lsquo;vbr&rsquo;, &lsquo;cbr&rsquo;, &lsquo;cq&rsquo;, or
+&lsquo;q&rsquo;</p>
+
+
+<p style="margin-left:9%;"><b>sharpness=</b><b><i>S</i></b></p>
+
+<p style="margin-left:18%;">Bias towards block sharpness in
+rate-distortion optimization of transform coefficients in
+0..7. (Default: 0).</p>
+
+
+<p style="margin-left:9%;"><b>tune=</b><b><i>METRIC</i></b></p>
+
+<p style="margin-left:18%;">Tune the encoder for distortion
+metric, one of &lsquo;psnr&rsquo; or &lsquo;ssim&rsquo;.
+(Default: psnr).</p>
+
+
+<p style="margin-left:9%;"><b>film-grain-test=</b><b><i>TEST</i></b></p>
+
+<p style="margin-left:18%;">Film grain test vectors in
+0..16. 0=none (default), 1=test1, 2=test2, ...
+16=test16.</p>
+
+
+<p style="margin-left:9%;"><b>film-grain-table=</b><b><i>FILENAME</i></b></p>
+
+<p style="margin-left:18%;">Path to file containing film
+grain parameters.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Compress a PNG
+file to an AVIF file:</p>
+
+<p style="margin-left:18%;">$ <b>avifenc input.png
+output.avif</b></p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bugs can be
+reported on GitHub at:</p>
+
+
+<p style="margin-left:18%;"><a href="https://github.com/AOMediaCodec/libavif/issues">https://github.com/AOMediaCodec/libavif/issues</a></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>avifdec</b>(1)</p>
+<hr>
+</body>
+</html>

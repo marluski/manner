@@ -1,0 +1,191 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:46 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>psktool</title>
+
+</head>
+<body>
+
+<h1 align="center">psktool</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>psktool</b> -
+GnuTLS PSK tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>psktool</b>
+[<b>-flags</b>] [<b>-flag</b> [<i>value</i>]]
+[<b>--option-name</b>[[=| ]<i>value</i>]]</p>
+
+<p style="margin-left:9%; margin-top: 1em">All arguments
+must be options.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Program that
+generates random keys for use with TLS-PSK. The keys are
+stored in hexadecimal format in a key file.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>
+<i>num</i>, <b>--debug</b>=<i>num</i> Enable debugging. This
+option takes an integer <br>
+number as its argument. The value of <i>num</i> is
+constrained to being:</p>
+
+<p style="margin-left:14%;">in the range 0 through 9999</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+debug level.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>
+<i>num</i>, <b>--keysize</b>=<i>num</i> Specify the key size
+in bytes (default is <br>
+32-bytes or 256-bits). This option takes an integer number
+as its <br>
+argument. The value of <i>num</i> is constrained to
+being:</p>
+
+<p style="margin-left:14%;">in the range 0 through 512</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>
+<i>str</i>, <b>--username</b>=<i>str</i> Specify the
+username to use.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b>
+<i>str</i>, <b>--pskfile</b>=<i>str</i> Specify a pre-shared
+key file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This option will
+specify the pre-shared key file to store the generated <br>
+keys.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--passwd</b>
+This is an alias for the <i>--pskfile</i> option.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE: THIS
+OPTION IS DEPRECATED <br>
+-v</b> <i>arg</i>, <b>--version</b>=<i>arg</i> Output
+version of program and exit. The default <br>
+mode is &lsquo;v&rsquo;, a simple version. The
+&lsquo;c&rsquo; mode will print copyright <br>
+information and &lsquo;n&rsquo; will print the full
+copyright notice.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b> Display usage information and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-!</b>,
+<b>--more-help</b> Pass the extended usage information
+through a pager.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:18%; margin-top: 1em">To add a user
+&rsquo;psk_identity&rsquo; in <i>keys.psk</i> for use with
+GnuTLS run:</p>
+
+<p style="margin-left:23%;">$ ./psktool -u psk_identity -p
+keys.psk <br>
+Generating a random key for user &rsquo;psk_identity&rsquo;
+<br>
+Key stored to keys.psk <br>
+$ cat keys.psk <br>
+psk_identity:88f3824b3e5659f52d00e959bacab954b6540344 <br>
+$</p>
+
+<p style="margin-left:18%; margin-top: 1em">This command
+will create <i>keys.psk</i> if it does not exist and will
+add user &rsquo;psk_identity&rsquo;.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">One of the
+following exit values will be returned: <br>
+0 (EXIT_SUCCESS) Successful program execution.</p>
+
+<p style="margin-left:9%; margin-top: 1em">1 (EXIT_FAILURE)
+The operation failed or the command syntax was not <br>
+valid.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:18%; margin-top: 1em">gnutls-cli-debug
+(1), gnutls-serv (1), srptool (1), certtool (1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2020-2023 Free Software Foundation, and others all rights
+reserved. This program is released under the terms of the
+GNU General Public License, version 3 or later</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to: bugs@gnutls.org</p>
+<hr>
+</body>
+</html>

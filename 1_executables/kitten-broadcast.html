@@ -1,0 +1,266 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-broadcast</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-broadcast</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Overview">Overview</a><br>
+<a href="#Source code for broadcast">Source code for broadcast</a><br>
+<a href="#Command line interface">Command line interface</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Author">Author</a><br>
+<a href="#Copyright">Copyright</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-broadcast
+- Broadcast typed text to kitty windows</p>
+
+<h2>Overview
+<a name="Overview"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Type text in
+all kitty windows simultaneously</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>broadcast</b> kitten can be used to type text
+simultaneously in all <i>kitty windows</i> (or a subset as
+desired).</p>
+
+<p style="margin-left:9%; margin-top: 1em">To use it,
+simply create a mapping in <b>kitty.conf</b> such as:</p>
+
+<p style="margin-left:13%; margin-top: 1em">map f1 launch
+--allow-remote-control kitty +kitten broadcast</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then press the
+<b>F1</b> key and whatever you type in the newly created
+window will be sent to all kitty windows.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can use the
+options described below to control which windows are
+selected.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example,
+only broadcast to other windows in the current tab:</p>
+
+<p style="margin-left:13%; margin-top: 1em">map f1 launch
+--allow-remote-control kitty +kitten broadcast --match-tab
+state:focused</p>
+
+<h2>Source code for broadcast
+<a name="Source code for broadcast"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The source code
+for this kitten is <i>available on GitHub</i>.</p>
+
+<h2>Command line interface
+<a name="Command line interface"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">kitty +kitten
+broadcast [options] [initial text to send ...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Broadcast typed
+text to kitty windows. By default text is sent to all
+windows, unless one of the matching options is specified</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--hide-input-toggle
+&lt;HIDE_INPUT_TOGGLE&gt;</b></p>
+
+<p style="margin-left:18%;">Key to press that will toggle
+hiding of the input in the broadcast window itself. Useful
+while typing a password, prevents the password from being
+visible on the screen. Default: <b>Ctrl+Alt+Esc</b></p>
+
+<p style="margin-left:9%;"><b>--end-session
+&lt;END_SESSION&gt;</b></p>
+
+<p style="margin-left:18%;">Key to press to end the
+broadcast session. Default: <b>Ctrl+Esc</b></p>
+
+<p style="margin-left:9%;"><b>--match &lt;MATCH&gt;, -m
+&lt;MATCH&gt;</b></p>
+
+<p style="margin-left:18%;">The window to match. Match
+specifications are of the form: field:query. Where field can
+be one of: <b>id</b>, <b>title</b>, <b>pid</b>, <b>cwd</b>,
+<b>cmdline</b>, <b>num</b>, <b>env</b>, <b>var</b>,
+<b>state</b>, <b>neighbor</b>, and <b>recent</b>. query is
+the expression to match. Expressions can be either a number
+or a regular expression, and can be <i>combined using
+Boolean operators</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The special
+value <b>all</b> matches all windows.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For numeric
+fields: <b>id</b>, <b>pid</b>, <b>num</b> and <b>recent</b>,
+the expression is interpreted as a number, not a regular
+expression. Negative values for <b>id</b> match from the
+highest id number down, in particular, -1 is the most
+recently created window.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The field
+<b>num</b> refers to the window position in the current tab,
+starting from zero and counting clockwise (this is the same
+as the order in which the windows are reported by the
+<i>kitten @ ls</i> command).</p>
+
+<p style="margin-left:18%; margin-top: 1em">The window id
+of the current window is available as the
+<i>KITTY_WINDOW_ID</i> environment variable.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The field
+<b>recent</b> refers to recently active windows in the
+currently active tab, with zero being the currently active
+window, one being the previously active window and so
+on.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The field
+<b>neighbor</b> refers to a neighbor of the active window in
+the specified direction, which can be: <b>left</b>,
+<b>right</b>, <b>top</b> or <b>bottom</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When using the
+<b>env</b> field to match on environment variables, you can
+specify only the environment variable name or a name and
+value, for example, <b>env:MY_ENV_VAR=2</b>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Similarly, the
+<b>var</b> field matches on user variables set on the
+window. You can specify name or name and value as with the
+<b>env</b> field.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The field
+<b>state</b> matches on the state of the window. Supported
+states are: <b>active</b>, <b>focused</b>,
+<b>needs_attention</b>, <b>parent_active</b>,
+<b>parent_focused</b>, <b>self</b>, <b>overlay_parent</b>.
+Active windows are the windows that are active in their
+parent tab. There is only one focused window and it is the
+window to which keyboard events are delivered. If no window
+is focused, the last focused window is matched. The value
+<b>self</b> matches the window in which the remote control
+command is run. The value <b>overlay_parent</b> matches the
+window that is under the <b>self</b> window, when the self
+window is an overlay.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note that you
+can use the <i>kitten @ ls</i> command to get a list of
+windows.</p>
+
+<p style="margin-left:9%;"><b>--match-tab
+&lt;MATCH_TAB&gt;, -t &lt;MATCH_TAB&gt;</b></p>
+
+<p style="margin-left:18%;">The tab to match. Match
+specifications are of the form: field:query. Where field can
+be one of: <b>id</b>, <b>index</b>, <b>title</b>,
+<b>window_id</b>, <b>window_title</b>, <b>pid</b>,
+<b>cwd</b>, <b>cmdline env</b>, <b>var</b>, <b>state</b> and
+<b>recent</b>. query is the expression to match. Expressions
+can be either a number or a regular expression, and can be
+<i>combined using Boolean operators</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The special
+value <b>all</b> matches all tabs.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For numeric
+fields: <b>id</b>, <b>index</b>, <b>window_id</b>,
+<b>pid</b> and <b>recent</b>, the expression is interpreted
+as a number, not a regular expression. Negative values for
+<b>id</b>/<b>window_id</b> match from the highest id number
+down, in particular, -1 is the most recently created
+tab/window.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When using
+<b>title</b> or <b>id</b>, first a matching tab is looked
+for, and if not found a matching window is looked for, and
+the tab for that window is used.</p>
+
+<p style="margin-left:18%; margin-top: 1em">You can also
+use <b>window_id</b> and <b>window_title</b> to match the
+tab that contains the window with the specified id or
+title.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The
+<b>index</b> number is used to match the nth tab in the
+currently active OS window. The <b>recent</b> number matches
+recently active tabs in the currently active OS window, with
+zero being the currently active tab, one the previously
+active tab and so on.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When using the
+<b>env</b> field to match on environment variables, you can
+specify only the environment variable name or a name and
+value, for example, <b>env:MY_ENV_VAR=2</b>. Tabs containing
+any window with the specified environment variables are
+matched. Similarly, <b>var</b> matches tabs containing any
+window with the specified user variable.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The field
+<b>state</b> matches on the state of the tab. Supported
+states are: <b>active</b>, <b>focused</b>,
+<b>needs_attention</b>, <b>parent_active</b> and
+<b>parent_focused</b>. Active tabs are the tabs that are
+active in their parent OS window. There is only one focused
+tab and it is the tab to which keyboard events are
+delivered. If no tab is focused, the last focused tab is
+matched.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Note that you
+can use the <i>kitten @ ls</i> command to get a list of
+tabs.</p>
+
+<h2>Author
+<a name="Author"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kovid Goyal</p>
+
+<h2>Copyright
+<a name="Copyright"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2025, Kovid
+Goyal</p>
+<hr>
+</body>
+</html>

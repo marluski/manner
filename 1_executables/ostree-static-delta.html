@@ -1,0 +1,264 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE STATIC-DELTA</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE STATIC-DELTA</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#GENERATE OPTIONS">GENERATE OPTIONS</a><br>
+<a href="#APPLY-OFFLINE OPTIONS">APPLY-OFFLINE OPTIONS</a><br>
+<a href="#VERIFY OPTIONS">VERIFY OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-static-delta
+- Manage static delta files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><b>ostree static-delta
+list</b></p> </td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><b>ostree static-delta
+show</b></p> </td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><b>ostree static-delta
+delete</b></p> </td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><b>ostree static-delta
+generate</b> {--to=REV} [OPTIONS...]</p></td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><b>ostree static-delta
+apply-offline</b> [OPTIONS...] {PATH} [KEY-ID...]</p></td>
+<td width="6%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="85%">
+
+
+<p style="margin-top: 1em"><b>ostree static-delta
+verify</b> [OPTIONS...] {STATIC-DELTA} [KEY-ID...]</p></td>
+<td width="6%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">List and
+manipulate static delta files.</p>
+
+<h2>GENERATE OPTIONS
+<a name="GENERATE OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--from</b>=&quot;REV&quot;</p>
+
+<p style="margin-left:14%;">Create delta from revision
+REV.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--to</b>=&quot;REV&quot;</p>
+
+<p style="margin-left:14%;">Create delta to revision REV.
+(This option is required.) The delta is from the parent of
+REV, unless specified otherwise by <b>--from</b> or
+<b>--empty</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--empty</b></p>
+
+<p style="margin-left:14%;">Create delta from scratch.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--max-usize</b>=SIZE</p>
+
+<p style="margin-left:14%;">Maximum uncompressed size in
+megabytes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign-type</b>=ENGINE</p>
+
+<p style="margin-left:14%;">Use particular signature
+engine. Currently available ed25519 and dummy signature
+types. The default is ed25519.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign</b>=&quot;KEY-ID&quot;</p>
+
+<p style="margin-left:14%;">There KEY-ID is:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+ed25519:</b></p>
+
+<p style="margin-left:19%;">base64-encoded secret key for
+signing.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+dummy:</b></p>
+
+<p style="margin-left:19%;">ASCII-string used as secret
+key.</p>
+
+<h2>APPLY-OFFLINE OPTIONS
+<a name="APPLY-OFFLINE OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>KEY-ID</b></p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+ed25519:</b></p>
+
+<p style="margin-left:19%;">base64-encoded public key for
+verifying.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+dummy:</b></p>
+
+<p style="margin-left:19%;">ASCII-string used as public
+key.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign-type</b>=ENGINE</p>
+
+<p style="margin-left:14%;">Use particular signature
+engine. Currently available ed25519 and dummy signature
+types.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keys-file</b></p>
+
+<p style="margin-left:14%;">Read key(s) from file filename.
+Valid for ed25519 signature type. For ed25519 this file must
+contain base64-encoded public key(s) per line for
+verifying.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keys-dir</b></p>
+
+<p style="margin-left:14%;">Redefine the system path, where
+to search files and subdirectories with well-known and
+revoked keys.</p>
+
+<h2>VERIFY OPTIONS
+<a name="VERIFY OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>KEY-ID</b></p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+ed25519:</b></p>
+
+<p style="margin-left:19%;">base64-encoded public key for
+verifying.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+dummy:</b></p>
+
+<p style="margin-left:19%;">ASCII-string used as public
+key.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign-type</b>=ENGINE</p>
+
+<p style="margin-left:14%;">Use particular signature
+engine. Currently available ed25519 and dummy signature
+types. The default is ed25519.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keys-file</b></p>
+
+<p style="margin-left:14%;">Read key(s) from file filename.
+Valid for ed25519 signature type. For ed25519 this file must
+contain base64-encoded public key(s) per line for
+verifying.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--keys-dir</b></p>
+
+<p style="margin-left:14%;">Redefine the system path, where
+to search files and subdirectories with well-known and
+revoked keys.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+static-delta</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">(No static
+deltas)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CXL-RESERVE-DPA</title>
+
+</head>
+<body>
+
+<h1 align="center">CXL-RESERVE-DPA</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">cxl-reserve-dpa
+- allocate device-physical address space</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>cxl
+reserve-dpa</i> &lt;mem0&gt; [&lt;mem1&gt;..&lt;memN&gt;]
+[&lt;options&gt;]</p>
+
+<p style="margin-left:9%; margin-top: 1em">The CXL region
+provisioning process proceeds in multiple steps. One of the
+steps is identifying and reserving the DPA span that each
+member of the interleave-set (region) contributes in advance
+of attaching that allocation to a region. For development,
+test, and debug purposes this command is a helper to find
+the next available decoder on endpoint (memdev) and mark a
+span of DPA as busy.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;memory
+device(s)&gt;</p>
+
+<p style="margin-left:14%;">A <i>memX</i> device name, or a
+memdev id number. Restrict the operation to the specified
+memdev(s). The keyword <i>all</i> can be specified to
+indicate the lack of any restriction.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-S, --serial</p>
+
+<p style="margin-left:14%;">Rather an a memdev id number,
+interpret the &lt;memdev&gt; argument(s) as a list of serial
+numbers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-b, --bus=</p>
+
+<p style="margin-left:14%;">Restrict the operation to the
+specified bus.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-d,
+--decoder</p>
+
+<p style="margin-left:14%;">Specify the decoder to attempt
+the allocation. The CXL specification mandates that
+allocations must be ordered by DPA and decoder instance.
+I.e. the lowest DPA allocation on the device is covered by
+decoder0, and the last / highest DPA allocation is covered
+by the last decoder. This ordering is enforced by the
+kernel. By default the tool picks the <i>next available</i>
+decoder.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-t, --type</p>
+
+<p style="margin-left:14%;">Select the partition for the
+allocation. CXL devices implement a partition that divdes
+<i>ram</i> and <i>pmem</i> capacity, where <i>pmem</i>
+capacity consumes the higher DPA capacity above the
+partition boundary. The type defaults to <i>pmem</i>. Note
+that given CXL DPA allocation constraints, once any
+<i>pmem</i> allocation is established then all remaining
+<i>ram</i> capacity becomes reserved (skipped).</p>
+
+<p style="margin-left:9%; margin-top: 1em">-f, --force</p>
+
+<p style="margin-left:14%;">The kernel enforces CXL DPA
+allocation ordering constraints, and the tool anticipates
+those and fails operations that are expected to fail without
+sending them to the kernel. For test purposes, continue to
+attempt &quot;expected to fail&quot; operations to exercise
+the driver.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-s, --size</p>
+
+<p style="margin-left:14%;">Specify the size of the
+allocation. This option supports the suffixes &quot;k&quot;
+or &quot;K&quot; for KiB, &quot;m&quot; or &quot;M&quot; for
+MiB, &quot;g&quot; or &quot;G&quot; for GiB and
+&quot;t&quot; or &quot;T&quot; for TiB. This defaults to
+&quot;all available capacity of the specified
+type&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-v</p>
+
+<p style="margin-left:14%;">Turn on verbose debug messages
+in the library (if libcxl was built with logging and debug
+enabled).</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2016 - 2022, Intel Corporation. License GPLv2: GNU GPL
+version 2 &lt;http://gnu.org/licenses/gpl.html&gt;. This is
+free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">cxl-free-dpa(1)</p>
+<hr>
+</body>
+</html>

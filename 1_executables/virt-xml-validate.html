@@ -1,0 +1,533 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VIRT-XML-VALIDATE</title>
+
+</head>
+<body>
+
+<h1 align="center">VIRT-XML-VALIDATE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">virt-xml-validate
+- validate libvirt XML files against a schema</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>virt-xml-validate</b>
+<i>XML-FILE</i> [<i>SCHEMA-NAME</i>]</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>virt-xml-validate</b>
+<i>OPTION</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Validates a
+libvirt XML for compliance with the published schema. The
+first compulsory argument is the path to the XML file to be
+validated. The optional second argument is the name of the
+schema to validate against. If omitted, the schema name will
+be inferred from the name of the root element in the XML
+document.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid schema
+names currently include</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="3%">
+
+
+<p><b>cpu</b></p></td>
+<td width="85%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format of cpu</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="17%">
+
+
+<p style="margin-top: 1em"><b>domainsnapshot</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by domain snapshot configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em"><b>domaincheckpoint</b></p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by domain checkpoint configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="15%">
+
+
+<p style="margin-top: 1em"><b>domainbackup</b></p></td>
+<td width="73%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by domain backup configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>domaincaps</b></p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format of domain capabilities</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="7%">
+
+
+<p style="margin-top: 1em"><b>domain</b></p></td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by guest domains configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><b>networkport</b></p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by network port configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>network</b></p></td>
+<td width="79%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by virtual network configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>storagepoolcaps</b></p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format of storage pool capabilities</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="14%">
+
+
+<p style="margin-top: 1em"><b>storagepool</b></p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by storage pool configuration</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>storagevol</b></p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by storage volume descriptions</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="9%">
+
+
+<p style="margin-top: 1em"><b>nodedev</b></p></td>
+<td width="79%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by node device descriptions</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="12%">
+
+
+<p style="margin-top: 1em"><b>capability</b></p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used to declare driver capabilities</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><b>nwfilter</b></p></td>
+<td width="78%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by network traffic filters</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em"><b>nwfilterbinding</b></p></td>
+<td width="69%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+XML format used by network filter bindings.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="7%">
+
+
+<p style="margin-top: 1em"><b>secret</b></p></td>
+<td width="81%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by secrets descriptions</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="11%">
+
+
+<p style="margin-top: 1em"><b>interface</b></p></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The schema for
+the XML format used by physical host interfaces</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Display command
+line help usage then exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b>,
+<b>--version</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Display version
+information then exit.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Upon successful
+validation, an exit status of 0 will be set. Upon failure a
+non-zero status will be set.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Daniel P.
+Berrang&eacute;</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+all bugs you discover. This should be done via either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">1.</p></td>
+<td width="1%"></td>
+<td width="20%">
+
+
+<p style="margin-top: 1em">the mailing list</p></td>
+<td width="67%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:13%; margin-top: 1em">&lt;https://libvirt.org/contact.html&gt;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">2.</p></td>
+<td width="1%"></td>
+<td width="19%">
+
+
+<p style="margin-top: 1em">the bug tracker</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:13%; margin-top: 1em">&lt;https://libvirt.org/bugs.html&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Alternatively,
+you may report bugs to your software distributor /
+vendor.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2009-2013 by Red Hat, Inc. Copyright (C) 2009 by Daniel P.
+Berrang&eacute;</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>virt-xml-validate</b>
+is distributed under the terms of the GNU GPL v2+. This is
+free software; see the source for copying conditions. There
+is NO warranty; not even for MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">virsh(1), online
+XML format descriptions
+&lt;https://libvirt.org/format.html&gt; , <br>
+ &lt;https://libvirt.org/&gt;</p>
+<hr>
+</body>
+</html>

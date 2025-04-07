@@ -1,0 +1,180 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SPHINX-AUTOGEN</title>
+
+</head>
+<body>
+
+<h1 align="center">SPHINX-AUTOGEN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sphinx-autogen -
+Generate autodoc stub pages</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sphinx-autogen</b>
+[<i>options</i>] &lt;sourcefile&gt; ...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sphinx-autogen</b>
+is a tool for automatic generation of Sphinx sources that,
+using the <i>autodoc</i> extension, document items included
+in <i>autosummary</i> listing(s).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>sourcefile</i>
+is the path to one or more reStructuredText documents
+containing <i>autosummary</i> entries with the
+<b>:toctree:</b> option set. <i>sourcefile</i> can be an
+<i>fnmatch</i>-style pattern.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o
+&lt;outputdir&gt;</b></p>
+
+<p style="margin-left:18%;">Directory to place the output
+file. If it does not exist, it is created. Defaults to the
+value passed to the <b>:toctree:</b> option.</p>
+
+<p style="margin-left:9%;"><b>-s &lt;suffix&gt;, --suffix
+&lt;suffix&gt;</b></p>
+
+<p style="margin-left:18%;">Default suffix to use for
+generated files. Defaults to <b>rst</b>.</p>
+
+<p style="margin-left:9%;"><b>-t &lt;templates&gt;,
+--templates &lt;templates&gt;</b></p>
+
+<p style="margin-left:18%;">Custom template directory.
+Defaults to <b>None</b>.</p>
+
+<p style="margin-left:9%;"><b>-i,
+--imported-members</b></p>
+
+<p style="margin-left:18%;">Document imported members.</p>
+
+<p style="margin-left:9%;"><b>-a,
+--respect-module-all</b></p>
+
+<p style="margin-left:18%;">Document exactly the members in
+a module's <b>__all__</b> attribute.</p>
+
+<p style="margin-left:9%;"><b>--remove-old</b></p>
+
+<p style="margin-left:18%;">Remove existing files in the
+output directory that are not generated anymore.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Given the
+following directory structure:</p>
+
+<p style="margin-left:13%; margin-top: 1em">docs <br>
+&#9500;&#9472;&#9472; index.rst <br>
+&#9492;&#9472;&#9472; ... <br>
+foobar <br>
+&#9500;&#9472;&#9472; foo <br>
+&#9474; &#9492;&#9472;&#9472; __init__.py <br>
+&#9492;&#9472;&#9472; bar <br>
+&#9500;&#9472;&#9472; __init__.py <br>
+&#9492;&#9472;&#9472; baz <br>
+&#9492;&#9472;&#9472; __init__.py</p>
+
+<p style="margin-left:9%; margin-top: 1em">and assuming
+<b>docs/index.rst</b> contained the following:</p>
+
+<p style="margin-left:13%; margin-top: 1em">Modules <br>
+=======</p>
+
+<p style="margin-left:13%; margin-top: 1em">..
+autosummary:: <br>
+:toctree: modules</p>
+
+<p style="margin-left:13%; margin-top: 1em">foobar.foo <br>
+foobar.bar <br>
+foobar.bar.baz</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you run the
+following:</p>
+
+<p style="margin-left:13%; margin-top: 1em">$ PYTHONPATH=.
+sphinx-autogen docs/index.rst</p>
+
+<p style="margin-left:9%; margin-top: 1em">then the
+following stub files will be created in <b>docs</b>:</p>
+
+<p style="margin-left:13%; margin-top: 1em">docs <br>
+&#9500;&#9472;&#9472; index.rst <br>
+&#9492;&#9472;&#9472; modules <br>
+&#9500;&#9472;&#9472; foobar.bar.rst <br>
+&#9500;&#9472;&#9472; foobar.bar.baz.rst <br>
+&#9492;&#9472;&#9472; foobar.foo.rst</p>
+
+<p style="margin-left:9%; margin-top: 1em">and each of
+those files will contain a <i>autodoc</i> directive and some
+other information.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sphinx-build(1)</b>,
+<b>sphinx-apidoc(1)</b></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2007-2025, the
+Sphinx developers</p>
+<hr>
+</body>
+</html>

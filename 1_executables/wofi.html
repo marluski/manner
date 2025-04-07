@@ -1,0 +1,341 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>wofi</title>
+
+</head>
+<body>
+
+<h1 align="center">wofi</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wofi - A rofi
+inspired launcher for wlroots compositors</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wofi</b>
+[options]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wofi</b> is a
+rofi inspired menu program for wlroots compositors such as
+sway. It is intended to be highly customizable and flexible
+with the help of CSS styling and a dmenu mode that allows
+for endless scriptability. Wofi can be run cacheless in
+dmenu mode automatically by invoking it as dmenu with
+symlink.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Wofi was
+designed specifically for wlroots and makes use of the
+wlr-layer-shell protocol. If your compositor does not
+support this protocol or if you are in a non-wayland
+environment then wofi must be run with
+<b>--normal-window</b> or it will crash. If you wish to run
+wofi this way you can also place <b>normal_window=true</b>
+in your config file to avoid specifying the option on the
+command line.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:18%;">Prints the help message and
+then exits.</p>
+
+<p style="margin-left:9%;"><b>-f, --fork</b></p>
+
+<p style="margin-left:18%;">Forks the menu so the terminal
+running it can be closed.</p>
+
+<p style="margin-left:9%;"><b>-c,
+--conf=</b><i>PATH</i></p>
+
+<p style="margin-left:18%;">Specifies the config file to
+use.</p>
+
+<p style="margin-left:9%;"><b>-s,
+--style=</b><i>PATH</i></p>
+
+<p style="margin-left:18%;">Specifies the CSS file to use
+as the stylesheet.</p>
+
+<p style="margin-left:9%;"><b>-C,
+--color=</b><i>PATH</i></p>
+
+<p style="margin-left:18%;">Specifies the colors file to
+use.</p>
+
+<p style="margin-left:9%;"><b>-d, --dmenu</b></p>
+
+<p style="margin-left:18%;">Runs wofi in dmenu mode.</p>
+
+<p style="margin-left:9%;"><b>-S,
+--show=</b><i>MODE</i></p>
+
+<p style="margin-left:18%;">Specifies the mode to run in. A
+list of modes can be found in <b>wofi</b>(7).</p>
+
+<p style="margin-left:9%;"><b>-W,
+--width=</b><i>WIDTH</i></p>
+
+<p style="margin-left:18%;">Specifies the menu width in
+pixels or percent of screen size, default is 50%. Pixels are
+used unless the number ends with a %.</p>
+
+<p style="margin-left:9%;"><b>-H,
+--height=</b><i>HEIGHT</i></p>
+
+<p style="margin-left:18%;">Specifies the menu height in
+pixels or percent of screen size, default is 40%. Pixels are
+used unless the number ends with a %.</p>
+
+<p style="margin-left:9%;"><b>-p,
+--prompt=</b><i>PROMPT</i></p>
+
+<p style="margin-left:18%;">Sets the prompt to be display
+in the search box, default is the name of the mode.</p>
+
+<p style="margin-left:9%;"><b>-x,
+--xoffset=</b><i>OFFSET</i></p>
+
+<p style="margin-left:18%;">Sets the x offset from the
+location in pixels, default is 0.</p>
+
+<p style="margin-left:9%;"><b>-y,
+--yoffset=</b><i>OFFSET</i></p>
+
+<p style="margin-left:18%;">Sets the y offset from the
+location in pixels, default is 0.</p>
+
+<p style="margin-left:9%;"><b>-n, --normal-window</b></p>
+
+<p style="margin-left:18%;">Runs wofi in a normal window
+instead of using wlr-layer-shell.</p>
+
+<p style="margin-left:9%;"><b>-I, --allow-images</b></p>
+
+<p style="margin-left:18%;">Allows image escape sequences
+to be processed and rendered.</p>
+
+<p style="margin-left:9%;"><b>-m, --allow-markup</b></p>
+
+<p style="margin-left:18%;">Allows pango markup to be
+processed and rendered.</p>
+
+<p style="margin-left:9%;"><b>-k,
+--cache-file=</b><i>PATH</i></p>
+
+<p style="margin-left:18%;">Specifies the cache file to
+load/store cache, default is $XDG_CACHE_HOME/wofi-&lt;mode
+name&gt; where &lt;mode name&gt; is the name of the mode, if
+$XDG_CACHE_HOME is not specified &#732;/.cache is used.</p>
+
+<p style="margin-left:9%;"><b>-t,
+--term=</b><i>TERM</i></p>
+
+<p style="margin-left:18%;">Specifies the term to use when
+running a program in a terminal. This overrides the default
+terminal run order which is kitty, alacritty, wezterm, foot,
+termite, gnome-terminal, weston-terminal in that order.</p>
+
+<p style="margin-left:9%;"><b>-P, --password</b>
+[character]</p>
+
+<p style="margin-left:18%;">Runs wofi in password mode with
+an optional password character to use. If no character is
+specified * is used by default.</p>
+
+<p style="margin-left:9%;"><b>-e, --exec-search</b></p>
+
+<p style="margin-left:18%;">Activiating a search with enter
+will execute the search not the first result.</p>
+
+<p style="margin-left:9%;"><b>-b, --hide-scroll</b></p>
+
+<p style="margin-left:18%;">Hides the scroll bars.</p>
+
+<p style="margin-left:9%;"><b>-M,
+--matching=</b><i>MODE</i></p>
+
+<p style="margin-left:18%;">Specifies the matching mode, it
+can be either contains, multi-contains, or fuzzy, default is
+contains.</p>
+
+<p style="margin-left:9%;"><b>-i, --insensitive</b></p>
+
+<p style="margin-left:18%;">Enables case insensitive
+search.</p>
+
+<p style="margin-left:9%;"><b>-q, --parse-search</b></p>
+
+<p style="margin-left:18%;">Parses out image escapes and
+pango preventing them from being used for searching.</p>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:18%;">Prints the version and then
+exits.</p>
+
+<p style="margin-left:9%;"><b>-l,
+--location=</b><i>LOCATION</i></p>
+
+<p style="margin-left:18%;">Specifies the location. See
+<b>wofi</b>(7) for more information, default is center.</p>
+
+<p style="margin-left:9%;"><b>-a, --no-actions</b></p>
+
+<p style="margin-left:18%;">Disables multiple actions for
+modes that support it.</p>
+
+<p style="margin-left:9%;"><b>-D,
+--define=</b><i>KEY=VALUE</i></p>
+
+<p style="margin-left:18%;">Sets a config option</p>
+
+<p style="margin-left:9%;"><b>-L,
+--lines=</b><i>LINES</i></p>
+
+<p style="margin-left:18%;">Specifies the height in number
+of lines instead of pixels.</p>
+
+<p style="margin-left:9%;"><b>-w,
+--columns=</b><i>COLUMNS</i></p>
+
+<p style="margin-left:18%;">Specifies the number of columns
+to display, default is 1.</p>
+
+<p style="margin-left:9%;"><b>-O,
+--sort-order=</b><i>ORDER</i></p>
+
+<p style="margin-left:18%;">Specifies the default sort
+order. There are currently two orders, default and
+alphabetical. See <b>wofi</b>(7) for details.</p>
+
+<p style="margin-left:9%;"><b>-G, --gtk-dark</b></p>
+
+<p style="margin-left:18%;">Instructs wofi to use the dark
+variant of the current GTK theme, if available.</p>
+
+<p style="margin-left:9%;"><b>-Q, --search</b></p>
+
+<p style="margin-left:18%;">Specifies something to search
+for immediately on opening</p>
+
+<p style="margin-left:9%;"><b>-o, --monitor</b></p>
+
+<p style="margin-left:18%;">Sets the monitor to open on</p>
+
+<p style="margin-left:9%;"><b>-r, --pre-display-cmd</b></p>
+
+<p style="margin-left:18%;">If set, the selectable entry
+won&rsquo;t be displayed as-is, but will instead be
+displayed based on the output of this command, which can be
+anything. Suggested to use with <b>&quot;echo %s |
+some_cmd&quot;</b> or <b>&quot;some_cmd %s&quot;</b>, as the
+string gets replaced in a printf-like fashion. This will not
+affect the output of wofi once a selection has been done,
+allowing you to display something else than the original
+output.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Wofi has 3 main
+files used for configuration. All files are completely
+optional.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>The config file which defaults to
+$XDG_CONFIG_HOME/wofi/config.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>The CSS file which defaults to
+$XDG_CONFIG_HOME/wofi/style.css.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="2%"></td>
+<td width="86%">
+
+
+<p>The colors file which defaults to the pywal cache
+$XDG_CACHE_HOME/wal/colors.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">All 3 of these
+paths can be manually specified using the respective command
+line flag. In the case of the last 2 they can additionally
+be specified in the config file.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In the event
+$XDG_CONFIG_HOME is not specified it defaults to
+&#732;/.config likewise if $XDG_CACHE_HOME is not specified
+it defaults to &#732;/.cache.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Information
+about the formats for these files can be found in
+<b>wofi</b>(5).</p>
+<hr>
+</body>
+</html>

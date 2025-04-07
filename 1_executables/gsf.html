@@ -1,0 +1,209 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:48 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GSF</title>
+
+</head>
+<body>
+
+<h1 align="center">GSF</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Subcommands">Subcommands</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gsf - archiving
+utility using the G Structured File library</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gsf</b>
+[<i>OPTION...</i>] <i>SUBCOMMAND ARCHIVE...</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+briefly documents the <b>gsf</b> command.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>gsf</b> is a
+simple archive utility, somewhat similar to <b>tar</b>(1).
+It operates on files following one of the structured file
+formats understood by the G Structured File library, for
+example, Microsoft Excel(TM) files.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-?,
+--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<p style="margin-left:9%;"><b>-v, --version</b></p>
+
+<p style="margin-left:18%;">Display gsf&rsquo;s version</p>
+
+<h3>Subcommands
+<a name="Subcommands"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>cat</b></p></td>
+<td width="3%"></td>
+<td width="74%">
+
+
+<p style="margin-top: 1em">Output one or more files in
+archive</p> </td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>dump</b></p></td>
+<td width="3%"></td>
+<td width="74%">
+
+
+<p>Dump one or more files in archive as formatted
+hexadecimal</p> </td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>help</b></p></td>
+<td width="3%"></td>
+<td width="74%">
+
+
+<p>List subcommands</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>list</b></p></td>
+<td width="3%"></td>
+<td width="74%">
+
+
+<p>List files in archive</p></td>
+<td width="8%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>props</b></p></td>
+<td width="3%"></td>
+<td width="74%">
+
+
+<p>Archive list of property names</p></td>
+<td width="8%">
+</td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To list the
+content structure of a Microsoft Excel(TM) file
+<i>arrays.xls</i>:</p>
+
+<p style="margin-left:9%; margin-top: 1em">gsf list
+arrays.xls</p>
+
+<p style="margin-left:9%; margin-top: 1em">To dump
+Workbook, an individual data stream in arrays.xls:</p>
+
+<p style="margin-left:9%; margin-top: 1em">gsf dump
+arrays.xls Workbook</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gsf</b>&rsquo;s
+primary authors are Morten Welinder &lt;terra@gnome.org&gt;
+and Jody Goldberg &lt;jody@gnome.org&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The initial
+version of this manpage was written by J.H.M. Dassen (Ray)
+&lt;jdassen@debian.org&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gnumeric</b>(1)</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Gnumeric
+homepage &lang; URL: http://www.gnome.org/projects/gnumeric/
+&rang;</p>
+
+<p style="margin-left:9%; margin-top: 1em">The GNOME
+project page &lang; URL: http://www.gnome.org/ &rang;</p>
+<hr>
+</body>
+</html>

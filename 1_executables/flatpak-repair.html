@@ -1,0 +1,174 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:18 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK REPAIR</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK REPAIR</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-repair -
+Repair a flatpak installation</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="33%">
+
+
+<p style="margin-top: 1em"><b>flatpak repair</b>
+[OPTION...]</p> </td>
+<td width="58%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Repair a flatpak
+installation by pruning and reinstalling invalid objects.
+The repair command does all of the following:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Scan all
+locally available refs, removing any that don't correspond
+to a deployed ref.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Verify
+each commit they point to, removing any invalid objects and
+noting any missing objects.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Remove
+any refs that had an invalid object, and any non-partial
+refs that had missing objects.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; Prune
+all objects not referenced by a ref, which gets rid of any
+possibly invalid non-scanned objects.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull;
+Enumerate all deployed refs and re-install any that are not
+in the repo (or are partial for a non-subdir deploy).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that
+<b>flatpak repair</b> has to be run with root privileges to
+operate on the system installation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An alternative
+command for repairing OSTree repositories is ostree
+fsck.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>,
+<b>--user</b></p>
+
+<p style="margin-left:14%;">Repair per-user
+installation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system</b></p>
+
+<p style="margin-left:14%;">Repair system-wide
+installation.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--installation=NAME</b></p>
+
+<p style="margin-left:14%;">Repair the system-wide
+installation specified by NAME among those defined in
+/etc/flatpak/installations.d/. Using --installation=default
+is equivalent to using --system.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dry-run</b></p>
+
+<p style="margin-left:14%;">Only report inconsistencies,
+don't make any changes</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--reinstall-all</b></p>
+
+<p style="margin-left:14%;">Reinstall all refs, regardless
+of whether they were removed from the repo or not</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ sudo
+flatpak repair</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+repair --user</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flatpak</b>(1),
+<b>ostree-fsck</b>(1)</p>
+<hr>
+</body>
+</html>

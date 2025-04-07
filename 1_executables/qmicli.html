@@ -1,0 +1,1661 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:00 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>QMICLI</title>
+
+</head>
+<body>
+
+<h1 align="center">QMICLI</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Usage:">Usage:</a><br>
+<a href="#Help Options:">Help Options:</a><br>
+<a href="#DMS options:">DMS options:</a><br>
+<a href="#NAS options:">NAS options:</a><br>
+<a href="#WDS options:">WDS options:</a><br>
+<a href="#PBM options:">PBM options:</a><br>
+<a href="#PDC options:">PDC options:</a><br>
+<a href="#UIM options:">UIM options:</a><br>
+<a href="#SAR options:">SAR options:</a><br>
+<a href="#WMS options:">WMS options:</a><br>
+<a href="#WDA options:">WDA options:</a><br>
+<a href="#VOICE options:">VOICE options:</a><br>
+<a href="#LOC options:">LOC options:</a><br>
+<a href="#QoS options:">QoS options:</a><br>
+<a href="#GAS options:">GAS options:</a><br>
+<a href="#GMS options:">GMS options:</a><br>
+<a href="#DSD options:">DSD options:</a><br>
+<a href="#DPM options:">DPM options:</a><br>
+<a href="#FOX options:">FOX options:</a><br>
+<a href="#ATR options:">ATR options:</a><br>
+<a href="#IMSP options:">IMSP options:</a><br>
+<a href="#IMSA options:">IMSA options:</a><br>
+<a href="#IMS options:">IMS options:</a><br>
+<a href="#Link management options:">Link management options:</a><br>
+<a href="#qmi_wwan specific options:">qmi_wwan specific options:</a><br>
+<a href="#Application Options:">Application Options:</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">qmicli - Control
+QMI devices</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<h3>Usage:
+<a name="Usage:"></a>
+</h3>
+
+
+<p style="margin-left:18%; margin-top: 1em">qmicli
+[OPTION?] - Control QMI devices</p>
+
+<h3>Help Options:
+<a name="Help Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show help options</p>
+
+<p style="margin-left:9%;"><b>--help-all</b></p>
+
+<p style="margin-left:18%;">Show all help options</p>
+
+<p style="margin-left:9%;"><b>--help-dms</b></p>
+
+<p style="margin-left:18%;">Show Device Management Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-nas</b></p>
+
+<p style="margin-left:18%;">Show Network Access Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-wds</b></p>
+
+<p style="margin-left:18%;">Show Wireless Data Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-pbm</b></p>
+
+<p style="margin-left:18%;">Show Phonebook Management
+options</p>
+
+<p style="margin-left:9%;"><b>--help-pdc</b></p>
+
+<p style="margin-left:18%;">Show platform device
+configurations options</p>
+
+<p style="margin-left:9%;"><b>--help-uim</b></p>
+
+<p style="margin-left:18%;">Show User Identity Module
+options</p>
+
+<p style="margin-left:9%;"><b>--help-sar</b></p>
+
+<p style="margin-left:18%;">Show Specific Absorption Rate
+options</p>
+
+<p style="margin-left:9%;"><b>--help-wms</b></p>
+
+<p style="margin-left:18%;">Show Wireless Messaging Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-wda</b></p>
+
+<p style="margin-left:18%;">Show Wireless Data
+Administrative options</p>
+
+<p style="margin-left:9%;"><b>--help-voice</b></p>
+
+<p style="margin-left:18%;">Show Voice Service options</p>
+
+<p style="margin-left:9%;"><b>--help-loc</b></p>
+
+<p style="margin-left:18%;">Show location options</p>
+
+<p style="margin-left:9%;"><b>--help-qos</b></p>
+
+<p style="margin-left:18%;">Show Quality of Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-gas</b></p>
+
+<p style="margin-left:18%;">Show General Application
+Service options</p>
+
+<p style="margin-left:9%;"><b>--help-gms</b></p>
+
+<p style="margin-left:18%;">Show General Modem Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-dsd</b></p>
+
+<p style="margin-left:18%;">Show Data System Determination
+options</p>
+
+<p style="margin-left:9%;"><b>--help-dpm</b></p>
+
+<p style="margin-left:18%;">Show Data Port Mapper Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-fox</b></p>
+
+<p style="margin-left:18%;">Show Foxconn Modem Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-atr</b></p>
+
+<p style="margin-left:18%;">Show AT Relay Service
+options</p>
+
+<p style="margin-left:9%;"><b>--help-imsp</b></p>
+
+<p style="margin-left:18%;">Show IP Multimedia Subsystem
+Presence Service options</p>
+
+<p style="margin-left:9%;"><b>--help-imsa</b></p>
+
+<p style="margin-left:18%;">Show IP Multimedia Subsystem
+Application Service options</p>
+
+<p style="margin-left:9%;"><b>--help-ims</b></p>
+
+<p style="margin-left:18%;">Show IP Multimedia Subsystem
+Settings Service options</p>
+
+
+<p style="margin-left:9%;"><b>--help-link-management</b></p>
+
+<p style="margin-left:18%;">Show link management specific
+options</p>
+
+<p style="margin-left:9%;"><b>--help-qmiwwan</b></p>
+
+<p style="margin-left:18%;">Show qmi_wwan driver specific
+options</p>
+
+<h3>DMS options:
+<a name="DMS options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dms-get-ids</b></p>
+
+<p style="margin-left:18%;">Get IDs</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-capabilities</b></p>
+
+<p style="margin-left:18%;">Get capabilities</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-manufacturer</b></p>
+
+<p style="margin-left:18%;">Get manufacturer</p>
+
+<p style="margin-left:9%;"><b>--dms-get-model</b></p>
+
+<p style="margin-left:18%;">Get model</p>
+
+<p style="margin-left:9%;"><b>--dms-get-revision</b></p>
+
+<p style="margin-left:18%;">Get revision</p>
+
+<p style="margin-left:9%;"><b>--dms-get-msisdn</b></p>
+
+<p style="margin-left:18%;">Get MSISDN</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-power-state</b></p>
+
+<p style="margin-left:18%;">Get power state</p>
+
+
+<p style="margin-left:9%;"><b>--dms-uim-set-pin-protection</b>=<i>[</i>(PIN|PIN2),(disable|enable),(current
+<br>
+PIN)]</p>
+
+<p style="margin-left:18%;">Set PIN protection in the
+UIM</p>
+
+
+<p style="margin-left:9%;"><b>--dms-uim-verify-pin</b>=<i>[</i>(PIN|PIN2),(current
+PIN)]</p>
+
+<p style="margin-left:18%;">Verify PIN</p>
+
+
+<p style="margin-left:9%;"><b>--dms-uim-unblock-pin</b>=<i>[</i>(PIN|PIN2),(PUK),(new
+PIN)]</p>
+
+<p style="margin-left:18%;">Unblock PIN</p>
+
+
+<p style="margin-left:9%;"><b>--dms-uim-change-pin</b>=<i>[</i>(PIN|PIN2),(old
+PIN),(new PIN)]</p>
+
+<p style="margin-left:18%;">Change PIN</p>
+
+
+<p style="margin-left:9%;"><b>--dms-uim-get-pin-status</b></p>
+
+<p style="margin-left:18%;">Get PIN status</p>
+
+<p style="margin-left:9%;"><b>--dms-uim-get-iccid</b></p>
+
+<p style="margin-left:18%;">Get ICCID</p>
+
+<p style="margin-left:9%;"><b>--dms-uim-get-imsi</b></p>
+
+<p style="margin-left:18%;">Get IMSI</p>
+
+<p style="margin-left:9%;"><b>--dms-uim-get-state</b></p>
+
+<p style="margin-left:18%;">Get UIM State</p>
+
+
+<p style="margin-left:9%;"><b>--dms-uim-get-ck-status</b>=<i>[</i>(pn|pu|pp|pc|pf)]</p>
+
+<p style="margin-left:18%;">Get CK Status</p>
+
+
+<p style="margin-left:9%;"><b>--dms-uim-set-ck-protection</b>=<i>[</i>(pn|pu|pp|pc|pf),(disable),(key)]</p>
+
+<p style="margin-left:18%;">Disable CK protection</p>
+
+
+<p style="margin-left:9%;"><b>--dms-uim-unblock-ck</b>=<i>[</i>(pn|pu|pp|pc|pf),(key)]</p>
+
+<p style="margin-left:18%;">Unblock CK</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-hardware-revision</b></p>
+
+<p style="margin-left:18%;">Get the HW revision</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-operating-mode</b></p>
+
+<p style="margin-left:18%;">Get the device operating
+mode</p>
+
+
+<p style="margin-left:9%;"><b>--dms-set-operating-mode</b>=<i>[</i>(Operating
+mode)]</p>
+
+<p style="margin-left:18%;">Set the device operating
+mode</p>
+
+<p style="margin-left:9%;"><b>--dms-get-time</b></p>
+
+<p style="margin-left:18%;">Get the device time</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-prl-version</b></p>
+
+<p style="margin-left:18%;">Get the PRL version</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-activation-state</b></p>
+
+<p style="margin-left:18%;">Get the state of the service
+activation</p>
+
+
+<p style="margin-left:9%;"><b>--dms-activate-automatic</b>=<i>[Activation</i>
+Code]</p>
+
+<p style="margin-left:18%;">Request automatic service
+activation</p>
+
+
+<p style="margin-left:9%;"><b>--dms-activate-manual</b>=<i>[SPC</i>,SID,MDN,MIN]</p>
+
+<p style="margin-left:18%;">Request manual service
+activation</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-user-lock-state</b></p>
+
+<p style="margin-left:18%;">Get the state of the user
+lock</p>
+
+
+<p style="margin-left:9%;"><b>--dms-set-user-lock-state</b>=<i>[</i>(disable|enable),(current
+lock code)]</p>
+
+<p style="margin-left:18%;">Set the state of the user
+lock</p>
+
+
+<p style="margin-left:9%;"><b>--dms-set-user-lock-code</b>=<i>[</i>(old
+lock code),(new lock code)]</p>
+
+<p style="margin-left:18%;">Change the user lock code</p>
+
+<p style="margin-left:9%;"><b>--dms-read-user-data</b></p>
+
+<p style="margin-left:18%;">Read user data</p>
+
+
+<p style="margin-left:9%;"><b>--dms-write-user-data</b>=<i>[</i>(User
+data)]</p>
+
+<p style="margin-left:18%;">Write user data</p>
+
+<p style="margin-left:9%;"><b>--dms-read-eri-file</b></p>
+
+<p style="margin-left:18%;">Read ERI file</p>
+
+
+<p style="margin-left:9%;"><b>--dms-restore-factory-defaults</b>=<i>[</i>(Service
+Programming Code)]</p>
+
+<p style="margin-left:18%;">Restore factory defaults</p>
+
+
+<p style="margin-left:9%;"><b>--dms-validate-service-programming-code</b>=<i>[</i>(Service
+Programming Code)]</p>
+
+<p style="margin-left:18%;">Validate the Service
+Programming Code</p>
+
+
+<p style="margin-left:9%;"><b>--dms-set-firmware-id</b></p>
+
+<p style="margin-left:18%;">Set firmware id</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-band-capabilities</b></p>
+
+<p style="margin-left:18%;">Get band capabilities</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-factory-sku</b></p>
+
+<p style="margin-left:18%;">Get factory stock keeping
+unit</p>
+
+
+<p style="margin-left:9%;"><b>--dms-list-stored-images</b></p>
+
+<p style="margin-left:18%;">List stored images</p>
+
+
+<p style="margin-left:9%;"><b>--dms-select-stored-image</b>=<i>[modem</i>#,pri#]
+where # is the index</p>
+
+<p style="margin-left:18%;">Select stored image</p>
+
+
+<p style="margin-left:9%;"><b>--dms-delete-stored-image</b>=<i>[modem</i>#|pri#]
+where # is the index</p>
+
+<p style="margin-left:18%;">Delete stored image</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-firmware-preference</b></p>
+
+<p style="margin-left:18%;">Get firmware preference</p>
+
+
+<p style="margin-left:9%;"><b>--dms-set-firmware-preference</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set firmware preference
+(required keys: firmware-version, config-version, carrier;
+optional keys: modem-storage-index,
+override-download=yes)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-boot-image-download-mode</b></p>
+
+<p style="margin-left:18%;">Get boot image download
+mode</p>
+
+
+<p style="margin-left:9%;"><b>--dms-set-boot-image-download-mode</b>=<i>[normal</i>|boot-and-recovery]</p>
+
+<p style="margin-left:18%;">Set boot image download
+mode</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-software-version</b></p>
+
+<p style="margin-left:18%;">Get software version</p>
+
+
+<p style="margin-left:9%;"><b>--dms-set-fcc-authentication</b></p>
+
+<p style="margin-left:18%;">Set FCC authentication</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-supported-messages</b></p>
+
+<p style="margin-left:18%;">Get supported messages</p>
+
+
+<p style="margin-left:9%;"><b>--dms-hp-change-device-mode</b>=<i>[fastboot]</i></p>
+
+<p style="margin-left:18%;">Change device mode (HP
+specific)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-swi-get-current-firmware</b></p>
+
+<p style="margin-left:18%;">Get Current Firmware (Sierra
+Wireless specific)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-swi-get-usb-composition</b></p>
+
+<p style="margin-left:18%;">Get current and supported USB
+compositions (Sierra Wireless specific)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-swi-set-usb-composition</b>=<i>[</i>#]</p>
+
+<p style="margin-left:18%;">Set USB composition (Sierra
+Wireless specific)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-foxconn-change-device-mode</b>=<i>[fastboot-ota</i>|fastboot-online]</p>
+
+<p style="margin-left:18%;">Change device mode (Foxconn
+specific)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-foxconn-get-firmware-version</b>=<i>[firmware-mcfg-apps</i>|firmware-mcfg|apps]</p>
+
+<p style="margin-left:18%;">Get firmware version (Foxconn
+specific)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-foxconn-set-fcc-authentication</b>=<i>[magic]</i></p>
+
+<p style="margin-left:18%;">Set FCC authentication (Foxconn
+specific)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-foxconn-set-fcc-authentication-v2</b>=<i>[magic-string</i>,magic-number]</p>
+
+<p style="margin-left:18%;">Set FCC authentication (Foxconn
+specific, v2)</p>
+
+
+<p style="margin-left:9%;"><b>--dms-get-mac-address</b>=<i>[wlan</i>|bt]</p>
+
+<p style="margin-left:18%;">Get default MAC address</p>
+
+<p style="margin-left:9%;"><b>--dms-reset</b></p>
+
+<p style="margin-left:18%;">Reset the service state</p>
+
+<p style="margin-left:9%;"><b>--dms-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a DMS
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>NAS options:
+<a name="NAS options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--nas-get-signal-strength</b></p>
+
+<p style="margin-left:18%;">Get signal strength</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-signal-info</b></p>
+
+<p style="margin-left:18%;">Get signal info</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-tx-rx-info</b>=<i>[</i>(Radio
+Interface)]</p>
+
+<p style="margin-left:18%;">Get TX/RX info</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-home-network</b></p>
+
+<p style="margin-left:18%;">Get home network</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-serving-system</b></p>
+
+<p style="margin-left:18%;">Get serving system</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-system-info</b></p>
+
+<p style="margin-left:18%;">Get system info</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-technology-preference</b></p>
+
+<p style="margin-left:18%;">Get technology preference</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-preferred-networks</b></p>
+
+<p style="margin-left:18%;">Get preferred networks</p>
+
+
+<p style="margin-left:9%;"><b>--nas-set-preferred-networks</b>=<i>[[MCCMNC</i>,access_tech],...]</p>
+
+<p style="margin-left:18%;">Set preferred networks list</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-system-selection-preference</b></p>
+
+<p style="margin-left:18%;">Get system selection
+preference</p>
+
+
+<p style="margin-left:9%;"><b>--nas-set-system-selection-preference</b>=<i>[cdma-1x</i>|cdma-1xevdo|gsm|umts|lte|td-scdma][,[automatic|manual=MCCMNC]]</p>
+
+<p style="margin-left:18%;">Set system selection
+preference</p>
+
+<p style="margin-left:9%;"><b>--nas-network-scan</b></p>
+
+<p style="margin-left:18%;">Scan networks</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-cell-location-info</b></p>
+
+<p style="margin-left:18%;">Get Cell Location Info</p>
+
+
+<p style="margin-left:9%;"><b>--nas-force-network-search</b></p>
+
+<p style="margin-left:18%;">Force network search</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-operator-name</b></p>
+
+<p style="margin-left:18%;">Get operator name data</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-plmn-name</b>=<i>[mccmnc]</i></p>
+
+<p style="margin-left:18%;">Get plmn name data</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-lte-cphy-ca-info</b></p>
+
+<p style="margin-left:18%;">Get LTE Cphy CA Info</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-rf-band-info</b></p>
+
+<p style="margin-left:18%;">Get RF Band Info</p>
+
+<p style="margin-left:9%;"><b>--nas-get-drx</b></p>
+
+<p style="margin-left:18%;">Get DRX</p>
+
+
+<p style="margin-left:9%;"><b>--nas-get-supported-messages</b></p>
+
+<p style="margin-left:18%;">Get supported messages</p>
+
+<p style="margin-left:9%;"><b>--nas-swi-get-status</b></p>
+
+<p style="margin-left:18%;">Get status ((Sierra Wireless
+specific)</p>
+
+<p style="margin-left:9%;"><b>--nas-reset</b></p>
+
+<p style="margin-left:18%;">Reset the service state</p>
+
+<p style="margin-left:9%;"><b>--nas-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a NAS
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>WDS options:
+<a name="WDS options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--wds-start-network</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Start network (allowed keys:
+apn, 3gpp-profile, 3gpp2-profile, auth (PAP|CHAP|BOTH),
+username, password, autoconnect=yes, ip-type (4|6))</p>
+
+<p style="margin-left:9%;"><b>--wds-follow-network</b></p>
+
+<p style="margin-left:18%;">Follow the network status until
+disconnected. Use with &lsquo;--wds-start-network&rsquo;</p>
+
+
+<p style="margin-left:9%;"><b>--wds-stop-network</b>=<i>[Packet</i>
+data handle] OR [disable-autoconnect]</p>
+
+<p style="margin-left:18%;">Stop network</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-current-settings</b></p>
+
+<p style="margin-left:18%;">Get current settings</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-packet-service-status</b></p>
+
+<p style="margin-left:18%;">Get packet service status</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-packet-statistics</b></p>
+
+<p style="margin-left:18%;">Get packet statistics</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-data-bearer-technology</b></p>
+
+<p style="margin-left:18%;">Get data bearer technology</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-current-data-bearer-technology</b></p>
+
+<p style="margin-left:18%;">Get current data bearer
+technology</p>
+
+<p style="margin-left:9%;"><b>--wds-go-dormant</b></p>
+
+<p style="margin-left:18%;">Make the active data connection
+go dormant</p>
+
+<p style="margin-left:9%;"><b>--wds-go-active</b></p>
+
+<p style="margin-left:18%;">Make the active data connection
+go active</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-dormancy-status</b></p>
+
+<p style="margin-left:18%;">Get the dormancy status of the
+active data connection</p>
+
+
+<p style="margin-left:9%;"><b>--wds-create-profile</b>=<i>[</i>&quot;(3gpp|3gpp2)[,key=value,...]&quot;]</p>
+
+<p style="margin-left:18%;">Create new profile using first
+available profile index (optional keys: name, apn, pdp-type
+(IP|PPP|IPV6|IPV4V6), auth (NONE|PAP|CHAP|BOTH), username,
+password, context-num, no-roaming=yes, disabled=yes)</p>
+
+
+<p style="margin-left:9%;"><b>--wds-swi-create-profile-indexed</b>=<i>[</i>&quot;(3gpp|3gpp2),#[,key=value,...]&quot;]</p>
+
+<p style="margin-left:18%;">Create new profile at specified
+profile index [Sierra Wireless specific] (optional keys:
+name, apn, pdp-type (IP|PPP|IPV6|IPV4V6), auth
+(NONE|PAP|CHAP|BOTH), username, password, context-num,
+no-roaming=yes, disabled=yes)</p>
+
+
+<p style="margin-left:9%;"><b>--wds-modify-profile</b>=<i>[</i>&quot;(3gpp|3gpp2),#,key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Modify existing profile
+(optional keys: name, apn, pdp-type (IP|PPP|IPV6|IPV4V6),
+auth (NONE|PAP|CHAP|BOTH), username, password, context-num,
+no-roaming=yes, disabled=yes)</p>
+
+
+<p style="margin-left:9%;"><b>--wds-delete-profile</b>=<i>[</i>(3gpp|3gpp2),#]</p>
+
+<p style="margin-left:18%;">Delete existing profile</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-profile-list</b>=<i>[3gpp</i>|3gpp2]</p>
+
+<p style="margin-left:18%;">Get profile list</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-default-profile-number</b>=<i>[3gpp</i>|3gpp2]</p>
+
+<p style="margin-left:18%;">Get default profile number</p>
+
+
+<p style="margin-left:9%;"><b>--wds-set-default-profile-number</b>=<i>[</i>(3gpp|3gpp2),#]</p>
+
+<p style="margin-left:18%;">Set default profile number</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-default-settings</b>=<i>[3gpp</i>|3gpp2]</p>
+
+<p style="margin-left:18%;">Get default settings</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-autoconnect-settings</b></p>
+
+<p style="margin-left:18%;">Get autoconnect settings</p>
+
+
+<p style="margin-left:9%;"><b>--wds-set-autoconnect-settings</b>=<i>[</i>(enabled|disabled|paused)[,(roaming-allowed|home-only)]]</p>
+
+<p style="margin-left:18%;">Set autoconnect settings
+(roaming settings optional)</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-supported-messages</b></p>
+
+<p style="margin-left:18%;">Get supported messages</p>
+
+<p style="margin-left:9%;"><b>--wds-reset</b></p>
+
+<p style="margin-left:18%;">Reset the service state</p>
+
+
+<p style="margin-left:9%;"><b>--wds-bind-data-port</b>=<i>[a2-mux-rmnet0-7</i>|#]</p>
+
+<p style="margin-left:18%;">Bind data port to controller
+device to be used with
+&lsquo;--client-no-release-cid&rsquo;</p>
+
+
+<p style="margin-left:9%;"><b>--wds-bind-mux-data-port</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Bind qmux data port to
+controller device (allowed keys: mux-id, ep-type
+(undefined|hsusb|pcie|embedded|bam-dmux), ep-iface-number)
+to be used with &lsquo;--client-no-release-cid&rsquo;</p>
+
+
+<p style="margin-left:9%;"><b>--wds-set-ip-family</b>=<i>[4</i>|6]</p>
+
+<p style="margin-left:18%;">Set IP family</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-channel-rates</b></p>
+
+<p style="margin-left:18%;">Get channel data rates</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-lte-attach-parameters</b></p>
+
+<p style="margin-left:18%;">Get LTE attach parameters</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-max-lte-attach-pdn-num</b></p>
+
+<p style="margin-left:18%;">Get the maximum number of LTE
+attach PDN</p>
+
+
+<p style="margin-left:9%;"><b>--wds-get-lte-attach-pdn-list</b></p>
+
+<p style="margin-left:18%;">Get the list of LTE attach
+PDN</p>
+
+
+<p style="margin-left:9%;"><b>--wds-set-lte-attach-pdn-list</b>=<i>[</i>#,#,...]</p>
+
+<p style="margin-left:18%;">Set the list of LTE attach
+PDN</p>
+
+<p style="margin-left:9%;"><b>--wds-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a WDS
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>PBM options:
+<a name="PBM options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pbm-get-all-capabilities</b></p>
+
+<p style="margin-left:18%;">Get all phonebook
+capabilities</p>
+
+<p style="margin-left:9%;"><b>--pbm-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a PBM
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>PDC options:
+<a name="PDC options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pdc-list-configs</b>=<i>[</i>(platform|software)]</p>
+
+<p style="margin-left:18%;">List all configs</p>
+
+
+<p style="margin-left:9%;"><b>--pdc-delete-config</b>=<i>[</i>(platform|software),ConfigId]</p>
+
+<p style="margin-left:18%;">Delete config</p>
+
+
+<p style="margin-left:9%;"><b>--pdc-activate-config</b>=<i>[</i>(platform|software),ConfigId]</p>
+
+<p style="margin-left:18%;">Activate config</p>
+
+
+<p style="margin-left:9%;"><b>--pdc-deactivate-config</b>=<i>[</i>(platform|software),ConfigId]</p>
+
+<p style="margin-left:18%;">Deactivate config</p>
+
+
+<p style="margin-left:9%;"><b>--pdc-load-config</b>=<i>[Path</i>
+to config]</p>
+
+<p style="margin-left:18%;">Load config to device</p>
+
+
+<p style="margin-left:9%;"><b>--pdc-monitor-refresh</b></p>
+
+<p style="margin-left:18%;">Watch for refresh
+indications</p>
+
+<p style="margin-left:9%;"><b>--pdc-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a PDC
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>UIM options:
+<a name="UIM options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--uim-set-pin-protection</b>=<i>[</i>(PIN1|PIN2|UPIN),(disable|enable),(current
+<br>
+PIN)]</p>
+
+<p style="margin-left:18%;">Set PIN protection</p>
+
+
+<p style="margin-left:9%;"><b>--uim-verify-pin</b>=<i>[</i>(PIN1|PIN2|UPIN),(current
+PIN)]</p>
+
+<p style="margin-left:18%;">Verify PIN</p>
+
+
+<p style="margin-left:9%;"><b>--uim-unblock-pin</b>=<i>[</i>(PIN1|PIN2|UPIN),(PUK),(new
+PIN)]</p>
+
+<p style="margin-left:18%;">Unblock PIN</p>
+
+
+<p style="margin-left:9%;"><b>--uim-change-pin</b>=<i>[</i>(PIN1|PIN2|UPIN),(old
+PIN),(new PIN)]</p>
+
+<p style="margin-left:18%;">Change PIN</p>
+
+
+<p style="margin-left:9%;"><b>--uim-read-transparent</b>=<i>[0xNNNN</i>,0xNNNN,...]</p>
+
+<p style="margin-left:18%;">Read a transparent file given
+the file path</p>
+
+
+<p style="margin-left:9%;"><b>--uim-get-file-attributes</b>=<i>[0xNNNN</i>,0xNNNN,...]</p>
+
+<p style="margin-left:18%;">Get the attributes of a given
+file</p>
+
+
+<p style="margin-left:9%;"><b>--uim-read-record</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Read a record from given file
+(allowed keys: record-number, record-length, file
+([0xNNNN-0xNNNN,...])</p>
+
+
+<p style="margin-left:9%;"><b>--uim-get-card-status</b></p>
+
+<p style="margin-left:18%;">Get card status</p>
+
+
+<p style="margin-left:9%;"><b>--uim-get-supported-messages</b></p>
+
+<p style="margin-left:18%;">Get supported messages</p>
+
+
+<p style="margin-left:9%;"><b>--uim-sim-power-on</b>=<i>[</i>(slot
+number)]</p>
+
+<p style="margin-left:18%;">Power on SIM card</p>
+
+
+<p style="margin-left:9%;"><b>--uim-sim-power-off</b>=<i>[</i>(slot
+number)]</p>
+
+<p style="margin-left:18%;">Power off SIM card</p>
+
+
+<p style="margin-left:9%;"><b>--uim-change-provisioning-session</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Change provisioning session
+(allowed keys: session-type, activate, slot, aid)</p>
+
+
+<p style="margin-left:9%;"><b>--uim-get-slot-status</b></p>
+
+<p style="margin-left:18%;">Get slot status</p>
+
+
+<p style="margin-left:9%;"><b>--uim-switch-slot</b>=<i>[</i>(slot
+number)]</p>
+
+<p style="margin-left:18%;">Switch active physical slot</p>
+
+
+<p style="margin-left:9%;"><b>--uim-monitor-slot-status</b></p>
+
+<p style="margin-left:18%;">Watch for slot status
+indications</p>
+
+<p style="margin-left:9%;"><b>--uim-reset</b></p>
+
+<p style="margin-left:18%;">Reset the service state</p>
+
+
+<p style="margin-left:9%;"><b>--uim-monitor-refresh-file</b>=<i>[0xNNNN</i>,0xNNNN,...]</p>
+
+<p style="margin-left:18%;">Watch for REFRESH events for
+given file paths</p>
+
+
+<p style="margin-left:9%;"><b>--uim-monitor-refresh-all</b></p>
+
+<p style="margin-left:18%;">Watch for REFRESH events for
+any file</p>
+
+
+<p style="margin-left:9%;"><b>--uim-get-configuration</b></p>
+
+<p style="margin-left:18%;">Get personalization status of
+the modem</p>
+
+
+<p style="margin-left:9%;"><b>--uim-depersonalization</b>=<i>[</i>(feature),(operation),(control
+key)[,(slot <br>
+number)]]</p>
+
+<p style="margin-left:18%;">Deactivates or unblocks
+personalization feature</p>
+
+
+<p style="margin-left:9%;"><b>--uim-remote-unlock</b>=<i>[XX</i>:XX:...]</p>
+
+<p style="margin-left:18%;">Updates the SimLock
+configuration data</p>
+
+<p style="margin-left:9%;"><b>--uim-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a UIM
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>SAR options:
+<a name="SAR options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sar-rf-get-state</b></p>
+
+<p style="margin-left:18%;">Get RF state</p>
+
+
+<p style="margin-left:9%;"><b>--sar-rf-set-state</b>=<i>[</i>(state
+number)]</p>
+
+<p style="margin-left:18%;">Set RF state.</p>
+
+<p style="margin-left:9%;"><b>--sar-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a SAR
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>WMS options:
+<a name="WMS options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--wms-get-supported-messages</b></p>
+
+<p style="margin-left:18%;">Get supported messages</p>
+
+<p style="margin-left:9%;"><b>--wms-get-routes</b></p>
+
+<p style="margin-left:18%;">Get SMS route information</p>
+
+
+<p style="margin-left:9%;"><b>--wms-set-routes</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set SMS route information
+(keys: type, class, storage, receipt-action)</p>
+
+<p style="margin-left:9%;"><b>--wms-reset</b></p>
+
+<p style="margin-left:18%;">Reset the service state</p>
+
+<p style="margin-left:9%;"><b>--wms-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a WMS
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>WDA options:
+<a name="WDA options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--wda-set-data-format</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Set data format (allowed keys:
+link-layer-protocol (802-3|raw-ip), ul-protocol
+(disabled|tlp|qc-ncm|mbim|rndis|qmap|qmapv5), dl-protocol
+(disabled|tlp|qc-ncm|mbim|rndis|qmap|qmapv5),
+dl-datagram-max-size, dl-max-datagrams, ep-type
+(undefined|hsusb|pcie|embedded), ep-iface-number,
+ul-datagram-max-size, ul-max-datagrams)</p>
+
+
+<p style="margin-left:9%;"><b>--wda-get-data-format</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Get data format (allowed keys:
+ep-type (undefined|hsusb|pcie|embedded), ep-iface-number);
+also allows empty key list</p>
+
+
+<p style="margin-left:9%;"><b>--wda-get-supported-messages</b></p>
+
+<p style="margin-left:18%;">Get supported messages</p>
+
+<p style="margin-left:9%;"><b>--wda-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a WDA
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>VOICE options:
+<a name="VOICE options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--voice-get-config</b></p>
+
+<p style="margin-left:18%;">Get Voice service
+configuration</p>
+
+
+<p style="margin-left:9%;"><b>--voice-get-supported-messages</b></p>
+
+<p style="margin-left:18%;">Get supported messages</p>
+
+<p style="margin-left:9%;"><b>--voice-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a
+VOICE client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>LOC options:
+<a name="LOC options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--loc-session-id</b>=<i>[ID]</i></p>
+
+<p style="margin-left:18%;">Session ID for the LOC
+session</p>
+
+<p style="margin-left:9%;"><b>--loc-start</b></p>
+
+<p style="margin-left:18%;">Start location gathering</p>
+
+<p style="margin-left:9%;"><b>--loc-stop</b></p>
+
+<p style="margin-left:18%;">Stop location gathering</p>
+
+
+<p style="margin-left:9%;"><b>--loc-get-position-report</b></p>
+
+<p style="margin-left:18%;">Get position reported by the
+location module</p>
+
+
+<p style="margin-left:9%;"><b>--loc-get-gnss-sv-info</b></p>
+
+<p style="margin-left:18%;">Show GNSS space vehicle
+info</p>
+
+
+<p style="margin-left:9%;"><b>--loc-timeout</b>=<i>[SECS]</i></p>
+
+<p style="margin-left:18%;">Maximum time to wait for
+information in &lsquo;--loc-get-position-report&rsquo; and
+&lsquo;--loc-get-gnss-sv-info&rsquo; (default 30s)</p>
+
+
+<p style="margin-left:9%;"><b>--loc-follow-position-report</b></p>
+
+<p style="margin-left:18%;">Follow all position updates
+reported by the location module indefinitely</p>
+
+
+<p style="margin-left:9%;"><b>--loc-follow-gnss-sv-info</b></p>
+
+<p style="margin-left:18%;">Follow all GNSS space vehicle
+info updates reported by the location module
+indefinitely</p>
+
+<p style="margin-left:9%;"><b>--loc-follow-nmea</b></p>
+
+<p style="margin-left:18%;">Follow all NMEA trace updates
+reported by the location module indefinitely</p>
+
+
+<p style="margin-left:9%;"><b>--loc-delete-assistance-data</b></p>
+
+<p style="margin-left:18%;">Delete positioning assistance
+data</p>
+
+<p style="margin-left:9%;"><b>--loc-get-nmea-types</b></p>
+
+<p style="margin-left:18%;">Get list of enabled NMEA
+traces</p>
+
+
+<p style="margin-left:9%;"><b>--loc-set-nmea-types</b>=<i>[type1</i>|type2|type3...]</p>
+
+<p style="margin-left:18%;">Set list of enabled NMEA
+traces</p>
+
+
+<p style="margin-left:9%;"><b>--loc-get-operation-mode</b></p>
+
+<p style="margin-left:18%;">Get operation mode</p>
+
+
+<p style="margin-left:9%;"><b>--loc-set-operation-mode</b>=<i>[default</i>|msb|msa|standalone|cellid|wwan]</p>
+
+<p style="margin-left:18%;">Set operation mode</p>
+
+
+<p style="margin-left:9%;"><b>--loc-get-engine-lock</b></p>
+
+<p style="margin-left:18%;">Get engine lock status</p>
+
+
+<p style="margin-left:9%;"><b>--loc-set-engine-lock</b>=<i>[none</i>|mi|mt|all]</p>
+
+<p style="margin-left:18%;">Set engine lock status</p>
+
+<p style="margin-left:9%;"><b>--loc-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a LOC
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>QoS options:
+<a name="QoS options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--qos-get-flow-status</b>=<i>[QoS</i>
+ID]</p>
+
+<p style="margin-left:18%;">Get QoS flow status</p>
+
+
+<p style="margin-left:9%;"><b>--qos-get-network-status</b></p>
+
+<p style="margin-left:18%;">Gets the network status</p>
+
+
+<p style="margin-left:9%;"><b>--qos-swi-read-data-stats</b>=<i>[APN</i>
+ID]</p>
+
+<p style="margin-left:18%;">Read data stats (Sierra
+Wireless specific)</p>
+
+<p style="margin-left:9%;"><b>--qos-reset</b></p>
+
+<p style="margin-left:18%;">Reset the service state</p>
+
+<p style="margin-left:9%;"><b>--qos-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a QOS
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>GAS options:
+<a name="GAS options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gas-dms-set-usb-composition</b>=<i>[pid]</i></p>
+
+<p style="margin-left:18%;">Sets the USB composition</p>
+
+
+<p style="margin-left:9%;"><b>--gas-dms-get-usb-composition</b></p>
+
+<p style="margin-left:18%;">Gets the current USB
+composition</p>
+
+
+<p style="margin-left:9%;"><b>--gas-dms-get-firmware-list</b></p>
+
+<p style="margin-left:18%;">Gets the list of stored
+firmware</p>
+
+
+<p style="margin-left:9%;"><b>--gas-dms-get-active-firmware</b></p>
+
+<p style="margin-left:18%;">Gets the currently active
+firmware</p>
+
+
+<p style="margin-left:9%;"><b>--gas-dms-set-active-firmware</b>=<i>[index]</i></p>
+
+<p style="margin-left:18%;">Sets the active firmware
+index</p>
+
+<p style="margin-left:9%;"><b>--gas-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a GAS
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>GMS options:
+<a name="GMS options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gms-test-get-value</b></p>
+
+<p style="margin-left:18%;">Gets test value</p>
+
+
+<p style="margin-left:9%;"><b>--gms-test-set-value</b>=<i>[mandatory-value][</i>,[optional-value]]</p>
+
+<p style="margin-left:18%;">Sets test value</p>
+
+<p style="margin-left:9%;"><b>--gms-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a GMS
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>DSD options:
+<a name="DSD options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dsd-get-apn-info</b>=<i>[</i>(type)]</p>
+
+<p style="margin-left:18%;">Gets the settings associated to
+a given APN type</p>
+
+
+<p style="margin-left:9%;"><b>--dsd-set-apn-type</b>=<i>[</i>(name),
+(type1|type2|type3...)]</p>
+
+<p style="margin-left:18%;">Sets the types associated to a
+given APN name</p>
+
+
+<p style="margin-left:9%;"><b>--dsd-get-system-status</b></p>
+
+<p style="margin-left:18%;">Gets system status</p>
+
+<p style="margin-left:9%;"><b>--dsd-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a DSD
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>DPM options:
+<a name="DPM options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dpm-open-port</b>=<i>[</i>&quot;key=value,...&quot;]</p>
+
+<p style="margin-left:18%;">Open port (allowed-keys:
+ctrl-ep-type, ctrl-ep-iface-number, ctrl-port-name,
+hw-data-ep-type, hw-data-ep-iface-number, hw-data-rx-id,
+hw-data-tx-id, sw-data-ep-type, sw-data-ep-iface-number,
+sw-data-port-name)</p>
+
+<p style="margin-left:9%;"><b>--dpm-close-port</b></p>
+
+<p style="margin-left:18%;">Close port</p>
+
+<p style="margin-left:9%;"><b>--dpm-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a DPM
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>FOX options:
+<a name="FOX options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--fox-get-firmware-version</b>=<i>[firmware-mcfg-apps</i>|firmware-mcfg|apps]</p>
+
+<p style="margin-left:18%;">Get firmware version</p>
+
+<p style="margin-left:9%;"><b>--fox-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a FOX
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>ATR options:
+<a name="ATR options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--atr-send</b>=<i>[AT</i>
+command]</p>
+
+<p style="margin-left:18%;">Send an AT command and wait for
+the reply</p>
+
+
+<p style="margin-left:9%;"><b>--atr-send-only</b>=<i>[AT</i>
+command]</p>
+
+<p style="margin-left:18%;">Send an AT command without
+waiting for the reply</p>
+
+<p style="margin-left:9%;"><b>--atr-monitor</b></p>
+
+<p style="margin-left:18%;">Watch for unsolicited
+indications</p>
+
+<p style="margin-left:9%;"><b>--atr-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release an ATR
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>IMSP options:
+<a name="IMSP options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--imsp-get-enabler-state</b></p>
+
+<p style="margin-left:18%;">Get IMSP enabler state</p>
+
+<p style="margin-left:9%;"><b>--imsp-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a IMSP
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>IMSA options:
+<a name="IMSA options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--imsa-get-ims-registration-status</b></p>
+
+<p style="margin-left:18%;">Get IMS registration status</p>
+
+
+<p style="margin-left:9%;"><b>--imsa-get-ims-services-status</b></p>
+
+<p style="margin-left:18%;">Get IMS services status</p>
+
+<p style="margin-left:9%;"><b>--imsa-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a IMSA
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>IMS options:
+<a name="IMS options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ims-get-ims-services-enabled-setting</b></p>
+
+<p style="margin-left:18%;">Get IMS Services Enabled
+Setting</p>
+
+<p style="margin-left:9%;"><b>--ims-noop</b></p>
+
+<p style="margin-left:18%;">Just allocate or release a IMS
+client. Use with &lsquo;--client-no-release-cid&rsquo;
+and/or &lsquo;--client-cid&rsquo;</p>
+
+<h3>Link management options:
+<a name="Link management options:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--link-list</b>=<i>[IFACE]</i></p>
+
+<p style="margin-left:18%;">List links created from a given
+interface</p>
+
+
+<p style="margin-left:9%;"><b>--link-add</b>=<i>[iface=IFACE</i>,prefix=PREFIX[,mux-id=N][,flags=FLAGS]]</p>
+
+<p style="margin-left:18%;">Create new network interface
+link</p>
+
+
+<p style="margin-left:9%;"><b>--link-delete</b>=<i>[link-iface=IFACE][</i>,[mux-id=N]]</p>
+
+<p style="margin-left:18%;">Delete a given network
+interface link</p>
+
+
+<p style="margin-left:9%;"><b>--link-delete-all</b>=<i>[IFACE]</i></p>
+
+<p style="margin-left:18%;">Delete all network interface
+links from the given interface</p>
+
+<h3>qmi_wwan specific options:
+<a name="qmi_wwan specific options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w</b>,
+<b>--get-wwan-iface</b></p>
+
+<p style="margin-left:18%;">Get the associated WWAN iface
+name</p>
+
+<p style="margin-left:9%;"><b>-e</b>,
+<b>--get-expected-data-format</b></p>
+
+<p style="margin-left:18%;">Get the expected data format in
+the WWAN iface</p>
+
+<p style="margin-left:9%;"><b>-E</b>,
+<b>--set-expected-data-format</b>=<i>[802-3</i>|raw-ip|qmap-pass-through]</p>
+
+<p style="margin-left:18%;">Set the expected data format in
+the WWAN iface</p>
+
+<h3>Application Options:
+<a name="Application Options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--device</b>=<i>[PATH</i>|URI]</p>
+
+<p style="margin-left:18%;">Specify device path or QRTR URI
+(e.g. qrtr://0)</p>
+
+
+<p style="margin-left:9%;"><b>--get-service-version-info</b></p>
+
+<p style="margin-left:18%;">Get service version info</p>
+
+
+<p style="margin-left:9%;"><b>--device-set-instance-id</b>=<i>[Instance</i>
+ID]</p>
+
+<p style="margin-left:18%;">Set instance ID</p>
+
+
+<p style="margin-left:9%;"><b>--device-open-version-info</b></p>
+
+<p style="margin-left:18%;">Run version info check when
+opening device</p>
+
+<p style="margin-left:9%;"><b>--device-open-sync</b></p>
+
+<p style="margin-left:18%;">Run sync operation when opening
+device</p>
+
+<p style="margin-left:9%;"><b>-p</b>,
+<b>--device-open-proxy</b></p>
+
+<p style="margin-left:18%;">Request to use the
+&rsquo;qmi-proxy&rsquo; proxy</p>
+
+<p style="margin-left:9%;"><b>--device-open-qmi</b></p>
+
+<p style="margin-left:18%;">Open a cdc-wdm device
+explicitly in QMI mode</p>
+
+<p style="margin-left:9%;"><b>--device-open-mbim</b></p>
+
+<p style="margin-left:18%;">Open a cdc-wdm device
+explicitly in MBIM mode</p>
+
+<p style="margin-left:9%;"><b>--device-open-auto</b></p>
+
+<p style="margin-left:18%;">Open a cdc-wdm device in either
+QMI or MBIM mode (default)</p>
+
+
+<p style="margin-left:9%;"><b>--device-open-net</b>=<i>[net-802-3</i>|net-raw-ip|net-qos-header|net-no-qos-header]</p>
+
+<p style="margin-left:18%;">Open device with specific link
+protocol and QoS flags</p>
+
+
+<p style="margin-left:9%;"><b>--client-cid</b>=<i>[CID]</i></p>
+
+<p style="margin-left:18%;">Use the given CID, don&rsquo;t
+allocate a new one</p>
+
+
+<p style="margin-left:9%;"><b>--client-no-release-cid</b></p>
+
+<p style="margin-left:18%;">Do not release the CID when
+exiting</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--verbose</b></p>
+
+<p style="margin-left:18%;">Run action with verbose logs,
+including the debug ones</p>
+
+<p style="margin-left:9%;"><b>--verbose-full</b></p>
+
+<p style="margin-left:18%;">Run action with verbose logs,
+including the debug ones and personal info</p>
+
+<p style="margin-left:9%;"><b>--silent</b></p>
+
+<p style="margin-left:18%;">Run action with no logs; not
+even the error/warning ones</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Print version</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2012-2023 Aleksander Morgado License GPLv2+: GNU GPL version
+2 or later &lt;http://gnu.org/licenses/gpl-2.0.html&gt; <br>
+This is free software: you are free to change and
+redistribute it. There is NO WARRANTY, to the extent
+permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <b>qmicli</b> is maintained as a Texinfo
+manual. If the <b>info</b> and <b>qmicli</b> programs are
+properly installed at your site, the command</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>info
+qmicli</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+<hr>
+</body>
+</html>

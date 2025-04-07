@@ -1,0 +1,196 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>wsdl</title>
+
+</head>
+<body>
+
+<h1 align="center">wsdl</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wsdl -
+Mono&rsquo;s Web Service Proxy Generator</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>wsdl</b>
+[options] [path | url]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>wsdl</i> is a
+tool for generating proxy classes that can be used to access
+to web services. The tool reads a WSDL document from the
+provided path or url, and downloads referenced schemas or
+other WSDL documents if needed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This tool is
+used to target the 1.x API, for targetting the 2.x API,
+please use the wsdl2 tool.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are available: <i><br>
+-appsettingurlkey:key -urlkey:key</i></p>
+
+<p style="margin-left:18%;">Specifies that the url for the
+services should be read from the &lt;appsettings&gt; section
+of the configuration file, using the provided key.</p>
+
+<p style="margin-left:9%;"><i>-appsettingbaseurl:url ,
+-baseurl:url</i></p>
+
+<p style="margin-left:18%;">Specifies a base URL for the
+service. The final URL will be constructed by combining this
+value with the URL read from the <i>-appsettingurlkey</i>
+option, and the <i>-type:typename, assembly</i> Generate a
+proxy for a compiled web service class. The URL parameter
+can be used to providethe location of the service.
+<i>location</i> attribute specified in the WSDL
+document.</p>
+
+<p style="margin-left:9%;"><i>-language:language ,
+-l</i></p>
+
+<p style="margin-left:18%;">Language of the code to
+generate. It can be CS for C# (default), Boo for Boo and VB
+for Visual.Basic.</p>
+
+<p style="margin-left:9%;">Alternatively you can specify a
+full type name for a CodeProvider, for</p>
+
+<p style="margin-left:18%;">example, you could use this to
+generate code for the imaginary &quot;MyLan&quot; language
+which has the following full type:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>wsdl myservice.wsdl -language:MyLan.MyLanCodeProvider,
+MyLan.CodeDom, Version=1.0.0.0, Culture=neutral,
+PublicKeyToken=xxyy&rsquo;</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>-namespace:name ,
+-n:name</i></p>
+
+<p style="margin-left:18%;">The namespace of the generated
+classes. If none is specified, the default namespace is
+used.</p>
+
+<p style="margin-left:9%;"><i>-out:filename ,
+-o:filename</i></p>
+
+<p style="margin-left:18%;">The target file for generated
+code.</p>
+
+<p style="margin-left:9%;"><i>-protocol:protocol ,
+-p:protocol</i></p>
+
+<p style="margin-left:18%;">The protocol for which to
+generate code. It can be Soap (default), HttpGet or
+HttpPost.</p>
+
+<p style="margin-left:9%;"><i>-sample:METHOD</i></p>
+
+<p style="margin-left:18%;">This will display XML request
+and reply of the sample invocations to that SOAP message.
+You can use the -protocol: option to render the message in
+different forms.</p>
+
+<p style="margin-left:9%;"><i>-server</i></p>
+
+<p style="margin-left:18%;">Generate a server skeleton
+instead of a client proxy.</p>
+
+<p style="margin-left:9%;"><i>-nologo</i></p>
+
+<p style="margin-left:18%;">Supress the startup logo.</p>
+
+<p style="margin-left:9%;"><i>-u:username ,
+-user:username</i></p>
+
+<p style="margin-left:18%;">The user name to use when
+connecting to the server.</p>
+
+<p style="margin-left:9%;"><i>-p:password ,
+-password:password</i></p>
+
+<p style="margin-left:18%;">The password to use when
+connecting to the server.</p>
+
+<p style="margin-left:9%;"><i>-d:domain ,
+-domain:domain</i></p>
+
+<p style="margin-left:18%;">The domain to use when
+connecting to the server.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Lluis Sanchez
+Gual (lluis@ximian.com)</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">wsdl is released
+under the terms of the GNU GPL.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">disco(1),
+soapsuds(1), mono(1), mcs(1), wsdl2(1)</p>
+<hr>
+</body>
+</html>

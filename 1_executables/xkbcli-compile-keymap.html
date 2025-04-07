@@ -1,0 +1,148 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>XKBCLI-COMPILE-KEYMAP</i>(1) General Commands Manual
+<i>XKBCLI-COMPILE-KEYMAP</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">xkbcli-compile-keymap &mdash;
+compile an X Keyboard keymap</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:37%;"><b>xkbcli-compile-keymap</b>
+[<i>options</i>] [<i>KEYMAP_PATH</i>]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>xkbcli-compile-keymap</b>
+compiles and prints a keymap based on the given options.</p>
+
+<p style="margin-top: 1em"><i>KEYMAP_PATH</i></p>
+
+<p style="margin-left:19%;">Path to a keymap file, or
+&ldquo;-&rdquo; to read the standard input</p>
+
+<p style="margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Print help and
+exit</p>
+
+<p style="margin-top: 1em"><b>--verbose</b></p>
+
+<p style="margin-left:19%;">Enable verbose debugging
+output</p>
+
+<p style="margin-top: 1em"><b>--test</b></p>
+
+<p style="margin-left:19%; margin-top: 1em">Test
+compilation but do not print the keymap</p>
+
+<p style="margin-top: 1em"><b>--rmlvo</b></p>
+
+<p style="margin-left:19%;">Print the full RMLVO with the
+defaults filled in for missing elements</p>
+
+<p style="margin-top: 1em"><b>--keymap</b> [ <i><br>
+PATH</i>], <b>--from-xkb</b> [ <i><br>
+PATH</i>]</p>
+
+<p style="margin-left:19%;">Load the XKB file from a file,
+ignore RMLVO options. If <i>PATH</i> is empty or
+&ldquo;-&rdquo;, read the stdin.</p>
+
+<p style="margin-top: 1em"><b>--include</b> <i>PATH</i></p>
+
+<p style="margin-left:19%;">Add the given path to the
+include path list. This option is order-dependent, include
+paths given first are searched first. If an include path is
+given, the default include path list is not used. Use
+<b>--include-defaults</b> to add the default include
+paths.</p>
+
+<p style="margin-top: 1em"><b>--include-defaults</b></p>
+
+<p style="margin-left:19%;">Add the default set of include
+directories. This option is order-dependent, include paths
+given first are searched first.</p>
+
+<p style="margin-top: 1em"><b>--rules</b> <i>rules</i></p>
+
+<p style="margin-left:19%;">The XKB ruleset</p>
+
+<p style="margin-top: 1em"><b>--model</b> <i>model</i></p>
+
+<p style="margin-left:19%;">The XKB model</p>
+
+<p style="margin-top: 1em"><b>--layout</b>
+<i>layout</i></p>
+
+<p style="margin-left:19%;">The XKB layout</p>
+
+<p style="margin-top: 1em"><b>--variant</b>
+<i>variant</i></p>
+
+<p style="margin-left:19%;">The XKB layout variant</p>
+
+<p style="margin-top: 1em"><b>--options</b>
+<i>options</i></p>
+
+<p style="margin-left:19%;">The XKB options</p>
+
+
+<p style="margin-top: 1em"><b>--enable-environment-names</b></p>
+
+<p style="margin-left:19%;">Allow to set the default RMLVO
+values via the following environment variables:</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_RULES</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_MODEL</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_LAYOUT</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_VARIANT</p>
+
+<p><b>-</b></p>
+
+<p style="margin-left:24%;">XKB_DEFAULT_OPTIONS</p>
+
+<p style="margin-left:19%;">Note that this option may
+affect the default values of the previous options.</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>xkbcli</i>(1), <i>The
+libxkbcommon online documentation</i>: https://xkbcommon.org
+GNU June 4, 2024 <i>XKBCLI-COMPILE-KEYMAP</i>(1)</p>
+<hr>
+</body>
+</html>

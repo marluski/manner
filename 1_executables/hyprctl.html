@@ -1,0 +1,229 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>hyprctl</title>
+
+</head>
+<body>
+
+<h1 align="center">hyprctl</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONTROL COMMANDS">CONTROL COMMANDS</a><br>
+<a href="#INFO COMMANDS">INFO COMMANDS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hyprctl -
+Utility for controlling parts of Hyprland from a CLI or a
+script</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hyprctl</b>
+[<i>(opt)flags</i>] [<b>command</b>] [<i>(opt)args</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hyprctl</b>
+is a utility for controlling some parts of the compositor
+from a CLI or a script.</p>
+
+<h2>CONTROL COMMANDS
+<a name="CONTROL COMMANDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dispatch</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Call a
+dispatcher with an argument.</p>
+
+<p style="margin-left:18%; margin-top: 1em">An argument
+must be present. For dispatchers without parameters it can
+be anything.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Returns:
+<i>ok</i> on success, and an error message on failure. <br>
+Examples:</p>
+
+<p style="margin-left:27%;"><b>hyprctl</b> <i>dispatch exec
+kitty</i></p>
+
+<p style="margin-left:27%; margin-top: 1em"><b>hyprctl</b>
+<i>dispatch pseudo x</i></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>keyword</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Set a config
+keyword dynamically.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Returns:
+<i>ok</i> on success, and an error message on failure. <br>
+Examples:</p>
+
+<p style="margin-left:27%;"><b>hyprctl</b> <i>keyword bind
+SUPER,0,pseudo</i></p>
+
+<p style="margin-left:27%; margin-top: 1em"><b>hyprctl</b>
+<i>keyword general:border_size 10</i></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>reload</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Force a reload
+of the config file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>kill</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Enter kill
+mode, where you can kill an app by clicking on it. You can
+exit by pressing ESCAPE.</p>
+
+<h2>INFO COMMANDS
+<a name="INFO COMMANDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>version</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Prints the
+Hyprland version, flags, commit and branch of build.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>monitors</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Lists all the
+outputs with their properties.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>workspaces</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Lists all
+workspaces with their properties.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clients</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Lists all
+windows with their properties.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>devices</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Lists all
+connected input devices.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>activewindow</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Returns the
+active window name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>layers</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Lists all the
+layers.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>splash</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Returns the
+current random splash.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--batch</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Specify a batch
+of commands to execute. <br>
+Example:</p>
+
+<p style="margin-left:27%;"><b>hyprctl</b> <i>--batch
+&quot;keyword general:border_size 2 ; keyword
+general:gaps_out 20&quot;</i></p>
+
+<p style="margin-left:27%; margin-top: 1em"><i>;</i>
+separates the commands.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-j</b></p>
+
+<p style="margin-left:18%; margin-top: 1em">Outputs
+information in JSON.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Submit bug
+reports and request features online at:</p>
+
+
+<p style="margin-left:18%;">&lt;<i>https://github.com/hyprwm/Hyprland/issues</i>&gt;</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Sources at:
+&lt;<i>https://github.com/hyprwm/Hyprland</i>&gt;</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (c)
+2022, vaxerski</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Vaxerski
+&lt;<i>https://github.com/vaxerski</i>&gt;.</p>
+<hr>
+</body>
+</html>

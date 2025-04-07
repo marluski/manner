@@ -1,0 +1,340 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SPEEXENC</title>
+
+</head>
+<body>
+
+<h1 align="center">SPEEXENC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#input_file can be:">input_file can be:</a><br>
+<a href="#output_file can be:">output_file can be:</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Raw input options:">Raw input options:</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">speexenc - The
+reference implementation speex encoder.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>speexenc</b>
+[<i>options</i>] <i>input_file output_file</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Encodes
+input_file using Speex. It can read the WAV or raw
+files.</p>
+
+<h3>input_file can be:
+<a name="input_file can be:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">filename.wav</p>
+
+<p style="margin-left:18%;">wav file</p>
+
+<p style="margin-left:9%;">filename.*</p>
+
+<p style="margin-left:18%;">Raw PCM file (any extension
+other than .wav)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>-</p></td>
+<td width="8%"></td>
+<td width="6%">
+
+
+<p>stdin</p></td>
+<td width="76%">
+</td></tr>
+</table>
+
+<h3>output_file can be:
+<a name="output_file can be:"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">filename.spx</p>
+
+<p style="margin-left:18%;">Speex file</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>-</p></td>
+<td width="8%"></td>
+<td width="8%">
+
+
+<p>stdout</p></td>
+<td width="74%">
+</td></tr>
+</table>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n</b>,
+<b>--narrowband</b></p>
+
+<p style="margin-left:18%;">Narrowband (8 kHz) input
+file</p>
+
+<p style="margin-left:9%;"><b>-w</b>, <b>--wideband</b></p>
+
+<p style="margin-left:18%;">Wideband (16 kHz) input
+file</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="73%">
+
+
+<p style="margin-top: 1em"><b>-u</b>,
+<b>--ultra-wideband</b> &quot;Ultra-wideband&quot; (32 kHz)
+input file</p></td>
+<td width="18%">
+</td></tr>
+</table>
+
+<p><b>--quality</b> n</p></table>
+
+<p style="margin-left:18%;">Encoding quality (0-10),
+default 8</p>
+
+<p style="margin-left:9%;"><b>--bitrate</b> n</p>
+
+<p style="margin-left:18%;">Encoding bit-rate (use bit-rate
+n or lower)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--vbr</b></p></td>
+<td width="3%"></td>
+<td width="38%">
+
+
+<p>Enable variable bit-rate (VBR)</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--abr</b> rate</p>
+
+<p style="margin-left:18%;">Enable average bit-rate (ABR)
+at rate bps</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--vad</b></p></td>
+<td width="3%"></td>
+<td width="64%">
+
+
+<p>Enable voice activity detection (VAD)</p></td>
+<td width="18%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--dtx</b></p></td>
+<td width="3%"></td>
+<td width="64%">
+
+
+<p>Enable file-based discontinuous transmission (DTX)</p></td>
+<td width="18%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--comp</b> n</p>
+
+<p style="margin-left:18%;">Set encoding complexity (0-10),
+default 3</p>
+
+<p style="margin-left:9%;"><b>--nframes</b> n</p>
+
+<p style="margin-left:18%;">Number of frames per Ogg packet
+(1-10), default 1</p>
+
+<p style="margin-left:9%;"><b>--comment</b></p>
+
+<p style="margin-left:18%;">Add the given string as an
+extra comment. This may be used multiple times</p>
+
+<p style="margin-left:9%;"><b>--author</b></p>
+
+<p style="margin-left:18%;">Author of this track</p>
+
+<p style="margin-left:9%;"><b>--title</b></p>
+
+<p style="margin-left:18%;">Title for this track</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>--help</b></p>
+
+<p style="margin-left:18%;">This help</p>
+
+<p style="margin-left:9%;"><b>-v</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Version information</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-V</b></p></td>
+<td width="6%"></td>
+<td width="36%">
+
+
+<p>Verbose mode (show bit-rate)</p></td>
+<td width="46%">
+</td></tr>
+</table>
+
+<h3>Raw input options:
+<a name="Raw input options:"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--rate</b>
+n</p>
+
+<p style="margin-left:18%;">Sampling rate for raw input</p>
+
+<p style="margin-left:9%;"><b>--stereo</b></p>
+
+<p style="margin-left:18%;">Consider raw input as
+stereo</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--le</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p>Raw input is little-endian</p></td>
+<td width="47%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--be</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p>Raw input is big-endian</p></td>
+<td width="47%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--8bit</b></p></td>
+<td width="1%"></td>
+<td width="35%">
+
+
+<p>Raw input is 8-bit unsigned</p></td>
+<td width="47%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--16bit</b></p>
+
+<p style="margin-left:18%;">Raw input is 16-bit signed</p>
+
+<p style="margin-left:9%; margin-top: 1em">Default raw PCM
+input is 16-bit, little-endian, mono</p>
+
+<p style="margin-left:9%; margin-top: 1em">More information
+is available from the Speex site: http://www.speex.org</p>
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+bugs to the mailing list
+&lsquo;speex-dev@xiph.org&rsquo;.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2002 Jean-Marc Valin</p>
+<hr>
+</body>
+</html>

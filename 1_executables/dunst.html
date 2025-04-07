@@ -1,0 +1,320 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:21 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>dunst</title>
+
+</head>
+<body>
+
+<h1 align="center">dunst</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Autostarting dunst">Autostarting dunst</a><br>
+<a href="#COMMAND LINE OPTIONS">COMMAND LINE OPTIONS</a><br>
+<a href="#DEPRECATED OPTIONS">DEPRECATED OPTIONS</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#NOTIFY-SEND HINTS">NOTIFY-SEND HINTS</a><br>
+<a href="#MISCELLANEOUS">MISCELLANEOUS</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">dunst - a
+customizable and lightweight notification-daemon</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">dunst [-conf
+file] [-verbosity v] [-print] [--startup_notification]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Dunst is a
+highly configurable and lightweight notification daemon.</p>
+
+<h3>Autostarting dunst
+<a name="Autostarting dunst"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">On most
+installations, dunst should be able to automatically be
+started by D-Bus when a notification is sent. This is not
+recommended when multiple notification daemons are
+installed, because D-Bus will not know which one to start.
+Other ways of autostarting dunst include starting dunst with
+your desktop environment or window manager&rsquo;s autostart
+functionality or via the provided systemd service.</p>
+
+<h2>COMMAND LINE OPTIONS
+<a name="COMMAND LINE OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h/-help/--help</b></p>
+
+<p style="margin-left:14%;">List all command line flags</p>
+
+<p style="margin-left:9%;"><b>-conf/-config file</b></p>
+
+<p style="margin-left:14%;">Use alternative config file.
+This disables the search for other config files. If it
+cannot be opened, dunst will issue a warning and fall back
+on its internal defaults. (Hint: &lsquo;dunst -conf -
+&lt;/dev/null&lsquo; can be used to enforce the defaults,
+i.e. for testing)</p>
+
+
+<p style="margin-left:9%;"><b>-v/-version/--version</b></p>
+
+<p style="margin-left:14%;">Print version information.</p>
+
+<p style="margin-left:9%;"><b>-verbosity</b> (values:
+&rsquo;crit&rsquo;, &rsquo;warn&rsquo;, &rsquo;mesg&rsquo;,
+&rsquo;info&rsquo;, &rsquo;debug&rsquo; default <br>
+&rsquo;mesg&rsquo;)</p>
+
+<p style="margin-left:14%;">Do not display log messages,
+which have lower precedence than specified verbosity. This
+won&rsquo;t affect printing notifications on the terminal.
+Use the &rsquo;-print&rsquo; option for this.</p>
+
+<p style="margin-left:9%;"><b>-print/--print</b></p>
+
+<p style="margin-left:14%;">Print notifications to stdout.
+This might be useful for logging, setting up rules or using
+the output in other scripts.</p>
+
+
+<p style="margin-left:9%;"><b>-startup_notification/--startup_notification</b></p>
+
+<p style="margin-left:14%;">Display a notification on
+startup.</p>
+
+<h3>DEPRECATED OPTIONS
+<a name="DEPRECATED OPTIONS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Old version of
+dunst allowed changing the colors of different urgencies
+through command line options. This has been long removed in
+favour of RULES, see issue #328. <b><br>
+-li/ni/ci icon</b></p>
+
+<p style="margin-left:14%;">Set notification icon.</p>
+
+<p style="margin-left:9%;"><b>-lf/nf/cf color</b></p>
+
+<p style="margin-left:14%;">Set notification foreground
+color.</p>
+
+<p style="margin-left:9%;"><b>-lb/nb/cb color</b></p>
+
+<p style="margin-left:14%;">Set notification background
+color.</p>
+
+<p style="margin-left:9%;"><b>-lh/nh/ch color</b></p>
+
+<p style="margin-left:14%;">Set notification highlight
+color.</p>
+
+<p style="margin-left:9%;"><b>-lfr/nfr/cfr color</b></p>
+
+<p style="margin-left:14%;">Set notification frame
+color.</p>
+
+<p style="margin-left:9%;"><b>-lto/nto/cto secs</b></p>
+
+<p style="margin-left:14%;">Set notification timeout
+time.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A default
+configuration file is included (usually /etc/dunst/dunstrc)
+and serves as the least important configuration file. Note:
+this was previously /usr/share/dunst/dunstrc. You can edit
+this file to change the system-wide defaults or copy it to a
+more important location to override its settings. See the
+FILES section for more details on where dunst searches for
+its configuration files and how settings get applied.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>dunst</b>(5) for all possible settings.</p>
+
+<h3>NOTIFY-SEND HINTS
+<a name="NOTIFY-SEND HINTS"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Dunst is able to
+get different colors for a message via notify-send. In order
+to do that you have to add a hint via the -h option. The
+progress value can be set with a hint, too.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+<b>dunst</b>(5) for the list of accepted hints.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Some
+examples:</p>
+
+<p style="margin-left:9%; margin-top: 1em">notify-send -h
+string:fgcolor:#ff4444 <br>
+notify-send -h string:bgcolor:#4444ff -h
+string:fgcolor:#ff4444 -h string:frcolor:#44ff44 <br>
+notify-send -h int:value:42 &quot;Working ...&quot;</p>
+
+<h2>MISCELLANEOUS
+<a name="MISCELLANEOUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Dunst can be
+paused via the &lsquo;dunstctl set-paused true&lsquo;
+command. To unpause dunst use &lsquo;dunstctl set-paused
+false&lsquo;. Another way is to send SIGUSR1 and SIGUSR2 to
+pause and unpause respectively. Pausing using dunstctl is
+recommended over using signals, because the meaning of the
+signals isn&rsquo;t stable and might change in the
+future.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When paused,
+dunst won&rsquo;t display any notifications, but keeps all
+notifications in a queue. This can for example be wrapped
+around a screen locker (i3lock, slock) to prevent flickering
+of notifications through the lock, and to read all missed
+notifications after returning to the computer.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">These are the
+base directories dunst searches for configuration files in
+<i>descending order of importance</i>: <br>
+$XDG_CONFIG_HOME</p>
+
+<p style="margin-left:19%;">This is the most important
+directory. (&quot;$HOME/.config&quot; if unset or empty)</p>
+
+<p style="margin-left:9%;">$XDG_CONFIG_DIRS</p>
+
+<p style="margin-left:19%;">This, like $PATH for instance,
+is a :-separated list of base directories in <i>descending
+order of importance</i>. (<i>/etc</i> if unset or empty)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Dunst will
+search these directories for the following relative file
+paths: <i><br>
+dunst/dunstrc</i></p>
+
+<p style="margin-left:19%;">This is the base config and as
+such the least important in a particular base directory.</p>
+
+
+<p style="margin-left:9%;"><i>dunst/dunstrc.d/*.conf</i></p>
+
+<p style="margin-left:19%;">These are &quot;drop-ins&quot;
+(mind the &quot;.d&quot; suffix of the directory). They are
+more important than the base dunstrc in the parent
+directory, as they are considered to be small snippets to
+override settings. The last in lexical order is the most
+important one, so you can easily change the order by
+renaming them. A common approach to naming drop-ins is to
+prefix them with numbers, i.e.:</p>
+
+
+<p style="margin-left:19%; margin-top: 1em">00-least-important.conf
+<br>
+01-foo.conf <br>
+20-bar.conf <br>
+99-most-important.conf</p>
+
+<p style="margin-left:19%; margin-top: 1em">Only files with
+the <b>.conf</b> suffix will be read.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Only settings
+from the last base config the corresponding drop-ins get
+applied. So if a dunstrc is first found in
+<i>&#732;/.config/dunst/dunstrc</i>, drop-ins will be
+searched in <i>&#732;/.config/dunst/dunstrc.d/*</i>.
+Settings in more important files override those in less
+important ones.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Sascha Kruse &lt;knopwob@googlemail.com&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bugs and
+suggestions should be reported on GitHub at
+https://github.com/dunst-project/dunst/issues</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright 2013
+Sascha Kruse and contributors (see LICENSE for licensing
+information)</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you feel that
+copyrights are violated, please send me an email.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>dunst</b>(5),
+<b>dunstctl</b>(1), <b>dmenu</b>(1), <b>notify-send</b>(1),
+<b>dunstify</b>(1)</p>
+<hr>
+</body>
+</html>

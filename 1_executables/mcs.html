@@ -1,0 +1,1015 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:19 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mcs</title>
+
+</head>
+<body>
+
+<h1 align="center">mcs</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#PACKAGES AND LIBRARIES">PACKAGES AND LIBRARIES</a><br>
+<a href="#SPECIAL DEFINES">SPECIAL DEFINES</a><br>
+<a href="#DEBUGGING SUPPORT">DEBUGGING SUPPORT</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#MAILING LIST">MAILING LIST</a><br>
+<a href="#MORE INFORMATION">MORE INFORMATION</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mcs - Turbo C#
+Compiler</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mcs</b>
+[option] [source-files]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mcs is the Turbo
+C# compiler (also known as the Mono C# compiler), it is an
+implementation of the ECMA-334 language specification. You
+can pass one or more options to drive the compiler, and a
+set of source files. Extra options or arguments can be
+provided in a response file. Response files are referenced
+by prepending the @ symbol to the response file name.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <i>mcs</i>
+compiler is used to compile against the latest Mono Base
+Class Library version and fully implements C# 1.0, 2.0, 3.0,
+4.0, 5.0 and 6.0 specifications with partial support for C#
+7.0.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See the section
+on packages for more information.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Turbo C#
+compiler accepts the same command line options that the
+Microsoft C# compiler does. Those options can start with a
+slash or a dash (/checked is the same as -checked).
+Additionally some GNU-like options are supported, those
+begin with &quot;--&quot;. All MCS-specific flags which are
+not available in the Microsoft C# compiler are available
+only with the GNU-style options.</p>
+
+<p style="margin-left:9%; margin-top: 1em">C# source files
+must end with a &quot;.cs&quot; extension. Compilation of C#
+source code requires all the files that make up a library,
+module or executable to be provided on the command line.
+There is no support for partial compilation. To achieve the
+benefits of partial compilation, you should compile programs
+into their own assemblies, and later reference them with the
+&quot;-r&quot; flag.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Turbo C#
+compiler generates images (.exe files) that contain CIL byte
+code that can be executed by any system that implements a
+Common Language Infrastructure virtual machine such as the
+Microsoft .NET runtime engine on Windows or the Mono runtime
+engine on Unix systems. Executables are not bound to a
+specific CPU or operating system.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The Turbo C#
+compiler by default only references three assemblies:
+mscorlib.dll, System.dll and System.Xml.dll. If you want to
+reference extra libraries you must manually specify them
+using the -pkg: command line option or the -r: command line
+option. Alternatively if you want to get all of the System
+libraries, you can use the -pkg:dotnet command line
+option.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>--about</i></p>
+
+<p style="margin-left:18%;">Displays information about the
+Turbo C# compiler</p>
+
+
+<p style="margin-left:9%;"><i>--addmodule:MODULE1[,MODULE2]</i></p>
+
+<p style="margin-left:18%;">Includes the specified modules
+in the resulting assembly. Modules are created by calling
+the compiler with the -target:module option</p>
+
+<p style="margin-left:9%;"><i>-checked, -checked+</i></p>
+
+<p style="margin-left:18%;">Sets the default compilation
+mode to &lsquo;checked&rsquo;. This makes all the math
+operations checked (the default is unchecked).</p>
+
+<p style="margin-left:9%;"><i>-checked-</i></p>
+
+<p style="margin-left:18%;">Sets the default compilation
+mode to &lsquo;unchecked&rsquo;. This makes all the math
+operations unchecked (this is the default).</p>
+
+<p style="margin-left:9%;"><i>-clscheck-,
+-clscheck+</i></p>
+
+<p style="margin-left:18%;">Disables or enables the Common
+Language Specification (CLS) checks (it is enabled by
+default).</p>
+
+<p style="margin-left:18%; margin-top: 1em">The Common
+Language Specification (CLS) defines an interoperable subset
+of types as well as conventions that compilers (CLS
+producers) and developers must follow to expose code to
+other programming languages (CLS consumers).</p>
+
+<p style="margin-left:9%;"><i>-codepage:ID</i></p>
+
+<p style="margin-left:18%;">Specifies the code page used to
+process the input files from the point it is specified on.
+By default files will be processed in the
+environment-dependent native code page. The compiler will
+also automatically detect Unicode files that have an
+embedded byte mark at the beginning.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Other popular
+encodings are 28591 (Latin1), 1252 (iso-8859-1) and 65001
+(UTF-8).</p>
+
+<p style="margin-left:18%; margin-top: 1em">MCS supports a
+couple of shorthands: &quot;utf8&quot; can be used to
+specify utf-8 instead of using the cryptic 65001 and
+&quot;reset&quot; restores the automatic handling of code
+pages. These shorthands are not available on the Microsoft
+compiler.</p>
+
+<p style="margin-left:9%;"><i>-define:SYMLIST,
+-d:SYMLIST</i></p>
+
+<p style="margin-left:18%;">Defines the symbol listed by
+the semi-colon separated list SYMLIST SYMBOL. This can be
+tested in the source code by the pre-processor, or can be
+used by methods that have been tagged with the Conditional
+attribute.</p>
+
+<p style="margin-left:9%;"><i>-debug, -debug+</i></p>
+
+<p style="margin-left:18%;">Generate debugging information.
+To obtain stack traces with debugging information, you need
+to invoke the mono runtime with the &lsquo;--debug&rsquo;
+flag. The debugging information is stored in a MDB file
+located in same output folder as produced assembly.</p>
+
+<p style="margin-left:9%;"><i>-debug-</i></p>
+
+<p style="margin-left:18%;">Do not generate debugging
+information.</p>
+
+<p style="margin-left:9%;"><i>-delaysign+</i></p>
+
+<p style="margin-left:18%;">Only embed the strongname
+public key into the assembly. The actual signing must be
+done in a later stage using the SN tool. This is useful to
+protect the private key during development. Note that delay
+signing can only be done using a strongname key file (not a
+key container). The option is equivalent to including
+[assembly: AssemblyDelaySign (true)] in your source code.
+Compiler option takes precedence over the attributes.</p>
+
+<p style="margin-left:9%;"><i>-delaysign-</i></p>
+
+<p style="margin-left:18%;">Default. Strongname (sign) the
+assembly using the strong name key file (or container). The
+option is equivalent to including [assembly:
+AssemblyDelaySign (false)] in your source code. Compiler
+option takes precedence over the attributes.</p>
+
+<p style="margin-left:9%;"><i>-doc:FILE</i></p>
+
+<p style="margin-left:18%;">Extracts the C#/XML
+documentation from the source code and stores in in the
+given FILE.</p>
+
+<p style="margin-left:9%;"><i>-errorreport</i></p>
+
+<p style="margin-left:18%;">This flag is ignored by
+Mono&rsquo;s C# compiler and is present only to allow MCS to
+be used as a CSC replacement for msbuild/xbuild.</p>
+
+<p style="margin-left:9%;"><i>--fatal</i></p>
+
+<p style="margin-left:18%;">This is used for debugging the
+compiler. This makes the error emission generate an
+exception that can be caught by a debugger.</p>
+
+<p style="margin-left:9%;"><i>-filealign</i></p>
+
+<p style="margin-left:18%;">This flag is ignored by
+Mono&rsquo;s C# compiler and is present only to allow MCS to
+be used as a CSC replacement for msbuild/xbuild.</p>
+
+<p style="margin-left:9%;"><i>-fullpaths</i></p>
+
+<p style="margin-left:18%;">Any source code error or
+warning issued by the compiler includes file name only by
+default. This option causes compiler to issue absolute file
+path instead.</p>
+
+<p style="margin-left:9%;"><i>-keyfile:KEYFILE</i></p>
+
+<p style="margin-left:18%;">Strongname (sign) the output
+assembly using the key pair present in the specified strong
+name key file (snk). A full key pair is required by default
+(or when using delaysign-). A file containing only the
+public key can be used with delaysign+. The option is
+equivalent to including [assembly: AssemblyKeyFile
+(&quot;KEYFILE&quot;)] in your source code. Compiler option
+takes precedence over the attributes.</p>
+
+
+<p style="margin-left:9%;"><i>-keycontainer:CONTAINER</i></p>
+
+<p style="margin-left:18%;">Strongname (sign) the output
+assembly using the key pair present in the specified
+container. Note that delaysign+ is ignored when using key
+containers. The option is equivalent to including [assembly:
+AssemblyKeyName (&quot;CONTAINER&quot;)] in your source
+code. Compiler option takes precedence over the
+attributes.</p>
+
+<p style="margin-left:9%;"><i>-langversion:TEXT</i></p>
+
+<p style="margin-left:18%;">The option specifies the
+version of the language to use. The feature set is different
+in each C# version. This switch can be used to force the
+compiler to allow only a subset of the features. The
+possible values are: <i><br>
+Default</i></p>
+
+<p style="margin-left:27%;">Instruct compiler to use the
+latest version. Equivalent is to omit the switch (this
+currently defaults to the C# 6.0 language
+specification).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>ISO-1</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Restrict compiler to use only first ISO standardized
+features. The usage of features such as generics, static
+classes, anonymous methods will lead to error.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>ISO-2</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Restrict compiler to use only the second ISO
+standardized features. This allows the use of generics,
+static classes, iterators and anonymous methods for
+example.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>3</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Restrict the compiler to use only the features available
+in C# 3.0 (a superset of ISO-1 and ISO-2).</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>4</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Restrict the compiler to use only the features available
+in C# 4.0 specification.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>5</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Restrict the compiler to use only the features available
+in C# 5.0 specification.</p></td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="6%">
+
+
+<p><i>6</i></p></td>
+<td width="3%"></td>
+<td width="73%">
+
+
+<p>Restrict the compiler to use only the features available
+in C# 6.0 specification.</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><i>experimental</i></p>
+
+<p style="margin-left:27%;">Enables unstable features from
+upcoming versions of the language.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Notice that
+this flag only restricts the language features available to
+the programmer. A version of produced assemblies can be
+controlled using <i>SDK</i> option.</p>
+
+<p style="margin-left:9%;"><i>-lib:PATHLIST</i></p>
+
+<p style="margin-left:18%;">Each path specified in the
+comma-separated list will direct the compiler to look for
+libraries in that specified path.</p>
+
+<p style="margin-left:9%;"><i>-L PATH</i></p>
+
+<p style="margin-left:18%;">Directs the compiler to look
+for libraries in the specified path. Multiple paths can be
+provided by using the option multiple times.</p>
+
+<p style="margin-left:9%;"><i>-main:CLASS</i></p>
+
+<p style="margin-left:18%;">Tells the compiler which CLASS
+contains the entry point. Useful when you are compiling
+several classes with a Main method.</p>
+
+<p style="margin-left:9%;"><i>-nostdlib, -nostdlib+</i></p>
+
+<p style="margin-left:18%;">Use this flag if you want to
+compile the core library. This makes the compiler load its
+internal types from the assembly being compiled.</p>
+
+<p style="margin-left:9%;"><i>-noconfig, -noconfig+</i></p>
+
+<p style="margin-left:18%;">Disables the default compiler
+configuration to be loaded. The compiler by default has
+references to the system assemblies.</p>
+
+<p style="margin-left:9%;"><i>-nowarn:WARNLIST</i></p>
+
+<p style="margin-left:18%;">Makes the compiler ignore
+warnings specified in the comma-separated list
+WARNLIST&gt;</p>
+
+<p style="margin-left:9%;"><i>-optimize, -optimize+,
+-optimize-</i></p>
+
+<p style="margin-left:18%;">Controls compiler code
+generation optimizations on the code. Using -optimize or
+-optimize+ will turn on optimizations, -optimize- will turn
+it off. The default in mcs is to optimize-. The option can
+be mixed with -debug but for the best debugging experience
+it is recommended leave the options off.</p>
+
+<p style="margin-left:9%;"><i>-out:FNAME, -o FNAME</i></p>
+
+<p style="margin-left:18%;">Names the output file to be
+generated.</p>
+
+<p style="margin-left:9%;"><i>--parse</i></p>
+
+<p style="margin-left:18%;">Used for benchmarking. The
+compiler will only parse its input files.</p>
+
+<p style="margin-left:9%;"><i>-pathmap:K=V[,Kn=Vn]</i></p>
+
+<p style="margin-left:18%;">Sets a mapping for source path
+names used in generated output.</p>
+
+
+<p style="margin-left:9%;"><i>-pkg:package1[,packageN]</i></p>
+
+<p style="margin-left:18%;">Reference assemblies for the
+given packages.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The compiler
+will invoke pkg-config --libs on the set of packages
+specified on the command line to obtain libraries and
+directories to compile the code.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This is
+typically used with third party components, like this:</p>
+
+<p style="margin-left:18%; margin-top: 1em">$ mcs
+-pkg:gtk-sharp demo.cs <i><br>
+-pkg:dotnet</i></p>
+
+<p style="margin-left:27%;">This will instruct the compiler
+to reference the System.* libraries available on a typical
+dotnet framework installation, notice that this does not
+include all of the Mono libraries, only the System.* ones.
+This is a convenient shortcut for those porting code.</p>
+
+<p style="margin-left:9%;"><i>-platform:ARCH</i></p>
+
+<p style="margin-left:18%;">Used to specify the target
+platform. The possible values are: anycpu,
+anycpu32bitpreferred, arm, x86, x64 or itanium. The default
+option is anycpu.</p>
+
+
+<p style="margin-left:9%;"><i>-resource:RESOURCE[,ID]</i></p>
+
+<p style="margin-left:18%;">Embeds to the given resource
+file. The optional ID can be used to give a different name
+to the resource. If not specified, the resource name will be
+the file name.</p>
+
+
+<p style="margin-left:9%;"><i>-linkresource:RESOURCE[,ID]</i></p>
+
+<p style="margin-left:18%;">Links to the specified
+RESOURCE. The optional ID can be used to give a name to the
+linked resource.</p>
+
+<p style="margin-left:9%;"><i>-r:ASSEMBLY1[,ASSEMBLY2],
+-reference ASSEMBLY1[,ASSEMBLY2]</i></p>
+
+<p style="margin-left:18%;">Reference the named assemblies.
+Use this to use classes from the named assembly in your
+program. The assembly will be loaded from either the system
+directory where all the assemblies live, or from the path
+explicitly given with the -L option.</p>
+
+<p style="margin-left:18%; margin-top: 1em">You can also
+use a semicolon to separate the assemblies instead of a
+comma.</p>
+
+
+<p style="margin-left:9%;"><i>-reference:ALIAS=ASSEMBLY</i></p>
+
+<p style="margin-left:18%;">Extern alias reference support
+for C#.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If you have
+different assemblies that provide the same types, the extern
+alias support allows you to provide names that your software
+can use to tell those appart. The types from ASSEMBLY will
+be exposed as ALIAS, then on the C# source code, you need to
+do:</p>
+
+<p style="margin-left:18%; margin-top: 1em">extern alias
+ALIAS; <br>
+To bring it into your namespace. For example, to cope with
+two graphics libraries that define
+&quot;Graphics.Point&quot;, one in &quot;OpenGL.dll&quot;
+and one in &quot;Postscript.dll&quot;, you would invoke the
+compiler like this:</p>
+
+<p style="margin-left:18%; margin-top: 1em">mcs
+-r:Postscript=Postscript.dll -r:OpenGL=OpenGL.dll</p>
+
+<p style="margin-left:18%; margin-top: 1em">And in your
+source code, you would write:</p>
+
+<p style="margin-left:18%; margin-top: 1em">extern alias
+Postscript;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>extern alias OpenGL;</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>class X {</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>// This is a Graphics.Point from Postscrip.dll</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>Postscript.Point p = new Postscript.Point ();</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>// This is a Graphics.Point from OpenGL.dll</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%">
+</td>
+<td width="81%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>OpenGL.Point p = new OpenGL.Point ();</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>}</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>-recurse:PATTERN, --recurse
+PATTERN</i></p>
+
+<p style="margin-left:18%;">Does recursive compilation
+using the specified pattern. In Unix the shell will perform
+globbing, so you might want to use it like this:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%">
+</td>
+<td width="6%">
+</td>
+<td width="81%">
+
+
+<p>$ mcs -recurse:&rsquo;*.cs&rsquo;</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>-sdk:VERSION</i></p>
+
+<p style="margin-left:18%;">Used to specify the version of
+Base Class Library assemblies used for compilation.
+Following predefined values are valid: 2, 4 (default) as
+well as any custom value. The predefined version number
+means which custom value is specified mcs will try to find
+Base Class Libraries in the mono installed location
+PREFIX/lib/mono/&lt;value&gt;.</p>
+
+<p style="margin-left:9%;"><i>--shell</i></p>
+
+<p style="margin-left:18%;">Starts up the compiler in
+interactive mode, providing a C# shell for statements and
+expressions. A shortcut is to use the <i>csharp</i> command
+directly.</p>
+
+<p style="margin-left:9%;"><i>--stacktrace</i></p>
+
+<p style="margin-left:18%;">Generates a stack trace at the
+time the error is reported, useful for debugging the
+compiler.</p>
+
+<p style="margin-left:9%;"><i>-target:KIND, -t:KIND</i></p>
+
+<p style="margin-left:18%;">Used to specify the desired
+target. The possible values are: exe (plain executable),
+winexe (Windows.Forms executable), library (component
+libraries) and module (partial library).</p>
+
+<p style="margin-left:9%;"><i>--timestamp</i></p>
+
+<p style="margin-left:18%;">Another debugging flag. Used to
+display the times at various points in the compilation
+process.</p>
+
+<p style="margin-left:9%;"><i>-unsafe, -unsafe+</i></p>
+
+<p style="margin-left:18%;">Enables compilation of unsafe
+code.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>-v</i></p></td>
+<td width="6%"></td>
+<td width="53%">
+
+
+<p>Debugging. Turns on verbose yacc parsing.</p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--version</i></p>
+
+<p style="margin-left:18%;">Shows the compiler version.</p>
+
+<p style="margin-left:9%;"><i>-warnaserror,
+-warnaserror+</i></p>
+
+<p style="margin-left:18%;">All compilers warnings will be
+reported as errors.</p>
+
+<p style="margin-left:9%;"><i>-warnaserror:W1,[Wn],
+-warnaserror+:W1,[Wn]</i></p>
+
+<p style="margin-left:18%;">Treats one or more compiler
+warnings as errors.</p>
+
+
+<p style="margin-left:9%;"><i>-warnaserror-:W1,[Wn]</i></p>
+
+<p style="margin-left:18%;">Sets one or more compiler
+warnings to be always threated as warnings. Becomes useful
+when used together with -warnaserror.</p>
+
+<p style="margin-left:9%;"><i>-warn:LEVEL</i></p>
+
+<p style="margin-left:18%;">Sets the warning level. 0 is
+the lowest warning level, and 4 is the highest. The default
+is 4.</p>
+
+<p style="margin-left:9%;"><i>-win32res:FILE</i></p>
+
+<p style="margin-left:18%;">Specifies a Win32 resource file
+(.res) to be bundled into the resulting assembly.</p>
+
+<p style="margin-left:9%;"><i>-win32icon:FILE</i></p>
+
+<p style="margin-left:18%;">Attaches the icon specified in
+FILE on the output into the resulting assembly.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>--</i></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Use this to stop option parsing, and allow
+option-looking parameters to be passed on the command
+line.</p> </td></tr>
+</table>
+
+<h2>PACKAGES AND LIBRARIES
+<a name="PACKAGES AND LIBRARIES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When referencing
+an assembly, if the name of the assembly is a path, the
+compiler will try to load the assembly specified in the
+path. If it does not, then the compiler will try loading the
+assembly from the current directory, the compiler base
+directory and if the assembly is not found in any of those
+places in the directories specified as arguments to the
+-lib: command argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The compiler
+uses the library path to locate libraries, and is able to
+reference libraries from a particular package if that
+directory is used. To simplify the use of packages, the C#
+compiler includes the -pkg: command line option that is used
+to load specific collections of libraries.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Libraries
+visible to the compiler are stored relative to the
+installation prefix under PREFIX/lib/mono/ called the
+PACKAGEBASE and the defaults for mcs, gmcs and smcs are as
+follows:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><i>mcs</i></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">References the PACKAGEBASE/1.0
+directory</p> </td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><i>gmcs</i></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>References the PACKAGEBASE/2.0 directory</p></td>
+<td width="31%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><i>smcs</i></p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>References the PACKAGEBASE/2.1 directory</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Those are the
+only runtime profiles that exist. Although other directories
+exist (like 3.0 and 3.5) those are not really runtime
+profiles, they are merely placeholders for extra libraries
+that build on the 2.0 foundation.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Software
+providers will distribute software that is installed
+relative to the PACKAGEBASE directory. This is integrated
+into the <i>gacutil</i> tool that not only installs public
+assemblies into the Global Assembly Cache (GAC) but also
+installs them into the PACKAGEBASE/PKG directory (where PKG
+is the name passed to the -package flag to gacutil).</p>
+
+<p style="margin-left:9%; margin-top: 1em">As a developer,
+if you want to consume the Gtk# libraries, you would invoke
+the compiler like this:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ mcs
+-pkg:gtk-sharp-2.0 main.cs</p>
+
+<p style="margin-left:9%; margin-top: 1em">The -pkg: option
+instructs the compiler to fetch the definitions for
+gtk-sharp-2.0 from pkg-config, this is equivalent to passing
+to the C# compiler the output of:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ pkg-config
+--libs gtk-sharp-2.0</p>
+
+<p style="margin-left:9%; margin-top: 1em">Usually this
+merely references the libraries from PACKAGEBASE/PKG.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Although there
+are directory names for 3.0 and 3.5, that does not mean that
+there are 3.0 and 3.5 compiler editions or profiles. Those
+are merely new libraries that must be manually referenced
+either with the proper -pkg: invocation, or by referencing
+the libraries directly.</p>
+
+<h2>SPECIAL DEFINES
+<a name="SPECIAL DEFINES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>TRACE</b>
+and <b>DEBUG</b> defines have a special meaning to the
+compiler.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default calls
+to methods and properties in the System.Diagnostics.Trace
+class are not generated unless the TRACE symbol is defined
+(either through a &quot;#define TRACE&quot;) in your source
+code, or by using the <i>--define TRACE</i> in the command
+line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">By default calls
+to methods and properties in the System.Diagnostics.Debug
+class are not generated unless the DEBUG symbol is defined
+(either through a &quot;#define DEBUG&quot;) in your source
+code, or by using the <i>--define DEBUG</i> in the command
+line.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that the
+effect of defining TRACE and DEBUG is a global setting, even
+if they are only defined in a single file.</p>
+
+<h2>DEBUGGING SUPPORT
+<a name="DEBUGGING SUPPORT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When using the
+&quot;-debug&quot; flag, MCS will generate a file with the
+extension .mdb that contains the debugging information for
+the generated assembly. This file is consumed by the Mono
+debugger (mdb).</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>MCS_COLORS</i></p>
+
+<p style="margin-left:18%;">If this variable is set, it
+contains a string in the form
+&quot;foreground,background&quot; that specifies which color
+to use to display errors on some terminals.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The background
+is optional and defaults to your terminal current
+background. The possible colors for foreground are:
+<b>black, red, brightred, green, brightgreen, yellow,
+brightyellow,</b> blue, brightblue, magenta, brightmagenta,
+cyan, brightcyan, grey, white and brightwhite.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The possible
+colors for background are: black, red, green, yellow, blue,
+magenta, cyan, grey and white.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For example,
+you could set these variable from your shell: <br>
+export MCS_COLORS</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>MCS_COLORS=errors=brightwhite,red</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">You can disable
+the built-in color scheme by setting this variable to
+&quot;disable&quot;.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">During
+compilation the MCS compiler defines the __MonoCS__ symbol,
+this can be used by pre-processor instructions to compile
+Mono C# compiler specific code. Please note that this symbol
+is only to test for the compiler, and is not useful to
+distinguish compilation or deployment platforms.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono C#
+Compiler was written by Miguel de Icaza, Ravi Pratap, Martin
+Baulig, Marek Safar and Raja Harinath. The development was
+funded by Ximian, Novell and Marek Safar.</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono
+Compiler Suite is released under the terms of the GNU GPL or
+the MIT X11. Please read the accompanying
+&lsquo;COPYING&rsquo; file for details. Alternative
+licensing for the compiler is available from Xamarin.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">csharp(1),
+mono(1), pkg-config(1), sn(1)</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To report bugs
+in the compiler, you must file them on our bug tracking
+system, at: http://www.mono-project.com/community/bugs/</p>
+
+<h2>MAILING LIST
+<a name="MAILING LIST"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono Mailing
+lists are listed at
+http://www.mono-project.com/community/help/mailing-lists/</p>
+
+<h2>MORE INFORMATION
+<a name="MORE INFORMATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The Mono C#
+compiler was developed by Novell, Inc
+(http://www.novell.com) and Xamarin Inc
+(http://www.xamarin.com) is based on the ECMA C# language
+standard available here:
+http://www.ecma.ch/ecma1/STAND/ecma-334.htm</p>
+
+<p style="margin-left:9%; margin-top: 1em">The home page
+for the Mono C# compiler is at
+http://www.mono-project.com/docs/about-mono/languages/csharp/</p>
+<hr>
+</body>
+</html>

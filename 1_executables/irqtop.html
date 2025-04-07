@@ -1,0 +1,191 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:24 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>IRQTOP</title>
+
+</head>
+<body>
+
+<h1 align="center">IRQTOP</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#INTERACTIVE MODE KEY COMMANDS">INTERACTIVE MODE KEY COMMANDS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#AVAILABILITY">AVAILABILITY</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">irqtop - utility
+to display kernel interrupt information</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>irqtop</b>
+[options]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Display kernel
+interrupt counter information in <b>top</b>(1) style
+view.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default
+output is subject to change. So whenever possible, you
+should avoid using default outputs in your scripts. Always
+explicitly define expected columns by using
+<b>--output</b>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--output</b> <i>list</i></p>
+
+<p style="margin-left:14%;">Specify which output columns to
+print. Use <b>--help</b> to get a list of all supported
+columns. The default list of columns may be extended if list
+is specified in the format <i>+list</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b>,
+<b>--cpu-stat</b> <i>mode</i></p>
+
+<p style="margin-left:14%;">Show per-cpu statistics by
+specified mode. Available modes are: <b>auto</b>,
+<b>enable</b>, <b>disable</b>. The default option
+<b>auto</b> detects the width of window, then shows the
+per-cpu statistics if the width of window is large enough to
+show a full line of statistics.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C</b>,
+<b>--cpu-list</b> <i>list</i></p>
+
+<p style="margin-left:14%;">Specify cpus in list format to
+show.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>,
+<b>--delay</b> <i>seconds</i></p>
+
+<p style="margin-left:14%;">Update interrupt output every
+<i>seconds</i> intervals.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>,
+<b>--sort</b> <i>column</i></p>
+
+<p style="margin-left:14%;">Specify sort criteria by column
+name. See <b>--help</b> output to get column names. The sort
+criteria may be changes in interactive mode.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-S</b>,
+<b>--softirq</b></p>
+
+<p style="margin-left:14%;">Show softirqs information.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t</b>,
+<b>--threshold</b> <i>min</i></p>
+
+<p style="margin-left:14%;">Only show IRQs with counters
+above the specified threshold. Human readable values are
+supported (e.g. 1.2K).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Display help text and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b>,
+<b>--version</b></p>
+
+<p style="margin-left:14%;">Display version and exit.</p>
+
+<h2>INTERACTIVE MODE KEY COMMANDS
+<a name="INTERACTIVE MODE KEY COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>i</b></p>
+
+<p style="margin-left:14%;">sort by short irq name or
+number field</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>t</b></p>
+
+<p style="margin-left:14%;">sort by total count of
+interrupts (the default)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>d</b></p>
+
+<p style="margin-left:14%;">sort by delta count of
+interrupts</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>n</b></p>
+
+<p style="margin-left:14%;">sort by long descriptive name
+field</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>q Q</b></p>
+
+<p style="margin-left:14%;">stop updates and exit
+program</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Zhenwei
+Pi</i> &lt;pizhenwei@bytedance.com&gt;, <i>Sami Kerola</i>
+&lt;kerolasa@iki.fi&gt;, <i>Karel Zak</i>
+&lt;kzak@redhat.com&gt; <i>Robin Jarry</i>
+&lt;robin@jarry.cc&gt;</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For bug reports,
+use the <i>issue tracker</i>
+&lt;https://github.com/util-linux/util-linux/issues&gt;.</p>
+
+<h2>AVAILABILITY
+<a name="AVAILABILITY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>irqtop</b> command is part of the util-linux package
+which can be downloaded from <i>Linux Kernel Archive</i>
+&lt;https://www.kernel.org/pub/linux/utils/util-linux/&gt;.</p>
+<hr>
+</body>
+</html>

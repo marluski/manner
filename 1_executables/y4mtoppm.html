@@ -1,0 +1,176 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>y4mtoppm</title>
+
+</head>
+<body>
+
+<h1 align="center">y4mtoppm</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">y4mtoppm -
+Convert YUV4MPEG2 stream to PPM images</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4mtoppm</b>
+[<i>options</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4mtoppm</b>
+converts a YUV4MPEG2 stream into a sequence of raw PPM
+images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Output is to
+stdout (but feel free to have the shell redirect to a
+file).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Input is read
+from stdin, like all other YUV4MPEG2 filters and tools.
+YUV4MPEG2 streams contain frames using the Y&rsquo;CbCr
+colorspace (ITU-R BT.601). <b>y4mtoppm</b> will convert each
+pixel to the usual R&rsquo;G&rsquo;B&rsquo; colorspace used
+for computer graphics.</p>
+
+<p style="margin-left:9%; margin-top: 1em">YUV4MPEG2
+streams may (often!) have subsampled chroma planes.
+<b>y4mtoppm</b> can upsample &quot;4:2:0 JPEG&quot; streams
+using a simple, lousy algorithm. Better results will be
+obtained using a filters such as <b>y4mscaler</b>(1) which
+are capable of general-purpose subsampling operations.
+<b>y4mtoppm</b> will fail on streams which have chroma
+subsampling modes other than 4:4:4 or 4:2:0-JPEG.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For interlaced
+streams, these operations are performed on each field
+individually. Fields can be output as separate PPM images in
+time-order (default), or interleaved into full-frame
+images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If multiple PPM
+images are generated, they are simply output one after
+another. If you want to turn such a &quot;multi-image&quot;
+PPM stream/file into individual files, use <b>pnmsplit</b>.
+(Some PNM filters can process multi-image files/streams;
+however, many written before June 2000 will only process the
+first image.)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4mtoppm</b>
+and <b>ppmtoy4m</b> are inverses of each other; you can pipe
+the output of one into the other, and vice-versa. Note that
+the colorspace (and subsampling) operations are lossy in
+both directions. And, when converting to PPM, information on
+interlacing and sample aspect ratio is lost (but can be
+reconstructed by supplying command-line arguments to
+<b>ppmtoy4m</b>).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>y4mtoppm</b>
+accepts the following options:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-L</b></p></td>
+<td width="3%"></td>
+<td width="85%">
+
+
+<p>For interlaced streams, output a single PPM image for
+each frame, containing two interleaved fields. (Otherwise,
+two PPM images will be generated for each frame; one per
+field.)</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-v</b> <i>[0,1,2]</i></p>
+
+<p style="margin-left:15%;">Set verbosity level. <br>
+0 = warnings and errors only. <br>
+1 = add informative messages, too. <br>
+2 = add chatty debugging message, too.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">To turn the
+first 15 frames of an (MJPEG or DV) AVI file into individual
+PPM files:</p>
+
+<p style="margin-left:15%; margin-top: 1em">lav2yuv -f 15
+your-video.avi | y4mtoppm | pnmsplit -
+&quot;your-video-%d.ppm&quot;</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Matt Marjanovic. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>ppm</b></i>(5),
+<b>pnm</b>(5), <b>ppmtoy4m</b>(1), <b>mjpegtools</b>(1),
+<b>mpeg2enc</b>(1), <b>lav2yuv</b>(1), <b>pnmsplit</b>(1),
+<b>y4mscaler</b>(1)</p>
+<hr>
+</body>
+</html>

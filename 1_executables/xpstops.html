@@ -1,0 +1,239 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>XPSTOPS</title>
+
+</head>
+<body>
+
+<h1 align="center">XPSTOPS</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xpstops - XPS to
+PostScript converter</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="49%">
+
+
+<p style="margin-top: 1em"><b>xpstops</b>
+[<i>OPTION</i>...] FILE [<i>OUTPUT&nbsp;FILE</i>]</p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>xpstops</b>
+converts XPS documents to PostScript format. <b>xpstops</b>
+reads the XPS file, <i>FILE</i>, and writes a PostScript
+file, <i>OUTPUT FILE</i>. If <i>OUTPUT FILE</i> is not
+specified the output filename will be derived from the
+<i>FILE</i> filename.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-?</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>
+<i>DOCUMENT</i>, <b>--document</b>=<i>DOCUMENT</i></p>
+
+<p style="margin-left:14%;">The document inside the XPS
+file to convert. By default, the first document of the XPS
+file is used.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f</b>
+<i>PAGE</i>, <b>--first</b>=<i>PAGE</i></p>
+
+<p style="margin-left:14%;">The first page to convert.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l</b>
+<i>PAGE</i>, <b>--last</b>=<i>PAGE</i></p>
+
+<p style="margin-left:14%;">The last page to convert.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>,
+<b>--odd</b></p>
+
+<p style="margin-left:14%;">Convert only odd pages.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e</b>,
+<b>--even</b></p>
+
+<p style="margin-left:14%;">Convert only even pages.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b>
+<i>RESOLUTION</i>, <b>--resolution</b>=<i>RESOLUTION</i></p>
+
+<p style="margin-left:14%;">Horizontal and vertical
+resolution in PPI (Pixels Per Inch). The default is 150
+PPI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--rx</b>=<i>RESOLUTION</i></p>
+
+<p style="margin-left:14%;">Horizontal resolution in PPI
+(Pixels Per Inch). The default is 150 PPI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ry</b>=<i>RESOLUTION</i></p>
+
+<p style="margin-left:14%;">Vertical resolution in PPI
+(Pixels Per Inch). The default is 150 PPI.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-x</b>
+<i>X</i>, <b>--crop-x</b>=<i>X</i></p>
+
+<p style="margin-left:14%;">The x-coordinate of the crop
+area top left corner.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-y</b>
+<i>Y</i>, <b>--crop-y</b>=<i>Y</i></p>
+
+<p style="margin-left:14%;">The y-coordinate of the crop
+area top left corner.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w</b>
+<i>WIDTH</i>, <b>--crop-width</b>=<i>WIDTH</i></p>
+
+<p style="margin-left:14%;">The width of crop area.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>
+<i>HEIGHT</i>, <b>--crop-height</b>=<i>HEIGHT</i></p>
+
+<p style="margin-left:14%;">The height of crop area.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--level2</b></p>
+
+<p style="margin-left:14%;">Generate Level 2 PostScript.
+Level 2 supports color images and image compression.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--level3</b></p>
+
+<p style="margin-left:14%;">Generate Level 3 PostScript.
+This enables all Level 2 features plus shading patterns and
+masked images. This is the default setting.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--eps</b></p>
+
+<p style="margin-left:14%;">Generate an Encapsulated
+PostScript (EPS) file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--paper</b>=<i>PAPER</i></p>
+
+<p style="margin-left:14%;">Set the paper size to one of
+&quot;A0&quot;, &quot;A1&quot;, &quot;A2&quot;,
+&quot;A3&quot;, &quot;A4&quot;, &quot;A5&quot;,
+&quot;B4&quot;, &quot;B5&quot;, &quot;Letter&quot;,
+&quot;Tabloid&quot;, &quot;Ledger&quot;, &quot;Legal&quot;,
+&quot;Statement&quot;, &quot;Executive&quot;,
+&quot;Folio&quot;, &quot;Quarto&quot;,
+&quot;10x14&quot;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--duplex</b></p>
+
+<p style="margin-left:14%;">Adds the %%IncludeFeature:
+*Duplex DuplexNoTumble DSC comment to the PostScript file.
+This tells the print manager to enable duplexing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--paper-width</b>=<i>WIDTH</i></p>
+
+<p style="margin-left:14%;">The paper width.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--paper-height</b>=<i>HEIGHT</i></p>
+
+<p style="margin-left:14%;">The paper height.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--expand</b></p>
+
+<p style="margin-left:14%;">Expand pages smaller than the
+paper to fill the paper. By default, pages are not
+scaled.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-shrink</b></p>
+
+<p style="margin-left:14%;">Don't scale pages which are
+larger than the paper. By default, pages larger than the
+paper are shrunk to fit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-center</b></p>
+
+<p style="margin-left:14%;">Don't center on the paper pages
+smaller than the paper (after any scaling). By default,
+pages smaller than the paper are aligned to the lower-left
+corner.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to
+<b><font color="#0000FF">https://bugzilla.gnome.org/enter_bug.cgi?product=libgxps</font></b><font color="#000000">.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>xpstojpeg</b>(1)
+<b>xpstopng</b>(1) <b>xpstopdf</b>(1)
+<b>xpstosvg</b>(1)</font></p>
+<hr>
+</body>
+</html>

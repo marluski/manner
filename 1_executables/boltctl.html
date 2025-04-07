@@ -1,0 +1,337 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:49 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>BOLTCTL</title>
+
+</head>
+<body>
+
+<h1 align="center">BOLTCTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#authorize [-F | --first-time] DEVICE">authorize [-F | --first-time] DEVICE</a><br>
+<a href="#config --describe [global|domain|device]">config --describe [global|domain|device]</a><br>
+<a href="#config KEY [VALUE]">config KEY [VALUE]</a><br>
+<a href="#config &lt;domain|device&gt;.KEY TARGET [VALUE]">config &lt;domain|device&gt;.KEY TARGET [VALUE]</a><br>
+<a href="#domains [-v | --verbose]">domains [-v | --verbose]</a><br>
+<a href="#enroll [--policy policy] DEVICE">enroll [--policy policy] DEVICE</a><br>
+<a href="#forget DEVICE">forget DEVICE</a><br>
+<a href="#info DEVICE">info DEVICE</a><br>
+<a href="#list [-a | --all]">list [-a | --all]</a><br>
+<a href="#monitor">monitor</a><br>
+<a href="#power [-t | --timeout seconds] [-q | --query]">power [-t | --timeout seconds] [-q | --query]</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">boltctl -
+control the thunderbolt device manager</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>boltctl</b>
+<i>authorize DEVICE</i> <b><br>
+boltctl</b> <i>config</i> <b><br>
+boltctl</b> <i>domains</i> <b><br>
+boltctl</b> <i>enroll DEVICE</i> <b><br>
+boltctl</b> <i>forget DEVICE</i> <b><br>
+boltctl</b> <i>info DEVICE</i> <b><br>
+boltctl</b> <i>list</i> <b><br>
+boltctl</b> <i>monitor</i> <b><br>
+boltctl</b> <i>power</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>boltctl</i>
+is the command line interface to interact with <i>boltd</i>,
+the system daemon that manages Thunderbolt 3(TM) devices. It
+can be used to query the state of devices as well as manage
+them.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Devices can be
+globally identified via their unique identifier (uuid). All
+commands that take a <i>DEVICE</i> identifier expect this
+unique id.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If no command is
+given, it is equivalent to <i>boltctl list</i>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print version information and
+exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-U | --uuid
+{</b><i>full</i> <b>|</b> <i>short</i> <b>|</b> <i>alias</i>
+<b>| N}</b></p>
+
+<p style="margin-left:14%;">Control how UUIDs are printed.
+Since they are somewhat sensitive data it is not advisable
+to share them publicly in full length. Instead <i>short</i>
+or <i>alias</i> can and should be used when sharing the
+output of <i>boltctl</i>.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>full</i></p>
+
+<p style="margin-left:19%;">Print all UUIDs in full
+length.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>short</i></p>
+
+<p style="margin-left:19%;">Truncate all UUIDs so only the
+first 13 characters are printed.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>alias</i></p>
+
+<p style="margin-left:19%;">All UUIDs are replaced by a
+random string that is derived from the UUID, therefore the
+devices can be uniquely identified without revealing the
+original UUID.</p>
+
+<p style="margin-left:14%; margin-top: 1em">N</p>
+
+<p style="margin-left:19%;">If a integer <i>N</i> is
+specified, all UUIDs are truncated to only show up to
+<i>N</i>.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>authorize [-F | --first-time] DEVICE
+<a name="authorize [-F | --first-time] DEVICE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Authorize a
+currently unauthorized device identified via its unique id
+(uuid) <i>DEVICE</i>. If a key is stored in the database it
+will be used, given the security level of the domain
+supports secure device connection. Use <i>boltctl list</i>
+to find out the uuid of a device.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-F |
+--first-time</b></p>
+
+<p style="margin-left:14%;">Normally, when attempting to
+authorize an already authorized device <b>boltctl</b> will
+do nothing and return a successful status code. When using
+this option, the attempt will fail and result in a negative
+exit code if the device is already authorized.</p>
+
+<h3>config --describe [global|domain|device]
+<a name="config --describe [global|domain|device]"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List global,
+domain, or all (if nothing is specified) properties. The
+format is 3 columns: permission, name, description.
+Permission indicates if the property is only readable or can
+also be written.</p>
+
+<h3>config KEY [VALUE]
+<a name="config KEY [VALUE]"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get or set, if
+<i>VALUE</i> is specified, a global property.</p>
+
+<h3>config &lt;domain|device&gt;.KEY TARGET [VALUE]
+<a name="config &lt;domain|device&gt;.KEY TARGET [VALUE]"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Get or set, if
+<i>VALUE</i> is specified, a domain or device property,
+where <i>TARGET</i> is the unique id of the domain or the
+device.</p>
+
+<h3>domains [-v | --verbose]
+<a name="domains [-v | --verbose]"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List all
+currently active Thunderbolt domains. A Thunderbolt domain
+represents the Thunderbolt controller hardware. There will
+be one domain (and host device) for each Thunderbolt
+controller present in the system. The <i>security</i>
+property shows the security level of the controller. If
+<i>iommu</i> support is active (see the <b>boltd</b> man
+page) it will be indicated by a <i>+iommu</i> suffix for
+&quot;secure&quot; or &quot;user&quot; mode, or just plain
+<i>iommu</i> in case the security level is &quot;none&quot;
+(sl0). <i>bootacl</i> shows the used and total slots of the
+boot access control list (BootACL) and the content of all
+non-empty entries. NB: if BootACL is unsupported it will
+show 0 for both (0/0). The <i>online</i> property shows if
+the thunderbolt controller is currently powered by the
+firmware. <b>NB</b>: if the controller is currently offline
+the BootACL list will reflect what <i>boltd</i> estimates
+the list will look like once the controller is back online
+and local changes have been synchronized to the controller.
+This might not be accurate if the list was modified in the
+meantime, e.g. from a different installation or OS.</p>
+
+<h3>enroll [--policy policy] DEVICE
+<a name="enroll [--policy policy] DEVICE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Authorize and
+record the device with the unique id <i>DEVICE</i> in the
+database. If the domain supports secure connection a new key
+will be generated and stored in the database alongside the
+device name and vendor name. The key, if created, will be
+used in the future to securely authorize the device.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--policy
+{</b><i>default</i> <b>|</b> <i>auto</i> <b>|</b>
+<i>manual</i><b>}</b></p>
+
+<p style="margin-left:14%;">Specify the policy to be used
+for the newly enrolled device.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>default</i></p>
+
+<p style="margin-left:19%;">Use the global default policy
+of the daemon; this can be changed, but is normally also
+<i>auto</i>.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>auto</i></p>
+
+<p style="margin-left:19%;">Automatically authorize this
+device whenever it is connected.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><i>manual</i></p>
+
+<p style="margin-left:19%;">Do <b>not</b> automatically
+authorize the device; instead require manual authorization
+via <b>boltctl authorize</b>.</p>
+
+<h3>forget DEVICE
+<a name="forget DEVICE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Remove the
+information about the device with the unique id
+<i>DEVICE</i> from the database. This includes the key, if
+one was previously generated. If you pass <i>--all</i>
+instead of the <i>DEVICE</i> all devices are removed instead
+of just one.</p>
+
+<h3>info DEVICE
+<a name="info DEVICE"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Display
+information about the device with the unique id
+<i>DEVICE</i>.</p>
+
+<h3>list [-a | --all]
+<a name="list [-a | --all]"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List and print
+information about all connected and stored devices.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a |
+--all</b></p>
+
+<p style="margin-left:14%;">Normally, the only the device
+type that will be shown is peripherals. Therefore the device
+that represents the host itself will be omitted. Using this
+option will instead include all device types in the
+list.</p>
+
+<h3>monitor
+<a name="monitor"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Listen for and
+show changes in connected devices.</p>
+
+<h3>power [-t | --timeout seconds] [-q | --query]
+<a name="power [-t | --timeout seconds] [-q | --query]"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Power up the
+Thunderbolt controller. If the Thunderbolt controller is not
+in &quot;native enumeration mode&quot; it can be completely
+powered down by the host firmware/BIOS. On supported systems
+there is an interface to &quot;force&quot; power the
+thunderbolt controller. If supported this command will
+request the daemon to do so. The daemon will keep track of
+all client requests and will release the force power
+override when the last request is released.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t |
+--timeout</b> <i>seconds</i></p>
+
+<p style="margin-left:14%;">Release the force power request
+after the specified amount of <i>seconds</i> and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q |
+--query</b></p>
+
+<p style="margin-left:14%;">Query the current force power
+status of the daemon.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Christian Kellner &lt;ckellner@redhat.com&gt;.</p>
+<hr>
+</body>
+</html>

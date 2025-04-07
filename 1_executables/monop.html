@@ -1,0 +1,193 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>monop</title>
+
+</head>
+<body>
+
+<h1 align="center">monop</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">monop, monop2 -
+Mono Class Outline Viewer</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>monop</b>
+[-r:assembly] [--search] class</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-r:assembly</i></p>
+
+<p style="margin-left:18%;">Specifies the assembly to use
+for looking up the type</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>-a</i></p></td>
+<td width="6%"></td>
+<td width="65%">
+
+
+<p>Renders all of the types in the specified assembly.</p></td>
+<td width="17%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--search, -s, -k</i></p>
+
+<p style="margin-left:18%;">Searches through all known
+assemblies for types containing &lsquo;class&rsquo;.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><i>--refs</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Prints a list of the referenced assemblies for an
+assembly. Requires an assembly to be specified with
+-r:assembly.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><i>--filter-obsolete, -f</i></p>
+
+<p style="margin-left:18%;">Do not show obsolete types and
+members.</p>
+
+<p style="margin-left:9%;"><i>--declared-only, -d</i></p>
+
+<p style="margin-left:18%;">Only show members declared in
+the type.</p>
+
+<p style="margin-left:9%;"><i>--private, -p</i></p>
+
+<p style="margin-left:18%;">Show private members.</p>
+
+<p style="margin-left:9%;"><i>--runtime-version</i></p>
+
+<p style="margin-left:18%;">Print runtime version.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>-xa</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Sets the lookup path to the Xamarin.Android directory.
+This will load both the mscorlib from there, and search
+assemblies in that directory.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><i>-xi</i></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Sets the lookup path to the Xamarin.iOS directory. This
+will load both the mscorlib from there, and search
+assemblies in that directory.</p></td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Monop is a tool
+that allows you to view the outline of a class. You can see
+the signature of each member of the class. Use <i>monop</i>
+to explore 1.0 assemblies, use <i>monop2</i> to explore 2.0
+assemblies.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The tool takes
+one option, the class to view. You must specify the full
+name of the class, including namespace.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For generic
+classes, you must specify the generic arguments, for
+example: <br>
+monop2 &rsquo;System.Collections.Generic.List&lsquo;1&rsquo;
+<br>
+The above is the string representation for the List&lt;T&gt;
+in System.Collections.Generic</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you are
+unsure of the full name of the class, you can use the
+&lsquo;--search&rsquo; option to search through all known
+assemblies.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

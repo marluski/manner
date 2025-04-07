@@ -1,0 +1,129 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:57 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>happrox</title>
+
+</head>
+<body>
+
+<h1 align="center">happrox</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">happrox -
+returns a simplified triangulation of a set of points using
+algorithm III of Garland and Heckbert (1995).</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>happrox</b>
+[<i>OPTIONS</i>]&nbsp;&lt;&nbsp;[<i>input.pgm</i>|<i>input</i>]&nbsp;&gt;&nbsp;<i>output.gts</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+documents briefly the <b>happrox</b> command.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program
+follow the usual GNU command line syntax, with long options
+starting with two dashes (&lsquo;-&rsquo;). A summary of
+options is included below. <b><br>
+-n&nbsp;</b><i>N</i>,&nbsp;<b>--number=</b><i>N</i></p>
+
+<p style="margin-left:18%;">Stop the refinement process if
+the number of vertices is larger than <i>N</i>.</p>
+
+
+<p style="margin-left:9%;"><b>-c&nbsp;</b><i>C</i>,&nbsp;<b>--cost=</b><i>C</i></p>
+
+<p style="margin-left:18%;">Stop the refinement process if
+the cost of insertion of a vertex is smaller than
+<i>C</i>.</p>
+
+
+<p style="margin-left:9%;"><b>-f</b>,&nbsp;<b>--flat</b></p>
+
+<p style="margin-left:18%;">Input is a flat file with three
+x,y,z columns (default is PGM file).</p>
+
+
+<p style="margin-left:9%;"><b>-r&nbsp;</b><i>Z</i>,&nbsp;<b>--relative=</b><i>Z</i></p>
+
+<p style="margin-left:18%;">Use relative height cost for
+all heights larger than <i>Z</i>.</p>
+
+
+<p style="margin-left:9%;"><b>-k</b>,&nbsp;<b>--keep</b></p>
+
+<p style="margin-left:18%;">Keep enclosing triangle.</p>
+
+
+<p style="margin-left:9%;"><b>-C</b>,&nbsp;<b>--closed</b></p>
+
+<p style="margin-left:18%;">Close the surface.</p>
+
+
+<p style="margin-left:9%;"><b>-l</b>,&nbsp;<b>--log</b></p>
+
+<p style="margin-left:18%;">Log evolution of cost.</p>
+
+
+<p style="margin-left:9%;"><b>-v</b>,&nbsp;<b>--verbose</b></p>
+
+<p style="margin-left:18%;">Display surface statistics.</p>
+
+
+<p style="margin-left:9%;"><b>-h</b>,&nbsp;<b>--help</b></p>
+
+<p style="margin-left:18%;">Display the help and exit.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">happrox was
+written by Stephane Popinet
+&lt;popinet@users.sourceforge.net&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This manual page
+was written by Ruben Molina &lt;rmolina@udea.edu.co&gt;, for
+the Debian project (but may be used by others).</p>
+<hr>
+</body>
+</html>

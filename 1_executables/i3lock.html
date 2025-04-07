@@ -1,0 +1,360 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>i3lock</title>
+
+</head>
+<body>
+
+<h1 align="center">i3lock</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#RECOMMENDED USAGE">RECOMMENDED USAGE</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#IMPROVEMENTS">IMPROVEMENTS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DPMS">DPMS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">i3lock -
+improved screen locker</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>i3lock</b>
+[-v] [-n] [-b] [-i <i>image.png</i>] [-c <i>color</i>] [-t]
+[-p <i>pointer]</i> [-u] [-e] [-f]</p>
+
+<h2>RECOMMENDED USAGE
+<a name="RECOMMENDED USAGE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">xss-lock
+--transfer-sleep-lock -- i3lock --nofork</p>
+
+<p style="margin-left:9%; margin-top: 1em">Using
+<b>xss-lock</b> ensures that your screen is locked before
+your laptop suspends.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Notably, using a
+systemd service file is not adequate, as it will not delay
+suspend until your screen is locked.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>i3lock</b> is
+a simple screen locker like slock. After starting it, you
+will see a white screen (you can configure the color/an
+image). You can return to your screen by entering your
+password.</p>
+
+<h2>IMPROVEMENTS
+<a name="IMPROVEMENTS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">i3lock forks, so you can combine
+it with an alias to suspend to RAM (run &quot;i3lock
+&amp;&amp; echo mem &gt; /sys/power/state&quot; to get a
+locked screen after waking up your computer from suspend to
+RAM)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>You can specify either a background color or a PNG image
+which will be displayed while your screen is locked.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>You can specify whether i3lock should bell upon a wrong
+password.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>i3lock uses PAM and therefore is compatible with LDAP,
+etc.</p> </td></tr>
+</table>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:18%;">Display the version of your
+<b>i3lock</b></p>
+
+<p style="margin-left:9%;"><b>-n, --nofork</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t fork after
+starting.</p>
+
+<p style="margin-left:9%;"><b>-b, --beep</b></p>
+
+<p style="margin-left:18%;">Enable beeping. Be sure to not
+do this when you are about to annoy other people, like when
+opening your laptop in a boring lecture.</p>
+
+<p style="margin-left:9%;"><b>-u,
+--no-unlock-indicator</b></p>
+
+<p style="margin-left:18%;">Disable the unlock indicator.
+i3lock will by default show an unlock indicator after
+pressing keys. This will give feedback for every keypress
+and it will show you the current PAM state (whether your
+password is currently being verified or whether it is
+wrong).</p>
+
+
+<p style="margin-left:9%;"><b>-i&nbsp;</b><i>path</i>,&nbsp;<b>--image=</b><i>path</i></p>
+
+<p style="margin-left:18%;">Display the given PNG image
+instead of a blank screen.</p>
+
+<p style="margin-left:9%;"><b>--raw=</b><i>format</i></p>
+
+<p style="margin-left:18%;">Read the image given by --image
+as a raw image instead of PNG. The argument is the
+image&rsquo;s format as
+&lt;width&gt;x&lt;height&gt;:&lt;pixfmt&gt;. The supported
+pixel formats are: &acute;native&rsquo;, &rsquo;rgb&rsquo;,
+&rsquo;xrgb&rsquo;, &rsquo;rgbx&rsquo;, &rsquo;bgr&rsquo;,
+&rsquo;xbgr&rsquo;, and &rsquo;bgrx&rsquo;. The
+&quot;native&quot; pixel format expects a pixel as a 32-bit
+(4-byte) integer in the machine&rsquo;s native endianness,
+with the upper 8 bits unused. Red, green and blue are stored
+in the remaining bits, in that order.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>Example:</b>
+<br>
+--raw=1920x1080:rgb</p>
+
+<p style="margin-left:18%; margin-top: 1em">You can use
+ImageMagick&rsquo;s <i>convert(1)</i> program to feed raw
+images into i3lock:</p>
+
+<p style="margin-left:18%; margin-top: 1em">convert
+wallpaper.jpg RGB:- | i3lock --raw 3840x2160:rgb --image
+/dev/stdin</p>
+
+<p style="margin-left:18%; margin-top: 1em">This allows you
+to load a variety of image formats without i3lock having to
+support each one explicitly.</p>
+
+
+<p style="margin-left:9%;"><b>-c&nbsp;</b><i>rrggbb</i>,&nbsp;<b>--color=</b><i>rrggbb</i></p>
+
+<p style="margin-left:18%;">Turn the screen into the given
+color instead of white. Color must be given in 3-byte
+format: rrggbb (i.e. ff0000 is red).</p>
+
+<p style="margin-left:9%;"><b>-t, --tiling</b></p>
+
+<p style="margin-left:18%;">If an image is specified (via
+-i) it will display the image tiled all over the screen (if
+it is a multi-monitor setup, the image is visible on all
+screens).</p>
+
+
+<p style="margin-left:9%;"><b>-p&nbsp;</b><i>win|default</i>,&nbsp;<b>--pointer=</b><i>win|default</i></p>
+
+<p style="margin-left:18%;">If you specify
+&quot;default&quot;, <b>i3lock</b> does not hide your mouse
+pointer. If you specify &quot;win&quot;, <b>i3lock</b>
+displays a hardcoded Windows-Pointer (thus enabling you to
+mess with your friends by using a screenshot of a Windows
+desktop as a locking-screen).</p>
+
+<p style="margin-left:9%;"><b>-e,
+--ignore-empty-password</b></p>
+
+<p style="margin-left:18%;">When an empty password is
+provided by the user, do not validate it. Without this
+option, the empty password will be provided to PAM and, if
+invalid, the user will have to wait a few seconds before
+another try. This can be useful if the XF86ScreenSaver key
+is used to put a laptop to sleep and bounce on resume or if
+you happen to wake up your computer with the enter key.</p>
+
+<p style="margin-left:9%;"><b>-f,
+--show-failed-attempts</b></p>
+
+<p style="margin-left:18%;">Show the number of failed
+attempts, if any.</p>
+
+<p style="margin-left:9%;"><b>-k,
+--show-keyboard-layout</b></p>
+
+<p style="margin-left:18%;">Show the current keyboard
+layout.</p>
+
+<p style="margin-left:9%;"><b>--debug</b></p>
+
+<p style="margin-left:18%;">Enables debug logging. Note,
+that this will log the password used for authentication to
+stdout.</p>
+
+<h2>DPMS
+<a name="DPMS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The -d (--dpms)
+option was removed from i3lock in version 2.8. There were
+plenty of use-cases that were not properly addressed, and
+plenty of bugs surrounding that feature. While features are
+not normally removed from i3 and its tools, we felt the need
+to make an exception in this case.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Users who wish
+to explicitly enable DPMS only when their screen is locked
+can use a wrapper script around i3lock like the
+following:</p>
+
+<p style="margin-left:9%; margin-top: 1em">#!/bin/sh</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>revert() {</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>xset dpms 0 0 0</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>}</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>trap revert HUP INT TERM</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>xset +dpms dpms 5 5 5</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>i3lock -n</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>revert</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The -I
+(--inactivity-timeout=seconds) was removed because it only
+makes sense with DPMS.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>xss-lock(1)</i>
+- hooks up i3lock to the systemd login manager</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>convert(1)</i>
+- feed a wide variety of image formats to i3lock</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Michael
+Stapelberg &lt;michael+i3lock at stapelberg dot de&gt;</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,189 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-NEW</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-NEW</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-new -
+incorporate new mail into the notmuch database</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+new</b> [options]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Find and import
+any new messages to the database.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>new</b>
+command scans all sub-directories of the database,
+performing full-text indexing on new messages that are
+found. Each new message will automatically be tagged with
+both the <b>inbox</b> and <b>unread</b> tags.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should run
+<b>notmuch new</b> once after first running <i>notmuch</i>
+to create the initial database. The first run may take a
+long time if you have a significant amount of mail (several
+hundred thousand messages or more). Subsequently, you should
+run <b>notmuch new</b> whenever new mail is delivered and
+you wish to incorporate it into the database. These
+subsequent runs will be much quicker than the initial
+run.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Invoking
+<b>notmuch</b> with no command argument will run <b>new</b>
+if <i>notmuch</i> has previously been completed, but
+<b>notmuch new</b> has not previously been run.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+new</b> updates tags according to maildir flag changes if
+the <b>maildir.synchronize_flags</b> configuration option is
+enabled. See <i>notmuch-config</i> for details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The <b>new</b>
+command supports hooks. See <i>notmuch-hooks</i> for more
+details on hooks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options for <b>new</b> include <b><br>
+--no-hooks</b></p>
+
+<p style="margin-left:18%;">Prevents hooks from being
+run.</p>
+
+<p style="margin-left:9%;"><b>--quiet</b></p>
+
+<p style="margin-left:18%;">Do not print progress or
+results.</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">Print file names being
+processed. Ignored when combined with <b>--quiet</b>.</p>
+
+
+<p style="margin-left:9%;"><b>--decrypt=(true|nostash|auto|false)</b></p>
+
+<p style="margin-left:18%;">If <b>true</b>, when
+encountering an encrypted message, try to decrypt it while
+indexing, and stash any discovered session keys. If
+<b>auto</b>, try to use any session key already known to
+belong to this message, but do not attempt to use the user's
+secret keys. If decryption is successful, index the
+cleartext of the message.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Be aware that
+the index is likely sufficient (and the session key is
+certainly sufficient) to reconstruct the cleartext of the
+message itself, so please ensure that the notmuch message
+index is adequately protected. DO NOT USE
+<b>--decrypt=true</b> or <b>--decrypt=nostash</b> without
+considering the security of your index.</p>
+
+<p style="margin-left:18%; margin-top: 1em">See also
+<b>index.decrypt</b> in <i>notmuch-config</i>.</p>
+
+<p style="margin-left:9%;"><b>--full-scan</b></p>
+
+<p style="margin-left:18%;">By default notmuch-new uses
+directory modification times (mtimes) to optimize the
+scanning of directories for new mail. This option turns that
+optimization off.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Indexing is
+influenced by the configuration options
+<i>index.decrypt</i>, <i>index.header.&lt;prefix&gt;</i> and
+<i>new.ignore</i>. Tagging is controlled by <i>new.tags</i>
+and <i>maildir.synchronize_flags</i>. See
+<i>notmuch-config</i> for details.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+supports the following special exit status code <b><br>
+75 (EX_TEMPFAIL)</b></p>
+
+<p style="margin-left:18%;">A temporary failure occurred;
+the user is invited to retry.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-config</i>, <i>notmuch-count</i>,
+<i>notmuch-dump</i>, <i>notmuch-hooks</i>,
+<i>notmuch-insert</i>, <i>notmuch-reply</i>,
+<i>notmuch-restore</i>, <i>notmuch-search</i>,
+<i>notmuch-search-terms</i>, <i>notmuch-show</i>,
+<i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

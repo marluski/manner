@@ -1,0 +1,716 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:02 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NPM-QUERY</title>
+
+</head>
+<body>
+
+<h1 align="center">NPM-QUERY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Piping npm query to other commands">Piping npm query to other commands</a><br>
+<a href="#Extended Use Cases &amp; Queries">Extended Use Cases &amp; Queries</a><br>
+<a href="#Example Response Output">Example Response Output</a><br>
+<a href="#Expecting a certain number of results">Expecting a certain number of results</a><br>
+<a href="#Package lock only mode">Package lock only mode</a><br>
+<a href="#Configuration">Configuration</a><br>
+<a href="#global">global</a><br>
+<a href="#workspace">workspace</a><br>
+<a href="#workspaces">workspaces</a><br>
+<a href="#include-workspace-root">include-workspace-root</a><br>
+<a href="#package-lock-only">package-lock-only</a><br>
+<a href="#expect-results">expect-results</a><br>
+<a href="#expect-result-count">expect-result-count</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>npm-query</b>
+- Dependency selector query</p>
+
+<h3>Synopsis
+<a name="Synopsis"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">npm query
+&lt;selector&gt;</p>
+
+<h3>Description
+<a name="Description"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>npm
+query</b> command allows for usage of css selectors in order
+to retrieve an array of dependency objects.</p>
+
+<h3>Piping npm query to other commands
+<a name="Piping npm query to other commands"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em"># find all
+dependencies with postinstall scripts &amp; uninstall them
+<br>
+npm query &quot;:attr(scripts, [postinstall])&quot; | jq
+&rsquo;map(.name)|join(&quot;\n&quot;)&rsquo; -r | xargs -I
+{} npm uninstall {}</p>
+
+<p style="margin-left:12%; margin-top: 1em"># find all git
+dependencies &amp; explain who requires them <br>
+npm query &quot;:type(git)&quot; | jq
+&rsquo;map(.name)&rsquo; | xargs -I {} npm why {}</p>
+
+<h3>Extended Use Cases &amp; Queries
+<a name="Extended Use Cases &amp; Queries"></a>
+</h3>
+
+
+<p style="margin-left:12%; margin-top: 1em">// all deps
+<br>
+*</p>
+
+<p style="margin-left:12%; margin-top: 1em">// all direct
+deps <br>
+:root &gt; *</p>
+
+<p style="margin-left:12%; margin-top: 1em">// direct
+production deps <br>
+:root &gt; .prod</p>
+
+<p style="margin-left:12%; margin-top: 1em">// direct
+development deps <br>
+:root &gt; .dev</p>
+
+<p style="margin-left:12%; margin-top: 1em">// any peer dep
+of a direct deps <br>
+:root &gt; * &gt; .peer</p>
+
+<p style="margin-left:12%; margin-top: 1em">// any
+workspace dep</p>
+
+<p style="margin-left:12%; margin-top: 1em">// all
+workspaces that depend on another workspace</p>
+
+<p style="margin-left:12%; margin-top: 1em">// all
+workspaces that have peer deps</p>
+
+<p style="margin-left:12%; margin-top: 1em">// any dep
+named &quot;lodash&quot; <br>
+// equivalent to [name=&quot;lodash&quot;] <br>
+#lodash</p>
+
+<p style="margin-left:12%; margin-top: 1em">// any deps
+named &quot;lodash&quot; &amp; within semver range
+&#710;&quot;1.2.3&quot; <br>
+#lodash@&#710;1.2.3 <br>
+// equivalent to... <br>
+[name=&quot;lodash&quot;]:semver(&#710;1.2.3)</p>
+
+<p style="margin-left:12%; margin-top: 1em">// get the
+hoisted node for a given semver range <br>
+#lodash@&#710;1.2.3:not(:deduped)</p>
+
+<p style="margin-left:12%; margin-top: 1em">// querying
+deps with a specific version <br>
+#lodash@2.1.5 <br>
+// equivalent to... <br>
+[name=&quot;lodash&quot;][version=&quot;2.1.5&quot;]</p>
+
+<p style="margin-left:12%; margin-top: 1em">// has any deps
+<br>
+:has(*)</p>
+
+<p style="margin-left:12%; margin-top: 1em">// deps with no
+other deps (ie. &quot;leaf&quot; nodes) <br>
+:empty</p>
+
+<p style="margin-left:12%; margin-top: 1em">// manually
+querying git dependencies <br>
+[repository&#710;=github:], <br>
+[repository&#710;=git:], <br>
+[repository&#710;=https://github.com], <br>
+[repository&#710;=http://github.com], <br>
+[repository&#710;=https://github.com], <br>
+[repository&#710;=+git:...]</p>
+
+<p style="margin-left:12%; margin-top: 1em">// querying for
+all git dependencies <br>
+:type(git)</p>
+
+<p style="margin-left:12%; margin-top: 1em">// get
+production dependencies that aren&rsquo;t also dev deps</p>
+
+<p style="margin-left:12%; margin-top: 1em">// get
+dependencies with specific licenses <br>
+[license=MIT], [license=ISC]</p>
+
+<p style="margin-left:12%; margin-top: 1em">// find all
+packages that have @ruyadorno as a contributor <br>
+:attr(contributors, [email=ruyadorno@github.com])</p>
+
+<h3>Example Response Output
+<a name="Example Response Output"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">an array of dependency objects
+is returned which can contain multiple copies of the same
+package which may or may not have been linked or deduped</p></td></tr>
+</table>
+
+<p style="margin-left:12%; margin-top: 1em">[ <br>
+{ <br>
+&quot;name&quot;: &quot;&quot;, <br>
+&quot;version&quot;: &quot;&quot;, <br>
+&quot;description&quot;: &quot;&quot;, <br>
+&quot;homepage&quot;: &quot;&quot;, <br>
+&quot;bugs&quot;: {}, <br>
+&quot;author&quot;: {}, <br>
+&quot;license&quot;: {}, <br>
+&quot;funding&quot;: {}, <br>
+&quot;files&quot;: [], <br>
+&quot;main&quot;: &quot;&quot;, <br>
+&quot;browser&quot;: &quot;&quot;, <br>
+&quot;bin&quot;: {}, <br>
+&quot;man&quot;: [], <br>
+&quot;directories&quot;: {}, <br>
+&quot;repository&quot;: {}, <br>
+&quot;scripts&quot;: {}, <br>
+&quot;config&quot;: {}, <br>
+&quot;dependencies&quot;: {}, <br>
+&quot;devDependencies&quot;: {}, <br>
+&quot;optionalDependencies&quot;: {}, <br>
+&quot;bundledDependencies&quot;: {}, <br>
+&quot;peerDependencies&quot;: {}, <br>
+&quot;peerDependenciesMeta&quot;: {}, <br>
+&quot;engines&quot;: {}, <br>
+&quot;os&quot;: [], <br>
+&quot;cpu&quot;: [], <br>
+&quot;workspaces&quot;: {}, <br>
+&quot;keywords&quot;: [], <br>
+... <br>
+}, <br>
+...</p>
+
+<h3>Expecting a certain number of results
+<a name="Expecting a certain number of results"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">One common use
+of <b>npm query</b> is to make sure there is only one
+version of a certain dependency in your tree. This is
+especially common for ecosystems like that rely on
+<b>typescript</b> where having state split across two
+different but identically-named packages causes bugs. You
+can use the <b>--expect-results</b> or
+<b>--expect-result-count</b> in your setup to ensure that
+npm will exit with an exit code if your tree doesn&rsquo;t
+look like you want it to.</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm query
+&rsquo;#react&rsquo; --expect-result-count=1</p>
+
+<p style="margin-left:9%; margin-top: 1em">Perhaps you want
+to quickly check if there are any production dependencies
+that could be updated:</p>
+
+<p style="margin-left:12%; margin-top: 1em">$ npm query
+&rsquo;:root&gt;:outdated(in-range).prod&rsquo;
+--no-expect-results</p>
+
+<h3>Package lock only mode
+<a name="Package lock only mode"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If
+package-lock-only is enabled, only the information in the
+package lock (or shrinkwrap) is loaded. This means that
+information from the package.json files of your dependencies
+will not be included in the result set (e.g. description,
+homepage, engines).</p>
+
+<h3>Configuration
+<a name="Configuration"></a>
+</h3>
+
+
+<h3>global
+<a name="global"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Operates in
+&quot;global&quot; mode, so that packages are installed into
+the <b>prefix</b> folder instead of the current working
+directory. See npm help folders for more on the differences
+in behavior.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">packages are installed into the
+<b>{prefix}/lib/node_modules</b> folder, instead of the
+current working directory.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>bin files are linked to <b>{prefix}/bin</b></p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>man pages are linked to <b>{prefix}/share/man</b></p></td></tr>
+</table>
+
+<h3>workspace
+<a name="workspace"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p style="margin-top: 1em">Default:</p></td>
+<td width="35%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="51%">
+
+
+<p>Type: String (can be set multiple times)</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Enable running a
+command in the context of the configured workspaces of the
+current project while filtering by running only the
+workspaces defined by this configuration option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Valid values for
+the <b>workspace</b> config are either:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Workspace names</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a workspace directory</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Path to a parent workspace directory (will result in
+selecting all workspaces within that folder)</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">When set for the
+<b>npm init</b> command, this may be set to the folder of a
+workspace which does not yet exist, to create the folder and
+set it up as a brand new workspace within the project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>workspaces
+<a name="workspaces"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Set to true to
+run the command in the context of <b>all</b> configured
+workspaces.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Explicitly
+setting this to false will cause commands like
+<b>install</b> to ignore workspaces altogether. When not set
+explicitly:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Commands that operate on the
+<b>node_modules</b> tree (install, update, etc.) will link
+workspaces into the <b>node_modules</b> folder. - Commands
+that do other things (test, exec, publish, etc.) will
+operate on the root project, <i>unless</i> one or more
+workspaces are specified in the <b>workspace</b> config.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>include-workspace-root
+<a name="include-workspace-root"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Include the
+workspace root when workspaces are enabled for a
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When false,
+specifying individual workspaces via the <b>workspace</b>
+config, or all workspaces via the <b>workspaces</b> flag,
+will cause npm to operate only on the specified workspaces,
+and not on the root project.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This value is
+not exported to the environment for child processes.</p>
+
+<h3>package-lock-only
+<a name="package-lock-only"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p style="margin-top: 1em">Default: false</p></td>
+<td width="68%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="18%">
+
+
+<p>Type: Boolean</p></td>
+<td width="68%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If set to true,
+the current operation will only use the
+<b>package-lock.json</b>, ignoring <b>node_modules</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For
+<b>update</b> this means only the <b>package-lock.json</b>
+will be updated, instead of checking <b>node_modules</b> and
+downloading dependencies.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For <b>list</b>
+this means the output will be based on the tree described by
+the <b>package-lock.json</b>, rather than the contents of
+<b>node_modules</b>.</p>
+
+<h3>expect-results
+<a name="expect-results"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="59%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="27%">
+
+
+<p>Type: null or Boolean</p></td>
+<td width="59%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Tells npm
+whether or not to expect results from the command. Can be
+either true (expect some results) or false (expect no
+results).</p>
+
+<p style="margin-left:9%; margin-top: 1em">This config can
+not be used with: <b>expect-result-count</b></p>
+
+<h3>expect-result-count
+<a name="expect-result-count"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p style="margin-top: 1em">Default: null</p></td>
+<td width="60%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="26%">
+
+
+<p>Type: null or Number</p></td>
+<td width="60%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Tells to expect
+a specific number of results from the command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This config can
+not be used with: <b>expect-results</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="40%">
+
+
+<p style="margin-top: 1em">npm help &quot;dependency
+selectors&quot;</p> </td>
+<td width="46%">
+</td></tr>
+ </table>
+<hr>
+</body>
+</html>

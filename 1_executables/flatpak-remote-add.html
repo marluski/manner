@@ -1,0 +1,306 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK REMOTE-ADD</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK REMOTE-ADD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-remote-add
+- Add a remote repository</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="56%">
+
+
+<p style="margin-top: 1em"><b>flatpak remote-add</b>
+[OPTION...] NAME LOCATION</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Adds a remote
+repository to the flatpak repository configuration. NAME is
+the name for the new remote, and LOCATION is a url or
+pathname. The LOCATION is either a flatpak repository, or a
+.flatpakrepo file which describes a repository. In the
+former case you may also have to specify extra options, such
+as the gpg key for the repo.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unless
+overridden with the <b>--user</b> or <b>--installation</b>
+options, this command changes the default system-wide
+installation.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--from</b></p>
+
+<p style="margin-left:14%;">Assume the URI is a
+.flatpakrepo file rather than the repository itself. This is
+enabled by default if the extension is .flatpakrepo, so
+generally you don't need this option.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-u</b>,
+<b>--user</b></p>
+
+<p style="margin-left:14%;">Modify the per-user
+configuration.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system</b></p>
+
+<p style="margin-left:14%;">Modify the default system-wide
+configuration.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--installation=NAME</b></p>
+
+<p style="margin-left:14%;">Modify a system-wide
+installation specified by NAME among those defined in
+/etc/flatpak/installations.d/. Using
+<b>--installation=default</b> is equivalent to using
+<b>--system</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-gpg-verify</b></p>
+
+<p style="margin-left:14%;">Disable GPG verification for
+the added remote.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--prio=PRIO</b></p>
+
+<p style="margin-left:14%;">Set the priority for the
+remote. Default is 1, higher is more prioritized. This is
+mainly used for graphical installation tools. It is also
+used when searching for a remote to provide an app's
+runtime. The app's origin is checked before other remotes
+with the same priority.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--subset=SUBSET</b></p>
+
+<p style="margin-left:14%;">Limit the refs available from
+the remote to those that are part of the named subset.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-enumerate</b></p>
+
+<p style="margin-left:14%;">Mark the remote as not
+enumerated. This means the remote will not be used to list
+applications, for instance in graphical installation
+tools.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-use-for-deps</b></p>
+
+<p style="margin-left:14%;">Mark the remote as not to be
+used for automatic runtime dependency resolution.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--if-not-exists</b></p>
+
+<p style="margin-left:14%;">Do nothing if the provided
+remote already exists.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disable</b></p>
+
+<p style="margin-left:14%;">Disable the added remote.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--title=TITLE</b></p>
+
+<p style="margin-left:14%;">A title for the remote, e.g.
+for display in a UI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--comment=COMMENT</b></p>
+
+<p style="margin-left:14%;">A single-line comment for the
+remote, e.g. for display in a UI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--description=DESCRIPTION</b></p>
+
+<p style="margin-left:14%;">A full-paragraph description
+for the remote, e.g. for display in a UI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--homepage=URL</b></p>
+
+<p style="margin-left:14%;">URL for a website for the
+remote, e.g. for display in a UI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--icon=URL</b></p>
+
+<p style="margin-left:14%;">URL for an icon for the remote,
+e.g. for display in a UI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--default-branch=BRANCH</b></p>
+
+<p style="margin-left:14%;">A default branch for the
+remote, mainly for use in a UI.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--filter=PATH</b></p>
+
+<p style="margin-left:14%;">Add a local filter to the
+remote. A filter file is a list of lines, each file starting
+with &quot;allow&quot; or &quot;deny&quot;, and then a glob
+for the ref to allow or disallow. The globs specify a
+partial ref (i.e. you can leave out trailing parts which
+will then match everything), but otherwise only
+&quot;*&quot; is special, matching anything in that part of
+the ref.</p>
+
+<p style="margin-left:14%; margin-top: 1em">By default all
+refs are allowed, but if a ref matches a deny rule it is
+disallowed unless it specifically matches an allow rule.
+This means you can use this to implement both allowlisting
+and blocklisting.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Here is an
+example filter file:</p>
+
+<p style="margin-left:19%; margin-top: 1em"># This is an
+allowlist style filter as it denies all first <br>
+deny * <br>
+allow runtime/org.freedesktop.* <br>
+allow org.some.app/arm <br>
+allow org.signal.Signal/*/stable <br>
+allow org.signal.Signal.*/*/stable</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-import=FILE</b></p>
+
+<p style="margin-left:14%;">Import gpg keys from the
+specified keyring file as trusted for the new remote. If the
+file is - the keyring is read from standard input.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--authenticator-name=NAME</b></p>
+
+<p style="margin-left:14%;">Specify the authenticator to
+use for the remote.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--authenticator-option=KEY=VALUE</b></p>
+
+<p style="margin-left:14%;">Specify an authenticator option
+for the remote.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--authenticator-install</b></p>
+
+<p style="margin-left:14%;">Enable auto-installation of
+authenticator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-authenticator-install</b></p>
+
+<p style="margin-left:14%;">Disable auto-installation of
+authenticator.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-follow-redirect</b></p>
+
+<p style="margin-left:14%;">Do not follow xa.redirect-url
+defined in the summary file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+remote-add gnome
+https://sdk.gnome.org/gnome.flatpakrepo</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+--user remote-add --no-gpg-verify test-repo
+https://people.gnome.org/&#732;alexl/gnome-sdk/repo/</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>flatpak</b>(1),
+<b>flatpak-remote-modify</b>(1),
+<b>flatpak-remote-delete</b>(1), <b>flatpak-remotes</b>(1),
+<b>flatpakrepo</b>(5)</p>
+<hr>
+</body>
+</html>

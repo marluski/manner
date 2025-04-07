@@ -1,0 +1,153 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:20 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>MDB_COPY</title>
+
+</head>
+<body>
+
+<h1 align="center">MDB_COPY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#CAVEATS">CAVEATS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mdb_copy - LMDB
+environment copy tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdb_copy</b>
+[<b>-V</b>] [<b>-c</b>] [<b>-n</b>] <b>srcpath</b>
+[<b>dstpath</b>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>mdb_copy</b> utility copies an LMDB environment. The
+environment can be copied regardless of whether it is
+currently in use. No lockfile is created, since it gets
+recreated at need.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If
+<i>dstpath</i> is specified it must be the path of an empty
+directory for storing the backup. Otherwise, the backup will
+be written to stdout.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-V</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Write the library version number
+to the standard output, and exit.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-c</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Compact while copying. Only current data pages will be
+copied; freed or unused pages will be omitted from the copy.
+This option will slow down the backup process as it is more
+CPU-intensive. Currently it fails if the environment has
+suffered a page leak.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-n</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Open LDMB environment(s) which do not use
+subdirectories.</p> </td></tr>
+</table>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Exit status is
+zero if no errors occur. Errors result in a non-zero exit
+status and a diagnostic message being written to standard
+error.</p>
+
+<h2>CAVEATS
+<a name="CAVEATS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This utility can
+trigger significant file size growth if run in parallel with
+write transactions, because pages which they free during
+copying cannot be reused until the copy is done.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mdb_stat</b>(1)</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Howard Chu of
+Symas Corporation &lt;http://www.symas.com&gt;</p>
+<hr>
+</body>
+</html>

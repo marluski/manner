@@ -1,0 +1,143 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:16 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE SHOW</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE SHOW</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-show -
+Output a metadata object</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="42%">
+
+
+<p style="margin-top: 1em"><b>ostree show</b> [OPTIONS...]
+{OBJECT}</p> </td>
+<td width="49%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Given an object,
+shows the metadata for that object. For a particular
+revision, it will show the data for the most recent commit
+to that revision.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--print-related</b></p>
+
+<p style="margin-left:14%;">Show the &quot;related&quot;
+commits.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--print-variant-type</b>=&quot;TYPE&quot;</p>
+
+<p style="margin-left:14%;">Memory map <i>OBJECT</i> (in
+this case a filename) to the GVariant type string.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-metadata-keys</b></p>
+
+<p style="margin-left:14%;">List the available metadata
+keys.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--print-metadata-key</b>=&quot;KEY&quot;</p>
+
+<p style="margin-left:14%;">Print string value of metadata
+key.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list-detached-metadata-keys</b></p>
+
+<p style="margin-left:14%;">List the available detached
+metadata keys.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--print-detached-metadata-key</b>=&quot;KEY&quot;</p>
+
+<p style="margin-left:14%;">Print string value of detached
+metadata key.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--print-sizes</b></p>
+
+<p style="margin-left:14%;">Show the commit size metadata.
+This in only supported for commits that contain
+<i>ostree.sizes</i> metadata. This can be included when
+creating commits with <b>ostree commit
+--generate-sizes</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--raw</b></p>
+
+<p style="margin-left:14%;">Show raw variant data.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-homedir</b>=&quot;HOMEDIR&quot;</p>
+
+<p style="margin-left:14%;">GPG home directory to use when
+looking for keyrings (if have GPGME - GNU Privacy Guard Made
+Easy).</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree show
+my-branch</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">commit
+67e382b11d213a402a5313e61cbc69dfd5ab93cb07 <br>
+Date: 2014-06-12 13:42:54 +0000</p>
+<hr>
+</body>
+</html>

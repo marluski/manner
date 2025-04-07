@@ -1,0 +1,247 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>kitten-clipboard</title>
+
+</head>
+<body>
+
+<h1 align="center">kitten-clipboard</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Overview">Overview</a><br>
+<a href="#Source code for clipboard">Source code for clipboard</a><br>
+<a href="#Command line interface">Command line interface</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Author">Author</a><br>
+<a href="#Copyright">Copyright</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">kitten-clipboard
+- Copy/paste with the system clipboard, even over SSH</p>
+
+<h2>Overview
+<a name="Overview"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>Copy/paste to
+the system clipboard from shell scripts</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>clipboard</b> kitten can be used to read or write to the
+system clipboard from the shell. It even works over SSH.
+Using it is as simple as:</p>
+
+<p style="margin-left:13%; margin-top: 1em">echo hooray |
+kitten clipboard</p>
+
+<p style="margin-left:9%; margin-top: 1em">All text
+received on <b>STDIN</b> is copied to the clipboard.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To get text from
+the clipboard:</p>
+
+<p style="margin-left:13%; margin-top: 1em">kitten
+clipboard --get-clipboard</p>
+
+<p style="margin-left:9%; margin-top: 1em">The text will be
+written to <b>STDOUT</b>. Note that by default kitty asks
+for permission when a program attempts to read the
+clipboard. This can be controlled via
+<i>clipboard_control</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Added in version
+0.27.0: Support for copying arbitrary data types</p>
+
+<p style="margin-left:9%; margin-top: 1em">The clipboard
+kitten can be used to send/receive more than just plain text
+from the system clipboard. You can transfer arbitrary data
+types. Best illustrated with some examples:</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy an image
+to the clipboard: <br>
+kitten clipboard picture.png</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy an image
+and some text to the clipboard: <br>
+kitten clipboard picture.jpg text.txt</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy text
+from STDIN and an image to the clipboard: <br>
+echo hello | kitten clipboard picture.png /dev/stdin</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy any
+raster image available on the clipboard to a PNG file: <br>
+kitten clipboard -g picture.png</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy an image
+to a file and text to STDOUT: <br>
+kitten clipboard -g picture.png /dev/stdout</p>
+
+<p style="margin-left:13%; margin-top: 1em"># List the
+formats available on the system clipboard <br>
+kitten clipboard -g -m . /dev/stdout</p>
+
+<p style="margin-left:9%; margin-top: 1em">Normally, the
+kitten guesses MIME types based on the file names. To
+control the MIME types precisely, use the <i>--mime</i>
+option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This kitten uses
+a new protocol developed by kitty to function, for details,
+see <i>Copying all data types to the clipboard</i>.</p>
+
+<h2>Source code for clipboard
+<a name="Source code for clipboard"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The source code
+for this kitten is <i>available on GitHub</i>.</p>
+
+<h2>Command line interface
+<a name="Command line interface"></a>
+</h2>
+
+
+<p style="margin-left:13%; margin-top: 1em">kitten
+clipboard [options] [files to copy to/from]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Read or write to
+the system clipboard.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This kitten
+operates most simply in filter mode. To set the clipboard
+text, pipe in the new text on <b>STDIN</b>. Use the
+<i>--get-clipboard</i> option to instead output the current
+clipboard text content to <b>STDOUT</b>. Note that copying
+from the clipboard will cause a permission popup, see
+<i>clipboard_control</i> for details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For more
+control, specify filename arguments. Then, different MIME
+types can be copied to/from the clipboard. Some
+examples:</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy an image
+to the clipboard: <br>
+kitten clipboard picture.png</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy an image
+and some text to the clipboard: <br>
+kitten clipboard picture.jpg text.txt</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy text
+from STDIN and an image to the clipboard: <br>
+echo hello | kitten clipboard picture.png /dev/stdin</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy any
+raster image available on the clipboard to a PNG file: <br>
+kitten clipboard -g picture.png</p>
+
+<p style="margin-left:13%; margin-top: 1em"># Copy an image
+to a file and text to STDOUT: <br>
+kitten clipboard -g picture.png /dev/stdout</p>
+
+<p style="margin-left:13%; margin-top: 1em"># List the
+formats available on the system clipboard <br>
+kitten clipboard -g -m . /dev/stdout</p>
+
+<h3>Options
+<a name="Options"></a>
+</h3>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--get-clipboard,
+-g</b></p>
+
+<p style="margin-left:18%;">Output the current contents of
+the clipboard to STDOUT. Note that by default kitty will
+prompt for permission to access the clipboard. Can be
+controlled by <i>clipboard_control</i>.</p>
+
+<p style="margin-left:9%;"><b>--use-primary, -p</b></p>
+
+<p style="margin-left:18%;">Use the primary selection
+rather than the clipboard on systems that support it, such
+as Linux.</p>
+
+<p style="margin-left:9%;"><b>--mime &lt;MIME&gt;, -m
+&lt;MIME&gt;</b></p>
+
+<p style="margin-left:18%;">The mimetype of the specified
+file. Useful when the auto-detected mimetype is likely to be
+incorrect or the filename has no extension and therefore no
+mimetype can be detected. If more than one file is
+specified, this option should be specified multiple times,
+once for each specified file. When copying data from the
+clipboard, you can use wildcards to match MIME types. For
+example: <b>--mime 'text/*'</b> will match any textual MIME
+type available on the clipboard, usually the first matching
+MIME type is copied. The special MIME type <b>.</b> will
+return the list of available MIME types currently on the
+system clipboard.</p>
+
+<p style="margin-left:9%;"><b>--alias &lt;ALIAS&gt;, -a
+&lt;ALIAS&gt;</b></p>
+
+<p style="margin-left:18%;">Specify aliases for MIME types.
+Aliased MIME types are considered equivalent. When copying
+to clipboard both the original and alias are made available
+on the clipboard. When copying from clipboard if the
+original is not found, the alias is used, as a fallback. Can
+be specified multiple times to create multiple aliases. For
+example: <b>--alias text/plain=text/x-rst</b> makes
+<b>text/plain</b> an alias of <b>text/rst</b>. Aliases are
+not used in filter mode. An alias for <b>text/plain</b> is
+automatically created if <b>text/plain</b> is not present in
+the input data, but some other <b>text/*</b> MIME is
+present.</p>
+
+
+<p style="margin-left:9%;"><b>--wait-for-completion</b></p>
+
+<p style="margin-left:18%;">Wait till the copy to clipboard
+is complete before exiting. Useful if running the kitten in
+a dedicated, ephemeral window. Only needed in filter
+mode.</p>
+
+<h2>Author
+<a name="Author"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Kovid Goyal</p>
+
+<h2>Copyright
+<a name="Copyright"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2025, Kovid
+Goyal</p>
+<hr>
+</body>
+</html>

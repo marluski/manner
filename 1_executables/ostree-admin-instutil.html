@@ -1,0 +1,114 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE ADMIN INSTUTI</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE ADMIN INSTUTI</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SUBCOMMANDS">SUBCOMMANDS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-admin-instutil
+- Utility functions intended primarily for operating system
+installation programs</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="53%">
+
+
+<p style="margin-top: 1em"><b>ostree admin instutil</b>
+{SUBCOMMAND} [ARGS]</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Use the
+subcommands to toggle admin installation utilities for
+selinux policies and kernel arguments.</p>
+
+<h2>SUBCOMMANDS
+<a name="SUBCOMMANDS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="50%">
+
+
+<p style="margin-top: 1em"><b>selinux-ensure-labeled</b>
+[SUBPATH&nbsp;PREFIX]</p> </td>
+<td width="41%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Ensure all
+files and directories are labeled according to SELinux
+policy of the first deployment.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em"><b>set-kargs</b> [--merge]
+[--import-proc-cmdline] [--append=&quot;NAME=VALUE&quot;]
+[--replace=&quot;NAME=VALUE&quot;] [MORE_APPEND_ARGS]</p></td>
+<td width="5%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">Replace the
+kernel arguments of the default deployment. The new
+arguments are based on an empty list (the default), the
+current options (--merge), or the arguments of the loaded
+kernel (--import-proc-cmdline), and new options either are
+added to the end (--append=&quot;NAME=VALUE&quot;) or
+replace existing arguments of the same name
+(--replace=&quot;NAME=VALUE&quot;).</p>
+<hr>
+</body>
+</html>

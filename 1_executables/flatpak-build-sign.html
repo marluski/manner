@@ -1,0 +1,147 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:13 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK BUILD-SIGN</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK BUILD-SIGN</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-build-sign
+- Sign an application or runtime</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="65%">
+
+
+<p style="margin-top: 1em"><b>flatpak build-sign</b>
+[OPTION...] LOCATION ID [BRANCH]</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Signs the commit
+for a specified application or runtime in a local
+repository. LOCATION is the location of the repository. ID
+is the name of the application, or runtime if --runtime is
+specified. If BRANCH is not specified, it is assumed to be
+&quot;master&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Applications can
+also be signed during build-export, but it is sometimes
+useful to add additional signatures later.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-sign=KEYID</b></p>
+
+<p style="margin-left:14%;">Sign the commit with this GPG
+key. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-homedir=PATH</b></p>
+
+<p style="margin-left:14%;">GPG Homedir to use when looking
+for keyrings</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--runtime</b></p>
+
+<p style="margin-left:14%;">Sign a runtime instead of an
+app.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--arch=ARCH</b></p>
+
+<p style="margin-left:14%;">The architecture to use. See
+<b>flatpak --supported-arches</b> for architectures
+supported by the host.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+build-sign
+--gpg-sign=D8BA6573DDD2418027736F1BC33B315E53C1E9D6
+/some/repo org.my.App</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree</b>(1),
+<b>flatpak</b>(1), <b>flatpak-build-export</b>(1),
+<b>flatpak-build</b>(1),</p>
+<hr>
+</body>
+</html>

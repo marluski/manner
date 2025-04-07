@@ -1,0 +1,354 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:39 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ACLOCAL</title>
+
+</head>
+<body>
+
+<h1 align="center">ACLOCAL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Warning categories are:">Warning categories are:</a><br>
+<a href="#-W also understands:">-W also understands:</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">aclocal -
+Generate aclocal.m4 by scanning configure.ac</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>aclocal</b>
+[<i>OPTION</i>]...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Generate
+&rsquo;aclocal.m4&rsquo; by scanning
+&rsquo;configure.ac&rsquo; or &rsquo;configure.in&rsquo;</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--automake-acdir</b>=<i>DIR</i></p>
+
+<p style="margin-left:18%;">directory holding
+automake-provided m4 files</p>
+
+
+<p style="margin-left:9%;"><b>--aclocal-path</b>=<i>PATH</i></p>
+
+<p style="margin-left:18%;">colon-separated list of
+directories to search for third-party local files</p>
+
+
+<p style="margin-left:9%;"><b>--system-acdir</b>=<i>DIR</i></p>
+
+<p style="margin-left:18%;">directory holding third-party
+system-wide files</p>
+
+
+<p style="margin-left:9%;"><b>--diff</b>[=<i>COMMAND</i>]</p>
+
+<p style="margin-left:18%;">run COMMAND [diff <b>-u]</b> on
+M4 files that would be changed (implies <b>--install</b> and
+<b>--dry-run</b>)</p>
+
+<p style="margin-left:9%;"><b>--dry-run</b></p>
+
+<p style="margin-left:18%;">pretend to, but do not actually
+update any file</p>
+
+<p style="margin-left:9%;"><b>--force</b></p>
+
+<p style="margin-left:18%;">always update output file</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="54%">
+
+
+<p>print this help, then exit</p></td>
+<td width="28%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-I</b> DIR</p></td>
+<td width="1%"></td>
+<td width="54%">
+
+
+<p>add directory to search list for .m4 files</p></td>
+<td width="28%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--install</b></p>
+
+<p style="margin-left:18%;">copy third-party files to the
+first <b>-I</b> directory</p>
+
+<p style="margin-left:9%;"><b>--output</b>=<i>FILE</i></p>
+
+<p style="margin-left:18%;">put output in FILE (default
+aclocal.m4)</p>
+
+<p style="margin-left:9%;"><b>--print-ac-dir</b></p>
+
+<p style="margin-left:18%;">print name of directory holding
+system-wide third-party m4 files, then exit</p>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<p style="margin-left:18%;">don&rsquo;t be silent</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">print version number, then
+exit</p>
+
+<p style="margin-left:9%;"><b>-W</b>,
+<b>--warnings</b>=<i>CATEGORY</i></p>
+
+<p style="margin-left:18%;">report the warnings falling in
+CATEGORY, defaults to $WARNINGS</p>
+
+<h3>Warning categories are:
+<a name="Warning categories are:"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em">cross</p></td>
+<td width="3%"></td>
+<td width="68%">
+
+
+<p style="margin-top: 1em">cross compilation issues</p></td>
+<td width="14%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>gnu</p></td>
+<td width="3%"></td>
+<td width="68%">
+
+
+<p>GNU coding standards (default in gnu and gnits
+modes)</p> </td>
+<td width="14%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">obsolete</p>
+
+<p style="margin-left:18%;">obsolete features or
+constructions (default)</p>
+
+<p style="margin-left:9%;">override</p>
+
+<p style="margin-left:18%;">user redefinitions of Automake
+rules or variables</p>
+
+<p style="margin-left:9%;">portability</p>
+
+<p style="margin-left:18%;">portability issues (default in
+gnu and gnits modes)</p>
+
+<p style="margin-left:9%;">portability-recursive</p>
+
+<p style="margin-left:18%;">nested Make variables (default
+with <b>-Wportability</b>)</p>
+
+<p style="margin-left:9%;">extra-portability</p>
+
+<p style="margin-left:18%;">extra portability issues
+related to obscure tools</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p>syntax</p></td>
+<td width="1%"></td>
+<td width="49%">
+
+
+<p>dubious syntactic constructs (default)</p></td>
+<td width="33%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">unsupported</p>
+
+<p style="margin-left:18%;">unsupported or incomplete
+features (default)</p>
+
+<h3>-W also understands:
+<a name="-W also understands:"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em">all</p></td>
+<td width="4%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em">turn on all the warnings</p></td>
+<td width="50%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>none</p></td>
+<td width="4%"></td>
+<td width="32%">
+
+
+<p>turn off all the warnings</p></td>
+<td width="50%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;">no-CATEGORY</p>
+
+<p style="margin-left:18%;">turn off warnings in
+CATEGORY</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p>error</p></td>
+<td width="3%"></td>
+<td width="46%">
+
+
+<p>treat all enabled warnings as errors</p></td>
+<td width="36%">
+</td></tr>
+</table>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by Tom
+Tromey &lt;tromey@redhat.com&gt;</p>
+
+<p style="margin-left:18%; margin-top: 1em">and Alexandre
+Duret-Lutz &lt;adl@gnu.org&gt;.</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+&lt;bug-automake@gnu.org&gt;. <br>
+GNU Automake home page:
+&lt;https://www.gnu.org/software/automake/&gt;. <br>
+General help using GNU software:
+&lt;https://www.gnu.org/gethelp/&gt;.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2024 Free Software Foundation, Inc. License GPLv2+: GNU GPL
+version 2 or later
+&lt;https://gnu.org/licenses/gpl-2.0.html&gt; <br>
+This is free software: you are free to change and
+redistribute it. There is NO WARRANTY, to the extent
+permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <b>aclocal</b> is maintained as a Texinfo
+manual. If the <b>info</b> and <b>aclocal</b> programs are
+properly installed at your site, the command</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>info
+automake</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,389 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:42 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>grolbp</title>
+
+</head>
+<body>
+
+<h1 align="center">grolbp</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Typefaces">Typefaces</a><br>
+<a href="#Paper format, orientation, and device description file">Paper format, orientation, and device description file</a><br>
+<a href="#Font description files">Font description files</a><br>
+<a href="#Drawing commands">Drawing commands</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Environment">Environment</a><br>
+<a href="#Files">Files</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grolbp -
+<i>groff</i> output driver for Canon CaPSL printers</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>grolbp</b></p></td>
+<td width="1%"></td>
+<td width="79%">
+
+
+<p style="margin-top: 1em">[<b>-l</b>]
+[<b>-c&nbsp;</b><i>num-copies</i>]
+[<b>-F&nbsp;</b><i>font-directory</i>]
+[<b>-o&nbsp;</b><i>orientation</i>]
+[<b>-p&nbsp;</b><i>paper-format</i>]
+[<b>-w&nbsp;</b><i>width</i>] [<i>file&nbsp;</i>...]</p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>grolbp</b></p></td>
+<td width="1%"></td>
+<td width="79%">
+
+
+<p>[<b>--copies=</b><i>num-copies</i>]
+[<b>--fontdir=</b><i>font-directory</i>]
+[<b>--landscape</b>] [<b>--linewidth=</b><i>width</i>]
+[<b>--orientation=</b><i>orientation</i>]
+[<b>--papersize=</b><i>paper-format</i>]
+[<i>file&nbsp;</i>...]</p> </td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>grolbp</b></p></td>
+<td width="1%"></td>
+<td width="79%">
+
+
+<p style="margin-top: 1em"><b>-h</b></p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>grolbp</b></p></td>
+<td width="1%"></td>
+<td width="79%">
+
+
+<p><b>--help</b></p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>grolbp</b></p></td>
+<td width="1%"></td>
+<td width="79%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>grolbp</b></p></td>
+<td width="1%"></td>
+<td width="79%">
+
+
+<p><b>--version</b></p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This GNU
+<i>roff</i> output driver translates the output of
+<a href="man:troff(1)"><i>troff</i>(1)</a> into a CaPSL and
+VDM format suitable for Canon LBP-4 and LBP-8 printers.
+Normally, <i>grolbp</i> is invoked by
+<a href="man:groff(1)"><i>groff</i>(1)</a> when the latter
+is given the &ldquo;<b>-T&nbsp;lbp</b>&rdquo; option. (In
+this installation, <b>ps</b> is the default output device.)
+Use <i>groff</i>&rsquo;s <b>-P</b> option to pass any
+options shown above to <i>grolbp</i>. If no <i>file</i>
+arguments are given, or if <i>file</i> is &ldquo;-&rdquo;,
+<i>grolbp</i> reads the standard input stream. Output is
+written to the standard output stream.</p>
+
+<h3>Typefaces
+<a name="Typefaces"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The driver
+supports the Dutch, Swiss, and Swiss-Narrow scalable
+typefaces, each in the regular, bold, italic, and
+bold-italic styles. Additionally, the bitmapped, monospaced
+Courier and Elite typefaces are available in regular, bold,
+and italic styles; Courier at 8 and 12 points, Elite at 8
+and 10 points. The following chart summarizes the
+<i>groff</i> font names used to access them.</p>
+
+<h3>Paper format, orientation, and device description file
+<a name="Paper format, orientation, and device description file"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grolbp</i>
+supports paper formats &ldquo;<b>A4</b>&rdquo;,
+&ldquo;<b>letter</b>&rdquo;, &ldquo;<b>legal</b>&rdquo;, and
+&ldquo;<b>executive</b>&rdquo;. These are matched
+case-insensitively. The <b>-p</b>, <b>--papersize</b> option
+overrides any setting in the device description file
+<i>DESC</i>. If neither specifies a paper format, A4 is
+assumed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In its
+<i>DESC</i> file, <i>grolbp</i> (case-insensitively)
+recognizes an <b>orientation</b> directive accepting one
+mandatory argument, <b>portrait</b> or <b>landscape</b>. The
+first valid orientation directive encountered controls. The
+<b>-l</b>, <b>-o</b>, and <b>--orientation</b> command-line
+options override any setting in <i>DESC</i>. If none of the
+foregoing specify the orientation, portrait is assumed.</p>
+
+<h3>Font description files
+<a name="Font description files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In addition to
+the font description file directives documented in
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>,
+<i>grolbp</i> recognizes <b>lbpname</b>, which maps the
+<i>groff</i> font name to the font name used internally by
+the printer. Its syntax is as follows.</p>
+
+
+<p style="margin-left:18%;">lbpname&nbsp;<i>printer-font-name</i></p>
+
+<p style="margin-left:9%;"><b>lbpname</b>&rsquo;s argument
+is case-sensitive. The printer&rsquo;s font names are
+encoded as follows.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For bitmapped
+fonts, <i>printer-font_name</i> has the form</p>
+
+<p style="margin-left:18%;">N&lang;
+<i>base-font-name</i>&rang; &lang;
+<i>font-style</i>&rang;</p>
+
+<p style="margin-left:9%;"><i>base-font-name</i> is the
+font name as it appears in the printer&rsquo;s font listings
+without the first letter, up to (but not including) the font
+size. <i>font-style</i> can be one of the letters <b>R</b>,
+<b>I</b>, or <b>B</b>, indicating the roman, italic, and
+bold styles, respectively. For instance, if the
+printer&rsquo;s &ldquo;font listing A&rdquo; shows
+&ldquo;Nelite12I.ISO_USA&rdquo;, the corresponding entry in
+the <i>groff</i> font description file is</p>
+
+<p style="margin-left:18%;">lbpname NeliteI</p>
+
+<p style="margin-left:9%;">You may need to modify
+<i>grolbp</i> to add support for new bitmapped fonts, since
+the available font names and font sizes of bitmapped fonts
+(as documented above) are hard-coded into the program.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For scalable
+fonts, <i>printer-font-name</i> is identical to the font
+name as it appears in the printer&rsquo;s &ldquo;font
+listing A&rdquo;. For instance, to select the
+&ldquo;Swiss&rdquo; font in bold-italic style, which appears
+in the font listing as &ldquo;Swiss-BoldOblique&rdquo;,</p>
+
+<p style="margin-left:18%;">lbpname Swiss-BoldOblique</p>
+
+<p style="margin-left:9%;">is the required directive, and
+this is what we find in the <i>groff</i> font description
+file <i>HBI</i> for the <b>lbp</b> device.</p>
+
+<h3>Drawing commands
+<a name="Drawing commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">For
+compatibility with
+<a href="man:grolj4(1)"><i>grolj4</i>(1)</a>, an additional
+drawing command is available. <b><br>
+\D'R&nbsp;</b><i>dh dv</i><b>'</b></p>
+
+<p style="margin-left:18%;">Draw a rule (solid black
+rectangle) with one corner at the drawing position, and the
+diagonally opposite corner at the drawing position
++(<i>dh</i>,<i>dv</i>).</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b> and
+<b>--help</b> display a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward. <b><br>
+-c</b> <i>num-copies</i> <b><br>
+--copies=</b><i>num-copies</i></p>
+
+<p style="margin-left:18%;">Produce <i>num-copies</i>
+copies of each page.</p>
+
+<p style="margin-left:9%;"><b>-F</b> <i>font-directory</i>
+<b><br>
+--fontdir=</b><i>font-directory</i></p>
+
+<p style="margin-left:18%;">Prepend directory
+font-directory<i>/dev</i>name to the search path for font
+and device description files; <i>name</i> is the name of the
+device, usually <b>lbp</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-l</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--landscape</b></p>
+
+<p style="margin-left:18%;">Format the document in
+landscape orientation.</p>
+
+<p style="margin-left:9%;"><b>-o</b> <i>orientation</i>
+<b><br>
+--orientation=</b><i>orientation</i></p>
+
+<p style="margin-left:18%;">Format the document in the
+given <i>orientation</i>, which must be
+&ldquo;<b>portrait</b>&rdquo; or
+&ldquo;<b>landscape</b>&rdquo;.</p>
+
+<p style="margin-left:9%;"><b>-p</b> <i>paper-format</i>
+<b><br>
+--papersize=</b><i>paper-format</i></p>
+
+<p style="margin-left:18%;">Set the paper format to
+<i>paper-format</i>, which must be a valid paper format as
+described above.</p>
+
+<p style="margin-left:9%;"><b>-w</b> <i>width</i> <b><br>
+--linewidth=</b><i>width</i></p>
+
+<p style="margin-left:18%;">Set the default line thickness
+to <i>width</i> thousandths of an em; the default is
+<b>40</b> (0.04&nbsp;em).</p>
+
+<h2>Environment
+<a name="Environment"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>GROFF_FONT_PATH</i></p>
+
+<p style="margin-left:18%;">lists directories in which to
+seek the selected output device&rsquo;s directory of device
+and font description files. See
+<a href="man:troff(1)"><i>troff</i>(1)</a> and
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>.</p>
+
+<h2>Files
+<a name="Files"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>/usr/share/groff/1.23.0/font/devlbp/DESC</i></p>
+
+<p style="margin-left:18%;">describes the <b>lbp</b> output
+device.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/font/devlbp/</i>F</p>
+
+<p style="margin-left:18%;">describes the font known
+as&nbsp;<i>F</i> on device <b>lbp</b>.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/tmac/lbp.tmac</i></p>
+
+<p style="margin-left:18%;">defines macros for use with the
+<b>lbp</b> output device. It is automatically loaded by
+<i>troffrc</i> when the <b>lbp</b> output device is
+selected.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:troff(1)"><i>troff</i>(1)</a>,
+<a href="man:groff_out(5)"><i>groff_out</i>(5)</a>,
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>,
+<a href="man:groff_char(7)"><i>groff_char</i>(7)</a></p>
+<hr>
+</body>
+</html>

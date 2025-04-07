@@ -1,0 +1,261 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:30 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>monodocs2html</title>
+
+</head>
+<body>
+
+<h1 align="center">monodocs2html</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#TEMPLATE FORMAT">TEMPLATE FORMAT</a><br>
+<a href="#HTML LINKS">HTML LINKS</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">monodocs2html -
+Translate Monodoc XML to HTML</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>monodocs2html</b>
+-source:SOURCE_DIR -dest:DEST_DIR [OPTIONS]*</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>monodocs2html</i>
+has been obsoleted by <b>mdoc</b>(1). See the
+<b>mdoc-export-html</b>(1) man page.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>monodocs2html</i>
+is a program that creates HTML documentation from the
+Monodoc documentation XML files.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>-dest:DEST_DIR</i></p>
+
+<p style="margin-left:18%;">Write the HTML files into the
+directory <i>DEST_DIR</i> .</p>
+
+<p style="margin-left:9%;"><i>-dumptemplate</i></p>
+
+<p style="margin-left:18%;">Dump the default page template
+to standard output so that you can use it as a base for a
+new template for use with the <i>-template</i> option.</p>
+
+<p style="margin-left:9%;"><i>-ext:FILE_EXTENSION</i></p>
+
+<p style="margin-left:18%;"><i>FILE_EXTENSION</i> is the
+file extension for generated files.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This defaults
+to <i>html</i> .</p>
+
+<p style="margin-left:9%;"><i>-?, -help</i></p>
+
+<p style="margin-left:18%;">Show program argument
+information.</p>
+
+<p style="margin-left:9%;"><i>-onlytype:TYPE</i></p>
+
+<p style="margin-left:18%;">Only generate HTML for the type
+<i>TYPE</i> .</p>
+
+<p style="margin-left:9%;"><i>-source:SOURCE_DIR</i></p>
+
+<p style="margin-left:18%;"><i>SOURCE_DIR</i> is the base
+directory containing the Monodoc XML documentation.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This directory
+should contain an <i>index.xml</i> file, the
+<i>namespace-name.xml</i> files (one for each namespace),
+and <i>namespace-name</i> directories (one for each
+namespace), which will contain the <i>type.xml</i> files
+holding the monodoc documentation.</p>
+
+<p style="margin-left:9%;"><i>-template:TEMPLATE</i></p>
+
+<p style="margin-left:18%;">Generate HTML using the page
+template <i>TEMPLATE</i> .</p>
+
+<p style="margin-left:9%;"><i>-V, -version</i></p>
+
+<p style="margin-left:18%;">Display version and licensing
+information.</p>
+
+<h2>TEMPLATE FORMAT
+<a name="TEMPLATE FORMAT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The template
+file is an XSLT which needs to process the following input
+XML document:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;Page&gt;</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;CollectionTitle&gt;Collection
+Title&lt;/CollectionTitle&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;PageTitle&gt;Page Title&lt;/PageTitle&gt;</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;Summary&gt;Page Summary&lt;/Summary&gt;</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;Signature&gt;Type Declaration&lt;/Signature&gt;</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;Remarks&gt;Type Remarks&lt;/Remarks&gt;</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;Members&gt;Type Members&lt;/Members&gt;</p></td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;Copyright&gt;Documentation
+Copyright&lt;/Copyright&gt;</p> </td></tr>
+<tr valign="top" align="left">
+<td width="6%"></td>
+<td width="7%"></td>
+<td width="87%">
+
+
+<p>&lt;/Page&gt;</p></td></tr>
+</table>
+
+<p style="margin-left:9%;">The generated HTML also makes
+use of the following CSS classes, which should be defined so
+that output is nicely formatted:</p>
+
+<p style="margin-left:18%;"><i>.CollectionTitle <br>
+.PageTitle <br>
+.Summary <br>
+.Signature <br>
+.Remarks <br>
+.Members <br>
+.Copyright <br>
+.Section <br>
+.SectionBox <br>
+.NamespaceName <br>
+.NamespaceSummary <br>
+.MemberName <br>
+.MemberSignature <br>
+.MemberBox <br>
+.Subsection <br>
+.SubsectionBox <br>
+.SignatureTable <br>
+.EnumerationsTable <br>
+.CodeExampleTable <br>
+.MembersListing <br>
+.TypesListing <br>
+.InnerSignatureTable <br>
+.TypePermissionsTable</i></p>
+
+<h2>HTML LINKS
+<a name="HTML LINKS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">All members
+within the HTML file have a <i>id</i> attribute to permit
+linking to a specific member. The value of the <i>id</i>
+attribute is the String ID of the specified member. See the
+<b>STRING ID FORMAT</b> section of the <b>monodocer</b> man
+page for more information.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-docs-list for
+<br>
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>

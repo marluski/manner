@@ -1,0 +1,220 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:05 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>cmark</title>
+
+</head>
+<body>
+
+<h1 align="center">cmark</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cmark</b> -
+convert CommonMark formatted text to HTML</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="27%">
+
+
+<p style="margin-top: 1em"><b>cmark</b> [options] file*</p></td>
+<td width="64%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cmark</b>
+converts Markdown formatted plain text to either HTML, groff
+man, CommonMark XML, LaTeX, or CommonMark, using the
+conventions described in the CommonMark spec. It reads input
+from <i>stdin</i> or the specified files (concatenating
+their contents) and writes output to <i>stdout</i>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--to, -t</b>
+<i>FORMAT</i></p>
+
+<p style="margin-left:24%;">Specify output format
+(<tt>html</tt>, <tt>man</tt>, <tt>xml</tt>, <tt>latex</tt>,
+<tt>commonmark</tt>).</p>
+
+<p style="margin-left:9%;"><b>--width</b> <i>WIDTH</i></p>
+
+<p style="margin-left:24%;">Specify a column width to which
+to wrap the output. For no wrapping, use the value 0 (the
+default). This option currently only affects the commonmark,
+latex, and man renderers.</p>
+
+<p style="margin-left:9%;"><b>--hardbreaks</b></p>
+
+<p style="margin-left:24%;">Render soft breaks (newlines
+inside paragraphs in the CommonMark source) as hard line
+breaks in the target format. If this option is specified,
+hard wrapping is disabled for CommonMark output, regardless
+of the value given with --width.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="14%">
+
+
+<p><b>--nobreaks</b></p></td>
+<td width="1%"></td>
+<td width="76%">
+
+
+<p>Render soft breaks as spaces. If this option is
+specified, hard wrapping is disabled for all output formats,
+regardless of the value given with --width.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="14%">
+
+
+<p><b>--sourcepos</b></p></td>
+<td width="1%"></td>
+<td width="76%">
+
+
+<p>Include source position attribute.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--validate-utf8</b></p>
+
+<p style="margin-left:24%;">Validate UTF-8, replacing
+illegal sequences with U+FFFD.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>--smart</b></p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p>Use smart punctuation. Straight double and single quotes
+will be rendered as curly quotes, depending on their
+position. <tt>--</tt> will be rendered as an en-dash.
+<tt>---</tt> will be rendered as an em-dash. <tt>...</tt>
+will be rendered as ellipses.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>--safe</b></p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p>Omit raw HTML and potentially dangerous URLs (default).
+Raw HTML is replaced by a placeholder comment and
+potentially dangerous URLs are replaced by empty strings.
+Potentially dangerous URLs are those that begin with
+&lsquo;javascript:&lsquo;, &lsquo;vbscript:&lsquo;,
+&lsquo;file:&lsquo;, or &lsquo;data:&lsquo; (except for
+&lsquo;image/png&lsquo;, &lsquo;image/gif&lsquo;,
+&lsquo;image/jpeg&lsquo;, or &lsquo;image/webp&lsquo; mime
+types).</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>--unsafe</b></p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p>Render raw HTML or potentially dangerous URLs,
+overriding the default (--safe) behavior.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>--help</b></p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p>Print usage information.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="12%">
+
+
+<p><b>--version</b></p></td>
+<td width="3%"></td>
+<td width="76%">
+
+
+<p>Print version.</p></td></tr>
+</table>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">John MacFarlane,
+Vicent Marti, K&#257;rlis Ga&#326;&#291;is, Nick
+Wellnhofer.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">CommonMark spec:
+<tt>https://spec.commonmark.org</tt>.</p>
+<hr>
+</body>
+</html>

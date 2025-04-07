@@ -1,0 +1,1555 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:43 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>grops</title>
+
+</head>
+<body>
+
+<h1 align="center">grops</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Synopsis">Synopsis</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Options">Options</a><br>
+<a href="#Usage">Usage</a><br>
+<a href="#Typefaces">Typefaces</a><br>
+<a href="#Device control commands">Device control commands</a><br>
+<a href="#Encapsulated PostScript">Encapsulated PostScript</a><br>
+<a href="#TrueType and other font formats">TrueType and other font formats</a><br>
+<a href="#Font installation">Font installation</a><br>
+<a href="#Old fonts">Old fonts</a><br>
+<a href="#Environment">Environment</a><br>
+<a href="#Files">Files</a><br>
+<a href="#See also">See also</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grops -
+<i>groff</i> output driver for PostScript</p>
+
+<h2>Synopsis
+<a name="Synopsis"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>grops</b></p></td>
+<td width="2%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">[<b>-glm</b>]
+[<b>-b&nbsp;</b><i>brokenness-flags</i>]
+[<b>-c&nbsp;</b><i>num-copies</i>]
+[<b>-F&nbsp;</b><i>font-directory</i>]
+[<b>-I&nbsp;</b><i>inclusion-directory</i>]
+[<b>-p&nbsp;</b><i>paper-format</i>]
+[<b>-P&nbsp;</b><i>prologue-file</i>]
+[<b>-w&nbsp;</b><i>rule-thickness</i>]
+[<i>file&nbsp;</i>...]</p> </td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>grops</b></p></td>
+<td width="2%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><b>--help</b></p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>grops</b></p></td>
+<td width="2%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><b>-v</b></p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>grops</b></p></td>
+<td width="2%"></td>
+<td width="82%">
+
+
+<p><b>--version</b></p></td>
+<td width="1%">
+</td></tr>
+</table>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The GNU
+<i>roff</i> PostScript output driver translates the output
+of <a href="man:troff(1)"><i>troff</i>(1)</a> into
+PostScript. Normally, <i>grops</i> is invoked by
+<a href="man:groff(1)"><i>groff</i>(1)</a> when the latter
+is given the &ldquo;<b>-T&nbsp;ps</b>&rdquo; option. (In
+this installation, <b>ps</b> is the default output device.)
+Use <i>groff</i>&rsquo;s <b>-P</b> option to pass any
+options shown above to <i>grops</i>. If no <i>file</i>
+arguments are given, or if <i>file</i> is &ldquo;-&rdquo;,
+<i>grotty</i> reads the standard input stream. Output is
+written to the standard output stream.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When called with
+multiple <i>file</i> arguments, <i>grops</i> doesn&rsquo;t
+produce a valid document structure (one conforming to the
+Document Structuring Conventions). To print such
+concatenated output, it is necessary to deactivate DSC
+handling in the printing program or previewer.</p>
+
+<p style="margin-left:9%; margin-top: 1em">See section
+&ldquo;Font installation&rdquo; below for a guide to
+installing fonts for <i>grops</i>.</p>
+
+<h2>Options
+<a name="Options"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b>
+displays a usage message, while <b>-v</b> and
+<b>--version</b> show version information; all exit
+afterward.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-b&nbsp;</b><i>n</i></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Work around problems with spoolers, previewers, and
+older printers. Normally, <i>grops</i> produces output at
+PostScript LanguageLevel&nbsp;2 that conforms to version 3.0
+of the Document Structuring Conventions. Some software and
+devices can&rsquo;t handle such a data stream. The value
+of&nbsp;<i>n</i> determines what <i>grops</i> does to make
+its output acceptable to such consumers. If <i>n</i> is
+<b>0</b>, <i>grops</i> employs no workarounds, which is the
+default; it can be changed by modifying the <b>broken</b>
+directive in <i>grops</i>&rsquo;s <i>DESC</i> file.</p></td></tr>
+</table>
+
+<p style="margin-left:18%; margin-top: 1em">Add&nbsp;1 to
+suppress generation of <b>%%BeginDocumentSetup</b> and
+<b>%%End- DocumentSetup</b> comments; this is needed for
+early versions of TranScript that get confused by anything
+between the <b>%%EndProlog</b> comment and the first
+<b>%%Page</b> comment.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Add&nbsp;2 to
+omit lines in included files beginning with <b>%!</b>, which
+confuse Sun&rsquo;s <i>pageview</i> previewer.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Add&nbsp;4 to
+omit lines in included files beginning with <b>%%Page</b>,
+<b>%%Trailer</b> and <b>%%EndProlog</b>; this is needed for
+spoolers that don&rsquo;t understand <b>%%BeginDocument</b>
+and <b>%%EndDocument</b> comments.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Add&nbsp;8 to
+write <b>%!PS-Adobe-2.0</b> rather than
+<b>%!PS-Adobe-3.0</b> as the first line of the PostScript
+output; this is needed when using Sun&rsquo;s Newsprint with
+a printer that requires page reversal.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Add&nbsp;16 to
+omit media size information (that is, output neither a
+<b>%%DocumentMedia</b> comment nor the <b>setpagedevice</b>
+PostScript command). This was the behavior of <i>groff</i>
+1.18.1 and earlier; it is needed for older printers that
+don&rsquo;t understand PostScript LanguageLevel&nbsp;2, and
+is also necessary if the output is further processed to
+produce an EPS file; see subsection &ldquo;Escapsulated
+PostScript&rdquo; below.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>-c&nbsp;</b><i>n</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Output <i>n</i> copies of each
+page.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-F&nbsp;</b><i>dir</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Prepend directory dir<i>/dev</i>name to the search path
+for font and device description and PostScript prologue
+files; <i>name</i> is the name of the device, usually
+<b>ps</b>.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-g</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Generate PostScript code to guess the page length. The
+guess is correct only if the imageable area is vertically
+centered on the page. This option allows you to generate
+documents that can be printed on both U.S. letter and A4
+paper formats without change.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-I&nbsp;</b><i>dir</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Search the directory <i>dir</i> for files named in
+<b>\X'ps: file'</b> and <b>\X'ps: import'</b> escape
+sequences. <b>-I</b> may be specified more than once; each
+<i>dir</i> is searched in the given order. To search the
+current working directory before others, add &ldquo;<b>-I
+.</b>&rdquo; at the desired place; it is otherwise searched
+last.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-l</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Use landscape orientation rather than portrait.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-m</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Turn on manual feed for the document.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-p&nbsp;</b><i>fmt</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Set physical dimensions of output medium, overriding the
+<b>papersize</b>, <b>paperlength</b>, and <b>paperwidth</b>
+directives in the <i>DESC</i> file. <i>fmt</i> can be any
+argument accepted by the <b>papersize</b> directive; see
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>.</p> </td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-P&nbsp;</b><i>prologue</i></p>
+
+<p style="margin-left:18%;">Use the file <i>prologue</i>,
+sought in the <i>groff</i> font search path, as the
+PostScript prologue, overriding the default (see section
+&ldquo;Files&rdquo; below) and the environment variable
+<i>GROPS_PROLOGUE.</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>-w&nbsp;</b><i>n</i></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Draw rules (lines) with a thickness of
+<i>n&nbsp;</i>thousandths of an em. The default thickness is
+<b>40</b> (0.04&nbsp;em).</p></td></tr>
+</table>
+
+<h2>Usage
+<a name="Usage"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The input to
+<i>grops</i> must be in the format output by
+<a href="man:troff(1)"><i>troff</i>(1)</a>, described in
+<a href="man:groff_out(5)"><i>groff_out</i>(5)</a>. In
+addition, the device and font description files for the
+device used must meet certain requirements. The device
+resolution must be an integer multiple of&nbsp;72 times the
+<b>sizescale</b>. The device description file must contain a
+valid paper format; see
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>. Each
+font description file must contain a directive</p>
+
+
+<p style="margin-left:18%;">internalname&nbsp;<i>psname</i></p>
+
+<p style="margin-left:9%;">which says that the PostScript
+name of the font is <i>psname</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A font
+description file may also contain a directive</p>
+
+
+<p style="margin-left:18%;">encoding&nbsp;<i>enc-file</i></p>
+
+<p style="margin-left:9%;">which says that the PostScript
+font should be reencoded using the encoding described in
+<i>enc-file</i>; this file should consist of a sequence of
+lines of the form</p>
+
+<p style="margin-left:18%;"><i>pschar code</i></p>
+
+<p style="margin-left:9%;">where <i>pschar</i> is the
+PostScript name of the character, and <i>code</i> is its
+position in the encoding expressed as a decimal integer;
+valid values are in the range 0 to&nbsp;255. Lines starting
+with <b>#</b> and blank lines are ignored. The code for each
+character given in the font description file must correspond
+to the code for the character in encoding file, or to the
+code in the default encoding for the font if the PostScript
+font is not to be reencoded. This code can be used with the
+<b>\N</b> escape sequence in <i>troff</i> to select the
+character, even if it does not have a <i>groff</i> glyph
+name. Every character in the font description file must
+exist in the PostScript font, and the widths given in the
+font description file must match the widths used in the
+PostScript font. <i>grops</i> assumes that a character with
+a <i>groff</i> name of <b>space</b> is blank (makes no marks
+on the page); it can make use of such a character to
+generate more efficient and compact PostScript output.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>grops</i> is
+able to display all glyphs in a PostScript font; it is not
+limited to 256 of them. <i>enc-file</i> (or the default
+encoding if no encoding file is specified) just defines the
+order of glyphs for the first 256 characters; all other
+glyphs are accessed with additional encoding vectors which
+<i>grops</i> produces on the fly.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>grops</i> can
+embed fonts in a document that are necessary to render it;
+this is called &ldquo;downloading&rdquo;. Such fonts must be
+in PFA format. Use
+<a href="man:pfbtops(1)"><i>pfbtops</i>(1)</a> to convert a
+Type&nbsp;1 font in PFB format. Downloadable fonts must be
+listed a <i>download</i> file containing lines of the
+form</p>
+
+<p style="margin-left:18%;"><i>psname file</i></p>
+
+<p style="margin-left:9%;">where <i>psname</i> is the
+PostScript name of the font, and <i>file</i> is the name of
+the file containing it; lines beginning with <b>#</b> and
+blank lines are ignored; fields may be separated by tabs or
+spaces. <i>file</i> is sought using the same mechanism as
+that for <i>groff</i> font description files. The
+<i>download</i> file itself is also sought using this
+mechanism; currently, only the first matching file found in
+the device and font description search path is used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the file
+containing a downloadable font or imported document conforms
+to the Adobe Document Structuring Conventions, then
+<i>grops</i> interprets any comments in the files
+sufficiently to ensure that its own output is conforming. It
+also supplies any needed font resources that are listed in
+the <i>download</i> file as well as any needed file
+resources. It is also able to handle inter-resource
+dependencies. For example, suppose that you have a
+downloadable font called Garamond, and also a downloadable
+font called Garamond-Outline which depends on Garamond
+(typically it would be defined to copy Garamond&rsquo;s font
+dictionary, and change the PaintType), then it is necessary
+for Garamond to appear before Garamond-Outline in the
+PostScript document. <i>grops</i> handles this automatically
+provided that the downloadable font file for
+Garamond-Outline indicates its dependence on Garamond by
+means of the Document Structuring Conventions, for example
+by beginning with the following lines.</p>
+
+<p style="margin-left:18%;">%!PS-Adobe-3.0 Resource-Font
+<br>
+%%DocumentNeededResources: font Garamond <br>
+%%EndComments <br>
+%%IncludeResource: font Garamond</p>
+
+<p style="margin-left:9%;">In this case, both Garamond and
+Garamond-Outline would need to be listed in the
+<i>download</i> file. A downloadable font should not include
+its own name in a <b>%%DocumentSuppliedResources</b>
+comment.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>grops</i>
+does not interpret <b>%%DocumentFonts</b> comments. The
+<b>%%Document- NeededResources</b>,
+<b>%%DocumentSuppliedResources</b>,
+<b>%%IncludeResource</b>, <b>%%BeginResource</b>, and
+<b>%%EndResource</b> comments (or possibly the old
+<b>%%DocumentNeededFonts</b>,
+<b>%%DocumentSuppliedFonts</b>, <b>%%IncludeFont</b>,
+<b>%%Begin- Font</b>, and <b>%%EndFont</b> comments) should
+be used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default
+stroke and fill color is black. For colors defined in the
+&ldquo;rgb&rdquo; color space, <b>setrgbcolor</b> is used;
+for &ldquo;cmy&rdquo; and &ldquo;cmyk&rdquo;,
+<b>setcmykcolor</b>; and for &ldquo;gray&rdquo;,
+<b>setgray</b>. <b>setcmykcolor</b> is a PostScript
+LanguageLevel&nbsp;2 command and thus not available on some
+older printers.</p>
+
+<h3>Typefaces
+<a name="Typefaces"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Styles called
+<b>R</b>, <b>I</b>, <b>B</b>, and <b>BI</b> mounted at font
+positions 1 to&nbsp;4. Text fonts are grouped into families
+<b>A</b>, <b>BM</b>, <b>C</b>, <b>H</b>, <b>HN</b>,
+<b>N</b>, <b>P</b>, and&nbsp;<b>T</b>, each having members
+in each of these styles.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>AR</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p style="margin-top: 1em">AvantGarde-Book</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>AI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>AvantGarde-BookOblique</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>AB</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>AvantGarde-Demi</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>ABI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>AvantGarde-DemiOblique</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>BMR</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Bookman-Light</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>BMI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Bookman-LightItalic</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>BMB</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Bookman-Demi</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>BMBI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Bookman-DemiItalic</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>CR</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Courier</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>CI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Courier-Oblique</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>CB</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Courier-Bold</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>CBI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Courier-BoldOblique</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>HR</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Helvetica</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>HI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Helvetica-Oblique</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>HB</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Helvetica-Bold</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>HBI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Helvetica-BoldOblique</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>HNR</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Helvetica-Narrow</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>HNI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Helvetica-Narrow-Oblique</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>HNB</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Helvetica-Narrow-Bold</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>HNBI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Helvetica-Narrow-BoldOblique</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>NR</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>NewCenturySchlbk-Roman</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>NI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>NewCenturySchlbk-Italic</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>NB</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>NewCenturySchlbk-Bold</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>NBI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>NewCenturySchlbk-BoldItalic</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>PR</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Palatino-Roman</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>PI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Palatino-Italic</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>PB</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Palatino-Bold</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>PBI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Palatino-BoldItalic</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>TR</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Times-Roman</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>TI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Times-Italic</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>TB</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Times-Bold</p></td>
+<td width="37%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p><b>TBI</b></p></td>
+<td width="4%"></td>
+<td width="36%">
+
+
+<p>Times-BoldItalic</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Another text
+font is not a member of a family.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em"><b>ZCMI</b></p></td>
+<td width="4%"></td>
+<td width="32%">
+
+
+<p style="margin-top: 1em">ZapfChancery-MediumItalic</p></td>
+<td width="41%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Special fonts
+include <b>S</b>, the PostScript Symbol font; <b>ZD</b>,
+Zapf Dingbats; <b>SS</b> (slanted symbol), which contains
+oblique forms of lowercase Greek letters derived from
+Symbol; <b>EURO</b>, which offers a Euro glyph for use with
+old devices lacking it; and <b>ZDR</b>, a reversed version
+of ZapfDingbats (with symbols flipped about the vertical
+axis). Most glyphs in these fonts are unnamed and must be
+accessed using <b>\N</b>. The last three are not standard
+PostScript fonts, but supplied by <i>groff</i> and therefore
+included in the default <i>download</i> file.</p>
+
+<h3>Device control commands
+<a name="Device control commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grops</i>
+recognizes device control commands produced by the <b>\X</b>
+escape sequence, but interprets only those that begin with a
+&ldquo;<b>ps:</b>&rdquo; tag. <b><br>
+\X'ps: exec&nbsp;</b><i>code</i><b>'</b></p>
+
+<p style="margin-left:18%;">Execute the arbitrary
+PostScript commands <i>code</i>. The PostScript
+<i>currentpoint</i> is set to the <i>groff</i> drawing
+position when the <b>\X</b> escape sequence is interpreted
+before executing <i>code</i>. The origin is at the top left
+corner of the page; <i>x&nbsp;</i>coordinates increase to
+the right, and <i>y&nbsp;</i>coordinates down the page. A
+procedure&nbsp;<b>u</b> is defined that converts
+<i>groff</i> basic units to the coordinate system in effect
+(provided the user doesn&rsquo;t change the scale). For
+example,</p>
+
+<p style="margin-left:27%;">.nr x 1i <br>
+\X'ps: exec \nx u 0 rlineto stroke'</p>
+
+<p style="margin-left:18%;">draws a horizontal line one
+inch long. <i>code</i> may make changes to the graphics
+state, but any changes persist only to the end of the page.
+A dictionary containing the definitions specified by the
+<b>def</b> and <b>mdef</b> commands is on top of the
+dictionary stack. If your code adds definitions to this
+dictionary, you should allocate space for them using
+&ldquo;<b>\X'ps: mdef</b> <i>n</i><b>'</b>&rdquo;. Any
+definitions persist only until the end of the page. If you
+use the <b>\Y</b> escape sequence with an argument that
+names a macro, <i>code</i> can extend over multiple lines.
+For example,</p>
+
+<p style="margin-left:27%;">.nr x 1i <br>
+.de y <br>
+ps: exec <br>
+\nx u 0 rlineto <br>
+stroke <br>
+.. <br>
+\Yy</p>
+
+<p style="margin-left:18%;">is another way to draw a
+horizontal line one inch long. The single backslash before
+&ldquo;<b>nx</b>&rdquo;&mdash;the only reason to use a
+register while defining the macro
+&ldquo;<b>y</b>&rdquo;&mdash;is to convert a user-specified
+dimension &ldquo;<b>1i</b>&rdquo; to <i>groff</i> basic
+units which are in turn converted to PostScript units with
+the <b>u</b> procedure.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>grops</i>
+wraps user-specified PostScript code into a dictionary,
+nothing more. In particular, it doesn&rsquo;t start and end
+the inserted code with <b>save</b> and <b>restore</b>,
+respectively. This must be supplied by the user, if
+necessary.</p>
+
+<p style="margin-left:9%;"><b>\X'ps:
+file&nbsp;</b><i>name</i><b>'</b></p>
+
+<p style="margin-left:18%;">This is the same as the
+<b>exec</b> command except that the PostScript code is read
+from file <i>name</i>.</p>
+
+<p style="margin-left:9%;"><b>\X'ps:
+def&nbsp;</b><i>code</i><b>'</b></p>
+
+<p style="margin-left:18%;">Place a PostScript definition
+contained in <i>code</i> in the prologue. There should be at
+most one definition per <b>\X</b> command. Long definitions
+can be split over several <b>\X</b> commands; all the
+<i>code</i> arguments are simply joined together separated
+by newlines. The definitions are placed in a dictionary
+which is automatically pushed on the dictionary stack when
+an <b>exec</b> command is executed. If you use the <b>\Y</b>
+escape sequence with an argument that names a macro,
+<i>code</i> can extend over multiple lines.</p>
+
+<p style="margin-left:9%;"><b>\X'ps: mdef&nbsp;</b><i>n
+code</i><b>'</b></p>
+
+<p style="margin-left:18%;">Like <b>def</b>, except that
+<i>code</i> may contain up to <i>n&nbsp;</i>definitions.
+<i>grops</i> needs to know how many definitions <i>code</i>
+contains so that it can create an appropriately sized
+PostScript dictionary to contain them.</p>
+
+<p style="margin-left:9%;"><b>\X'ps:
+import&nbsp;</b><i>file llx lly urx ury
+width&nbsp;</i>[<i>height</i>]<b>'</b></p>
+
+<p style="margin-left:18%;">Import a PostScript graphic
+from <i>file</i>. The arguments <i>llx</i>, <i>lly</i>,
+<i>urx</i>, and <i>ury</i> give the bounding box of the
+graphic in the default PostScript coordinate system. They
+should all be integers: <i>llx</i> and <i>lly</i> are the
+<i>x</i> and <i>y&nbsp;</i>coordinates of the lower left
+corner of the graphic; <i>urx</i> and <i>ury</i> are the
+<i>x</i> and <i>y&nbsp;</i>coordinates of the upper right
+corner of the graphic; <i>width</i> and <i>height</i> are
+integers that give the desired width and height in
+<i>groff</i> basic units of the graphic.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The graphic is
+scaled so that it has this width and height and translated
+so that the lower left corner of the graphic is located at
+the position associated with <b>\X</b> command. If the
+height argument is omitted it is scaled uniformly in the
+<i>x</i> and <i>y&nbsp;</i>axes so that it has the specified
+width.</p>
+
+<p style="margin-left:18%; margin-top: 1em">The contents of
+the <b>\X</b> command are not interpreted by <i>troff</i>,
+so vertical space for the graphic is not automatically
+added, and the <i>width</i> and <i>height</i> arguments are
+not allowed to have attached scaling indicators.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the
+PostScript file complies with the Adobe Document Structuring
+Conventions and contains a <b>%%BoundingBox</b> comment,
+then the bounding box can be automatically extracted from
+within <i>groff</i> input by using the <b>psbb</b>
+request.</p>
+
+<p style="margin-left:18%; margin-top: 1em">See
+<a href="man:groff_tmac(5)"><i>groff_tmac</i>(5)</a> for a
+description of the <b>PSPIC</b> macro which provides a
+convenient high-level interface for inclusion of PostScript
+graphics.</p>
+
+<p style="margin-left:9%;"><b>\X'ps: invis' <br>
+\X'ps: endinvis'</b></p>
+
+<p style="margin-left:18%;">No output is generated for text
+and drawing commands that are bracketed with these <b>\X</b>
+commands. These commands are intended for use when output
+from <i>troff</i> is previewed before being processed with
+<i>grops</i>; if the previewer is unable to display certain
+characters or other constructs, then other substitute
+characters or constructs can be used for previewing by
+bracketing them with these <b>\X</b> commands.</p>
+
+<p style="margin-left:18%; margin-top: 1em">For example,
+<i>gxditview</i> is not able to display a proper
+<b>\[em]</b> character because the standard X11 fonts do not
+provide it; this problem can be overcome by executing the
+following request</p>
+
+<p style="margin-left:27%; margin-top: 1em">.char \[em]
+\X'ps: invis'\ <br>
+\Z'\v'-.25m'\h'.05m'\D'l .9m 0'\h'.05m''\ <br>
+\X'ps: endinvis'\[em]</p>
+
+<p style="margin-left:18%; margin-top: 1em">In this case,
+<i>gxditview</i> is unable to display the <b>\[em]</b>
+character and draws the line, whereas <i>grops</i> prints
+the <b>\[em]</b> character and ignores the line (this code
+is already in file <i>Xps.tmac</i>, which is loaded if a
+document intended for <i>grops</i> is previewed with
+<i>gxditview</i>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">If a PostScript
+procedure <b>BPhook</b> has been defined via a &ldquo;<b>ps:
+def</b>&rdquo; or &ldquo;<b>ps: mdef</b>&rdquo; device
+control command, it is executed at the beginning of every
+page (before anything is drawn or written by <i>groff</i>).
+For example, to underlay the page contents with the word
+&ldquo;DRAFT&rdquo; in light gray, you might use</p>
+
+<p style="margin-left:18%; margin-top: 1em">.de XX <br>
+ps: def <br>
+/BPhook <br>
+{ gsave .9 setgray clippath pathbbox exch 2 copy <br>
+.5 mul exch .5 mul translate atan rotate pop pop <br>
+/NewCenturySchlbk-Roman findfont 200 scalefont setfont <br>
+(DRAFT) dup stringwidth pop -.5 mul -70 moveto show <br>
+grestore } <br>
+def <br>
+.. <br>
+.devicem XX</p>
+
+<p style="margin-left:9%; margin-top: 1em">Or, to cause
+lines and polygons to be drawn with square linecaps and
+mitered linejoins instead of the round linecaps and
+linejoins normally used by <i>grops</i>, use</p>
+
+<p style="margin-left:18%;">.de XX <br>
+ps: def <br>
+/BPhook { 2 setlinecap 0 setlinejoin } def <br>
+.. <br>
+.devicem XX</p>
+
+<p style="margin-left:9%;">(square linecaps, as opposed to
+butt linecaps (&ldquo;<b>0 setlinecap</b>&rdquo;), give true
+corners in boxed tables even though the lines are drawn
+unconnected).</p>
+
+<h3>Encapsulated PostScript
+<a name="Encapsulated PostScript"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>grops</i>
+itself doesn&rsquo;t emit bounding box information. The
+following script, <i>groff2eps</i>, produces an EPS
+file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">#! /bin/sh <br>
+groff -P-b16 &quot;$1&quot; &gt; &quot;$1&quot;.ps <br>
+gs -dNOPAUSE -sDEVICE=bbox -- &quot;$1&quot;.ps 2&gt;
+&quot;$1&quot;.bbox <br>
+sed -e &quot;/^%%Orientation/r $1.bbox&quot; \ <br>
+-e &quot;/^%!PS-Adobe-3.0/s/$/ EPSF-3.0/&quot;
+&quot;$1&quot;.ps &gt; &quot;$1&quot;.eps <br>
+rm &quot;$1&quot;.ps &quot;$1&quot;.bbox</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can then use
+&ldquo;<b>groff2eps foo</b>&rdquo; to convert file
+<i>foo</i> to <i>foo.eps</i>.</p>
+
+<h3>TrueType and other font formats
+<a name="TrueType and other font formats"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">TrueType fonts
+can be used with <i>grops</i> if converted first to
+Type&nbsp;42 format, a PostScript wrapper equivalent to the
+PFA format described in
+<a href="man:pfbtops(1)"><i>pfbtops</i>(1)</a>. Several
+methods exist to generate a Type&nbsp;42 wrapper; some of
+them involve the use of a PostScript interpreter such as
+Ghostscript&mdash;see
+<a href="man:gs(1)"><i>gs</i>(1)</a>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">One approach is
+to use <a href="https://fontforge.org/">FontForge</a>, a
+font editor that can convert most outline font formats.
+Here&rsquo;s an example of using the Roboto Slab Serif font
+with <i>groff</i>. Several variables are used so that you
+can more easily adapt it into your own script.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em">MAP=/usr/share/groff/1.23.0/font/devps/generate/text.map
+<br>
+
+TTF=/usr/share/fonts/truetype/roboto/slab/RobotoSlab-Regular.ttf
+<br>
+BASE=$(basename &quot;$TTF&quot;) <br>
+INT=${BASE%.ttf} <br>
+PFA=$INT.pfa <br>
+AFM=$INT.afm <br>
+GFN=RSR <br>
+DIR=$HOME/.local/groff/font <br>
+mkdir -p &quot;$DIR&quot;/devps <br>
+fontforge -lang=ff -c &quot;Open(\&quot;$TTF\&quot;);\ <br>
+Generate(\&quot;$DIR/devps/$PFA\&quot;);&quot; <br>
+afmtodit &quot;$DIR/devps/$AFM&quot; &quot;$MAP&quot;
+&quot;$DIR/devps/$GFN&quot; <br>
+printf &quot;$BASE\t$PFA\n&quot; &gt;&gt;
+&quot;$DIR/devps/download&quot;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>fontforge</i>
+and <i>afmtodit</i> may generate warnings depending on the
+attributes of the font. The test procedure is simple.</p>
+
+<p style="margin-left:14%; margin-top: 1em">printf
+&quot;.ft RSR\nHello, world!\n&quot; | groff -F
+&quot;$DIR&quot; &gt; hello.ps</p>
+
+<p style="margin-left:9%; margin-top: 1em">Once
+you&rsquo;re satisfied that the font works, you may want to
+generate any available related styles (for instance, Roboto
+Slab also has &ldquo;Bold&rdquo;, &ldquo;Light&rdquo;, and
+&ldquo;Thin&rdquo; styles) and set up <i>GROFF_FONT_PATH</i>
+in your environment to include the directory you keep the
+generated fonts in so that you don&rsquo;t have to use the
+<b>-F</b> option.</p>
+
+<h2>Font installation
+<a name="Font installation"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following is
+a step-by-step font installation guide for <i>grops.</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Convert your font to something <i>groff</i> understands.
+This is a PostScript Type&nbsp;1 font in PFA format or a
+PostScript Type&nbsp;42 font, together with an AFM file. A
+PFA file begins as follows.</p></td></tr>
+</table>
+
+<p style="margin-left:21%;">%!PS-AdobeFont-1.0:</p>
+
+<p style="margin-left:12%;">A PFB file contains this string
+as well, preceded by some non-printing bytes. If your font
+is in PFB format, use <i>groff</i>&rsquo;s
+<a href="man:pfbtops(1)"><i>pfbtops</i>(1)</a> program to
+convert it to PFA. For TrueType and other font formats, we
+recommend <i>fontforge</i>, which can convert most outline
+font formats. A Type&nbsp;42 font file begins as
+follows.</p>
+
+<p style="margin-left:21%;">%!PS-TrueTypeFont</p>
+
+<p style="margin-left:12%;">This is a wrapper format for
+TrueType fonts. Old PostScript printers might not support
+them (that is, they might not have a built-in TrueType font
+interpreter). In the following steps, we will consider the
+use of CTAN&rsquo;s
+<a href="https://ctan.org/tex-archive/fonts/brushscr">BrushScriptX-Italic</a>
+font in PFA format.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Convert the AFM file to a
+<i>groff</i> font description file with the
+<a href="man:afmtodit(1)"><i>afmtodit</i>(1)</a> program.
+For instance,</p></td></tr>
+</table>
+
+<p style="margin-left:21%;">$ <b>afmtodit
+BrushScriptX-Italic.afm text.map BSI</b></p>
+
+<p style="margin-left:12%;">converts the Adobe Font Metric
+file <i>BrushScriptX-Italic.afm</i> to the <i>groff</i> font
+description file <i>BSI</i>.</p>
+
+<p style="margin-left:12%; margin-top: 1em">If you have a
+font family which provides regular upright (roman), bold,
+italic, and bold-italic styles (where &ldquo;italic&rdquo;
+may be &ldquo;oblique&rdquo; or &ldquo;slanted&rdquo;), we
+recommend using the letters <b>R</b>, <b>B</b>, <b>I</b>,
+and <b>BI</b>, respectively, as suffixes to the <i>groff</i>
+font family name to enable <i>groff</i>&rsquo;s font family
+and style selection features. An example is
+<i>groff</i>&rsquo;s built-in support for Times: the font
+family name is abbreviated as <b>T</b>, and the <i>groff</i>
+font names are therefore <b>TR</b>, <b>TB</b>, <b>TI</b>,
+and <b>TBI</b>. In our example, however, the BrushScriptX
+font is available in a single style only, italic.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p style="margin-top: 1em">Install the <i>groff</i> font
+description file(s) in a <i>devps</i> subdirectory in the
+search path that <i>groff</i> uses for device and font file
+descriptions. See the <i>GROFF_FONT_PATH</i> entry in
+section &ldquo;Environment&rdquo; of
+<a href="man:troff(1)"><i>troff</i>(1)</a> for the current
+value of the font search path. While <i>groff</i>
+doesn&rsquo;t directly use AFM files, it is a good idea to
+store them alongside its font description files.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>Register fonts in the <i>devps/download</i> file so they
+can be located for embedding in PostScript files
+<i>grops</i> generates. Only the first <i>download</i> file
+encountered in the font search path is read. If in doubt,
+copy the default <i>download</i> file (see section
+&ldquo;Files&rdquo; below) to the first directory in the
+font search path and add your fonts there. The PostScript
+font name used by <i>grops</i> is stored in the
+<b>internalname</b> field in the <i>groff</i> font
+description file. (This name does not necessarily resemble
+the font&rsquo;s file name.) We add the following line to
+<i>download</i>.</p> </td></tr>
+</table>
+
+
+<p style="margin-left:21%;">BrushScriptX-Italic&rarr;BrushScriptX-Italic.pfa</p>
+
+<p style="margin-left:12%;">A tab character, depicted as
+&rarr;, separates the fields.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="2%"></td>
+<td width="62%">
+
+
+<p style="margin-top: 1em">Test the selection and embedding
+of the new font.</p></td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:21%;">printf &quot;\\f[BSI]Hello,
+world!\n&quot; | groff -T ps -P -e &gt;hello.ps <br>
+see hello.pdf</p>
+
+<h2>Old fonts
+<a name="Old fonts"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>groff</i>
+versions 1.19.2 and earlier contained descriptions of a
+slightly different set of the base 35 PostScript level 2
+fonts defined by Adobe. The older set has 229 glyphs and a
+larger set of kerning pairs; the newer one has 314 glyphs
+and includes the Euro glyph. For backwards compatibility,
+these old font descriptions are also installed in the
+<i>/usr/share/groff/1.23.0/oldfont/devps</i> directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To use them,
+make sure that <i>grops</i> finds the fonts before the
+default system fonts (with the same names): either give
+<i>grops</i> the <b>-F</b> command-line option,</p>
+
+<p style="margin-left:18%;">$ <b>groff -Tps -P-F
+-P/usr/share/groff/1.23.0/oldfont</b> ...</p>
+
+<p style="margin-left:9%;">or add the directory to
+<i>groff</i>&rsquo;s font and device description search path
+environment variable,</p>
+
+<p style="margin-left:18%;">$
+<b>GROFF_FONT_PATH=/usr/share/groff/1.23.0/oldfont \</b></p>
+
+<p style="margin-left:27%;"><b>groff -Tps</b> ...</p>
+
+<p style="margin-left:9%;">when the command runs.</p>
+
+<h2>Environment
+<a name="Environment"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>GROFF_FONT_PATH</i></p>
+
+<p style="margin-left:18%;">A list of directories in which
+to seek the selected output device&rsquo;s directory of
+device and font description files. See
+<a href="man:troff(1)"><i>troff</i>(1)</a> and
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>.</p>
+
+<p style="margin-left:9%;"><i>GROPS_PROLOGUE</i></p>
+
+<p style="margin-left:18%;">If this is set to <i>foo</i>,
+then <i>grops</i> uses the file <i>foo</i> (in the font
+path) instead of the default prologue file <i>prologue</i>.
+The option <b>-P</b> overrides this environment
+variable.</p>
+
+<p style="margin-left:9%;"><i>SOURCE_DATE_EPOCH</i></p>
+
+<p style="margin-left:18%;">A timestamp (expressed as
+seconds since the Unix epoch) to use as the output creation
+timestamp in place of the current time. The time is
+converted to human-readable form using
+<a href="man:ctime(3)"><i>ctime</i>(3)</a> and recorded in a
+PostScript comment.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><i>TZ</i></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>The time zone to use when converting the current time
+(or value of <i>SOURCE_DATE_EPOCH</i>) to human-readable
+form; see <a href="man:tzset(3)"><i>tzset</i>(3)</a>.</p></td></tr>
+</table>
+
+<h2>Files
+<a name="Files"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>/usr/share/groff/1.23.0/font/devps/DESC</i></p>
+
+<p style="margin-left:18%;">describes the <b>ps</b> output
+device.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/font/devps/</i>F</p>
+
+<p style="margin-left:18%;">describes the font known
+as&nbsp;<i>F</i> on device <b>ps</b>.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/font/devps/download</i></p>
+
+<p style="margin-left:18%;">lists fonts available for
+embedding within the PostScript document (or download to the
+device).</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/font/devps/prologue</i></p>
+
+<p style="margin-left:18%;">is the default PostScript
+prologue prefixed to every output file.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/font/devps/text.enc</i></p>
+
+<p style="margin-left:18%;">describes the encoding scheme
+used by most PostScript Type&nbsp;1 fonts; the
+<b>encoding</b> directive of font description files for the
+<b>ps</b> device refers to it.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/tmac/ps.tmac</i></p>
+
+<p style="margin-left:18%;">defines macros for use with the
+<b>ps</b> output device. It is automatically loaded by
+<i>troffrc</i> when the <b>ps</b> output device is
+selected.</p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/tmac/pspic.tmac</i></p>
+
+<p style="margin-left:18%;">defines the <b>PSPIC</b> macro
+for embedding images in a document; see
+<a href="man:groff_tmac(5)"><i>groff_tmac</i>(5)</a>. It is
+automatically loaded by <i>troffrc.</i></p>
+
+
+<p style="margin-left:9%;"><i>/usr/share/groff/1.23.0/tmac/psold.tmac</i></p>
+
+<p style="margin-left:18%;">provides replacement glyphs for
+text fonts that lack complete coverage of the ISO Latin-1
+character set; using it, <i>groff</i> can produce glyphs
+like eth (&eth;) and thorn (&thorn;) that older PostScript
+printers do not natively support.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>grops</i>
+creates temporary files using the template
+&ldquo;<i>grops</i>XXXXXX&rdquo;; see
+<a href="man:groff(1)"><i>groff</i>(1)</a> for details on
+their storage location.</p>
+
+<h2>See also
+<a name="See also"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="http://partners.adobe.com/public/developer/en/ps/5001.DSC_Spec.pdf">PostScript
+Language Document Structuring Conventions
+Specification</a></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><a href="man:afmtodit(1)"><i>afmtodit</i>(1)</a>,
+<a href="man:groff(1)"><i>groff</i>(1)</a>,
+<a href="man:troff(1)"><i>troff</i>(1)</a>,
+<a href="man:pfbtops(1)"><i>pfbtops</i>(1)</a>,
+<a href="man:groff_char(7)"><i>groff_char</i>(7)</a>,
+<a href="man:groff_font(5)"><i>groff_font</i>(5)</a>,
+<a href="man:groff_out(5)"><i>groff_out</i>(5)</a>,
+<a href="man:groff_tmac(5)"><i>groff_tmac</i>(5)</a></p>
+<hr>
+</body>
+</html>

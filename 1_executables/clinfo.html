@@ -1,0 +1,610 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:04 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CLINFO</title>
+
+</head>
+<body>
+
+<h1 align="center">CLINFO</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#CONFORMING TO">CONFORMING TO</a><br>
+<a href="#EXTENSIONS">EXTENSIONS</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#EXPERIMENTAL FEATURES">EXPERIMENTAL FEATURES</a><br>
+<a href="#LIMITATIONS">LIMITATIONS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#General">General</a><br>
+<a href="#LLVM CommandLine errors">LLVM CommandLine errors</a><br>
+<a href="#Segmentation faults">Segmentation faults</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">clinfo - show
+OpenCL platforms and devices</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clinfo</b>
+[<i>options ...</i>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clinfo</b>
+prints all available information about all OpenCL platforms
+available on the system and the devices they expose.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clinfo</b>
+accepts the following options: <b><br>
+-a</b>, <b>--all-props</b></p>
+
+<p style="margin-left:12%;">try to retrieve all properties,
+even those not officially supported (e.g. because they
+require specific extensions), but only show them if the
+property could be retrieved successfully; see also the
+<b>LIMITATIONS</b> section below; note that even though this
+may reveal hidden properties, there is no guarantee that the
+returned values are meaningful, nor that the corresponding
+feature is actually available at all;</p>
+
+<p style="margin-left:9%;"><b>-A</b>,
+<b>--always-all-props</b></p>
+
+<p style="margin-left:12%;">like <b>-a</b>, but also show
+errors;</p>
+
+<p style="margin-left:9%;"><b>--human</b></p>
+
+<p style="margin-left:12%;">produce human-friendly output;
+this is the default (except as noted below);</p>
+
+<p style="margin-left:9%;"><b>--raw</b></p>
+
+<p style="margin-left:12%;">produce machine-friendly
+output; this is the default if <b>clinfo</b> is invoked with
+a name that contains the string
+&ldquo;<i>raw</i>&rdquo;;</p>
+
+<p style="margin-left:9%;"><b>--json</b></p>
+
+<p style="margin-left:12%;">outputs the raw data (cf. the
+<b>--raw</b> option) in JSON format; support for this option
+is experimental, as the representation of some of the values
+is not finalized;</p>
+
+<p style="margin-left:9%;"><b>--offline</b></p>
+
+<p style="margin-left:12%;">shows also offline devices for
+platforms that expose this feature;</p>
+
+<p style="margin-left:9%;"><b>--null-platform</b></p>
+
+<p style="margin-left:12%;">tries to handle the NULL
+platform as a normal platform, retrieving and showing its
+properties and devices; this is in addition to the NULL
+platform behavior tests done at the end, and can be useful
+on systems where there are no ICD platforms, but there is a
+platform hard-coded in the OpenCL library itself;</p>
+
+<p style="margin-left:9%;"><b>-l</b>, <b>--list</b></p>
+
+<p style="margin-left:12%;">list platforms and devices by
+name, with no (other) properties;</p>
+
+
+<p style="margin-left:9%;"><b>-d</b><i>platform_index</i><b>:</b><i>device_index</i>
+<b><br>
+--device</b>
+<i>platform_index</i><b>:</b><i>device_index</i></p>
+
+<p style="margin-left:12%;">only show properties for the
+specified device in the specified platform;</p>
+
+<p style="margin-left:9%;"><b>--prop</b>
+<i>property-name</i></p>
+
+<p style="margin-left:12%;">only show properties whose
+symbolic name matches (contains as a substring) the given
+<i>property-name</i>; the name is normalized as upper-case
+and with minus sign (-) replaced by underscore signs (_);
+when this flag is specified, raw mode is forced;</p>
+
+<p style="margin-left:9%;"><b>-h</b>, <b>-?</b></p>
+
+<p style="margin-left:12%;">show usage;</p>
+
+<p style="margin-left:9%;"><b>--version</b>, <b>-v</b></p>
+
+<p style="margin-left:12%;">show program version.</p>
+
+<h2>CONFORMING TO
+<a name="CONFORMING TO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">OpenCL 1.1,
+OpenCL 1.2, OpenCL 2.0, OpenCL 2.1, OpenCL 2.2, OpenCL
+3.0.</p>
+
+<h2>EXTENSIONS
+<a name="EXTENSIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Supported OpenCL
+extensions: <b><br>
+cl_khr_device_uuid</b></p>
+
+<p style="margin-left:12%;">for the UUID, LUID and node
+mask of the device;</p>
+
+
+<p style="margin-left:9%;"><b>cl_khr_extended_versioning</b></p>
+
+<p style="margin-left:12%;">for the extended platform,
+device, extension and IL versioned properties backported
+from OpenCL 3.0 to previous OpenCL versions;</p>
+
+<p style="margin-left:9%;"><b>cl_khr_fp16</b>,
+<b>cl_khr_fp64</b>, <b>cl_amd_fp64</b>,
+<b>cl_APPLE_fp64_basic_ops</b></p>
+
+<p style="margin-left:12%;">for information about support
+for half-precision and double-precision floating-point data
+types;</p>
+
+
+<p style="margin-left:9%;"><b>cl_khr_image2d_from_buffer</b></p>
+
+<p style="margin-left:12%;">for information about the base
+address and pitch alignment requirements of buffers to be
+used as base for 2D images;</p>
+
+<p style="margin-left:9%;"><b>cl_khr_il_program</b></p>
+
+<p style="margin-left:12%;">for information about the
+supported IL (Intermediate Language) representations;</p>
+
+<p style="margin-left:9%;"><b>cl_khr_spir</b></p>
+
+<p style="margin-left:12%;">for information about the
+supported SPIR (Standard Portable Intermediate
+Representation) versions;</p>
+
+<p style="margin-left:9%;"><b>cl_khr_icd</b></p>
+
+<p style="margin-left:12%;">for the suffix of vendor
+extensions functions;</p>
+
+
+<p style="margin-left:9%;"><b>cl_khr_subgroup_named_barrier</b></p>
+
+<p style="margin-left:12%;">for the maximum number of named
+sub-group barriers;</p>
+
+
+<p style="margin-left:9%;"><b>cl_khr_terminate_context</b><i>,</i>
+<b>cl_arm_controlled_kernel_termination</b></p>
+
+<p style="margin-left:12%;">for the terminate capabilities
+for the device;</p>
+
+
+<p style="margin-left:9%;"><b>cl_ext_device_fission</b></p>
+
+<p style="margin-left:12%;">for device fission support in
+OpenCL 1.1 devices;</p>
+
+<p style="margin-left:9%;"><b>cl_khr_pci_bus_info</b></p>
+
+<p style="margin-left:12%;">for the PCI bus information
+(see also <b>cl_nv_device_attribute_query</b> and
+<b>cl_amd_device_attribute_query</b>)</p>
+
+<p style="margin-left:9%;"><b>cl_ext_atomic_counters_32
+<br>
+cl_ext_atomic_counters_64</b></p>
+
+<p style="margin-left:12%;">for the atomic counter
+extension;</p>
+
+
+<p style="margin-left:9%;"><b>cl_ext_cxx_for_opencl</b></p>
+
+<p style="margin-left:12%;">for the version of the C++ for
+OpenCL language supported by the device compiler;</p>
+
+
+<p style="margin-left:9%;"><b>cl_amd_device_attribute_query</b></p>
+
+<p style="margin-left:12%;">for AMD-specific device
+attributes;</p>
+
+
+<p style="margin-left:9%;"><b>cl_amd_object_metadata</b></p>
+
+<p style="margin-left:12%;">to show the maximum number of
+keys supported by the platform;</p>
+
+
+<p style="margin-left:9%;"><b>cl_amd_offline_devices</b></p>
+
+<p style="margin-left:12%;">to show offline devices exposed
+by the platform, if requested (see <b>--offline</b>
+option);</p>
+
+
+<p style="margin-left:9%;"><b>cl_amd_copy_buffer_p2p</b></p>
+
+<p style="margin-left:12%;">to show the number and IDs of
+available P2P devices;</p>
+
+<p style="margin-left:9%;"><b>cl_amd_svm <br>
+cl_arm_shared_virtual_memory</b></p>
+
+<p style="margin-left:12%;">for Shared Virtual Memory (SVM)
+capabilities in OpenCL 1.2 devices;</p>
+
+<p style="margin-left:9%;"><b>cl_arm_core_id</b></p>
+
+<p style="margin-left:12%;">to show the (potentially
+sparse) list of the core IDs that the device may return;</p>
+
+
+<p style="margin-left:9%;"><b>cl_arm_job_slot_selection</b></p>
+
+<p style="margin-left:12%;">to show the (potentially
+sparse) list of available job slots for command
+submission;</p>
+
+
+<p style="margin-left:9%;"><b>cl_arm_scheduling_controls</b></p>
+
+<p style="margin-left:12%;">to show the supported work
+scheduling controls and the available sets of register
+allocations;</p>
+
+
+<p style="margin-left:9%;"><b>cl_nv_device_attribute_query</b></p>
+
+<p style="margin-left:12%;">for NVIDIA-specific device
+attributes;</p>
+
+
+<p style="margin-left:9%;"><b>cl_intel_device_attribute_query</b></p>
+
+<p style="margin-left:12%;">for Intel-specific device
+attributes;</p>
+
+
+<p style="margin-left:9%;"><b>cl_intel_exec_by_local_thread</b></p>
+
+<p style="margin-left:12%;">for the Intel extension
+allowing CPU devices to run kernels as part of the current
+host thread;</p>
+
+
+<p style="margin-left:9%;"><b>cl_intel_advanced_motion_estimation</b></p>
+
+<p style="margin-left:12%;">for the version of the Intel
+Motion Estimation accelerator version;</p>
+
+
+<p style="margin-left:9%;"><b>cl_intel_device_side_avc_motion_estimation</b></p>
+
+<p style="margin-left:12%;">for the version and supported
+features of Intel&rsquo;s device-side AVC Motion;</p>
+
+<p style="margin-left:9%;"><b>cl_intel_planar_yuv</b></p>
+
+<p style="margin-left:12%;">for the maximum dimensions of
+planar YUV images;</p>
+
+
+<p style="margin-left:9%;"><b>cl_intel_simultaneous_sharing</b></p>
+
+<p style="margin-left:12%;">for simultaneous CL/GL/DirectX
+context sharing (only partial support);</p>
+
+
+<p style="margin-left:9%;"><b>cl_intel_required_subgroup_size</b></p>
+
+<p style="margin-left:12%;">to enumerate allowed sub-group
+sizes;</p>
+
+
+<p style="margin-left:9%;"><b>cl_intel_command_queue_families</b></p>
+
+<p style="margin-left:12%;">to enumerate the available
+command queues and their properties and capabilities;</p>
+
+
+<p style="margin-left:9%;"><b>cl_altera_device_temperature</b></p>
+
+<p style="margin-left:12%;">for the Altera extension to
+query the core temperature of the device;</p>
+
+<p style="margin-left:9%;"><b>cl_qcom_ext_host_ptr</b></p>
+
+<p style="margin-left:12%;">for the QUALCOMM extension to
+query page size and required padding in external memory
+allocation.</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Some information
+is duplicated when available from multiple sources.
+Examples:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>supported device partition types and domains as obtained
+using the <b>cl_ext_device_fission</b> extension typically
+match the ones obtained using the core OpenCL 1.2 device
+partition feature;</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="88%">
+
+
+<p>the preferred work-group size multiple matches the
+NVIDIA warp size (on NVIDIA devices) or the AMD wavefront
+width (on AMD devices).</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Some
+floating-point configuration flags may only be meaningful
+for specific precisions and/or specific OpenCL versions. For
+example, <b>CL_FP_CORRECTLY_ROUNDED_DIVIDE_SQRT</b> is only
+relevant for single precision in OpenCL 1.2 devices.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+implementation-defined behavior for NULL platform or context
+properties is tested for the following API calls: <b><br>
+clGetPlatformInfo()</b></p>
+
+<p style="margin-left:12%;">by trying to show the platform
+name;</p>
+
+<p style="margin-left:9%;"><b>clGetDeviceIDs()</b></p>
+
+<p style="margin-left:12%;">by trying to enumerate devices;
+the corresponding platform (if any) is then detected by
+querying the device platform of the first device;</p>
+
+<p style="margin-left:9%;"><b>clCreateteContext()</b></p>
+
+<p style="margin-left:12%;">by trying to create a context
+from a device from the previous list (if any), and a context
+from a device from a different platform;</p>
+
+
+<p style="margin-left:9%;"><b>clCreateteContextFromType()</b></p>
+
+<p style="margin-left:12%;">by trying to create contexts
+for each device type (except DEFAULT).</p>
+
+<h2>EXPERIMENTAL FEATURES
+<a name="EXPERIMENTAL FEATURES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Support for
+OpenCL 2.x properties is not fully tested.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Support for
+<b>cl_khr_subgroup_named_barrier</b> is experimental due to
+missing definitions in the official OpenCL headers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Raw
+(machine-parsable) output is considered experimental, the
+output format might still undergo changes.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The properties
+of the ICD loader will also be queried if the
+<b>clGetICDLoaderInfoOCLICD</b> extension function is
+found.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Support for the
+properties exposed by <b>cl_amd_copy_buffer_p2p</b> is
+experimental.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Support for some
+(documented and undocumented) properties exposed by
+<b>cl_amd_device_attribute_query</b> is experimental (see
+also <b>LIMITATIONS</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Support for the
+interop lists exposed by
+<b>cl_intel_simultaneous_sharing</b> is experimental.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The highest
+OpenCL version supported by the ICD loader is detected with
+some trivial heuristics (symbols found); a notice is output
+if this is lower than the highest platform OpenCL version,
+or if the detected version doesn&rsquo;t match the one
+declared by the ICD loader itself.</p>
+
+<h2>LIMITATIONS
+<a name="LIMITATIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">OpenCL provides
+no explicit mean to detect the supported version of any
+extension exposed by a device, which makes it impossible to
+determine a priori if it will be possible to successfully
+query a device about a specific property. Additionally, the
+actual size and meaning of some properties are not
+officially declared anywhere.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Most notably,
+this affects extensions such as
+<b>cl_amd_device_attribute_query</b>,
+<b>cl_nv_device_attribute_query</b> and
+<b>cl_arm_core_id</b>. Heuristics based on standard version
+support are partially used in the code to determine which
+version may be supported.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Properties which
+are known to be affected by these limitations include:
+<b><br>
+CL_DEVICE_GLOBAL_FREE_MEMORY_AMD</b></p>
+
+<p style="margin-left:12%;">documented in v3 of the
+<b>cl_amd_device_attribute_query</b> extension specification
+as being the global free memory in KBytes, without any
+explanation given on why there are two values, although in
+the source code of the <b>ROCm</b> stack the second value is
+documented as being the largest free block;</p>
+
+
+<p style="margin-left:9%;"><b>CL_DEVICE_AVAILABLE_ASYNC_QUEUES_AMD</b></p>
+
+<p style="margin-left:12%;">documented in v3 of the
+<b>cl_amd_device_attribute_query</b> extension
+specification, but not reported by drivers supporting other
+v3 properties. This has now been enabled for drivers
+<i>assumed</i> to support v4 of the same extension;</p>
+
+
+<p style="margin-left:9%;"><b>CL_DEVICE_TERMINATE_CAPABILITY_KHR</b></p>
+
+<p style="margin-left:12%;">exposed by the
+<b>cl_khr_terminate_context</b> has changed value between
+OpenCL 1.x and 2.x, and it&rsquo;s <i>allegedly</i> a
+bitfield, whose values are however not defined anywhere.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<h3>General
+<a name="General"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please report
+any issues on <a href="http://github.com/Oblomov/clinfo">the
+project tracker on GitHub</a>.</p>
+
+<h3>LLVM CommandLine errors
+<a name="LLVM CommandLine errors"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">If multiple
+OpenCL platforms using shared <b>LLVM</b> libraries are
+present in the system, <b>clinfo</b> (and other OpenCL
+application) may crash with errors to the tune of</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>:
+CommandLine Error: Option &rsquo;(some option name)&rsquo;
+registered more than once! <br>
+LLVM ERROR: inconsistency in registered CommandLine
+options</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">or similar. This
+is not an issue in <b>clinfo</b>, or in any OpenCL platform
+or application, but it is due to the way <b>LLVM</b> handles
+its own command-line options parsing. The issue has been
+reported upstream
+<a href="https://bugs.llvm.org/show_bug.cgi?id=30587">as
+issue #30587</a>. See the next point for possible
+workarounds and assistance in identifying the conflicting
+platforms.</p>
+
+<h3>Segmentation faults
+<a name="Segmentation faults"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Faulty OpenCL
+platforms may cause segmentation faults in <b>clinfo</b>
+during the information gathering phase, sometimes even
+before any output is shown. There is very little
+<b>clinfo</b> can do to avoid this. If you see this
+happening, try disabling all platforms and then re-enabling
+them one by one until you experience the crash again.
+Chances are the last platform you enabled is defective in
+some way (either by being incompatible with other platforms
+or by missing necessary components and not handling their
+absence gracefully).</p>
+
+<p style="margin-left:9%; margin-top: 1em">To selectively
+enable/disable platforms, one way is to move or rename the
+<i>*.icd</i> files present in <i>/etc/OpenCL/vendors/</i>
+and then restoring them one by one. When using the
+free-software <b>ocl-icd</b> OpenCL library, a similar
+effect can be achieved by setting the
+<b>OPENCL_VENDOR_PATH</b> or <b>OCL_ICD_VENDORS</b>
+environment variables, as documented in <b>libOpenCL</b>(7).
+Other implementations of <b>libOpenCL</b> are known to
+support <b>OPENCL_VENDOR_PATH</b> too. <b><br>
+Example</b></p>
+
+<p style="margin-left:12%;">find /etc/OpenCL/vendors/ -name
+&rsquo;*.icd&rsquo; | while read OPENCL_VENDOR_PATH ; do
+clinfo -l &gt; /dev/null ; echo &quot;$?
+${OPENCL_VENDOR_PATH}&quot; ; done</p>
+
+<p style="margin-left:9%; margin-top: 1em">This one liner
+will run <b>clinfo -l</b> for each platform individually
+(hiding the normal output), and report the <i>.icd</i> path
+prefixed by <b>0</b> for successful runs, and a non-zero
+value for faulty platforms.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,292 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>swaynag</title>
+
+</head>
+<body>
+
+<h1 align="center">swaynag</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#APPEARANCE OPTIONS">APPEARANCE OPTIONS</a><br>
+<a href="#SEE">SEE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">swaynag - Show a
+warning or error message with buttons</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>swaynag</i>
+[options...]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b,
+--button</b> &lt;text&gt; &lt;action&gt;</p>
+
+<p style="margin-left:14%;">Create a button with the text
+<i>text</i> that executes <i>action</i> when pressed. If the
+environment variable <i>TERMINAL</i> is set, <i>action</i>
+will be run inside the terminal. Otherwise, it will fallback
+to running directly. Multiple buttons can be defined by
+providing the flag multiple times.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-B,
+--button-no-terminal</b> &lt;text&gt; &lt;action&gt;</p>
+
+<p style="margin-left:14%;">Create a button with the text
+<i>text</i> that executes <i>action</i> when pressed.
+<i>action</i> will be run directly instead of in a terminal.
+Multiple buttons can be defined by providing the flag
+multiple times.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-z,
+--button-dismiss</b> &lt;text&gt; &lt;action&gt;</p>
+
+<p style="margin-left:14%;">Create a button with the text
+<i>text</i> that executes <i>action</i> when pressed, and
+dismisses swaynag. If the environment variable
+<i>TERMINAL</i> is set, <i>action</i> will be run inside the
+terminal. Otherwise, it will fallback to running directly.
+Multiple buttons can be defined by providing the flag
+multiple times.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-Z,
+--button-dismiss-no-terminal</b> &lt;text&gt;
+&lt;action&gt;</p>
+
+<p style="margin-left:14%;">Create a button with the text
+<i>text</i> that executes <i>action</i> when pressed, and
+dismisses swaynag. <i>action</i> will be run directly
+instead of in a terminal. Multiple buttons can be defined by
+providing the flag multiple times.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--config</b> &lt;path&gt;</p>
+
+<p style="margin-left:14%;">The config file to use. By
+default, the following paths are checked:
+<i>$HOME/.swaynag/config</i>,
+<i>$XDG_CONFIG_HOME/swaynag/config</i>, and
+<i>SYSCONFDIR/swaynag/config</i>. All flags aside from this
+one and <i>debug</i> are valid options in the configuration
+file using the format <i>long-option=value</i>. All leading
+dashes should be omitted and the equals sign is required.
+See swaynag(5) for more information.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--debug</b></p>
+
+<p style="margin-left:14%;">Enable debugging.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-e,
+--edge</b> top|bottom</p>
+
+<p style="margin-left:14%;">Set the edge to use.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-y,
+--layer</b> overlay|top|bottom|background</p>
+
+<p style="margin-left:14%;">Set the layer to use.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--font</b> &lt;font&gt;</p>
+
+<p style="margin-left:14%;">Set the font to use.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l,
+--detailed-message</b></p>
+
+<p style="margin-left:14%;">Read a detailed message from
+stdin. A button to toggle details will be added. Details are
+shown in a scrollable multi-line text area.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-L,
+--detailed-button</b> &lt;text&gt;</p>
+
+<p style="margin-left:14%;">Set the text for the button
+that toggles details. This has no effect if there is not a
+detailed message. The default is <i>Toggle details</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-m,
+--message</b> &lt;msg&gt;</p>
+
+<p style="margin-left:14%;">Set the message text.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o,
+--output</b> &lt;output&gt;</p>
+
+<p style="margin-left:14%;">Set the output to use. This
+should be the name of a <i>xdg_output</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--dismiss-button</b> &lt;text&gt;</p>
+
+<p style="margin-left:14%;">Sets the text for the dismiss
+nagbar button. The default is <i>X</i>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t,
+--type</b> &lt;type&gt;</p>
+
+<p style="margin-left:14%;">Set the message type. Two types
+are created by default <i>error</i> and <i>warning</i>.
+Custom types can be defined in the config file. See
+<i>--config</i> and swaynag(5) for details. Both of the
+default types can be overridden in the config file as
+well.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Show the version number and
+quit.</p>
+
+<h2>APPEARANCE OPTIONS
+<a name="APPEARANCE OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--background</b>
+&lt;RRGGBB[AA]&gt;</p>
+
+<p style="margin-left:14%;">Set the color of the
+background.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--border</b>
+&lt;RRGGBB[AA]&gt;</p>
+
+<p style="margin-left:14%;">Set the color of the
+border.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--border-bottom</b>
+&lt;RRGGBB[AA]&gt;</p>
+
+<p style="margin-left:14%;">Set the color of the bottom
+border.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--button-background</b>
+&lt;RRGGBB[AA]&gt;</p>
+
+<p style="margin-left:14%;">Set the color for the
+background for buttons.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--text</b>
+&lt;RRGGBB[AA]&gt;</p>
+
+<p style="margin-left:14%;">Set the text color.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--button-text</b>
+&lt;RRGGBB[AA]&gt;</p>
+
+<p style="margin-left:14%;">Set the button text color.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--border-bottom-size</b>
+&lt;size&gt;</p>
+
+<p style="margin-left:14%;">Set the thickness of the bottom
+border.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--message-padding</b>
+&lt;padding&gt;</p>
+
+<p style="margin-left:14%;">Set the padding for the
+message.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--details-background</b>
+&lt;RRGGBB[AA]&gt;</p>
+
+<p style="margin-left:14%;">Set the color for the
+background for details.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--details-border-size</b>
+&lt;size&gt;</p>
+
+<p style="margin-left:14%;">Set the thickness for the
+details border.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--button-border-size</b>
+&lt;size&gt;</p>
+
+<p style="margin-left:14%;">Set the thickness for the
+button border.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--button-gap</b>
+&lt;gap&gt;</p>
+
+<p style="margin-left:14%;">Set the size of the gap between
+buttons.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--button-dismiss-gap</b>
+&lt;gap&gt;</p>
+
+<p style="margin-left:14%;">Set the size of the gap between
+the dismiss button and another button.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--button-margin-right</b>
+&lt;margin&gt;</p>
+
+<p style="margin-left:14%;">Set the margin from the right
+of the dismiss button to edge.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--button-padding</b>
+&lt;padding&gt;</p>
+
+<p style="margin-left:14%;">Set the padding for the button
+text.</p>
+
+<h2>SEE
+<a name="SEE"></a>
+</h2>
+
+ 
+<p style="margin-left:9%; margin-top: 1em">swaynag(5)</p>
+<hr>
+</body>
+</html>

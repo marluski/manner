@@ -1,0 +1,203 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GTK4-RENDERNODE-TOOL</title>
+
+</head>
+<body>
+
+<h1 align="center">GTK4-RENDERNODE-TOOL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#Information">Information</a><br>
+<a href="#Showing">Showing</a><br>
+<a href="#Rendering">Rendering</a><br>
+<a href="#Benchmark">Benchmark</a><br>
+<a href="#Compare">Compare</a><br>
+<a href="#Extract">Extract</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">gtk4-rendernode-tool
+- GskRenderNode Utility</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-rendernode-tool</b>
+&lt;COMMAND&gt; [OPTIONS...] &lt;FILE&gt;</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-rendernode-tool</b>
+benchmark [OPTIONS...] &lt;FILE&gt; <b><br>
+gtk4-rendernode-tool</b> compare [OPTIONS...] &lt;FILE1&gt;
+&lt;FILE2&gt; <b><br>
+gtk4-rendernode-tool</b> extract [OPTIONS...] &lt;FILE&gt;
+<b><br>
+gtk4-rendernode-tool</b> info [OPTIONS...] &lt;FILE&gt;
+<b><br>
+gtk4-rendernode-tool</b> render [OPTIONS...] &lt;FILE&gt;
+[&lt;FILE&gt;] <b><br>
+gtk4-rendernode-tool</b> show [OPTIONS...] &lt;FILE&gt;</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-rendernode-tool</b>
+can perform various operations on serialized
+rendernodes.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>Information
+<a name="Information"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>info</b>
+command shows general information about the rendernode, such
+as the number of nodes, and the depth of the tree.</p>
+
+<h3>Showing
+<a name="Showing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>show</b>
+command displays the rendernode.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--undecorated</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Removes window
+decorations. This is meant for rendering of exactly the
+rendernode without any titlebar.</p>
+
+<h3>Rendering
+<a name="Rendering"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>render</b> command saves a rendering of the rendernode as
+a png, tiff or svg image or as pdf document. The name of the
+file to write can be specified as a second FILE
+argument.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--renderer=RENDERER</b></p>
+
+<p style="margin-left:13%;">Use the given renderer. Use
+<b>--renderer=help</b> to get a information about possible
+values for the <b>RENDERER</b>.</p>
+
+<h3>Benchmark
+<a name="Benchmark"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>benchmark</b> command benchmarks rendering of a node with
+the existing renderers and prints the runtimes.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--renderer=RENDERER</b></p>
+
+<p style="margin-left:13%;">Add the given renderer. This
+argument can be passed multiple times to test multiple
+renderers. By default, all major GTK renderers are run.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--runs=RUNS</b></p>
+
+<p style="margin-left:13%;">Number of times to render the
+node on each renderer. By default, this is 3 times. Keep in
+mind that the first run is often used to populate caches and
+might be significantly slower.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-download</b></p>
+
+<p style="margin-left:13%;">Do not attempt to download the
+result. This may cause the measurement to not include the
+execution of the commands on the GPU. It can be useful to
+use this flag to test command submission performance.</p>
+
+<h3>Compare
+<a name="Compare"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>compare</b> command compares the rendering of a node with
+a reference image, or the renderings of two nodes, or two
+images. If any differences are found, the exit code is 1. If
+the images are identical, it is 0.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--renderer=RENDERER</b></p>
+
+<p style="margin-left:13%;">Use the given renderer.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--output=FILE</b></p>
+
+<p style="margin-left:13%;">Save the differences as a png
+image in <b>FILE</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--quiet</b></p>
+
+<p style="margin-left:13%;">Don't write results to
+stdout.</p>
+
+<h3>Extract
+<a name="Extract"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>extract</b> command saves all the data urls found in a
+node file to a given directory. The file names for the
+extracted files are derived from the mimetype of the
+url.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--dir=DIRECTORY</b></p>
+
+<p style="margin-left:13%;">Save extracted files in
+<b>DIRECTORY</b> (defaults to the current directory).</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>swww</title>
+
+</head>
+<body>
+
+<h1 align="center">swww</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">swww - A
+Solution to your Wayland Wallpaper Woes</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>swww</b>
+&lt;COMMAND&gt;</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clear</b></p>
+
+<p style="margin-left:14%;">Fills the specified outputs
+with the given color</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>restore</b></p>
+
+<p style="margin-left:14%;">Restores the last displayed
+image on the specified outputs</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>clear-cache</b></p>
+
+<p style="margin-left:14%;">Fills the specified outputs
+with the given color</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>img</b></p>
+
+<p style="margin-left:14%;">Sends an image (or animated
+gif) for the daemon to display</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>init</b></p>
+
+<p style="margin-left:14%;">Initializes the daemon</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>kill</b></p>
+
+<p style="margin-left:14%;">Kills the daemon</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>query</b></p>
+
+<p style="margin-left:14%;">Asks the daemon to print output
+information (names and dimensions)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>help
+[COMMAND]</b></p>
+
+<p style="margin-left:14%;">Print help or the help of the
+given command</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Print help (see a summary with
+&rsquo;-h&rsquo;)</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V</b>,
+<b>--version</b></p>
+
+<p style="margin-left:14%;">Print version</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>swww</b> is a
+wallpaper manager that lets you change what your monitors
+display as a background by controlling the
+<b>swww-daemon</b> at runtime.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It supports
+animated gifs and putting different stuff in different
+monitors. I also did my best to make it as resource
+efficient as possible.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To start, begin
+by running <b>swww init</b>. That will set up the
+<b>swww-daemon</b>. Then, you can send images to be
+displayed with <b>swww img</b>. To kill the daemon, use
+<b>swww kill</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Note that
+swww only works in a compositor that implements the
+layer-shell protocol</b>. Typically, <i>wlr-roots</i> based
+compositors.</p>
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>swww</b> will
+create the following files in your system:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p>A socket in
+<i>${XDG_RUNTIME_DIR}/swww-${WAYLAND_DISPLAY}.socket</i>,
+or</p> </td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><i>/tmp/swww/swww-${WAYLAND_DISPLAY}.socket</i>,
+if $XDG_RUNTIME_DIR is not set.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="14%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="81%">
+
+
+<p style="margin-top: 1em">Cache files in
+<i>$XDG_CACHE_HOME/swww</i> or <i>$HOME/.cache/swww</i> if
+$XDG_CACHE_HOME does not exist. These are used to set the
+wallpaper to the previous image when a monitor is
+(re)connected or turned on.</p></td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>swww-daemon</b>(1)
+<b>swww-clear</b>(1) <b>swww-img</b>(1) <b>swww-init</b>(1)
+<b>swww-kill</b>(1) <b>swww-query</b>(1)</p>
+<hr>
+</body>
+</html>

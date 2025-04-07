@@ -1,0 +1,186 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:17 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE SUMMARY</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE SUMMARY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-summary -
+Regenerate or view the summary metadata file</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em"><b>ostree summary</b>
+[--gpg-sign=KEYID] [--gpg-homedir=HOMEDIR] [--sign=KEYID]
+[--sign-type=ENGINE] {--update}
+[--add-metadata=<i>KEY</i>=<i>VALUE</i>...]</p> </td>
+<td width="13%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="78%">
+
+
+<p style="margin-top: 1em"><b>ostree summary</b> {--view |
+--raw}</p> </td>
+<td width="13%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The summary file
+is an optional higher level form of repository metadata that
+describes the available branches. It needs to be manually
+regenerated after a series of commits. Among other things,
+this allows atomically updating multiple commits.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--update</b>,<b>-u</b></p>
+
+<p style="margin-left:14%;">Update the summary file. This
+option can be combined with <b>--add-metadata</b> to add
+metadata fields to the summary.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If the
+repository has a collection ID configured, the
+ostree-metadata branch for that collection ID will also be
+updated with a new commit containing the given metadata,
+which will be signed if the summary file is signed.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--add-metadata</b>,<b>-m</b>=KEY=VALUE</p>
+
+<p style="margin-left:14%;">Specify an additional metadata
+field to add to the summary. It must be in the format
+<i>KEY</i><b>=</b><i>VALUE</i> or as two separate arguments.
+The keys must be namespaced for your organisation or
+repository using a dot prefix. The values must be in
+GVariant text format. For example, <b>exampleos.end-of-life
+&quot;@t 1445385600&quot;</b>. This option can be used
+multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--view</b>,<b>-v</b></p>
+
+<p style="margin-left:14%;">View the contents of the
+summary file in a human readable format.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--raw</b></p>
+
+<p style="margin-left:14%;">View the raw bytes of the
+summary file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-sign</b>=KEYID</p>
+
+<p style="margin-left:14%;">GPG Key ID to sign the summary
+with.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-homedir</b>=HOMEDIR</p>
+
+<p style="margin-left:14%;">GPG Homedir to use when looking
+for keyrings.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign-type</b>=ENGINE</p>
+
+<p style="margin-left:14%;">Use particular signature
+engine. Currently available ed25519 and dummy signature
+types. The default is ed25519.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sign</b>=&quot;KEY-ID&quot;</p>
+
+<p style="margin-left:14%;">There KEY-ID is:</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+ed25519:</b></p>
+
+<p style="margin-left:19%;">base64-encoded secret key for
+commit signing.</p>
+
+<p style="margin-left:14%; margin-top: 1em"><b>for
+dummy:</b></p>
+
+<p style="margin-left:19%;">ASCII-string used as secret
+key.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+summary -u</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+summary -u -m key=&quot;'value'&quot;</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ ostree
+summary -v</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">* ostree/1/1/0
+<br>
+Latest Commit (4.2 MB): <br>
+
+9828ab80f357459b4ab50f0629beab2ae3b67318fc3d161d10a89fae353afa90
+<br>
+Timestamp (ostree.commit.timestamp): 2017-11-21T01:41:10-08
+<br>
+Version (ostree.commit.version): 1.2.3</p>
+
+<p style="margin-left:14%; margin-top: 1em">Last-Modified
+(ostree.summary.last-modified): 2018-01-12T22:06:38-08</p>
+<hr>
+</body>
+</html>

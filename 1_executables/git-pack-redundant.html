@@ -1,0 +1,177 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-PACK-REDUNDANT</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-PACK-REDUNDANT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#WARNING">WARNING</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#GIT">GIT</a><br>
+<a href="#NOTES">NOTES</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">git-pack-redundant
+- Find redundant pack files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>git
+pack-redundant</i> [--verbose] [--alt-odb] (--all |
+&lt;pack-filename&gt;...)</p>
+
+<h2>WARNING
+<a name="WARNING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>git
+pack-redundant</b> has been deprecated and is scheduled for
+removal in a future version of Git. Because it can only
+remove entire duplicate packs and not individual duplicate
+objects, it is generally not a useful tool for reducing
+repository size. You are better off using <b>git gc</b> to
+do so, which will put objects into a new pack, removing
+duplicates.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Running
+<b>pack-redundant</b> without the <b>--i-still-use-this</b>
+flag will fail in this release. If you believe you have a
+use case for which <b>pack-redundant</b> is better suited
+and oppose this removal, please contact the Git mailing list
+at <b><font color="#0000FF">git@vger.kernel.org</font></b>
+<small><font color="#000000">[1]</font></small>
+<font color="#000000">. More information about the list is
+available at</font>
+<b><font color="#0000FF">https://git-scm.com/community</font></b><font color="#000000">.</font></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">This
+program computes which packs in your repository are
+redundant. The output is suitable for piping to <b>xargs
+rm</b> if you are in the root of the repository.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><i>git
+pack-redundant</i> accepts a list of objects on standard
+input. Any objects given will be ignored when checking which
+packs are required. This makes the following command useful
+when wanting to remove packs which contain unreachable
+objects.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">git
+fsck --full --unreachable | cut -d ' ' -f3 | \ git
+pack-redundant --all | xargs rm</font></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--all</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Processes
+all packs. Any filenames on the command line are
+ignored.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--alt-odb</font></p>
+
+
+<p style="margin-left:14%;"><font color="#000000">Don&rsquo;t
+require objects present in packs from alternate object
+database (odb) directories to be present in local
+packs.</font></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">--verbose</font></p>
+
+<p style="margin-left:14%;"><font color="#000000">Outputs
+some statistics to stderr. Has a small performance
+penalty.</font></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000"><b>git-pack-objects</b>(1)
+<b>git-repack</b>(1) <b>git-prune-packed</b>(1)</font></p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><font color="#000000">Part
+of the <b>git</b>(1) suite</font></p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="10%"></td>
+<td width="3%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">1.</font></p> </td>
+<td width="1%"></td>
+<td width="24%">
+
+
+
+<p style="margin-top: 1em"><font color="#000000">git@vger.kernel.org</font></p> </td>
+<td width="62%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:14%;"><font color="#000000">mailto:git@vger.kernel.org</font></p>
+<hr>
+</body>
+</html>

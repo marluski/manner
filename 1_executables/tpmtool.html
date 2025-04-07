@@ -1,0 +1,304 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:38 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>tpmtool</title>
+
+</head>
+<body>
+
+<h1 align="center">tpmtool</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#BUGS">BUGS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>tpmtool</b> -
+GnuTLS TPM tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>tpmtool</b>
+[<b>-flags</b>] [<b>-flag</b> [<i>value</i>]]
+[<b>--option-name</b>[[=| ]<i>value</i>]]</p>
+
+<p style="margin-left:9%; margin-top: 1em">All arguments
+must be options.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Program that
+allows handling cryptographic data from the TPM chip.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b>
+<i>num</i>, <b>--debug</b>=<i>num</i> Enable debugging. This
+option takes an integer <br>
+number as its argument. The value of <i>num</i> is
+constrained to being:</p>
+
+<p style="margin-left:14%;">in the range 0 through 9999</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specifies the
+debug level.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--infile</b>=<i>file</i>
+Input file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--outfile</b>=<i>str</i>
+Output file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--generate-rsa</b>
+Generate an RSA private-public key pair.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Generates an RSA
+private-public key pair in the TPM chip. The key may <br>
+be stored in file system and protected by a PIN, or stored
+(registered) <br>
+in the TPM chip flash.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--register</b>
+Any generated key will be registered in the TPM. This <br>
+option must appear in combination with the following
+options: <br>
+generate-rsa.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--signing</b>
+Any generated key will be a signing key. This option must
+<br>
+not appear in combination with any of the following options:
+legacy. <br>
+This option must appear in combination with the following
+options: <br>
+generate-rsa.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--legacy</b>
+Any generated key will be a legacy key. This option must not
+<br>
+appear in combination with any of the following options:
+signing. This <br>
+option must appear in combination with the following
+options: <br>
+generate-rsa.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--user</b>
+Any registered key will be a user key. This option must not
+<br>
+appear in combination with any of the following options:
+system. This <br>
+option must appear in combination with the following
+options: register.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The generated
+key will be stored in a user specific persistent
+storage.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--system</b>
+Any registered key will be a system key. This option must
+not <br>
+appear in combination with any of the following options:
+user. This <br>
+option must appear in combination with the following
+options: register.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The generated
+key will be stored in system persistent storage.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--pubkey</b>=<i>url</i>
+Prints the public key of the provided key.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--list</b>
+Lists all stored keys in the TPM.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--delete</b>=<i>url</i>
+Delete the key identified by the given URL (UUID).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--test-sign</b>=<i>url</i>
+Tests the signature operation of the provided object.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It can be used
+to test the correct operation of the signature <br>
+operation. This operation will sign and verify the signed
+data.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--sec-param</b>=<i>security
+parameter</i> Specify the security level [low, legacy, <br>
+medium, high, ultra].</p>
+
+<p style="margin-left:9%; margin-top: 1em">This is
+alternative to the bits option. Note however that the values
+<br>
+allowed by the TPM chip are quantized and given values may
+be rounded <br>
+up.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--bits</b>=<i>num</i>
+Specify the number of bits for key generate. This option
+<br>
+takes an integer number as its argument.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>--inder</b>,
+<b>--no-inder</b> Use the DER format for keys. The
+<i>no-inder</i> form <br>
+will disable the option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The input files
+will be assumed to be in the portable DER format of <br>
+TPM. The default format is a custom format used by various
+TPM tools</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--outder</b>,
+<b>--no-outder</b> Use DER format for output keys. The
+<i>no-outder</i> <br>
+form will disable the option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The output will
+be in the TPM portable DER format.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--srk-well-known</b>
+SRK has well known password (20 bytes of zeros).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>
+<i>arg</i>, <b>--version</b>=<i>arg</i> Output version of
+program and exit. The default <br>
+mode is &lsquo;v&rsquo;, a simple version. The
+&lsquo;c&rsquo; mode will print copyright <br>
+information and &lsquo;n&rsquo; will print the full
+copyright notice.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b> Display usage information and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-!</b>,
+<b>--more-help</b> Pass the extended usage information
+through a pager.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:18%; margin-top: 1em">To generate a
+key that is to be stored in file system use:</p>
+
+<p style="margin-left:23%;">$ tpmtool --generate-rsa --bits
+2048 --outfile tpmkey.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">To generate a
+key that is to be stored in TPM&rsquo;s flash use:</p>
+
+<p style="margin-left:23%;">$ tpmtool --generate-rsa --bits
+2048 --register --user</p>
+
+<p style="margin-left:18%; margin-top: 1em">To get the
+public key of a TPM key use:</p>
+
+<p style="margin-left:23%;">$ tpmtool --pubkey
+tpmkey:uuid=58ad734b-bde6-45c7-89d8-756a55ad1891;storage=user
+--outfile pubkey.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">or if the key
+is stored in the file system:</p>
+
+<p style="margin-left:23%;">$ tpmtool --pubkey
+tpmkey:file=tmpkey.pem --outfile pubkey.pem</p>
+
+<p style="margin-left:18%; margin-top: 1em">To list all
+keys stored in TPM use:</p>
+
+<p style="margin-left:23%;">$ tpmtool --list</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">One of the
+following exit values will be returned: <br>
+0 (EXIT_SUCCESS) Successful program execution.</p>
+
+<p style="margin-left:9%; margin-top: 1em">1 (EXIT_FAILURE)
+The operation failed or the command syntax was not <br>
+valid.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:18%; margin-top: 1em">p11tool (1),
+certtool (1)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2020-2023 Free Software Foundation, and others all rights
+reserved. This program is released under the terms of the
+GNU General Public License, version 3 or later</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Please send bug
+reports to: bugs@gnutls.org</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,262 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:23 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>ELFEDIT</title>
+
+</head>
+<body>
+
+<h1 align="center">ELFEDIT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">elfedit - update
+ELF header and program property of ELF files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">elfedit
+[<b>--input-mach=</b><i>machine</i>] <br>
+[<b>--input-type=</b><i>type</i>] <br>
+[<b>--input-osabi=</b><i>osabi</i>] <br>
+[<b>--input-abiversion=</b><i>version</i>] <b><br>
+--output-mach=</b><i>machine</i> <b><br>
+--output-type=</b><i>type</i> <b><br>
+--output-osabi=</b><i>osabi</i> <b><br>
+--output-abiversion=</b><i>version</i> <b><br>
+--enable-x86-feature=</b><i>feature</i> <b><br>
+--disable-x86-feature=</b><i>feature</i> <br>
+[<b>-v</b>|<b>--version</b>] <br>
+[<b>-h</b>|<b>--help</b>] <i><br>
+elffile</i>...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>elfedit</b>
+updates the ELF header and program property of ELF files
+which have the matching ELF machine and file types. The
+options control how and which fields in the ELF header and
+program property should be updated.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>elffile</i>...
+are the ELF files to be updated. 32-bit and 64-bit ELF files
+are supported, as are archives containing ELF files.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The long and
+short forms of options, shown here as alternatives, are
+equivalent. At least one of the <b>--output-mach</b>,
+<b>--output-type</b>, <b>--output-osabi</b>,
+<b>--output-abiversion</b>, <b>--enable-x86-feature</b> and
+<b>--disable-x86-feature</b> options must be given. <b><br>
+--input-mach=</b><i>machine</i></p>
+
+<p style="margin-left:14%;">Set the matching input ELF
+machine type to <i>machine</i>. If <b>--input-mach</b>
+isn&rsquo;t specified, it will match any ELF machine
+types.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The supported
+ELF machine types are, <i>i386</i>, <i>IAMCU</i>,
+<i>L1OM</i>, <i>K1OM</i> and <i>x86-64</i>.</p>
+
+
+<p style="margin-left:9%;"><b>--output-mach=</b><i>machine</i></p>
+
+<p style="margin-left:14%;">Change the ELF machine type in
+the ELF header to <i>machine</i>. The supported ELF machine
+types are the same as <b>--input-mach</b>.</p>
+
+
+<p style="margin-left:9%;"><b>--input-type=</b><i>type</i></p>
+
+<p style="margin-left:14%;">Set the matching input ELF file
+type to <i>type</i>. If <b>--input-type</b> isn&rsquo;t
+specified, it will match any ELF file types.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The supported
+ELF file types are, <i>rel</i>, <i>exec</i> and
+<i>dyn</i>.</p>
+
+
+<p style="margin-left:9%;"><b>--output-type=</b><i>type</i></p>
+
+<p style="margin-left:14%;">Change the ELF file type in the
+ELF header to <i>type</i>. The supported ELF types are the
+same as <b>--input-type</b>.</p>
+
+
+<p style="margin-left:9%;"><b>--input-osabi=</b><i>osabi</i></p>
+
+<p style="margin-left:14%;">Set the matching input ELF file
+OSABI to <i>osabi</i>. If <b>--input-osabi</b> isn&rsquo;t
+specified, it will match any ELF OSABIs.</p>
+
+<p style="margin-left:14%; margin-top: 1em">The supported
+ELF OSABIs are, <i>none</i>, <i>HPUX</i>, <i>NetBSD</i>,
+<i>GNU</i>, <i>Linux</i> (alias for <i>GNU</i>),
+<i>Solaris</i>, <i>AIX</i>, <i>Irix</i>, <i>FreeBSD</i>,
+<i>TRU64</i>, <i>Modesto</i>, <i>OpenBSD</i>,
+<i>OpenVMS</i>, <i>NSK</i>, <i>AROS</i> and
+<i>FenixOS</i>.</p>
+
+
+<p style="margin-left:9%;"><b>--output-osabi=</b><i>osabi</i></p>
+
+<p style="margin-left:14%;">Change the ELF OSABI in the ELF
+header to <i>osabi</i>. The supported ELF OSABI are the same
+as <b>--input-osabi</b>.</p>
+
+
+<p style="margin-left:9%;"><b>--input-abiversion=</b><i>version</i></p>
+
+<p style="margin-left:14%;">Set the matching input ELF file
+ABIVERSION to <i>version</i>. <i>version</i> must be between
+0 and 255. If <b>--input-abiversion</b> isn&rsquo;t
+specified, it will match any ELF ABIVERSIONs.</p>
+
+
+<p style="margin-left:9%;"><b>--output-abiversion=</b><i>version</i></p>
+
+<p style="margin-left:14%;">Change the ELF ABIVERSION in
+the ELF header to <i>version</i>. <i>version</i> must be
+between 0 and 255.</p>
+
+
+<p style="margin-left:9%;"><b>--enable-x86-feature=</b><i>feature</i></p>
+
+<p style="margin-left:14%;">Set the <i>feature</i> bit in
+program property in <i>exec</i> or <i>dyn</i> ELF files with
+machine types of <i>i386</i> or <i>x86-64</i>. The supported
+features are, <i>ibt</i>, <i>shstk</i>, <i>lam_u48</i> and
+<i>lam_u57</i>.</p>
+
+
+<p style="margin-left:9%;"><b>--disable-x86-feature=</b><i>feature</i></p>
+
+<p style="margin-left:14%;">Clear the <i>feature</i> bit in
+program property in <i>exec</i> or <i>dyn</i> ELF files with
+machine types of <i>i386</i> or <i>x86-64</i>. The supported
+features are the same as <b>--enable-x86-feature</b>.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Note:
+<b>--enable-x86-feature</b> and <b>--disable-x86-feature</b>
+are available only on hosts with <b>mmap</b> support.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Display the version number of
+<b>elfedit</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--help</b></p>
+
+<p style="margin-left:14%;">Display the command-line
+options understood by <b>elfedit</b>.</p>
+
+<p style="margin-left:9%;"><b>@</b><i>file</i></p>
+
+<p style="margin-left:14%;">Read command-line options from
+<i>file</i>. The options read are inserted in place of the
+original @<i>file</i> option. If <i>file</i> does not exist,
+or cannot be read, then the option will be treated
+literally, and not removed.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Options in
+<i>file</i> are separated by whitespace. A whitespace
+character may be included in an option by surrounding the
+entire option in either single or double quotes. Any
+character (including a backslash) may be included by
+prefixing the character to be included with a backslash. The
+<i>file</i> may itself contain additional @<i>file</i>
+options; any such options will be processed recursively.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>readelf</b>(1),
+and the Info entries for <i>binutils</i>.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (c)
+1991-2025 Free Software Foundation, Inc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this document
+under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free
+Software Foundation; with no Invariant Sections, with no
+Front-Cover Texts, and with no Back-Cover Texts. A copy of
+the license is included in the section entitled &quot;GNU
+Free Documentation License&quot;.</p>
+<hr>
+</body>
+</html>

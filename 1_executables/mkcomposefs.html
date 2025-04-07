@@ -1,0 +1,268 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:25 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mkcomposefs(1)</title>
+
+</head>
+<body>
+
+<h1 align="center">mkcomposefs(1)</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#FORMAT VERSIONING">FORMAT VERSIONING</a><br>
+<a href="#SANDBOXING RECOMMENDATIONS">SANDBOXING RECOMMENDATIONS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">mkcomposefs -
+create a composefs filesystem image</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mkcomposefs</b>
+<i>SOURCE IMAGE</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The composefs
+project uses EROFS image file to store metadata, and one or
+more separate directories containing content-addressed
+backing data for regular files.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mkcomposefs</b>
+constructs the mountable &quot;composefs image&quot; using
+the source as input. It can also create the backing store
+directory. Typically the source is a directory, but with
+<i>--from-file</i> it can also be a file.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The provided
+<i>SOURCEDIR</i> argument must be a directory and its entire
+contents will be read recursively. The provided <i>IMAGE</i>
+argument will be a mountable composefs image.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mkcomposefs</b>
+accepts the following options: <b><br>
+--digest-store</b>=<i>PATH</i></p>
+
+<p style="margin-left:18%;">This path will become a
+composefs &quot;object store&quot;. Regular files larger
+than 64 bytes in the <i>SOURCEDIR</i> will be copied
+(reflinked if possible) into this target directory, named
+after their fsverity digest. Small files will be inlined
+into the image metadata. If possible, the added files will
+have fs-verity enabled.</p>
+
+<p style="margin-left:18%; margin-top: 1em">This directory
+should be passed to the basedir option when you mount the
+image.</p>
+
+<p style="margin-left:9%;"><b>--print-digest</b></p>
+
+<p style="margin-left:18%;">Print the fsverity digest of
+the composefs metadata file.</p>
+
+<p style="margin-left:9%;"><b>--print-digest-only</b></p>
+
+<p style="margin-left:18%;">Print the fsverity digest of
+the composefs metadata file, but don&rsquo;t write the
+image. If this is passed, the <i>IMAGE</i> argument should
+be left out.</p>
+
+<p style="margin-left:9%;"><b>--use-epoch</b></p>
+
+<p style="margin-left:18%;">Use a zero time (unix epoch) as
+the modification time for all files.</p>
+
+<p style="margin-left:9%;"><b>--skip-devices</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t add device nodes to
+the image.</p>
+
+<p style="margin-left:9%;"><b>--skip-xattrs</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t add xattrs to files
+in the image.</p>
+
+<p style="margin-left:9%;"><b>--user-xattrs</b></p>
+
+<p style="margin-left:18%;">Only add xattrs with the
+&quot;user.&quot; prefix to files in the image.</p>
+
+<p style="margin-left:9%;"><b>--from-file</b></p>
+
+<p style="margin-left:18%;">The source is a file in the
+<b>composefs-dump(5)</b> format. If the specified file is
+&quot;-&quot;, the data is read from stdin.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">The base version to use for the
+image format.</p>
+
+<p style="margin-left:9%;"><b>--max-version</b></p>
+
+<p style="margin-left:18%;">If this specifies a version
+higher than --version, then the actual image format version
+used will be adjusted upwards if that is beneficial for the
+image, up to the max version.</p>
+
+
+<p style="margin-left:9%;"><b>--threads</b>=<i>count</i></p>
+
+<p style="margin-left:18%;">Number of threads to be used to
+calculate the file digests and copy. Default thread count is
+the number of processors when <i>--threads</i> is not
+specified.</p>
+
+<h2>FORMAT VERSIONING
+<a name="FORMAT VERSIONING"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Composefs images
+are binary reproduceable, meaning that for a given input the
+result is always the same, giving the same digest of the
+image. This is important as the digest is used to validate
+the image, even if the image was re-created rather than
+transferred as is. However, sometimes the format needs to be
+changed, such as for example when a new type of file is
+introduced or a bug is fixed. This is handled by introducing
+a format version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Specifying the
+version is done with two options, the base version
+(--version) and the max version (--max-version). When
+building an image, mkcomposefs tries to keep the image
+format as low as possible, but if some particular requested
+feature is not available with the base feature, but is
+accessible in the max version then the version used will be
+increased. This allows us to introduce new features and fix
+bugs in a later version and migrate to that using max
+versions, but still keeping the digests identical for
+unaffected images.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you need 100%
+binary reproducibility over time, specify the same version
+and a max version each time.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Format version
+history:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="83%">
+
+
+<p>0 - Initial version</p></td>
+<td width="5%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="83%">
+
+
+<p>1 - Supports overlay whiteout files in the image (added
+in 1.0.3)</p></td>
+<td width="5%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">The default if
+no version arguments are specified is version 0 and max
+version 1.</p>
+
+<h2>SANDBOXING RECOMMENDATIONS
+<a name="SANDBOXING RECOMMENDATIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This tool
+essentially just processes an input directory or text file
+and writes a file. It does not require any privileges at
+all. If you are invoking this as part of an otherwise
+privileged process (such as a container runtime) we
+recommend dropping privileges before invoking
+<b>mkcomposefs</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Especially if
+you are using <b>--from-file</b>, you can run this as an
+unprivileged uid that has no writable filesystem access at
+all except to a passed file descriptor. For example, you can
+pass a writable file descriptor for the desired target file
+as fd 3, and run <b>mkcomposefs --from-file -
+/proc/self/fd/3</b> to effectively use <b>mkcomposefs</b> as
+part of a pipeline.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An example
+simple sandboxing starting from root is <b>setpriv --nnp
+--reuid nobody -- mkcomposefs ...</b>. Another is to use
+<b>systemd-run -P DynamicUser=yes -P
+ProtectSystem=strict</b>. Yet another (especially if your
+code is already part of a container runtime) is to use that
+runtime&rsquo;s existing functionality (seccomp, unsharing
+user namespace, mounting a restricted subset of the rootfs,
+etc.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>composefs-info(1)</b>,
+<b>mount.composefs(1)</b>, <b>composefs-dump(5)</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">composefs
+upstream &lang;
+https://github.com/containers/composefs&rang;</p>
+<hr>
+</body>
+</html>

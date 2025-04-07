@@ -1,0 +1,303 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:38 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>POWERPROFILESCTL</title>
+
+</head>
+<body>
+
+<h1 align="center">POWERPROFILESCTL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#POSITIONAL ARGUMENTS">POSITIONAL ARGUMENTS</a><br>
+<a href="#powerprofilesctl list">powerprofilesctl list</a><br>
+<a href="#powerprofilesctl list-holds">powerprofilesctl list-holds</a><br>
+<a href="#powerprofilesctl list-actions">powerprofilesctl list-actions</a><br>
+<a href="#powerprofilesctl get">powerprofilesctl get</a><br>
+<a href="#powerprofilesctl set">powerprofilesctl set</a><br>
+<a href="#powerprofilesctl configure-action">powerprofilesctl configure-action</a><br>
+<a href="#powerprofilesctl configure-battery-aware">powerprofilesctl configure-battery-aware</a><br>
+<a href="#powerprofilesctl query-battery-aware">powerprofilesctl query-battery-aware</a><br>
+<a href="#powerprofilesctl launch">powerprofilesctl launch</a><br>
+<a href="#powerprofilesctl version">powerprofilesctl version</a><br>
+<a href="#COMMENTS">COMMENTS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#DISTRIBUTION">DISTRIBUTION</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">powerprofilesctl
+- Command line utility to control Power Profiles Daemon</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>powerprofilesctl</b>
+[-h]
+{list,list-holds,list-actions,get,set,configure-action,configure-battery-aware,query-battery-aware,launch,version}
+...</p>
+
+<h2>POSITIONAL ARGUMENTS
+<a name="POSITIONAL ARGUMENTS"></a>
+</h2>
+
+
+<h3>powerprofilesctl list
+<a name="powerprofilesctl list"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List available
+power profiles</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl list [-h]</p>
+
+<h3>powerprofilesctl list-holds
+<a name="powerprofilesctl list-holds"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List current
+power profile holds</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl list-holds [-h]</p>
+
+<h3>powerprofilesctl list-actions
+<a name="powerprofilesctl list-actions"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">List available
+power profile actions</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl list-actions [-h]</p>
+
+<h3>powerprofilesctl get
+<a name="powerprofilesctl get"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print the
+currently active power profile</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl get [-h]</p>
+
+<h3>powerprofilesctl set
+<a name="powerprofilesctl set"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Set the
+currently active power profile</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl set [-h] {}</p>
+
+<p style="margin-left:9%; margin-top: 1em">arguments:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="3%">
+
+
+<p><b>{}</b></p></td>
+<td width="6%"></td>
+<td width="38%">
+
+
+<p>Profile to use for set command</p></td>
+<td width="35%">
+</td></tr>
+</table>
+
+<h3>powerprofilesctl configure-action
+<a name="powerprofilesctl configure-action"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Configure the
+action to be taken for the profile</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl configure-action [-h] [--enable]
+[--disable] action</p>
+
+<p style="margin-left:9%; margin-top: 1em">arguments:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="8%">
+
+
+<p style="margin-top: 1em"><b>action</b></p></td>
+<td width="1%"></td>
+<td width="47%">
+
+
+<p style="margin-top: 1em">action to change for
+configure-action</p> </td>
+<td width="26%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">options:</p>
+
+<p style="margin-left:18%;"><b>--enable</b></p>
+
+<p style="margin-left:27%;">enable action</p>
+
+<p style="margin-left:18%;"><b>--disable</b></p>
+
+<p style="margin-left:27%;">disable action</p>
+
+<h3>powerprofilesctl configure-battery-aware
+<a name="powerprofilesctl configure-battery-aware"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Turn on or off
+dynamic changes from battery level or power adapter</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl configure-battery-aware [-h] [--enable]
+[--disable]</p>
+
+<p style="margin-left:9%; margin-top: 1em">options:</p>
+
+<p style="margin-left:18%;"><b>--enable</b></p>
+
+<p style="margin-left:27%;">enable battery aware</p>
+
+<p style="margin-left:18%;"><b>--disable</b></p>
+
+<p style="margin-left:27%;">disable battery aware</p>
+
+<h3>powerprofilesctl query-battery-aware
+<a name="powerprofilesctl query-battery-aware"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Query if dynamic
+changes from battery level or power adapter are enabled</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl query-battery-aware [-h]</p>
+
+<h3>powerprofilesctl launch
+<a name="powerprofilesctl launch"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Launch a command
+while holding a power profile</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl launch [-h] [--profile PROFILE] [--reason
+REASON] <br>
+[--appid APPID] <br>
+[arguments ...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">Launch the
+command while holding a power profile, either performance,
+or power-saver. By default, the profile hold is for the
+performance profile, but it might not be available on all
+systems. See the list command for a list of available
+profiles.</p>
+
+<p style="margin-left:9%; margin-top: 1em">arguments:</p>
+
+<p style="margin-left:18%;"><b>arguments</b></p>
+
+<p style="margin-left:27%;">Command to launch</p>
+
+<p style="margin-left:9%; margin-top: 1em">options:</p>
+
+<p style="margin-left:18%;"><b>--profile</b>
+<i>PROFILE</i>, <b>-p</b> <i>PROFILE</i></p>
+
+<p style="margin-left:27%;">Profile to use for launch
+command</p>
+
+<p style="margin-left:18%;"><b>--reason</b> <i>REASON</i>,
+<b>-r</b> <i>REASON</i></p>
+
+<p style="margin-left:27%;">Reason to use for launch
+command</p>
+
+<p style="margin-left:18%;"><b>--appid</b> <i>APPID</i>,
+<b>-i</b> <i>APPID</i></p>
+
+<p style="margin-left:27%;">AppId to use for launch
+command</p>
+
+<h3>powerprofilesctl version
+<a name="powerprofilesctl version"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Print version
+information and exit</p>
+
+<p style="margin-left:9%; margin-top: 1em">usage:
+powerprofilesctl version [-h]</p>
+
+<h2>COMMENTS
+<a name="COMMENTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Use
+&ldquo;powerprofilesctl COMMAND --help&rdquo; to get
+detailed help for individual commands</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bastien Nocera
+<br>
+Mario Limonciello</p>
+
+<h2>DISTRIBUTION
+<a name="DISTRIBUTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The latest
+version of power-profiles-daemon may be downloaded from
+<a href="https://gitlab.freedesktop.org/upower/power-profiles-daemon">https://gitlab.freedesktop.org/upower/power-profiles-daemon</a></p>
+<hr>
+</body>
+</html>

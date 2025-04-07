@@ -1,0 +1,225 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:53 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NOTMUCH-INSERT</title>
+
+</head>
+<body>
+
+<h1 align="center">NOTMUCH-INSERT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">notmuch-insert -
+add a message to the maildir and notmuch database</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+insert</b> [option ...]
+[+&lt;<i>tag</i>&gt;|-&lt;<i>tag</i>&gt; ...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>notmuch
+insert</b> reads a message from standard input and delivers
+it into the maildir directory given by configuration option
+<i>database.mail_root</i>, then incorporates the message
+into the notmuch database. It is an alternative to using a
+separate tool to deliver the message then running
+<i>notmuch-new</i> afterwards.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The new message
+will be tagged with the tags specified by the
+<i>new.tags</i> configuration option, then by operations
+specified on the command-line: tags prefixed by '+' are
+added while those prefixed by '-' are removed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the new
+message is a duplicate of an existing message in the
+database (it has same Message-ID), it will be added to the
+maildir folder and notmuch database, but the tags will not
+be changed.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>insert</b> command supports hooks. See
+<i>notmuch-hooks</i> for more details on hooks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Option arguments
+must appear before any tag operation arguments. Supported
+options for <b>insert</b> include <b><br>
+--folder=&lt;folder&gt;</b></p>
+
+<p style="margin-left:18%;">Deliver the message to the
+specified folder, relative to the top-level directory given
+by the value of <i>database.mail_root</i>. The default is
+the empty string, which means delivering to the top-level
+directory.</p>
+
+<p style="margin-left:9%;"><b>--create-folder</b></p>
+
+<p style="margin-left:18%;">Try to create the folder named
+by the <b>--folder</b> option, if it does not exist.
+Otherwise the folder must already exist for mail delivery to
+succeed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--keep</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Keep the message file if indexing fails, and keep the
+message indexed if applying tags or maildir flag
+synchronization fails. Ignore these errors and return exit
+status 0 to indicate successful mail delivery.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--no-hooks</b></p>
+
+<p style="margin-left:18%;">Prevent hooks from being
+run.</p>
+
+<p style="margin-left:9%;"><b>--world-readable</b></p>
+
+<p style="margin-left:18%;">When writing mail to the
+mailbox, allow it to be read by users other than the current
+user. Note that this does not override umask. By default,
+delivered mail is only readable by the current user.</p>
+
+
+<p style="margin-left:9%;"><b>--decrypt=(true|nostash|auto|false)</b></p>
+
+<p style="margin-left:18%;">If <b>true</b> and the message
+is encrypted, try to decrypt the message while indexing,
+stashing any session keys discovered. If <b>auto</b>, and
+notmuch already knows about a session key for the message,
+it will try decrypting using that session key but will not
+try to access the user's secret keys. If decryption is
+successful, index the cleartext itself. Either way, the
+message is always stored to disk in its original form
+(ciphertext).</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>nostash</b>
+is the same as <b>true</b> except that it will not stash
+newly-discovered session keys in the database.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Be aware that
+the index is likely sufficient (and a stashed session key is
+certainly sufficient) to reconstruct the cleartext of the
+message itself, so please ensure that the notmuch message
+index is adequately protected. DO NOT USE
+<b>--decrypt=true</b> or <b>--decrypt=nostash</b> without
+considering the security of your index.</p>
+
+<p style="margin-left:18%; margin-top: 1em">See also
+<i>index.decrypt</i> in <i>notmuch-config</i>.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Indexing is
+influenced by the configuration options <i>index.decrypt</i>
+and <i>index.header.&lt;prefix&gt;</i>. Tagging is
+controlled by options <i>new.tags</i> and
+<i>maildir.synchronize_flags</i>. See <i>notmuch-config</i>
+for details.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+returns exit status 0 on successful mail delivery, non-zero
+otherwise. The default is to indicate failed mail delivery
+on any errors, including message file delivery to the
+filesystem, message indexing to Notmuch database, changing
+tags, and synchronizing tags to maildir flags. The
+<b>--keep</b> option may be used to settle for successful
+message file delivery.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This command
+supports the following special exit status code for errors
+most likely to be temporary in nature, e.g. failure to get a
+database write lock. <b><br>
+75 (EX_TEMPFAIL)</b></p>
+
+<p style="margin-left:18%;">A temporary failure occurred;
+the user is invited to retry.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The exit status
+of the <b>post-insert</b> hook does not affect the exit
+status of the <b>insert</b> command.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>notmuch</i>,
+<i>notmuch-config</i>, <i>notmuch-count</i>,
+<i>notmuch-dump</i>, <i>notmuch-hooks</i>,
+<i>notmuch-reply</i>, <i>notmuch-restore</i>,
+<i>notmuch-search</i>, <i>notmuch-search-terms</i>,
+<i>notmuch-show</i>, <i>notmuch-tag</i></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Carl Worth and
+many others</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">2009-2025, Carl
+Worth and many others</p>
+<hr>
+</body>
+</html>

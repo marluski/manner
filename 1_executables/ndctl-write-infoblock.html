@@ -1,0 +1,232 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NDCTL-WRITE-INFOBLOCK</title>
+
+</head>
+<body>
+
+<h1 align="center">NDCTL-WRITE-INFOBLOCK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ndctl-write-infoblock
+- generate and write an infoblock</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>ndctl
+write-infoblock</i> [&lt;namespaceX.Y&gt; | -o &lt;file&gt;
+| --stdout] [&lt;options&gt;]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">As described in
+the theory of operation section of
+ndctl-create-namespace(1), the raw capacity of a namespace
+may encapsulate a personality, or mode of operation.
+Specifically, the mode may be set to one of
+&quot;sector&quot;, &quot;fsdax&quot;, and
+&quot;devdax&quot;. Each of those modes is defined by an
+info-block format that uniquely identifies the mode of
+operation. The write-infoblock command knows how to generate
+an &quot;fsdax&quot; or &quot;devdax&quot; info-block
+relative to the specified image size.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The generated
+block can be written to an existing namespace (provided that
+namespace is not presently active), written to a file, or
+piped to standard-out.</p>
+
+
+<p style="margin-left:14%; margin-top: 1em"><b><big>Warning</big></b></p>
+
+<p style="margin-left:14%; margin-top: 1em">This command is
+a debug facility that can generate image files with valid
+infoblocks, but also invalid infoblocks for testing the
+kernel. Use the --offset and --align options with care.
+Namely --offset must match the actual physical address
+offset of the namespace it is applied to, and --align must
+be one of the architectures supported page sizes.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><big>ndctl
+write-infoblock -s 1T -c | ndctl read-infoblock -j <br>
+wrote 1 infoblock <br>
+[ <br>
+{ <br>
+&quot;file&quot;:&quot;&lt;stdin&gt;&quot;, <br>
+&quot;signature&quot;:&quot;NVDIMM_PFN_INFO&quot;, <br>
+
+&quot;uuid&quot;:&quot;42e1d574-76ac-402c-9132-5436e31528c0&quot;,
+<br>
+
+&quot;parent_uuid&quot;:&quot;ef83e49c-4c4a-4fae-b908-72e94675b1b7&quot;,
+<br>
+&quot;flags&quot;:0, <br>
+&quot;version&quot;:&quot;1.4&quot;, <br>
+&quot;dataoff&quot;:17196646400, <br>
+&quot;npfns&quot;:264237056, <br>
+&quot;mode&quot;:2, <br>
+&quot;start_pad&quot;:0, <br>
+&quot;end_trunc&quot;:0, <br>
+&quot;align&quot;:16777216, <br>
+&quot;page_size&quot;:4096, <br>
+&quot;page_struct_size&quot;:64 <br>
+} <br>
+] <br>
+read 1 infoblock</big></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><big>&lt;namespace(s)&gt;</big></p>
+
+<p style="margin-left:14%;"><big>One or more
+<i>namespaceX.Y</i> device names. The keyword <i>all</i> can
+be specified to operate on every namespace in the system,
+optionally filtered by bus id (see --bus= option), or region
+id (see --region= option).</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-c,
+--stdout</big></p>
+
+<p style="margin-left:14%;"><big>Write the infoblock to
+stdout</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-o,
+--output=</big></p>
+
+<p style="margin-left:14%;"><big>Write the infoblock to the
+given file (mutually exclusive with --stdout).</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-m,
+--mode=</big></p>
+
+<p style="margin-left:14%;"><big>Select the infoblock mode
+between <i>fsdax</i> and <i>devdax</i>. See
+ndctl-create-namespace(1) for details on --mode.</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-s,
+--size=</big></p>
+
+<p style="margin-left:14%;"><big>Override the default size
+determined from the size of the file specified to --output.
+In the --stdout case, this option is required.</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-a,
+--align=</big></p>
+
+<p style="margin-left:14%;"><big>Specify the
+&quot;align&quot; value in the infoblock. In the
+--mode=devdax case &quot;align&quot; designates a page
+mapping size. There is no validation of this value relative
+to the page mapping capabilities of the platform.</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-u,
+--uuid=</big></p>
+
+<p style="margin-left:14%;"><big>Override the default
+autogenerated UUID with the given value.</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-M,
+--map=</big></p>
+
+<p style="margin-left:14%;"><big>Select whether the page
+map array is allocated from the device or from &quot;System
+RAM&quot;. Defaults to the device. See
+ndctl-create-namespace(1) for more details.</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-p,
+--parent-uuid=</big></p>
+
+<p style="margin-left:14%;"><big>When the infoblock is
+stored on a labelled namespace the UUID of the namespace
+must match the &quot;parent uuid&quot; attribute in the
+infoblock. This option defaults to the UUID of the namespace
+when --output and --stdout are not used, otherwise it
+defaults to a NULL UUID (all zeroes).</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-O,
+--offset=</big></p>
+
+<p style="margin-left:14%;"><big>By default the assumption
+is that the infoblock is being written to a namespace or
+namespace-image that is aligned to its size. Specify this
+EXPERT/DEBUG option to experiment / test the kernel&rsquo;s
+handling of namespaces that violate that
+assumption.</big></p>
+
+<p style="margin-left:9%; margin-top: 1em"><big>-r,
+--region=</big></p>
+
+<p style="margin-left:14%;"><big>A <i>regionX</i> device
+name, or a region id number. Restrict the operation to the
+specified region(s). The keyword <i>all</i> can be specified
+to indicate the lack of any restriction, however this is the
+same as not supplying a --region option at all.</big></p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><big>Copyright
+&copy; 2016 - 2022, Intel Corporation. License GPLv2: GNU
+GPL version 2 &lt;http://gnu.org/licenses/gpl.html&gt;. This
+is free software: you are free to change and redistribute
+it. There is NO WARRANTY, to the extent permitted by
+law.</big></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><big>ndctl-create-namespace(1),
+<i>UEFI NVDIMM Label Protocol</i>
+&lt;http://www.uefi.org/sites/default/files/resources/UEFI_Spec_2_7.pdf&gt;</big></p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:23:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>CXL-WAIT-SANITIZE</title>
+
+</head>
+<body>
+
+<h1 align="center">CXL-WAIT-SANITIZE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">cxl-wait-sanitize
+- wait for a sanitize operation to complete</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>cxl
+wait-sanitize &lt;mem0&gt; [&lt;mem1&gt;..&lt;memN&gt;]
+[&lt;options&gt;]</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A sanitize
+operation can take several seconds to complete. Block and
+wait for the sanitize operation to complete.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:14%; margin-top: 1em"># cxl
+wait-sanitize mem0 <br>
+sanitize completed on 1 mem device</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">-b, --bus=</p>
+
+<p style="margin-left:14%;">Restrict the operation to the
+specified bus.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-t,
+--timeout</p>
+
+<p style="margin-left:14%;">Milliseconds to wait before
+timing out and returning. Defaults to infinite.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-v,
+--verbose</p>
+
+<p style="margin-left:14%;">Emit more debug messages</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright &copy;
+2016 - 2022, Intel Corporation. License GPLv2: GNU GPL
+version 2 &lt;http://gnu.org/licenses/gpl.html&gt;. This is
+free software: you are free to change and redistribute it.
+There is NO WARRANTY, to the extent permitted by law.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">cxl-list(1),</p>
+<hr>
+</body>
+</html>

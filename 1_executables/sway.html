@@ -1,0 +1,317 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:22 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>sway</title>
+
+</head>
+<body>
+
+<h1 align="center">sway</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#CONFIGURATION">CONFIGURATION</a><br>
+<a href="#IPC COMMANDS">IPC COMMANDS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sway - An
+i3-compatible Wayland compositor</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sway</b>
+[options...] [command]</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h,
+--help</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c,
+--config</b> &lt;config&gt;</p>
+
+<p style="margin-left:14%;">Specifies a config file.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-C,
+--validate</b></p>
+
+<p style="margin-left:14%;">Check the validity of the
+config file, then exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--debug</b></p>
+
+<p style="margin-left:14%;">Enables full logging, including
+debug information.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--version</b></p>
+
+<p style="margin-left:14%;">Show the version number and
+quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-V,
+--verbose</b></p>
+
+<p style="margin-left:14%;">Enables more verbose
+logging.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--get-socketpath</b></p>
+
+<p style="margin-left:14%;">Gets the IPC socket path and
+prints it, then exits.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sway was created
+to fill the need of an i3-like window manager for Wayland.
+The upstream i3 developers have no intention of porting i3
+to Wayland, and projects proposed by others ended up as
+vaporware. Many thanks to the i3 folks for providing such a
+great piece of software, so good that your users would
+rather write an entirely new window manager from scratch
+that behaved <i>exactly</i> like i3 rather than switch to
+something else.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You can run sway
+directly from a tty, or via a Wayland-compatible login
+manager.</p>
+
+<h2>CONFIGURATION
+<a name="CONFIGURATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">sway searches
+for a config file in the following locations, in this
+order:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>1.</p></td>
+<td width="2%"></td>
+<td width="63%">
+
+
+<p>&#732;/.sway/config</p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>2.</p></td>
+<td width="2%"></td>
+<td width="63%">
+
+
+<p>$XDG_CONFIG_HOME/sway/config (suggested location)</p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>3.</p></td>
+<td width="2%"></td>
+<td width="63%">
+
+
+<p>&#732;/.i3/config</p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>4.</p></td>
+<td width="2%"></td>
+<td width="63%">
+
+
+<p>$XDG_CONFIG_HOME/i3/config</p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>5.</p></td>
+<td width="2%"></td>
+<td width="63%">
+
+
+<p>/etc/sway/config</p></td>
+<td width="23%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>6.</p></td>
+<td width="2%"></td>
+<td width="63%">
+
+
+<p>/etc/i3/config</p></td>
+<td width="23%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">If unset,
+$XDG_CONFIG_HOME defaults to <b>&#732;/.config</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">An error is
+raised when no config file is found. The recommended default
+configuration is usually installed to
+<b>/etc/sway/config</b>; you are encouraged to copy this to
+<b>&#732;/.config/sway/config</b> and edit it from
+there.</p>
+
+<p style="margin-left:9%; margin-top: 1em">For information
+on the config file format, see <b>sway</b>(5).</p>
+
+<h2>IPC COMMANDS
+<a name="IPC COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Though
+<b>swaymsg</b>(1) is generally preferred, you may run
+<b>sway</b> <i>command</i> to send <i>command</i> to the
+running instance of sway. You can also issue commands with
+<b>i3-msg</b>(1) or even with <b>i3</b>(1).</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+environment variables have an effect on sway:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>SWAYSOCK</i></p>
+
+<p style="margin-left:14%;">Specifies the path to the sway
+IPC socket.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>XKB_DEFAULT_RULES</i>,
+<i>XKB_DEFAULT_MODEL</i>, <i>XKB_DEFAULT_LAYOUT</i>,
+<i>XKB_DEFAULT_VARIANT</i>, <i>XKB_DEFAULT_OPTIONS</i></p>
+
+<p style="margin-left:14%;">Configures the xkb keyboard
+settings. See <b>xkeyboard-config</b>(7). The preferred way
+to configure the keyboard is via the configuration file, see
+<b>sway-input</b>(5).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The following
+environment variables are set by sway:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>DISPLAY</i></p>
+
+<p style="margin-left:14%;">If compiled with Xwayland
+support and Xwayland is not disabled by the config, this
+will be set to the name of the X display used for
+Xwayland.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>I3SOCK</i></p>
+
+<p style="margin-left:14%;">For compatibility with i3,
+specifies the path to the sway IPC socket.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>SWAYSOCK</i></p>
+
+<p style="margin-left:14%;">Specifies the path to the sway
+IPC socket.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>WAYLAND_DISPLAY</i></p>
+
+<p style="margin-left:14%;">Specifies the name of the
+Wayland display that sway is running on.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>XCURSOR_SIZE</i></p>
+
+<p style="margin-left:14%;">Specifies the configured cursor
+size.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>XCURSOR_THEME</i></p>
+
+<p style="margin-left:14%;">Specifies the configured cursor
+theme.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Simon Ser &lt;contact@emersion.fr&gt;, who is assisted by
+other open source contributors. For more information about
+sway development, see
+&lt;https://github.com/swaywm/sway&gt;.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>sway</b>(5)
+<b>swaymsg</b>(1) <b>sway-input</b>(5) <b>sway-output</b>(5)
+<b>sway-bar</b>(5) <b>sway-ipc</b>(7)</p>
+<hr>
+</body>
+</html>

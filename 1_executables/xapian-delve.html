@@ -1,0 +1,208 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:09 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>DELVE</title>
+
+</head>
+<body>
+
+<h1 align="center">DELVE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">delve - Inspect
+the contents of a Xapian database</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>delve</b>
+[<i>OPTIONS</i>] <i>DATABASE</i>...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">delve - Inspect
+the contents of a Xapian database</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-a</b></p></td>
+<td width="6%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em">show all terms in the
+database</p> </td>
+<td width="44%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-A</b> &lt;prefix&gt;</p>
+
+<p style="margin-left:18%;">show all terms in the database
+with given prefix</p>
+
+<p style="margin-left:9%;"><b>-r</b> &lt;recno&gt;</p>
+
+<p style="margin-left:18%;">for term list(s)</p>
+
+<p style="margin-left:9%;"><b>-t</b> &lt;term&gt;</p>
+
+<p style="margin-left:18%;">for posting list(s)</p>
+
+<p style="margin-left:9%;"><b>-t</b> &lt;term&gt; <b>-r</b>
+&lt;recno&gt;</p>
+
+<p style="margin-left:18%;">for position list(s)</p>
+
+<p style="margin-left:9%;"><b>-s</b>,
+<b>--stemmer</b>=<i>LANG</i></p>
+
+<p style="margin-left:18%;">set the stemming language, the
+default is &rsquo;none&rsquo;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-1</b></p></td>
+<td width="6%"></td>
+<td width="38%">
+
+
+<p>output one list entry per line</p></td>
+<td width="44%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%;"><b>-V[</b>&lt;type&gt;]&lt;valueno&gt;</p>
+
+<p style="margin-left:18%;">output value valueno for each
+document referred to (or each document in the database if no
+<b>-r</b> options). &lt;type&gt; can be: E: escape in a
+C-like way (default) I: decode as a packed integer R: show
+the raw value (which may contain binary data,</p>
+
+<p style="margin-left:9%;">newlines, invalid UTF-8,
+etc)</p>
+
+<p style="margin-left:18%;">S: decode using
+Xapian::sortable_unserialise()</p>
+
+<p style="margin-left:9%;"><b>-V[</b>&lt;type&gt;]</p>
+
+<p style="margin-left:18%;">output all values for each
+document referred to. &lt;type&gt; is as above.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-d</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>output document data for each document referred to</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-z</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>for db, count documents with length 0</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-v</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>extra info (wdf and len for postlist; wdf and termfreq
+for termlist; number of terms for db; termfreq when showing
+all terms; value bounds and freq when showing all values in
+a slot)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-vv</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>even more info (also show collection freq and wdf upper
+bound for terms)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>display this help and exit</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">output version information and
+exit</p>
+<hr>
+</body>
+</html>

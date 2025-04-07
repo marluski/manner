@@ -1,0 +1,230 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>yuvkineco</title>
+
+</head>
+<body>
+
+<h1 align="center">yuvkineco</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">yuvkineco -
+revert 2-3 pulldown movie</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvkineco</b>
+[<i>options</i>] [<b>-C</b> <i>PATH</i>] <b><br>
+yuvkineco</b> [<i>options</i>] <b>-O</b>|<b>N</b>
+<i>PATH</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>yuvkineco</b></i>
+reverts to original non-interlaced frames, from NTSC video
+which was film sourced and 2-3 pulled down. Input fps code
+must be 4(29.97fps), output fps code can be selected from
+1(23.97fps) to 4(29.97fps). If 2, 3 or 4 selected,
+duplicated frames remain but they are reverted to
+non-interlaced. If input was non-interlaced only remove
+duplicate frames. Interlaced frame detection may fail in
+conditions like: <br>
+Pull down cycle changed (video editing). <br>
+Low quality pull down. <br>
+Motionless scene. <br>
+If <b>-C</b> <i>PATH</i> was specified, <b>yuvkineco</b>
+outputs 2-3 pull down cycle list to the file. You can edit
+this file by hand and feed it to <b>yuvkineco</b> with
+<b>-O</b> or <b>-N</b> option to correct mistake of 1st
+<b>yuvkineco</b>. Try <b>-C</b> and see cycle list. <br>
+EXAMPLE #1: for 24p movie / automatically <b><br>
+lav2yuv 60i.eli | \ <br>
+yuvkineco -F 1 | yuv2lav -f a -I 0 -o 24p.avi</b> <br>
+EXAMPLE #2: for 30p/24p mix / automatically <b><br>
+lav2yuv 60i.eli | \ <br>
+yuvkineco -F 4 | yuv2lav -f a -I 0 -o 30p.avi</b> <br>
+EXAMPLE #3: for 24p movie / check and repair <b><br>
+lav2yuv 60i.eli | \ <br>
+yuvkineco -F 1 -C 60i.23c | \ <br>
+yuv2lav -f a -I 1 -o take1.avi <br>
+glav -F +n take1.avi &nbsp;</b># check and edit 60i.23c
+<b><br>
+lav2yuv take1.avi | \ <br>
+yuvkineco -F 1 -N 60i.23c | \ <br>
+yuv2lav -f a -I 0 -o take2.avi</b> <br>
+EXAMPLE #4: for 24p movie / check and retry <b><br>
+lav2yuv 60i.eli | \ <br>
+yuvkineco -F 1 -C 60i.23c | \ <br>
+yuv2lav -f a -I 0 -o take1.avi <br>
+glav -F +n take1.avi &nbsp;</b># check and edit 60i.23c
+<b><br>
+lav2yuv 60i.eli | \ <br>
+yuvkineco -F 1 -O 60i.23c | \ <br>
+yuv2lav -f a -I 0 -o take2.avi</b></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvkineco</b>
+accepts the following options: <b><br>
+-F&nbsp;</b><i>FPSCODE</i></p>
+
+<p style="margin-left:19%;">Set output fps code (default:
+same as input).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>-C&nbsp;</b><i>PATH</i></p></td>
+<td width="1%"></td>
+<td width="80%">
+
+
+<p>Specify 2-3 pull down cycle list file name to write.</p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>-O&nbsp;</b><i>PATH</i></p></td>
+<td width="1%"></td>
+<td width="80%">
+
+
+<p>Specify cycle list name to read with old yuv stream to
+retry.</p> </td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>-N&nbsp;</b><i>PATH</i></p></td>
+<td width="1%"></td>
+<td width="80%">
+
+
+<p>Specify cycle list name to read with new yuv stream to
+repair.</p> </td>
+<td width="1%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-n&nbsp;</b><i>LEVEL</i></p>
+
+<p style="margin-left:19%;">Specify noise level of input
+(default: 10). This affects both pulldown cycle detection
+and deinterlacing.</p>
+
+
+<p style="margin-left:9%;"><b>-c&nbsp;</b><i>THRESHOLD</i></p>
+
+<p style="margin-left:19%;">Specify threshold to decide
+pictures in 2 frames are same (default: 4). <b>yuvkineco</b>
+compares several frames, searches pair of frame they contain
+same pictures, to decide which frame should be dropped. If
+<i>THRESHOLD</i> is 0, pair which has smallest difference
+will be selected. If 16, selected from pairs those have
+differences smaller than average.</p>
+
+
+<p style="margin-left:9%;"><b>-i&nbsp;</b><i>PERMIL</i></p>
+
+<p style="margin-left:19%;"><b>yuvkineco</b> deinterlaces
+each frame after 2-3 pulldown reverting process, specify how
+much pixels deinterlaced to decide to use or not use
+deinterlacing result (default: 10). If <i>PERMIL</i> is 10
+and 1% or more of pixels deinterlaced, deinterlacing result
+will be used. If 0, always deinterlacing result will be
+used. If 1000, deinterlacing result will not be used, but
+deinterlacing process will run on all of frames. To disable
+deinterlacing process, specify negative value.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-u</b></p></td>
+<td width="7%"></td>
+<td width="81%">
+
+
+<p>Set interlace information in header of output to unknown
+(default: non-interlaced).</p></td></tr>
+</table>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvkineco</b>
+was written by Kawamata/Hitoshi. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),</p>
+<hr>
+</body>
+</html>

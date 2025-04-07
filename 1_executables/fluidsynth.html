@@ -1,0 +1,548 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:20 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FluidSynth</title>
+
+</head>
+<body>
+
+<h1 align="center">FluidSynth</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#SETTINGS">SETTINGS</a><br>
+<a href="#SHELL COMMANDS">SHELL COMMANDS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+<a href="#DISCLAIMER">DISCLAIMER</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">FluidSynth - a
+SoundFont synthesizer</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>fluidsynth</b>
+[<i>options</i>] [ SoundFonts ] [ midifiles ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>FluidSynth</b>
+is a real-time MIDI synthesizer based on the SoundFont(R) 2
+specifications. It can be used to render MIDI input or MIDI
+files to audio. The MIDI events are read from a MIDI device.
+The sound is rendered in real-time to the sound output
+device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The easiest way
+to start the synthesizer is to give it a SoundFont on the
+command line: &rsquo;fluidsynth soundfont.sf2&rsquo;.
+fluidsynth will load the SoundFont and read MIDI events from
+the default MIDI device using the default MIDI driver. Once
+FluidSynth is running, it reads commands from the stdin.
+There are commands to send MIDI events manually, to load or
+unload SoundFonts, and so forth. All the available commands
+are discussed below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">FluidSynth can
+also be used to play a list of MIDI files. Simply run
+FluidSynth with the SoundFont and the list of MIDI files to
+play. In this case you might not want to open the MIDI
+device to read external events. Use the -n option to
+deactivate MIDI input. If you also want to deactivate the
+use of the shell, start FluidSynth with the -i option:
+&rsquo;fluidsynth -ni soundfont.sf2 midifile1.mid
+midifile2.mid&rsquo;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run fluidsynth
+with the --help option to check for changes in the list of
+options.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>fluidsynth</b>
+accepts the following options: <b><br>
+-a, --audio-driver=[label]</b></p>
+
+<p style="margin-left:18%;">The audio driver to use.
+&quot;-a help&quot; to list valid options</p>
+
+<p style="margin-left:9%;"><b>-c,
+--audio-bufcount=[count]</b></p>
+
+<p style="margin-left:18%;">Number of audio buffers</p>
+
+<p style="margin-left:9%;"><b>-C, --chorus</b></p>
+
+<p style="margin-left:18%;">Turn the chorus on or off
+[0|1|yes|no, default = on]</p>
+
+<p style="margin-left:9%;"><b>-d, --dump</b></p>
+
+<p style="margin-left:18%;">Dump incoming and outgoing MIDI
+events to stdout</p>
+
+<p style="margin-left:9%;"><b>-E,
+--audio-file-endian</b></p>
+
+<p style="margin-left:18%;">Audio file endian for fast
+rendering or aufile driver (&quot;-E help&quot; for
+list)</p>
+
+<p style="margin-left:9%;"><b>-f, --load-config</b></p>
+
+<p style="margin-left:18%;">Load command configuration file
+(shell commands)</p>
+
+<p style="margin-left:9%;"><b>-F,
+--fast-render=[file]</b></p>
+
+<p style="margin-left:18%;">Render MIDI file to raw audio
+data and store in [file]</p>
+
+<p style="margin-left:9%;"><b>-g, --gain</b></p>
+
+<p style="margin-left:18%;">Set the master gain [0 &lt;
+gain &lt; 10, default = 0.2]</p>
+
+<p style="margin-left:9%;"><b>-G, --audio-groups</b></p>
+
+<p style="margin-left:18%;">Defines the number of LADSPA
+audio nodes</p>
+
+<p style="margin-left:9%;"><b>-h, --help</b></p>
+
+<p style="margin-left:18%;">Print out this help summary</p>
+
+<p style="margin-left:9%;"><b>-i, --no-shell</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t read commands from
+the shell [default = yes]</p>
+
+<p style="margin-left:9%;"><b>-j,
+--connect-jack-outputs</b></p>
+
+<p style="margin-left:18%;">Attempt to connect the jack
+outputs to the physical ports</p>
+
+<p style="margin-left:9%;"><b>-K,
+--midi-channels=[num]</b></p>
+
+<p style="margin-left:18%;">The number of midi channels
+[default = 16]</p>
+
+<p style="margin-left:9%;"><b>-L,
+--audio-channels=[num]</b></p>
+
+<p style="margin-left:18%;">The number of stereo audio
+channels [default = 1]</p>
+
+<p style="margin-left:9%;"><b>-m,
+--midi-driver=[label]</b></p>
+
+<p style="margin-left:18%;">The name of the midi driver to
+use. &quot;-m help&quot; to list valid options.</p>
+
+<p style="margin-left:9%;"><b>-n, --no-midi-in</b></p>
+
+<p style="margin-left:18%;">Don&rsquo;t create a midi
+driver to read MIDI input events [default = yes]</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-o</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Define a setting, -o name=value (&quot;-o help&quot; to
+dump current values)</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-O,
+--audio-file-format</b></p>
+
+<p style="margin-left:18%;">Audio file format for fast
+rendering or aufile driver (&quot;-O help&quot; for
+list)</p>
+
+<p style="margin-left:9%;"><b>-p,
+--portname=[label]</b></p>
+
+<p style="margin-left:18%;">Set MIDI port name (alsa_seq,
+coremidi drivers)</p>
+
+<p style="margin-left:9%;"><b>-q, --quiet</b></p>
+
+<p style="margin-left:18%;">Do not print welcome message or
+other informational output</p>
+
+<p style="margin-left:9%;"><b>-r, --sample-rate</b></p>
+
+<p style="margin-left:18%;">Set the sample rate</p>
+
+<p style="margin-left:9%;"><b>-R, --reverb</b></p>
+
+<p style="margin-left:18%;">Turn the reverb on or off
+[0|1|yes|no, default = on]</p>
+
+<p style="margin-left:9%;"><b>-s, --server</b></p>
+
+<p style="margin-left:18%;">Start FluidSynth as a server
+process</p>
+
+<p style="margin-left:9%;"><b>-T, --audio-file-type</b></p>
+
+<p style="margin-left:18%;">Audio file type for fast
+rendering or aufile driver (&quot;-T help&quot; for
+list)</p>
+
+<p style="margin-left:9%;"><b>-v, --verbose</b></p>
+
+<p style="margin-left:18%;">Print out verbose messages
+about midi events (synth.verbose=1) as well as other debug
+messages</p>
+
+<p style="margin-left:9%;"><b>-V, --version</b></p>
+
+<p style="margin-left:18%;">Show version of program</p>
+
+<p style="margin-left:9%;"><b>-z,
+--audio-bufsize=[size]</b></p>
+
+<p style="margin-left:18%;">Size of each audio buffer</p>
+
+<h2>SETTINGS
+<a name="SETTINGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The settings to
+be specified with -o are documented in the fluidsettings.xml
+hopefully shipped with this distribution or online at
+https://www.fluidsynth.org/api/fluidsettings.xml . We
+recommend viewing this file in a webbrowser, favourably
+Firefox.</p>
+
+<h2>SHELL COMMANDS
+<a name="SHELL COMMANDS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>GENERAL</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>help</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Prints out list of help topics (type &quot;help
+&lt;topic&gt;&quot; to view details on available
+commands)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>quit</b></p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>Quit the synthesizer</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>SOUNDFONTS <br>
+load filename [reset] [bankofs]</b></p>
+
+<p style="margin-left:18%;">Load a SoundFont onto the
+SoundFont stack. If reset is 1 (which is the implicit
+default), all currently in-use SoundFont presets will be
+re-evaluated with the newly loaded SoundFont taken into
+account. Optionally, you can specify a non-zero bank offset
+for the new SoundFont. For example the command load
+soundfont.sf2 0 10 will load the soundfont.sf2 with a bank
+offset of 10 without re-evaluating the presets.</p>
+
+<p style="margin-left:9%;"><b>unload number</b></p>
+
+<p style="margin-left:18%;">Unload a SoundFont. The number
+is the index of the SoundFont on the stack.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>fonts</b></p></td>
+<td width="3%"></td>
+<td width="53%">
+
+
+<p>Lists the current SoundFonts on the stack</p></td>
+<td width="29%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>inst number</b></p>
+
+<p style="margin-left:18%;">Print out the available
+instruments for the SoundFont.</p>
+
+<p style="margin-left:9%;"><b>MIDI MESSAGES <br>
+noteon channel key velocity</b></p>
+
+<p style="margin-left:18%;">Send a note-on event</p>
+
+<p style="margin-left:9%;"><b>noteoff channel key</b></p>
+
+<p style="margin-left:18%;">Send a note-off event</p>
+
+<p style="margin-left:9%;"><b>cc channel ctrl value</b></p>
+
+<p style="margin-left:18%;">Send a control change event</p>
+
+<p style="margin-left:9%;"><b>prog chan num</b></p>
+
+<p style="margin-left:18%;">Send program-change message</p>
+
+<p style="margin-left:9%;"><b>select chan sfont bank
+prog</b></p>
+
+<p style="margin-left:18%;">Combination of bank-select and
+program-change</p>
+
+<p style="margin-left:9%;"><b>channels</b></p>
+
+<p style="margin-left:18%;">Print out the presets of all
+channels.</p>
+
+<p style="margin-left:9%;"><b>AUDIO SYNTHESIS <br>
+gain value</b></p>
+
+<p style="margin-left:18%;">Set the master gain (0 &lt;
+gain &lt; 5)</p>
+
+<p style="margin-left:9%;"><b>interp num</b></p>
+
+<p style="margin-left:18%;">Choose interpolation method for
+all channels</p>
+
+<p style="margin-left:9%;"><b>interpc chan num</b></p>
+
+<p style="margin-left:18%;">Choose interpolation method for
+one channel</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>REVERB</b></p></td>
+<td width="83%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em"><b>set
+synth.reverb.active [0|1]</b></p>
+
+<p style="margin-left:18%;">Turn the reverb on or off</p>
+
+<p style="margin-left:9%;"><b>set synth.reverb.room-size
+num</b></p>
+
+<p style="margin-left:18%;">Change reverb room size</p>
+
+<p style="margin-left:9%;"><b>set synth.reverb.damp
+num</b></p>
+
+<p style="margin-left:18%;">Change reverb damping</p>
+
+<p style="margin-left:9%;"><b>set synth.reverb.width
+num</b></p>
+
+<p style="margin-left:18%;">Change reverb width</p>
+
+<p style="margin-left:9%;"><b>set synth.reverb.level
+num</b></p>
+
+<p style="margin-left:18%;">Change reverb level</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>CHORUS</b></p></td>
+<td width="83%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em"><b>set
+synth.chorus.active [0|1]</b></p>
+
+<p style="margin-left:18%;">Turn the chorus on or off</p>
+
+<p style="margin-left:9%;"><b>set synth.chorus.nr n</b></p>
+
+<p style="margin-left:18%;">Use n delay lines (default
+3)</p>
+
+<p style="margin-left:9%;"><b>set synth.chorus.level
+num</b></p>
+
+<p style="margin-left:18%;">Set output level of each chorus
+line to num</p>
+
+<p style="margin-left:9%;"><b>set synth.chorus.speed
+num</b></p>
+
+<p style="margin-left:18%;">Set mod speed of chorus to num
+(Hz)</p>
+
+<p style="margin-left:9%;"><b>set synth.chorus.depth
+num</b></p>
+
+<p style="margin-left:18%;">Set chorus modulation depth to
+num (ms)</p>
+
+<p style="margin-left:9%;"><b>MIDI ROUTER <br>
+router_default</b></p>
+
+<p style="margin-left:18%;">Reloads the default MIDI
+routing rules (input channels are mapped 1:1 to the
+synth)</p>
+
+<p style="margin-left:9%;"><b>router_clear</b></p>
+
+<p style="margin-left:18%;">Deletes all MIDI routing
+rules.</p>
+
+<p style="margin-left:9%;"><b>router_begin
+[note|cc|prog|pbend|cpress|kpress]</b></p>
+
+<p style="margin-left:18%;">Starts a new routing rule for
+events of the given type</p>
+
+<p style="margin-left:9%;"><b>router_chan min max mul
+add</b></p>
+
+<p style="margin-left:18%;">Limits the rule for events on
+min &lt;= chan &lt;= max. If the channel falls into the
+window, it is multiplied by &rsquo;mul&rsquo;, then
+&rsquo;add&rsquo; is added.</p>
+
+<p style="margin-left:9%;"><b>router_par1 min max mul
+add</b></p>
+
+<p style="margin-left:18%;">Limits parameter 1 (for example
+note number in a note events). Similar to router_chan.</p>
+
+<p style="margin-left:9%;"><b>router_par2 min max mul
+add</b></p>
+
+<p style="margin-left:18%;">Limits parameter 2 (for example
+velocity in a note event). Similar to router_chan</p>
+
+<p style="margin-left:9%;"><b>router_end</b></p>
+
+<p style="margin-left:18%;">Finishes the current rule and
+adds it to the router.</p>
+
+<p style="margin-left:9%;"><b>Router examples</b> <br>
+router_clear <br>
+router_begin note <br>
+router_chan 0 7 0 15 <br>
+router_end</p>
+
+<p style="margin-left:18%;">Will accept only note events
+from the lower 8 MIDI channels. Regardless of the channel,
+the synthesizer plays the note on ch 15
+(synthchannel=midichannel*0+15)</p>
+
+<p style="margin-left:9%;">router_begin cc <br>
+router_chan 0 7 0 15 <br>
+router_par1 1 1 0 64 <br>
+router_add</p>
+
+<p style="margin-left:18%;">Configures the modulation wheel
+to act as sustain pedal (transforms CC 1 to CC 64 on the
+lower 8 MIDI channels, routes to ch 15)</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Peter Hanappe
+&lt;hanappe@fluid-synth.org&gt; <br>
+Markus Nentwig &lt;nentwig@users.sourceforge.net&gt; <br>
+Antoine Schmitt &lt;as@gratin.org&gt; <br>
+Josh Green &lt;jgreen@users.sourceforge.net&gt; <br>
+Stephane Letz &lt;letz@grame.fr&gt; <br>
+Tom Moebert &lt;tom[d0t]mbrt[&Auml;T]gmail[d0t]com&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Please check the
+AUTHORS and THANKS files for all credits</p>
+
+<h2>DISCLAIMER
+<a name="DISCLAIMER"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">SoundFont(R) is
+a registered trademark of E-mu Systems, Inc.</p>
+<hr>
+</body>
+</html>

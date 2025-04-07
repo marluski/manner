@@ -1,0 +1,126 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:42 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>TS_UINPUT</title>
+
+</head>
+<body>
+
+<h1 align="center">TS_UINPUT</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ts_uinput - A
+daemon program creating a tslib-filtered and calibrated
+input event device</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ts_uinput</b>
+[OPTION]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ts_uinput</b>
+provides an alternative for using tslib&rsquo;s API in order
+to get filtered and calibrated touch screen inputs. Using
+Linux&rsquo; uinput system, it <b>creates an input event
+device</b> to be used in your environment. It uses
+ts_read_mt() and thus supports single and multi touch.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d,
+--daemonize</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Start ts_uinput
+as a daemon and return. The sysfs&rsquo; input device name
+of the newly created device is printed to stdout before
+returning. If --verbose is chosen too, the /dev/input/eventX
+path to the device node is printed.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--verbose</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Print debug
+information to stdout and stderr. Only if --daemonize is not
+chosen. If used together with --daemonize, the path to the
+created input event device node /dev/input/eventX is printed
+before the program forks and returns.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-n,
+--name</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Set the name of
+the new input event device. Default: <b>ts_uinput</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-i,
+--idev</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Explicitly
+choose the original input event device for tslib to use.
+Default: the environment variable
+<b>TSLIB_TSDEVICE</b>&rsquo;s value.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f,
+--fbdev</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Explicitly
+choose the framebuffer device to use. Default: the
+environment variable <b>TSLIB_FBDEVICE</b>&rsquo;s
+value.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s,
+--slots</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Explicitly set
+the possible concurrent touch contacts supported. May be
+only needed if the original input device doesn&rsquo;t
+report it.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b,
+--nofb</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Read the screen
+resolution values from the input device, not the framebuffer
+device.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ts.conf (5),
+ts_calibrate (1), ts_test (1)</p>
+<hr>
+</body>
+</html>

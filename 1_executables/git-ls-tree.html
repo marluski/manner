@@ -1,0 +1,286 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:06 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GIT-LS-TREE</title>
+
+</head>
+<body>
+
+<h1 align="center">GIT-LS-TREE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OUTPUT FORMAT">OUTPUT FORMAT</a><br>
+<a href="#FIELD NAMES">FIELD NAMES</a><br>
+<a href="#GIT">GIT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">git-ls-tree -
+List the contents of a tree object</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>git
+ls-tree</i> [-d] [-r] [-t] [-l] [-z] <br>
+[--name-only] [--name-status] [--object-only] [--full-name]
+[--full-tree] [--abbrev[=&lt;n&gt;]]
+[--format=&lt;format&gt;] <br>
+&lt;tree-ish&gt; [&lt;path&gt;...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Lists the
+contents of a given tree object, like what &quot;/bin/ls
+-a&quot; does in the current working directory. Note
+that:</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; the
+behaviour is slightly different from that of
+&quot;/bin/ls&quot; in that the <i>&lt;path&gt;</i> denotes
+just a list of patterns to match, e.g. so specifying
+directory name (without <b>-r</b>) will behave differently,
+and order of the arguments does not matter.</p>
+
+<p style="margin-left:14%; margin-top: 1em">&bull; the
+behaviour is similar to that of &quot;/bin/ls&quot; in that
+the <i>&lt;path&gt;</i> is taken as relative to the current
+working directory. E.g. when you are in a directory
+<i>sub</i> that has a directory <i>dir</i>, you can run
+<i>git ls-tree -r HEAD dir</i> to list the contents of the
+tree (that is <b>sub/dir</b> in <b>HEAD</b>). You
+don&rsquo;t want to give a tree that is not at the root
+level (e.g. <b>git ls-tree -r HEAD:sub dir</b>) in this
+case, as that would result in asking for <b>sub/sub/dir</b>
+in the <b>HEAD</b> commit. However, the current working
+directory can be ignored by passing --full-tree option.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">&lt;tree-ish&gt;</p>
+
+<p style="margin-left:14%;">Id of a tree-ish.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-d</p>
+
+<p style="margin-left:14%;">Show only the named tree entry
+itself, not its children.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-r</p>
+
+<p style="margin-left:14%;">Recurse into sub-trees.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-t</p>
+
+<p style="margin-left:14%;">Show tree entries even when
+going to recurse them. Has no effect if <b>-r</b> was not
+passed. <b>-d</b> implies <b>-t</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-l, --long</p>
+
+<p style="margin-left:14%;">Show object size of blob (file)
+entries.</p>
+
+<p style="margin-left:9%; margin-top: 1em">-z</p>
+
+<p style="margin-left:14%;">\0 line termination on output
+and do not quote filenames. See OUTPUT FORMAT below for more
+information.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--name-only,
+--name-status</p>
+
+<p style="margin-left:14%;">List only filenames (instead of
+the &quot;long&quot; output), one per line. Cannot be
+combined with <b>--object-only</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--object-only</p>
+
+<p style="margin-left:14%;">List only names of the objects,
+one per line. Cannot be combined with <b>--name-only</b> or
+<b>--name-status</b>. This is equivalent to specifying
+<b>--format=</b>'%(<b>objectname</b>)', but for both this
+option and that exact format the command takes a
+hand-optimized codepath instead of going through the generic
+formatting mechanism.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--abbrev[=&lt;n&gt;]</p>
+
+<p style="margin-left:14%;">Instead of showing the full
+40-byte hexadecimal object lines, show the shortest prefix
+that is at least <i>&lt;n&gt;</i> hexdigits long that
+uniquely refers the object. Non default number of digits can
+be specified with --abbrev=&lt;n&gt;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--full-name</p>
+
+<p style="margin-left:14%;">Instead of showing the path
+names relative to the current working directory, show the
+full path names.</p>
+
+<p style="margin-left:9%; margin-top: 1em">--full-tree</p>
+
+<p style="margin-left:14%;">Do not limit the listing to the
+current working directory. Implies --full-name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">--format=&lt;format&gt;</p>
+
+<p style="margin-left:14%;">A string that interpolates
+%(<b>fieldname</b>) from the result being shown. It also
+interpolates %% to %, and %xNN where <b>NN</b> are hex
+digits interpolates to character with hex code <b>NN</b>;
+for example %x00 interpolates to \0 (NUL), %x09 to \t (TAB)
+and %x0a to \n (LF). When specified, <b>--format</b> cannot
+be combined with other format-altering options, including
+<b>--long</b>, <b>--name-only</b> and
+<b>--object-only</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">[&lt;path&gt;...]</p>
+
+<p style="margin-left:14%;">When paths are given, show them
+(note that this isn&rsquo;t really raw pathnames, but rather
+a list of patterns to match). Otherwise implicitly uses the
+root level of the tree as the sole path argument.</p>
+
+<h2>OUTPUT FORMAT
+<a name="OUTPUT FORMAT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The output
+format of <b>ls-tree</b> is determined by either the
+<b>--format</b> option, or other format-altering options
+such as <b>--name-only</b> etc. (see <b>--format</b>
+above).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The use of
+certain <b>--format</b> directives is equivalent to using
+those options, but invoking the full formatting machinery
+can be slower than using an appropriate formatting
+option.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In cases where
+the <b>--format</b> would exactly map to an existing option
+<b>ls-tree</b> will use the appropriate faster path. Thus
+the default format is equivalent to:</p>
+
+<p style="margin-left:14%; margin-top: 1em">%(objectmode)
+%(objecttype) %(objectname)%x09%(path)</p>
+
+<p style="margin-left:9%; margin-top: 1em">This output
+format is compatible with what <b>--index-info --stdin</b>
+of <i>git update-index</i> expects.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When the
+<b>-l</b> option is used, format changes to</p>
+
+<p style="margin-left:14%; margin-top: 1em">%(objectmode)
+%(objecttype) %(objectname)
+%(objectsize:padded)%x09%(path)</p>
+
+<p style="margin-left:9%; margin-top: 1em">Object size
+identified by &lt;objectname&gt; is given in bytes, and
+right-justified with minimum width of 7 characters. Object
+size is given only for blobs (file) entries; for other
+entries <b>-</b> character is used in place of size.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Without the
+<b>-z</b> option, pathnames with &quot;unusual&quot;
+characters are quoted as explained for the configuration
+variable <b>core.quotePath</b> (see <b>git-config</b>(1)).
+Using <b>-z</b> the filename is output verbatim and the line
+is terminated by a NUL byte.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Customized
+format:</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to print in a custom format by using the <b>--format</b>
+option, which is able to interpolate different fields using
+a %(<b>fieldname</b>) notation. For example, if you only
+care about the &quot;objectname&quot; and &quot;path&quot;
+fields, you can execute with a specific &quot;--format&quot;
+like</p>
+
+<p style="margin-left:14%; margin-top: 1em">git ls-tree
+--format='%(objectname) %(path)' &lt;tree-ish&gt;</p>
+
+<h2>FIELD NAMES
+<a name="FIELD NAMES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Various values
+from structured fields can be used to interpolate into the
+resulting output. For each outputting line, the following
+names can be used:</p>
+
+<p style="margin-left:9%; margin-top: 1em">objectmode</p>
+
+<p style="margin-left:14%;">The mode of the object.</p>
+
+<p style="margin-left:9%; margin-top: 1em">objecttype</p>
+
+<p style="margin-left:14%;">The type of the object
+(<b>commit</b>, <b>blob</b> or <b>tree</b>).</p>
+
+<p style="margin-left:9%; margin-top: 1em">objectname</p>
+
+<p style="margin-left:14%;">The name of the object.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em">objectsize[:padded]</p>
+
+<p style="margin-left:14%;">The size of a <b>blob</b>
+object (&quot;-&quot; if it&rsquo;s a <b>commit</b> or
+<b>tree</b>). It also supports a padded format of size with
+&quot;%(objectsize:padded)&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">path</p>
+
+<p style="margin-left:14%;">The pathname of the object.</p>
+
+<h2>GIT
+<a name="GIT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Part of the
+<b>git</b>(1) suite</p>
+<hr>
+</body>
+</html>

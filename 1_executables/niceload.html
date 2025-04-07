@@ -1,0 +1,752 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:47 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>NICELOAD</title>
+
+</head>
+<body>
+
+<h1 align="center">NICELOAD</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE: See niceload in action">EXAMPLE: See niceload in action</a><br>
+<a href="#EXAMPLE: Run updatedb">EXAMPLE: Run updatedb</a><br>
+<a href="#EXAMPLE: Run rsync">EXAMPLE: Run rsync</a><br>
+<a href="#EXAMPLE: Ensure enough disk cache">EXAMPLE: Ensure enough disk cache</a><br>
+<a href="#ENVIRONMENT VARIABLES">ENVIRONMENT VARIABLES</a><br>
+<a href="#EXIT STATUS">EXIT STATUS</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#LICENSE">LICENSE</a><br>
+<a href="#Documentation license I">Documentation license I</a><br>
+<a href="#Documentation license II">Documentation license II</a><br>
+<a href="#DEPENDENCIES">DEPENDENCIES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">niceload - slow
+down a program when the load average is above a certain
+limit</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>niceload</b>
+[-v] [-h] [-n nice] [-I io] [-L load] [-M mem] [-N]
+[--sensor program] [-t time] [-s time|-f factor] ( command |
+-p PID [-p PID ...] | --prg program )</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GNU
+<b>niceload</b> will slow down a program when the load
+average (or other system activity) is above a certain limit.
+When the limit is reached the program will be suspended for
+some time. Then resumed again for some time. Then the load
+average is checked again and we start over.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Instead of load
+average <b>niceload</b> can also look at disk I/O, amount of
+free memory, or swapping activity.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the load is
+3.00 then the default settings will run a program like
+this:</p>
+
+<p style="margin-left:9%; margin-top: 1em">run 1 second,
+suspend (3.00-1.00) seconds, run 1 second, suspend
+(3.00-1.00) seconds, run 1 second, ...</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-B</b></p></td>
+<td width="88%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--battery</b></p>
+
+<p style="margin-left:21%;">Suspend if the system is
+running on battery. Shorthand for: -l -1 --sensor &rsquo;cat
+/sys/class/power_supply/BAT0/status
+/proc/acpi/battery/BAT0/state 2&gt;/dev/null | grep -i -q
+discharging; echo $?&rsquo;</p>
+
+<p style="margin-left:9%;"><b>-f</b> <i>FACTOR</i> <b><br>
+--factor</b> <i>FACTOR</i></p>
+
+<p style="margin-left:21%;">Suspend time factor.
+Dynamically set <b>-s</b> as amount over limit * factor.
+Default is 1.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-H</b></p></td>
+<td width="4%"></td>
+<td width="79%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--hard</b></p></td>
+<td width="4%"></td>
+<td width="79%">
+
+
+<p>Hard limit. <b>--hard</b> will suspend the process until
+the system is under the limits. The default is
+<b>--soft</b>.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--io</b> <i>iolimit</i>
+<b><br>
+-I</b> <i>iolimit</i></p>
+
+<p style="margin-left:21%;">Limit for I/O. The amount of
+disk I/O will be computed as a value 0 - 10, where 0 is no
+I/O and 10 is at least one disk is 100% saturated.</p>
+
+<p style="margin-left:21%; margin-top: 1em"><b>--io</b>
+will set both <b>--start-io</b> and <b>--run-io</b>.</p>
+
+<p style="margin-left:9%;"><b>--load</b> <i>loadlimit</i>
+<b><br>
+-L</b> <i>loadlimit</i></p>
+
+<p style="margin-left:21%;">Limit for load average.</p>
+
+<p style="margin-left:21%; margin-top: 1em"><b>--load</b>
+will set both <b>--start-load</b> and <b>--run-load</b>.</p>
+
+<p style="margin-left:9%;"><b>--mem</b> <i>memlimit</i>
+<b><br>
+-M</b> <i>memlimit</i></p>
+
+<p style="margin-left:21%;">Limit for free memory. This is
+the amount of bytes available as free + cache. This limit is
+treated opposite other limits: If the system is above the
+limit the program will run, if it is below the limit the
+program will stop</p>
+
+
+<p style="margin-left:21%; margin-top: 1em"><i>memlimit</i>
+can be postfixed with K, M, G, T, or P which would multiply
+the size with 1024, 1048576, 1073741824, or 1099511627776
+respectively.</p>
+
+<p style="margin-left:21%; margin-top: 1em"><b>--mem</b>
+will set both <b>--start-mem</b> and <b>--run-mem</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>--noswap</b></p></td>
+<td width="2%"></td>
+<td width="79%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>-N</b></p></td>
+<td width="2%"></td>
+<td width="79%">
+
+
+<p>No swapping. If the system is swapping both in and out
+it is a good indication that the system is memory
+stressed.</p> </td></tr>
+</table>
+
+
+<p style="margin-left:21%; margin-top: 1em"><b>--noswap</b>
+is over limit if the system is swapping both in and out.</p>
+
+
+<p style="margin-left:21%; margin-top: 1em"><b>--noswap</b>
+will set both <b>--start-noswap</b> and
+<b>--run-noswap</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p style="margin-top: 1em"><b>--net</b></p></td>
+<td width="6%"></td>
+<td width="33%">
+
+
+<p style="margin-top: 1em">Shorthand for <b>--nethops
+3</b>.</p> </td>
+<td width="46%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--nethops</b> <i>h</i></p>
+
+<p style="margin-left:21%;">Network nice. Pause if the
+internet connection is overloaded.</p>
+
+
+<p style="margin-left:21%; margin-top: 1em"><b>niceload</b>
+finds a router <i>h</i> hops closer to the internet. It
+<b>ping</b>s this every second. If the latency is more than
+50% bigger than the median, it is regarded as being over the
+limit.</p>
+
+
+<p style="margin-left:21%; margin-top: 1em"><b>--nethops</b>
+can be combined with <b>--hard</b>. Without <b>--hard</b>
+the program may be able to queue up so much traffic that it
+will take longer than the <b>--suspend</b> time to clear it.
+<b>--hard</b> is useful for traffic that does not break by
+being suspended for a longer time.</p>
+
+
+<p style="margin-left:21%; margin-top: 1em"><b>--nethops</b>
+can be combined with a high <b>--suspend</b>. This way a
+program can be allowed to do a bit of traffic now and then.
+This is useful to keep the connection alive.</p>
+
+<p style="margin-left:9%;"><b>-n</b> <i>niceness</i>
+<b><br>
+--nice</b> <i>niceness</i></p>
+
+<p style="margin-left:21%;">Sets niceness. See
+<b>nice</b>(1).</p>
+
+<p style="margin-left:9%;"><b>-p</b>
+<i>PID</i>[,<i>PID</i>] <b><br>
+--pid</b> <i>PID</i>[,<i>PID</i>]</p>
+
+<p style="margin-left:21%;">Process IDs of processes to
+suspend. You can specify multiple process IDs with multiple
+<b>-p</b> <i>PID</i> or by separating the PIDs with
+comma.</p>
+
+<p style="margin-left:9%;"><b>--prg</b> <i>program</i>
+<b><br>
+--program</b> <i>program</i></p>
+
+<p style="margin-left:21%;">Name of running program to
+suspend. You can specify multiple programs with multiple
+<b>--prg</b> <i>program</i>. If no processes with the name
+<i>program</i> is found, <b>niceload</b> with search for
+substrings containing <i>program</i>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>--quote</b></p></td>
+<td width="3%"></td>
+<td width="79%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="9%">
+
+
+<p><b>-q</b></p></td>
+<td width="3%"></td>
+<td width="79%">
+
+
+<p>Quote the command line. Useful if the command contains
+chars like *, $, &gt;, and &quot; that should not be
+interpreted by the shell.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--run-io</b> <i>iolimit</i>
+<b><br>
+--ri</b> <i>iolimit</i> <b><br>
+--run-load</b> <i>loadlimit</i> <b><br>
+--rl</b> <i>loadlimit</i> <b><br>
+--run-mem</b> <i>memlimit</i> <b><br>
+--rm</b> <i>memlimit</i></p>
+
+<p style="margin-left:21%;">Run limit. The running program
+will be slowed down if the system is above the limit. See:
+<b>--io</b>, <b>--load</b>, <b>--mem</b>,
+<b>--noswap</b>.</p>
+
+<p style="margin-left:9%;"><b>--sensor</b> <i>sensor
+program</i></p>
+
+<p style="margin-left:21%;">Read sensor. Use <i>sensor
+program</i> to read a sensor.</p>
+
+<p style="margin-left:21%; margin-top: 1em">This will keep
+the CPU temperature below 80 deg C on GNU/Linux:</p>
+
+<p style="margin-left:21%; margin-top: 1em">niceload -l
+80000 -f 0.001 --sensor 'sort -n
+/sys/devices/platform/coretemp*/temp*_input' gzip *</p>
+
+<p style="margin-left:21%; margin-top: 1em">This will stop
+if the disk space &lt; 100000.</p>
+
+<p style="margin-left:21%; margin-top: 1em">niceload -H -l
+-100000 --sensor &quot;df . | awk '{ print \$4 }'&quot;
+echo</p>
+
+<p style="margin-left:9%;"><b>--start-io</b> <i>iolimit</i>
+<b><br>
+--si</b> <i>iolimit</i> <b><br>
+--start-load</b> <i>loadlimit</i> <b><br>
+--sl</b> <i>loadlimit</i> <b><br>
+--start-mem</b> <i>memlimit</i> <b><br>
+--sm</b> <i>memlimit</i></p>
+
+<p style="margin-left:21%;">Start limit. The program will
+not start until the system is below the limit. See:
+<b>--io</b>, <b>--load</b>, <b>--mem</b>,
+<b>--noswap</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--soft</b></p></td>
+<td width="4%"></td>
+<td width="79%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-S</b></p></td>
+<td width="4%"></td>
+<td width="79%">
+
+
+<p>Soft limit. <b>niceload</b> will suspend a process for a
+while and then let it run for a second thus only slowing
+down a process while the system is over one of the given
+limits. This is the default.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--suspend</b> <i>SEC</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-s</b> <i>SEC</i></p></td>
+<td width="4%"></td>
+<td width="79%">
+
+
+<p>Suspend time. Suspend the command this many seconds when
+the max load average is reached.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--recheck</b> <i>SEC</i></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-t</b> <i>SEC</i></p></td>
+<td width="4%"></td>
+<td width="79%">
+
+
+<p>Recheck load time. Sleep SEC seconds before checking
+load again. Default is 1 second.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--verbose</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="9%"></td>
+<td width="79%">
+
+
+<p>Verbose. Print some extra output on what is happening.
+Use <b>-v</b> until you know what your are doing.</p></td></tr>
+</table>
+
+<h2>EXAMPLE: See niceload in action
+<a name="EXAMPLE: See niceload in action"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">In terminal 1
+run: top</p>
+
+<p style="margin-left:9%; margin-top: 1em">In terminal 2
+run:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>niceload -q
+perl -e &rsquo;$|=1;do{$l==$r or print &quot;.&quot;;
+$l=$r}until(($r=time-$&#710;T)</b>&gt;<b>50)&rsquo;</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">This will print
+a &rsquo;.&rsquo; every second for 50 seconds and eat a lot
+of CPU. When the load rises to 1.0 the process is
+suspended.</p>
+
+<h2>EXAMPLE: Run updatedb
+<a name="EXAMPLE: Run updatedb"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Running
+<b>updatedb</b> can often starve the system for disk I/O and
+thus result in a high load.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run
+<b>updatedb</b> but suspend <b>updatedb</b> if the load is
+above 2.00:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>niceload -L 2
+updatedb</b></p>
+
+<h2>EXAMPLE: Run rsync
+<a name="EXAMPLE: Run rsync"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>rsync</b>
+can, just like <b>updatedb</b>, starve the system for disk
+I/O and thus result in a high load.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Run <b>rsync</b>
+but keep load below 3.4. If load reaches 7 sleep for
+(7-3.4)*12 seconds:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>niceload -L
+3.4 -f 12 rsync -Ha /home/ /backup/home/</b></p>
+
+<h2>EXAMPLE: Ensure enough disk cache
+<a name="EXAMPLE: Ensure enough disk cache"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Assume the
+program <b>foo</b> uses 2 GB files intensively. <b>foo</b>
+will run fast if the files are in disk cache and be slow as
+a crawl if they are not in the cache.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To ensure 2 GB
+are reserved for disk cache run:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>niceload
+--hard --run-mem 2g foo</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">This will not
+guarantee that the 2 GB memory will be used for the files
+for <b>foo</b>, but it will stop <b>foo</b> if the memory
+for disk cache is too low.</p>
+
+<h2>ENVIRONMENT VARIABLES
+<a name="ENVIRONMENT VARIABLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">None. In future
+versions $NICELOAD will be able to contain default
+settings.</p>
+
+<h2>EXIT STATUS
+<a name="EXIT STATUS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Exit status
+should be the same as the command being run (untested).</p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs to
+&lt;bug-parallel@gnu.org&gt;.</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2004-11-19 Ole Tange, http://ole.tange.dk</p>
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2005-2010 Ole Tange, http://ole.tange.dk</p>
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2010-2025 Ole Tange, http://ole.tange.dk and Free Software
+Foundation, Inc.</p>
+
+<h2>LICENSE
+<a name="LICENSE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+free software; you can redistribute it and/or modify it
+under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 3
+of the License, or at your option any later version.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This program is
+distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+GNU General Public License for more details.</p>
+
+<p style="margin-left:9%; margin-top: 1em">You should have
+received a copy of the GNU General Public License along with
+this program. If not, see
+&lt;http://www.gnu.org/licenses/&gt;.</p>
+
+<h3>Documentation license I
+<a name="Documentation license I"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this documentation
+under the terms of the GNU Free Documentation License,
+Version 1.3 or any later version published by the Free
+Software Foundation; with no Invariant Sections, with no
+Front-Cover Texts, and with no Back-Cover Texts. A copy of
+the license is included in the file
+LICENSES/GFDL-1.3-or-later.txt.</p>
+
+<h3>Documentation license II
+<a name="Documentation license II"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">You are
+free:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p style="margin-top: 1em"><b>to Share</b></p></td>
+<td width="2%"></td>
+<td width="52%">
+
+
+<p style="margin-top: 1em">to copy, distribute and transmit
+the work</p></td>
+<td width="27%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="10%">
+
+
+<p><b>to Remix</b></p></td>
+<td width="2%"></td>
+<td width="52%">
+
+
+<p>to adapt the work</p></td>
+<td width="27%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Under the
+following conditions: <b><br>
+Attribution</b></p>
+
+<p style="margin-left:21%;">You must attribute the work in
+the manner specified by the author or licensor (but not in
+any way that suggests that they endorse you or your use of
+the work).</p>
+
+<p style="margin-left:9%;"><b>Share Alike</b></p>
+
+<p style="margin-left:21%;">If you alter, transform, or
+build upon this work, you may distribute the resulting work
+only under the same, similar or a compatible license.</p>
+
+<p style="margin-left:9%; margin-top: 1em">With the
+understanding that:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>Waiver</b></p></td>
+<td width="4%"></td>
+<td width="79%">
+
+
+<p>Any of the above conditions can be waived if you get
+permission from the copyright holder.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>Public Domain</b></p>
+
+<p style="margin-left:21%;">Where the work or any of its
+elements is in the public domain under applicable law, that
+status is in no way affected by the license.</p>
+
+<p style="margin-left:9%;"><b>Other Rights</b></p>
+
+<p style="margin-left:21%;">In no way are any of the
+following rights affected by the license:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p>Your fair dealing or fair use rights, or other
+applicable copyright exceptions and limitations;</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p>The author&rsquo;s moral rights;</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p>&bull;</p></td>
+<td width="1%"></td>
+<td width="77%">
+
+
+<p>Rights other persons may have either in the work itself
+or in how the work is used, such as publicity or privacy
+rights.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="13%">
+
+
+<p><b>Notice</b></p></td>
+<td width="1%"></td>
+<td width="77%">
+</td></tr>
+</table>
+
+<p style="margin-left:21%; margin-top: 1em">For any reuse
+or distribution, you must make clear to others the license
+terms of this work.</p>
+
+<p style="margin-left:9%; margin-top: 1em">A copy of the
+full license is included in the file as
+LICENCES/CC-BY-SA-4.0.txt</p>
+
+<h2>DEPENDENCIES
+<a name="DEPENDENCIES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">GNU
+<b>niceload</b> uses Perl, and the Perl modules POSIX, and
+Getopt::Long.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>parallel</b>(1),
+<b>nice</b>(1), <b>uptime</b>(1)</p>
+<hr>
+</body>
+</html>

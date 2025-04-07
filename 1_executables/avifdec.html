@@ -1,0 +1,267 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:22:45 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>AVIFDEC</title>
+
+</head>
+<body>
+
+<h1 align="center">AVIFDEC</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#REPORTING BUGS">REPORTING BUGS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">avifdec -
+decompress an AVIF file to an image file</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>avifdec</b>
+[<i>options</i>] <i>input.avif
+output.</i>[<i>jpg</i>|<i>jpeg</i>|<i>png</i>|<i>y4m</i>]</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>avifdec
+--info</b> <i>input.avif</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>avifdec</b></i>
+decompresses an AVIF file to an image file. Output format
+can be either JPEG, PNG or YUV4MPEG2 (Y4M).</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:18%;">Show syntax help.</p>
+
+<p style="margin-left:9%;"><b>-V</b>, <b>--version</b></p>
+
+<p style="margin-left:18%;">Show the version number.</p>
+
+<p style="margin-left:9%;"><b>-j</b>, <b>--jobs</b>
+<i>J</i></p>
+
+<p style="margin-left:18%;">Number of jobs (worker
+threads), or &lsquo;all&rsquo; to potentially use as many
+cores as possible. (Default: all).</p>
+
+<p style="margin-left:9%;"><b>-c</b>, <b>--codec</b>
+<i>C</i></p>
+
+<p style="margin-left:18%;">Codec to use.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Possible values
+depend on the codecs enabled at build time (see
+<b>--help</b> or <b>--version</b> for the available codecs).
+Default is auto-selected from the available codecs. <br>
+Possible values are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="8%">
+
+
+<p><b>aom</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="8%">
+
+
+<p><b>dav1d</b></p></td>
+<td width="71%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="18%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="2%"></td>
+<td width="8%">
+
+
+<p><b>libgav1</b></p></td>
+<td width="71%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-d</b>, <b>--depth</b>
+<i>D</i></p>
+
+<p style="margin-left:18%;">Output depth, either 8 or 16.
+(PNG only; For y4m, depth is retained, and JPEG is always
+8bpc).</p>
+
+<p style="margin-left:9%;"><b>-q</b>, <b>--quality</b>
+<i>Q</i></p>
+
+<p style="margin-left:18%;">Output quality in 0..100. (JPEG
+only, default: 90).</p>
+
+<p style="margin-left:9%;"><b>--png-compress</b>
+<i>L</i></p>
+
+<p style="margin-left:18%;">PNG compression level in 0..9
+(PNG only; 0=none, 9=max). Defaults to libpng&rsquo;s
+builtin default.</p>
+
+<p style="margin-left:9%;"><b>-u</b>, <b>--upsampling</b>
+<i>U</i></p>
+
+<p style="margin-left:18%;">Chroma upsampling (for
+420/422). One of &lsquo;automatic&rsquo; (default),
+&lsquo;fastest&rsquo;, &lsquo;best&rsquo;,
+&lsquo;nearest&rsquo;, or &lsquo;bilinear&rsquo;.</p>
+
+<p style="margin-left:9%;"><b>-r</b>,
+<b>--raw-color</b></p>
+
+<p style="margin-left:18%;">Output raw RGB values instead
+of multiplying by alpha when saving to opaque formats (JPEG
+only; not applicable to y4m).</p>
+
+<p style="margin-left:9%;"><b>--index</b> <i>I</i></p>
+
+<p style="margin-left:18%;">When decoding an image sequence
+or progressive image, specify which frame index to decode,
+where the first frame has index 0, or &lsquo;all&rsquo; to
+decode all frames. (Default: 0)</p>
+
+<p style="margin-left:9%;"><b>--progressive</b></p>
+
+<p style="margin-left:18%;">Enable progressive AVIF
+processing. If a progressive image is encountered and
+--progressive is passed, avifdec will use --index to choose
+which layer to decode (in progressive order).</p>
+
+<p style="margin-left:9%;"><b>--no-strict</b></p>
+
+<p style="margin-left:18%;">Disable strict decoding, which
+disables strict validation checks and errors.</p>
+
+<p style="margin-left:9%;"><b>-i</b>, <b>--info</b></p>
+
+<p style="margin-left:18%;">Decode all frames and display
+all image information instead of saving to disk.</p>
+
+<p style="margin-left:9%;"><b>--icc</b> <i>FILENAME</i></p>
+
+<p style="margin-left:18%;">Provide an ICC profile payload
+(implies --ignore-icc).</p>
+
+<p style="margin-left:9%;"><b>--ignore-icc</b></p>
+
+<p style="margin-left:18%;">If the input file contains an
+embedded ICC profile, ignore it (no-op if absent).</p>
+
+<p style="margin-left:9%;"><b>--size-limit</b> <i>C</i></p>
+
+<p style="margin-left:18%;">Maximum image size (in total
+pixels) that should be tolerated. (Default: 268435456).</p>
+
+<p style="margin-left:9%;"><b>--dimension-limit</b>
+<i>C</i></p>
+
+<p style="margin-left:18%;">Maximum image dimension (width
+or height) that should be tolerated. Set to 0 to ignore.
+(Default: 32768).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>--</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Signal the end of options. Everything after this is
+interpreted as file names.</p></td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Decompress an
+AVIF file to a PNG file:</p>
+
+<p style="margin-left:18%;">$ <b>avifdec input.avif
+output.png</b></p>
+
+<h2>REPORTING BUGS
+<a name="REPORTING BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Bugs can be
+reported on GitHub at:</p>
+
+
+<p style="margin-left:18%;"><a href="https://github.com/AOMediaCodec/libavif/issues">https://github.com/AOMediaCodec/libavif/issues</a></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>avifenc</b>(1)</p>
+<hr>
+</body>
+</html>

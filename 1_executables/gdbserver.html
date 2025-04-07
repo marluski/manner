@@ -1,0 +1,440 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:44 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GDBSERVER</title>
+
+</head>
+<body>
+
+<h1 align="center">GDBSERVER</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#ENVIRONMENT">ENVIRONMENT</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gdbserver -
+Remote Server for the GNU Debugger</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gdbserver
+<i>comm prog</i> [<i>args</i>...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">gdbserver
+--attach <i>comm pid</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">gdbserver
+--multi <i>comm</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>gdbserver</b></i>
+is a program that allows you to run <small>GDB</small> on a
+different machine than the one which is running the program
+being debugged.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Usage (server
+(target) side):</p>
+
+<p style="margin-left:9%; margin-top: 1em">First, you need
+to have a copy of the program you want to debug put onto the
+target system. The program can be stripped to save space if
+needed, as <b>gdbserver</b> doesn&rsquo;t care about
+symbols. All symbol handling is taken care of by the
+<small>GDB</small> running on the host system.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To use the
+server, you log on to the target system, and run the
+<b>gdbserver</b> program. You must tell it (a) how to
+communicate with <small>GDB,</small> (b) the name of your
+program, and (c) its arguments. The general syntax is:</p>
+
+<p style="margin-left:9%; margin-top: 1em">target&gt;
+gdbserver &lt;comm&gt; &lt;program&gt; [&lt;args&gt;
+...]</p>
+
+<p style="margin-left:9%; margin-top: 1em">For example,
+using a serial port, you might say:</p>
+
+<p style="margin-left:9%; margin-top: 1em">target&gt;
+gdbserver /dev/com1 emacs foo.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">This tells
+<b>gdbserver</b> to debug emacs with an argument of foo.txt,
+and to communicate with <small>GDB</small> via
+<i>/dev/com1</i>. <b>gdbserver</b> now waits patiently for
+the host <small>GDB</small> to communicate with it.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To use a
+<small>TCP</small> connection, you could say:</p>
+
+<p style="margin-left:9%; margin-top: 1em">target&gt;
+gdbserver host:2345 emacs foo.txt</p>
+
+<p style="margin-left:9%; margin-top: 1em">This says pretty
+much the same thing as the last example, except that we are
+going to communicate with the &quot;host&quot;
+<small>GDB</small> via <small>TCP.</small> The
+&quot;host:2345&quot; argument means that we are expecting
+to see a <small>TCP</small> connection from &quot;host&quot;
+to local <small>TCP</small> port 2345. (Currently, the
+&quot;host&quot; part is ignored.) You can choose any number
+you want for the port number as long as it does not conflict
+with any existing <small>TCP</small> ports on the target
+system. This same port number must be used in the host GDBs
+&quot;target remote&quot; command, which will be described
+shortly. Note that if you chose a port number that conflicts
+with another service, <b>gdbserver</b> will print an error
+message and exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gdbserver</b>
+can also attach to running programs. This is accomplished
+via the <b>--attach</b> argument. The syntax is:</p>
+
+<p style="margin-left:9%; margin-top: 1em">target&gt;
+gdbserver --attach &lt;comm&gt; &lt;pid&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>pid</i> is
+the process <small>ID</small> of a currently running
+process. It isn&rsquo;t necessary to point <b>gdbserver</b>
+at a binary for the running process.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To start
+&quot;gdbserver&quot; without supplying an initial command
+to run or process <small>ID</small> to attach, use the
+<b>--multi</b> command line option. In such case you should
+connect using &quot;target extended-remote&quot; to start
+the program you want to debug.</p>
+
+<p style="margin-left:9%; margin-top: 1em">target&gt;
+gdbserver --multi &lt;comm&gt;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Usage (host
+side):</p>
+
+<p style="margin-left:9%; margin-top: 1em">You need an
+unstripped copy of the target program on your host system,
+since <small>GDB</small> needs to examine its symbol tables
+and such. Start up <small>GDB</small> as you normally would,
+with the target program as the first argument. (You may need
+to use the <b>--baud</b> option if the serial line is
+running at anything except 9600 baud.) That is &quot;gdb
+TARGET-PROG&quot;, or &quot;gdb --baud BAUD
+TARGET-PROG&quot;. After that, the only new command you need
+to know about is &quot;target remote&quot; (or &quot;target
+extended-remote&quot;). Its argument is either a device name
+(usually a serial device, like <i>/dev/ttyb</i>), or a
+&quot;HOST:PORT&quot; descriptor. For example:</p>
+
+<p style="margin-left:9%; margin-top: 1em">(gdb) target
+remote /dev/ttyb</p>
+
+<p style="margin-left:9%; margin-top: 1em">communicates
+with the server via serial line <i>/dev/ttyb</i>, and:</p>
+
+<p style="margin-left:9%; margin-top: 1em">(gdb) target
+remote the-target:2345</p>
+
+<p style="margin-left:9%; margin-top: 1em">communicates via
+a <small>TCP</small> connection to port 2345 on host
+&lsquo;the-target&rsquo;, where you previously started up
+<b>gdbserver</b> with the same port number. Note that for
+<small>TCP</small> connections, you must start up
+<b>gdbserver</b> prior to using the &lsquo;target
+remote&rsquo; command, otherwise you may get an error that
+looks something like &lsquo;Connection refused&rsquo;.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gdbserver</b>
+can also debug multiple inferiors at once, described in the
+<small>GDB</small> manual in node &quot;Inferiors
+Connections and Programs&quot; -- shell command &quot;info
+-f gdb -n 'Inferiors Connections and Programs'&quot;. In
+such case use the &quot;extended-remote&quot;
+<small>GDB</small> command variant:</p>
+
+<p style="margin-left:9%; margin-top: 1em">(gdb) target
+extended-remote the-target:2345</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>gdbserver</b> option <b>--multi</b> may or may not be
+used in such case.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">There are three
+different modes for invoking <b>gdbserver</b>:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="71%">
+
+
+<p>Debug a specific program specified by its program
+name:</p> </td>
+<td width="15%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">gdbserver
+&lt;comm&gt; &lt;prog&gt; [&lt;args&gt;...]</p>
+
+<p style="margin-left:14%; margin-top: 1em">The <i>comm</i>
+parameter specifies how should the server communicate with
+<small>GDB</small> ; it is either a device name (to use a
+serial line), a <small>TCP</small> port number
+(&quot;:1234&quot;), or &quot;-&quot; or &quot;stdio&quot;
+to use stdin/stdout of &quot;gdbserver&quot;. Specify the
+name of the program to debug in <i>prog</i>. Any remaining
+arguments will be passed to the program verbatim. When the
+program exits, <small>GDB</small> will close the connection,
+and &quot;gdbserver&quot; will exit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p style="margin-top: 1em">Debug a specific program by
+specifying the process <small>ID</small> of a running
+program:</p> </td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">gdbserver
+--attach &lt;comm&gt; &lt;pid&gt;</p>
+
+<p style="margin-left:14%; margin-top: 1em">The <i>comm</i>
+parameter is as described above. Supply the process
+<small>ID</small> of a running program in <i>pid</i>;
+<small>GDB</small> will do everything else. Like with the
+previous mode, when the process <i>pid</i> exits,
+<small>GDB</small> will close the connection, and
+&quot;gdbserver&quot; will exit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="4%"></td>
+<td width="74%">
+
+
+<p style="margin-top: 1em">Multi-process mode -- debug more
+than one program/process:</p></td>
+<td width="12%">
+</td></tr>
+</table>
+
+<p style="margin-left:14%; margin-top: 1em">gdbserver
+--multi &lt;comm&gt;</p>
+
+<p style="margin-left:14%; margin-top: 1em">In this mode,
+<small>GDB</small> can instruct <b>gdbserver</b> which
+command(s) to run. Unlike the other 2 modes,
+<small>GDB</small> will not close the connection when a
+process being debugged exits, so you can debug several
+processes in the same session.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In each of the
+modes you may specify these options: <b><br>
+--help</b></p>
+
+<p style="margin-left:14%;">List all options, with brief
+explanations.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:14%;">This option causes
+<b>gdbserver</b> to print its version number and exit.</p>
+
+<p style="margin-left:9%;"><b>--attach</b></p>
+
+<p style="margin-left:14%;"><b>gdbserver</b> will attach to
+a running program. The syntax is:</p>
+
+<p style="margin-left:14%; margin-top: 1em">target&gt;
+gdbserver --attach &lt;comm&gt; &lt;pid&gt;</p>
+
+<p style="margin-left:14%; margin-top: 1em"><i>pid</i> is
+the process <small>ID</small> of a currently running
+process. It isn&rsquo;t necessary to point <b>gdbserver</b>
+at a binary for the running process.</p>
+
+<p style="margin-left:9%;"><b>--multi</b></p>
+
+<p style="margin-left:14%;">To start &quot;gdbserver&quot;
+without supplying an initial command to run or process
+<small>ID</small> to attach, use this command line option.
+Then you can connect using &quot;target
+extended-remote&quot; and start the program you want to
+debug. The syntax is:</p>
+
+<p style="margin-left:14%; margin-top: 1em">target&gt;
+gdbserver --multi &lt;comm&gt;</p>
+
+
+<p style="margin-left:9%;"><b>--debug</b>[<b>=option1,option2,...</b>]</p>
+
+<p style="margin-left:14%;">Instruct &quot;gdbserver&quot;
+to display extra status information about the debugging
+process. This option is intended for &quot;gdbserver&quot;
+development and for bug reports to the developers.</p>
+
+<p style="margin-left:14%; margin-top: 1em">Each
+<i>option</i> is the name of a component for which debugging
+should be enabled. The list of possible options is
+<b>all</b>, <b>threads</b>, <b>event-loop</b>,
+<b>remote</b>. The special option <b>all</b> enables all
+components. The option list is processed left to right, and
+an option can be prefixed with the &quot;-&quot; character
+to disable output for that component, so you could
+write:</p>
+
+<p style="margin-left:14%; margin-top: 1em">target&gt;
+gdbserver --debug=all,-event-loop</p>
+
+<p style="margin-left:14%; margin-top: 1em">to turn on
+debug output for all components except <b>event-loop</b>. If
+no options are passed to <b>--debug</b> then this is treated
+as equivalent to <b>--debug=threads</b>. This could change
+in future releases of &quot;gdbserver&quot;.</p>
+
+
+<p style="margin-left:9%;"><b>--debug-file=</b><i>filename</i></p>
+
+<p style="margin-left:14%;">Instruct &quot;gdbserver&quot;
+to send any debug output to the given <i>filename</i>. This
+option is intended for &quot;gdbserver&quot; development and
+for bug reports to the developers.</p>
+
+
+<p style="margin-left:9%;"><b>--debug-format=option1</b>[<b>,option2,...</b>]</p>
+
+<p style="margin-left:14%;">Instruct &quot;gdbserver&quot;
+to include extra information in each line of debugging
+output.</p>
+
+<p style="margin-left:9%;"><b>--wrapper</b></p>
+
+<p style="margin-left:14%;">Specify a wrapper to launch
+programs for debugging. The option should be followed by the
+name of the wrapper, then any command-line arguments to pass
+to the wrapper, then &quot;--&quot; indicating the end of
+the wrapper arguments.</p>
+
+<p style="margin-left:9%;"><b>--once</b></p>
+
+<p style="margin-left:14%;">By default, <b>gdbserver</b>
+keeps the listening <small>TCP</small> port open, so that
+additional connections are possible. However, if you start
+&quot;gdbserver&quot; with the <b>--once</b> option, it will
+stop listening for any further connection attempts after
+connecting to the first <small>GDB</small> session.</p>
+
+<h2>ENVIRONMENT
+<a name="ENVIRONMENT"></a>
+</h2>
+
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for <small>GDB</small> is maintained as a
+Texinfo manual. If the &quot;info&quot; and &quot;gdb&quot;
+programs and <small>GDB</small> &rsquo;s Texinfo
+documentation are properly installed at your site, the
+command</p>
+
+<p style="margin-left:9%; margin-top: 1em">info gdb</p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><i>Using
+<small>GDB: A</small> Guide to the <small>GNU</small>
+Source-Level Debugger</i>, Richard M. Stallman and Roland H.
+Pesch, July 1991.</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (c)
+1988-2024 Free Software Foundation, Inc.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Permission is
+granted to copy, distribute and/or modify this document
+under the terms of the <small>GNU</small> Free Documentation
+License, Version 1.3 or any later version published by the
+Free Software Foundation; with the Invariant Sections being
+&quot;Free Software&quot; and &quot;Free Software Needs Free
+Documentation&quot;, with the Front-Cover Texts being
+&quot;A <small>GNU</small> Manual,&quot; and with the
+Back-Cover Texts as in (a) below.</p>
+
+<p style="margin-left:9%; margin-top: 1em">(a) The
+<small>FSF</small> &rsquo;s Back-Cover Text is: &quot;You
+are free to copy and modify this <small>GNU</small> Manual.
+Buying copies from <small>GNU</small> Press supports the
+<small>FSF</small> in developing <small>GNU</small> and
+promoting software freedom.&quot;</p>
+<hr>
+</body>
+</html>

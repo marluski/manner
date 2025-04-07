@@ -1,0 +1,738 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:09 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>LZ4</title>
+
+</head>
+<body>
+
+<h1 align="center">LZ4</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Difference between lz4 and gzip">Difference between lz4 and gzip</a><br>
+<a href="#Concatenation of .lz4 files">Concatenation of .lz4 files</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#Short commands concatenation">Short commands concatenation</a><br>
+<a href="#Multiple commands">Multiple commands</a><br>
+<a href="#Operation mode">Operation mode</a><br>
+<a href="#Operation modifiers">Operation modifiers</a><br>
+<a href="#Other options">Other options</a><br>
+<a href="#Benchmark mode">Benchmark mode</a><br>
+<a href="#Environment Variables">Environment Variables</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lz4</b> -
+lz4, unlz4, lz4cat - Compress or decompress .lz4 files</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lz4</b>
+[<i>OPTIONS</i>] [-|INPUT-FILE] <i>OUTPUT-FILE</i></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>unlz4</b> is
+equivalent to <b>lz4 -d</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>lz4cat</b> is
+equivalent to <b>lz4 -dcfm</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">When writing
+scripts that need to decompress files, it is recommended to
+always use the name <b>lz4</b> with appropriate arguments
+(<b>lz4 -d</b> or <b>lz4 -dc</b>) instead of the names
+<b>unlz4</b> and <b>lz4cat</b>.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lz4</b> is a
+CLI based on <b>liblz4</b>, an extremely fast implementation
+of lossless compression algorithm. It provides a default
+compression speed of typically &gt; 500 MB/s per core. Speed
+can traded for higher compression ratio, by increasing the
+compression level parameter. While decompression is
+single-threaded, it reaches multiple GB/s, generally fast
+enough to be I/O bound. <b>lz4</b> native file format is the
+<b>.lz4</b> format.</p>
+
+<h3>Difference between lz4 and gzip
+<a name="Difference between lz4 and gzip"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>lz4</b>
+supports a command line syntax similar <i>but not
+identical</i> to <b>gzip(1)</b>. Differences are :</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>lz4</b> compresses a single file by default (see
+<b>-m</b> for multiple files)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>lz4 file1 file2</b> means : compress file1
+<i>into</i> file2</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>lz4 file.lz4</b> will default to decompression (use
+<b>-z</b> to force compression)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>lz4</b> preserves original files (see <b>--rm</b> to
+erase source file on completion)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>lz4</b> shows real-time notification statistics
+during compression or decompression of a single file (use
+<b>-q</b> to silence them)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>When no destination is specified, result is sent on
+implicit output, which depends on <b>stdout</b> status. When
+<b>stdout</b> <i>is Not the console</i>, it becomes the
+implicit output. Otherwise, if <b>stdout</b> is the console,
+the implicit output is <b>filename.lz4</b>.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>It is considered bad practice to rely on implicit output
+in scripts. because the script&acute;s environment may
+change. Always use explicit output in scripts. <b>-c</b>
+ensures that output will be <b>stdout</b>. Conversely,
+providing a destination name, or using <b>-m</b> ensures
+that the output will be either the specified name, or
+<b>filename.lz4</b> respectively.</p></td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em">Default
+behaviors can be modified by opt-in commands, detailed
+below.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p><b>lz4 -m</b> makes it possible to provide multiple
+input filenames, which will be compressed into files using
+suffix <b>.lz4</b>. Progress notifications become disabled
+by default (use <b>-v</b> to enable them). This mode has a
+behavior which more closely mimics <b>gzip</b> command line,
+with the main remaining difference being that source files
+are preserved by default.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Similarly, <b>lz4 -m -d</b> can decompress multiple
+<b>*.lz4</b> files.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>It&acute;s possible to opt-in to erase source files on
+successful compression or decompression, using <b>--rm</b>
+command.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="4%"></td>
+<td width="86%">
+
+
+<p>Consequently, <b>lz4 -m --rm</b> features a behavior
+closer to the <b>gzip</b> one.</p></td></tr>
+</table>
+
+<h3>Concatenation of .lz4 files
+<a name="Concatenation of .lz4 files"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to concatenate <b>.lz4</b> files as is. <b>lz4</b> will
+decompress such files as if they were a single <b>.lz4</b>
+file. For example:</p>
+
+<p style="margin-top: 1em">lz4 file1 &gt; foo.lz4 <br>
+lz4 file2 &gt;&gt; foo.lz4</p>
+
+<p style="margin-left:9%; margin-top: 1em">Then <b>lz4cat
+foo.lz4</b> is equivalent to <b>cat file1 file2</b>.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<h3>Short commands concatenation
+<a name="Short commands concatenation"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">In some cases,
+some options can be expressed using short command <b>-x</b>
+or long command <b>--long-word</b>. Short commands can be
+concatenated together. For example, <b>-d -c</b> is
+equivalent to <b>-dc</b>. Long commands cannot be
+concatenated. They must be clearly separated by a space.</p>
+
+<h3>Multiple commands
+<a name="Multiple commands"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">When multiple
+contradictory commands are issued on a same command line,
+only the latest one will be applied.</p>
+
+<h3>Operation mode
+<a name="Operation mode"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-z
+--compress</b></p>
+
+<p style="margin-left:18%;">Compress. This is the default
+operation mode when no operation mode option is specified,
+no other operation mode is implied from the command name
+(for example, <b>unlz4</b> implies <b>--decompress</b>), nor
+from the input file name (for example, a file extension
+<b>.lz4</b> implies <b>--decompress</b> by default).
+<b>-z</b> can also be used to force compression of an
+already compressed <b>.lz4</b> file.</p>
+
+<p style="margin-left:9%;"><b>-d --decompress
+--uncompress</b></p>
+
+<p style="margin-left:18%;">Decompress. <b>--decompress</b>
+is also the default operation when the input filename has an
+<b>.lz4</b> extension.</p>
+
+<p style="margin-left:9%;"><b>-t --test</b></p>
+
+<p style="margin-left:18%;">Test the integrity of
+compressed <b>.lz4</b> files. The decompressed data is
+discarded. No files are created nor removed.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-b#</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Benchmark mode, using <b>#</b> compression level.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--list</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>List information about .lz4 files. For detailed
+information on files with multiple frames, use <b>-v</b>.
+<b>--list</b> automatically triggers <b>-m</b> modifier.</p></td></tr>
+</table>
+
+<h3>Operation modifiers
+<a name="Operation modifiers"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em"><b>-#</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Compression level, with # being
+any value from 1 to 12. Higher values trade compression
+speed for compression ratio. Values above 12 are considered
+the same as 12. Recommended values are 1 for fast
+compression (default), and 9 for high compression.
+Speed/compression trade-off will vary depending on data to
+compress. Decompression speed remains fast at all
+settings.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--fast[=#]</b></p>
+
+<p style="margin-left:18%;">Switch to ultra-fast
+compression levels. The higher the value, the faster the
+compression speed, at the cost of some compression ratio. If
+<b>=#</b> is not present, it defaults to <b>1</b>. This
+setting overrides compression level if one was set
+previously. Similarly, if a compression level is set after
+<b>--fast</b>, it overrides it.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--best</b></p></td>
+<td width="1%"></td>
+<td width="55%">
+
+
+<p>Set highest compression level. Same as -12.</p></td>
+<td width="27%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>-T#</b>,
+<b>--threads=#</b></p>
+
+<p style="margin-left:18%;">Use <b>#</b> threads for
+compression. When <b>0</b>, or none provided: automatically
+determined from nb of detected cores.</p>
+
+<p style="margin-left:9%;"><b>--favor-decSpeed</b></p>
+
+<p style="margin-left:18%;">Generate compressed data
+optimized for decompression speed. Compressed data will be
+larger as a consequence (typically by &#732;0.5%), while
+decompression speed will be improved by 5-20%, depending on
+use cases. This option only works in combination with very
+high compression levels (&gt;=10).</p>
+
+<p style="margin-left:9%;"><b>-D dictionaryName</b></p>
+
+<p style="margin-left:18%;">Compress, decompress or
+benchmark using dictionary <i>dictionaryName</i>.
+Compression and decompression must use the same dictionary
+to be compatible. Using a different dictionary during
+decompression will either abort due to decompression error,
+or generate a checksum error.</p>
+
+<p style="margin-left:9%;"><b>-f --[no-]force</b></p>
+
+<p style="margin-left:18%;">This option has several
+effects:</p>
+
+<p style="margin-left:18%; margin-top: 1em">If the target
+file already exists, overwrite it without prompting.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When used with
+<b>--decompress</b> and <b>lz4</b> cannot recognize the type
+of the source file, copy the source file as is to standard
+output. This allows <b>lz4cat --force</b> to be used like
+<b>cat (1)</b> for files that have not been compressed with
+<b>lz4</b>.</p>
+
+<p style="margin-left:9%;"><b>-c --stdout
+--to-stdout</b></p>
+
+<p style="margin-left:18%;">Force write to standard output,
+even if it is the console.</p>
+
+<p style="margin-left:9%;"><b>-m --multiple</b></p>
+
+<p style="margin-left:18%;">Multiple input files.
+Compressed file names will be appended a <b>.lz4</b> suffix.
+This mode also reduces notification level. Can also be used
+to list multiple files. <b>lz4 -m</b> has a behavior
+equivalent to <b>gzip -k</b> (it preserves source files by
+default).</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-r</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>operate recursively on directories. This mode also sets
+<b>-m</b> (multiple input files).</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-B#</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Block size [4-7](default : 7)</p></td></tr>
+</table>
+
+<p style="margin-left:18%;"><b>-B4</b>= 64KB ; <b>-B5</b>=
+256KB ; <b>-B6</b>= 1MB ; <b>-B7</b>= 4MB</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>-BI</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Produce independent blocks
+(default)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-BD</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Blocks depend on predecessors (improves compression
+ratio, more noticeable on small blocks)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-BX</b></p></td>
+<td width="5%"></td>
+<td width="82%">
+
+
+<p>Generate block checksums (default:disabled)</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--[no-]frame-crc</b></p>
+
+<p style="margin-left:18%;">Select frame checksum
+(default:enabled)</p>
+
+<p style="margin-left:9%;"><b>--no-crc</b></p>
+
+<p style="margin-left:18%;">Disable both frame and block
+checksums</p>
+
+<p style="margin-left:9%;"><b>--[no-]content-size</b></p>
+
+<p style="margin-left:18%;">Header includes original size
+(default:not present) <br>
+Note : this option can only be activated when the original
+size can be determined, hence for a file. It won&acute;t
+work with unknown source size, such as stdin or pipe.</p>
+
+<p style="margin-left:9%;"><b>--[no-]sparse</b></p>
+
+<p style="margin-left:18%;">Sparse mode support
+(default:enabled on file, disabled on stdout)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-l</b></p></td>
+<td width="6%"></td>
+<td width="74%">
+
+
+<p>Use Legacy format (typically for Linux Kernel
+compression)</p> </td>
+<td width="8%">
+</td></tr>
+</table>
+
+<p style="margin-left:18%;">Note : <b>-l</b> is not
+compatible with <b>-m</b> (<b>--multiple</b>) nor
+<b>-r</b></p>
+
+<h3>Other options
+<a name="Other options"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v
+--verbose</b></p>
+
+<p style="margin-left:18%;">Verbose mode</p>
+
+<p style="margin-left:9%;"><b>-q --quiet</b></p>
+
+<p style="margin-left:18%;">Suppress warnings and real-time
+statistics; specify twice to suppress errors too</p>
+
+<p style="margin-left:9%;"><b>-h -H --help</b></p>
+
+<p style="margin-left:18%;">Display help/long help and
+exit</p>
+
+<p style="margin-left:9%;"><b>-V --version</b></p>
+
+<p style="margin-left:18%;">Display Version number and
+exit</p>
+
+<p style="margin-left:9%;"><b>-k --keep</b></p>
+
+<p style="margin-left:18%;">Preserve source files (default
+behavior)</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>--rm</b></p></td>
+<td width="4%"></td>
+<td width="79%">
+
+
+<p>Delete source files on successful compression or
+decompression</p> </td>
+<td width="3%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p><b>--</b></p></td>
+<td width="4%"></td>
+<td width="79%">
+
+
+<p>Treat all subsequent arguments as files</p></td>
+<td width="3%">
+</td></tr>
+</table>
+
+<h3>Benchmark mode
+<a name="Benchmark mode"></a>
+</h3>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p style="margin-top: 1em"><b>-b#</b></p></td>
+<td width="5%"></td>
+<td width="81%">
+
+
+<p style="margin-top: 1em">Benchmark file(s), using #
+compression level</p></td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-e#</b></p></td>
+<td width="5%"></td>
+<td width="81%">
+
+
+<p>Benchmark multiple compression levels, from b# to e#
+(included)</p> </td>
+<td width="1%">
+</td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="4%">
+
+
+<p><b>-i#</b></p></td>
+<td width="5%"></td>
+<td width="81%">
+
+
+<p>Minimum evaluation time in seconds [1-9] (default :
+3)</p> </td>
+<td width="1%">
+</td></tr>
+</table>
+
+<h3>Environment Variables
+<a name="Environment Variables"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">It&acute;s
+possible to pass some parameters to <b>lz4</b> via
+environment variables. This can be useful in situations
+where <b>lz4</b> is known to be invoked (from a script for
+example) but there is no way to pass <b>lz4</b> parameters
+to influence the compression session. The environment
+variable has higher priority than executable default, but
+lower priority than corresponding runtime command. When set
+as global environment variables, it can be a way to enforce
+personalized defaults different from the executable set
+ones. <b><br>
+LZ4_CLEVEL</b></p>
+
+<p style="margin-left:18%;">specify a default compression
+level that <b>lz4</b> employs for compression when no other
+compression level is specified on command line. Executable
+default is generally <b>1</b>.</p>
+
+<p style="margin-left:9%;"><b>LZ4_NBWORKERS</b></p>
+
+<p style="margin-left:18%;">specify a default number of
+threads that <b>lz4</b> will employ for compression.
+Executable default is generally <b>0</b>, which means
+auto-determined based on local cpu. This functionality is
+only relevant when <b>lz4</b> is compiled with
+multithreading support. The maximum number of workers is
+capped at <b>LZ4_NBWORKERS_MAX</b> (<b>200</b> by
+default).</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Report bugs at:
+https://github.com/lz4/lz4/issues</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Yann Collet</p>
+<hr>
+</body>
+</html>

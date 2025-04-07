@@ -1,0 +1,434 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:11 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#GPG VERIFICATION">GPG VERIFICATION</a><br>
+<a href="#TERMINOLOGY">TERMINOLOGY</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree - Manage
+multiple bootable versioned filesystem trees</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="37%">
+
+
+<p style="margin-top: 1em"><b>ostree</b> {COMMAND}
+[OPTIONS...]</p> </td>
+<td width="54%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">OSTree is a tool
+for managing multiple bootable versioned filesystem trees,
+or just &quot;tree&quot; for short. In the OSTree model,
+operating systems no longer live in the physical
+&quot;/&quot; root directory. Instead, they parallel install
+to the new toplevel /ostree directory. Each installed system
+gets its own /ostree/deploy/<i>stateroot</i> directory.
+(stateroot is the newer term for osname).</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unlike rpm or
+dpkg, OSTree is only aware of complete filesystem trees. It
+has no built-in knowledge of what components went into
+creating the filesystem tree.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to use OSTree in several modes; the most basic form is to
+replicate pre-built trees from a build server. Usually,
+these pre-built trees are derived from packages. You might
+also be using OSTree underneath a higher level tool which
+computes filesystem trees locally.</p>
+
+<p style="margin-left:9%; margin-top: 1em">It must be
+emphasized that OSTree only supports <i>read-only</i> trees.
+To change to a different tree (upgrade, downgrade, install
+software), a new tree is checked out, and a 3-way merge of
+configuration is performed. The currently running tree is
+not ever modified; the new tree will become active on a
+system reboot.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To see the man
+page for a command run <b>man ostree</b> <i>COMMAND</i> or
+<b>man ostree-admin</b> <i>COMMAND</i></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--repo</b></p>
+
+<p style="margin-left:14%;">For most commands, a repository
+is required. If unspecified, the current directory is used
+if it appears to be an OSTree repository. If it isn't,
+either the <b>OSTREE_REPO</b> environment variable is used,
+or the system repository located at
+/sysroot/ostree/repo.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v,
+--verbose</b></p>
+
+<p style="margin-left:14%;">Produce debug level output.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--version</b></p>
+
+<p style="margin-left:14%;">Print version information,
+including the features enabled at compile time, and
+exit.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">System
+administrators will primarily interact with OSTree via the
+subcommand <b>ostree admin</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-cleanup</b>(1)</p>
+
+<p style="margin-left:14%;">Delete untagged deployments and
+repository objects.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-config-diff</b>(1)</p>
+
+<p style="margin-left:14%;">See changes to /etc as compared
+to the current default (from /usr/etc).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-deploy</b>(1)</p>
+
+<p style="margin-left:14%;">Takes a particular commit or
+revision, and sets it up for the next boot.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-init-fs</b>(1)</p>
+
+<p style="margin-left:14%;">Initialize a root filesystem in
+a specified path.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-instutil</b>(1)</p>
+
+<p style="margin-left:14%;">Utility functions intended
+primarily for operating system installation programs</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-os-init</b>(1)</p>
+
+<p style="margin-left:14%;">Initialize the deployment
+location for an operating system with a specified name.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-status</b>(1)</p>
+
+<p style="margin-left:14%;">Show and list the
+deployments.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-switch</b>(1)</p>
+
+<p style="margin-left:14%;">Choose a different ref to track
+from the same remote as the current tree.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-undeploy</b>(1)</p>
+
+<p style="margin-left:14%;">Remove the previously
+<i>INDEX</i> deployed tree from the bootloader
+configuration.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-admin-upgrade</b>(1)</p>
+
+<p style="margin-left:14%;">Download the latest version for
+the current ref, and deploy it.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Both
+administrators and operating system builders may interact
+with OSTree via the regular filesystem manipulation
+commands.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-cat</b>(1)</p>
+
+<p style="margin-left:14%;">Concatenate contents of
+files</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-checkout</b>(1)</p>
+
+<p style="margin-left:14%;">Check out a commit into a
+filesystem tree.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-checksum</b>(1)</p>
+
+<p style="margin-left:14%;">Gives checksum of any file.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-commit</b>(1)</p>
+
+<p style="margin-left:14%;">Given one or more trees, create
+a new commit using those contents.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-config</b>(1)</p>
+
+<p style="margin-left:14%;">Change settings.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-create-usb</b>(1)</p>
+
+<p style="margin-left:14%;">Put the given refs on an
+external drive for P2P distribution.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-diff</b>(1)</p>
+
+<p style="margin-left:14%;">Concisely list differences
+between the given refs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-find-remotes</b>(1)</p>
+
+<p style="margin-left:14%;">Find remotes to serve the given
+refs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-fsck</b>(1)</p>
+
+<p style="margin-left:14%;">Check a repository for
+consistency.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-init</b>(1)</p>
+
+<p style="margin-left:14%;">Initialize a new
+repository.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-log</b>(1)</p>
+
+<p style="margin-left:14%;">Show revision log.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-ls</b>(1)</p>
+
+<p style="margin-left:14%;">List the contents of a given
+commit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-prune</b>(1)</p>
+
+<p style="margin-left:14%;">Search for unreachable
+objects.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-pull-local</b>(1)</p>
+
+<p style="margin-left:14%;">Copy data from source-repo.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-pull</b>(1)</p>
+
+<p style="margin-left:14%;">Download data from remote repo.
+If you have libsoup.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-refs</b>(1)</p>
+
+<p style="margin-left:14%;">List refs.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-remote</b>(1)</p>
+
+<p style="margin-left:14%;">Manipulate remote archive
+configuration.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-reset</b>(1)</p>
+
+<p style="margin-left:14%;">Reset a ref to a previous
+commit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-rev-parse</b>(1)</p>
+
+<p style="margin-left:14%;">Show the SHA256 corresponding
+to a given rev.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-show</b>(1)</p>
+
+<p style="margin-left:14%;">Given an OSTree SHA256
+checksum, display its contents.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-static-delta</b>(1)</p>
+
+<p style="margin-left:14%;">Manage static delta files.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree-summary</b>(1)</p>
+
+<p style="margin-left:14%;">Regenerate the repository
+summary metadata.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">For specific
+examples, please see the man page regarding the specific
+ostree command. For example:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>man ostree
+init</b> or <b>man ostree-admin status</b></p>
+
+<h2>GPG VERIFICATION
+<a name="GPG VERIFICATION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">OSTree supports
+signing commits with GPG. Operations on the system
+repository by default use keyring files in
+/usr/share/ostree/trusted.gpg.d. Any public key in a keyring
+file in that directory will be trusted by the client. No
+private keys should be present in this directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In addition to
+the system repository, OSTree supports two other paths.
+First, there is a gpgkeypath option for remotes, which must
+point to the filename of an ASCII-armored GPG key, or a
+directory containing ASCII-armored GPG keys to import.
+Multiple file and directory paths to import from can be
+specified, as a comma-separated list of paths. This option
+may be specified by using <b>--set</b> in <b>ostree remote
+add</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Second, there is
+support for a per-remote <i>remotename</i>.trustedkeys.gpg
+file stored in the toplevel of the repository (alongside
+objects/ and such). This is particularly useful when
+downloading content that may not be fully trusted (e.g. you
+want to inspect it but not deploy it as an OS), or use it
+for containers. This file is written via <b>ostree remote
+add --gpg-import</b>.</p>
+
+<h2>TERMINOLOGY
+<a name="TERMINOLOGY"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+terms are commonly used throughout the man pages. Terms in
+upper case letters are literals used in command line
+arguments.</p>
+
+<p style="margin-left:9%; margin-top: 1em">BRANCH</p>
+
+<p style="margin-left:14%;">Branch name. Part of a REF.</p>
+
+<p style="margin-left:9%; margin-top: 1em">CHECKSUM</p>
+
+<p style="margin-left:14%;">A SHA256 hash of a object
+stored in the OSTree repository. This can be a content, a
+dirtree, a dirmeta or a commit object. If the SHA256 hash of
+a commit object is meant, the term COMMIT is used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">COMMIT</p>
+
+<p style="margin-left:14%;">A SHA256 hash of a commit
+object.</p>
+
+<p style="margin-left:9%; margin-top: 1em">REF</p>
+
+<p style="margin-left:14%;">A reference to a particular
+commit. References are text files stored in refs/ that name
+(refer to) a particular commit. A reference can only be the
+branch name part, in which case a local reference is used
+(e.g. mybranch/stable). If a remote branch is referred to,
+the remote name followed by a colon and the branch name
+needs to be used (e.g. myremote:mybranch/stable).</p>
+
+<p style="margin-left:9%; margin-top: 1em">REV, REFSPEC</p>
+
+<p style="margin-left:14%;">A specific revision, a commit.
+This can be anything which can be resolved to a commit, e.g.
+a REF or a COMMIT.</p>
+
+<p style="margin-left:9%; margin-top: 1em">SHA256</p>
+
+<p style="margin-left:14%;">A cryptographic hash function
+used to store objects in the OSTree repository. The hashes
+have a length of 256 bites and are typically shown and
+passed to ostree in its 64 ASCII character long hexadecimal
+representation (e.g.
+0fc70ed33cfd7d26fe99ae29afb7682ddd0e2157a4898bd8cfcdc8a03565b870).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree.repo</b>(5)</p>
+<hr>
+</body>
+</html>

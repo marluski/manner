@@ -1,0 +1,314 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:03 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>HUGO-DEPLOY</title>
+
+</head>
+<body>
+
+<h1 align="center">HUGO-DEPLOY</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#OPTIONS INHERITED FROM PARENT COMMANDS">OPTIONS INHERITED FROM PARENT COMMANDS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hugo-deploy -
+Deploy your site to a cloud provider</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hugo deploy
+[flags] [args]</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Deploy your site
+to a cloud provider</p>
+
+<p style="margin-left:9%; margin-top: 1em">See
+https://gohugo.io/hosting-and-deployment/hugo-deploy/ for
+detailed documentation.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--confirm</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>ask for confirmation before making changes to the
+target</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--dryRun</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>dry run</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--force</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>force upload of all files</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-h</b>, <b>--help</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>help for deploy</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--invalidateCDN</b>[=true]</p></td>
+<td width="87%">
+
+
+<p>invalidate the CDN cache listed in the deployment
+target</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--maxDeletes</b>=256</p></td>
+<td width="87%">
+
+
+<p>maximum # of files to delete, or -1 to disable</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--target</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>target deployment from deployments section in config
+file; defaults to the first one</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--workers</b>=10</p></td>
+<td width="87%">
+
+
+<p>number of workers to transfer files. defaults to 10</p></td></tr>
+</table>
+
+<h2>OPTIONS INHERITED FROM PARENT COMMANDS
+<a name="OPTIONS INHERITED FROM PARENT COMMANDS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--clock</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>set the clock used by Hugo, e.g. --clock
+2021-11-06T22:30:00.00+09:00</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--config</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>config file (default is hugo.yaml|json|toml)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--configDir</b>=&quot;config&quot;</p></td>
+<td width="87%">
+
+
+<p>config dir</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-d</b>, <b>--destination</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>filesystem path to write files to</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-e</b>, <b>--environment</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>build environment</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--ignoreVendorPaths</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>ignores any _vendor for module paths matching the given
+Glob pattern</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--logLevel</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>log level (debug|info|warn|error)</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--noBuildLock</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>don&rsquo;t create .hugo_build.lock file</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--quiet</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>build in quiet mode</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-M</b>, <b>--renderToMemory</b>[=false]</p></td>
+<td width="87%">
+
+
+<p>render to memory (mostly useful when running the
+server)</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>-s</b>, <b>--source</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>filesystem path to read files relative from</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p><b>--themesDir</b>=&quot;&quot;</p></td>
+<td width="87%">
+
+
+<p>filesystem path to themes directory</p></td></tr>
+</table>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hugo(1)</b></p>
+<hr>
+</body>
+</html>

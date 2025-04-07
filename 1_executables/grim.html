@@ -1,0 +1,145 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:39 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>grim</title>
+
+</head>
+<body>
+
+<h1 align="center">grim</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grim - grab
+images from a Wayland compositor</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>grim</b>
+[options...] [output-file]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">grim is a
+command-line utility to take screenshots of Wayland
+desktops. For now it requires support for the screencopy
+protocol to work. Support for the xdg-output protocol is
+optional, but improves fractional scaling support.</p>
+
+<p style="margin-left:9%; margin-top: 1em">grim will write
+an image to <i>output-file</i>, or to a timestamped file
+name in <b>$GRIM_DEFAULT_DIR</b> if not specified. If
+<b>$GRIM_DEFAULT_DIR</b> is not set, it falls back first to
+<b>$XDG_PICTURES_DIR</b> and then to the current working
+directory. If <i>output-file</i> is <b>-</b>, grim will
+write the image to the standard output instead.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>
+&lt;factor&gt;</p>
+
+<p style="margin-left:14%;">Set the output image&rsquo;s
+scale factor to <i>factor</i>. By default, the scale factor
+is set to the highest of all outputs.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-g</b>
+&quot;&lt;x&gt;,&lt;y&gt;
+&lt;width&gt;x&lt;height&gt;&quot;</p>
+
+<p style="margin-left:14%;">Set the region to capture, in
+layout coordinates.</p>
+
+<p style="margin-left:14%; margin-top: 1em">If set to
+<b>-</b>, read the region from the standard input
+instead.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-t</b>
+&lt;type&gt;</p>
+
+<p style="margin-left:14%;">Set the output image&rsquo;s
+file format to <i>type</i>. By default, the filetype is set
+to <b>png</b>, valid values are <b>png</b>, <b>jpeg</b> or
+<b>ppm</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-q</b>
+&lt;quality&gt;</p>
+
+<p style="margin-left:14%;">Set the output jpeg&rsquo;s
+filetype compression rate to <i>quality</i>. By default, the
+jpeg quality is <b>80</b>, valid values are between
+0-100.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-l</b>
+&lt;level&gt;</p>
+
+<p style="margin-left:14%;">Set the output PNG&rsquo;s
+filetype compression level to <i>level</i>. By default, the
+PNG compression level is 6 on a scale from 0 to 9. Level 9
+gives the highest compression ratio, but may be slow; level
+1 gives a lower compression ratio, but is faster. Level 0
+does no compression at all, and produces very large files;
+it can be useful when grim is used in a pipeline with other
+commands.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b>
+&lt;output&gt;</p>
+
+<p style="margin-left:14%;">Set the output name to
+capture.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b></p>
+
+<p style="margin-left:14%;">Include cursors in the
+screenshot.</p>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Simon Ser &lt;contact@emersion.fr&gt;, who is assisted by
+other open-source contributors. For more information about
+grim development, see
+&lt;https://sr.ht/&#732;emersion/grim&gt;.</p>
+<hr>
+</body>
+</html>

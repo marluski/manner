@@ -1,0 +1,328 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:27:10 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>HWLOC-DISTRIB</title>
+
+</head>
+<body>
+
+<h1 align="center">HWLOC-DISTRIB</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#RETURN VALUE">RETURN VALUE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hwloc-distrib -
+Build a number of cpu masks distributed on the system</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>hwloc-distrib</b>
+[<i>options</i>] <i>&lt;integer&gt;</i></p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>--single</b></i></p>
+
+<p style="margin-left:18%;">Singlify each output to a
+single CPU.</p>
+
+<p style="margin-left:9%;"><b>--cpuset-output-format</b>
+&lt;hwloc|list|taskset&gt; <b>--cof</b>
+&lt;hwloc|list|taskset&gt;</p>
+
+<p style="margin-left:18%;">Change the format of displayed
+CPU set strings. By default, the hwloc-specific format is
+used. If <i>list</i> is given, the output is a
+comma-separated of numbers or ranges, e.g. 2,4-5,8 . If
+<i>taskset</i> is given, the output is compatible with the
+taskset program (replaces the former <b>--taskset</b>
+option).</p>
+
+<p style="margin-left:9%;"><b>-v --verbose</b></p>
+
+<p style="margin-left:18%;">Verbose messages.</p>
+
+<p style="margin-left:9%;"><b>-i</b> &lt;path&gt;,
+<b>--input</b> &lt;path&gt;</p>
+
+<p style="margin-left:18%;">Read the topology from
+&lt;path&gt; instead of discovering the topology of the
+local machine.</p>
+
+<p style="margin-left:18%; margin-top: 1em">If &lt;path&gt;
+is a file, it may be a XML file exported by a previous hwloc
+program. If &lt;path&gt; is &quot;-&quot;, the standard
+input may be used as a XML file.</p>
+
+<p style="margin-left:18%; margin-top: 1em">On Linux,
+&lt;path&gt; may be a directory containing the topology
+files gathered from another machine topology with
+hwloc-gather-topology.</p>
+
+<p style="margin-left:18%; margin-top: 1em">On x86,
+&lt;path&gt; may be a directory containing a cpuid dump
+gathered with hwloc-gather-cpuid.</p>
+
+<p style="margin-left:18%; margin-top: 1em">When the
+archivemount program is available, &lt;path&gt; may also be
+a tarball containing such Linux or x86 topology files.</p>
+
+<p style="margin-left:9%;"><b>-i</b> &lt;specification&gt;,
+<b>--input</b> &lt;specification&gt;</p>
+
+<p style="margin-left:18%;">Simulate a fake hierarchy
+(instead of discovering the topology on the local machine).
+If &lt;specification&gt; is &quot;node:2 pu:3&quot;, the
+topology will contain two NUMA nodes with 3 processing units
+in each of them. The &lt;specification&gt; string must end
+with a number of PUs.</p>
+
+<p style="margin-left:9%;"><b>--if</b> &lt;format&gt;,
+<b>--input-format</b> &lt;format&gt;</p>
+
+<p style="margin-left:18%;">Enforce the input in the given
+format, among <b>xml</b>, <b>fsroot</b>, <b>cpuid</b> and
+<b>synthetic</b>.</p>
+
+<p style="margin-left:9%;"><b>--ignore</b> &lt;type&gt;</p>
+
+<p style="margin-left:18%;">Ignore all objects of type
+&lt;type&gt; in the topology.</p>
+
+<p style="margin-left:9%;"><b>--from</b> &lt;type&gt;</p>
+
+<p style="margin-left:18%;">Distribute starting from
+objects of the given type instead of from the top of the
+topology hierarchy, i.e. ignoring the structure given by
+objects above.</p>
+
+<p style="margin-left:18%; margin-top: 1em">&lt;type&gt;
+cannot be among NUMANode, I/O or Misc types.</p>
+
+<p style="margin-left:9%;"><b>--to</b> &lt;type&gt;</p>
+
+<p style="margin-left:18%;">Distribute down to objects of
+the given type instead of down to the bottom of the topology
+hierarchy, i.e. ignoring the structure given by objects
+below. This may be useful if some latitude is desired for
+the binding, e.g. just bind several processes to each
+package without specifying a single core for each of
+them.</p>
+
+<p style="margin-left:18%; margin-top: 1em">&lt;type&gt;
+cannot be among NUMANode, I/O or Misc types.</p>
+
+<p style="margin-left:9%;"><b>--at</b> &lt;type&gt;</p>
+
+<p style="margin-left:18%;">Distribute among objects of the
+given type. This is equivalent to specifying both
+<b>--from</b> and <b>--to</b> at the same time.</p>
+
+<p style="margin-left:9%;"><b>--reverse</b></p>
+
+<p style="margin-left:18%;">Distribute by starting with the
+last objects first, and singlify CPU sets by keeping the
+last bit (instead of the first bit).</p>
+
+<p style="margin-left:9%;"><b>--restrict</b>
+&lt;cpuset&gt;</p>
+
+<p style="margin-left:18%;">Restrict the topology to the
+given cpuset. This removes some PUs and their now-child-less
+parents.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Beware that
+restricting the PUs in a topology may change the logical
+indexes of many objects, including NUMA nodes.</p>
+
+<p style="margin-left:9%;"><b>--restrict</b>
+nodeset=&lt;nodeset&gt;</p>
+
+<p style="margin-left:18%;">Restrict the topology to the
+given nodeset (unless <b>--restrict-flags</b> specifies
+something different). This removes some NUMA nodes and their
+now-child-less parents.</p>
+
+<p style="margin-left:18%; margin-top: 1em">Beware that
+restricting the NUMA nodes in a topology may change the
+logical indexes of many objects, including PUs.</p>
+
+<p style="margin-left:9%;"><b>--restrict-flags</b>
+&lt;flags&gt;</p>
+
+<p style="margin-left:18%;">Enforce flags when restricting
+the topology. Flags may be given as numeric values or as a
+comma-separated list of flag names that are passed to
+<i>hwloc_topology_restrict()</i>. Those names may be
+substrings of actual flag names as long as a single one
+matches, for instance <b>bynodeset,memless</b>. The default
+is <b>0</b> (or <b>none</b>).</p>
+
+<p style="margin-left:9%;"><b>--disallowed</b></p>
+
+<p style="margin-left:18%;">Include objects disallowed by
+administrative limitations.</p>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Report version and exit.</p>
+
+<p style="margin-left:9%;"><b>-h --help</b></p>
+
+<p style="margin-left:18%;">Display help message and
+exit.</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">hwloc-distrib
+generates a series of CPU masks corresponding to a
+distribution of a given number of elements over the topology
+of the machine. The distribution is done recursively from
+the top of the hierarchy (or from the level specified by
+option <b>--from</b>) down to the bottom of the hierarchy
+(or down to the level specified by option <b>--to</b>, or
+until only one element remains), splitting the number of
+elements at each encountered hierarchy level not ignored by
+options <b>--ignore</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This can e.g. be
+used to distribute a set of processes hierarchically
+according to the topology of a machine. These masks can be
+used with hwloc-bind(1).</p>
+
+<p style="margin-left:9%; margin-top: 1em">On hybrid CPUs
+(or asymmetric platforms), distribution may be suboptimal
+since the number of cores or PUs inside packages or below
+caches may vary (the top-down recursive partitioning ignores
+these numbers until reaching their levels). Hence it is
+recommended to distribute only inside a single homogeneous
+domain. For instance on a CPU with energy-efficient E-cores
+and high-performance P-cores, one should distribute
+separately N tasks on E-cores and M tasks on P-cores instead
+of trying to distribute directly M+N tasks on the entire
+CPUs.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>NOTE:</b> It
+is highly recommended that you read the hwloc(7) overview
+page before reading this man page. Most of the concepts
+described in hwloc(7) directly apply to the hwloc-bind
+utility.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">hwloc-distrib&rsquo;s
+operation is best described through several examples.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If 4 processes
+have to be distributed across a machine, their CPU masks may
+be obtained with:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-distrib
+4 <br>
+0x0000000f <br>
+0x00000f00 <br>
+0x000000f0 <br>
+0x0000f000</p>
+
+<p style="margin-left:9%; margin-top: 1em">To distribute
+only among the second package, the topology should be
+restricted:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-distrib
+--restrict $(hwloc-calc package:1) 4 <br>
+0x00000010 <br>
+0x00000020 <br>
+0x00000040 <br>
+0x00000080</p>
+
+<p style="margin-left:9%; margin-top: 1em">To get a single
+processor of each CPU masks (prevent migration in case of
+binding)</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-distrib
+4 --single <br>
+0x00000001 <br>
+0x00000100 <br>
+0x00000010 <br>
+0x00001000</p>
+
+<p style="margin-left:9%; margin-top: 1em">Each output line
+may be converted independently with hwloc-calc:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-distrib
+4 --single | hwloc-calc --oo -q -I pu <br>
+PU:0 <br>
+PU:8 <br>
+PU:4 <br>
+PU:12</p>
+
+<p style="margin-left:9%; margin-top: 1em">To convert the
+output into a list of processors that may be passed to
+dplace -c inside a mpirun command line:</p>
+
+<p style="margin-left:9%; margin-top: 1em">$ hwloc-distrib
+4 --single | xargs hwloc-calc -I pu <br>
+0,8,4,16</p>
+
+<h2>RETURN VALUE
+<a name="RETURN VALUE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Upon successful
+execution, hwloc-distrib displays one or more CPU mask
+strings. The return value is 0.</p>
+
+<p style="margin-left:9%; margin-top: 1em">hwloc-distrib
+will return nonzero if any kind of error occurs, such as
+(but not limited to) failure to parse the command line.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+ 
+<p style="margin-left:9%; margin-top: 1em">hwloc(7)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,510 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:07 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>SCGCHECK</title>
+
+</head>
+<body>
+
+<h1 align="center">SCGCHECK</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#Device naming">Device naming</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#FILES">FILES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#NOTES">NOTES</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#BUGS">BUGS</a><br>
+<a href="#CREDITS">CREDITS</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">scgcheck - check
+and validate the ABI of libscg</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>scgcheck</b>
+[ <i>options</i> ]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>Scgcheck</b>
+is used to check and verify the Application Binary Interface
+of libscg.</p>
+
+<h3>Device naming
+<a name="Device naming"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">Most users do
+not need to care about device naming at all, as in
+<b>-auto</b> mode, <b>scgcheck</b> implements <b>auto
+target</b> support and automagically finds a test drive in
+case that exactly one CD-ROM type drive is available in the
+system.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-version</b></p>
+
+<p style="margin-left:18%;">Print version information and
+exit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>-auto</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Instead of asking to confirm each test before runing it,
+<b>scgcheck</b> tries to do a fully automated test.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>dev=</b><i>target</i></p>
+
+<p style="margin-left:18%;">Set the SCSI target for the
+device, see notes above. A typical target device
+specification is <b>dev=</b><i>1,6,0</i> . If a filename
+must be provided together with the numerical target
+specification, the filename is implementation specific. The
+correct filename in this case can be found in the system
+specific manuals of the target operating system. On a
+<i>FreeBSD</i> system without <i>CAM</i> support, you need
+to use the control device (e.g. <i>/dev/rcd0.ctl</i>). A
+correct device specification in this case may be
+<b>dev=</b><i>/dev/rcd0.ctl:@</i> .</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>General SCSI
+addressing</b> <br>
+The <i>target device</i> to the <b>dev=</b> option refers to
+<i>scsibus</i>/<i>target</i>/<i>lun</i> of the device.
+Communication on <i>SunOS</i> is done with the SCSI general
+driver <b>scg.</b> Other operating systems are using a
+library simulation of this driver. Possible syntax is:
+<b>dev=</b> <i>scsibus</i>,<i>target</i>,<i>lun</i> or
+<b>dev=</b> <i>target</i>,<i>lun</i>. In the latter case,
+the device has to be connected to the default SCSI bus of
+the machine. <i>Scsibus</i>, <i>target</i> and <i>lun</i>
+are integer numbers. Some operating systems or SCSI
+transport implementations may require to specify a filename
+in addition. In this case the correct syntax for the device
+is: <b>dev=</b>
+<i>devicename</i>:<i>scsibus</i>,<i>target</i>,<i>lun</i> or
+<b>dev=</b> <i>devicename</i>:<i>target</i>,<i>lun</i>. If
+the name of the device node that has been specified on such
+a system refers to exactly one SCSI device, a shorthand in
+the form <b>dev=</b> <i>devicename</i>:<i>@</i> or
+<b>dev=</b> <i>devicename</i>:<i>@</i>,<i>lun</i> may be
+used instead of <b>dev=</b>
+<i>devicename</i>:<i>scsibus</i>,<i>target</i>,<i>lun</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Remote SCSI
+addressing</b> <br>
+To access remote SCSI devices, you need to prepend the SCSI
+device name by a remote device indicator. The remote device
+indicator is either <b>REMOTE:</b><i>user@host:</i> or
+<b>REMOTE:</b><i>host:</i> A valid remote SCSI device name
+may be: <b>REMOTE:</b><i>user@host:</i> to allow remote SCSI
+bus scanning or <b>REMOTE:</b><i>user@host:1,0,0</i> to
+access the SCSI device at <i>host</i> connected to SCSI bus
+# 1,target 0, lun 0. In order to allow remote access to a
+specific <i>host</i>, the <b>rscsi</b>(1) program needs to
+be present and configured on the <i>host</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Alternate
+SCSI transports <br>
+ATAPI</b> drives are just <b>SCSI</b> drives that inherently
+use the <i>ATA packet interface</i> as <b>SCSI</b> command
+transport layer build into the IDE (ATA) transport. You may
+need to specify an alternate transport layer on the command
+line if your OS does not implement a fully integrated kernel
+driver subsystem that allows to access any drive using
+<b>SCSI</b> commands via a single unique user interface.</p>
+
+<p style="margin-left:18%; margin-top: 1em">To access SCSI
+devices via alternate transport layers, you need to prepend
+the SCSI device name by a transport layer indicator. The
+transport layer indicator may be something like
+<b>USCSI:</b> or <b>ATAPI:</b>. To get a list of supported
+transport layers for your platform, use <b>dev=</b>
+<i>HELP</i>:</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Portability
+Background</b> <br>
+To make <b>scgcheck</b> portable to all <small>UNIX</small>
+platforms, the syntax <b>dev=</b>
+<i>devicename</i>:<i>scsibus</i>,<i>target</i>,<i>lun</i> is
+preferred as it hides OS specific knowledge about device
+names from the user. A specific OS may not necessarily
+support a way to specify a real device file name nor a way
+to specify <i>scsibus</i>,<i>target</i>,<i>lun</i>.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><i>Scsibus</i>
+0 is the default SCSI bus on the machine. Watch the boot
+messages for more information or look into
+<b>/var/adm/messages</b> for more information about the SCSI
+configuration of your machine. If you have problems to
+figure out what values for
+<i>scsibus</i>,<i>target</i>,<i>lun</i> should be used, try
+the <b>-scanbus</b> option of <b>scgcheck</b> described
+below.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>Autotarget
+Mode</b> <br>
+If no <b>dev=</b> option is present, or if it only contains
+a transport specifyer but no address notation,
+<b>scgcheck</b> tries to scan the SCSI address space for
+CD-ROM drives. If exactly one is found, this is used by
+default.</p>
+
+<p style="margin-left:9%;"><b>timeout=</b><i>#</i></p>
+
+<p style="margin-left:18%;">Set the default SCSI command
+timeout value to <i>#</i> seconds. The default SCSI command
+timeout is the minimum timeout used for sending SCSI
+commands. If a SCSI command fails due to a timeout, you may
+try to raise the default SCSI command timeout above the
+timeout value of the failed command. If the command runs
+correctly with a raised command timeout, please report the
+better timeout value and the corresponding command to the
+author of the program. If no <i>timeout</i> option is
+present, a default timeout of 40 seconds is used.</p>
+
+<p style="margin-left:9%;"><b>debug=</b><i>#,</i>
+<b>-d</b></p>
+
+<p style="margin-left:18%;">Set the misc debug value to #
+(with debug=#) or increment the misc debug level by one
+(with -d). If you specify <i>-dd,</i> this equals to
+<b>debug=</b><i>2.</i> This may help to find problems while
+opening a driver for libscg. as well as with sector sizes
+and sector types. Using <b>-debug</b> slows down the process
+and may be the reason for a buffer underrun.</p>
+
+<p style="margin-left:9%;"><b>kdebug=</b>#, <b>kd=</b>#</p>
+
+<p style="margin-left:18%;">Tell the <b>scg</b>-driver to
+modify the kernel debug value while SCSI commands are
+running.</p>
+
+<p style="margin-left:9%;"><b>scgopts=</b><i>list</i></p>
+
+<p style="margin-left:18%;">A comma separated list of SCSI
+options that are handled by libscg. The implemented options
+may be uptated indepentendly from applications. Currently,
+one option: <b>ignore-resid</b> is supported to work around
+a Linux kernel bug.</p>
+
+<p style="margin-left:9%;"><b>-silent</b>, <b>-s</b></p>
+
+<p style="margin-left:18%;">Do not print out a status
+report for failed SCSI commands.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-v</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Increment the level of general verbosity by one. This is
+used e.g. to display the progress of the process.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>-V</b></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Increment the verbose level with respect of SCSI command
+transport by one. This helps to debug problems during the
+process, that occur in the CD-Recorder. If you get
+incomprehensible error messages you should use this flag to
+get more detailed output. <b>-VV</b> will show data buffer
+content in addition. Using <b>-V</b> or <b>-VV</b> slows
+down the process.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>f=</b><i>file</i></p></td>
+<td width="1%"></td>
+<td width="82%">
+
+
+<p>Specify the log file to be used instead of
+<i>check.log</i>.</p> </td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<h2>FILES
+<a name="FILES"></a>
+</h2>
+
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdrecord</b>(1),
+<b>readcd</b>(1), <b>mkisofs</b>(1), <b>scg</b>(7).</p>
+
+<h2>NOTES
+<a name="NOTES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">When using
+<b>scgcheck</b> with the broken <b>Linux SCSI generic
+driver.</b> You should note that <b>scgcheck</b> uses a
+hack, that tries to emulate the functionality of the scg
+driver. Unfortunately, the sg driver on <b>Linux</b> has
+several severe bugs:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p style="margin-top: 1em">&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">It cannot see if a SCSI command
+could not be sent at all.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>It cannot get the SCSI status byte. <b>Scgcheck</b> for
+that reason cannot report failing SCSI commands in some
+situations.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>It cannot get real DMA count of transfer.
+<b>Scgcheck</b> cannot tell you if there is an DMA residual
+count.</p> </td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>It cannot get number of bytes valid in auto sense data.
+<b>Scgcheck</b> cannot tell you if device transfers no sense
+data at all.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="1%">
+
+
+<p>&bull;</p></td>
+<td width="8%"></td>
+<td width="82%">
+
+
+<p>It fetches to few data in auto request sense
+(CCS/SCSI-2/SCSI-3 needs &gt;= 18).</p></td></tr>
+</table>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">A typical error
+message for a SCSI command looks like:</p>
+
+<p style="margin-left:18%; margin-top: 1em">scgcheck: I/O
+error. test unit ready: scsi sendcmd: no error <br>
+CDB: 00 20 00 00 00 00 <br>
+status: 0x2 (CHECK CONDITION) <br>
+Sense Bytes: 70 00 05 00 00 00 00 0A 00 00 00 00 25 00 00 00
+00 00 <br>
+Sense Key: 0x5 Illegal Request, Segment 0 <br>
+Sense Code: 0x25 Qual 0x00 (logical unit not supported) Fru
+0x0 <br>
+Sense flags: Blk 0 (not valid) <br>
+cmd finished after 0.002s timeout 40s</p>
+
+<p style="margin-left:9%; margin-top: 1em">The first line
+gives information about the transport of the command. The
+text after the first colon gives the error text for the
+system call from the view of the kernel. It usually is:
+<b>I/O error</b> unless other problems happen. The next
+words contain a short description for the SCSI command that
+fails. The rest of the line tells you if there were any
+problems for the transport of the command over the SCSI bus.
+<b>fatal error</b> means that it was not possible to
+transport the command (i.e. no device present at the
+requested SCSI address).</p>
+
+<p style="margin-left:9%; margin-top: 1em">The second line
+prints the SCSI command descriptor block for the failed
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The third line
+gives information on the SCSI status code returned by the
+command, if the transport of the command succeeds. This is
+error information from the SCSI device.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The fourth line
+is a hex dump of the auto request sense information for the
+command.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The fifth line
+is the error text for the sense key if available, followed
+by the segment number that is only valid if the command was
+a <i>copy</i> command. If the error message is not directly
+related to the current command, the text <i>deferred
+error</i> is appended.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The sixth line
+is the error text for the sense code and the sense qualifier
+if available. If the type of the device is known, the sense
+data is decoded from tables in <i>scsierrs.c</i> . The text
+is followed by the error value for a field replaceable
+unit.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The seventh line
+prints the block number that is related to the failed
+command and text for several error flags. The block number
+may not be valid.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The eight line
+reports the timeout set up for this command and the time
+that the command realy needed to complete.</p>
+
+<h2>BUGS
+<a name="BUGS"></a>
+</h2>
+
+
+<h2>CREDITS
+<a name="CREDITS"></a>
+</h2>
+
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Joerg Schilling
+<br>
+Seestr. 110 <br>
+D-13353 Berlin <br>
+Germany</p>
+
+<p style="margin-left:9%; margin-top: 1em">Additional
+information can be found on: <br>
+http://cdrecord.org/private/cdrecord.html</p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+support questions, send them to:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdrtools-support@lists.sourceforge.net</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If you have
+definitely found a bug, send a mail to:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>cdrtools-developers@lists.sourceforge.net</b>
+<br>
+or <b>joerg.schilling@fokus.fraunhofer.de</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">To subscribe,
+use:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>https://lists.sourceforge.net/lists/listinfo/cdrtools-developers</b>
+<br>
+or
+<b>https://lists.sourceforge.net/lists/listinfo/cdrtools-support</b></p>
+<hr>
+</body>
+</html>

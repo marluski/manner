@@ -1,0 +1,134 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:29:14 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>OSTREE CREATE-USB</title>
+
+</head>
+<body>
+
+<h1 align="center">OSTREE CREATE-USB</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLE">EXAMPLE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">ostree-create-usb
+- Put the given refs on an external drive for P2P
+distribution.</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="81%">
+
+
+<p style="margin-top: 1em"><b>ostree create-usb</b>
+[OPTIONS...] {MOUNT-PATH} {COLLECTION-ID&nbsp;REF}
+[COLLECTION-ID&nbsp;REF...]</p> </td>
+<td width="10%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This command
+creates a repository in MOUNT-PATH and pulls the given
+REF(s) into it so they can be found and pulled from (perhaps
+by another computer that's offline). See
+<b>ostree-find-remotes</b>(1) for more information on P2P
+distribution.</p>
+
+<p style="margin-left:9%; margin-top: 1em">In order for
+ostree to pull refs from a mounted filesystem (such as a USB
+drive) the repo must be in a standard location.
+Specifically, subdirectories of .ostree/repos.d are checked,
+then .ostree/repo, ostree/repo, and var/lib/flatpak/repo are
+checked. By default <b>ostree create-usb</b> uses
+.ostree/repo, but if you specify another location using
+<b>--destination-repo</b> a symbolic link will be created
+for you in .ostree/repos.d.</p>
+
+<p style="margin-left:9%; margin-top: 1em">This command
+will regenerate the summary file in the destination repo so
+that it stays accurate, so you shouldn't try to use summary
+signatures in the destination repo. This shouldn't be a
+concern because clients that support pulling from USB mounts
+use signed per-repo and per-commit metadata instead of
+summary signatures.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disable-fsync</b></p>
+
+<p style="margin-left:14%;">Do not invoke fsync().</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--destination-repo</b>=DEST</p>
+
+<p style="margin-left:14%;">Create the repository in DEST
+under MOUNT-PATH, rather than the default location.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--commit</b>=COMMIT</p>
+
+<p style="margin-left:14%;">Pull COMMIT instead of whatever
+REF points to. This can only be used if a single ref is
+specified.</p>
+
+<h2>EXAMPLE
+<a name="EXAMPLE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree
+--repo=/var/lib/flatpak/repo create-usb
+/run/media/mwleeds/f6d04c7a-60f6-4ba3-bb96-0f40498675be
+com.exampleos.Apps app/org.kde.Khangman/x86_64/stable
+com.exampleos.Apps ostree-metadata com.exampleos.Apps
+appstream/x86_64</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">5 metadata, 213
+content objects imported; 1 KiB transferred in 1 seconds
+Copied 3/3 refs successfully from
+&lsquo;/var/lib/flatpak/repo&rsquo; to
+&lsquo;.ostree/repo&rsquo; repository in
+&lsquo;/run/media/mwleeds/f6d04c7a-60f6-4ba3-bb96-0f40498675be&rsquo;.</p>
+<hr>
+</body>
+</html>

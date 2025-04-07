@@ -1,0 +1,180 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:51 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GTK4-IMAGE-TOOL</title>
+
+</head>
+<body>
+
+<h1 align="center">GTK4-IMAGE-TOOL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#COMMANDS">COMMANDS</a><br>
+<a href="#Information">Information</a><br>
+<a href="#Showing">Showing</a><br>
+<a href="#Compare">Compare</a><br>
+<a href="#Conversion">Conversion</a><br>
+<a href="#Relabeling">Relabeling</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">gtk4-image-tool
+- Image Utility</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-image-tool</b>
+&lt;COMMAND&gt; [OPTIONS...] &lt;FILE&gt;...</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-image-tool</b>
+compare [OPTIONS...] &lt;FILE1&gt; &lt;FILE2&gt; <b><br>
+gtk4-image-tool</b> convert [OPTIONS...] &lt;FILE1&gt;
+&lt;FILE2&gt; <b><br>
+gtk4-image-tool</b> info [OPTIONS...] &lt;FILE&gt; <b><br>
+gtk4-image-tool</b> relabel [OPTIONS...] &lt;FILE1&gt;
+&lt;FILE2&gt; <b><br>
+gtk4-image-tool</b> show [OPTIONS...] &lt;FILE&gt;...</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gtk4-image-tool</b>
+can perform various operations on images.</p>
+
+<h2>COMMANDS
+<a name="COMMANDS"></a>
+</h2>
+
+
+<h3>Information
+<a name="Information"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>info</b>
+command shows general information about the image, such as
+its format and color state.</p>
+
+<h3>Showing
+<a name="Showing"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The <b>show</b>
+command displays one or more images, side-by-side.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--undecorated</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Removes window
+decorations. This is meant for rendering of exactly the
+image without any titlebar.</p>
+
+<h3>Compare
+<a name="Compare"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>compare</b> command compares two images. If any
+differences are found, the exit code is 1. If the images are
+identical, it is 0.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--output=FILE</b></p>
+
+<p style="margin-left:13%;">Save the differences as a png
+image in <b>FILE</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--quiet</b></p>
+
+<p style="margin-left:13%;">Don't write results to
+stdout.</p>
+
+<h3>Conversion
+<a name="Conversion"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>convert</b> command converts the image to a different
+format or color state.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--format=FORMAT</b></p>
+
+<p style="margin-left:13%;">Convert to the given format.
+The supported formats can be listed with
+<b>--format=list</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--color-state=COLORSTATE</b></p>
+
+<p style="margin-left:13%;">Convert to the given color
+state. The supported color states can be listed with
+<b>--format=list</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--cicp=CICP</b></p>
+
+<p style="margin-left:13%;">Convert to a color state that
+is specified as a cicp tuple. The cicp tuple must be
+specified as four numbers, separated by /, e.g.
+1/13/6/0.</p>
+
+<h3>Relabeling
+<a name="Relabeling"></a>
+</h3>
+
+
+<p style="margin-left:9%; margin-top: 1em">The
+<b>relabel</b> command changes the color state of an image
+without conversion. This can be useful to produce wrong
+color renderings for diagnostics.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--color-state=COLORSTATE</b></p>
+
+<p style="margin-left:13%;">Relabel to the given color
+state. The supported color states can be listed with
+<b>--format=list</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--cicp=CICP</b></p>
+
+<p style="margin-left:13%;">Relabel to a color state that
+is specified as a cicp tuple. The cicp tuple must be
+specified as four numbers, separated by /, e.g.
+1/13/6/0.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK BUILD-BUNDL</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK BUILD-BUNDL</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-build-bundle
+- Create a single-file bundle from a local repository</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em"><b>flatpak build-bundle</b>
+[OPTION...] LOCATION FILENAME NAME [BRANCH]</p></td>
+<td width="9%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Creates a
+single-file named FILENAME for the application (or runtime)
+named NAME in the repository at LOCATION. If a BRANCH is
+specified, this branch of the application is used.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The collection
+ID set on the repository at LOCATION (if set) will be used
+for the bundle.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Unless
+<b>--oci</b> is used, the format of the bundle file is that
+of an ostree static delta (against an empty base) with some
+flatpak specific metadata for the application icons and
+appdata.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--runtime</b></p>
+
+<p style="margin-left:14%;">Export a runtime instead of an
+application.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--arch=ARCH</b></p>
+
+<p style="margin-left:14%;">The arch to create a bundle
+for. See <b>flatpak --supported-arches</b> for architectures
+supported by the host.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--repo-url=URL</b></p>
+
+<p style="margin-left:14%;">The URL for the repository from
+which the application can be updated. Installing the bundle
+will automatically configure a remote for this URL.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--runtime-repo=URL</b></p>
+
+<p style="margin-left:14%;">The URL for a .flatpakrepo file
+that contains the information about the repository that
+supplies the runtimes required by the app.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-keys=FILE</b></p>
+
+<p style="margin-left:14%;">Add the GPG key from FILE (use
+- for stdin).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-homedir=PATH</b></p>
+
+<p style="margin-left:14%;">GPG Homedir to use when looking
+for keyrings.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--from-commit=COMMIT</b></p>
+
+<p style="margin-left:14%;">The OSTree commit to create a
+delta bundle from.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--oci</b></p>
+
+<p style="margin-left:14%;">Export to an OCI image instead
+of a Flatpak bundle.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+build-bundle /var/lib/flatpak/repo gnome-calculator.flatpak
+org.gnome.Calculator stable</b></p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+build-bundle &#732;/.local/share/flatpak/repo
+gnome-calculator.flatpak org.gnome.Calculator stable</b></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree</b>(1),
+<b>flatpak</b>(1), <b>flatpak-build-init</b>(1),
+<b>flatpak-build</b>(1), <b>flatpak-build-finish</b>(1),
+<b>flatpak-build-import-bundle</b>(1),
+<b>flatpak-build-update-repo</b>(1)</p>
+<hr>
+</body>
+</html>

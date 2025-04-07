@@ -1,0 +1,395 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:30:15 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>slurp</title>
+
+</head>
+<body>
+
+<h1 align="center">slurp</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#COLORS">COLORS</a><br>
+<a href="#FORMAT">FORMAT</a><br>
+<a href="#KEYBOARD CONTROLS">KEYBOARD CONTROLS</a><br>
+<a href="#AUTHORS">AUTHORS</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">slurp - select a
+region in a Wayland compositor</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>slurp</b>
+[options...]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">slurp is a
+command-line utility to select a region from Wayland
+compositors which support the layer-shell protocol. It lets
+the user hold the pointer to select, or click to cancel the
+selection.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the standard
+input is not a TTY or the -r option is used, slurp will read
+a list of predefined rectangles for quick selection. Each
+line must be in the form &quot;&lt;x&gt;,&lt;y&gt;
+&lt;width&gt;x&lt;height&gt; [label]&quot;. The label is
+optional and can be any string that doesn&rsquo;t contain
+newlines. It can be accessed using the &quot;%l&quot;
+sequence in a format string.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If the
+<i>Esc</i> key is pressed, selection is cancelled. If the
+<i>Space</i> key is held, the selection is moved instead of
+being resized.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:14%;">Show help message and quit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-d</b></p>
+
+<p style="margin-left:14%;">Display dimensions of
+selection.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>
+<i>color</i></p>
+
+<p style="margin-left:14%;">Set background color. See
+<b>COLORS</b> for more detail.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-c</b>
+<i>color</i></p>
+
+<p style="margin-left:14%;">Set border color. See
+<b>COLORS</b> for more detail.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>
+<i>color</i></p>
+
+<p style="margin-left:14%;">Set selection color. See
+<b>COLORS</b> for more detail.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-B</b>
+<i>color</i></p>
+
+<p style="margin-left:14%;">Set color for highlighting
+predefined rectangles from standard input when not
+selected.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-F</b>
+<i>font family</i></p>
+
+<p style="margin-left:14%;">Set the font family name when
+displaying the dimensions box. Only useful when combined
+with the -d option. The available font family names
+guaranteed to work are the standard generic CSS2 options:
+serif, sans-serif, monospace, cursive and fantasy. It
+defaults to the sans-serif family name.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-w</b>
+<i>weight</i></p>
+
+<p style="margin-left:14%;">Set border weight.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-f</b>
+<i>format</i></p>
+
+<p style="margin-left:14%;">Set format. See <b>FORMAT</b>
+for more detail.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-p</b></p>
+
+<p style="margin-left:14%;">Select a single pixel instead
+of a rectangle. This mode ignores any predefined rectangles
+read from the standard input.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-o</b></p>
+
+<p style="margin-left:14%;">Add predefined rectangles for
+all outputs, as if provided on standard input. The label
+will be the name of the output.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b></p>
+
+<p style="margin-left:14%;">Require the user to select one
+of the predefined rectangles. These can come from standard
+input, if <b>-o</b> is used, the rectangles of all display
+outputs. This option conflicts with <b>-p</b>.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-a</b>
+<i>width</i>:<i>height</i></p>
+
+<p style="margin-left:14%;">Force selections to have the
+given aspect ratio. This constraint is not applied to the
+predefined rectangles specified using <b>-o</b>.</p>
+
+<h2>COLORS
+<a name="COLORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Colors may be
+specified in #RRGGBB or #RRGGBBAA format. The # is
+optional.</p>
+
+<h2>FORMAT
+<a name="FORMAT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Interpreted
+sequences are:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%x</p></td>
+<td width="87%">
+
+
+<p>The x-coordinate of the selection</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%y</p></td>
+<td width="87%">
+
+
+<p>The y-coordinate of the selection</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%w</p></td>
+<td width="87%">
+
+
+<p>The width of the selection</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%h</p></td>
+<td width="87%">
+
+
+<p>The height of the selection</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%X</p></td>
+<td width="87%">
+
+
+<p>The x-coordinate of the selection with coordinates
+relative to the output</p></td></tr>
+</table>
+
+<p style="margin-left:14%;">containing the top left
+corner.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%Y</p></td>
+<td width="87%">
+
+
+<p>The y-coordinate of the selection with coordinates
+relative to the output</p></td></tr>
+</table>
+
+<p style="margin-left:14%;">containing the top left
+corner.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%W</p></td>
+<td width="87%">
+
+
+<p>The width of the selection cropped to the output
+containing the top left</p></td></tr>
+</table>
+
+<p style="margin-left:14%;">corner.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%H</p></td>
+<td width="87%">
+
+
+<p>The height of the selection cropped to the output
+containing the top left</p></td></tr>
+</table>
+
+<p style="margin-left:14%;">corner.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%l</p></td>
+<td width="87%">
+
+
+<p>Label included with region from stdin</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%"></td>
+<td width="7%">
+
+
+<p>%o</p></td>
+<td width="87%">
+
+
+<p>The name of the output containing the top left corner,
+or &quot;&lt;unknown&gt;&quot; if</p></td></tr>
+</table>
+
+<p style="margin-left:14%;">not known</p>
+
+<p style="margin-left:9%; margin-top: 1em">The default
+format is &quot;%x,%y %wx%h\n&quot;.</p>
+
+<h2>KEYBOARD CONTROLS
+<a name="KEYBOARD CONTROLS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+keyboard actions can be used during selection:</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p><b>Escape</b></p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>Cancel the selection and exit slurp</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p><b>Space</b></p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>If currently making a selection, while space is held
+down, move the entire selection rather than change the
+selection&rsquo;s size as you move the pointer.</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="-3%">
+
+
+<p><b>Shift</b></p></td>
+<td width="7%"></td>
+<td width="6%"></td>
+<td width="81%">
+
+
+<p>Experimental. If the <b>-a</b> option wasn&rsquo;t
+specified, then set the aspect ratio to 1:1 while shift is
+held down, releasing it restores the un-constrained aspect
+ratio. <b>Note:</b> This behavior may change in the future
+depending on feedback.</p></td></tr>
+</table>
+
+<h2>AUTHORS
+<a name="AUTHORS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Maintained by
+Simon Ser &lt;contact@emersion.fr&gt;, who is assisted by
+other open-source contributors. For more information about
+slurp development, see
+https://github.com/emersion/slurp.</p>
+<hr>
+</body>
+</html>

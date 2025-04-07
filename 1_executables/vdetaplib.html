@@ -1,0 +1,157 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:31:54 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>VDETAPLIB</title>
+
+</head>
+<body>
+
+<h1 align="center">VDETAPLIB</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#NOTICE">NOTICE</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">vdetaplib -
+Virtual Distributed Ethernet tap emulation library</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">No synopsis</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vdetaplib</b>
+is a library that emulates tap (tuntap level2 interface, see
+in kernel sources Documentation/networking/tun.c) and
+connects tap virtual interfaces to vde networks.</p>
+
+<p style="margin-left:9%; margin-top: 1em">To use it, the
+libvdetab.so library must be preloaded (sh, ksh or bash
+syntax):</p>
+
+<p style="margin-left:18%;"><b>export
+LD_PRELOAD=/usr/lib/vde2/libvdetap.so</b></p>
+
+<p style="margin-left:9%;">(csh, tcsh syntax):</p>
+
+<p style="margin-left:18%;"><b>setenv LD_PRELOAD
+/usr/lib/vde2/libvdetap.so</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+divert all tap requests to a single vde_switch set the
+variable VDEALLTAP to the vde socket. <br>
+(sh, ksh or bash syntax):</p>
+
+<p style="margin-left:18%;"><b>export
+VDEALLTAP=/tmp/vde.ctl</b></p>
+
+<p style="margin-left:9%;">(csh, tcsh syntax):</p>
+
+<p style="margin-left:18%;"><b>setenv VDEALLTAP
+/tmp/vde.ctl</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">It is possible
+to set each single interface to different vde_switches by
+setting the environment variable with the same name of the
+interface. <br>
+(sh, ksh or bash syntax):</p>
+
+<p style="margin-left:18%;"><b>export tap0=/tmp/vde.ctl
+<br>
+export tap1=/tmp/myvde.ctl <br>
+export ppc=/tmp/ppc.ctl</b></p>
+
+<p style="margin-left:9%;">(csh, tcsh syntax):</p>
+
+<p style="margin-left:18%;"><b>setenv tap0 /tmp/vde.ctl
+<br>
+setenv tap1 /tmp/myvde.ctl <br>
+setenv ppc /tmp/ppc.ctl</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">It is also
+possible to specify <b>port</b>, <b>group</b> or <b>mode</b>
+for a given interface setting environment variables as in
+the following example. <br>
+(sh, ksh or bash syntax):</p>
+
+<p style="margin-left:18%;"><b>export tap0_port=5 <br>
+export tap0_group=vde-net <br>
+export tap0_mode=0660</b></p>
+
+<p style="margin-left:9%;">(csh, tcsh, syntax):</p>
+
+<p style="margin-left:18%;"><b>setenv tap0_port 5 <br>
+setenv tap0_group vde-net <br>
+setenv tap0_mode 0660</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The variable to
+set the specific interface is checked first then VDEALLTAP.
+VDEALLTAP thus works as a default choice for the vde switch
+to be used. If VDEALLTAP is not set and there is no specific
+environment variable (and for tun -- IFF_TUN interfaces) the
+kernel provided interface is used. In this latter case
+access to /dev/net/tun is required, generally root
+access.</p>
+
+<h2>NOTICE
+<a name="NOTICE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Virtual
+Distributed Ethernet is not related in any way with
+www.vde.com (&quot;Verband der Elektrotechnik, Elektronik
+und Informationstechnik&quot; i.e. the German
+&quot;Association for Electrical, Electronic &amp;
+Information Technologies&quot;).</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>vde_switch</b>(1),
+<b>vdeq</b>(1).</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">VDE is a project
+by Renzo Davoli &lt;renzo@cs.unibo.it&gt;</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,351 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:20 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>floppyd</title>
+
+</head>
+<body>
+
+<h1 align="center">floppyd</h1>
+
+<a href="#Name">Name</a><br>
+<a href="#Note&nbsp;of&nbsp;warning">Note&nbsp;of&nbsp;warning</a><br>
+<a href="#Description">Description</a><br>
+<a href="#Authentication">Authentication</a><br>
+<a href="#Command&nbsp;line&nbsp;options">Command&nbsp;line&nbsp;options</a><br>
+<a href="#Connecting&nbsp;to&nbsp;floppyd">Connecting&nbsp;to&nbsp;floppyd</a><br>
+<a href="#Examples:">Examples:</a><br>
+<a href="#See&nbsp;Also">See&nbsp;Also</a><br>
+<a href="#Viewing&nbsp;the&nbsp;texi&nbsp;doc">Viewing&nbsp;the&nbsp;texi&nbsp;doc</a><br>
+
+<hr>
+
+
+<h2>Name
+<a name="Name"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">floppyd - floppy
+daemon for remote access to floppy drive</p>
+
+<h2>Note&nbsp;of&nbsp;warning
+<a name="Note&nbsp;of&nbsp;warning"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manpage has
+been automatically generated from mtools&rsquo;s texinfo
+documentation, and may not be entirely accurate or complete.
+See the end of this man page for details.</p>
+
+<h2>Description
+<a name="Description"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Floppyd is used
+as a server to grant access to the floppy drive to clients
+running on a remote machine, just as an X server grants
+access to the display to remote clients. It has the
+following syntax:</p>
+
+<p style="margin-left:9%; margin-top: 1em">floppyd [-d]
+[-D] [-l] [-s <i>port</i>] [-r <i>user</i>] [-b
+<i>ipaddr</i>] [-x <i>display</i>] <i>devicenames</i></p>
+
+<p style="margin-left:9%; margin-top: 1em">floppyd is
+always associated with an X server. It runs on the same
+machine as its X server, and listens on port 5703 and
+above.</p>
+
+<h2>Authentication
+<a name="Authentication"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">floppyd
+authenticates remote clients using the Xauthority protocol.
+Xhost authentication is not supported. Each floppyd is
+associated with an X server. When a remote client attempts
+to connect to floppyd, it sends floppyd the X authority
+record corresponding to floppyd&rsquo;s X server. Floppyd in
+turn then tries to open up a connection to the X server in
+order to verify the authenticity of the xauth record. If the
+connection to the X server succeeds, the client is granted
+access. DISPLAY.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Caution</b>:
+In order to make authentication work correctly, the local
+host should <b>not</b> be listed in the xhost list of
+allowed hosts. <br>
+Indeed, hosts listed in xhost do not need a correct
+Xauthority cookie to connect to the X server. As floppyd
+runs on the same host as the X server, all its probe
+connection would succeed even for clients who supplied a bad
+cookie. This means that your floppy drive would be open to
+the world, i.e. a huge security hole. <br>
+If your X server does not allow you to remove localhost:0
+and :0 from the xhost list, you can prevent floppyd from
+probing those display names with the -l option.</p>
+
+<h2>Command&nbsp;line&nbsp;options
+<a name="Command&nbsp;line&nbsp;options"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p style="margin-top: 1em">d&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">Server mode. Floppyd runs its
+own server loop. Do not supply this if you start floppyd
+from inetd.conf</p></td></tr>
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p>D&nbsp;</p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Do not daemonize. Floppyd will not put itself into the
+background even if started in server mode.</p></td></tr>
+</table>
+
+
+<p style="margin-left:9%;">s&nbsp;&nbsp;<i>port&nbsp;</i></p>
+
+<p style="margin-left:18%;">Port number for daemon mode.
+Default is 5703 + <i>displaynumber</i>. This flag implies
+daemon mode. For example, for display hitchhiker:5, the port
+would be 5708.</p>
+
+
+<p style="margin-left:9%;">b&nbsp;&nbsp;<i>ipaddr&nbsp;</i></p>
+
+<p style="margin-left:18%;">Bind address (for multi homed
+hosts). This flag implies daemon mode</p>
+
+<p style="margin-left:9%;">r&nbsp;<i>user&nbsp;</i></p>
+
+<p style="margin-left:18%;">Run the server under as the
+given user</p>
+
+<p style="margin-left:9%;">x&nbsp;<i>display&nbsp;</i></p>
+
+<p style="margin-left:18%;">X display to use for
+authentication. By default, this is taken from the DISPLAY
+variable. If neither the x attribute is present nor DISPLAY
+is set, floppyd uses :0.0.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><i>devicenames</i>
+is a list of device nodes to be opened. Default is /dev/fd0.
+Multiple devices are only supported on mtools versions newer
+than 3.9.11.</p>
+
+<h2>Connecting&nbsp;to&nbsp;floppyd
+<a name="Connecting&nbsp;to&nbsp;floppyd"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">In order to use
+floppyd, add the flag remote to the device description in
+your &lsquo;&#732;/.mtoolsrc&rsquo; file. If the flag remote
+is given, the file parameter of the device description is
+taken to be a remote address. It&rsquo;s format is the
+following:
+<i>hostname</i>:<i>displaynumber</i>[/[<i>baseport</i>][/<i>drive</i>]].
+When using this entry, mtools connects to port
+<i>baseport</i>+<i>displaynumber</i> at <i>hostname</i>. By
+default <i>baseport</i> is 5703. The drive parameter is to
+distinguish among multiple drives associated with a single
+display (only mtools versions more recent than 3.9.11)</p>
+
+<h2>Examples:
+<a name="Examples:"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+starts a floppy daemon giving access to
+&lsquo;/dev/fd0&rsquo;, listening on the default port 5703,
+tied to the default X servers:</p>
+
+<p style="margin-left:13%; margin-top: 1em"><b>floppyd -d
+/dev/fd0</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Each of the
+following starts a floppy daemon giving access to
+&lsquo;/dev/fd1&rsquo;, tied to the :1 local X servers, and
+listening on port 5704. We assume that the local host is
+named hitchhiker.</p>
+
+<p style="margin-left:13%; margin-top: 1em"><b>floppyd -d
+/dev/fd0 <br>
+floppyd -d -x :1 -p 5704 /dev/fd0</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If you want to
+start floppyd by inetd instead of running it as a daemon,
+insert the following lines into
+&lsquo;/etc/services&rsquo;:</p>
+
+<p style="margin-left:13%; margin-top: 1em"><b># floppy
+daemon <br>
+floppyd-0 5703/tcp # floppy daemon for X server :0 <br>
+floppyd-1 5704/tcp # floppy daemon for X server :1</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">And insert the
+following into &lsquo;/etc/inetd.conf&rsquo; (assuming that
+you have defined a user named floppy in your
+&lsquo;/etc/passwd&rsquo;):</p>
+
+<p style="margin-left:13%; margin-top: 1em"><b># floppy
+daemon <br>
+floppyd-0 stream tcp wait floppy /usr/sbin/floppyd floppyd
+/dev/fd0 <br>
+floppyd-1 stream tcp wait floppy /usr/sbin/floppyd floppyd
+-x :1 /dev/fd0</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">Note that you
+need to supply the X display names for the second floppyd.
+This is because the port is opened by inetd.conf, and hence
+floppyd cannot know its number to interfere the display
+number.</p>
+
+<p style="margin-left:9%; margin-top: 1em">On the client
+side, insert the following into your
+&lsquo;&#732;/.mtoolsrc&rsquo; to define a drive letter
+accessing floppy drive in your X terminal:</p>
+
+<p style="margin-left:13%; margin-top: 1em"><b>drive x:
+file=&quot;$DISPLAY&quot; remote</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">If your X
+terminal has more than one drive, you may access the
+additional drives as follows:</p>
+
+<p style="margin-left:13%; margin-top: 1em"><b>drive y:
+file=&quot;$DISPLAY//1&quot; remote <br>
+drive z: file=&quot;$DISPLAY//2&quot; remote</b></p>
+
+<h2>See&nbsp;Also
+<a name="See&nbsp;Also"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Mtools&rsquo;
+texinfo doc</p>
+
+<h2>Viewing&nbsp;the&nbsp;texi&nbsp;doc
+<a name="Viewing&nbsp;the&nbsp;texi&nbsp;doc"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This manpage has
+been automatically generated from mtools&rsquo;s texinfo
+documentation. However, this process is only approximative,
+and some items, such as crossreferences, footnotes and
+indices are lost in this translation process. Indeed, these
+items have no appropriate representation in the manpage
+format. Moreover, not all information has been translated
+into the manpage version. Thus I strongly advise you to use
+the original texinfo doc. See the end of this manpage for
+instructions how to view the texinfo doc.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p>* &nbsp;&nbsp;</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p>To generate a printable copy from the texinfo doc, run
+the following commands:</p></td></tr>
+</table>
+
+
+<p style="margin-left:22%; margin-top: 1em"><b>./configure;
+make dvi; dvips mtools.dvi</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em">* &nbsp;&nbsp;</p></td>
+<td width="4%"></td>
+<td width="38%">
+
+
+<p style="margin-top: 1em">To generate a html copy,
+run:</p> </td>
+<td width="44%">
+</td></tr>
+</table>
+
+
+<p style="margin-left:22%; margin-top: 1em"><b>./configure;
+make html</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">A premade html
+can be found at
+&lsquo;http://www.gnu.org/software/mtools/manual/mtools.html&rsquo;</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="5%">
+
+
+<p style="margin-top: 1em">* &nbsp;&nbsp;</p></td>
+<td width="4%"></td>
+<td width="82%">
+
+
+<p style="margin-top: 1em">To generate an info copy
+(browsable using emacs&rsquo; info mode), run:</p></td></tr>
+</table>
+
+
+<p style="margin-left:22%; margin-top: 1em"><b>./configure;
+make info</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The texinfo doc
+looks most pretty when printed or as html. Indeed, in the
+info version certain examples are difficult to read due to
+the quoting conventions used in info.</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,289 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:25:12 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>FLATPAK BUILD-EXPOR</title>
+
+</head>
+<body>
+
+<h1 align="center">FLATPAK BUILD-EXPOR</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">flatpak-build-export
+- Create a repository from a build directory</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="77%">
+
+
+<p style="margin-top: 1em"><b>flatpak build-export</b>
+[OPTION...] LOCATION DIRECTORY [BRANCH]</p></td>
+<td width="14%">
+</td></tr>
+</table>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Creates or
+updates a repository with an application build. LOCATION is
+the location of the repository. DIRECTORY must be a
+finalized build directory. If BRANCH is not specified, it is
+assumed to be &quot;master&quot;.</p>
+
+<p style="margin-left:9%; margin-top: 1em">If LOCATION
+exists, it is assumed to be an OSTree repository, otherwise
+a new OSTree repository is created at this location. The
+repository can be inspected with the <b>ostree</b> tool.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The contents of
+DIRECTORY are committed on the branch with name
+app/APPNAME/ARCH/BRANCH, where ARCH is the architecture of
+the runtime that the application is using. A commit filter
+is used to enforce that only the contents of the files/ and
+export/ subdirectories and the metadata file are included in
+the commit, anything else is ignored.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When exporting a
+flatpak to be published to the internet,
+<b>--collection-id=COLLECTION-ID</b> should be specified as
+a globally unique reverse DNS value to identify the
+collection of flatpaks this will be added to. Setting a
+globally unique collection ID allows the apps in the
+repository to be shared over peer to peer systems without
+needing further configuration.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The
+build-update-repo command should be used to update
+repository metadata whenever application builds are added to
+a repository.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options are understood:</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-h</b>,
+<b>--help</b></p>
+
+<p style="margin-left:14%;">Show help options and exit.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-s</b>,
+<b>--subject=SUBJECT</b></p>
+
+<p style="margin-left:14%;">One line subject for the commit
+message.</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-b</b>,
+<b>--body=BODY</b></p>
+
+<p style="margin-left:14%;">Full description for the commit
+message.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--collection-id=COLLECTION-ID</b></p>
+
+<p style="margin-left:14%;">Set as the collection ID of the
+repository. Setting a globally unique collection ID allows
+the apps in the repository to be shared over peer to peer
+systems without needing further configuration. If exporting
+to an existing repository, the collection ID must match the
+existing configured collection ID for that repository.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--subset=SUBSET</b></p>
+
+<p style="margin-left:14%;">Mark the commit to be included
+in the named subset. This will cause the commit to be put in
+the named subset summary (in addition to the main one),
+allowing users to see only this subset instead of the whole
+repo.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--arch=ARCH</b></p>
+
+<p style="margin-left:14%;">Specify the architecture
+component of the branch to export. Only host compatible
+architectures can be specified; see <b>flatpak
+--supported-arches</b> for valid values.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--exclude=PATTERN</b></p>
+
+<p style="margin-left:14%;">Exclude files matching PATTERN
+from the commit. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--include=PATTERN</b></p>
+
+<p style="margin-left:14%;">Don't exclude files matching
+PATTERN from the commit, even if they match the
+<b>--exclude</b> patterns. This option can be used multiple
+times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--metadata=FILENAME</b></p>
+
+<p style="margin-left:14%;">Use the specified filename as
+metadata in the exported app instead of the default file
+(called metadata). This is useful if you want to commit
+multiple things from a single build tree, typically used in
+combination with <b>--files</b> and <b>--exclude</b>.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--files=SUBDIR</b></p>
+
+<p style="margin-left:14%;">Use the files in the specified
+subdirectory as the file contents, rather than the regular
+files directory.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--timestamp=DATE</b></p>
+
+<p style="margin-left:14%;">Use the specified ISO 8601
+formatted date or NOW, for the current time, in the commit
+metadata and, if <b>--update-appstream</b> is used, the
+appstream data.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--end-of-life=REASON</b></p>
+
+<p style="margin-left:14%;">Mark the build as end-of-life.
+REASON is a message that may be shown to users installing
+this build.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--end-of-life-rebase=ID</b></p>
+
+<p style="margin-left:14%;">Mark the build as end-of-life.
+Unlike <b>--end-of-life</b>, this one takes an ID that
+supersedes the current one. By the user's request, the
+application data may be preserved for the new
+application.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--disable-fsync</b></p>
+
+<p style="margin-left:14%;">Don't fsync when writing to the
+repository. This can result in data loss in exceptional
+situations, but can improve performance when working with
+temporary or test repositories.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--update-appstream</b></p>
+
+<p style="margin-left:14%;">Update the appstream branch
+after the build.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--no-update-summary</b></p>
+
+<p style="margin-left:14%;">Don't update the summary file
+after the new commit is added. This means the repository
+will not be useful for serving over http until
+build-update-repo has been run. This is useful is you want
+to do multiple repo operations before finally updating the
+summary.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-sign=KEYID</b></p>
+
+<p style="margin-left:14%;">Sign the commit with this GPG
+key. This option can be used multiple times.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--gpg-homedir=PATH</b></p>
+
+<p style="margin-left:14%;">GPG Homedir to use when looking
+for keyrings</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-r</b>,
+<b>--runtime</b></p>
+
+<p style="margin-left:14%;">Export a runtime instead of an
+app (this uses the usr subdir as files).</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>-v</b>,
+<b>--verbose</b></p>
+
+<p style="margin-left:14%;">Print debug information during
+command processing.</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>--ostree-verbose</b></p>
+
+<p style="margin-left:14%;">Print OSTree debug information
+during command processing.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>$ flatpak
+build-export &#732;/repos/gnome-calculator/
+&#732;/build/gnome-calculator/ org.gnome.Calculator</b></p>
+
+<p style="margin-left:14%; margin-top: 1em">Commit:
+9d0044ea480297114d03aec85c3d7ae3779438f9d2cb69d717fb54237acacb8c
+<br>
+Metadata Total: 605 <br>
+Metadata Written: 5 <br>
+Content Total: 1174 <br>
+Content Written: 1 <br>
+Content Bytes Written: 305</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>ostree</b>(1),
+<b>flatpak</b>(1), <b>flatpak-build-init</b>(1),
+<b>flatpak-build</b>(1), <b>flatpak-build-finish</b>(1),
+<b>flatpak-build-sign</b>(1),
+<b>flatpak-build-update-repo</b>(1)</p>
+<hr>
+</body>
+</html>

@@ -1,0 +1,259 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:26:34 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>GPG-MAIL-TUBE</title>
+
+</head>
+<body>
+
+<h1 align="center">GPG-MAIL-TUBE</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#DIAGNOSTICS">DIAGNOSTICS</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gpg-mail-tube</b>
+- Encrypt rfc822 formatted mail in a pipeline</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gpg-mail-tube</b>
+[<i>options</i>] <i>recipients</i></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>gpg-mail-tube</b></i>
+takes RFC-822 formatted mail on stdin and turns it into a
+PGP/MIME encrypted mail which is then written to stdout.</p>
+
+<p style="margin-left:9%; margin-top: 1em">The recipients
+must be plain mail addresses (e.g. <b>foo@example.org</b>)
+and should in general list the To and Cc addresses contained
+in the mail.</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gpg-mail-tube</b>
+understands these options: <b><br>
+--verbose</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-v</b></p></td>
+<td width="6%"></td>
+<td width="44%">
+
+
+<p>Enable extra informational output.</p></td>
+<td width="38%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--quiet</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-q</b></p></td>
+<td width="6%"></td>
+<td width="40%">
+
+
+<p>Try to be as quiet as possible.</p></td>
+<td width="42%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--log-file</b>
+<i>file</i></p>
+
+<p style="margin-left:18%;">Write log output to
+<i>file</i>. Use &lsquo;<i>socket://</i>&rsquo; to log to a
+socket.</p>
+
+<p style="margin-left:9%;"><b>--no-stderr</b></p>
+
+<p style="margin-left:18%;">Suppresses all output to
+stderr. This is useful for callers which don&rsquo;t
+distinguish stdout and stderr. To get diagnostics the option
+<b>--log-file</b> can be used.</p>
+
+<p style="margin-left:9%;"><b>--header</b>
+<i>name</i><b>=</b><i>value</i></p>
+
+<p style="margin-left:18%;">Add the mail header
+&quot;<i>name</i>: <i>value</i>&quot; to the output.</p>
+
+<p style="margin-left:9%;"><b>--setenv</b>
+<i>name</i><b>=</b><i>value</i></p>
+
+<p style="margin-left:18%;">Put the given environment
+string into the environment of this process and of the
+called gpg. This option is required if there is no other way
+to set the environemt.</p>
+
+<p style="margin-left:9%;"><b>--as-attach</b></p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-a</b></p></td>
+<td width="6%"></td>
+<td width="82%">
+
+
+<p>Do not write a PGP/MIME mail but emit a simple body
+along with an attachment containing the encrypted body of
+the input mail. If the input was a plain text message a
+simple encrypted file will be attached. If the input was a
+multipart MIME message the encrypted file is of type
+message/rfc822.</p> </td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--gpg</b> <i>gpgcmd</i></p>
+
+<p style="margin-left:18%;">Use the specified command
+<i>gpgcmd</i> instead of <b>gpg</b>.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="6%">
+
+
+<p><b>--vsd</b></p></td>
+<td width="3%"></td>
+<td width="82%">
+
+
+<p>Use the gpg from a <i>GnuPG VS-Desktop&reg;</i>
+AppImage. The AppImage is started if it is not running. A
+symlink named
+&lsquo;<i>&#732;/.gnupg-vsd/gnupg-vs-desktop.AppImage</i>&rsquo;
+needs to link to the actually to be used AppImage.</p></td></tr>
+</table>
+
+<p style="margin-left:9%;"><b>--version</b></p>
+
+<p style="margin-left:18%;">Print version of the program
+and exit.</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="8%">
+
+
+<p><b>--help</b></p></td>
+<td width="1%"></td>
+<td width="45%">
+
+
+<p>Display a brief help page and exit.</p></td>
+<td width="37%">
+</td></tr>
+</table>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The following
+options can be used in a local transport rule of the Exim
+MTA which assumes that that <b>check_local_user</b> has been
+used in the router.</p>
+
+
+<p style="margin-left:12%; margin-top: 1em">transport_filter
+= /usr/local/bin/gpg-mail-tube --setenv HOME=${home} \ <br>
+--no-stderr -- $pipe_addresses</p>
+
+<p style="margin-left:9%; margin-top: 1em">For a remote
+transport the use of <b>size_addition</b> and an explicit
+setting of the user and its home directory might be
+required.</p>
+
+<h2>DIAGNOSTICS
+<a name="DIAGNOSTICS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">The program
+returns 0 on a successful encryption or a non-zero value on
+error. Note that on error some output might have already
+been written to stdout.</p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>gpg</b>(1),</p>
+
+<p style="margin-left:9%; margin-top: 1em">The full
+documentation for this tool is maintained as a Texinfo
+manual. If GnuPG and the info program are properly installed
+at your site, the command</p>
+
+<p style="margin-left:12%; margin-top: 1em">info gnupg</p>
+
+<p style="margin-left:9%; margin-top: 1em">should give you
+access to the complete manual including a menu structure and
+an index.</p>
+<hr>
+</body>
+</html>

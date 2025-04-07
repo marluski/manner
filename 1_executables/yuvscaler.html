@@ -1,0 +1,328 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:32 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>yuvscaler</title>
+
+</head>
+<body>
+
+<h1 align="center">yuvscaler</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#EXAMPLES">EXAMPLES</a><br>
+<a href="#OPTIONS">OPTIONS</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#SEE ALSO">SEE ALSO</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">yuvscaler -
+UPscales or DOWNscales a YUV4MPEG2 stream to a specified
+format</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvscaler</b>
+[<b>-I</b> <i>input_keyword</i>] [<b>-M</b>
+<i>mode_keyword</i>] [<b>-O</b> <i>output_keyword</i>]
+[<b>-n&nbsp;p</b>|<b>s</b>|<b>n</b>]
+[<b>-v&nbsp;0</b>-<b>2</b>] [<b>-h</b>]</p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvscaler</b>
+is a general (UP or DOWN) scaling utility that is provided
+to allow conversion between different video formats. It
+reads in a YUV4MPEG2 format stream from stdin (such as that
+produced by <b>lav2yuv</b>) and outputs such stream to
+stdout (e.g. to be consumed by <b>mpeg2enc</b>). The most
+common use of yuvscaler is to generate input suitable for
+MPEG encoding to VCD or SVCD formats using
+<b>mpeg2enc</b>(1).</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>yuvscaler</b>
+will automatically take into account PAL/SECAM and NTSC
+format, as well as widescreen (16:9) format and interlacing.
+Use of yuvscaler was designed to be straightforward.</p>
+
+<h2>EXAMPLES
+<a name="EXAMPLES"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>VCD
+encoding:</b> <br>
+lav2yuv my-file.avi | yuvscaler -O VCD | mpeg2enc -f 1 -o
+vcd.%d.m1v</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>SVCD
+encoding:</b> <br>
+lav2yuv my-file.qt | yuvscaler -O SVCD | mpeg2enc -f 4 -o
+svcd.%d.m2v</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Encoding
+anamorphic 16:9 as letterboxed VCD:</b> <br>
+lav2yuv my-ana16-9.eli | yuvscaler -M WIDE2VCD | mpeg2enc -f
+1 -o letterbox_vcd.%d.m1v</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Encoding
+anamorphic 16:9 as letterboxed SVCD:</b> <br>
+lav2yuv my-ana16-9.eli | yuvscaler -M WIDE2STD -O SVCD |
+mpeg2enc -f 4 -o letterbox_svcd.%d.m2v</p>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Encoding
+anamorphic 16:9 as letterboxed DVD:</b> <br>
+lav2yuv my-ana16-9.eli | yuvscaler -M WIDE2STD -O DVD |
+mpeg2enc -f 8 -o letterbox_dvd.%d.m2v</p>
+
+<h2>OPTIONS
+<a name="OPTIONS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>-I</b>
+<i>input_keyword</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Specifies input
+processing options. Input options may be combined by using
+multiple <b>-I</b> flags. Possible <i>input_keyword</i>s
+are:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>USE_WidthxHeight+WidthOffset+HeightOffset</b>
+to select a useful area of the input frame (all multiple of
+2, Height and HeightOffset multiple of 4 if interlaced), the
+rest of the image being discarded</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>ACTIVE_WidthxHeight+WidthOffset+HeightOffset</b>
+to select an active area of the input frame (all multiple of
+2, Height and HeightOffset multiple of 4 if interlaced), the
+rest of the image being made black</p>
+
+<p style="margin-left:9%;"><b>-M</b>
+<i>mode_keyword</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Sets the
+scaling mode options. Scaling mode options can be combined
+by giving several <b>-M</b> flags. Possible are:</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>BICUBIC</b>
+- to use the (Mitchell-Netravalli) high-quality bicubic
+upsacling and/or downscaling algorithm</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>RESAMPLE</b>
+- to use a classical resampling algorithm -only for
+downscaling- that goes much faster than bicubic. For
+coherence reason, <b>yuvscaler</b> will use RESAMPLE if only
+downscaling is necessary, BICUBIC if not.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>WIDE2STD</b>
+- convert widescreen anamorphic (16:9) input video into
+letterboxed (4:3), generating necessary black lines. Note
+that for MPEG applications if your <i>player</i> can
+properly decode anamorphic video you may wish to leave the
+video unscaled and simply specify the approprate format
+during MPEG encoding (see <b>mpeg2enc</b>(1)).</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>RATIO_WidthIn_WidthOut_HeightIn_HeightOut</b>
+to specified scaling ratios of WidthIn/WidthOut for width
+and HeightIN/HeightOut for height to be applied to the
+useful area. The output frames that result from scaling can
+have a different format than the output format specified
+using <b>-O</b> options(s). In this case, <b>yuvscaler</b>
+automatically generate necessary black lines and columns
+and/or skips necessary lines and columns to center the
+scaled image in the output frame.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>WIDE2VCD</b>
+to scale anamorphic widescreen (16:9) frames into
+letterboxed VCD format (equivalent to -M WIDE2STD -O
+VCD).</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>FASTVCD</b>
+to transcode full sized frames to VCD (equivalent to -M
+RATIO_2_1_2_1 -O VCD, see below).</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>FAST_WIDE2VCD</b>
+to transcode full-sized anamorphic (16:9) frames to
+letter-boxed VCD (equivalent to -M WIDE2STD -M RATIO_2_1_2_1
+-O VCD, see below).</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>NO_HEADER</b>
+to suppress stream header generation on output</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>MMX</b> to
+use MMX functions for BICUBIC scaling (experimental
+feature!!)</p>
+
+<p style="margin-left:9%;"><b>-O</b>
+<i>output_keyword</i></p>
+
+<p style="margin-left:18%; margin-top: 1em">Sets the output
+frame format options. Output format options can be combined
+by giving several <b>-O</b> flags. By default, output frames
+size will be the same as input frame sizes, as well as
+output frames interlacing if coherent with output keyword
+specification which prevails, top_first if not.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>MONOCHROME</b>
+to generate monochrome frames on output. Chrominance
+information for the scaled pixels is set neutral (white).
+MPEG encoding of black and white video will be both
+inefficient <i>and</i> show annonying chrominance artifacts
+unless this is done.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>VCD</b> to
+generate VCD compliant frames on output (taking care of PAL
+and NTSC standards). Non-interlaced output.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>SVCD</b> to
+generate SVCD compliant frames on output (taking care of PAL
+and NTSC standards). Top-field-first interlaced frames.</p>
+
+<p style="margin-left:18%; margin-top: 1em"><b>DVD</b> to
+generate DVD compliant frames on output (taking care of PAL
+and NTSC standards). Top-field-first interlaced frames.</p>
+
+
+<p style="margin-left:18%; margin-top: 1em"><b>SIZE_WidthxHeight</b>
+to generate frames of size WidthxHeight on output (multiple
+of 4)</p>
+
+<p style="margin-left:18%; margin-top: 1em">If VCD, SVCD or
+DVD keywords are not used, output interlacing is taken of
+the same type as input. By default, output frames size will
+be the same as input frame size.</p>
+
+<p style="margin-left:9%;"><b>-n p|s|n</b></p>
+
+<p style="margin-left:18%;">(usually not necessary) if norm
+could not be determined from data flux, specifies the OUTPUT
+norm for VCD/SVCD (p=pal,s=secam,n=ntsc).</p>
+
+<p style="margin-left:9%;"><b>-v 0|1|2</b></p>
+
+<p style="margin-left:18%;">Specifies the degree of
+verbosity: 0=quiet, 1=normal, 2=verbose/debug</p>
+
+<table width="100%" border="0" rules="none" frame="void"
+       cellspacing="0" cellpadding="0">
+<tr valign="top" align="left">
+<td width="9%"></td>
+<td width="3%">
+
+
+<p><b>-h</b></p></td>
+<td width="6%"></td>
+<td width="51%">
+
+
+<p>Prints a summary of command line syntax.</p></td>
+<td width="31%">
+</td></tr>
+</table>
+
+<p style="margin-left:9%; margin-top: 1em"><b>Note:</b> The
+most useful downscaling ratios are handled using dedicated
+optimised scaling routines. They are:</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_WidthIn_WidthOut_2_1
+=&gt; Full-sized frame to VCD downscaling</p>
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_3_2_1_1
+=&gt; Full-sized frame to SVCD downscaling</p>
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_1_1_4_3
+=&gt; WIDE2STD downscaling mode</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_WidthIn_WidthOut_1_1
+=&gt; downscaling only concerns width, not height</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_1_1_HeightIn_HeightOut
+=&gt; downscaling only concerns height, not width</p>
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_2_1_2_1
+=&gt; FASTVCD, slightly width distorted (real ratio 45 to
+22) but faster full-sized frame to VCD downscaling (-M
+RATIO_2_1_2_1 -O VCD)</p>
+
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_WidthIn_WidthOut_8_3
+=&gt; specific to WIDE2VCD downscaling (-M WIDE2STD -O
+VCD)</p>
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_2_1_8_3
+=&gt; specific to (slighly distorted) FAST_WIDE2VCD
+downscaling (-M WIDE2STD -M RATIO_2_1_2_1 -O VCD)</p>
+
+<p style="margin-left:18%; margin-top: 1em">RATIO_1_1_1_1
+=&gt; copy useful input part of possible several files into
+output frames</p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">This man page
+was written by Xavier Biquard et al. <br>
+If you have questions, remarks, problems or you just want to
+contact the developers, the main mailing list for the
+MJPEG-tools is: <i><br>
+mjpeg-users@lists.sourceforge.net</i> <br>
+For more info, see our website at</p>
+
+
+<p style="margin-left:18%;"><i>http://mjpeg.sourceforge.net/</i></p>
+
+<h2>SEE ALSO
+<a name="SEE ALSO"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><i><b>mjpegtools</b></i>(1),
+<b>lavpipe</b>(1), <b>lav2yuv</b>(1) <b>mpeg2enc</b>(1)</p>
+<hr>
+</body>
+</html>

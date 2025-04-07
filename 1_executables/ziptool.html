@@ -1,0 +1,458 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:32:34 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title></title>
+</head>
+<body>
+
+<hr>
+
+
+<p><i>ZIPTOOL</i>(1) General Commands Manual
+<i>ZIPTOOL</i>(1)</p>
+
+<p style="margin-top: 1em"><b>NAME</b></p>
+
+<p style="margin-left:9%;">ziptool &mdash; modify zip
+archives</p>
+
+<p style="margin-top: 1em"><b>SYNOPSIS</b></p>
+
+<p style="margin-left:19%;"><b>ziptool</b>
+[<b>-ceghnrst</b>] [<b>-l&nbsp;</b><i>length</i>]
+[<b>-o&nbsp;</b><i>offset</i>] <i>zip-archive</i>
+<b>command</b> [<i>command-args ...</i>]
+[<b>command&nbsp;</b>[</p>
+
+<p><i>command-args&nbsp;...</i> ]&nbsp;...]</p>
+
+<p style="margin-top: 1em"><b>DESCRIPTION</b></p>
+
+<p style="margin-left:9%;"><b>ziptool</b> modifies the zip
+archive <i>zip-archive</i> according to the <i>commands</i>
+given.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+options:</p>
+
+<p style="margin-top: 1em"><b>-c</b></p>
+
+<p style="margin-left:26%; margin-top: 1em">Check zip
+archive consistency when opening it.</p>
+
+<p style="margin-top: 1em"><b>-e</b></p>
+
+<p style="margin-left:26%; margin-top: 1em">Error if
+archive already exists (only useful with <b>-n</b>).</p>
+
+<p style="margin-top: 1em"><b>-g</b></p>
+
+<p style="margin-left:26%; margin-top: 1em">Guess file name
+encoding (for <b>stat</b> command).</p>
+
+<p style="margin-top: 1em"><b>-h</b></p>
+
+<p style="margin-left:26%; margin-top: 1em">Display
+help.</p>
+
+<p style="margin-top: 1em"><b>-l</b> <i>length</i></p>
+
+<p style="margin-left:26%; margin-top: 1em">Only read
+<i>length</i> bytes of archive. See also <b>-o</b>.</p>
+
+<p style="margin-top: 1em"><b>-n</b></p>
+
+<p style="margin-left:26%; margin-top: 1em">Create archive
+if it doesn&rsquo;t exist. See also <b>-e</b>.</p>
+
+<p style="margin-top: 1em"><b>-o</b> <i>offset</i></p>
+
+<p style="margin-left:26%; margin-top: 1em">Start reading
+input archive from <i>offset</i>. See also <b>-l</b>.</p>
+
+<p style="margin-top: 1em"><b>-r</b></p>
+
+<p style="margin-left:26%; margin-top: 1em">Print raw file
+name encoding without translation (for <b>stat</b>
+command).</p>
+
+<p style="margin-top: 1em"><b>-s</b></p>
+
+<p style="margin-left:26%; margin-top: 1em">Follow file
+name convention strictly (for <b>stat</b> command).</p>
+
+<p style="margin-top: 1em"><b>-t</b></p>
+
+<p style="margin-left:26%; margin-top: 1em">Disregard
+current file contents, if any. <i>Note</i>: use this with
+care, it deletes all existing file contents when you modify
+the archive.</p>
+
+
+<p style="margin-left:4%; margin-top: 1em"><b>Commands</b></p>
+
+<p style="margin-left:9%;">For all commands below, the
+index is zero-based. In other words, the first entry in the
+zip archive has index 0.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported
+commands and arguments are:</p>
+
+<p style="margin-top: 1em"><b>add</b> <i>name
+content</i></p>
+
+<p style="margin-left:24%;">Add file called <i>name</i>
+using the string <i>content</i> from the command line as
+data.</p>
+
+<p style="margin-top: 1em"><b>add_dir</b> <i>name</i></p>
+
+<p style="margin-left:24%;">Add directory <i>name</i>.</p>
+
+<p style="margin-top: 1em"><b>add_file</b> <i>name
+file_to_add offset len</i></p>
+
+<p style="margin-left:24%;">Add file <i>name</i> to
+archive, using <i>len</i> bytes from the file
+<i>file_to_add</i> as input data, starting at
+<i>offset</i>.</p>
+
+<p style="margin-top: 1em"><b>add_from_zip</b> <i>name
+archivename index offset len</i></p>
+
+<p style="margin-left:24%;">Add file called <i>name</i> to
+archive using data from another zip archive
+<i>archivename</i> using the entry with index <i>index</i>
+and reading <i>len</i> bytes from <i>offset</i>.</p>
+
+<p style="margin-top: 1em"><b>cat</b> <i>index</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Output file
+contents for entry <i>index</i> to stdout.</p>
+
+<p style="margin-top: 1em"><b>count_extra</b> <i>index
+flags</i></p>
+
+<p style="margin-left:24%;">Print the number of extra
+fields for archive entry <i>index</i> using
+<i>flags</i>.</p>
+
+<p style="margin-top: 1em"><b>count_extra_by_id</b>
+<i>index extra_id flags</i></p>
+
+<p style="margin-left:24%;">Print number of extra fields of
+type <i>extra_id</i> for archive entry <i>index</i> using
+<i>flags</i>.</p>
+
+<p style="margin-top: 1em"><b>delete</b> <i>index</i></p>
+
+<p style="margin-left:24%;">Remove entry at <i>index</i>
+from zip archive.</p>
+
+<p style="margin-top: 1em"><b>delete_extra</b> <i>index
+extra_idx flags</i></p>
+
+<p style="margin-left:24%;">Remove extra field number
+<i>extra_idx</i> from archive entry <i>index</i> using
+<i>flags</i>.</p>
+
+<p style="margin-top: 1em"><b>delete_extra_by_id</b>
+<i>index extra_id extra_index flags</i></p>
+
+<p style="margin-left:24%;">Remove extra field number
+<i>extra_index</i> of type <i>extra_id</i> from archive
+entry <i>index</i> using <i>flags</i>.</p>
+
+<p style="margin-top: 1em"><b>get_archive_comment</b></p>
+
+<p style="margin-left:24%;">Print archive comment.</p>
+
+<p style="margin-top: 1em"><b>get_archive_flag</b>
+<i>flag</i></p>
+
+<p style="margin-left:24%;">Print state of archive flag
+<i>flag</i>.</p>
+
+<p style="margin-top: 1em"><b>get_extra</b> <i>index
+extra_index flags</i></p>
+
+<p style="margin-left:24%;">Print extra field
+<i>extra_index</i> for archive entry <i>index</i> using
+<i>flags</i>.</p>
+
+<p style="margin-top: 1em"><b>get_extra_by_id</b> <i>index
+extra_id extra_index flags</i></p>
+
+<p style="margin-left:24%;">Print extra field
+<i>extra_index</i> of type <i>extra_id</i> for archive entry
+<i>index</i> using <i>flags</i>.</p>
+
+<p style="margin-top: 1em"><b>get_file_comment</b>
+<i>index</i></p>
+
+<p style="margin-left:24%;">Get file comment for archive
+entry <i>index</i>.</p>
+
+<p style="margin-top: 1em"><b>get_num_entries</b>
+<i>flags</i></p>
+
+<p style="margin-left:24%;">Print number of entries in
+archive using <i>flags</i>.</p>
+
+<p style="margin-top: 1em"><b>name_locate</b> <i>name
+flags</i></p>
+
+<p style="margin-left:24%;">Find entry in archive with the
+filename <i>name</i> using <i>flags</i> and print its
+index.</p>
+
+<p style="margin-top: 1em"><b>rename</b> <i>index
+name</i></p>
+
+<p style="margin-left:24%;">Rename archive entry
+<i>index</i> to <i>name</i>.</p>
+
+<p style="margin-top: 1em"><b>replace_file_contents</b>
+<i>index data</i></p>
+
+<p style="margin-left:24%;">Replace file contents for
+archive entry <i>index</i> with the string <i>data</i>.</p>
+
+<p style="margin-top: 1em"><b>set_archive_comment</b>
+<i>comment</i></p>
+
+<p style="margin-left:24%;">Set archive comment to
+<i>comment</i>.</p>
+
+<p style="margin-top: 1em"><b>get_archive_flag</b> <i>flag
+value</i></p>
+
+<p style="margin-left:24%;">Set archive flag <i>flag</i> to
+<i>value</i>.</p>
+
+<p style="margin-top: 1em"><b>set_extra</b> <i>index
+extra_id extra_index flags value</i></p>
+
+<p style="margin-left:24%;">Set extra field number
+<i>extra_index</i> of type <i>extra_id</i> for archive entry
+<i>index</i> using <i>flags</i> to <i>value</i>.</p>
+
+<p style="margin-top: 1em"><b>set_file_comment</b> <i>index
+comment</i></p>
+
+<p style="margin-left:24%;">Set file comment for archive
+entry <i>index</i> to string <i>comment</i>.</p>
+
+<p style="margin-top: 1em"><b>set_file_compression</b>
+<i>index method compression_flags</i></p>
+
+<p style="margin-left:24%;">Set file compression method for
+archive entry <i>index</i> to <i>method</i> using
+<i>compression_flags</i>. <i>Note</i>: Currently,
+<i>compression_flags</i> are ignored.</p>
+
+<p style="margin-top: 1em"><b>set_file_encryption</b>
+<i>index method password</i></p>
+
+<p style="margin-left:24%;">Set file encryption method for
+archive entry <i>index</i> to <i>method</i> with password
+<i>password</i>.</p>
+
+<p style="margin-top: 1em"><b>set_file_mtime</b> <i>index
+timestamp</i></p>
+
+<p style="margin-left:24%;">Set file modification time for
+archive entry <i>index</i> to UNIX mtime
+<i>timestamp</i>.</p>
+
+<p style="margin-top: 1em"><b>set_file_mtime_all</b>
+<i>timestamp</i></p>
+
+<p style="margin-left:24%;">Set file modification time for
+all archive entries to UNIX mtime <i>timestamp</i>.</p>
+
+<p style="margin-top: 1em"><b>set_password</b>
+<i>password</i></p>
+
+<p style="margin-left:24%;">Set default password for
+encryption/decryption to <i>password</i>.</p>
+
+<p style="margin-top: 1em"><b>stat</b> <i>index</i></p>
+
+<p style="margin-left:24%; margin-top: 1em">Print
+information about archive entry <i>index</i>.</p>
+
+
+<p style="margin-left:4%; margin-top: 1em"><b>Flags</b></p>
+
+<p style="margin-left:9%;">Some commands take flag
+arguments. Each character in the argument sets the
+corresponding flag. Use 0 or the empty string for no
+flags.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Supported flags
+are:</p>
+
+<p><i>4</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_ENC_CP437</p>
+
+<p><i>8</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_ENC_UTF_8</p>
+
+<p><i>C</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_NOCASE</p>
+
+<p><i>c</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_CENTRAL</p>
+
+<p><i>d</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_NODIR</p>
+
+<p><i>l</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_LOCAL</p>
+
+<p><i>r</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_ENC_RAW</p>
+
+<p><i>s</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_ENC_STRICT</p>
+
+<p><i>u</i></p>
+
+
+<p style="margin-left:23%; margin-top: 1em">ZIP_FL_UNCHANGED</p>
+
+<p style="margin-left:4%; margin-top: 1em"><b>Archive
+flags</b></p>
+
+<p style="margin-left:9%;"><b>get_archive_flag</b> and
+<b>set_archive_flag</b> work on the following flags:</p>
+
+<p><b>&bull;</b></p>
+
+
+<p style="margin-left:22%;">create-or-keep-empty-file-for-archive</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">is-torrentzip</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">rdonly</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">want-torrentzip</p>
+
+<p style="margin-left:4%; margin-top: 1em"><b>Compression
+Methods</b></p>
+
+<p style="margin-left:9%;">Some commands take compression
+method arguments. Supported methods are:</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">default</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">deflate</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">store</p>
+
+<p style="margin-left:4%; margin-top: 1em"><b>Encryption
+Methods</b></p>
+
+<p style="margin-left:9%;">Some commands take encryption
+method arguments. Supported methods are:</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">none</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">AES-128</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">AES-192</p>
+
+<p><b>&bull;</b></p>
+
+<p style="margin-left:22%;">AES-256</p>
+
+<p style="margin-top: 1em"><b>EXIT STATUS</b></p>
+
+<p style="margin-left:9%;">The <b>ziptool</b> utility
+exits&nbsp;0 on success, and&nbsp;&gt;0 if an error
+occurs.</p>
+
+<p style="margin-top: 1em"><b>EXAMPLES</b></p>
+
+<p style="margin-left:9%;">Add a file called
+<i>teststring.txt</i> to the zip archive
+<i>testbuffer.zip</i> with data &ldquo;This is a
+test.\n&rdquo; where &ldquo;\n&rdquo; is replaced with a
+newline character:</p>
+
+<p style="margin-left:17%; margin-top: 1em">ziptool
+testbuffer.zip add teststring.txt \&quot;This is a
+test.\n\&quot;</p>
+
+<p style="margin-left:9%; margin-top: 1em">Delete the first
+file from the zip archive <i>testfile.zip</i>:</p>
+
+<p style="margin-left:17%; margin-top: 1em">ziptool
+testfile.zip delete 0</p>
+
+<p style="margin-top: 1em"><b>SEE ALSO</b></p>
+
+<p style="margin-left:9%;"><i>zipcmp</i>(1),
+<i>zipmerge</i>(1), <i>libzip</i>(3)</p>
+
+<p style="margin-top: 1em"><b>HISTORY</b></p>
+
+<p style="margin-left:9%;"><b>ziptool</b> was added in
+libzip 1.1.</p>
+
+<p style="margin-top: 1em"><b>AUTHORS</b></p>
+
+<p style="margin-left:9%;">Dieter Baron
+&lt;<i>dillo@nih.at</i>&gt; and Thomas Klausner
+&lt;<i>wiz@gatalith.at</i>&gt; GNU January 23, 2023
+<i>ZIPTOOL</i>(1)</p>
+<hr>
+</body>
+</html>

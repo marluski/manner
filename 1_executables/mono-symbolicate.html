@@ -1,0 +1,120 @@
+<!-- Creator     : groff version 1.23.0 -->
+<!-- CreationDate: Mon Apr  7 17:28:31 2025 -->
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta name="generator" content="groff -Thtml, see www.gnu.org">
+<meta http-equiv="Content-Type" content="text/html; charset=US-ASCII">
+<meta name="Content-Style" content="text/css">
+<style type="text/css">
+       p       { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       pre     { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       table   { margin-top: 0; margin-bottom: 0; vertical-align: top }
+       h1      { text-align: center }
+</style>
+<title>mono-symbolicate</title>
+
+</head>
+<body>
+
+<h1 align="center">mono-symbolicate</h1>
+
+<a href="#NAME">NAME</a><br>
+<a href="#SYNOPSIS">SYNOPSIS</a><br>
+<a href="#DESCRIPTION">DESCRIPTION</a><br>
+<a href="#AUTHOR">AUTHOR</a><br>
+<a href="#COPYRIGHT">COPYRIGHT</a><br>
+<a href="#MAILING LISTS">MAILING LISTS</a><br>
+<a href="#WEB SITE">WEB SITE</a><br>
+
+<hr>
+
+
+<h2>NAME
+<a name="NAME"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">mono-symbolicate
+- Mono Symbolicate Tool</p>
+
+<h2>SYNOPSIS
+<a name="SYNOPSIS"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono-symbolicate
+&lt;msym dir&gt; &lt;input file&gt;</b></p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono-symbolicate
+store-symbols &lt;msym dir&gt; [&lt;dir&gt;]+</b></p>
+
+<h2>DESCRIPTION
+<a name="DESCRIPTION"></a>
+</h2>
+
+
+
+<p style="margin-left:9%; margin-top: 1em">mono-symbolicate
+is a tool that converts a stack trace with &lt;filename
+unknown&gt;:0 into one with file names and line numbers.</p>
+
+<p style="margin-left:9%; margin-top: 1em">When
+mono-symbolicate is called with a symbol directory and a
+file containing a stacktrace:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono-symbolicate
+&lt;msym dir&gt; &lt;input file&gt;</b></p>
+
+<p style="margin-left:9%; margin-top: 1em">The tool writes
+into stdout the file contents while adding file location to
+stack frames when it is possible to symbolicate with the
+symbols available on the symbol directory.</p>
+
+<p style="margin-left:9%; margin-top: 1em">Managed symbols
+.exe/.dll can be added to the symbol directory by doing:</p>
+
+
+<p style="margin-left:9%; margin-top: 1em"><b>mono-symbolicate
+store-symbols &lt;msym dir&gt; [&lt;dir&gt;]+</b></p>
+
+<h2>AUTHOR
+<a name="AUTHOR"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Written by
+Marcos Henrich</p>
+
+<h2>COPYRIGHT
+<a name="COPYRIGHT"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Copyright (C)
+2015 Xamarin.</p>
+
+<h2>MAILING LISTS
+<a name="MAILING LISTS"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://lists.ximian.com/mailman/listinfo/mono-devel-list for
+details.</p>
+
+<h2>WEB SITE
+<a name="WEB SITE"></a>
+</h2>
+
+
+<p style="margin-left:9%; margin-top: 1em">Visit
+http://www.mono-project.com for details</p>
+<hr>
+</body>
+</html>
